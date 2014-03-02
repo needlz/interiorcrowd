@@ -364,3 +364,11 @@ header {
     margin-top: 20px; } }
 .separator{margin: 0 5px;}
 .formbuttons{padding: 10px 0;}
+.page-header{color: #535353;font-weight: normal;font-style: italic;
+font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
+  .slider  {
+    width: 300px !important;
+  }
+  
+.leftlabel, .rightlabel{color:#428BCA;font-weight: normal;font-size: 13px;}
+.slidercon{line-height:36px;}
