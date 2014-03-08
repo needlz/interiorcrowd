@@ -377,3 +377,14 @@ font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
 label.mesure-label{position: relative;min-height: 1px;padding-right: 5px;padding-left: 1px;}
 div.mesure-label{padding-right: 1px;padding-left:3px;}
  .mesure-con{margin: 5px 3px;}
+ .selection{margin: 0 5px;}
+ .preview  label, .appeals td{color: #428BCA;
+font-weight: normal;
+font-size: 13px;}
+ .preview .progress{margin-bottom: 1px;}
+ .preview .row{margin-top:10px;}
+ .projectname{min-height: 60px;margin-left: -15px;margin-top: 10px;background-color: #252528;color: #fff;padding-top: 10px;}
+ 
+ .projectname label {color: #428BCA;
+font-weight: bold;
+font-size: 15px;}
