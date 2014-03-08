@@ -116,7 +116,7 @@ header {
   margin-top: 140px;
   background-color: #252528;
   color: #fff;
-  padding-top: 35px;
+  padding-top: 10px;
   /* testimonials */
   /* contact */
   /* credits */
@@ -126,12 +126,12 @@ header {
     font-style: italic;
     font-weight: 300;
     font-size: 25px;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
     margin-left: 15px; }
   #footer .recent_posts {
     margin-left: 0px; }
     #footer .recent_posts .post {
-      margin-bottom: 70px;
+      margin-bottom: 30px;
       width: 93%; }
       #footer .recent_posts .post img {
         float: left;
@@ -372,3 +372,8 @@ font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
   
 .leftlabel, .rightlabel{color:#428BCA;font-weight: normal;font-size: 13px;}
 .slidercon{line-height:36px;}
+.footer-links .footer-nav{float:right}
+.footer-links .footer-nav a{margin:0 5px;float:right;}
+label.mesure-label{position: relative;min-height: 1px;padding-right: 5px;padding-left: 1px;}
+div.mesure-label{padding-right: 1px;padding-left:3px;}
+ .mesure-con{margin: 5px 3px;}
