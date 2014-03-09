@@ -31,7 +31,7 @@
 								%>
 									<% if design_cat.id != 8 %>
 									<div class="row">
-										<% if design_cat.image_name.present?%><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
+										<% if design_cat.image_name.present? && design_cat.image_name != 'null' %><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
 											<label class="checkbox"><input name="design_cat[]" type="checkbox" <%= checked %> value="<%= design_cat.id %>" class="design_element"><%= design_cat.name %></label>
 										</div>
 										<% if design_cat.image_name.present? && design_cat.image_name != 'null'%>
