@@ -1,0 +1,86 @@
+<!-- Pricing Option -->
+    <div id="in_pricing">
+        <div class="container">
+            <div class="section_header">
+                &nbsp;
+            </div>
+
+            <div class="row charts_wrapp">
+                <!-- Plan Box -->
+                <div class="col-sm-12">
+                    <div class="plan">
+                        <div class="wrapper">
+							<%= render :partial => 'contest_top_panel' %>
+                            <h3>What area of your home are you looking to update?</h3>
+                            <div class="container col-sm-offset-1">
+							
+								<%= form_tag step3_contests_path,  {:id => "step2", :method => "post"} do %>
+									<% @design_space.each do |design_space|
+										child_spaces = DesignSpace.where("parent =? ", design_space.id)
+										if session[:step2].present? && session[:step2].include?(design_space.id.to_s)
+											checked = "checked = 'checked'"
+										else
+											checked = ''
+								    	end	
+									%>
+										<div class="row">
+											<div class="col-sm-4">
+												<label class="checkbox">
+													<input name="design_space[]" type="checkbox" <%= checked %> value="<%= design_space.id %>" class="design_space"> <%= design_space.name %>
+												</label>
+											</div>									
+										</div>
+										<% if child_spaces.present? 
+											child_spaces.each do |child_space|
+											if session[:step2].present? && session[:step2].include?(child_space.id.to_s)
+												checked = "checked = 'checked'"
+											else
+												checked = ''
+								    		end		
+										%>
+											<div class="row">
+												<div class="col-sm-3 col-sm-offset-1">
+													<label class="checkbox">
+														<input name="design_space[]" <%= checked %> type="checkbox" value="<%= child_space.id %>" class="design_space"> <%= child_space.name %>
+													</label>
+												</div>	
+											</div>
+										<% end 
+										end
+										%>
+									<% end %>
+								<% end %>
+							</div>
+							</div>
+
+							<div class="row formbuttons">
+								<div class="col-sm-3 ">
+									<a class="order" href="<%= step1_contests_path %>">GO BACK</a>
+								</div>
+								<div class="col-sm-4 col-sm-offset-3">
+									<a class="order continue" href="#">CONTINUE</a>
+								</div>
+							</div>
+							
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery('.continue').click(function(e) {
+			if(jQuery('.design_space:checked').length > 0) {
+				e.preventDefault();
+				jQuery("#step2").submit();
+			} else {
+				alert("Please select atleast one area.");
+				return false;
+			}
+		});
+	});
+</script>	
+
+     

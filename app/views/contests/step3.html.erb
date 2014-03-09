@@ -1,0 +1,181 @@
+<%= content_for :javascript do %>
+	<%= javascript_include_tag 'bootstrap-slider' %>
+	<%= stylesheet_link_tag  'lib/slider' %> 
+<% end %>	
+ <!-- Pricing Option -->
+    <div id="in_pricing">
+        <div class="container">
+            <div class="section_header">
+                &nbsp;
+            </div>
+
+            <div class="row charts_wrapp">
+                <!-- Plan Box -->
+                <div class="col-sm-12">
+                    <div class="plan">
+                        <div class="wrapper">
+							<%= render :partial => 'contest_top_panel' %>
+							
+							<h3>Design Style?</h3>
+						<%= form_tag step4_contests_path,  {:id => "step3", :method => "post"} do %>
+                            <div class="container col-sm-offset-1">
+
+								
+								
+								<div class="row"  style="padding-top:10px;">
+								     <label>What appeals to you?</label>
+								</div>
+								
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" name="test" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="A">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Traditional
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="B">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="C">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="D">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="E">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="G">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-9 col-sm-offset-1 slidercon">
+									<div class="col-sm-1 leftlabel">
+										Feminine
+									</div>
+									<div class="col-sm-7 col-sm-offset-1">
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="H">
+									</div>	
+									<div class="col-sm-1 rightlabel">
+										Masculine
+									</div>
+									</div>	
+								</div>
+							<% end %>	
+								
+
+								
+
+								<div class="row">
+									<div class="col-sm-8">
+										<label class="checkbox">
+											<input name="" type="checkbox" > 
+										Closet
+										</label>
+									</div>									
+								</div>
+
+							</div>
+							</div>
+
+							<div class="row formbuttons">
+															<div class="col-sm-3 ">
+									<a class="order" href="launch_step1.html">GO BACK</a>
+								</div>
+								<div class="col-sm-4 col-sm-offset-3">
+									<a class="order" href="launch_step3.html">CONTINUE</a>
+								</div>
+							</div>
+							
+                        </div>
+                    </div>
+                </div>
+              
+                
+            </div>
+            
+        </div>
+    </div>
+    
+<script>
+	$(function(){
+		  /* see documentation at http://www.eyecon.ro/bootstrap-slider/
+		  var RGBChange = function() {
+		          $('#RGB').val(a.getValue())
+		        };
+		        var a = $('#R').slider()
+				.on('slide', RGBChange)
+				.data('slider');       
+		*/
+        $('.slidercon input').slider();
+    });
+</script>

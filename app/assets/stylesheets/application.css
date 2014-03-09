@@ -9,5 +9,9 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require_tree .
+ *= require bootstrap/bootstrap.min.css
+ *= require compiled/bootstrap-overrides.css
+ *= require compiled/theme.css
+ *= require compiled/index.css
+ *= require lib/animate.css
  */

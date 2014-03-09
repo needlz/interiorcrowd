@@ -3,7 +3,17 @@ InteriorC::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+   root 'home#index'
+   
+   resources :contests do
+     collection do
+       match 'step1', via: [:get, :post]
+       match 'step2', via: [:get, :post]
+       match 'step3', via: [:get, :post]
+       match 'step4', via: [:get, :post]
+       get 'preview'
+     end
+   end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
