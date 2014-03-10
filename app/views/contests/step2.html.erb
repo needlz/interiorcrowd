@@ -11,7 +11,11 @@
                     <div class="plan">
                         <div class="wrapper">
 							<%= render :partial => 'contest_top_panel' %>
-                            <h3>What area of your home are you looking to update?</h3>
+                            <div class="row">
+								<div class="col-sm-10 col-sm-offset-1 page-title">
+									<h3>What area of your home are you looking to update?</h3>
+								</div>
+							</div>
                             <div class="container col-sm-offset-1">
 							
 								<%= form_tag step3_contests_path,  {:id => "step2", :method => "post"} do %>
@@ -50,9 +54,6 @@
 										%>
 									<% end %>
 								<% end %>
-							</div>
-							</div>
-
 							<div class="row formbuttons">
 								<div class="col-sm-3 ">
 									<a class="order" href="<%= step1_contests_path %>">GO BACK</a>
@@ -61,6 +62,11 @@
 									<a class="order continue" href="#">CONTINUE</a>
 								</div>
 							</div>
+							
+							</div>
+							</div>
+
+							
 							
                         </div>
                     </div>

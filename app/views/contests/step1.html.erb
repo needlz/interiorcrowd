@@ -11,7 +11,11 @@
 				<div class="plan">
 					<div class="wrapper">
 						<%= render :partial => 'contest_top_panel' %>
-						<h3>What do you need help with today?</h3>
+						<div class="row">
+								<div class="col-sm-10 col-sm-offset-1 page-title">
+									<h3>What do you need help with today?</h3>
+								</div>
+						</div>
 						<div class="container col-sm-offset-1">
 							
 							<div class="row">
@@ -59,16 +63,17 @@
 									</div>
 								  <% end %>	
 								<% end %>
-						   <% end %>	
-						</div>
-					</div>
-
-					<div class="row formbuttons">
+						   <% end %>
+						   <div class="row formbuttons">
 						<div class="col-sm-4 col-sm-offset-6">
 							<%= link_to "CONTINUE", '#', :class => "order" %>
 						</div>
 					</div>
+	
+						</div>
+					</div>
 
+					
 				</div>
 			</div>
 		</div>

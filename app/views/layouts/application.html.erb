@@ -37,7 +37,7 @@
 
     <%= yield %>
     
-	<!-- starts footer -->
+	    <!-- starts footer -->
     <footer id="footer">
         <div class="container">
             <div class="row sections">
@@ -47,8 +47,8 @@
                     </h3>
                     <div class="post col-sm-offset-2">
                     					  
-						  <p >- Are you a designer/decorator</p>
-						  <p>- Do you have an eye for (interior design)</p>                    
+						  <div class="title" >Are you a designer/decorator</div>
+						  <div class="title">Do you have an eye for (interior design)</div>                    
               
                     
 
@@ -70,13 +70,11 @@
 			<div class="row footer-links">
                 <div class="col-md-12">
                     <div class="row ">
-					<div class="col-md-2">
-                            <a href="#" >
+					
+					<div class="col-md-4 footer-nav col-sm-offset-4">
+							<a href="#" >
                                ABOUT US
-                            </a>
-
-					</div>
-					<div class="col-md-4 footer-nav">
+                            </a><span class="separator"></span>
                             <a href="#" >
                                BLOG
                             </a><span class="separator"></span>
@@ -103,9 +101,14 @@
                             </a><span class="separator">|</span>
 							<a href="#" >
                                Privacy policy
-                            </a>
+                            </a><span class="separator">|</span>
+							<a href="#" >
+                              Help
+                            </a>                          
+
 					</div>
-                        <div class="col-md-4 social">
+
+					  <div class="row col-md-4 social col-sm-offset-4">
                             <a href="#" class="facebook">
                                 <span class="socialicons ico1"></span>
                                 <span class="socialicons_h ico1h"></span>
@@ -128,10 +131,13 @@
                             </a>
      
                         </div>
+                      
                     </div>
 
                 </div>            
             </div>
+			
+			
         </div>
     </footer>
 </body>
