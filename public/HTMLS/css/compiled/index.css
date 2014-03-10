@@ -266,7 +266,7 @@
       width: 95%;
       position: relative; }
       #in_pricing .charts_wrapp .plan .wrapper {
-        padding: 33px 30px 26px 30px; }
+        padding: 0 30px 26px 30px; }
   #in_pricing .plan h3 {
     color: #535353;
     font-weight: normal;
@@ -301,7 +301,7 @@
   #in_pricing .plan a.order {
     background-color: #2190DB;
     text-align: center;
-    margin: 25px auto 0;
+    margin: 25px 0;
     width: 48%;
     display: block;
     padding: 3px 0;
@@ -507,3 +507,5 @@
   #showcase .features_op1_row .last {
     margin-bottom: 0; } }
 .form_ele{margin-top:10px;color: #1189D9;}
+.launch-nav{margin:10px 0}
+.page-title{margin:0 0 10px 0}
