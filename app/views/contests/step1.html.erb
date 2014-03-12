@@ -10,14 +10,31 @@
 			<div class="col-sm-12">
 				<div class="plan">
 					<div class="wrapper">
-						<%= render :partial => 'contest_top_panel' %>
+						<%#= render :partial => 'contest_top_panel' %>
+						
 						<div class="row">
+							<div class="page-header">
+								<h2>Launch a New Design Contest</h2>
+							</div>
+						</div>
+						<div class="row launch-nav" >
+							<div class="col-sm-10 col-sm-offset-1">
+								<ul class="nav nav-pills nav-justified">
+									<li class="col-sm-2  active"><%= link_to "Step 1", step1_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 2", step2_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 3", step3_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 4", step4_contests_path %></li>
+								</ul>
+							</div>
+						</div>
+
+						
+						<div class="container col-sm-offset-1">
+							<div class="row">
 								<div class="col-sm-10 col-sm-offset-1 page-title">
 									<h3>What do you need help with today?</h3>
 								</div>
-						</div>
-						<div class="container col-sm-offset-1">
-							
+							</div>	
 							<div class="row">
 								<div class="col-sm-10">
 									<% if flash[:error].present? %>

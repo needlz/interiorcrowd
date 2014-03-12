@@ -267,6 +267,8 @@
       position: relative; }
       #in_pricing .charts_wrapp .plan .wrapper {
         padding: 0 30px 26px 30px; }
+		#in_pricing .charts_wrapp .plan .home_wrapper {
+        padding: 30px 30px 26px 30px; }
   #in_pricing .plan h3 {
     color: #535353;
     font-weight: normal;
@@ -508,4 +510,35 @@
     margin-bottom: 0; } }
 .form_ele{margin-top:10px;color: #1189D9;}
 .launch-nav{margin:10px 0}
-.page-title{margin:0 0 10px 0}
+.page-title{margin:0 0 10px 15px}
+.launch-nav ul li a{ font-weight:bold;}
+.step-row{margin:15px 0 0 15px}
+
+.nav-pills >li.next >a {
+    color: #005580;
+	background-color: #eee;
+ }
+ .nav-pills >li.previous >a {
+  color: #468847;
+    background-color: #dff0d8;
+ }
+ .nav-pills > li > a:hover {
+      background-color: #0088cc;
+	  font-weight:bold;
+	  background-color:#ccc;
+ }
+ .nav-pills .active > a {
+    background-color:#ccc;
+    color:#0088cc;font-weight:bold;
+}
+
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    margin-left: 90px;
+    background-color: #F5F5F5;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05) inset;
+}

@@ -372,8 +372,10 @@ font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
     width: 300px !important;
   }
   
-.leftlabel, .rightlabel{color:#428BCA;font-weight: normal;font-size: 13px;}
-.slidercon{line-height:36px;}
+.leftlabel, .rightlabel{color:#428BCA;font-weight: bold;font-size: 13px;}
+.leftlabel{margin-right:5px;}
+.rightlabel{margin-left:5px;}
+.slidercon{line-height:20px;}
 .footer-links .footer-nav{float:left;text-align:center;}
 
 label.mesure-label{position: relative;min-height: 1px;padding-right: 5px;padding-left: 1px;}
