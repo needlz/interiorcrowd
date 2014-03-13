@@ -10,10 +10,31 @@
 			<div class="col-sm-12">
 				<div class="plan">
 					<div class="wrapper">
-						<%= render :partial => 'contest_top_panel' %>
-						<h3>What do you need help with today?</h3>
+						<%#= render :partial => 'contest_top_panel' %>
+						
+						<div class="row">
+							<div class="page-header">
+								<h2>Launch a New Design Contest</h2>
+							</div>
+						</div>
+						<div class="row launch-nav" >
+							<div class="col-sm-10 col-sm-offset-1">
+								<ul class="nav nav-pills nav-justified">
+									<li class="col-sm-2  active"><%= link_to "Step 1", step1_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 2", step2_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 3", step3_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 4", step4_contests_path %></li>
+								</ul>
+							</div>
+						</div>
+
+						
 						<div class="container col-sm-offset-1">
-							
+							<div class="row">
+								<div class="col-sm-10 col-sm-offset-1 page-title">
+									<h3>What do you need help with today?</h3>
+								</div>
+							</div>	
 							<div class="row">
 								<div class="col-sm-10">
 									<% if flash[:error].present? %>
@@ -31,10 +52,10 @@
 								%>
 									<% if design_cat.id != 8 %>
 									<div class="row">
-										<% if design_cat.image_name.present?%><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
+										<% if design_cat.image_name.present? && design_cat.image_name != 'null' %><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
 											<label class="checkbox"><input name="design_cat[]" type="checkbox" <%= checked %> value="<%= design_cat.id %>" class="design_element"><%= design_cat.name %></label>
 										</div>
-										<% if design_cat.image_name.present? %>
+										<% if design_cat.image_name.present? && design_cat.image_name != 'null'%>
 											<div class="col-sm-2">
 												<%= image_tag "interior/#{design_cat.image_name}", :class => "img-circle" %>
 											</div>
@@ -59,16 +80,17 @@
 									</div>
 								  <% end %>	
 								<% end %>
-						   <% end %>	
-						</div>
-					</div>
-
-					<div class="row formbuttons">
+						   <% end %>
+						   <div class="row formbuttons">
 						<div class="col-sm-4 col-sm-offset-6">
 							<%= link_to "CONTINUE", '#', :class => "order" %>
 						</div>
 					</div>
+	
+						</div>
+					</div>
 
+					
 				</div>
 			</div>
 		</div>

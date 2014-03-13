@@ -14,147 +14,203 @@
                 <div class="col-sm-12">
                     <div class="plan">
                         <div class="wrapper">
-							<%= render :partial => 'contest_top_panel' %>
+						
+							<div class="row">
+							<div class="page-header">
+								<h2>Launch a New Design Contest</h2>
+							</div>
+						</div>
+						<div class="row launch-nav" >
+							<div class="col-sm-10 col-sm-offset-1">
+								<ul class="nav nav-pills nav-justified">
+									<li class="col-sm-2  previous"><%= link_to "Step 1", step1_contests_path %></li>
+									<li class="col-sm-2 previous"><%= link_to "Step 2", step2_contests_path %></li>
+									<li class="col-sm-2 active"><%= link_to "Step 3", step3_contests_path %></li>
+									<li class="col-sm-2 next"><%= link_to "Step 4", step4_contests_path %></li>
+								</ul>
+							</div>
+						</div>
+
 							
-							<h3>Design Style?</h3>
-						<%= form_tag step4_contests_path,  {:id => "step3", :method => "post"} do %>
+
                             <div class="container col-sm-offset-1">
 
+								<div class="row ">
+								<div class="col-sm-10 col-sm-offset-1 page-title">
+									<h3>Design Style?</h3>
+								</div>
+							</div>
 								
-								
-								<div class="row"  style="padding-top:10px;">
+								<div class="row step-row">
 								     <label>What appeals to you?</label>
 								</div>
 								
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" name="test" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="A">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Traditional
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="B">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="C">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="D">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="E">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
+											<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Feminine</span>
+									
+									
 										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="G">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
+									
+									
+										<span  class="rightlabel">Masculine</span>
+									
 									</div>	
 								</div>
-								<div class="row">
-									<div class="col-sm-9 col-sm-offset-1 slidercon">
-									<div class="col-sm-1 leftlabel">
-										Feminine
-									</div>
-									<div class="col-sm-7 col-sm-offset-1">
-										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="H">
-									</div>	
-									<div class="col-sm-1 rightlabel">
-										Masculine
-									</div>
-									</div>	
-								</div>
-							<% end %>	
 								
-
-								
-
 								<div class="row">
-									<div class="col-sm-8">
-										<label class="checkbox">
-											<input name="" type="checkbox" > 
-										Closet
-										</label>
-									</div>									
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Alegan+</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Eclectic</span>
+									
+									</div>	
 								</div>
+								
+								<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Traditional</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Modern</span>
+									
+									</div>	
+								</div>
+								
+								<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Conservative</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Bold</span>
+									
+									</div>	
+								</div>
+							
+								<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Muted</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Colorful</span>
+									
+									</div>	
+								</div>
+										<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Timeless</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Trendy</span>
+									
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Fancy</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">Playful</span>
+									
+									</div>	
+								</div>
+								
+								<div class="row">
+									<div class="col-sm-6 slidercon well col-sm-offset-1">
+									
+										<span class="leftlabel">Ma...</span>
+									
+									
+										<input type="text" value="" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0" data-slider-selection="after"data-slider-tooltip="hide" id="F">
+									
+									
+										<span  class="rightlabel">ganag..</span>
+									
+									</div>	
+								</div>
+								
+							
+								
+								<div class="row step-row">
+								     <label>What colors do you want in you space?</label>
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-1">
+										
+										<input name="" type="text" class="form-control"> 
+										
+									</div>	
+								</div>								
+								<div class="row step-row">
+								     <label>What colors do you want to avoid?</label>
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-1">
+										
+										<input name="" type="text" class="form-control"> 
+										
+									</div>	
+								</div>								
+								<div class="row step-row">
+								     <label>Any example that you like?</label>
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-1">										
+										<div class="col-sm-1">
+											Upload
+										</div>
+										<div class="col-sm-3 col-sm-offset-1">
+											<input name="" type="file"> <span>(.jpg, .tif, .png)</span>
+										</div>
+									</div>	
+								</div>
+								<div class="row">
+									<div class="col-sm-8 col-sm-offset-1">										
+										<div class="col-sm-9">
+											<label>Add Links</label>			
+											<input name="" type="text" class="form-control"> 
+										</div>
+									</div>	
+								</div>
+								<div class="row formbuttons">
+								<div class="col-sm-3 ">
+									<a class="order" href="launch_step2.html">GO BACK</a>
+								</div>
+								<div class="col-sm-4 col-sm-offset-4">
+									<a class="order" href="launch_step4.html">CONTINUE</a>
+								</div>
+							</div>
 
 							</div>
 							</div>
 
-							<div class="row formbuttons">
-															<div class="col-sm-3 ">
-									<a class="order" href="launch_step1.html">GO BACK</a>
-								</div>
-								<div class="col-sm-4 col-sm-offset-3">
-									<a class="order" href="launch_step3.html">CONTINUE</a>
-								</div>
-							</div>
+
 							
                         </div>
                     </div>
@@ -165,7 +221,7 @@
             
         </div>
     </div>
-    
+
 <script>
 	$(function(){
 		  /* see documentation at http://www.eyecon.ro/bootstrap-slider/

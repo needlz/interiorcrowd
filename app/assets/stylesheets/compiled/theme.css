@@ -143,6 +143,8 @@ header {
         display: block;
         color: #b5b5b6;
         font-size: 14px; }
+		 #footer .recent_posts .post  ul{
+       list-style:none;}
   #footer .testimonials .wrapper {
     margin: 0 auto;
     width: 82%; }
@@ -217,7 +219,7 @@ header {
     border-top: 1px solid #343437;
     padding: 10px 0px 10px 0px; }
     #footer .credits .social {
-      margin-top: 5px;
+      margin-top: 15px;
       text-align: center; }
       #footer .credits .social a {
         margin: 10px; }
@@ -249,7 +251,7 @@ header {
       color: #a6a6a7;
       font-style: italic;
       text-align: center;
-      margin-top: 10px; }
+      margin-top: 5px; }
 	      #footer .credits .copyright a{
       color: #a6a6a7;}
     #footer .credits .socialicons {
@@ -370,10 +372,12 @@ font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
     width: 300px !important;
   }
   
-.leftlabel, .rightlabel{color:#428BCA;font-weight: normal;font-size: 13px;}
-.slidercon{line-height:36px;}
-.footer-links .footer-nav{float:right}
-.footer-links .footer-nav a{margin:0 5px;float:right;}
+.leftlabel, .rightlabel{color:#428BCA;font-weight: bold;font-size: 13px;}
+.leftlabel{margin-right:5px;}
+.rightlabel{margin-left:5px;}
+.slidercon{line-height:20px;}
+.footer-links .footer-nav{float:left;text-align:center;}
+
 label.mesure-label{position: relative;min-height: 1px;padding-right: 5px;padding-left: 1px;}
 div.mesure-label{padding-right: 1px;padding-left:3px;}
  .mesure-con{margin: 5px 3px;}
