@@ -63,14 +63,13 @@
 									<h2>Launch a New Design Contest</h2>
 								</div>
 							</div>
-							<div class="row">
-							
+							<div class="row launch-nav">
 								<div class="col-sm-10 col-sm-offset-1">
 									<ul class="nav nav-pills nav-justified">
-									  <li><a href="launch_step1.html">Step 1</a></li>
-									  <li><a href="launch_step2.html">Step 2</a></li>
-									  <li><a href="launch_step3.html">Step 3</a></li>
-									  <li class="active"><a href="launch_step4.html">Step 4</a></li>
+									  <li class="col-sm-2 previous"><a href="launch_step1.html">Step 1</a></li>
+									  <li class="col-sm-2 previous"><a href="launch_step2.html">Step 2</a></li>
+									  <li class="col-sm-2 previous"><a href="launch_step3.html">Step 3</a></li>
+									  <li class="col-sm-2 active"><a href="launch_step4.html">Step 4</a></li>
 									</ul>
 								</div>
 							</div>
@@ -78,86 +77,91 @@
 
                             <div class="container col-sm-offset-1">
 
-								<div class="row mesure-con">
+								<div class="row  step-row">
 								     <label>Upload pictures of your space</label>
 								</div>
 								<div class="row">
-									<div class="col-sm-8 form-inline">										
+									<div class="col-sm-offset-1 col-sm-8 form-inline" style="padding-left:0">										
 										<div class="col-sm-2">
 											Upload
 										</div>
-										<div class="col-sm-3">
+										<div class="col-sm-6">
 											<input name="" type="file"> <span>(.jpg, .tif, .png)</span>
 										</div>
 									</div>	
 								</div>	
-								<div class="row  mesure-con">	
+								<div class="row   step-row">	
 									
 								     <label>Add dimensions of your space</label>
 									
 								</div>
-																		
-								<div class="col-sm-8 col-sm-offset-1  mesure-con">										
+								<div class="row">									
+								<div class="col-sm-5 well">	
+								<div class="row">
+								<div class="col-sm-12  mesure-con">										
 									<div class="col-sm-2">
 										Length
 									</div>
-									<div class="col-sm-8  form-inline">
-									<div class="col-sm-3 mesure-label">
+									<div class="col-sm-10  form-inline">
+									<div class="col-sm-4 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
 									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-3 col-sm-offset-1 mesure-label">
+									<div class="col-sm-4 col-sm-offset-1 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
-									<label class="col-sm-1 mesure-label">Inches</label>
-
-									
+									<label class="col-sm-2 mesure-label">Inches</label>									
+									</div>	
 								</div>	
 								</div>	
-								
-								<div class="col-sm-8 col-sm-offset-1  mesure-con">										
+								<div class="row">
+								<div class="col-sm-12 mesure-con">										
 									<div class="col-sm-2">
 										Width
 									</div>
-									<div class="col-sm-8  form-inline">
-									<div class="col-sm-3 mesure-label">
+									<div class="col-sm-10  form-inline">
+									<div class="col-sm-4 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
 									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-3 col-sm-offset-1 mesure-label">
+									<div class="col-sm-4 col-sm-offset-1 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
-									<label class="col-sm-1 mesure-label">Inches</label>
-
-									
-								</div>	
+									<label class="col-sm-2 mesure-label">Inches</label>									
+									</div>	
 								</div>
-								<div class="col-sm-8 col-sm-offset-1 mesure-con">										
+								</div>
+								<div class="row">
+								<div class="col-sm-12  mesure-con">										
 									<div class="col-sm-2">
-										Height(Optional)
+										Height (Optional)
 									</div>
-									<div class="col-sm-8  form-inline col-sm-offset-1">
-									<div class="col-sm-3 mesure-label">
+									<div class="col-sm-10  form-inline">
+									<div class="col-sm-4 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
 									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-3 col-sm-offset-1 mesure-label">
+									<div class="col-sm-4 col-sm-offset-1 mesure-label">
 										<input name="" type="text" class="form-control">
 									</div>										
-									<label class="col-sm-1 mesure-label">Inches</label>
-
-									
-								</div>	
+									<label class="col-sm-2 mesure-label">Inches</label>									
+									</div>	
+								</div>
+								</div>
+								
+								
+				
+								</div>
 								</div>
 						
 								
-								<div class="row mesure-con">
+								<div class="row  step-row">
 								     <label>What is your design budget for materials?</label>
 								</div>
 								<div class="row mesure-con">
 									<div class="col-sm-8 col-sm-offset-1">
 										
-										<select name=""  class="form-control"> 
+										<select name=""  class="form-control budget-control"> 
 										<option>$0 -$200</option>
 										<option>$201 -$500</option>
 										<option>$501 -$1000</option>
@@ -167,7 +171,7 @@
 										
 									</div>	
 								</div>								
-								<div class="row mesure-con">
+								<div class="row step-row">
 								     <label>Other feedback or instructions?</label>
 								</div>
 								<div class="row">
@@ -177,12 +181,12 @@
 										</textarea>
 									</div>	
 								</div>								
-									<div class="row formbuttons">
+								<div class="row formbuttons">
 								<div class="col-sm-3 ">
 									<a class="order" href="launch_step3.html">GO BACK</a>
 								</div>
 								<div class="col-sm-4 col-sm-offset-4">
-									<a class="order" href="preview.html">preview</a>
+									<a class="order" href="preview.html">PREVIEW</a>
 								</div>
 							</div>
 								
