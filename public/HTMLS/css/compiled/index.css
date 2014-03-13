@@ -544,3 +544,6 @@
 }
 
 .budget-control{margin-left:-14px;width:30%;}
+.text-error {
+    color: #B94A48;
+}

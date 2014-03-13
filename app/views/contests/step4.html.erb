@@ -11,21 +11,21 @@
                     <div class="plan">
                         <div class="wrapper">
 						
-							<div class="row">
-								<div class="page-header">
-									<h2>Launch a New Design Contest</h2>
-								</div>
+							 <div class="row">
+							<div class="page-header">
+								<h2>Launch a New Design Contest</h2>
 							</div>
-							<div class="row launch-nav">
-								<div class="col-sm-10 col-sm-offset-1">
-									<ul class="nav nav-pills nav-justified">
-									  <li class="col-sm-2 previous"><a href="launch_step1.html">Step 1</a></li>
-									  <li class="col-sm-2 previous"><a href="launch_step2.html">Step 2</a></li>
-									  <li class="col-sm-2 previous"><a href="launch_step3.html">Step 3</a></li>
-									  <li class="col-sm-2 active"><a href="launch_step4.html">Step 4</a></li>
-									</ul>
-								</div>
+						</div>
+						<div class="row launch-nav" >
+							<div class="col-sm-10 col-sm-offset-1">
+								<ul class="nav nav-pills nav-justified">
+									<li class="col-sm-2  previous"><%= link_to "Step 1", step1_contests_path %></li>
+									<li class="col-sm-2 previous"><%= link_to "Step 2", step2_contests_path %></li>
+									<li class="col-sm-2 previous"><%= link_to "Step 3", step3_contests_path %></li>
+									<li class="col-sm-2 active"><%= link_to "Step 4", step4_contests_path %></li>
+								</ul>
 							</div>
+						</div>
                             
 
                             <div class="container col-sm-offset-1">
@@ -136,10 +136,10 @@
 								</div>								
 								<div class="row formbuttons">
 								<div class="col-sm-3 ">
-									<a class="order" href="launch_step3.html">GO BACK</a>
+									<a class="order" href="<%= step3_contests_path%>">GO BACK</a>
 								</div>
 								<div class="col-sm-4 col-sm-offset-4">
-									<a class="order" href="preview.html">PREVIEW</a>
+									<a class="order" href="<%= preview_contests_path %>">PREVIEW</a>
 								</div>
 							</div>
 								
