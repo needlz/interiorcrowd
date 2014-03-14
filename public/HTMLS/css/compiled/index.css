@@ -534,7 +534,7 @@
 
 .well {
     min-height: 20px;
-    padding: 19px 10px;
+    padding: 19px 5px;
     margin-bottom: 20px;
     margin-left: 90px;
     background-color: #F5F5F5;
@@ -544,3 +544,6 @@
 }
 
 .budget-control{margin-left:-14px;width:30%;}
+.text-error {
+    color: #B94A48;
+}
