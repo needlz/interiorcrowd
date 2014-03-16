@@ -67,7 +67,7 @@
 									<% else %>
 										<div class="col-sm-3">
 											<label class="checkbox">
-												<input name="design_cat[]" type="checkbox" <%= checked %> class="design_element">
+												<input name="design_cat[]" type="checkbox" <%= checked %> class="design_element" value="<%= design_cat.id %>">
 												Other(specify) </label>
 											<div class="col-sm-12 col-sm-offset-1">
 												<input name="other_value" type="text" class="form-control" value = "<%= session[:step1][:other]  if session[:step1].present? %>" >
