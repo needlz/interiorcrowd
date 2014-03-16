@@ -1,330 +1,390 @@
- <!-- Pricing Option -->
-    <div id="in_pricing">
-        <div class="container">
-            <div class="section_header">
-                &nbsp;
-            </div>
+<!-- Pricing Option -->
+<div id="in_pricing">
+	<div class="container">
+		<div class="section_header">
+			&nbsp;
+		</div>
 
-            <div class="row charts_wrapp">
-                <!-- Plan Box -->
-                <div class="col-sm-12">
-                    <div class="plan">
-                        <div class="wrapper">
-						
+		<div class="row charts_wrapp">
+			<!-- Plan Box -->
+			<div class="col-sm-12">
+				<div class="plan">
+					<div class="wrapper">
+
+						<div class="row">
+							<div class="page-header">
+								<h2>Launch a New Design Contest</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="page-header">
+								<h3>Just a preview of everything entered thus far.</h2>
+							</div>
+						</div>
+
+						<div class="container col-sm-offset-1 preview">
+
 							<div class="row">
-								<div class="page-header">
-									<h2>Launch a New Design Contest</h2>
-								</div>
+								<label>What do you need help with today? </label>
+								<% if session[:step1].present? %>
+								<% design_cat = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos).pluck(:name) %>
+								<span class="selection"><%= design_cat.join(', ') %><span> <% end %>
+							</div>
+
+							<div class="row">
+								<label>What area of your home are you looking to update? </label>
+								<% if session[:step2].present? %>
+								<% design_cat = DesignSpace.where("id IN (?)", session[:step2]).order(:pos).pluck(:name) %>
+								<span class="selection"><%= design_cat.join(', ') %><span> <% end %>
+							</div>
+
+							<div class="row">
+								<label>What appeals to you? </label>
 							</div>
 							<div class="row">
-								<div class="page-header">
-									<h3>Just a preview of everything entered thus far.</h2>
-								</div>
-							</div>
-                            
-
-                            <div class="container col-sm-offset-1 preview">
-
-								<div class="row">
-								     <label>What do you need help with today? </label><span class="selection">Window treatments, Furniture<span>
-								</div>
-								<div class="row">
-								     <label>What area of your home are you looking to update? </label><span class="selection">Bedroom(Master, Guest), Living Room<span>
-								</div>
-								<div class="row">
-								     <label>What appeals to you? </label>
-								</div>
-								<div class="row">
-									<div class="col-sm-8">
+								<div class="col-sm-8">
 									<div class="plan appeals">
-									<table class="table table-hover">
-									
-										<tr>
-										<td class="col-sm-2">Feminine</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 35%">
-											35% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 65%">
-											65%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Masculine</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Alegan+</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 41%">
-											41% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 59%">
-											59%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Eclectic</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Traditional</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 45%">
-											45% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 55%">
-											55%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Modern</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Conservative</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 48%">
-											48% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 52%">
-											52%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Bold</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Muted</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 43%">
-											43% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 57%">
-											57%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Colorful</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Timeless</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 78%">
-											78% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 22%">
-											22%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Trendy</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Fancy</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 65%">
-											65% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 35%">
-											35%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">Playful</td>
-										</tr>					
-										<tr>
-										<td class="col-sm-2">Ma...</td>
-										<td class="col-sm-8">
-										<div class="progress">
-										  <div class="progress-bar progress-bar-success" style="width: 82%">
-											82% 
-										  </div>
-										  <div class="progress-bar progress-bar-warning" style="width: 18%">
-											18%
-										  </div>
-										</div>
-										</td>
-										<td class="col-sm-2">ganag..</td>
-										</tr>
+										<table class="table table-hover">
+
+											<tr>
+												<td class="col-sm-2">Feminine</td>
+												<td class="col-sm-8">
+													<% if session[:step3].present? && session[:step3][:Feminine].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:Feminine]%>%">
+															<%= session[:step3][:Feminine]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:Feminine].to_i%>%">
+															<%= 100- session[:step3][:Feminine].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												
+												<td class="col-sm-2">Masculine</td>
+											</tr>
+											
+											<tr>
+												<td class="col-sm-2">Alegant</td>
+												<td class="col-sm-8">
+													<% if session[:step3].present? && session[:step3][:alegant].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:alegant]%>%">
+															<%= session[:step3][:alegant]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:alegant].to_i%>%">
+															<%= 100- session[:step3][:alegant].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Eclectic</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Traditional</td>
+												<td class="col-sm-8">
+													<% if session[:step3].present? && session[:step3][:traditional].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:traditional]%>%">
+															<%= session[:step3][:traditional]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:traditional].to_i%>%">
+															<%= 100- session[:step3][:traditional].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Modern</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Conservative</td>
+												<td class="col-sm-8">	
+													<% if session[:step3].present? && session[:step3][:conservative].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:conservative]%>%">
+															<%= session[:step3][:conservative]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:conservative].to_i%>%">
+															<%= 100- session[:step3][:conservative].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>	
+												<td class="col-sm-2">Bold</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Muted</td>
+												<td class="col-sm-8">	
+													<% if session[:step3].present? && session[:step3][:muted].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:muted]%>%">
+															<%= session[:step3][:muted]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:muted].to_i%>%">
+															<%= 100- session[:step3][:muted].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Colorful</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Timeless</td>
+												<td class="col-sm-8">	
+													<% if session[:step3].present? && session[:step3][:timeless].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:timeless]%>%">
+															<%= session[:step3][:timeless]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:timeless].to_i%>%">
+															<%= 100- session[:step3][:timeless].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Trendy</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Fancy</td>
+												<td class="col-sm-8">	
+													<% if session[:step3].present? && session[:step3][:fancy].present?%>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= session[:step3][:fancy]%>%">
+															<%= session[:step3][:fancy]%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- session[:step3][:fancy].to_i%>%">
+															<%= 100- session[:step3][:fancy].to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <div class="progress">
+															<div class="progress-bar progress-bar-success" style="width: 0%"></div>
+															<div class="progress-bar progress-bar-warning" style="width: 0%"></div>
+														</div>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Playful</td>
+											</tr>
+											
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<label>What colors do you want in you space? </label>
+								<span class="selection"><%= session[:step3][:fav_color] if session[:step3].present? %><span>
+							</div>
+							<div class="row">
+								<label>What colors do you want to avoid? </label>
+								<span class="selection"><%= session[:step3][:refrain_color] if session[:step3].present? %><span>
+							</div>
+							<div class="row">
+								<label>Any example that you like? </label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="">
+										<% if session[:step3].present? && session[:step3][:document].present? 
+											  session[:step3][:document].split(',').each do |path| %>
+											  <img src="<%= path%>" class="" style="padding-right:10px;">
+										<% end	
+										  	end		
+										%>
 										
-									</table>
-									</div>
 									</div>
 								</div>
-								<div class="row">
-								     <label>What colors do you want in you space? </label><span class="selection">Pink, navvy blue<span>
-								</div>
-								<div class="row">
-								     <label>What colors do you want to avoid? </label><span class="selection">Red, White<span>
-								</div>
-								<div class="row">
-								     <label>Any example that you like? </label>
-								</div>								
-								<div class="row">
-										<div class="col-sm-4">
-											<div class="img">												
-													<img src="img/blog2.png" alt="" class="img-responsive">
-											</div>										
-										</div>
+							</div>
+
+							<div class="row">
+								<label>Links? </label>
+								<span class="selection"><%= session[:step3][:ex_links] if session[:step3].present? %><span>
+							</div>
+
+							<div class="row">
+								<label>Upload pictures of your space: </label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="">
+										<% if session[:step4].present? && session[:step4][:document].present? 
+											  session[:step4][:document].split(',').each do |path| %>
+											  <img src="<%= path%>" class="" style="padding-top:10px;">
+										<% end	
+										  	end		
+										%>
 									</div>
-								
-								<div class="row">
-								     <label>Links? </label><span class="selection">http://abcd.com/aaa/html<span>
 								</div>
-								
-								<div class="row">
-								     <label>Upload pictures of your space: </label>
+							</div>
+
+							<div class="row">
+								<label>Add dimensions of your space</label>
+								<span class="selection">
+									<p>
+										Length: <%= "#{session[:step4][:f_length]} ft" if session[:step4][:f_length].present? %> 
+										<%= "#{session[:step4][:i_legth]} Inches" if session[:step4][:i_legth].present? %>
+									</p>
+									<p>
+										Width: <%= "#{session[:step4][:f_width]} ft" if session[:step4][:f_width].present? %> 
+										<%= "#{session[:step4][:i_width]} Inches" if session[:step4][:i_width].present? %>
+									</p>
+									<p>
+										Height: <%= "#{session[:step4][:f_height]} ft" if session[:step4][:f_height].present? %> 
+										<%= "#{session[:step4][:i_height]} Inches" if session[:step4][:i_height].present? %>
+									</p> <span>
+							</div>
+
+							<div class="row">
+								<label>What is your design budget for materials?</label>
+								<span class="selection"><%= session[:step4][:f_budget] if session[:step4].present? %><span>
+							</div>
+
+							<div class="row">
+								<label>Other feedback or instructions?</label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<%= session[:step4][:feedback] if session[:step4].present? %>
 								</div>
-								<div class="row">
-									 <div class="col-sm-4">
-											<div class="img">
-													<img src="img/blog2.png" alt="" class="img-responsive">
+							</div>
+
+							<div class="row">
+								<div class="col-sm-9">
+									<div class="row projectname plan">
+
+										<div class="form-inline">
+											<div class="col-sm-4">
+												<label style="">Give your project a name</label>
+											</div>
+											<div class="col-sm-6">
+												<input name="" type="text" class="form-control">
 											</div>
 										</div>
-								</div>
-								
-								
-								
-
-									
-								<div class="row">
-								     <label>Add dimensions of your space</label>
-									 <span class="selection">
-									 <p>Length:7ft 3Inches</p>
-									 <p>Width:9ft 6Inches</p>
-									 <p>Height:7ft 3Inches</p>
-									 <span>
-								</div>
-																		
-		
-								
-								
-						
-								
-								<div class="row">
-								     <label>What is your design budget for materials?</label><span class="selection">$501 -$1000<span>
-								</div>
-										
-								<div class="row">
-								     <label>Other feedback or instructions?</label>
-								</div>
-								<div class="row">
-								<div class="col-sm-8">
-									There are many variations of passages of generators on the embarrassing hidden in slightly distracted by these distribution of letters, as opposed.There are many variations of passages of generators on the embarrassing hidden in slightly distracted by these distribution of letters, as opposed.There are many variations of passages of generators on the embarrassing hidden in slightly distracted by these distribution of letters, as opposed.There are many variations of passages of generators on the embarrassing hidden in slightly distracted by these distribution of letters, as opposed.
-								</div>								
-								</div>								
-		
-								<div class="row">
-								<div class="col-sm-9">
-								<div class="row projectname plan">
-									
-									<div class="form-inline">
-									<div class="col-sm-4">
-									<label style="">Give your project a name</label>
 									</div>
-									<div class="col-sm-6"><input name="" type="text" class="form-control"></div>
-									</div>	
-								</div>	
-								
 
-							</div>
-							</div>
-							</div>
-							
-							<div class="row charts_wrapp" style="margin-top:60px">
-                <!-- Plan Box -->
-                <div class="col-sm-4 standar">
-                    <div class="plan" >
-                        <div class="wrapper home_wrapper">
-                            <h3>Budget</h3>
-                            <div class="price">
-                                <span class="dollar">$</span> 
-                                <span class="qty">99</span> 
-                                
-                            </div>
-                            <div class="features">
-                                <p>Expert
-                                    <strong>2</strong>
-                                    designs
-                                </p>
-                                 <p>&nbsp;</p>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- Plan Box -->
-                <div class="col-sm-4 standar ">
-                    <div class="plan">
-                        <div class="wrapper home_wrapper alert-info">
-							   <h3>Premier</h3>
-                            <div class="price">
-                                <span class="dollar">$</span> 
-                                <span class="qty">199</span> 
-                                
-                            </div>
-                            <div class="features">
-                                <p>Expert
-                                    <strong>10</strong>
-                                    designs
-                                </p>
-                                <p>&nbsp;</p>
-                               
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-                <!-- Plan Box -->
-                <div class="col-sm-4 standar">
-                    <div class="plan">
-                        <div class="wrapper home_wrapper">
-                            <h3>Premier</h3>
-                         
-                            <div class="price">
-                                <span class="dollar">$</span> 
-                                <span class="qty">299</span> 
-                                
-                            </div>   
-                            <div class="features">
-                                <p>Expert
-                                    <strong>15</strong>
-                                    designs
-                                </p>
-                                <p>Money back guarantee
-                                </p>
-                                
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-			
-										<div class="row formbuttons">
-								<div class="col-sm-3 col-sm-offset-2">
-									<a class="order" href="<%= step4_contests_path %>">GO BACK</a>
-								</div>
-								<div class="col-sm-3 col-sm-offset-4">
-									<a class="order" href="#">CONTINUE</a>
 								</div>
 							</div>
-			
-			
-							</div>
+						</div>
 
-	
-							
-                        </div>
-                    </div>
-                </div>
-              
-                
-            </div>
-            
-        </div>
+						<div class="row charts_wrapp" style="margin-top:60px">
+							<!-- Plan Box -->
+							<div class="col-sm-4 standar">
+								<div class="plan" >
+									<div class="wrapper home_wrapper">
+										<h3>Budget</h3>
+										<div class="price">
+											<span class="dollar">$</span>
+											<span class="qty">99</span>
+
+										</div>
+										<div class="features">
+											<p>
+												Expert <strong>2</strong>
+												designs
+											</p>
+											<p>
+												&nbsp;
+											</p>
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Plan Box -->
+							<div class="col-sm-4 standar ">
+								<div class="plan">
+									<div class="wrapper home_wrapper alert-info">
+										<h3>Premier</h3>
+										<div class="price">
+											<span class="dollar">$</span>
+											<span class="qty">199</span>
+
+										</div>
+										<div class="features">
+											<p>
+												Expert <strong>10</strong>
+												designs
+											</p>
+											<p>
+												&nbsp;
+											</p>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+							<!-- Plan Box -->
+							<div class="col-sm-4 standar">
+								<div class="plan">
+									<div class="wrapper home_wrapper">
+										<h3>Premier</h3>
+
+										<div class="price">
+											<span class="dollar">$</span>
+											<span class="qty">299</span>
+
+										</div>
+										<div class="features">
+											<p>
+												Expert <strong>15</strong>
+												designs
+											</p>
+											<p>
+												Money back guarantee
+											</p>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row formbuttons">
+							<div class="col-sm-3 col-sm-offset-2">
+								<a class="order" href="<%= step4_contests_path %>">GO BACK</a>
+							</div>
+							<div class="col-sm-3 col-sm-offset-4">
+								<a class="order" href="#" onclick="alert('Under Implementation!'); return false;">CONTINUE</a>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

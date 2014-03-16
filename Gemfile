@@ -5,7 +5,9 @@ gem 'rails', '4.0.3'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-
+gem 'uploadify-rails'
+gem "paperclip", "~> 3.0"
+gem 'mime-types'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

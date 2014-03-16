@@ -70,6 +70,7 @@
 										end
 										%>
 									<% end %>
+									<span class="text-error" id="err_area"></span>
 								<% end %>
 							<div class="row formbuttons">
 								<div class="col-sm-3 ">
@@ -95,11 +96,12 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery('.continue').click(function(e) {
+			jQuery("#err_area").html("");
 			if(jQuery('.design_space:checked').length > 0) {
 				e.preventDefault();
 				jQuery("#step2").submit();
 			} else {
-				alert("Please select atleast one area.");
+				jQuery("#err_area").html("Please select atleast one area.");
 				return false;
 			}
 		});
