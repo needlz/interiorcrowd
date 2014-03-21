@@ -373,7 +373,7 @@ font-size: 25px;margin: 0px 0px 5px;line-height: 25px;text-align: center;}
   }
   
 .leftlabel, .rightlabel{color:#428BCA;font-weight: bold;font-size: 13px;}
-.leftlabel{float:left;width:85px;}
+.leftlabel{float:left;width:105px;}
 .rightlabel{float:right;text-align:right;}
 .slidercon{line-height:20px;}
 .footer-links .footer-nav{float:left;text-align:center;}
