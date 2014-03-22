@@ -547,3 +547,9 @@
 .text-error {
     color: #B94A48;
 }
+.form-inline .left-control{margin-right:22px;}
+.form-inline .right-control{margin-left:12px;}
+.input-small{width:28%}
+.input-big{width:70%}
+.card-type label{margin-right:12px;}
+.card-exp{margin-left:0px;width:20%;display:inline-block;margin-right:8px;}
