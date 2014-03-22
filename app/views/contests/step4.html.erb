@@ -1,17 +1,24 @@
-<!-- Pricing Option -->
-    <div id="in_pricing">
-        <div class="container">
-            <div class="section_header">
-                &nbsp;
-            </div>
+<%= content_for :javascript do %>
+	<%= javascript_include_tag  'jquery.uploadify' %> 
+	<%= stylesheet_link_tag  'uploadify' %> 
+	
+<% end %>
+<%#=  session[:step4_image_id].inspect %>	
 
-            <div class="row charts_wrapp">
-                <!-- Plan Box -->
-                <div class="col-sm-12">
-                    <div class="plan">
-                        <div class="wrapper">
-						
-							 <div class="row">
+<!-- Pricing Option -->
+<div id="in_pricing">
+	<div class="container">
+		<div class="section_header">
+			&nbsp;
+		</div>
+
+		<div class="row charts_wrapp">
+			<!-- Plan Box -->
+			<div class="col-sm-12">
+				<div class="plan">
+					<div class="wrapper">
+
+						<div class="row">
 							<div class="page-header">
 								<h2>Launch a New Design Contest</h2>
 							</div>
@@ -19,145 +26,234 @@
 						<div class="row launch-nav" >
 							<div class="col-sm-10 col-sm-offset-1">
 								<ul class="nav nav-pills nav-justified">
-									<li class="col-sm-2  previous"><%= link_to "Step 1", step1_contests_path %></li>
-									<li class="col-sm-2 previous"><%= link_to "Step 2", step2_contests_path %></li>
-									<li class="col-sm-2 previous"><%= link_to "Step 3", step3_contests_path %></li>
-									<li class="col-sm-2 active"><%= link_to "Step 4", step4_contests_path %></li>
+									<li class="col-sm-2  previous">
+										<%= link_to "Step 1", step1_contests_path %>
+									</li>
+									<li class="col-sm-2 previous">
+										<%= link_to "Step 2", step2_contests_path %>
+									</li>
+									<li class="col-sm-2 previous">
+										<%= link_to "Step 3", step3_contests_path %>
+									</li>
+									<li class="col-sm-2 active">
+										<%= link_to "Step 4", step4_contests_path %>
+									</li>
 								</ul>
 							</div>
 						</div>
-                            
-
-                            <div class="container col-sm-offset-1">
-
-								<div class="row  step-row">
-								     <label>Upload pictures of your space</label>
-								</div>
-								<div class="row">
-									<div class="col-sm-offset-1 col-sm-8 form-inline" style="padding-left:0">										
-										<div class="col-sm-2">
-											Upload
-										</div>
-										<div class="col-sm-6">
-											<input name="" type="file"> <span>(.jpg, .tif, .png)</span>
-										</div>
-									</div>	
-								</div>	
-								<div class="row   step-row">	
-									
-								     <label>Add dimensions of your space</label>
-									
-								</div>
-								<div class="row">									
-								<div class="col-sm-5 well">	
-								<div class="row">
-								<div class="col-sm-12  mesure-con">										
-									<div class="col-sm-2">
-										Length
-									</div>
-									<div class="col-sm-10  form-inline">
-									<div class="col-sm-4 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-4 col-sm-offset-1 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-2 mesure-label">Inches</label>									
-									</div>	
-								</div>	
-								</div>	
-								<div class="row">
-								<div class="col-sm-12 mesure-con">										
-									<div class="col-sm-2">
-										Width
-									</div>
-									<div class="col-sm-10  form-inline">
-									<div class="col-sm-4 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-4 col-sm-offset-1 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-2 mesure-label">Inches</label>									
-									</div>	
-								</div>
-								</div>
-								<div class="row">
-								<div class="col-sm-12  mesure-con">										
-									<div class="col-sm-2">
-										Height (Optional)
-									</div>
-									<div class="col-sm-10  form-inline">
-									<div class="col-sm-4 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-1 mesure-label">Ft</label>
-									<div class="col-sm-4 col-sm-offset-1 mesure-label">
-										<input name="" type="text" class="form-control">
-									</div>										
-									<label class="col-sm-2 mesure-label">Inches</label>									
-									</div>	
-								</div>
-								</div>
-								
-								
-				
-								</div>
-								</div>
 						
-								
-								<div class="row  step-row">
-								     <label>What is your design budget for materials?</label>
+						<%= form_tag preview_contests_path,  {:id => "step4", :method => "post"} do %>
+							<input type="hidden" name="step4[document]" id="step4_image" value="<%= session[:step4][:document] if session[:step4].present? %>">
+						<div class="container col-sm-offset-1">
+
+							<div class="row  step-row">
+								<label>Upload pictures of your space</label>
+							</div>
+							
+							<div class="row">
+								<div class="col-sm-offset-1 col-sm-8 form-inline" style="padding-left:0">
+									<span id="image_display" style="padding-bottom:10px;">
+										<% if session[:step4].present? && session[:step4][:document].present? 
+											session[:step4][:document].split(',').each do |path| %>
+												<img src="<%= path%>">
+											<% end	
+										  end		
+										%>
+									</span>
+									<input name="" id="file_input" type="file"> <span>(.jpg, .tif, .png)</span>
 								</div>
-								<div class="row mesure-con">
-									<div class="col-sm-8 col-sm-offset-1">
-										
-										<select name=""  class="form-control budget-control"> 
-										<option>$0 -$200</option>
-										<option>$201 -$500</option>
-										<option>$501 -$1000</option>
-										<option>$1000+</option>
-										
-										</select> 
-										
-									</div>	
-								</div>								
-								<div class="row step-row">
-								     <label>Other feedback or instructions?</label>
+							</div>
+							
+							<div class="row   step-row">
+
+								<label>Add dimensions of your space</label>
+
+							</div>
+							<div class="row">
+								<div class="col-sm-5 well">
+									<div class="row">
+										<div class="col-sm-12  mesure-con">
+											<div class="col-sm-2">
+												<strong>Length</strong>
+											</div>
+											<div class="col-sm-10  form-inline">
+												<div class="col-sm-4 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[f_length]" id="f_length" value="<%= session[:step4][:f_length] if session[:step4].present? %>" type="text" class="form-control">
+												</div>
+												<label class="col-sm-1 mesure-label">Ft</label>
+												<div class="col-sm-4 col-sm-offset-1 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[i_length]" id="i_length" type="text" class="form-control" value="<%= session[:step4][:i_legth] if session[:step4].present? %>">
+												</div>
+												<label class="col-sm-2 mesure-label">Inches</label>
+												
+											</div>
+											<span class="text-error" id="err_length" style="padding-left:15px;"></span>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-sm-12 mesure-con">
+											<div class="col-sm-2">
+												<strong>Width</strong>
+											</div>
+											<div class="col-sm-10  form-inline">
+												<div class="col-sm-4 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[f_width]" value="<%= session[:step4][:f_width] if session[:step4].present? %>" id="f_width" type="text" class="form-control">
+												</div>
+												<label class="col-sm-1 mesure-label">Ft</label>
+												<div class="col-sm-4 col-sm-offset-1 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" value="<%= session[:step4][:i_width] if session[:step4].present? %>" name="step4[i_width]" id="i_width" type="text" class="form-control">
+												</div>
+												<label class="col-sm-2 mesure-label">Inches</label>
+											</div>
+											<span class="text-error" id="err_w" style="padding-left:15px;"></span>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-sm-12  mesure-con">
+											<div class="col-sm-2">
+												<strong>Height (Optional)</strong>
+											</div>
+											<div class="col-sm-10  form-inline">
+												<div class="col-sm-4 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[f_height]" value="<%= session[:step4][:f_height] if session[:step4].present? %>" id="f_height" type="text" class="form-control">
+												</div>
+												<label class="col-sm-1 mesure-label">Ft</label>
+												<div class="col-sm-4 col-sm-offset-1 mesure-label">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[i_height]" value="<%= session[:step4][:i_height] if session[:step4].present? %>" id="i_height" type="text" class="form-control">
+												</div>
+												<label class="col-sm-2 mesure-label">Inches</label>
+											</div>
+										</div>
+									</div>
+
 								</div>
-								<div class="row">
-									<div class="col-sm-8 col-sm-offset-1">
-										
-										<textarea name="" row="50" style="width:98%" column="20" class="form-control"> 
-										</textarea>
-									</div>	
-								</div>								
-								<div class="row formbuttons">
+							</div>
+
+							<div class="row  step-row">
+								<label>What is your design budget for materials?</label>
+							</div>
+							<div class="row mesure-con">
+								<div class="col-sm-8 col-sm-offset-1">
+
+									<select name="step4[f_budget]"   class="form-control budget-control">
+										<option value="$0 -$200">$0 -$200</option>
+										<option value="$201 -$500">$201 -$500</option>
+										<option value="$501 -$1000">$501 -$1000</option>
+										<option value="$1000+">$1000+</option>
+									</select>
+
+								</div>
+							</div>
+							<div class="row step-row">
+								<label>Other feedback or instructions?</label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-1">
+									<textarea name="step4[feedback]" row="50" style="width:98%" column="20" class="form-control"><%= strip_tags(session[:step4][:feedback]) if session[:step4].present? %></textarea>
+								</div>
+							</div>
+							
+							<div class="row formbuttons">
 								<div class="col-sm-3 ">
 									<a class="order" href="<%= step3_contests_path%>">GO BACK</a>
 								</div>
 								<div class="col-sm-4 col-sm-offset-4">
-									<a class="order" href="<%= preview_contests_path %>">PREVIEW</a>
+									<a class="order continue" href="#">CONTINUE	</a>
 								</div>
 							</div>
-								
 
-							</div>
-							</div>
+						</div>
+						<% end %>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+</div>
 
 
-							
-                        </div>
-                    </div>
-                </div>
-              
-                
-            </div>
-            
-        </div>
-    </div>
+<script type="text/javascript">
+	jQuery(function(){
+		jQuery('.continue').click(function(e) {
+			e.preventDefault();
+			
+			jQuery(".text-error").html("");
+			
+			var f_length = jQuery.trim(jQuery("#f_length").val());
+			var i_length = jQuery.trim(jQuery("#i_length").val());
+			
+			var f_width = jQuery.trim(jQuery("#f_width").val());
+			var i_width = jQuery.trim(jQuery("#i_width").val());
+			
+			var bool = true
+			var focus = false
+			
+			if(f_length.length < 1 && i_length.length < 1) {
+				bool = false
+				jQuery("#err_length").html("Please enter length.");
+				focus = "f_length"	
+			}
+			
+			if(f_width.length < 1 && i_width < 1) {
+				bool = false
+				jQuery("#err_w").html("Please enter width.");
+				if(!focus) {
+					focus = "f_width"
+				}
+			}  
+			
+			if(bool) {
+				jQuery("#step4").submit();
+			} else {
+				jQuery("#"+focus).focus();
+				return false;
+			}
+		});
+	});
+   
+</script>
+
+
+<script type="text/javascript">
+  jQuery(function() {  
+    // encode the session into a Flash-save format
+   <% session_key = Rails.application.config.session_options[:key] %>
+   
+    jQuery('#file_input').uploadify ({
+      uploader        : '<%= step4_upload_contests_path %>',
+      swf    : '/uploadify.swf',
+      buttonText : 'Upload',
+      fileSizeLimit   : <%=  1.megabytes %>,
+      fileTypeExts:  '*.png;*.jpg;*.tif',
+      uploadLimit     : 3, 
+      fileObjName : 'photo',
+      multi           : false,
+      auto            : true,
+      removeTimeout :10,
+      onUploadSuccess : function(file, data, response) {
+      						$("#image_display").append("<img src='" + data + "' />");
+      						var img_val = $.trim($("#step4_image").val())
+      						if(img_val.length < 1)
+      						{
+      							$("#step4_image").val(data)
+      						} else {
+      							$("#step4_image").val(img_val + ','+data)
+      						}
+      						
+            				//alert('The file ' + file.name + ' was successfully uploaded.');
+        				},  
+      formData : {"<%= key = Rails.application.config.session_options[:key] %>" :"<%= cookies[key] %>",
+        "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>"},
+      cancelImg       : '/images/cancel.png'  //take care that the image is accessible
+    });
+  });
+</script>
 
 
 

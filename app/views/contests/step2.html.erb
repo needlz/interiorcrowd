@@ -11,7 +11,6 @@
                     <div class="plan">
                         <div class="wrapper">
 							<%#= render :partial => 'contest_top_panel' %>
-                            
                         <div class="row">
 							<div class="page-header">
 								<h2>Launch a New Design Contest</h2>
@@ -38,31 +37,23 @@
 								<%= form_tag step3_contests_path,  {:id => "step2", :method => "post"} do %>
 									<% @design_space.each do |design_space|
 										child_spaces = DesignSpace.where("parent =? ", design_space.id)
-										if session[:step2].present? && session[:step2].include?(design_space.id.to_s)
-											checked = "checked = 'checked'"
-										else
-											checked = ''
-								    	end	
+										checked = (session[:step2].present? && session[:step2].include?(design_space.id.to_s)) ? "checked = 'checked'" : ''
 									%>
 										<div class="row">
 											<div class="col-sm-4">
 												<label class="checkbox">
-													<input name="design_space[]" type="checkbox" <%= checked %> value="<%= design_space.id %>" class="design_space"> <%= design_space.name %>
+													<input name="design_space[]" id="<%= design_space.id %>" parent_id="0" type="checkbox" <%= checked %> value="<%= design_space.id %>" class="design_space"> <%= design_space.name %>
 												</label>
 											</div>									
 										</div>
 										<% if child_spaces.present? 
 											child_spaces.each do |child_space|
-											if session[:step2].present? && session[:step2].include?(child_space.id.to_s)
-												checked = "checked = 'checked'"
-											else
-												checked = ''
-								    		end		
+											checked = (session[:step2].present? && session[:step2].include?(child_space.id.to_s)) ? "checked = 'checked'" : '' 
 										%>
 											<div class="row">
 												<div class="col-sm-3 col-sm-offset-1">
 													<label class="checkbox">
-														<input name="design_space[]" <%= checked %> type="checkbox" value="<%= child_space.id %>" class="design_space"> <%= child_space.name %>
+														<input name="design_space[]" <%= checked %> type="checkbox" parent_id="<%= design_space.id %>" value="<%= child_space.id %>" class="design_space"> <%= child_space.name %>
 													</label>
 												</div>	
 											</div>
@@ -70,6 +61,7 @@
 										end
 										%>
 									<% end %>
+									<span class="text-error" id="err_area"></span>
 								<% end %>
 							<div class="row formbuttons">
 								<div class="col-sm-3 ">
@@ -95,14 +87,22 @@
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery('.continue').click(function(e) {
+			jQuery("#err_area").html("");
 			if(jQuery('.design_space:checked').length > 0) {
 				e.preventDefault();
 				jQuery("#step2").submit();
 			} else {
-				alert("Please select atleast one area.");
+				jQuery("#err_area").html("Please select atleast one area.");
 				return false;
 			}
 		});
+		
+		jQuery(".design_space").click(function(e) {
+			var parent_id = jQuery(this).attr("parent_id");
+			if(parent_id > 0) {
+				jQuery("#"+parent_id).attr("checked", "'checked'");
+			}
+		})
 	});
 </script>	
 

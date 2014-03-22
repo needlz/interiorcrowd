@@ -11,7 +11,9 @@ InteriorC::Application.routes.draw do
        match 'step2', via: [:get, :post]
        match 'step3', via: [:get, :post]
        match 'step4', via: [:get, :post]
-       get 'preview'
+       match 'preview', via: [:get, :post]
+       match 'upload', via: [:post]
+       match 'step4_upload', via: [:post]
      end
    end
 

@@ -533,6 +533,7 @@
 }
 
 .well {
+	width: 53%;
     min-height: 20px;
     padding: 19px 5px;
     margin-bottom: 20px;

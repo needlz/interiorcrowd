@@ -44,14 +44,11 @@
 							</div>
 							<%= form_tag step2_contests_path,  {:id => "step1", :method => "post"} do %>
 								<% @design_cat.each do |design_cat| 
-									if session[:step1].present? && session[:step1][:cat_id].include?(design_cat.id.to_s)
-										checked = "checked = 'checked'"
-									else
-										checked = ''
-								    end			  
+									checked = (session[:step1].present? && session[:step1][:cat_id].include?(design_cat.id.to_s)) ? "checked = 'checked'" : ''	  
 								%>
-									<% if design_cat.id != 8 %>
 									<div class="row">
+									<% if design_cat.id != 8 %>
+									
 										<% if design_cat.image_name.present? && design_cat.image_name != 'null' %><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
 											<label class="checkbox"><input name="design_cat[]" type="checkbox" <%= checked %> value="<%= design_cat.id %>" class="design_element"><%= design_cat.name %></label>
 										</div>
@@ -66,20 +63,21 @@
 												From $<%= design_cat.price %>
 											</div>
 										<% end %>	
-									</div>
+									
 									<% else %>
-									<div class="row">
 										<div class="col-sm-3">
 											<label class="checkbox">
-												<input name="design_cat[]" type="checkbox" <%= checked %> class="design_element">
+												<input name="design_cat[]" type="checkbox" <%= checked %> class="design_element" value="<%= design_cat.id %>">
 												Other(specify) </label>
 											<div class="col-sm-12 col-sm-offset-1">
 												<input name="other_value" type="text" class="form-control" value = "<%= session[:step1][:other]  if session[:step1].present? %>" >
 											</div>
 										</div>
-									</div>
-								  <% end %>	
+									<% end %>	
+									
+								 </div>
 								<% end %>
+								<span class="text-error" id="err_category"></span>
 						   <% end %>
 						   <div class="row formbuttons">
 								<div class="col-sm-4 col-sm-offset-6">
@@ -89,24 +87,23 @@
 	
 						</div>
 					</div>
-
-					
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 </div>
 </div>
+
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery('.order').click(function(e) {
+			jQuery("#err_category").html('');
 			if(jQuery('.design_element:checked').length > 0) {
 				e.preventDefault();
 				jQuery("#step1").submit();
 			} else {
-				alert("Please select atleast one category.");
+				jQuery("#err_category").html("Please select atleast one category.")
 				return false;
 			}
 		});
