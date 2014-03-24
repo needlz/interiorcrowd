@@ -555,3 +555,7 @@
 .input-big{width:70%}
 .card-type label{margin-right:12px;}
 .card-exp{margin-left:0px;width:20%;display:inline-block;margin-right:8px;}
+
+.input-big-addon{width:66% !important}
+.profileQuestion{text-align:left;}
+#in_pricing  .thanks-wrap{margin-left:-15px }

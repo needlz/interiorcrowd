@@ -17,7 +17,7 @@ class UsersController < ApplicationController
             #session[:role] = User::STUDENT
             #session[:user_id] = @user.id
             create_contests(@user.id)
-            format.html { redirect_to root_path}  
+            format.html { redirect_to thank_you_contests_path}  
             format.json { render json: @user, status: :created, location: @user }
           else
             flash[:error] = @user.errors.full_messages.join("</br>") 
