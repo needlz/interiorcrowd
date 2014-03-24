@@ -231,10 +231,16 @@
 			
 			} else {
 				$('#card_number').validateCreditCard(function(result) {
-				    if(!(result.card_type.name == card_type && result.length_valid)) {
-						 jQuery("#err_card_number").text('Please enter valid card number.')   
-						 bool = "card_number";
-					}      
+				    if(result.card_type) {
+					    if(!(result.card_type.name == card_type && result.length_valid)) {
+							 jQuery("#err_card_number").text('Please enter valid card number.')   
+							 bool = "card_number";
+						}
+					} else {
+						jQuery("#err_card_number").text('Please enter valid card number.')   
+						bool = "card_number";
+					}
+						      
 				});
 		   }		
 			
