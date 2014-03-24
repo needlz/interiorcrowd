@@ -3,8 +3,7 @@
 	<%= stylesheet_link_tag  'uploadify' %> 
 	
 <% end %>
-<%#=  session[:step4_image_id].inspect %>	
-
+	
 <!-- Pricing Option -->
 <div id="in_pricing">
 	<div class="container">
@@ -23,6 +22,9 @@
 								<h2>Launch a New Design Contest</h2>
 							</div>
 						</div>
+						
+						<%= render :partial => 'home/msg' %>
+						
 						<div class="row launch-nav" >
 							<div class="col-sm-10 col-sm-offset-1">
 								<ul class="nav nav-pills nav-justified">
@@ -44,6 +46,7 @@
 						
 						<%= form_tag preview_contests_path,  {:id => "step4", :method => "post"} do %>
 							<input type="hidden" name="step4[document]" id="step4_image" value="<%= session[:step4][:document] if session[:step4].present? %>">
+							<input type="hidden" name="step4[document_id]" id="step4_image_id" value="<%= session[:step4][:document_id] if session[:step4].present? %>">
 						<div class="container col-sm-offset-1">
 
 							<div class="row  step-row">
@@ -82,7 +85,7 @@
 												</div>
 												<label class="col-sm-1 mesure-label">Ft</label>
 												<div class="col-sm-4 col-sm-offset-1 mesure-label">
-													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[i_length]" id="i_length" type="text" class="form-control" value="<%= session[:step4][:i_legth] if session[:step4].present? %>">
+													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[i_length]" id="i_length" type="text" class="form-control" value="<%= session[:step4][:i_length] if session[:step4].present? %>">
 												</div>
 												<label class="col-sm-2 mesure-label">Inches</label>
 												
@@ -117,7 +120,7 @@
 											</div>
 											<div class="col-sm-10  form-inline">
 												<div class="col-sm-4 mesure-label">
-													<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[f_height]" value="<%= session[:step4][:f_height] if session[:step4].present? %>" id="f_height" type="text" class="form-control">
+													<input onkeyup="jQuery(this).va-l(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="step4[f_height]" value="<%= session[:step4][:f_height] if session[:step4].present? %>" id="f_height" type="text" class="form-control">
 												</div>
 												<label class="col-sm-1 mesure-label">Ft</label>
 												<div class="col-sm-4 col-sm-offset-1 mesure-label">
@@ -136,14 +139,9 @@
 							</div>
 							<div class="row mesure-con">
 								<div class="col-sm-8 col-sm-offset-1">
-
-									<select name="step4[f_budget]"   class="form-control budget-control">
-										<option value="$0 -$200">$0 -$200</option>
-										<option value="$201 -$500">$201 -$500</option>
-										<option value="$501 -$1000">$501 -$1000</option>
-										<option value="$1000+">$1000+</option>
-									</select>
-
+								    <%  session[:step4].present? %>
+									
+									<%= select_tag "step4[f_budget]", options_for_select(Contest::CONTEST_DESIGN_BUDGETS.invert, session[:step4].present? ? session[:step4][:f_budget] : ''), {:class => "form-control budget-control"} %>
 								</div>
 							</div>
 							<div class="row step-row">
@@ -226,7 +224,7 @@
    <% session_key = Rails.application.config.session_options[:key] %>
    
     jQuery('#file_input').uploadify ({
-      uploader        : '<%= step4_upload_contests_path %>',
+      uploader        : '<%= documents_path %>',
       swf    : '/uploadify.swf',
       buttonText : 'Upload',
       fileSizeLimit   : <%=  1.megabytes %>,
@@ -237,17 +235,20 @@
       auto            : true,
       removeTimeout :10,
       onUploadSuccess : function(file, data, response) {
-      						$("#image_display").append("<img src='" + data + "' />");
-      						var img_val = $.trim($("#step4_image").val())
-      						if(img_val.length < 1)
-      						{
-      							$("#step4_image").val(data)
-      						} else {
-      							$("#step4_image").val(img_val + ','+data)
-      						}
+      						var info = data.split(',');
+      						$("#image_display").append("<img src='" + info[0] + "' />");
       						
-            				//alert('The file ' + file.name + ' was successfully uploaded.');
-        				},  
+      						var img_val = $.trim($("#step4_image").val());
+      						var img_id = $.trim($("#step4_image_id").val());
+      						
+      						if(img_val.length < 1) {
+      							$("#step4_image").val(info[0]);
+      							$("#step4_image_id").val(info[1]);
+      						} else {
+      							$("#step4_image").val(img_val + ','+info[0]);
+      							$("#step4_image_id").val(img_id + ','+info[1]);
+      						}
+      					},  
       formData : {"<%= key = Rails.application.config.session_options[:key] %>" :"<%= cookies[key] %>",
         "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>"},
       cancelImg       : '/images/cancel.png'  //take care that the image is accessible

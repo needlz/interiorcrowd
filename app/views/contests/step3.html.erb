@@ -5,7 +5,7 @@
 	<%= stylesheet_link_tag  'uploadify' %> 
 	
 <% end %>	
-<%#=  session[:step3_image_id].inspect %>
+
  <!-- Pricing Option -->
     <div id="in_pricing">
         <div class="container">
@@ -35,8 +35,8 @@
 							</div>
 						</div>
 							
-							<%#= session[:step3].inspect %>
-                            <div class="container col-sm-offset-1">
+							
+                        <div class="container col-sm-offset-1">
 
 							<div class="row ">
 								<div class="col-sm-10 col-sm-offset-1 page-title">
@@ -44,12 +44,15 @@
 								</div>
 							</div>
 							
+							<%= render :partial => 'home/msg' %>
 							
-								<div class="row step-row">
-								     <label>What appeals to you?</label>
-								</div>
+							<div class="row step-row">
+								<label>What appeals to you?</label>
+							</div>
+								
 								<%= form_tag step4_contests_path,  {:id => "step3", :method => "post"} do %>
 								<input type="hidden" name="step3[document]" id="step3_image" value="<%= session[:step3][:document] if session[:step3].present? %>">
+								<input type="hidden" name="step3[document_id]" id="step3_image_id" value="<%= session[:step3][:document_id] if session[:step3].present? %>">
 								
 								<div class="row">
 									<div class="slidercon well col-sm-offset-1">
@@ -61,7 +64,7 @@
 								
 								<div class="row">
 									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Alegant</span>
+										<span class="leftlabel">Elegant</span>
 										<input type="text" value="<%= session[:step3][:alegant] if session[:step3].present? %>" name="step3[alegant]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:alegant] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
 										<span  class="rightlabel">Eclectic</span>
 									</div>	
@@ -223,7 +226,7 @@
    <% session_key = Rails.application.config.session_options[:key] %>
    
     jQuery('#file_input').uploadify ({
-      uploader        : '<%= upload_contests_path %>',
+      uploader        : '<%= documents_path %>',
       swf    : '/uploadify.swf',
       buttonText : 'Upload',
       fileSizeLimit   : <%=  1.megabytes %>,
@@ -232,17 +235,21 @@
       fileObjName : 'photo',
       multi           : false,
       auto            : true,
-      removeTimeout :10,
+      removeTimeout :5,
       onUploadSuccess : function(file, data, response) {
-      						$("#image_display").append("<img src='" + data + "' />");
-      						var img_val = $.trim($("#step3_image").val())
-      						if(img_val.length < 1)
-      						{
-      							$("#step3_image").val(data)
+      						var info = data.split(',');
+      						$("#image_display").append("<img src='" + info[0] + "' />");
+      						
+      						var img_val = $.trim($("#step3_imge").val());
+      						var img_id = $.trim($("#step3_image_id").val());
+      						
+      						if(img_val.length < 1) {
+      							$("#step3_image").val(info[0]);
+      							$("#step3_image_id").val(info[1]);
       						} else {
-      							$("#step3_image").val(img_val + ','+data)
+      							$("#step3_image").val(img_val + ','+info[0]);
+      							$("#step3_image_id").val(img_id + ','+info[1]);
       						}
-
             				//alert('The file ' + file.name + ' was successfully uploaded.');
         					
         				},  

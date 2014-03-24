@@ -14,8 +14,12 @@ InteriorC::Application.routes.draw do
        match 'preview', via: [:get, :post]
        match 'upload', via: [:post]
        match 'step4_upload', via: [:post]
+       match 'step6', via: [:post, :get]
      end
    end
+   
+   resources :documents
+   resources :users
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

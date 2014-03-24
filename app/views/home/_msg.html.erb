@@ -1,0 +1,7 @@
+<div class="row">
+	<div class="col-sm-10">
+		<% if flash[:error].present? %>
+			<div class="alert alert-danger"><%= flash[:error] %></div>
+		<% end %>
+	</div>
+</div>
