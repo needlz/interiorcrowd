@@ -34,6 +34,7 @@
 									<h3>What area of your home are you looking to update?</h3>
 								</div>
 							</div>
+							<%= render :partial => 'home/msg' %>
 								<%= form_tag step3_contests_path,  {:id => "step2", :method => "post"} do %>
 									<% @design_space.each do |design_space|
 										child_spaces = DesignSpace.where("parent =? ", design_space.id)

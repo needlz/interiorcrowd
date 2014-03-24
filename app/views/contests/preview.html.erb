@@ -4,7 +4,9 @@
 		<div class="section_header">
 			&nbsp;
 		</div>
-
+<%= form_tag step6_contests_path,  {:id => "step6", :method => "post"} do %>
+		<input type="hidden" name="step5[b_plan]" id="plan_id" value="<%= session[:step5][:b_plan] if session[:step5].present? %>">
+		
 		<div class="row charts_wrapp">
 			<!-- Plan Box -->
 			<div class="col-sm-12">
@@ -21,7 +23,7 @@
 								<h3>Just a preview of everything entered thus far.</h2>
 							</div>
 						</div>
-
+					
 						<div class="container col-sm-offset-1 preview">
 
 							<div class="row">
@@ -251,7 +253,7 @@
 								<span class="selection">
 									<p>
 										Length: <%= "#{session[:step4][:f_length]} ft" if session[:step4][:f_length].present? %> 
-										<%= "#{session[:step4][:i_legth]} Inches" if session[:step4][:i_legth].present? %>
+										<%= "#{session[:step4][:i_legth]} Inches" if session[:step4][:i_length].present? %>
 									</p>
 									<p>
 										Width: <%= "#{session[:step4][:f_width]} ft" if session[:step4][:f_width].present? %> 
@@ -280,17 +282,19 @@
 							<div class="row">
 								<div class="col-sm-9">
 									<div class="row projectname plan">
-
 										<div class="form-inline">
 											<div class="col-sm-4">
 												<label style="">Give your project a name</label>
 											</div>
 											<div class="col-sm-6">
-												<input name="" type="text" class="form-control">
+												<input name="step5[project_name]" id="project_name" type="text" class="form-control" maxlength="100" value="<%= session[:step5][:project_name] if session[:step5].present? %>">
+												<span class="text-error" id="err_prj_name"></span>
 											</div>
+											
 										</div>
+										
 									</div>
-
+								   
 								</div>
 							</div>
 						</div>
@@ -299,30 +303,24 @@
 							<!-- Plan Box -->
 							<div class="col-sm-4 standar">
 								<div class="plan" >
-									<div class="wrapper home_wrapper">
+									<div class="wrapper home_wrapper" id="1" plan_id="1">
 										<h3>Budget</h3>
 										<div class="price">
 											<span class="dollar">$</span>
 											<span class="qty">99</span>
-
 										</div>
 										<div class="features">
-											<p>
-												Expert <strong>2</strong>
-												designs
-											</p>
-											<p>
-												&nbsp;
-											</p>
+											<p>Expert <strong>2</strong> designs</p>
+											<p>&nbsp;</p>
 										</div>
-
 									</div>
 								</div>
 							</div>
+							
 							<!-- Plan Box -->
 							<div class="col-sm-4 standar ">
 								<div class="plan">
-									<div class="wrapper home_wrapper alert-info">
+									<div class="wrapper home_wrapper" id="2" plan_id="2">
 										<h3>Premier</h3>
 										<div class="price">
 											<span class="dollar">$</span>
@@ -330,44 +328,30 @@
 
 										</div>
 										<div class="features">
-											<p>
-												Expert <strong>10</strong>
-												designs
-											</p>
-											<p>
-												&nbsp;
-											</p>
-
+											<p>Expert <strong>10</strong> designs</p>
+											<p>&nbsp;</p>
 										</div>
-
-									</div>
+								 </div>
 								</div>
 							</div>
 							<!-- Plan Box -->
 							<div class="col-sm-4 standar">
 								<div class="plan">
-									<div class="wrapper home_wrapper">
+									<div class="wrapper home_wrapper" id="3" plan_id="3">
 										<h3>Premier</h3>
-
 										<div class="price">
 											<span class="dollar">$</span>
 											<span class="qty">299</span>
-
 										</div>
+										
 										<div class="features">
-											<p>
-												Expert <strong>15</strong>
-												designs
-											</p>
-											<p>
-												Money back guarantee
-											</p>
-
+											<p>Expert <strong>15</strong> designs</p>
+											<p>Money back guarantee</p>
 										</div>
-
 									</div>
 								</div>
 							</div>
+							<span class="text-error" id="err_plan" style="padding-left:25px;"></span>
 						</div>
 
 						<div class="row formbuttons">
@@ -375,7 +359,7 @@
 								<a class="order" href="<%= step4_contests_path %>">GO BACK</a>
 							</div>
 							<div class="col-sm-3 col-sm-offset-4">
-								<a class="order" href="#" onclick="alert('Under Implementation!'); return false;">CONTINUE</a>
+								<a class="order continue" href="#">CONTINUE</a>
 							</div>
 						</div>
 
@@ -384,7 +368,58 @@
 				</div>
 			</div>
 		</div>
-
+<% end %>
 	</div>
 
 </div>
+
+<script type="text/javascript">
+	jQuery(function(){
+		
+		jQuery(".home_wrapper").click(function(e) {
+			jQuery(".home_wrapper").removeClass("alert-info");
+			jQuery(this).addClass("alert-info");	
+			jQuery("#plan_id").val(jQuery(this).attr("plan_id"));
+		})
+		
+		var plan_id = jQuery("#plan_id").val();
+		
+		if(plan_id.length > 0) {
+			jQuery("#"+plan_id).addClass("alert-info");
+		}
+		
+		jQuery('.continue').click(function(e) {
+			e.preventDefault();
+			
+			jQuery(".text-error").html("");
+			
+			var pname = jQuery.trim(jQuery("#project_name").val());
+			var pbudget = jQuery.trim(jQuery("#plan_id").val());
+			
+			var bool = true
+			var focus = false
+			
+			if(pname.length < 1) {
+				bool = false
+				jQuery("#err_prj_name").html("Please enter project_name.");
+				focus = "project_name"	
+			}
+			
+			if(pbudget.length < 1) {
+				bool = false
+				jQuery("#err_plan").html("Please choose plan.");
+				if(!focus) {
+					focus = "err_plan"
+				}
+			}  
+			
+			if(bool) {
+				jQuery("#step6").submit();
+			} else {
+				jQuery("#"+focus).focus();
+				return false;
+			}
+		});
+	});
+   
+</script>

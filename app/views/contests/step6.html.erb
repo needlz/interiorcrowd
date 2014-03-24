@@ -1,0 +1,320 @@
+<%= content_for :javascript do %>
+	<%= javascript_include_tag  'jquery.creditCardValidator.js' %> 
+<% end %>
+
+<!-- Pricing Option -->
+<div id="in_pricing">
+	<div class="container">
+		<div class="section_header">
+			&nbsp;
+		</div>
+		<%= form_for @user,  {:id => "create", :method => "post"} do |f|%>
+		<div class="row charts_wrapp">
+			<!-- Plan Box -->
+			<div class="col-sm-12">
+				<div class="plan">
+					<div class="wrapper">
+
+						<div class="row">
+							<div class="page-header">
+								<h2>Payment Details and Account Creation</h2>
+							</div>
+						</div>
+						
+						<%= render :partial => 'home/msg' %>
+
+						<div class="container ">
+
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-1 page-title">
+									<h3>Personal Details</h3>
+								</div>
+							</div>
+
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>First Name: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= f.text_field :first_name, :class=>  "form-control input-big" %>
+									<span class="text-error" id="err_first_name"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Last Name: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= f.text_field :last_name, :class=>  "form-control input-big" %>
+									<span class="text-error" id="err_last_name"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Email: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= f.text_field :email, :class=>  "form-control input-big" %>
+									<span class="text-error" id="err_email"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Password: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= f.password_field :password, :class=>  "form-control input-big" %>
+									<span class="text-error" id="err_password"></span>
+								</div>
+							</div>
+							
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Password Again: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= f.password_field :password_confirmation, :class=>  "form-control input-big" %>
+									<span class="text-error" id="err_cpassword"></span>
+								</div>
+							</div>
+
+							<div class="row step-row"></div>
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-1 page-title">
+									<h3>Billing Information</h3>
+								</div>
+							</div>
+
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Name on Card: </label>
+								</div>
+								<div class="col-sm-7">
+									<input name="Contest[name_on_card]" id="name_on_card" type="text" class="form-control input-big">
+									<span class="text-error" id="err_name_on_card"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Address: </label>
+								</div>
+								<div class="col-sm-7">
+									<input name="Contest[address]" id="address" type="text" class="form-control input-big">
+									<span class="text-error" id="err_address"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>State: </label>
+								</div>
+								<div class="col-sm-7 controls form-inline">
+									<input name="Contest[state]" id="state" type="text" class="form-control left-control input-small" >
+									<label>Zip: </label>
+									<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="Contest[zip]" id="zip" type="text" class="form-control right-control input-small" >
+									
+									<span class="text-error" id="err_zip"></span>
+									<span class="text-error" id="err_state"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Card Type: </label>
+								</div>
+								
+								<div class="col-sm-7">
+									<div class="control-group">
+										<div class="controls form-inline card-type">
+											<label class="radio inline" for="radios-0">
+												<input name="Contest[type]" id="radios-0" value="visa" type="radio" checked="checked" class="card_type">
+												Visa </label>
+											<label class="radio inline" for="radios-1">
+												<input name="Contest[type]" id="radios-1" value="mastercard" type="radio" class="card_type">
+												Master </label>
+											<label class="radio inline" for="radios-2">
+												<input name="Contest[type]" id="radios-2" value="amex" type="radio" class="card_type">
+												Amex </label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Card Number: </label>
+								</div>
+								<div class="col-sm-7">
+									<input name="Contest[card_number]" id="card_number" onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" maxlength="16" type="text" class="form-control input-big">
+									<span class="text-error" id="err_card_number"></span>
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>Card Expiry: </label>
+								</div>
+								<div class="col-sm-7">
+									<%= select_month(Date.today, {:field_name => 'card_exp_month'}, :class => "form-control card-exp") %>Month &nbsp; &nbsp; &nbsp;
+									<%= select_year(Date.today, {:start_year => Time.now.year, :end_year => Time.now.year + 10, :field_name => :card_exp_year},  :class => "form-control card-exp") %>Year
+								</div>
+							</div>
+
+							<div class="row step-row">
+								<div class="col-sm-2">
+									<label>CVC: </label>
+								</div>
+								<div class="col-sm-7 controls form-inline">
+									<input name="Contest[cvc]" id="card_cvc" onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" type="text" class="form-control left-control input-small" maxlength="3">
+									<span class="text-error" id="err_cvc"></span>						
+								</div>
+							</div>
+							<div class="row step-row">
+								<div class="col-sm-6 col-sm-offset-2">
+									By clicking below, You are agree to our terms and conditions.
+								</div>
+							</div>
+							<div class="row formbuttons">
+								<div class="col-sm-4 col-sm-offset-4">
+									<a class="order continue" href="#">CHARGE NOW</a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<% end %>
+	</div>
+
+</div>
+</div>
+
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery(".continue").click(function(e){
+			e.preventDefault();
+			jQuery(".text-error").html("");
+			
+			var first_name = $.trim($("#user_first_name").val());
+			var last_name = $.trim($("#user_last_name").val());
+			var email = $.trim($("#user_email").val());
+			var password = $.trim($("#user_password").val());
+			var c_password = $.trim($("#user_password_confirmation").val());
+			
+			var name_on_card = $.trim($("#name_on_card").val());
+			var address = $.trim($("#address").val());
+			
+			var city = $.trim($("#city").val());
+			var state = $.trim($("#state").val());
+			var zip = $.trim($("#zip").val());
+			var card_type = $.trim($(".card_type:checked").val());
+			
+			var cvc = $.trim($("#card_cvc").val());
+			
+			var bool = false;
+			
+			
+			if (cvc.length > 1) {
+				if(!$.isNumeric(cvc) || cvc.length != 3)	{
+					jQuery("#err_cvc").text('Please enter valid CVC, must have 3 digits.')
+				}
+			} else {
+				jQuery("#err_cvc").text('Please enter CVC.')
+				bool = "card_cvc";
+			}
+			
+			if($('#card_number').val().length < 1) {
+				jQuery("#err_card_number").text('Please enter card number.')   
+				bool = "card_number";
+			
+			} else {
+				$('#card_number').validateCreditCard(function(result) {
+				    if(!(result.card_type.name == card_type && result.length_valid)) {
+						 jQuery("#err_card_number").text('Please enter valid card number.')   
+						 bool = "card_number";
+					}      
+				});
+		   }		
+			
+			if (zip.length > 1) {
+				if(!$.isNumeric(zip))	{
+					jQuery("#err_zip").text('Please enter valid zip.')
+				}
+			} else {
+				jQuery("#err_zip").text('Please enter zip.')
+				bool = "zip";
+			}
+			
+			if (state.length > 1) {
+				var rege = /^[a-zA-Z]+$/
+				if(!rege.test(state))	{
+					jQuery("#err_state").text('Please enter valid state. Only letters are allowed.');
+					bool = "state";	
+			    }
+			} else {
+				jQuery("#err_state").text('Please enter state.')
+				bool = "state";
+			}
+			
+			if (address.length < 1) {
+				jQuery("#err_address").text('Please enter address.')
+				bool = "address";
+			}
+			
+			
+			if (name_on_card.length < 1) {
+				jQuery("#err_name_on_card").text('Please enter name.')
+				bool = "name_on_card";
+			}
+			
+			if (password.length < 1) {
+				jQuery("#err_password").text('Please enter paswword.')
+				bool = "user_password";
+			}
+			
+			if (c_password.length < 1) {
+				jQuery("#err_cpassword").text('Please enter confirm paswword.');
+				bool = "user_password_confirmation";
+			} else {
+				if(c_password != password) {
+					jQuery("#err_cpassword").text('Password and Confirm password must be same.');
+					bool = "user_password_confirmation";
+				}
+			}
+			
+			
+			if(email.length > 1) {
+				var rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if(!rege.test(email))	{
+					jQuery("#err_email").text('Please enter valid email.');
+					bool = "user_email";	
+			    }
+			} else {
+				jQuery("#err_email").text('Please enter email.');
+			    bool = "user_email";
+			}
+			
+			if (last_name.length < 1) {
+				jQuery("#err_last_name").text('Please enter last name.')
+				bool = "user_last_name";
+			}
+			
+			if (first_name.length < 1) {
+				jQuery("#err_first_name").text('Please enter first name.')
+				bool = "user_first_name";
+			}
+			
+			if(bool) {
+			   jQuery("#"+bool).focus();
+			   return false;
+			} else {
+				jQuery("#new_user").submit();
+				return true;	
+			}
+				
+		});
+		
+	});
+</script>
