@@ -90,7 +90,7 @@
 									<label>Name on Card: </label>
 								</div>
 								<div class="col-sm-7">
-									<input name="Contest[name_on_card]" id="name_on_card" type="text" class="form-control input-big">
+									<%= f.text_field :name_on_card, :class=>  "form-control input-big" %>
 									<span class="text-error" id="err_name_on_card"></span>
 								</div>
 							</div>
@@ -99,7 +99,7 @@
 									<label>Address: </label>
 								</div>
 								<div class="col-sm-7">
-									<input name="Contest[address]" id="address" type="text" class="form-control input-big">
+									<%= f.text_field :address, :class=>  "form-control input-big" %>
 									<span class="text-error" id="err_address"></span>
 								</div>
 							</div>
@@ -108,14 +108,16 @@
 									<label>State: </label>
 								</div>
 								<div class="col-sm-7 controls form-inline">
-									<input name="Contest[state]" id="state" type="text" class="form-control left-control input-small" >
+									<%= f.text_field :state, :class=>  "form-control left-control input-small" %>
 									<label>Zip: </label>
-									<input onkeyup="jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" name="Contest[zip]" id="zip" type="text" class="form-control right-control input-small" >
 									
+									<%= f.text_field :zip, :class=>  "form-control left-control input-small", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))" %>
 									<span class="text-error" id="err_zip"></span>
 									<span class="text-error" id="err_state"></span>
 								</div>
 							</div>
+							
+							
 							<div class="row step-row">
 								<div class="col-sm-2">
 									<label>Card Type: </label>
@@ -203,12 +205,11 @@
 			var password = $.trim($("#user_password").val());
 			var c_password = $.trim($("#user_password_confirmation").val());
 			
-			var name_on_card = $.trim($("#name_on_card").val());
-			var address = $.trim($("#address").val());
+			var name_on_card = $.trim($("#user_name_on_card").val());
+			var address = $.trim($("#user_address").val());
 			
-			var city = $.trim($("#city").val());
-			var state = $.trim($("#state").val());
-			var zip = $.trim($("#zip").val());
+			var state = $.trim($("#user_state").val());
+			var zip = $.trim($("#user_zip").val());
 			var card_type = $.trim($(".card_type:checked").val());
 			
 			var cvc = $.trim($("#card_cvc").val());
@@ -247,32 +248,33 @@
 			if (zip.length > 1) {
 				if(!$.isNumeric(zip))	{
 					jQuery("#err_zip").text('Please enter valid zip.')
+					bool = "user_zip";
 				}
 			} else {
 				jQuery("#err_zip").text('Please enter zip.')
-				bool = "zip";
+				bool = "user_zip";
 			}
 			
 			if (state.length > 1) {
 				var rege = /^[a-zA-Z]+$/
 				if(!rege.test(state))	{
 					jQuery("#err_state").text('Please enter valid state. Only letters are allowed.');
-					bool = "state";	
+					bool = "user_state";	
 			    }
 			} else {
 				jQuery("#err_state").text('Please enter state.')
-				bool = "state";
+				bool = "user_state";
 			}
 			
 			if (address.length < 1) {
 				jQuery("#err_address").text('Please enter address.')
-				bool = "address";
+				bool = "user_address";
 			}
 			
 			
 			if (name_on_card.length < 1) {
 				jQuery("#err_name_on_card").text('Please enter name.')
-				bool = "name_on_card";
+				bool = "user_name_on_card";
 			}
 			
 			if (password.length < 1) {

@@ -7,12 +7,12 @@ class UsersController < ApplicationController
       params[:user][:password] = User.encrypt(params[:user][:password])
       params[:user][:password_confirmation] = User.encrypt(params[:user][:password_confirmation])
       
-      params.require(:user).permit(:first_name, :last_name, :email, :password)
+      params.require(:user).permit(:first_name, :last_name, :email, :address, :name_on_card, :state, :zip, :password)
       #raise session[:step5].inspect
       @user = User.new(params[:user])
       respond_to do |format|
           if @user.save
-            #OscarMailer.student_registration_mail(@student, st_ps, @user).deliver
+            ICrowd.user_registration(@user, user_ps).deliver
             #session[:id] = @student.id 
             #session[:role] = User::STUDENT
             #session[:user_id] = @user.id
