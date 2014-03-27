@@ -267,7 +267,7 @@
 
 							<div class="row">
 								<label>What is your design budget for materials?</label>
-								<span class="selection"><%= session[:step4][:f_budget] if session[:step4].present? %><span>
+								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget]] if session[:step4].present? %><span>
 							</div>
 
 							<div class="row">
