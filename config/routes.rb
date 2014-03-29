@@ -1,4 +1,6 @@
 InteriorC::Application.routes.draw do
+  resources :designers
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,11 +17,18 @@ InteriorC::Application.routes.draw do
        match 'upload', via: [:post]
        match 'step4_upload', via: [:post]
        match 'step6', via: [:post, :get]
+       match 'thank_you', via: [:get]
      end
    end
    
    resources :documents
    resources :users
+   
+   resources :designers do
+     member do
+      match 'thank_you', via: [:get]
+     end 
+   end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
