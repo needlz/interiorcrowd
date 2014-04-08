@@ -1,4 +1,15 @@
 class ContestsController < ApplicationController
+  before_filter :check_designer, :only => [:respond]
+  
+  def index
+    @contests = Contest.paginate(:page => params[:page]).order('created_at DESC')
+  end
+  
+  def show
+    @contest = Contest.find_by_id(params[:id])
+    @cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
+   
+  end
   
   def step1
     @design_cat = DesignCategory.where("status = ?", DesignCategory::CAT_ACTIVE_STATUS).order('pos ASC')
@@ -74,6 +85,7 @@ class ContestsController < ApplicationController
     end
   end
   
+  
   def upload
     params[:image] = {}
     params[:image][:image] = params[:photo]
@@ -86,7 +98,16 @@ class ContestsController < ApplicationController
     else
         render :json => {:msg => "Upload Failed", :error => @image.error}
     end
+  end
   
+  def respond
+    @contest = Contest.find_by_id(params[:id])
+    cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id]) 
+    redirect_to contest_path if @contest.blank? || cr.present?  
+    
+    @crequest = ContestRequest.new
+    @crequest.designer_id = session[:designer_id]
+    @crequest.contest_id = params[:id]   
   end
 
 end

@@ -1,0 +1,122 @@
+<%= content_for :javascript do %>
+	<%= javascript_include_tag 'bootstrap-slider' %>
+	<%= javascript_include_tag  'jquery.uploadify' %> 
+	<%= stylesheet_link_tag  'lib/slider' %> 
+	<%= stylesheet_link_tag  'uploadify' %> 
+<% end %>
+	
+<!-- Pricing Option -->
+<div id="in_pricing">
+	<div class="container">
+		<div class="section_header">
+			&nbsp;
+		</div>
+
+		<div class="row charts_wrapp">
+			<!-- Plan Box -->
+			<div class="col-sm-12">
+				<div class="plan">
+					<div class="wrapper">
+
+						<div class="row">
+							<div class="page-header">
+								<h2>Design Center</h2>
+							</div>
+						</div>
+						<div class="row">
+							<div class="page-header">
+								<h3>Respond to contest</h3>
+							</div>
+						</div>
+
+						<%= form_for @crequest,  {:id => "step3", :method => "post"} do |f|%>
+						<%= f.hidden_field :designer_id %>
+						<%= f.hidden_field :designs %>
+						<%= f.hidden_field :contest_id %>
+						<div class="container col-sm-offset-1 preview">
+
+							<div class="row">
+								<label><a href="14_create_lookbook">Create a lookbook</a> </label>
+							</div>
+
+							<div class="row">
+								<h4>Resourses</h4>
+							</div>
+							<div class="row">
+								<div class="col-sm-8 form-inline" style="padding-left:0">
+									<span id="image_display" style="padding-bottom:10px;"></span>
+									
+									<div class="col-sm-8 col-sm-offset-1">
+										<input name="" type="file" id="file_input">
+										<span>(.jpg, .tif, .png)</span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<label>Other feedback or instructions?</label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8 col-sm-offset-1">
+									<%= f.text_area :feedback, :class => "form-control", :style => "width:68%" %>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row">
+							<center>
+								<div class="col-sm-3 col-sm-offset-5">
+									<a class="order continue" href="#">SUBMIT</a>
+								</div>
+							</center>
+						</div>
+						<% end %>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+<script type="text/javascript">
+  jQuery(function() {  
+  	jQuery(".continue").click(function(e){
+  		jQuery("#new_contest_request").submit();
+  	})	
+    // encode the session into a Flash-save format
+   <% session_key = Rails.application.config.session_options[:key] %>
+   
+    jQuery('#file_input').uploadify ({
+      uploader        : '<%= documents_path %>',
+      swf    : '/uploadify.swf',
+      buttonText : 'Upload a design',
+      fileSizeLimit   : <%=  1.megabytes %>,
+      fileTypeExts:  '*.png;*.jpg;*.tif',
+      uploadLimit     : 3, 
+      fileObjName : 'photo',
+      multi           : false,
+      auto            : true,
+      removeTimeout :3,
+      onUploadSuccess : function(file, data, response) {
+      						var info = data.split(',');
+      						$("#image_display").append("<img src='" + info[0] + "' />");
+      						var img_id = $.trim($("#contest_request_designs").val());
+      						
+      						if(img_id.length < 1) {
+      							$("#contest_request_designs").val(info[1]);
+      						} else {
+      							$("#contest_request_designs").val(img_id + ','+info[1]);
+      						}
+            				//alert('The file ' + file.name + ' was successfully uploaded.');
+        					
+        				},  
+      formData : {"<%= key = Rails.application.config.session_options[:key] %>" :"<%= cookies[key] %>",
+        "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>"},
+      cancelImg       : '/images/cancel.png'  //take care that the image is accessible
+    });
+  });
+</script>

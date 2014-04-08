@@ -8,6 +8,7 @@ gem 'pg'
 gem 'uploadify-rails'
 gem "paperclip", "~> 3.0"
 gem 'mime-types'
+gem "will_paginate", "~> 3.0.4"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 

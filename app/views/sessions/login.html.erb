@@ -1,0 +1,104 @@
+<%= content_for :javascript do %>
+	<%= stylesheet_link_tag  'compiled/sign-in' %> 
+<% end %>	
+
+<!-- Sign In Option 1 -->
+    <div id="sign_in1" style="height:10px;"></div>
+	
+    <!-- Sign In Option 2 -->
+    <div id="sign_in2">
+        <div class="container">
+            <div class="section_header">
+                <h3>Sign in</h3>
+            </div>
+            
+            <div class="row login">
+                <div class="col-sm-5 left_box">
+                    <h4>Log in to your account</h4>
+
+                    <div class="perk_box">
+                        <div class="perk">
+                            <span class="icos ico1"></span>
+                            <p><strong>Lorem alteration</strong> in some form  injected humour these randomised words .</p>
+                        </div>
+                        <div class="perk">
+                            <span class="icos ico2"></span>
+                            <p><strong>There are many variations</strong> of passages of Lorem alteration in some form  injected humour these randomised words.</p>
+                        </div>
+                        <div class="perk">
+                            <span class="icos ico3"></span>
+                            <p><strong>Alteration in some form</strong> injected humour these randomised words.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 signin_box">
+                	<%= render :partial => 'home/msg' %>
+                    <div class="box">
+                        <div class="box_cont">
+							<div class="form">
+                               <%= form_tag authenticate_sessions_path, {:id => :login} do %>
+                                    <input type="text" name="username" id="username" placeholder="Email" class="form-control">
+                                    <span class="text-error" id="err_u"></span>
+                                    
+                                    <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+                                    <span class="text-error" id="err_p"></span>
+                                    
+                                    <div class="forgot">
+                                        <span>Don’t have an account?</span>
+                                        <a href="<%= new_designer_path%>">Sign up</a>
+                                    </div>
+                                    <input type="submit" value="sign in">
+                                <% end %>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <!-- Pricing Option -->
+    
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		
+		jQuery("#login").submit(function(){
+		    jQuery(".text-error").text('');
+			
+			var username = jQuery.trim(jQuery("#username").val());
+			var password = jQuery.trim(jQuery("#password").val());
+			
+			
+			var bool = false
+						
+			if (password.length < 1) {
+				
+				jQuery("#err_p").text('Please enter password.');
+				bool = "passowrd"
+			}	
+			
+			if(username.length > 1) {
+				var rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+				if(!rege.test(username))	{
+					jQuery("#err_u").text('Please enter valid email.');
+					bool = "username"	
+			    }
+				
+			} else {
+				jQuery("#err_u").text('Please enter email.');
+				bool = "username"
+			}
+			if(bool) {
+			   jQuery("#"+bool).focus();
+			   return false;
+			} else {
+				return true;	
+			}
+				
+		});
+		
+	});
+</script>
+

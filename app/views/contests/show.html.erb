@@ -1,0 +1,280 @@
+<% if @contest.present? %>
+<!-- Pricing Option -->
+<div id="in_pricing">
+	<div class="container">
+		<div class="section_header">
+			&nbsp;
+		</div>
+		
+		<div class="row charts_wrapp">
+			<!-- Plan Box -->
+			<div class="col-sm-12">
+				<div class="plan">
+					<div class="wrapper">
+
+						<div class="row">
+								<div class="page-header">
+									<h2>Design Center</h2>
+								</div>
+							</div>
+							<div class="row">
+								<div class="page-header">
+									<h3>Previewing &nbsp;<strong class="price"><%= @contest.project_name %> <%= Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest.budget_plan.to_i] %></strong></h3>
+								</div>
+						</div>
+					
+						<div class="container col-sm-offset-1 preview">
+
+							<div class="row">
+								<label>What do you need help with today? </label>
+								<% design_cat = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos).pluck(:name) %>
+								<span class="selection"><%= design_cat.join(', ') %><span>
+							</div>
+
+							<div class="row">
+								<label>What area of your home are you looking to update? </label>
+								<% design_cat = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos).pluck(:name) %>
+								<span class="selection"><%= design_cat.join(', ') %><span>
+							</div>
+
+							<div class="row">
+								<label>What appeals to you? </label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="plan appeals">
+										<table class="table table-hover">
+
+											<tr>
+												<td class="col-sm-2">Feminine</td>
+												<td class="col-sm-8">
+													<% if @contest.cd_feminine_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_feminine_scale %>%">
+															<%= @contest.cd_feminine_scale %> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_feminine_scale.to_i%>%">
+															<%= 100- @contest.cd_feminine_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												
+												<td class="col-sm-2">Masculine</td>
+											</tr>
+											
+											<tr>
+												<td class="col-sm-2">Elegant</td>
+												<td class="col-sm-8">
+													<% if @contest.cd_elegant_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_elegant_scale %>%">
+															<%= @contest.cd_elegant_scale %> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_elegant_scale.to_i%>%">
+															<%= 100- @contest.cd_elegant_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+												    	<%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Eclectic</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Traditional</td>
+												<td class="col-sm-8">
+													<% if @contest.cd_traditional_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_traditional_scale%>%">
+															<%= @contest.cd_traditional_scale%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_traditional_scale.to_i%>%">
+															<%= 100- @contest.cd_traditional_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Modern</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Conservative</td>
+												<td class="col-sm-8">	
+													<% if @contest.cd_conservative_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_conservative_scale %>%">
+															<%= @contest.cd_conservative_scale %> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_conservative_scale.to_i%>%">
+															<%= 100- @contest.cd_conservative_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													   <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>	
+												<td class="col-sm-2">Bold</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Muted</td>
+												<td class="col-sm-8">	
+													<% if @contest.cd_muted_scale.present? %>
+												<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_muted_scale %>%">
+															<%= @contest.cd_muted_scale %> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_muted_scale.to_i%>%">
+															<%= 100- @contest.cd_muted_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Colorful</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Timeless</td>
+												<td class="col-sm-8">	
+													<% if @contest.cd_timeless_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_timeless_scale%>%">
+															<%= @contest.cd_timeless_scale%> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_timeless_scale.to_i%>%">
+															<%= 100- @contest.cd_timeless_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Trendy</td>
+											</tr>
+											<tr>
+												<td class="col-sm-2">Fancy</td>
+												<td class="col-sm-8">	
+													<% if @contest.cd_fancy_scale.present? %>
+													<div class="progress">
+														<div class="progress-bar progress-bar-success" style="width: <%= @contest.cd_fancy_scale %>%">
+															<%= @contest.cd_fancy_scale %> %
+														</div>
+														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_fancy_scale.to_i%>%">
+															<%= 100- @contest.cd_fancy_scale.to_i %>%
+														</div>
+													</div>
+												    <% else %>
+													    <%= render :partial => 'no_data_slider' %>
+													<% end %>	
+												</td>
+												<td class="col-sm-2">Playful</td>
+											</tr>
+											
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<label>What colors do you want in your space? </label>
+								<span class="selection"><%= @contest.cd_fav_color %><span>
+							</div>
+							<div class="row">
+								<label>What colors do you want to avoid? </label>
+								<span class="selection"><%= @contest.cd_refrain_color %><span>
+							</div>
+							<div class="row">
+								<label>Any example that you like? </label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="">
+										<% if @contest.cd_style_ex_images.present? 
+											  @contest.cd_style_ex_images.split(',').each do |path| %>
+											  <img src="<%= path%>" class="" style="padding-right:10px;">
+										<% end	
+										  	end		
+										%>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<label>Links? </label>
+								<span class="selection"><%= @contest.cd_style_links %><span>
+							</div>
+
+							<div class="row">
+								<label>Upload pictures of your space: </label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<div class="">
+										<% if @contest.cd_space_images.present? 
+											  @contest.cd_space_images.split(',').each do |path| %>
+											  <img src="<%= path%>" class="" style="padding-top:10px;">
+										<% end	
+										  	end		
+										%>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<label>Add dimensions of your space</label>
+								<span class="selection">
+									<p>
+										Length: <%= "#{@contest.cd_space_flength} ft" %> 
+										<%= "#{@contest.cd_space_ilength} Inches"  %>
+									</p>
+									<p>
+										Width: <%= "#{@contest.cd_space_fwidth} ft"  %> 
+										<%= "#{@contest.cd_space_iwidth} Inches"  %>
+									</p>
+									<p>
+										Height: <%= "#{@contest.cd_space_fheight} ft"  %> 
+										<%= "#{@contest.cd_space_iheight} Inches"  %>
+									</p> <span>
+							</div>
+							
+
+							<div class="row">
+								<label>What is your design budget for materials?</label>
+								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[@contest.cd_space_budget.to_i]  %><span>
+							</div>
+
+							<div class="row">
+								<label>Other feedback or instructions?</label>
+							</div>
+							<div class="row">
+								<div class="col-sm-8">
+									<%= @contest.feedback %>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="row formbuttons">
+							<div class="col-sm-5 col-sm-offset-1">
+								<a style="width:70%" class="order" href="<%= contests_path %>">Go back to other contests</a>
+							</div>
+							<% if @cr.blank? %>
+								<div class="col-sm-4 col-sm-offset-2">
+									<a style="width:55%" class="order" href="<%= respond_contest_path(params[:id]) %>">Join this contest</a>
+								</div>
+							<% end %>	
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<% end %>
