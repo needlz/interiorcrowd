@@ -10,7 +10,8 @@ InteriorC::Application.routes.draw do
     collection do
       match 'logout', via: [:get] 
       match 'login', via: [:get]
-       match 'authenticate', via: [:post]
+      match 'authenticate', via: [:post]
+      match 'retry_password', via: [:post, :get]
     end   
   end
    

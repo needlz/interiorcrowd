@@ -193,8 +193,12 @@
 								<div class="col-sm-8">
 									<div class="">
 										<% if @contest.cd_style_ex_images.present? 
-											  @contest.cd_style_ex_images.split(',').each do |path| %>
-											  <img src="<%= path%>" class="" style="padding-right:10px;">
+											  @contest.cd_style_ex_images.split(',').each do |path| 
+											  doc = Image.find_by_id(path)
+											  
+											  %>
+											  <%= image_tag doc.image.url(:medium) if doc.present? %>
+											  
 										<% end	
 										  	end		
 										%>
@@ -214,8 +218,11 @@
 								<div class="col-sm-8">
 									<div class="">
 										<% if @contest.cd_space_images.present? 
-											  @contest.cd_space_images.split(',').each do |path| %>
-											  <img src="<%= path%>" class="" style="padding-top:10px;">
+											  @contest.cd_space_images.split(',').each do |path| 
+											  doc = Image.find_by_id(path)
+										%>
+											  <%= image_tag doc.image.url(:medium) if doc.present? %>
+											  
 										<% end	
 										  	end		
 										%>

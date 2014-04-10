@@ -18,15 +18,21 @@ class SessionsController < ApplicationController
   end
   
   def retry_password
-     designer_info = Designer.find_by_email(params[:email])
-     if udesigner_infoser_info.present?
-      new_password = SecureRandom.urlsafe_base64(5)
-      designer_info.password = User.encrypt(new_password)  
-      designer_info.save
-      ICrowd.reset_password_mail(designer_info, new_password).deliver
-     else
-       flash[:error] = "Email does not exist."
-     end
+    if request.method == 'POST'
+       designer_info = Designer.find_by_email(params[:email])
+       if designer_info.present?
+        new_password = SecureRandom.urlsafe_base64(5)
+        designer_info.password = User.encrypt(new_password)  
+        designer_info.save
+        ICrowd.reset_password_mail(designer_info, new_password).deliver
+        flash[:notice] = "An email has been sent to your registered email address."
+        redirect_to login_sessions_path
+       
+       else
+         flash[:error] = "Email does not exist."
+         redirect_to retry_password_sessions_path
+       end
+    end     
   end
   
   
