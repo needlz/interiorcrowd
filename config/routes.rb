@@ -5,9 +5,25 @@ InteriorC::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  
+  resources :sessions do
+    collection do
+      match 'logout', via: [:get] 
+      match 'login', via: [:get]
+      match 'authenticate', via: [:post]
+      match 'retry_password', via: [:post, :get]
+    end   
+  end
+   
    root 'home#index'
    
+   resources :contest_requests
+   
    resources :contests do
+     member do
+      match 'respond', via: [:get]
+     end
+     
      collection do
        match 'step1', via: [:get, :post]
        match 'step2', via: [:get, :post]
@@ -27,6 +43,7 @@ InteriorC::Application.routes.draw do
    resources :designers do
      member do
       match 'thank_you', via: [:get]
+      match 'welcome', via: [:get]
      end 
    end
 

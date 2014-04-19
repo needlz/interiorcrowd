@@ -13,5 +13,11 @@ class ICrowd < ActionMailer::Base
     @password = password
     mail(:to => user.email, :subject => "Interior Crowd")
   end
+  
+  def reset_password_mail(user, password)
+    @user = user
+    @password = password
+    mail(:to => user.email, :subject => "Interior Crowd-Forgot Password")
+  end
 
 end

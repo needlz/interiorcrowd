@@ -1,4 +1,5 @@
 class DesignersController < ApplicationController
+  before_filter :check_designer, :only => [:welcome]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
   # GET /designers
@@ -36,8 +37,9 @@ class DesignersController < ApplicationController
     @designer = Designer.new(designer_params)
     respond_to do |format|
       if @designer.save
+        session[:designer_id] = @designer.id 
         ICrowd.designer_registration(@designer, user_ps).deliver
-        format.html { redirect_to thank_you_designer_path(@designer), notice: 'Designer was successfully created.' }
+        format.html { redirect_to welcome_designer_path(@designer), notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else
         @designer_images = params[:designer_image]
@@ -72,6 +74,10 @@ class DesignersController < ApplicationController
       format.html { redirect_to designers_url }
       format.json { head :no_content }
     end
+  end
+  
+  def welcome
+    
   end
 
   private
