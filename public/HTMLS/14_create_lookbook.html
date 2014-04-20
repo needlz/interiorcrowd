@@ -95,18 +95,18 @@
 									</div>	
 								</div>
 	
-								<div class="row">
+								<div class="row img_container">
 									<div class="col-sm-8 img_box">										
 										
 											<label>Add text to go at bottom of picture</label>			
 											<input name="" type="text" class="form-control"> 
-											<a class="plus_wrapper" href="#">
-												<span>&#43;</span>
-											</a>
+
 										<a class="minus_wrapper" href="#">
 											<span>&#45;</span>
 										</a>
-										
+										<a class="plus_wrapper" href="#">
+										<span>&#43;</span>
+										</a>
 									</div>	
 								</div>	
 								<div class="row">
@@ -272,6 +272,27 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script> 
+    <script >
+
+	$( document ).on( "click", ".img_container .plus_wrapper", function() {						
+			var $rows = $('.img_container:first').first();
+			$formclone = $rows.clone()
+			$formclone.find('input').val('');
+			$formclone.insertAfter($('.img_container:last')); 
+			$(".img_container .plus_wrapper").hide();
+			if($(".img_container .plus_wrapper").length > 1){
+			$(".img_container .minus_wrapper").show();}
+			$(".img_container .plus_wrapper:last").last().show();
+			//$('.particiapntForm:last').find('.frmdestroyer').show();
+		});
+		$( document ).on( "click", ".img_container .minus_wrapper", function() {						
+			 $(this).parent().parent().remove();
+			 if($(".img_container .plus_wrapper").length == 1){
+			$(".img_container .minus_wrapper").hide();}
+			$(".img_container .plus_wrapper:last").last().show();
+		});
+	
+	</script> 
 
 
 </body>

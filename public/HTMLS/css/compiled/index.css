@@ -575,10 +575,14 @@ border-radius: 6px;
         padding: 2px 0px 2px;
         margin: 0 2px 1px;width:4%;float:left;
  }
+.img_box a.minus_wrapper,.link_box a.minus_wrapper {        
+        display: none;
+ }
  .img_box a.plus_wrapper span ,.link_box a.plus_wrapper span {
           color: #1189D9;
           font-size: 30px;
           font-weight: bold;
+		  
  } 
  .img_box a.minus_wrapper span,.link_box a.minus_wrapper span{
           color: #f00;
