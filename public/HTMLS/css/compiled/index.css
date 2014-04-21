@@ -598,3 +598,8 @@ border-radius: 6px;
  }
  .img_box input,.link_box input,.lnk_tit_box input{width:90%;float:left;}
  .lnk_img_box{margin-top:10px;}
+#in_pricing .charts_wrapp .plan .client_wrapper { padding: 0px 12px 26px 12px; }
+ .client_wrapper h4{ border-bottom: 1px solid #eee;padding-bottom:5px; }
+ .pickwin {  font-size: 30px; font-weight: bold; }
+ .client-center {  margin-top: 50px; }
+ 
