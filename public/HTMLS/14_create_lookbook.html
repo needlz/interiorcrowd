@@ -96,9 +96,14 @@
 								</div>
 	
 								<div class="row img_container">
+								<div class="col-sm-8 img_img_box">	
+										<div class="img">
+											<img src="img/blog3.png" alt="" class="img-responsive" />
+										</div>								
+									</div>
 									<div class="col-sm-8 img_box">										
 										
-											<label>Add text to go at bottom of picture</label>			
+											<label>Add text to go at bottom of image</label>			
 											<input name="" type="text" class="form-control"> 
 
 										<a class="minus_wrapper" href="#">
@@ -107,9 +112,10 @@
 										<a class="plus_wrapper" href="#">
 										<span>&#43;</span>
 										</a>
-									</div>	
+									</div>
+																		
 								</div>	
-								<div class="row">
+								<div class="row lnk_container">
 									<div class="col-sm-8 link_box">										
 										<label>Add Links</label>			
 										<input name="" type="text" class="form-control">
@@ -120,7 +126,13 @@
 											<span>&#45;</span>
 										</a>										
 									</div>
-									<div class="col-sm-8">	
+									<div class="col-sm-8 lnk_tit_box">										
+										
+											<label>Add text to go at bottom of image</label>			
+											<input name="" type="text" class="form-control"> 
+										
+									</div>
+									<div class="col-sm-8 lnk_img_box">	
 										<div class="img">
 											<img src="img/blog3.png" alt="" class="img-responsive" />
 										</div>								
@@ -278,6 +290,7 @@
 			var $rows = $('.img_container:first').first();
 			$formclone = $rows.clone()
 			$formclone.find('input').val('');
+			$formclone.find('.img_img_box').hide();
 			$formclone.insertAfter($('.img_container:last')); 
 			$(".img_container .plus_wrapper").hide();
 			if($(".img_container .plus_wrapper").length > 1){
@@ -290,6 +303,25 @@
 			 if($(".img_container .plus_wrapper").length == 1){
 			$(".img_container .minus_wrapper").hide();}
 			$(".img_container .plus_wrapper:last").last().show();
+		});
+	
+	$( document ).on( "click", ".lnk_container .plus_wrapper", function() {						
+			var $rows = $('.lnk_container:first').first();
+			$formclone = $rows.clone()
+			$formclone.find('input').val('');
+			$formclone.find('.lnk_img_box').hide();
+			$formclone.insertAfter($('.lnk_container:last')); 
+			$(".lnk_container .plus_wrapper").hide();
+			if($(".lnk_container .plus_wrapper").length > 1){
+			$(".lnk_container .minus_wrapper").show();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			//$('.particiapntForm:last').find('.frmdestroyer').show();
+		});
+		$( document ).on( "click", ".lnk_container .minus_wrapper", function() {						
+			 $(this).parent().parent().remove();
+			 if($(".lnk_container .plus_wrapper").length == 1){
+			$(".lnk_container .minus_wrapper").hide();}
+			$(".lnk_container .plus_wrapper:last").last().show();
 		});
 	
 	</script> 

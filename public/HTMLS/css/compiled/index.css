@@ -590,4 +590,5 @@ border-radius: 6px;
           font-weight: bold;
 		  
  }
- .img_box input,.link_box input{width:90%;float:left;}
+ .img_box input,.link_box input,.lnk_tit_box input{width:90%;float:left;}
+ .lnk_img_box{margin-top:10px;}
