@@ -573,8 +573,14 @@ border-radius: 6px;
 		border:2px solid #eee;
         border-radius: 4px;
         padding: 2px 0px 2px;
-        margin: 0 2px 1px;width:4%;float:left;
+        margin: 0 2px 1px;
+		width:4%;
+		float:left;
  }
+ .link_box_large a.plus_wrapper,.link_box_large a.minus_wrapper{
+ width:5%;
+ }
+ 
 .img_box a.minus_wrapper,.link_box a.minus_wrapper {        
         display: none;
  }

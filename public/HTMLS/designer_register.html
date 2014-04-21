@@ -113,13 +113,19 @@
 										<input name="" type="text" class="form-control input-small">										
 									</div>
 								</div>
-								<div class="row step-row">
-								<div class="col-sm-2">										
+								<div class="row step-row lnk_container">
+								<div class="col-sm-2 examplelabel">										
 										<label>Example of Your Work: </label> 										
 									</div>
-									<div class="input-group col-sm-7">
+									<div class="input-group col-sm-7 link_box link_box_large">
 									  <span class="input-group-addon">Links</span>
 									  <input type="text" class="form-control input-big-addon" >
+									  <a class="plus_wrapper" href="#">
+											<span>&#43;</span>
+										</a>
+										<a class="minus_wrapper" href="#">
+											<span>&#45;</span>
+										</a>	
 									</div>							     
 				
 								</div>
@@ -288,20 +294,33 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/theme.js"></script> 
- <script src="js/bootstrap-slider.js"></script>
-	<script>
+<script >
 
-		$(function(){
-  /* see documentation at http://www.eyecon.ro/bootstrap-slider/
-  var RGBChange = function() {
-          $('#RGB').val(a.getValue())
-        };
-        var a = $('#R').slider()
-		.on('slide', RGBChange)
-		.data('slider');       
-*/
-        $('.slidercon input').slider();
-    });
-  </script>	
+
+	
+	$( document ).on( "click", ".lnk_container .plus_wrapper", function() {						
+			var $rows = $('.lnk_container:first').first();
+			$formclone = $rows.clone()
+			$formclone.find('input').val('');
+			
+			$formclone.insertAfter($('.lnk_container:last')); 
+			$(".lnk_container .plus_wrapper").hide();
+			$(".lnk_container .examplelabel label").hide();
+			$(".lnk_container .examplelabel label").first().show();
+			if($(".lnk_container .plus_wrapper").length > 1){
+			$(".lnk_container .minus_wrapper").show();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			//$('.particiapntForm:last').find('.frmdestroyer').show();
+		});
+		$( document ).on( "click", ".lnk_container .minus_wrapper", function() {						
+			 $(this).parent().parent().remove();
+			 if($(".lnk_container .plus_wrapper").length == 1){
+			$(".lnk_container .minus_wrapper").hide();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			$(".lnk_container .examplelabel label").hide();
+			$(".lnk_container .examplelabel label").first().show();
+		});
+	
+	</script> 
 </body>
 </html>
