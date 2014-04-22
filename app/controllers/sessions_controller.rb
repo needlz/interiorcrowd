@@ -1,9 +1,23 @@
 class SessionsController < ApplicationController
   
   def login
-    redirect_to users_url unless session[:id].nil?
+    redirect_to users_url unless session[:designer_id].nil?
   end
   
+  def client_login
+    redirect_to users_url unless session[:designer_id].nil?
+  end
+  
+  def client_authenticate
+    cinfo = User.authenticate(params[:username], params[:password])
+    if cinfo.present?
+        session[:client_id] = cinfo.id 
+        redirect_to client_center_users_path
+    else
+      flash[:error] = 'Incorrect Username or Password!'
+      redirect_to client_login_sessions_url
+    end   
+  end
   
   
   def authenticate
@@ -35,10 +49,27 @@ class SessionsController < ApplicationController
     end     
   end
   
+  def client_retry_password
+    if request.method == 'POST'
+       client_info = User.find_by_email(params[:email])
+       if client_info.present?
+        new_password = SecureRandom.urlsafe_base64(5)
+        client_info.password = User.encrypt(new_password)  
+        client_info.save
+        ICrowd.reset_password_mail(designer_info, new_password).deliver
+        flash[:notice] = "An email has been sent to your registered email address."
+        redirect_to client_login_sessions_path
+       else
+         flash[:error] = "Email does not exist."
+         redirect_to client_retry_password_sessions_path
+       end
+    end     
+  end
+  
   
   def logout
     reset_session
-    redirect_to login_sessions_path
+    redirect_to root_path
   end
   
 end

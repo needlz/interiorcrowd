@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  
+  before_filter :check_client, :only => [:client_center]
   # POST /users
   # POST /users.json
+  def client_center
+    contests = User.find_by_id(session[:client_id]).contests.pluck(:id)
+    @contest_requests = ContestRequest.where("contest_id IN (?)", contests)
+    
+  end
+  
   def create
       user_ps = params[:user][:password]
       params[:user][:password] = User.encrypt(params[:user][:password])

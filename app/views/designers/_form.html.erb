@@ -1,6 +1,30 @@
 <%= content_for :javascript do %>
 	<%= javascript_include_tag  'jquery.uploadify' %> 
 	<%= stylesheet_link_tag  'uploadify' %> 
+	<script type="text/javascript">
+	  $( document ).on( "click", ".lnk_container .plus_wrapper", function() {						
+			var $rows = $('.lnk_container:first').first();
+			$formclone = $rows.clone()
+			$formclone.find('input').val('');
+			
+			$formclone.insertAfter($('.lnk_container:last')); 
+			$(".lnk_container .plus_wrapper").hide();
+			$(".lnk_container .examplelabel label").hide();
+			$(".lnk_container .examplelabel label").first().show();
+			if($(".lnk_container .plus_wrapper").length > 1){
+			$(".lnk_container .minus_wrapper").show();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			//$('.particiapntForm:last').find('.frmdestroyer').show();
+		});
+		$( document ).on( "click", ".lnk_container .minus_wrapper", function() {						
+			 $(this).parent().parent().remove();
+			 if($(".lnk_container .plus_wrapper").length == 1){
+			$(".lnk_container .minus_wrapper").hide();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			$(".lnk_container .examplelabel label").hide();
+			$(".lnk_container .examplelabel label").first().show();
+		});
+	</script> 
 <% end %>
 
 <%= form_for(@designer) do |f| %>
@@ -44,16 +68,36 @@
 			<%= f.text_field :zip, :class=>  "form-control input-small" , :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))"%>
 		</div>
 	</div>
+	<!--
 	<div class="row step-row">
 		<div class="col-sm-2">
 			<label>Example of Your Work: </label>
 		</div>
 		<div class="input-group col-sm-7">
 			<span class="input-group-addon">Links</span>
-			<%= f.text_field :ex_links, :class=>  "form-control input-big-addon" %>
+			<%#= f.text_field :ex_links, :class=>  "form-control input-big-addon" %>
 		</div>
 	
+	</div>-->
+
+	<div class="row step-row lnk_container">
+		<div class="col-sm-2 examplelabel">										
+				<label>Example of Your Work: </label> 										
+			</div>
+			<div class="input-group col-sm-7 link_box link_box_large">
+			  <span class="input-group-addon">Links</span>
+			  <input type="text"  class="form-control input-big-addon des_links" name="exlinks[]">
+			  <a class="plus_wrapper" href="javascript:void(0)">
+					<span>&#43;</span>
+			  </a>
+			  <a class="minus_wrapper" href="javascript:void(0)">
+					<span>&#45;</span>
+			  </a>	
+		</div>							     
 	</div>
+								
+
+								
 	<div class="row step-row">
 		<div class="col-sm-8 controls form-inline col-sm-offset-2">
 			<span id="image_display" style="padding-bottom:10px;">
@@ -170,8 +214,24 @@
 			   jQuery("#"+bool).focus();
 			   return false;
 			} else {
-				jQuery("#new_designer").submit();
-				return true;	
+				var can_submit = true
+				jQuery(".des_links").each(function(){
+					var url_value= jQuery.trim(jQuery(this).val());
+					if(url_value.length > 1) {
+					  var rege = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+					  if(!rege.test(url_value))	{
+							jQuery(this).removeClass('alert-danger').addClass('alert-danger');	
+					  		can_submit = false
+					   } 
+					}
+				}) 
+				if(can_submit) {
+					jQuery("#new_designer").submit();
+					return true;
+				} else {
+					 alert("Please enter valid Link URL and make sure to add prefix http or https in URL")
+		   			 return false;
+				}		
 			}
 				
 		});
@@ -181,6 +241,27 @@
 
 <script type="text/javascript">
   jQuery(function() {  
+  	
+  		<% unless session[:exlnks].blank? 
+			  	session[:exlnks].split(',').each do |link, index|	
+			  %>
+  	var $rows = $('.lnk_container:first').first();
+			$formclone = $rows.clone()
+			$formclone.find('input').val("<%= link %>");
+			
+			$formclone.insertBefore($('.lnk_container:last')); 
+			$(".lnk_container .plus_wrapper").hide();
+			$(".lnk_container .examplelabel label").hide();
+			$(".lnk_container .examplelabel label").first().show();
+			if($(".lnk_container .plus_wrapper").length > 1){
+			$(".lnk_container .minus_wrapper").show();}
+			$(".lnk_container .plus_wrapper:last").last().show();
+			
+			
+  <% end
+  
+  end %>			
+			
     // encode the session into a Flash-save format
    <% session_key = Rails.application.config.session_options[:key] %>
    

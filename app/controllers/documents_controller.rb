@@ -8,7 +8,7 @@ class DocumentsController < ApplicationController
       @image = Image.new(params[:image])
       
       if @image.save
-          render :json =>  "#{@image.image.url(:thumb)},#{@image.id}"
+          render :json =>  "#{@image.image.url(:medium)},#{@image.id}"
       else
           render :json => {:msg => "Upload Failed", :error => @image.error}
       end

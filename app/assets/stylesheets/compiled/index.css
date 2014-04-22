@@ -560,3 +560,48 @@
 .profileQuestion{text-align:left;}
 #in_pricing  .thanks-wrap{margin-left:-15px }
 .planheight{min-height:100px; }
+
+span#image_display img {
+margin-right:10px;
+margin-bottom:5px;
+border: 1px solid #eee;
+border-radius: 6px;
+}
+
+.img_box a.plus_wrapper,.img_box a.minus_wrapper ,.link_box a.plus_wrapper,.link_box a.minus_wrapper {        
+        text-align: center;
+        background: #fff;
+        display: block;
+		border:2px solid #eee;
+        border-radius: 4px;
+        padding: 2px 0px 2px;
+        margin: 0 2px 1px;
+		width:4%;
+		float:left;
+ }
+ .link_box_large a.plus_wrapper,.link_box_large a.minus_wrapper{
+ width:5%;
+ }
+ 
+.img_box a.minus_wrapper,.link_box a.minus_wrapper {        
+        display: none;
+ }
+ .img_box a.plus_wrapper span ,.link_box a.plus_wrapper span {
+          color: #1189D9;
+          font-size: 30px;
+          font-weight: bold;
+		  
+ } 
+ .img_box a.minus_wrapper span,.link_box a.minus_wrapper span{
+          color: #f00;
+          font-size: 30px;
+          font-weight: bold;
+		  
+ }
+ .img_box input,.link_box input,.lnk_tit_box input{width:90%;float:left;}
+ .lnk_img_box{margin-top:10px;}
+#in_pricing .charts_wrapp .plan .client_wrapper { padding: 0px 12px 26px 12px; }
+ .client_wrapper h4{ border-bottom: 1px solid #eee;padding-bottom:5px; }
+ .pickwin {  font-size: 30px; font-weight: bold; }
+ .client-center {  margin-top: 50px; }
+ 

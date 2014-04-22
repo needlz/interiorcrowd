@@ -27,10 +27,21 @@
 
             <div class="collapse navbar-collapse navbar-ex1-collapse" role="navigation">
                 <ul class="nav navbar-nav navbar-right">
-                	<% if session[:designer_id].present? %>
+                	<% if session[:designer_id].present? || session[:client_id].present?%>
               			<li><a href="<%= logout_sessions_path %>">Sign Out</a></li>
+              		
               		<% else %>
-              			<li><a href="<%= login_sessions_path %>">Sign in</a></li>
+              			<li class="dropdown active">
+                        	<a href="sign-in.html" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+	                        <ul class="dropdown-menu">
+	         
+	                            <li><a href="<%= client_login_sessions_path %>">Client Sign in</a></li>
+	                            <li><a href="<%= login_sessions_path %>">Designer Sign in</a></li>
+	                            <!--<li><a href="10_sign-up.html">Sign up</a></li>
+	                            <li><a href="10_reset.html">Reset Password</a></li>-->
+	                           
+	                        </ul>
+                    	</li>
               		<% end %>	
                 </ul>
             </div>

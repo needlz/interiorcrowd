@@ -6,5 +6,9 @@ class ApplicationController < ActionController::Base
   def check_designer
     redirect_to login_sessions_path if session[:designer_id].blank? 
   end
+  
+  def check_client
+    redirect_to client_login_sessions_path if session[:client_id].blank? 
+  end
 
 end

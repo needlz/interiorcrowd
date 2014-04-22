@@ -1,5 +1,5 @@
 class ContestsController < ApplicationController
-  before_filter :check_designer, :only => [:respond]
+  before_filter :check_designer, :only => [:respond, :designer_lookbook]
   
   def index
     @contests = Contest.paginate(:page => params[:page]).order('created_at DESC')
@@ -57,9 +57,16 @@ class ContestsController < ApplicationController
     if request.method == "POST"
       if params[:step4].present?
         session[:step4]= params[:step4]
+        unless session[:step1].present? && session[:step2].present? && session[:step3].present? && session[:step4].present?  
+          flash[:error] = 'Please fill the required info.'
+          redirect_to step1_contests_path and return if session[:step1].blank?
+          redirect_to step2_contests_path and return if session[:step2].blank?
+          redirect_to step3_contests_path and return if session[:step3].blank?
+          redirect_to step4_contests_path and return if session[:step4].blank? 
+        end  
       else
         flash[:error] = 'Please fill the required info.'
-        redirect_to step3_contests_path
+        redirect_to step4_contests_path
       end        
     end
   end
@@ -69,13 +76,6 @@ class ContestsController < ApplicationController
     if request.method == "POST"
       if params[:step5].present?
         session[:step5] = params[:step5]
-        unless session[:step1].present? && session[:step2].present? && session[:step3].present? && session[:step4].present?  
-          flash[:error] = 'Please fill the required info.'
-          redirect_to step1_contests_path and return if session[:step1].blank?
-          redirect_to step2_contests_path and return if session[:step2].blank?
-          redirect_to step3_contests_path and return if session[:step3].blank?
-          redirect_to step4_contests_path and return if session[:step4].blank? 
-        end  
       else
         flash[:error] = 'Please fill the required info.'
         redirect_to preview_contests_path and return
@@ -109,5 +109,6 @@ class ContestsController < ApplicationController
     @crequest.designer_id = session[:designer_id]
     @crequest.contest_id = params[:id]   
   end
+  
 
 end

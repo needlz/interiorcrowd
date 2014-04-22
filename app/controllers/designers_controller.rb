@@ -1,5 +1,5 @@
 class DesignersController < ApplicationController
-  before_filter :check_designer, :only => [:welcome]
+  before_filter :check_designer, :only => [:welcome, :lookbook, :preview_lookbook]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
   # GET /designers
@@ -19,6 +19,7 @@ class DesignersController < ApplicationController
 
   # GET /designers/new
   def new
+    session[:exlnks] = nil
     @designer = Designer.new
     @designer_images = nil
   end
@@ -30,13 +31,16 @@ class DesignersController < ApplicationController
   # POST /designers
   # POST /designers.json
   def create
+    #raise  params[:exlinks].inspect
     user_ps = params[:designer][:password]
     params[:designer][:password] = User.encrypt(params[:designer][:password])
     params[:designer][:password_confirmation] = User.encrypt(params[:designer][:password_confirmation])
-    
+    params[:designer][:ex_links] = params[:exlinks].reject { |c| c.empty? }.join(',')
+    session[:exlnks] = params[:designer][:ex_links]
     @designer = Designer.new(designer_params)
     respond_to do |format|
       if @designer.save
+        session[:exlnks] = nil
         session[:designer_id] = @designer.id 
         ICrowd.designer_registration(@designer, user_ps).deliver
         format.html { redirect_to welcome_designer_path(@designer), notice: 'Designer was successfully created.' }
@@ -76,9 +80,42 @@ class DesignersController < ApplicationController
     end
   end
   
+  
   def welcome
     
   end
+  
+  def lookbook
+    if request.method == "POST"
+      session[:lookbook] = params
+      redirect_to preview_lookbook_designer_path(params[:id])
+    else
+      #session[:lookbook] = nil
+      @lookbook = Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
+      if @lookbook.present?
+        @pictures = @lookbook.lookbook_details.where(:doc_type => 1).order("id ASC")
+        if @pictures.present?
+          @doc_id = @pictures.collect{|doc| doc.document_id}
+          if @doc_id.present?
+            @doc_path = []
+            @doc_id.each do |doc_id|
+              doc = Image.find_by_id(doc_id)
+              @doc_path << doc.image.url(:medium)
+            end
+          end
+          @doc_id = @doc_id.join(',')
+          @doc_path = @doc_path.join(',')
+        end
+        @links = @lookbook.lookbook_details.where(:doc_type => 2).order("id ASC") 
+      end
+    end  
+  end
+  
+  def preview_lookbook
+    redirect_to lookbook_designer_path(params[:id]) if session[:lookbook].blank?
+    #aise session[:lookbook].inspect
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
