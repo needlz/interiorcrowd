@@ -54,6 +54,82 @@
 								<input type="hidden" name="step3[document]" id="step3_image" value="<%= session[:step3][:document] if session[:step3].present? %>">
 								<input type="hidden" name="step3[document_id]" id="step3_image_id" value="<%= session[:step3][:document_id] if session[:step3].present? %>">
 								
+								<!----------new table --->
+								<div class="row">
+									<div class="col-sm-7 col-sm-offset-1">
+									<div class="plan appeals">
+									<table class="table table-hover">
+									
+										<tr>
+										<td class="col-sm-2">Feminine</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										 <input type="text" value="<%= session[:step3][:Feminine] if session[:step3].present? %>" name="step3[Feminine]" data-slider-value="<%= session[:step3][:Feminine] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1"  data-slider-selection="after" data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Masculine</td>
+										</tr>
+										<tr>
+										<td class="col-sm-2">Elegant</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										  <input type="text" value="<%= session[:step3][:alegant] if session[:step3].present? %>" name="step3[alegant]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:alegant] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Eclectic</td>
+										</tr>					
+										<tr>
+										<td class="col-sm-2">Traditional</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										  <input type="text" value="<%= session[:step3][:traditional] if session[:step3].present? %>" name="step3[traditional]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:traditional] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Modern</td>
+										</tr>					
+										<tr>
+										<td class="col-sm-2">Conservative</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										  <input type="text" value="<%= session[:step3][:conservative] if session[:step3].present? %>" name="step3[conservative]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:conservative] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Bold</td>
+										</tr>					
+										<tr>
+										<td class="col-sm-2">Muted</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										  <input type="text" name="step3[muted]" value="<%= session[:step3][:muted] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:muted] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Colorful</td>
+										</tr>					
+										<tr>
+										<td class="col-sm-2">Timeless</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										 <input type="text" name="step3[timeless]" value="<%= session[:step3][:timeless] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:timeless] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Trendy</td>
+										</tr>					
+										<tr>
+										<td class="col-sm-2">Fancy</td>
+										<td class="col-sm-8">
+										<div class="slidercon">
+										  <input type="text" name="step3[fancy]" value="<%= session[:step3][:fancy] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:fancy] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
+										</div>
+										</td>
+										<td class="col-sm-2">Playful</td>
+										</tr>					
+										
+										</table>
+									</div>
+									</div>
+								</div>
+								<!----------new table end  --->
+								
 								<div class="row">
 									<div class="slidercon well col-sm-offset-1">
 										<span class="leftlabel">Feminine</span>
