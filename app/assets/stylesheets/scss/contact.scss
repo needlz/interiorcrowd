@@ -75,15 +75,15 @@
 				}
 
 				&.name {
-					background: url('../../img/formname.png') #fff no-repeat 5px;
+					background: url('/assets/formname.png') #fff no-repeat 5px;
 				}
 
 				&.mail {
-					background: url('../../img/formmail.png') #fff no-repeat 5px;
+					background: url('/assets/formmail.png') #fff no-repeat 5px;
 				}
 
 				&.phone {
-					background: url('../../img/formphone.png') #fff no-repeat 5px;
+					background: url('/assets/formphone.png') #fff no-repeat 5px;
 				}
 			}
 
@@ -224,7 +224,7 @@
 }
 
 .contacticos {
-	background: url('../../img/contact_icos.png') no-repeat;
+	background: url('/assets/contact_icos.png') no-repeat;
 	width: 24px;
 	height: 44px;
 }

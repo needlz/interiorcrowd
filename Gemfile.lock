@@ -28,6 +28,9 @@ GEM
     arel (4.0.2)
     atomic (1.1.15)
     builder (3.1.4)
+    bullet (4.14.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (>= 1.6.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.3)
@@ -117,6 +120,7 @@ GEM
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    uniform_notifier (1.6.2)
     uploadify-rails (3.1.1.1)
     will_paginate (3.0.5)
 
@@ -124,6 +128,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bullet
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails
