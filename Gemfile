@@ -32,6 +32,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 gem 'figaro'
+gem 'haml'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -45,6 +46,8 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'bullet'
+  gem 'erb2haml'
+  gem 'haml-rails'
 end
 
 group :test do
