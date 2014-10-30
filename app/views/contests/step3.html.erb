@@ -302,7 +302,7 @@
    <% session_key = Rails.application.config.session_options[:key] %>
    
     jQuery('#file_input').uploadify ({
-      uploader        : '<%= documents_path %>',
+      uploader        : '<%= images_path %>',
       swf    : '/uploadify.swf',
       buttonText : 'Upload',
       fileSizeLimit   : <%=  1.megabytes %>,
