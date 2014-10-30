@@ -1,6 +1,6 @@
 class ICrowd < ActionMailer::Base
   layout 'mailer'
-  default from: "vstest80@gmail.com"
+  default from: ENV['mailer_address']
   
   def user_registration(user, password)
     @user = user
