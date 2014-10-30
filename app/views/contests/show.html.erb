@@ -19,7 +19,9 @@
 							</div>
 							<div class="row">
 								<div class="page-header">
-									<h3>Previewing &nbsp;<strong class="price"><%= @contest.project_name %> <%= Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest.budget_plan.to_i] %></strong></h3>
+									<h3>
+                                      Previewing &nbsp;<strong class="price"><%= @contest.project_name %> <%= Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest.budget_plan.to_i] %></strong>
+                                    </h3>
 								</div>
 						</div>
 					
@@ -28,13 +30,13 @@
 							<div class="row">
 								<label>What do you need help with today? </label>
 								<% design_cat = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos).pluck(:name) %>
-								<span class="selection"><%= design_cat.join(', ') %><span>
+								<span class="selection"><%= design_cat.join(', ') %></span>
 							</div>
 
 							<div class="row">
 								<label>What area of your home are you looking to update? </label>
 								<% design_cat = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos).pluck(:name) %>
-								<span class="selection"><%= design_cat.join(', ') %><span>
+								<span class="selection"><%= design_cat.join(', ') %></span>
 							</div>
 
 							<div class="row">
@@ -74,7 +76,7 @@
 															<%= @contest.cd_elegant_scale %> %
 														</div>
 														<div class="progress-bar progress-bar-warning" style="width: <%= 100- @contest.cd_elegant_scale.to_i%>%">
-															<%= 100- @contest.cd_elegant_scale.to_i %>%
+															<%= 100 - @contest.cd_elegant_scale.to_i %>%
 														</div>
 													</div>
 												    <% else %>
@@ -180,11 +182,11 @@
 							</div>
 							<div class="row">
 								<label>What colors do you want in your space? </label>
-								<span class="selection"><%= @contest.cd_fav_color %><span>
+								<span class="selection"><%= @contest.cd_fav_color %></span>
 							</div>
 							<div class="row">
 								<label>What colors do you want to avoid? </label>
-								<span class="selection"><%= @contest.cd_refrain_color %><span>
+								<span class="selection"><%= @contest.cd_refrain_color %></span>
 							</div>
 							<div class="row">
 								<label>Any example that you like? </label>
@@ -208,7 +210,7 @@
 
 							<div class="row">
 								<label>Links? </label>
-								<span class="selection"><%= @contest.cd_style_links %><span>
+								<span class="selection"><%= @contest.cd_style_links %></span>
 							</div>
 
 							<div class="row">
@@ -244,13 +246,14 @@
 									<p>
 										Height: <%= "#{@contest.cd_space_fheight} ft"  %> 
 										<%= "#{@contest.cd_space_iheight} Inches"  %>
-									</p> <span>
+									</p>
+                                </span>
 							</div>
 							
 
 							<div class="row">
 								<label>What is your design budget for materials?</label>
-								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[@contest.cd_space_budget.to_i]  %><span>
+								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[@contest.cd_space_budget.to_i]  %></span>
 							</div>
 
 							<div class="row">

@@ -10,24 +10,7 @@
 			<div class="col-sm-12">
 				<div class="plan">
 					<div class="wrapper">
-						<%#= render :partial => 'contest_top_panel' %>
-						
-						<div class="row">
-							<div class="page-header">
-								<h2>Launch a New Design Contest</h2>
-							</div>
-						</div>
-						<div class="row launch-nav" >
-							<div class="col-sm-10 col-sm-offset-1">
-								<ul class="nav nav-pills nav-justified">
-									<li class="col-sm-2  active"><%= link_to "Step 1", step1_contests_path %></li>
-									<li class="col-sm-2 next"><%= link_to "Step 2", step2_contests_path %></li>
-									<li class="col-sm-2 next"><%= link_to "Step 3", step3_contests_path %></li>
-									<li class="col-sm-2 next"><%= link_to "Step 4", step4_contests_path %></li>
-								</ul>
-							</div>
-						</div>
-
+						<%= render :partial => 'contest_top_panel' %>
 						
 						<div class="container col-sm-offset-1">
 							<div class="row">
@@ -43,7 +26,7 @@
 									checked = (session[:step1].present? && session[:step1][:cat_id].include?(design_cat.id.to_s)) ? "checked = 'checked'" : ''	  
 								%>
 									<div class="row">
-									<% if design_cat.id != 8 %>
+									<% if design_cat.id != DesignCategory::CUSTOM_CATEGORY_ID %>
 									
 										<% if design_cat.image_name.present? && design_cat.image_name != 'null' %><div class="col-sm-3"><% else %><div class="col-sm-5"><% end %>
 											<label class="checkbox"><input name="design_cat[]" type="checkbox" <%= checked %> value="<%= design_cat.id %>" class="design_element"><%= design_cat.name %></label>

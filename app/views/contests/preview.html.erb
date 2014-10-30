@@ -20,7 +20,7 @@
 						</div>
 						<div class="row">
 							<div class="page-header">
-								<h3>Just a preview of everything entered thus far.</h2>
+								<h3>Just a preview of everything entered thus far.</h3>
 							</div>
 						</div>
 					
@@ -29,15 +29,17 @@
 							<div class="row">
 								<label>What do you need help with today? </label>
 								<% if session[:step1].present? %>
-								<% design_cat = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos).pluck(:name) %>
-								<span class="selection"><%= design_cat.join(', ') %><span> <% end %>
+                                    <% design_cat = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos).pluck(:name) %>
+                                    <span class="selection"><%= design_cat.join(', ') %></span>
+                                <% end %>
 							</div>
 
 							<div class="row">
 								<label>What area of your home are you looking to update? </label>
 								<% if session[:step2].present? %>
-								<% design_cat = DesignSpace.where("id IN (?)", session[:step2]).order(:pos).pluck(:name) %>
-								<span class="selection"><%= design_cat.join(', ') %><span> <% end %>
+							    	<% design_cat = DesignSpace.where("id IN (?)", session[:step2]).order(:pos).pluck(:name) %>
+								    <span class="selection"><%= design_cat.join(', ') %></span>
+                                <% end %>
 							</div>
 
 							<div class="row">
@@ -183,11 +185,11 @@
 							</div>
 							<div class="row">
 								<label>What colors do you want in your space? </label>
-								<span class="selection"><%= session[:step3][:fav_color] if session[:step3].present? %><span>
+								<span class="selection"><%= session[:step3][:fav_color] if session[:step3].present? %></span>
 							</div>
 							<div class="row">
 								<label>What colors do you want to avoid? </label>
-								<span class="selection"><%= session[:step3][:refrain_color] if session[:step3].present? %><span>
+								<span class="selection"><%= session[:step3][:refrain_color] if session[:step3].present? %></span>
 							</div>
 							<div class="row">
 								<label>Any example that you like? </label>
@@ -208,7 +210,7 @@
 
 							<div class="row">
 								<label>Links? </label>
-								<span class="selection"><%= session[:step3][:ex_links] if session[:step3].present? %><span>
+								<span class="selection"><%= session[:step3][:ex_links] if session[:step3].present? %></span>
 							</div>
 
 							<div class="row">
@@ -241,13 +243,14 @@
 									<p>
 										Height: <%= "#{session[:step4][:f_height]} ft" if session[:step4][:f_height].present? %> 
 										<%= "#{session[:step4][:i_height]} Inches" if session[:step4][:i_height].present? %>
-									</p> <span>
+									</p>
+                                </span>
 							</div>
 							
 
 							<div class="row">
 								<label>What is your design budget for materials?</label>
-								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget].to_i] if session[:step4].present? %><span>
+								<span class="selection"><%= Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget].to_i] if session[:step4].present? %></span>
 							</div>
 
 							<div class="row">

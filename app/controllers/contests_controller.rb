@@ -1,6 +1,8 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, :only => [:respond, :designer_lookbook]
-  
+
+  before_filter :set_creation_wizard, only: [:step1, :step2, :step3, :step4]
+
   def index
     @contests = Contest.paginate(:page => params[:page]).order('created_at DESC')
   end
@@ -26,7 +28,7 @@ class ContestsController < ApplicationController
         redirect_to step1_contests_path
       end        
     end
-    @design_space = DesignSpace.where("status = ? AND parent = 0", DesignSpace::SPACE_ACTIVE_STATUS).order('pos ASC')
+    @design_space = @creation_wizard.available_design_areas
   end
   
   def step3
@@ -72,7 +74,7 @@ class ContestsController < ApplicationController
   end
   
   def step6
-    @user = User.new
+    @client = Client.new
     if request.method == "POST"
       if params[:step5].present?
         session[:step5] = params[:step5]
@@ -109,6 +111,11 @@ class ContestsController < ApplicationController
     @crequest.designer_id = session[:designer_id]
     @crequest.contest_id = params[:id]   
   end
-  
+
+  private
+
+  def set_creation_wizard
+    @creation_wizard = ContestCreationWizard.new(params, session)
+  end
 
 end

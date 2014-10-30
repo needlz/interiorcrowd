@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class Client < ActiveRecord::Base
   
   ACTIVE_STATUS = 1
   INACTIVE_STATUS = 0

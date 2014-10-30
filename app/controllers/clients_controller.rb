@@ -1,34 +1,34 @@
-class UsersController < ApplicationController
+class ClientsController < ApplicationController
   before_filter :check_client, :only => [:client_center]
-  # POST /users
-  # POST /users.json
+  # POST /clients
+  # POST /clients.json
   def client_center
-    contests = User.find_by_id(session[:client_id]).contests.pluck(:id)
+    contests = Client.find_by_id(session[:client_id]).contests.pluck(:id)
     @contest_requests = ContestRequest.where("contest_id IN (?)", contests)
     
   end
   
   def create
-      user_ps = params[:user][:password]
-      params[:user][:password] = User.encrypt(params[:user][:password])
-      params[:user][:password_confirmation] = User.encrypt(params[:user][:password_confirmation])
+      user_ps = params[:client][:password]
+      params[:client][:password] = Client.encrypt(params[:client][:password])
+      params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
       
-      params.require(:user).permit(:first_name, :last_name, :email, :address, :name_on_card, :state, :zip, :password)
+      params.require(:client).permit(:first_name, :last_name, :email, :address, :name_on_card, :state, :zip, :password)
       #raise session[:step5].inspect
-      @user = User.new(params[:user])
+      @client = Client.new(params[:client])
       respond_to do |format|
-          if @user.save
-            ICrowd.user_registration(@user, user_ps).deliver
+          if @client.save
+            ICrowd.user_registration(@client, user_ps).deliver
             #session[:id] = @student.id 
-            #session[:role] = User::STUDENT
-            #session[:user_id] = @user.id
-            create_contests(@user.id)
+            #session[:role] = Client::STUDENT
+            #session[:user_id] = @client.id
+            create_contests(@client.id)
             format.html { redirect_to thank_you_contests_path}  
-            format.json { render json: @user, status: :created, location: @user }
+            format.json { render json: @client, status: :created, location: @client }
           else
-            flash[:error] = @user.errors.full_messages.join("</br>") 
+            flash[:error] = @client.errors.full_messages.join("</br>")
             format.html { render :template => "contests/step6" }
-            format.json { render json: @user.errors, status: :unprocessable_entity }
+            format.json { render json: @client.errors, status: :unprocessable_entity }
           end
       end
   end

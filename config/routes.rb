@@ -45,7 +45,7 @@ InteriorC::Application.routes.draw do
    end
    
    resources :images
-   resources :users do
+   resources :clients do
      collection do
        get 'client_center'
      end
