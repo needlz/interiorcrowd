@@ -1,10 +1,10 @@
 class DesignSpace < ActiveRecord::Base
-  SPACE_ACTIVE_STATUS = 1
-  SPACE_INACTIVE_STATUS = 0
+  ACTIVE_STATUS = 1
+
+  scope :available, where(status: ACTIVE_STATUS).order(pos: :asc)
 
   def children
     DesignSpace.where(parent: id)
   end
-
 
 end

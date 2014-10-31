@@ -10,7 +10,7 @@ class ContestCreationWizard
 
   # design categories
   def available_design_categories
-    @available_design_categories ||= DesignCategory.where(status: DesignCategory::CAT_ACTIVE_STATUS).order('pos ASC')
+    @available_design_categories ||= DesignCategory.available
   end
 
   def design_categories_checkboxes
@@ -29,7 +29,7 @@ class ContestCreationWizard
 
   # design areas
   def available_design_areas
-    @available_design_areas ||= DesignSpace.where(status: DesignSpace::SPACE_ACTIVE_STATUS).order('pos ASC')
+    @available_design_areas ||= DesignSpace.available
   end
 
   def design_areas_checkboxes

@@ -27,18 +27,18 @@
 						<div class="container col-sm-offset-1 preview">
 
 							<div class="row">
-								<label>What do you need help with today? </label>
+								<label><%= t('contests.design_categories_title') %></label>
 								<% if session[:step1].present? %>
-                                    <% design_cat = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos).pluck(:name) %>
-                                    <span class="selection"><%= design_cat.join(', ') %></span>
+                                    <% category_names = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos).pluck(:name) %>
+                                    <span class="selection"><%= category_names.join(', ') %></span>
                                 <% end %>
 							</div>
 
 							<div class="row">
 								<label>What area of your home are you looking to update? </label>
 								<% if session[:step2].present? %>
-							    	<% design_cat = DesignSpace.where("id IN (?)", session[:step2]).order(:pos).pluck(:name) %>
-								    <span class="selection"><%= design_cat.join(', ') %></span>
+							    	<% category_names = DesignSpace.where("id IN (?)", session[:step2]).order(:pos).pluck(:name) %>
+								    <span class="selection"><%= category_names.join(', ') %></span>
                                 <% end %>
 							</div>
 

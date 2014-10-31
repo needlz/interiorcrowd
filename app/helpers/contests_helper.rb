@@ -1,7 +1,7 @@
 module ContestsHelper
 
   def contest_creation_category_checkbox(category)
-    check_box_tag "design_cat[]",
+    check_box_tag "design_category[]",
                   category.id,
                   @creation_wizard.design_categories_checkboxes[category.id],
                   class: "design_element"
