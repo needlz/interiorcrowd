@@ -1,0 +1,42 @@
+.row.step-row
+  %label Add dimensions of your space
+.row
+  .col-sm-5.well
+    .row
+      .col-sm-12.mesure-con
+        .col-sm-2
+          %strong Length
+        .col-sm-10.form-inline
+          .col-sm-4.mesure-label
+            %input#f_length.form-control{:name => "step4[f_length]",
+            :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
+            :type => "text",
+            :value => (session[:step4][:f_length] if session[:step4].present?)}
+          %label.col-sm-1.mesure-label Ft
+          .col-sm-4.col-sm-offset-1.mesure-label
+            %input#i_length.form-control{:name => "step4[i_length]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text", :value => (session[:step4][:i_length] if session[:step4].present?)}
+          %label.col-sm-2.mesure-label Inches
+        %span#err_length.text-error{:style => "padding-left:15px;"}
+    .row
+      .col-sm-12.mesure-con
+        .col-sm-2
+          %strong Width
+        .col-sm-10.form-inline
+          .col-sm-4.mesure-label
+            %input#f_width.form-control{:name => "step4[f_width]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text", :value => (session[:step4][:f_width] if session[:step4].present?)}
+          %label.col-sm-1.mesure-label Ft
+          .col-sm-4.col-sm-offset-1.mesure-label
+            %input#i_width.form-control{:name => "step4[i_width]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text", :value => (session[:step4][:i_width] if session[:step4].present?)}
+          %label.col-sm-2.mesure-label Inches
+        %span#err_w.text-error{:style => "padding-left:15px;"}
+    .row
+      .col-sm-12.mesure-con
+        .col-sm-2
+          %strong Height (Optional)
+        .col-sm-10.form-inline
+          .col-sm-4.mesure-label
+            %input#f_height.form-control{:name => "step4[f_height]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text", :value => (session[:step4][:f_height] if session[:step4].present?)}
+          %label.col-sm-1.mesure-label Ft
+          .col-sm-4.col-sm-offset-1.mesure-label
+            %input#i_height.form-control{:name => "step4[i_height]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text", :value => (session[:step4][:i_height] if session[:step4].present?)}
+          %label.col-sm-2.mesure-label Inches

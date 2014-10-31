@@ -6,7 +6,7 @@ class Contest < ActiveRecord::Base
 
   APPEAL_SCALES = [
     { start: :feminine, end: :masculine },
-    { start: :elegant, end: :masculine },
+    { start: :elegant, end: :eclectic },
     { start: :traditional, end: :modern },
     { start: :conservative, end: :bold },
     { start: :muted, end: :colorful },

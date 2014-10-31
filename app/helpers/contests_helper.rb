@@ -15,4 +15,8 @@ module ContestsHelper
     )
   end
 
+  def appeal_name(appeal)
+    t("contests.appleals.#{ appeal.to_s }")
+  end
+
 end

@@ -1,0 +1,5 @@
+.row.step-row
+  %label What is your design budget for materials?
+.row.mesure-con
+  .col-sm-8.col-sm-offset-1
+    = select_tag "step4[f_budget]", options_for_select(Contest::CONTEST_DESIGN_BUDGETS.invert, session[:step4].present? ? session[:step4][:f_budget] : ''), {:class => "form-control budget-control"}

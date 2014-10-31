@@ -28,19 +28,19 @@
 						<div class="container col-sm-offset-1 preview">
 
 							<div class="row">
-								<label><%= t('contests.design_categories_title') %></label>
+								<label><%= t('contests.titles.design_categories') %></label>
 								<% category_names = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos).pluck(:name) %>
 								<span class="selection"><%= category_names.join(', ') %></span>
 							</div>
 
 							<div class="row">
-								<label>What area of your home are you looking to update? </label>
+								<label><%= t('contests.titles.areas') %></label>
 								<% category_names = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos).pluck(:name) %>
 								<span class="selection"><%= category_names.join(', ') %></span>
 							</div>
 
 							<div class="row">
-								<label>What appeals to you? </label>
+								<label><%= t('contests.titles.appeals') %></label>
 							</div>
 							<div class="row">
 								<div class="col-sm-8">
@@ -181,15 +181,15 @@
 								</div>
 							</div>
 							<div class="row">
-								<label>What colors do you want in your space? </label>
+								<label><%= t('contests.titles.wanted_colors') %></label>
 								<span class="selection"><%= @contest.cd_fav_color %></span>
 							</div>
 							<div class="row">
-								<label>What colors do you want to avoid? </label>
+								<label><%= t('contests.titles.avoided_colors') %></label>
 								<span class="selection"><%= @contest.cd_refrain_color %></span>
 							</div>
 							<div class="row">
-								<label>Any example that you like? </label>
+								<label><%= t('contests.titles.example') %></label>
 							</div>
 							<div class="row">
 								<div class="col-sm-8">

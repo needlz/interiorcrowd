@@ -1,0 +1,27 @@
+- content_for :page_content do
+  = render :partial => 'home/msg'
+  = form_tag preview_contests_path, {:id => "step4", :method => "post"} do
+    %input#step4_image{:name => "step4[document]", :type => "hidden", :value => (session[:step4][:document] if session[:step4].present?)}/
+    %input#step4_image_id{:name => "step4[document_id]", :type => "hidden", :value => (session[:step4][:document_id] if session[:step4].present?)}/
+
+    = render partial: 'contests/picture_of_space_option'
+    = render partial: 'contests/dimensions_of_space_options'
+    = render partial: 'contests/budget_for_materials_options'
+    = render partial: 'contests/comments_options'
+    .row.formbuttons
+      .col-sm-3
+        %a.order{:href => step3_contests_path} GO BACK
+      .col-sm-4.col-sm-offset-4
+        %a.order.continue{:href => "#"} CONTINUE
+= render partial: 'contests/contest_creation_page'
+
+= content_for :javascript do
+  = javascript_include_tag 'jquery.uploadify'
+  = javascript_include_tag 'contests/step4'
+
+  = stylesheet_link_tag 'uploadify'
+  :javascript
+    window.uploadifyFormData = {"#{key = Rails.application.config.session_options[:key]}": "#{cookies[key]}",
+        "#{request_forgery_protection_token}": "#{form_authenticity_token}"}
+    window.uploadifyFileSizeLimit = #{1.megabytes}
+    window.uploadifyUploader = '#{images_path}'
