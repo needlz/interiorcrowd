@@ -5,4 +5,8 @@ class DesignCategory < ActiveRecord::Base
 
   CUSTOM_CATEGORY_ID = 8
 
+  def has_image?
+    image_name.present? && image_name != 'null'
+  end
+
 end

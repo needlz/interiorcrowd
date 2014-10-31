@@ -14,7 +14,6 @@ class ContestsController < ApplicationController
   end
   
   def step1
-    @design_cat = DesignCategory.where("status = ?", DesignCategory::CAT_ACTIVE_STATUS).order('pos ASC')
   end
   
   def step2
@@ -28,7 +27,6 @@ class ContestsController < ApplicationController
         redirect_to step1_contests_path
       end        
     end
-    @design_space = @creation_wizard.available_design_areas
   end
   
   def step3
@@ -41,7 +39,6 @@ class ContestsController < ApplicationController
         redirect_to step2_contests_path
       end        
     end
-    #@design_space = DesignSpace.where("status = ? AND parent = 0", DesignSpace::SPACE_ACTIVE_STATUS).order('pos ASC')
   end
   
   def step4

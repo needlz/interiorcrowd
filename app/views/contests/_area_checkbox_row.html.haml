@@ -1,0 +1,12 @@
+.row
+  .col-sm-4
+    %label.checkbox
+      = area_checkbox(design_area, id: design_area.id, parent_id: 0)
+      = design_area.name
+- if design_area.children.present?
+  - design_area.children.each do |child_area|
+    .row
+      .col-sm-3.col-sm-offset-1
+        %label.checkbox
+          = area_checkbox(child_area, parent_id: design_area.id)
+          = child_area.name

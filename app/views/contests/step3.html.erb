@@ -2,11 +2,18 @@
 	<%= javascript_include_tag 'bootstrap-slider' %>
 	<%= javascript_include_tag  'jquery.uploadify' %> 
 	<%= stylesheet_link_tag  'lib/slider' %> 
-	<%= stylesheet_link_tag  'uploadify' %> 
-	
-<% end %>	
+	<%= stylesheet_link_tag  'uploadify' %>
+    <%= javascript_include_tag 'contests/step3' %>
 
- <!-- Pricing Option -->
+    <script type="text/javascript">
+        <% session_key = Rails.application.config.session_options[:key] %>
+        uploadifyFormData = {"<%= key = Rails.application.config.session_options[:key] %>" :"<%= cookies[key] %>",
+            "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>"}
+        uploadifyFileSizeLimit = <%=  1.megabytes %>
+                uploadifyUploader = '<%= images_path %>'
+    </script>
+<% end %>
+
     <div id="in_pricing">
         <div class="container">
             <div class="section_header">
@@ -14,28 +21,12 @@
             </div>
 
             <div class="row charts_wrapp">
-                <!-- Plan Box -->
                 <div class="col-sm-12">
                     <div class="plan">
                         <div class="wrapper">
 						
-					    <div class="row">
-							<div class="page-header">
-								<h2>Launch a New Design Contest</h2>
-							</div>
-						</div>
-						<div class="row launch-nav" >
-							<div class="col-sm-10 col-sm-offset-1">
-								<ul class="nav nav-pills nav-justified">
-									<li class="col-sm-2  previous"><%= link_to "Step 1", step1_contests_path %></li>
-									<li class="col-sm-2 previous"><%= link_to "Step 2", step2_contests_path %></li>
-									<li class="col-sm-2 active"><%= link_to "Step 3", step3_contests_path %></li>
-									<li class="col-sm-2 next"><%= link_to "Step 4", step4_contests_path %></li>
-								</ul>
-							</div>
-						</div>
-							
-							
+					    <%= render :partial => 'contest_top_panel' %>
+
                         <div class="container col-sm-offset-1">
 
 							<div class="row ">
@@ -54,7 +45,6 @@
 								<input type="hidden" name="step3[document]" id="step3_image" value="<%= session[:step3][:document] if session[:step3].present? %>">
 								<input type="hidden" name="step3[document_id]" id="step3_image_id" value="<%= session[:step3][:document_id] if session[:step3].present? %>">
 								
-								<!----------new table --->
 								<div class="row">
 									<div class="col-sm-7 col-sm-offset-1">
 									<div class="plan appeals">
@@ -128,64 +118,7 @@
 									</div>
 									</div>
 								</div>
-								<!----------new table end  --->
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Feminine</span>
-										<input type="text" value="<%= session[:step3][:Feminine] if session[:step3].present? %>" name="step3[Feminine]" data-slider-value="<%= session[:step3][:Feminine] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1"  data-slider-selection="after" data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Masculine</span>
-									</div>	
-								</div>
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Elegant</span>
-										<input type="text" value="<%= session[:step3][:alegant] if session[:step3].present? %>" name="step3[alegant]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:alegant] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Eclectic</span>
-									</div>	
-								</div>
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Traditional</span>
-										<input type="text" value="<%= session[:step3][:traditional] if session[:step3].present? %>" name="step3[traditional]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:traditional] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Modern</span>
-									</div>	
-								</div>
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Conservative</span>
-										<input type="text" value="<%= session[:step3][:conservative] if session[:step3].present? %>" name="step3[conservative]" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:conservative] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Bold</span>
-									</div>	
-								</div>
-							
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Muted</span>
-										<input type="text" name="step3[muted]" value="<%= session[:step3][:muted] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:muted] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Colorful</span>
-									</div>	
-								</div>
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Timeless</span>
-										<input type="text" name="step3[timeless]" value="<%= session[:step3][:timeless] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:timeless] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Trendy</span>
-									</div>	
-								</div>
-								
-								<div class="row">
-									<div class="slidercon well col-sm-offset-1">
-										<span class="leftlabel">Fancy</span>
-										<input type="text" name="step3[fancy]" value="<%= session[:step3][:fancy] if session[:step3].present? %>" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="<%= session[:step3][:fancy] if session[:step3].present? %>" data-slider-selection="after"data-slider-tooltip="show" id="F">
-										<span  class="rightlabel">Playful</span>
-									</div>	
-								</div>
-								
+
 								<div class="row step-row">
 								     <label>What colors do you want in your space?</label>
 								</div>
@@ -254,84 +187,3 @@
             
         </div>
     </div>
-
-<script type="text/javascript">
-	jQuery(function(){
-		  /* see documentation at http://www.eyecon.ro/bootstrap-slider/
-		  var RGBChange = function() {
-		          $('#RGB').val(a.getValue())
-		        };
-		        var a = $('#R').slider()
-				.on('slide', RGBChange)
-				.data('slider');       
-		*/
-        jQuery('.slidercon input').slider();
-        
-        
-        jQuery('.continue').click(function(e) {
-			e.preventDefault();
-			
-			jQuery(".text-error").html("");
-			
-			var fav_color = jQuery.trim(jQuery("#fav_color").val());
-			var refrain_color = jQuery.trim(jQuery("#refrain_color").val());
-			var bool = true
-			
-			if(fav_color.length < 1) {
-				bool = false
-				jQuery("#err_fav").html("Please enter data.");
-			}
-			if(refrain_color.length < 1) {
-				bool = false
-				jQuery("#err_refrain").html("Please enter data.");
-			}  
-			
-			if(bool) {
-				jQuery("#step3").submit();
-			} else {
-				return false;
-			}
-		});
-	});
-   
-</script>
-
-<script type="text/javascript">
-  jQuery(function() {  
-    // encode the session into a Flash-save format
-   <% session_key = Rails.application.config.session_options[:key] %>
-   
-    jQuery('#file_input').uploadify ({
-      uploader        : '<%= images_path %>',
-      swf    : '/uploadify.swf',
-      buttonText : 'Upload',
-      fileSizeLimit   : <%=  1.megabytes %>,
-      fileTypeExts:  '*.png;*.jpg;*.tif',
-      uploadLimit     : 3, 
-      fileObjName : 'photo',
-      multi           : false,
-      auto            : true,
-      removeTimeout :5,
-      onUploadSuccess : function(file, data, response) {
-      						var info = data.split(',');
-      						$("#image_display").append("<img src='" + info[0] + "' />");
-      						
-      						var img_val = $.trim($("#step3_imge").val());
-      						var img_id = $.trim($("#step3_image_id").val());
-      						
-      						if(img_val.length < 1) {
-      							$("#step3_image").val(info[0]);
-      							$("#step3_image_id").val(info[1]);
-      						} else {
-      							$("#step3_image").val(img_val + ','+info[0]);
-      							$("#step3_image_id").val(img_id + ','+info[1]);
-      						}
-            				//alert('The file ' + file.name + ' was successfully uploaded.');
-        					
-        				},  
-      formData : {"<%= key = Rails.application.config.session_options[:key] %>" :"<%= cookies[key] %>",
-        "<%= request_forgery_protection_token %>" : "<%= form_authenticity_token %>"},
-      cancelImg       : '/images/cancel.png'  //take care that the image is accessible
-    });
-  });
-</script>
