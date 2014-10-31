@@ -219,7 +219,7 @@
         position: absolute;
         top: 250px;
         left: 0;
-        background: url(../../img/leftright-arrows.png) no-repeat;
+        background: url('/assets/leftright-arrows.png') no-repeat;
         opacity: .5;
         -webkit-transition: opacity .1s linear;
         -moz-transition: opacity .1s linear;
@@ -240,7 +240,7 @@
         top: 250px;
         left: auto;
         right: 0;
-        background: url(../../img/leftright-arrows.png) no-repeat;
+        background: url('/assets/leftright-arrows.png') no-repeat;
         background-position: -31px 0;
         opacity: .5;
         -webkit-transition: opacity .1s linear;
@@ -630,7 +630,7 @@
         }
 
         .client1 {
-            background: url('../../img/client1.png') 0 -75px;
+            background: url('/assets/client1.png') 0 -75px;
 
             &:hover {
                 background-position: 1px 0px;
@@ -638,7 +638,7 @@
         }
 
         .client2 {
-            background: url('../../img/client2.png') 0 -75px;
+            background: url('/assets/client2.png') 0 -75px;
 
             &:hover {
                 background-position: -1px 0px;
@@ -646,7 +646,7 @@
         }
 
         .client3 {
-            background: url('../../img/client3.png') 0 -76px;
+            background: url('/assets/client3.png') 0 -76px;
 
             &:hover {
                 background-position: 0px 0px;

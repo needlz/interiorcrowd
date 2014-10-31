@@ -303,11 +303,11 @@ header {
 	      #footer .credits .copyright a{
       color: #a6a6a7;}
     #footer .credits .socialicons {
-      background: url("../../img/socialicons.png") no-repeat;
+      background: url("/assets/socialicons.png") no-repeat;
       width: 265px;
       height: 36px; }
     #footer .credits .socialicons_h {
-      background: url("/assets//socialicons_h.png") no-repeat;
+      background: url("/assets/socialicons_h.png") no-repeat;
       width: 265px;
       height: 36px; }
   #footer .info {

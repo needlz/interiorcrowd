@@ -20,7 +20,7 @@ module InteriorC
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
    config.action_controller.permit_all_parameters = true
-   %w(observers mailers middleware).each do |dir|
+   %w(mailers middleware view_objects).each do |dir|
           config.autoload_paths << "#{config.root}/app/#{dir}"
    end
    
@@ -28,11 +28,11 @@ module InteriorC
      config.assets.version = '1.0'
      config.action_mailer.delivery_method = :smtp
      config.action_mailer.smtp_settings = {  
-      :address              => "smtp.gmail.com",  
-      :port                 => 587,  
-      :domain               => "gmail.com",  
-      :user_name            => "vstest80@gmail.com", #Your user name
-      :password             => "fucktheclient", # Your password
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :domain               => "gmail.com",
+      :user_name            => ENV['mailer_address'], #Your user name
+      :password             => ENV['mailer_password'], # Your password
       :authentication       => "plain",  
       :enable_starttls_auto => true  
    }

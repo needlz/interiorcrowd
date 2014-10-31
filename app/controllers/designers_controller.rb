@@ -33,8 +33,8 @@ class DesignersController < ApplicationController
   def create
     #raise  params[:exlinks].inspect
     user_ps = params[:designer][:password]
-    params[:designer][:password] = User.encrypt(params[:designer][:password])
-    params[:designer][:password_confirmation] = User.encrypt(params[:designer][:password_confirmation])
+    params[:designer][:password] = Client.encrypt(params[:designer][:password])
+    params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
     params[:designer][:ex_links] = params[:exlinks].reject { |c| c.empty? }.join(',')
     session[:exlnks] = params[:designer][:ex_links]
     @designer = Designer.new(designer_params)

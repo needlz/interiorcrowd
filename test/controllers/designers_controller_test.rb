@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DesignersControllerTest < ActionController::TestCase
   setup do
-    @designer = designers(:one)
+    @designer = {}
   end
 
   test "should get index" do
