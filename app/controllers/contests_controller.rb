@@ -14,13 +14,14 @@ class ContestsController < ApplicationController
   end
   
   def step1
+    render
   end
   
   def step2
     if request.method == "POST"
-      if params[:design_cat].present?
+      if params[:design_category].present?
         session[:step1] = {}
-        session[:step1][:cat_id] = params[:design_cat]
+        session[:step1][:cat_id] = params[:design_category]
         session[:step1][:other] = params[:other_value]
       else
         flash[:error] = 'Please select atleast one category.'

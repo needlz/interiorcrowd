@@ -7,7 +7,7 @@
       .col-sm-12.col-sm-offset-1
         = text_area_tag "other_value", @creation_wizard.other_category_text, class: "form-control"
   - else
-    %div{:class => contest_creation_category_checkbox_div_class(design_category)}
+    %div{:class => @creation_wizard.category_checkbox_div_class(design_category)}
       %label.checkbox
         = contest_creation_category_checkbox(design_category)
         = design_category.name

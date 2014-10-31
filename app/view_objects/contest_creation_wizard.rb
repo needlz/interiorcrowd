@@ -26,6 +26,23 @@ class ContestCreationWizard
     @other_category_text ||= session[:step1][:other] if session[:step1].present?
   end
 
+  def category_checkbox_div_class(category)
+    if category.image_name.present? && category.image_name != 'null'
+      'col-sm-3'
+    else
+      'col-sm-5'
+    end
+  end
+
+  def breadcrumb_class(step_index)
+    if step_index < active_step_index
+      'previous'
+    elsif step_index == active_step_index
+      'active'
+    else
+      'next'
+    end
+  end
 
   # design areas
   def available_design_areas
