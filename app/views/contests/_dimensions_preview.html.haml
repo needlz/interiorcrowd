@@ -1,0 +1,8 @@
+.row
+  %label Add dimensions of your space
+  %span.selection
+    - @dimensions.each do |dimension_row|
+      - if dimension_row.value.present?
+        %p
+          = dimension_row.name
+          \: #{dimension_row.to_feet} ft #{dimension_row.to_inches} Inches

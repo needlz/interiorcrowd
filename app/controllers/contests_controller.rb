@@ -2,6 +2,8 @@ class ContestsController < ApplicationController
   before_filter :check_designer, :only => [:respond, :designer_lookbook]
 
   before_filter :set_creation_wizard, only: [:step1, :step2, :step3, :step4]
+  before_filter :set_appeal_scales, only: [:step3, :preview]
+  before_filter :set_dimensions, only: [:step4, :preview]
 
   def index
     @contests = Contest.paginate(:page => params[:page]).order('created_at DESC')
@@ -10,7 +12,17 @@ class ContestsController < ApplicationController
   def show
     @contest = Contest.find_by_id(params[:id])
     @cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-   
+    @dimensions = DimensionRow.from(@contest)
+    @appeal_scales = AppealScale.from(@contest)
+    @categories = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos)
+    @design_areas = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos)
+    @favorited_colors = @contest.cd_fav_color
+    @avoided_colors = @contest.cd_refrain_color
+    @examples = @contest.cd_style_ex_images.split(',')
+    @links = @contest.cd_style_links
+    @space_pictures = @contest.cd_space_images.split(',').map { |image_id| Image.find(image_id).image.url(:medium) }
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[@contest.cd_space_budget.to_i]
+    @comment = @contest.feedback
   end
   
   def step1
@@ -38,7 +50,7 @@ class ContestsController < ApplicationController
       else
         flash[:error] = 'Please select atleast one area.'
         redirect_to step2_contests_path
-      end        
+      end
     end
   end
   
@@ -69,6 +81,15 @@ class ContestsController < ApplicationController
         redirect_to step4_contests_path
       end        
     end
+    @categories = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos)
+    @design_areas = DesignSpace.where("id IN (?)", session[:step2]).order(:pos)
+    @favorited_colors = session[:step3][:fav_color]
+    @avoided_colors = session[:step3][:refrain_color]
+    @examples = session[:step3][:document].split(',')
+    @links = session[:step3][:ex_links]
+    @space_pictures = session[:step4][:document].split(',')
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget].to_i]
+    @comment = session[:step4][:feedback]
   end
   
   def step6
@@ -114,6 +135,15 @@ class ContestsController < ApplicationController
 
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(params, session)
+  end
+
+  def set_appeal_scales
+    appeal_values = session[:step3]
+    @appeal_scales = AppealScale.from(appeal_values)
+  end
+
+  def set_dimensions
+    @dimensions = DimensionRow.from(session[:step4])
   end
 
 end

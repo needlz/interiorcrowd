@@ -14,7 +14,7 @@ jQuery ->
       focus = "f_length"
     if f_width.length < 1 and i_width < 1
       bool = false
-      jQuery("#err_w").html "Please enter width."
+      jQuery("#err_width").html "Please enter width."
       focus = "f_width"  unless focus
     if bool
       jQuery("#step4").submit()

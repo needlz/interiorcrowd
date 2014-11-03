@@ -1,0 +1,38 @@
+- if @contest.present?
+  / Pricing Option
+  #in_pricing
+    .container
+      .section_header
+        \ 
+      .row.charts_wrapp
+        / Plan Box
+        .col-sm-12
+          .plan
+            .wrapper
+              .row
+                .page-header
+                  %h2 Design Center
+              .row
+                .page-header
+                  %h3
+                    Previewing  
+                    %strong.price
+                      = @contest.project_name
+                      = Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest.budget_plan.to_i]
+              .container.col-sm-offset-1.preview
+                = render partial: 'contests/categories_preview'
+                = render partial: 'contests/areas_preview'
+                = render partial: 'contests/appeals_preview'
+                = render partial: 'contests/colors_preview'
+                = render partial: 'contests/examples_preview'
+                = render partial: 'contests/links_preview'
+                = render partial: 'contests/space_pictures_preview'
+                = render partial: 'contests/dimensions_preview'
+                = render partial: 'contests/budget_preview'
+                = render partial: 'contests/comment_preview'
+              .row.formbuttons
+                .col-sm-5.col-sm-offset-1
+                  %a.order{:href => contests_path, :style => "width:70%"} Go back to other contests
+                - if @cr.blank?
+                  .col-sm-4.col-sm-offset-2
+                    %a.order{:href => respond_contest_path(params[:id]), :style => "width:55%"} Join this contest

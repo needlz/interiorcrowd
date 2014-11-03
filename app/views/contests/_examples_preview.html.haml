@@ -1,0 +1,7 @@
+.row
+  %label= t('contests.titles.example')
+.row
+  .col-sm-8
+    %div
+    - @examples.each do |path|
+      %img{:src => path, :style => "padding-right:10px;"}/

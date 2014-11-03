@@ -1,0 +1,52 @@
+= content_for :javascript do
+  = javascript_include_tag 'bootstrap-slider'
+  = javascript_include_tag 'jquery.uploadify'
+  = stylesheet_link_tag 'lib/slider'
+  = stylesheet_link_tag 'uploadify'
+
+  :javascript
+    window.uploadifyFormData = {"#{key = Rails.application.config.session_options[:key]}": "#{cookies[key]}",
+                "#{request_forgery_protection_token}": "#{form_authenticity_token}"}
+    window.uploadifyFileSizeLimit = #{1.megabytes}
+    window.uploadifyUploader = '#{images_path}'
+
+/ Pricing Option
+#in_pricing
+  .container
+    .section_header
+      \ 
+    .row.charts_wrapp
+      / Plan Box
+      .col-sm-12
+        .plan
+          .wrapper
+            .row
+              .page-header
+                %h2 Design Center
+            .row
+              .page-header
+                %h3 Respond to contest
+            = form_for @crequest, {:id => "step3", :method => "post"} do |f|
+              = f.hidden_field :designer_id
+              = f.hidden_field :designs
+              = f.hidden_field :contest_id
+              .container.col-sm-offset-1.preview
+                .row
+                  %label
+                    %a{:href => lookbook_designer_path(params[:id])} Create a lookbook
+                .row
+                  %h4 Resources
+                .row
+                  .col-sm-8.form-inline{:style => "padding-left:0"}
+                    %span#image_display{:style => "padding-bottom:10px;"}
+                    .col-sm-8.col-sm-offset-1
+                      %input#file_input{:name => "", :type => "file"}/
+                      %span (.jpg, .tif, .png)
+                .row
+                  %label Other feedback or instructions?
+                .row
+                  .col-sm-8.col-sm-offset-1
+                    = f.text_area :feedback, :class => "form-control", :style => "width:68%"
+              .row
+                .col-sm-3.col-sm-offset-5
+                  %a.order.continue{:href => "#"} SUBMIT
