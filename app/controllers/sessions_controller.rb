@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     cinfo = Client.authenticate(params[:username], params[:password])
     if cinfo.present?
         session[:client_id] = cinfo.id 
-        redirect_to client_center_users_path
+        redirect_to client_center_clients_path
     else
       flash[:error] = 'Incorrect Username or Password!'
       redirect_to client_login_sessions_url
