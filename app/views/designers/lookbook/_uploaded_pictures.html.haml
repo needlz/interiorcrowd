@@ -1,0 +1,4 @@
+#image_display.row.img_container
+  - @lookbook_view.paths.each_with_index do |path, index|
+    = render partial: 'designers/lookbook/uploaded_picture_row',
+    locals: {url: path, title: @lookbook_view.titles[index]}

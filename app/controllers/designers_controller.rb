@@ -2,8 +2,6 @@ class DesignersController < ApplicationController
   before_filter :check_designer, :only => [:welcome, :lookbook, :preview_lookbook]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
-  # GET /designers
-  # GET /designers.json
   def index
     @designers = Designer.all
   end
@@ -12,26 +10,19 @@ class DesignersController < ApplicationController
 
   end 
   
-  # GET /designers/1
-  # GET /designers/1.json
   def show
   end
 
-  # GET /designers/new
   def new
     session[:exlnks] = nil
     @designer = Designer.new
     @designer_images = nil
   end
 
-  # GET /designers/1/edit
   def edit
   end
 
-  # POST /designers
-  # POST /designers.json
   def create
-    #raise  params[:exlinks].inspect
     user_ps = params[:designer][:password]
     params[:designer][:password] = Client.encrypt(params[:designer][:password])
     params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
@@ -54,10 +45,6 @@ class DesignersController < ApplicationController
     end
   end
   
-  
-
-  # PATCH/PUT /designers/1
-  # PATCH/PUT /designers/1.json
   def update
     respond_to do |format|
       if @designer.update(designer_params)
@@ -70,8 +57,6 @@ class DesignersController < ApplicationController
     end
   end
 
-  # DELETE /designers/1
-  # DELETE /designers/1.json
   def destroy
     @designer.destroy
     respond_to do |format|
@@ -82,7 +67,7 @@ class DesignersController < ApplicationController
   
   
   def welcome
-    
+    render
   end
   
   def lookbook
@@ -90,32 +75,44 @@ class DesignersController < ApplicationController
       session[:lookbook] = params
       redirect_to preview_lookbook_designer_path(params[:id])
     else
-      #session[:lookbook] = nil
-      @lookbook = Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-      if @lookbook.present?
-        @pictures = @lookbook.lookbook_details.where(:doc_type => 1).order("id ASC")
-        if @pictures.present?
-          @doc_id = @pictures.collect{|doc| doc.document_id}
-          if @doc_id.present?
-            @doc_path = []
-            @doc_id.each do |doc_id|
-              doc = Image.find_by_id(doc_id)
-              @doc_path << doc.image.url(:medium)
+      if session[:lookbook].present?
+        image_paths = session[:lookbook]['lookbook_photo']['document'].split(',')
+        image_ids = session[:lookbook]['lookbook_photo']['document_id'].split(',')
+        image_titles = session[:lookbook]['lookbook_photo']['photo_title']
+
+        link_urls = session[:lookbook]['lookbook_link']['links']
+        link_titles = session[:lookbook]['lookbook_link']['link_title']
+
+        feedback = session[:lookbook]['feedback']
+      else
+        lookbook = Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
+        if lookbook
+          pictures = lookbook.lookbook_details.includes(:image).uploaded_pictures.order(id: :asc)
+          if pictures.present?
+            image_ids = []
+            image_paths = []
+            image_titles = []
+            pictures.each do |lookbook_document|
+              image = lookbook_document.image
+              image_paths << image.image.url(:medium)
+              image_ids << image.id
+              image_titles << lookbook_document.description
             end
           end
-          @doc_id = @doc_id.join(',')
-          @doc_path = @doc_path.join(',')
+          links = lookbook.lookbook_details.external_pictures.order(id: :asc)
+          link_urls = links.pluck(:url)
+          link_titles = links.pluck(:description)
+          feedback = lookbook.feedback
         end
-        @links = @lookbook.lookbook_details.where(:doc_type => 2).order("id ASC") 
       end
+
+      @lookbook_view = LookbookView.new(image_ids, image_paths, image_titles, link_urls, link_titles, feedback)
     end  
   end
   
   def preview_lookbook
     redirect_to lookbook_designer_path(params[:id]) if session[:lookbook].blank?
-    #aise session[:lookbook].inspect
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
