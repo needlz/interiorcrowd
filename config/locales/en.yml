@@ -1,3 +1,31 @@
 en:
   contests:
-    design_categories_title: 'What do you need help with today?'
+    titles:
+      creation: Launch a New Design Contest
+      design_categories: What do you need help with today?
+      design_style: Design Style?
+      appeals: What appeals to you?
+      wanted_colors: What colors do you want in your space?
+      avoided_colors: What colors do you want to avoid?
+      example: Any example that you like?
+      areas: What area of your home are you looking to update?
+      preview: Just a preview of everything entered thus far.
+    appleals:
+      feminine: Feminine
+      masculine: Masculine
+      elegant: Elegant
+      eclectic: Eclectic
+      traditional: Traditional
+      modern: Modern
+      conservative: Conservative
+      bold: Bold
+      muted: Muted
+      colorful: Colorful
+      timeless: Timeless
+      trendy: Trendy
+      fancy: Fancy
+      playful: Playful
+    dimensions:
+      length: Length
+      width: Width
+      height: Height (Optional)

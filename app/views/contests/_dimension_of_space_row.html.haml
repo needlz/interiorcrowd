@@ -1,0 +1,20 @@
+.row
+  .col-sm-12.mesure-con
+    .col-sm-2
+      %strong= dimension.name
+    .col-sm-10.form-inline
+      .col-sm-4.mesure-label
+        %input.form-control{:name => "step4[#{ dimension.identifier }]",
+        onkeyup: "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
+        type: "text",
+        value: dimension.to_feet,
+        id: dimension.feet_identifier}
+      %label.col-sm-1.mesure-label Ft
+      .col-sm-4.col-sm-offset-1.mesure-label
+        %input.form-control{onkeyup: "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
+        type: "text",
+        value: dimension.to_inches,
+        id: dimension.inches_identifier}
+      %label.col-sm-2.mesure-label Inches
+    - if dimension.mandatory
+      %span.text-error{:style => "padding-left:15px;", id: "err_#{dimension.identifier}"}

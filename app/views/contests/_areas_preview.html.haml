@@ -1,0 +1,4 @@
+.row
+  %label= t('contests.titles.areas')
+  - category_names = @design_areas.pluck(:name)
+  %span.selection= category_names.join(', ')

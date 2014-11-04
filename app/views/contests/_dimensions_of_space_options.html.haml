@@ -1,0 +1,7 @@
+.row.step-row
+  %label Add dimensions of your space
+.row
+  .col-sm-5.well
+    = render partial: 'contests/dimension_of_space_row',
+    collection: @dimensions,
+    as: :dimension

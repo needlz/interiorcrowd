@@ -1,0 +1,45 @@
+#in_pricing
+  .container
+    .section_header
+      \ 
+    .row.charts_wrapp
+      / Plan Box
+      .col-sm-12
+        .plan
+          .wrapper
+            .row
+              .page-header
+                %h2 Design Center
+            .row
+              .page-header
+                %h3 Preview current contests
+            = render :partial => 'home/msg'
+            .container.preview
+              .row
+                .col-sm-10
+                  .plan.appeals
+                    %table.table.table-hover
+                      %tr
+                        %td.col-sm-6
+                          %strong Contest Name
+                        %td.col-sm-2
+                          %strong Budget
+                        %td.col-sm-2
+                          %strong Created at
+                        %td.col-sm-2
+                          %strong Action
+                      - if @contests.present?
+                        - @contests.each do |contest|
+                          %tr
+                            %td.col-sm-6= contest.project_name
+                            %td.col-sm-2= Contest::CONTEST_DESIGN_BUDGET_PLAN[contest.budget_plan.to_i]
+                            %td.col-sm-2= contest.created_at.strftime("%d %b. %Y")
+                            %td.col-sm-2= link_to 'Details', contest_path(contest)
+                          %tr
+                            %td{:colspan => "2"}
+                              .digg_pagination
+                                = will_paginate @contests, :container => false
+                      - else
+                        %tr
+                          %td.col-sm-10{:colspan => "2"}
+                            No record found.

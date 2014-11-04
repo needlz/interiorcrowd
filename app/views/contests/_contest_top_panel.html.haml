@@ -1,10 +1,11 @@
 .row
   .page-header
-    %h2 Launch a New Design Contest
+    %h2= t('contests.titles.creation')
 .row.launch-nav
   .col-sm-10.col-sm-offset-1
     %ul.nav.nav-pills.nav-justified
-      %li{:class => "col-sm-2 #{contest_creation_breadcrumb_class(1)}"}= link_to "Step 1", step1_contests_path
-      %li{:class => "col-sm-2 #{contest_creation_breadcrumb_class(2)}"}= link_to "Step 2", step2_contests_path
-      %li{:class => "col-sm-2 #{contest_creation_breadcrumb_class(3)}"}= link_to "Step 3", step3_contests_path
-      %li{:class => "col-sm-2 #{contest_creation_breadcrumb_class(4)}"}= link_to "Step 4", step4_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(1)}"}= link_to "Step 1", step1_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(2)}"}= link_to "Step 2", step2_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(3)}"}= link_to "Step 3", step3_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(4)}"}= link_to "Step 4", step4_contests_path
+

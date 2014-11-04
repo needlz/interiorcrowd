@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_filter :check_client, :only => [:client_center]
+  before_filter :check_client, only: [:client_center]
   # POST /clients
   # POST /clients.json
   def client_center
@@ -27,7 +27,7 @@ class ClientsController < ApplicationController
             format.json { render json: @client, status: :created, location: @client }
           else
             flash[:error] = @client.errors.full_messages.join("</br>")
-            format.html { render :template => "contests/step6" }
+            format.html { render template: "contests/step6" }
             format.json { render json: @client.errors, status: :unprocessable_entity }
           end
       end
@@ -37,46 +37,40 @@ class ClientsController < ApplicationController
   def create_contests(user_id)
       all_steps = session[:step1].present? && session[:step2].present? && session[:step3].present? && session[:step4].present? && session[:step5].present?
       if all_steps  
-        params = ActionController::Parameters.new contest: {:cd_cat => session[:step1][:cat_id].present? ? session[:step1][:cat_id].join(",") : '',
-                    :cd_other_cat => session[:step1][:other],
+        params = ActionController::Parameters.new contest: {cd_cat: session[:step1][:cat_id].present? ? session[:step1][:cat_id].join(",") : '',
+                    cd_other_cat: session[:step1][:other],
                     
-                    :cd_space => session[:step2].join(','),
+                    cd_space: session[:step2].join(','),
                     
-                    :cd_feminine_scale => session[:step3][:Feminine],
-                    :cd_elegant_scale => session[:step3][:elegant],
-                    :cd_traditional_scale => session[:step3][:traditional],
-                    :cd_muted_scale => session[:step3][:muted],
-                    :cd_conservative_scale => session[:step3][:conservative],
-                    :cd_timeless_scale => session[:step3][:timeless],
-                    :cd_fancy_scale => session[:step3][:fancy],
-                    :cd_fav_color =>  session[:step3][:fav_color],
-                    :cd_refrain_color =>  session[:step3][:refrain_color],
-                    :cd_refrain_color =>  session[:step3][:refrain_color],
-                    :cd_style_ex_images => session[:step3][:document_id],
-                    :cd_style_links => session[:step3][:ex_links],
+                    cd_feminine_scale: session[:step3][:Feminine],
+                    cd_elegant_scale: session[:step3][:elegant],
+                    cd_traditional_scale: session[:step3][:traditional],
+                    cd_muted_scale: session[:step3][:muted],
+                    cd_conservative_scale: session[:step3][:conservative],
+                    cd_timeless_scale: session[:step3][:timeless],
+                    cd_fancy_scale: session[:step3][:fancy],
+                    cd_fav_color:  session[:step3][:fav_color],
+                    cd_refrain_color:  session[:step3][:refrain_color],
+                    cd_style_ex_images: session[:step3][:document_id],
+                    cd_style_links: session[:step3][:ex_links],
                     
-                    :cd_space_images => session[:step4][:document_id],
-                    :cd_space_flength => session[:step4][:f_length],
-                    :cd_space_ilength => session[:step4][:i_length],
-                    :cd_space_fwidth => session[:step4][:f_width],
-                    :cd_space_iwidth => session[:step4][:i_width],
-                    :cd_space_fheight => session[:step4][:f_height],
-                    :cd_space_iheight => session[:step4][:i_height],
-                    :cd_space_budget => session[:step4][:f_budget],
-                    :feedback => session[:step4][:feedback],
+                    cd_space_images: session[:step4][:document_id],
+                    space_length: session[:step4][:length],
+                    space_width: session[:step4][:width],
+                    space_height: session[:step4][:height],
+                    cd_space_budget: session[:step4][:f_budget],
+                    feedback: session[:step4][:feedback],
                     
-                    :budget_plan => session[:step5][:b_plan],
-                    :project_name => session[:step5][:project_name],
-                    :user_id => user_id
+                    budget_plan: session[:step5][:b_plan],
+                    project_name: session[:step5][:project_name],
+                    client_id: user_id
                    }
                    
-         params.require(:contest).permit(:user_id, :project_name, :budget_plan, :feedback, :cd_space_budget,
+         params.require(:contest).permit(:client_id, :project_name, :budget_plan, :feedback, :cd_space_budget,
                          :cd_space_images, :cd_space_flength, 
-                         :cd_space_ilength, 
-                         :cd_space_fwidth, 
-                         :cd_space_iwidth, 
-                         :cd_space_fheight, 
-                         :cd_space_iheight,
+                         :space_length,
+                         :space_width,
+                         :space_height,
                          :cd_feminine_scale,
                           :cd_elegant_scale,
                           :cd_traditional_scale,

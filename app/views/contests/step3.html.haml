@@ -1,0 +1,33 @@
+- content_for :page_content do
+  .row
+    .col-sm-10.col-sm-offset-1.page-title
+      %h3= t('contests.titles.design_style')
+  = render :partial => 'home/msg'
+  .row.step-row
+    %label= t('contests.titles.appeals')
+  = form_tag step4_contests_path, {:id => "step3", :method => "post"} do
+    %input#step3_image{:name => "step3[document]", :type => "hidden", :value => (session[:step3][:document] if session[:step3].present?)}
+    %input#step3_image_id{:name => "step3[document_id]", :type => "hidden", :value => (session[:step3][:document_id] if session[:step3].present?)}
+    = render partial: 'contests/appeals_options'
+    = render partial: 'contests/colors_options'
+    = render partial: 'contests/example_options'
+    .row.formbuttons
+      .col-sm-3
+        %a.order{:href => step2_contests_path} GO BACK
+      .col-sm-4.col-sm-offset-4
+        %a.order.continue{:href => "#"} CONTINUE
+= render partial: 'contests/contest_creation_page'
+
+= content_for :javascript do
+  = javascript_include_tag 'bootstrap-slider'
+  = javascript_include_tag 'jquery.uploadify'
+  = javascript_include_tag 'contests/step3'
+
+  = stylesheet_link_tag 'lib/slider'
+  = stylesheet_link_tag 'uploadify'
+
+  :javascript
+    window.uploadifyFormData = {"#{key = Rails.application.config.session_options[:key]}": "#{cookies[key]}",
+                "#{request_forgery_protection_token}": "#{form_authenticity_token}"}
+    window.uploadifyFileSizeLimit = #{1.megabytes}
+    window.uploadifyUploader = '#{images_path}'

@@ -1,0 +1,46 @@
+- content_for :javascript do
+  = javascript_include_tag 'contests/preview'
+
+#in_pricing
+  .container
+    .section_header
+    = form_tag step6_contests_path,  {:id => "step6", :method => "post"} do
+      %input#plan_id{:name => "step5[b_plan]",
+      :type => "hidden",
+      :value => (session[:step5][:b_plan] if session[:step5].present?)}
+      .row.charts_wrapp
+        .col-sm-12
+          .plan
+            .wrapper
+              .row
+                .page-header
+                  %h2= t('contests.titles.creation')
+              .row
+                .page-header
+                  %h3= t('contests.titles.preview')
+              .container.col-sm-offset-1.preview
+                = render partial: 'contests/categories_preview'
+                = render partial: 'contests/areas_preview'
+                = render partial: 'contests/appeals_preview'
+                = render partial: 'contests/colors_preview'
+                = render partial: 'contests/examples_preview'
+                = render partial: 'contests/links_preview'
+                = render partial: 'contests/space_pictures_preview'
+                = render partial: 'contests/dimensions_preview'
+                = render partial: 'contests/budget_preview'
+                = render partial: 'contests/comment_preview'
+                .row
+                  .col-sm-9
+                    .row.projectname.plan
+                      .form-inline
+                        .col-sm-4
+                          %label{:style => ""} Give your project a name
+                        .col-sm-6
+                          %input#project_name.form-control{:maxlength => "100", :name => "step5[project_name]", :type => "text", :value => (session[:step5][:project_name] if session[:step5].present?)}
+                          %span#err_prj_name.text-error
+              = render partial: 'contests/plan_options'
+              .row.formbuttons
+                .col-sm-3.col-sm-offset-2
+                  %a.order{:href => step4_contests_path} GO BACK
+                .col-sm-3.col-sm-offset-4
+                  %a.order.continue{:href => "#"} CONTINUE
