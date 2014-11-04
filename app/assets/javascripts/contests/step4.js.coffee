@@ -1,29 +1,29 @@
-jQuery ->
-  jQuery(".continue").click (e) ->
+$ ->
+  $(".continue").click (e) ->
     e.preventDefault()
-    jQuery(".text-error").html ""
-    f_length = jQuery.trim(jQuery("#f_length").val())
-    i_length = jQuery.trim(jQuery("#i_length").val())
-    f_width = jQuery.trim(jQuery("#f_width").val())
-    i_width = jQuery.trim(jQuery("#i_width").val())
+    $(".text-error").html ""
+    f_length = $.trim($("#length_feet").val())
+    i_length = $.trim($("#length_inches").val())
+    f_width = $.trim($("#width_feet").val())
+    i_width = $.trim($("#width_inches").val())
     bool = true
     focus = false
     if f_length.length < 1 and i_length.length < 1
       bool = false
-      jQuery("#err_length").html "Please enter length."
-      focus = "f_length"
+      $("#err_length").html "Please enter length."
+      focus = "length_feet"
     if f_width.length < 1 and i_width < 1
       bool = false
-      jQuery("#err_width").html "Please enter width."
-      focus = "f_width"  unless focus
+      $("#err_width").html "Please enter width."
+      focus = "width_feet"  unless focus
     if bool
-      jQuery("#step4").submit()
+      $("#step4").submit()
     else
-      jQuery("#" + focus).focus()
+      $("#" + focus).focus()
       false
 
-jQuery ->
-  jQuery("#file_input").uploadify
+$ ->
+  $("#file_input").uploadify
     uploader: uploadifyUploader
     swf: "/uploadify.swf"
     buttonText: "Upload"

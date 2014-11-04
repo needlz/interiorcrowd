@@ -1,25 +1,25 @@
-jQuery ->
-  jQuery(".slidercon input").slider()
-  jQuery(".continue").click (e) ->
+$ ->
+  $(".slidercon input").slider()
+  $(".continue").click (e) ->
     e.preventDefault()
-    jQuery(".text-error").html ""
-    fav_color = jQuery.trim(jQuery("#fav_color").val())
-    refrain_color = jQuery.trim(jQuery("#refrain_color").val())
+    $(".text-error").html ""
+    fav_color = $.trim($("#fav_color").val())
+    refrain_color = $.trim($("#refrain_color").val())
     bool = true
     if fav_color.length < 1
       bool = false
-      jQuery("#err_fav").html "Please enter data."
+      $("#err_fav").html "Please enter data."
     if refrain_color.length < 1
       bool = false
-      jQuery("#err_refrain").html "Please enter data."
+      $("#err_refrain").html "Please enter data."
     if bool
-      jQuery("#step3").submit()
+      $("#step3").submit()
     else
       false
 
-jQuery ->
+$ ->
   # encode the session into a Flash-save format
-  jQuery("#file_input").uploadify
+  $("#file_input").uploadify
     uploader: uploadifyUploader
     swf: "/uploadify.swf"
     buttonText: "Upload"

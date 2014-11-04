@@ -1,0 +1,117 @@
+= content_for :javascript do
+  = javascript_include_tag 'jquery.creditCardValidator.js'
+  = javascript_include_tag 'contests/step6'
+#in_pricing
+  .container
+    .section_header
+      \ 
+    = form_for @client, {:id => "create", :method => "post"} do |f|
+      .row.charts_wrapp
+        / Plan Box
+        .col-sm-12
+          .plan
+            .wrapper
+              .row
+                .page-header
+                  %h2 Payment Details and Account Creation
+              = render :partial => 'home/msg'
+              .container
+                .row
+                  .col-sm-8.col-sm-offset-1.page-title
+                    %h3 Personal Details
+                .row.step-row
+                  .col-sm-2
+                    %label First Name:
+                  .col-sm-7
+                    = f.text_field :first_name, :class => "form-control input-big"
+                    %span#err_first_name.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Last Name:
+                  .col-sm-7
+                    = f.text_field :last_name, :class => "form-control input-big"
+                    %span#err_last_name.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Email:
+                  .col-sm-7
+                    = f.text_field :email, :class => "form-control input-big"
+                    %span#err_email.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Password:
+                  .col-sm-7
+                    = f.password_field :password, :class => "form-control input-big"
+                    %span#err_password.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Password Again:
+                  .col-sm-7
+                    = f.password_field :password_confirmation, :class => "form-control input-big"
+                    %span#err_cpassword.text-error
+                .row.step-row
+                .row
+                  .col-sm-8.col-sm-offset-1.page-title
+                    %h3 Billing Information
+                .row.step-row
+                  .col-sm-2
+                    %label Name on Card:
+                  .col-sm-7
+                    = f.text_field :name_on_card, :class => "form-control input-big"
+                    %span#err_name_on_card.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Address:
+                  .col-sm-7
+                    = f.text_field :address, :class => "form-control input-big"
+                    %span#err_address.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label State:
+                  .col-sm-7.controls.form-inline
+                    = f.text_field :state, :class => "form-control left-control input-small"
+                    %label Zip:
+                    = f.text_field :zip, :class => "form-control left-control input-small", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))"
+                    %span#err_zip.text-error
+                    %span#err_state.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Card Type:
+                  .col-sm-7
+                    .control-group
+                      .controls.form-inline.card-type
+                        %label.radio.inline{:for => "radios-0"}
+                          %input#radios-0.card_type{:checked => "checked", :name => "Contest[type]", :type => "radio", :value => "visa"}/
+                          Visa
+                        %label.radio.inline{:for => "radios-1"}
+                          %input#radios-1.card_type{:name => "Contest[type]", :type => "radio", :value => "mastercard"}/
+                          Master
+                        %label.radio.inline{:for => "radios-2"}
+                          %input#radios-2.card_type{:name => "Contest[type]", :type => "radio", :value => "amex"}/
+                          Amex
+                .row.step-row
+                  .col-sm-2
+                    %label Card Number:
+                  .col-sm-7
+                    %input#card_number.form-control.input-big{:maxlength => "16", :name => "Contest[card_number]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text"}/
+                    %span#err_card_number.text-error
+                .row.step-row
+                  .col-sm-2
+                    %label Card Expiry:
+                  .col-sm-7
+                    = select_month(Date.today, {:field_name => 'card_exp_month'}, :class => "form-control card-exp")
+                    Month      
+                    \#{select_year(Date.today, {:start_year => Time.now.year, :end_year => Time.now.year + 10, :field_name => :card_exp_year}, :class => "form-control card-exp")}
+                    Year
+                .row.step-row
+                  .col-sm-2
+                    %label CVC:
+                  .col-sm-7.controls.form-inline
+                    %input#card_cvc.form-control.left-control.input-small{:maxlength => "3", :name => "Contest[cvc]", :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", :type => "text"}/
+                    %span#err_cvc.text-error
+                .row.step-row
+                  .col-sm-6.col-sm-offset-2
+                    By clicking below, You are agree to our terms and conditions.
+                .row.formbuttons
+                  .col-sm-4.col-sm-offset-4
+                    %a.order.continue{:href => "#"} CHARGE NOW

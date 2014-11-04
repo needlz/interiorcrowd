@@ -20,12 +20,7 @@ class AppealScale
   def self.from(options)
     SCALES.map do |scale|
       appeal = new(scale)
-      if options
-        appeal.value = options.kind_of?(Hash) ? options[appeal.identifier] : options.send("cd_#{ appeal.identifier }_scale")
-      else
-        appeal.value = 0
-      end
-
+      appeal.value = options
       appeal
     end
   end
@@ -43,7 +38,11 @@ class AppealScale
   end
 
   def value=(value)
-    @value = value.to_i || default_value
+    if value.present?
+      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send("cd_#{ identifier }_scale")
+    else
+      @value = default_value
+    end
   end
 
   def second_value

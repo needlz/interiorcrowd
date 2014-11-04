@@ -1,10 +1,12 @@
-class DimensionRow
+class SpaceDimension
 
   DIMENSIONS = [
     { identifier: :length, mandatory: true },
     { identifier: :width, mandatory: true },
     { identifier: :height, mandatory: false }
   ]
+
+  INCHES_IN_FEET = 12
 
   attr_reader :mandatory, :identifier, :value
 
@@ -15,14 +17,9 @@ class DimensionRow
 
   def self.from(options)
     DIMENSIONS.map do |dimension|
-      dimension_row = new(dimension[:identifier], dimension[:mandatory])
-      if options
-        dimension_row.value = options.kind_of?(Hash) ? options[dimension_row.identifier] : options.send("space_#{ dimension_row.identifier }")
-      else
-        dimension_row.value = nil
-      end
-
-      dimension_row
+      space_dimension = new(dimension[:identifier], dimension[:mandatory])
+      space_dimension.value = options
+      space_dimension
     end
   end
 
@@ -32,7 +29,7 @@ class DimensionRow
 
   def to_inches
     return unless value
-    value * 12
+    value * INCHES_IN_FEET
   end
 
   def to_feet
@@ -40,15 +37,19 @@ class DimensionRow
   end
 
   def value=(value)
-    @value = (value.to_i if value.present?)
+    if value
+      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send("space_#{ identifier }")
+    else
+      @value = nil
+    end
   end
 
   def feet_identifier
-    'f_' + (identifier.to_s)
+    "#{identifier}_feet"
   end
 
   def inches_identifier
-    'i_' + (identifier.to_s)
+    "#{identifier}_inches"
   end
 
 end

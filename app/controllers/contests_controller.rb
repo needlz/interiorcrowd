@@ -6,13 +6,13 @@ class ContestsController < ApplicationController
   before_filter :set_dimensions, only: [:step4, :preview]
 
   def index
-    @contests = Contest.paginate(:page => params[:page]).order('created_at DESC')
+    @contests = Contest.by_page(params[:page])
   end
   
   def show
     @contest = Contest.find_by_id(params[:id])
     @cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-    @dimensions = DimensionRow.from(@contest)
+    @dimensions = SpaceDimension.from(@contest)
     @appeal_scales = AppealScale.from(@contest)
     @categories = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos)
     @design_areas = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos)
@@ -63,6 +63,7 @@ class ContestsController < ApplicationController
         redirect_to step3_contests_path
       end        
     end
+    @budget_option = session[:step4].present? ? session[:step4][:f_budget] : ''
   end
   
   def preview
@@ -143,7 +144,7 @@ class ContestsController < ApplicationController
   end
 
   def set_dimensions
-    @dimensions = DimensionRow.from(session[:step4])
+    @dimensions = SpaceDimension.from(session[:step4])
   end
 
 end

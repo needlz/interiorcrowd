@@ -1,8 +1,8 @@
-jQuery ->
-  jQuery(".continue").click (e) ->
-    jQuery("#new_contest_request").submit()
+$ ->
+  $(".continue").click (e) ->
+    $("#new_contest_request").submit()
 
-  jQuery("#file_input").uploadify
+  $("#file_input").uploadify
     uploader: uploadifyUploader
     swf: "/uploadify.swf"
     buttonText: "Upload a design"
