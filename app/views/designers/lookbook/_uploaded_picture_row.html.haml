@@ -4,7 +4,15 @@
   %label{style: "float:left"}
     Edit text to go at bottom of image
     %input{maxlength: "100",
-    name: "lookbook_photo[photo_title][]",
+    name: "picture[titles][]",
     style: "width:100%",
     type: "text",
     value: title}
+    %input{maxlength: "100",
+    name: "picture[urls][]",
+    type: "hidden",
+    value: url}
+    %input{maxlength: "100",
+    name: "picture[ids][]",
+    type: "hidden",
+    value: id}

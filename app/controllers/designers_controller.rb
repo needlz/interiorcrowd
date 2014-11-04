@@ -76,42 +76,18 @@ class DesignersController < ApplicationController
       redirect_to preview_lookbook_designer_path(params[:id])
     else
       if session[:lookbook].present?
-        image_paths = session[:lookbook]['lookbook_photo']['document'].split(',')
-        image_ids = session[:lookbook]['lookbook_photo']['document_id'].split(',')
-        image_titles = session[:lookbook]['lookbook_photo']['photo_title']
-
-        link_urls = session[:lookbook]['lookbook_link']['links']
-        link_titles = session[:lookbook]['lookbook_link']['link_title']
-
-        feedback = session[:lookbook]['feedback']
+        @lookbook_options = session[:lookbook]
       else
         lookbook = Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-        if lookbook
-          pictures = lookbook.lookbook_details.includes(:image).uploaded_pictures.order(id: :asc)
-          if pictures.present?
-            image_ids = []
-            image_paths = []
-            image_titles = []
-            pictures.each do |lookbook_document|
-              image = lookbook_document.image
-              image_paths << image.image.url(:medium)
-              image_ids << image.id
-              image_titles << lookbook_document.description
-            end
-          end
-          links = lookbook.lookbook_details.external_pictures.order(id: :asc)
-          link_urls = links.pluck(:url)
-          link_titles = links.pluck(:description)
-          feedback = lookbook.feedback
-        end
+        @lookbook_options = lookbook if lookbook
       end
-
-      @lookbook_view = LookbookView.new(image_ids, image_paths, image_titles, link_urls, link_titles, feedback)
+      @lookbook_view = LookbookView.new(@lookbook_options)
     end  
   end
   
   def preview_lookbook
     redirect_to lookbook_designer_path(params[:id]) if session[:lookbook].blank?
+    @lookbook_view = LookbookView.new(session[:lookbook])
   end
 
   private

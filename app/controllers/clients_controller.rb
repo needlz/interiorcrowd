@@ -67,25 +67,26 @@ class ClientsController < ApplicationController
                    }
                    
          params.require(:contest).permit(:client_id, :project_name, :budget_plan, :feedback, :cd_space_budget,
-                         :cd_space_images, :cd_space_flength, 
+                         :cd_space_images,
+                         :cd_space_flength,
                          :space_length,
                          :space_width,
                          :space_height,
                          :cd_feminine_scale,
-                          :cd_elegant_scale,
-                          :cd_traditional_scale,
-                          :cd_muted_scale,
-                          :cd_conservative_scale,
-                          :cd_timeless_scale,
-                          :cd_fancy_scale,
-                          :cd_fav_color ,
-                          :cd_refrain_color ,
-                          :cd_refrain_color ,
-                          :cd_style_ex_images,
-                          :cd_style_links,
-                          :cd_space,
-                          :cd_other_cat,
-                          :cd_cat
+                         :cd_elegant_scale,
+                         :cd_traditional_scale,
+                         :cd_muted_scale,
+                         :cd_conservative_scale,
+                         :cd_timeless_scale,
+                         :cd_fancy_scale,
+                         :cd_fav_color,
+                         :cd_refrain_color,
+                         :cd_refrain_color,
+                         :cd_style_ex_images,
+                         :cd_style_links,
+                         :cd_space,
+                         :cd_other_cat,
+                         :cd_cat
                          )         
            if Contest.new(params[:contest]).save()
               session[:step1] = nil
