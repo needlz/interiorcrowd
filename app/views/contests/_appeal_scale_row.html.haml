@@ -3,11 +3,11 @@
   %td.col-sm-8
     .slidercon
       = text_field_tag "step3[#{ scale.identifier.to_s }]",
-      scale.value,
-      "data-slider-max" => "100",
-      "data-slider-min" => "0",
-      "data-slider-selection" => "after",
-      "data-slider-step" => "1",
-      "data-slider-tooltip" => "show",
-      "data-slider-value" => scale.value
+          scale.value,
+          "data-slider-max" => "100",
+          "data-slider-min" => "0",
+          "data-slider-selection" => "after",
+          "data-slider-step" => "1",
+          "data-slider-tooltip" => "show",
+          "data-slider-value" => scale.value
   %td.col-sm-2= scale.second_name

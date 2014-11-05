@@ -5,9 +5,9 @@ class DesignerLookbook
   def initialize(options)
     if options
       if options.kind_of?(Hash)
-        initialize_from_hash(options)
+        initialize_from_options(options)
       else
-        initialize_from_object(options)
+        initialize_from_lookbook(options)
       end
     else
       initialize_defaults
@@ -24,9 +24,9 @@ class DesignerLookbook
 
   private
 
-  def initialize_from_hash(options)
-    @paths = options['picture']['urls']
+  def initialize_from_options(options)
     @ids = options['picture']['ids']
+    @paths = options['picture']['urls']
     @titles = options['picture']['titles']
 
     @links = options['link']['urls']
@@ -35,23 +35,25 @@ class DesignerLookbook
     @feedback = options['feedback']
   end
 
-  def initialize_from_object(options)
-    pictures = options.lookbook_details.includes(:image).uploaded_pictures.order(id: :asc)
-    if pictures.present?
+  def initialize_from_lookbook(lookbook)
+    lookbook_items= lookbook.lookbook_details.includes(:image).uploaded_pictures.order(id: :asc)
+    if lookbook_items.present?
       @ids = []
       @paths = []
       @titles = []
-      pictures.each do |lookbook_document|
-        image = lookbook_document.image
-        @paths << image.image.url(:medium)
+      lookbook_items.each do |item|
+        image = item.image
         @ids << image.id
-        @titles << lookbook_document.description
+        @paths << image.image.url(:medium)
+        @titles << item.description
       end
     end
-    links = options.lookbook_details.external_pictures.order(id: :asc)
+    links = lookbook.lookbook_details.external_pictures.order(id: :asc)
+
     @links = links.pluck(:url)
     @link_titles = links.pluck(:description)
-    @feedback = options.feedback
+
+    @feedback = lookbook.feedback
   end
 
   def initialize_defaults
