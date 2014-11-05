@@ -1,15 +1,15 @@
 $.fn.initUploader = (uploadifyOptions) ->
   @.uploadify
     uploader: uploadifyUploader
-    swf: "/uploadify.swf"
+    swf: '/uploadify.swf'
     buttonText: uploadifyOptions.buttonText
     fileSizeLimit: uploadifyFileSizeLimit
-    fileTypeExts: "*.png;*.jpg;*.tif"
+    fileTypeExts: '*.png;*.jpg;*.tif'
     uploadLimit: uploadifyOptions.uploadLimit || 3
-    fileObjName: "photo"
+    fileObjName: 'photo'
     multi: false
     auto: true
     removeTimeout: uploadifyOptions.removeTimeout
     onUploadSuccess: uploadifyOptions.onUploadSuccess
     formData: uploadifyFormData
-    cancelImg: "/images/cancel.png" #take care that the image is accessible
+    cancelImg: '/images/cancel.png' #take care that the image is accessible

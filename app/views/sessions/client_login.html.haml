@@ -1,5 +1,7 @@
 = content_for :head do
-  = stylesheet_link_tag  'compiled/sign-in'
+  = stylesheet_link_tag 'compiled/sign-in'
+  = javascript_include_tag 'sessions/login'
+
 / Sign In Option 1
 #sign_in1{:style => "height:10px;"}
 / Sign In Option 2
@@ -40,43 +42,3 @@
                   %a{:href => client_retry_password_sessions_path}> Forgot Password
                   \&nbsp;
                 %input{:type => "submit", :value => "sign in"}/
-/ Pricing Option
-:javascript
-  jQuery(document).ready(function() {
-  	
-  	jQuery("#login").submit(function(){
-  	    jQuery(".text-error").text('');
-  		
-  		var username = jQuery.trim(jQuery("#username").val());
-  		var password = jQuery.trim(jQuery("#password").val());
-  		
-  		
-  		var bool = false
-  					
-  		if (password.length < 1) {
-  			
-  			jQuery("#err_p").text('Please enter password.');
-  			bool = "passowrd"
-  		}	
-  		
-  		if(username.length > 1) {
-  			var rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  			if(!rege.test(username))	{
-  				jQuery("#err_u").text('Please enter valid email.');
-  				bool = "username"	
-  		    }
-  			
-  		} else {
-  			jQuery("#err_u").text('Please enter email.');
-  			bool = "username"
-  		}
-  		if(bool) {
-  		   jQuery("#"+bool).focus();
-  		   return false;
-  		} else {
-  			return true;	
-  		}
-  			
-  	});
-  	
-  });

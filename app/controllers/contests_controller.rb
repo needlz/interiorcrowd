@@ -64,6 +64,7 @@ class ContestsController < ApplicationController
       end        
     end
     @budget_option = session[:step4].present? ? session[:step4][:f_budget] : ''
+    @feedback = session[:step4].present? ? session[:step4][:feedback] : ''
   end
   
   def preview
