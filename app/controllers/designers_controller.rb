@@ -33,7 +33,7 @@ class DesignersController < ApplicationController
       if @designer.save
         session[:exlnks] = nil
         session[:designer_id] = @designer.id 
-        ICrowd.designer_registration(@designer, user_ps).deliver
+        Mailer.designer_registration(@designer, user_ps).deliver
         format.html { redirect_to welcome_designer_path(@designer), notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else

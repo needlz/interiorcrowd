@@ -1,0 +1,89 @@
+%section#feature_slider.lol
+  /
+    Each slide is composed by <img> and .info
+    \- .info's position is customized with css in index.css
+    \- each <img> parallax effect is declared by the following params inside its class:
+    
+    example: class="asset left-472 sp600 t120 z3"
+    left-472 means left: -472px from the center
+    sp600 is speed transition
+    t120 is top to 120px
+    z3 is z-index to 3
+    Note: Maintain this order of params
+    
+    For the backgrounds, you can combine from the bgs folder :D
+  /
+    <article class="slide" id="showcasing" style="background: url('/assets//backgrounds/landscape.png') repeat-x top center;">
+    <img class="asset left-30 sp600 t120 z1" src="/assets/slides/scene1/macboo.jpg" />
+    <div class="info">
+    <h2>Beautiful theme for showcasing your home.</h2>
+    <haml:loud> link_to &amp;#39;Launch a contest&amp;#39;, step1_contests_path() </haml:loud>
+    </div>
+    </article>
+  %article#tour.slide{:style => "background: url('/assets/backgrounds/color-splash.jpg') repeat-x top center;"}
+    %img.asset.left-472.sp650.t110.z3{:src => "/assets/slides/scene3/scene3b.jpg"}/
+    %img.asset.left-365.sp600.t270.z4{:src => "/assets/slides/scene3/scene3c.jpg"}/
+    %img.asset.left-350.sp450.t135.z2{:src => "/assets/slides/scene3/scene3a.jpg"}/
+    .info
+      %h2 Get multiple options
+      = link_to 'Launch a contest', step1_contests_path()
+  %article#responsive.slide{:style => "background: url('/assets/backgrounds/indigo.jpg') repeat-x top center;"}
+    %img.asset.left-472.sp600.t100.z2{:src => "/assets/slides/scene4/scene4a.jpg"}/
+    %img.asset.left-190.sp500.t120.z4{:src => "/assets/slides/scene4/scene4b.jpg"}/
+    .info
+      %h2 We love to turn ideas into beautiful home
+      = link_to 'Launch a contest', step1_contests_path()
+/ Pricing Option
+#in_pricing
+  .container
+    .section_header
+      \&nbsp;
+    .row.charts_wrapp
+      / Plan Box
+      .col-sm-4
+        .plan
+          .wrapper.home_wrapper
+            %h3 How does a contest work for you?
+            .features
+              %p
+                %strong 10
+                Shared Projects
+              %p
+                %strong 4
+                Team Members
+              %p
+                %strong 10
+                Storage
+            %a.order{:href => step1_contests_path} Let's Start
+      / Plan Box
+      .col-sm-4.standar
+        .plan
+          .wrapper.home_wrapper
+            %h3 successful contests/testimonials
+            .features
+              %p
+                %strong 10
+                Shared Projects
+              %p
+                %strong 25
+                Team Members
+              %p
+                %strong Unlimited
+                Storage
+            %a.order{:href => step1_contests_path} Let's Start
+      / Plan Box
+      .col-sm-4.standar
+        .plan
+          .wrapper.home_wrapper
+            %h3 Get Inspired by other work
+            .features
+              %p
+                %strong 10
+                Shared Projects
+              %p
+                %strong 4
+                Team Members
+              %p
+                %strong 10
+                Storage
+            %a.order{:href => step1_contests_path} Let's Start

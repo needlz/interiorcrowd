@@ -1,0 +1,83 @@
+= content_for :head do
+  = stylesheet_link_tag  'compiled/sign-in'
+/ Sign In Option 1
+#sign_in1{:style => "height:10px;"}
+/ Sign In Option 2
+#sign_in2
+  .container
+    .section_header
+      %h3 Designer Sign in
+    .row.login
+      .col-sm-5.left_box
+        %h4 Log in to your account
+        .perk_box
+          .perk
+            %span.icos.ico1
+            %p
+              %strong Lorem alteration
+              in some form  injected humour these randomised words .
+          .perk
+            %span.icos.ico2
+            %p
+              %strong There are many variations
+              of passages of Lorem alteration in some form  injected humour these randomised words.
+          .perk
+            %span.icos.ico3
+            %p
+              %strong Alteration in some form
+              injected humour these randomised words.
+      .col-sm-6.signin_box
+        = render :partial => 'home/msg'
+        .box
+          .box_cont
+            .form
+              = form_tag authenticate_sessions_path, {:id => :login} do
+                %input#username.form-control{:name => "username", :placeholder => "Email", :type => "text"}/
+                %span#err_u.text-error
+                %input#password.form-control{:name => "password", :placeholder => "Password", :type => "password"}/
+                %span#err_p.text-error
+                .forgot
+                  %a{:href => retry_password_sessions_path}> Forgot Password
+                  \&nbsp;
+                  %a{:href => new_designer_path} Sign Up
+                %input{:type => "submit", :value => "sign in"}/
+/ Pricing Option
+:javascript
+  jQuery(document).ready(function() {
+  	
+  	jQuery("#login").submit(function(){
+  	    jQuery(".text-error").text('');
+  		
+  		var username = jQuery.trim(jQuery("#username").val());
+  		var password = jQuery.trim(jQuery("#password").val());
+  		
+  		
+  		var bool = false
+  					
+  		if (password.length < 1) {
+  			
+  			jQuery("#err_p").text('Please enter password.');
+  			bool = "passowrd"
+  		}	
+  		
+  		if(username.length > 1) {
+  			var rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  			if(!rege.test(username))	{
+  				jQuery("#err_u").text('Please enter valid email.');
+  				bool = "username"	
+  		    }
+  			
+  		} else {
+  			jQuery("#err_u").text('Please enter email.');
+  			bool = "username"
+  		}
+  		if(bool) {
+  		   jQuery("#"+bool).focus();
+  		   return false;
+  		} else {
+  			return true;	
+  		}
+  			
+  	});
+  	
+  });

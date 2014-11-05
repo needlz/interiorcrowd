@@ -1,0 +1,28 @@
+#in_pricing
+  .container
+    .section_header
+      \&nbsp;
+    .row.charts_wrapp
+      / Plan Box
+      .col-sm-12
+        .plan
+          .wrapper
+            .row
+              .page-header
+                %h2 Become a Designer!
+            .row
+              .alert.alert-info
+                %h3
+                  Do you love
+                  = succeed "?" do
+                    %strong interior design
+                %h3
+                  Do your friends tell you that you have a knock for
+                  = succeed "?" do
+                    %strong style
+            = render :partial => 'home/msg'
+            .container
+              .row
+                .col-sm-8.col-sm-offset-1.page-title
+                  %h3 Get Started
+              = render 'form'

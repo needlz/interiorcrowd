@@ -1,0 +1,6 @@
+.row
+  .col-sm-10
+    - if flash[:error].present?
+      .alert.alert-danger= flash[:error]
+    - if flash[:notice].present?
+      .alert.alert-success= flash[:notice]

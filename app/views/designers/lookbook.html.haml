@@ -1,4 +1,4 @@
-- content_for :javascript do
+- content_for :head do
   = javascript_include_tag  'jquery.uploadify'
   = javascript_include_tag 'designers/lookbook'
   = stylesheet_link_tag  'uploadify'
@@ -23,7 +23,6 @@
               .page-header
                 %h3 Creating your lookbook
             = form_tag lookbook_designer_path(params[:id]),  {id: "lookbook", method: "post"} do
-              = render partial: 'designers/lookbook/current_images_field'
               .container.col-sm-offset-1.preview
                 .row
                   %h4{style: "padding-left:15px;"} What do you want to include in your design?

@@ -1,0 +1,40 @@
+/ Pricing Option
+#in_pricing
+  .container
+    .section_header
+      \&nbsp;
+    .row.charts_wrapp
+      / Plan Box
+      .col-sm-12
+        .plan
+          .wrapper
+            .row
+              .page-header
+                %h2 Design Center
+            .row
+              .page-header
+                %h3 Welcome to your designer center!
+            .row.charts_wrapp{:style => "margin-top:60px"}
+              / Plan Box
+              .col-sm-4.standar
+                .plan
+                  .wrapper.home_wrapper
+                    .planheight
+                      %h3.price
+                        %a{:href => contests_path} Preview current contests
+              / Plan Box
+              .col-sm-4.standar
+                .plan
+                  .wrapper.home_wrapper
+                    .planheight
+                      %h3.price
+                        %a{:href => "#", :onclick => "alert('Under Implementation!'); return false;"}
+                          Enhance your
+                          profile
+              / Plan Box
+              .col-sm-4.standar
+                .plan
+                  .wrapper.home_wrapper
+                    .planheight
+                      %h3.price
+                        %a{:href => "#", :onclick => "alert('Under Implementation!'); return false;"} Respond to contests you're selected
