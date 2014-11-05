@@ -1,0 +1,17 @@
+.col-sm-8.img_img_box{style: "padding-top:30px;"}
+  %label Link
+  %input.link_url{name: "link[urls][]",
+    style: "width:60%",
+    type: "text",
+    value: url}
+  .img{style: "width:50%;float:left"}
+    %a{href: url, target: "_blank"}
+      %img{src: "http://immediatenet.com/t/m?Size=1024x768&URL=#{url}",
+       style: "padding-top:25px;border:1;"}
+  %label{style: "float:left;padding-top:20px;"}
+    Edit text to go at bottom of image
+    %input{maxlength: "100",
+      name: "link[titles][]",
+      style: "width:100%",
+      type: "text",
+      value: title}

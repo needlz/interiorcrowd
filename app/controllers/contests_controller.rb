@@ -1,5 +1,5 @@
 class ContestsController < ApplicationController
-  before_filter :check_designer, :only => [:respond, :designer_lookbook]
+  before_filter :check_designer, :only => [:respond]
 
   before_filter :set_creation_wizard, only: [:step1, :step2, :step3, :step4]
   before_filter :set_appeal_scales, only: [:step3, :preview]
