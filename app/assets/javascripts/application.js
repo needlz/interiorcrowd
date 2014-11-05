@@ -16,5 +16,4 @@
 //= require bootstrap.min
 //= require theme
 //= require index-slider
-
-
+//= require_tree ./shared

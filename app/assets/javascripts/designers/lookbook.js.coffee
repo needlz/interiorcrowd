@@ -29,16 +29,8 @@ jQuery ->
           alert "Please add atleast one picture or Link."
           false
 
-  jQuery("#file_input").uploadify
-    uploader: uploadifyUploader
-    swf: "/uploadify.swf"
+  jQuery("#file_input").initUploader
     buttonText: "Upload"
-    fileSizeLimit: uploadifyFileSizeLimit
-    fileTypeExts: "*.png;*.jpg;*.tif"
-    uploadLimit: 3
-    fileObjName: "photo"
-    multi: false
-    auto: true
     removeTimeout: 10
     onUploadSuccess: (file, data, response) ->
       info = data.split(",")
@@ -56,8 +48,6 @@ jQuery ->
           </label>
         </div>
 """
-    formData: uploadifyFormData
-    cancelImg: "/images/cancel.png" #take care that the image is accessible
 
 
 $(document).on "click", ".img_container .plus_wrapper", ->
