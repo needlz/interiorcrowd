@@ -1,4 +1,4 @@
-class ICrowd < ActionMailer::Base
+class Mailer < ActionMailer::Base
   layout 'mailer'
   default from: ENV['mailer_address']
   

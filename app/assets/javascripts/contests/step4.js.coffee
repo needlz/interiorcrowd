@@ -23,16 +23,8 @@ $ ->
       false
 
 $ ->
-  $("#file_input").uploadify
-    uploader: uploadifyUploader
-    swf: "/uploadify.swf"
+  $("#file_input").initUploader
     buttonText: "Upload"
-    fileSizeLimit: uploadifyFileSizeLimit
-    fileTypeExts: "*.png;*.jpg;*.tif"
-    uploadLimit: 3
-    fileObjName: "photo"
-    multi: false
-    auto: true
     removeTimeout: 10
     onUploadSuccess: (file, data, response) ->
       info = data.split(",")
@@ -45,5 +37,3 @@ $ ->
       else
         $("#step4_image").val img_val + "," + info[0]
         $("#step4_image_id").val img_id + "," + info[1]
-    formData: uploadifyFormData
-    cancelImg: "/images/cancel.png" #take care that the image is accessible

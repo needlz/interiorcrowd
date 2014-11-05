@@ -1,0 +1,15 @@
+%tr
+  %td{:colspan => "2"}
+    Dear #{@user.first_name},
+%tr
+  %td{:colspan => "2"} &nbsp;
+%tr
+  %td{:colspan => "2"} You have successfully registered with us a designer. Your login details for Interior Crowd as below:
+%tr
+  %td{:width => "150"} Username:
+  %td{:width => "350"}= @user.email
+%tr
+  %td{:width => "150"} Password:
+  %td{:width => "350"}= @password
+%tr
+  %td{:colspan => "2"} &nbsp;

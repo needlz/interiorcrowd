@@ -13,4 +13,6 @@
   .col-sm-8.col-sm-offset-1
     .col-sm-9
       %label Add Links
-      %input.form-control{name: "step3[ex_links]", type: "text", value: (session[:step3][:ex_links] if session[:step3].present?)}
+      %input.form-control{name: "step3[ex_links]",
+        type: "text",
+        value: (session[:step3][:ex_links] if session[:step3].present?)}

@@ -1,43 +1,8 @@
 .row.charts_wrapp{:style => "margin-top:60px"}
-  .col-sm-4.standar
-    .plan
-      #1.wrapper.home_wrapper{:plan_id => "1"}
-        %h3 Budget
-        .price
-          %span.dollar $
-          %span.qty 99
-        .features
-          %p
-            Expert
-            %strong 2
-            designs
-          %p  
-  / Plan Box
-  .col-sm-4.standar
-    .plan
-      #2.wrapper.home_wrapper{:plan_id => "2"}
-        %h3 Premier
-        .price
-          %span.dollar $
-          %span.qty 199
-        .features
-          %p
-            Expert
-            %strong 10
-            designs
-          %p  
-  / Plan Box
-  .col-sm-4.standar
-    .plan
-      #3.wrapper.home_wrapper{:plan_id => "3"}
-        %h3 Premier
-        .price
-          %span.dollar $
-          %span.qty 299
-        .features
-          %p
-            Expert
-            %strong 15
-            designs
-          %p Money back guarantee
+  = render partial: 'contests/plan_box',
+      locals: { plan_id: 1, price: 99, designs_count: 2, money_back_guarantee: false }
+  = render partial: 'contests/plan_box',
+      locals: { plan_id: 2, price: 199, designs_count: 10, money_back_guarantee: false }
+  = render partial: 'contests/plan_box',
+      locals: { plan_id: 3, price: 299, designs_count: 15, money_back_guarantee: true }
   %span#err_plan.text-error{:style => "padding-left:25px;"}

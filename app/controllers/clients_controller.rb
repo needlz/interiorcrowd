@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
       @client = Client.new(params[:client])
       respond_to do |format|
           if @client.save
-            ICrowd.user_registration(@client, user_ps).deliver
+            Mailer.user_registration(@client, user_ps).deliver
             #session[:id] = @student.id 
             #session[:role] = Client::STUDENT
             #session[:user_id] = @client.id

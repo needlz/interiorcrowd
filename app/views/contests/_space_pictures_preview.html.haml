@@ -3,5 +3,5 @@
 .row
   .col-sm-8
     %div
-      - @space_pictures.split(',').each do |path|
+      - @space_pictures.each do |path|
         %img{:src => path, :style => "padding-top:10px;"}/

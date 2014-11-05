@@ -15,13 +15,9 @@
         %a.order.continue{:href => "#"} CONTINUE
 = render partial: 'contests/contest_creation_page'
 
-= content_for :javascript do
+= content_for :head do
   = javascript_include_tag 'jquery.uploadify'
   = javascript_include_tag 'contests/step4'
 
   = stylesheet_link_tag 'uploadify'
-  :javascript
-    window.uploadifyFormData = {"#{key = Rails.application.config.session_options[:key]}": "#{cookies[key]}",
-        "#{request_forgery_protection_token}": "#{form_authenticity_token}"}
-    window.uploadifyFileSizeLimit = #{1.megabytes}
-    window.uploadifyUploader = '#{images_path}'
+  = render partial: 'shared/setup_uploadify'
