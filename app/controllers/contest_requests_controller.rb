@@ -32,9 +32,9 @@ class ContestRequestsController < ApplicationController
 
     if lookbook_id.present?
       LookbookDetail.destroy_all(lookbook_id: lookbook_id)
-      if session[:lookbook]['lookbook_photo']['document_id'].present?
-        document_ids = session[:lookbook]['lookbook_photo']['document_id'].split(',')
-        document_titles = session[:lookbook]['lookbook_photo']['photo_title']
+      if session[:lookbook].try(:[], 'picture').try(:[], 'ids').present?
+        document_ids = session[:lookbook]['picture']['ids']
+        document_titles = session[:lookbook]['picture']['titles']
         document_ids.each_with_index do |doc, index|
           LookbookDetail.create({lookbook_id: lookbook_id,
                                  image_id: doc,
@@ -42,12 +42,12 @@ class ContestRequestsController < ApplicationController
                                  description: document_titles[index]})
         end
       end
-      if session[:lookbook]['lookbook_link']['links'].present?
-        document_ids = session[:lookbook]['lookbook_link']['links']
-        document_titles = session[:lookbook]['lookbook_link']['link_title']
-        document_ids.each_with_index do |doc, index|
-          if doc.present?
-            LookbookDetail.create({lookbook_id: lookbook_id, url: doc, doc_type: 2, description: document_titles[index]})
+      if session[:lookbook].try(:[], 'link').try(:[], 'urls').present?
+        document_urls = session[:lookbook]['link']['urls']
+        document_titles = session[:lookbook]['link']['titles']
+        document_urls.each_with_index do |url, index|
+          if url.present?
+            LookbookDetail.create({lookbook_id: lookbook_id, url: url, doc_type: 2, description: document_titles[index]})
           end
         end
       end

@@ -25,13 +25,16 @@ class DesignerLookbook
   private
 
   def initialize_from_options(options)
-    @ids = options['picture']['ids']
-    @paths = options['picture']['urls']
-    @titles = options['picture']['titles']
-
-    @links = options['link']['urls']
-    @link_titles = options['link']['titles']
-
+    initialize_defaults
+    if options['picture']
+      @ids = options['picture']['ids']
+      @paths = options['picture']['urls']
+      @titles = options['picture']['titles']
+    end
+    if options['link']
+      @links = options['link']['urls']
+      @link_titles = options['link']['titles']
+    end
     @feedback = options['feedback']
   end
 

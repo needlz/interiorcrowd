@@ -1,16 +1,16 @@
-jQuery ->
-  jQuery(".continue").click (e) ->
+$ ->
+  $(".continue").click (e) ->
     e.preventDefault()
-    jQuery(".text-error").html ""
+    $(".text-error").html ""
     bool = false
     can_submit = false
-    jQuery(".link_url").each ->
-      url_value = jQuery.trim(jQuery(this).val())
+    $(".link_url").each ->
+      url_value = $.trim($(this).val())
       if url_value.length > 1
         rege = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
         unless rege.test(url_value)
           bool = true
-          jQuery(this).removeClass("alert-danger").addClass "alert-danger"
+          $(this).removeClass("alert-danger").addClass "alert-danger"
         else
           can_submit = true
 
@@ -19,24 +19,24 @@ jQuery ->
       false
     else
       if can_submit
-        jQuery("#lookbook").submit()
+        $("#lookbook").submit()
         true
       else
-        if jQuery.trim(jQuery("#look_image_id").val()).length > 1
-          jQuery("#lookbook").submit()
+        if $("[name='picture[urls][]'],[name='link[urls][]']").length > 0
+          $("#lookbook").submit()
           true
         else
           alert "Please add atleast one picture or Link."
           false
 
-  jQuery("#file_input").initUploader
+  $("#file_input").initUploader
     buttonText: "Upload"
     removeTimeout: 10
     onUploadSuccess: (file, data, response) ->
       info = data.split(",")
       url = info[0]
       image_id = info[1]
-      jQuery("#image_display").append """
+      $("#image_display").append """
         <div class='col-sm-8 img_img_box' style='padding-top:20px;'>
           <div class='img' style='width:50%;float:left'>
             <img src='#{ info[0] }' />
