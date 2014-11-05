@@ -75,19 +75,19 @@ class DesignersController < ApplicationController
       session[:lookbook] = params
       redirect_to preview_lookbook_designer_path(params[:id])
     else
-      if session[:lookbook].present?
-        @lookbook_options = session[:lookbook]
-      else
-        lookbook = Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-        @lookbook_options = lookbook if lookbook
-      end
-      @lookbook_view = LookbookView.new(@lookbook_options)
+      lookbook_options =
+        if session[:lookbook].present?
+          session[:lookbook]
+        else
+          Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
+        end
+      @lookbook_view = DesignerLookbook.new(lookbook_options)
     end  
   end
   
   def preview_lookbook
     redirect_to lookbook_designer_path(params[:id]) if session[:lookbook].blank?
-    @lookbook_view = LookbookView.new(session[:lookbook])
+    @lookbook_view = DesignerLookbook.new(session[:lookbook])
   end
 
   private
