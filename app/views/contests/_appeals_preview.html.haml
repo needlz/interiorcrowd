@@ -4,7 +4,7 @@
   .col-sm-8
     .plan.appeals
       %table.table.table-hover
-        - @appeal_scales.each do |scale|
+        - @contest_view.appeal_scales.each do |scale|
           %tr
             %td.col-sm-2= scale.first_name
             %td.col-sm-8
