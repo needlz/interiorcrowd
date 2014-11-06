@@ -15,8 +15,9 @@ class ContestsController < ApplicationController
   end
   
   def show
-    @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
-    @contest_view = ContestView.new(@contest)
+    contest = Contest.find_by_id(params[:id])
+    @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], contest.id)
+    @contest_view = ContestView.new(contest)
   end
   
   def design_categories

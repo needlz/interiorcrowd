@@ -1,6 +1,6 @@
 class ContestView
 
-  attr_reader :dimensions, :appeal_scales, :categories, :design_areas, :favorited_colors, :avoided_colors, :examples,
+  attr_reader :dimensions, :appeal_scales, :categories, :design_areas, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name
   
   def initialize(options)
@@ -14,11 +14,11 @@ class ContestView
   private
 
   def initialize_from_options(options)
-    @categories = DesignCategory.by_ids(options['design_categories'].try(:[], 'cat_id'))
-    @design_areas = DesignSpace.by_ids(options['space_areas'])
+    @categories = DesignCategory.by_ids(options['design_categories'].try(:[], :cat_id).try(:map) { |cat_id| cat_id.to_i })
+    @design_areas = DesignSpace.by_ids(options['space_areas'].try(:map) { |area_id| area_id.to_i })
     @appeal_scales = AppealScale.from(options['design_style'])
-    @favorited_colors = options['design_style'].try(:[], 'fav_color')
-    @avoided_colors = options['design_style'].try(:[], 'refrain_color')
+    @desirable_colors = options['design_style'].try(:[], 'desirable_colors')
+    @undesirable_colors = options['design_style'].try(:[], 'undesirable_colors')
     @examples = options['design_style'].try(:[], 'document').try(:split, ',')
     @links = options['design_style'].try(:[], 'ex_links')
     @dimensions = SpaceDimension.from(options['design_space'])
@@ -30,18 +30,18 @@ class ContestView
   end
 
   def initialize_from_contest(contest)
-    @categories = DesignCategory.by_ids(contest.cd_cat)
-    @design_areas = DesignSpace.by_ids(contest.cd_space)
+    @categories = DesignCategory.by_ids(contest.cd_cat.split(','))
+    @design_areas = DesignSpace.by_ids(contest.cd_space.try(:split, ','))
     @appeal_scales = AppealScale.from(contest)
-    @favorited_colors = contest.cd_fav_color
-    @avoided_colors = contest.cd_refrain_color
+    @desirable_colors = contest.desirable_colors
+    @undesirable_colors = contest.undesirable_colors
     @examples = contest.cd_style_ex_images.split(',')
     @links = contest.cd_style_links
     @dimensions = SpaceDimension.from(contest)
     @space_pictures = contest.cd_space_images.split(',').map { |image_id| Image.find(image_id).image.url(:medium) }
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.cd_space_budget.to_i]
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
-    @budget_plan = contest.cd_space_budget
+    @budget_plan = contest.budget_plan
     @name = contest.project_name
   end
 
