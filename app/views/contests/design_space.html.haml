@@ -1,8 +1,8 @@
 - content_for :page_content do
   = render :partial => 'home/msg'
-  = form_tag preview_contests_path, {:id => "step4", :method => "post"} do
-    %input#step4_image{:name => "step4[document]", :type => "hidden", :value => (session[:step4][:document] if session[:step4].present?)}/
-    %input#step4_image_id{:name => "step4[document_id]", :type => "hidden", :value => (session[:step4][:document_id] if session[:step4].present?)}/
+  = form_tag save_design_space_contests_path, {:id => "design_space", :method => "post"} do
+    %input#design_space_image{:name => "design_space[document]", :type => "hidden", :value => (session[:design_space][:document] if session[:design_space].present?)}/
+    %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => (session[:design_space][:document_id] if session[:design_space].present?)}/
 
     = render partial: 'contests/picture_of_space_option'
     = render partial: 'contests/dimensions_of_space_options'
@@ -10,14 +10,14 @@
     = render partial: 'contests/comments_options'
     .row.formbuttons
       .col-sm-3
-        %a.order{:href => step3_contests_path} GO BACK
+        %a.order{:href => design_style_contests_path} GO BACK
       .col-sm-4.col-sm-offset-4
         %a.order.continue{:href => "#"} CONTINUE
 = render partial: 'contests/contest_creation_page'
 
 = content_for :head do
   = javascript_include_tag 'jquery.uploadify'
-  = javascript_include_tag 'contests/step4'
+  = javascript_include_tag 'contests/design_space'
 
   = stylesheet_link_tag 'uploadify'
   = render partial: 'shared/setup_uploadify'

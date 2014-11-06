@@ -17,7 +17,7 @@ $ ->
       $("#err_width").html "Please enter width."
       focus = "width_feet"  unless focus
     if bool
-      $("#step4").submit()
+      $("#design_space").submit()
     else
       $("#" + focus).focus()
       false
@@ -29,11 +29,11 @@ $ ->
     onUploadSuccess: (file, data, response) ->
       info = data.split(",")
       $("#image_display").append "<img src='" + info[0] + "' />"
-      img_val = $.trim($("#step4_image").val())
-      img_id = $.trim($("#step4_image_id").val())
+      img_val = $.trim($("#design_space_image").val())
+      img_id = $.trim($("#design_space_image_id").val())
       if img_val.length < 1
-        $("#step4_image").val info[0]
-        $("#step4_image_id").val info[1]
+        $("#design_space_image").val info[0]
+        $("#design_space_image_id").val info[1]
       else
-        $("#step4_image").val img_val + "," + info[0]
-        $("#step4_image_id").val img_id + "," + info[1]
+        $("#design_space_image").val img_val + "," + info[0]
+        $("#design_space_image_id").val img_id + "," + info[1]

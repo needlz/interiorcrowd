@@ -2,16 +2,16 @@
   %label= t('contests.titles.wanted_colors')
 .row
   .col-sm-8.col-sm-offset-1
-    %input#fav_color.form-control{name: "step3[fav_color]",
+    %input#fav_color.form-control{name: "design_style[fav_color]",
       type: "text",
-      value: (session[:step3][:fav_color] if session[:step3].present?)}
+      value: (session[:design_style][:fav_color] if session[:design_style].present?)}
     %span#err_fav.text-error
 
 .row.step-row
   %label= t('contests.titles.avoided_colors')
 .row
   .col-sm-8.col-sm-offset-1
-    %input#refrain_color.form-control{name: "step3[refrain_color]",
+    %input#refrain_color.form-control{name: "design_style[refrain_color]",
       type: "text",
-      value: (session[:step3][:refrain_color] if session[:step3].present?)}
+      value: (session[:design_style][:refrain_color] if session[:design_style].present?)}
     %span#err_refrain.text-error

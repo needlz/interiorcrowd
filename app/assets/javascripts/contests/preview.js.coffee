@@ -22,7 +22,7 @@ $ ->
       $("#err_plan").html "Please choose plan."
       focus = "err_plan"  unless focus
     if bool
-      $("#step6").submit()
+      $("#account_creation").submit()
     else
       $("#" + focus).focus()
       false

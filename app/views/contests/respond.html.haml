@@ -22,7 +22,7 @@
             .row
               .page-header
                 %h3 Respond to contest
-            = form_for @crequest, {:id => "step3", :method => "post"} do |f|
+            = form_for @crequest, {:id => "design_style", :method => "post"} do |f|
               = f.hidden_field :designer_id
               = f.hidden_field :designs
               = f.hidden_field :contest_id
