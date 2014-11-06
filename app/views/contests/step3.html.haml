@@ -5,7 +5,7 @@
   = render :partial => 'home/msg'
   .row.step-row
     %label= t('contests.titles.appeals')
-  = form_tag step4_contests_path, {:id => "step3", :method => "post"} do
+  = form_tag save_step3_contests_path, {:id => "step3", :method => "post"} do
     %input#step3_image{:name => "step3[document]", :type => "hidden", :value => (session[:step3][:document] if session[:step3].present?)}
     %input#step3_image_id{:name => "step3[document_id]", :type => "hidden", :value => (session[:step3][:document_id] if session[:step3].present?)}
     = render partial: 'contests/appeals_options'

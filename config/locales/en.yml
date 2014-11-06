@@ -29,3 +29,6 @@ en:
       length: Length
       width: Width
       height: Height (Optional)
+    creation:
+      errors:
+        not_all_data_entered: Please fill the required info.

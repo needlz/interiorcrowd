@@ -28,87 +28,83 @@ class ContestsController < ApplicationController
   def step1
     render
   end
-  
+
+  def save_step1
+    if params[:design_category].present?
+      session[:step1] = {}
+      session[:step1][:cat_id] = params[:design_category]
+      session[:step1][:other] = params[:other_value]
+    end
+    redirect_to step2_contests_path
+  end
+
   def step2
-    if request.method == "POST"
-      if params[:design_category].present?
-        session[:step1] = {}
-        session[:step1][:cat_id] = params[:design_category]
-        session[:step1][:other] = params[:other_value]
-      else
-        flash[:error] = 'Please select atleast one category.'
-        redirect_to step1_contests_path
-      end        
-    end
+    render
   end
-  
+
+  def save_step2
+    if params[:design_space].present?
+      session[:step2] = {}
+      session[:step2]= params[:design_space]
+    end
+    redirect_to step3_contests_path
+  end
+
   def step3
-    if request.method == "POST"
-      if params[:design_space].present?
-        session[:step2] = {}
-        session[:step2]= params[:design_space]
-      else
-        flash[:error] = 'Please select atleast one area.'
-        redirect_to step2_contests_path
-      end
-    end
+    render
   end
-  
-  def step4
-    if request.method == "POST"
-      if params[:step3].present?
-        session[:step3]= params[:step3]
-      else
-        flash[:error] = 'Please fill the required info.'
-        redirect_to step3_contests_path
-      end        
+
+  def save_step3
+    if params[:step3].present?
+      session[:step3]= params[:step3]
     end
     @budget_option = session[:step4].present? ? session[:step4][:f_budget] : ''
     @feedback = session[:step4].present? ? session[:step4][:feedback] : ''
+    redirect_to step4_contests_path
   end
-  
-  def preview
-    if request.method == "POST"
-      if params[:step4].present?
-        session[:step4]= params[:step4]
-        unless session[:step1].present? && session[:step2].present? && session[:step3].present? && session[:step4].present?  
-          flash[:error] = 'Please fill the required info.'
-          redirect_to step1_contests_path and return if session[:step1].blank?
-          redirect_to step2_contests_path and return if session[:step2].blank?
-          redirect_to step3_contests_path and return if session[:step3].blank?
-          redirect_to step4_contests_path and return if session[:step4].blank? 
-        end  
-      else
-        flash[:error] = 'Please fill the required info.'
-        redirect_to step4_contests_path
-      end        
-    end
-    @categories = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos)
-    @design_areas = DesignSpace.where("id IN (?)", session[:step2]).order(:pos)
-    @favorited_colors = session[:step3][:fav_color]
-    @avoided_colors = session[:step3][:refrain_color]
-    @examples = session[:step3][:document].split(',')
-    @links = session[:step3][:ex_links]
-    @space_pictures = session[:step4][:document].split(',')
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget].to_i]
-    @comment = session[:step4][:feedback]
+
+  def step4
+    @budget_option = session[:step4].present? ? session[:step4][:f_budget] : ''
+    @feedback = session[:step4].present? ? session[:step4][:feedback] : ''
   end
-  
-  def step6
-    @client = Client.new
-    if request.method == "POST"
-      if params[:step5].present?
-        session[:step5] = params[:step5]
-      else
-        flash[:error] = 'Please fill the required info.'
-        redirect_to preview_contests_path and return
-      end        
+
+  def save_step4
+    if params[:step4].present?
+      session[:step4] = params[:step4]
+      unless session[:step1].present? && session[:step2].present? && session[:step3].present? && session[:step4].present?
+        flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
+        redirect_to step1_contests_path and return if session[:step1].blank?
+        redirect_to step2_contests_path and return if session[:step2].blank?
+        redirect_to step3_contests_path and return if session[:step3].blank?
+        redirect_to step4_contests_path and return if session[:step4].blank?
+      end
     else
+      flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
+      redirect_to step4_contests_path
+    end
+    redirect_to preview_contests_path
+  end
+
+  def preview
+    set_preview
+  end
+
+  def save_step5
+    @client = Client.new
+    if params[:step5].present?
+      session[:step5] = params[:step5]
+      render 'contests/step6'
+    else
+      flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
       redirect_to preview_contests_path and return
     end
   end
-  
-  
+
+  def step6
+    @client = Client.new
+    redirect_to preview_contests_path and return
+  end
+
   def upload
     params[:image] = {}
     params[:image][:image] = params[:photo]
@@ -146,6 +142,18 @@ class ContestsController < ApplicationController
 
   def set_dimensions
     @dimensions = SpaceDimension.from(session[:step4])
+  end
+
+  def set_preview
+    @categories = DesignCategory.where("id IN (?)", session[:step1][:cat_id]).order(:pos)
+    @design_areas = DesignSpace.where("id IN (?)", session[:step2]).order(:pos)
+    @favorited_colors = session[:step3][:fav_color]
+    @avoided_colors = session[:step3][:refrain_color]
+    @examples = session[:step3][:document].split(',')
+    @links = session[:step3][:ex_links]
+    @space_pictures = session[:step4][:document].split(',')
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[session[:step4][:f_budget].to_i]
+    @comment = session[:step4][:feedback]
   end
 
 end

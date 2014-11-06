@@ -1,6 +1,6 @@
 - content_for :page_content do
   = render :partial => 'home/msg'
-  = form_tag preview_contests_path, {:id => "step4", :method => "post"} do
+  = form_tag save_step4_contests_path, {:id => "step4", :method => "post"} do
     %input#step4_image{:name => "step4[document]", :type => "hidden", :value => (session[:step4][:document] if session[:step4].present?)}/
     %input#step4_image_id{:name => "step4[document_id]", :type => "hidden", :value => (session[:step4][:document_id] if session[:step4].present?)}/
 
