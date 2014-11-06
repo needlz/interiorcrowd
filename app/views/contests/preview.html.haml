@@ -7,7 +7,7 @@
     = form_tag save_preview_contests_path,  {:id => "account_creation", :method => "post"} do
       %input#plan_id{:name => "preview[b_plan]",
       :type => "hidden",
-      :value => (session[:preview][:b_plan] if session[:preview].present?)}
+      :value => @contest_view.budget_plan}
       .row.charts_wrapp
         .col-sm-12
           .plan
@@ -37,9 +37,9 @@
                           %label{:style => ""} Give your project a name
                         .col-sm-6
                           %input#project_name.form-control{maxlength: "100",
-                            name: "preview[project_name]",
+                            name: "preview[contest_name]",
                             type: "text",
-                            value: (session[:preview][:project_name] if session[:preview].present?)}
+                            value: @contest_view.name}
                           %span#err_prj_name.text-error
               = render partial: 'contests/plan_options'
               .row.formbuttons

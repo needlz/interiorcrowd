@@ -3,5 +3,5 @@
     .plan.appeals
       %table.table.table-hover
         = render partial: 'contests/appeal_scale_row',
-            collection: @appeal_scales,
+            collection: @contest_view.appeal_scales,
             as: :scale

@@ -45,7 +45,7 @@ class ClientsController < ApplicationController
                                                           feedback: session[:design_space][:feedback],
 
                                                           budget_plan: session[:preview][:b_plan],
-                                                          project_name: session[:preview][:project_name],
+                                                          project_name: session[:preview][:contest_name],
                                                           client_id: user_id
       }.merge(session[:design_style])
 
