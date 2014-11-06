@@ -79,21 +79,29 @@ class ContestsController < ApplicationController
     if params[:design_space].present?
       session[:design_space] = params[:design_space]
       unless CREATION_STEPS.all? { |step| session[step].present? }
-        flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
+        flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
         redirect_to design_categories_contests_path and return if session[:design_categories].blank?
         redirect_to space_areas_contests_path and return if session[:space_areas].blank?
         redirect_to design_style_contests_path and return if session[:design_style].blank?
         redirect_to design_space_contests_path and return if session[:design_space].blank?
       end
     else
-      flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
+      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to design_space_contests_path
     end
     redirect_to preview_contests_path
   end
 
   def preview
-    set_preview
+    @categories = DesignCategory.where("id IN (?)", session[:design_categories][:cat_id]).order(:pos)
+    @design_areas = DesignSpace.where("id IN (?)", session[:space_areas]).order(:pos)
+    @favorited_colors = session[:design_style][:fav_color]
+    @avoided_colors = session[:design_style][:refrain_color]
+    @examples = session[:design_style][:document].split(',')
+    @links = session[:design_style][:ex_links]
+    @space_pictures = session[:design_space][:document].split(',')
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[session[:design_space][:f_budget].to_i]
+    @comment = session[:design_space][:feedback]
   end
 
   def save_preview
@@ -102,7 +110,7 @@ class ContestsController < ApplicationController
       session[:preview] = params[:preview]
       render 'contests/account_creation'
     else
-      flash[:error] = I18n.t('contests.creation.errors.not_all_data_entered')
+      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to preview_contests_path and return
     end
   end
@@ -149,18 +157,6 @@ class ContestsController < ApplicationController
 
   def set_dimensions
     @dimensions = SpaceDimension.from(session[:design_space])
-  end
-
-  def set_preview
-    @categories = DesignCategory.where("id IN (?)", session[:design_categories][:cat_id]).order(:pos)
-    @design_areas = DesignSpace.where("id IN (?)", session[:space_areas]).order(:pos)
-    @favorited_colors = session[:design_style][:fav_color]
-    @avoided_colors = session[:design_style][:refrain_color]
-    @examples = session[:design_style][:document].split(',')
-    @links = session[:design_style][:ex_links]
-    @space_pictures = session[:design_space][:document].split(',')
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[session[:design_space][:f_budget].to_i]
-    @comment = session[:design_space][:feedback]
   end
 
 end

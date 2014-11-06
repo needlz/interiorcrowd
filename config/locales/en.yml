@@ -31,4 +31,4 @@ en:
       height: Height (Optional)
     creation:
       errors:
-        not_all_data_entered: Please fill the required info.
+        required_data_missing: Please fill the required info.
