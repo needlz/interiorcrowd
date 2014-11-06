@@ -74,7 +74,7 @@ class ClientsController < ApplicationController
                                       :cd_other_cat,
                                       :cd_cat
       )
-      if Contest.new(params[:contest]).save()
+      if Contest.new(params).save!
         session[:design_categories] = nil
         session[:space_areas] = nil
         session[:design_style] = nil
