@@ -26,7 +26,7 @@ class AppealScale
   end
 
   def identifier
-    first
+    "#{ first }_appeal_scale".to_sym
   end
 
   def first_name
@@ -39,7 +39,7 @@ class AppealScale
 
   def value=(value)
     if value.present?
-      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send("cd_#{ identifier }_scale").to_i
+      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send(identifier).to_i
     else
       @value = default_value
     end

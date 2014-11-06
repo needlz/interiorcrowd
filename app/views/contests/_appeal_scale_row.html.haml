@@ -2,7 +2,7 @@
   %td.col-sm-2= scale.first_name
   %td.col-sm-8
     .slidercon
-      = text_field_tag "design_style[#{ scale.identifier.to_s }]",
+      = text_field_tag "design_style[#{ scale.identifier }]",
           scale.value,
           "data-slider-max" => "100",
           "data-slider-min" => "0",

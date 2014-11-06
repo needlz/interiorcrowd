@@ -23,12 +23,12 @@ class ContestsController < ApplicationController
     @appeal_scales = AppealScale.from(@contest)
     @categories = DesignCategory.where("id IN (?)", @contest.cd_cat.split(',')).order(:pos)
     @design_areas = DesignSpace.where("id IN (?)", @contest.cd_space.split(',')).order(:pos)
-    @favorited_colors = @contest.cd_fav_color
-    @avoided_colors = @contest.cd_refrain_color
+    @favorited_colors = @contest.desirable_colors
+    @avoided_colors = @contest.undesirable_colors
     @examples = @contest.cd_style_ex_images.split(',')
     @links = @contest.cd_style_links
     @space_pictures = @contest.cd_space_images.split(',').map { |image_id| Image.find(image_id).image.url(:medium) }
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[@contest.cd_space_budget.to_i]
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[@contest.space_budget.to_i]
     @comment = @contest.feedback
   end
   
