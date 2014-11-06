@@ -3,7 +3,7 @@ $(document).ready ->
     $("#err_area").html ""
     if $(".design_space:checked").length > 0
       e.preventDefault()
-      $("#step2").submit()
+      $("#space_areas").submit()
     else
       $("#err_area").html "Please select atleast one area."
       false

@@ -3,7 +3,7 @@ $(document).ready ->
     $("#err_category").html ""
     if $(".design_element:checked").length > 0
       e.preventDefault()
-      $("#step1").submit()
+      $("#design_categories").submit()
     else
       $("#err_category").html "Please select atleast one category."
       false

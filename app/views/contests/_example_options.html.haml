@@ -3,8 +3,8 @@
 .row
   .col-sm-8.col-sm-offset-1
     %span#image_display{:style => "padding-bottom:10px;"}
-      - if session[:step3].present? && session[:step3][:document].present?
-        - session[:step3][:document].split(',').each do |path|
+      - if session[:design_style].present? && session[:design_style][:document].present?
+        - session[:design_style][:document].split(',').each do |path|
           %img{:src => path}
     %input#file_input{:name => "", :type => "file"}
     %span (.jpg, .tif, .png)
@@ -13,6 +13,6 @@
   .col-sm-8.col-sm-offset-1
     .col-sm-9
       %label Add Links
-      %input.form-control{name: "step3[ex_links]",
+      %input.form-control{name: "design_style[ex_links]",
         type: "text",
-        value: (session[:step3][:ex_links] if session[:step3].present?)}
+        value: (session[:design_style][:ex_links] if session[:design_style].present?)}

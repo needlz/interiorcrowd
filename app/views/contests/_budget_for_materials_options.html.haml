@@ -2,6 +2,6 @@
   %label What is your design budget for materials?
 .row.mesure-con
   .col-sm-8.col-sm-offset-1
-    = select_tag "step4[f_budget]",
+    = select_tag "design_space[f_budget]",
         options_for_select(@creation_wizard.budget_options, @budget_option),
         {class: "form-control budget-control"}

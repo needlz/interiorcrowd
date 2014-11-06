@@ -4,7 +4,7 @@
       %strong= dimension.name
     .col-sm-10.form-inline
       .col-sm-4.mesure-label
-        %input.form-control{:name => "step4[#{ dimension.identifier }]",
+        %input.form-control{:name => "design_space[#{ dimension.identifier }]",
           onkeyup: "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
           type: "text",
           value: dimension.to_feet,

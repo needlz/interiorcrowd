@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1.page-title
       %h3= t('contests.titles.design_categories')
   = render :partial => 'home/msg'
-  = form_tag save_step1_contests_path, {:id => "step1", :method => "post"} do
+  = form_tag save_design_categories_contests_path, {:id => "design_categories", :method => "post"} do
     = render partial: 'contests/category_checkbox_row',
         collection: @creation_wizard.available_design_categories,
         as: :design_category
@@ -13,4 +13,4 @@
       = link_to "CONTINUE", '#', :class => "order"
 = render partial: 'contest_creation_page'
 
-= javascript_include_tag 'contests/step1'
+= javascript_include_tag 'contests/design_categories'

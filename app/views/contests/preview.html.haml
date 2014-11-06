@@ -4,10 +4,10 @@
 #in_pricing
   .container
     .section_header
-    = form_tag save_step5_contests_path,  {:id => "step6", :method => "post"} do
-      %input#plan_id{:name => "step5[b_plan]",
+    = form_tag save_preview_contests_path,  {:id => "account_creation", :method => "post"} do
+      %input#plan_id{:name => "preview[b_plan]",
       :type => "hidden",
-      :value => (session[:step5][:b_plan] if session[:step5].present?)}
+      :value => (session[:preview][:b_plan] if session[:preview].present?)}
       .row.charts_wrapp
         .col-sm-12
           .plan
@@ -36,11 +36,14 @@
                         .col-sm-4
                           %label{:style => ""} Give your project a name
                         .col-sm-6
-                          %input#project_name.form-control{:maxlength => "100", :name => "step5[project_name]", :type => "text", :value => (session[:step5][:project_name] if session[:step5].present?)}
+                          %input#project_name.form-control{maxlength: "100",
+                            name: "preview[project_name]",
+                            type: "text",
+                            value: (session[:preview][:project_name] if session[:preview].present?)}
                           %span#err_prj_name.text-error
               = render partial: 'contests/plan_options'
               .row.formbuttons
                 .col-sm-3.col-sm-offset-2
-                  %a.order{:href => step4_contests_path} GO BACK
+                  %a.order{:href => design_space_contests_path} GO BACK
                 .col-sm-3.col-sm-offset-4
                   %a.order.continue{:href => "#"} CONTINUE

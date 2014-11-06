@@ -27,24 +27,24 @@ InteriorC::Application.routes.draw do
     end
 
     collection do
-      get 'step1'
-      post 'save_step1'
-      get 'step2'
-      post 'save_step2'
-      get 'step3'
-      post 'save_step3'
-      get 'step4'
-      post 'save_step4'
+      get 'design_categories'
+      post 'save_design_categories'
+      get 'space_areas'
+      post 'save_space_areas'
+      get 'design_style'
+      post 'save_design_style'
+      get 'design_space'
+      post 'save_design_space'
       get 'preview'
-      post 'save_step5'
+      post 'save_preview'
       post 'upload'
-      post 'step4_upload'
-      get 'step6'
+      get 'account_creation'
       get 'thank_you'
     end
   end
 
   resources :images
+
   resources :clients do
     collection do
       get 'client_center'
