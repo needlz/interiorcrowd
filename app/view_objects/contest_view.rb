@@ -30,7 +30,7 @@ class ContestView
   end
 
   def initialize_from_contest(contest)
-    @categories = DesignCategory.by_ids(contest.cd_cat.split(','))
+    @categories = DesignCategory.by_ids(contest.cd_cat.try(:split, ','))
     @design_areas = DesignSpace.by_ids(contest.cd_space.try(:split, ','))
     @appeal_scales = AppealScale.from(contest)
     @desirable_colors = contest.desirable_colors
