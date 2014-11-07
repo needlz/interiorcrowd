@@ -12,22 +12,22 @@ DesignCategory.create(id: 1,
                       description: 'choose this if you already have a style that you like but need to just pull it together',
                       pos: 1,
                       price: 99,
-                      before_image: 'contest_creation/before_picture.png',
-                      after_image: 'contest_creation/after_picture.png')
+                      before_picture: 'contest_creation/before_picture.png',
+                      before_picture: 'contest_creation/after_picture.png')
 DesignCategory.create(id: 2,
                       name: 'Update My Style',
                       description: 'choose this if your place needs updating to fit your current style',
                       pos: 2,
                       price: 99,
-                      before_image: 'contest_creation/before_picture.png',
-                      after_image: 'contest_creation/after_picture.png')
+                      before_picture: 'contest_creation/before_picture.png',
+                      before_picture: 'contest_creation/after_picture.png')
 DesignCategory.create(id: 3,
                       name: 'Total Room Overhaul',
                       description: 'choose this if you want to start from scratch and have a completely new space',
                       pos: 3,
                       price: 199,
-                      before_image: 'contest_creation/before_picture.png',
-                      after_image: 'contest_creation/after_picture.png')
+                      before_picture: 'contest_creation/before_picture.png',
+                      before_picture: 'contest_creation/after_picture.png')
 
 DesignSpace.delete_all
 DesignSpace.create(id: 1, name: 'Bedroom', pos: 10, parent: 0)
