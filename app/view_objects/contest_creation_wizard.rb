@@ -26,10 +26,6 @@ class ContestCreationWizard
     @other_category_text ||= session[:design_categories][:other] if session[:design_categories].present?
   end
 
-  def category_checkbox_div_class(category)
-    'col-sm-9'
-  end
-
   def breadcrumb_class(step_index)
     return 'previous' if step_index < active_step_index
     return 'active' if step_index == active_step_index
@@ -41,13 +37,10 @@ class ContestCreationWizard
     @available_design_areas ||= DesignSpace.available
   end
 
-  def design_areas_checkboxes
-    return @design_areas_checkboxes if @design_areas_checkboxes
-    @design_areas_checkboxes = {}
-    available_design_areas.each do |area|
-      @design_areas_checkboxes[area.id] = session[:space_areas].present? && session[:space_areas].include?(area.id.to_s)
+  def available_areas
+    DesignSpace.available.top_level.map do |area|
+      { id: area.id, name: area.name, children: area.children }
     end
-    @design_areas_checkboxes
   end
 
   def budget_options

@@ -5,7 +5,6 @@
   .col-sm-10.col-sm-offset-1
     %ul.nav.nav-pills.nav-justified
       %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(1)}"}= link_to "Step 1", design_categories_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(2)}"}= link_to "Step 2", space_areas_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(3)}"}= link_to "Step 3", design_style_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(4)}"}= link_to "Step 4", design_space_contests_path
-
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(2)}"}= link_to "Step 2", design_style_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(3)}"}= link_to "Step 3", design_space_contests_path
+      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(4)}"}= link_to "Step 4", preview_contests_path

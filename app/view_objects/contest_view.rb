@@ -1,6 +1,6 @@
 class ContestView
 
-  attr_reader :dimensions, :appeal_scales, :category, :design_areas, :desirable_colors, :undesirable_colors, :examples,
+  attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name
   
   def initialize(options)
@@ -15,7 +15,7 @@ class ContestView
 
   def initialize_from_options(options)
     @category = DesignCategory.find_by_id(options['design_categories'].try(:[], :design_category))
-    @design_areas = DesignSpace.by_ids(options['space_areas'].try(:map) { |area_id| area_id.to_i })
+    @design_area = DesignSpace.find_by_id(options['design_categories'].try(:[], :design_area))
     @appeal_scales = AppealScale.from(options['design_style'])
     @desirable_colors = options['design_style'].try(:[], 'desirable_colors')
     @undesirable_colors = options['design_style'].try(:[], 'undesirable_colors')
@@ -31,7 +31,7 @@ class ContestView
 
   def initialize_from_contest(contest)
     @category = contest.design_category
-    @design_areas = DesignSpace.by_ids(contest.cd_space.try(:split, ','))
+    @design_area = contest.design_space
     @appeal_scales = AppealScale.from(contest)
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
