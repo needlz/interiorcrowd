@@ -1,7 +1,7 @@
 .row
-  %div{:class => @creation_wizard.category_checkbox_div_class(design_category)}
+  %div.col-sm-9
     %label.checkbox
-      = contest_creation_category_checkbox(design_category)
+      = contest_creation_category_radiobutton(design_category)
       #{design_category.name} (#{design_category.description}. From $#{design_category.price})
     .col-sm-6
       %img{src: "/assets/#{design_category.before_picture}"}
