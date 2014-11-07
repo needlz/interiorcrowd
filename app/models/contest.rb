@@ -5,6 +5,7 @@ class Contest < ActiveRecord::Base
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
 
   belongs_to :client
+  belongs_to :design_category
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
 end
