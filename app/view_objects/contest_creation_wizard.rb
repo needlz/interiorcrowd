@@ -17,7 +17,7 @@ class ContestCreationWizard
     return @design_categories_checkboxes if @design_categories_checkboxes
     @design_categories_checkboxes = {}
     available_design_categories.each do |category|
-      @design_categories_checkboxes[category.id] = session[:design_categories] && session[:design_categories][:cat_id].include?(category.id.to_s)
+      @design_categories_checkboxes[category.id] = session[:design_categories] && session[:design_categories][:design_category] && session[:design_categories][:design_category].include?(category.id.to_s)
     end
     @design_categories_checkboxes
   end
@@ -27,8 +27,7 @@ class ContestCreationWizard
   end
 
   def category_checkbox_div_class(category)
-    return 'col-sm-3' if category.image_name.present? && category.image_name != 'null'
-    'col-sm-5'
+    'col-sm-9'
   end
 
   def breadcrumb_class(step_index)

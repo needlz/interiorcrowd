@@ -7,15 +7,27 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 DesignCategory.delete_all
-DesignCategory.create(id: 1, name: 'Furniture', pos: 1, price: 99, image_name: 'bedroom.png') 
-DesignCategory.create(id: 2, name: 'Floor covering', pos: 2, price: 99, image_name: 'carpet.png')
-DesignCategory.create(id: 3, name: 'Wall treatments', pos: 3, price: 59, image_name: 'painting.png')
-DesignCategory.create(id: 4, name: 'Window treatments', pos: 4, price: 120, image_name: 'window.png')
-DesignCategory.create(id: 5, name: 'Artwork', pos: 5, price: 99, image_name: 'artwork.png')
-DesignCategory.create(id: 6, name: 'Accessories', pos: 6, price: 59, image_name: 'file-manager.png')
-DesignCategory.create(id: 7, name: 'Space Planning', pos: 7, price: 59, image_name: 'graphics.png')
-DesignCategory.create(id: 8, name: 'Other(specify)', pos: 8, price: 0)
-DesignCategory.create(id: 9, name: 'Everything (Soup to nuts)', pos: 9, price: 299)
+DesignCategory.create(id: 1,
+                      name: 'Complete My Look',
+                      description: 'choose this if you already have a style that you like but need to just pull it together',
+                      pos: 1,
+                      price: 99,
+                      before_image: 'contest_creation/before_picture.png',
+                      after_image: 'contest_creation/after_picture.png')
+DesignCategory.create(id: 2,
+                      name: 'Update My Style',
+                      description: 'choose this if your place needs updating to fit your current style',
+                      pos: 2,
+                      price: 99,
+                      before_image: 'contest_creation/before_picture.png',
+                      after_image: 'contest_creation/after_picture.png')
+DesignCategory.create(id: 3,
+                      name: 'Total Room Overhaul',
+                      description: 'choose this if you want to start from scratch and have a completely new space',
+                      pos: 3,
+                      price: 199,
+                      before_image: 'contest_creation/before_picture.png',
+                      after_image: 'contest_creation/after_picture.png')
 
 DesignSpace.delete_all
 DesignSpace.create(id: 1, name: 'Bedroom', pos: 10, parent: 0)

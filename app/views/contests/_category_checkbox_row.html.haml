@@ -1,19 +1,9 @@
 .row
-  - if design_category.custom?
-    .col-sm-3
-      %label.checkbox
-        = contest_creation_category_checkbox(design_category)
-        Other(specify)
-      .col-sm-12.col-sm-offset-1
-        = text_area_tag "other_value", @creation_wizard.other_category_text, class: "form-control"
-  - else
-    %div{:class => @creation_wizard.category_checkbox_div_class(design_category)}
-      %label.checkbox
-        = contest_creation_category_checkbox(design_category)
-        = design_category.name
-    - if design_category.has_image?
-      .col-sm-2
-        = image_tag "interior/#{design_category.image_name}", :class => "img-circle"
-    - if design_category.paid?
-      .form_ele.col-sm-2.col-sm-offset-1
-        From $#{design_category.price}
+  %div{:class => @creation_wizard.category_checkbox_div_class(design_category)}
+    %label.checkbox
+      = contest_creation_category_checkbox(design_category)
+      #{design_category.name} (#{design_category.description}. From $#{design_category.price})
+    .col-sm-6
+      %img{src: "/assets/#{design_category.before_picture}"}
+    .col-sm-6
+      %img{src: "/assets/#{design_category.after_picture}"}

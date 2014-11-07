@@ -27,8 +27,7 @@ class ContestsController < ApplicationController
   def save_design_categories
     if params[:design_category].present?
       session[:design_categories] = {}
-      session[:design_categories][:cat_id] = params[:design_category]
-      session[:design_categories][:other] = params[:other_value]
+      session[:design_categories][:design_category] = params[:design_category]
     end
     redirect_to space_areas_contests_path
   end
