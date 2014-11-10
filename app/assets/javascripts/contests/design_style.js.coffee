@@ -7,19 +7,17 @@ $ ->
     $(".text-error").html ""
     fav_color = $.trim($("#fav_color").val())
     refrain_color = $.trim($("#refrain_color").val())
-    bool = true
+    valid = true
     if fav_color.length < 1
-      bool = false
+      valid = false
       $("#err_fav").html "Please enter data."
     if refrain_color.length < 1
-      bool = false
+      valid = false
       $("#err_refrain").html "Please enter data."
-    console.log(parseInt(levelContainer.val()) == NaN)
     if isNaN(parseInt(levelContainer.val()))
-      console.log('lkkk')
-      bool = false
+      valid = false
       $("#err-designer-level").html "Please select one of the options."
-    if bool
+    if valid
       $("#design_style").submit()
     else
       false
@@ -42,6 +40,7 @@ $ ->
   $('.level-block').click ->
     selectedLevel = $(@)
     newId = selectedLevel.attr('data-id')
-    $('.level-block').removeClass('active')
     levelContainer.val(newId)
+
+    $('.level-block').removeClass('active')
     selectedLevel.addClass('active')
