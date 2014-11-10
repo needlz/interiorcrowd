@@ -52,7 +52,7 @@ class ClientsController < ApplicationController
                                                           budget_plan: session[:preview][:b_plan],
                                                           project_name: session[:preview][:contest_name],
                                                           client_id: user_id
-      }.merge(session[:design_style])
+      }
 
       params = params.require(:contest).permit(:client_id,
                                       :project_name,
