@@ -14,7 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer :card_ex_month
       t.integer :card_ex_year
       t.integer :card_cvc
-      t.integer :status, :default => 1
+      t.integer :status, default: 1
       t.timestamps
     end
   end
