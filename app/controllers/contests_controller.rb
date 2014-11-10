@@ -1,10 +1,10 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
-  before_filter :set_creation_wizard, only: [:design_categories, :design_style, :design_space, :preview]
+  before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
 
   CREATION_STEPS = [
-    :design_categories,
+    :design_brief,
     :design_style,
     :design_space,
     :preview
@@ -20,15 +20,15 @@ class ContestsController < ApplicationController
     @contest_view = ContestView.new(contest)
   end
   
-  def design_categories
+  def design_brief
     render
   end
 
-  def save_design_categories
+  def save_design_brief
     if params[:design_category].present?
-      session[:design_categories] = {}
-      session[:design_categories][:design_category] = params[:design_category]
-      session[:design_categories][:design_area]= params[:design_area]
+      session[:design_brief] = {}
+      session[:design_brief][:design_category] = params[:design_category]
+      session[:design_brief][:design_area]= params[:design_area]
     end
     redirect_to design_style_contests_path
   end
@@ -53,7 +53,7 @@ class ContestsController < ApplicationController
       session[:design_space] = params[:design_space]
       unless CREATION_STEPS.all? { |step| session[step].present? }
         flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-        redirect_to design_categories_contests_path and return if session[:design_categories].blank?
+        redirect_to design_brief_contests_path and return if session[:design_brief].blank?
         redirect_to design_style_contests_path and return if session[:design_style].blank?
         redirect_to design_space_contests_path and return if session[:design_space].blank?
       end

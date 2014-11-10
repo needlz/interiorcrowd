@@ -17,13 +17,13 @@ class ContestCreationWizard
     return @design_categories_checkboxes if @design_categories_checkboxes
     @design_categories_checkboxes = {}
     available_design_categories.each do |category|
-      @design_categories_checkboxes[category.id] = session[:design_categories] && session[:design_categories][:design_category] && session[:design_categories][:design_category].include?(category.id.to_s)
+      @design_categories_checkboxes[category.id] = session[:design_brief].try(:[], :design_category) && session[:design_brief][:design_category].include?(category.id.to_s)
     end
     @design_categories_checkboxes
   end
 
   def other_category_text
-    @other_category_text ||= session[:design_categories][:other] if session[:design_categories].present?
+    @other_category_text ||= session[:design_brief][:other] if session[:design_brief].present?
   end
 
   def breadcrumb_class(step_index)

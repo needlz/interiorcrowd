@@ -1,19 +1,20 @@
 - content_for :head do
-  = javascript_include_tag 'contests/design_categories'
+  = javascript_include_tag 'contests/design_brief'
   :javascript
     window.areas = #{ @creation_wizard.available_areas.to_json }
+    window.noCategoryMessage = "Please select atleast one category."
 
 - content_for :page_content do
   .row
     .col-sm-10.col-sm-offset-1.page-title
       %h3= t('contests.titles.design_categories')
   = render :partial => 'home/msg'
-  = form_tag save_design_categories_contests_path, { id: "design_categories", method: "post" } do
+  = form_tag save_design_brief_contests_path, { id: "design_categories", method: "post" } do
     = render partial: 'contests/category_row',
         collection: @creation_wizard.available_design_categories,
         as: :design_category
-    = render partial: 'contests/area_dropdown', locals: { design_area: @contest_view.design_area }
     %span#err_category.text-error
+    = render partial: 'contests/area_dropdown', locals: { design_area: @contest_view.design_area }
   .row.formbuttons
     .col-sm-4.col-sm-offset-6
       = link_to "CONTINUE", '#', :class => "order"

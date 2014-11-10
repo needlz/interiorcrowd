@@ -27,8 +27,8 @@ InteriorC::Application.routes.draw do
     end
 
     collection do
-      get 'design_categories'
-      post 'save_design_categories'
+      get 'design_brief'
+      post 'save_design_brief'
       get 'space_areas'
       post 'save_space_areas'
       get 'design_style'
