@@ -30,11 +30,11 @@ class ClientsController < ApplicationController
   private
 
   def create_contests(user_id)
-    all_steps = session[:design_categories].present? && session[:design_style].present? && session[:design_space].present? && session[:preview].present?
+    all_steps = session[:design_brief].present? && session[:design_style].present? && session[:design_space].present? && session[:preview].present?
     if all_steps
-      params = ActionController::Parameters.new contest: {design_category_id: session[:design_categories][:design_category],
+      params = ActionController::Parameters.new contest: {design_category_id: session[:design_brief][:design_category],
 
-                                                          design_space_id: session[:design_categories][:design_area],
+                                                          design_space_id: session[:design_brief][:design_area],
 
                                                           cd_space_images: session[:design_space][:document_id],
                                                           space_length: session[:design_space][:length],
@@ -73,7 +73,7 @@ class ClientsController < ApplicationController
                                       :design_category_id
       )
       if Contest.new(params).save!
-        session[:design_categories] = nil
+        session[:design_brief] = nil
         session[:design_style] = nil
         session[:design_space] = nil
         session[:preview] = nil

@@ -1,5 +1,5 @@
 class DesignersController < ApplicationController
-  before_filter :check_designer, :only => [:welcome, :lookbook, :preview_lookbook]
+  before_filter :check_designer, only: [:welcome, :lookbook, :preview_lookbook]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
   def index

@@ -5,7 +5,7 @@ class CreateContestRequests < ActiveRecord::Migration
       t.integer :contest_id
       t.text :designs
       t.text :feedback
-      t.integer :status, :default => 1
+      t.integer :status, default: 1
       t.timestamps
     end
   end

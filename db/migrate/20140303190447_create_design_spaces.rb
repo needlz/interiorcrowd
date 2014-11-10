@@ -4,7 +4,7 @@ class CreateDesignSpaces < ActiveRecord::Migration
       t.string :name
       t.integer :pos
       t.integer :parent
-      t.integer :status, :default => 1
+      t.integer :status, default: 1
       t.timestamps
     end
   end

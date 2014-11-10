@@ -14,8 +14,8 @@ class ContestView
   private
 
   def initialize_from_options(options)
-    @category = DesignCategory.find_by_id(options['design_categories'].try(:[], :design_category))
-    @design_area = DesignSpace.find_by_id(options['design_categories'].try(:[], :design_area))
+    @category = DesignCategory.find_by_id(options['design_brief'].try(:[], :design_category))
+    @design_area = DesignSpace.find_by_id(options['design_brief'].try(:[], :design_area))
     @appeal_scales = AppealScale.from(options['design_style'])
     @desirable_colors = options['design_style'].try(:[], 'desirable_colors')
     @undesirable_colors = options['design_style'].try(:[], 'undesirable_colors')
