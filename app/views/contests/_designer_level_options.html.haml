@@ -1,0 +1,7 @@
+.row.step-row
+  %label #{t('contests.titles.designer_level')}:
+.row
+  = hidden_field_tag 'design_style[designer_level]', @contest_view.designer_level
+  - @creation_wizard.available_designer_levels.each do |designer_level|
+    = render partial: 'contests/designer_level_item', locals: { designer_level: designer_level }
+#err-designer-level.text-error

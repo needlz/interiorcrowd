@@ -43,6 +43,10 @@ class ContestCreationWizard
     end
   end
 
+  def available_designer_levels
+    DesignerLevel.all.order(:id)
+  end
+
   def budget_options
     Contest::CONTEST_DESIGN_BUDGETS.invert
   end

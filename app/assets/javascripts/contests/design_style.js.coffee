@@ -1,4 +1,6 @@
 $ ->
+  levelContainer = $("input[name='design_style[designer_level]']")
+
   $(".slidercon input").slider()
   $(".continue").click (e) ->
     e.preventDefault()
@@ -12,12 +14,16 @@ $ ->
     if refrain_color.length < 1
       bool = false
       $("#err_refrain").html "Please enter data."
+    console.log(parseInt(levelContainer.val()) == NaN)
+    if isNaN(parseInt(levelContainer.val()))
+      console.log('lkkk')
+      bool = false
+      $("#err-designer-level").html "Please select one of the options."
     if bool
       $("#design_style").submit()
     else
       false
 
-$ ->
   $("#file_input").initUploader
     buttonText: "Upload"
     removeTimeout: 5
@@ -32,3 +38,10 @@ $ ->
       else
         $("#design_style_image").val img_val + "," + info[0]
         $("#design_style_image_id").val img_id + "," + info[1]
+
+  $('.level-block').click ->
+    selectedLevel = $(@)
+    newId = selectedLevel.attr('data-id')
+    $('.level-block').removeClass('active')
+    levelContainer.val(newId)
+    selectedLevel.addClass('active')
