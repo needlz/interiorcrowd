@@ -9,6 +9,7 @@ class Client < ActiveRecord::Base
   validates :email, uniqueness: true
   
   has_many :contests
+  belongs_to :designer_level
   
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")

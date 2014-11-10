@@ -39,7 +39,7 @@ class ContestsController < ApplicationController
 
   def save_design_style
     if params[:design_style].present?
-      session[:design_style]= params[:design_style]
+      session[:design_style] = params[:design_style]
     end
     redirect_to design_space_contests_path
   end

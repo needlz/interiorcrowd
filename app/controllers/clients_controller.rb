@@ -10,8 +10,17 @@ class ClientsController < ApplicationController
     user_ps = params[:client][:password]
     params[:client][:password] = Client.encrypt(params[:client][:password])
     params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
+    params[:client][:designer_level_id] = session[:design_style][:designer_level]
 
-    params.require(:client).permit(:first_name, :last_name, :email, :address, :name_on_card, :state, :zip, :password)
+    params.require(:client).permit(:first_name,
+                                   :last_name,
+                                   :email,
+                                   :address,
+                                   :name_on_card,
+                                   :state,
+                                   :zip,
+                                   :password,
+                                   :designer_level_id)
     @client = Client.new(params[:client])
     respond_to do |format|
       if @client.save
@@ -33,16 +42,13 @@ class ClientsController < ApplicationController
     all_steps = session[:design_brief].present? && session[:design_style].present? && session[:design_space].present? && session[:preview].present?
     if all_steps
       params = ActionController::Parameters.new contest: {design_category_id: session[:design_brief][:design_category],
-
                                                           design_space_id: session[:design_brief][:design_area],
-
                                                           cd_space_images: session[:design_space][:document_id],
                                                           space_length: session[:design_space][:length],
                                                           space_width: session[:design_space][:width],
                                                           space_height: session[:design_space][:height],
                                                           space_budget: session[:design_space][:f_budget],
                                                           feedback: session[:design_space][:feedback],
-
                                                           budget_plan: session[:preview][:b_plan],
                                                           project_name: session[:preview][:contest_name],
                                                           client_id: user_id
@@ -70,7 +76,7 @@ class ClientsController < ApplicationController
                                       :cd_style_ex_images,
                                       :cd_style_links,
                                       :design_space_id,
-                                      :design_category_id
+                                      :design_category_id,
       )
       if Contest.new(params).save!
         session[:design_brief] = nil
