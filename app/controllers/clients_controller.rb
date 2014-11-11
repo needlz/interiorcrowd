@@ -73,12 +73,7 @@ class ClientsController < ApplicationController
       )
       contest = Contest.new(params)
       if contest.save!
-        Appeal.all.each do |appeal|
-          contest.contests_appeals << ContestsAppeal.new(appeal_id: appeal.id,
-                                                         contest_id: contest.id,
-                                                         reason: session[:design_style].try(:[], appeal.identifier).try(:[], :reason),
-                                                         value: session[:design_style].try(:[], appeal.identifier).try(:[], :value))
-        end
+        contest.add_appeals(session[:design_style])
         session[:design_brief] = nil
         session[:design_style] = nil
         session[:design_space] = nil

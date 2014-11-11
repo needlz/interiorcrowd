@@ -12,4 +12,13 @@ class Contest < ActiveRecord::Base
   belongs_to :design_space
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
+
+  def add_appeals(options)
+    Appeal.all.each do |appeal|
+      contests_appeals << ContestsAppeal.new(appeal_id: appeal.id,
+                                             contest_id: id,
+                                             reason: options.try(:[], appeal.identifier).try(:[], :reason),
+                                             value: options.try(:[], appeal.identifier).try(:[], :value))
+    end
+  end
 end
