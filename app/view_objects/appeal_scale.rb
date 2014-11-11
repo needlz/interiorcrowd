@@ -12,21 +12,22 @@ class AppealScale
 
   attr_reader :first, :second, :value
 
-  def initialize(scale)
-    @first, @second = scale[:first], scale[:second]
+  def initialize(appeal)
+    @appeal = appeal
+    @first, @second = appeal.first_name, appeal.second_name
     @value = default_value
   end
 
   def self.from(options)
-    SCALES.map do |scale|
-      appeal = new(scale)
-      appeal.value = options
-      appeal
+    Appeal.all.order(:id).map do |appeal|
+      appeal_scale = new(appeal)
+      appeal_scale.value = options
+      appeal_scale
     end
   end
 
   def identifier
-    "#{ first }_appeal_scale".to_sym
+    appeal.identifier
   end
 
   def first_name
@@ -39,7 +40,7 @@ class AppealScale
 
   def value=(value)
     if value.present?
-      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send(identifier).to_i
+      @value = value.kind_of?(Hash) ? value[identifier][:value].to_i : value.send(identifier).to_i
     else
       @value = default_value
     end
@@ -50,6 +51,8 @@ class AppealScale
   end
 
   private
+
+  attr_reader :appeal
 
   def default_value
     0

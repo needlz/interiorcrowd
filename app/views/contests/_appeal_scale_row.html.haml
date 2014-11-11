@@ -1,13 +1,9 @@
-%tr
-  %td.col-sm-2= scale.first_name
-  %td.col-sm-8
-    .slidercon
-      = text_field_tag "design_style[#{ scale.identifier }]",
-          scale.value,
-          "data-slider-max" => "100",
-          "data-slider-min" => "0",
-          "data-slider-selection" => "after",
-          "data-slider-step" => "1",
-          "data-slider-tooltip" => "show",
-          "data-slider-value" => scale.value
-  %td.col-sm-2= scale.second_name
+.col-sm-12{ style: 'margin-bottom: 20px' }
+  = select_tag "design_style[#{ scale.identifier }][value]",
+      options_for_select(@creation_wizard.available_appeal_feedback, scale.value)
+  = text_field_tag "design_style[#{ scale.identifier }][reason]",
+      '',
+      placeholder: t('contests.appleals.placeholder'),
+      size: 50
+  %div
+    %img{ src: '/assets/blank.png' }

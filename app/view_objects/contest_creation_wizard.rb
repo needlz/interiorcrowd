@@ -2,6 +2,12 @@ class ContestCreationWizard
 
   attr_reader :active_step_index
 
+  APPEAL_FEEDBACK = [
+    { name: 'Love it!', value: 100 },
+    { name: 'Like it!', value: 50 },
+    { name: 'Leave it...', value: 0 }
+  ]
+
   def initialize(action_params, action_session, step_index)
     @params = action_params
     @session = action_session
@@ -45,6 +51,12 @@ class ContestCreationWizard
 
   def available_designer_levels
     DesignerLevel.all.order(:id)
+  end
+
+  def available_appeal_feedback
+    APPEAL_FEEDBACK.map do |appeal_feedback|
+      [appeal_feedback[:name], appeal_feedback[:value]]
+    end
   end
 
   def budget_options

@@ -64,13 +64,6 @@ class ClientsController < ApplicationController
                                       :space_length,
                                       :space_width,
                                       :space_height,
-                                      :feminine_appeal_scale,
-                                      :elegant_appeal_scale,
-                                      :traditional_appeal_scale,
-                                      :muted_appeal_scale,
-                                      :conservative_appeal_scale,
-                                      :timeless_appeal_scale,
-                                      :fancy_appeal_scale,
                                       :desirable_colors,
                                       :undesirable_colors,
                                       :cd_style_ex_images,
@@ -78,7 +71,14 @@ class ClientsController < ApplicationController
                                       :design_space_id,
                                       :design_category_id,
       )
-      if Contest.new(params).save!
+      contest = Contest.new(params)
+      if contest.save!
+        Appeal.all.each do |appeal|
+          contest.contests_appeals << ContestsAppeal.new(appeal_id: appeal.id,
+                                                         contest_id: contest.id,
+                                                         reason: session[:design_style].try(:[], appeal.identifier).try(:[], :reason),
+                                                         value: session[:design_style].try(:[], appeal.identifier).try(:[], :value))
+        end
         session[:design_brief] = nil
         session[:design_style] = nil
         session[:design_space] = nil

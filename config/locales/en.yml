@@ -26,6 +26,8 @@ en:
       trendy: Trendy
       fancy: Fancy
       playful: Playful
+
+      placeholder: Tell us why (optional)
     dimensions:
       length: Length
       width: Width

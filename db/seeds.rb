@@ -61,6 +61,12 @@ DesignerLevel.delete_all
 DesignerLevel.create(id: 1, name: 'Novice', image: 'blank.png')
 DesignerLevel.create(id: 2, name: 'Enthusiast', image: 'blank.png')
 DesignerLevel.create(id: 3, name: 'Aficionado', image: 'blank.png')
- 
 
-
+Appeal.delete_all
+Appeal.create(id: 1, first_name: 'feminine', second_name: 'masculine', image: 'blank.png')
+Appeal.create(id: 2, first_name: 'elegant', second_name: 'eclectic', image: 'blank.png')
+Appeal.create(id: 3, first_name: 'traditional', second_name: 'modern', image: 'blank.png')
+Appeal.create(id: 4, first_name: 'conservative', second_name: 'bold', image: 'blank.png')
+Appeal.create(id: 5, first_name: 'muted', second_name: 'colorful', image: 'blank.png')
+Appeal.create(id: 6, first_name: 'timeless', second_name: 'trendy', image: 'blank.png')
+Appeal.create(id: 7, first_name: 'fancy', second_name: 'playful', image: 'blank.png')
