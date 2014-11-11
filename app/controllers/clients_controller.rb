@@ -52,7 +52,7 @@ class ClientsController < ApplicationController
                                                           budget_plan: session[:preview][:b_plan],
                                                           project_name: session[:preview][:contest_name],
                                                           client_id: user_id
-      }.merge(session[:design_style])
+      }
 
       params = params.require(:contest).permit(:client_id,
                                       :project_name,
@@ -64,13 +64,6 @@ class ClientsController < ApplicationController
                                       :space_length,
                                       :space_width,
                                       :space_height,
-                                      :feminine_appeal_scale,
-                                      :elegant_appeal_scale,
-                                      :traditional_appeal_scale,
-                                      :muted_appeal_scale,
-                                      :conservative_appeal_scale,
-                                      :timeless_appeal_scale,
-                                      :fancy_appeal_scale,
                                       :desirable_colors,
                                       :undesirable_colors,
                                       :cd_style_ex_images,
@@ -78,7 +71,9 @@ class ClientsController < ApplicationController
                                       :design_space_id,
                                       :design_category_id,
       )
-      if Contest.new(params).save!
+      contest = Contest.new(params)
+      if contest.save!
+        contest.add_appeals(session[:design_style])
         session[:design_brief] = nil
         session[:design_style] = nil
         session[:design_space] = nil

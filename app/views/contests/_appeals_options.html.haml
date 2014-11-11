@@ -1,9 +1,7 @@
 .row.step-row
   %label= t('contests.titles.appeals')
 .row
-  .col-sm-7.col-sm-offset-1
-    .plan.appeals
-      %table.table.table-hover
-        = render partial: 'contests/appeal_scale_row',
-            collection: @contest_view.appeal_scales,
-            as: :scale
+  .col-sm-12
+    = render partial: 'contests/appeal_scale_row',
+        collection: @contest_view.appeal_scales,
+        as: :scale
