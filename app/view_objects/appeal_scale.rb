@@ -19,10 +19,11 @@ class AppealScale
   end
 
   def self.from(options)
-    Appeal.all.order(:id).map do |appeal|
-      appeal_scale = new(appeal)
-      appeal_scale.value = options
-      appeal_scale
+    options ||= {}
+    if options.kind_of?(Hash)
+      initialize_from_options(options)
+    else
+      initialize_from_appeals(options)
     end
   end
 
@@ -40,7 +41,7 @@ class AppealScale
 
   def value=(value)
     if value.present?
-      @value = value.kind_of?(Hash) ? value[identifier][:value].to_i : value.contests_appeals.find_by_appeal_id(appeal.id).value
+      @value = value
     else
       @value = default_value
     end
@@ -53,6 +54,22 @@ class AppealScale
   private
 
   attr_reader :appeal
+
+  def self.initialize_from_options(options)
+    Appeal.all.order(:id).map do |appeal|
+      appeal_scale = new(appeal)
+      appeal_scale.value = options[appeal.identifier].try(:[], :value).to_i
+      appeal_scale
+    end
+  end
+
+  def self.initialize_from_appeals(contests_appeals)
+    contests_appeals.map do |contest_appeal|
+      appeal_scale = new(contest_appeal.appeal)
+      appeal_scale.value = contest_appeal.value
+      appeal_scale
+    end
+  end
 
   def default_value
     0

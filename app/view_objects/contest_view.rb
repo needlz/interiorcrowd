@@ -34,7 +34,7 @@ class ContestView
     @category = contest.design_category
     @design_area = contest.design_space
     @designer_level = contest.client.designer_level
-    @appeal_scales = AppealScale.from(contest)
+    @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
     @examples = contest.cd_style_ex_images.try(:split, ',') || []
