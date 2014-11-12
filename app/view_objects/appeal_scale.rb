@@ -40,7 +40,7 @@ class AppealScale
 
   def value=(value)
     if value.present?
-      @value = value.kind_of?(Hash) ? value[identifier][:value].to_i : value.send(identifier).to_i
+      @value = value.kind_of?(Hash) ? value[identifier][:value].to_i : value.contests_appeals.find_by_appeal_id(appeal.id).value
     else
       @value = default_value
     end

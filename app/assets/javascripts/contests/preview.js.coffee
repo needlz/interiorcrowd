@@ -26,3 +26,5 @@ $ ->
     else
       $("#" + focus).focus()
       false
+
+  $('.colors').colorTags({ readonly: true })
