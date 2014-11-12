@@ -52,9 +52,9 @@ class ClientsController < ApplicationController
                                                           budget_plan: session[:preview][:b_plan],
                                                           project_name: session[:preview][:contest_name],
                                                           client_id: user_id
-      }
+      }.merge(session[:design_style])
 
-      params = params.require(:contest).permit(:client_id,
+      contest_params = params.require(:contest).permit(:client_id,
                                       :project_name,
                                       :budget_plan,
                                       :feedback,
@@ -71,7 +71,7 @@ class ClientsController < ApplicationController
                                       :design_space_id,
                                       :design_category_id,
       )
-      contest = Contest.new(params)
+      contest = Contest.new(contest_params)
       if contest.save!
         contest.add_appeals(session[:design_style])
         session[:design_brief] = nil

@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery_ujs
+//= require jquery-ui/widget
 //= require bootstrap.min
 //= require theme
 //= require index-slider

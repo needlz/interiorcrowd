@@ -44,3 +44,5 @@ $ ->
 
     $('.level-block').removeClass('active')
     selectedLevel.addClass('active')
+
+  $('.color-typeahead').colorTags({ readonly: false })
