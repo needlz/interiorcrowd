@@ -72,14 +72,21 @@ class ClientsController < ApplicationController
                                       :design_category_id,
       )
       contest = Contest.new(contest_params)
-      if contest.save!
-        contest.add_appeals(session[:design_style])
-        session[:design_brief] = nil
-        session[:design_style] = nil
-        session[:design_space] = nil
-        session[:preview] = nil
+      contest.transaction do
+        if contest.save!
+          contest.add_appeals(session[:design_style])
+          contest.add_external_examples(session[:design_style][:ex_links].split(',').map(&:strip))
+          clear_session
+        end
       end
     end
+  end
+
+  def clear_session
+    session[:design_brief] = nil
+    session[:design_style] = nil
+    session[:design_space] = nil
+    session[:preview] = nil
   end
 
 end
