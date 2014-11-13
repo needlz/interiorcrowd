@@ -6,6 +6,7 @@ class Contest < ActiveRecord::Base
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
+  has_many :image_links
 
   belongs_to :client
   belongs_to :design_category
@@ -19,6 +20,12 @@ class Contest < ActiveRecord::Base
                                              contest_id: id,
                                              reason: options.try(:[], appeal.identifier).try(:[], :reason),
                                              value: options.try(:[], appeal.identifier).try(:[], :value))
+    end
+  end
+
+  def add_image_links(urls)
+    urls.each do |url|
+      image_links << ImageLink.new(url: url)
     end
   end
 end
