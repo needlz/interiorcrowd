@@ -154,6 +154,13 @@ $.widget "custom.colorTags",
       )
       formatSelection: formatColorItem
       formatResult: formatColorItem
+      sortResults: (results, container, query) ->
+        return results unless query.term
+        results.sort((a, b) ->
+          return 1 if a.text.length > b.text.length
+          return -1 if a.text.length < b.text.length
+          0
+        )
     }).on('select2-selecting', (e)->
       e.preventDefault() unless isColorHex(e.val)
     ).on('change');
