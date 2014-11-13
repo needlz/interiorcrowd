@@ -3,7 +3,7 @@ class RemoveContestCdStyleLinks < ActiveRecord::Migration
     Contest.all.each do |contest|
       next unless contest.cd_style_links
       contest.cd_style_links.split(',').map(&:strip).each do |url|
-        contest.image_links << ImageLink.new(url: url)
+        contest.liked_external_examples << ImageLink.new(url: url)
       end
     end
 
