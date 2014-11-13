@@ -72,7 +72,7 @@ class ClientsController < ApplicationController
                                       :design_category_id,
       )
       contest = Contest.new(contest_params)
-      ActiveRecord::Base.transaction do
+      contest.transaction do
         if contest.save!
           contest.add_appeals(session[:design_style])
           contest.add_external_examples(session[:design_style][:ex_links].split(',').map(&:strip))
