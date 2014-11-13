@@ -37,10 +37,10 @@ class ContestView
     @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
-    @examples = contest.cd_style_ex_images.try(:split, ',') || []
+    @examples = contest.liked_examples.map { |example| example.image.url(:medium) }
     @links = contest.liked_external_examples.pluck(:url)
     @dimensions = SpaceDimension.from(contest)
-    @space_pictures = contest.cd_space_images.try(:split, ',').try(:map) { |image_id| Image.find(image_id).image.url(:medium) }
+    @space_pictures = contest.space_images.map { |space_image| space_image.image.url(:medium) }
     @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan

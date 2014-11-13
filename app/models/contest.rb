@@ -7,6 +7,11 @@ class Contest < ActiveRecord::Base
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
   has_many :liked_external_examples, class_name: 'ImageLink'
+  has_many :contests_images
+  has_many :example_contests_images, ->{ where(kind: ContestsImage::LIKED_EXAMPLE) }, class_name: 'ContestsImage'
+  has_many :space_contests_images, ->{ where(kind: ContestsImage::SPACE) }, class_name: 'ContestsImage'
+  has_many :liked_examples, through: :example_contests_images, class_name: 'Image', source: :image
+  has_many :space_images, through: :space_contests_images, class_name: 'Image', source: :image
 
   belongs_to :client
   belongs_to :design_category
@@ -26,6 +31,12 @@ class Contest < ActiveRecord::Base
   def add_external_examples(urls)
     urls.each do |url|
       liked_external_examples << ImageLink.new(url: url)
+    end
+  end
+
+  def add_images(image_ids, kind)
+    image_ids.each do |image_id|
+      contests_images << ContestsImage.new(image_id: image_id, kind: kind)
     end
   end
 end

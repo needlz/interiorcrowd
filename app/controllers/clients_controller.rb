@@ -43,7 +43,6 @@ class ClientsController < ApplicationController
     if all_steps
       params = ActionController::Parameters.new contest: {design_category_id: session[:design_brief][:design_category],
                                                           design_space_id: session[:design_brief][:design_area],
-                                                          cd_space_images: session[:design_space][:document_id],
                                                           space_length: session[:design_space][:length],
                                                           space_width: session[:design_space][:width],
                                                           space_height: session[:design_space][:height],
@@ -59,14 +58,12 @@ class ClientsController < ApplicationController
                                       :budget_plan,
                                       :feedback,
                                       :space_budget,
-                                      :cd_space_images,
                                       :cd_space_flength,
                                       :space_length,
                                       :space_width,
                                       :space_height,
                                       :desirable_colors,
                                       :undesirable_colors,
-                                      :cd_style_ex_images,
                                       :cd_style_links,
                                       :design_space_id,
                                       :design_category_id,
@@ -76,6 +73,10 @@ class ClientsController < ApplicationController
         if contest.save!
           contest.add_appeals(session[:design_style])
           contest.add_external_examples(session[:design_style][:ex_links].split(',').map(&:strip))
+          space_image_ids = session[:design_space][:document_id].split(',').map(&:strip).map(&:to_i)
+          liked_example_ids = session[:design_style][:document_id].split(',').map(&:strip).map(&:to_i)
+          contest.add_images(space_image_ids, ContestsImage::SPACE)
+          contest.add_images(liked_example_ids, ContestsImage::LIKED_EXAMPLE)
           clear_session
         end
       end
