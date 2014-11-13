@@ -35,6 +35,7 @@ gem 'figaro'
 gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
+gem 'aws-sdk'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
