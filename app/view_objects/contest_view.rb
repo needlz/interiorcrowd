@@ -38,7 +38,7 @@ class ContestView
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
     @examples = contest.cd_style_ex_images.try(:split, ',') || []
-    @links = contest.image_links.pluck(:url)
+    @links = contest.liked_external_examples.pluck(:url)
     @dimensions = SpaceDimension.from(contest)
     @space_pictures = contest.cd_space_images.try(:split, ',').try(:map) { |image_id| Image.find(image_id).image.url(:medium) }
     @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]

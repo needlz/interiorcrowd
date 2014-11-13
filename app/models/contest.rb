@@ -6,7 +6,7 @@ class Contest < ActiveRecord::Base
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
-  has_many :image_links
+  has_many :liked_external_examples, class_name: 'ImageLink'
 
   belongs_to :client
   belongs_to :design_category
@@ -23,9 +23,9 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  def add_image_links(urls)
+  def add_external_examples(urls)
     urls.each do |url|
-      image_links << ImageLink.new(url: url)
+      liked_external_examples << ImageLink.new(url: url)
     end
   end
 end
