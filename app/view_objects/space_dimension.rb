@@ -38,7 +38,11 @@ class SpaceDimension
 
   def value=(value)
     if value
-      @value = value.kind_of?(Hash) ? value[identifier].to_i : value.send("space_#{ identifier }")
+      if value.kind_of?(Hash)
+        @value = (value["space_#{ identifier }"].to_i if value["space_#{ identifier }"].present?)
+      else
+        @value = value.send("space_#{ identifier }")
+      end
     else
       @value = nil
     end

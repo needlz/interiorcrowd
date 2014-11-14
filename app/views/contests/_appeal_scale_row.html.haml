@@ -2,7 +2,7 @@
   = select_tag "design_style[#{ scale.identifier }][value]",
       options_for_select(@creation_wizard.available_appeal_feedback, scale.value)
   = text_field_tag "design_style[#{ scale.identifier }][reason]",
-      '',
+      scale.reason,
       placeholder: t('contests.appleals.placeholder'),
       size: 50
   %div

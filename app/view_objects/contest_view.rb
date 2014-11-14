@@ -5,7 +5,7 @@ class ContestView
   
   def initialize(options)
     if options.kind_of?(Hash)
-      initialize_from_options(options)
+      initialize_from_options(HashWithIndifferentAccess.new(options))
     else
       initialize_from_contest(options)
     end
@@ -14,20 +14,23 @@ class ContestView
   private
 
   def initialize_from_options(options)
-    @category = DesignCategory.find_by_id(options['design_brief'].try(:[], :design_category))
-    @design_area = DesignSpace.find_by_id(options['design_brief'].try(:[], :design_area))
-    @designer_level = DesignerLevel.find_by_id(options['design_style'].try(:[], :designer_level))
-    @appeal_scales = AppealScale.from(options['design_style'])
-    @desirable_colors = options['design_style'].try(:[], 'desirable_colors')
-    @undesirable_colors = options['design_style'].try(:[], 'undesirable_colors')
-    @examples = options['design_style'].try(:[], 'document').try(:split, ',')
-    @links = options['design_style'].try(:[], 'ex_links').try(:split, ',')
-    @dimensions = SpaceDimension.from(options['design_space'])
-    @space_pictures = options['design_space'].try(:[], 'document').try(:split, ',')
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[options['design_space'].try(:[], 'f_budget').to_i]
-    @feedback = options['design_space'].try(:[], 'feedback')
-    @budget_plan = options['preview'].try(:[], 'b_plan')
-    @name = options['preview'].try(:[], 'contest_name')
+    contest_attributes = Contest.options_from_hash(options)
+    contest_params = contest_attributes[:contest]
+    contest_associations = contest_attributes[:contest_associations]
+    @category = DesignCategory.find_by_id(contest_params[:design_category_id])
+    @design_area = DesignSpace.find_by_id(contest_params[:design_space_id])
+    @designer_level = DesignerLevel.find_by_id(contest_params[:designer_level])
+    @appeal_scales = AppealScale.from(contest_params)
+    @desirable_colors = contest_params[:desirable_colors]
+    @undesirable_colors = contest_params[:undesirable_colors]
+    @examples = contest_associations[:liked_example_urls]
+    @links = contest_associations[:example_links]
+    @dimensions = SpaceDimension.from(contest_params)
+    @space_pictures = contest_associations[:space_image_urls]
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest_params[:space_budget]]
+    @feedback = contest_params[:feedback]
+    @budget_plan = contest_params[:budget_plan]
+    @name = contest_params[:project_name]
   end
 
   def initialize_from_contest(contest)
@@ -37,14 +40,13 @@ class ContestView
     @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
-    @examples = contest.cd_style_ex_images.try(:split, ',') || []
+    @examples = contest.liked_examples.map { |example| example.image.url(:medium) }
     @links = contest.liked_external_examples.pluck(:url)
     @dimensions = SpaceDimension.from(contest)
-    @space_pictures = contest.cd_space_images.try(:split, ',').try(:map) { |image_id| Image.find(image_id).image.url(:medium) }
+    @space_pictures = contest.space_images.map { |space_image| space_image.image.url(:medium) }
     @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
     @name = contest.project_name
   end
-
 end
