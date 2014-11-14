@@ -29,8 +29,6 @@ InteriorC::Application.routes.draw do
     collection do
       get 'design_brief'
       post 'save_design_brief'
-      get 'space_areas'
-      post 'save_space_areas'
       get 'design_style'
       post 'save_design_style'
       get 'design_space'

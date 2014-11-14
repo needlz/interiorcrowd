@@ -11,6 +11,7 @@ class AppealScale
   ]
 
   attr_reader :first, :second, :value
+  attr_accessor :reason
 
   def initialize(appeal)
     @appeal = appeal
@@ -59,6 +60,7 @@ class AppealScale
     Appeal.all.order(:id).map do |appeal|
       appeal_scale = new(appeal)
       appeal_scale.value = options[appeal.identifier].try(:[], :value).to_i
+      appeal_scale.reason = options[appeal.identifier].try(:[], :reason)
       appeal_scale
     end
   end
@@ -67,6 +69,7 @@ class AppealScale
     contests_appeals.map do |contest_appeal|
       appeal_scale = new(contest_appeal.appeal)
       appeal_scale.value = contest_appeal.value
+      appeal_scale.reason = contest_appeal.reason
       appeal_scale
     end
   end
