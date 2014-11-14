@@ -8,13 +8,8 @@ class Contest < ActiveRecord::Base
   has_many :appeals, through: :contests_appeals
   has_many :liked_external_examples, class_name: 'ImageLink'
 
-  has_many :contests_images
-
-  has_many :liked_examples_contests_images, ->{ liked_examples }, class_name: 'ContestsImage'
-  has_many :space_contests_images, ->{ space_images }, class_name: 'ContestsImage'
-
-  has_many :liked_examples, through: :liked_examples_contests_images, class_name: 'Image', source: :image
-  has_many :space_images, through: :space_contests_images, class_name: 'Image', source: :image
+  has_many :liked_examples, -> { liked_examples }, class_name: 'Image'
+  has_many :space_images, -> { space_images }, class_name: 'Image'
 
   belongs_to :client
   belongs_to :design_category
@@ -40,7 +35,7 @@ class Contest < ActiveRecord::Base
           space_image_urls: (options[:design_space][:document].split(',').map(&:strip) if options[:design_space].try(:[], :document)),
           liked_example_ids: (options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style].try(:[], :document_id)),
           liked_example_urls: (options[:design_style][:document].split(',').map(&:strip) if options[:design_style].try(:[], :document)),
-          example_links: (options[:design_style][:ex_links].split(',').map(&:strip)  if options[:design_space].try(:[], :ex_links))
+          example_links: (options[:design_style][:ex_links].split(',').map(&:strip)  if options[:design_style].try(:[], :ex_links))
       }
     })
   end
@@ -61,10 +56,21 @@ class Contest < ActiveRecord::Base
     end
   end
 
+  def add_space_images(image_ids)
+    add_images(image_ids, Image::SPACE)
+  end
+
+  def add_example_images(image_ids)
+    add_images(image_ids, Image::LIKED_EXAMPLE)
+  end
+
+  private
+
   def add_images(image_ids, kind)
-    return unless image_ids
-    image_ids.each do |image_id|
-      contests_images << ContestsImage.new(image_id: image_id, kind: kind)
+    images = Image.where(id: image_ids)
+    images.each do |image|
+      image.update_attributes(contest_id: id, kind: kind)
     end
   end
+
 end

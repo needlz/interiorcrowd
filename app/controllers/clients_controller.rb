@@ -64,8 +64,8 @@ class ClientsController < ApplicationController
           contest_associations = contest_options[:contest_associations]
           contest.add_appeals(contest_options[:contest])
           contest.add_external_examples(contest_associations[:example_links])
-          contest.add_images(contest_associations[:space_image_ids], ContestsImage::SPACE)
-          contest.add_images(contest_associations[:liked_example_ids], ContestsImage::LIKED_EXAMPLE)
+          contest.add_space_images(contest_associations[:space_image_ids])
+          contest.add_example_images(contest_associations[:liked_example_ids])
           clear_session
         end
       end
