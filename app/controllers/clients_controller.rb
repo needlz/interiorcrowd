@@ -41,42 +41,31 @@ class ClientsController < ApplicationController
   def create_contests(user_id)
     all_steps = session[:design_brief].present? && session[:design_style].present? && session[:design_space].present? && session[:preview].present?
     if all_steps
-      params = ActionController::Parameters.new contest: {design_category_id: session[:design_brief][:design_category],
-                                                          design_space_id: session[:design_brief][:design_area],
-                                                          space_length: session[:design_space][:length],
-                                                          space_width: session[:design_space][:width],
-                                                          space_height: session[:design_space][:height],
-                                                          space_budget: session[:design_space][:f_budget],
-                                                          feedback: session[:design_space][:feedback],
-                                                          budget_plan: session[:preview][:b_plan],
-                                                          project_name: session[:preview][:contest_name],
-                                                          client_id: user_id
-      }.merge(session[:design_style])
-
-      contest_params = params.require(:contest).permit(:client_id,
-                                      :project_name,
-                                      :budget_plan,
-                                      :feedback,
-                                      :space_budget,
-                                      :cd_space_flength,
-                                      :space_length,
-                                      :space_width,
-                                      :space_height,
-                                      :desirable_colors,
-                                      :undesirable_colors,
-                                      :cd_style_links,
-                                      :design_space_id,
-                                      :design_category_id,
+      contest_options = complete_contest_options(Contest.options_from_hash(session), user_id)
+      contest_attributes = contest_options.require(:contest).permit(
+        :client_id,
+        :project_name,
+        :budget_plan,
+        :feedback,
+        :space_budget,
+        :cd_space_flength,
+        :space_length,
+        :space_width,
+        :space_height,
+        :desirable_colors,
+        :undesirable_colors,
+        :cd_style_links,
+        :design_space_id,
+        :design_category_id,
       )
-      contest = Contest.new(contest_params)
+      contest = Contest.new(contest_attributes)
       contest.transaction do
         if contest.save!
-          contest.add_appeals(session[:design_style])
-          contest.add_external_examples(session[:design_style][:ex_links].split(',').map(&:strip))
-          space_image_ids = session[:design_space][:document_id].split(',').map(&:strip).map(&:to_i)
-          liked_example_ids = session[:design_style][:document_id].split(',').map(&:strip).map(&:to_i)
-          contest.add_images(space_image_ids, ContestsImage::SPACE)
-          contest.add_images(liked_example_ids, ContestsImage::LIKED_EXAMPLE)
+          contest_associations = contest_options[:contest_associations]
+          contest.add_appeals(contest_options[:contest])
+          contest.add_external_examples(contest_associations[:example_links])
+          contest.add_images(contest_associations[:space_image_ids], ContestsImage::SPACE)
+          contest.add_images(contest_associations[:liked_example_ids], ContestsImage::LIKED_EXAMPLE)
           clear_session
         end
       end
@@ -88,6 +77,13 @@ class ClientsController < ApplicationController
     session[:design_style] = nil
     session[:design_space] = nil
     session[:preview] = nil
+  end
+
+  def complete_contest_options(basic_contest_options, user_id)
+    ActionController::Parameters.new(
+      contest: basic_contest_options[:contest].merge(client_id: user_id),
+      contest_associations: basic_contest_options[:contest_associations]
+    )
   end
 
 end

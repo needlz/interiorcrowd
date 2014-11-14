@@ -6,4 +6,7 @@ class ContestsImage < ActiveRecord::Base
   belongs_to :contest
   belongs_to :image
 
+  scope :liked_examples, where(kind: LIKED_EXAMPLE)
+  scope :space_images, where(kind: SPACE)
+
 end
