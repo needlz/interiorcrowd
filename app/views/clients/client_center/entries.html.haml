@@ -1,3 +1,8 @@
+- content_for :head do
+  = javascript_include_tag 'clients/entries'
+  :javascript
+    I18n = #{ translations_to_json(['client_center', 'entries']) }
+
 - content_for :client_center_content do
   .row.client-center.moodboards
     - @contest_requests.in_groups_of(2, false) do |contest_requests|
