@@ -9,5 +9,5 @@
 .row
   .col-sm-4
     %label.checkbox
-      - top_level_areas.each do |area|
+      - top_level_areas.includes(:children).each do |area|
         = areas_child_dropdown(area, design_area)
