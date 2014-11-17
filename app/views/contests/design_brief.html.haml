@@ -14,7 +14,9 @@
         collection: @creation_wizard.available_design_categories,
         as: :design_category
     %span#err_category.text-error
-    = render partial: 'contests/area_dropdown', locals: { design_area: @contest_view.design_area }
+    = render partial: 'contests/area_dropdown',
+        locals: { design_area: @contest_view.design_area,
+                  top_level_areas: @creation_wizard.available_design_areas.top_level }
   .row.formbuttons
     .col-sm-4.col-sm-offset-6
       = link_to "CONTINUE", '#', :class => "order"

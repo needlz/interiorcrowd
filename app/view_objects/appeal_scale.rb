@@ -42,9 +42,9 @@ class AppealScale
 
   def value=(value)
     if value.present?
-      @value = value
+      @value = value.to_i
     else
-      @value = default_value
+      @value = nil
     end
   end
 
@@ -59,7 +59,7 @@ class AppealScale
   def self.initialize_from_options(options)
     Appeal.all.order(:id).map do |appeal|
       appeal_scale = new(appeal)
-      appeal_scale.value = options[appeal.identifier].try(:[], :value).to_i
+      appeal_scale.value = options[appeal.identifier].try(:[], :value)
       appeal_scale.reason = options[appeal.identifier].try(:[], :reason)
       appeal_scale
     end

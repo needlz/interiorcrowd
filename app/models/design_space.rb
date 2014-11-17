@@ -2,7 +2,7 @@ class DesignSpace < ActiveRecord::Base
   ACTIVE_STATUS = 1
 
   has_many :contests
-  has_one :parent, class_name: 'DesignSpace', foreign_key: :parent
+  belongs_to :parent, class_name: 'DesignSpace', foreign_key: :parent_id
 
   scope :available, where(status: ACTIVE_STATUS).order(pos: :asc)
   scope :top_level, where(parent_id: 0)

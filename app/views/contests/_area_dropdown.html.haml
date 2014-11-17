@@ -4,10 +4,10 @@
 .row
   .col-sm-4
     %label.checkbox
-      = areas_parent_dropdown(design_area)
+      = areas_parent_dropdown(top_level_areas, design_area)
+    %span#err_design_area.text-error
 .row
   .col-sm-4
     %label.checkbox
-      - @creation_wizard.available_design_areas.top_level.each do |area|
-        - if area.children.present?
-          = select_tag('design_area', options_for_select(area.children.map { |child| [child.name, child.id] } ), class: 'area-children', 'data-id' => area.id, style: 'display: none')
+      - top_level_areas.each do |area|
+        = areas_child_dropdown(area, design_area)

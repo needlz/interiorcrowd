@@ -1,6 +1,12 @@
 $ ->
   levelContainer = $("input[name='design_style[designer_level]']")
 
+  allAppealsSelected = ->
+    $.grep($('select.appeal'), (appeal)->
+      $(appeal).val() == ''
+    ).length == 0
+
+
   $(".slidercon input").slider()
   $(".continue").click (e) ->
     e.preventDefault()
@@ -16,7 +22,10 @@ $ ->
       $("#err_refrain").html "Please enter data."
     if isNaN(parseInt(levelContainer.val()))
       valid = false
-      $("#err-designer-level").html "Please select one of the options."
+      $("#err-designer-level").html "Please select one"
+    unless allAppealsSelected()
+      valid = false
+      $("#err-appeals").html "Please pick your opinion for each appeal"
     if valid
       $("#design_style").submit()
     else

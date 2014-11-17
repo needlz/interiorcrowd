@@ -7,12 +7,26 @@ module ContestsHelper
                      class: "design_element"
   end
 
-  def areas_parent_dropdown(area)
+  def areas_parent_dropdown(top_level_areas, selected_area)
+    areas_dropdown(top_level_areas, selected_area.try(:parent) || selected_area)
+  end
+
+  def areas_child_dropdown(area, selected_area)
+    return if area.children.blank?
+    areas_dropdown(area.children,
+                   selected_area,
+                     class: 'area-children appeal',
+                     'data-id' => area.id,
+                     style: 'display: none')
+  end
+
+  def areas_dropdown(areas, selected_area, options = {})
     select_tag 'design_area',
                options_for_select(
-                 @creation_wizard.available_design_areas.top_level.map { |area| [area.name, area.id]},
-                 area.try(:id)
-               )
+                 [['Select one', '']] + areas.map { |area| [area.name, area.id]},
+                 selected_area.try(:id),
+               ),
+               options
   end
 
 end
