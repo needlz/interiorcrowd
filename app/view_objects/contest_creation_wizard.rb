@@ -44,7 +44,7 @@ class ContestCreationWizard
   end
 
   def available_areas
-    DesignSpace.available.top_level.map do |area|
+    DesignSpace.available.top_level.includes(:children).map do |area|
       { id: area.id, name: area.name, children: area.children }
     end
   end
