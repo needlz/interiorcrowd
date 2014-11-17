@@ -1,5 +1,6 @@
 en:
   contests:
+    default_selection: Select one
     titles:
       creation: Launch a New Design Contest
       design_categories: What do you need help with today?

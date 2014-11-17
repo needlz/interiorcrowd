@@ -48,7 +48,7 @@ $ ->
 
   $('.level-block').click ->
     selectedLevel = $(@)
-    newId = selectedLevel.attr('data-id')
+    newId = selectedLevel.attr('data_id')
     levelContainer.val(newId)
 
     $('.level-block').removeClass('active')

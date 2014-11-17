@@ -16,15 +16,16 @@ module ContestsHelper
     areas_dropdown(area.children,
                    selected_area,
                      class: 'area-children appeal',
-                     'data-id' => area.id,
+                     data_id: area.id,
                      style: 'display: none')
   end
 
   def areas_dropdown(areas, selected_area, options = {})
+    default_option = [t('contests.default_selection'), '']
     select_tag 'design_area',
                options_for_select(
-                 [['Select one', '']] + areas.map { |area| [area.name, area.id]},
-                 selected_area.try(:id),
+                 [default_option] + areas.map { |area| [area.name, area.id]},
+                 selected_area.try(:id)
                ),
                options
   end

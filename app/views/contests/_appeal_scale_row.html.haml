@@ -1,6 +1,6 @@
 .col-sm-12{ style: 'margin-bottom: 20px' }
   = select_tag "design_style[#{ scale.identifier }][value]",
-      options_for_select([['Select one', '']] + @creation_wizard.available_appeal_feedback, scale.value),
+      options_for_select([[t('contests.default_selection'), '']] + @creation_wizard.available_appeal_feedback, scale.value),
       class: 'appeal'
   = text_field_tag "design_style[#{ scale.identifier }][reason]",
       scale.reason,

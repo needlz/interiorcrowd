@@ -28,14 +28,23 @@ class @DesignArea
 
   update: ->
     $("#err_design_area").html('')
-    @childrenDropdowns.hide().removeAttr('name')
-    id = @id()
-    if $.grep(@areas, (area)=>
-      return (area.id == id) && (area.children.length)
-    ).length
+    @hideAllChildrenDropdowns()
+    if @selectionHasChildren()
       @parentDropdown.removeAttr('name')
-      @childrenDropdowns.filter("[data-id='#{ id }']").show().attr('name', 'design_area')
+      @showChildrenDropdown()
     else
       @parentDropdown.attr('name', 'design_area')
+
   id: ->
     parseInt(@parentDropdown.val())
+
+  selectionHasChildren: ->
+    $.grep(@areas, (area)=>
+      return (area.id == @id()) && (area.children.length)
+    ).length
+
+  showChildrenDropdown: ->
+    @childrenDropdowns.filter("[data_id='#{ @id() }']").show().attr('name', 'design_area')
+
+  hideAllChildrenDropdowns: ->
+    @childrenDropdowns.hide().removeAttr('name')
