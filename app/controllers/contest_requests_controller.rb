@@ -53,8 +53,10 @@ class ContestRequestsController < ApplicationController
       end
       session[:lookbook] = nil
       if params[:op] == 'lock'
-        crequest = ContestRequest.new({designer_id: session[:designer_id], contest_id: params[:id]})
-        crequest.save
+        request = ContestRequest.new({designer_id: session[:designer_id],
+                                       contest_id: params[:id],
+                                       lookbook_id: lookbook_id})
+        request.save
         flash[:notice] = "Lookbook has been successfully created and you also responded successfully."
         redirect_to contests_path
       else

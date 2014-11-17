@@ -1,0 +1,14 @@
+#in_pricing
+  .container
+    .section_header
+      \ 
+    .row.charts_wrapp
+      .col-sm-12
+        .plan
+          .wrapper.client-center
+            .row
+              .page-header
+                %h2 Client Center
+            .row
+              = render partial: 'clients/client_center/header'
+            = yield :client_center_content

@@ -13,4 +13,8 @@ class Designer < ActiveRecord::Base
      username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil
      #self.find_by_email(username)
   end
+
+  def name
+    "#{ first_name } #{ last_name }"
+  end
 end

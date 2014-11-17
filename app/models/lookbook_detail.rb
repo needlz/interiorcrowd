@@ -7,4 +7,12 @@ class LookbookDetail < ActiveRecord::Base
 
   scope :uploaded_pictures, where(doc_type: UPLOADED_PICTURE_TYPE)
   scope :external_pictures, where(doc_type: EXTERNAL_PICTURE_TYPE)
+
+  def uploaded?
+    doc_type == UPLOADED_PICTURE_TYPE
+  end
+
+  def external?
+    doc_type == EXTERNAL_PICTURE_TYPE
+  end
 end

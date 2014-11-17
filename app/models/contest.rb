@@ -14,6 +14,7 @@ class Contest < ActiveRecord::Base
   belongs_to :client
   belongs_to :design_category
   belongs_to :design_space
+  has_many :contest_requests
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
 
