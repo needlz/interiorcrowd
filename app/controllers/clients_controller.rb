@@ -2,8 +2,6 @@ class ClientsController < ApplicationController
   before_filter :check_client, only: [:client_center]
   before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
 
-  MOODBOARDS_PER_PAGE = 8
-
   def client_center
     if @client.last_contest.contest_requests.present?
       redirect_to entries_clients_path
@@ -14,9 +12,8 @@ class ClientsController < ApplicationController
 
   def entries
     contest = @client.last_contest
-    @contest_requests = contest.contest_requests.includes(:designer, :lookbook)
-    page = params[:page] || 1
-    @contest_requests = @contest_requests.paginate(page: page, per_page: MOODBOARDS_PER_PAGE)
+    requests = contest.contest_requests.includes(:designer, :lookbook)
+    @contest_requests = requests.by_page(params[:page])
     render 'clients/client_center/entries'
   end
 

@@ -1,7 +1,11 @@
 class ContestRequest < ActiveRecord::Base
+  self.per_page = 8
+
   belongs_to :designer
   belongs_to :contest
   belongs_to :lookbook
+
+  scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
 
   def moodboard_image_path
     lookbook_details = lookbook.lookbook_details
