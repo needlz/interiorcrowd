@@ -19,4 +19,8 @@ class Client < ActiveRecord::Base
      password = encrypt(password)
      username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil
   end
+
+  def last_contest
+    contests.order(:created_at).last
+  end
 end

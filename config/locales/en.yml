@@ -36,3 +36,5 @@ en:
     creation:
       errors:
         required_data_missing: Please fill the required info.
+  client_center:
+    welcome_user: Welcome, %{username}

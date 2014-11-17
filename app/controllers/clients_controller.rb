@@ -1,9 +1,31 @@
 class ClientsController < ApplicationController
   before_filter :check_client, only: [:client_center]
+  before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
+
+  MOODBOARDS_PER_PAGE = 8
 
   def client_center
-    contests = Client.find_by_id(session[:client_id]).contests.pluck(:id)
-    @contest_requests = ContestRequest.where("contest_id IN (?)", contests)
+    if @client.last_contest.contest_requests.present?
+      redirect_to entries_clients_path
+    else
+      redirect_to brief_clients_path
+    end
+  end
+
+  def entries
+    contest = @client.last_contest
+    @contest_requests = contest.contest_requests.includes(:designer, :lookbook)
+    page = params[:page] || 1
+    @contest_requests = @contest_requests.paginate(page: page, per_page: MOODBOARDS_PER_PAGE)
+    render 'clients/client_center/entries'
+  end
+
+  def brief
+    render 'clients/client_center/brief'
+  end
+
+  def profile
+    render 'clients/client_center/profile'
   end
 
   def create
@@ -84,6 +106,10 @@ class ClientsController < ApplicationController
       contest: basic_contest_options[:contest].merge(client_id: user_id),
       contest_associations: basic_contest_options[:contest_associations]
     )
+  end
+
+  def set_client
+    @client = Client.find_by_id(session[:client_id])
   end
 
 end

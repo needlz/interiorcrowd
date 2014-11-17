@@ -1,0 +1,9 @@
+.col-md-6{ style: 'text-align: center;' }
+  %div
+    - if contest_request.moodboard_image_path
+      = image_tag contest_request.moodboard_image_path
+    - else
+      No images
+  .designer
+    = contest_request.designer.name
+  = render partial: 'clients/moodboard_answers'
