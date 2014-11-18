@@ -67,20 +67,20 @@ class ClientsController < ApplicationController
     if all_steps
       contest_options = complete_contest_options(Contest.options_from_hash(session), user_id)
       contest_attributes = contest_options.require(:contest).permit(
-          :client_id,
-          :project_name,
-          :budget_plan,
-          :feedback,
-          :space_budget,
-          :cd_space_flength,
-          :space_length,
-          :space_width,
-          :space_height,
-          :desirable_colors,
-          :undesirable_colors,
-          :cd_style_links,
-          :design_space_id,
-          :design_category_id,
+        :client_id,
+        :project_name,
+        :budget_plan,
+        :feedback,
+        :space_budget,
+        :cd_space_flength,
+        :space_length,
+        :space_width,
+        :space_height,
+        :desirable_colors,
+        :undesirable_colors,
+        :cd_style_links,
+        :design_space_id,
+        :design_category_id,
       )
       contest = Contest.new(contest_attributes)
       contest.transaction do

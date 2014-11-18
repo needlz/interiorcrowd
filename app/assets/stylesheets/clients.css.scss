@@ -1,12 +1,20 @@
 .client-center {
   .header {
-    border-bottom: 1px solid #eee
+    border-bottom: 1px solid #eee;
   }
 
   .moodboards {
     .pagination-row {
-      clear:both;
+      clear: both;
       text-align: center;
     }
+
+    .moodboard {
+      text-align: center;
+    }
+  }
+
+  .winner-dialog {
+    margin-bottom: 45px;
   }
 }

@@ -1,6 +1,10 @@
 class ContestRequest < ActiveRecord::Base
   self.per_page = 8
 
+  ANSWERS = ['no', 'maybe', 'favorite', 'winner']
+
+  validates_inclusion_of :answer, in: ANSWERS, allow_nil: true
+
   belongs_to :designer
   belongs_to :contest
   belongs_to :lookbook
