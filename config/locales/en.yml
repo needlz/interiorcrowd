@@ -38,3 +38,14 @@ en:
         required_data_missing: Please fill the required info.
   client_center:
     welcome_user: Welcome, %{username}
+    entries:
+      answers:
+        no: No
+        maybe: Maybe
+        favorite: Favorite
+        winner: Winner
+      winner_dialog:
+        title: Ready to pick the Winner?
+        text: Please confirm
+        'yes': 'Yes'
+        'no': 'No'

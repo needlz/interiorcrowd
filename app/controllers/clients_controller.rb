@@ -1,9 +1,10 @@
+require 'will_paginate/array'
 class ClientsController < ApplicationController
   before_filter :check_client, only: [:client_center]
   before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
 
   def client_center
-    if @client.last_contest.contest_requests.present?
+    if @client.last_contest.try(:contest_requests).present?
       redirect_to entries_clients_path
     else
       redirect_to brief_clients_path
@@ -12,8 +13,12 @@ class ClientsController < ApplicationController
 
   def entries
     contest = @client.last_contest
-    requests = contest.contest_requests.includes(:designer, :lookbook)
-    @contest_requests = requests.by_page(params[:page])
+    if contest
+      requests = contest.contest_requests.includes(:designer, :lookbook)
+      @contest_requests = requests.by_page(params[:page])
+    else
+      @contest_requests = [].paginate
+    end
     render 'clients/client_center/entries'
   end
 
@@ -100,8 +105,8 @@ class ClientsController < ApplicationController
 
   def complete_contest_options(basic_contest_options, user_id)
     ActionController::Parameters.new(
-      contest: basic_contest_options[:contest].merge(client_id: user_id),
-      contest_associations: basic_contest_options[:contest_associations]
+        contest: basic_contest_options[:contest].merge(client_id: user_id),
+        contest_associations: basic_contest_options[:contest_associations]
     )
   end
 

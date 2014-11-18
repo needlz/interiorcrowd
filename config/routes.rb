@@ -18,6 +18,7 @@ InteriorC::Application.routes.draw do
   resources :contest_requests do
     member do
       get 'save_lookbook'
+      post 'answer'
     end
   end
 

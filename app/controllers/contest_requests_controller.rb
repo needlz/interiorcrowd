@@ -1,5 +1,6 @@
 class ContestRequestsController < ApplicationController
-  before_filter :check_designer
+  before_filter :check_designer, only: [:create, :save_lookbook]
+  before_filter :check_client, only: [:answer]
 
   def create
     @crequest = ContestRequest.new(params[:contest_request])
@@ -64,6 +65,12 @@ class ContestRequestsController < ApplicationController
         redirect_to lookbook_designer_path(params[:id])
       end
     end
+  end
+
+  def answer
+    request = ContestRequest.find_by_id(params[:id])
+    replied = request.reply(params[:answer], session[:client_id])
+    render json: { answered: replied }
   end
 
 end
