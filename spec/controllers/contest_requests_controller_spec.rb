@@ -11,40 +11,42 @@ RSpec.describe ContestRequestsController do
   end
 
   describe "POST answer" do
-    it "should return 'saved':'true' if answer is set to 'winner'" do
+    let(:answered) { JSON.parse(response.body)['answered'] }
+
+    it 'saves if answer is winner' do
       post :answer, id: request.id, answer: 'winner'
-      expect(JSON.parse(response.body)['saved']).to eq true
+      expect(answered).to eq true
     end
 
-    it "should return 'saved':'true' if answer is set to 'no'" do
+    it 'saves if answer is no' do
       post :answer, id: request.id, answer: 'no'
-      expect(JSON.parse(response.body)['saved']).to eq true
+      response.body
+      expect(answered).to eq true
     end
 
-    it "should return 'saved':'true' if answer is set to 'favorite'" do
+    it 'saves if answer is favorite' do
       post :answer, id: request.id, answer: 'favorite'
-      expect(JSON.parse(response.body)['saved']).to eq true
+      expect(answered).to eq true
     end
 
-    it "should return 'saved':'true' if answer is set to 'maybe'" do
+    it 'saves if answer is maybe' do
       post :answer, id: request.id, answer: 'maybe'
-      expect(JSON.parse(response.body)['saved']).to eq true
+      expect(answered).to eq true
     end
 
-    it "should return 'saved':'false' if answer is set to unknown value" do
+    it 'does not save if answer is unknown' do
       post :answer, id: request.id, answer: 'what?'
-      expect(JSON.parse(response.body)['saved']).to eq false
+      expect(answered).to eq false
     end
 
-    it "should return 'saved':'false' if request id is wrong" do
-      post :answer, id: 0, answer: 'no'
-      expect(JSON.parse(response.body)['saved']).to eq false
+    it 'does not save if request id is wrong' do
+      expect { post :answer, id: 0, answer: 'no' }.to raise_exception
     end
 
-    it "should return 'saved':'false' if user is not logged as contest creator" do
+    it 'does not save if user is not logged as contest creator' do
       session[:client_id] = 0
-      post :answer, id: 0, answer: 'no'
-      expect(JSON.parse(response.body)['saved']).to eq false
+      post :answer, id: request.id, answer: 'no'
+      expect(answered).to be_falsy
     end
   end
 end

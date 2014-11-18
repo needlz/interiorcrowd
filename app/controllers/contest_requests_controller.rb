@@ -69,11 +69,8 @@ class ContestRequestsController < ApplicationController
 
   def answer
     request = ContestRequest.find_by_id(params[:id])
-    answer = params[:answer]
-    saved = request &&
-      request.contest.client_id == session[:client_id] &&
-      request.update_attributes(answer: answer)
-    render text: { saved: !!saved }.to_json
+    replied = request.reply(params[:answer], session[:client_id])
+    render json: { answered: replied }
   end
 
 end
