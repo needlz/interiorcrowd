@@ -1,10 +1,10 @@
-.col-md-6.moodboard{ data_id: contest_request.id }
+.col-md-6.moodboard{ data: { id: contest_request.id } }
   %div
     - if contest_request.moodboard_image_path
       = link_to image_tag(contest_request.moodboard_image_path), contest_request_path(id: contest_request.id)
     - else
-      = link_to 'No images', contest_request_path(id: contest_request.id)
+      = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
   .designer
     = contest_request.designer.name
-  = render partial: 'clients/moodboard_answers'
+  = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
   %span.current-answer= contest_request.answer

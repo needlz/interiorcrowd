@@ -16,7 +16,7 @@ module ContestsHelper
     areas_dropdown(area.children,
                    selected_area,
                      class: 'area-children appeal',
-                     data_id: area.id,
+                     data: { id: area.id },
                      style: 'display: none')
   end
 

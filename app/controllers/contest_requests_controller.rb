@@ -75,10 +75,7 @@ class ContestRequestsController < ApplicationController
 
   def show
     @client = Client.find(session[:client_id])
-    if @client
-      @request = ContestRequest.find(params[:id])
-      render 'contest_requests/show'
-    end
+    @request = ContestRequest.find(params[:id])
   end
 
 end

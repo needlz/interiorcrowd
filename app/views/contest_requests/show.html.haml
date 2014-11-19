@@ -4,6 +4,8 @@
     I18n = #{ translations_to_json(['client_center', 'entries']) }
 
 - content_for :client_center_content do
+  = render partial: 'clients/client_center/moodboard_winner_dialog'
+
   = link_to t('client_center.moodboard_details.back'), entries_clients_path
   .row
     .col-sm-9

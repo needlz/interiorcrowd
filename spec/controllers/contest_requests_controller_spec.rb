@@ -10,7 +10,7 @@ RSpec.describe ContestRequestsController do
     session[:client_id] = client.id
   end
 
-  describe "POST answer" do
+  describe 'POST answer' do
     let(:answered) { JSON.parse(response.body)['answered'] }
 
     it 'saves if answer is winner' do
@@ -47,6 +47,22 @@ RSpec.describe ContestRequestsController do
       session[:client_id] = 0
       post :answer, id: request.id, answer: 'no'
       expect(answered).to be_falsy
+    end
+  end
+
+  describe 'GET show' do
+    it 'responses with OK status' do
+      get :show, id: request.id
+      expect(response).to be_ok
+    end
+
+    it 'raises error if client is not logged in' do
+      session[:client_id] = 0
+      expect { get :show, id: request.id }.to raise_error
+    end
+
+    it 'raises error if requestid is wrong' do
+      expect { get :show, id: 0 }.to raise_error
     end
   end
 end

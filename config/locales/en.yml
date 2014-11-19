@@ -38,6 +38,7 @@ en:
         required_data_missing: Please fill the required info.
   client_center:
     welcome_user: Welcome, %{username}
+    no_images: No images
     entries:
       answers:
         no: No

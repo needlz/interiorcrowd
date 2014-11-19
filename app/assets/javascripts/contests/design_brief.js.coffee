@@ -44,7 +44,7 @@ class @DesignArea
     ).length
 
   showChildrenDropdown: ->
-    @childrenDropdowns.filter("[data_id='#{ @id() }']").show().attr('name', 'design_area')
+    @childrenDropdowns.filter("[data-id='#{ @id() }']").show().attr('name', 'design_area')
 
   hideAllChildrenDropdowns: ->
     @childrenDropdowns.hide().removeAttr('name')
