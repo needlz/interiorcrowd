@@ -35,7 +35,8 @@ class @Answers
       answer = $(@).attr('answer')
       self.sendAnswer(requestId, answer)
 
-  sendAnswer: (requestId, answer, callbacks)->
+  sendAnswer: (requestId, answer, custom_callbacks)->
+    callbacks = @bindViewUpdate(requestId, answer, custom_callbacks)
     options = $.extend(
       {
         type: 'POST',
@@ -45,11 +46,23 @@ class @Answers
       callbacks)
     $.ajax(options)
 
+  bindViewUpdate: (requestId, answer, callbacks)->
+    callbacks_with_injection = $.extend({}, callbacks)
+    customSuccess = callbacks_with_injection.success if callbacks_with_injection.success
+    callbacks_with_injection.success = (data)=>
+      @updateView(requestId, answer)
+      customSuccess?(data)
+    callbacks_with_injection
+
+  updateView: (requestId, answer)->
+    $(".moodboard[data_id='#{ requestId }'] .current-answer").text(answer)
+
   hidePopover: ($popover_element)->
     id = $popover_element.parents('.winner-dialog').attr('data_id')
     $(".moodboard[data_id='#{id}'] .winner-answer").popover('hide')
 
   onDialogYesClick: (button)->
+    self = @
     $button = $(button)
     $dialog = $button.parents('.winner-dialog')
     requestId = $dialog.attr('data_id')

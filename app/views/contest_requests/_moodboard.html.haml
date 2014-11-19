@@ -1,0 +1,9 @@
+.moodboard{ data_id: contest_request.id }
+  %div
+    - if contest_request.moodboard_image_path
+      = image_tag(contest_request.moodboard_image_path)
+    - else
+      = link_to 'No images', contest_request_path(id: contest_request.id)
+  .pull-right
+    = render partial: 'clients/moodboard_answers'
+    %span.current-answer= contest_request.answer

@@ -49,3 +49,6 @@ en:
         text: Please confirm
         'yes': 'Yes'
         'no': 'No'
+    moodboard_details:
+      back: < Back to Entries
+      designer_notes: Designer's Notes

@@ -1,0 +1,16 @@
+- content_for :head do
+  = javascript_include_tag 'clients/entries'
+  :javascript
+    I18n = #{ translations_to_json(['client_center', 'entries']) }
+
+- content_for :client_center_content do
+  = link_to t('client_center.moodboard_details.back'), entries_clients_path
+  .row
+    .col-sm-9
+      = render partial: 'contest_requests/moodboard', locals: { contest_request: @request }
+    .col-sm-3
+      = render partial: 'contest_requests/designer_info', locals: { designer: @request.designer }
+  .row
+    = render partial: 'contest_requests/designer_notes', locals: { notes: @request.feedback }
+
+= render partial: 'clients/client_center/layout'
