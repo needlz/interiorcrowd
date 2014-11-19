@@ -8,9 +8,16 @@
       clear: both;
       text-align: center;
     }
+  }
 
-    .moodboard {
-      text-align: center;
+  .moodboard {
+    text-align: center;
+
+    .image-container {
+      height: 300px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position-y: 25%;
     }
   }
 

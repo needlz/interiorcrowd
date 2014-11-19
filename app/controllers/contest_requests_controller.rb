@@ -48,7 +48,10 @@ class ContestRequestsController < ApplicationController
         document_titles = session[:lookbook]['link']['titles']
         document_urls.each_with_index do |url, index|
           if url.present?
-            LookbookDetail.create({lookbook_id: lookbook_id, url: url, doc_type: 2, description: document_titles[index]})
+            LookbookDetail.create({ lookbook_id: lookbook_id,
+                                    url: url,
+                                    doc_type: 2,
+                                    description: document_titles[index] })
           end
         end
       end
@@ -77,5 +80,4 @@ class ContestRequestsController < ApplicationController
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
   end
-
 end

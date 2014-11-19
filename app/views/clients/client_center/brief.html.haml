@@ -1,4 +1,15 @@
 - content_for :client_center_content do
-  Brief page
+  = render partial: 'contests/categories_preview'
+  %span.link Edit
+  = render partial: 'contests/areas_preview'
+  = render partial: 'contests/designer_level_preview'
+  = render partial: 'contests/appeals_preview'
+  = render partial: 'contests/colors_preview'
+  = render partial: 'contests/examples_preview'
+  = render partial: 'contests/links_preview'
+  = render partial: 'contests/space_pictures_preview'
+  = render partial: 'contests/dimensions_preview'
+  = render partial: 'contests/budget_preview'
+  = render partial: 'contests/comment_preview'
 
 = render partial: 'clients/client_center/layout'

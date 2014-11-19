@@ -23,6 +23,7 @@ class ClientsController < ApplicationController
   end
 
   def brief
+    @contest_view = ContestView.new(@client.last_contest)
     render 'clients/client_center/brief'
   end
 
