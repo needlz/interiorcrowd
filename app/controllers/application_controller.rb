@@ -10,5 +10,4 @@ class ApplicationController < ActionController::Base
   def check_client
     redirect_to client_login_sessions_path if session[:client_id].blank? 
   end
-
 end

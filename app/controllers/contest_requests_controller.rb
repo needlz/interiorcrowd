@@ -68,9 +68,14 @@ class ContestRequestsController < ApplicationController
   end
 
   def answer
-    request = ContestRequest.find_by_id(params[:id])
+    request = ContestRequest.find(params[:id])
     replied = request.reply(params[:answer], session[:client_id])
     render json: { answered: replied }
+  end
+
+  def show
+    @client = Client.find(session[:client_id])
+    @request = ContestRequest.find(params[:id])
   end
 
 end

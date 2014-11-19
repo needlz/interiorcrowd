@@ -1,6 +1,6 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
-  before_filter :check_client, only: [:client_center]
+  before_filter :check_client, only: [:client_center, :entries, :brief, :profile]
   before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
 
   def client_center
