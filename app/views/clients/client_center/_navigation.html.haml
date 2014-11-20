@@ -1,6 +1,3 @@
-.pull-right
-  = link_to 'Entries', entries_clients_path
-  |
-  = link_to 'Brief', brief_clients_path
-  |
-  = link_to 'Profile', profile_clients_path
+%ul.nav.nav-tabs.pull-right
+  - navigation_links.each do |navigation_link|
+    = render partial: 'clients/client_center/navigation_link', locals: navigation_link

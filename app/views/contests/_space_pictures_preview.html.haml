@@ -1,7 +1,4 @@
-.row
-  %label Upload pictures of your space:
-.row
-  .col-sm-8
-    %div
-      - @contest_view.space_pictures.try(:each) do |path|
-        %img{:src => path, :style => "padding-top:10px;"}/
+- value_html = capture do
+  - @contest_view.space_pictures.try(:each) do |path|
+    %img{:src => path, :style => "padding-top:10px;"}
+= render partial: 'contests/preview_row', locals: { title: t('contests.titles.brief.space_pictures'), value: value_html }

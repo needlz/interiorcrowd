@@ -1,5 +1,3 @@
-.row
-  %label Other feedback or instructions?
-.row
-  .col-sm-8
-    = @contest_view.feedback
+- value_html = capture do
+  = @contest_view.feedback
+= render partial: 'contests/preview_row', locals: { title: t('contests.titles.brief.feedback'), value: value_html }

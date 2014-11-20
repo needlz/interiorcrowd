@@ -1,7 +1,8 @@
 .col-md-6.moodboard{ data: { id: contest_request.id } }
   %div
     - if contest_request.moodboard_image_path
-      = link_to image_tag(contest_request.moodboard_image_path), contest_request_path(id: contest_request.id)
+      %a{ href: contest_request_path(id: contest_request.id) }
+        .image-container{ style: "background-image: url(#{ contest_request.moodboard_image_path })" }
     - else
       = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
   .designer

@@ -25,6 +25,7 @@ InteriorC::Application.routes.draw do
   resources :contests do
     member do
       get 'respond'
+      get 'option'
     end
 
     collection do
