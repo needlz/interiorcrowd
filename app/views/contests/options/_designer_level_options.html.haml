@@ -3,7 +3,7 @@
 .row
   = hidden_field_tag 'design_style[designer_level]', @contest_view.designer_level.try(:id)
   - @creation_wizard.available_designer_levels.each do |designer_level|
-    = render partial: 'contests/designer_level_item',
+    = render partial: 'contests/options/designer_level_item',
         locals: { designer_level: designer_level,
                   active: designer_level == @contest_view.designer_level }
 #err-designer-level.text-error

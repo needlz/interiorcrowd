@@ -1,0 +1,4 @@
+.row.charts_wrapp{:style => "margin-top:60px"}
+  - plans.each do |plan|
+    = render partial: 'contests/options/plan_box', locals: plan
+  %span#err_plan.text-error{:style => "padding-left:25px;"}

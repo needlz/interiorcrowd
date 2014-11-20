@@ -6,10 +6,10 @@
   = form_tag save_design_style_contests_path, {id: "design_style", method: "post"} do
     %input#design_style_image{name: "design_style[document]", type: "hidden", value: (session[:design_style][:document] if session[:design_style].present?)}
     %input#design_style_image_id{name: "design_style[document_id]", type: "hidden", value: (session[:design_style][:document_id] if session[:design_style].present?)}
-    = render partial: 'contests/designer_level_options'
-    = render partial: 'contests/appeals_options'
-    = render partial: 'contests/colors_options'
-    = render partial: 'contests/example_options'
+    = render partial: 'contests/options/designer_level_options'
+    = render partial: 'contests/options/appeals_options'
+    = render partial: 'contests/options/colors_options'
+    = render partial: 'contests/options/example_options'
     .row.formbuttons
       .col-sm-3
         %a.order{href: design_brief_contests_path} GO BACK

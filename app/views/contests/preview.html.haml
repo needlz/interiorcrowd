@@ -24,30 +24,7 @@
                 .page-header
                   %h3= t('contests.titles.preview')
               .container.col-sm-offset-1.preview
-                .row
-                  = render partial: 'contests/categories_preview'
-                .row
-                  = render partial: 'contests/areas_preview'
-                .row
-                  = render partial: 'contests/designer_level_preview'
-                .row
-                  = render partial: 'contests/appeals_preview'
-                .row
-                  = render partial: 'contests/desirable_colors_preview'
-                .row
-                  = render partial: 'contests/undesirable_colors_preview'
-                .row
-                  = render partial: 'contests/examples_preview'
-                .row
-                  = render partial: 'contests/links_preview'
-                .row
-                  = render partial: 'contests/space_pictures_preview'
-                .row
-                  = render partial: 'contests/dimensions_preview'
-                .row
-                  = render partial: 'contests/budget_preview'
-                .row
-                  = render partial: 'contests/comment_preview'
+                = render partial: 'contests/preview'
                 .row
                   .col-sm-9
                     .row.projectname.plan
@@ -60,7 +37,7 @@
                             type: "text",
                             value: @contest_view.name}
                           %span#err_prj_name.text-error
-              = render partial: 'contests/plan_options'
+              = render partial: 'contests/options/plan_options'
               .row.formbuttons
                 .col-sm-3.col-sm-offset-2
                   %a.order{:href => design_space_contests_path} GO BACK

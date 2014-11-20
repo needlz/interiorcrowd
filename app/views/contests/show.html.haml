@@ -25,30 +25,7 @@
                     = @contest_view.name
                     = Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest_view.budget_plan.to_i]
             .container.col-sm-offset-1.preview
-              .row
-                = render partial: 'contests/categories_preview'
-              .row
-                = render partial: 'contests/areas_preview'
-              .row
-                = render partial: 'contests/designer_level_preview'
-              .row
-                = render partial: 'contests/appeals_preview'
-              .row
-                = render partial: 'contests/desirable_colors_preview'
-              .row
-                = render partial: 'contests/undesirable_colors_preview'
-              .row
-                = render partial: 'contests/examples_preview'
-              .row
-                = render partial: 'contests/links_preview'
-              .row
-                = render partial: 'contests/space_pictures_preview'
-              .row
-                = render partial: 'contests/dimensions_preview'
-              .row
-                = render partial: 'contests/budget_preview'
-              .row
-                = render partial: 'contests/comment_preview'
+              = render partial: 'contests/preview'
             .row.formbuttons
               .col-sm-5.col-sm-offset-1
                 %a.order{:href => contests_path, :style => "width:70%"} Go back to other contests
