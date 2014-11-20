@@ -2,6 +2,9 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
+  before_filter :set_contest, only: [:show, :respond, :option]
+
+  OPTIONS = [:space_pictures]
 
   CREATION_STEPS = [
     :design_brief,
@@ -15,9 +18,8 @@ class ContestsController < ApplicationController
   end
   
   def show
-    contest = Contest.find_by_id(params[:id])
-    @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], contest.id)
-    @contest_view = ContestView.new(contest)
+    @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
+    @contest_view = ContestView.new(@contest)
   end
   
   def design_brief
@@ -99,8 +101,7 @@ class ContestsController < ApplicationController
   end
   
   def respond
-    @contest = Contest.find_by_id(params[:id])
-    cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], params[:id]) 
+    cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
     redirect_to contest_path if @contest.blank? || cr.present?  
     
     @crequest = ContestRequest.new
@@ -108,11 +109,22 @@ class ContestsController < ApplicationController
     @crequest.contest_id = params[:id]   
   end
 
+  def option
+    case params[:option]
+      when 'space_pictures'
+        render partial: 'contests/picture_of_space_option'
+    end
+  end
+
   private
 
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(params, session, CREATION_STEPS.index(params[:action].to_sym) + 1)
     @contest_view = ContestView.new(session.to_hash)
+  end
+
+  def set_contest
+    @contest = Contest.find_by_id(params[:id])
   end
 
 end

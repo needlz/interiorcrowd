@@ -1,7 +1,4 @@
-.row
-  %label= t('contests.titles.example')
-.row
-  .col-sm-8
-    %div
-    - @contest_view.examples.try(:each) do |path|
-      %img{:src => path, :style => "padding-right:10px;"}/
+- value_html = capture do
+  - @contest_view.examples.try(:each) do |path|
+    %img{:src => path, :style => "padding-right:10px;"}/
+= render partial: 'contests/preview_row', locals: { title: t('contests.titles.brief.example'), value: value_html }

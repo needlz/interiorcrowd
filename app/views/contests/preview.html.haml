@@ -24,17 +24,30 @@
                 .page-header
                   %h3= t('contests.titles.preview')
               .container.col-sm-offset-1.preview
-                = render partial: 'contests/categories_preview'
-                = render partial: 'contests/areas_preview'
-                = render partial: 'contests/designer_level_preview'
-                = render partial: 'contests/appeals_preview'
-                = render partial: 'contests/colors_preview'
-                = render partial: 'contests/examples_preview'
-                = render partial: 'contests/links_preview'
-                = render partial: 'contests/space_pictures_preview'
-                = render partial: 'contests/dimensions_preview'
-                = render partial: 'contests/budget_preview'
-                = render partial: 'contests/comment_preview'
+                .row
+                  = render partial: 'contests/categories_preview'
+                .row
+                  = render partial: 'contests/areas_preview'
+                .row
+                  = render partial: 'contests/designer_level_preview'
+                .row
+                  = render partial: 'contests/appeals_preview'
+                .row
+                  = render partial: 'contests/desirable_colors_preview'
+                .row
+                  = render partial: 'contests/undesirable_colors_preview'
+                .row
+                  = render partial: 'contests/examples_preview'
+                .row
+                  = render partial: 'contests/links_preview'
+                .row
+                  = render partial: 'contests/space_pictures_preview'
+                .row
+                  = render partial: 'contests/dimensions_preview'
+                .row
+                  = render partial: 'contests/budget_preview'
+                .row
+                  = render partial: 'contests/comment_preview'
                 .row
                   .col-sm-9
                     .row.projectname.plan

@@ -28,10 +28,6 @@ class ContestCreationWizard
     @design_categories_checkboxes
   end
 
-  def other_category_text
-    @other_category_text ||= session[:design_brief][:other] if session[:design_brief].present?
-  end
-
   def breadcrumb_class(step_index)
     return 'previous' if step_index < active_step_index
     return 'active' if step_index == active_step_index
