@@ -10,11 +10,9 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET option' do
-    it 'returns OK status if known options was passed' do
-      ContestsController::OPTIONS.each do |option|
-        get :option, id: contest.id, option: option.to_s
-        expect(response).to be_ok
-      end
+    it 'returns OK status if space_pictures was passed' do
+      get :option, id: contest.id, option: 'space_pictures'
+      expect(response).to be_ok
     end
 
     it 'throws exception if unknown option was passed' do

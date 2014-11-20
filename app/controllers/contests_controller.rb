@@ -4,8 +4,6 @@ class ContestsController < ApplicationController
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option]
 
-  OPTIONS = [:space_pictures]
-
   CREATION_STEPS = [
     :design_brief,
     :design_style,
@@ -110,10 +108,8 @@ class ContestsController < ApplicationController
   end
 
   def option
-    case params[:option]
-      when 'space_pictures'
-        render partial: 'contests/picture_of_space_option'
-    end
+    option = params[:option]
+    render partial: 'contests/picture_of_space_option' if option == 'space_pictures'
   end
 
   private
