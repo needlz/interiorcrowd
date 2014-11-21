@@ -5,6 +5,8 @@
   = javascript_include_tag  'jquery.uploadify'
   = javascript_include_tag 'contests/space_pictures_options'
   = javascript_include_tag 'contests/example_pictures_options'
+  = javascript_include_tag 'contests/desirable_colors_options'
+  = javascript_include_tag 'contests/undesirable_colors_options'
   = render partial: 'shared/setup_uploadify'
 
   = stylesheet_link_tag 'lib/select2-3.5.2/select2.css'
@@ -13,7 +15,7 @@
 
 - content_for :client_center_content do
   .contest{ data: { id: @contest.id } }
-    - brief_fields.each do |brief_field|
-      = render partial: 'clients/client_center/brief_option', locals: brief_field
+    - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
+      = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
 
 = render partial: 'clients/client_center/layout'

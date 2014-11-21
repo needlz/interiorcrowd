@@ -107,7 +107,7 @@ class ContestsController < ApplicationController
   end
 
   def option
-    @creation_wizard = ContestCreationWizard.new(params, session, 0)
+    @creation_wizard = ContestCreationWizard.new(action_params: params, action_session: session, step_index: 0)
     @contest_view = ContestView.new(session.to_hash)
     option = params[:option]
     render partial: "contests/options/#{ option }_options"
@@ -116,7 +116,9 @@ class ContestsController < ApplicationController
   private
 
   def set_creation_wizard
-    @creation_wizard = ContestCreationWizard.new(params, session, CREATION_STEPS.index(params[:action].to_sym) + 1)
+    @creation_wizard = ContestCreationWizard.new(action_params: params,
+                                                 action_session: session,
+                                                 step_index: CREATION_STEPS.index(params[:action].to_sym) + 1)
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -125,13 +127,8 @@ class ContestsController < ApplicationController
   end
 
   def uncomplete_step_path
-    @uncomplete_step_path ||=
-      if session[:design_brief].blank?
-        design_brief_contests_path
-      elsif session[:design_style].blank?
-        design_style_contests_path
-      elsif session[:design_space].blank?
-        design_space_contests_path
-      end
+    return design_brief_contests_path if session[:design_brief].blank?
+    return design_style_contests_path if session[:design_style].blank?
+    design_space_contests_path if session[:design_space].blank?
   end
 end

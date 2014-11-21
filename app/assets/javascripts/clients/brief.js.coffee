@@ -23,7 +23,6 @@ class @ContestEditing
       url: @optionsHtmlPath()
       success: (optionsHtml)=>
         @onOptionsRetrieved(option, optionsHtml)
-
     )
 
   onOptionsRetrieved: (option, optionsHtml)=>
@@ -35,7 +34,6 @@ class @ContestEditing
     $optionContainer.html(optionsHtml)
     $preview.addClass('preview').removeClass('value').hide().insertAfter($optionContainer)
     @attributeCallbacks[option]?()
-
 
   onCancelClick: (event)=>
     $editButton = $(event.target)
@@ -50,16 +48,15 @@ class @ContestEditing
   optionsRow: ($child)->
     $child.parents('.row[data-option]')
 
-  attributeCallbacks: {
+  attributeCallbacks:
     space_pictures: ->
       SpacePicturesUploader.init()
     example_pictures: ->
       ExamplesUploader.init()
     desirable_colors: ->
-      $('#fav_color').colorTags({ readonly: false })
+      DesirableColorsEditor.init()
     undesirable_colors: ->
-      $('#refrain_color').colorTags({ readonly: false })
-  }
+      UndesirableColorsEditor.init()
 
 $ ->
   window.brief = new ContestEditing()

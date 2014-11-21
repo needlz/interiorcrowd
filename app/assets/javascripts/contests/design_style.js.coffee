@@ -32,8 +32,8 @@ $ ->
       false
 
   ExamplesUploader.init()
-  $('#fav_color').colorTags({ readonly: false })
-  $('#refrain_color').colorTags({ readonly: false })
+  DesirableColorsEditor.init()
+  UndesirableColorsEditor.init()
 
   $('.level-block').click ->
     selectedLevel = $(@)

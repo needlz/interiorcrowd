@@ -11,7 +11,7 @@ RSpec.describe ContestsController do
 
   describe 'GET option' do
     it 'returns html of options' do
-      ContestView::OPTIONS_PARTIALS.each do |option|
+      ContestView::EDITABLE_ATTRIBUTES.each do |option|
         get :option, id: contest.id, option: option
         expect(response).to be_ok
         expect(response).to render_template(partial: "contests/options/_#{ option }_options")

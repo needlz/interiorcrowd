@@ -10,10 +10,4 @@ module ClientsHelper
      { name: 'Profile', path: profile_clients_path }]
   end
 
-  def brief_fields
-    ContestView::OPTIONS_PARTIALS.map do |option, partial|
-      { option: option, option_partial: "contests/previews/#{ option }_preview" }
-    end
-  end
-
 end

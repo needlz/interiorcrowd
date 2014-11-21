@@ -8,10 +8,10 @@ class ContestCreationWizard
     { name: 'Leave it...', value: 0 }
   ]
 
-  def initialize(action_params, action_session, step_index)
-    @params = action_params
-    @session = action_session
-    @active_step_index = step_index
+  def initialize(options)
+    @params = options[:action_params]
+    @session = options[:action_session]
+    @active_step_index = options[:step_index]
   end
 
   # design categories
@@ -37,6 +37,10 @@ class ContestCreationWizard
   # design areas
   def available_design_areas
     @available_design_areas ||= DesignSpace.available
+  end
+
+  def top_level_areas
+    @top_level_areas ||= available_design_areas.top_level.includes(:children)
   end
 
   def available_areas
