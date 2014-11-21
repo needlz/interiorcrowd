@@ -2,7 +2,10 @@ class ContestView
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level
-  
+
+  OPTIONS_PARTIALS = [:category, :area, :appeals, :desirable_colors, :undesirable_colors,
+        :example_pictures, :example_links, :space_pictures, :space_dimensions, :budget, :feedback]
+
   def initialize(options)
     if options.kind_of?(Hash)
       initialize_from_options(HashWithIndifferentAccess.new(options))

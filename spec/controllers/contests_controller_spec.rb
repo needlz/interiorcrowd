@@ -10,9 +10,12 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET option' do
-    it 'returns OK status if space_pictures was passed' do
-      get :option, id: contest.id, option: 'space_pictures'
-      expect(response).to be_ok
+    it 'returns html of options' do
+      ContestView::OPTIONS_PARTIALS.each do |option|
+        get :option, id: contest.id, option: option
+        expect(response).to be_ok
+        expect(response).to render_template(partial: "contests/options/_#{ option }_options")
+      end
     end
 
     it 'throws exception if unknown option was passed' do

@@ -1,6 +1,6 @@
 .row.step-row
   %label= t('contests.titles.example')
-.row
+.row.example-pictures
   .col-sm-8.col-sm-offset-1
     %span#image_display{:style => "padding-bottom:10px;"}
       - if session[:design_style].present? && session[:design_style][:document].present?
@@ -8,11 +8,3 @@
           %img{:src => path}
     %input#file_input{:name => "", :type => "file"}
     %span (.jpg, .tif, .png)
-
-.row
-  .col-sm-8.col-sm-offset-1
-    .col-sm-9
-      %label Add Links
-      %input.form-control{name: "design_style[ex_links]",
-        type: "text",
-        value: (session[:design_style][:ex_links] if session[:design_style].present?)}

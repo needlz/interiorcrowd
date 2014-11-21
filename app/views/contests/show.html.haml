@@ -24,7 +24,7 @@
                   %strong.price
                     = @contest_view.name
                     = Contest::CONTEST_DESIGN_BUDGET_PLAN[@contest_view.budget_plan.to_i]
-            .container.col-sm-offset-1.preview
+            .col-sm-offset-1.preview
               = render partial: 'contests/preview'
             .row.formbuttons
               .col-sm-5.col-sm-offset-1

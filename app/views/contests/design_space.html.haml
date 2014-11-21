@@ -4,10 +4,10 @@
     %input#design_space_image{:name => "design_space[document]", :type => "hidden", :value => (session[:design_space][:document] if session[:design_space].present?)}/
     %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => (session[:design_space][:document_id] if session[:design_space].present?)}/
 
-    = render partial: 'contests/options/picture_of_space_option'
-    = render partial: 'contests/options/dimensions_of_space_options'
-    = render partial: 'contests/options/budget_for_materials_options'
-    = render partial: 'contests/options/comments_options'
+    = render partial: 'contests/options/space_pictures_options'
+    = render partial: 'contests/options/space_dimensions_options'
+    = render partial: 'contests/options/budget_options'
+    = render partial: 'contests/options/feedback_options'
     .row.formbuttons
       .col-sm-3
         %a.order{:href => design_style_contests_path} GO BACK

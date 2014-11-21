@@ -53,9 +53,7 @@ class ContestsController < ApplicationController
       session[:design_space] = params[:design_space]
       unless CREATION_STEPS.all? { |step| session[step].present? }
         flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-        redirect_to design_brief_contests_path and return if session[:design_brief].blank?
-        redirect_to design_style_contests_path and return if session[:design_style].blank?
-        redirect_to design_space_contests_path and return if session[:design_space].blank?
+        redirect_to uncomplete_step_path and return if uncomplete_step_path
       end
     else
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
@@ -65,6 +63,7 @@ class ContestsController < ApplicationController
   end
 
   def preview
+    redirect_to uncomplete_step_path and return if uncomplete_step_path
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -99,8 +98,8 @@ class ContestsController < ApplicationController
   end
   
   def respond
-    cr = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
-    redirect_to contest_path if @contest.blank? || cr.present?  
+    request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
+    redirect_to contest_path if @contest.blank? || request.present?
     
     @crequest = ContestRequest.new
     @crequest.designer_id = session[:designer_id]
@@ -108,8 +107,10 @@ class ContestsController < ApplicationController
   end
 
   def option
+    @creation_wizard = ContestCreationWizard.new(params, session, 0)
+    @contest_view = ContestView.new(session.to_hash)
     option = params[:option]
-    render partial: 'contests/picture_of_space_option' if option == 'space_pictures'
+    render partial: "contests/options/#{ option }_options"
   end
 
   private
@@ -123,4 +124,14 @@ class ContestsController < ApplicationController
     @contest = Contest.find_by_id(params[:id])
   end
 
+  def uncomplete_step_path
+    @uncomplete_step_path ||=
+      if session[:design_brief].blank?
+        design_brief_contests_path
+      elsif session[:design_style].blank?
+        design_style_contests_path
+      elsif session[:design_space].blank?
+        design_space_contests_path
+      end
+  end
 end

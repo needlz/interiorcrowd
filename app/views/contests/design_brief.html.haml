@@ -10,13 +10,8 @@
       %h3= t('contests.titles.design_categories')
   = render :partial => 'home/msg'
   = form_tag save_design_brief_contests_path, { id: "design_categories", method: "post" } do
-    = render partial: 'contests/category_row',
-        collection: @creation_wizard.available_design_categories,
-        as: :design_category
-    %span#err_category.text-error
-    = render partial: 'contests/area_dropdown',
-        locals: { design_area: @contest_view.design_area,
-                  top_level_areas: @creation_wizard.available_design_areas.top_level }
+    = render partial: 'contests/options/category_options'
+    = render partial: 'contests/options/area_options'
   .row.formbuttons
     .col-sm-4.col-sm-offset-6
       = link_to "CONTINUE", '#', :class => "order"
