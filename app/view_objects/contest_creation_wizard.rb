@@ -9,8 +9,7 @@ class ContestCreationWizard
   ]
 
   def initialize(options)
-    @params = options[:action_params]
-    @session = options[:action_session]
+    @contest_attributes = HashWithIndifferentAccess.new(options[:contest_attributes])
     @active_step_index = options[:step_index]
   end
 
@@ -21,11 +20,10 @@ class ContestCreationWizard
 
   def design_categories_checkboxes
     return @design_categories_checkboxes if @design_categories_checkboxes
-    @design_categories_checkboxes = {}
-    available_design_categories.each do |category|
-      @design_categories_checkboxes[category.id] = session[:design_brief].try(:[], :design_category) && session[:design_brief][:design_category].include?(category.id.to_s)
+    checkboxes_array = available_design_categories.map do |category|
+      [category.id, contest_attributes[:design_brief].try(:[], :design_category) == category.id.to_s]
     end
-    @design_categories_checkboxes
+    @design_categories_checkboxes = Hash[checkboxes_array]
   end
 
   def breadcrumb_class(step_index)
@@ -65,6 +63,6 @@ class ContestCreationWizard
 
   private
 
-  attr_reader :params, :session
+  attr_reader :contest_attributes
 
 end

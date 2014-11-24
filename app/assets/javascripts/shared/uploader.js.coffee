@@ -14,20 +14,17 @@ $.fn.initUploader = (uploadifyOptions) ->
     formData: uploadifyFormData
     cancelImg: '/images/cancel.png' #take care that the image is accessible
 
-$.fn.initUploaderWithThumbs = (thumbSelector, uploadifyOptions) ->
+$.fn.initUploaderWithThumbs = (options) ->
   @.initUploader(
     $.extend(
       onUploadSuccess: (file, data, response) ->
         info = data.split(",")
-        $("#image_display").append "<img src='" + info[0] + "' />"
-        img_val = $.trim($(thumbSelector).val())
-        img_id = $.trim($(thumbSelector + '_id').val())
-        if img_val.length < 1
-          $(thumbSelector).val info[0]
-          $(thumbSelector + '_id').val info[1]
-        else
-          $(thumbSelector).val img_val + "," + info[0]
-          $(thumbSelector + '_id').val img_id + "," + info[1]
-      uploadifyOptions
+        imageUrl = info[0]
+        imageId = info[1]
+        $(options.thumbs.container).append "<img src='#{ imageUrl }' />"
+        $imageIds = $(options.thumbs.selector)
+        previousIds = if $imageIds.val().length then $imageIds.val() + ',' else ''
+        $imageIds.val(previousIds + imageId)
+      options.uploadify
     )
   )

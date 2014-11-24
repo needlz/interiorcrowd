@@ -3,8 +3,7 @@
 .row.space-pictures
   .col-sm-offset-1.col-sm-8.form-inline{:style => "padding-left:0"}
     %span#image_display{:style => "padding-bottom:10px;"}
-      - if session[:design_space].present? && session[:design_space][:document].present?
-        - session[:design_space][:document].split(',').each do |path|
-          %img{:src => path}
+      - @contest_view.space_pictures.try(:each) do |path|
+        %img{:src => path}
     %input#file_input{:name => "", :type => "file"}
     %span (.jpg, .tif, .png)
