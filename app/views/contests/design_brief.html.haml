@@ -1,5 +1,6 @@
 - content_for :head do
   = javascript_include_tag 'contests/design_brief'
+  = javascript_include_tag 'contests/area_options'
   :javascript
     window.areas = #{ @creation_wizard.available_areas.to_json }
     window.noCategoryMessage = "Please select atleast one category."

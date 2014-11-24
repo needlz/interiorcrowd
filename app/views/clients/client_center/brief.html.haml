@@ -7,11 +7,16 @@
   = javascript_include_tag 'contests/example_pictures_options'
   = javascript_include_tag 'contests/desirable_colors_options'
   = javascript_include_tag 'contests/undesirable_colors_options'
+  = javascript_include_tag 'contests/area_options'
   = render partial: 'shared/setup_uploadify'
 
   = stylesheet_link_tag 'lib/select2-3.5.2/select2.css'
   = stylesheet_link_tag 'lib/select2-3.5.2/select2-bootstrap'
   = stylesheet_link_tag  'uploadify'
+
+:javascript
+  window.areas = #{ @creation_wizard.available_areas.to_json }
+  window.noCategoryMessage = "Please select atleast one category."
 
 - content_for :client_center_content do
   .contest{ data: { id: @contest.id } }

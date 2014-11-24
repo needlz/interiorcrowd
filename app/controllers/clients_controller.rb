@@ -25,6 +25,7 @@ class ClientsController < ApplicationController
   def brief
     @contest = @client.last_contest
     @contest_view = ContestView.new(@contest)
+    @creation_wizard = ContestCreationWizard.new(action_params: params, action_session: session, step_index: 0)
     render 'clients/client_center/brief'
   end
 

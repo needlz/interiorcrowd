@@ -57,6 +57,9 @@ class @ContestEditing
       DesirableColorsEditor.init()
     undesirable_colors: ->
       UndesirableColorsEditor.init()
+    area: ->
+      designArea = new DesignArea($('#design_area'), $('.area-children'), areas)
+      designArea.init()
 
 $ ->
   window.brief = new ContestEditing()

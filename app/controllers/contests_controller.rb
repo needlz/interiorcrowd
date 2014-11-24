@@ -108,7 +108,7 @@ class ContestsController < ApplicationController
 
   def option
     @creation_wizard = ContestCreationWizard.new(action_params: params, action_session: session, step_index: 0)
-    @contest_view = ContestView.new(session.to_hash)
+    @contest_view = ContestView.new(@contest)
     option = params[:option]
     render partial: "contests/options/#{ option }_options"
   end
