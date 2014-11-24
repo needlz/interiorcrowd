@@ -1,0 +1,13 @@
+.row
+  .col-sm-10.col-sm-offset-1.page-title
+    %h3= t('contests.titles.areas')
+.row
+  .col-sm-4
+    %label.checkbox
+      = areas_parent_dropdown(@creation_wizard.top_level_areas, @contest_view.design_area)
+    %span#err_design_area.text-error
+.row
+  .col-sm-4
+    %label.checkbox
+      - @creation_wizard.top_level_areas.each do |area|
+        = areas_child_dropdown(area, @contest_view.design_area)

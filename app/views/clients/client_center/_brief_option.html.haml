@@ -1,5 +1,5 @@
 .row{ data: { option: option } }
-  .col-md-10
-    = render partial: option_partial
-  .col-md-2
+  .col-xs-11
+    = render partial: "contests/previews/#{ option }_preview"
+  .col-xs-1
     %span.edit-label= t('client_center.brief.option_edit_button')

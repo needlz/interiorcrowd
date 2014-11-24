@@ -2,7 +2,7 @@
   %label= t('contests.titles.appeals')
 .row
   .col-sm-12
-    = render partial: 'contests/appeal_scale_row',
+    = render partial: 'contests/options/appeal_scale_row',
         collection: @contest_view.appeal_scales,
         as: :scale
     %span#err-appeals.text-error

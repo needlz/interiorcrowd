@@ -5,8 +5,8 @@ class DesignSpace < ActiveRecord::Base
   belongs_to :parent, class_name: 'DesignSpace', foreign_key: :parent_id
   has_many :children, class_name: 'DesignSpace', foreign_key: :parent_id
 
-  scope :available, where(status: ACTIVE_STATUS).order(pos: :asc)
-  scope :top_level, where(parent_id: 0)
+  scope :available, ->{ where(status: ACTIVE_STATUS).order(pos: :asc) }
+  scope :top_level, ->{ where(parent_id: 0) }
   scope :by_ids, ->(ids) { where("id IN (?)", ids).order(:pos) }
 
 end

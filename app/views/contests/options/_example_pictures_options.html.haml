@@ -1,0 +1,9 @@
+.row.step-row
+  %label= t('contests.titles.example')
+.row.example-pictures
+  .col-sm-8.col-sm-offset-1
+    %span#image_display{:style => "padding-bottom:10px;"}
+      - @contest_view.examples.try(:each) do |path|
+        %img{:src => path}
+    %input#file_input{:name => "", :type => "file"}
+    %span (.jpg, .tif, .png)

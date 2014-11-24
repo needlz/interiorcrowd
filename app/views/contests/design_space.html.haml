@@ -1,13 +1,12 @@
 - content_for :page_content do
   = render :partial => 'home/msg'
   = form_tag save_design_space_contests_path, {:id => "design_space", :method => "post"} do
-    %input#design_space_image{:name => "design_space[document]", :type => "hidden", :value => (session[:design_space][:document] if session[:design_space].present?)}/
     %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => (session[:design_space][:document_id] if session[:design_space].present?)}/
 
-    = render partial: 'contests/picture_of_space_option'
-    = render partial: 'contests/dimensions_of_space_options'
-    = render partial: 'contests/budget_for_materials_options'
-    = render partial: 'contests/comments_options'
+    = render partial: 'contests/options/space_pictures_options'
+    = render partial: 'contests/options/space_dimensions_options'
+    = render partial: 'contests/options/budget_options'
+    = render partial: 'contests/options/feedback_options'
     .row.formbuttons
       .col-sm-3
         %a.order{:href => design_style_contests_path} GO BACK
@@ -18,6 +17,7 @@
 = content_for :head do
   = javascript_include_tag 'jquery.uploadify'
   = javascript_include_tag 'contests/design_space'
+  = javascript_include_tag 'contests/space_pictures_options'
 
   = stylesheet_link_tag 'uploadify'
   = render partial: 'shared/setup_uploadify'

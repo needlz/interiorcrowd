@@ -19,33 +19,35 @@ module InteriorC
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-   config.action_controller.permit_all_parameters = true
-   %w(mailers middleware view_objects).each do |dir|
-          config.autoload_paths << "#{config.root}/app/#{dir}"
-   end
-   
+    config.action_controller.permit_all_parameters = true
+    %w(mailers middleware view_objects).each do |dir|
+      config.autoload_paths << "#{config.root}/app/#{dir}"
+    end
+
     # Version of your assets, change this if you want to expire all your assets
-     config.assets.version = '1.0'
-     config.action_mailer.delivery_method = :smtp
-     config.action_mailer.smtp_settings = {  
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => "gmail.com",
-      :user_name            => ENV['mailer_address'], #Your user name
-      :password             => ENV['mailer_password'], # Your password
-      :authentication       => "plain",  
-      :enable_starttls_auto => true  
-   }
+    config.assets.version = '1.0'
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+        :address => "smtp.gmail.com",
+        :port => 587,
+        :domain => "gmail.com",
+        :user_name => ENV['mailer_address'], #Your user name
+        :password => ENV['mailer_password'], # Your password
+        :authentication => "plain",
+        :enable_starttls_auto => true
+    }
 
 
-   config.paperclip_defaults = {
-       url: ':s3_domain_url',
-       storage: :s3,
-       s3_credentials: {
-           bucket: ENV['S3_BUCKET_NAME'],
-           access_key_id: ENV['AWS_ACCESS_KEY'],
-           secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
-       }
-   }
+    config.paperclip_defaults = {
+        url: ':s3_domain_url',
+        storage: :s3,
+        s3_credentials: {
+            bucket: ENV['S3_BUCKET_NAME'],
+            access_key_id: ENV['AWS_ACCESS_KEY'],
+            secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+        }
+    }
+
+    config.i18n.enforce_available_locales = false
   end
 end

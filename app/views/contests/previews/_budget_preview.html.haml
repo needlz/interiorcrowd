@@ -1,4 +1,4 @@
 - value_html = capture do
   %span.selection= @contest_view.budget
-= render partial: 'contests/preview_row', locals: { title: t('contests.titles.brief.design_budget'),
+= render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.design_budget'),
                                                     value: value_html }

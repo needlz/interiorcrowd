@@ -33,9 +33,7 @@ class Contest < ActiveRecord::Base
       }.merge(options[:design_style] || {}),
       contest_associations: {
           space_image_ids: (options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space].try(:[], :document_id)),
-          space_image_urls: (options[:design_space][:document].split(',').map(&:strip) if options[:design_space].try(:[], :document)),
           liked_example_ids: (options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style].try(:[], :document_id)),
-          liked_example_urls: (options[:design_style][:document].split(',').map(&:strip) if options[:design_style].try(:[], :document)),
           example_links: (options[:design_style][:ex_links].split(',').map(&:strip)  if options[:design_style].try(:[], :ex_links))
       }
     })

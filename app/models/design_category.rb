@@ -4,7 +4,7 @@ class DesignCategory < ActiveRecord::Base
 
   has_many :contests
 
-  scope :available, where(status: ACTIVE_STATUS).order(pos: :asc)
+  scope :available, ->{ where(status: ACTIVE_STATUS).order(pos: :asc) }
   scope :by_ids, ->(ids) { where("id IN (?)", ids).order(:pos) }
 
   def paid?

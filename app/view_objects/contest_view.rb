@@ -2,7 +2,10 @@ class ContestView
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level
-  
+
+  EDITABLE_ATTRIBUTES = [:category, :area, :appeals, :desirable_colors, :undesirable_colors,
+        :example_pictures, :example_links, :space_pictures, :space_dimensions, :budget, :feedback]
+
   def initialize(options)
     if options.kind_of?(Hash)
       initialize_from_options(HashWithIndifferentAccess.new(options))
@@ -23,10 +26,10 @@ class ContestView
     @appeal_scales = AppealScale.from(contest_params)
     @desirable_colors = contest_params[:desirable_colors]
     @undesirable_colors = contest_params[:undesirable_colors]
-    @examples = contest_associations[:liked_example_urls]
+    @examples = contest_associations[:liked_example_ids].try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
     @links = contest_associations[:example_links]
     @dimensions = SpaceDimension.from(contest_params)
-    @space_pictures = contest_associations[:space_image_urls]
+    @space_pictures = contest_associations[:space_image_ids].try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
     @budget = Contest::CONTEST_DESIGN_BUDGETS[contest_params[:space_budget]]
     @feedback = contest_params[:feedback]
     @budget_plan = contest_params[:budget_plan]

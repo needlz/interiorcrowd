@@ -25,6 +25,7 @@ class ClientsController < ApplicationController
   def brief
     @contest = @client.last_contest
     @contest_view = ContestView.new(@contest)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: session.to_hash, step_index: 0)
     render 'clients/client_center/brief'
   end
 
@@ -117,7 +118,3 @@ class ClientsController < ApplicationController
   end
 
 end
-    
-  
-  
-

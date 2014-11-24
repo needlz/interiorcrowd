@@ -8,10 +8,9 @@ class ContestCreationWizard
     { name: 'Leave it...', value: 0 }
   ]
 
-  def initialize(action_params, action_session, step_index)
-    @params = action_params
-    @session = action_session
-    @active_step_index = step_index
+  def initialize(options)
+    @contest_attributes = HashWithIndifferentAccess.new(options[:contest_attributes])
+    @active_step_index = options[:step_index]
   end
 
   # design categories
@@ -21,11 +20,10 @@ class ContestCreationWizard
 
   def design_categories_checkboxes
     return @design_categories_checkboxes if @design_categories_checkboxes
-    @design_categories_checkboxes = {}
-    available_design_categories.each do |category|
-      @design_categories_checkboxes[category.id] = session[:design_brief].try(:[], :design_category) && session[:design_brief][:design_category].include?(category.id.to_s)
+    checkboxes_array = available_design_categories.map do |category|
+      [category.id, contest_attributes[:design_brief].try(:[], :design_category) == category.id.to_s]
     end
-    @design_categories_checkboxes
+    @design_categories_checkboxes = Hash[checkboxes_array]
   end
 
   def breadcrumb_class(step_index)
@@ -37,6 +35,10 @@ class ContestCreationWizard
   # design areas
   def available_design_areas
     @available_design_areas ||= DesignSpace.available
+  end
+
+  def top_level_areas
+    @top_level_areas ||= available_design_areas.top_level.includes(:children)
   end
 
   def available_areas
@@ -61,6 +63,6 @@ class ContestCreationWizard
 
   private
 
-  attr_reader :params, :session
+  attr_reader :contest_attributes
 
 end

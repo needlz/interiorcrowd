@@ -8,7 +8,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :contest
 
-  scope :liked_examples, where(kind: LIKED_EXAMPLE)
-  scope :space_images, where(kind: SPACE)
+  scope :liked_examples, ->{ where(kind: LIKED_EXAMPLE) }
+  scope :space_images, ->{ where(kind: SPACE) }
 
 end
