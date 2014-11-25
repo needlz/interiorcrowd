@@ -1,3 +1,8 @@
+@mixin link {
+  color: #428bca;
+  cursor: pointer;
+}
+
 .client-center {
   .header {
     border-bottom: 1px solid #eee;
@@ -27,5 +32,19 @@
 
   .winner-dialog {
     margin-bottom: 45px;
+  }
+
+  .edit-label {
+    @include link
+  }
+
+  .save-button {
+    @include link
+  }
+
+  .brief {
+    .row.attribute {
+      margin-bottom: 1em;
+    }
   }
 }

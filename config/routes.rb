@@ -26,6 +26,7 @@ InteriorC::Application.routes.draw do
     member do
       get 'respond'
       get 'option'
+      patch 'update'
     end
 
     collection do

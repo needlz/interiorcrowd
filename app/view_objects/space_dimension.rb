@@ -39,9 +39,9 @@ class SpaceDimension
   def value=(value)
     if value
       if value.kind_of?(Hash)
-        @value = (value["space_#{ identifier }"].to_i if value["space_#{ identifier }"].present?)
+        @value = (value["space_#{ identifier }".to_sym].to_i if value["space_#{ identifier }".to_sym].present?)
       else
-        @value = value.send("space_#{ identifier }")
+        @value = value.send("space_#{ identifier }".to_sym)
       end
     else
       @value = nil

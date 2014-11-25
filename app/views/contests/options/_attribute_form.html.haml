@@ -1,0 +1,4 @@
+= form_tag contest_path(id: @contest.id), { method: 'patch', remote: true } do
+  = hidden_field_tag 'option', option
+  = render partial: fields_partial
+  = render partial: 'contests/save_changes_button'

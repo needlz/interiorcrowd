@@ -66,7 +66,7 @@ class AppealScale
   end
 
   def self.initialize_from_appeals(contests_appeals)
-    contests_appeals.map do |contest_appeal|
+    contests_appeals.ordered_by_appeal.map do |contest_appeal|
       appeal_scale = new(contest_appeal.appeal)
       appeal_scale.value = contest_appeal.value
       appeal_scale.reason = contest_appeal.reason

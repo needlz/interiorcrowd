@@ -1,7 +1,7 @@
 module ContestsHelper
 
   def contest_creation_category_radiobutton(category)
-    radio_button_tag "design_category",
+    radio_button_tag 'design_brief[design_category]',
                      category.id,
                      @creation_wizard.design_categories_checkboxes[category.id],
                      class: "design_element"
@@ -22,7 +22,7 @@ module ContestsHelper
 
   def areas_dropdown(areas, selected_area, options = {})
     default_option = [t('contests.default_selection'), '']
-    select_tag 'design_area',
+    select_tag 'design_brief[design_area]',
                options_for_select(
                  [default_option] + areas.map { |area| [area.name, area.id]},
                  selected_area.try(:id)

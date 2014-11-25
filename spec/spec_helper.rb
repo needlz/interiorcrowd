@@ -63,4 +63,8 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 =end
+
+  def random_string
+    ('a'..'z').to_a.shuffle[0, 8].join
+  end
 end

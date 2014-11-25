@@ -4,7 +4,6 @@
       %h3= t('contests.titles.design_style')
   = render partial: 'home/msg'
   = form_tag save_design_style_contests_path, {id: "design_style", method: "post"} do
-    %input#design_style_image_id{name: "design_style[document_id]", type: "hidden", value: (session[:design_style][:document_id] if session[:design_style].present?)}
     = render partial: 'contests/options/designer_level_options'
     = render partial: 'contests/options/appeals_options'
     = render partial: 'contests/options/desirable_colors_options'

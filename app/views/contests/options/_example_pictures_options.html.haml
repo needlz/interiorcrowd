@@ -6,4 +6,5 @@
       - @contest_view.examples.try(:each) do |path|
         %img{:src => path}
     %input#file_input{:name => "", :type => "file"}
+    %input#design_style_image_id{name: "design_style[document_id]", type: "hidden", value: @contest_view.example_ids.try(:join, ',') }
     %span (.jpg, .tif, .png)

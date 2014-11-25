@@ -19,7 +19,7 @@
   window.noCategoryMessage = "Please select atleast one category."
 
 - content_for :client_center_content do
-  .contest{ data: { id: @contest.id } }
+  .contest.brief{ data: { id: @contest.id } }
     - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
 

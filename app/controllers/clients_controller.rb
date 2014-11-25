@@ -25,7 +25,8 @@ class ClientsController < ApplicationController
   def brief
     @contest = @client.last_contest
     @contest_view = ContestView.new(@contest)
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: session.to_hash, step_index: 0)
+    contest_attributes = Contest.options_from_hash(session.to_hash)[:contest]
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: contest_attributes, step_index: 0)
     render 'clients/client_center/brief'
   end
 
@@ -68,7 +69,7 @@ class ClientsController < ApplicationController
   def create_contests(user_id)
     all_steps = session[:design_brief].present? && session[:design_style].present? && session[:design_space].present? && session[:preview].present?
     if all_steps
-      contest_options = complete_contest_options(Contest.options_from_hash(session), user_id)
+      contest_options = complete_contest_options(Contest.options_from_hash(session.to_hash), user_id)
       contest_attributes = contest_options.require(:contest).permit(
         :client_id,
         :project_name,
@@ -89,8 +90,8 @@ class ClientsController < ApplicationController
       contest.transaction do
         if contest.save!
           contest_associations = contest_options[:contest_associations]
-          contest.add_appeals(contest_options[:contest])
-          contest.add_external_examples(contest_associations[:example_links])
+          contest.update_appeals(contest_associations[:appeals])
+          contest.update_external_examples(contest_associations[:example_links])
           contest.add_space_images(contest_associations[:space_image_ids])
           contest.add_example_images(contest_associations[:liked_example_ids])
           clear_session

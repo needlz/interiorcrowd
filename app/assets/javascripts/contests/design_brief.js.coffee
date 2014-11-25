@@ -8,7 +8,7 @@ $(document).ready ->
     if $(".design_element:checked").length < 1
       $("#err_category").html noCategoryMessage
       valid = false
-    if isNaN(parseInt($('select[name="design_area"]').val()))
+    if isNaN(parseInt($('select[name="design_brief[design_area]"]').val()))
       $("#err_design_area").html 'Please select one'
       valid = false
     if valid
