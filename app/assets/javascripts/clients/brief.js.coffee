@@ -33,7 +33,7 @@ class @ContestEditing
   bindSaveError: ->
     $('body').on('ajax:error', '.attribute form', (event, data, status, xhr)=>
       $form = $(event.target)
-      $form.append '<p>ERROR</p>'
+      @optionsContainer($form).find('.has-error .control-label').text 'An error occured during saving'
     )
 
   onEditClick: (event)=>
@@ -99,7 +99,7 @@ class @ContestEditing
     undesirable_colors: ->
       UndesirableColorsEditor.init()
     area: ->
-      designArea = new DesignArea($('#design_area'), $('.area-children'), areas)
+      designArea = new DesignArea($('#design_brief_design_area'), $('.area-children'), areas)
       designArea.init()
 
   previewCallbacks:

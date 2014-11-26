@@ -1,5 +1,5 @@
 $(document).ready ->
-  designArea = new DesignArea($('#design_area'), $('.area-children'), areas)
+  designArea = new DesignArea($('#design_brief_design_area'), $('.area-children'), areas)
   designArea.init()
 
   $(".order").click (e) ->
