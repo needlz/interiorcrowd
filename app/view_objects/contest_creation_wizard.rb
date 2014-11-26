@@ -9,7 +9,7 @@ class ContestCreationWizard
   ]
 
   def initialize(options)
-    @contest_attributes = HashWithIndifferentAccess.new(options[:contest_attributes])
+    @contest_attributes = options[:contest_attributes]
     @active_step_index = options[:step_index]
   end
 
@@ -21,7 +21,7 @@ class ContestCreationWizard
   def design_categories_checkboxes
     return @design_categories_checkboxes if @design_categories_checkboxes
     checkboxes_array = available_design_categories.map do |category|
-      [category.id, contest_attributes[:design_brief].try(:[], :design_category) == category.id.to_s]
+      [category.id, contest_attributes.try(:[], :design_category_id) == category.id]
     end
     @design_categories_checkboxes = Hash[checkboxes_array]
   end

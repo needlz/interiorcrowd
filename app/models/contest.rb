@@ -8,6 +8,7 @@ class Contest < ActiveRecord::Base
   has_many :appeals, through: :contests_appeals
   has_many :liked_external_examples, class_name: 'ImageLink'
 
+  has_many :images
   has_many :liked_examples, -> { liked_examples }, class_name: 'Image'
   has_many :space_images, -> { space_images }, class_name: 'Image'
 
@@ -18,58 +19,71 @@ class Contest < ActiveRecord::Base
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
 
-  def self.options_from_hash(options)
-    HashWithIndifferentAccess.new({
-      contest: {
-          design_category_id: options[:design_brief].try(:[], :design_category),
-          design_space_id: options[:design_brief].try(:[], :design_area),
-          space_length: options[:design_space].try(:[], :length),
-          space_width: options[:design_space].try(:[], :width),
-          space_height: options[:design_space].try(:[], :height),
-          space_budget: options[:design_space].try(:[], :f_budget),
-          feedback: options[:design_space].try(:[], :feedback),
-          budget_plan: options[:preview].try(:[], :b_plan),
-          project_name: options[:preview].try(:[], :contest_name),
-      }.merge(options[:design_style] || {}),
-      contest_associations: {
-          space_image_ids: (options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space].try(:[], :document_id)),
-          liked_example_ids: (options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style].try(:[], :document_id)),
-          example_links: (options[:design_style][:ex_links].split(',').map(&:strip)  if options[:design_style].try(:[], :ex_links))
-      }
-    })
+  def self.create_from_options(options)
+    contest = new(options.contest)
+    contest.transaction do
+      contest.save!
+      contest.on_update_from_options(options)
+    end
+    contest
   end
 
-  def add_appeals(options)
-    Appeal.all.each do |appeal|
-      contests_appeals << ContestsAppeal.new(appeal_id: appeal.id,
-                                             contest_id: id,
-                                             reason: options.try(:[], appeal.identifier).try(:[], :reason),
-                                             value: options.try(:[], appeal.identifier).try(:[], :value))
+  def update_from_options(options)
+    transaction do
+      update_attributes(options.contest) if options.contest
+      on_update_from_options(options)
     end
   end
 
-  def add_external_examples(urls)
+  def on_update_from_options(options)
+    return unless options
+    update_appeals(options.appeals) if options.appeals
+    update_external_examples(options.example_links) if options.example_links
+    update_space_images(options.space_image_ids) if options.space_image_ids
+    update_example_images(options.liked_example_ids) if options.liked_example_ids
+  end
+
+  private
+
+  def update_appeals(options)
+    Appeal.all.each do |appeal|
+      contest_appeal = contests_appeals.where(appeal_id: appeal.id).first_or_initialize
+      if options[appeal.identifier]
+        contest_appeal.assign_attributes(options[appeal.identifier])
+        contest_appeal.save
+      end
+    end
+  end
+
+  def update_external_examples(urls)
     return unless urls
+    liked_external_examples.destroy_all
     urls.each do |url|
       liked_external_examples << ImageLink.new(url: url)
     end
   end
 
-  def add_space_images(image_ids)
-    add_images(image_ids, Image::SPACE)
+  def update_space_images(image_ids)
+    update_images(image_ids, Image::SPACE)
   end
 
-  def add_example_images(image_ids)
-    add_images(image_ids, Image::LIKED_EXAMPLE)
+  def update_example_images(image_ids)
+    update_images(image_ids, Image::LIKED_EXAMPLE)
   end
-
-  private
 
   def add_images(image_ids, kind)
     images = Image.where(id: image_ids)
     images.each do |image|
       image.update_attributes(contest_id: id, kind: kind)
     end
+  end
+
+  def update_images(image_ids, kind)
+    old_ids = images.of_kind(kind).pluck(:id)
+    ids_to_remove = old_ids - image_ids
+    ids_to_add = image_ids - old_ids
+    Image.where(id: ids_to_remove).destroy_all
+    add_images(ids_to_add, kind)
   end
 
 end

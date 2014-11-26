@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
-  before_filter :set_contest, only: [:show, :respond, :option]
+  before_filter :set_contest, only: [:show, :respond, :option, :update]
 
   CREATION_STEPS = [
     :design_brief,
@@ -25,11 +25,7 @@ class ContestsController < ApplicationController
   end
 
   def save_design_brief
-    if params[:design_category].present?
-      session[:design_brief] = {}
-      session[:design_brief][:design_category] = params[:design_category]
-      session[:design_brief][:design_area]= params[:design_area]
-    end
+    session[:design_brief] = params[:design_brief] if params[:design_brief].present?
     redirect_to design_style_contests_path
   end
 
@@ -38,9 +34,7 @@ class ContestsController < ApplicationController
   end
 
   def save_design_style
-    if params[:design_style].present?
-      session[:design_style] = params[:design_style]
-    end
+    session[:design_style] = params[:design_style] if params[:design_style].present?
     redirect_to design_space_contests_path
   end
 
@@ -107,16 +101,25 @@ class ContestsController < ApplicationController
   end
 
   def option
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: session.to_hash, step_index: 0)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest, step_index: 0)
     @contest_view = ContestView.new(@contest)
     option = params[:option]
-    render partial: "contests/options/#{ option }_options"
+    render partial: 'contests/options/attribute_form', locals: { fields_partial: "contests/options/#{ option }_options",
+                                                                 option: option }
+  end
+
+  def update
+    options = ContestOptions.new(params.with_indifferent_access)
+    @contest.update_from_options(options)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest, step_index: 0)
+    @contest_view = ContestView.new(@contest)
+    render partial: "contests/previews/#{ params[:option] }_preview"
   end
 
   private
 
   def set_creation_wizard
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: session.to_hash,
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
                                                  step_index: CREATION_STEPS.index(params[:action].to_sym) + 1)
     @contest_view = ContestView.new(session.to_hash)
   end

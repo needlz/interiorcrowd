@@ -1,8 +1,6 @@
 - content_for :page_content do
   = render :partial => 'home/msg'
   = form_tag save_design_space_contests_path, {:id => "design_space", :method => "post"} do
-    %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => (session[:design_space][:document_id] if session[:design_space].present?)}/
-
     = render partial: 'contests/options/space_pictures_options'
     = render partial: 'contests/options/space_dimensions_options'
     = render partial: 'contests/options/budget_options'

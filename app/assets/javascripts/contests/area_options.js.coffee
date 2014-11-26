@@ -15,7 +15,7 @@ class @DesignArea
       @parentDropdown.removeAttr('name')
       @showChildrenDropdown()
     else
-      @parentDropdown.attr('name', 'design_area')
+      @parentDropdown.attr('name', 'design_brief[design_area]')
 
   id: ->
     parseInt(@parentDropdown.val())
@@ -26,7 +26,7 @@ class @DesignArea
     ).length
 
   showChildrenDropdown: ->
-    @childrenDropdowns.filter("[data-id='#{ @id() }']").show().attr('name', 'design_area')
+    @childrenDropdowns.filter("[data-id='#{ @id() }']").show().attr('name', 'design_brief[design_area]')
 
   hideAllChildrenDropdowns: ->
     @childrenDropdowns.hide().removeAttr('name')

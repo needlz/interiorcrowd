@@ -6,4 +6,5 @@
       - @contest_view.space_pictures.try(:each) do |path|
         %img{:src => path}
     %input#file_input{:name => "", :type => "file"}
+    %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => @contest_view.space_pictures_ids.try(:join, ',') }
     %span (.jpg, .tif, .png)

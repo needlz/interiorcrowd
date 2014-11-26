@@ -148,21 +148,22 @@ $.widget "custom.colorTags",
     isColorHex = (text)->
       /^[0-9A-F]{6}$/i.test(text)
 
-    @element.select2({
-      tags: $.map(colorNames, (color)->
-        { id: color.hex, text: color.name}
-      )
-      formatSelection: formatColorItem
-      formatResult: formatColorItem
-      sortResults: (results, container, query) ->
-        return results unless query.term
-        results.sort((a, b) ->
-          return 1 if a.text.length > b.text.length
-          return -1 if a.text.length < b.text.length
-          0
+    unless @element.data('select2')
+      @element.select2({
+        tags: $.map(colorNames, (color)->
+          { id: color.hex, text: color.name}
         )
-    }).on('select2-selecting', (e)->
-      e.preventDefault() unless isColorHex(e.val)
-    ).on('change');
+        formatSelection: formatColorItem
+        formatResult: formatColorItem
+        sortResults: (results, container, query) ->
+          return results unless query.term
+          results.sort((a, b) ->
+            return 1 if a.text.length > b.text.length
+            return -1 if a.text.length < b.text.length
+            0
+          )
+      }).on('select2-selecting', (e)->
+        e.preventDefault() unless isColorHex(e.val)
+      ).on('change');
 
     @element.select2('readonly', true) if @options.readonly
