@@ -1,4 +1,6 @@
 - content_for :client_center_content do
-  Profile page
+  .profile
+    Profile page
+    = render partial: 'clients/client_center/profile/profile_preview'
 
 = render partial: 'clients/client_center/layout'

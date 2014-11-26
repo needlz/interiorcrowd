@@ -47,4 +47,13 @@
       margin-bottom: 1em;
     }
   }
+
+  .profile {
+    .attribute {
+      .preview {
+        color: black;
+        @extend .col-xs-11
+      }
+    }
+  }
 }

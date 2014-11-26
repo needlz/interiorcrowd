@@ -1,0 +1,9 @@
+.row.attribute{ data: { attribute: attribute } }
+  .preview
+    .col-xs-3.title
+      %label= title
+    .col-xs-9.attribute-form
+      .view
+        = render partial: "clients/client_center/profile/preview/#{ attribute }", locals: { user: user }
+  .col-xs-1
+    %span.edit-label= t('client_center.attribute_edit_button')

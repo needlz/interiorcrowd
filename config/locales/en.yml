@@ -64,5 +64,6 @@ en:
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
-    brief:
-      option_edit_button: Edit
+    attribute_edit_button: Edit
+    attribute_save_button: Save
+    attribute_cancel_button: Cancel
