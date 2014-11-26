@@ -10,5 +10,6 @@ class Image < ActiveRecord::Base
 
   scope :liked_examples, ->{ where(kind: LIKED_EXAMPLE) }
   scope :space_images, ->{ where(kind: SPACE) }
+  scope :of_kind, ->(kind){ where(kind: kind) }
 
 end

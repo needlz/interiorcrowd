@@ -40,4 +40,31 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  def contest_options_source
+    { design_brief: {
+        design_category: 'design_category',
+        design_area: 'design_area' },
+      design_space: {
+          length: '10',
+          width: '10',
+          height: '10',
+          f_budget: '2000',
+          feedback: 'feedback',
+          document_id: '1,2' },
+      preview: {
+          b_plan: '1',
+          contest_name: 'contest_name' },
+      design_style: {
+          designer_level: 1,
+          desirable_colors: '#bbbbbb',
+          undesirable_colors: '#aaaaaa,#888888',
+          appeals: {
+              some_appeal: {
+                  reason: 'reason',
+                  value: 100} },
+          document_id: '3,4',
+          ex_links: 'link1,link2' },
+    }
+  end
 end

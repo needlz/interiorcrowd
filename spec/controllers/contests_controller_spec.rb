@@ -28,13 +28,15 @@ RSpec.describe ContestsController do
   end
 
   describe 'PATCH update' do
+    let(:appeal_values){ Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] }
+
     it 'updates appeals of contest' do
-      appeal_values = Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] #TODO
       patch :update, option: 'appeals', id: contest.id, design_style: { appeals: appeal_values }
-      expect(contest.reload.contests_appeals.count).to eq 3
-      contest.contests_appeals.includes(:appeal).each do |contest_appeal|
-        expect(contest_appeal.value).to eq appeal_values[contest_appeal.appeal.identifier][:value].to_i
-        expect(contest_appeal.reason).to eq appeal_values[contest_appeal.appeal.identifier][:reason]
+      appeal_values.each do |identifier, value|
+        appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }
+        contest_appeal = contest.contests_appeals.where(appeal_id: appeal.id).first
+        expect(contest_appeal.value).to eq value[:value].to_i
+        expect(contest_appeal.reason).to eq value[:reason]
       end
     end
   end

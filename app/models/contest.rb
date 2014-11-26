@@ -19,38 +19,31 @@ class Contest < ActiveRecord::Base
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
 
-  def self.options_from_hash(options)
-    {
-      contest: {
-          design_category_id: options[:design_brief].try(:[], :design_category),
-          design_space_id: options[:design_brief].try(:[], :design_area),
-          space_length: options[:design_space].try(:[], :length),
-          space_width: options[:design_space].try(:[], :width),
-          space_height: options[:design_space].try(:[], :height),
-          space_budget: options[:design_space].try(:[], :f_budget),
-          feedback: options[:design_space].try(:[], :feedback),
-          budget_plan: options[:preview].try(:[], :b_plan),
-          project_name: options[:preview].try(:[], :contest_name),
-          designer_level: options[:design_style].try(:[], :designer_level),
-          desirable_colors: options[:design_style].try(:[], :desirable_colors),
-          undesirable_colors: options[:design_style].try(:[], :undesirable_colors)
-      },
-      contest_associations: {
-          appeals: options[:design_style].try(:[], :appeals),
-          space_image_ids: (options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space].try(:[], :document_id)),
-          liked_example_ids: (options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style].try(:[], :document_id)),
-          example_links: (options[:design_style][:ex_links].split(',').map(&:strip)  if options[:design_style].try(:[], :ex_links))
-      }
-    }
+  def self.create_from_options(options)
+    contest = new(options.contest)
+    contest.transaction do
+      contest.save!
+      contest.on_update_from_options(options)
+    end
+    contest
   end
 
-  def add_space_images(image_ids)
-    add_images(image_ids, Image::SPACE)
+  def update_from_options(options)
+    transaction do
+      update_attributes(options.contest) if options.contest
+      on_update_from_options(options)
+    end
   end
 
-  def add_example_images(image_ids)
-    add_images(image_ids, Image::LIKED_EXAMPLE)
+  def on_update_from_options(options)
+    return unless options
+    update_appeals(options.appeals) if options.appeals
+    update_external_examples(options.example_links) if options.example_links
+    update_space_images(options.space_image_ids) if options.space_image_ids
+    update_example_images(options.liked_example_ids) if options.liked_example_ids
   end
+
+  private
 
   def update_appeals(options)
     Appeal.all.each do |appeal|
@@ -78,16 +71,6 @@ class Contest < ActiveRecord::Base
     update_images(image_ids, Image::LIKED_EXAMPLE)
   end
 
-  def update_associations(contest_associations)
-    return unless contest_associations
-    update_appeals(contest_associations[:appeals]) if contest_associations[:appeals]
-    update_external_examples(contest_associations[:example_links]) if contest_associations[:example_links]
-    update_space_images(contest_associations[:space_image_ids]) if contest_associations[:space_image_ids]
-    update_example_images(contest_associations[:liked_example_ids]) if contest_associations[:liked_example_ids]
-  end
-
-  private
-
   def add_images(image_ids, kind)
     images = Image.where(id: image_ids)
     images.each do |image|
@@ -96,7 +79,7 @@ class Contest < ActiveRecord::Base
   end
 
   def update_images(image_ids, kind)
-    old_ids = images.pluck(:id)
+    old_ids = images.of_kind(kind).pluck(:id)
     ids_to_remove = old_ids - image_ids
     ids_to_add = image_ids - old_ids
     Image.where(id: ids_to_remove).destroy_all

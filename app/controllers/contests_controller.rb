@@ -109,11 +109,8 @@ class ContestsController < ApplicationController
   end
 
   def update
-    changed_options = changed_contest_options
-    Contest.transaction do
-      @contest.update_attributes(changed_options[:contest])
-      @contest.update_associations(changed_options[:contest_associations])
-    end
+    options = ContestOptions.new(params.with_indifferent_access)
+    @contest.update_from_options(options)
     @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest, step_index: 0)
     @contest_view = ContestView.new(@contest)
     render partial: "contests/previews/#{ params[:option] }_preview"
@@ -122,7 +119,7 @@ class ContestsController < ApplicationController
   private
 
   def set_creation_wizard
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: Contest.options_from_hash(session.to_hash)[:contest],
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
                                                  step_index: CREATION_STEPS.index(params[:action].to_sym) + 1)
     @contest_view = ContestView.new(session.to_hash)
   end
@@ -135,19 +132,5 @@ class ContestsController < ApplicationController
     return design_brief_contests_path if session[:design_brief].blank?
     return design_style_contests_path if session[:design_style].blank?
     design_space_contests_path if session[:design_space].blank?
-  end
-
-  def recursive_compact(hash)
-    hash.inject({}.with_indifferent_access) do |new_hash, (key, value)|
-      if value.present?
-        new_hash[key] = value.kind_of?(Hash) ? recursive_compact(value) : value
-      end
-      new_hash
-    end
-  end
-
-  def changed_contest_options
-    options = Contest.options_from_hash(params.with_indifferent_access)
-    recursive_compact(options)
   end
 end

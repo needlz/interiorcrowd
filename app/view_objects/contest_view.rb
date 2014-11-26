@@ -17,22 +17,21 @@ class ContestView
   private
 
   def initialize_from_options(options)
-    contest_attributes = Contest.options_from_hash(options)
-    contest_params = contest_attributes[:contest]
-    contest_associations = contest_attributes[:contest_associations]
+    contest_options = ContestOptions.new(options)
+    contest_params = contest_options.contest
     @category = DesignCategory.find_by_id(contest_params[:design_category_id])
     @design_area = DesignSpace.find_by_id(contest_params[:design_space_id])
-    @designer_level = DesignerLevel.find_by_id(contest_params[:designer_level])
-    @appeal_scales = AppealScale.from(contest_associations[:appeals])
+    @designer_level = DesignerLevel.find_by_id(contest_options.designer_level)
+    @appeal_scales = AppealScale.from(contest_options.appeals)
     @desirable_colors = contest_params[:desirable_colors]
     @undesirable_colors = contest_params[:undesirable_colors]
-    @examples = contest_associations[:liked_example_ids].try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
-    @example_ids = contest_associations[:liked_example_ids]
-    @links = contest_associations[:example_links]
+    @examples = contest_options.liked_example_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
+    @example_ids = contest_options.liked_example_ids
+    @links = contest_options.example_links
     @dimensions = SpaceDimension.from(contest_params)
-    @space_pictures = contest_associations[:space_image_ids].try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
-    @space_pictures_ids = contest_associations[:space_image_ids]
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest_params[:space_budget]]
+    @space_pictures = contest_options.space_image_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
+    @space_pictures_ids = contest_options.space_image_ids
+    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
     @feedback = contest_params[:feedback]
     @budget_plan = contest_params[:budget_plan]
     @name = contest_params[:project_name]
