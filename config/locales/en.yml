@@ -67,3 +67,6 @@ en:
     attribute_edit_button: Edit
     attribute_save_button: Save
     attribute_cancel_button: Cancel
+    profile:
+      save_button: Save
+      done_button: Done

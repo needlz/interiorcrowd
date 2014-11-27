@@ -1,13 +1,13 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
-  before_filter :check_client, only: [:client_center, :entries, :brief, :profile]
-  before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
+  before_filter :check_client, only: [:client_center, :entries, :brief, :profile, :edit_attribute]
+  before_filter :set_client, only: [:client_center, :entries, :brief, :profile, :edit_attribute]
 
   def client_center
     if @client.last_contest.try(:contest_requests).present?
-      redirect_to entries_clients_path
+      redirect_to entries_client_center_index_path
     else
-      redirect_to brief_clients_path
+      redirect_to brief_client_center_index_path
     end
   end
 
@@ -59,6 +59,11 @@ class ClientsController < ApplicationController
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def edit_attribute
+    attribute = params[:attribute]
+    render partial: "clients/client_center/profile/forms/#{ attribute }"
   end
 
   private

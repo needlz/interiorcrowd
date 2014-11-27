@@ -1,6 +1,10 @@
+- content_for :head do
+  :javascript
+    I18n = #{ translations_to_json(:client_center) }
+
 - content_for :client_center_content do
   .profile
-    Profile page
-    = render partial: 'clients/client_center/profile/profile_preview'
+    = form_for @client do
+      = render partial: 'clients/client_center/profile/profile_preview'
 
 = render partial: 'clients/client_center/layout'

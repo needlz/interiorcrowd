@@ -43,8 +43,8 @@ RSpec.configure do |config|
 
   def contest_options_source
     { design_brief: {
-        design_category: 'design_category',
-        design_area: 'design_area' },
+        design_category: '1',
+        design_area: '2' },
       design_space: {
           length: '10',
           width: '10',

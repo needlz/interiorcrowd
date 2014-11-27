@@ -1,2 +1,3 @@
-= render partial: 'clients/client_center/profile/profile_preview_row',
-         locals: { title: 'First name', attribute: 'first_name', user: @client }
+- profile_rows.each do |attribute_row|
+  = render partial: 'clients/client_center/profile/profile_attribute_preview',
+           locals: attribute_row.merge({ user: @client })
