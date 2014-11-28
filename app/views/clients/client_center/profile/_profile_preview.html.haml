@@ -1,3 +1,6 @@
-- profile_rows.each do |attribute_row|
+- profile_rows.each do |attribute|
   = render partial: 'clients/client_center/profile/profile_attribute_preview',
-           locals: attribute_row.merge({ user: @client })
+           locals: { title: I18n.t("client_center.profile.labels.#{ attribute }"),
+                     attribute: attribute,
+                     user: @client,
+                     form: form }

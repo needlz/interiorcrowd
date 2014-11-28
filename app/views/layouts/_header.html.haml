@@ -12,12 +12,12 @@
       %ul.nav.navbar-nav.navbar-right
         - if session[:designer_id].present?
           %li
-            %a{:href => logout_sessions_path} Sign Out
+            %a{href: logout_sessions_path} Sign Out
         - elsif session[:client_id].present?
           %li
-            %a{:href => client_center_index_path} Client Center
+            %a{href: client_center_index_path} Client Center
           %li
-            %a{:href => logout_sessions_path} Sign Out
+            %a{href: logout_sessions_path} Sign Out
         - else
           %li.dropdown.active
             %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: 'sign-in.html' }
@@ -25,6 +25,6 @@
               %b.caret
             %ul.dropdown-menu
               %li
-                %a{:href => client_login_sessions_path} Client Sign in
+                %a{href: client_login_sessions_path} Client Sign in
               %li
-                %a{:href => login_sessions_path} Designer Sign in
+                %a{href: login_sessions_path} Designer Sign in

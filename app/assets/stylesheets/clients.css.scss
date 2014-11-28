@@ -35,24 +35,31 @@
   }
 
   .edit-button {
-    @include link
+    @include link;
   }
 
   .save-button {
-    @include link
+    @include link;
   }
 
-  .brief {
-    .row.attribute {
-      margin-bottom: 1em;
-    }
+
+  .row.attribute {
+    margin-bottom: 1em;
   }
 
   .profile {
-    .attribute {
+    .row.attribute {
       .preview {
         color: black;
-        @extend .col-xs-11
+        @extend .col-xs-11;
+
+        .edit {
+          display: none;
+        }
+      }
+
+      .done {
+        @include link;
       }
     }
   }

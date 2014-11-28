@@ -54,7 +54,6 @@ InteriorC::Application.routes.draw do
       get 'entries', to: 'clients#entries', as: 'entries'
       get 'brief', to: 'clients#brief', as: 'brief'
       get 'profile', to: 'clients#profile', as: 'profile'
-      get 'edit_attribute', to: 'clients#edit_attribute', as: 'edit_attribute'
     end
   end
 

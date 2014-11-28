@@ -1,20 +1,22 @@
-class @ContestEditing
+class @ContestEditing extends InlineEditor
 
-  bindEditForms: ->
+  attributeIdentifierData: 'option'
+  editButtonSelector: '.edit-button'
+  attributeSelector: '.attribute'
+  placeholderSelector: '.attribute-form'
+
+  bindEvents: ->
     @bindSaveClick()
-    @bindEditClick()
     @bindSaveSuccess()
     @bindSaveError()
     @initPreview()
+    super()
 
   initPreview: ->
-    $('.attribute[data-option]').each((index, element)=>
-      option = $(element).data('option')
-      @previewCallbacks[option]?()
+    $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }]").each((index, element)=>
+      attribute = $(element).data(@attributeIdentifierData)
+      @previewCallbacks[attribute]?()
     )
-
-  bindEditClick: ->
-    $('.attribute .edit-button').click(@onEditClick)
 
   bindSaveClick: ->
     $('body').on('click', '.attribute .save-button', @onSaveClick)
@@ -24,8 +26,8 @@ class @ContestEditing
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
       $editButton = $(".row[data-option='#{ option }'] .edit-button")
-      @cancelEditing($editButton)
       $optionsRow = @optionsRow($editButton)
+      @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $optionsRow.find('.preview').html(data)
       @previewCallbacks[option]?()
     )
@@ -36,10 +38,13 @@ class @ContestEditing
       @optionsContainer($form).find('.has-error .control-label').text 'An error occured during saving'
     )
 
-  onEditClick: (event)=>
-    $button = $(event.target)
-    option = $button.parents('[data-option]').data('option')
-    @insertOptionsHtml(option)
+  getForm: (attribute)->
+    $.ajax(
+      data: { option: attribute }
+      url: @optionsHtmlPath()
+      success: (optionsHtml)=>
+        @onEditFormRetrieved(attribute, optionsHtml)
+    )
 
   contestId: ->
     $('.contest').data('id')
@@ -50,44 +55,9 @@ class @ContestEditing
   optionsHtmlPath: ->
     "/contests/#{ @contestId() }/option"
 
-  insertOptionsHtml: (option)->
-    $.ajax(
-      data: { option: option }
-      url: @optionsHtmlPath()
-      success: (optionsHtml)=>
-        @onEditFormRetrieved(option, optionsHtml)
-    )
-
-  onEditFormRetrieved: (option, optionsHtml)=>
-    $editButton = $(".row[data-option='#{ option }'] .edit-button")
-    $editButton.text('Cancel')
-    $editButton.off('click').click(@onCancelClick)
-    $optionsRow = @optionsRow($editButton)
-    $optionContainer = $optionsRow.find('.attribute-form .view')
-    $saveButton = $optionsRow.find('.save-button')
+  afterEditFormRetrieved: (attribute, formHtml)->
+    $saveButton = $("[data-option=#{ attribute }]").find('.save-button')
     $saveButton.show()
-    $preview = $optionContainer.clone()
-    $optionContainer.html(optionsHtml)
-    $preview.addClass('edit-form').removeClass('view').hide().insertAfter($optionContainer)
-    @editFormsCallbacks[option]?()
-
-  onCancelClick: (event)=>
-    $editButton = $(event.target)
-    @cancelEditing($editButton)
-
-  cancelEditing: ($editButton)->
-    $editButton.text('Edit')
-    $optionsRow = @optionsRow($editButton)
-    $optionsRow.find('.save-button').hide()
-    $preview = $optionsRow.find('.edit-form')
-    $options = $optionsRow.find('.attribute-form .view')
-    $options.replaceWith($preview)
-    $preview.show().removeClass('edit-form').addClass('view')
-    $editButton.off('click').click(@onEditClick)
-
-
-  optionsRow: ($child)->
-    $child.parents('.row[data-option]')
 
   editFormsCallbacks:
     space_pictures: ->
@@ -114,4 +84,4 @@ class @ContestEditing
 
 $ ->
   window.brief = new ContestEditing()
-  brief.bindEditForms()
+  brief.bindEvents()

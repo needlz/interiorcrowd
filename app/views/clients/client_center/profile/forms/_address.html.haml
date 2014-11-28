@@ -1,6 +1,12 @@
-edit
-= user.address
-edit
-= user.state
-edit
-= user.zip
+.row
+  = form.label :address, t('client_center.profile.labels.address')
+.row
+  = form.text_field :address
+.row
+  = form.label :state, t('client_center.profile.labels.state')
+.row
+  = form.text_field :state
+.row
+  = form.label :zip, t('client_center.profile.labels.zip')
+.row
+  = form.text_field :zip

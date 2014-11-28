@@ -1,7 +1,6 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
-  before_filter :check_client, only: [:client_center, :entries, :brief, :profile, :edit_attribute]
-  before_filter :set_client, only: [:client_center, :entries, :brief, :profile, :edit_attribute]
+  before_filter :set_client, except: [:create]
 
   def client_center
     if @client.last_contest.try(:contest_requests).present?
@@ -61,9 +60,9 @@ class ClientsController < ApplicationController
     end
   end
 
-  def edit_attribute
-    attribute = params[:attribute]
-    render partial: "clients/client_center/profile/forms/#{ attribute }"
+  def update
+    @client.update_attributes!(client_params)
+    redirect_to profile_client_center_index_path
   end
 
   private
@@ -82,7 +81,13 @@ class ClientsController < ApplicationController
   end
 
   def set_client
+    check_client
     @client = Client.find_by_id(session[:client_id])
+  end
+
+  def client_params
+    params.require(:client).permit(:first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
+                                   :card_ex_year, :card_cvc, :email)
   end
 
 end

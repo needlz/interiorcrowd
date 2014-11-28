@@ -1,92 +1,58 @@
-class @ProfileEditor
+class @ProfileEditor extends InlineEditor
+
+  attributeIdentifierData: 'id'
+  attributeSelector: '.attribute'
+  editButtonSelector: '.edit-button'
+  placeholderSelector: '.placeholder'
+  numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
 
   bindEvents: ->
-    @bindEditClick()
-    @bindSaveSuccess()
-    @bindSaveError()
-    @initPreview()
+    @bindDoneButton()
+    @initNumberFields()
+    super()
 
-  initPreview: ->
-    $('.attribute[data-id]').each((index, element)=>
-      attribute = $(element).data('attribute')
-      @previewCallbacks[option]?()
+  initNumberFields: ->
+    $('.attribute').on('keypress', @numberFields, (e)->
+      char = String.fromCharCode(e.which);
+      !!char.match(/[0-9]/)
     )
 
-  bindEditClick: ->
-    $('.attribute .edit-button').click(@onEditClick)
+  getForm: (attribute, onEditFormRetrieved)=>
+    formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit").html()
+    $(".attribute[data-id='#{ attribute }'] .preview .edit").empty()
+    @onEditFormRetrieved(attribute, formHtml)
 
-  onEditClick: (event)=>
-    $button = $(event.target)
-    attribute = $button.parents('.attribute').data('id')
-    @insertOptionsHtml(attribute)
-
-  formPlaceholder: ($childElement)->
-    @optionsRow($childElement).find('.placeholder')
-
-  optionsHtmlPath: ->
-    "/clients/#{ @contestId() }/option"
-
-  requestAttributeForm: (attribute)->
-    $.ajax(
-      data: { option: option }
-      url: @attributeFormPath()
-      success: (formHtml)=>
-        @onEditFormRetrieved(attribute, formHtml)
+  bindDoneButton: ->
+    $('body').on('click', '.edit .done', @, (event)->
+      editor = event.data
+      $attributeRow = $(event.target).parents(editor.attributeSelector)
+      attribute = $attributeRow.data(editor.attributeIdentifierData)
+      $form = $attributeRow.find('.edit')
+      $view = $attributeRow.find('.view')
+      editor.previewCallbacks[attribute].apply(editor, [$form, $view]) if editor.previewCallbacks[attribute]?
+      editor.cancelEditing(attribute)
     )
-
-  onEditFormRetrieved: (attribute, formHtml)=>
-    $editButton = $(".attribute[data-id='#{ attribute }'] .edit-button")
-    $editButton.text(I18n)
-    $editButton.off('click').click(@onCancelClick)
-    $optionsRow = @optionsRow($editButton)
-    $optionContainer = $optionsRow.find('.attribute-form .view')
-    $saveButton = $optionsRow.find('.save-button')
-    $saveButton.show()
-    $preview = $optionContainer.clone()
-    $optionContainer.html(optionsHtml)
-    $preview.addClass('edit-form').removeClass('view').hide().insertAfter($optionContainer)
-    @editFormsCallbacks[option]?()
-
-  onCancelClick: (event)=>
-    $editButton = $(event.target)
-    @cancelEditing($editButton)
-
-  cancelEditing: ($editButton)->
-    $editButton.text('Edit')
-    $optionsRow = @optionsRow($editButton)
-    $optionsRow.find('.save-button').hide()
-    $preview = $optionsRow.find('.edit-form')
-    $options = $optionsRow.find('.attribute-form .view')
-    $options.replaceWith($preview)
-    $preview.show().removeClass('edit-form').addClass('view')
-    $editButton.off('click').click(@onEditClick)
-
-
-  optionsRow: ($child)->
-    $child.parents('.row[data-option]')
-
-  editFormsCallbacks:
-    space_pictures: ->
-      SpacePicturesUploader.init()
-    example_pictures: ->
-      ExamplesUploader.init()
-    desirable_colors: ->
-      DesirableColorsEditor.init()
-    undesirable_colors: ->
-      UndesirableColorsEditor.init()
-    area: ->
-      designArea = new DesignArea($('#design_brief_design_area'), $('.area-children'), areas)
-      designArea.init()
 
   previewCallbacks:
-    desirable_colors: ->
-      $('.colors').colorTags({ readonly: true })
-    undesirable_colors: ->
-      $('.colors').colorTags({ readonly: true })
+    first_name: ($form, $view)->
+      @updateText($form, $view, 'first_name')
+    last_name: ($form, $view)->
+      @updateText($form, $view, 'last_name')
+    email: ($form, $view)->
+      @updateText($form, $view, 'email')
+    address: ($form, $view)->
+      @updateText($form, $view, 'address')
+      @updateText($form, $view, 'state')
+      @updateText($form, $view, 'zip')
+    billing_information: ($form, $view)->
+      @updateText($form, $view, 'card_number')
+      @updateText($form, $view, 'card_ex_month')
+      @updateText($form, $view, 'card_ex_year')
+      @updateText($form, $view, 'card_cvc')
 
-  onSaveClick: (event)=>
-    $saveButton = $(event.target)
-    $saveButton.parents('form').submit()
+  updateText: ($form, $view, field)->
+    $view.find('.' + field).text($form.find('#client_' + field).val())
+    $form.find('#client_' + field).attr('value', $form.find('#client_' + field).val())
 
 $ ->
   profile = new ProfileEditor()

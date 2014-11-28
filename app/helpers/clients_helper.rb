@@ -11,13 +11,7 @@ module ClientsHelper
   end
 
   def profile_rows
-    [
-      { title: 'First name', attribute: 'first_name' },
-      { title: 'Last name', attribute: 'last_name' },
-      { title: 'Email', attribute: 'email' },
-      { title: 'Address', attribute: 'address' },
-      { title: 'Billing information', attribute: 'billing_info' }
-    ]
+    ['first_name', 'last_name', 'email', 'address', 'billing_information']
   end
 
 end

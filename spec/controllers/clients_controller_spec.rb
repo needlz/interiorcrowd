@@ -42,19 +42,32 @@ RSpec.describe ClientsController do
     end
   end
 
-  describe 'GET edit_attribute' do
-    it 'returns attribute form for profile of current client' do
-      session[:client_id] = client.id
-      profile_rows.each do |profile_row|
-        attribute = profile_row[:attribute]
-        get :edit_attribute, attribute: attribute
-        expect(response).to be_ok
-        expect(response).to render_template(partial: "clients/client_center/profile/forms/_#{ attribute }")
-      end
+  describe 'PATCH update' do
+    let(:new_client_attributes) do
+      { first_name: 'new first name',
+        last_name: 'new last name',
+        address: 'new address',
+        state: 'new state',
+        zip: '123456',
+        card_number: '4242',
+        card_ex_month: '12',
+        card_ex_year: '2002',
+        card_cvc: '444'
+      }
     end
+    let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
 
-    it 'fails if client is not logged in' do
-      expect { get :edit_attribute, atribute: helper.profile_rows[0][:attribute] }.to raise_error
+    it 'updates client attributes' do
+      sign_in(client)
+      patch :update, client: new_client_attributes, id: client.id
+      is_expected.to redirect_to(profile_client_center_index_path)
+      client.reload
+      new_client_attributes.except(*integer_attributes).each do |attribute, value|
+        expect(client[attribute]).to eq value
+      end
+      integer_attributes.each do |attribute|
+        expect(client[attribute]).to eq new_client_attributes[attribute].to_i
+      end
     end
   end
 end

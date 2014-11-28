@@ -5,5 +5,8 @@
     .col-xs-9.placeholder
       .view
         = render partial: "clients/client_center/profile/preview/#{ attribute }", locals: { user: user }
+      .edit
+        = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: { user: user, form: form }
+        = render partial: 'clients/client_center/profile/forms/done_button'
   .col-xs-1
     %span.edit-button= t('client_center.attribute_edit_button')
