@@ -55,12 +55,16 @@
 
         .edit {
           display: none;
+
+          .field {
+            margin-bottom: 20px;
+          }
         }
       }
+    }
 
-      .done {
-        @include link;
-      }
+    .save {
+      text-align: center;
     }
   }
 }

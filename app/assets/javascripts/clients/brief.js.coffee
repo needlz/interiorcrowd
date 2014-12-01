@@ -1,16 +1,14 @@
 class @ContestEditing extends InlineEditor
 
   attributeIdentifierData: 'option'
-  editButtonSelector: '.edit-button'
-  attributeSelector: '.attribute'
   placeholderSelector: '.attribute-form'
 
   bindEvents: ->
+    super()
     @bindSaveClick()
     @bindSaveSuccess()
     @bindSaveError()
     @initPreview()
-    super()
 
   initPreview: ->
     $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }]").each((index, element)=>
@@ -41,9 +39,9 @@ class @ContestEditing extends InlineEditor
   getForm: (attribute)->
     $.ajax(
       data: { option: attribute }
-      url: @optionsHtmlPath()
-      success: (optionsHtml)=>
-        @onEditFormRetrieved(attribute, optionsHtml)
+      url: @formHtmlPath()
+      success: (formHtml)=>
+        @onEditFormRetrieved(attribute, formHtml)
     )
 
   contestId: ->
@@ -52,7 +50,7 @@ class @ContestEditing extends InlineEditor
   optionsContainer: ($childElement)->
     @optionsRow($childElement).find('.attribute-form .view')
 
-  optionsHtmlPath: ->
+  formHtmlPath: ->
     "/contests/#{ @contestId() }/option"
 
   afterEditFormRetrieved: (attribute, formHtml)->

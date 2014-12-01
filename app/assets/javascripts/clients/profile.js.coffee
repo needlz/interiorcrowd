@@ -1,20 +1,18 @@
 class @ProfileEditor extends InlineEditor
 
   attributeIdentifierData: 'id'
-  attributeSelector: '.attribute'
-  editButtonSelector: '.edit-button'
   placeholderSelector: '.placeholder'
   numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
 
   bindEvents: ->
+    super()
     @bindDoneButton()
     @initNumberFields()
-    super()
 
   initNumberFields: ->
     $('.attribute').on('keypress', @numberFields, (e)->
       char = String.fromCharCode(e.which);
-      !!char.match(/[0-9]/)
+      e.preventDefault() unless char.match(/[0-9]/)
     )
 
   getForm: (attribute, onEditFormRetrieved)=>
@@ -41,18 +39,14 @@ class @ProfileEditor extends InlineEditor
     email: ($form, $view)->
       @updateText($form, $view, 'email')
     address: ($form, $view)->
-      @updateText($form, $view, 'address')
-      @updateText($form, $view, 'state')
-      @updateText($form, $view, 'zip')
+      @updateText($form, $view, field) for field in ['address', 'state', 'zip']
     billing_information: ($form, $view)->
-      @updateText($form, $view, 'card_number')
-      @updateText($form, $view, 'card_ex_month')
-      @updateText($form, $view, 'card_ex_year')
-      @updateText($form, $view, 'card_cvc')
+      @updateText($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
 
   updateText: ($form, $view, field)->
-    $view.find('.' + field).text($form.find('#client_' + field).val())
-    $form.find('#client_' + field).attr('value', $form.find('#client_' + field).val())
+    $input = $form.find("#client_#{ field }")
+    $view.find(".#{ field }").text($input.val())
+    $input.attr('value', $input.val())
 
 $ ->
   profile = new ProfileEditor()

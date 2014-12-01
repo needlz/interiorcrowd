@@ -8,5 +8,6 @@
     = render partial: 'home/msg'
     = form_for @client do |f|
       = render partial: 'clients/client_center/profile/profile_preview', locals: { form: f }
-      = f.submit t('client_center.attribute_save_button')
+      .save
+        = f.submit t('client_center.attribute_save_button'), class: 'btn btn-primary'
 = render partial: 'clients/client_center/layout'

@@ -1,5 +1,7 @@
 class @InlineEditor
 
+  editButtonSelector: '.edit-button'
+  attributeSelector: '.attribute'
   hiddenViewClass: 'hidden-view'
 
   bindEvents: ->

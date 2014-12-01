@@ -57,16 +57,23 @@ RSpec.describe ClientsController do
     end
     let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
 
-    it 'updates client attributes' do
-      sign_in(client)
-      patch :update, client: new_client_attributes, id: client.id
-      is_expected.to redirect_to(profile_client_center_index_path)
-      client.reload
-      new_client_attributes.except(*integer_attributes).each do |attribute, value|
-        expect(client[attribute]).to eq value
+    describe 'updates' do
+      before do
+        sign_in(client)
+        patch :update, client: new_client_attributes, id: client.id
+        client.reload
+        is_expected.to redirect_to(profile_client_center_index_path)
       end
-      integer_attributes.each do |attribute|
-        expect(client[attribute]).to eq new_client_attributes[attribute].to_i
+
+      it 'client string attributes' do
+        new_client_attributes.except(*integer_attributes).each do |attribute, value|
+          expect(client[attribute]).to eq value
+        end
+      end
+      it 'client integer attributes' do
+        integer_attributes.each do |attribute|
+          expect(client[attribute]).to eq new_client_attributes[attribute].to_i
+        end
       end
     end
   end

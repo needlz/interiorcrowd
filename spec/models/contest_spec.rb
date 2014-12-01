@@ -14,7 +14,6 @@ RSpec.describe Contest do
     it 'updates liked examples' do
       old_examples = contest.liked_examples
       new_examples_ids = [old_examples[0].id, Fabricate(:image).id]
-      expect(old_examples.count).to eq 2
       params = { design_style: { document_id: new_examples_ids.join(',') } }
       options = ContestOptions.new(params)
       contest.update_from_options(options)
