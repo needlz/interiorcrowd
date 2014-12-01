@@ -1,0 +1,27 @@
+.field
+  %div
+    = form.label :card_number, t('client_center.profile.labels.card_number')
+  %div
+    = form.text_field :card_number
+.field
+  %div
+    = form.label :card_ex_month, t('client_center.profile.labels.card_exp_month')
+  %div
+    = select_month(form.object.card_ex_month,
+        use_month_numbers: true,
+        field_name: 'card_ex_month',
+        prefix: 'client')
+.field
+  %div
+    = form.label :card_ex_year, t('client_center.profile.labels.card_exp_year')
+  %div
+    = select_year(form.object.card_ex_year,
+        start_year: Date.today.year,
+        end_year: Date.today.year + 20,
+        field_name: 'card_ex_year',
+        prefix: 'client')
+.field
+  %div
+    = form.label :card_cvc, t('client_center.profile.labels.card_cvc')
+  %div
+    = form.text_field :card_cvc

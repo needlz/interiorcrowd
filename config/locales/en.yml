@@ -64,5 +64,20 @@ en:
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
-    brief:
-      option_edit_button: Edit
+    attribute_edit_button: Edit
+    attribute_save_button: Save
+    attribute_cancel_button: Cancel
+    attribute_done_button: Done
+    profile:
+      labels:
+        address: Address
+        state: State
+        zip: Zip
+        first_name: First name
+        last_name: Last name
+        email: Email
+        billing_information: Billing information
+        card_number: Card number
+        card_exp_month: Expiration month
+        card_exp_year: Expiration year
+        card_cvc: CVC

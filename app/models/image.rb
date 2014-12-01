@@ -12,4 +12,13 @@ class Image < ActiveRecord::Base
   scope :space_images, ->{ where(kind: SPACE) }
   scope :of_kind, ->(kind){ where(kind: kind) }
 
+  def self.update_ids(contest_id, image_ids, kind)
+    transaction do
+      old_ids = of_kind(kind).pluck(:id)
+      ids_to_remove = old_ids - image_ids
+      where(id: ids_to_remove).destroy_all if ids_to_remove.present?
+      ids_to_add = image_ids - old_ids
+      where(id: ids_to_add).update_all(contest_id: contest_id, kind: kind) if ids_to_add.present?
+    end
+  end
 end

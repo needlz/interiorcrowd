@@ -46,12 +46,14 @@ InteriorC::Application.routes.draw do
 
   resources :images
 
-  resources :clients do
+  resources :clients
+
+  resources :client_center, only: [] do
     collection do
-      get 'client_center'
-      get 'client_center/entries', to: 'clients#entries', as: 'entries'
-      get 'client_center/brief', to: 'clients#brief', as: 'brief'
-      get 'client_center/profile', to: 'clients#profile', as: 'profile'
+      get '', to: 'clients#client_center', as: ''
+      get 'entries', to: 'clients#entries', as: 'entries'
+      get 'brief', to: 'clients#brief', as: 'brief'
+      get 'profile', to: 'clients#profile', as: 'profile'
     end
   end
 

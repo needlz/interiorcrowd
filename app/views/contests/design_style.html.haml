@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1.page-title
       %h3= t('contests.titles.design_style')
   = render partial: 'home/msg'
-  = form_tag save_design_style_contests_path, {id: "design_style", method: "post"} do
+  = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
     = render partial: 'contests/options/designer_level_options'
     = render partial: 'contests/options/appeals_options'
     = render partial: 'contests/options/desirable_colors_options'

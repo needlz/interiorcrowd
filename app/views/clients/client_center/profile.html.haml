@@ -1,4 +1,13 @@
-- content_for :client_center_content do
-  Profile page
+- content_for :head do
+  = javascript_include_tag 'clients/profile'
+  :javascript
+    I18n = #{ translations_to_json(:client_center) }
 
+- content_for :client_center_content do
+  .profile
+    = render partial: 'home/msg'
+    = form_for @client do |f|
+      = render partial: 'clients/client_center/profile/profile_preview', locals: { form: f }
+      .save
+        = f.submit t('client_center.attribute_save_button'), class: 'btn btn-primary'
 = render partial: 'clients/client_center/layout'

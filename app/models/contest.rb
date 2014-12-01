@@ -64,26 +64,11 @@ class Contest < ActiveRecord::Base
   end
 
   def update_space_images(image_ids)
-    update_images(image_ids, Image::SPACE)
+    Image.update_ids(id, image_ids, Image::SPACE)
   end
 
   def update_example_images(image_ids)
-    update_images(image_ids, Image::LIKED_EXAMPLE)
-  end
-
-  def add_images(image_ids, kind)
-    images = Image.where(id: image_ids)
-    images.each do |image|
-      image.update_attributes(contest_id: id, kind: kind)
-    end
-  end
-
-  def update_images(image_ids, kind)
-    old_ids = images.of_kind(kind).pluck(:id)
-    ids_to_remove = old_ids - image_ids
-    ids_to_add = image_ids - old_ids
-    Image.where(id: ids_to_remove).destroy_all
-    add_images(ids_to_add, kind)
+    Image.update_ids(id, image_ids, Image::LIKED_EXAMPLE)
   end
 
 end

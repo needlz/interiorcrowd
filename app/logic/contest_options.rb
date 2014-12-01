@@ -7,7 +7,7 @@ class ContestOptions
     @contest = {}
     if options[:design_brief]
       @contest[:design_category_id] = options[:design_brief][:design_category].to_i if options[:design_brief].key?(:design_category)
-      @contest[:design_space_id] = options[:design_brief][:design_area] if options[:design_brief].key?(:design_area)
+      @contest[:design_space_id] = options[:design_brief][:design_area].to_i if options[:design_brief].key?(:design_area)
     end
     if options[:design_space]
       @contest[:space_length] = options[:design_space][:length] if options[:design_space].key?(:length)

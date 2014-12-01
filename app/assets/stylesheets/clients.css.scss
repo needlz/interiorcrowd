@@ -34,17 +34,37 @@
     margin-bottom: 45px;
   }
 
-  .edit-label {
-    @include link
+  .edit-button {
+    @include link;
   }
 
   .save-button {
-    @include link
+    @include link;
   }
 
-  .brief {
+
+  .row.attribute {
+    margin-bottom: 1em;
+  }
+
+  .profile {
     .row.attribute {
-      margin-bottom: 1em;
+      .preview {
+        color: black;
+        @extend .col-xs-11;
+
+        .edit {
+          display: none;
+
+          .field {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+
+    .save {
+      text-align: center;
     }
   }
 }

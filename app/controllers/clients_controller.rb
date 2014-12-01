@@ -1,13 +1,12 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
-  before_filter :check_client, only: [:client_center, :entries, :brief, :profile]
-  before_filter :set_client, only: [:client_center, :entries, :brief, :profile]
+  before_filter :set_client, except: [:create]
 
   def client_center
     if @client.last_contest.try(:contest_requests).present?
-      redirect_to entries_clients_path
+      redirect_to entries_client_center_index_path
     else
-      redirect_to brief_clients_path
+      redirect_to brief_client_center_index_path
     end
   end
 
@@ -61,6 +60,11 @@ class ClientsController < ApplicationController
     end
   end
 
+  def update
+    @client.update_attributes!(client_params)
+    redirect_to profile_client_center_index_path
+  end
+
   private
 
   def create_contests(user_id)
@@ -77,7 +81,13 @@ class ClientsController < ApplicationController
   end
 
   def set_client
+    check_client
     @client = Client.find_by_id(session[:client_id])
+  end
+
+  def client_params
+    params.require(:client).permit(:first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
+                                   :card_ex_year, :card_cvc, :email)
   end
 
 end

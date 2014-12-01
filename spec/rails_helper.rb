@@ -41,10 +41,18 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 
+  def sign_in(user)
+    if user.kind_of?(Client)
+      session[:client_id] = user.id
+    elsif user.kind_of?(Designer)
+      session[:designer_id] = user.id
+    end
+  end
+
   def contest_options_source
     { design_brief: {
-        design_category: 'design_category',
-        design_area: 'design_area' },
+        design_category: '1',
+        design_area: '2' },
       design_space: {
           length: '10',
           width: '10',
