@@ -14,7 +14,7 @@ class DesignersController < ApplicationController
   end
 
   def new
-    session[:exlnks] = nil
+    session[:external_links] = nil
     @designer = Designer.new
     @designer_images = nil
   end
@@ -26,12 +26,12 @@ class DesignersController < ApplicationController
     user_ps = params[:designer][:password]
     params[:designer][:password] = Client.encrypt(params[:designer][:password])
     params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
-    params[:designer][:ex_links] = params[:exlinks].reject { |c| c.empty? }.join(',')
-    session[:exlnks] = params[:designer][:ex_links]
+    params[:designer][:ex_links] = params[:external_links].reject { |c| c.empty? }.join(',')
+    session[:external_links] = params[:designer][:ex_links]
     @designer = Designer.new(designer_params)
     respond_to do |format|
       if @designer.save
-        session[:exlnks] = nil
+        session[:external_links] = nil
         session[:designer_id] = @designer.id 
         Mailer.designer_registration(@designer, user_ps).deliver
         format.html { redirect_to welcome_designer_path(@designer), notice: 'Designer was successfully created.' }

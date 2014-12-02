@@ -9,6 +9,7 @@ class @DesignerSignUp
     @bindRemoveLinkButton()
     @bindCreateAccountButton()
     @bindFileUploader()
+    $('#designer_zip').keypress digitsFilter
 
   bindAddLinkButton: ->
     $(document).on 'click', '.lnk_container .plus_wrapper', @, (event)->
@@ -21,12 +22,12 @@ class @DesignerSignUp
 
   bindRemoveLinkButton: ->
     $(document).on 'click', '.lnk_container .minus_wrapper', @, (event)->
-      $(event.target).parent().parent().remove()
+      $(event.target).parents('.lnk_container').remove()
       signUp = event.data
       signUp.refreshLinkButtons('removed')
 
   populateExamplesInputs: ->
-    $.each(exlnks, (index, link)=>
+    $.each(externaLinks, (index, link)=>
       $rows = $('.lnk_container:first').first()
       $formclone = $rows.clone()
       $formclone.find('input').val link
@@ -96,6 +97,11 @@ class @DesignerSignUp
         $('#err_email').text I18n.validation_messages.invalid_email unless @validEmail(@designer_email)
       else
         $('#err_email').text I18n.validation_messages.enter_email
+    designer_zip: ->
+      if @designer_zip.length > 1
+        $('#err_zip').text 'Please enter valid zip.' unless $.isNumeric(@designer_zip)
+      else
+        $('#err_zip').text 'Please enter zip.'
     designer_password: ->
       $('#err_password').text I18n.validation_messages.enter_password if @designer_password.length < 1
     designer_password_confirmation: ->
@@ -106,9 +112,9 @@ class @DesignerSignUp
           $('#err_cpassword').text I18n.validation_messages.password_confirmation_mistmatch
 
   validateInputs: ->
-    $('.text-error').html ''
-    @invalidInputs = []
+    $('.text-error').text ''
     @readInputValues()
+    @invalidInputs = []
     for inputId, validation of @validations
       @validateInput($('#' + inputId), validation)
 

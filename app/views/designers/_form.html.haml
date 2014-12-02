@@ -4,7 +4,7 @@
   = stylesheet_link_tag  'uploadify'
   = render partial: 'shared/setup_uploadify'
   :javascript
-    window.exlnks = #{session[:exlnks].present? ? session[:exlnks].split(',') : []}
+    window.externaLinks = #{session[:external_links].present? ? session[:external_links].split(',') : []}
     window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }
 
 = form_for(@designer) do |f|
@@ -33,8 +33,8 @@
       %label #{ t('designer_center.sign_up.zipcode') }:
     .col-sm-7
       = f.text_field :zip,
-          class: 'form-control input-small' ,
-          onkeyup: "$(this).val($(this).val().replace(/[^0-9]/ig, ''))"
+          class: 'form-control input-small'
+      %span#err_zip.text-error
   .row.step-row
     .col-sm-6.col-sm-offset-2= t('designer_center.sign_up.show_examples')
   .row.step-row.lnk_container
