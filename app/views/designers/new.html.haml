@@ -1,28 +1,21 @@
-#in_pricing
+#in_pricing.sign-up
   .container
     .section_header
       \&nbsp;
     .row.charts_wrapp
-      / Plan Box
       .col-sm-12
         .plan
           .wrapper
             .row
               .page-header
-                %h2 Become a Designer!
+                %h2= t('designer_center.sign_up.become_designer')
             .row
               .alert.alert-info
-                %h3
-                  Do you love
-                  = succeed "?" do
-                    %strong interior design
-                %h3
-                  Do your friends tell you that you have a knock for
-                  = succeed "?" do
-                    %strong style
-            = render :partial => 'home/msg'
+                %h3= sign_up_interior_design_title
+                %h3= sign_up_style_title
+            = render partial: 'home/msg'
             .container
               .row
                 .col-sm-8.col-sm-offset-1.page-title
-                  %h3 Get Started
+                  %h3= t('designer_center.sign_up.get_started')
               = render 'form'

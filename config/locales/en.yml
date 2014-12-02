@@ -73,11 +73,45 @@ en:
         address: Address
         state: State
         zip: Zip
-        first_name: First name
-        last_name: Last name
+        first_name: First Name
+        last_name: Last Name
         email: Email
         billing_information: Billing information
         card_number: Card number
         card_exp_month: Expiration month
         card_exp_year: Expiration year
         card_cvc: CVC
+  designer_center:
+    sign_up:
+      first_name: First Name
+      last_name: Last Name
+      email: Email Address
+      phone_number: Phone Number
+      zipcode: Zipcode
+      show_examples: Please show us examples of your work.
+      links_to_work: Links to your portfolio / work
+      upload_examples: Upload examples
+      password: Password
+      confirm_password: Password (again)
+      agreement: By clicking below, you agree to the terms and conditions.
+      register_button: Create Account
+      upload_example_button: Upload
+      validation_messages:
+        invalid_zip: Please enter valid zip.
+        enter_zip: Please enter zip.
+        enter_password: Please enter password.
+        confirm_password: Please confirm password.
+        password_confirmation_mistmatch: Password and Confirm password must be same.
+        invalid_email: Please enter valid email.
+        enter_email: Please enter email.
+        enter_last_name: Please enter last name.
+        enter_first_name: Please enter first name.
+        invalid_example_url: Please enter valid Link URL and make sure to add prefix http or https in URL
+      become_designer: Become a Designer!
+      do_you_love: Do you love %{interior_design}?
+      interior_design: interior design
+      a_knock_for_style: Do your friends tell you that you have a knock for %{style}?
+      style: style
+      get_started: Get Started
+  supported_image_extensions: (.jpg, .tif, .png)
+
