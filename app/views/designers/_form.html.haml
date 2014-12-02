@@ -5,68 +5,72 @@
   = render partial: 'shared/setup_uploadify'
   :javascript
     window.exlnks = #{session[:exlnks].present? ? session[:exlnks].split(',') : []}
+    window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }
 
 = form_for(@designer) do |f|
   = f.hidden_field :ex_document_ids
-  %input#designer_image{:name => "designer_image", :type => "hidden", :value => @designer_images}/
+  %input#designer_image{name: 'designer_image', type: 'hidden', value: @designer_images}
   .row.step-row
     .col-sm-2
-      %label First Name:
+      %label #{ t('designer_center.sign_up.first_name') }:
     .col-sm-7
-      = f.text_field :first_name, :class=>  "form-control input-big"
+      = f.text_field :first_name, class: 'form-control input-big'
       %span#err_first_name.text-error
   .row.step-row
     .col-sm-2
-      %label Last Name:
+      %label #{ t('designer_center.sign_up.last_name') }:
     .col-sm-7
-      = f.text_field :last_name, :class=>  "form-control input-big"
+      = f.text_field :last_name, class: 'form-control input-big'
       %span#err_last_name.text-error
   .row.step-row
     .col-sm-2
-      %label Email:
+      %label #{ t('designer_center.sign_up.email') }:
     .col-sm-7
-      = f.text_field :email, :class=>  "form-control input-big"
+      = f.text_field :email, class: 'form-control input-big'
       %span#err_email.text-error
   .row.step-row
     .col-sm-2
-      %label Zip Code:
+      %label #{ t('designer_center.sign_up.zipcode') }:
     .col-sm-7
       = f.text_field :zip,
-          :class=>  "form-control input-small" ,
-          :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))"
+          class: 'form-control input-small' ,
+          onkeyup: "$(this).val($(this).val().replace(/[^0-9]/ig, ''))"
+  .row.step-row
+    .col-sm-6.col-sm-offset-2= t('designer_center.sign_up.show_examples')
   .row.step-row.lnk_container
     .col-sm-2.examplelabel
-      %label Example of Your Work:
+      %label #{ t('designer_center.sign_up.links_to_work') }:
     .input-group.col-sm-7.link_box.link_box_large
-      %span.input-group-addon Links
-      %input.form-control.input-big-addon.des_links{:name => "exlinks[]", :type => "text"}/
-      %a.plus_wrapper{:href => "javascript:void(0)"}
+      %span
+      %input.form-control.input-big-addon.des_links{name: 'exlinks[]', type: 'text'}
+      %a.plus_wrapper{href: 'javascript:void(0)'}
         %span +
-      %a.minus_wrapper{:href => "javascript:void(0)"}
+      %a.minus_wrapper{href: 'javascript:void(0)'}
         %span -
   .row.step-row
-    .col-sm-8.controls.form-inline.col-sm-offset-2
-      %span#image_display{:style => "padding-bottom:10px;"}
+    .col-sm-2
+      %label #{ t('designer_center.sign_up.upload_examples') }:
+    .col-sm-8.controls.form-inline
+      %span#image_display
         - if @designer_images.present?
           - @designer_images.split(',').each do |path|
-            %img{:src => path}/
-      %input#file_input{:name => "", :type => "file"}/
-      %span (.jpg, .tif, .png)
+            %img{src: path}
+      %input#file_input{ name: '', type:' file' }
+      %span= t('supported_image_extensions')
   .row.step-row
     .col-sm-2
-      %label Password:
+      %label #{ t('designer_center.sign_up.password') }:
     .col-sm-7
-      = f.password_field :password, :class=>  "form-control input-big"
+      = f.password_field :password, class: 'form-control input-big'
       %span#err_password.text-error
   .row.step-row
     .col-sm-2
-      %label Password Again:
+      %label #{ t('designer_center.sign_up.confirm_password') }:
     .col-sm-7
-      = f.password_field :password_confirmation, :class=>  "form-control input-big"
+      = f.password_field :password_confirmation, class: 'form-control input-big'
       %span#err_cpassword.text-error
   .row.step-row
-    .col-sm-6.col-sm-offset-2
-      By clicking below, You are agree to our terms and conditions.
+    .col-sm-6.col-sm-offset-2= t('designer_center.sign_up.agreement')
   .row.formbuttons
     .col-sm-4.col-sm-offset-4
-      %a.order.continue{:href => "#", :style => "width:150px"} CREATE ACCOUNT
+      %a.order.create-account{href: '#'}= t('designer_center.sign_up.register_button')
