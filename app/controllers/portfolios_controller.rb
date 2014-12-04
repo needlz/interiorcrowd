@@ -2,7 +2,7 @@ class PortfoliosController < ApplicationController
   before_filter :set_designer, only: [:edit, :create, :update, :new]
 
   def show
-    @designer = Designer.where(portfolio_path: params[:url]).first
+    @designer = Designer.find_by_portfolio_path(params[:url])
     @portfolio_items = @designer.portfolio_pictures
   end
 

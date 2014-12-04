@@ -83,6 +83,8 @@ en:
         card_exp_year: Expiration year
         card_cvc: CVC
   designer_center:
+    navigation:
+      create_portfolio: Create Portfolio
     sign_up:
       first_name: First Name
       last_name: Last Name
@@ -147,4 +149,5 @@ en:
         about: Tell us something about yourself
         about_placeholder: Describe your design style, how you work with clients, why you love interior design, etc.
         create_button: Create Page
+        no_path_error: must be specified in order to publish portfolio
   supported_image_extensions: (.jpg, .tif, .png)

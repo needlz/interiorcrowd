@@ -5,7 +5,7 @@ module DesignerCenterHelper
   end
 
   def designer_center_navigation_links
-    [{ name: 'Create Portfolio', path: edit_portfolio_path }]
+    [{ name: t('designer_center.navigation.create_portfolio'), path: edit_portfolio_path }]
   end
 
 end

@@ -12,7 +12,6 @@ class DesignerCenterController < ApplicationController
   private
 
   def set_designer
-    check_designer
-    @designer = Designer.where(id: session[:designer_id]).first
+    @designer = Designer.find(session[:designer_id]) if check_designer
   end
 end

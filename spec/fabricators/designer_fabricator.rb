@@ -1,8 +1,6 @@
 Fabricator(:designer) do
-  Fabricate.sequence do |i|
-    first_name "first_name#{ i }"
-    last_name "last_name#{ i }"
-    email "designer#{ i }@example.com"
-    password i.to_s * 6
-  end
+  first_name{ sequence { |i| "first_name#{ i }" } }
+  last_name{ sequence { |i| "last_name#{ i }" } }
+  email{ sequence { |i| "designer#{ i }@example.com" } }
+  password{ sequence { |i| i.to_s * 6 } }
 end
