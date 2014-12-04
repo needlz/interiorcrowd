@@ -64,11 +64,11 @@ class Contest < ActiveRecord::Base
   end
 
   def update_space_images(image_ids)
-    Image.update_ids(id, image_ids, Image::SPACE)
+    Image.update_contest(self, image_ids, Image::SPACE)
   end
 
   def update_example_images(image_ids)
-    Image.update_ids(id, image_ids, Image::LIKED_EXAMPLE)
+    Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
   end
 
 end

@@ -1,0 +1,10 @@
+- content_for :head do
+  = javascript_include_tag 'portfolio/edit'
+
+- content_for :designer_center_content do
+  .portfolio-creation
+    = form_for @designer, url: portfolio_path, method: :patch  do |f|
+      = render partial: 'portfolios/form', locals: { form: f }
+      = f.submit t('designer_center.portfolio.creation.create_button')
+
+= render partial: 'designer_center/layout'

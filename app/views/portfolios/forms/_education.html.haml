@@ -1,0 +1,10 @@
+.row
+  = t('designer_center.portfolio.creation.education.title')
+= form.check_box :education, { id: 'designer_education_gifted' }, 'gifted'
+= form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted')
+
+= form.check_box :education, { id: 'designer_education_school' }, 'school'
+= form.label :education_school, t('designer_center.portfolio.creation.education.school')
+
+= form.check_box :education, { id: 'designer_education_apprenticed' }, 'apprenticed'
+= form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')

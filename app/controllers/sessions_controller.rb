@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   
   def login
-    redirect_to users_url unless session[:designer_id].nil?
+    redirect_to designer_center_index_path if session[:designer_id].present?
   end
   
   def client_login
-    redirect_to users_url unless session[:designer_id].nil?
+    redirect_to client_center_index_path if session[:client_id].present?
   end
   
   def client_authenticate
@@ -21,10 +21,10 @@ class SessionsController < ApplicationController
   
   
   def authenticate
-    dinfo = Designer.authenticate(params[:username], params[:password])
-    if dinfo.present?
-        session[:designer_id] = dinfo.id 
-        redirect_to welcome_designer_path(dinfo)
+    designer = Designer.authenticate(params[:username], params[:password])
+    if designer.present?
+        session[:designer_id] = designer.id
+        redirect_to designer_center_index_path
     else
       flash[:error] = 'Incorrect Username or Password!'
       redirect_to login_sessions_url
@@ -33,12 +33,12 @@ class SessionsController < ApplicationController
   
   def retry_password
     if request.method == 'POST'
-       designer_info = Designer.find_by_email(params[:email])
-       if designer_info.present?
+       designer = Designer.find_by_email(params[:email])
+       if designer.present?
         new_password = SecureRandom.urlsafe_base64(5)
-        designer_info.password = Client.encrypt(new_password)
-        designer_info.save
-        Mailer.reset_password_mail(designer_info, new_password).deliver
+        designer.password = Client.encrypt(new_password)
+        designer.save
+        Mailer.reset_password_mail(designer, new_password).deliver
         flash[:notice] = "An email has been sent to your registered email address."
         redirect_to login_sessions_path
        
@@ -51,11 +51,11 @@ class SessionsController < ApplicationController
   
   def client_retry_password
     if request.method == 'POST'
-       client_info = Client.find_by_email(params[:email])
-       if client_info.present?
+       client = Client.find_by_email(params[:email])
+       if client.present?
         new_password = SecureRandom.urlsafe_base64(5)
-        client_info.password = Client.encrypt(new_password)
-        client_info.save
+        client.password = Client.encrypt(new_password)
+        client.save
         Mailer.reset_password_mail(designer_info, new_password).deliver
         flash[:notice] = "An email has been sent to your registered email address."
         redirect_to client_login_sessions_path

@@ -2,24 +2,14 @@ class DesignersController < ApplicationController
   before_filter :check_designer, only: [:welcome, :lookbook, :preview_lookbook]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
-  def index
-    @designers = Designer.all
-  end
-
   def thank_you
-
+    render
   end 
-  
-  def show
-  end
 
   def new
     session[:external_links] = nil
     @designer = Designer.new
     @designer_images = nil
-  end
-
-  def edit
   end
 
   def create
@@ -57,15 +47,6 @@ class DesignersController < ApplicationController
     end
   end
 
-  def destroy
-    @designer.destroy
-    respond_to do |format|
-      format.html { redirect_to designers_url }
-      format.json { head :no_content }
-    end
-  end
-  
-  
   def welcome
     render
   end
@@ -91,13 +72,12 @@ class DesignersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_designer
-      @designer = Designer.find(params[:id]) if params[:id].present?
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def designer_params
-      params[:designer]
-    end
+  def set_designer
+    @designer = Designer.find(params[:id]) if params[:id].present?
+  end
+
+  def designer_params
+    params.require(:designer)
+  end
 end

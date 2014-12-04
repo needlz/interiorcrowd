@@ -57,7 +57,7 @@ InteriorC::Application.routes.draw do
     end
   end
 
-  resources :designers do
+  resources :designers, only: [:create, :update] do
     member do
       get 'thank_you'
       get 'welcome'
@@ -65,4 +65,13 @@ InteriorC::Application.routes.draw do
       get 'preview_lookbook'
     end
   end
+
+  resources :designer_center, only: [] do
+    collection do
+      get '', to: 'designer_center#designer_center', as: ''
+      resource :portfolio, only: [:edit, :update]
+    end
+  end
+
+  get '/:url', to: 'portfolios#show', as: 'show_portfolio'
 end

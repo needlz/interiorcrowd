@@ -1,0 +1,7 @@
+- index = 1
+- @portfolio_items.in_groups_of(2, false) do |items|
+  - items.each do |item|
+    = render partial: 'portfolios/item',
+        locals: { image_url: item.image.url,
+                  number: index }
+    - index += 1
