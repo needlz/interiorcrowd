@@ -1,0 +1,14 @@
+#in_pricing
+  .container
+    .section_header
+      \ 
+    .row.charts_wrapp
+      .col-sm-12
+        .plan
+          .wrapper.client-center
+            .row
+              .page-header{ style: 'border-bottom: none;' }
+                %h2= title
+            .row
+              = render partial: header
+            = content

@@ -48,6 +48,7 @@ en:
       errors:
         required_data_missing: Please fill the required info.
   client_center:
+    title: Client Center
     welcome_user: Welcome, %{username}
     no_images: No images
     entries:
@@ -82,6 +83,8 @@ en:
         card_exp_year: Expiration year
         card_cvc: CVC
   designer_center:
+    navigation:
+      create_portfolio: Create Portfolio
     sign_up:
       first_name: First Name
       last_name: Last Name
@@ -113,5 +116,38 @@ en:
       a_knock_for_style: Do your friends tell you that you have a knock for %{style}?
       style: style
       get_started: Get Started
+    title: Designer Center
+    welcome_user: Welcome, %{username}
+    portfolio:
+      creation:
+        title: Create your portfolio page
+        years_of_expirience: How many years of expirience do you have?
+        education:
+          title: 'Where did you study interior design Please choose all that apply:'
+          gifted: I'm naturally gifted
+          apprenticed: Apprenticed with a designer
+          school: College / University
+          school_name: Name of School
+          degrees:
+            title: Degree Earned
+            no: No degree (just coursework)
+            associates: Associates
+            bachelors: Bachelors
+            masters: Masters
+            doctorate: Doctorate
+        list_awards: Please list any awards that you have won for your work
+        upload_pictrures:
+          title: 'Upload Portfolio Pictures:'
+          button: Upload
+          hint: needs to be %{extensions}
+        choose_background: Choose background for portfolio page by clicking on the above
+        upload_personal_picture:
+          title: Upload Your Personal Picture (optional)
+          button: Upload
+          hint: needs to be %{extensions}
+        characterize_style: How do you characterize your design style?
+        about: Tell us something about yourself
+        about_placeholder: Describe your design style, how you work with clients, why you love interior design, etc.
+        create_button: Create Page
+        no_path_error: must be specified in order to publish portfolio
   supported_image_extensions: (.jpg, .tif, .png)
-
