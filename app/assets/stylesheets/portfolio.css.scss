@@ -2,4 +2,57 @@
   label {
     font-weight: normal !important;
   }
+
+  #school-details {
+    display: none;
+  }
+
+  .portfolio-thumbs {
+    padding-bottom: 10px;
+
+    img {
+      width: 30%;
+    }
+  }
+
+  #school-details {
+    width: 50%;
+    border: 1px black solid;
+    padding: 20px;
+  }
+}
+
+#portfolio {
+  margin-top: 90px;
+  margin-left: 30px;
+
+  .row {
+    max-width: 1000px
+  }
+
+  .attr {
+    margin-bottom: 10px;
+  }
+
+  .items-row {
+    margin-bottom: 30px;
+
+    .item {
+      padding:30px;
+    }
+  }
+
+  .about {
+    border: 1px solid gray;
+  }
+
+  .item {
+    img {
+      width: 100%;
+    }
+
+    .number {
+      font-size: 20px;
+    }
+  }
 }

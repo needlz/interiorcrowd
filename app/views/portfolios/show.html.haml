@@ -1,7 +1,35 @@
-- index = 1
-- @portfolio_items.in_groups_of(2, false) do |items|
-  - items.each do |item|
-    = render partial: 'portfolios/item',
-        locals: { image_url: item.image.url,
-                  number: index }
-    - index += 1
+#in_pricing
+  #portfolio
+    .row
+      .attr
+        - personal_picture = @portfolio.personal_picture ? @portfolio.personal_picture.image.url(:medium) : '/assets/blank.png'
+        %img{ style: 'width: 100px', src: personal_picture }
+      .col-md-6
+        .attr.name{ style: 'font-size: 20px' }
+          = @portfolio.designer.name
+        .attr.years_of_expirience
+          [#{ @portfolio.years_of_expirience }]
+          = expirience_level(@portfolio)
+        .attr.education
+          [#{ education_icon(@portfolio) }]
+          = education_view(@portfolio)
+        .attr.awards
+          Awards:
+          = @portfolio.awards
+      .col-md-6.about-container
+        The designer about himself:
+        .about
+          = @portfolio.about
+        .style-description= @portfolio.style_description
+    .attr
+      - index = 1
+      - @portfolio.pictures.in_groups_of(2, false) do |items|
+        .row.items-row
+          - items.each do |item|
+            .col-lg-6.col-md-5.col-xs-12.col-sm-6.item
+              = render partial: 'portfolios/item',
+                  locals: { image_url: item.image.url,
+                            number: index }
+              - index += 1
+.row
+

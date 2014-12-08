@@ -2,10 +2,10 @@ class DesignerCenterController < ApplicationController
   before_filter :set_designer
 
   def designer_center
-    if @designer.has_portfolio?
-      redirect_to show_portfolio_path(url: @designer.portfolio_path)
-    else
+    if @designer.portfolio
       redirect_to edit_portfolio_path
+    else
+      redirect_to new_portfolio_path
     end
   end
 

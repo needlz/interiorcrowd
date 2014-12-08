@@ -1,2 +1,11 @@
 .row
   = t('designer_center.portfolio.creation.upload_personal_picture.title')
+
+%span#personal_picture_thumb.portfolio-thumbs
+  - path = portfolio.personal_picture.try(:image).try(:url)
+  - if path
+    %img{ src: path }
+%input#personal_picture{ name: '', type: 'file' }
+%input#personal_picture_id{ name: "portfolio[personal_picture_id]",
+  type: "hidden",
+  value: portfolio.personal_picture.try(:id) }

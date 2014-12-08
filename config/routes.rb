@@ -27,6 +27,7 @@ InteriorC::Application.routes.draw do
       get 'respond'
       get 'option'
       patch 'update'
+      get 'show', as: 'show'
     end
 
     collection do
@@ -69,7 +70,7 @@ InteriorC::Application.routes.draw do
   resources :designer_center, only: [] do
     collection do
       get '', to: 'designer_center#designer_center', as: ''
-      resource :portfolio, only: [:edit, :update]
+      resource :portfolio, only: [:edit, :update, :new, :create]
     end
   end
 

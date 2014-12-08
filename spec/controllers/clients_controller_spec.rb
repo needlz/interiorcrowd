@@ -62,7 +62,7 @@ RSpec.describe ClientsController do
         sign_in(client)
         patch :update, client: new_client_attributes, id: client.id
         client.reload
-        is_expected.to redirect_to(profile_client_center_index_path)
+        expect(response).to redirect_to(profile_client_center_index_path)
       end
 
       it 'client string attributes' do
@@ -70,6 +70,7 @@ RSpec.describe ClientsController do
           expect(client[attribute]).to eq value
         end
       end
+
       it 'client integer attributes' do
         integer_attributes.each do |attribute|
           expect(client[attribute]).to eq new_client_attributes[attribute].to_i

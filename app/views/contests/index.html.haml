@@ -34,7 +34,7 @@
                             %td.col-sm-6= contest.project_name
                             %td.col-sm-2= Contest::CONTEST_DESIGN_BUDGET_PLAN[contest.budget_plan.to_i]
                             %td.col-sm-2= contest.created_at.strftime("%d %b. %Y")
-                            %td.col-sm-2= link_to 'Details', contest_path(contest)
+                            %td.col-sm-2= link_to 'Details', show_contest_path(contest)
                           %tr
                             %td{:colspan => "2"}
                               .digg_pagination

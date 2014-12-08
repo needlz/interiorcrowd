@@ -1,10 +1,20 @@
-.row
-  = t('designer_center.portfolio.creation.education.title')
-= form.check_box :education, { id: 'designer_education_gifted' }, 'gifted'
-= form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted')
+.education
+  .row
+    = t('designer_center.portfolio.creation.education.title')
+  .attr.row
+    = form.check_box :education_gifted
+    = form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted')
 
-= form.check_box :education, { id: 'designer_education_school' }, 'school'
-= form.label :education_school, t('designer_center.portfolio.creation.education.school')
-
-= form.check_box :education, { id: 'designer_education_apprenticed' }, 'apprenticed'
-= form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')
+  .attr.row
+    = form.check_box :education_school
+    = form.label :education_school, t('designer_center.portfolio.creation.education.school')
+    #school-details.pull-right
+      .attr
+        = t('designer_center.portfolio.creation.education.school_name')
+        = form.text_field :school_name
+      .attr
+        = t('designer_center.portfolio.creation.education.degrees.title')
+        = education_degree_select('portfolio', portfolio)
+  .attr.row
+    = form.check_box :education_apprenticed
+    = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')
