@@ -3,8 +3,7 @@ class @PortfolioEditor
   init: ->
     @bindYearsOfExpirience()
     @bindPictureUploaders()
-    @bindSchoolCheckbox()
-    @updateSchoolDetails(@$education_school_checkbox())
+    @bindSchoolCheckbox().trigger('change')
 
   bindYearsOfExpirience: ->
     $('#portfolio_years_of_expirience').keypress digitsFilter
@@ -31,18 +30,12 @@ class @PortfolioEditor
     )
 
   bindSchoolCheckbox: ->
-    @$education_school_checkbox().change (event)=>
+    handler = (event)=>
       $checkbox = $(event.target)
-      @updateSchoolDetails($checkbox)
-
-  updateSchoolDetails: ($school_checkbox)->
-    if $school_checkbox.is(':checked')
-      $('#school-details').show()
-    else
-      $('#school-details').hide()
-
-  $education_school_checkbox: ->
-    $('#portfolio_education_school')
+      $('#school-details').toggle($checkbox.is(':checked'))
+    $checkbox = $('#portfolio_education_school')
+    $checkbox.change(handler)
+    $checkbox
 
 $ ->
   portfolioEditor = new PortfolioEditor()

@@ -14,7 +14,7 @@
         = form.text_field :school_name
       .attr
         = t('designer_center.portfolio.creation.education.degrees.title')
-        = education_degree_select('portfolio', portfolio)
+        = @portfolio_view.education_degree_select('portfolio')
   .attr.row
     = form.check_box :education_apprenticed
     = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')

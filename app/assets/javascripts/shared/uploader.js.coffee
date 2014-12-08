@@ -29,7 +29,8 @@ $.fn.initUploaderWithThumbs = (options) ->
           $imageIds.val(imageId)
         else
           $(options.thumbs.container).append "<img src='#{ imageUrl }' />"
-          previousIds = if $imageIds.val().length then $imageIds.val() + ',' else ''
+          previousIds = ''
+          previousIds = $imageIds.val() + ',' if $imageIds.val().length
           $imageIds.val(previousIds + imageId)
       options.uploadify
     )

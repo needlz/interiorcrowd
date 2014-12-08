@@ -3,33 +3,35 @@ class PortfoliosController < ApplicationController
   before_filter :set_portfolio, only: [:edit, :update, :new]
 
   def show
-    @portfolio = Portfolio.find_by_path(params[:url])
-    render_404 unless @portfolio
-  end
-
-  def edit
-    render
+    portfolio = Portfolio.find_by_path(params[:url])
+    raise_404 unless portfolio
+    @portfolio_view = PortfolioView.new(portfolio)
   end
 
   def new
     return redirect_to edit_portfolio_path if @portfolio
   end
 
+  def create
+    portfolio = Portfolio.new(portfolio_params)
+    Portfolio.transaction do
+      @designer.portfolio = portfolio
+      portfolio.update_pictures(params[:portfolio])
+    end
+    redirect_after_updated(portfolio)
+  end
+
+  def edit
+    @portfolio_view = PortfolioView.new(@portfolio)
+    render
+  end
+
   def update
     Portfolio.transaction do
       @portfolio.update_attributes!(portfolio_params)
-      update_potfolio_pictures(@portfolio, params[:portfolio])
-      redirect_after_updated(@portfolio)
+      @portfolio.update_pictures(params[:portfolio])
     end
-  end
-
-  def create
-    Portfolio.transaction do
-      portfolio = Portfolio.new(portfolio_params)
-      @designer.portfolio = portfolio
-      update_potfolio_pictures(portfolio, params[:portfolio])
-      redirect_after_updated(portfolio)
-    end
+    redirect_after_updated(@portfolio)
   end
 
   private
@@ -58,12 +60,5 @@ class PortfoliosController < ApplicationController
     else
       redirect_to edit_portfolio_path
     end
-  end
-
-  def update_potfolio_pictures(portfolio, portfolio_params)
-    portfolio_pictures_ids = portfolio_params[:picture_ids].try(:split, ',').try(:map, &:to_i)
-    personal_picture_id = portfolio_params[:personal_picture_id]
-    background_picture_id = portfolio_params[:background_picture_id]
-    Image.update_portfolio(portfolio, background_picture_id, personal_picture_id, portfolio_pictures_ids)
   end
 end

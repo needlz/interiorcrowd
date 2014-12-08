@@ -2,33 +2,32 @@
   #portfolio
     .row
       .attr
-        - personal_picture = @portfolio.personal_picture ? @portfolio.personal_picture.image.url(:medium) : '/assets/blank.png'
-        %img{ style: 'width: 100px', src: personal_picture }
+        %img{ style: 'width: 100px', src: @portfolio_view.personal_picture_url }
       .col-md-6
         .attr.name{ style: 'font-size: 20px' }
-          = @portfolio.designer.name
+          = @portfolio_view.designer_name
         .attr.years_of_expirience
-          [#{ @portfolio.years_of_expirience }]
-          = expirience_level(@portfolio)
+          [#{ @portfolio_view.years_of_expirience }]
+          = @portfolio_view.expirience_level
         .attr.education
-          [#{ education_icon(@portfolio) }]
-          = education_view(@portfolio)
+          [#{ @portfolio_view.education_icon }]
+          = @portfolio_view.education_view
         .attr.awards
           Awards:
-          = @portfolio.awards
+          = @portfolio_view.awards
       .col-md-6.about-container
         The designer about himself:
         .about
-          = @portfolio.about
-        .style-description= @portfolio.style_description
+          = @portfolio_view.about
+        .style-description= @portfolio_view.style_description
     .attr
       - index = 1
-      - @portfolio.pictures.in_groups_of(2, false) do |items|
+      - @portfolio_view.pictures_urls.in_groups_of(2, false) do |urls|
         .row.items-row
-          - items.each do |item|
+          - urls.each do |url|
             .col-lg-6.col-md-5.col-xs-12.col-sm-6.item
               = render partial: 'portfolios/item',
-                  locals: { image_url: item.image.url,
+                  locals: { image_url: url,
                             number: index }
               - index += 1
 .row
