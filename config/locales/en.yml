@@ -149,5 +149,15 @@ en:
         about: Tell us something about yourself
         about_placeholder: Describe your design style, how you work with clients, why you love interior design, etc.
         create_button: Create Page
+        update_button: Update Page
         no_path_error: must be specified in order to publish portfolio
+        path: Name of page within %{domain}.
+      show:
+        degree_name: '%{degree} Degree'
+        self_educated: Self-educated
+        expirience_levels:
+          novice: Up and Coming Designer
+          professional: Career professional
+          expirienced: Very Expirienced
   supported_image_extensions: (.jpg, .tif, .png)
+  page_not_found: Page not found

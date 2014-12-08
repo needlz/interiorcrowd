@@ -1,2 +1,3 @@
 - portfolio_attributes.each do |attribute|
-  = render partial: "portfolios/forms/#{ attribute }", locals: { designer: @designer, form: form }
+  %div{ style: 'margin-bottom: 20px' }
+    = render partial: "portfolios/forms/#{ attribute }", locals: { portfolio: form.object, form: form }

@@ -7,9 +7,9 @@
 
 - content_for :designer_center_content do
   .portfolio-creation
-    = form_for @portfolio, url: portfolio_path, method: :patch  do |f|
+    = form_for Portfolio.new, url: portfolio_path, method: :post  do |f|
       = render partial: 'portfolios/form', locals: { form: f }
       .row
-        = f.submit t('designer_center.portfolio.creation.update_button')
+        = f.submit t('designer_center.portfolio.creation.create_button')
 
 = render partial: 'designer_center/layout'

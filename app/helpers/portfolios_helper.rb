@@ -1,12 +1,13 @@
 module PortfoliosHelper
 
   def portfolio_attributes
-    ['years_of_expirience',
+    ['path',
+     'years_of_expirience',
      'education',
      'awards',
      'portfolio_pictures',
      'personal_picture',
-     'design_style',
+     'style_description',
      'about']
   end
 end

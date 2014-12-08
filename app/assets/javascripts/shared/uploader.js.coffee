@@ -21,10 +21,17 @@ $.fn.initUploaderWithThumbs = (options) ->
         info = data.split(",")
         imageUrl = info[0]
         imageId = info[1]
-        $(options.thumbs.container).append "<img src='#{ imageUrl }' />"
         $imageIds = $(options.thumbs.selector)
-        previousIds = if $imageIds.val().length then $imageIds.val() + ',' else ''
-        $imageIds.val(previousIds + imageId)
+        if options.single
+          $img = $(options.thumbs.container).find('img')
+          $img = $('<img>').appendTo($(options.thumbs.container)) unless $img.length
+          $img.attr('src', imageUrl)
+          $imageIds.val(imageId)
+        else
+          $(options.thumbs.container).append "<img src='#{ imageUrl }' />"
+          previousIds = ''
+          previousIds = $imageIds.val() + ',' if $imageIds.val().length
+          $imageIds.val(previousIds + imageId)
       options.uploadify
     )
   )

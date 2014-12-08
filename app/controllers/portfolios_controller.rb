@@ -1,22 +1,37 @@
 class PortfoliosController < ApplicationController
   before_filter :set_designer, only: [:edit, :create, :update, :new]
+  before_filter :set_portfolio, only: [:edit, :update, :new]
 
   def show
-    @designer = Designer.find_by_portfolio_path(params[:url])
-    @portfolio_items = @designer.portfolio_pictures
+    portfolio = Portfolio.find_by_path(params[:url])
+    raise_404 unless portfolio
+    @portfolio_view = PortfolioView.new(portfolio)
+  end
+
+  def new
+    return redirect_to edit_portfolio_path if @portfolio
+  end
+
+  def create
+    portfolio = Portfolio.new(portfolio_params)
+    Portfolio.transaction do
+      @designer.portfolio = portfolio
+      portfolio.update_pictures(params[:portfolio])
+    end
+    redirect_after_updated(portfolio)
   end
 
   def edit
+    @portfolio_view = PortfolioView.new(@portfolio)
     render
   end
 
   def update
-    @designer.update_attributes!(designer_params)
-    if @designer.portfolio_published
-      redirect_to show_portfolio_path(url: @designer.portfolio_path)
-    else
-      redirect_to edit_portfolio_path
+    Portfolio.transaction do
+      @portfolio.update_attributes!(portfolio_params)
+      @portfolio.update_pictures(params[:portfolio])
     end
+    redirect_after_updated(@portfolio)
   end
 
   private
@@ -26,7 +41,24 @@ class PortfoliosController < ApplicationController
     @designer = Designer.find(session[:designer_id])
   end
 
-  def designer_params
-    params.require(:designer)
+  def set_portfolio
+    @portfolio = @designer.portfolio
+  end
+
+  def portfolio_params
+    result = params.require(:portfolio).permit(:years_of_expirience, :education_gifted, :degree, :school_name,
+      :education_apprenticed, :education_school, :awards, :style_description, :about, :path)
+    [:education_gifted, :education_school, :education_apprenticed].each do |param|
+      result[param] = to_bool(result[param])
+    end
+    result
+  end
+
+  def redirect_after_updated(portfolio)
+    if portfolio.complete?
+      redirect_to show_portfolio_path(url: portfolio.path)
+    else
+      redirect_to edit_portfolio_path
+    end
   end
 end
