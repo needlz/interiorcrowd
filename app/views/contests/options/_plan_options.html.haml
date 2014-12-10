@@ -1,4 +1,4 @@
 .row.plans
   - plans.each do |plan|
-    = render partial: 'contests/options/plan_box', locals: plan
+    = render partial: 'contests/options/plan_box', locals: { plan: plan }
   %span#err_plan.text-error

@@ -1,15 +1,15 @@
 .col-sm-4.standar
   .plan
-    #wrapper.home_wrapper{plan_id: plan_id}
+    #wrapper.home_wrapper{plan_id: plan.id}
       %h3 Premier
       .price
         %span.dollar $
-        %span.qty= price
+        %span.qty= plan.price
       .features
         %p
           Expect
-          %strong= designs_count
+          %strong= plan.designs_count
           designs
         %p
-          - if money_back_guarantee
+          - if plan.money_back_guarantee
             Money back guarantee

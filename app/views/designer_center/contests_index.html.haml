@@ -1,0 +1,12 @@
+- content_for :head do
+  = javascript_include_tag 'contests/contests_index'
+
+- content_for :designer_center_content do
+  #contests-preview
+    .row
+      = render partial: 'designer_center/contests_preview/notifications'
+      = render partial: 'designer_center/contests_preview/suggested_contests'
+    .row
+      = render partial: 'designer_center/contests_preview/all_contests'
+
+= render partial: 'designer_center/layout'

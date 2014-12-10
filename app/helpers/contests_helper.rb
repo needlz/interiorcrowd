@@ -31,9 +31,7 @@ module ContestsHelper
   end
 
   def plans
-    [{ plan_id: 1, price: 99, designs_count: 2, money_back_guarantee: false },
-     { plan_id: 2, price: 199, designs_count: 10, money_back_guarantee: false },
-     { plan_id: 3, price: 299, designs_count: 15, money_back_guarantee: true }]
+    BudgetPlan.all
   end
 
 end

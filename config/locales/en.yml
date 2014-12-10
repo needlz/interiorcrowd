@@ -85,6 +85,7 @@ en:
   designer_center:
     navigation:
       create_portfolio: Create Portfolio
+      preview_contests: Preview Current Contests
     sign_up:
       first_name: First Name
       last_name: Last Name
@@ -131,9 +132,9 @@ en:
           degrees:
             title: Degree Earned
             no: No degree (just coursework)
-            associates: Associates
-            bachelors: Bachelors
-            masters: Masters
+            associate: Associate's
+            bachelor: Bachelor's
+            master: Master's
             doctorate: Doctorate
         list_awards: Please list any awards that you have won for your work
         upload_pictrures:
@@ -159,5 +160,11 @@ en:
           novice: Up and Coming Designer
           professional: Career professional
           expirienced: Very Expirienced
+        about_self: The designer about himself
+    contests_preview:
+      suggested_contests_title: Suggested contests for you!
+      suggested_contests_hint: We think that these contests are just right for your style.
+      all_contests_title: See all current contests
+      days_left: '%{days} days left to enter'
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

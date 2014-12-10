@@ -47,7 +47,7 @@ RSpec.describe PortfoliosController do
 
         it 'renders attribute inputs' do
           get :edit
-          portfolio_attributes.each do |attribute|
+          PortfolioView.portfolio_attributes.each do |attribute|
             expect(response).to render_template(partial: "portfolios/forms/_#{ attribute }")
           end
         end

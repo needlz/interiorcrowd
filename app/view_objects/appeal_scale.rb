@@ -49,7 +49,7 @@ class AppealScale
   end
 
   def second_value
-    100 - value
+    100 - value.to_i
   end
 
   private

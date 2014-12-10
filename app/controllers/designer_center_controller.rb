@@ -9,6 +9,11 @@ class DesignerCenterController < ApplicationController
     end
   end
 
+  def contests_index
+    @suggested_contests = Contest.all.includes(:design_category, :design_space)
+    @all_contests = Contest.all
+  end
+
   private
 
   def set_designer
