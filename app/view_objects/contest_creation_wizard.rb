@@ -61,6 +61,10 @@ class ContestCreationWizard
     Contest::CONTEST_DESIGN_BUDGETS.invert
   end
 
+  def budget_plans
+    BudgetPlan.all
+  end
+
   private
 
   attr_reader :contest_attributes

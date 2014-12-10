@@ -10,8 +10,8 @@ class DesignerCenterController < ApplicationController
   end
 
   def contests_index
-    @suggested_contests = Contest.all.includes(:design_category, :design_space)
-    @all_contests = Contest.all
+    @current_contests = Contest.all.includes(:design_category, :design_space)
+    @suggested_contests = @current_contests
   end
 
   private

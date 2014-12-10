@@ -1,5 +1,9 @@
 class MakeBudgetPlanInteger < ActiveRecord::Migration
-  def change
-    execute 'ALTER TABLE contests ALTER budget_plan TYPE integer USING budget_plan::int;'
+  def up
+    change_column :contests, :budget_plan, 'integer USING budget_plan::int'
+  end
+
+  def down
+    change_column :contests, :budget_plan, :string
   end
 end

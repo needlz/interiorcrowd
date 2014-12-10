@@ -30,8 +30,4 @@ module ContestsHelper
                options
   end
 
-  def plans
-    BudgetPlan.all
-  end
-
 end
