@@ -11,3 +11,18 @@
     padding-left: 25px;
   }
 }
+
+#contests-preview {
+  .contest-item {
+    cursor: pointer;
+  }
+
+  .contest-item:hover td {
+    background-color: #f0f0f0;
+    color: #428bca;
+  }
+
+  h3 {
+    margin-top: 1em !important;
+  }
+}

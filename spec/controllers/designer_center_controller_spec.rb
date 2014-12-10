@@ -34,4 +34,15 @@ RSpec.describe DesignerCenterController do
       end
     end
   end
+
+  describe 'GET contests_index' do
+    before do
+      sign_in(designer)
+    end
+
+    it 'returns ok' do
+      get :contests_index
+      expect(response).to be_ok
+    end
+  end
 end

@@ -43,6 +43,10 @@ class Contest < ActiveRecord::Base
     update_example_images(options.liked_example_ids) if options.liked_example_ids
   end
 
+  def days_left
+    0
+  end
+
   private
 
   def update_appeals(options)

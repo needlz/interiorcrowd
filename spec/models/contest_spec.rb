@@ -20,4 +20,8 @@ RSpec.describe Contest do
       expect(contest.reload.liked_examples.pluck(:id)).to eq new_examples_ids
     end
   end
+
+  it 'know how many days left to enter contest' do
+    expect(contest.days_left).to eq 0
+  end
 end
