@@ -24,25 +24,25 @@ RSpec.describe PortfoliosController do
   end
 
   describe 'GET edit' do
-    before do
-      designer.portfolio = Fabricate(:portfolio)
-    end
-
-    it 'can not be accessed by anonymous user' do
-      expect { get :edit }.to raise_error
-    end
-
-    it 'can not be accessed by client' do
-      sign_in(client)
-      expect { get :edit }.to raise_error
-    end
-
-    context 'when signed in as designer' do
+    context 'portfolio created' do
       before do
-        sign_in(designer)
+        designer.portfolio = Fabricate(:portfolio)
       end
 
-      context 'with rendered views' do
+      it 'can not be accessed by anonymous user' do
+        expect { get :edit }.to raise_error
+      end
+
+      it 'can not be accessed by client' do
+        sign_in(client)
+        expect { get :edit }.to raise_error
+      end
+
+      context 'when signed in as designer' do
+        before do
+          sign_in(designer)
+        end
+
         it 'renders attribute inputs' do
           get :edit
           PortfolioView.portfolio_attributes.each do |attribute|
@@ -50,6 +50,12 @@ RSpec.describe PortfoliosController do
           end
         end
       end
+    end
+
+    it 'redirects to new portfolio page if portfolio not created' do
+      sign_in(designer)
+      get :edit
+      expect(response).to redirect_to new_portfolio_path
     end
   end
 

@@ -94,10 +94,10 @@ class ContestsController < ApplicationController
   def respond
     request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
     redirect_to contest_path if @contest.blank? || request.present?
-    
+
     @crequest = ContestRequest.new
     @crequest.designer_id = session[:designer_id]
-    @crequest.contest_id = params[:id]   
+    @crequest.contest_id = params[:id]
   end
 
   def option
