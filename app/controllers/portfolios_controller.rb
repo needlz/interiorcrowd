@@ -12,6 +12,7 @@ class PortfoliosController < ApplicationController
   def new
     return redirect_to edit_portfolio_path if @portfolio
     @portfolio_view = PortfolioView.new(Portfolio.new)
+    @navigation.active_tab = :portfolio
   end
 
   def create
@@ -26,6 +27,7 @@ class PortfoliosController < ApplicationController
   def edit
     return redirect_to new_portfolio_path unless @portfolio
     @portfolio_view = PortfolioView.new(@portfolio)
+    @navigation.active_tab = :portfolio
   end
 
   def update
@@ -65,6 +67,6 @@ class PortfoliosController < ApplicationController
   end
 
   def set_navigation
-    @navigation = Navigation::DesignerCenter.new(view_context)
+    @navigation = Navigation::DesignerCenter.new
   end
 end

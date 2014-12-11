@@ -5,11 +5,13 @@ class DesignerCenterContestsController < ApplicationController
   def index
     @current_contests = Contest.all.includes(:design_category, :design_space)
     @suggested_contests = @current_contests
+    @navigation.active_tab = :contests
   end
 
   def show
     @contest = Contest.find(params[:id])
     @contest_view = ContestView.new(@contest)
+    @navigation.active_tab = :contests
   end
 
   private
@@ -19,6 +21,6 @@ class DesignerCenterContestsController < ApplicationController
   end
 
   def set_navigation
-    @navigation = Navigation::DesignerCenter.new(view_context)
+    @navigation = Navigation::DesignerCenter.new
   end
 end

@@ -19,16 +19,19 @@ class ClientsController < ApplicationController
     else
       @contest_requests = [].paginate
     end
+    @navigation.active_tab = :entries
     render 'clients/client_center/entries'
   end
 
   def brief
     @contest = @client.last_contest
     @contest_view = ContestView.new(@contest)
+    @navigation.active_tab = :brief
     render 'clients/client_center/brief'
   end
 
   def profile
+    @navigation.active_tab = :profile
     render 'clients/client_center/profile'
   end
 
@@ -92,7 +95,7 @@ class ClientsController < ApplicationController
   end
 
   def set_navigation
-    @navigation = Navigation::ClientCenter.new(view_context)
+    @navigation = Navigation::ClientCenter.new
   end
 
 end

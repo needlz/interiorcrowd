@@ -1,26 +1,21 @@
 module Navigation
 
   class Base
+    include Rails.application.routes.url_helpers
 
-    def initialize(view_context)
-      @view_context = view_context
-    end
+    attr_accessor :active_tab
 
     def tabs
-      fail 'abstract method'
+      raise NotImplementedError
     end
 
-    def active_class(tab_routes)
-      'active' if tab_routes.find{ |route| route == current_route }
+    def active_class(tab)
+      'active' if tab == active_tab
     end
 
     private
 
-    attr_reader :view_context
-
-    def current_route
-      { controller: view_context.controller_name, action: view_context.action_name }
-    end
+    attr_reader :current_route
   end
 
 end
