@@ -1,0 +1,2 @@
+$ ->
+  $('.colors').colorTags({ readonly: true })

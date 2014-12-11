@@ -16,6 +16,7 @@ en:
       areas: Which rooms need help?
       brief:
         design_categories: Need help with
+        designer_level: Design knowledge
         wanted_colors: Preffered colors
         avoided_colors: Colors to avoid
         example: Examples
@@ -85,6 +86,10 @@ en:
         card_exp_month: Expiration month
         card_exp_year: Expiration year
         card_cvc: CVC
+    navigation:
+      entries: Entries
+      brief: Brief
+      profile: Profile
   designer_center:
     navigation:
       create_portfolio: Create Portfolio
@@ -169,5 +174,8 @@ en:
       suggested_contests_hint: We think that these contests are just right for your style.
       all_contests_title: See all current contests
       days_left: '%{days} days left to enter'
+    show_page:
+      back_to_index: < Back to all current contests
+      join: Join this contest >
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

@@ -1,0 +1,3 @@
+%ul.nav.nav-tabs.pull-right
+  - @navigation.tabs.each do |navigation_link|
+    = render partial: 'shared/navigation_link', locals: navigation_link

@@ -70,7 +70,7 @@ InteriorC::Application.routes.draw do
   resources :designer_center, only: [] do
     collection do
       get '', to: 'designer_center#designer_center', as: ''
-      get 'preview_contests', to: 'designer_center#contests_index', as: 'preview_contests'
+      resources :contests, controller: 'designer_center_contests', as: 'designer_center_contest', only: [:show, :index]
       resource :portfolio, only: [:edit, :update, :new, :create]
     end
   end

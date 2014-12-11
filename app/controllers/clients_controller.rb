@@ -1,6 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
   before_filter :set_client, except: [:create]
+  before_filter :set_navigation, only: [:entries, :brief, :profile]
 
   def client_center
     if @client.last_contest.try(:contest_requests).present?
@@ -88,6 +89,10 @@ class ClientsController < ApplicationController
   def client_params
     params.require(:client).permit(:first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
                                    :card_ex_year, :card_cvc, :email)
+  end
+
+  def set_navigation
+    @navigation = Navigation::ClientCenter.new(view_context)
   end
 
 end

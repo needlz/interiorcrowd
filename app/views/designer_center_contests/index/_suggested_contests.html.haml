@@ -3,9 +3,9 @@
   %h4= t('designer_center.contests_preview.suggested_contests_hint')
   %table.table.table-striped
     %thead
-      = render partial: 'designer_center/contests_preview/contest_row',
+      = render partial: 'designer_center_contests/index/contest_row',
           locals: { classes: '',
-                    item_tag: :th,
+                    column_tag: :th,
                     id: 'ID#',
                     project_name: 'Name',
                     design_category_name: 'Type',
@@ -13,5 +13,5 @@
                     days_left: 'Days left to enter',
                     price: 'Budget' }
     %tbody
-      = render partial: 'designer_center/contests_preview/contests_list',
+      = render partial: 'designer_center_contests/index/contests_list',
           locals: { contests: @suggested_contests }

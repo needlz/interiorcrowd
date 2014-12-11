@@ -1,7 +1,7 @@
 - contests.each do |contest|
-  = render partial: 'designer_center/contests_preview/contest_row',
+  = render partial: 'designer_center_contests/index/contest_row',
       locals: { classes: cycle('odd', 'even') + ' contest-item',
-                item_tag: :td,
+                column_tag: :td,
                 id: contest.id,
                 project_name: contest.project_name,
                 design_category_name: contest.design_category.name,
