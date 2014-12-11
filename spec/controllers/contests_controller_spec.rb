@@ -2,6 +2,8 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ContestsController do
+  render_views
+
   let(:client) { Client.create!(email: 'client@example.com', first_name: 'First', last_name: 'Last', password: '123456') }
   let(:contest) { Contest.create!(client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
@@ -12,8 +14,6 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET option' do
-    render_views
-
     it 'returns html of options' do
       ContestView::EDITABLE_ATTRIBUTES.each do |option|
         get :option, id: contest.id, option: option

@@ -14,6 +14,10 @@ class ContestView
     end
   end
 
+  def top_level_area_active?(area)
+    design_area == area || design_area.try(:parent) == area
+  end
+
   private
 
   def initialize_from_options(options)

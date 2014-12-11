@@ -2,12 +2,15 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ContestRequestsController do
-  let(:client) { Client.create!(email: 'client@example.com', first_name: 'First', last_name: 'Last', password: '123456') }
-  let(:contest) { Contest.create!(client: client) }
-  let(:request) { ContestRequest.create!(contest: contest) }
+  render_views
+
+  let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest, client: client) }
+  let(:designer) { Fabricate(:designer) }
+  let(:request) { Fabricate(:contest_request, contest: contest, lookbook: Fabricate(:lookbook), designer: designer) }
 
   before do
-    session[:client_id] = client.id
+    sign_in(client)
   end
 
   describe 'POST answer' do

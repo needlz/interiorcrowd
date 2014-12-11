@@ -49,5 +49,9 @@ module InteriorC
     }
 
     config.i18n.enforce_available_locales = false
+
+    Dir.glob("#{Rails.root}/app/assets/fonts/**/").each do |path|
+      config.assets.paths << path
+    end
   end
 end

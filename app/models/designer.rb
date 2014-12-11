@@ -18,8 +18,4 @@ class Designer < ActiveRecord::Base
   def name
     "#{ first_name } #{ last_name }"
   end
-
-  def has_portfolio?
-    portfolio_published
-  end
 end

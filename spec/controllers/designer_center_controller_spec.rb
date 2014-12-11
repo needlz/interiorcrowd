@@ -2,6 +2,8 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe DesignerCenterController do
+  render_views
+
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
 

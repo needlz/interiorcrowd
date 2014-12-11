@@ -1,0 +1,36 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 2934689, 2014-12-06T00:14:37-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Webfonts(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: SofiaProLight by Mostardesign
+ * URL: http://www.myfonts.com/fonts/mostardesign/sofia-pro/light/
+ * Copyright: Copyright (c) Olivier Gourvat - Mostardesign Studio, 2012. All rights reserved.
+ * Licensed pageviews: 10,000
+ * 
+ * Webfont: AvenirLTStd-Light by Linotype
+ * URL: http://www.myfonts.com/fonts/linotype/avenir/35-light/
+ * Copyright: Copyright &#x00A9; 1989, 1995, 2002 Adobe Systems Incorporated.  All Rights Reserved. &#x00A9; 1981, 1995, 2002 Heidelberger Druckmaschinen AG. All rights reserved.
+ * Licensed pageviews: 250,000
+ * 
+ * 
+ * License: http://www.myfonts.com/viewlicense?type=web&buildid=2934689
+ * 
+ * © 2014 MyFonts Inc
+*/
+
+
+/* @import must be at top of file, otherwise CSS will not work */
+/*@import url("//hello.myfonts.net/count/2cc7a1");*/
+
+  
+@font-face {font-family: 'SofiaProLight';src: url('/assets/2CC7A1_0_0.eot');src: url('/assets/2CC7A1_0_0.eot?#iefix') format('embedded-opentype'),url('/assets/2CC7A1_0_0.woff2') format('woff2'),url('/assets/2CC7A1_0_0.woff') format('woff'),url('/assets/2CC7A1_0_0.ttf') format('truetype');}
+ 
+  
+@font-face {font-family: 'AvenirLTStd-Light';src: url('/assets/2CC7A1_1_0.eot');src: url('/assets/2CC7A1_1_0.eot?#iefix') format('embedded-opentype'),url('/assets/2CC7A1_1_0.woff2') format('woff2'),url('/assets/2CC7A1_1_0.woff') format('woff'),url('/assets/2CC7A1_1_0.ttf') format('truetype');}
+ 

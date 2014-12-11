@@ -1,19 +1,24 @@
-%section#feature_slider.lol
-  %article#tour.slide{:style => "background: url('/assets/backgrounds/color-splash.jpg') repeat-x top center;"}
-    %img.asset.left-472.sp650.t110.z3{:src => "/assets/slides/scene3/scene3b.jpg"}/
-    %img.asset.left-365.sp600.t270.z4{:src => "/assets/slides/scene3/scene3c.jpg"}/
-    %img.asset.left-350.sp450.t135.z2{:src => "/assets/slides/scene3/scene3a.jpg"}/
-    .info
-      %h2 Get multiple options
-      = link_to 'Launch a contest', design_brief_contests_path()
-  %article#responsive.slide{:style => "background: url('/assets/backgrounds/indigo.jpg') repeat-x top center;"}
-    %img.asset.left-472.sp600.t100.z2{:src => "/assets/slides/scene4/scene4a.jpg"}/
-    %img.asset.left-190.sp500.t120.z4{:src => "/assets/slides/scene4/scene4b.jpg"}/
-    .info
-      %h2 We love to turn ideas into beautiful home
-      = link_to 'Launch a contest', design_brief_contests_path()
+- content_for :head do
+  = javascript_include_tag 'theme'
+  = stylesheet_link_tag 'compiled/theme.css'
 
 #in_pricing
+  %section#feature_slider
+    %article#tour.slide{:style => "background: url('/assets/backgrounds/color-splash.jpg') repeat-x top center;"}
+      %img.asset.left-472.sp650.t110.z3{:src => "/assets/slides/scene3/scene3b.jpg"}/
+      %img.asset.left-365.sp600.t270.z4{:src => "/assets/slides/scene3/scene3c.jpg"}/
+      %img.asset.left-350.sp450.t135.z2{:src => "/assets/slides/scene3/scene3a.jpg"}/
+      .info
+        %h2 Get multiple options
+        = link_to 'Launch a contest', design_brief_contests_path()
+    %article#responsive.slide{:style => "background: url('/assets/backgrounds/indigo.jpg') repeat-x top center;"}
+      %img.asset.left-472.sp600.t100.z2{:src => "/assets/slides/scene4/scene4a.jpg"}/
+      %img.asset.left-190.sp500.t120.z4{:src => "/assets/slides/scene4/scene4b.jpg"}/
+      .info
+        %h2 We love to turn ideas into beautiful home
+        = link_to 'Launch a contest', design_brief_contests_path()
+
+
   .container
     .section_header
       \ 
@@ -66,3 +71,4 @@
                 %strong 10
                 Storage
             %a.order{:href => design_brief_contests_path} Let's Start
+

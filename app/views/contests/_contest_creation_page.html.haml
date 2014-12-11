@@ -1,11 +1,3 @@
-#in_pricing
-  .container
-    .section_header
-      \ 
-    .row.charts_wrapp
-      .col-sm-12
-        .plan
-          .wrapper
-            = render :partial => 'contest_top_panel'
-            .container.col-sm-offset-1
-              = yield :page_content
+.container.animated.fadeInDown
+  = render :partial => 'contest_top_panel'
+  = yield :page_content

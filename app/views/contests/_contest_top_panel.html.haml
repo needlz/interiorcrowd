@@ -1,10 +1,24 @@
-.row
-  .page-header
-    %h2= t('contests.titles.creation')
-.row.launch-nav
-  .col-sm-10.col-sm-offset-1
-    %ul.nav.nav-pills.nav-justified
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(1)}"}= link_to "Step 1", design_brief_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(2)}"}= link_to "Step 2", design_style_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(3)}"}= link_to "Step 3", design_space_contests_path
-      %li{:class => "col-sm-2 #{@creation_wizard.breadcrumb_class(4)}"}= link_to "Step 4", preview_contests_path
+.row.text-center.title-first
+  %h1= t('contests.titles.creation').upcase
+  .options-selector
+    .col-md-3.option-item.no-padding-right.no-padding-left{class: @creation_wizard.breadcrumb_class(1)}
+      .circle
+        %span 1
+      .text-selector.text-center
+        Choose Room
+    .col-md-3.option-item.no-padding-left.no-padding-right{class: @creation_wizard.breadcrumb_class(2)}
+      .circle
+        %span 2
+      .text-selector.text-center
+        Style Profile
+    .col-md-3.option-item.no-padding-left.no-padding-right{class: @creation_wizard.breadcrumb_class(3)}
+      .circle
+        %span 3
+      .text-selector.text-center
+        Project Detail
+    .col-md-3.option-item.no-padding-left{class: @creation_wizard.breadcrumb_class(4)}
+      .circle
+        %span 4
+      .text-selector.text-center
+        Review
+    .clearfix

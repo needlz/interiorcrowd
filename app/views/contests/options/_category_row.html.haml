@@ -1,9 +1,18 @@
-.row
-  %div.col-sm-9
-    %label.checkbox
-      = contest_creation_category_radiobutton(design_category)
-      #{design_category.name} (#{design_category.description}. From $#{design_category.price})
-    .col-sm-6
-      %img{src: "/assets/#{design_category.before_picture}"}
-    .col-sm-6
-      %img{src: "/assets/#{design_category.after_picture}"}
+.col-md-12{ class: classes }
+  .col-md-1
+    = contest_creation_category_radiobutton(design_category)
+    = label_tag("design_brief_design_category_#{ design_category.id }", '')
+  = label_tag("design_brief_design_category_#{ design_category.id }") do
+    %span.text-price
+      %b #{design_category.name}     $#{design_category.price}
+    %br
+    %span.category-description
+      %i #{design_category.description}
+
+.clearfix
+.img-block
+  .col-md-6.no-padding-left.no-padding-right
+    %img.img-responsive{ src: "/assets/#{design_category.before_picture}" }
+  .col-md-6.no-padding-left.no-padding-right
+    %img.img-responsive{ src: "/assets/#{design_category.after_picture}" }
+  .clearfix

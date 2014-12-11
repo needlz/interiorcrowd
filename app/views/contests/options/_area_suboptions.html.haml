@@ -1,0 +1,5 @@
+.clearfix
+.menu-room.row{ data: { id: parent.id } }
+  .menu-room.text-center.children{:style => "margin-top: 42px; margin-bottom: 42px;"}
+    - areas.each do |area|
+      %span.m-room.option-item{:style => "padding:10px;", data: { id: area.id }, class: ('active' if @contest_view.design_area == area)}= area.name

@@ -1,7 +1,7 @@
 InteriorC::Application.routes.draw do
-  resources :designers
+  resources :designers, only: [:new, :create, :update]
 
-  resources :sessions do
+  resources :sessions, only: [] do
     collection do
       get 'logout'
       get 'login'
@@ -15,14 +15,14 @@ InteriorC::Application.routes.draw do
 
   root 'home#index'
 
-  resources :contest_requests do
+  resources :contest_requests, only: [:show, :create] do
     member do
       get 'save_lookbook'
       post 'answer'
     end
   end
 
-  resources :contests do
+  resources :contests, only: [:show, :update, :index] do
     member do
       get 'respond'
       get 'option'
@@ -45,9 +45,9 @@ InteriorC::Application.routes.draw do
     end
   end
 
-  resources :images
+  resources :images, only: [:show, :create]
 
-  resources :clients
+  resources :clients, only: [:create, :update]
 
   resources :client_center, only: [] do
     collection do

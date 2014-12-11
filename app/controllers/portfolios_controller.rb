@@ -10,6 +10,7 @@ class PortfoliosController < ApplicationController
 
   def new
     return redirect_to edit_portfolio_path if @portfolio
+    @portfolio_view = PortfolioView.new(Portfolio.new)
   end
 
   def create

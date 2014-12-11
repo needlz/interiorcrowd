@@ -2,6 +2,8 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ClientsController do
+  render_views
+
   include ClientsHelper
 
   before do
