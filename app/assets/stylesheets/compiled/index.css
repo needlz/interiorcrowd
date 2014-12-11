@@ -5,7 +5,9 @@
   height: 480px;
   background: #262626;
   z-index: 1;
-  margin-bottom: 40px; }
+  margin-bottom: 40px;
+  margin-top: 80px;
+}
   #feature_slider h1 {
     font-weight: 100;
     color: #ccc;
@@ -263,7 +265,7 @@
       border-radius: 6px;
       box-shadow: 0 1px 3px 1px #d6d6d6;
       background-color: #fff;
-      width: 95%;
+      width: 100%;
       position: relative; }
       #in_pricing .charts_wrapp .plan .wrapper {
         padding: 0 30px 26px 30px; }

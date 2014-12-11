@@ -18,4 +18,15 @@ module ApplicationHelper
     @translations.to_json.html_safe
   end
 
+  def for_each_by_groups(array, group_size, &block)
+    total_index = 0
+    content = ''
+    array.in_groups_of(group_size, false) do |group|
+      group.each_with_index do |item, group_index|
+        block[item, group_index, total_index]
+        total_index += 1
+      end
+    end
+    content.html_safe
+  end
 end

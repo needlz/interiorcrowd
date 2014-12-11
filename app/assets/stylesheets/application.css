@@ -9,12 +9,15 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
- *= require bootstrap/bootstrap.min.css
- *= require compiled/bootstrap-overrides.css
- *= require compiled/theme.css
+ *= require_tree ./bootstrap
  *= require compiled/index.css
  *= require lib/animate.css
  *= require clients
- *= require contests
  *= require portfolio
+ *= require jquery.mmenu.all
+ *= require animate
+ *= require contests
+ *= require home
+ *= require fonts
+ *= require style
  */

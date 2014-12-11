@@ -7,6 +7,5 @@ class DesignSpace < ActiveRecord::Base
 
   scope :available, ->{ where(status: ACTIVE_STATUS).order(pos: :asc) }
   scope :top_level, ->{ where(parent_id: 0) }
-  scope :by_ids, ->(ids) { where("id IN (?)", ids).order(:pos) }
 
 end

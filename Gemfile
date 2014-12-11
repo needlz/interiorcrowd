@@ -35,13 +35,14 @@ gem 'jquery-ui-rails'
 gem 'aws-sdk'
 gem 'hashie'
 gem 'fabrication'
+gem 'sprockets', '2.11.0'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
 
-group :producrion do
+group :production do
   gem 'rails_12factor'
 end
 
@@ -50,11 +51,18 @@ group :development do
   gem 'bullet'
   gem 'erb2haml'
   gem 'haml-rails'
+  gem 'sass-rails-source-maps'
+  gem 'rails_best_practices'
+  gem 'lol_dba'  #https://github.com/plentz/lol_dba
 end
 
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'simplecov', require: false
+end
+
+group :staging do
+  gem 'rails_12factor'
 end
 
 # Use ActiveModel has_secure_password

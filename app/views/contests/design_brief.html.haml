@@ -3,17 +3,15 @@
   = javascript_include_tag 'contests/area_options'
   :javascript
     window.areas = #{ @creation_wizard.available_areas.to_json }
-    window.noCategoryMessage = "Please select atleast one category."
+    window.I18n = #{ translations_to_json('contests') }
 
 - content_for :page_content do
-  .row
-    .col-sm-10.col-sm-offset-1.page-title
-      %h3= t('contests.titles.design_categories')
-  = render :partial => 'home/msg'
-  = form_tag save_design_brief_contests_path, { id: "design_categories", method: "post" } do
-    = render partial: 'contests/options/category_options'
-    = render partial: 'contests/options/area_options'
-  .row.formbuttons
-    .col-sm-4.col-sm-offset-6
-      = link_to "CONTINUE", '#', :class => "order"
+  #choose-room
+    = render partial: 'home/msg'
+    = form_tag save_design_brief_contests_path, { id: 'design_categories', method: 'post' } do
+      = render partial: 'contests/options/category_options'
+      = render partial: 'contests/options/area_options'
+    .text-center
+      %button.btn.btn-confirm{ type: 'button' } Continue
+
 = render partial: 'contest_creation_page'

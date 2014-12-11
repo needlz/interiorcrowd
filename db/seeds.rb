@@ -50,8 +50,8 @@ DesignSpace.create(id: 14, name: 'Living Room', pos: 50, parent_id: 0)
 DesignSpace.create(id: 15, name: 'Family Room/Den', pos: 60, parent_id: 0)
 
 DesignSpace.create(id: 16, name: 'Dining Room', pos: 70, parent_id: 0)
-DesignSpace.create(id: 17, name: 'MudRoom', pos: 80, parent_id: 0)
-DesignSpace.create(id: 18, name: 'PlayRoom', pos: 90, parent_id: 0)
+DesignSpace.create(id: 17, name: 'Mudroom', pos: 80, parent_id: 0)
+DesignSpace.create(id: 18, name: 'Playroom', pos: 90, parent_id: 0)
 
 DesignSpace.create(id: 19, name: 'Foyer', pos: 100, parent_id: 0)
 DesignSpace.create(id: 20, name: 'Garage', pos: 110, parent_id: 0)

@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe PortfoliosController do
-  include PortfoliosHelper
+  render_views
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
@@ -43,8 +43,6 @@ RSpec.describe PortfoliosController do
       end
 
       context 'with rendered views' do
-        render_views
-
         it 'renders attribute inputs' do
           get :edit
           PortfolioView.portfolio_attributes.each do |attribute|
