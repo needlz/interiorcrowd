@@ -1,0 +1,16 @@
+- content_for :designer_center_content do
+  #designer-center-responds
+    .row
+      .col-md-7
+        %h3= t('designer_center.responds.title')
+        %h4 #{ t('designer_center.responds.list_title') }:
+        - @current_requests.each do |request|
+          .respond
+            = render partial: 'designer_center_contests/responds/item',
+                locals: { contest: request.contest, request: request }
+      .col-md-5
+        = render partial: 'designer_center_contests/responds/notifications'
+    .row
+      = render partial: 'designer_center_contests/responds/footer'
+
+= render partial: 'designer_center/layout'

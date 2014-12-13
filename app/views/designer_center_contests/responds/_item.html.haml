@@ -1,0 +1,18 @@
+.clearfix
+  .col-md-1
+    = contest.id
+  .col-md-2
+    = contest.project_name
+  .col-md-3
+    = contest.design_category.name
+  .col-md-3
+    = contest.design_space.name
+  .col-md-2
+    = t('designer_center.contests_preview.days_left', days: contest.days_left)
+  .col-md-1
+    = BudgetPlan.find(contest.budget_plan).price
+.moodboard
+  .status
+    #{ t('designer_center.responds.item.status') }: #{ t('designer_center.responds.statuses.' + request.status ) }
+  .options
+    = render partial: "designer_center_contests/responds/#{ request.status }_options"

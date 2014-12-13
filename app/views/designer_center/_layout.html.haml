@@ -1,4 +1,5 @@
-= render partial: 'shared/user_center_layout',
-    locals: { header: 'designer_center/header',
-              title: t('designer_center.title'),
-              content: (yield :designer_center_content) }
+.designer-center
+  = render partial: 'shared/user_center_layout',
+      locals: { header: 'designer_center/header',
+                title: t('designer_center.title'),
+                content: (yield :designer_center_content) }

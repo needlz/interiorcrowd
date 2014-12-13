@@ -14,6 +14,11 @@ class DesignerCenterContestsController < ApplicationController
     @navigation.active_tab = :contests
   end
 
+  def responds
+    @current_requests = @designer.contest_requests.includes(contest: [:design_category, :design_space])
+    @navigation.active_tab = :requests
+  end
+
   private
 
   def set_designer
