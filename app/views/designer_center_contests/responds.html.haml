@@ -7,7 +7,7 @@
         - @current_responds.each do |respond|
           .respond
             = render partial: 'designer_center_contests/responds/item',
-                locals: { contest: @contest_details[respond], respond: respond }
+                locals: { respond: respond }
       .col-md-5
         = render partial: 'designer_center_contests/responds/notifications'
     .row

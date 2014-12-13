@@ -3,7 +3,7 @@ class ContestShortDetails
   attr_reader :id, :name, :design_category, :design_space, :days_left, :price
 
   def initialize(contest)
-    @contest = contest
+    @id = contest.id
     @name = contest.project_name
     @design_category = contest.design_category.name
     @design_space = contest.design_space.name
@@ -12,9 +12,5 @@ class ContestShortDetails
     @price = I18n.t('designer_center.responds.item.price',
                     price: BudgetPlan.find(contest.budget_plan).price)
   end
-
-  private
-
-  attr_reader :contest
 
 end
