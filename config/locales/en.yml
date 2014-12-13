@@ -57,7 +57,7 @@ en:
     no_images: No images
     entries:
       answers:
-        no: No
+        'no': 'No'
         maybe: Maybe
         favorite: Favorite
         winner: Winner
@@ -140,7 +140,7 @@ en:
           school_name: Name of School
           degrees:
             title: Degree Earned
-            no: No degree (just coursework)
+            'no': No degree (just coursework)
             associate: Associate's
             bachelor: Bachelor's
             master: Master's

@@ -79,7 +79,6 @@ class ContestRequestsController < ApplicationController
   def show
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
-    @navigation = Navigation::ClientCenter.new
-    @navigation.active_tab = :entries
+    @navigation = Navigation::ClientCenter.new(:entries)
   end
 end

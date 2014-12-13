@@ -5,6 +5,10 @@ module Navigation
 
     attr_accessor :active_tab
 
+    def initialize(active_tab)
+      @active_tab = active_tab
+    end
+
     def tabs
       raise NotImplementedError
     end
