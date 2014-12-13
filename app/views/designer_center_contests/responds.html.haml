@@ -4,10 +4,10 @@
       .col-md-7
         %h3= t('designer_center.responds.title')
         %h4 #{ t('designer_center.responds.list_title') }:
-        - @current_requests.each do |request|
+        - @current_responds.each do |respond|
           .respond
             = render partial: 'designer_center_contests/responds/item',
-                locals: { contest: request.contest, request: request }
+                locals: { contest: @contest_details[respond], respond: respond }
       .col-md-5
         = render partial: 'designer_center_contests/responds/notifications'
     .row

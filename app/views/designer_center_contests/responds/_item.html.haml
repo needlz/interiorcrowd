@@ -2,17 +2,21 @@
   .col-md-1
     = contest.id
   .col-md-2
-    = contest.project_name
+    = contest.name
   .col-md-3
-    = contest.design_category.name
+    = contest.design_category
   .col-md-3
-    = contest.design_space.name
+    = contest.design_space
   .col-md-2
-    = t('designer_center.contests_preview.days_left', days: contest.days_left)
+    = contest.days_left
   .col-md-1
-    = BudgetPlan.find(contest.budget_plan).price
+    = contest.price
 .moodboard
   .status
-    #{ t('designer_center.responds.item.status') }: #{ t('designer_center.responds.statuses.' + request.status ) }
+    #{ t('designer_center.responds.item.status') }: #{ t('designer_center.responds.statuses.' + respond.status ) }
+  - if respond.submitted?
+    .listed-at
+      = t('designer_center.responds.item.listed_as',
+          answer: t("client_center.entries.answers.#{ respond.answer }"))
   .options
-    = render partial: "designer_center_contests/responds/#{ request.status }_options"
+    = render partial: "designer_center_contests/responds/#{ respond.status }_options"

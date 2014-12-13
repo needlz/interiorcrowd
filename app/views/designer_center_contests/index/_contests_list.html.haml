@@ -3,8 +3,8 @@
       locals: { classes: cycle('odd', 'even') + ' contest-item',
                 column_tag: :td,
                 id: contest.id,
-                project_name: contest.project_name,
-                design_category_name: contest.design_category.name,
-                design_space_name: contest.design_space.name,
-                days_left: t('designer_center.contests_preview.days_left', days: contest.days_left),
-                price: "$#{ BudgetPlan.find(contest.budget_plan).price }" }
+                project_name: contest.name,
+                design_category_name: contest.design_category,
+                design_space_name: contest.design_space,
+                days_left: contest.days_left,
+                price: contest.price }

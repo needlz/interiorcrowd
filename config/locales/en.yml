@@ -192,6 +192,7 @@ en:
         create_shopping_list: Create Shoppping List
         create_3d_rendering: Create 3D rendering
         price: $%{price}
+        listed_as: 'Currently listed as: %{answer}'
       statuses:
         submitted: Moodboard submitted
         fulfillment: Fulfillment period

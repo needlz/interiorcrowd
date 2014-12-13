@@ -21,4 +21,8 @@ class ContestRequest < ActiveRecord::Base
     return false unless contest.client_id == client_id
     update_attributes(answer: answer)
   end
+
+  def submitted?
+    status == 'submitted'
+  end
 end
