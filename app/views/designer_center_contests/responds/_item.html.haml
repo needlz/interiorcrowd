@@ -1,0 +1,22 @@
+- contest = respond.contest
+.clearfix
+  .col-md-1
+    = contest.id
+  .col-md-2
+    = contest.name
+  .col-md-3
+    = contest.design_category
+  .col-md-3
+    = contest.design_space
+  .col-md-2
+    = contest.days_left
+  .col-md-1
+    = contest.price
+.moodboard
+  .status
+    #{ t('designer_center.responds.item.status') }: #{ respond.status_name }
+  - if respond.answer
+    .listed-at
+      = t('designer_center.responds.item.listed_as', answer: respond.answer )
+  .options
+    = render partial: "designer_center_contests/responds/#{ respond.status }_options"

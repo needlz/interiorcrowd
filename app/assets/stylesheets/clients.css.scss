@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+.hover-link-color:hover {
+  @include link;
+}
+
 .client-center {
   .header {
     border-bottom: 1px solid #eee;

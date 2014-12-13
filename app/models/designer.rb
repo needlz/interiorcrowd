@@ -5,6 +5,7 @@ class Designer < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_one :portfolio
+  has_many :contest_requests
 
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")

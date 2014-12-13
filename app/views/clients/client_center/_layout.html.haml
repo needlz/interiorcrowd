@@ -1,4 +1,5 @@
-= render partial: 'shared/user_center_layout',
-    locals: { title: t('client_center.title'),
-              header: 'clients/client_center/header',
-              content: (yield :client_center_content) }
+.client-center
+  = render partial: 'shared/user_center_layout',
+      locals: { title: t('client_center.title'),
+                header: 'clients/client_center/header',
+                content: (yield :client_center_content) }

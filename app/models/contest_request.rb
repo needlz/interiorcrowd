@@ -2,6 +2,7 @@ class ContestRequest < ActiveRecord::Base
   self.per_page = 8
 
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
+  validates_inclusion_of :status, in: %w{submitted closed fulfillment failed finished}, allow_nil: false
 
   belongs_to :designer
   belongs_to :contest
@@ -19,5 +20,9 @@ class ContestRequest < ActiveRecord::Base
   def reply(answer, client_id)
     return false unless contest.client_id == client_id
     update_attributes(answer: answer)
+  end
+
+  def submitted?
+    status == 'submitted'
   end
 end
