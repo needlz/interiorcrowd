@@ -9,10 +9,9 @@
   = link_to t('client_center.moodboard_details.back'), entries_client_center_index_path
   .row
     .col-sm-9
-      = render partial: 'contest_requests/moodboard', locals: { contest_request: @request }
+      = render partial: 'contest_requests/moodboard_with_answers', locals: { contest_request: @request }
+      = render partial: 'contest_requests/designer_notes', locals: { notes: @request.feedback }
     .col-sm-3
       = render partial: 'contest_requests/designer_info', locals: { designer: @request.designer }
-  .row
-    = render partial: 'contest_requests/designer_notes', locals: { notes: @request.feedback }
 
 = render partial: 'clients/client_center/layout'

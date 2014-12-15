@@ -1,9 +1,0 @@
-.moodboard{ data: { id: contest_request.id } }
-  %div
-    - if contest_request.moodboard_image_path
-      .image-container{ style: "background-image: url(#{ contest_request.moodboard_image_path })" }
-    - else
-      = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
-  .pull-right
-    = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
-    %span.current-answer= contest_request.answer

@@ -14,12 +14,6 @@ class DesignerCenterContestsController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
-  def responds
-    responds = @designer.contest_requests.includes(contest: [:design_category, :design_space])
-    @current_responds = responds.map{ |respond| ContestRespondView.new(respond) }
-    @navigation = Navigation::DesignerCenter.new(:requests)
-  end
-
   private
 
   def set_designer

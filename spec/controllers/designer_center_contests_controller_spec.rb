@@ -25,15 +25,15 @@ RSpec.describe DesignerCenterContestsController do
     end
   end
 
-  describe 'GET responds' do
+  describe 'GET index' do
     before do
       contest.contest_requests << Fabricate(:contest_request, designer: designer)
       contest.contest_requests << Fabricate(:contest_request, designer: designer, status: 'fulfillment')
     end
 
     it 'returns page' do
-      get :responds
-      expect(response).to render_template(:responds)
+      get :index
+      expect(response).to render_template(:index)
     end
   end
 end
