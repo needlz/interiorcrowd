@@ -19,4 +19,4 @@
     .listed-at
       = t('designer_center.responds.item.listed_as', answer: respond.answer )
   .options
-    = render partial: "designer_center_contests/responds/#{ respond.status }_options"
+    = render partial: "designer_center_requests/index/#{ respond.status }_options", locals: { respond_id: respond.id }

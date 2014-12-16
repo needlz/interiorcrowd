@@ -11,6 +11,7 @@ class @InlineEditor
     $(@attributeSelector).find(@editButtonSelector).click(@, @onEditClick)
 
   onEditClick: (event)->
+    event.preventDefault()
     $button = $(event.target)
     editor = event.data
     attribute = $button.parents(editor.attributeSelector).data(editor.attributeIdentifierData)
@@ -35,6 +36,7 @@ class @InlineEditor
     @editFormsCallbacks[attribute]?() if @editFormsCallbacks
 
   onCancelClick: (event)=>
+    event.preventDefault()
     $editButton = $(event.target)
     editor = event.data
     attribute = editor.optionsRow($editButton).data(editor.attributeIdentifierData)

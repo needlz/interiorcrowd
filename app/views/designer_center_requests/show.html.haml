@@ -1,0 +1,21 @@
+- content_for :head do
+  = javascript_include_tag 'designer_center_requests/show'
+
+  :javascript
+    I18n = #{ translations_to_json('client_center') }
+
+- content_for :designer_center_content do
+  #designer-respond-view
+    .row
+      .col-sm-9.respond{ data: { id: @request.id } }
+        = render partial: 'shared/moodboard', locals: { request: @request }
+        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+
+    .footer
+      .back-link
+        = link_to t('designer_center.respond_view.back'), designer_center_response_index_path
+
+    #notes-edit-dialog
+      = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
+
+= render partial: 'designer_center/layout'

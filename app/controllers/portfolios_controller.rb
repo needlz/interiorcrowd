@@ -1,7 +1,6 @@
 class PortfoliosController < ApplicationController
   before_filter :set_designer, only: [:edit, :create, :update, :new]
   before_filter :set_portfolio, only: [:edit, :update, :new]
-  before_filter :set_navigation, only: [:new, :edit]
 
   def show
     portfolio = Portfolio.find_by_path(params[:url])
@@ -12,7 +11,7 @@ class PortfoliosController < ApplicationController
   def new
     return redirect_to edit_portfolio_path if @portfolio
     @portfolio_view = PortfolioView.new(Portfolio.new)
-    @navigation.active_tab = :portfolio
+    @navigation = Navigation::DesignerCenter.new(:portfolio)
   end
 
   def create
@@ -27,7 +26,7 @@ class PortfoliosController < ApplicationController
   def edit
     return redirect_to new_portfolio_path unless @portfolio
     @portfolio_view = PortfolioView.new(@portfolio)
-    @navigation.active_tab = :portfolio
+    @navigation = Navigation::DesignerCenter.new(:portfolio)
   end
 
   def update
@@ -64,9 +63,5 @@ class PortfoliosController < ApplicationController
     else
       redirect_to edit_portfolio_path
     end
-  end
-
-  def set_navigation
-    @navigation = Navigation::DesignerCenter.new
   end
 end

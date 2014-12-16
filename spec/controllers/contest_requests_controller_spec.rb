@@ -54,9 +54,9 @@ RSpec.describe ContestRequestsController do
   end
 
   describe 'GET show' do
-    it 'responses with OK status' do
+    it 'returns page' do
       get :show, id: request.id
-      expect(response).to be_ok
+      expect(response).to render_template(:show)
     end
 
     it 'raises error if client is not logged in' do
