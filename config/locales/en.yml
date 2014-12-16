@@ -1,4 +1,5 @@
 en:
+  error_during_saving:
   contests:
     default_selection: Select one
     continue_button: Continue
@@ -196,5 +197,8 @@ en:
       statuses:
         submitted: Moodboard submitted
         fulfillment: Fulfillment period
+    respond_view:
+      edit_button: Edit
+      back: < Back
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

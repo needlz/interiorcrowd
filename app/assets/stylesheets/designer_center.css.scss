@@ -1,6 +1,6 @@
-.designer-center{
-  .content{
-    padding-top: 15px
+.designer-center {
+  .content {
+    padding-top: 15px;
   }
 }
 
@@ -13,14 +13,39 @@
       margin-left: 50px;
 
       div {
-        margin-top: 5px
+        margin-top: 5px;
       }
 
       .options {
         button {
-          margin-right: 10px
+          margin-right: 10px;
         }
       }
     }
+  }
+}
+
+#designer-respond-view {
+  .designer-notes {
+    margin-top: 20px;
+    .notes {
+      margin-top: 20px;
+
+      textarea {
+        width: 100%;
+      }
+    }
+
+    .edit-button {
+      background-color: white;
+    }
+  }
+
+  #notes-edit-dialog {
+    display: none;
+  }
+
+  .footer {
+    margin-top: 20px;
   }
 }

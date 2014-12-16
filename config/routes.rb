@@ -78,10 +78,10 @@ InteriorC::Application.routes.draw do
           get 'index'
         end
       end
-      resources :responds,
-               controller: 'designer_center_responds',
-               as: 'designer_center_respond',
-               only: [:show, :index]
+      resources :responses,
+               controller: 'designer_center_requests',
+               as: 'designer_center_response',
+               only: [:show, :index, :update]
       resource :portfolio, only: [:edit, :update, :new, :create]
     end
   end

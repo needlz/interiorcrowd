@@ -6,11 +6,11 @@
         %h4 #{ t('designer_center.responds.list_title') }:
         - @current_responds.each do |respond|
           .respond
-            = render partial: 'designer_center_responds/index/item',
+            = render partial: 'designer_center_requests/index/item',
                 locals: { respond: respond }
       .col-md-5
-        = render partial: 'designer_center_responds/index/notifications'
+        = render partial: 'designer_center_requests/index/notifications'
     .row
-      = render partial: 'designer_center_responds/index/footer'
+      = render partial: 'designer_center_requests/index/footer'
 
 = render partial: 'designer_center/layout'

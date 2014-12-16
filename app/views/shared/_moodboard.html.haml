@@ -1,5 +1,2 @@
-%div
-  - if respond.moodboard_image_path
-    .image-container{ style: "background-image: url(#{ respond.moodboard_image_path })" }
-  - else
-    = link_to t('client_center.no_images'), contest_request_path(id: respond.id)
+.moodboard
+  = image_tag request.moodboard_image_path

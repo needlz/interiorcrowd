@@ -1,0 +1,11 @@
+.designer-notes.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
+  .row.title
+    = t('client_center.moodboard_details.designer_notes')
+
+  .row.notes
+    %input.designer-notes-value{ type: 'hidden', value: request.feedback }
+    .view
+      = render partial: 'designer_center_requests/show/previews/feedback', locals: { request: request }
+    = link_to t('designer_center.respond_view.edit_button'), '#', class: 'edit-button'
+    .edit
+    .error
