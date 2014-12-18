@@ -6,6 +6,27 @@
   #err_plan {
     padding-left: 25px;
   }
+
+  .projectname {
+    margin-top: 20px;
+    padding: 5px;
+
+    #project_name {
+      width: 100%;
+    }
+  }
+
+  .plan-container {
+    .plan {
+      cursor: pointer;
+    }
+  }
+
+  .plan-container.active {
+    .plan {
+      background-color: #E5E5E5 !important;
+    }
+  }
 }
 
 #contests-preview {
@@ -111,6 +132,10 @@
 
   .areas-row {
     margin-bottom: 40px;
+  }
+
+  .option-item {
+    cursor: pointer;
   }
 }
 

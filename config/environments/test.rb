@@ -34,5 +34,5 @@ InteriorC::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  I18n.exception_handler = ->(exception, locale, key, options) { raise exception.message }
+  config.action_view.raise_on_missing_translations = true
 end

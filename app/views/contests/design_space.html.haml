@@ -5,11 +5,11 @@
     = render partial: 'contests/options/space_dimensions_options'
     = render partial: 'contests/options/budget_options'
     = render partial: 'contests/options/feedback_options'
-    .row.formbuttons
-      .col-sm-3
-        %a.order{:href => design_style_contests_path} GO BACK
-      .col-sm-4.col-sm-offset-4
-        %a.order.continue{:href => "#"} CONTINUE
+    .clearfix.formbuttons
+      .col-sm-10
+        %a.order{:href => design_style_contests_path}= t('contests.creation.go_back')
+        .pull-right
+          %a.order.continue{:href => "#"}= t('contests.creation.continue')
 = render partial: 'contests/contest_creation_page'
 
 = content_for :head do

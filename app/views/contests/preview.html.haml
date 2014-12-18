@@ -1,41 +1,40 @@
 - content_for :head do
   = javascript_include_tag 'contests/preview'
   = javascript_include_tag 'shared/color_selector'
+  :javascript
+    I18n = #{ translations_to_json(['contests', 'creation', 'preview']) }
 
 #in_pricing.contest-preview
   .container
     .section_header
-    = form_tag save_preview_contests_path,  {:id => "account_creation", :method => "post"} do
-      %input#plan_id{:name => "preview[b_plan]",
-      :type => "hidden",
-      :value => @contest_view.budget_plan}
+    = form_tag save_preview_contests_path,  { id: 'account_creation', method: 'post' } do
+      %input#plan_id{ name: 'preview[b_plan]',
+        type: 'hidden',
+        value: @contest_view.budget_plan }
       .row.charts_wrapp
         .col-sm-12
-          .plan
-            .wrapper
+          .wrapper
+            .row
+              .page-header
+                %h2= t('contests.titles.creation')
+            .col-sm-offset-1.preview
+              .text-center
+                = t('contests.creation.preview.almost_there')
               .row
-                .page-header
-                  %h2= t('contests.titles.creation')
-              .row
-                .page-header
-                  %h3= t('contests.titles.preview')
-              .col-sm-offset-1.preview
-                = render partial: 'contests/preview'
-                .row
-                  .col-sm-9
-                    .row.projectname.plan
-                      .form-inline
-                        .col-sm-4
-                          %label{:style => ""} Give your project a name
-                        .col-sm-6
-                          %input#project_name.form-control{maxlength: "100",
-                            name: "preview[contest_name]",
-                            type: "text",
-                            value: @contest_view.name}
-                          %span#err_prj_name.text-error
-              = render partial: 'contests/options/plan_options'
-              .row.formbuttons
-                .col-sm-3.col-sm-offset-2
-                  %a.order{:href => design_space_contests_path} GO BACK
-                .col-sm-3.col-sm-offset-4
-                  %a.order.continue{:href => "#"} CONTINUE
+                .col-sm-9.col-sm-offset-1
+                  .row.projectname.plan
+                    .form-inline
+                      .col-sm-4
+                        %label= t('contests.creation.preview.name_label')
+                      .col-sm-8
+                        %input#project_name.form-control{ maxlength: '100',
+                          name: 'preview[contest_name]',
+                          type: 'text',
+                          value: @contest_view.name }
+                        %span#err_prj_name.text-error
+            = render partial: 'contests/options/plan_options'
+            .row.formbuttons
+              .col-sm-8.col-sm-offset-2
+                %a.order{ href: design_space_contests_path }= t('contests.creation.go_back')
+                .pull-right
+                  %a.order.continue{:href => "#"}= t('contests.creation.continue')

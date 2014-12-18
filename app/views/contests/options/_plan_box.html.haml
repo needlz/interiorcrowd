@@ -1,15 +1,15 @@
-.col-sm-4.standar
+.col-sm-4.plan-container
   .plan
     #wrapper.home_wrapper{plan_id: plan.id}
-      %h3 Premier
+      %h3= plan.name
       .price
         %span.dollar $
         %span.qty= plan.price
       .features
         %p
-          Expect
-          %strong= plan.designs_count
-          designs
+          = t('contests.creation.preview.expect_designs',
+              count: plan.designs_count,
+              design_count: content_tag(:strong, plan.designs_count)).html_safe
         %p
           - if plan.money_back_guarantee
-            Money back guarantee
+            = t('contests.creation.preview.money_back_quarantee')

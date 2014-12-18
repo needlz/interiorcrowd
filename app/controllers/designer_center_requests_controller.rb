@@ -37,12 +37,13 @@ class DesignerCenterRequestsController < ApplicationController
 
   def create
     contest = Contest.current.find(params[:contest_id])
-    request = ContestRequestCreation.new({ designer: @designer,
+    contest_creation = ContestRequestCreation.new({ designer: @designer,
                                            contest: contest,
                                            request_params: response_params,
                                            lookbook_params: params[:lookbook],
-                                           submit: params[:contest_request][:status] == 'submitted' }
-    ).perform
+                                           need_submit: params[:contest_request][:status] == 'submitted' }
+    )
+    request = contest_creation.perform
 
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
