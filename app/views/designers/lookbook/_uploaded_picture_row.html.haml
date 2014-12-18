@@ -1,18 +1,11 @@
 .col-sm-8.img_img_box{style: "padding-top:20px;"}
   .img{style: "width:50%;float:left"}
     %img{src: url}
-  %label{style: "float:left"}
-    Edit text to go at bottom of image
-    %input{maxlength: "100",
-      name: "picture[titles][]",
-      style: "width:100%",
-      type: "text",
-      value: title}
-    %input{maxlength: "100",
-      name: "picture[urls][]",
-      type: "hidden",
-      value: url}
-    %input{maxlength: "100",
-      name: "picture[ids][]",
-      type: "hidden",
-      value: id}
+  %input{maxlength: "100",
+    name: "lookbook[picture][urls][]",
+    type: "hidden",
+    value: url}
+  %input{maxlength: "100",
+    name: "lookbook[picture][ids][]",
+    type: "hidden",
+    value: id}

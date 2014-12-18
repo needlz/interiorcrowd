@@ -1,0 +1,11 @@
+.footer.clearfix
+  .col-md-4
+    = link_to t('designer_center.respond.back'), designer_center_contest_index_path
+  .col-md-4.text-center
+    = link_to t('designer_center.respond.save_and_preview'), '#', class: 'save-and-preview'
+  - unless request.submitted?
+    .col-md-4
+      .pull-right
+        = link_to t('designer_center.respond.submit'),
+            '#',
+            class: 'submit-button'

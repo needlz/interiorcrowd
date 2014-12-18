@@ -7,8 +7,8 @@ $ ->
     $(".link_url").each ->
       url_value = $.trim($(this).val())
       if url_value.length > 1
-        rege = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-        unless rege.test(url_value)
+        regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        unless regex.test(url_value)
           bool = true
           $(this).removeClass("alert-danger").addClass "alert-danger"
         else
@@ -22,7 +22,7 @@ $ ->
         $("#lookbook").submit()
         true
       else
-        if $("[name='picture[urls][]'],[name='link[urls][]']").length > 0
+        if $("[name='lookbook[picture][urls][]'],[name='lookbook[link][urls][]']").length > 0
           $("#lookbook").submit()
           true
         else
@@ -30,7 +30,7 @@ $ ->
           false
 
   $("#file_input").initUploader
-    buttonText: "Upload"
+    buttonText: I18n.upload_moodboard
     removeTimeout: 10
     onUploadSuccess: (file, data, response) ->
       info = data.split(",")
@@ -41,11 +41,8 @@ $ ->
           <div class='img' style='width:50%;float:left'>
             <img src='#{ info[0] }' />
           </div>
-          <label style='float:left'>Add text to go at bottom of image</br>
-            <input name='picture[titles][]' type='text' style='width:100%' maxlength='100'>
-            <input name='picture[urls][]' type='hidden' value='#{ url }'>
-            <input name='picture[ids][]' type='hidden' value='#{ image_id }'>
-          </label>
+          <input name='lookbook[picture][urls][]' type='hidden' value='#{ url }'>
+          <input name='lookbook[picture][ids][]' type='hidden' value='#{ image_id }'>
         </div>
 """
 
@@ -76,6 +73,6 @@ $(document).on "click", ".lnk_container .plus_wrapper", ->
   $(".lnk_container .plus_wrapper:last").last().show()
 
 $(document).on "click", ".lnk_container .minus_wrapper", ->
-  $(this).parent().parent().remove()
+  $(this).parents('.lnk_container').remove()
   $(".lnk_container .minus_wrapper").hide() if $(".lnk_container .plus_wrapper").length is 1
   $(".lnk_container .plus_wrapper:last").last().show()

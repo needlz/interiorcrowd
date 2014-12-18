@@ -1,13 +1,13 @@
 - content_for :designer_center_content do
-  #designer-center-responds
+  #designer-center-responses
     .row
       .col-md-7
-        %h3= t('designer_center.responds.title')
-        %h4 #{ t('designer_center.responds.list_title') }:
-        - @current_responds.each do |respond|
-          .respond
+        %h3= t('designer_center.responses.title')
+        %h4 #{ t('designer_center.responses.list_title') }:
+        - @current_responses.each do |response|
+          .response
             = render partial: 'designer_center_requests/index/item',
-                locals: { respond: respond }
+                locals: { response: response }
       .col-md-5
         = render partial: 'designer_center_requests/index/notifications'
     .row

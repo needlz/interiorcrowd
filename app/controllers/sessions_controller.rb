@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
     designer = Designer.authenticate(params[:username], params[:password])
     if designer.present?
         session[:designer_id] = designer.id
-        redirect_to welcome_designer_path(designer)
+        redirect_to designer_center_index_path(designer)
     else
       flash[:error] = 'Incorrect Username or Password!'
       redirect_to login_sessions_url

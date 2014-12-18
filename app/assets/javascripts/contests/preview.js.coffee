@@ -27,4 +27,4 @@ $ ->
       $("#" + focus).focus()
       false
 
-  $('.colors').colorTags({ readonly: true })
+  ContestPreview.init()

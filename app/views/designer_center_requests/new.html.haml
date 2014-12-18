@@ -1,0 +1,32 @@
+- content_for :head do
+  = javascript_include_tag 'designer_center_requests/new'
+  = javascript_include_tag  'jquery.uploadify'
+  = javascript_include_tag 'designers/lookbook'
+  = stylesheet_link_tag  'uploadify'
+  = render partial: 'shared/setup_uploadify'
+  :javascript
+    I18n = #{ translations_to_json(['designer_center', 'respond']) }
+
+- content_for :designer_center_content do
+  #respond
+    .contest
+      .clearfix
+        .col-md-7
+          = render partial: 'shared/contest_short_view', locals: { contest: @contest_short_details }
+          #accordion.panel-group{ aria: { multiselectable: 'true' }, role: 'tablist' }
+            .panel.panel-default
+              #headingTwo.panel-heading{ role: 'tab' }
+                %h4.panel-title
+                  %a.collapsed{aria: { controls: 'collapseTwo', expanded: 'false' },
+                    data: {parent: '#accordion', toggle: 'collapse' }, href: '#collapseTwo' }
+                    = t('designer_center.respond.see_more')
+              #collapseTwo.panel-collapse.collapse{ aria: { labelledby: 'headingTwo' }, role: 'tabpanel' }
+                .panel-body
+                  #details
+                    = render partial: 'contests/preview'
+
+    = render partial: 'designer_center_requests/new/response_form',
+        locals: { request: @request }
+    = render partial: 'designer_center_requests/footer',  locals: { request: @request }
+
+= render partial: 'designer_center/layout'

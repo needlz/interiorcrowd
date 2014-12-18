@@ -23,12 +23,12 @@
                 .row
                   %h4{style: "padding-left:15px;"} What do you want to include in your design?
                 = render partial: 'designers/lookbook/add_picture'
-                = render partial: 'designers/lookbook/uploaded_pictures'
+                = render partial: 'designers/lookbook/uploaded_pictures', locals: { lookbook_view: @lookbook_view }
                 .row
                   .page-header{style: "width:65%"}
-                = render partial: 'designers/lookbook/external_pictures'
+                = render partial: 'designers/lookbook/external_pictures', locals: { lookbook_view: @lookbook_view }
                 = render partial: 'designers/lookbook/add_link'
-                = render partial: 'designers/lookbook/comment_about_design'
+                = render partial: 'designers/lookbook/comment_about_design', locals: { lookbook_view: @lookbook_view }
               .row
                 %center
                   .col-sm-4.col-sm-offset-4

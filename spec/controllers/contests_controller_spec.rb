@@ -31,6 +31,7 @@ RSpec.describe ContestsController do
     let(:appeal_values){ Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] }
 
     it 'updates appeals of contest' do
+      allow_any_instance_of(AppealScale).to receive(:name) { |key| key }
       patch :update, option: 'appeals', id: contest.id, design_style: { appeals: appeal_values }
       appeal_values.each do |identifier, value|
         appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }

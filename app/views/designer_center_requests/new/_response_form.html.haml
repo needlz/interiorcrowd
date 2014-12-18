@@ -1,0 +1,10 @@
+= form_for request,
+    html: { class: 'response' },
+    url: designer_center_response_index_path(contest_id: request.contest.id) do |f|
+  = f.hidden_field :status, value: 'draft'
+  = f.fields_for :lookbook, f.object.lookbook || Lookbook.new do |f|
+    .container.preview
+      .row
+        %h4{style: "padding-left:15px;"}= t('designer_center.respond.ready_to_go')
+      = render partial: 'designers/lookbook/add_picture'
+      = render partial: 'designers/lookbook/uploaded_pictures', locals: { lookbook_view: DesignerLookbook.new(f.object) }

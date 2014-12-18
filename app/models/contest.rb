@@ -15,9 +15,10 @@ class Contest < ActiveRecord::Base
   belongs_to :client
   belongs_to :design_category
   belongs_to :design_space
-  has_many :contest_requests
+  has_many :requests, class_name: 'ContestRequest'
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
+  scope :current, ->{ all }
 
   def self.create_from_options(options)
     contest = new(options.contest)
@@ -45,6 +46,10 @@ class Contest < ActiveRecord::Base
 
   def days_left
     0
+  end
+
+  def response_of(designer)
+    requests.find_by_designer_id(designer.id)
   end
 
   private

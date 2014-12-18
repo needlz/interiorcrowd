@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
   before_filter :set_client, except: [:create]
 
   def client_center
-    if @client.last_contest.try(:contest_requests).present?
+    if @client.last_contest.try(:requests).present?
       redirect_to entries_client_center_index_path
     else
       redirect_to brief_client_center_index_path
