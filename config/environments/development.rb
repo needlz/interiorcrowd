@@ -43,5 +43,5 @@ InteriorC::Application.configure do
   # Enable source maps in the browser
   config.sass.debug_info = true
 
-  I18n.exception_handler = ->(exception, locale, key, options) { raise exception.message }
+  config.action_view.raise_on_missing_translations = true
 end

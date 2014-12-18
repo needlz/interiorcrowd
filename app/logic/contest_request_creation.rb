@@ -5,14 +5,14 @@ class ContestRequestCreation
     @contest = options[:contest]
     @request_params = options[:request_params]
     @lookbook_params = options[:lookbook_params]
-    @submit = options[:submit]
+    @need_submit = options[:need_submit]
   end
 
   def perform
     ContestRequest.transaction do
       create_request
       create_lookbook
-      request.submit! if submit
+      request.submit! if need_submit
       request
     end
   end
@@ -26,7 +26,7 @@ class ContestRequestCreation
   end
 
   def create_lookbook
-    request.lookbook = Lookbook.create!
+    request.update_attributes(lookbook_id: Lookbook.create!.id)
 
     if lookbook_params.try(:[], :picture).try(:[], :ids).present?
       document_ids = lookbook_params[:picture][:ids]
@@ -38,6 +38,6 @@ class ContestRequestCreation
     end
   end
 
-  attr_reader :contest, :designer, :request, :request_params, :lookbook_params, :submit
+  attr_reader :contest, :designer, :request, :request_params, :lookbook_params, :need_submit
 
 end

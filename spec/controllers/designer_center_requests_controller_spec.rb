@@ -97,5 +97,11 @@ RSpec.describe DesignerCenterRequestsController do
     it 'raises error if contest not specified' do
       expect { post :create, contest_id: 0, contest_request: { feedback: '' } }.to raise_error
     end
+
+    it 'creates lookbook' do
+      image = Fabricate(:image)
+      post :create, contest_id: contest.id, lookbook: { picture: { ids: [image.id] } }, contest_request: { feedback: '' }
+      expect(contest.requests[0].lookbook.lookbook_details).to be_present
+    end
   end
 end

@@ -13,7 +13,7 @@ class ClientsController < ApplicationController
   def entries
     contest = @client.last_contest
     if contest
-      requests = contest.contest_requests.includes(:designer, :lookbook)
+      requests = contest.requests.includes(:designer, :lookbook)
       @contest_requests = requests.by_page(params[:page])
     else
       @contest_requests = [].paginate

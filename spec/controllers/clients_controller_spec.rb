@@ -98,4 +98,16 @@ RSpec.describe ClientsController do
       expect(response).to redirect_to brief_client_center_index_path
     end
   end
+
+  describe 'GET entries' do
+    before do
+      sign_in(client)
+      Fabricate(:contest, client: client)
+    end
+
+    it 'returns page' do
+      get :entries
+      expect(response).to render_template(:entries)
+    end
+  end
 end
