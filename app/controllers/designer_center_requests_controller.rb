@@ -16,44 +16,33 @@ class DesignerCenterRequestsController < ApplicationController
   def update
     request = ContestRequest.find(params[:id])
     ContestRequest.transaction do
-      request.update_attributes!(respond_params)
-      request.update_attributes!(status: 'submitted') if params[:contest_request][:status] == 'submitted'
+      request.update_attributes!(response_params)
+      request.submit! if params[:contest_request][:status] == 'submitted'
     end
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
       format.json do
-        render json: changes(request, respond_params)
+        render json: format_changed_attributes(request, response_params)
       end
     end
   end
 
   def new
     @navigation = Navigation::DesignerCenter.new(:requests)
-    @contest = Contest.find(params[:contest_id])
-    @contest_view = ContestView.new(@contest)
-    @contest_short_details = ContestShortDetails.new(@contest)
-    @request = ContestRequest.new
+    contest = Contest.find(params[:contest_id])
+    @contest_view = ContestView.new(contest)
+    @contest_short_details = ContestShortDetails.new(contest)
+    @request = ContestRequest.new(contest_id: contest.id)
   end
 
   def create
     contest = Contest.current.find(params[:contest_id])
-    request = @designer.contest_requests.new(respond_params)
-    request.status = 'submitted' if params[:contest_request][:status] == 'submitted'
-    ContestRequest.transaction do
-      contest.requests << request
-
-      request.lookbook = Lookbook.new
-      request.lookbook.save!
-
-      if params[:lookbook].try(:[], 'picture').try(:[], 'ids').present?
-        document_ids = params[:lookbook]['picture']['ids']
-        document_ids.each do |doc|
-          LookbookDetail.create({lookbook_id: request.lookbook.id,
-                                 image_id: doc,
-                                 doc_type: LookbookDetail::UPLOADED_PICTURE_TYPE })
-        end
-      end
-    end
+    request = ContestRequestCreation.new({ designer: @designer,
+                                           contest: contest,
+                                           request_params: response_params,
+                                           lookbook_params: params[:lookbook],
+                                           submit: params[:contest_request][:status] == 'submitted' }
+    ).perform
 
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
@@ -62,7 +51,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   private
 
-  def respond_params
+  def response_params
     params.require(:contest_request).permit(:feedback)
   end
 
@@ -70,7 +59,7 @@ class DesignerCenterRequestsController < ApplicationController
     @designer = Designer.find(session[:designer_id]) if check_designer
   end
 
-  def changes(request, changed_params)
+  def format_changed_attributes(request, changed_params)
     result = {}
     changed_params.each do |attribute, value|
       result[attribute] = { html: render_to_string(partial: "/designer_center_requests/show/previews/#{ attribute }",

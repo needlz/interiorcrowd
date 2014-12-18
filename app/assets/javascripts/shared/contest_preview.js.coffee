@@ -1,4 +1,4 @@
 class @ContestPreview
 
   @init: ->
-    ContestPreview.init()
+    $('.colors').colorTags({ readonly: true })

@@ -21,7 +21,7 @@ class Designer < ActiveRecord::Base
   end
 
   def has_active_requests?
-    contest_requests.active.count > 0
+    contest_requests.active.exists?
   end
 
 end

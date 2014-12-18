@@ -15,10 +15,7 @@ class ContestRequest < ActiveRecord::Base
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
 
   def moodboard_image_path
-    return unless lookbook
-    lookbook_details = lookbook.lookbook_details
-    return unless lookbook_details
-    lookbook_item = lookbook_details.last
+    lookbook_item = lookbook.try(:lookbook_details).try(:last)
     return unless lookbook_item
     return lookbook_item.image.image.url if lookbook_item.uploaded?
     return lookbook_item.url if lookbook_item.external?
@@ -31,6 +28,10 @@ class ContestRequest < ActiveRecord::Base
 
   def submitted?
     status == 'submitted'
+  end
+
+  def submit!
+    update_attributes!(status: 'submitted')
   end
 
   def draft?

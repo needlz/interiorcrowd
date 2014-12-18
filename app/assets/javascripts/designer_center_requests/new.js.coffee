@@ -5,9 +5,6 @@ class @ResponseEditor
     @bindSubmitButton()
     @bindSaveButton()
 
-  initializePreview: ->
-    ContestPreview.init()
-
   bindSubmitButton: ->
     $('.submit-button').click (event)=>
       event.preventDefault()

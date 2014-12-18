@@ -82,6 +82,20 @@ RSpec.describe ClientsController do
   end
 
   describe 'GET client_center' do
+    before do
+      sign_in(client)
+    end
 
+    it 'redirects to Entries page if responses present' do
+      client_contest =  Fabricate(:contest, client: client)
+      Fabricate(:contest_request, contest: client_contest)
+      get :client_center
+      expect(response).to redirect_to entries_client_center_index_path
+    end
+
+    it 'redirects to Brief page if no responses present' do
+      get :client_center
+      expect(response).to redirect_to brief_client_center_index_path
+    end
   end
 end
