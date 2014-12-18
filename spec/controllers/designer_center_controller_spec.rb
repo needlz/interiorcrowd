@@ -24,13 +24,24 @@ RSpec.describe DesignerCenterController do
         sign_in(designer)
       end
 
-      it 'redirects to portfolio editing if portfolio exists' do
-        Fabricate(:portfolio, designer: designer)
-        get :designer_center
-        expect(response).to redirect_to edit_portfolio_path
+      context 'portfolio exists' do
+        before do
+          Fabricate(:portfolio, designer: designer)
+        end
+
+        it 'redirects to portfolio editing if the designer has no active requests' do
+          get :designer_center
+          expect(response).to redirect_to designer_center_contest_index_path
+        end
+
+        it 'redirects to responses list if the designer has active requests' do
+          Fabricate(:contest_request, designer: designer, contest: Fabricate(:contest))
+          get :designer_center
+          expect(response).to redirect_to designer_center_response_index_path
+        end
       end
 
-      it 'redirects to portfolio creation if portfolio exists' do
+      it 'redirects to portfolio creation if portfolio don\'t exists' do
         get :designer_center
         expect(response).to redirect_to new_portfolio_path
       end

@@ -9,7 +9,7 @@ class ContestShortDetails
     @design_space = contest.design_space.name
     @days_left = I18n.t('designer_center.contests_preview.days_left',
                         days: contest.days_left)
-    @price = I18n.t('designer_center.responds.item.price',
+    @price = I18n.t('designer_center.responses.item.price',
                     price: BudgetPlan.find(contest.budget_plan).price)
   end
 

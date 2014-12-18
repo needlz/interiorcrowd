@@ -80,4 +80,8 @@ RSpec.describe ClientsController do
       end
     end
   end
+
+  describe 'GET client_center' do
+
+  end
 end

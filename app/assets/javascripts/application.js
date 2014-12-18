@@ -16,4 +16,5 @@
 //= require bootstrap.min
 //= require index-slider
 //= require jquery.mmenu.min.all
+//= require lib/select2-3.5.2/select2
 //= require_tree ./shared

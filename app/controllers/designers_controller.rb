@@ -60,7 +60,8 @@ class DesignersController < ApplicationController
         if session[:lookbook].present?
           session[:lookbook]
         else
-          Lookbook.find_by_designer_id_and_contest_id(session[:designer_id], params[:id])
+          designer = Designer.find(session[:designer_id])
+          Contest.find(params[:id]).response_of(designer).try(:lookbook)
         end
       @lookbook_view = DesignerLookbook.new(lookbook_options)
     end  

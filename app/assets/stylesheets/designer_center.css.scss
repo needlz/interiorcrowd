@@ -4,9 +4,9 @@
   }
 }
 
-#designer-center-responds {
+#designer-center-responses {
 
-  .respond {
+  .response {
     margin-bottom: 20px;
 
     .moodboard {
@@ -25,13 +25,14 @@
   }
 }
 
-#designer-respond-view {
+#designer-response-view {
   .designer-notes {
     margin-top: 20px;
     .notes {
       margin-top: 20px;
 
       textarea {
+        background-color: white;
         width: 100%;
       }
     }
@@ -44,8 +45,18 @@
   #notes-edit-dialog {
     display: none;
   }
+}
 
-  .footer {
-    margin-top: 20px;
+.footer {
+  margin-top: 20px;
+}
+
+#respond {
+  .row.lnk_container {
+    margin-bottom: 20px;
+  }
+
+  #file_input-button, #SWFUpload_0, #file_input {
+    width: 250px !important;
   }
 }

@@ -72,9 +72,9 @@ class @ContestEditing extends InlineEditor
 
   previewCallbacks:
     desirable_colors: ->
-      $('.colors').colorTags({ readonly: true })
+      ContestPreview.init()
     undesirable_colors: ->
-      $('.colors').colorTags({ readonly: true })
+      ContestPreview.init()
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)

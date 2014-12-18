@@ -1,22 +1,9 @@
-- contest = respond.contest
-.clearfix
-  .col-md-1
-    = contest.id
-  .col-md-2
-    = contest.name
-  .col-md-3
-    = contest.design_category
-  .col-md-3
-    = contest.design_space
-  .col-md-2
-    = contest.days_left
-  .col-md-1
-    = contest.price
+= render partial: 'shared/contest_short_view', locals: { contest: response.contest }
 .moodboard
   .status
-    #{ t('designer_center.responds.item.status') }: #{ respond.status_name }
-  - if respond.answer
+    #{ t('designer_center.responses.item.status') }: #{ response.status_name }
+  - if response.answer
     .listed-at
-      = t('designer_center.responds.item.listed_as', answer: respond.answer )
+      = t('designer_center.responses.item.listed_as', answer: response.answer )
   .options
-    = render partial: "designer_center_requests/index/#{ respond.status }_options", locals: { respond_id: respond.id }
+    = render partial: "designer_center_requests/index/#{ response.status }_options", locals: { response_id: response.id }

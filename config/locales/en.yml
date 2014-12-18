@@ -179,7 +179,8 @@ en:
     show_page:
       back_to_index: < Back to all current contests
       join: Join this contest >
-    responds:
+      view_response: View your response >
+    responses:
       title: Contests Underway
       list_title: You are currently participating in the folowing contests
       see_all_contests: See all current contests
@@ -195,10 +196,19 @@ en:
         price: $%{price}
         listed_as: 'Currently listed as: %{answer}'
       statuses:
+        draft: Not submitted
         submitted: Moodboard submitted
         fulfillment: Fulfillment period
     respond_view:
       edit_button: Edit
       back: < Back
+    respond:
+      see_more: See More
+      responding_to: Responding to
+      back: < Exit without saving
+      save_and_preview: Save my work & preview
+      submit: Submit >
+      ready_to_go: Ready to go?
+      upload_moodboard: Upload your concept moodboard
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

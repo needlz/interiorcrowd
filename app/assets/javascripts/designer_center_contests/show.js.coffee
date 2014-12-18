@@ -1,2 +1,2 @@
 $ ->
-  $('.colors').colorTags({ readonly: true })
+  ContestPreview.init()
