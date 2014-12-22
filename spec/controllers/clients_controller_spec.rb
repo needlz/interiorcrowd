@@ -11,7 +11,11 @@ RSpec.describe ClientsController do
   end
 
   let(:client) { Fabricate(:client) }
-  let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
+  let(:appeals) do
+    (0..2).map do |index|
+      Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }")
+    end
+  end
   let(:client_options){
     { password: 'password',
       password_confirmation: 'password',

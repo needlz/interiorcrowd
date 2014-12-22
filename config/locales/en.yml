@@ -190,7 +190,7 @@ en:
       suggested_contests_title: Suggested contests for you!
       suggested_contests_hint: We think that these contests are just right for your style.
       all_contests_title: See all current contests
-      days_left: '%{days} days left to enter'
+      days_left: '%{days} left to enter'
     show_page:
       back_to_index: < Back to all current contests
       join: Join this contest >

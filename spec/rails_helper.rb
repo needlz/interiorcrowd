@@ -50,9 +50,9 @@ RSpec.configure do |config|
   end
 
   def contest_options_source
-    { design_brief: {
-        design_category: '1',
-        design_area: '2' },
+    @contest_options_source ||= { design_brief: {
+        design_category: Fabricate(:design_category).id,
+        design_area: Fabricate(:design_space).id },
       design_space: {
           length: '10',
           width: '10',

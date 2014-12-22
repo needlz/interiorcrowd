@@ -4,8 +4,8 @@ require 'spec_helper'
 RSpec.describe ContestsController do
   render_views
 
-  let(:client) { Client.create!(email: 'client@example.com', first_name: 'First', last_name: 'Last', password: '123456') }
-  let(:contest) { Contest.create!(client: client) }
+  let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest, client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
 
 

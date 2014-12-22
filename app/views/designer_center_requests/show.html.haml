@@ -17,8 +17,9 @@
       - if @request.draft?
         = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
           = f.hidden_field :status, value: 'submitted'
-        .pull-right
-          = link_to t('designer_center.respond.submit'), '#', class: 'submit'
+        - if @request.contest.submission?
+          .pull-right
+            = link_to t('designer_center.respond.submit'), '#', class: 'submit'
 
     #notes-edit-dialog
       = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }

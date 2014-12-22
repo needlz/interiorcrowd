@@ -37,6 +37,8 @@ gem 'hashie'
 gem 'fabrication'
 gem 'sprockets', '2.11.0'
 gem 'state_machine'
+gem 'delayed_job_active_record'
+gem 'daemons'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

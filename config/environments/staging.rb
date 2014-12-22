@@ -26,4 +26,9 @@ InteriorC::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.after_initialize do
+    Delayed::Backend::ActiveRecord::Job.send(:include, Delayed::Workless::Scaler)
+    Delayed::Job.scaler = :heroku_cedar
+  end
 end
