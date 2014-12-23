@@ -1,7 +1,9 @@
-- options = last_in_row ? { class: 'no-padding-right'} : {}
-.col-md-4.text-center.text-price.no-padding-left.areas-row{ options }
+- options = last_in_row ? { class: 'last-in-row'} : {}
+.col-md-3.text-center.text-price.no-padding-left.areas-row{ options }
   .bedr
     %a{:href => "#"}
-      .room.room-selector{ class: ('active' if active), data: { id: area.id } }
-        = area.name
+      .room.room-selector-sub{ class: ('active' if active), data: { id: area.id } }
+        %b= area.name
         %i.glyphicon.glyphicon-ok.option-selected{ style: ('display: none' if !active) }
+- if last_in_row
+  .clearfix

@@ -8,7 +8,7 @@
 
 DesignCategory.delete_all
 DesignCategory.create(id: 1,
-                      name: 'Complete My Look',
+                      name: 'Quick Fix',
                       description: 'choose this if you already have a style that you like but need to just pull it together',
                       pos: 1,
                       price: 99,

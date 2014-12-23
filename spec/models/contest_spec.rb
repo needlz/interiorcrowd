@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Contest do
-  Delayed::Worker.delay_jobs = true
-
   let(:client) { Fabricate(:client) }
   let(:contest) do
     Fabricate(:contest,

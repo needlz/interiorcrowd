@@ -55,6 +55,7 @@ en:
       errors:
         required_data_missing: Please fill the required info.
         select_category: Please select at least one category.
+        select_room: Please select one.
       preview:
         name_label: Give your project a name
         name_error: Please enter project name.
@@ -64,8 +65,8 @@ en:
           one: Expect 1 design
           other: Expect %{design_count} designs
         money_back_quarantee: Money back guarantee
-      go_back: GO BACK
-      continue: CONTINUE
+      go_back: Go back
+      continue: Continue
       plans:
         budget: Budget
         premier: Premier
