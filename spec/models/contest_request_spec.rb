@@ -27,4 +27,23 @@ RSpec.describe ContestRequest do
       expect(contest.requests.reload).to be_empty
     end
   end
+
+  describe 'winner count validation' do
+    let!(:request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
+    let!(:other_request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
+
+    before do
+      contest.update_attributes!(status: 'winner_selection')
+    end
+
+    it 'does not allow to select more than one winner' do
+      request.update_attributes!(answer: 'winner')
+      expect { other_request.update_attributes!(answer: 'winner') }.to raise_error
+    end
+
+    it 'allows to select more than one winner' do
+      request.update_attributes!(answer: 'winner')
+      expect(request.answer).to eq 'winner'
+    end
+  end
 end

@@ -38,6 +38,7 @@ class Contest < ActiveRecord::Base
     event :close do
       transition submission: :closed
     end
+    after_transition on: :close, do: :close_requests
 
     event :winner_selected do
       transition winner_selection: :fulfillment
@@ -88,6 +89,10 @@ class Contest < ActiveRecord::Base
 
   def delay_submission_end
     Contests::SubmissionEndJob.schedule(id, run_at: phase_end)
+  end
+
+  def close_requests
+    requests.update_all(status: 'closed')
   end
 
   private

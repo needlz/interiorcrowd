@@ -1,4 +1,5 @@
 .moodboard{ data: { id: contest_request.id } }
   = render partial: 'shared/moodboard', locals: { request: contest_request }
-  = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
+  - if show_answer_options
+    = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
   %span.current-answer= contest_request.answer

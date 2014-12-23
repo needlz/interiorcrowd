@@ -47,7 +47,7 @@ class @Answers
     onUpdate = $.extend({}, callbacks)
     onUpdateSuccess = onUpdate.success if onUpdate.success
     onUpdate.success = (data)=>
-      @updateView(requestId, answer)
+      @updateView(requestId, answer) if data.answered
       onUpdateSuccess?(data)
     onUpdate
 

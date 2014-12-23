@@ -2,7 +2,7 @@ class DesignerCenterRequestsController < ApplicationController
   before_filter :set_designer
 
   def index
-    @responses = @designer.contest_requests.includes(contest: [:design_category, :design_space])
+    @responses = @designer.contest_requests.active.includes(contest: [:design_category, :design_space])
     @current_responses = @responses.map{ |respond| ContestResponseView.new(respond) }
     @navigation = Navigation::DesignerCenter.new(:requests)
   end

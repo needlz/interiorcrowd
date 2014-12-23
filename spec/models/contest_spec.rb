@@ -59,4 +59,14 @@ RSpec.describe Contest do
       expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 1
     end
   end
+
+  describe '#close_requests' do
+    it 'closes requests' do
+      draft = Fabricate(:contest_request, contest: contest, designer: Fabricate(:designer), status: 'draft')
+      submitted = Fabricate(:contest_request, contest: contest, designer: Fabricate(:designer), status: 'submitted')
+      contest.close_requests
+      statuses = [draft, submitted].map { |request| request.reload.status }
+      expect(statuses.uniq).to eq ['closed']
+    end
+  end
 end

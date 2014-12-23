@@ -11,9 +11,9 @@ class ClientsController < ApplicationController
   end
 
   def entries
-    contest = @client.last_contest
-    if contest
-      requests = contest.requests.published.includes(:designer, :lookbook)
+    @contest = @client.last_contest
+    if @contest
+      requests = @contest.requests.published.includes(:designer, :lookbook)
       @contest_requests = requests.by_page(params[:page])
     else
       @contest_requests = [].paginate

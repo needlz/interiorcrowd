@@ -7,5 +7,6 @@
       = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
   .designer
     = contest_request.designer.name
-  = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
+  - if show_answer_options
+    = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
   %span.current-answer= contest_request.answer
