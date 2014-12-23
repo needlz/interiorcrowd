@@ -133,9 +133,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .menu-border {
-    border-top: 3px solid #e1e1e1;
-    border-bottom: 3px solid #e1e1e1;
-    margin-top: 15%;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .menu-border.header {
@@ -148,7 +146,7 @@ h1, h2, h3, h4, h5 {
 
 .text-menu a {
     color: #000000;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 h1 {
@@ -156,10 +154,13 @@ h1 {
 }
 
 .main-menu > li > a {
-    padding: 10px 12px;
+    padding: 10px 40px;
     font-weight: 600;
     line-height: 25px;
     padding-bottom: 14px;
+    text-align: right;
+    padding-right: 0;
+    font-size: 14px;
 }
 
 .title-first {
@@ -202,9 +203,18 @@ h1 {
     font-size: 24px;
 }
 
+.option-item:hover {
+    opacity: 1;
+}
+
 .option-item {
     opacity: 0.5;
     margin-bottom: 20px;
+}
+
+.menu-room.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 .menu-room {
@@ -231,7 +241,7 @@ h1 {
 
 .text-package h1 {
     color: #231f20;
-    font-size: 30px;
+    font-size: 24px;
     line-height: 2;
 
 }
@@ -257,14 +267,13 @@ h1 {
 
 .text-price {
     line-height: 30px;
-    font-size: 24px;
-    /* 	font-weight: bold; */
+    font-size: 20px;
 }
 
 .img-block {
     margin-top: 31px;
     padding-bottom: 40px;
-    border-bottom: 4px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
 }
 
 .room:hover {
@@ -306,10 +315,11 @@ h1 {
 }
 
 .m-room {
-    font-size: 24px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
-.btn-confirm {
+.btn1-confirm {
 
     padding: 15px 70px;
     font-size: 30px;
@@ -319,7 +329,7 @@ h1 {
     border-radius: 0;
 }
 
-.btn-confirm:hover {
+.btn1-confirm:hover {
 
     background: #000;
     color: #fff;
@@ -415,5 +425,193 @@ h1 {
 
     .img-responsive {
         margin: 0 auto;
+    }
+}
+
+/* Template2 */
+
+.fade-text {
+    position: absolute;
+    width: 100%;
+    top: 5%;
+    color: #231f20;
+    font-size: 18px;
+}
+
+.novice:hover {
+    opacity: 0.5;
+}
+
+.all-under-block {
+    border-bottom: 3px solid #e1e1e1;
+    padding-bottom: 50px;
+}
+
+/* ---- isotope ---- */
+
+.live-tiles {
+    padding: 40px 0;
+}
+
+/* clear fix */
+.live-tiles:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* ---- isotope ---- */
+
+.tile {
+    float: left;
+    width: 10%;
+    height: 90px;
+    background: #e1e1e1;
+}
+
+.tile.width15 {
+    width: 14%;
+}
+
+.tile.width2 {
+    width: 19%;
+}
+
+.tile.width3 {
+    width: 29%;
+}
+
+.tile.width4 {
+    width: 38.8%;
+}
+
+.tile.height2 {
+    height: 190px;
+}
+
+.tile.height4 {
+    height: 390px;
+}
+
+.tile.height150 {
+    height: 140px;
+}
+
+.tile.height250 {
+    height: 240px;
+}
+
+.btn1 {
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 15px 55px;
+    margin-bottom: 60px;
+}
+
+.btn1-small {
+    font-size: 20px;
+    padding: 15px 21px;
+}
+
+.no-x-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.level2 {
+    color: #231f20;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+
+.circle3 {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    line-height: 24px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.glyphic-r {
+    font-size: 30px;
+    right: -45px;
+    top: 10px;
+    color: black;
+}
+
+.glyphic-round {
+    position: absolute;
+    top: 15px;
+    right: 45px;
+    color: black;
+}
+
+.glyphic-link {
+    position: absolute;
+    left: 24px;
+    top: 15px;
+    font-size: 30px;
+    color: black;
+}
+
+.telluswhy .form-group {
+    margin-bottom: 63px;
+    margin-top: 43px;
+}
+
+textarea.form-control, input.form-control {
+    border: 1px solid #000;
+    border-radius: 0;
+}
+
+input.form-control {
+    font-family: AvenirLTStd-Light;
+    font-style: italic;
+    font-size: 15pt;
+}
+
+.btn2-success {
+    background-color: #bebebe;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 2px 31px;
+    margin-top: -2px;
+}
+
+.menu-border2 {
+    border-top: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.logo-pc {
+    padding: 10px 0;
+}
+
+.nav-tabs > li > a {
+    border: 0
+}
+
+.nav-tabs > li > a:hover, .nav > li > a:focus {
+    border: 0;
+    background: none;
+    color: #7E7E7E;
+}
+
+.footer-menu li a {
+    padding-top: 16px;
+}
+
+@media (max-width: 992px) {
+    .footer-menu li a {
+        text-align: center;
+    }
+
+    .main-menu > li > a > img {
+        margin: 0 auto;
+        display: block;
     }
 }

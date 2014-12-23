@@ -88,12 +88,12 @@
   }
 
   .big-radio + label {
-    padding: 16px;
+    padding: 14px;
   }
 
   .big-radio:checked + label:after {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     left: 4px;
     top: 4px;
   }
@@ -102,36 +102,38 @@
     font-weight: normal;
   }
 
-  .question, .question label {
+  .question, .question2, .question label, .question2 label {
     cursor: pointer !important;
   }
 
   .subtitle {
-    font-size: 18px;
+    font-size: 16px;
+    color:#000000;
   }
 
   .category-description {
-    font-size: 18px;
+    font-size: 14px;
     line-height: 30px;
+    color:#000000;
   }
 
   .rooms {
     padding-bottom: 40px;
-    border-bottom: 4px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
     margin-bottom: 60px;
 
-    title {
+    .title {
       margin-top: 34px;
       margin-bottom: 20px;
     }
 
-    .room-selector {
+    .room-selector-sub {
       padding: 20px 20px;
     }
   }
 
-  .areas-row {
-    margin-bottom: 40px;
+  .areas-row.last-in-row {
+    padding-bottom: 40px;
   }
 
   .option-item {

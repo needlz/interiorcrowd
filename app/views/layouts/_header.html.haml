@@ -31,28 +31,25 @@
   .visible-xs.visible-sm.visible-md
     .mobile-menu
       %a{href: '#menu'}
-  .container-fluid.menu-border.animated.fadeInDown.header
+  .menu-border
     .container
       .text-center.logo-mobile.visible-sm.visible-xs.visible-md
-        %img{src: '/assets/logo.png'}/
+        %img{src: '/assets/logo2.png'}/
       .row.my-menu.visible-lg
-        .col-md-4.no-padding-right
-          .top-nav
-            .nav-collapse
-              %ul.nav.nav-tabs.text-menu.main-menu
-                %li
-                  %a{href: '#'} Get Inspired
-                %li
-                  %a{href: '#'} Portfolio
-        .col-md-4.text-center.logo
-          %div
-            %img{src: '/assets/logo.png'}/
-        .col-md-4.no-padding-left
-          .top-nav
+        .col-md-6.no-padding-right.logo-pc
+          %img{ src: '/assets/logo2.png' }
+        %a.btn.btn2-success.pull-right{href: '#'}
+          %b Need help?
+        .col-md-6.no-padding-right
+          .top-nav.pull-down
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.pull-right
                 %li
-                  %a{:href => '#'} How it works
+                  %a{href: "#"} Get Inspired
+                %li
+                  %a{href: "#"} Portfolio
+                %li
+                  %a{href: "#"} How it works
                 - if session[:designer_id].present?
                   %li
                     %a{href: logout_sessions_path} Sign Out
@@ -71,7 +68,3 @@
                         %a{href: client_login_sessions_path} Client login
                       %li
                         %a{href: login_sessions_path} Designer login
-                  %li
-                    %a{href: '#'}
-                      %b Get started
-                      

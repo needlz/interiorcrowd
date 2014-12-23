@@ -5,7 +5,9 @@ class @DesignArea
   init: ->
     @update()
     @parentAreas.click((event)=>
-      $button = $(event.target)
+      event.preventDefault()
+      $button = $(event.target).closest(@parentAreas)
+      return if @selectedParentId() is parseInt($button.data('id'))
       @parentAreas.removeClass('active').find('.option-selected').hide()
       $button.addClass('active').find('.option-selected').show()
 
@@ -42,7 +44,7 @@ class @DesignArea
     $children = @childrenAreas.filter("[data-id='#{ id }']")
     $children.animate(opacity: 'show', 200)
     $children.find('.menu-room').show()
-    $lastInRow = $(".room-selector[data-id='#{ id }']").parents('.areas-row').nextAll('.no-padding-right').first()
+    $lastInRow = @parentAreas.filter("[data-id='#{ id }']").parents('.areas-row').nextAll('.last-in-row').first()
     $children.insertAfter($lastInRow)
 
   hideAllChildrenAreas: ->
