@@ -16,39 +16,51 @@ RSpec.describe ContestRequestsController do
   describe 'POST answer' do
     let(:answered) { JSON.parse(response.body)['answered'] }
 
-    it 'saves if answer is winner' do
-      post :answer, id: request.id, answer: 'winner'
-      expect(answered).to eq true
+    context 'contest in "winner selection" state' do
+      before do
+        request
+        contest.update_attributes!(status: 'winner_selection')
+      end
+
+      it 'saves if answer is winner' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(answered).to eq true
+      end
+
+      it 'saves if answer is no' do
+        post :answer, id: request.id, answer: 'no'
+        response.body
+        expect(answered).to eq true
+      end
+
+      it 'saves if answer is favorite' do
+        post :answer, id: request.id, answer: 'favorite'
+        expect(answered).to eq true
+      end
+
+      it 'saves if answer is maybe' do
+        post :answer, id: request.id, answer: 'maybe'
+        expect(answered).to eq true
+      end
+
+      it 'does not save if answer is unknown' do
+        post :answer, id: request.id, answer: 'what?'
+        expect(answered).to eq false
+      end
+
+      it 'does not save if request id is wrong' do
+        expect { post :answer, id: 0, answer: 'no' }.to raise_exception
+      end
+
+      it 'does not save if user is not logged as contest creator' do
+        session[:client_id] = 0
+        post :answer, id: request.id, answer: 'no'
+        expect(answered).to be_falsy
+      end
     end
 
-    it 'saves if answer is no' do
-      post :answer, id: request.id, answer: 'no'
-      response.body
-      expect(answered).to eq true
-    end
-
-    it 'saves if answer is favorite' do
+    it 'does not save answer if contest is not in winner selection state' do
       post :answer, id: request.id, answer: 'favorite'
-      expect(answered).to eq true
-    end
-
-    it 'saves if answer is maybe' do
-      post :answer, id: request.id, answer: 'maybe'
-      expect(answered).to eq true
-    end
-
-    it 'does not save if answer is unknown' do
-      post :answer, id: request.id, answer: 'what?'
-      expect(answered).to eq false
-    end
-
-    it 'does not save if request id is wrong' do
-      expect { post :answer, id: 0, answer: 'no' }.to raise_exception
-    end
-
-    it 'does not save if user is not logged as contest creator' do
-      session[:client_id] = 0
-      post :answer, id: request.id, answer: 'no'
       expect(answered).to be_falsy
     end
   end
@@ -64,7 +76,7 @@ RSpec.describe ContestRequestsController do
       expect { get :show, id: request.id }.to raise_error
     end
 
-    it 'raises error if requestid is wrong' do
+    it 'raises error if request id is wrong' do
       expect { get :show, id: 0 }.to raise_error
     end
   end

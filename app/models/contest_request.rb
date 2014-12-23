@@ -7,6 +7,7 @@ class ContestRequest < ActiveRecord::Base
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_uniqueness_of :designer_id, scope: :contest_id
   validate :contest_status, if: ->(request){ request.contest }
+  validate :answerable, if: ->(request){ request.contest }
 
   state_machine :status, initial: :draft do
     event :submit do
@@ -46,16 +47,25 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def reply(answer, client_id)
-    return false unless contest.client_id == client_id
-    update_attributes(answer: answer)
+    (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
   private
 
   def contest_status
-    if submitted? && !contest.submission?
+    if (status_changed_to_submitted? || contest_id_changed?) && !contest.submission?
       errors.add(:status, I18n.t('contest_requests.validations.contest_submission'))
     end
+  end
+
+  def answerable
+    if !contest.winner_selection? && answer.present?
+      errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
+    end
+  end
+
+  def status_changed_to_submitted?
+    submitted? && status_changed?
   end
 
 end
