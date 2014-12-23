@@ -54,7 +54,7 @@ class ContestRequest < ActiveRecord::Base
 
   def contest_status
     if submitted? && !contest.submission?
-      errors.add(:status, 'can not be "submitted" if a contest is not in "submission" state')
+      errors.add(:status, I18n.t('contest_requests.validations.contest_submission'))
     end
   end
 

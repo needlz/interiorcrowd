@@ -1,6 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Contest do
+  Delayed::Worker.delay_jobs = true
+
   let(:client) { Fabricate(:client) }
   let(:contest) do
     Fabricate(:contest,
@@ -43,9 +45,20 @@ RSpec.describe Contest do
       expect(contest.reload).to be_winner_selection
     end
 
-    it 'performs delayed job' do
-      Contests::SubmissionEndJob.new(contest.id).perform
-      expect(contest.reload).to be_closed
+    describe 'delayed job' do
+      before do
+        Contests::SubmissionEndJob.new(contest.id).perform
+      end
+
+      it 'changes status of the contest' do
+        expect(contest.reload).to be_closed
+      end
+    end
+
+    it 'creates delayed job on creation' do
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 0
+      contest.run_callbacks(:commit)
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 1
     end
   end
 end

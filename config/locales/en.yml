@@ -1,5 +1,8 @@
 en:
   error_during_saving:
+  contest_requests:
+    validations:
+      contest_submission: can not be "submitted" if a contest is not in "submission" state
   contests:
     default_selection: Select one
     continue_button: Continue

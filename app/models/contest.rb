@@ -4,7 +4,6 @@ class Contest < ActiveRecord::Base
   CONTEST_DESIGN_BUDGETS = {1 => "$0-$200", 2 => "$201-$500", 3 => "$501-1000", 4 => "$1000+"}
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
   STATUSES = %w{submission winner_selection closed fulfillment finished}
-  JOBS_QUEUE = 'contests'
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -88,8 +87,7 @@ class Contest < ActiveRecord::Base
   end
 
   def delay_submission_end
-    job = Contests::SubmissionEndJob.new(id)
-    Delayed::Job.enqueue(job, run_at: phase_end)
+    Contests::SubmissionEndJob.schedule(id, run_at: phase_end)
   end
 
   private
