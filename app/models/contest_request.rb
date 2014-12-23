@@ -37,6 +37,7 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
+  scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
 
   def moodboard_image_path
