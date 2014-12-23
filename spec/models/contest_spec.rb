@@ -1,6 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Contest do
+  Delayed::Worker.delay_jobs = true
+
   let(:client) { Fabricate(:client) }
   let(:contest) do
     Fabricate(:contest,
@@ -21,7 +23,42 @@ RSpec.describe Contest do
     end
   end
 
-  it 'know how many days left to enter contest' do
-    expect(contest.days_left).to eq 0
+  it 'delays submission time by 3 days' do
+    expect(contest.days_left).to eq 3
+  end
+
+  it 'sets submission end time' do
+    expect(contest.phase_end).to be_present
+  end
+
+  describe 'submission end' do
+    it 'closes the contest if there were less than 3 requests' do
+      contest.end_submission
+      expect(contest.reload).to be_closed
+    end
+
+    it 'starts period of winner selection there were at least 3 requests' do
+      3.times do
+        contest.requests << Fabricate(:contest_request, designer: Fabricate(:designer))
+      end
+      contest.end_submission
+      expect(contest.reload).to be_winner_selection
+    end
+
+    describe 'delayed job' do
+      before do
+        Contests::SubmissionEndJob.new(contest.id).perform
+      end
+
+      it 'changes status of the contest' do
+        expect(contest.reload).to be_closed
+      end
+    end
+
+    it 'creates delayed job on creation' do
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 0
+      contest.run_callbacks(:commit)
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 1
+    end
   end
 end
