@@ -46,9 +46,10 @@ class @Answers
   bindViewUpdate: (requestId, answer, callbacks)->
     onUpdate = $.extend({}, callbacks)
     onUpdateSuccess = onUpdate.success if onUpdate.success
-    onUpdate.success = (data)=>
-      @updateView(requestId, answer)
-      onUpdateSuccess?(data)
+    onUpdate.success = (response)=>
+      answerSaved = response.answered
+      @updateView(requestId, answer) if answerSaved
+      onUpdateSuccess?(response)
     onUpdate
 
   updateView: (requestId, answer)->

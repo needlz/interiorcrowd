@@ -79,6 +79,7 @@ class ContestRequestsController < ApplicationController
   def show
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
+    @show_answer_options = @request.contest.winner_selection?
     @navigation = Navigation::ClientCenter.new(:entries)
   end
 end

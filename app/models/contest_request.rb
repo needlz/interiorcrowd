@@ -6,7 +6,7 @@ class ContestRequest < ActiveRecord::Base
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_uniqueness_of :designer_id, scope: :contest_id
-  validate :contest_status, if: ->(request){ request.contest }
+  validate :contest_status, :one_winner, :answerable, if: ->(request){ request.contest }
 
   state_machine :status, initial: :draft do
     event :submit do
@@ -36,6 +36,7 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
+  scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
 
   def moodboard_image_path
@@ -46,15 +47,26 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def reply(answer, client_id)
-    return false unless contest.client_id == client_id
-    update_attributes(answer: answer)
+    (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
   private
 
   def contest_status
-    if submitted? && !contest.submission?
+    if (changed_to?(:status, 'submitted') || contest_id_changed?) && !contest.submission?
       errors.add(:status, I18n.t('contest_requests.validations.contest_submission'))
+    end
+  end
+
+  def answerable
+    if !contest.winner_selection? && answer.present?
+      errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
+    end
+  end
+
+  def one_winner
+    if changed_to?(:answer, 'winner') && contest.requests.find_by_answer('winner')
+      errors.add(:answer, I18n.t('contest_requests.validations.one_winner'))
     end
   end
 

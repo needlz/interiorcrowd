@@ -9,7 +9,7 @@
   .row.client-center.moodboards
     - @contest_requests.in_groups_of(2, false) do |contest_requests|
       - contest_requests.each do |contest_request|
-        = render partial: 'clients/moodboard', locals: { contest_request: contest_request }
+        = render partial: 'clients/moodboard', locals: { contest_request: contest_request, show_answer_options: @contest.winner_selection? }
     .pagination-row
       = will_paginate(@contest_requests)
 
