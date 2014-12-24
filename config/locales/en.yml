@@ -141,7 +141,7 @@ en:
         enter_email: Please enter email.
         enter_last_name: Please enter last name.
         enter_first_name: Please enter first name.
-        invalid_example_url: Please enter valid Link URL and make sure to add prefix http or https in URL
+        invalid_example_url: Please enter valid URL
       become_designer: Become a Designer!
       do_you_love: Do you love %{interior_design}?
       interior_design: interior design

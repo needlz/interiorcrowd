@@ -7,7 +7,7 @@ $ ->
     $(".link_url").each ->
       url_value = $.trim($(this).val())
       if url_value.length > 1
-        regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+        regex = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
         unless regex.test(url_value)
           bool = true
           $(this).removeClass("alert-danger").addClass "alert-danger"
