@@ -6,9 +6,7 @@ class ContestRequest < ActiveRecord::Base
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_uniqueness_of :designer_id, scope: :contest_id
-  validate :contest_status, if: ->(request){ request.contest }
-  validate :one_winner, if: ->(request){ request.contest }
-  validate :answerable, if: ->(request){ request.contest }
+  validate :contest_status, :one_winner, :answerable, if: ->(request){ request.contest }
 
   state_machine :status, initial: :draft do
     event :submit do
