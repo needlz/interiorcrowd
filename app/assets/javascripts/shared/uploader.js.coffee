@@ -5,9 +5,8 @@ $.fn.initUploader = (uploadifyOptions) ->
     buttonText: uploadifyOptions.buttonText
     fileSizeLimit: uploadifyFileSizeLimit
     fileTypeExts: '*.png;*.jpg;*.tif'
-    uploadLimit: uploadifyOptions.uploadLimit || 3
+    uploadLimit: uploadifyOptions.uploadLimit
     fileObjName: 'photo'
-    multi: false
     auto: true
     removeTimeout: uploadifyOptions.removeTimeout
     onUploadSuccess: uploadifyOptions.onUploadSuccess
@@ -34,4 +33,5 @@ $.fn.initUploaderWithThumbs = (options) ->
           $imageIds.val(previousIds + imageId)
       options.uploadify
     )
+    $.extend(options.uploadify, { multi: false }) if options.single
   )
