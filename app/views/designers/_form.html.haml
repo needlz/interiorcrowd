@@ -40,17 +40,18 @@
   .row.step-row.lnk_container
     .col-sm-2.examplelabel
       %label #{ t('designer_center.sign_up.links_to_work') }:
-    .input-group.col-sm-7.link_box.link_box_large
-      %span
-      %input.form-control.input-big-addon.des_links{name: 'exlinks[]', type: 'text'}
-      %a.plus_wrapper{href: 'javascript:void(0)'}
-        %span +
-      %a.minus_wrapper{href: 'javascript:void(0)'}
-        %span -
+    .col-sm-7
+      .input-group.link_box.link_box_large.col-sm-12
+        %span
+        %input.form-control.input-big-addon.des_links{name: 'external_links[]', type: 'text'}
+        %a.plus_wrapper{href: 'javascript:void(0)'}
+          %span +
+        %a.minus_wrapper{href: 'javascript:void(0)'}
+          %span -
   .row.step-row
     .col-sm-2
       %label #{ t('designer_center.sign_up.upload_examples') }:
-    .col-sm-8.controls.form-inline
+    .col-sm-7.controls.form-inline
       %span#image_display
         - if @designer_images.present?
           - @designer_images.split(',').each do |path|

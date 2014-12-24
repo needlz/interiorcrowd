@@ -58,7 +58,7 @@ class @DesignerSignUp
         can_submit = true
         $('.des_links').each (index, input) =>
           url_value = $.trim($(input).val())
-          if url_value.length > 1
+          if url_value.length
             unless @validLink(url_value)
               $(this).removeClass('alert-danger').addClass 'alert-danger'
               can_submit = false
@@ -80,7 +80,7 @@ class @DesignerSignUp
         removeTimeout: 3
 
   validLink: (link)->
-    regex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
+    regex = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
     regex.test(link)
 
   validEmail: (email)->

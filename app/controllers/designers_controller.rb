@@ -16,7 +16,7 @@ class DesignersController < ApplicationController
     user_ps = params[:designer][:password]
     params[:designer][:password] = Client.encrypt(params[:designer][:password])
     params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
-    params[:designer][:ex_links] = params[:external_links].reject { |c| c.empty? }.join(',')
+    params[:designer][:ex_links] = params[:external_links].try(:reject) { |c| c.empty? }.try(:join, ',')
     session[:external_links] = params[:designer][:ex_links]
     @designer = Designer.new(designer_params)
     respond_to do |format|
@@ -24,7 +24,7 @@ class DesignersController < ApplicationController
         session[:external_links] = nil
         session[:designer_id] = @designer.id 
         Mailer.designer_registration(@designer, user_ps).deliver
-        format.html { redirect_to welcome_designer_path(@designer), notice: 'Designer was successfully created.' }
+        format.html { redirect_to designer_center_index_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else
         @designer_images = params[:designer_image]
