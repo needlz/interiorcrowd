@@ -1,5 +1,6 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
+  before_filter :set_client, only: [:additional_details, :save_additionl_details]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option, :update]
@@ -73,6 +74,8 @@ class ContestsController < ApplicationController
   end
 
   def additional_details
+    @contest = @client.contests.find(params[:id])
+    @preferences = ContestAdditionalPreference.from(@contest)
     render
   end
 
@@ -139,5 +142,9 @@ class ContestsController < ApplicationController
     return design_brief_contests_path if session[:design_brief].blank?
     return design_style_contests_path if session[:design_style].blank?
     design_space_contests_path if session[:design_space].blank?
+  end
+
+  def set_client
+    @client = Client.find(check_client)
   end
 end

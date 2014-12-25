@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
 
   def check_designer
     redirect_to login_sessions_path if session[:designer_id].blank?
-    session[:designer_id].present?
+    session[:designer_id]
   end
   
   def check_client
     redirect_to client_login_sessions_path if session[:client_id].blank?
-    session[:client_id].present?
+    session[:client_id]
   end
 
   def to_bool(value)
