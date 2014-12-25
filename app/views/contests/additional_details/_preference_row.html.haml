@@ -1,12 +1,12 @@
 .clearfix
   .col-md-9.col-xs-12
     .col-sm-offset-1.col-sm-4.col-xs-5
-      = radio_button_tag("contest[#{ preference.name }]", preference.first_option)
+      = form.radio_button(preference.name, preference.first_option)
       = form.label(preference.name, preference.first_option_name, value: preference.first_option)
 
     .col-sm-1.col-xs-2
       = t('contests.additional_details.or').html_safe
 
     .col-sm-4.col-xs-5
-      = radio_button_tag("contest[#{ preference.name }]", preference.second_option)
+      = form.radio_button(preference.name, preference.second_option)
       = form.label(preference.name, preference.second_option_name, value: preference.second_option)

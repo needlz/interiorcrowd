@@ -29,7 +29,7 @@ InteriorC::Application.routes.draw do
       patch 'update'
       get 'show', as: 'show'
       get 'additional_details'
-      post 'save_additional_details'
+      patch 'save_additional_details'
     end
 
     collection do

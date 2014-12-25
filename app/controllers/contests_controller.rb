@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
-  before_filter :set_client, only: [:additional_details, :save_additionl_details]
+  before_filter :set_client, only: [:additional_details, :save_additional_details]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option, :update]
@@ -80,6 +80,9 @@ class ContestsController < ApplicationController
   end
 
   def save_additional_details
+    @contest = @client.contests.find(params[:id])
+    options = ContestOptions.new(params.with_indifferent_access)
+    @contest.update_from_options(options)
     redirect_to brief_client_center_index_path
   end
 
@@ -135,7 +138,7 @@ class ContestsController < ApplicationController
   end
 
   def set_contest
-    @contest = Contest.find_by_id(params[:id])
+    @contest = Contest.find(params[:id])
   end
 
   def uncomplete_step_path

@@ -49,9 +49,9 @@ RSpec.describe ContestsController do
     end
   end
 
-  describe 'POST save_additional_details' do
+  describe 'PATCH save_additional_details' do
     it 'redirects to brief page' do
-      post :save_additional_details, id: contest.id
+      patch :save_additional_details, id: contest.id
       expect(response).to redirect_to brief_client_center_index_path
     end
   end

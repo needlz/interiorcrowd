@@ -1,15 +1,14 @@
 .clearfix
   .col-md-4.col-sm-6.col-xs-7
     = t('contests.additional_details.space_needs_accommodate.children')
-  = radio_button_tag('contest[accomodate_children]', 'yes')
-  = label_tag('contest[accomodate_children]', t('contests.additional_details.space_needs_accommodate.yes'), value: 'yes')
-  = radio_button_tag('contest[accomodate_children]', 'no')
-  = label_tag('contest[accomodate_children]', t('contests.additional_details.space_needs_accommodate.no'), value: 'no')
+  = form.radio_button(:accommodate_children, true)
+  = form.label(:accommodate_children, t('contests.additional_details.space_needs_accommodate.yes'), value: true)
+  = form.radio_button(:accommodate_children, false)
+  = form.label(:accommodate_children, t('contests.additional_details.space_needs_accommodate.no'), value: false)
   .clearfix
     .col-md-4.col-sm-6.col-xs-7
       = t('contests.additional_details.space_needs_accommodate.pets')
-    = radio_button_tag('contest[accomodate_pets]', 'yes')
-    = label_tag('contest[accomodate_pets]', t('contests.additional_details.space_needs_accommodate.yes'), value: 'yes')
-    = radio_button_tag('contest[accomodate_pets]', 'no')
-    = label_tag('contest[accomodate_pets]', t('contests.additional_details.space_needs_accommodate.no'), value: 'no')
-    
+    = form.radio_button(:accommodate_pets, true)
+    = form.label(:accommodate_pets, t('contests.additional_details.space_needs_accommodate.yes'), value: true)
+    = form.radio_button(:accommodate_pets, false)
+    = form.label(:accommodate_pets, t('contests.additional_details.space_needs_accommodate.no'), value: false)

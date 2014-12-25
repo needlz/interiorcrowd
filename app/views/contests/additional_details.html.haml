@@ -14,7 +14,7 @@
 
     #form-container.clearfix
       .col-md-12
-        = form_for @contest do |f|
+        = form_for @contest, url: save_additional_details_contest_path(id: @contest.id) do |f|
           #preferences
             .title= t('contests.additional_details.do_you_prefer')
             .options
@@ -22,7 +22,7 @@
                 = render partial: 'contests/additional_details/preference_row',
                   locals: { preference: preference, form: f }
           #accomodation
-            = render partial: 'contests/additional_details/accommodation'
+            = render partial: 'contests/additional_details/accommodation', locals: { form: f }
           .text-center
             %button.done{ type: 'submit' }
               .title= t('contests.additional_details.done_button')
