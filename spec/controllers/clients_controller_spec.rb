@@ -46,6 +46,12 @@ RSpec.describe ClientsController do
       expect(Contest.count).to eq 0
       expect(Client.count).to eq 1
     end
+
+    it 'redirects to additional details page' do
+      post :create, { client: client_options }, contest_options_source
+      created_contest = Contest.last
+      expect(response).to redirect_to(additional_details_contest_path(id: created_contest.id))
+    end
   end
 
   describe 'PATCH update' do

@@ -28,6 +28,8 @@ InteriorC::Application.routes.draw do
       get 'option'
       patch 'update'
       get 'show', as: 'show'
+      get 'additional_details'
+      post 'save_additional_details'
     end
 
     collection do

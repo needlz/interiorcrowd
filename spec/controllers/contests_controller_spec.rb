@@ -41,4 +41,18 @@ RSpec.describe ContestsController do
       end
     end
   end
+
+  describe 'GET additional_details' do
+    it 'returns page' do
+      get :additional_details, id: contest.id
+      expect(response).to render_template(:additional_details)
+    end
+  end
+
+  describe 'POST save_additional_details' do
+    it 'redirects to brief page' do
+      post :save_additional_details, id: contest.id
+      expect(response).to redirect_to brief_client_center_index_path
+    end
+  end
 end

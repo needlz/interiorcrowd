@@ -65,16 +65,23 @@ class ContestsController < ApplicationController
     @client = Client.new
     if params[:preview].present?
       session[:preview] = params[:preview]
-      render 'contests/account_creation'
+      redirect_to account_creation_contests_path
     else
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to preview_contests_path and return
     end
   end
 
+  def additional_details
+    render
+  end
+
+  def save_additional_details
+    redirect_to brief_client_center_index_path
+  end
+
   def account_creation
     @client = Client.new
-    redirect_to preview_contests_path and return
   end
 
   def upload
