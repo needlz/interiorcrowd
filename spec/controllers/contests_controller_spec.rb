@@ -50,9 +50,25 @@ RSpec.describe ContestsController do
   end
 
   describe 'PATCH save_additional_details' do
+    let(:details) do
+      result = {}
+      ContestAdditionalPreference::PREFERENCES.each do |preference, options|
+        result[preference] = options.sample
+      end
+      result
+    end
+
     it 'redirects to brief page' do
       patch :save_additional_details, id: contest.id
       expect(response).to redirect_to brief_client_center_index_path
+    end
+
+    it 'saves additional details of contest' do
+      patch :save_additional_details, id: contest.id, contest: details
+      contest.reload
+      ContestAdditionalPreference.preferences.each do |preference|
+        expect(contest.send(preference)).to eq details[preference].to_s
+      end
     end
   end
 end

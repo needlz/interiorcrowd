@@ -22,3 +22,12 @@
   = render partial: 'contests/previews/budget_preview'
 .row
   = render partial: 'contests/previews/feedback_preview'
+- if @contest_view.additional_preferences
+  .row
+    = render partial: 'contests/previews/additional_preferences_preview'
+- unless @contest_view.accommodate_children.nil?
+  .row
+    = render partial: 'contests/previews/accommodate_children_preview'
+- unless @contest_view.accommodate_pets.nil?
+  .row
+    = render partial: 'contests/previews/accommodate_pets_preview'

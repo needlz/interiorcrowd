@@ -14,16 +14,15 @@ class ContestAdditionalPreference
     PREFERENCES.keys
   end
 
-  def self.from(contest)
-    PREFERENCES.map do |preference, options|
-      new({ preference: preference, first_option: options[0], second_option: options[1] })
-    end
+  def self.all(list = nil)
+    selected_preferences = list || preferences
+    selected_preferences.map { |preference| new(preference) }
   end
 
-  def initialize(options)
-    @name = options[:preference]
-    @first_option = options[:first_option]
-    @second_option = options[:second_option]
+  def initialize(preference)
+    @name = preference
+    @first_option = PREFERENCES[preference][0]
+    @second_option = PREFERENCES[preference][1]
   end
 
   def first_option_name

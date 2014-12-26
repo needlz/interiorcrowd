@@ -75,7 +75,7 @@ class ContestsController < ApplicationController
 
   def additional_details
     @contest = @client.contests.find(params[:id])
-    @preferences = ContestAdditionalPreference.from(@contest)
+    @preferences = ContestAdditionalPreference.all
     render
   end
 
