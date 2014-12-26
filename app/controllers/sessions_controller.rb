@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
   end
   
   def client_authenticate
-    cinfo = Client.authenticate(params[:username], params[:password])
-    if cinfo.present?
-        session[:client_id] = cinfo.id 
+    client = Client.authenticate(params[:username], params[:password])
+    if client.present?
+        session[:client_id] = client.id
         redirect_to client_center_index_path
     else
       flash[:error] = 'Incorrect Username or Password!'

@@ -69,4 +69,22 @@ RSpec.describe Contest do
       expect(statuses.uniq).to eq ['closed']
     end
   end
+
+  describe 'additional preferences validation' do
+    it 'allows to set only allowed values' do
+      ContestAdditionalPreference::PREFERENCES.each do |preference, options|
+        options.each do |option|
+          contest.update_attributes(preference => option.to_s)
+          expect(contest.reload.send(preference)).to eq option.to_s
+        end
+      end
+    end
+
+    it 'does not allow to set unknown preferences' do
+      ContestAdditionalPreference.preferences.each do |preference|
+        contest.update_attributes(preference => 'unknown')
+        expect(contest.reload.send(preference)).to_not eq 'unknown'
+      end
+    end
+  end
 end

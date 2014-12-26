@@ -1,0 +1,5 @@
+.title= t('contests.additional_details.do_you_prefer')
+.options
+  - ContestAdditionalPreference.all.each do |preference|
+    = render partial: 'contests/additional_details/preference_row',
+        locals: { preference: preference, form: form }

@@ -52,8 +52,9 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         Mailer.user_registration(@client, user_ps).deliver
-        create_contests(@client.id)
-        format.html { redirect_to thank_you_contests_path }
+        session[:client_id] = @client.id
+        contest = create_contest(@client.id)
+        format.html { redirect_to additional_details_contest_path(id: contest.id) }
         format.json { render json: @client, status: :created, location: @client }
       else
         flash[:error] = @client.errors.full_messages.join("</br>")
@@ -70,10 +71,12 @@ class ClientsController < ApplicationController
 
   private
 
-  def create_contests(user_id)
+  def create_contest(user_id)
     contest_options = ContestOptions.new(session.to_hash.merge(client_id: user_id))
     return unless contest_options.required_present?
-    clear_session if Contest.create_from_options(contest_options)
+    contest = Contest.create_from_options(contest_options)
+    clear_session
+    contest
   end
 
   def clear_session

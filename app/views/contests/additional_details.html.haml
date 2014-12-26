@@ -1,0 +1,29 @@
+.container.animated.fadeInDown
+  #additional-details
+    #main-title.clearfix
+      .col-sm-6.col-sm-offset-3
+        #title.text-center
+          .main= t('contests.additional_details.thanks_title')
+          .subtitle= t('contests.additional_details.thanks_subtitle')
+
+    #description.clearfix
+      .col-md-7
+        .description= t('contests.additional_details.description')
+      .col-md-3
+        %button#call_us_button.btn.btn-success{ type: 'button' }= t('contests.additional_details.call_us')
+
+    #form-container.clearfix
+      .col-md-12
+        = form_for @contest, url: save_additional_details_contest_path(id: @contest.id) do |f|
+          #preferences
+            .title= t('contests.additional_details.do_you_prefer')
+            .options
+              - @preferences.each do |preference|
+                = render partial: 'contests/additional_details/preference_row',
+                  locals: { preference: preference, form: f }
+          #accomodation
+            = render partial: 'contests/additional_details/accommodation', locals: { form: f }
+          .text-center
+            %button.done{ type: 'submit' }
+              .title= t('contests.additional_details.done_button')
+              .subtitle= t('contests.additional_details.thank_you')

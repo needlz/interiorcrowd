@@ -1,0 +1,5 @@
+- ContestView::ACCOMMODATION_ATTRIBUTES.each do |attribute|
+  .clearfix
+    .col-md-4.col-sm-6.col-xs-7
+      = t("contests.additional_details.space_needs_accommodate.#{ attribute }")
+    = render partial: 'contests/additional_details/accommodate_form', locals: { form: form, attribute: attribute }

@@ -1,10 +1,21 @@
 class ContestView
 
-  attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
-              :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids, :space_pictures_ids
+  ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
 
-  EDITABLE_ATTRIBUTES = [:category, :area, :appeals, :desirable_colors, :undesirable_colors,
-        :example_pictures, :example_links, :space_pictures, :space_dimensions, :budget, :feedback]
+  attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
+              :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
+              :space_pictures_ids, :additional_preferences
+
+  ContestAdditionalPreference.preferences.map do |preference|
+    attr_reader preference
+  end
+
+  ACCOMMODATION_ATTRIBUTES.each do |attribute|
+    attr_reader attribute
+  end
+
+  EDITABLE_ATTRIBUTES = [:category, :area, :appeals, :desirable_colors, :undesirable_colors, :example_pictures,
+    :example_links, :space_pictures, :space_dimensions, :budget, :feedback, :additional_preferences] + ACCOMMODATION_ATTRIBUTES
 
   def initialize(options)
     if options.kind_of?(Hash)
@@ -39,6 +50,8 @@ class ContestView
     @feedback = contest_params[:feedback]
     @budget_plan = contest_params[:budget_plan]
     @name = contest_params[:project_name]
+    set_additional_preferences(contest_params)
+    set_accommodation(contest_params)
   end
 
   def initialize_from_contest(contest)
@@ -58,5 +71,23 @@ class ContestView
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
     @name = contest.project_name
+    set_additional_preferences(contest.attributes.with_indifferent_access)
+    set_accommodation(contest.attributes.with_indifferent_access)
+  end
+
+  def set_accommodation(options)
+    accommodation_attributes = ACCOMMODATION_ATTRIBUTES.map do |accommodation_attribute|
+      value = options[accommodation_attribute]
+      [accommodation_attribute, value] if value
+    end
+    @accommodation = Hash[accommodation_attributes.compact]
+  end
+
+  def set_additional_preferences(options)
+    additional_preferences = ContestAdditionalPreference.preferences.map do |preference|
+      value = options[preference]
+      [ContestAdditionalPreference.new(preference), value] if value
+    end
+    @additional_preferences = additional_preferences.compact
   end
 end

@@ -30,6 +30,13 @@ class ContestOptions
       @designer_level = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
     end
     @contest[:client_id] = options[:client_id] if options.has_key?(:client_id)
+    if options[:contest]
+      @contest[:accommodate_children] = options[:contest][:accommodate_children] if options[:contest].has_key?(:accommodate_children)
+      @contest[:accommodate_pets] = options[:contest][:accommodate_pets] if options[:contest].has_key?(:accommodate_pets)
+      ContestAdditionalPreference.preferences.each do |preference|
+        @contest[preference] = options[:contest][preference] if options[:contest].has_key?(preference)
+      end
+    end
   end
 
   def required_present?

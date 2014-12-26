@@ -26,6 +26,9 @@ class Contest < ActiveRecord::Base
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category
   validates_presence_of :design_space
+  ContestAdditionalPreference::PREFERENCES.each do |preference, options|
+    validates_inclusion_of preference, in: options.map(&:to_s), allow_nil: true
+  end
 
   after_initialize :defaults, if: :new_record?
   after_commit :delay_submission_end, on: :create
@@ -48,7 +51,6 @@ class Contest < ActiveRecord::Base
       transition fulfillment: :finished
     end
   end
-
 
   def self.create_from_options(options)
     contest = new(options.contest)

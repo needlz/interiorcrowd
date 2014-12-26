@@ -32,6 +32,9 @@ en:
         links: Links
         space_pictures: Pictures of space
         appeals: Appeals
+        accommodate_children: Accommodate children
+        accommodate_pets: Accommodate pets
+        additional_preferences: Additional preferences
     appleals:
       feminine: Feminine
       masculine: Masculine
@@ -73,6 +76,38 @@ en:
         budget: Budget
         premier: Premier
         premium: Premium
+    additional_details:
+      call_us: Or, call us!
+      thanks_title: Great job! Design concepts will be headed your way soon!
+      thanks_subtitle: |
+        Thank you for launching your contest. You should expect designs in 2 to 3 business days.
+        In the meantime, feel free to give us more information so the designs will be a better fir fot you.
+      description: Willing to share more about your design style to help the designers? Take our fun design quiz.
+      cull_us: Or, call us!
+      do_you_prefer: 'Do you prefer to:'
+      or: '-&nbspOR&nbsp-'
+      theme:
+        have_consistent: Have a consistent theme
+        mix_styles: Mix and match styles
+      space:
+        take_risk: Take a risk with your space
+        keep_simple: Keep it simple
+      accessories:
+        covering_open_space: Have accessories covering open space
+        minimalistic: Prefer minimalistic
+      space_changes:
+        seasonally: Chanhe your space seasonally
+        keep_consistent: Keep it consistent with minimal changes
+      shop:
+        antique_stores: Shop antique stores
+        retailers: Shop retailers who are on-trend
+      space_needs_accommodate:
+        accommodate_children: Does this space need to acoommodate children?
+        accommodate_pets: Does this space need to acoommodate pets?
+        'yes': 'Yes'
+        'no': 'No'
+      done_button: Done!
+      thank_you: Thank you!
   client_center:
     title: Client Center
     welcome_user: Welcome, %{username}
