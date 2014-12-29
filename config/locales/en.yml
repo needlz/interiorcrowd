@@ -11,8 +11,7 @@ en:
     titles:
       creation: Launch a New Design Contest
       design_categories: What do you need help with today?
-      design_style: Design Style?
-      appeals: What appeals to you?
+      appeals: What do you think of the style below?
       wanted_colors: What colors do you want in your space?
       avoided_colors: What colors do you want to avoid?
       example: Any example that you like?
@@ -35,6 +34,9 @@ en:
         accommodate_children: Accommodate children
         accommodate_pets: Accommodate pets
         additional_preferences: Additional preferences
+    design_style:
+      title: Style Profile
+      description:
     appleals:
       feminine: Feminine
       masculine: Masculine

@@ -1,15 +1,7 @@
-.level-block-container {
-  text-align: center;
-
-  .level-block {
-    display: inline-block;
-    padding: 10px;
-    cursor: pointer;
-  }
-
-  .active {
-    background-color: lightblue;
-  }
+.level-block {
+  display: inline-block;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .typeahead.dropdown-menu {

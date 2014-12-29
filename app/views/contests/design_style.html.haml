@@ -1,22 +1,3 @@
-- content_for :page_content do
-  .row
-    .col-sm-10.col-sm-offset-1.page-title
-      %h3= t('contests.titles.design_style')
-  = render partial: 'home/msg'
-  = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
-    = render partial: 'contests/options/designer_level_options'
-    = render partial: 'contests/options/appeals_options'
-    = render partial: 'contests/options/desirable_colors_options'
-    = render partial: 'contests/options/undesirable_colors_options'
-    = render partial: 'contests/options/example_pictures_options'
-    = render partial: 'contests/options/example_links_options'
-    .row.formbuttons
-      .col-sm-10
-        %a.order{href: design_brief_contests_path}= t('contests.creation.go_back')
-        .pull-right
-          %a.order.continue{:href => "#"}= t('contests.creation.continue')
-= render partial: 'contests/contest_creation_page'
-
 = content_for :head do
   = javascript_include_tag 'bootstrap-slider'
   = javascript_include_tag 'jquery.uploadify'
@@ -30,3 +11,36 @@
   = stylesheet_link_tag 'uploadify'
   = stylesheet_link_tag 'contests/design_style'
   = render partial: 'shared/setup_uploadify'
+  :javascript
+    window.appealsCount = #{ Appeal.count }
+
+
+- content_for :page_content do
+  #design-style
+    = render partial: 'home/msg'
+    .packages.text-package
+      .col-md-6.no-x-padding
+        #header.col-md-11
+          %h1 Style Profile
+          %span#description
+            Now for the fun part, tell us about your style. We're excited to start
+            designing for you. Our Style Profile helps us get a sense of where your
+            style is now and where you would like it to be.
+      .col-md-4.no-padding-right
+        %h1{:style => "visibility:hidden;"}  
+        %span.quote
+          %i “The more we know about you, the better we can style for you.”
+    = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
+      = render partial: 'contests/options/designer_level_options'
+      = render partial: 'contests/options/appeals_options'
+      = render partial: 'contests/options/desirable_colors_options'
+      = render partial: 'contests/options/undesirable_colors_options'
+      = render partial: 'contests/options/example_pictures_options'
+      = render partial: 'contests/options/example_links_options'
+      .row.formbuttons
+        .col-sm-10
+          %a.order{href: design_brief_contests_path}= t('contests.creation.go_back')
+          .pull-right
+            %a.order.continue{:href => "#"}= t('contests.creation.continue')
+
+= render partial: 'contests/contest_creation_page'

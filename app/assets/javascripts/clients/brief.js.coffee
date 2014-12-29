@@ -69,6 +69,8 @@ class @ContestEditing extends InlineEditor
     area: ->
       designArea = new DesignArea($('#design_brief_design_area'), $('.area-children'), areas)
       designArea.init()
+    appeals: ->
+      AppealsForm.init()
 
   previewCallbacks:
     desirable_colors: ->

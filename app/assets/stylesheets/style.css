@@ -203,10 +203,6 @@ h1 {
     font-size: 24px;
 }
 
-.option-item:hover {
-    opacity: 1;
-}
-
 .option-item {
     opacity: 0.5;
     margin-bottom: 20px;
@@ -220,11 +216,6 @@ h1 {
 .menu-room {
     display: none;
 }
-
-/*
-.option-item:hover {
-	opacity:1;
-}*/
 
 .option-item.active {
     opacity: 1;
@@ -438,12 +429,12 @@ h1 {
     font-size: 18px;
 }
 
-.novice:hover {
+.designer-level:hover {
     opacity: 0.5;
 }
 
 .all-under-block {
-    border-bottom: 3px solid #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
     padding-bottom: 50px;
 }
 
@@ -559,7 +550,7 @@ h1 {
 }
 
 .telluswhy .form-group {
-    margin-bottom: 63px;
+    margin-bottom: 48px;
     margin-top: 43px;
 }
 
@@ -615,3 +606,100 @@ input.form-control {
         display: block;
     }
 }
+
+.all-color-block{
+    border: 1px dashed black;
+    padding-top:29px;
+    padding-bottom:39px;
+}
+
+.btn3{
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 15px 55px;
+    margin-bottom: 60px;
+}
+
+.btn3-confirm {
+
+    padding: 15px 27px;
+    font-size: 22px;
+    font-weight: 700;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+}
+
+.btn3-confirm:hover {
+
+    background: #000;
+    color: #fff;
+}
+
+.btn4{
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 15px 55px;
+    margin-bottom: 38px;
+}
+.btn4-confirm {
+
+    padding: 15px 50px;
+    font-size: 22px;
+    font-weight: 700;
+    background: #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+}
+
+.btn4-confirm:hover {
+
+    background: #000;
+    color: #fff;
+}
+
+.gal1 {
+    width: 16%;
+    min-height: 60px;
+    float: left;
+    transition: all .2s ease-in-out;
+    text-align: center;
+    padding-top: 8px;
+}
+
+.gal1 > img { display: none;}
+
+.gal1:hover {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
+}
+
+.gal1.selected > img {display: inline;}
+
+.selected-color-item {margin-bottom: 10px;}
+.selected-color-item span {font-size:22px;}
+
+.fav-color { width:80%;height:50px;margin-top: 12px; }
+
+.dp-down-box {border: 1px solid #000; display: none;}
+
+.color-box {width: 50px; height: 50px; display: inline-block; vertical-align: middle; margin-right: 15px;}
+
+.single-color-line {
+    width: 100%;
+    padding: 20px;
+    font-size: 19px;
+}
+
+.single-color-line:hover { background: #E5E5E5; }
+
+.glyphic-del {right: 0; cursor: pointer;}

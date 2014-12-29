@@ -1,10 +1,36 @@
-.col-sm-12{ style: 'margin-bottom: 20px' }
-  = select_tag "design_style[appeals][#{ scale.identifier }][value]",
-      options_for_select([[t('contests.default_selection'), '']] + @creation_wizard.available_appeal_feedback, scale.value),
-      class: 'appeal'
-  = text_field_tag "design_style[appeals][#{ scale.identifier }][reason]",
-      scale.reason,
-      placeholder: t('contests.appleals.placeholder'),
-      size: 50
-  %div
-    %img{ src: '/assets/blank.png' }
+.appeal
+  .likes
+    - @creation_wizard.available_appeal_feedback.each do |appeal_feedback|
+      .col-md-2.no-x-padding.option
+        .col-md-3
+          = radio_button_tag("design_style[appeals][#{ scale.identifier }][value]",
+              appeal_feedback[:value],
+              scale.value == appeal_feedback[:value],
+              class: 'regular-radio big-radio')
+          = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", '')
+        .col-md-9
+          .text
+            = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", appeal_feedback[:name])
+  .col-md-12.no-x-padding
+    .live-tiles
+      .tile.width3.height2
+      .tile.width2.height150
+      .tile.width2.height4
+      .tile.width3.height150
+      .tile.width2.height250
+      .tile.width3
+      .tile.width15.height150
+      .tile.width15.height150
+      .tile.width15.height250
+      .tile.width15.height250
+      .tile.width3.height150
+      .tile.width4
+  .clearfix
+  .telluswhy
+    .title
+      %span Tell us why
+      %span.optional (optional)
+    .form-group
+      %textarea#comment.form-control{ rows: "4",
+        name: "design_style[appeals][#{ scale.identifier }][reason]" }= scale.reason
+  .col-md-12.border
