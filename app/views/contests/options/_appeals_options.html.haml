@@ -1,8 +1,10 @@
-.row.step-row
-  %label= t('contests.titles.appeals')
-.row
-  .col-sm-12
+.appeal-options
+  .all-block-bar
+    .col-md-12.no-x-padding.header
+      %h1.title= t('contests.titles.appeals')
+    .clearfix
+
     = render partial: 'contests/options/appeal_scale_row',
-        collection: @contest_view.appeal_scales,
-        as: :scale
+          collection: @contest_view.appeal_scales,
+          as: :scale
     %span#err-appeals.text-error

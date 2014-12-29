@@ -52,9 +52,7 @@ class ContestCreationWizard
   end
 
   def available_appeal_feedback
-    APPEAL_FEEDBACK.map do |appeal_feedback|
-      [appeal_feedback[:name], appeal_feedback[:value]]
-    end
+    APPEAL_FEEDBACK
   end
 
   def budget_options

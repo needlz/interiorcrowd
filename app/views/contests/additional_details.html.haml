@@ -21,7 +21,7 @@
               - @preferences.each do |preference|
                 = render partial: 'contests/additional_details/preference_row',
                   locals: { preference: preference, form: f }
-          #accomodation
+          #accommodation
             = render partial: 'contests/additional_details/accommodation', locals: { form: f }
           .text-center
             %button.done{ type: 'submit' }
