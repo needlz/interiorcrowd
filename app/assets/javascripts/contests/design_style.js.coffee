@@ -17,16 +17,16 @@ class Validations
       valid = true
       if fav_color.length < 1
         valid = false
-        $("#err_fav").html "Please enter data."
+        $("#err_fav").html I18n.validations.no_colors
       if refrain_color.length < 1
         valid = false
-        $("#err_refrain").html "Please enter data."
+        $("#err_refrain").html I18n.validations.no_colors
       if isNaN(parseInt($levelContainer.val()))
         valid = false
-        $("#err-designer-level").html "Please select one"
+        $("#err-designer-level").html I18n.validations.select_design_level
       unless allAppealsSelected()
         valid = false
-        $("#err-appeals").html "Please pick your opinion for each appeal"
+        $("#err-appeals").html I18n.validations.no_appeals
       if valid
         $("#design_style").submit()
       else

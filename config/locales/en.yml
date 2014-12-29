@@ -36,7 +36,15 @@ en:
         additional_preferences: Additional preferences
     design_style:
       title: Style Profile
-      description:
+      description: |
+        Now for the fun part, tell us about your style. We're excited to start
+        designing for you. Our Style Profile helps us get a sense of where your
+        style is now and where you would like it to be.
+      quote: “The more we know about you, the better we can style for you.”
+      validations:
+        no_colors: Please enter data.
+        select_design_level: Please select one
+        no_appeals: Please pick your opinion for each appeal
     appleals:
       feminine: Feminine
       masculine: Masculine

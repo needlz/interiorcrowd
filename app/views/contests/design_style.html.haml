@@ -13,7 +13,7 @@
   = render partial: 'shared/setup_uploadify'
   :javascript
     window.appealsCount = #{ Appeal.count }
-
+    window.I18n = #{ translations_to_json(['contests', 'design_style']) }
 
 - content_for :page_content do
   #design-style
@@ -21,15 +21,12 @@
     .packages.text-package
       .col-md-6.no-x-padding
         #header.col-md-11
-          %h1 Style Profile
-          %span#description
-            Now for the fun part, tell us about your style. We're excited to start
-            designing for you. Our Style Profile helps us get a sense of where your
-            style is now and where you would like it to be.
+          %h1= t('contests.design_style.title')
+          %span#description= t('contests.design_style.description')
       .col-md-4.no-padding-right
-        %h1{:style => "visibility:hidden;"}  
+        %h1{ style: 'visibility:hidden;' }  
         %span.quote
-          %i “The more we know about you, the better we can style for you.”
+          %i= t('contests.design_style.quote')
     = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
       = render partial: 'contests/options/designer_level_options'
       = render partial: 'contests/options/appeals_options'
