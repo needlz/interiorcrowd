@@ -664,7 +664,7 @@ input.form-control {
     color: #fff;
 }
 
-.gal1 {
+.color-cell {
     width: 16%;
     min-height: 60px;
     float: left;
@@ -673,9 +673,9 @@ input.form-control {
     padding-top: 8px;
 }
 
-.gal1 > img { display: none;}
+.color-cell > img { display: none;}
 
-.gal1:hover {
+.color-cell:hover {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
@@ -683,12 +683,12 @@ input.form-control {
     box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
 }
 
-.gal1.selected > img {display: inline;}
+.color-cell.selected > img {display: inline;}
 
 .selected-color-item {margin-bottom: 10px;}
 .selected-color-item span {font-size:22px;}
 
-.fav-color { width:80%;height:50px;margin-top: 12px; }
+.fav-color { width:80%;height:50px; }
 
 .dp-down-box {border: 1px solid #000; display: none;}
 

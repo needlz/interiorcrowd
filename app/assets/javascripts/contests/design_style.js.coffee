@@ -1,15 +1,13 @@
 class Validations
 
-  constructor: (@appealsCount)->
+  constructor: (@appealsCount, @levelContainer)->
 
   init: ()->
-    $levelContainer = $("input[name='design_style[designer_level]']")
-
     allAppealsSelected = ->
       $('.likes input:checked').length == @appealsCount
 
     $(".slidercon input").slider()
-    $(".continue").click (e) ->
+    $(".continue").click (e) =>
       e.preventDefault()
       $(".text-error").html ""
       fav_color = $.trim($("#fav_color").val())
@@ -21,7 +19,7 @@ class Validations
       if refrain_color.length < 1
         valid = false
         $("#err_refrain").html I18n.validations.no_colors
-      if isNaN(parseInt($levelContainer.val()))
+      if isNaN(parseInt(@levelContainer.val()))
         valid = false
         $("#err-designer-level").html I18n.validations.select_design_level
       unless allAppealsSelected()
@@ -33,11 +31,14 @@ class Validations
         false
 
 $ ->
-  validations = new Validations(appealsCount)
+  $levelContainer = $("input[name='design_style[designer_level]']")
+  validations = new Validations(appealsCount, $levelContainer)
   validations.init()
   ExamplesUploader.init()
+
   DesirableColorsEditor.init()
   UndesirableColorsEditor.init()
+
   AppealsForm.init()
 
   $('.level-block').click ->

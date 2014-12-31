@@ -1,0 +1,13 @@
+.col-md-12.colors-table
+  %img.check{src: "/assets/check-icon.png", style: 'display: none'}
+  - color_table_values.each do |color_object|
+    .color-cell{ data: { id: color_object[:id], text: color_object[:text] }, style: "background: ##{ color_object[:id] };" }
+
+.text-center.picker-types-separator
+  %b= t('contests.design_style.picker_types_separator')
+.text-center.color-input-container
+  %input.color-name{ onkeyup: "searchColor(this.value);",
+  placeholder: t('contests.design_style.type_color_name'),
+  type: "text"}/
+  .dp-down-box
+.clearfix

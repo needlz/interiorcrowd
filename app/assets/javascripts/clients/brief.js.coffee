@@ -67,8 +67,7 @@ class @ContestEditing extends InlineEditor
     undesirable_colors: ->
       UndesirableColorsEditor.init()
     area: ->
-      designArea = new DesignArea($('#design_brief_design_area'), $('.area-children'), areas)
-      designArea.init()
+      RoomsEditor.init()
     appeals: ->
       AppealsForm.init()
 
