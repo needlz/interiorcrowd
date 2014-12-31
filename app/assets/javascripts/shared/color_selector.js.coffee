@@ -144,7 +144,7 @@ colorNames = [
 $.widget "custom.colorTags",
   _create: ()->
     formatColorItem = (item)->
-      "<div style='background-color: ##{item.id}; width: 2em; height: 2em; display: inline-block; vertical-align: bottom;'></div> #{item.text}"
+      "<div class='search-color-item' style='background-color: ##{item.id};'></div> #{item.text}"
     isColorHex = (text)->
       /^[0-9A-F]{6}$/i.test(text)
 
@@ -160,7 +160,7 @@ $.widget "custom.colorTags",
           container.append($colorName)
 
           container.css(width: '100%', height: '100%')
-          coloredBlock = "<div class='fav-color' style='margin-right: 20px; background-color: ##{item.id}; height: 100%;'></div>"
+          coloredBlock = "<div class='fav-color' style='background-color: ##{item.id};'></div>"
           container.append(coloredBlock)
 
           $closeGlyph = $('<i></i>').addClass('glyphicon glyphic-r glyphicon-remove pull-right')
@@ -190,21 +190,21 @@ class @ColorsEditor
     @$colorsTable = options.$colorsTable
     @$colorInput = options.$colorInput
 
-  addColor: (color)->
-    colors = @$colorTags.select2('data')
-    @$colorTags.select2('data', colors.concat(color))
+  add: (color)->
+    colors = @currentColors()
+    @setCurrentColors(colors.concat(color))
 
-  removeColor: (color)->
-    newColors = $.grep(@$colorTags.select2('data'), (selectedColor, index)->
-      true if selectedColor.id != color.id
+  remove: (color)->
+    newColors = $.grep(@currentColors(), (selectedColor, index)->
+      selectedColor.id != color.id
     )
-    @$colorTags.select2('data', newColors)
+    @setCurrentColors(newColors)
 
-  colorButtonDeselected: ($button)->
+  deselectCell: ($button)->
     $button.removeClass('selected')
     $button.find('.check').remove()
 
-  colorButtonSelected: ($button)->
+  selectCell: ($button)->
     $button.addClass('selected')
     $button.append(@checkMark().clone().show())
 
@@ -212,22 +212,28 @@ class @ColorsEditor
     @$colorsTable.find(@colorButtonSelector).click (event)=>
       $button = $(event.target).closest(@colorButtonSelector)
       selected = !$button.hasClass('selected')
-      color = @colorFromButton($button)
+      color = @selectedColor($button)
       if selected
-        @colorButtonSelected($button)
-        @addColor(color)
+        @selectCell($button)
+        @add(color)
       else
-        @colorButtonDeselected($button)
-        @removeColor(color)
+        @deselectCell($button)
+        @remove(color)
 
-    for color in @$colorTags.select2('data')
+    for color in @currentColors()
       $button = @$colorsTable.find(@colorButtonSelector).filter("[data-id='#{ color.id }']")
-      @colorButtonSelected($button)
+      @selectCell($button)
+
+  currentColors: ->
+    @$colorTags.select2('data')
+
+  setCurrentColors: (newColors)->
+    @$colorTags.select2('data', newColors)
 
   checkMark: ->
     @$colorsTable.find('> .check')
 
-  colorFromButton: ($button)->
+  selectedColor: ($button)->
     { id: $button.data('id'), text: $button.data('text') }
 
   initSelectedColors: ->
@@ -242,12 +248,12 @@ class @ColorsEditor
       event.preventDefault()
     @$colorTags.on 'select2-removed', (event)=>
       $colorButton = @$colorsTable.find(@colorButtonSelector).filter("[data-id='#{ event.choice.id }']")
-      @colorButtonDeselected($colorButton)
+      @deselectCell($colorButton)
 
   initColorNameInput: ->
     $colorNameInput = @$colorInput.colorTags({ readonly: false })
     $colorNameInput.on 'select2-selecting', (event)=>
-      @addColor(event.choice)
+      @add(event.choice)
       event.preventDefault()
       $(event.target).select2('close')
 
