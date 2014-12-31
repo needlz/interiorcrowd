@@ -6,6 +6,6 @@ class @ExamplesUploader
         container: '#image_display'
         selector: '#design_style_image_id'
       uploadify:
-        buttonText: "Upload"
+        buttonText: I18n.upload_button
         removeTimeout: 5
     )

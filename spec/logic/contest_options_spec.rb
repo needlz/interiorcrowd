@@ -19,7 +19,7 @@ RSpec.describe ContestOptions do
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))
     expect(options.liked_example_ids).to eq(source[:design_style][:document_id].split(',').map(&:strip).map(&:to_i))
-    expect(options.example_links).to eq(source[:design_style][:ex_links].split(',').map(&:strip))
+    expect(options.example_links).to eq(source[:design_style][:ex_links].map(&:strip))
   end
 
   it 'gets options from hash with symbol keys' do

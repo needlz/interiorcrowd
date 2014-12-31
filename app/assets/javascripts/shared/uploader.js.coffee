@@ -22,12 +22,23 @@ $.fn.initUploaderWithThumbs = (options) ->
         imageId = info[1]
         $imageIds = $(options.thumbs.selector)
         if options.single
-          $img = $(options.thumbs.container).find('img')
-          $img = $('<img>').appendTo($(options.thumbs.container)) unless $img.length
+          $container = $('<div class="col-md-3 novice">')
+          $img = $(options.thumbs.container).find('.col-md-3.novice img')
+          $img = $('<img>') unless $img.length
+          $closeButton = $('<a href="#">')
+          $closeButton.append($('<i class="circle3 glyphicon glyphicon-remove pull-right glyphic-round">'))
           $img.attr('src', imageUrl)
+
+          $container.append($img)
+          $container.append($closeButton)
           $imageIds.val(imageId)
         else
-          $(options.thumbs.container).append "<img src='#{ imageUrl }' />"
+          $container = $('<div class="col-md-3 novice">')
+          $container.append $("<img src='#{ imageUrl }' />")
+          $closeButton = $('<a href="#">')
+          $closeButton.append($('<i class="circle3 glyphicon glyphicon-remove pull-right glyphic-round">'))
+          $container.append $closeButton
+          $(options.thumbs.container).append $container
           previousIds = ''
           previousIds = $imageIds.val() + ',' if $imageIds.val().length
           $imageIds.val(previousIds + imageId)
