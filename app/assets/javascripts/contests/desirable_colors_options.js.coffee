@@ -1,4 +1,8 @@
 class @DesirableColorsEditor
 
   @init: ->
-    $('#fav_color').colorTags({ readonly: false })
+    desirableColorsEditor = new ColorsEditor
+      $colorTags: $('#fav_color')
+      $colorsTable: $('.fav-colors .colors-table')
+      $colorInput: $('.fav-colors .color-name')
+    desirableColorsEditor.init()

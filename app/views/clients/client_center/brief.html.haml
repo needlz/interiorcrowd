@@ -14,6 +14,7 @@
 
   :javascript
     I18n = #{ translations_to_json('client_center') }
+    window.colorTableValues = #{ color_table_values.to_json }
 
 - content_for :client_center_content do
   .contest.brief{ data: { id: @contest.id } }

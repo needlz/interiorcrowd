@@ -190,7 +190,7 @@
   top: 4px;
 }
 
-#design-style {
+.design-style-options {
   .appeal-options{
     .header {
       margin-top: 17px;
@@ -274,4 +274,82 @@
       }
     }
   }
+
+  .select2-choices {
+    background-image: inherit !important;
+    background-color: inherit !important;
+  }
+
+  .select2-search-choice {
+    background-image: inherit !important;
+    width: 32%;
+    height: 3.5em;
+    border: none !important;
+    background-color: inherit !important;
+    margin-top: 10px !important;
+    margin-bottom: 30px !important;
+    -webkit-box-shadow: none !important;
+    padding: 3px 5px 3px 18px !important;
+  }
+
+  .select2-search-choice-close {
+    right: 20%;
+    background: inherit;
+    left: auto !important;
+    width: 0px;
+
+    .glyphic-r {
+      top: 20px;
+    }
+  }
+
+  .no-search {
+    display:none
+  }
+
+  .colors-table {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+
+  .color-cell {
+    cursor: pointer;
+  }
+
+  .picker-types-separator {
+    font-size: 24px;
+  }
+
+  .color-input-container {
+    max-width: 500px;
+    margin: auto;
+
+    .color-name {
+      width: 100%;
+      padding: 15px;
+      font-size: 22px;
+      margin-top: 20px;
+    }
+  }
+
+  .colors-type-title {
+    color: #231f20;
+    padding-bottom: 25px;
+    margin-top: 58px;
+    font-size: 24px;
+  }
+
+  .fav-color {
+    margin-right: 20px;
+    height: 100%;
+  }
+}
+
+.search-color-item {
+  width: 2em;
+  height: 2em;
+  display: inline-block;
+  vertical-align: bottom;
 }
