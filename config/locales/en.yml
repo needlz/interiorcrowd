@@ -47,6 +47,7 @@ en:
         no_appeals: Please pick your opinion for each appeal
       type_color_name: Type color name
       picker_types_separator: Or
+      add_links: Add your inspiration links
     appleals:
       feminine: Feminine
       masculine: Masculine
@@ -82,7 +83,7 @@ en:
           one: Expect 1 design
           other: Expect %{design_count} designs
         money_back_quarantee: Money back guarantee
-      go_back: Go back
+      go_back: Back
       continue: Continue
       plans:
         budget: Budget

@@ -55,4 +55,3 @@ class @RoomsEditor
   @init: ->
     designArea = new DesignArea($('.bedr .room-selector-sub'), $('.menu-room.row'), areas, $('[name="design_brief[design_area]"]'))
     designArea.init()
-    

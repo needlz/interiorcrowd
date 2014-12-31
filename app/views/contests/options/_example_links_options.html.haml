@@ -1,7 +1,15 @@
-.row
-  .col-sm-8.col-sm-offset-1
-    .col-sm-9
-      %label Add Links
-      %input.form-control{name: "design_style[ex_links]",
-        type: "text",
-        value: (session[:design_style][:ex_links] if session[:design_style].present?)}
+.col-md-12.no-x-padding{:style => "padding-bottom: 40px;"}
+  %span{:style => "font-size:24px;"}
+    %b= t('contests.design_style.add_links')
+.clearfix
+
+.link-template{ style: 'display: none;' }
+  .link
+    = render partial: 'contests/options/example_link', locals: { value: '', name: '' }
+
+.links
+  - @contest_view.links.each do |url|
+    .link
+      = render partial: 'contests/options/example_link', locals: { value: url, name: 'design_style[ex_links][]' }
+
+.col-md-12{:style => "border-bottom:1px solid #e1e1e1;height:1px;padding-top:29px;"}

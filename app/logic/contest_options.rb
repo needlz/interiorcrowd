@@ -21,12 +21,13 @@ class ContestOptions
       @contest[:budget_plan] = options[:preview][:b_plan] if options[:preview].key?(:b_plan)
       @contest[:project_name] = options[:preview][:contest_name] if options[:preview].key?(:contest_name)
     end
+    p options[:design_style][:ex_links]
     if options[:design_style]
       @contest[:desirable_colors] = options[:design_style][:desirable_colors] if options[:design_style].key?(:desirable_colors)
       @contest[:undesirable_colors] = options[:design_style][:undesirable_colors] if options[:design_style].key?(:undesirable_colors)
       @appeals = options[:design_style][:appeals].deep_symbolize_keys if options[:design_style].key?(:appeals)
       @liked_example_ids = options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style][:document_id]
-      @example_links = options[:design_style][:ex_links].split(',').map(&:strip) if options[:design_style][:ex_links]
+      @example_links = options[:design_style][:ex_links] if options[:design_style][:ex_links]
       @designer_level = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
     end
     @contest[:client_id] = options[:client_id] if options.has_key?(:client_id)
