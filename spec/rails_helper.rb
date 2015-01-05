@@ -72,7 +72,7 @@ RSpec.configure do |config|
                   reason: 'reason',
                   value: 100} },
           document_id: '3,4',
-          ex_links: 'link1,link2' },
+          ex_links: ['link1', 'link2'] },
     }
   end
 end

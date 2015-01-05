@@ -14,7 +14,7 @@ en:
       appeals: What do you think of the style below?
       wanted_colors: What colors would you like in your space?
       avoided_colors: What colors would you like to avoid?
-      example: Any example that you like?
+      example: Do you have any example of rooms that you like?
       areas: I need help with my...
       designer_level: Do you consider yourself an interior design
       areas: Which rooms need help?
@@ -47,6 +47,8 @@ en:
         no_appeals: Please pick your opinion for each appeal
       type_color_name: Type color name
       picker_types_separator: Or
+      add_links: Add your inspiration links
+      upload_button: Upload images
     appleals:
       feminine: Feminine
       masculine: Masculine
@@ -82,7 +84,7 @@ en:
           one: Expect 1 design
           other: Expect %{design_count} designs
         money_back_quarantee: Money back guarantee
-      go_back: Go back
+      go_back: Back
       continue: Continue
       plans:
         budget: Budget

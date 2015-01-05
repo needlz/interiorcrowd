@@ -41,6 +41,9 @@ $ ->
 
   AppealsForm.init()
 
+  inspirationLinksEditor = new InspirationLinksEditor()
+  inspirationLinksEditor.init()
+
   $('.level-block').click ->
     $selectedLevel = $(@)
     newId = $selectedLevel.data('id')
