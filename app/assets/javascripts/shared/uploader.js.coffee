@@ -14,11 +14,13 @@ $.fn.initUploader = (uploadifyOptions) ->
     cancelImg: '/images/cancel.png' #take care that the image is accessible
 
 $.fn.initUploaderWithThumbs = (options) ->
-  thumbsTheme = if options.thumbs.theme is 'new' then RemovableThumbsTheme else DefaultThumbsTheme
   $imageIds = $(options.thumbs.selector)
   $container = $(options.thumbs.container)
-  if thumbsTheme is RemovableThumbsTheme
-    $container.on 'click', '.remove-thumb-button', $imageIds, RemovableThumbsTheme.removeThumb
+  thumbsTheme = if options.thumbs.theme is 'new'
+      new RemovableThumbsTheme($container, $imageIds)
+    else
+      new DefaultThumbsTheme($container, $imageIds)
+  thumbsTheme.init()
 
   @.initUploader(
     $.extend(
@@ -27,10 +29,10 @@ $.fn.initUploaderWithThumbs = (options) ->
         imageUrl = info[0]
         imageId = info[1]
         if options.single
-          thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId, $container, $imageIds)
+          thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
           $imageIds.val(imageId)
         else
-          thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId, $container, $imageIds)
+          thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
           previousIds = ''
           previousIds = $imageIds.val() + ',' if $imageIds.val().length
           $imageIds.val(previousIds + imageId)
@@ -39,33 +41,41 @@ $.fn.initUploaderWithThumbs = (options) ->
     $.extend(options.uploadify, { multi: false }) if options.single
   )
 
-class DefaultThumbsTheme
+class ThumbsTheme
 
-  @thumbForSingleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
-    $img = $thumbsContainer.find('img')
-    $img = $('<img>').appendTo($thumbsContainer) unless $img.length
+  constructor: (@$container, @$imageIds)->
+
+  init: ->
+
+class DefaultThumbsTheme extends ThumbsTheme
+
+  thumbForSingleImageUploader: (imageUrl, imageId) ->
+    $img = @$container.find('img')
+    $img = $('<img>').appendTo(@$container) unless $img.length
     $img.attr('src', imageUrl)
 
-  @thumbForMultipleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
-    $thumbsContainer.append "<img src='#{ imageUrl }' />"
+  thumbForMultipleImageUploader: (imageUrl, imageId) ->
+    @$container.append "<img src='#{ imageUrl }' />"
 
-class RemovableThumbsTheme
+class RemovableThumbsTheme extends ThumbsTheme
 
-  @removeThumb: (event)->
+  init: ->
+    @$container.on 'click', '.remove-thumb-button', @removeThumb
+
+  removeThumb: (event)=>
+    event.preventDefault()
     $thumbContainer = $(event.target).parents('.thumb')
-    $imageIds = event.data
-    imageIds = $imageIds.val().split(',')
+    imageIds = @$imageIds.val().split(',')
     imageId = $thumbContainer.data('id')
     indexOfThumb = imageIds.indexOf(imageId)
     imageIds.splice(indexOfThumb, 1)
-    $imageIds.val(imageIds.join(','))
+    @$imageIds.val(imageIds.join(','))
     $thumbContainer.remove()
-    event.preventDefault()
 
-  @thumbForMultipleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
-    $template = $thumbsContainer.find('.template')
+  thumbForMultipleImageUploader: (imageUrl, imageId) ->
+    $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
     $container.data('id', imageId)
     $container.find('img').attr('src', imageUrl)
-    $thumbsContainer.append $container
+    @$container.append $container
