@@ -14,31 +14,23 @@ $.fn.initUploader = (uploadifyOptions) ->
     cancelImg: '/images/cancel.png' #take care that the image is accessible
 
 $.fn.initUploaderWithThumbs = (options) ->
+  thumbsTheme = if options.thumbs.theme is 'new' then RemovableThumbsTheme else DefaultThumbsTheme
+  $imageIds = $(options.thumbs.selector)
+  $container = $(options.thumbs.container)
+  if thumbsTheme is RemovableThumbsTheme
+    $container.on 'click', '.remove-thumb-button', $imageIds, RemovableThumbsTheme.removeThumb
+
   @.initUploader(
     $.extend(
       onUploadSuccess: (file, data, response) ->
         info = data.split(",")
         imageUrl = info[0]
         imageId = info[1]
-        $imageIds = $(options.thumbs.selector)
         if options.single
-          $container = $('<div class="col-md-3 novice">')
-          $img = $(options.thumbs.container).find('.col-md-3.novice img')
-          $img = $('<img>') unless $img.length
-          $closeButton = $('<a href="#">')
-          $closeButton.append($('<i class="circle3 glyphicon glyphicon-remove pull-right glyphic-round">'))
-          $img.attr('src', imageUrl)
-
-          $container.append($img)
-          $container.append($closeButton)
+          thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId, $container, $imageIds)
           $imageIds.val(imageId)
         else
-          $container = $('<div class="col-md-3 novice">')
-          $container.append $("<img src='#{ imageUrl }' />")
-          $closeButton = $('<a href="#">')
-          $closeButton.append($('<i class="circle3 glyphicon glyphicon-remove pull-right glyphic-round">'))
-          $container.append $closeButton
-          $(options.thumbs.container).append $container
+          thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId, $container, $imageIds)
           previousIds = ''
           previousIds = $imageIds.val() + ',' if $imageIds.val().length
           $imageIds.val(previousIds + imageId)
@@ -46,3 +38,34 @@ $.fn.initUploaderWithThumbs = (options) ->
     )
     $.extend(options.uploadify, { multi: false }) if options.single
   )
+
+class DefaultThumbsTheme
+
+  @thumbForSingleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
+    $img = $thumbsContainer.find('img')
+    $img = $('<img>').appendTo($thumbsContainer) unless $img.length
+    $img.attr('src', imageUrl)
+
+  @thumbForMultipleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
+    $thumbsContainer.append "<img src='#{ imageUrl }' />"
+
+class RemovableThumbsTheme
+
+  @removeThumb: (event)->
+    $thumbContainer = $(event.target).parents('.thumb')
+    $imageIds = event.data
+    imageIds = $imageIds.val().split(',')
+    imageId = $thumbContainer.data('id')
+    indexOfThumb = imageIds.indexOf(imageId)
+    imageIds.splice(indexOfThumb, 1)
+    $imageIds.val(imageIds.join(','))
+    $thumbContainer.remove()
+    event.preventDefault()
+
+  @thumbForMultipleImageUploader: (imageUrl, imageId, $thumbsContainer, $imageIds) ->
+    $template = $thumbsContainer.find('.template')
+    $container = $template.clone()
+    $container.removeClass('template').addClass('thumb')
+    $container.data('id', imageId)
+    $container.find('img').attr('src', imageUrl)
+    $thumbsContainer.append $container

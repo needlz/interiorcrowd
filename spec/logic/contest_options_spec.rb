@@ -32,4 +32,11 @@ RSpec.describe ContestOptions do
     test_options(options, contest_options_source)
   end
 
+  it 'removes blank example links' do
+    params = contest_options_source.deep_dup
+    params[:design_style][:ex_links] = params[:design_style][:ex_links] + ['', nil]
+    options = ContestOptions.new(params)
+    test_options(options, contest_options_source)
+  end
+
 end

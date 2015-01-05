@@ -42,4 +42,3 @@ class @InspirationLinksEditor
 
     lastLink = @links().find('.link:last-child')
     lastLink.find('.add-button').show()
-    lastLink.find('.remove-button').hide()

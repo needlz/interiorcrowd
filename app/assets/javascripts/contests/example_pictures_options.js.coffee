@@ -5,6 +5,7 @@ class @ExamplesUploader
       thumbs:
         container: '#image_display'
         selector: '#design_style_image_id'
+        theme: 'new'
       uploadify:
         buttonText: I18n.upload_button
         removeTimeout: 5

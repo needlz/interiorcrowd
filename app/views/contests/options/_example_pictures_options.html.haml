@@ -1,15 +1,16 @@
-.example-pictures
-  .col-md-12{:style => "border-bottom:1px solid #e1e1e1;height:1px; margin-top: 20px;"}
-  .col-md-12.no-x-padding
-    %h1{:style => "color:#231f20;padding-bottom: 25px;margin-top: 70px;font-size:24px;"}= t('contests.titles.example')
-  #image_display.col-md-12{:style => " border: 1px dashed black; height:315px;padding-top: 40px;"}
-    - @contest_view.examples.try(:each) do |path|
-      .col-md-3.novice
-        %img{ src: path }/
-        %a{:href => "#"}
-          %i.circle3.glyphicon.glyphicon-remove.pull-right.glyphic-round
-  .col-md-6.no-x-padding{:style => "margin-top:40px;"}
-    %input#file_input{:name => "", :type => "file"}
-  %input#design_style_image_id{name: "design_style[document_id]",
-    type: "hidden",
-    value: @contest_view.example_ids.try(:join, ',') }
+.design-style-options
+  .example-pictures
+    .col-md-12.border
+    .col-md-12.no-x-padding.title
+      %h1= t('contests.titles.example')
+    #image_display.col-md-12
+      .col-md-3.novice.template
+        = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+      - @contest_view.examples.try(:each) do |path|
+        .col-md-3.novice.thumb
+          = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+    .col-md-6.no-x-padding.file-input-container
+      %input#file_input{:name => "", :type => "file"}
+    %input#design_style_image_id{name: "design_style[document_id]",
+      type: "hidden",
+      value: @contest_view.example_ids.try(:join, ',') }

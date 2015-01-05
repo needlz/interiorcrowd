@@ -190,6 +190,21 @@
   top: 4px;
 }
 
+.footer-buttons {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .back-button {
+    padding: 9px 5px;
+    font-size: 26px;
+  }
+
+  .continue-button {
+    padding: 9px 5px;
+    font-size: 26px;
+  }
+}
+
 .design-style-options {
   .appeal-options{
     .header {
@@ -216,23 +231,23 @@
 
       .telluswhy {
         .title {
-          font-size:24px;
-
-          .optional {
-            color:#dfdfdf;
-          }
+          font-size: 24px;
         }
 
-        textarea {
-          resize: none;
-          height: 48px;
+        .optional {
+          color:#dfdfdf;
         }
       }
 
-      .border {
-        border-bottom: 1px solid #e1e1e1;
-        height: 1px;
+      textarea {
+        resize: none;
+        height: 48px;
       }
+    }
+
+    .border {
+      border-bottom: 1px solid #e1e1e1;
+      height: 1px;
     }
   }
 
@@ -344,6 +359,59 @@
   .fav-color {
     margin-right: 20px;
     height: 100%;
+  }
+
+  .template {
+    display: none;
+  }
+
+  .links-options {
+    .title {
+      padding-bottom: 40px;
+
+      span {
+        font-size: 24px;
+      }
+    }
+
+    .bottom-border {
+      border-bottom: 1px solid #e1e1e1;
+      height: 1px;
+      padding-top: 29px;
+    }
+  }
+
+  .links {
+    input {
+      height: 63px;
+    }
+  }
+
+  .example-pictures {
+    .border {
+      border-bottom: 1px solid #e1e1e1;
+      height: 1px;
+      margin-top: 20px;
+    }
+
+    .title {
+      h1 {
+        color: #231f20;
+        padding-bottom: 25px;
+        margin-top: 70px;
+        font-size: 24px;
+      }
+    }
+
+    #image_display {
+      border: 1px dashed black;
+      height: 315px;
+      padding-top: 40px;
+    }
+
+    .file-input-container {
+      margin-top: 40px;
+    }
   }
 }
 

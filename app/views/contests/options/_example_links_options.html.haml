@@ -1,15 +1,17 @@
-.col-md-12.no-x-padding{:style => "padding-bottom: 40px;"}
-  %span{:style => "font-size:24px;"}
-    %b= t('contests.design_style.add_links')
-.clearfix
+.design-style-options
+  .links-options
+    .col-md-12.no-x-padding.title
+      %span
+        %b= t('contests.design_style.add_links')
+    .clearfix
 
-.link-template{ style: 'display: none;' }
-  .link
-    = render partial: 'contests/options/example_link', locals: { value: '', name: '' }
+    .link-template.template
+      .link
+        = render partial: 'contests/options/example_link', locals: { value: '', name: '' }
 
-.links
-  - @contest_view.links.try(:each) do |url|
-    .link
-      = render partial: 'contests/options/example_link', locals: { value: url, name: 'design_style[ex_links][]' }
+    .links
+      - @contest_view.links.try(:each) do |url|
+        .link
+          = render partial: 'contests/options/example_link', locals: { value: url, name: 'design_style[ex_links][]' }
 
-.col-md-12{:style => "border-bottom:1px solid #e1e1e1;height:1px;padding-top:29px;"}
+    .col-md-12.bottom-border

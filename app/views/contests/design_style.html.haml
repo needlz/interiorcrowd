@@ -36,15 +36,15 @@
       = render partial: 'contests/options/undesirable_colors_options'
       = render partial: 'contests/options/example_pictures_options'
       = render partial: 'contests/options/example_links_options'
-      .col-md-12.no-x-padding.text-center{:style => "margin-top: 50px; margin-bottom: 50px;"}
+      .col-md-12.no-x-padding.text-center.footer-buttons
         .bedr.col-md-offset-3.col-md-2
           %a{href: design_brief_contests_path}
-            %div{:style => "padding: 9px 5px;font-size: 26px;"}
+            %div.back-button
               %b= t('contests.creation.go_back')
         .col-md-1
         .bedr.col-md-2.continue
           %a.order{:href => "#"}
-            %div{:style => "padding: 9px 5px;font-size: 26px;"}
+            %div.continue-button
               %b= t('contests.creation.continue')
 
 = render partial: 'contests/contest_creation_page'
