@@ -58,12 +58,12 @@ class Image < ActiveRecord::Base
     end
   end
 
-  def thumbnail_json
+  def thumbnail
     {
-        "name" => read_attribute(:image_file_name),
-        "size" => read_attribute(:image_file_size),
-        "url" => image.url(:medium),
-        'id' => id
+      name: image_file_name,
+      size: image_file_size,
+      url: image.url(:medium),
+      id: id
     }
   end
 

@@ -1,35 +1,57 @@
-$.fn.initUploader = (uploadifyOptions)->
-  @.fileupload uploadifyOptions
-
+$.fn.initUploader = (options)->
+  @.fileupload(options)
 
 $.fn.initUploaderWithThumbs = (options) ->
-  $imageIds = $(options.thumbs.selector)
-  $container = $(options.thumbs.container)
-  thumbsTheme = if options.thumbs.theme is 'new'
-      new RemovableThumbsTheme($container, $imageIds)
-    else
-      new DefaultThumbsTheme($container, $imageIds)
-  thumbsTheme.init()
+  uploader = new Uploader($(@), options)
+  uploader.init()
 
-  @.initUploader(
+class Uploader
+
+  constructor: (@$input, @options)->
+
+  init: ()->
+    @$container = $(@options.thumbs.container)
+    @$imageIds = $(@options.thumbs.selector)
+    @thumbsTheme = if @options.thumbs.theme is 'new'
+        new RemovableThumbsTheme(@$container, @$imageIds)
+      else
+        new DefaultThumbsTheme(@$container, @$imageIds)
+    @thumbsTheme.init()
+
+    @bindUploadScript()
+
+
+  bindUploadScript: ->
+    uploadOptions = {}
     $.extend(
+      uploadOptions
       dataType: 'json'
       url: uploadifyUploader
-      done: (e, data) ->
-        $.each data.result.files, (index, file) ->
-          imageUrl = file.url
-          imageId = file.id
-          if options.single
-            thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
-            $imageIds.val(imageId)
-          else
-            thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
-            previousIds = ''
-            previousIds = $imageIds.val() + ',' if $imageIds.val().length
-            $imageIds.val(previousIds + imageId)
-      options.uploadify
+      type: 'POST'
+      done: @onUploaded
+      @options.uploadify
     )
-  )
+
+    @$input.initUploader(
+      add: (event, data)=>
+        # script uses native form of input by default, that causes side effects
+        $inputWithoutForm = @$input.clone()
+        $inputWithoutForm.fileupload(uploadOptions)
+        $inputWithoutForm.fileupload('add', { files: data.files })
+    )
+
+  onUploaded: (event, data) =>
+    $.each data.result.files, (index, file) =>
+      imageUrl = file.url
+      imageId = file.id
+      if @options.single
+        @thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
+        @$imageIds.val(imageId)
+      else
+        @thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
+        previousIds = ''
+        previousIds = @$imageIds.val() + ',' if @$imageIds.val().length
+        @$imageIds.val(previousIds + imageId)
 
 class ThumbsTheme
 

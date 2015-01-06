@@ -3,7 +3,7 @@ class ImagesController < ApplicationController
   def create
     @image = Image.new(params[:image])
     if @image.save
-      render json: { files: [@image.thumbnail_json] }
+      render json: { files: [@image.thumbnail] }
     else
       render json: { msg: "Upload Failed", error: @image.errors }
     end

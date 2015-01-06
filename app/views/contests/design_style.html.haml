@@ -10,9 +10,9 @@
   = stylesheet_link_tag 'lib/slider'
   = stylesheet_link_tag 'contests/design_style'
   = render partial: 'shared/setup_uploadify'
+  = render partial: 'shared/setup_colors_table'
   :javascript
     window.appealsCount = #{ Appeal.count }
-    window.colorTableValues = #{ color_table_values.to_json }
     window.I18n = #{ translations_to_json(['contests', 'design_style']) }
 
 - content_for :page_content do

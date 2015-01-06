@@ -8,10 +8,10 @@
   = javascript_include_tag 'contests/undesirable_colors_options'
   = javascript_include_tag 'contests/area_options'
   = render partial: 'shared/setup_uploadify'
+  = render partial: 'shared/setup_colors_table'
 
   :javascript
     I18n = #{ translations_to_json('client_center') }
-    window.colorTableValues = #{ color_table_values.to_json }
 
 - content_for :client_center_content do
   .contest.brief{ data: { id: @contest.id } }

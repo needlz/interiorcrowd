@@ -10,8 +10,7 @@
         .col-md-3.novice.thumb
           = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
     .col-md-6.no-x-padding.file-input-container
-      %button.btn3.btn3-confirm.upload-button{:style => "margin-bottom: 38px;", :type => "button"} Upload images
-
+      %button.btn3.btn3-confirm.upload-button{ type: 'button' }= t('contests.design_style.upload_button')
       %input#file_input{ name: "image[image]", type: 'file', style: 'display: none', multiple: 'multiple' }
     %input#design_style_image_id{name: "design_style[document_id]",
       type: "hidden",
