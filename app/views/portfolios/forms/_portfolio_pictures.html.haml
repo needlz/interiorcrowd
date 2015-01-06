@@ -3,7 +3,7 @@
 %span#portfolio_pictures_preview.portfolio-thumbs
   - portfolio.pictures.try(:map) do |picture|
     %img{ src: picture.image.url }
-%input#portfolio_pictures{ name: '', type: 'file' }
+%input#portfolio_pictures{ name: 'image[image]', type: 'file', multiple: 'multiple' }
 %input#portfolio_pictures_ids{ name: "portfolio[picture_ids]",
   type: "hidden",
   value: portfolio.pictures.try(:pluck, :id).try(:join, ',') }

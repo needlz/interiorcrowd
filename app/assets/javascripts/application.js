@@ -16,5 +16,7 @@
 //= require bootstrap.min
 //= require index-slider
 //= require jquery.mmenu.min.all
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require_tree ./lib
 //= require_tree ./shared

@@ -1,7 +1,5 @@
 - content_for :head do
-  = javascript_include_tag  'jquery.uploadify'
   = javascript_include_tag 'designers/lookbook'
-  = stylesheet_link_tag  'uploadify'
   = render partial: 'shared/setup_uploadify'
 #in_pricing
   .container
@@ -33,5 +31,3 @@
                 %center
                   .col-sm-4.col-sm-offset-4
                     %a.order.continue{href: "#", style: "width:68%"} Preview And Save
-
-

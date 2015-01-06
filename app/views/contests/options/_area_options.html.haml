@@ -1,6 +1,5 @@
 :javascript
   window.areas = #{ @creation_wizard.available_areas.to_json }
-  I18n = #{translations_to_json(['contests', 'creation']) }
 
 .rooms.text-package.text-center-sm.text-center-xs
   %h1.title #{ t('contests.titles.areas') }
@@ -17,4 +16,3 @@
   .clearfix
   = hidden_field_tag('design_brief[design_area]', @contest_view.design_area.try(:id))
   %span#err_design_area.text-error
-

@@ -57,4 +57,14 @@ class Image < ActiveRecord::Base
       picture.update_attributes!(kind: kind, portfolio_id: portfolio.id)
     end
   end
+
+  def thumbnail
+    {
+      name: image_file_name,
+      size: image_file_size,
+      url: image.url(:medium),
+      id: id
+    }
+  end
+
 end

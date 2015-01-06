@@ -1,8 +1,6 @@
 - content_for :head do
   = javascript_include_tag 'designer_center_requests/new'
-  = javascript_include_tag  'jquery.uploadify'
   = javascript_include_tag 'designers/lookbook'
-  = stylesheet_link_tag  'uploadify'
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json(['designer_center', 'respond']) }

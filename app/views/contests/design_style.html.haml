@@ -1,6 +1,5 @@
 = content_for :head do
   = javascript_include_tag 'bootstrap-slider'
-  = javascript_include_tag 'jquery.uploadify'
   = javascript_include_tag 'contests/design_style'
   = javascript_include_tag 'contests/example_pictures_options'
   = javascript_include_tag 'shared/color_selector'
@@ -9,12 +8,11 @@
   = javascript_include_tag 'contests/inspiration_links'
 
   = stylesheet_link_tag 'lib/slider'
-  = stylesheet_link_tag 'uploadify'
   = stylesheet_link_tag 'contests/design_style'
   = render partial: 'shared/setup_uploadify'
+  = render partial: 'shared/setup_colors_table'
   :javascript
     window.appealsCount = #{ Appeal.count }
-    window.colorTableValues = #{ color_table_values.to_json }
     window.I18n = #{ translations_to_json(['contests', 'design_style']) }
 
 - content_for :page_content do
