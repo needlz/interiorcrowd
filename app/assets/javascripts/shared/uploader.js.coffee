@@ -1,17 +1,6 @@
-$.fn.initUploader = (uploadifyOptions) ->
-  @.uploadify
-    uploader: uploadifyUploader
-    swf: '/uploadify.swf'
-    buttonText: uploadifyOptions.buttonText
-    fileSizeLimit: uploadifyFileSizeLimit
-    fileTypeExts: '*.png;*.jpg;*.tif'
-    uploadLimit: uploadifyOptions.uploadLimit
-    fileObjName: 'photo'
-    auto: true
-    removeTimeout: uploadifyOptions.removeTimeout
-    onUploadSuccess: uploadifyOptions.onUploadSuccess
-    formData: uploadifyFormData
-    cancelImg: '/images/cancel.png' #take care that the image is accessible
+$.fn.initUploader = (uploadifyOptions)->
+  @.fileupload uploadifyOptions
+
 
 $.fn.initUploaderWithThumbs = (options) ->
   $imageIds = $(options.thumbs.selector)
@@ -24,21 +13,22 @@ $.fn.initUploaderWithThumbs = (options) ->
 
   @.initUploader(
     $.extend(
-      onUploadSuccess: (file, data, response) ->
-        info = data.split(",")
-        imageUrl = info[0]
-        imageId = info[1]
-        if options.single
-          thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
-          $imageIds.val(imageId)
-        else
-          thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
-          previousIds = ''
-          previousIds = $imageIds.val() + ',' if $imageIds.val().length
-          $imageIds.val(previousIds + imageId)
+      dataType: 'json'
+      url: uploadifyUploader
+      done: (e, data) ->
+        $.each data.result.files, (index, file) ->
+          imageUrl = file.url
+          imageId = file.id
+          if options.single
+            thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
+            $imageIds.val(imageId)
+          else
+            thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
+            previousIds = ''
+            previousIds = $imageIds.val() + ',' if $imageIds.val().length
+            $imageIds.val(previousIds + imageId)
       options.uploadify
     )
-    $.extend(options.uploadify, { multi: false }) if options.single
   )
 
 class ThumbsTheme

@@ -1,16 +1,11 @@
 class ImagesController < ApplicationController
     
   def create
-    params[:image] = {}
-    params[:image][:image] = params[:photo]
-    params.require(:image).permit(:image)
-
     @image = Image.new(params[:image])
-
     if @image.save
-        render json:  "#{@image.image.url(:medium)},#{@image.id}"
+      render json: { files: [@image.thumbnail_json] }
     else
-        render json: {msg: "Upload Failed", error: @image.errors}
+      render json: { msg: "Upload Failed", error: @image.errors }
     end
   end
 
@@ -21,5 +16,3 @@ class ImagesController < ApplicationController
   end
 
 end
-
-

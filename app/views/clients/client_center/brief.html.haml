@@ -2,15 +2,12 @@
   = javascript_include_tag 'shared/inline_editor'
   = javascript_include_tag 'clients/brief'
   = javascript_include_tag 'shared/color_selector'
-  = javascript_include_tag  'jquery.uploadify'
   = javascript_include_tag 'contests/space_pictures_options'
   = javascript_include_tag 'contests/example_pictures_options'
   = javascript_include_tag 'contests/desirable_colors_options'
   = javascript_include_tag 'contests/undesirable_colors_options'
   = javascript_include_tag 'contests/area_options'
   = render partial: 'shared/setup_uploadify'
-
-  = stylesheet_link_tag  'uploadify'
 
   :javascript
     I18n = #{ translations_to_json('client_center') }

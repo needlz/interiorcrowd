@@ -6,7 +6,6 @@ gem 'rails', '4.1.8'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
-gem 'uploadify-rails'
 gem "paperclip", "~> 3.0"
 gem 'mime-types'
 gem "will_paginate", "~> 3.0.4"
@@ -39,6 +38,7 @@ gem 'sprockets', '2.11.0'
 gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
+gem 'jquery-fileupload-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
