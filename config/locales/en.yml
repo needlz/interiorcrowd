@@ -82,6 +82,9 @@ en:
         prefer_to_email_or_text: Prefer to text or e-mail it to us?
         text_to: Text to 012-345-6789 and include your e-mail address
         email_to: E-mail to us at pictures@interiorcrowd.com
+      dimensions:
+        title: Add dimensions of your space.
+        hint: While we love accuracy, we know that you might not have this info right now, so feel free to approximate and update later.
     creation:
       errors:
         required_data_missing: Please fill the required info.

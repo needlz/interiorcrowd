@@ -8,8 +8,9 @@
         Tell us information about your room. Show us pictures of your space to give
         %br/
         more direction to the designers.
-    = render partial: 'contests/options/space_pictures_options'
-    = render partial: 'contests/options/space_dimensions_options'
+    .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
+      = render partial: 'contests/options/space_pictures_options'
+      = render partial: 'contests/options/space_dimensions_options'
     = render partial: 'contests/options/budget_options'
     = render partial: 'contests/options/feedback_options'
     .clearfix.formbuttons

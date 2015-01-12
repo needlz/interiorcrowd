@@ -478,4 +478,36 @@
       line-height: 25px;
     }
   }
+
+  .dimensions {
+    .title {
+      font-size: 20px;
+      color: #231f20;
+    }
+
+    .hint {
+      font-size: 16px;
+    }
+
+    .dimensions-margin {
+      margin-bottom: 15px;
+    }
+
+    .dimension {
+      margin-top: 25px;
+
+      input {
+        height: 40px;
+        min-width: 170px;
+      }
+
+      .text-error {
+        padding-left: 15px;
+      }
+    }
+  }
+}
+
+.rooms-conditional-options {
+  padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;
 }
