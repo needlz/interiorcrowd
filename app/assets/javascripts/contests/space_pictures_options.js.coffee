@@ -12,6 +12,8 @@ class @SpacePicturesUploader
         selector: '#design_space_image_id'
         theme: 'new'
       uploadify:
-        buttonText: "Upload"
-        removeTimeout: 5
+        start: (event)=>
+          $(@uploadButtonSelector).text(I18n.uploading)
+        stop: (event)=>
+          $(@uploadButtonSelector).text(I18n.upload_button)
     )

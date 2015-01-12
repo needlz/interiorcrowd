@@ -73,12 +73,15 @@ en:
       width: Width
       height: Height (Optional)
     space:
+      title: Project Detail
+      description: Tell us information about your room. Show us pictures of your space to give more direction to the designers.
       photos:
         title: Take photos of your room and upload to us.
         image_requirements: At least 4 images with back to each coner. Images must be smaller than 10M.
         see_more: See more guideline
         hint: Please stand with your back in each corner of the room and take a picture.
         upload_button: Upload images
+        uploading: Uploading...
         prefer_to_email_or_text: Prefer to text or e-mail it to us?
         text_to: Text to 012-345-6789 and include your e-mail address
         email_to: E-mail to us at pictures@interiorcrowd.com
@@ -88,6 +91,10 @@ en:
       budget:
         title: What is your design budget for materials?
         hint: 'Note: This does not include any design fees'
+      other_feedback:
+        title: Other feedback or instructions?
+        placeholder: Leave a comment...
+        send: Send
     creation:
       errors:
         required_data_missing: Please fill the required info.

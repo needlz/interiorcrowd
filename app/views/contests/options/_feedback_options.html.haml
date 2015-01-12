@@ -1,13 +1,10 @@
-.row.step-row
-  %label Other feedback or instructions?
-.row
-  .col-sm-8.col-sm-offset-1
-
-.col-md-12.no-padding-left
-  %h1{:style => "margin-top: 34px; margin-bottom: 0;"} Other feedback or instructions?
-.clearfix
-.col-md-12.no-padding-left.no-padding-right
-  %textarea{ placeholder: "Leave a comment...",
-    style: "width: 100%; height:355px; padding: 15px; font-size: 24px; margin-top: 20px; border: 5px solid #000; border-color:#e1e1e1; border-radius: 10px 10px 0px 0px; resize:none;", :type => "text" }
-.clearfix
-%button.btn5.btn5-confirm{:style => "height:98px; width:100%;border-top:0px;border-radius: 0px 0px 10px 10px;", type: "button"} Send
+.space-options
+  .feedback
+    .col-md-12.no-padding-left
+      %h1.title= t('contests.space.other_feedback.title')
+    .clearfix
+    .col-md-12.no-padding-left.no-padding-right
+      %textarea{ placeholder: t('contests.space.other_feedback.placeholder'),
+        type: 'text' }
+    .clearfix
+    %button.btn5.btn5-confirm.send-button{ type: 'button' }= t('contests.space.other_feedback.send')

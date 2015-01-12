@@ -5,24 +5,29 @@
 
   = render partial: 'shared/setup_uploadify'
 
+  :javascript
+    I18n = #{ translations_to_json(['contests', 'space', 'photos']) }
+
 - content_for :page_content do
   = render partial: 'home/msg'
-  = form_tag save_design_space_contests_path, { id: "design_space", method: "post"} do
+  #design_space
+    = form_tag save_design_space_contests_path, { id: "design_space", method: "post"} do
 
-    .packages.text-package.text-center-xs.text-center-sm
-      %h1 Project Detail
-      %span{:style => "font-size: 16px;color:#000000;"}
-        Tell us information about your room. Show us pictures of your space to give
-        %br/
-        more direction to the designers.
-    .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
-      = render partial: 'contests/options/space_pictures_options'
-      = render partial: 'contests/options/space_dimensions_options'
-      = render partial: 'contests/options/budget_options'
-      = render partial: 'contests/options/feedback_options'
-    .clearfix.formbuttons
-      .col-sm-10
-        %a.order{ href: design_style_contests_path}= t('contests.creation.go_back')
-        .pull-right
-          %a.order.continue{ href: "#"}= t('contests.creation.continue')
+      .packages.text-package.text-center-xs.text-center-sm.title
+        %h1= t('contests.space.title')
+        .col-md-6.description
+          %span= t('contests.space.description')
+      .clearfix
+      .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
+        = render partial: 'contests/options/have_pictures_or_dimension'
+        = render partial: 'contests/options/space_pictures_options'
+        = render partial: 'contests/options/space_dimensions_options'
+        = render partial: 'contests/options/budget_options'
+        = render partial: 'contests/options/feedback_options'
+      .clearfix.formbuttons
+        .col-sm-10
+          %a.order{ href: design_style_contests_path}= t('contests.creation.go_back')
+          .pull-right
+            %a.order.continue{ href: "#"}= t('contests.creation.continue')
+
 = render partial: 'contests/contest_creation_page'
