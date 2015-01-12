@@ -2,9 +2,12 @@
   %label Other feedback or instructions?
 .row
   .col-sm-8.col-sm-offset-1
-    = text_area_tag "design_space[feedback]",
-        @contest_view.feedback,
-        row: "50",
-        style: "width:98%",
-        column: "20",
-        class: "form-control"
+
+.col-md-12.no-padding-left
+  %h1{:style => "margin-top: 34px; margin-bottom: 0;"} Other feedback or instructions?
+.clearfix
+.col-md-12.no-padding-left.no-padding-right
+  %textarea{ placeholder: "Leave a comment...",
+    style: "width: 100%; height:355px; padding: 15px; font-size: 24px; margin-top: 20px; border: 5px solid #000; border-color:#e1e1e1; border-radius: 10px 10px 0px 0px; resize:none;", :type => "text" }
+.clearfix
+%button.btn5.btn5-confirm{:style => "height:98px; width:100%;border-top:0px;border-radius: 0px 0px 10px 10px;", type: "button"} Send

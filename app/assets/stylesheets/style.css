@@ -641,7 +641,7 @@ input.form-control {
 
 .btn4{
     background: none repeat scroll 0 0 #fff;
-    border: 1px solid #000;
+    border: 0.5px solid #000;
     border-radius: 0;
     font-size: 22px;
     font-weight: 700;
@@ -654,7 +654,7 @@ input.form-control {
     font-size: 22px;
     font-weight: 700;
     background: #fff;
-    border: 1px solid #000;
+    border: 0.5px solid #000;
     border-radius: 0;
 }
 
@@ -703,3 +703,151 @@ input.form-control {
 .single-color-line:hover { background: #E5E5E5; }
 
 .glyphic-del {right: 0; cursor: pointer;}
+
+.a-under{
+    color:#231f20 !important;
+}
+
+.btn5{
+    background: none repeat scroll 0 0 #fff;
+    border: 5px solid #e1e1e1;
+    border-radius: 0;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 15px 55px;
+}
+.btn5-confirm {
+
+    padding: 15px 50px;
+    font-size: 22px;
+    font-weight: 700;
+    background: #fff;
+    border: 5px solid #e1e1e1;
+    border-radius: 0;
+}
+
+.btn5-confirm:hover {
+
+    background: #000;
+    color: #e1e1e1;
+}
+.dreamloft{
+    font-size:30px !important;
+    margin-top:20px;
+    resize: none;
+    height:50px !important;
+}
+
+.btn6{
+    background: none repeat scroll 0 0 #dbdbdb;
+    border: 5px solid #dbdbdb;
+    border-radius: 0;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 15px 55px;
+}
+.btn6-confirm {
+
+    padding: 15px 50px;
+    font-size: 22px;
+    font-weight: 700;
+    background: #9B9B9B;
+    border: 0;
+}
+
+.btn-select{
+    position:absolute;
+    bottom:0;
+    left:100px;
+    border-radius: 10px 10px 10px 10px;
+    margin-bottom: 38px;
+    color:#ffffff;
+}
+
+.novice { margin-bottom: 5px; }
+
+.first-block-quick > div {
+    transition: all .2s ease-in-out;
+    opacity: 0.7;
+    padding-left:25px;
+    padding-right:25px;
+}
+
+.first-block-quick > div:hover{
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.btn-selector-big {
+    padding: 15px;
+    font-size: 22px;
+    border: 1px solid #000;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    color: #8B8B8B;
+    font-style: italic;
+}
+
+.dropdown-menu>li>a {
+    padding: 15px 20px;
+    font-size: 22px;
+}
+
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus {
+
+    background-color: #E2E2E2;
+    background-image: none;
+}
+
+.bootstrap-select.btn-group .btn .caret {
+
+    background: url('./img/down-caret.png') 10px 22px no-repeat;
+    width: 42px;
+    height: 100%;
+    border: 0;
+    top: 2px;
+    border-left: 1px solid #000;
+}
+
+
+/*  - */
+
+.btn7{
+    background: none repeat scroll 0 0 #f6f6f6;
+    border: 5px solid #dbdbdb;
+    padding: 12px 18px;
+}
+
+.circle-big{
+    width:157px;
+    height:157px;
+    border-radius:50%;
+    font-size:20px;
+    /*line-height:157px;*/
+    text-align:center;
+    border:1px solid black;
+    margin-bottom:27px;
+    padding-top: 65px;
+}
+
+.link-underline{
+    color:#000000;
+    text-decoration: underline;
+}
+
+.profile-card {
+    background:#f6f6f6;
+    padding:20px;
+
+}
+
+.profile-card:nth-child(4) {margin-top:40px;}
+.profile-card:nth-child(5) {margin-top:40px;}
+
+.profile-card:nth-child(2) {border-right: 5px solid #fff;}
+.profile-card:nth-child(3) {border-left: 5px solid #fff;}
+
+.profile-card:nth-child(4) {border-right: 5px solid #fff;}
+.profile-card:nth-child(5) {border-left: 5px solid #fff;}

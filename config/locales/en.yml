@@ -50,7 +50,8 @@ en:
       add_links: Add your inspiration links
       upload_button: Upload images
       uploading: Uploading...
-    appleals:
+
+    appeals:
       feminine: Feminine
       masculine: Masculine
       elegant: Elegant
@@ -71,6 +72,16 @@ en:
       length: Length
       width: Width
       height: Height (Optional)
+    space:
+      photos:
+        title: Take photos of your room and upload to us.
+        image_requirements: At least 4 images with back to each coner. Images must be smaller than 10M.
+        see_more: See more guideline
+        hint: Please stand with your back in each corner of the room and take a picture.
+        upload_button: Upload images
+        prefer_to_email_or_text: Prefer to text or e-mail it to us?
+        text_to: Text to 012-345-6789 and include your e-mail address
+        email_to: E-mail to us at pictures@interiorcrowd.com
     creation:
       errors:
         required_data_missing: Please fill the required info.

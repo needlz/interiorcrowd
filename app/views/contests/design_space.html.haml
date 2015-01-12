@@ -1,15 +1,22 @@
 - content_for :page_content do
-  = render :partial => 'home/msg'
-  = form_tag save_design_space_contests_path, {:id => "design_space", :method => "post"} do
+  = render partial: 'home/msg'
+  = form_tag save_design_space_contests_path, { id: "design_space", method: "post"} do
+
+    .packages.text-package.text-center-xs.text-center-sm
+      %h1 Project Detail
+      %span{:style => "font-size: 16px;color:#000000;"}
+        Tell us information about your room. Show us pictures of your space to give
+        %br/
+        more direction to the designers.
     = render partial: 'contests/options/space_pictures_options'
     = render partial: 'contests/options/space_dimensions_options'
     = render partial: 'contests/options/budget_options'
     = render partial: 'contests/options/feedback_options'
     .clearfix.formbuttons
       .col-sm-10
-        %a.order{:href => design_style_contests_path}= t('contests.creation.go_back')
+        %a.order{ href: design_style_contests_path}= t('contests.creation.go_back')
         .pull-right
-          %a.order.continue{:href => "#"}= t('contests.creation.continue')
+          %a.order.continue{ href: "#"}= t('contests.creation.continue')
 = render partial: 'contests/contest_creation_page'
 
 = content_for :head do

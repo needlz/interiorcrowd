@@ -5,3 +5,21 @@
     = select_tag "design_space[f_budget]",
         options_for_select(@creation_wizard.budget_options, @budget_option),
         {class: "form-control budget-control"}
+
+.col-md-12.no-padding-left{:style => "margin-bottom: 20px;"}
+  %h1{:style => "margin-top: 34px; margin-bottom: 0;"} What is your design budget for materials?
+  %span{:style => "font-size:14px;color:#000000;"}
+    %i Note: This does not include any design fees
+.clearfix
+%select.selectpicker
+  %option{:disabled => "disabled", :selected => "selected", :value => ""} Budget:
+  %option $0 - $200
+  %option $201 - $500
+  %option $501 - $1000
+  %option $1001 - $1500
+  %option $1501 - $2500
+  %option $2501 - $3500
+  %option $3501 - $5000
+  %option $5001 - $7500
+  %option $7501 - $10000
+  %option $10000 +

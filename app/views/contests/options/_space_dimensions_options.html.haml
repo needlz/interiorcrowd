@@ -5,3 +5,48 @@
     = render partial: 'contests/options/dimension_of_space_row',
         collection: @contest_view.dimensions,
         as: :dimension
+
+.col-md-12.no-padding-left
+  %h1{:style => "font-size:20px;color:#231f20;"} Add dimensions of your space.
+  %span{:style => "font-size:16px;"} While we love accuracy, we know that you might not have this info right now, so feel free to approximate and update later.
+.clearfix
+.col-md-12.no-x-padding{:style => "margin-top: 40px;"}
+  .col-md-2.no-x-padding
+    %span{:style => "font-size:20px;"} Length
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-1
+    %span{:style => "font-size:20px;"} Feet
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-4
+    %span{:style => "font-size:20px;"} Inches
+.col-md-12.no-x-padding{:style => "margin-top: 25px;"}
+  .col-md-2.no-padding-left
+    %span{:style => "font-size:20px;"} Width
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-1
+    %span{:style => "font-size:20px;"} Feet
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-4
+    %span{:style => "font-size:20px;"} Inches
+.col-md-12.no-x-padding{:style => "margin-top: 25px;"}
+  .col-md-2.no-padding-left
+    %span{:style => "font-size:20px;"} Height
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-1
+    %span{:style => "font-size:20px;"} Feet
+  .col-md-2
+    .form-group
+      %input.form-control{:style => "height:40px;min-width:170px;"}/
+  .col-md-4
+    %span{:style => "font-size:20px;"} Inches
+.clearfix

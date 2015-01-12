@@ -79,7 +79,7 @@ class AppealScale
   end
 
   def name(key)
-    I18n.t "contests.appleals.#{ key.to_s }"
+    I18n.t "contests.appeals.#{ key.to_s }"
   end
 
 end
