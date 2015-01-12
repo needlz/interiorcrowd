@@ -10,24 +10,30 @@
 
 - content_for :page_content do
   = render partial: 'home/msg'
-  #design_space
-    = form_tag save_design_space_contests_path, { id: "design_space", method: "post"} do
+  = form_tag save_design_space_contests_path, { id: 'design_space', method: 'post' } do
 
-      .packages.text-package.text-center-xs.text-center-sm.title
-        %h1= t('contests.space.title')
-        .col-md-6.description
-          %span= t('contests.space.description')
-      .clearfix
-      .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
-        = render partial: 'contests/options/have_pictures_or_dimension'
+    .packages.text-package.text-center-xs.text-center-sm.title
+      %h1= t('contests.space.title')
+      .col-md-6.description
+        %span= t('contests.space.description')
+    .clearfix
+    .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
+      = render partial: 'contests/options/have_pictures_or_dimension'
+      .space-view-details
         = render partial: 'contests/options/space_pictures_options'
         = render partial: 'contests/options/space_dimensions_options'
-        = render partial: 'contests/options/budget_options'
-        = render partial: 'contests/options/feedback_options'
-      .clearfix.formbuttons
-        .col-sm-10
-          %a.order{ href: design_style_contests_path}= t('contests.creation.go_back')
-          .pull-right
-            %a.order.continue{ href: "#"}= t('contests.creation.continue')
+      = render partial: 'contests/options/budget_options'
+      = render partial: 'contests/options/feedback_options'
+
+    .col-md-12.no-x-padding.text-center.footer-buttons{:style => " margin-bottom: 50px;"}
+      .bedr.col-md-offset-3.col-md-2
+        %a{href: design_style_contests_path}
+          %div.back-button
+            %b= t('contests.creation.go_back')
+      .col-md-1
+      .bedr.col-md-2.continue
+        %a.order{:href => "#"}
+          %div.continue-button
+            %b= t('contests.creation.continue')
 
 = render partial: 'contests/contest_creation_page'

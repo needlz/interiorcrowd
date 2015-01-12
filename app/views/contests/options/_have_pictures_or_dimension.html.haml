@@ -1,17 +1,21 @@
-%h1{:style => "margin-top: 34px; margin-bottom: 0;"} Have pictures or dimension of your space?
+%h1{:style => "margin-top: 34px; margin-bottom: 0;"}= t('contests.space.details_toggle.title')
 %span{:style => "font-size:14px;color:#000000;"}
-  %i You can upload it later in client center.
+  %i= t('contests.space.details_toggle.hint')
 .clearfix
 .question.col-md-2
   .col-md-1
-    .circle2
+    = radio_button_tag('details_toggle', 'yes', @contest_view.have_space_views_details, class: 'regular-radio big-radio')
+    = label_tag('details_toggle_yes', '')
   .col-md-1{:style => "margin-left: 25px;"}
     %span.text-price{:style => "font-size:24px;"}
-      %b Yes
+      %b
+        = label_tag("details_toggle_yes", t('contests.space.details_toggle.yes'))
 .question.col-md-2
   .col-md-1
-    .circle2
+    = radio_button_tag('details_toggle', 'no', !@contest_view.have_space_views_details, class: 'regular-radio big-radio')
+    = label_tag('details_toggle_no', '')
   .col-md-1{:style => "margin-left: 25px;"}
     %span.text-price{:style => "font-size:24px;"}
-      %b No
+      %b
+        = label_tag('details_toggle_no', t('contests.space.details_toggle.no'))
 .clearfix

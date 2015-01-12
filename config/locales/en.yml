@@ -75,6 +75,11 @@ en:
     space:
       title: Project Detail
       description: Tell us information about your room. Show us pictures of your space to give more direction to the designers.
+      details_toggle:
+        title: Have pictures or dimension of your space?
+        hint: You can upload it later in client center.
+        'yes': 'Yes'
+        'no': 'No'
       photos:
         title: Take photos of your room and upload to us.
         image_requirements: At least 4 images with back to each coner. Images must be smaller than 10M.
