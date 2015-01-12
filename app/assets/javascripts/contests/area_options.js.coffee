@@ -3,7 +3,13 @@ class @DesignArea
   constructor: (@parentAreas, @childrenAreas, @areas, @currentIdInput)->
 
   init: ->
-    @update()
+    @hideAllChildrenAreas()
+    if @parentSelectionHasChildren()
+      @showChildrenButtons()
+
+    @bindRoomButtons()
+
+  bindRoomButtons: ->
     @parentAreas.click((event)=>
       event.preventDefault()
       $button = $(event.target).closest(@parentAreas)

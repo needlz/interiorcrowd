@@ -55,13 +55,13 @@
 
   .subtitle {
     font-size: 16px;
-    color:#000000;
+    color: #000000;
   }
 
   .category-description {
     font-size: 14px;
     line-height: 30px;
-    color:#000000;
+    color: #000000;
   }
 
   .rooms {
@@ -206,12 +206,12 @@
 }
 
 .design-style-options {
-  .appeal-options{
+  .appeal-options {
     .header {
       margin-top: 17px;
 
       .title {
-        color:#231f20;
+        color: #231f20;
         font-size: 24px;
       }
     }
@@ -235,7 +235,7 @@
         }
 
         .optional {
-          color:#dfdfdf;
+          color: #dfdfdf;
         }
       }
 
@@ -276,8 +276,8 @@
 
     .designer-level {
       .check {
-        position:absolute;
-        bottom:30%;
+        position: absolute;
+        bottom: 30%;
         width: 100%;
       }
     }
@@ -319,7 +319,7 @@
   }
 
   .no-search {
-    display:none
+    display: none
   }
 
   .colors-table {
@@ -428,4 +428,54 @@
 
 .template {
   display: none;
+}
+
+.space-options {
+  .space-pictures {
+    .description {
+      .title {
+        font-size: 20px;
+        color: #231f20;
+      }
+
+      .hint {
+        font-size: 16px;
+      }
+
+      .requirements {
+        font-size: 14px;
+        line-height: 35px;
+      }
+
+      .see-guidline {
+        font-size: 18px;
+        text-decoration: underline;
+        font-weight: normal;
+        text-align: right;
+      }
+    }
+
+    .thumbs {
+      border: 1px dashed black;
+      padding-top: 40px;
+      padding-bottom: 35px;
+      margin-top: 30px;
+
+      #image_display {
+        padding-bottom: 10px;
+      }
+    }
+
+    .upload-button-container {
+      margin-top: 40px;
+
+      .upload-button {
+        margin-bottom: 38px;
+      }
+    }
+
+    .alternatives {
+      line-height: 25px;
+    }
+  }
 }

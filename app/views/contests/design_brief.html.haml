@@ -2,7 +2,7 @@
   = javascript_include_tag 'contests/design_brief'
   = javascript_include_tag 'contests/area_options'
   :javascript
-    window.I18n = #{ translations_to_json('contests') }
+    window.I18n = #{ translations_to_json(['contests', 'creation']) }
 
 - content_for :page_content do
   #choose-room
