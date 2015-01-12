@@ -803,7 +803,7 @@ input.form-control {
 
 .bootstrap-select.btn-group .btn .caret {
 
-    background: url('./img/down-caret.png') 10px 22px no-repeat;
+    background: url('/assets/down-caret.png') 10px 22px no-repeat;
     width: 42px;
     height: 100%;
     border: 0;

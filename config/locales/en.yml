@@ -85,6 +85,9 @@ en:
       dimensions:
         title: Add dimensions of your space.
         hint: While we love accuracy, we know that you might not have this info right now, so feel free to approximate and update later.
+      budget:
+        title: What is your design budget for materials?
+        hint: 'Note: This does not include any design fees'
     creation:
       errors:
         required_data_missing: Please fill the required info.

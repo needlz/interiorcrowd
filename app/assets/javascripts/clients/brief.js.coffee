@@ -70,6 +70,8 @@ class @ContestEditing extends InlineEditor
       RoomsEditor.init()
     appeals: ->
       AppealsForm.init()
+    budget: ->
+      BudgetOptions.init()
 
   previewCallbacks:
     desirable_colors: ->

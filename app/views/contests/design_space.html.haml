@@ -1,3 +1,10 @@
+= content_for :head do
+  = javascript_include_tag 'contests/design_space'
+  = javascript_include_tag 'contests/space_pictures_options'
+  = javascript_include_tag 'contests/budget_options'
+
+  = render partial: 'shared/setup_uploadify'
+
 - content_for :page_content do
   = render partial: 'home/msg'
   = form_tag save_design_space_contests_path, { id: "design_space", method: "post"} do
@@ -11,17 +18,11 @@
     .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
       = render partial: 'contests/options/space_pictures_options'
       = render partial: 'contests/options/space_dimensions_options'
-    = render partial: 'contests/options/budget_options'
-    = render partial: 'contests/options/feedback_options'
+      = render partial: 'contests/options/budget_options'
+      = render partial: 'contests/options/feedback_options'
     .clearfix.formbuttons
       .col-sm-10
         %a.order{ href: design_style_contests_path}= t('contests.creation.go_back')
         .pull-right
           %a.order.continue{ href: "#"}= t('contests.creation.continue')
 = render partial: 'contests/contest_creation_page'
-
-= content_for :head do
-  = javascript_include_tag 'contests/design_space'
-  = javascript_include_tag 'contests/space_pictures_options'
-
-  = render partial: 'shared/setup_uploadify'

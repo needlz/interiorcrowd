@@ -506,8 +506,26 @@
       }
     }
   }
+
+  .design-budget {
+    .description {
+      margin-bottom: 20px;
+
+      .title {
+        margin-top: 34px;
+        margin-bottom: 0;
+      }
+
+      .hint {
+        font-size: 14px;
+        color: #000000;
+      }
+    }
+  }
 }
 
 .rooms-conditional-options {
-  padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 60px;
 }
