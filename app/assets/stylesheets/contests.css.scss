@@ -496,6 +496,14 @@
     .dimension {
       margin-top: 25px;
 
+      .name {
+        font-size: 20px;
+      }
+
+      .units {
+        font-size: 20px;
+      }
+
       input {
         height: 40px;
         min-width: 170px;
@@ -542,7 +550,10 @@
     }
 
     .send-button {
-      height:98px; width:100%;border-top:0px;border-radius: 0px 0px 10px 10px;
+      height: 98px;
+      width: 100%;
+      border-top: 0px;
+      border-radius: 0px 0px 10px 10px;
     }
   }
 }
@@ -553,7 +564,8 @@
       padding-left: 0px;
 
       span {
-        font-size: 16px;color:#000000;
+        font-size: 16px;
+        color: #000000;
       }
     }
   }
@@ -561,6 +573,31 @@
   .rooms-conditional-options {
     padding-bottom: 40px;
     border-bottom: 1px solid #e1e1e1;
-//    margin-bottom: 60px;
+  }
+
+  .pictures-or-dimensions {
+    .title {
+      margin-top: 34px;
+      margin-bottom: 0;
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #000000;
+    }
+
+    .question {
+      .caption {
+        margin-left: 25px;
+
+        .text-price {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  .footer-buttons {
+    margin-bottom: 50px;
   }
 }

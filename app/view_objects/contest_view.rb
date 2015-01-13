@@ -29,6 +29,10 @@ class ContestView
     design_area == area || design_area.try(:parent) == area
   end
 
+  def conditional_block_radio_button_active?(block_is_visible, button_value)
+    (block_is_visible && (button_value == 'yes')) || (!block_is_visible && (button_value == 'no'))
+  end
+
   private
 
   def initialize_from_options(options)

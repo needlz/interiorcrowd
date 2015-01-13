@@ -1,21 +1,17 @@
-%h1{:style => "margin-top: 34px; margin-bottom: 0;"}= t('contests.space.details_toggle.title')
-%span{:style => "font-size:14px;color:#000000;"}
-  %i= t('contests.space.details_toggle.hint')
-.clearfix
-.question.col-md-2
-  .col-md-1
-    = radio_button_tag('details_toggle', 'yes', @contest_view.have_space_views_details, class: 'regular-radio big-radio')
-    = label_tag('details_toggle_yes', '')
-  .col-md-1{:style => "margin-left: 25px;"}
-    %span.text-price{:style => "font-size:24px;"}
-      %b
-        = label_tag("details_toggle_yes", t('contests.space.details_toggle.yes'))
-.question.col-md-2
-  .col-md-1
-    = radio_button_tag('details_toggle', 'no', !@contest_view.have_space_views_details, class: 'regular-radio big-radio')
-    = label_tag('details_toggle_no', '')
-  .col-md-1{:style => "margin-left: 25px;"}
-    %span.text-price{:style => "font-size:24px;"}
-      %b
-        = label_tag('details_toggle_no', t('contests.space.details_toggle.no'))
-.clearfix
+.pictures-or-dimensions
+  %h1.title= t('contests.space.details_toggle.title')
+  %span.hint
+    %i= t('contests.space.details_toggle.hint')
+  .clearfix
+  - %w(yes no).each do |value|
+    .question.col-md-2
+      .col-md-1
+        = radio_button_tag('details_toggle',
+          value,
+          @contest_view.conditional_block_radio_button_active?(@contest_view.have_space_views_details, value),
+          class: 'regular-radio big-radio')
+        = label_tag("details_toggle_#{ value }", '')
+      .col-md-1.caption
+        %span.text-price
+          %b= label_tag("details_toggle_#{ value }", t("contests.space.details_toggle.#{ value }"))
+  .clearfix
