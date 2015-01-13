@@ -60,7 +60,6 @@ class DesignStylePage
       $selectedLevel = $(event.target).closest('.level-block')
       newId = $selectedLevel.data('id')
       $levelContainer.val(newId)
-
       $('.level-block').removeClass('active')
       $('.level-block').find('.check').hide()
       $selectedLevel.addClass('active')
