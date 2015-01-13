@@ -1,24 +1,12 @@
-class DimensionViewDetailsToggle
-
-  @init: ->
-    @refreshView()
-    @bindRadioButtons()
-
-  @showing: ->
-    $('[name="details_toggle"]:checked').val() is 'yes'
-
-  @refreshView: (value)->
-    $('.space-view-details').toggle(@showing())
-
-  @bindRadioButtons: ->
-    $('[name="details_toggle"]').change (event)=>
-      @refreshView()
-
 class DesignSpacePage
 
   @init: ->
     BudgetOptions.init()
-    DimensionViewDetailsToggle.init()
+    dimensionViewDetailsToggle = new OptionsContainerToggle(
+      radioButtonsSelector: '[name="details_toggle"]',
+      containerSelector: '.space-view-details'
+    )
+    dimensionViewDetailsToggle.init()
     SpacePicturesUploader.init()
 
     @bindContinueButton()
