@@ -1,17 +1,18 @@
 class DimensionViewDetailsToggle
 
   @init: ->
-    @.refreshView(@.showing())
-
-    $('[name="details_toggle"]').change (event)->
-      DimensionViewDetailsToggle.refreshView($(event.target).val())
+    @refreshView()
+    @bindRadioButtons()
 
   @showing: ->
     $('[name="details_toggle"]:checked').val() is 'yes'
 
   @refreshView: (value)->
-    showDetailsBlock = (value )
-    $('.space-view-details').toggle(showDetailsBlock)
+    $('.space-view-details').toggle(@showing())
+
+  @bindRadioButtons: ->
+    $('[name="details_toggle"]').change (event)=>
+      @refreshView()
 
 class DesignSpacePage
 
@@ -25,7 +26,7 @@ class DesignSpacePage
   @bindContinueButton: ->
     $('.continue').click (event) =>
       event.preventDefault()
-      $('.text-error').html ''
+      $('.text-error').text('')
       @clearHiddenInputs()
       $('#design_space').submit()
 

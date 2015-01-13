@@ -56,7 +56,7 @@ class ContestCreationWizard
   end
 
   def budget_options
-    [['Budget:', '']] + Contest::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
+    [['Budget:', '']] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
   end
 
   def budget_plans

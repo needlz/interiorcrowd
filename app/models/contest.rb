@@ -1,8 +1,6 @@
 class Contest < ActiveRecord::Base
   self.per_page = 10
-  
-  CONTEST_DESIGN_BUDGETS = [ '$0 - $200', '$201 - $500', '$501 - $1000', '$1001 - $1500', '$1501 - $2500',
-                             '$2501 - $3500', '$3501 - $5000', '$5001 - $7500', '$7501 - $10000', '$10000 +' ]
+
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
   STATUSES = %w{submission winner_selection closed fulfillment finished}
 
