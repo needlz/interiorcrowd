@@ -7,7 +7,7 @@ class ContestView
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
-              :space_pictures_ids, :additional_preferences, :have_space_views_details
+              :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -26,6 +26,8 @@ class ContestView
     else
       initialize_from_contest(options)
     end
+    set_have_space_views_details
+    set_have_examples
   end
 
   def top_level_area_active?(area)
@@ -60,7 +62,6 @@ class ContestView
     @name = contest_params[:project_name]
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
-    set_have_space_views_details
   end
 
   def initialize_from_contest(contest)
@@ -82,7 +83,6 @@ class ContestView
     @name = contest.project_name
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
-    set_have_space_views_details
   end
 
   def set_accommodation(options)
@@ -103,5 +103,9 @@ class ContestView
 
   def set_have_space_views_details
     @have_space_views_details = @dimensions.find { |dimension| dimension.value.present? } || @space_pictures_ids.present?
+  end
+
+  def set_have_examples
+    @have_examples = @links.present? || @example_ids.present?
   end
 end

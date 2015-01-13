@@ -1,0 +1,17 @@
+.design-style-options
+  .example-pictures
+    .col-md-12.border
+    .col-md-12.no-x-padding.title
+      %h1= t('contests.titles.example')
+    .clearfix
+    - %w(yes no).each do |value|
+      .question.col-md-2
+        .col-md-1
+          = radio_button_tag('examples_toggle',
+            value,
+            @contest_view.conditional_block_radio_button_active?(@contest_view.have_examples, value),
+            class: 'regular-radio big-radio')
+          = label_tag("examples_toggle_#{ value }", '')
+        .col-md-1.caption
+          %span.text-price
+            %b= label_tag("examples_toggle_#{ value }", t("contests.design_style.examples_toggle.#{ value }"))

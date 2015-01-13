@@ -50,6 +50,9 @@ en:
       add_links: Add your inspiration links
       upload_button: Upload images
       uploading: Uploading...
+      examples_toggle:
+        'yes': 'Yes'
+        'no': 'No'
 
     appeals:
       feminine: Feminine

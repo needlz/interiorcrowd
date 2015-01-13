@@ -1,9 +1,5 @@
 .design-style-options
   .example-pictures
-    .col-md-12.border
-    .col-md-12.no-x-padding.title
-      %h1= t('contests.titles.example')
-
     #image_display.col-md-12
       = render partial: 'contests/options/removable_thumbnails', locals: { urls: @contest_view.examples }
 
