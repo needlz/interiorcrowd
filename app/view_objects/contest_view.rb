@@ -1,10 +1,13 @@
 class ContestView
 
+  CONTEST_DESIGN_BUDGETS = [ '$0 - $200', '$201 - $500', '$501 - $1000', '$1001 - $1500', '$1501 - $2500',
+                             '$2501 - $3500', '$3501 - $5000', '$5001 - $7500', '$7501 - $10000', '$10000 +' ]
+
   ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
-              :space_pictures_ids, :additional_preferences
+              :space_pictures_ids, :additional_preferences, :have_space_views_details
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -29,6 +32,11 @@ class ContestView
     design_area == area || design_area.try(:parent) == area
   end
 
+  def conditional_block_radio_button_active?(is_block_visible, button_value)
+    active_button_value = is_block_visible ? 'yes' : 'no'
+    button_value == active_button_value
+  end
+
   private
 
   def initialize_from_options(options)
@@ -46,12 +54,13 @@ class ContestView
     @dimensions = SpaceDimension.from(contest_params)
     @space_pictures = contest_options.space_image_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
     @space_pictures_ids = contest_options.space_image_ids
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
+    @budget = CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
     @feedback = contest_params[:feedback]
     @budget_plan = contest_params[:budget_plan]
     @name = contest_params[:project_name]
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
+    set_have_space_views_details
   end
 
   def initialize_from_contest(contest)
@@ -67,12 +76,13 @@ class ContestView
     @dimensions = SpaceDimension.from(contest)
     @space_pictures = contest.space_images.map { |space_image| space_image.image.url(:medium) }
     @space_pictures_ids = contest.space_images.pluck(:id)
-    @budget = Contest::CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
+    @budget = CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
     @name = contest.project_name
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
+    set_have_space_views_details
   end
 
   def set_accommodation(options)
@@ -89,5 +99,9 @@ class ContestView
       [ContestAdditionalPreference.new(preference), value] if value
     end
     @additional_preferences = additional_preferences.compact
+  end
+
+  def set_have_space_views_details
+    @have_space_views_details = @dimensions.find { |dimension| dimension.value.present? } || @space_pictures_ids.present?
   end
 end

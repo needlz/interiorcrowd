@@ -3,12 +3,10 @@
     .col-md-12.border
     .col-md-12.no-x-padding.title
       %h1= t('contests.titles.example')
+
     #image_display.col-md-12
-      .col-md-3.novice.template
-        = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
-      - @contest_view.examples.try(:each) do |path|
-        .col-md-3.novice.thumb
-          = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+      = render partial: 'contests/options/removable_thumbnails', locals: { urls: @contest_view.examples }
+
     .col-md-6.no-x-padding.file-input-container
       %button.btn3.btn3-confirm.upload-button{ type: 'button' }= t('contests.design_style.upload_button')
       %input#file_input{ name: "image[image]", type: 'file', style: 'display: none', multiple: 'multiple' }

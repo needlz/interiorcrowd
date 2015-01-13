@@ -1,10 +1,37 @@
-.row.step-row
-  %label Upload pictures of your space
-.row.space-pictures
-  .col-sm-offset-1.col-sm-8.form-inline{:style => "padding-left:0"}
-    %span#image_display{:style => "padding-bottom:10px;"}
-      - @contest_view.space_pictures.try(:each) do |path|
-        %img{:src => path}
-    %input#file_input{ name: 'image[image]', type: 'file', multiple: 'multiple' }
-    %input#design_space_image_id{:name => "design_space[document_id]", :type => "hidden", :value => @contest_view.space_pictures_ids.try(:join, ',') }
-    %span (.jpg, .tif, .png)
+.space-options
+  .space-pictures
+    .description
+      .some-text.col-md-6.no-padding-left
+        %h1.title= t('contests.space.photos.title')
+        %span.hint= t('contests.space.photos.hint')
+        %br/
+        %span.requirements{:style => ""}
+          %i= t('contests.space.photos.image_requirements')
+      .some-text.col-md-6
+        %h1.see-guidline
+          %a.a-under{:href => "#"}
+            %i= t('contests.space.photos.see_more')
+    .clearfix
+
+    .col-md-12.thumbs
+      %span#image_display
+        = render partial: 'contests/options/removable_thumbnails', locals: { urls: @contest_view.space_pictures }
+
+    .clearfix
+    %input#design_space_image_id{:name => "design_space[document_id]",
+      type: "hidden",
+      value: @contest_view.space_pictures_ids.try(:join, ',') }
+    .col-md-6.no-x-padding.upload-button-container
+      %button.btn3.btn3-confirm.upload-button{ :type => "button"}= t('contests.space.photos.upload_button')
+      %input.hidden#file_input{ name: 'image[image]', type: 'file', multiple: 'multiple' }
+    .clearfix
+    .col-md-4.no-padding-left.alternatives
+      %span
+        %i= t('contests.space.photos.prefer_to_email_or_text')
+      %br/
+      %span
+        %i= t('contests.space.photos.text_to')
+      %br/
+      %span
+        %i= t('contests.space.photos.email_to')
+    .clearfix

@@ -1,7 +1,10 @@
-.row.step-row
-  %label Add dimensions of your space
-.row
-  .col-sm-5.well
+.space-options
+  .dimensions
+    .col-md-12.no-padding-left
+      %h1.title= t('contests.space.dimensions.title')
+      %span.hint= t('contests.space.dimensions.hint')
+    .clearfix.dimensions-margin
     = render partial: 'contests/options/dimension_of_space_row',
-        collection: @contest_view.dimensions,
-        as: :dimension
+             collection: @contest_view.dimensions,
+             as: :dimension
+    .clearfix

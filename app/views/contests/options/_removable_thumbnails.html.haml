@@ -1,0 +1,5 @@
+.col-md-3.novice.template
+  = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+- urls.try(:each) do |path|
+  .col-md-3.novice.thumb
+    = render partial: 'contests/options/example_picture_thumb', locals: { src: path }

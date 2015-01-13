@@ -55,13 +55,13 @@
 
   .subtitle {
     font-size: 16px;
-    color:#000000;
+    color: #000000;
   }
 
   .category-description {
     font-size: 14px;
     line-height: 30px;
-    color:#000000;
+    color: #000000;
   }
 
   .rooms {
@@ -206,12 +206,12 @@
 }
 
 .design-style-options {
-  .appeal-options{
+  .appeal-options {
     .header {
       margin-top: 17px;
 
       .title {
-        color:#231f20;
+        color: #231f20;
         font-size: 24px;
       }
     }
@@ -235,7 +235,7 @@
         }
 
         .optional {
-          color:#dfdfdf;
+          color: #dfdfdf;
         }
       }
 
@@ -276,8 +276,8 @@
 
     .designer-level {
       .check {
-        position:absolute;
-        bottom:30%;
+        position: absolute;
+        bottom: 30%;
         width: 100%;
       }
     }
@@ -319,7 +319,7 @@
   }
 
   .no-search {
-    display:none
+    display: none
   }
 
   .colors-table {
@@ -424,4 +424,180 @@
   height: 2em;
   display: inline-block;
   vertical-align: bottom;
+}
+
+.template {
+  display: none;
+}
+
+.space-options {
+  .space-pictures {
+    .description {
+      .title {
+        font-size: 20px;
+        color: #231f20;
+      }
+
+      .hint {
+        font-size: 16px;
+      }
+
+      .requirements {
+        font-size: 14px;
+        line-height: 35px;
+      }
+
+      .see-guidline {
+        font-size: 18px;
+        text-decoration: underline;
+        font-weight: normal;
+        text-align: right;
+      }
+    }
+
+    .thumbs {
+      border: 1px dashed black;
+      padding-top: 40px;
+      padding-bottom: 35px;
+      margin-top: 30px;
+
+      #image_display {
+        padding-bottom: 10px;
+      }
+    }
+
+    .upload-button-container {
+      margin-top: 40px;
+
+      .upload-button {
+        margin-bottom: 38px;
+      }
+    }
+
+    .alternatives {
+      line-height: 25px;
+    }
+  }
+
+  .dimensions {
+    .title {
+      font-size: 20px;
+      color: #231f20;
+    }
+
+    .hint {
+      font-size: 16px;
+    }
+
+    .dimensions-margin {
+      margin-bottom: 15px;
+    }
+
+    .dimension {
+      margin-top: 25px;
+
+      .name {
+        font-size: 20px;
+      }
+
+      .units {
+        font-size: 20px;
+      }
+
+      input {
+        height: 40px;
+        min-width: 170px;
+      }
+
+      .text-error {
+        padding-left: 15px;
+      }
+    }
+  }
+
+  .design-budget {
+    .description {
+      margin-bottom: 20px;
+
+      .title {
+        margin-top: 34px;
+        margin-bottom: 0;
+      }
+
+      .hint {
+        font-size: 14px;
+        color: #000000;
+      }
+    }
+  }
+
+  .feedback {
+    .title {
+      margin-top: 34px;
+      margin-bottom: 0;
+    }
+
+    textarea {
+      width: 100%;
+      height: 355px;
+      padding: 15px;
+      font-size: 24px;
+      margin-top: 20px;
+      border: 5px solid #000;
+      border-color: #e1e1e1;
+      border-radius: 10px 10px 0px 0px;
+      resize: none;
+    }
+
+    .send-button {
+      height: 98px;
+      width: 100%;
+      border-top: 0px;
+      border-radius: 0px 0px 10px 10px;
+    }
+  }
+}
+
+#design_space {
+  .title {
+    .description {
+      padding-left: 0px;
+
+      span {
+        font-size: 16px;
+        color: #000000;
+      }
+    }
+  }
+
+  .rooms-conditional-options {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .pictures-or-dimensions {
+    .title {
+      margin-top: 34px;
+      margin-bottom: 0;
+    }
+
+    .hint {
+      font-size: 14px;
+      color: #000000;
+    }
+
+    .question {
+      .caption {
+        margin-left: 25px;
+
+        .text-price {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  .footer-buttons {
+    margin-bottom: 50px;
+  }
 }

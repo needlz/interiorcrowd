@@ -1,26 +1,37 @@
-$ ->
-  $(".continue").click (e) ->
-    e.preventDefault()
-    $(".text-error").html ""
-    f_length = $.trim($("#length_feet").val())
-    i_length = $.trim($("#length_inches").val())
-    f_width = $.trim($("#width_feet").val())
-    i_width = $.trim($("#width_inches").val())
-    bool = true
-    focus = false
-    if f_length.length < 1 and i_length.length < 1
-      bool = false
-      $("#err_length").html "Please enter length."
-      focus = "length_feet"
-    if f_width.length < 1 and i_width < 1
-      bool = false
-      $("#err_width").html "Please enter width."
-      focus = "width_feet"  unless focus
-    if bool
-      $("#design_space").submit()
-    else
-      $("#" + focus).focus()
-      false
+class DimensionViewDetailsToggle
+
+  @init: ->
+    @refreshView()
+    @bindRadioButtons()
+
+  @showing: ->
+    $('[name="details_toggle"]:checked').val() is 'yes'
+
+  @refreshView: (value)->
+    $('.space-view-details').toggle(@showing())
+
+  @bindRadioButtons: ->
+    $('[name="details_toggle"]').change (event)=>
+      @refreshView()
+
+class DesignSpacePage
+
+  @init: ->
+    BudgetOptions.init()
+    DimensionViewDetailsToggle.init()
+    SpacePicturesUploader.init()
+
+    @bindContinueButton()
+
+  @bindContinueButton: ->
+    $('.continue').click (event) =>
+      event.preventDefault()
+      $('.text-error').text('')
+      @clearHiddenInputs()
+      $('#design_space').submit()
+
+  @clearHiddenInputs: ->
+    $('.space-pictures, .dimensions').find('input').attr('name', '') unless DimensionViewDetailsToggle.showing()
 
 $ ->
-  SpacePicturesUploader.init()
+  DesignSpacePage.init()

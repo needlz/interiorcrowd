@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui/widget
 //= require bootstrap.min
+//= require bootstrap-select.min
 //= require index-slider
 //= require jquery.mmenu.min.all
 //= require jquery-fileupload/basic

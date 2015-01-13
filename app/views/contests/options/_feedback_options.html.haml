@@ -1,10 +1,9 @@
-.row.step-row
-  %label Other feedback or instructions?
-.row
-  .col-sm-8.col-sm-offset-1
-    = text_area_tag "design_space[feedback]",
-        @contest_view.feedback,
-        row: "50",
-        style: "width:98%",
-        column: "20",
-        class: "form-control"
+.space-options
+  .feedback
+    .col-md-12.no-padding-left
+      %h1.title= t('contests.space.other_feedback.title')
+    .clearfix
+    .col-md-12.no-padding-left.no-padding-right
+      %textarea{ placeholder: t('contests.space.other_feedback.placeholder'),
+        type: 'text' }
+    .clearfix
