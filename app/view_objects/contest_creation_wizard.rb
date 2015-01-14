@@ -60,7 +60,7 @@ class ContestCreationWizard
   end
 
   def budget_plans
-    BudgetPlan.all
+    BudgetPlan.all.map { |plan| PackageView.new(plan) }
   end
 
   private

@@ -1,15 +1,16 @@
-.col-sm-4.plan-container
-  .plan
-    #wrapper.home_wrapper{plan_id: plan.id}
-      %h3= plan.name
-      .price
-        %span.dollar $
-        %span.qty= plan.price
-      .features
-        %p
-          = t('contests.creation.preview.expect_designs',
-              count: plan.designs_count,
-              design_count: content_tag(:strong, plan.designs_count)).html_safe
-        %p
-          - if plan.money_back_guarantee
-            = t('contests.creation.preview.money_back_quarantee')
+.first-block-quick.col-md-4.plan-container{ data: { id: package.id },
+                                            class: ('active' if @contest_view.package_selected?(package.id)) }
+  .col-md-12
+    .first.text-center.header
+      %span.name
+        %b= package.name
+      %br/
+      %span.price
+        %b $#{ package.price }
+    .first.text-center.body
+      - package.services.each_with_index do |service, index|
+        - style_class = index > 0 ? 'not-first' : ''
+        %div.service{ class: style_class }
+          %span= service.html_safe
+      %button.btn6.btn6-confirm.btn-select.text-center.plan{ type: 'button' }
+        %b= t('contests.creation.packages.select').upcase

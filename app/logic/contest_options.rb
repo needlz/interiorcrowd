@@ -2,6 +2,9 @@ class ContestOptions
 
   attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest
 
+  REQUIRED_OPTIONS = [:design_category_id, :design_space_id, :space_budget,
+                      :budget_plan, :project_name, :desirable_colors, :undesirable_colors]
+
   def initialize(hash)
     options = hash.with_indifferent_access
     @contest = {}
@@ -40,9 +43,7 @@ class ContestOptions
   end
 
   def required_present?
-    required_contest_options = [:design_category_id, :design_space_id, :space_length, :space_width, :space_budget,
-                                :budget_plan, :project_name, :desirable_colors, :undesirable_colors]
-    required_contest_options_present = !required_contest_options.detect { |option| contest[option].blank? }
+    required_contest_options_present = !REQUIRED_OPTIONS.detect { |option| contest[option].blank? }
     required_contest_options_present && appeals.present? && designer_level.present?
   end
 

@@ -73,7 +73,7 @@ class ClientsController < ApplicationController
 
   def create_contest(user_id)
     contest_options = ContestOptions.new(session.to_hash.merge(client_id: user_id))
-    return unless contest_options.required_present?
+    raise ArgumentError unless contest_options.required_present?
     contest = Contest.create_from_options(contest_options)
     clear_session
     contest

@@ -1,5 +1,7 @@
 class DesignSpacePage
 
+  @budgetDropdownSelector: '#design_space_f_budget'
+
   @init: ->
     BudgetOptions.init()
     dimensionViewDetailsToggle = new OptionsContainerToggle(
@@ -9,17 +11,29 @@ class DesignSpacePage
     dimensionViewDetailsToggle.init()
     SpacePicturesUploader.init()
 
-    @bindContinueButton()
+    @bindContinueButton(dimensionViewDetailsToggle)
 
-  @bindContinueButton: ->
+  @bindContinueButton: (dimensionViewDetailsToggle)->
     $('.continue').click (event) =>
       event.preventDefault()
       $('.text-error').text('')
-      @clearHiddenInputs()
-      $('#design_space').submit()
+      @clearHiddenInputs(dimensionViewDetailsToggle)
 
-  @clearHiddenInputs: ->
-    $('.space-pictures, .dimensions').find('input').attr('name', '') unless DimensionViewDetailsToggle.showing()
+      budget = $.trim($(@budgetDropdownSelector).val())
+      messageToFocus = false
+
+      if budget < 1
+        messageToFocus = $("#err_budget")
+        messageToFocus.text(I18n.budget.select_error)
+
+      if messageToFocus
+        $(messageToFocus).get(0).scrollIntoView()
+        false
+      else
+        $("#design_space").submit()
+
+  @clearHiddenInputs: (dimensionViewDetailsToggle)->
+    $('.space-pictures, .dimensions').find('input').attr('name', '') unless dimensionViewDetailsToggle.showing()
 
 $ ->
   DesignSpacePage.init()

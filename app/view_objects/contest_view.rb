@@ -39,6 +39,10 @@ class ContestView
     button_value == active_button_value
   end
 
+  def package_selected?(package_id)
+    package_id == @budget_plan.to_i
+  end
+
   private
 
   def initialize_from_options(options)
