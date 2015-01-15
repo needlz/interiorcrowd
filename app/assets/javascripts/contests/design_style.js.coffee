@@ -8,11 +8,11 @@ class Validations
   clearHiddenInputs: ->
     $('.example-pictures, .links-options').find('input').attr('name', '') unless @examplesToggle.showing()
 
-  validate: (errorCondition, validationMessage, text)->
+  validate: (errorCondition, $validationMessage, text)->
     if errorCondition
       @valide = false
-      validationMessage.text(text)
-      @validationMessage = validationMessage unless @validationMessage
+      $validationMessage.text(text)
+      @$validationMessage = $validationMessage unless @$validationMessage
 
   init: ()->
     $(".slidercon input").slider()
@@ -23,7 +23,7 @@ class Validations
       fav_color = $.trim($("#fav_color").val())
       refrain_color = $.trim($("#refrain_color").val())
       @valid = true
-      @validationMessage = null
+      @$validationMessage = null
 
       @clearHiddenInputs()
 
@@ -33,9 +33,9 @@ class Validations
       @validate isNaN(designerLevel), $("#err-designer-level"), I18n.validations.select_design_level
       @validate !@allAppealsSelected(), $("#err-appeals"), I18n.validations.no_appeals
 
-      if @validationMessage
+      if @$validationMessage
         false
-        @validationMessage.get(0).scrollIntoView()
+        @$validationMessage.get(0).scrollIntoView()
       else
         $("#design_style").submit()
 

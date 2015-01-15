@@ -1,4 +1,4 @@
-class Validations
+class Validator
 
   @reset: ->
     @clearErrors()
@@ -18,8 +18,8 @@ class Validations
 class ReviewPage
 
   @init: ->
-    @bindPlansBoxes()
     @initActivePlan()
+    @bindPlansBoxes()
     @bindContinueButton()
 
   @initActivePlan: ->
@@ -36,18 +36,19 @@ class ReviewPage
   @bindContinueButton: ->
     $('.continue').click (e) =>
       e.preventDefault()
-      pname = $.trim($('#project_name').val())
-      pbudget = $.trim($('#plan_id').val())
-      Validations.reset()
-      Validations.validate(pname.length < 1, $('#err_prj_name'), I18n.name_error, '#project_name')
-      Validations.validate(pbudget.length < 1, $('#err_plan'), I18n.plan_error, '.plans')
-      if Validations.valid
+      @validate()
+      if Validator.valid
         $('#account_creation').submit()
       else
-        $(Validations.elementToFocus).focus()
+        $(Validator.elementToFocus).focus()
         false
 
-
+  @validate: ->
+    pname = $.trim($('#project_name').val())
+    pbudget = $.trim($('#plan_id').val())
+    Validator.reset()
+    Validator.validate(pname.length < 1, $('#err_prj_name'), I18n.name_error, '#project_name')
+    Validator.validate(pbudget.length < 1, $('#err_plan'), I18n.plan_error, '.plans')
 
 $ ->
   ReviewPage.init()

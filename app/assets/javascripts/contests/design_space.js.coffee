@@ -20,7 +20,7 @@ class DesignSpacePage
       @clearHiddenInputs(dimensionViewDetailsToggle)
 
       budget = $.trim($(@budgetDropdownSelector).val())
-      messageToFocus = false
+      messageToFocus = null
 
       if budget < 1
         messageToFocus = $("#err_budget")
