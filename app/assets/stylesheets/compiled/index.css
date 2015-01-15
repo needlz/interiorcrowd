@@ -561,14 +561,7 @@
 #in_pricing  .thanks-wrap{margin-left:-15px }
 .planheight{min-height:100px; }
 
-span#image_display img {
-margin-right:10px;
-margin-bottom:5px;
-border: 1px solid #eee;
-border-radius: 6px;
-}
-
-.img_box a.plus_wrapper,.img_box a.minus_wrapper ,.link_box a.plus_wrapper,.link_box a.minus_wrapper {        
+.img_box a.plus_wrapper,.img_box a.minus_wrapper ,.link_box a.plus_wrapper,.link_box a.minus_wrapper {
         text-align: center;
         background: #fff;
         display: block;
