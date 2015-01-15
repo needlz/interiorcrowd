@@ -30,20 +30,18 @@ $ ->
           false
 
   $("#file_input").initUploader
-    buttonText: I18n.upload_moodboard
-    removeTimeout: 10
-    onUploadSuccess: (file, data, response) ->
-      info = data.split(",")
-      url = info[0]
-      image_id = info[1]
-      $("#image_display").append """
-        <div class='col-sm-8 img_img_box' style='padding-top:20px;'>
-          <div class='img' style='width:50%;float:left'>
-            <img src='#{ info[0] }' />
+    done: (event, data)=>
+      for file in data.result.files
+        url = file.url
+        image_id = file.id
+        $("#image_display").append """
+          <div class='col-sm-8 img_img_box' style='padding-top:20px;'>
+            <div class='img' style='width:50%;float:left'>
+              <img src='#{ url }' />
+            </div>
+            <input name='lookbook[picture][urls][]' type='hidden' value='#{ url }'>
+            <input name='lookbook[picture][ids][]' type='hidden' value='#{ image_id }'>
           </div>
-          <input name='lookbook[picture][urls][]' type='hidden' value='#{ url }'>
-          <input name='lookbook[picture][ids][]' type='hidden' value='#{ image_id }'>
-        </div>
 """
 
 

@@ -1,5 +1,16 @@
 $.fn.initUploader = (options)->
-  @.fileupload(options)
+  $.extend(
+    options,
+    dataType: 'json'
+    url: uploadifyUploader
+    type: 'POST'
+  )
+  @.fileupload
+    add: (event, data)=>
+        # script uses native form of input by default, that causes side effects
+      $inputWithoutForm = $(@).clone()
+      $inputWithoutForm.fileupload(options)
+      $inputWithoutForm.fileupload('add', { files: data.files })
 
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
@@ -25,20 +36,11 @@ class Uploader
     uploadOptions = {}
     $.extend(
       uploadOptions
-      dataType: 'json'
-      url: uploadifyUploader
-      type: 'POST'
       done: @onUploaded
       @options.uploadify
     )
 
-    @$input.initUploader(
-      add: (event, data)=>
-        # script uses native form of input by default, that causes side effects
-        $inputWithoutForm = @$input.clone()
-        $inputWithoutForm.fileupload(uploadOptions)
-        $inputWithoutForm.fileupload('add', { files: data.files })
-    )
+    @$input.initUploader(uploadOptions)
 
   onUploaded: (event, data) =>
     $.each data.result.files, (index, file) =>

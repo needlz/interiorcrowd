@@ -316,6 +316,7 @@ en:
         draft: Not submitted
         submitted: Moodboard submitted
         fulfillment: Fulfillment period
+        closed: Closed
     respond_view:
       edit_button: Edit
       back: < Back
