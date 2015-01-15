@@ -470,6 +470,7 @@
       padding-top: 40px;
       padding-bottom: 35px;
       margin-top: 30px;
+      text-align: center;
 
       #image_display {
         padding-bottom: 10px;
@@ -701,4 +702,8 @@
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 60px;
   }
+}
+
+.col-md-3.novice.thumb {
+  padding-right: 20px;
 }
