@@ -5,13 +5,6 @@ class ContestsController < ApplicationController
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option, :update]
 
-  CREATION_STEPS = [
-    :design_brief,
-    :design_style,
-    :design_space,
-    :preview
-  ]
-
   def index
     @contests = Contest.by_page(params[:page])
   end
@@ -44,21 +37,15 @@ class ContestsController < ApplicationController
   end
 
   def save_design_space
-    if params[:design_space].present?
-      session[:design_space] = params[:design_space]
-      unless CREATION_STEPS.all? { |step| session[step].present? }
-        flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-        redirect_to uncomplete_step_path and return if uncomplete_step_path
-      end
-    else
-      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-      redirect_to design_space_contests_path
-    end
+    session[:design_space] = params[:design_space] if params[:design_space].present?
     redirect_to preview_contests_path
   end
 
   def preview
-    redirect_to uncomplete_step_path and return if uncomplete_step_path
+    if uncomplete_step_path
+      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
+      redirect_to uncomplete_step_path and return
+    end
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -114,7 +101,7 @@ class ContestsController < ApplicationController
   end
 
   def option
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest, step_index: 0)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
     @contest_view = ContestView.new(@contest)
     option = params[:option]
     render partial: 'contests/options/attribute_form', locals: { fields_partial: "contests/options/#{ option }_options",
@@ -124,7 +111,7 @@ class ContestsController < ApplicationController
   def update
     options = ContestOptions.new(params.with_indifferent_access)
     @contest.update_from_options(options)
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest, step_index: 0)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
     @contest_view = ContestView.new(@contest)
     render partial: "contests/previews/#{ params[:option] }_preview"
   end
@@ -133,7 +120,7 @@ class ContestsController < ApplicationController
 
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
-                                                 step_index: CREATION_STEPS.index(params[:action].to_sym) + 1)
+                                                 step: params[:action].to_sym)
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -142,9 +129,9 @@ class ContestsController < ApplicationController
   end
 
   def uncomplete_step_path
-    return design_brief_contests_path if session[:design_brief].blank?
-    return design_style_contests_path if session[:design_style].blank?
-    design_space_contests_path if session[:design_space].blank?
+    required_steps = ContestCreationWizard.creation_steps - [:preview]
+    uncomplete_step = required_steps.find { |step| session.to_hash.with_indifferent_access[step].blank? }
+    ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
   end
 
   def set_client
