@@ -8,7 +8,6 @@ RSpec.describe ContestsController do
   let(:contest) { Fabricate(:contest, client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
 
-
   before do
     session[:client_id] = client.id
   end
@@ -68,6 +67,29 @@ RSpec.describe ContestsController do
       contest.reload
       ContestAdditionalPreference.preferences.each do |preference|
         expect(contest.send(preference)).to eq details[preference].to_s
+      end
+    end
+  end
+
+  describe 'GET preview' do
+    context 'previous steps completed' do
+      before do
+        ContestCreationWizard.creation_steps.each do |step|
+          session[step] = { key: 'value' }
+        end
+      end
+
+      it 'renders page' do
+        get :preview
+        expect(response).to be_ok
+        expect(response).to render_template(:preview)
+      end
+    end
+
+    context 'previous steps uncompleted' do
+      it 'redirects to uncompleted page' do
+        get :preview
+        expect(response).to redirect_to ContestCreationWizard.creation_steps_paths.values[0]
       end
     end
   end

@@ -8,9 +8,22 @@ class ContestCreationWizard
     { name: 'Leave it...', value: 0 }
   ]
 
+  def self.creation_steps_paths
+    urls_helper = Rails.application.routes.url_helpers
+    @creation_steps_paths ||=
+      { design_brief: urls_helper.design_brief_contests_path,
+        design_style: urls_helper.design_style_contests_path,
+        design_space: urls_helper.design_space_contests_path,
+        preview: urls_helper.preview_contests_path }
+  end
+
+  def self.creation_steps
+    creation_steps_paths.keys
+  end
+
   def initialize(options)
     @contest_attributes = options[:contest_attributes]
-    @active_step_index = options[:step_index]
+    @active_step_index = self.class.creation_steps.index(options[:step]) + 1 if options[:step]
   end
 
   # design categories
