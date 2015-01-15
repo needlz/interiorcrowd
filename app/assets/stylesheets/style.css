@@ -160,7 +160,7 @@ h1 {
     padding-bottom: 14px;
     text-align: right;
     padding-right: 0;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .title-first {
@@ -803,7 +803,6 @@ input.form-control {
 
 .bootstrap-select.btn-group .btn .caret {
 
-    background: url('/assets/down-caret.png') 10px 22px no-repeat;
     width: 42px;
     height: 100%;
     border: 0;
@@ -811,6 +810,36 @@ input.form-control {
     border-left: 1px solid #000;
 }
 
+.btn-selector-big .caret {
+background: url('/assets/down-caret.png') 10px 22px no-repeat;
+}
+
+.btn-selector-medium .caret {
+background: url('/assets/down-caret.png') 10px 10px no-repeat;
+}
+
+.btn-selector-medium {
+	font-size: 22px;
+	border: 1px solid #000;
+	margin: 0;
+	border-radius: 0;
+	background: none;
+	color: #8B8B8B;
+	font-style: italic;
+	height: 40px;
+	padding-right: 60px !important;
+
+}
+
+.btn-selector-medium span {	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;}
+
+div.form-selector  {
+width: 100% !important;
+}
+
+.font15 {font-size: 15px;}
 
 /*  - */
 
@@ -851,3 +880,164 @@ input.form-control {
 
 .profile-card:nth-child(4) {border-right: 5px solid #fff;}
 .profile-card:nth-child(5) {border-left: 5px solid #fff;}
+
+input.form-control {height: 40px;}
+
+.row.form label{
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+.row.form { margin-top: 20px; margin-bottom: 20px; }
+
+.tick-btn {
+	width: 20px;
+	height: 20px;
+	border: 1px solid #000;
+	float: left;
+	margin-right: 10px;
+	border-radius: 5px;
+	margin-top: 3px;
+	font-size: 16px;
+	cursor: default;
+	text-align: center;
+}
+
+.tick-btn span {display: none;}
+.tick-btn.active span {display: inline-block;}
+
+.no-margin-left{
+margin-left:0;
+}
+
+.long-separator {border-bottom: 1px solid #e1e1e1;padding-bottom: 40px; margin-bottom: 40px; }
+
+.marg-bottom20 {margin-bottom: 20px;}
+.marg-top20 {margin-top: 20px;}
+
+.marg-bottom30 {margin-bottom: 30px;}
+.marg-top30 {margin-top: 30px;}
+
+
+.marg-bottom40 {margin-bottom: 40px;}
+.marg-top40 {margin-top: 40px;}
+
+.sub-design-options { display: none; margin: 30px; margin-top: 0;  border: 1px dashed black; padding-top: 40px; padding-bottom: 35px; }
+
+.sub-design-options.active {display: block;}
+
+.portfolio-item .over-btn {padding: 70px;  padding-top: 0;  padding-bottom: 20px; margin-top: -50px;
+position: relative;
+z-index: 9;}
+.portfolio-item .over-btn > div{
+	text-align: center;
+	border: 1px solid #737373;
+	border-radius: 3px;
+	color: #000;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+.no-decor  {text-decoration: none;}
+.no-decor:hover  {text-decoration: none;}
+
+.mark-icon img {width: 25%;}
+
+.portfolio-item .over-btn {visibility: hidden;}
+.portfolio-item:hover .over-btn {visibility: visible;}
+
+.portfolio-item .mark-icon {visibility: hidden;}
+
+
+.portfolio-item .glyphicon-remove {visibility: hidden;}
+.portfolio-item.active .glyphicon-remove {visibility: visible;}
+.portfolio-item.active .over-btn {visibility: hidden;}
+.portfolio-item.active .mark-icon {visibility: visible;}
+
+
+.spinner {
+  width: 100px;
+}
+.spinner input {
+  text-align: center;
+  font-style: normal;
+}
+.input-group-btn-vertical {
+  position: relative;
+  white-space: nowrap;
+  width: 30px;
+  vertical-align: top;
+  display: table-cell;
+}
+.input-group-btn-vertical > .btn {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+  padding: 8px;
+  margin-left: -1px;
+  position: relative;
+  border-radius: 0;
+  height: 21px;
+  border-color: #000;
+}
+.input-group-btn-vertical > .btn:first-child {
+  background: url('/assets/icons/inc-icon.png') 5px -1px no-repeat;
+  border-bottom: 0;
+}
+.input-group-btn-vertical > .btn:last-child {
+  margin-top: -2px;
+  background: url('/assets/icons/inc-icon2.png') 5px -1px no-repeat;
+}
+.input-group-btn-vertical i{
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+
+.option-item.hover {
+	opacity:1;
+}
+
+.item-sel {
+padding-bottom: 0;
+border-bottom: 3px solid #A0A0A0;
+font-weight: bold;
+font-size: 24px;
+}
+
+.item-sel a {color: #000;}
+
+.p-l-r{
+padding-left:12px;
+padding-right:12px;
+}
+
+@media (max-width: 992px) {
+
+	.circle-big {
+	 width: 100%;
+	 line-height: normal;
+	 border: 0;
+	}
+
+	.btn-need { margin-right: 0 !important; }
+
+}
+
+.btn-need{
+font-size:16px;
+margin-top:20px;
+border: 1px solid #000000;
+border-radius:5px;
+margin-right:15px;
+padding: 8px 15px 8px 25px;
+}
+
+.btn-ready{
+font-size:16px;
+margin-top:20px;
+border: 1px solid #000000;
+border-radius:5px;
+padding: 8px 15px 8px 25px;
+}

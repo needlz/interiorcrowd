@@ -204,6 +204,9 @@ en:
         card_exp_month: Expiration month
         card_exp_year: Expiration year
         card_cvc: CVC
+        card_types:
+          visa: Visa
+          mastercard: Mastercard
     navigation:
       entries: Entries
       brief: Brief

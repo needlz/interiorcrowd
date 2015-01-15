@@ -1,5 +1,5 @@
 $(document).ready ->
-  $(".continue").click (e) ->
+  $(".submit-button").click (e) ->
     e.preventDefault()
     $(".text-error").html ""
     first_name = $.trim($("#client_first_name").val())
@@ -11,7 +11,7 @@ $(document).ready ->
     address = $.trim($("#client_address").val())
     state = $.trim($("#client_state").val())
     zip = $.trim($("#client_zip").val())
-    card_type = $.trim($(".card_type:checked").val())
+    card_type = $.trim($("#contest_type").val())
     cvc = $.trim($("#card_cvc").val())
     bool = false
     if cvc.length > 1
@@ -77,6 +77,8 @@ $(document).ready ->
     if first_name.length < 1
       $("#err_first_name").text "Please enter first name."
       bool = "user_first_name"
+    unless $('#client_agree').is(':checked')
+      bool = "client_agree"
     if bool
       $("#" + bool).focus()
       false
