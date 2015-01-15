@@ -8,31 +8,36 @@ class Validations
   clearHiddenInputs: ->
     $('.example-pictures, .links-options').find('input').attr('name', '') unless @examplesToggle.showing()
 
+  validate: (errorCondition, $validationMessage, text)->
+    if errorCondition
+      @valide = false
+      $validationMessage.text(text)
+      @$validationMessage = $validationMessage unless @$validationMessage
+
   init: ()->
     $(".slidercon input").slider()
     $(".continue").click (e) =>
       e.preventDefault()
-      $(".text-error").html ""
+      $(".text-error").text('')
+
       fav_color = $.trim($("#fav_color").val())
       refrain_color = $.trim($("#refrain_color").val())
-      valid = true
+      @valid = true
+      @$validationMessage = null
+
       @clearHiddenInputs()
-      if fav_color.length < 1
-        valid = false
-        $("#err_fav").html I18n.validations.no_colors
-      if refrain_color.length < 1
-        valid = false
-        $("#err_refrain").html I18n.validations.no_colors
-      if isNaN(parseInt(@levelContainer.val()))
-        valid = false
-        $("#err-designer-level").html I18n.validations.select_design_level
-      unless @allAppealsSelected()
-        valid = false
-        $("#err-appeals").html I18n.validations.no_appeals
-      if valid
-        $("#design_style").submit()
-      else
+
+      @validate fav_color.length < 1, $("#err_fav"), I18n.validations.no_colors
+      @validate refrain_color.length < 1, $("#err_refrain"), I18n.validations.no_colors
+      designerLevel = parseInt(@levelContainer.val())
+      @validate isNaN(designerLevel), $("#err-designer-level"), I18n.validations.select_design_level
+      @validate !@allAppealsSelected(), $("#err-appeals"), I18n.validations.no_appeals
+
+      if @$validationMessage
         false
+        @$validationMessage.get(0).scrollIntoView()
+      else
+        $("#design_style").submit()
 
 class DesignStylePage
 
@@ -60,7 +65,6 @@ class DesignStylePage
       $selectedLevel = $(event.target).closest('.level-block')
       newId = $selectedLevel.data('id')
       $levelContainer.val(newId)
-
       $('.level-block').removeClass('active')
       $('.level-block').find('.check').hide()
       $selectedLevel.addClass('active')

@@ -4,37 +4,19 @@
   :javascript
     I18n = #{ translations_to_json(['contests', 'creation', 'preview']) }
 
-#in_pricing.contest-preview
-  .container
-    .section_header
-    = form_tag save_preview_contests_path,  { id: 'account_creation', method: 'post' } do
-      %input#plan_id{ name: 'preview[b_plan]',
-        type: 'hidden',
-        value: @contest_view.budget_plan }
-      .row.charts_wrapp
-        .col-sm-12
-          .wrapper
-            .row
-              .page-header
-                %h2= t('contests.titles.creation')
-            .col-sm-offset-1.preview
-              .text-center
-                = t('contests.creation.preview.almost_there')
-              .row
-                .col-sm-9.col-sm-offset-1
-                  .row.projectname.plan
-                    .form-inline
-                      .col-sm-4
-                        %label= t('contests.creation.preview.name_label')
-                      .col-sm-8
-                        %input#project_name.form-control{ maxlength: '100',
-                          name: 'preview[contest_name]',
-                          type: 'text',
-                          value: @contest_view.name }
-                        %span#err_prj_name.text-error
-            = render partial: 'contests/options/plan_options'
-            .row.formbuttons
-              .col-sm-8.col-sm-offset-2
-                %a.order{ href: design_space_contests_path }= t('contests.creation.go_back')
-                .pull-right
-                  %a.order.continue{:href => "#"}= t('contests.creation.continue')
+- content_for :page_content do
+  = form_tag save_preview_contests_path,  { id: 'account_creation', method: 'post' } do
+    = render partial: 'contests/review/project_name'
+    = render partial: 'contests/review/plans'
+    .col-md-12.no-x-padding.text-center.footer-buttons{}
+      .bedr.col-md-offset-3.col-md-2
+        %a{href: design_space_contests_path}
+          %div.back-button
+            %b= t('contests.creation.go_back')
+      .col-md-1
+      .bedr.col-md-2.continue
+        %a.order{:href => "#"}
+          %div.continue-button
+            %b= t('contests.creation.continue')
+
+= render partial: 'contests/contest_creation_page'

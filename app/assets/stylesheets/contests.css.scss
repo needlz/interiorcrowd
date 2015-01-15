@@ -1,6 +1,6 @@
 .contest-preview {
   .plans {
-    margin-top: 60px
+    margin-top: 60px;
   }
 
   #err_plan {
@@ -609,5 +609,96 @@
 
   .footer-buttons {
     margin-bottom: 50px;
+  }
+}
+
+.plans-container {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 60px;
+
+  .packages {
+    margin-bottom: 35px;
+
+    h1 {
+      font-size: 30px;
+    }
+  }
+
+  .learn-more-container {
+    margin-top: 2em;
+
+    p {
+      font-size: 30px;
+      text-decoration: underline;
+
+      a {
+        color: #a9a9a9;
+      }
+    }
+  }
+
+  .packages-description {
+    font-size: 20px;
+    color: #949292;
+  }
+}
+
+.plans {
+  margin-bottom: 3em;
+
+  .plan-container.active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.1)
+  }
+
+  .plan-container {
+    .header {
+      background: #dbdbdb;
+      border-radius: 10px 10px 0px 0px;
+      padding-top: 28px;
+      padding-bottom: 28px;
+
+      .name {
+        font-size: 30px;
+      }
+
+      .price {
+        font-size: 45px;
+      }
+    }
+
+    .body {
+      background: #fafafb;
+      border-radius: 0px 0px 10px 10px;
+      padding-top: 28px;
+      height: 500px;
+      padding-left: 20px;
+      padding-right: 20px;
+
+      .service {
+        font-size: 24px;
+
+        span {
+          display: inline-block;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #e1e1e1;
+        }
+      }
+
+      .not-first {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+#account_creation {
+  .project-name-container {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 60px;
   }
 }

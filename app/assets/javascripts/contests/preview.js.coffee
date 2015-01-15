@@ -1,31 +1,54 @@
-$ ->
-  $('.plan').click (event) ->
-    $('.plan-container').removeClass('active')
-    $plan = $(event.target).parents('.plan-container')
-    $plan.addClass('active')
-    $('#plan_id').val($plan.find('[plan_id]').attr('plan_id'))
+class Validator
 
-  plan_id = $('#plan_id').val()
-  $('#' + plan_id).addClass 'active' if plan_id.length > 0
-  $('.continue').click (e) ->
-    e.preventDefault()
-    $('.text-error').html ''
+  @reset: ->
+    @clearErrors()
+    @valid = true
+    @validationMessage = null
+    @elementToFocus = null
+
+  @validate: (errorCondition, $validationMessage, text, elementToFocus)->
+    if errorCondition
+      @valid = false
+      $validationMessage.text(text)
+      @elementToFocus = @elementToFocus || elementToFocus
+
+  @clearErrors: ->
+    $('.text-error').text('')
+
+class ReviewPage
+
+  @init: ->
+    @initActivePlan()
+    @bindPlansBoxes()
+    @bindContinueButton()
+
+  @initActivePlan: ->
+    plan_id = $('#plan_id').val()
+    $('#' + plan_id).addClass 'active' if plan_id.length > 0
+
+  @bindPlansBoxes: ->
+    $('.plan').click (event) ->
+      $('.plan-container').removeClass('active')
+      $plan = $(event.target).parents('.plan-container')
+      $plan.addClass('active')
+      $('#plan_id').val($plan.data('id'))
+
+  @bindContinueButton: ->
+    $('.continue').click (e) =>
+      e.preventDefault()
+      @validate()
+      if Validator.valid
+        $('#account_creation').submit()
+      else
+        $(Validator.elementToFocus).focus()
+        false
+
+  @validate: ->
     pname = $.trim($('#project_name').val())
     pbudget = $.trim($('#plan_id').val())
-    bool = true
-    focus = false
-    if pname.length < 1
-      bool = false
-      $('#err_prj_name').html I18n.name_error
-      focus = 'project_name'
-    if pbudget.length < 1
-      bool = false
-      $('#err_plan').html I18n.plan_error
-      focus = 'err_plan' unless focus
-    if bool
-      $('#account_creation').submit()
-    else
-      $('#' + focus).focus()
-      false
+    Validator.reset()
+    Validator.validate(pname.length < 1, $('#err_prj_name'), I18n.name_error, '#project_name')
+    Validator.validate(pbudget.length < 1, $('#err_plan'), I18n.plan_error, '.plans')
 
-  ContestPreview.init()
+$ ->
+  ReviewPage.init()

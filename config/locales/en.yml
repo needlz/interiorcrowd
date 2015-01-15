@@ -101,6 +101,7 @@ en:
       budget:
         title: What is your design budget for materials?
         hint: 'Note: This does not include any design fees'
+        select_error: Please select budget.
       other_feedback:
         title: Other feedback or instructions?
         placeholder: Leave a comment...
@@ -111,20 +112,31 @@ en:
         select_category: Please select at least one category.
         select_room: Please select one.
       preview:
-        name_label: Give your project a name
+        name_label: Give your project name
+        name_placeholder: MY Dream Loft
         name_error: Please enter project name.
-        plan_error: Please choose plan.
-        almost_there: You're almost there!
-        expect_designs:
-          one: Expect 1 design
-          other: Expect %{design_count} designs
-        money_back_quarantee: Money back guarantee
+        plan_error: Please choose package.
+        expect_designers:
+          one: Expect 1 designer
+          other: Expect %{designer_count} designers
       go_back: Back
       continue: Continue
+      packages:
+        title: Our design packages
+        description: Pick a package - 100% money back guarantee
+        moodboard: Moodboard
+        product_list: Product list
+        up_to_products:
+          one: up to 1 product
+          other: up to %{product_count} products
+        floor_plan: Floor plan
+        3d_rendering: 3D rendering
+        select: Select
+        learn_more: Learn more about packages
       plans:
-        budget: Budget
-        premier: Premier
-        premium: Premium
+        budget: Quick Fix
+        premier: Update My Style
+        premium: Room Overhaul
     additional_details:
       call_us: Or, call us!
       thanks_title: Great job! Design concepts will be headed your way soon!

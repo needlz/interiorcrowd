@@ -1,4 +1,4 @@
 .row.plans
-  - @creation_wizard.budget_plans.each do |plan|
-    = render partial: 'contests/options/plan_box', locals: { plan: plan }
-  %span#err_plan.text-error
+  - @creation_wizard.budget_plans.each do |package|
+    = render partial: 'contests/options/plan_box', locals: { package: package }
+%span#err_plan.text-error
