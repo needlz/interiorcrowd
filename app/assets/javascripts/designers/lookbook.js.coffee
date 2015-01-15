@@ -1,7 +1,13 @@
-$ ->
-  $(".continue").click (e) ->
-    e.preventDefault()
-    $(".text-error").html ""
+class Lookbook
+
+  @init: ->
+    @bindContinueButton: ->
+      $(".continue").click (e) =>
+        e.preventDefault()
+        $(".text-error").text('')
+        @validateAndSubmit()
+
+  @validateAndSubmit: ->
     bool = false
     can_submit = false
     $(".link_url").each ->
@@ -29,48 +35,25 @@ $ ->
           alert "Please add atleast one picture or Link."
           false
 
-  $("#file_input").initUploader
-    done: (event, data)=>
-      for file in data.result.files
-        url = file.url
-        image_id = file.id
-        $("#image_display").append """
-          <div class='col-sm-8 img_img_box' style='padding-top:20px;'>
-            <div class='img' style='width:50%;float:left'>
-              <img src='#{ url }' />
-            </div>
-            <input name='lookbook[picture][urls][]' type='hidden' value='#{ url }'>
-            <input name='lookbook[picture][ids][]' type='hidden' value='#{ image_id }'>
-          </div>
-"""
 
+  @setupImageUploader: ->
+    $("#file_input").initUploader
+      done: (event, data)=>
+        for file in data.result.files
+          @addThumb(file)
 
-$(document).on "click", ".img_container .plus_wrapper", ->
-  $rows = $(".img_container:first").first()
-  $formclone = $rows.clone()
-  $formclone.find("input").val ""
-  $formclone.find(".img_img_box").hide()
-  $formclone.insertAfter $(".img_container:last")
-  $(".img_container .plus_wrapper").hide()
-  $(".img_container .minus_wrapper").show() if $(".img_container .plus_wrapper").length > 1
-  $(".img_container .plus_wrapper:last").last().show()
+  @addThumb: (file)->
+    url = file.url
+    image_id = file.id
+    $("#image_display").append """
+              <div class='col-sm-8 lookbook-thumb'>
+                <div class='img'>
+                  <img src='#{ url }' />
+                </div>
+                <input name='lookbook[picture][urls][]' type='hidden' value='#{ url }'>
+                <input name='lookbook[picture][ids][]' type='hidden' value='#{ image_id }'>
+              </div>
+    """
 
-$(document).on "click", ".img_container .minus_wrapper", ->
-  $(this).parent().parent().remove()
-  $(".img_container .minus_wrapper").hide() if $(".img_container .plus_wrapper").length is 1
-  $(".img_container .plus_wrapper:last").last().show()
-
-$(document).on "click", ".lnk_container .plus_wrapper", ->
-  $rows = $(".lnk_container:first").first()
-  $formclone = $rows.clone()
-  $formclone.find("input").val ""
-  $formclone.find(".lnk_img_box").hide()
-  $formclone.insertAfter $(".lnk_container:last")
-  $(".lnk_container .plus_wrapper").hide()
-  $(".lnk_container .minus_wrapper").show() if $(".lnk_container .plus_wrapper").length > 1
-  $(".lnk_container .plus_wrapper:last").last().show()
-
-$(document).on "click", ".lnk_container .minus_wrapper", ->
-  $(this).parents('.lnk_container').remove()
-  $(".lnk_container .minus_wrapper").hide() if $(".lnk_container .plus_wrapper").length is 1
-  $(".lnk_container .plus_wrapper:last").last().show()
+$ ->
+  Lookbook.init()
