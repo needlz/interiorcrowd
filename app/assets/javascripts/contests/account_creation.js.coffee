@@ -72,15 +72,6 @@ class AccountCreation
       $cardNumber = $("#card_number")
       if @trimedVal($cardNumber).length < 1
         @validator.addMessage $("#err_card_number"), "Please enter card number.", $cardNumber
-      else
-        $("#card_number").validateCreditCard (result) =>
-          if result.card_type
-            $card_type = $("#contest_type")
-            card_type = @trimedVal($card_type)
-            unless result.card_type.name is card_type and result.length_valid
-              @validator.addMessage $("#err_card_number"), "Please enter valid card number.", $cardNumber
-          else
-            @validator.addMessage $("#err_card_number"), "Please enter valid card number.", $cardNumber
     ->
       $cvc = $("#card_cvc")
       cvc = @trimedVal($cvc)
