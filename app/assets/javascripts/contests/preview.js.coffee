@@ -33,7 +33,7 @@ class ReviewPage
 
     pname = $.trim($('#project_name').val())
     if pname.length < 1
-      @validator.addMessage $('#err_prj_name'), I18n.name_error, $('#project_name')
+      @validator.addMessage $('#err_prj_name'), I18n.name_error, $('.project-name')
 
     pbudget = $.trim($('#plan_id').val())
     if pbudget.length < 1
