@@ -1,0 +1,42 @@
+%h3 Please show us examples of your work.
+.col-md-12.no-x-padding{:style => "padding-bottom: 40px;"}
+  %span{:style => "font-size:20px;"}
+    %b Links to your portfolio/work
+.clearfix
+.col-md-10.form-group.no-x-padding
+  %input.form-control.input-big-addon.des_links{name: 'external_links[]', type: 'text', :style => "height: 45px;"}
+  %a.plus_wrapper{href: 'javascript:void(0)'}
+    %span +
+  %a.minus_wrapper{href: 'javascript:void(0)'}
+    %span -
+
+  %input#usr.form-control{ :type => "text"}/
+.col-md-2.text-center-xs.text-center-sm
+  %a{:href => "#"}
+    %i.glyphicon.glyphicon-plus.pull-right.glyphic-link{:style => "left: 39px;top: 6px; position: static;float: left !important;margin-top: 6px;"}
+  .clearfix
+.col-md-12.no-x-padding
+  %h1{:style => "color:#231f20;margin-top: 25px;font-size:20px;"} Upload examples
+  %h1{:style => "color:#504d4e;padding-bottom: 25px;margin-top: 0px;font-size:14px;"}
+    %i Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
+.col-md-12{:style => " border: 1px dashed black; min-height:315px;padding-top: 40px; padding-bottom: 40px;"}
+  %span#image_display
+    - if @designer_images.present?
+      - @designer_images.split(',').each do |path|
+        %img{src: path}
+    %input#file_input{ name: '', type:' file' }
+
+  .col-md-3.novice.text-center-xs.text-center-sm{:style => "position:relative;"}
+    %img.img-responsive{:src => "/assets/img-back.png"}/
+    %a{:href => "#"}
+      %i.circle3.glyphicon.glyphicon-remove.pull-right.glyphic-round
+
+  .col-md-3.novice.text-center-xs.text-center-sm
+    %img.img-responsive{:src => "/assets/img-back.png"}/
+  .col-md-3.novice.text-center-xs.text-center-sm
+    %img.img-responsive{:src => "/assets/img-back.png"}/
+  .col-md-3.novice.text-center-xs.text-center-sm
+    %img.img-responsive{:src => "/assets/img-back.png"}/
+.col-md-6.no-x-padding.text-center-xs.text-center-sm{:style => "margin-top:40px;"}
+  / <button class="btn btn-small" type="button">Upload images</button>
+  %button.btn3.btn3-confirm{:type => "button"} Upload images

@@ -1,21 +1,17 @@
-#in_pricing.sign-up
-  .container
-    .section_header
-      \&nbsp;
-    .row.charts_wrapp
-      .col-sm-12
-        .plan
-          .wrapper
-            .row
-              .page-header
-                %h2= t('designer_center.sign_up.become_designer')
-            .row
-              .alert.alert-info
-                %h3= sign_up_interior_design_title
-                %h3= sign_up_style_title
-            = render partial: 'home/msg'
-            .container
-              .row
-                .col-sm-8.col-sm-offset-1.page-title
-                  %h3= t('designer_center.sign_up.get_started')
-              = render 'form'
+= content_for :head do
+  = javascript_include_tag 'designers/form'
+  = render partial: 'shared/setup_uploadify'
+  :javascript
+    window.externaLinks = #{session[:external_links].present? ? session[:external_links].split(',') : []}
+    window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }
+
+.container.animated.fadeInDown
+  .row.text-center.title-first
+    .col-md-12
+      %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"} DESIGNER CENTER
+      %h3{:style => "font-weight:normal;font-size:20px;color:#707070;"}
+        %i Do you love interior design?
+      %h3{:style => "font-weight:normal;font-size:20px;color:#707070;"}
+        %i Looking for a way to expand your portfolio and reach new customers?
+  %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+  = render 'form'
