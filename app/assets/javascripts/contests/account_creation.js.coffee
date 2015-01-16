@@ -1,87 +1,122 @@
-$(document).ready ->
-  $(".submit-button").click (e) ->
-    e.preventDefault()
-    $(".text-error").html ""
-    first_name = $.trim($("#client_first_name").val())
-    last_name = $.trim($("#client_last_name").val())
-    email = $.trim($("#client_email").val())
-    password = $.trim($("#client_password").val())
-    c_password = $.trim($("#client_password_confirmation").val())
-    name_on_card = $.trim($("#client_name_on_card").val())
-    address = $.trim($("#client_address").val())
-    state = $.trim($("#client_state").val())
-    zip = $.trim($("#client_zip").val())
-    card_type = $.trim($("#contest_type").val())
-    cvc = $.trim($("#card_cvc").val())
-    bool = false
-    if cvc.length > 1
-      $("#err_cvc").text "Please enter valid CVC, must have 3 digits."  if not $.isNumeric(cvc) or cvc.length isnt 3
-    else
-      $("#err_cvc").text "Please enter CVC."
-      bool = "card_cvc"
-    if $("#card_number").val().length < 1
-      $("#err_card_number").text "Please enter card number."
-      bool = "card_number"
-    else
-      $("#card_number").validateCreditCard (result) ->
-        if result.card_type
-          unless result.card_type.name is card_type and result.length_valid
-            $("#err_card_number").text "Please enter valid card number."
-            bool = "card_number"
-        else
-          $("#err_card_number").text "Please enter valid card number."
-          bool = "card_number"
+class AccountCreation
 
-    if zip.length > 1
-      unless $.isNumeric(zip)
-        $("#err_zip").text "Please enter valid zip."
-        bool = "user_zip"
-    else
-      $("#err_zip").text "Please enter zip."
-      bool = "user_zip"
-    if state.length > 1
-      rege = /^[a-zA-Z]+$/
-      unless rege.test(state)
-        $("#err_state").text "Please enter valid state. Only letters are allowed."
-        bool = "user_state"
-    else
-      $("#err_state").text "Please enter state."
-      bool = "user_state"
-    if address.length < 1
-      $("#err_address").text "Please enter address."
-      bool = "user_address"
-    if name_on_card.length < 1
-      $("#err_name_on_card").text "Please enter name."
-      bool = "user_name_on_card"
-    if password.length < 1
-      $("#err_password").text "Please enter paswword."
-      bool = "user_password"
-    if c_password.length < 1
-      $("#err_cpassword").text "Please enter confirm paswword."
-      bool = "user_password_confirmation"
-    else
-      unless c_password is password
-        $("#err_cpassword").text "Password and Confirm password must be same."
-        bool = "user_password_confirmation"
-    if email.length > 1
-      rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-      unless rege.test(email)
-        $("#err_email").text "Please enter valid email."
-        bool = "user_email"
-    else
-      $("#err_email").text "Please enter email."
-      bool = "user_email"
-    if last_name.length < 1
-      $("#err_last_name").text "Please enter last name."
-      bool = "user_last_name"
-    if first_name.length < 1
-      $("#err_first_name").text "Please enter first name."
-      bool = "user_first_name"
-    unless $('#client_agree').is(':checked')
-      bool = "client_agree"
-    if bool
-      $("#" + bool).focus()
-      false
-    else
-      $("#new_client").submit()
-      true
+  @init: ->
+    @validator = new ValidationMessages()
+    @bindSubmitButton()
+    @bindAgreementCheckbox()
+    @styleDropdowns()
+    @bindNumericInputs()
+
+  @bindNumericInputs: ->
+    $('#card_number, #card_cvc, #client_zip').keypress(digitsFilter)
+
+  @trimedVal: ($input)->
+    $.trim($input.val())
+
+  @validations: [
+    ->
+      $first_name = $("#client_first_name")
+      if @trimedVal($first_name).length < 1
+        @validator.addMessage $("#err_first_name"), "Please enter first name.", $first_name
+    ->
+      $last_name = $("#client_last_name")
+      if @trimedVal($last_name).length < 1
+        @validator.addMessage $("#err_last_name"), "Please enter last name.", $last_name
+    ->
+      $email = $("#client_email")
+      email = @trimedVal($email)
+      if email.length > 1
+        rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+        unless rege.test(email)
+          @validator.addMessage $("#err_email"), "Please enter valid email.", $email
+      else
+        @validator.addMessage $("#err_email"), "Please enter email.", $email
+    ->
+      $password = $("#client_password")
+      password = @trimedVal($password)
+      if password.length < 1
+        @validator.addMessage $("#err_password"), "Please enter paswword.", $password
+      $c_password = $("#client_password_confirmation")
+      c_password = @trimedVal($c_password)
+      if c_password.length < 1
+        @validator.addMessage $("#err_cpassword"), "Please enter confirm paswword.", $c_password
+      else
+        unless c_password is password
+          @validator.addMessage $("#err_cpassword"), "Password and Confirm password must be same.", $c_password
+    ->
+      $name_on_card = $("#client_name_on_card")
+      if @trimedVal($name_on_card).length < 1
+        @validator.addMessage $("#err_name_on_card"), "Please enter name.", $name_on_card
+    ->
+      $address = $("#client_address")
+      if @trimedVal($address).length < 1
+        @validator.addMessage $("#err_address"), "Please enter address.", $address
+    ->
+      $state = $("#client_state")
+      state = @trimedVal($state)
+      if state.length > 1
+        rege = /^[a-zA-Z]+$/
+        unless rege.test(state)
+          @validator.addMessage $("#err_state"), "Please enter valid state. Only letters are allowed.", $state
+      else
+        @validator.addMessage $("#err_state"), "Please enter state.", $state
+    ->
+      $zip = $("#client_zip")
+      zip = @trimedVal($zip)
+      if zip.length > 1
+        unless $.isNumeric(zip)
+          @validator.addMessage $("#err_zip"), "Please enter valid zip.", $zip
+      else
+        @validator.addMessage $("#err_zip"), "Please enter zip.", $zip
+    ->
+      $cardNumber = $("#card_number")
+      if @trimedVal($cardNumber).length < 1
+        @validator.addMessage $("#err_card_number"), "Please enter card number.", $cardNumber
+      else
+        $("#card_number").validateCreditCard (result) =>
+          if result.card_type
+            $card_type = $("#contest_type")
+            card_type = @trimedVal($card_type)
+            unless result.card_type.name is card_type and result.length_valid
+              @validator.addMessage $("#err_card_number"), "Please enter valid card number.", $cardNumber
+          else
+            @validator.addMessage $("#err_card_number"), "Please enter valid card number.", $cardNumber
+    ->
+      $cvc = $("#card_cvc")
+      cvc = @trimedVal($cvc)
+      if cvc.length > 1
+        if not $.isNumeric(cvc) or cvc.length isnt 3
+          @validator.addMessage $("#err_cvc"), "Please enter valid CVC, must have 3 digits.", $cvc
+      else
+        @validator.addMessage $("#err_cvc"), "Please enter CVC.", $cvc
+    ->
+      unless $('#client_agree').is(':checked')
+        @validator.valid = false
+  ]
+
+  @validate: ->
+    @validator.reset()
+    for validation in @validations
+      validation.apply @
+
+  @bindSubmitButton: ->
+    $(".submit-button").click (e) =>
+      e.preventDefault()
+      $(".text-error").html ""
+      @validate()
+      if @validator.valid
+        $("#new_client").submit()
+      else
+        @validator.focusOnMessage()
+        false
+
+  @bindAgreementCheckbox: ->
+    $('.tick-btn').click ->
+      $(this).toggleClass 'active'
+      $('#client_agree').trigger 'click'
+
+  @styleDropdowns: ->
+    $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
+
+$(document).ready ->
+  AccountCreation.init()

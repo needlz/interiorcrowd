@@ -2,80 +2,78 @@
   = javascript_include_tag 'jquery.creditCardValidator.js'
   = javascript_include_tag 'contests/account_creation'
 
-.container.animated.fadeInDown
+.container.animated.fadeInDown.client-signup
   .row.text-center.title-first
-    %h1{:style => "font-weight:normal;"} CREATE YOUR ACCOUNT AND PAYMENT DETAIL
+    %h1.main-title= t('client_center.sign_up.title')
     = render :partial => 'home/msg'
   = form_for @client, {:id => "create", :method => "post"} do |f|
-    %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
-    %h3 Create your account
+    %div.divider
+    %h3= t('client_center.sign_up.create_account')
     .col-md-12.no-padding-left
       .row.form
         .col-md-4
-          %label First Name
+          %label= t('client_center.profile.labels.first_name')
           = f.text_field :first_name, class: 'form-control', tabindex: 1
           %span#err_first_name.text-error
         .col-md-offset-2.col-md-4
-          %label E-mail address
+          %label= t('client_center.profile.labels.email')
           = f.text_field :email, :class => "form-control", tabindex: 3
           %span#err_email.text-error
       .row.form
         .col-md-4
-          %label Last Name
+          %label= t('client_center.profile.labels.last_name')
           = f.text_field :last_name, :class => "form-control", tabindex: 2
           %span#err_last_name.text-error
         .col-md-offset-2.col-md-4
-          %label Password
+          %label= t('client_center.sign_up.password')
           = f.password_field :password, :class => "form-control", tabindex: 4
           %span#err_password.text-error
       .row.form
         .col-md-offset-6.col-md-4
-          %label Confirm Password
+          %label= t('client_center.sign_up.confirm_password')
           = f.password_field :password_confirmation, :class => "form-control", tabindex: 5
           %span#err_cpassword.text-error
-      %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
-    %h3 Payment Information
+      %div.divider
+    %h3= t('client_center.sign_up.payment_information')
     .col-md-12.no-padding-left
       .row.form
         .col-md-4
-          %label Name on card
+          %label= t('client_center.sign_up.name_on_card')
           = f.text_field :name_on_card, :class => "form-control", tabindex: 6
           %span#err_name_on_card.text-error
         .col-md-offset-2.col-md-4
-          %label Card type
+          %label= t('client_center.sign_up.card_type')
           = select('contest',
               'type',
-              options_for_select(ContestCreationWizard::CARD_TYPES.map { |type| [t("client_center.profile.labels.card_types.#{ type }"), type] }, 0),
+              options_for_select(PersonalData.card_type_options, 0),
               {},
               { class: 'selectpicker form-selector', tabindex: 11 })
           .clearfix
       .row.form
         .col-md-4
-          %label Street address
+          %label= t('client_center.profile.labels.address')
           = f.text_field :address, :class => "form-control", tabindex: 7
           %span#err_address.text-error
         .col-md-offset-2.col-md-3
-          %label Card Number
+          %label= t('client_center.profile.labels.card_number')
           %input#card_number.form-control{ maxlength: 19,
             :name => "Contest[card_number]",
-            :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
              :type => "text", tabindex: 12}/
           %span#err_card_number.text-error
         .col-md-1
-          %label CVC
+          %label= t('client_center.profile.labels.card_cvc')
           %input#card_cvc.form-control.left-control{ :name => "Contest[cvc]",
-            :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))",
             :type => "text", tabindex: 13}/
           %span#err_cvc.text-error
       .row.form
         .col-md-4
-          %label City
+          %label= t('client_center.profile.labels.city')
           %input.form-control{:type => "text", tabindex: 8}/
         .col-md-offset-2.col-md-2
-          %label Expiration Date
+          %label= t('client_center.profile.labels.card_exp_date')
           = select_month(0,
               { :field_name => 'card_exp_month',
-                prompt: 'Select Month' },
+                prompt: t('client_center.sign_up.select_month') },
               :class => "selectpicker form-selector card-exp", tabindex: 14)
         .col-md-2
           %label  
@@ -83,45 +81,31 @@
               { :start_year => Time.now.year,
                 :end_year => Time.now.year + 10,
                 :field_name => :card_exp_year,
-                prompt: 'Select Year'},
+                prompt: t('client_center.sign_up.select_year')},
               :class => "selectpicker form-selector card-exp", tabindex: 15)
       .row.form
         .col-md-2
-          %label State
+          %label= t('client_center.profile.labels.state')
           = select('client',
               'state',
-              options_for_select(ContestCreationWizard::STATES.map { |code, name| [name, code] }, 0),
+              options_for_select(PersonalData.state_options, 0),
               {},
               { class: 'selectpicker form-selector', tabindex: 9 })
           %span#err_state.text-error
         .col-md-2
-          %label Zip code
+          %label= t('client_center.profile.labels.zip')
           = f.text_field :zip,
               :class => "form-control left-control",
-              :onkeyup => "jQuery(this).val(jQuery(this).val().replace(/[^0-9]/ig, ''))", tabindex: 10
+              tabindex: 10
           %span#err_zip.text-error
-      %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+      %div.divider
     .clearfix
     .text-center
-      %h3{:style => "display: inline-block; margin-bottom: 50px;"}
+      %h3.agreement
         = check_box_tag 'client_agree', 'yes', false, name: '', class: 'hidden'
         .tick-btn
           %span{ tabindex: 16 } ✓
-        I agree with the InteriorCrowd  term of use
+        = t('client_center.sign_up.i_agree')
       .clearfix
-      %button.btn1.btn1-confirm.submit-button{:type => "button", tabindex: 17 } Submit
-:javascript
-  $(function(){
-    $('.pull-down').each(function() {
-      $(this).css('margin-top', $(this).parent().height()-$(this).height())
-    });
-
-    $( ".tick-btn" ).click(function() {
-      $(this).toggleClass('active');
-      $('#client_agree').trigger('click')
-    });
-
-    $('.selectpicker').selectpicker({
-      style: 'btn-selector-medium font15'
-    });
-  })
+      %button.btn1.btn1-confirm.submit-button{:type => "button", tabindex: 17 }
+        = t('client_center.sign_up.submit')
