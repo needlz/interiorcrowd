@@ -244,7 +244,9 @@ en:
       confirm_password: Password (again)
       agreement: By clicking below, you agree to the terms and conditions.
       register_button: Create Account
-      upload_example_button: Upload
+      examples:
+        upload_button: Upload images
+        uploading: Uploading...
       validation_messages:
         invalid_zip: Please enter valid zip.
         enter_zip: Please enter zip.

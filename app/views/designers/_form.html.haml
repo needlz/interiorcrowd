@@ -1,6 +1,6 @@
 = form_for(@designer) do |f|
   = f.hidden_field :ex_document_ids
-  %input#designer_image{name: 'designer_image', type: 'hidden', value: @designer_images}
+  %input#designer_image{name: 'portfolio[picture_ids]', type: 'hidden', value: @designer_images}
   %h3 To get started, tell us a bit more about yourself.
   .col-md-12.no-padding-left
     .row.form
@@ -94,17 +94,16 @@
           %option{:value => "WY"} Wyoming
       .col-md-2
         %label Zip code
-        = f.text_field :zip,
-            class: 'form-control input-small'
+        = f.text_field :zip, class: 'form-control'
         %span#err_zip.text-error
-        %input.form-control{:type => "text"}/
     %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
   = render partial: 'designers/new/portfolio'
   .clearfix
   .text-center
     %h3{:style => "display: inline-block; margin-bottom: 50px;"}
+      = check_box_tag 'designer_agree', 'yes', false, name: '', class: 'hidden'
       .tick-btn
         %span ✓
-      I agree with the InteriorCrowd  term of use
+      = t('client_center.sign_up.i_agree')
     .clearfix
-    %button.btn1.btn1-confirm{:type => "button"} Create Account
+    %button.btn1.btn1-confirm.create-account{:type => "button"} Create Account

@@ -22,7 +22,12 @@ class DesignersController < ApplicationController
     respond_to do |format|
       if @designer.save
         session[:external_links] = nil
-        session[:designer_id] = @designer.id 
+        session[:designer_id] = @designer.id
+        if params[:portfolio].present? && params[:portfolio][:picture_ids].present?
+          portfolio = Portfolio.create!(designer_id: @designer.id)
+          portfolio.update_pictures(params[:portfolio])
+          @designer.save!
+        end
         Mailer.designer_registration(@designer, user_ps).deliver
         format.html { redirect_to designer_center_index_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
