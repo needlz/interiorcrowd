@@ -70,17 +70,11 @@ class ContestCreationWizard
 
   def budget_options
     placeholder = [I18n.t('contests.space.budget.placeholder'), '']
-    [placeholder] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
+    [placeholder] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i + 1] }
   end
 
   def budget_plans
     BudgetPlan.all.map { |plan| PackageView.new(plan) }
-  end
-
-  def self.card_type_options
-    ContestCreationWizard::CARD_TYPES.map do |type|
-      [I18n.t("client_center.profile.labels.card_types.#{ type }"), type]
-    end
   end
 
   private
