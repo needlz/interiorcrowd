@@ -3,14 +3,16 @@ $(document).ready ->
 
   $('.btn1-confirm').click (e) ->
     $('.text-error').html('')
-    errors = []
+    incompleteForms = []
     if $(".design_element:checked").length < 1
-      errors.push($("#err_category").html I18n.errors.select_category)
-    if isNaN(parseInt($('[name="design_brief[design_area]"]').val()))
-      errors.push($("#err_design_area").html I18n.errors.select_room)
-
-    if errors.length
-      errors[0].get(0).scrollIntoView()
+      $("#err_category").html I18n.errors.select_category
+      incompleteForms.push($('.packages'))
+    selectedRoomId = parseInt($('[name="design_brief[design_area]"]').val())
+    if isNaN(selectedRoomId)
+      $("#err_design_area").html I18n.errors.select_room
+      incompleteForms.push($('.rooms'))
+    if incompleteForms.length
+      incompleteForms[0].get(0).scrollIntoView()
     else
       e.preventDefault()
       $("#design_categories").submit()

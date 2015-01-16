@@ -4,9 +4,8 @@
     We’d love to help you with your design. let us know how we can work with you?
     %br
     How can we help you today?
-
+%span#err_category.text-error
 - @creation_wizard.available_design_categories.each_with_index do |design_category, index|
   = render partial: 'contests/options/category_row',
       locals: { classes: index == 0 ? 'question' : 'question2',
                 design_category: design_category }
-%span#err_category.text-error

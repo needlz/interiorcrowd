@@ -2,7 +2,9 @@
   window.areas = #{ @creation_wizard.available_areas.to_json }
 
 .rooms.text-package.text-center-sm.text-center-xs
-  %h1.title #{ t('contests.titles.areas') }
+  %h1.title= t('contests.titles.areas')
+  .clearfix
+    %span#err_design_area.text-error
   - rooms_in_row = 4
   = for_each_by_groups(@creation_wizard.top_level_areas, rooms_in_row) do |area, group_index|
     = render partial: 'contests/options/areas_row',
@@ -15,4 +17,3 @@
       = render partial: 'contests/options/area_suboptions', locals: { areas: area.children, parent: area }
   .clearfix
   = hidden_field_tag('design_brief[design_area]', @contest_view.design_area.try(:id))
-  %span#err_design_area.text-error
