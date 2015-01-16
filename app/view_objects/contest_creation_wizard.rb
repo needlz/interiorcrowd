@@ -77,6 +77,12 @@ class ContestCreationWizard
     BudgetPlan.all.map { |plan| PackageView.new(plan) }
   end
 
+  def self.card_type_options
+    ContestCreationWizard::CARD_TYPES.map do |type|
+      [I18n.t("client_center.profile.labels.card_types.#{ type }"), type]
+    end
+  end
+
   private
 
   attr_reader :contest_attributes
