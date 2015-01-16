@@ -70,7 +70,7 @@ class ContestCreationWizard
 
   def budget_options
     placeholder = [I18n.t('contests.space.budget.placeholder'), '']
-    [placeholder] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
+    [placeholder] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i + 1] }
   end
 
   def budget_plans

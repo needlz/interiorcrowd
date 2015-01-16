@@ -1,26 +1,10 @@
-class Validator
-
-  @reset: ->
-    @clearErrors()
-    @valid = true
-    @validationMessage = null
-    @elementToFocus = null
-
-  @validate: (errorCondition, $validationMessage, text, elementToFocus)->
-    if errorCondition
-      @valid = false
-      $validationMessage.text(text)
-      @elementToFocus = @elementToFocus || elementToFocus
-
-  @clearErrors: ->
-    $('.text-error').text('')
-
 class ReviewPage
 
   @init: ->
     @initActivePlan()
     @bindPlansBoxes()
     @bindContinueButton()
+    @validator = new ValidationMessages()
 
   @initActivePlan: ->
     plan_id = $('#plan_id').val()
@@ -37,18 +21,23 @@ class ReviewPage
     $('.continue').click (e) =>
       e.preventDefault()
       @validate()
-      if Validator.valid
+      if @validator.valid
         $('#account_creation').submit()
       else
-        $(Validator.elementToFocus).focus()
+        @validator.focusOnMessage()
         false
 
   @validate: ->
+    @validator.reset()
+    $('.text-error').text('')
+
     pname = $.trim($('#project_name').val())
+    if pname.length < 1
+      @validator.addMessage $('#err_prj_name'), I18n.name_error, $('#project_name')
+
     pbudget = $.trim($('#plan_id').val())
-    Validator.reset()
-    Validator.validate(pname.length < 1, $('#err_prj_name'), I18n.name_error, '#project_name')
-    Validator.validate(pbudget.length < 1, $('#err_plan'), I18n.plan_error, '.plans')
+    if pbudget.length < 1
+      @validator.addMessage $('#err_plan'), I18n.plan_error, $('.packages-description')
 
 $ ->
   ReviewPage.init()

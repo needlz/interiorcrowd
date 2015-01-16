@@ -5,8 +5,7 @@
       %span.hint
         %i= t('contests.space.budget.hint')
     .clearfix
+      %span.text-error{ id: 'err_budget' }
     = select_tag "design_space[f_budget]",
             options_for_select(@creation_wizard.budget_options, @budget_option),
             { class: 'selectpicker' }
-    .clearfix
-      %span.text-error{ id: 'err_budget' }

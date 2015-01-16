@@ -4,36 +4,38 @@ class DesignSpacePage
 
   @init: ->
     BudgetOptions.init()
-    dimensionViewDetailsToggle = new OptionsContainerToggle(
+    @dimensionViewDetailsToggle = new OptionsContainerToggle(
       radioButtonsSelector: '[name="details_toggle"]',
       containerSelector: '.space-view-details'
     )
-    dimensionViewDetailsToggle.init()
+    @dimensionViewDetailsToggle.init()
     SpacePicturesUploader.init()
+    @validator = new ValidationMessages()
 
-    @bindContinueButton(dimensionViewDetailsToggle)
+    @bindContinueButton()
 
-  @bindContinueButton: (dimensionViewDetailsToggle)->
-    $('.continue').click (event) =>
-      event.preventDefault()
-      $('.text-error').text('')
-      @clearHiddenInputs(dimensionViewDetailsToggle)
+  @onSubmitClick: (event)=>
+    event.preventDefault()
+    $('.text-error').text('')
+    @clearHiddenInputs
 
-      budget = $.trim($(@budgetDropdownSelector).val())
-      messageToFocus = null
+    @validator.reset()
+    budget = parseInt($.trim($(@budgetDropdownSelector).val()))
+    if isNaN(budget) || budget < 1
+      @validator.addMessage $("#err_budget"), I18n.budget.select_error, $('.design-budget')
 
-      if budget < 1
-        messageToFocus = $("#err_budget")
-        messageToFocus.text(I18n.budget.select_error)
+    if @validator.valid
+      $("#design_space").submit()
+    else
+      @validator.focusOnMessage()
+      false
 
-      if messageToFocus
-        $(messageToFocus).get(0).scrollIntoView()
-        false
-      else
-        $("#design_space").submit()
+  @bindContinueButton: ->
+    $('.continue').click(@onSubmitClick)
 
-  @clearHiddenInputs: (dimensionViewDetailsToggle)->
-    $('.space-pictures, .dimensions').find('input').attr('name', '') unless dimensionViewDetailsToggle.showing()
+
+  @clearHiddenInputs: ->
+    $('.space-pictures, .dimensions').find('input').attr('name', '') unless @dimensionViewDetailsToggle.showing()
 
 $ ->
   DesignSpacePage.init()

@@ -1,16 +1,32 @@
-$(document).ready ->
-  RoomsEditor.init()
+class ChooseRoomPage
 
-  $('.btn1-confirm').click (e) ->
-    $('.text-error').html('')
-    errors = []
+  @validate: ->
     if $(".design_element:checked").length < 1
-      errors.push($("#err_category").html I18n.errors.select_category)
-    if isNaN(parseInt($('[name="design_brief[design_area]"]').val()))
-      errors.push($("#err_design_area").html I18n.errors.select_room)
+      @validator.addMessage $("#err_category"), I18n.errors.select_category, $('.packages')
 
-    if errors.length
-      errors[0].get(0).scrollIntoView()
-    else
+    selectedRoomId = parseInt($('[name="design_brief[design_area]"]').val())
+    if isNaN(selectedRoomId)
+      @validator.addMessage $("#err_design_area"), I18n.errors.select_room, $('.rooms')
+
+  @init: ->
+    RoomsEditor.init()
+    @validator = new ValidationMessages()
+    @bindContinueButton()
+
+  @onSubmitClick: (e)=>
+    $('.text-error').html('')
+    @validator.reset()
+    @validate()
+
+    if @validator.valid
       e.preventDefault()
       $("#design_categories").submit()
+    else
+      @validator.focusOnMessage()
+
+
+  @bindContinueButton: ->
+    $('.btn1-confirm').click(@onSubmitClick)
+
+$(document).ready ->
+  ChooseRoomPage.init()

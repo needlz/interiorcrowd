@@ -3,11 +3,11 @@
     .col-md-12.no-x-padding
       %h1.colors-type-title= t('contests.titles.wanted_colors')
     .col-md-12
+      %span#err_fav.text-error
       - selected_colors_input = capture do
         %input#fav_color.form-control{name: "design_style[desirable_colors]",
           type: "text",
           value: @contest_view.desirable_colors,
           class: 'color-typeahead'}
-        %span#err_fav.text-error
 
     = render partial: 'contests/options/colors_picker', locals: { k: 'm', selected_colors_input: selected_colors_input }
