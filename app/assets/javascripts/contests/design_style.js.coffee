@@ -1,6 +1,7 @@
 class Validations
 
   constructor: (@appealsCount, @levelContainer, @examplesToggle)->
+    @validator = new ValidationMessages()
 
   allAppealsSelected: ->
     $('.likes input:checked').length == @appealsCount
@@ -8,36 +9,39 @@ class Validations
   clearHiddenInputs: ->
     $('.example-pictures, .links-options').find('input').attr('name', '') unless @examplesToggle.showing()
 
-  validate: (errorCondition, $validationMessage, text)->
-    if errorCondition
-      @valide = false
-      $validationMessage.text(text)
-      @$validationMessage = $validationMessage unless @$validationMessage
+  validate: ->
+    $(".text-error").text('')
+    @validator.reset()
 
-  init: ()->
-    $(".slidercon input").slider()
-    $(".continue").click (e) =>
-      e.preventDefault()
-      $(".text-error").text('')
+    designerLevel = parseInt(@levelContainer.val())
+    if isNaN(designerLevel)
+      @validator.addMessage $("#err-designer-level"), I18n.validations.select_design_level, $('.designer-levels')
 
-      fav_color = $.trim($("#fav_color").val())
-      refrain_color = $.trim($("#refrain_color").val())
-      @valid = true
-      @$validationMessage = null
+    unless @allAppealsSelected()
+      @validator.addMessage $("#err-appeals"), I18n.validations.no_appeals, $('.appeal-options')
 
+    fav_color = $.trim($("#fav_color").val())
+    if fav_color.length < 1
+      @validator.addMessage $("#err_fav"), I18n.validations.no_colors, $(".fav-colors")
+
+    refrain_color = $.trim($("#refrain_color").val())
+    if refrain_color.length < 1
+      @validator.addMessage $("#err_refrain"), I18n.validations.no_colors, $(".avoided-colors")
+
+  onSubmitClick: (e)=>
+    e.preventDefault()
+
+    @validate()
+    if @validator.valid
       @clearHiddenInputs()
+      $("#design_style").submit()
+    else
+      @validator.focusOnMessage()
+      false
 
-      @validate fav_color.length < 1, $("#err_fav"), I18n.validations.no_colors
-      @validate refrain_color.length < 1, $("#err_refrain"), I18n.validations.no_colors
-      designerLevel = parseInt(@levelContainer.val())
-      @validate isNaN(designerLevel), $("#err-designer-level"), I18n.validations.select_design_level
-      @validate !@allAppealsSelected(), $("#err-appeals"), I18n.validations.no_appeals
 
-      if @$validationMessage
-        false
-        @$validationMessage.get(0).scrollIntoView()
-      else
-        $("#design_style").submit()
+  init: ->
+    $(".continue").click(@onSubmitClick)
 
 class DesignStylePage
 
@@ -50,6 +54,8 @@ class DesignStylePage
     examplesToggle.init()
     validations = new Validations(appealsCount, $levelContainer, examplesToggle)
     validations.init()
+
+    $(".slidercon input").slider()
 
     DesirableColorsEditor.init()
     UndesirableColorsEditor.init()

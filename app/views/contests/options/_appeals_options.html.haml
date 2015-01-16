@@ -4,8 +4,8 @@
       .col-md-12.no-x-padding.header
         %h1.title= t('contests.titles.appeals')
       .clearfix
+        %span#err-appeals.text-error
 
       = render partial: 'contests/options/appeal_scale_row',
             collection: @contest_view.appeal_scales,
             as: :scale
-      %span#err-appeals.text-error

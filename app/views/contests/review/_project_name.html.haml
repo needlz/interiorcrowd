@@ -2,9 +2,10 @@
   %h1.text-center= t('contests.creation.preview.name_label')
 .rooms.text-package.text-center-sm.text-center-xs.project-name-container
   .col-md-offset-1.col-md-10.text-center
+    %span#err_prj_name.text-error
     %input#project_name.form-control.text-center.dreamloft{ name: 'preview[contest_name]',
       placeholder: t('contests.creation.preview.name_placeholder'),
       type: 'text',
       value: @contest_view.name }/
   .clearfix
-  %span#err_prj_name.text-error
+
