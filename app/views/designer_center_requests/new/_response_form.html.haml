@@ -7,4 +7,5 @@
       .row
         %h4{style: "padding-left:15px;"}= t('designer_center.respond.ready_to_go')
       = render partial: 'designers/lookbook/add_picture'
-      = render partial: 'designers/lookbook/uploaded_pictures', locals: { lookbook_view: DesignerLookbook.new(f.object) }
+      = render partial: 'designers/lookbook/uploaded_pictures',
+          locals: { lookbook_view: DesignerLookbook.new(f.object) }

@@ -102,6 +102,7 @@ en:
         title: What is your design budget for materials?
         hint: 'Note: This does not include any design fees'
         select_error: Please select budget.
+        placeholder: 'Budget:'
       other_feedback:
         title: Other feedback or instructions?
         placeholder: Leave a comment...
@@ -193,21 +194,38 @@ en:
     attribute_done_button: Done
     profile:
       labels:
-        address: Address
+        address: Street address
+        city: City
         state: State
-        zip: Zip
+        zip: Zip code
         first_name: First Name
         last_name: Last Name
-        email: Email
+        email: E-mail address
         billing_information: Billing information
         card_number: Card number
         card_exp_month: Expiration month
         card_exp_year: Expiration year
+        card_exp_date: Expiration Date
         card_cvc: CVC
+        card_types:
+          visa: Visa
+          mastercard: Mastercard
     navigation:
       entries: Entries
       brief: Brief
       profile: Profile
+    sign_up:
+      title: CREATE YOUR ACCOUNT AND PAYMENT DETAIL
+      create_account: Create your account
+      password: Password
+      confirm_password: Confirm Password
+      payment_information: Payment Information
+      name_on_card: Name on card
+      card_type: Card type
+      select_year: Select Year
+      select_month: Select Month
+      i_agree: I agree with the InteriorCrowd term of use
+      submit: Submit
   designer_center:
     navigation:
       create_portfolio: Create Portfolio
