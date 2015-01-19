@@ -649,6 +649,8 @@
   margin-bottom: 3em;
 
   .plan-container.active {
+    padding-bottom: 40px;
+    padding-top: 40px;
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     opacity: 1;
