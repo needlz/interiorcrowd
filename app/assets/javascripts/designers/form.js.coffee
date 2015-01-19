@@ -10,32 +10,40 @@ class @DesignerSignUp
     @bindRemoveLinkButton()
     @bindCreateAccountButton()
     @bindFileUploader()
-    $('#designer_zip').keypress digitsFilter
+    @bindNumericInputs()
+    @styleDropdowns()
+    @bindAgreementCheckbox()
 
+  styleDropdowns: ->
     $('.selectpicker').selectpicker({
       style: 'btn-selector-medium font15'
     });
 
+  bindAgreementCheckbox: ->
     $(".tick-btn").click (e)->
       $(@).toggleClass "active"
       $('#designer_agree').prop('checked', $(@).hasClass('active'))
 
+  bindNumericInputs: ->
+    $('#designer_zip').keypress digitsFilter
+
   bindAddLinkButton: ->
-    $(document).on 'click', '.lnk_container .plus_wrapper', @, (event)->
+    $(document).on 'click', '.lnk_container .plus_wrapper', (event)=>
       event.preventDefault()
-      $rows = $('.lnk_container:first').first()
-      $formclone = $rows.clone()
-      $formclone.find('input').val ''
-      $formclone.insertAfter $('.lnk_container:last')
-      signUp = event.data
-      signUp.refreshLinkButtons('added')
+      @addLink()
+
+  addLink: ->
+    $rows = $('.lnk_container:first').first()
+    $formclone = $rows.clone()
+    $formclone.find('input').val ''
+    $formclone.insertAfter $('.lnk_container:last')
+    @refreshLinkButtons('added')
 
   bindRemoveLinkButton: ->
-    $(document).on 'click', '.lnk_container .minus_wrapper', @, (event)->
+    $(document).on 'click', '.lnk_container .minus_wrapper', (event)=>
       event.preventDefault()
       $(event.target).parents('.lnk_container').remove()
-      signUp = event.data
-      signUp.refreshLinkButtons('removed')
+      @refreshLinkButtons('removed')
 
   populateExamplesInputs: ->
     $.each(externaLinks, (index, link)=>
@@ -149,4 +157,3 @@ class @DesignerSignUp
 $(document).ready ->
   signUp = new DesignerSignUp()
   signUp.init()
-

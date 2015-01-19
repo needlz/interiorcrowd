@@ -21,4 +21,29 @@
   .agreement {
     display: inline-block; margin-bottom: 50px;
   }
+
+  .links-to-work-title{
+    padding-bottom: 40px;
+    font-size:20px;
+  }
+
+  .example-link-glyph {
+    left: 39px;top: 6px; position: static;float: left !important;margin-top: 6px;
+  }
+
+  .upload-examples-title {
+    color:#231f20;margin-top: 25px;font-size:20px;
+  }
+
+  .upload-examples-subtitle {
+    color:#504d4e;padding-bottom: 25px;margin-top: 0px;font-size:14px;
+  }
+
+  .thumbs {
+    border: 1px dashed black; min-height:315px;padding-top: 40px; padding-bottom: 40px;
+  }
+
+  .upload-button-container {
+    margin-top:40px;
+  }
 }

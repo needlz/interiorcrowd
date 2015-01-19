@@ -23,11 +23,7 @@ class DesignersController < ApplicationController
       if @designer.save
         session[:external_links] = nil
         session[:designer_id] = @designer.id
-        if params[:portfolio].present? && params[:portfolio][:picture_ids].present?
-          portfolio = Portfolio.create!(designer_id: @designer.id)
-          portfolio.update_pictures(params[:portfolio])
-          @designer.save!
-        end
+        @designer.create_portfolio(params[:portfolio])
         Mailer.designer_registration(@designer, user_ps).deliver
         format.html { redirect_to designer_center_index_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
@@ -85,6 +81,6 @@ class DesignersController < ApplicationController
 
   def designer_params
     params.require(:designer).permit(:first_name, :email, :last_name, :password,
-                                     :password_confirmation, :state, :zip, :portfolio, :external_links)
+                                     :password_confirmation, :zip, :portfolio, :external_links)
   end
 end
