@@ -1,109 +1,61 @@
 = form_for(@designer) do |f|
-  = f.hidden_field :ex_document_ids
   %input#designer_image{name: 'portfolio[picture_ids]', type: 'hidden', value: @designer_images}
-  %h3 To get started, tell us a bit more about yourself.
-  .col-md-12.no-padding-left
+  %h3= t('designer_center.sign_up.get_started')
+  .col-md-12.no-padding-left.font20
     .row.form
       .col-md-5
-        %label{:style => "font-size:20px;"} First name
+        %label= t('designer_center.sign_up.first_name')
         = f.text_field :first_name, class: 'form-control'
         %span#err_first_name.text-error
       .col-md-offset-2.col-md-5
-        %label{:style => "font-size:20px;"} E-mail address
+        %label= t('designer_center.sign_up.email')
         = f.text_field :email, class: 'form-control'
         %span#err_email.text-error
     .row.form
       .col-md-5
-        %label{:style => "font-size:20px;"} Last Name
+        %label= t('designer_center.sign_up.last_name')
         = f.text_field :last_name, class: 'form-control'
         %span#err_last_name.text-error
       .col-md-offset-2.col-md-5
-        %label{:style => "font-size:20px;"} Password
+        %label= t('designer_center.sign_up.password')
         = f.password_field :password, class: 'form-control'
         %span#err_password.text-error
     .row.form
       .col-md-5
-        %label{:style => "font-size:20px;"} Street address
+        %label= t('designer_center.sign_up.street_address')
         %input.form-control{:type => "text"}/
       .col-md-offset-2.col-md-5
-        %label{:style => "font-size:20px;"} Confirm Password
+        %label= t('designer_center.sign_up.confirm_password')
         = f.password_field :password_confirmation, class: 'form-control'
         %span#err_cpassword.text-error
   .col-md-12.no-padding-left
     .row.form
       .col-md-2
-        %label City
+        %label= t('designer_center.sign_up.city')
         %input.form-control{:type => "text"}/
       .col-md-offset-2.col-md-3.no-margin-left
-        %label Phone number
+        %label= t('designer_center.sign_up.phone_number')
         %input.form-control{:type => "text"}/
     .row.form
       .col-md-2
-        %label State
-        %select.selectpicker.form-selector
-          %option{:value => "AL"} Alabama
-          %option{:value => "AK"} Alaska
-          %option{:value => "AZ"} Arizona
-          %option{:value => "AR"} Arkansas
-          %option{:value => "CA"} California
-          %option{:value => "CO"} Colorado
-          %option{:value => "CT"} Connecticut
-          %option{:value => "DE"} Delaware
-          %option{:value => "DC"} District Of Columbia
-          %option{:value => "FL"} Florida
-          %option{:value => "GA"} Georgia
-          %option{:value => "HI"} Hawaii
-          %option{:value => "ID"} Idaho
-          %option{:value => "IL"} Illinois
-          %option{:value => "IN"} Indiana
-          %option{:value => "IA"} Iowa
-          %option{:value => "KS"} Kansas
-          %option{:value => "KY"} Kentucky
-          %option{:value => "LA"} Louisiana
-          %option{:value => "ME"} Maine
-          %option{:value => "MD"} Maryland
-          %option{:value => "MA"} Massachusetts
-          %option{:value => "MI"} Michigan
-          %option{:value => "MN"} Minnesota
-          %option{:value => "MS"} Mississippi
-          %option{:value => "MO"} Missouri
-          %option{:value => "MT"} Montana
-          %option{:value => "NE"} Nebraska
-          %option{:value => "NV"} Nevada
-          %option{:value => "NH"} New Hampshire
-          %option{:value => "NJ"} New Jersey
-          %option{:value => "NM"} New Mexico
-          %option{:value => "NY"} New York
-          %option{:value => "NC"} North Carolina
-          %option{:value => "ND"} North Dakota
-          %option{:value => "OH"} Ohio
-          %option{:value => "OK"} Oklahoma
-          %option{:value => "OR"} Oregon
-          %option{:value => "PA"} Pennsylvania
-          %option{:value => "RI"} Rhode Island
-          %option{:value => "SC"} South Carolina
-          %option{:value => "SD"} South Dakota
-          %option{:value => "TN"} Tennessee
-          %option{:value => "TX"} Texas
-          %option{:value => "UT"} Utah
-          %option{:value => "VT"} Vermont
-          %option{:value => "VA"} Virginia
-          %option{:value => "WA"} Washington
-          %option{:value => "WV"} West Virginia
-          %option{:value => "WI"} Wisconsin
-          %option{:value => "WY"} Wyoming
+        %label= t('designer_center.sign_up.state')
+        = select('designer',
+              'state',
+              options_for_select(PersonalData.state_options, 0),
+              {},
+              { class: 'selectpicker form-selector', tabindex: 9 })
       .col-md-2
-        %label Zip code
+        %label= t('designer_center.sign_up.zipcode')
         = f.text_field :zip, class: 'form-control'
         %span#err_zip.text-error
-    %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+    %div.divide-line
   = render partial: 'designers/new/portfolio'
   .clearfix
   .text-center
-    %h3{:style => "display: inline-block; margin-bottom: 50px;"}
+    %h3.agreement
       = check_box_tag 'designer_agree', 'yes', false, name: '', class: 'hidden'
       .tick-btn
         %span ✓
-      = t('client_center.sign_up.i_agree')
+      = t('designer_center.sign_up.i_agree')
     .clearfix
-    %button.btn1.btn1-confirm.create-account{:type => "button"} Create Account
+    %button.btn1.btn1-confirm.create-account{:type => "button"}= t('designer_center.sign_up.register_button')

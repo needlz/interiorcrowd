@@ -16,15 +16,6 @@ class @DesignerSignUp
       style: 'btn-selector-medium font15'
     });
 
-    PicturesUploadButton.init
-      fileinputSelector: '#new_designer #file_input',
-      uploadButtonSelector: '#new_designer .upload-button',
-      thumbs:
-        container: '#image_display'
-        selector: '#designer_image'
-        theme: 'new'
-      I18n: I18n.examples
-
     $(".tick-btn").click (e)->
       $(@).toggleClass "active"
       $('#designer_agree').prop('checked', $(@).hasClass('active'))
@@ -91,13 +82,14 @@ class @DesignerSignUp
         false
 
   bindFileUploader: ->
-    $('#file_input').initUploaderWithThumbs
+    PicturesUploadButton.init
+      fileinputSelector: '#new_designer #file_input',
+      uploadButtonSelector: '#new_designer .upload-button',
       thumbs:
         container: '#image_display'
-        selector: '#designer_ex_document_ids'
-      uploadify:
-        buttonText: I18n.upload_example_button
-        removeTimeout: 3
+        selector: '#designer_image'
+        theme: 'new'
+      I18n: I18n.examples
 
   validLink: (link)->
     regex = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/

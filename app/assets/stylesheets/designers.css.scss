@@ -1,12 +1,24 @@
 // Place all the styles related to the designers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.sign-up {
-  .create-account {
-    width: 150px;
+#designer-signup {
+  .designer-center-title {
+    font-weight:normal;font-size:30px;color:#000000;
   }
 
-  #image_display {
-    padding-bottom: 10px;
+  h3.subtitle {
+    font-weight:normal;font-size:20px;color:#707070;
+  }
+
+  .divide-line {
+    padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;
+  }
+
+  .font20{
+    font-size:20px;
+  }
+
+  .agreement {
+    display: inline-block; margin-bottom: 50px;
   }
 }

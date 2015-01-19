@@ -5,13 +5,14 @@
     window.externaLinks = #{session[:external_links].present? ? session[:external_links].split(',') : []}
     window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }
 
-.container.animated.fadeInDown
-  .row.text-center.title-first
-    .col-md-12
-      %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"} DESIGNER CENTER
-      %h3{:style => "font-weight:normal;font-size:20px;color:#707070;"}
-        %i Do you love interior design?
-      %h3{:style => "font-weight:normal;font-size:20px;color:#707070;"}
-        %i Looking for a way to expand your portfolio and reach new customers?
-  %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
-  = render 'form'
+#designer-signup
+  .container.animated.fadeInDown
+    .row.text-center.title-first
+      .col-md-12
+        %h1.designer-center-title= t('designer_center.title').upcase
+        %h3.subtitle
+          %i= t('designer_center.sign_up.do_you_love')
+        %h3.subtitle
+          %i= t('designer_center.sign_up.looking_for')
+    %div.divide-line
+    = render 'form'
