@@ -190,6 +190,11 @@ class @ColorsEditor
     @$colorsTable = options.$colorsTable
     @$colorInput = options.$colorInput
 
+  colorsLimit: 12
+
+  canAdd: ->
+    @currentColors().length < @colorsLimit
+
   add: (color)->
     colors = @currentColors()
     @setCurrentColors(colors.concat(color))
@@ -214,8 +219,9 @@ class @ColorsEditor
       selected = !$button.hasClass('selected')
       color = @selectedColor($button)
       if selected
-        @selectCell($button)
-        @add(color)
+        if @canAdd()
+          @selectCell($button)
+          @add(color)
       else
         @deselectCell($button)
         @remove(color)
@@ -239,9 +245,6 @@ class @ColorsEditor
   initSelectedColors: ->
     @$colorTags.colorTags
       readonly: false
-      minimumResultsForSearch: -1
-      dropdownCssClass: 'no-search'
-      placeholder: I18n.type_color_name
     @$colorTags.select2('container').find('.select2-search-field').hide()
     @$colorTags.find('.select2-search, .select2-focusser').remove();
     @$colorTags.on 'select2-opening', (event)->
@@ -253,7 +256,7 @@ class @ColorsEditor
   initColorNameInput: ->
     $colorNameInput = @$colorInput.colorTags({ readonly: false })
     $colorNameInput.on 'select2-selecting', (event)=>
-      @add(event.choice)
+      @add(event.choice) if @canAdd()
       event.preventDefault()
       $(event.target).select2('close')
 

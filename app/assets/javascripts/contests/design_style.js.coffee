@@ -24,10 +24,6 @@ class Validations
     if fav_color.length < 1
       @validator.addMessage $("#err_fav"), I18n.validations.no_colors, $(".fav-colors")
 
-    refrain_color = $.trim($("#refrain_color").val())
-    if refrain_color.length < 1
-      @validator.addMessage $("#err_refrain"), I18n.validations.no_colors, $(".avoided-colors")
-
   onSubmitClick: (e)=>
     e.preventDefault()
 
