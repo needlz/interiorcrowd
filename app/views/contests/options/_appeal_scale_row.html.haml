@@ -1,7 +1,7 @@
 .appeal
-  .likes
+  .likes.row
     - @creation_wizard.available_appeal_feedback.each do |appeal_feedback|
-      .col-md-2.no-x-padding.option
+      .col-md-3.no-x-padding.option
         .col-md-3
           = radio_button_tag("design_style[appeals][#{ scale.identifier }][value]",
               appeal_feedback[:value],
