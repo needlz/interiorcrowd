@@ -6,10 +6,10 @@
   .clearfix
   #portfolio_pictures_preview.col-md-12{:style => " border: 1px dashed black; padding-top: 40px; padding-bottom: 35px; margin-top: 30px;"}
     .container
-      .col-md-3.novice.template
+      .col-md-3.novice.template.portfolio-item
         = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: '' }
       - portfolio.pictures.try(:map) do |picture|
-        .col-md-3.novice.thumb
+        .col-md-3.novice.thumb.portfolio-item{ data: { id: picture.id }, class: ('active' if picture.id == portfolio.background_id) }
           = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: picture.image.url(:medium) }
     .col-md-12.marg-top20
       %p{:style => "font-size: 16px;"} Choose cover image for portfolio page by clicking on the above
@@ -20,7 +20,5 @@
       type: "hidden",
       value: portfolio.pictures.try(:pluck, :id).try(:join, ',') }
     %button.btn3.btn3-confirm.upload-button{:style => "margin: 0;", :type => "button"} Upload images
+    = form.hidden_field :background_id
   .clearfix
-
-
-

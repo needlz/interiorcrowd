@@ -1,3 +1,16 @@
+class CoverImage
+
+  @select: ($thumb)->
+    @deselectAll()
+    $thumb.addClass('active')
+    @setCover($thumb.data('id'))
+
+  @deselectAll: ->
+    $('.portfolio-item').removeClass('active')
+
+  @setCover: (id)->
+    $('#portfolio_background_id').val(id)
+
 class @PortfolioEditor
 
   init: ->
@@ -37,6 +50,13 @@ class @PortfolioEditor
       $checkbox = $(@)
       $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
     $('.hidden:checkbox').change()
+
+    $('#portfolio_pictures_preview').on 'click', '.cover-button', (event)->
+      event.preventDefault()
+      $selectButton = $(@)
+      $selectedThumb = $selectButton.parents('.portfolio-item')
+      CoverImage.select($selectedThumb)
+
 
   bindYearsOfExpirience: ->
     $('#portfolio_years_of_expirience').keypress digitsFilter
