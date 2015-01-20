@@ -1,7 +1,7 @@
 class @PicturesUploadButton
   @init: (options)->
     $(options.uploadButtonSelector).click =>
-      $(options.fileinputSelector).click()
+      $(options.fileinputSelector).focus().click()
 
     $(options.fileinputSelector).initUploaderWithThumbs(
       thumbs:
@@ -11,6 +11,7 @@ class @PicturesUploadButton
           $(options.uploadButtonSelector).text(options.I18n.uploading)
         stop: (event)=>
           $(options.uploadButtonSelector).text(options.I18n.upload_button)
+      single: options.single
     )
 
 class @ExamplesUploader

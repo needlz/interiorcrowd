@@ -1,13 +1,19 @@
-= javascript_include_tag 'shared/uploader'
 - content_for :head do
+  = javascript_include_tag 'contests/pictures_upload_button'
+  = javascript_include_tag 'shared/uploader'
   = javascript_include_tag 'portfolio/edit'
+
   = render partial: 'shared/setup_uploadify'
+
+  :javascript
+    I18n = #{ translations_to_json('designer_center.portfolio.creation'.split('.')) }
 
 - content_for :designer_center_content do
   .portfolio-creation
     = form_for @portfolio, url: portfolio_path, method: :patch  do |f|
       = render partial: 'portfolios/form', locals: { form: f }
-      .row
-        = f.submit t('designer_center.portfolio.creation.update_button')
+      %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+      .text-center
+        = f.submit update_button_text(@portfolio), class: 'btn1 btn1-confirm'
 
 = render partial: 'designer_center/layout'

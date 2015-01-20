@@ -7,17 +7,6 @@ class PortfolioView
     @portfolio = portfolio
   end
 
-  def self.portfolio_attributes
-    ['path',
-     'years_of_expirience',
-     'education',
-     'awards',
-     'portfolio_pictures',
-     'personal_picture',
-     'style_description',
-     'about']
-  end
-
   def education_view
     items = [degree_name]
     items << I18n.t('designer_center.portfolio.creation.education.gifted') if portfolio.education_gifted

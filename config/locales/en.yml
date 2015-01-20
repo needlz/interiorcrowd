@@ -274,7 +274,7 @@ en:
         title: Create your portfolio page
         years_of_expirience: How many years of expirience do you have?
         education:
-          title: 'Where did you study interior design Please choose all that apply:'
+          title: 'Where did you study interior design? Please choose all that apply'
           gifted: I'm naturally gifted
           apprenticed: Apprenticed with a designer
           school: College / University
@@ -289,12 +289,14 @@ en:
         list_awards: Please list any awards that you have won for your work
         upload_pictrures:
           title: 'Upload Portfolio Pictures:'
-          button: Upload
+          upload_button: Upload images
+          uploading: Uploading...
           hint: needs to be %{extensions}
         choose_background: Choose background for portfolio page by clicking on the above
         upload_personal_picture:
           title: Upload Your Personal Picture (optional)
-          button: Upload
+          upload_button: Upload image
+          uploading: Uploading...
           hint: needs to be %{extensions}
         characterize_style: How do you characterize your design style?
         about: Tell us something about yourself

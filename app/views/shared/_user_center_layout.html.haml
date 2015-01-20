@@ -5,9 +5,9 @@
     .row.charts_wrapp
       .col-sm-12
         .wrapper
-          .row
-            .page-header{ style: 'border-bottom: none;' }
-              %h2= title
+          .row.text-center.title-first
+            .col-md-12
+              %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"}= title
           .row
             = render partial: header
           .content

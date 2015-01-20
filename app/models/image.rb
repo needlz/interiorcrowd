@@ -30,15 +30,15 @@ class Image < ActiveRecord::Base
   end
 
   def self.update_portfolio(portfolio, background_id, personal_picture_id, image_ids)
-    return if background_id.blank? && image_ids.blank? && personal_picture_id.blank?
+    return if background_id.nil? && image_ids.nil? && personal_picture_id.nil?
     transaction do
       if image_ids.present?
         update_ids(portfolio.pictures,
                    image_ids,
                    { portfolio_id: portfolio.id, kind: PORTFOLIO_ITEM })
       end
-      update_portfolio_image(portfolio, PORTFOLIO_BACKGROUND, background_id) if background_id
-      update_portfolio_image(portfolio, PORTFOLIO_PERSONAL, personal_picture_id) if personal_picture_id
+      update_portfolio_image(portfolio, PORTFOLIO_BACKGROUND, background_id)
+      update_portfolio_image(portfolio, PORTFOLIO_PERSONAL, personal_picture_id)
     end
   end
 
@@ -53,6 +53,10 @@ class Image < ActiveRecord::Base
   end
 
   def self.update_portfolio_image(portfolio, kind, image_id)
+    portfolio_image = Image.of_kind(kind).find_by_portfolio_id(portfolio.id)
+    if portfolio_image && portfolio_image.id != image_id
+      portfolio_image.destroy
+    end
     if picture = Image.find_by_id(image_id)
       picture.update_attributes!(kind: kind, portfolio_id: portfolio.id)
     end

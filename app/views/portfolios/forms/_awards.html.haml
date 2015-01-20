@@ -1,3 +1,11 @@
-.row
-  = t('designer_center.portfolio.creation.list_awards')
-= form.text_field :awards
+.col-md-12.no-x-padding{:style => "padding-bottom: 40px;"}
+  %span{:style => "font-size:20px;"}
+    %b= t('designer_center.portfolio.creation.list_awards')
+  .clearfix
+  .col-md-10.form-group.no-x-padding
+    %input#usr.form-control{:style => "height: 45px;", :type => "text"}/
+  .col-md-2.text-center-xs.text-center-sm
+    %a{:href => "#"}
+      %i.glyphicon.glyphicon-plus.pull-right.glyphic-link{:style => "left: 39px;top: 6px; position: static;float: left !important;margin-top: 6px;"}
+    .clearfix
+  .clearfix

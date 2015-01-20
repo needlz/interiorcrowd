@@ -1,3 +1,8 @@
-.row
-  = t('designer_center.portfolio.creation.about')
-= form.text_area :about
+.clearfix
+%h1{:style => "font-size:20px;color:#231f20; "}= t('designer_center.portfolio.creation.about')
+.col-md-12.no-padding-left.no-padding-right
+  = form.text_area :about, :placeholder => "Describe your design style, how you work with clients, why you love interior design, etc.",
+  :style => "min-width: 47%; height:150px; padding: 15px; font-size: 18px; margin-top: 20px; border: 1px solid #000; border-color:#000000; resize:none;",
+  :type => "text",
+  :value => ""
+.clearfix
