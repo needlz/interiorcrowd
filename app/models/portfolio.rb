@@ -2,6 +2,9 @@ class Portfolio < ActiveRecord::Base
 
   DEGREES = %w(associate bachelor master doctorate)
 
+  STYLES = %w(modern traditional coastal eclectic midcentury_modern rustic_elegance
+              vintage contemporary global hollywood_glam transitional color_pop)
+
   validates_uniqueness_of :designer_id
   validates_inclusion_of :degree, in: DEGREES, allow_nil: true
 

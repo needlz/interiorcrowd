@@ -1,7 +1,7 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
 
-  delegate :awards, :years_of_expirience, :about, :style_description, to: :portfolio
+  delegate :awards, :years_of_expirience, :about, to: :portfolio
 
   def initialize(portfolio)
     @portfolio = portfolio
@@ -18,7 +18,7 @@ class PortfolioView
     degrees = Portfolio::DEGREES.map do |degree|
       [I18n.t("designer_center.portfolio.creation.education.degrees.#{ degree }"), degree]
     end
-    select(prefix, 'degree', options_for_select(degrees, portfolio.degree))
+    select(prefix, 'degree', options_for_select(degrees, portfolio.degree), {}, { class: 'selectpicker form-selector' })
   end
 
   def expirience_level
@@ -58,6 +58,13 @@ class PortfolioView
 
   def pictures_urls
     portfolio.pictures.map { |picture| picture.image.url }
+  end
+
+  def style_description
+    styles = Portfolio::STYLES.select { |style| portfolio.send("#{ style }_style") }
+    result = styles.map {|style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }.join(', ')
+    result = result + '<br/>' + portfolio.style_description
+    result.html_safe
   end
 
   private

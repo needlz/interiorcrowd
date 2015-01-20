@@ -1,59 +1,15 @@
-%h1{:style => "font-size:20px;color:#231f20; margin-bottom: 30px;"}= t('designer_center.portfolio.creation.characterize_style')
-.col-md-12.no-padding-left
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Modern
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Traditional
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Coastal
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Eclectic
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-    %label{:style => "font-size:20px;width: 80%;"} Midcentury Modern
-  .col-md-2.no-x-padding
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-    %label{:style => "font-size:20px;"} Rustic Elegance
-.col-md-12.no-padding-left{:style => "margin-top:31px;"}
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Vintage
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Contemporary
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Global
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-    %label{:style => "font-size:20px;width: 79%;"} Hollywood Glam
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Transitional
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;width: 48%;"} Color Pop
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
+%h1{:style => "font-size:20px;color:#231f20; "}= t('designer_center.portfolio.creation.characterize_style')
+- Portfolio::STYLES.in_groups_of(6, false) do |styles|
+  .col-md-12.no-padding-left{:style => "margin-top:31px;"}
+  - styles.each do |style|
+    .col-md-2.no-x-padding
+      = form.check_box "#{ style }_style", class: 'hidden'
+      .tick-btn{:style => "border-radius: 0;"}
+        %span ✓
+      = form.label "#{ style }_style", t("designer_center.portfolio.creation.styles.#{ style }"), :style => "font-size:20px;width: 75%;"
 .col-md-12.no-padding-left{:style => "margin-top:31px;"}
   .col-md-2.no-x-padding
     %label{:style => "font-size:20px;"} Other
-    .tick-btn{:style => "border-radius: 0;"}
-      %span ✓
 .col-md-5.form-group.no-x-padding{:style => "margin-top:20px;"}
   = form.text_field :style_description, class: 'form-control', :style => "height: 75px;"
 .clearfix

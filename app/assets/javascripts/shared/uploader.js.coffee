@@ -86,20 +86,22 @@ class RemovableThumbsTheme extends ThumbsTheme
     $thumbContainer.remove()
 
   thumbForSingleImageUploader: (imageUrl, imageId) ->
-    $img = @$container.find('img')
+    $img = @$container.find('.thumb img')
     if $img.length
       $img.attr('src', imageUrl)
     else
       $template = @$container.find('.template')
-      $thumb = $template.clone()
+      $thumb = @createThumb(imageUrl, imageId)
       @$container.append $thumb
 
   thumbForMultipleImageUploader: (imageUrl, imageId) ->
+    $thumb = @createThumb(imageUrl, imageId)
+    @$container.append($thumb)
+
+  createThumb: (imageUrl, imageId)->
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
     $container.data('id', imageId)
     $container.find('img').attr('src', imageUrl)
-    @$container.append $container
-
-  createThumb: (imageId)
+    $container

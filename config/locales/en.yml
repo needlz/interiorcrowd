@@ -271,6 +271,19 @@ en:
     welcome_user: Welcome, %{username}
     portfolio:
       creation:
+        styles:
+          modern: Modern
+          vintage: Vintage
+          traditional: Traditional
+          contemporary: Contemporary
+          coastal: Coastal
+          global: Global
+          eclectic: Eclectic
+          hollywood_glam: Hollywood Glam
+          midcentury_modern: Midcentury Modern
+          transitional: Transitional
+          rustic_elegance: Rustic Elegance
+          color_pop: Color Pop
         title: Create your portfolio page
         years_of_expirience: How many years of expirience do you have?
         education:

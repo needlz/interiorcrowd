@@ -20,7 +20,9 @@ class @PortfolioEditor
 
     $(".tick-btn").click ->
       $(this).toggleClass "active"
-      $(this).prev(':checkbox').prop('checked', $(this).hasClass('active'))
+      $checkbox = $(this).prev(':checkbox')
+      $checkbox.prop('checked', $(this).hasClass('active'))
+      $checkbox.change()
 
     $(".spinner .btn:first-of-type").on "click", (event)->
       $(".spinner input").val(parseInt($(".spinner input").val(), 10) + 1)
@@ -34,6 +36,7 @@ class @PortfolioEditor
     $('.hidden:checkbox').change (event)->
       $checkbox = $(@)
       $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
+    $('.hidden:checkbox').change()
 
   bindYearsOfExpirience: ->
     $('#portfolio_years_of_expirience').keypress digitsFilter
