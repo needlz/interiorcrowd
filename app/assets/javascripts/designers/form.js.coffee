@@ -51,8 +51,8 @@ class @DesignerSignUp
       $formclone = $rows.clone()
       $formclone.find('input').val link
       $formclone.insertBefore $('.lnk_container:last')
-      @refreshLinkButtons('added')
     )
+    @refreshLinkButtons('removed')
 
   refreshLinkButtons: (change)->
     if change is 'added'
