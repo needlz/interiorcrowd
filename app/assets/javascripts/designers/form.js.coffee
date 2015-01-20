@@ -123,9 +123,9 @@ class @DesignerSignUp
     designer_zip: ->
       if @designer_zip.length > 1
         unless $.isNumeric(@designer_zip)
-          @validator.addMessage $('#err_zip'), 'Please enter valid zip.', $('#err_zip')
+          @validator.addMessage $('#err_zip'), I18n.validation_messages.invalid_zip, $('#err_zip')
       else
-        @validator.addMessage $('#err_zip'), 'Please enter zip.', $('#err_zip')
+        @validator.addMessage $('#err_zip'), I18n.validation_messages.enter_zip, $('#err_zip')
     designer_password: ->
       if @designer_password.length < 1
         @validator.addMessage $('#err_password'), I18n.validation_messages.enter_password, $('#err_password')
