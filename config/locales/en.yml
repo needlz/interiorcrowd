@@ -233,9 +233,12 @@ en:
       respond: Respond to Contests
     sign_up:
       first_name: First Name
+      street_address: Street address
       last_name: Last Name
-      email: Email Address
+      email: E-mail address
       phone_number: Phone Number
+      city: City
+      state: State
       zipcode: Zipcode
       show_examples: Please show us examples of your work.
       links_to_work: Links to your portfolio / work
@@ -244,7 +247,10 @@ en:
       confirm_password: Password (again)
       agreement: By clicking below, you agree to the terms and conditions.
       register_button: Create Account
-      upload_example_button: Upload
+      examples:
+        upload_button: Upload images
+        uploading: Uploading...
+        image_requirements: Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
       validation_messages:
         invalid_zip: Please enter valid zip.
         enter_zip: Please enter zip.
@@ -257,11 +263,10 @@ en:
         enter_first_name: Please enter first name.
         invalid_example_url: Please enter valid URL
       become_designer: Become a Designer!
-      do_you_love: Do you love %{interior_design}?
-      interior_design: interior design
-      a_knock_for_style: Do your friends tell you that you have a knock for %{style}?
-      style: style
-      get_started: Get Started
+      do_you_love: Do you love interior design?
+      looking_for: Looking for a way to expand your portfolio and reach new customers??
+      get_started: To get started, tell us a bit more about yourself.
+      i_agree: I agree with the InteriorCrowd term of use
     title: Designer Center
     welcome_user: Welcome, %{username}
     portfolio:

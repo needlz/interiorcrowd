@@ -31,5 +31,21 @@ RSpec.describe DesignersController do
       post :create, designer_creation_params
       expect(response).to redirect_to designer_center_index_path
     end
+
+    context 'portfolio passed' do
+      it 'creates portfolio' do
+        images = [Fabricate(:image), Fabricate(:image)]
+        image_ids = images.map(&:id).join(',')
+        post :create, designer_creation_params.merge({ portfolio: { picture_ids: image_ids } })
+        expect(Designer.first.portfolio.pictures).to match_array images
+      end
+    end
+
+    context 'portfolio not passed' do
+      it 'does not create portfolio' do
+        post :create, designer_creation_params
+        expect(Designer.first.portfolio).to be_nil
+      end
+    end
   end
 end

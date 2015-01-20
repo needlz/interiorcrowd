@@ -3,28 +3,47 @@ class @DesignerSignUp
   init: ->
     @bindEvents()
     @populateExamplesInputs()
+    @validator = new ValidationMessages()
 
   bindEvents: ->
     @bindAddLinkButton()
     @bindRemoveLinkButton()
     @bindCreateAccountButton()
     @bindFileUploader()
+    @bindNumericInputs()
+    @styleDropdowns()
+    @bindAgreementCheckbox()
+
+  styleDropdowns: ->
+    $('.selectpicker').selectpicker({
+      style: 'btn-selector-medium font15'
+    });
+
+  bindAgreementCheckbox: ->
+    $(".tick-btn").click (e)->
+      $(@).toggleClass "active"
+      $('#designer_agree').prop('checked', $(@).hasClass('active'))
+
+  bindNumericInputs: ->
     $('#designer_zip').keypress digitsFilter
 
   bindAddLinkButton: ->
-    $(document).on 'click', '.lnk_container .plus_wrapper', @, (event)->
-      $rows = $('.lnk_container:first').first()
-      $formclone = $rows.clone()
-      $formclone.find('input').val ''
-      $formclone.insertAfter $('.lnk_container:last')
-      signUp = event.data
-      signUp.refreshLinkButtons('added')
+    $(document).on 'click', '.lnk_container .plus_wrapper', (event)=>
+      event.preventDefault()
+      @addLink()
+
+  addLink: ->
+    $rows = $('.lnk_container:first').first()
+    $formclone = $rows.clone()
+    $formclone.find('input').val ''
+    $formclone.insertAfter $('.lnk_container:last')
+    @refreshLinkButtons('added')
 
   bindRemoveLinkButton: ->
-    $(document).on 'click', '.lnk_container .minus_wrapper', @, (event)->
+    $(document).on 'click', '.lnk_container .minus_wrapper', (event)=>
+      event.preventDefault()
       $(event.target).parents('.lnk_container').remove()
-      signUp = event.data
-      signUp.refreshLinkButtons('removed')
+      @refreshLinkButtons('removed')
 
   populateExamplesInputs: ->
     $.each(externaLinks, (index, link)=>
@@ -51,10 +70,7 @@ class @DesignerSignUp
     $('.create-account').click (e) =>
       e.preventDefault()
       @validateInputs()
-      if @invalidInputs.length
-        $(@invalidInputs).first().focus()
-        false
-      else
+      if @validator.valid
         can_submit = true
         $('.des_links').each (index, input) =>
           url_value = $.trim($(input).val())
@@ -69,15 +85,19 @@ class @DesignerSignUp
         else
           alert I18n.validation_messages.invalid_example_url
           false
+      else
+        @validator.focusOnMessage()
+        false
 
   bindFileUploader: ->
-    $('#file_input').initUploaderWithThumbs
+    PicturesUploadButton.init
+      fileinputSelector: '#new_designer #file_input',
+      uploadButtonSelector: '#new_designer .upload-button',
       thumbs:
         container: '#image_display'
-        selector: '#designer_ex_document_ids'
-      uploadify:
-        buttonText: I18n.upload_example_button
-        removeTimeout: 3
+        selector: '#designer_image'
+        theme: 'new'
+      I18n: I18n.examples
 
   validLink: (link)->
     regex = /((ftp|http|https):\/\/)?(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
@@ -89,32 +109,40 @@ class @DesignerSignUp
 
   validations:
     designer_first_name: ->
-      $('#err_first_name').text(I18n.validation_messages.enter_first_name) if @designer_first_name.length < 1
+      if @designer_first_name.length < 1
+        @validator.addMessage $('#err_first_name'), I18n.validation_messages.enter_first_name, $('#err_first_name')
     designer_last_name: ->
-      $('#err_last_name').text(I18n.validation_messages.enter_last_name) if @designer_last_name.length < 1
+      if @designer_last_name.length < 1
+        @validator.addMessage $('#err_last_name'), I18n.validation_messages.enter_last_name, $('#err_last_name')
     designer_email: ->
       if @designer_email.length > 1
-        $('#err_email').text I18n.validation_messages.invalid_email unless @validEmail(@designer_email)
+        unless @validEmail(@designer_email)
+          @validator.addMessage $('#err_email'), I18n.validation_messages.invalid_email, $('#err_email')
       else
-        $('#err_email').text I18n.validation_messages.enter_email
+        @validator.addMessage $('#err_email'), I18n.validation_messages.enter_email, $('#err_email')
     designer_zip: ->
       if @designer_zip.length > 1
-        $('#err_zip').text 'Please enter valid zip.' unless $.isNumeric(@designer_zip)
+        unless $.isNumeric(@designer_zip)
+          @validator.addMessage $('#err_zip'), I18n.validation_messages.invalid_zip, $('#err_zip')
       else
-        $('#err_zip').text 'Please enter zip.'
+        @validator.addMessage $('#err_zip'), I18n.validation_messages.enter_zip, $('#err_zip')
     designer_password: ->
-      $('#err_password').text I18n.validation_messages.enter_password if @designer_password.length < 1
+      if @designer_password.length < 1
+        @validator.addMessage $('#err_password'), I18n.validation_messages.enter_password, $('#err_password')
     designer_password_confirmation: ->
       if @designer_password_confirmation.length < 1
-        $('#err_cpassword').text I18n.validation_messages.confirm_password
+        @validator.addMessage $('#err_cpassword'), I18n.validation_messages.confirm_password, $('#err_cpassword')
       else
         unless @designer_password_confirmation is @designer_password
-          $('#err_cpassword').text I18n.validation_messages.password_confirmation_mistmatch
+          @validator.addMessage $('#err_cpassword'), I18n.validation_messages.password_confirmation_mistmatch, $('#err_cpassword')
+    designer_agree: ->
+      unless $('#designer_agree').is(':checked')
+        @validator.valid = false
 
   validateInputs: ->
     $('.text-error').text ''
+    @validator.reset()
     @readInputValues()
-    @invalidInputs = []
     for inputId, validation of @validations
       @validateInput($('#' + inputId), validation)
 
@@ -124,10 +152,8 @@ class @DesignerSignUp
       @[inputId] = $.trim($input.val())
 
   validateInput: ($input, validation)->
-    errors = validation.apply(@)
-    @invalidInputs.push($input) if errors
+    validation.apply(@)
 
 $(document).ready ->
   signUp = new DesignerSignUp()
   signUp.init()
-

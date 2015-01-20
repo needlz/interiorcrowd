@@ -1,0 +1,31 @@
+%h3= t('designer_center.sign_up.show_examples')
+.col-md-12.no-x-padding.links-to-work-title
+  %span
+    %b= t('designer_center.sign_up.links_to_work')
+.clearfix
+.lnk_container
+  .col-md-10.form-group.no-x-padding
+    %input.form-control{name: 'external_links[]', type: 'text'}
+  .col-md-2.text-center-xs.text-center-sm
+    %a.plus_wrapper{:href => "#"}
+      %i.glyphicon.glyphicon-plus.pull-right.glyphic-link.example-link-glyph
+    %a.minus_wrapper{:href => "#"}
+      %i.glyphicon.glyphicon-minus.pull-right.glyphic-link.example-link-glyph
+    .clearfix
+.col-md-12.no-x-padding
+  %h1.upload-examples-title= t('designer_center.sign_up.upload_examples')
+  %h1.upload-examples-subtitle
+    %i= t('designer_center.sign_up.examples.image_requirements')
+.col-md-12.thumbs
+  %span#image_display
+    - if @designer_images.present?
+      - @designer_images.split(',').each do |id|
+        .col-md-3.novice.thumb
+          = render partial: 'contests/options/example_picture_thumb',
+              locals: { src: Image.find(id).image.url(:medium) }
+    .col-md-3.novice.template
+      = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+.col-md-6.no-x-padding.text-center-xs.text-center-sm.upload-button-container
+  %input#file_input.hidden{ name: 'image[image]', type: 'file', multiple: 'multiple' }
+  %button.btn3.btn3-confirm.upload-button{:type => "button"}
+    = t('designer_center.sign_up.examples.upload_button')

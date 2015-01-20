@@ -24,4 +24,16 @@ class Designer < ActiveRecord::Base
     contest_requests.active.exists?
   end
 
+  def state
+    0
+  end
+
+  def create_portfolio(portfolio_params)
+    if portfolio_params.present? && portfolio_params[:picture_ids].present?
+      portfolio = Portfolio.create!(designer_id: id)
+      portfolio.update_pictures(portfolio_params)
+      save!
+    end
+  end
+
 end
