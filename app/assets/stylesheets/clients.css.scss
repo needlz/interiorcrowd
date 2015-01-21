@@ -7,6 +7,27 @@
   @include link;
 }
 
+.intc-pagination {
+  .pageNumber {
+    width: auto;
+    display: inline-block;
+  }
+
+  em, span {
+    font-size: 22px;
+    color: #231f20;
+    display: inline-block;
+    line-height: 56px;
+    padding: 0 23px;
+  }
+
+  em.current {
+    text-decoration: none;
+    background: #231f20;
+    color: #FFF;
+  }
+}
+
 .client-center {
   .header {
     border-bottom: 1px solid #eee;
