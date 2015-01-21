@@ -1,11 +1,24 @@
-.row
-  = t('designer_center.portfolio.creation.upload_personal_picture.title')
-
-%span#personal_picture_thumb.portfolio-thumbs
-  - path = portfolio.personal_picture.try(:image).try(:url)
-  - if path
-    %img{ src: path }
-%input#personal_picture{ name: 'image[image]', type: 'file' }
-%input#personal_picture_id{ name: "portfolio[personal_picture_id]",
-  type: "hidden",
-  value: portfolio.personal_picture.try(:id) }
+.rooms.text-center-sm.text-center-xs.personal-picture
+  %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+  .some-text.col-md-6.no-padding-left
+    %h1{:style => "font-size:20px;color:#231f20; "}= t('designer_center.portfolio.creation.upload_personal_picture.title')
+    %h1{:style => "color:#504d4e;padding-bottom: 25px;margin-top: 0px;font-size:14px;"}
+      %i Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
+  .clearfix
+  - path = portfolio.personal_picture.try(:image).try(:url, :medium)
+  .thumbs
+    .col-md-3.novice.no-padding-left.template{:style => "position:relative;"}
+      = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+    - if path
+      .col-md-3.novice.no-padding-left.thumb{:style => "position:relative;"}
+        = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+  .clearfix
+  .col-md-6.no-x-padding{:style => "margin-top:40px;"}
+    %input#personal_picture.hidden{ name: 'image[image]', type: 'file' }
+    %input#personal_picture_id{ name: "portfolio[personal_picture_id]",
+      type: "hidden",
+      value: portfolio.personal_picture.try(:id) }
+    %button.btn3.btn3-confirm.upload-button{:style => "margin: 0;", :type => "button"}
+      = t('designer_center.portfolio.creation.upload_personal_picture.upload_button')
+  .clearfix
+  .long-separator

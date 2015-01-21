@@ -31,7 +31,6 @@ class Uploader
 
     @bindUploadScript()
 
-
   bindUploadScript: ->
     uploadOptions = {}
     $.extend(
@@ -86,10 +85,23 @@ class RemovableThumbsTheme extends ThumbsTheme
     @$imageIds.val(imageIds.join(','))
     $thumbContainer.remove()
 
+  thumbForSingleImageUploader: (imageUrl, imageId) ->
+    $img = @$container.find('.thumb img:first')
+    if $img.length
+      $img.attr('src', imageUrl)
+    else
+      $template = @$container.find('.template')
+      $thumb = @createThumb(imageUrl, imageId)
+      @$container.append $thumb
+
   thumbForMultipleImageUploader: (imageUrl, imageId) ->
+    $thumb = @createThumb(imageUrl, imageId)
+    @$container.append($thumb)
+
+  createThumb: (imageUrl, imageId)->
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
     $container.data('id', imageId)
-    $container.find('img').attr('src', imageUrl)
-    @$container.append $container
+    $container.find('img:first').attr('src', imageUrl)
+    $container

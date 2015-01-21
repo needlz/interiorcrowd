@@ -944,14 +944,10 @@ z-index: 9;}
 .mark-icon img {width: 25%;}
 
 .portfolio-item .over-btn {visibility: hidden;}
-.portfolio-item:hover .over-btn {visibility: visible;}
+.portfolio-item:hover .over-btn {visibility: visible; cursor: pointer}
 
 .portfolio-item .mark-icon {visibility: hidden;}
 
-
-.portfolio-item .glyphicon-remove {visibility: hidden;}
-.portfolio-item.active .glyphicon-remove {visibility: visible;}
-.portfolio-item.active .over-btn {visibility: hidden;}
 .portfolio-item.active .mark-icon {visibility: visible;}
 
 

@@ -1,3 +1,12 @@
-- PortfolioView.portfolio_attributes.each do |attribute|
-  %div{ style: 'margin-bottom: 20px' }
-    = render partial: "portfolios/forms/#{ attribute }", locals: { portfolio: form.object, form: form }
+.container.animated.fadeInDown
+  %h3 Create your portfolio
+  = render partial: 'portfolios/forms/years_of_expirience', locals: { portfolio: form.object, form: form }
+  %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 40px;"}
+  = render partial: 'portfolios/forms/education', locals: { portfolio: form.object, form: form }
+  = render partial: 'portfolios/forms/awards', locals: { portfolio: form.object, form: form }
+  .long-separator
+  = render partial: 'portfolios/forms/portfolio_pictures', locals: { portfolio: form.object, form: form }
+  = render partial: 'portfolios/forms/personal_picture', locals: { portfolio: form.object, form: form }
+  = render partial: 'portfolios/forms/style_description', locals: { portfolio: form.object, form: form }
+  %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 20px;"}
+  = render partial: 'portfolios/forms/about', locals: { portfolio: form.object, form: form }

@@ -1,13 +1,12 @@
 class @DesignerSignUp
 
   init: ->
+    PopulatedInputs.init()
     @bindEvents()
     @populateExamplesInputs()
     @validator = new ValidationMessages()
 
   bindEvents: ->
-    @bindAddLinkButton()
-    @bindRemoveLinkButton()
     @bindCreateAccountButton()
     @bindFileUploader()
     @bindNumericInputs()
@@ -27,24 +26,6 @@ class @DesignerSignUp
   bindNumericInputs: ->
     $('#designer_zip').keypress digitsFilter
 
-  bindAddLinkButton: ->
-    $(document).on 'click', '.lnk_container .plus_wrapper', (event)=>
-      event.preventDefault()
-      @addLink()
-
-  addLink: ->
-    $rows = $('.lnk_container:first').first()
-    $formclone = $rows.clone()
-    $formclone.find('input').val ''
-    $formclone.insertAfter $('.lnk_container:last')
-    @refreshLinkButtons('added')
-
-  bindRemoveLinkButton: ->
-    $(document).on 'click', '.lnk_container .minus_wrapper', (event)=>
-      event.preventDefault()
-      $(event.target).parents('.lnk_container').remove()
-      @refreshLinkButtons('removed')
-
   populateExamplesInputs: ->
     $.each(externaLinks, (index, link)=>
       $rows = $('.lnk_container:first').first()
@@ -52,19 +33,7 @@ class @DesignerSignUp
       $formclone.find('input').val link
       $formclone.insertBefore $('.lnk_container:last')
     )
-    @refreshLinkButtons('removed')
-
-  refreshLinkButtons: (change)->
-    if change is 'added'
-      $('.lnk_container .plus_wrapper').hide()
-      $('.lnk_container .examplelabel label').hide().first().show()
-      $('.lnk_container .minus_wrapper').show() if $('.lnk_container .plus_wrapper').length > 1
-      $('.lnk_container .plus_wrapper:last').last().show()
-    else if change is 'removed'
-      $('.lnk_container .minus_wrapper').hide()  if $('.lnk_container .plus_wrapper').length is 1
-      $('.lnk_container .plus_wrapper:last').last().show()
-      $('.lnk_container .examplelabel label').hide()
-      $('.lnk_container .examplelabel label').first().show()
+    PopulatedInputs.refreshLinkButtons('removed')
 
   bindCreateAccountButton: ->
     $('.create-account').click (e) =>

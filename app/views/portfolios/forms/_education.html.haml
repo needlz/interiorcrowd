@@ -1,20 +1,37 @@
 .education
-  .row
-    = t('designer_center.portfolio.creation.education.title')
-  .attr.row
-    = form.check_box :education_gifted
-    = form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted')
-
-  .attr.row
-    = form.check_box :education_school
-    = form.label :education_school, t('designer_center.portfolio.creation.education.school')
-    #school-details.pull-right
-      .attr
-        = t('designer_center.portfolio.creation.education.school_name')
-        = form.text_field :school_name
-      .attr
-        = t('designer_center.portfolio.creation.education.degrees.title')
-        = @portfolio_view.education_degree_select('portfolio')
-  .attr.row
-    = form.check_box :education_apprenticed
-    = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')
+  %h3{:style => "font-size:20px;margin-top:0px;"}= t('designer_center.portfolio.creation.education.title')
+  .col-md-12.no-padding-left
+    .form
+      .row.marg-bottom30.marg-top40
+        .col-md-5
+          = form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted'), :style => "font-size:20px;"
+          = form.check_box :education_gifted, class: 'hidden'
+          .tick-btn{:style => "border-radius: 0;"}
+            %span ✓
+      .row.marg-bottom30
+        .col-md-5
+          = form.label :education_school, t('designer_center.portfolio.creation.education.school'), :style => "font-size:20px;"
+          = form.check_box :education_school, class: 'hidden'
+          .tick-btn{:style => "border-radius: 0;"}
+            %span ✓
+      #sub1.col-md-6.sub-design-options
+        .col-md-4
+          %label{:style => "font-size:20px;"}= t('designer_center.portfolio.creation.education.school_name')
+        .col-md-8
+          = form.text_field :school_name, class: 'form-control'
+        .col-md-4{:style => "padding-top: 35px;"}
+          .col-md-12.no-padding-left.no-padding-right
+            %label{:style => "font-size:20px;"}= t('designer_center.portfolio.creation.education.degrees.title')
+            .clearfix
+        .col-md-8{:style => "padding-top:20px;"}
+          .col-md-12.no-padding-left.no-padding-right
+            .clearfix
+            = @portfolio_view.education_degree_select('portfolio')
+      .clearfix
+      .row
+        .col-md-5
+          = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed'), :style => "font-size:20px;"
+          = form.check_box :education_apprenticed, class: 'hidden'
+          .tick-btn{:style => "border-radius: 0;"}
+            %span ✓
+    .long-separator

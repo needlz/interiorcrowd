@@ -43,11 +43,9 @@ RSpec.describe PortfoliosController do
           sign_in(designer)
         end
 
-        it 'renders attribute inputs' do
+        it 'renders page' do
           get :edit
-          PortfolioView.portfolio_attributes.each do |attribute|
-            expect(response).to render_template(partial: "portfolios/forms/_#{ attribute }")
-          end
+          expect(response).to render_template(:edit)
         end
       end
     end
@@ -100,6 +98,12 @@ RSpec.describe PortfoliosController do
         picture = Fabricate(:image)
         patch :update, portfolio: { personal_picture_id: picture.id }
         expect(designer.portfolio.reload.personal_picture).to eq picture
+      end
+
+      it 'updates background picture' do
+        picture = Fabricate(:image)
+        patch :update, portfolio: { background_id: picture.id }
+        expect(designer.portfolio.reload.background).to eq picture
       end
     end
   end
