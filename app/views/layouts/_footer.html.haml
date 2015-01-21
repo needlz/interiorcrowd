@@ -6,35 +6,35 @@
           .nav-collapse
             %ul.nav.nav-tabs.text-menu.main-menu.footer-menu
               %li
-                %a{href: '#'} About
+                %a{:href => "#"} About
               %li
-                %a{href: '#'} Designer Center
+                %a{:href => "#"} Designer Center
               %li
-                %a{href: '#'} Terms
+                %a{:href => "#"} Terms
               %li
-                %a{href: '#'} Privacy Policy
+                %a{:href => "#"} Privacy Policy
         .top-nav.col-md-6
           .nav-collapse.pull-right
             %ul.nav.nav-tabs.text-menu.main-menu
               %li
-                %a{href: '#'}
-                  %img{src: '/assets/icons/twitter.png'}/
+                %a{:href => "#"}
+                  %img{:src => "/assets/icons/twitter.png"}/
               %li
-                %a{href: '#'}
-                  %img{src: '/assets/icons/facebook.png'}/
+                %a{:href => "#"}
+                  %img{:src => "/assets/icons/facebook.png"}/
               %li
-                %a{href: '#'}
-                  %img{src: '/assets/icons/instagram.png'}/
+                %a{:href => "#"}
+                  %img{:src => "/assets/icons/instagram.png"}/
               %li
-                %a{href: '#'}
-                  %img{src: '/assets/icons/pinterest.png'}/
-  .col-md-12.text-center.copyright
-    %b
-      %img{src: '/assets/icons/copy.png'}/
-      2014 InteriorCrowd
+                %a{:href => "#"}
+                  %img{:src => "/assets/icons/pinterest.png"}/
+.col-md-12.text-center.copyright
+  %b
+    = succeed "2014 InteriorCrowd" do
+      %span.copyright-sign ©
   :javascript
       $( '.room-selector' ).click(function() {
       	$(this).toggleClass('active');
       	return false;
       });
-  #mm-blocker.mm-slideout
+#mm-blocker.mm-slideout
