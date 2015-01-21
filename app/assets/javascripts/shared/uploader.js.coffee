@@ -86,7 +86,7 @@ class RemovableThumbsTheme extends ThumbsTheme
     $thumbContainer.remove()
 
   thumbForSingleImageUploader: (imageUrl, imageId) ->
-    $img = @$container.find('.thumb img')
+    $img = @$container.find('.thumb img:first')
     if $img.length
       $img.attr('src', imageUrl)
     else
@@ -103,5 +103,5 @@ class RemovableThumbsTheme extends ThumbsTheme
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
     $container.data('id', imageId)
-    $container.find('img').attr('src', imageUrl)
+    $container.find('img:first').attr('src', imageUrl)
     $container

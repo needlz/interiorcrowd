@@ -1,7 +1,15 @@
 class CoverImage
 
-  @select: ($thumb)->
+  @idInput: '#portfolio_background_id'
+
+  @toggle: ($thumb)->
     @deselectAll()
+    if $thumb.data('id') == parseInt($(@idInput).val())
+      $(@idInput).val('')
+    else
+      @select($thumb)
+
+  @select: ($thumb)->
     $thumb.addClass('active')
     @setCover($thumb.data('id'))
 
@@ -9,7 +17,7 @@ class CoverImage
     $('.portfolio-item').removeClass('active')
 
   @setCover: (id)->
-    $('#portfolio_background_id').val(id)
+    $(@idInput).val(id)
 
 class @PortfolioEditor
 
@@ -17,6 +25,7 @@ class @PortfolioEditor
     @bindYearsOfExpirience()
     @bindPictureUploaders()
     @bindSchoolCheckbox().trigger('change')
+    PopulatedInputs.init()
 
     $(".selectpicker").selectpicker style: "btn-selector-medium font15"
     $(".dropdown-toggle").click ->
@@ -55,8 +64,7 @@ class @PortfolioEditor
       event.preventDefault()
       $selectButton = $(@)
       $selectedThumb = $selectButton.parents('.portfolio-item')
-      CoverImage.select($selectedThumb)
-
+      CoverImage.toggle($selectedThumb)
 
   bindYearsOfExpirience: ->
     $('#portfolio_years_of_expirience').keypress digitsFilter

@@ -99,6 +99,12 @@ RSpec.describe PortfoliosController do
         patch :update, portfolio: { personal_picture_id: picture.id }
         expect(designer.portfolio.reload.personal_picture).to eq picture
       end
+
+      it 'updates background picture' do
+        picture = Fabricate(:image)
+        patch :update, portfolio: { background_id: picture.id }
+        expect(designer.portfolio.reload.background).to eq picture
+      end
     end
   end
 

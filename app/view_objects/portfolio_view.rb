@@ -1,7 +1,7 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
 
-  delegate :awards, :years_of_expirience, :about, :background_id, to: :portfolio
+  delegate :awards, :years_of_expirience, :about, to: :portfolio
 
   def initialize(portfolio)
     @portfolio = portfolio

@@ -1,14 +1,7 @@
-#in_pricing
-  .container
-    .section_header
-      \ 
-    .row.charts_wrapp
-      .col-sm-12
-        .wrapper
-          .row.text-center.title-first
-            .col-md-12
-              %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"}= title
-          .row
-            = render partial: header
-          .content
-            = content
+.container.animated.fadeInDown
+  .row.text-center.title-first
+    %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"}= title
+  .row
+    = render partial: header
+.content.container.animated.fadeInDown
+  = content
