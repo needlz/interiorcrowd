@@ -12,13 +12,15 @@
   }
 }
 
-.footer {
-  .copyright {
-    margin-top: 40px;
-    font-size: 18px;
+.copyright {
+  margin-top: 40px;
+  font-size: 18px;
+  margin-bottom: 40px;
 
-    img {
-      margin-right: 5px;
-    }
+  .copyright-sign {
+    font-size: 27px;
+    margin-right: 7px;
+    position: relative;
+    top: 3px;
   }
 }
