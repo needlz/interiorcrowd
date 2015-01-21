@@ -15,6 +15,8 @@ class ClientsController < ApplicationController
     if @contest
       requests = @contest.requests.published.includes(:designer, :lookbook)
       @contest_requests = requests.by_page(params[:page])
+      invitable_designers = Designer.includes(portfolio: [:personal_picture]).all
+      @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
     else
       @contest_requests = [].paginate
     end
