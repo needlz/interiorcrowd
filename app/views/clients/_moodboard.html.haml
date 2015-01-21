@@ -1,12 +1,13 @@
 .col-md-6.moodboard{ data: { id: contest_request.id } }
-  %div
-    - if contest_request.moodboard_image_path
-      %a{ href: contest_request_path(id: contest_request.id) }
-        .image-container{ style: "background-image: url(#{ contest_request.moodboard_image_path })" }
-    - else
-      = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
-  .designer
-    = contest_request.designer.name
-  - if show_answer_options
-    = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
-  %span.current-answer= contest_request.answer
+  .designBox
+    %h3= contest_request.designer.name
+    .designItem
+      - if contest_request.moodboard_image_path
+        %a{ href: contest_request_path(id: contest_request.id) }
+          .image-container{ style: "background-image: url(#{ contest_request.moodboard_image_path })" }
+      - else
+        = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
+    .hLine
+    - if show_answer_options
+      = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
+    %span.current-answer= contest_request.answer

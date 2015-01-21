@@ -1,3 +1,8 @@
-.header{ style: 'height: 42px; border-bottom: 1px solid #ddd;' }
-  = t('designer_center.welcome_user', username: @designer.first_name)
-  = render partial: 'shared/navigation'
+.row.my-menu.visible-lg{:style => "padding-top: 20px;"}
+  .col-md-4.no-padding-right.logo-pc
+    .top-nav.pull-down
+      %label{:style => "font-size:20px;"}= t('designer_center.welcome_user', username: @designer.first_name)
+  .col-md-8.no-padding-right.pull-down
+    .top-nav
+      .nav-collapse
+        = render partial: 'shared/navigation'

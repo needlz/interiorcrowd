@@ -33,4 +33,12 @@
  
   
 @font-face {font-family: 'AvenirLTStd-Light';src: url('/assets/2CC7A1_1_0.eot');src: url('/assets/2CC7A1_1_0.eot?#iefix') format('embedded-opentype'),url('/assets/2CC7A1_1_0.woff2') format('woff2'),url('/assets/2CC7A1_1_0.woff') format('woff'),url('/assets/2CC7A1_1_0.ttf') format('truetype');}
- 
+@font-face {
+    font-family: 'AvenirLTStd-Black';
+    src: url('webfonts/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
+    url('webfonts/AvenirLTStd-Black.otf')  format('opentype'),
+    url('webfonts/AvenirLTStd-Black.woff') format('woff'), url('webfonts/AvenirLTStd-Black.ttf')  format('truetype'),
+    url('webfonts/AvenirLTStd-Black.svg#AvenirLTStd-Black') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
