@@ -58,4 +58,10 @@ RSpec.describe Portfolio do
       expect(portfolio.path).to eq 'john_snow_1'
     end
   end
+
+  it 'updates links' do
+    links = ['link1', '', 'link2']
+    portfolio.update_links(links)
+    expect(portfolio.reload.links.pluck(:example_links)).to match_array links
+  end
 end

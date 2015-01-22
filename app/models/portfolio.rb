@@ -12,6 +12,7 @@ class Portfolio < ActiveRecord::Base
   has_one :personal_picture, ->{ portfolio_personal_picture }, class_name: 'Image'
   belongs_to :background, class_name: 'Image'
   belongs_to :designer
+  has_many :example_links
 
   def complete?
     path.present?
@@ -21,6 +22,13 @@ class Portfolio < ActiveRecord::Base
     portfolio_pictures_ids = portfolio_params[:picture_ids].try(:split, ',').try(:map, &:to_i)
     personal_picture_id = portfolio_params[:personal_picture_id]
     Image.update_portfolio(self, personal_picture_id, portfolio_pictures_ids)
+  end
+
+  def update_links(links)
+    example_links.destroy_all
+    links.each do |link|
+      example_links.create!(url: link) if link.present?
+    end
   end
 
   def assign_unique_path
