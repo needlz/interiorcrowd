@@ -43,8 +43,8 @@
           %span#err_name_on_card.text-error
         .col-md-offset-2.col-md-4
           %label= t('client_center.sign_up.card_type')
-          = select('contest',
-              'type',
+          = select('client',
+              'card_type',
               options_for_select(PersonalData.card_type_options, 0),
               {},
               { class: 'selectpicker form-selector', tabindex: 11 })
@@ -57,22 +57,23 @@
         .col-md-offset-2.col-md-3
           %label= t('client_center.profile.labels.card_number')
           %input#card_number.form-control{ maxlength: 19,
-            :name => "Contest[card_number]",
+            :name => "client[card_number]",
              :type => "text", tabindex: 12}/
           %span#err_card_number.text-error
         .col-md-1
           %label= t('client_center.profile.labels.card_cvc')
-          %input#card_cvc.form-control.left-control{ :name => "Contest[cvc]",
+          %input#card_cvc.form-control.left-control{ :name => "client[card_cvc]",
             :type => "text", tabindex: 13}/
           %span#err_cvc.text-error
       .row.form
         .col-md-4
           %label= t('client_center.profile.labels.city')
-          %input.form-control{:type => "text", tabindex: 8}/
+          = f.text_field :city, :class => "form-control", tabindex: 8
         .col-md-offset-2.col-md-2
           %label.expiration-label= t('client_center.profile.labels.card_exp_date')
           = select_month(0,
-              { :field_name => 'card_exp_month',
+              { :field_name => 'card_ex_month',
+              prefix: 'client',
                 prompt: t('client_center.sign_up.select_month') },
               :class => "selectpicker form-selector card-exp", tabindex: 14)
         .col-md-2
@@ -80,7 +81,8 @@
           = select_year(0,
               { :start_year => Time.now.year,
                 :end_year => Time.now.year + 10,
-                :field_name => :card_exp_year,
+                :field_name => :card_ex_year,
+                prefix: 'client',
                 prompt: t('client_center.sign_up.select_year')},
               :class => "selectpicker form-selector card-exp", tabindex: 15)
       .row.form

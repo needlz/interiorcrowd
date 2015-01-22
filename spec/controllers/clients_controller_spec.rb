@@ -19,16 +19,21 @@ RSpec.describe ClientsController do
   let(:client_options){
     { password: 'password',
       password_confirmation: 'password',
-      designer_level_id: 2,
       first_name: 'firstname',
       last_name: 'lastname',
       email: 'email@example.com',
       address: 'address',
       name_on_card: 'name_on_card',
+      card_type: 'Visa',
+      city: 'City',
       state: 'state',
+      card_ex_month: '12',
+      card_ex_year: '2000',
+      card_cvc: '123',
       zip: '81100'
     }
   }
+  let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
 
   describe 'POST create' do
     it 'creates contest and client' do
@@ -52,6 +57,18 @@ RSpec.describe ClientsController do
       created_contest = Contest.last
       expect(response).to redirect_to(additional_details_contest_path(id: created_contest.id))
     end
+
+    it 'saves attributes' do
+      post :create, { client: client_options }, contest_options_source
+      client = Client.order(:created_at).last
+      client_options.except(:password, :password_confirmation, *integer_attributes).each do |attribute, value|
+        expect(client.send(attribute)).to eq value
+      end
+      integer_attributes.each do |attribute|
+        expect(client.send(attribute)).to eq client_options[attribute].to_i
+      end
+      expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level]
+    end
   end
 
   describe 'PATCH update' do
@@ -59,15 +76,16 @@ RSpec.describe ClientsController do
       { first_name: 'new first name',
         last_name: 'new last name',
         address: 'new address',
+        city: 'new city',
         state: 'new state',
         zip: '123456',
         card_number: '4242',
+        card_type: 'new type',
         card_ex_month: '12',
         card_ex_year: '2002',
         card_cvc: '444'
       }
     end
-    let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
 
     describe 'updates' do
       before do
