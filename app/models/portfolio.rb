@@ -13,6 +13,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :background, class_name: 'Image'
   belongs_to :designer
   has_many :example_links
+  has_many :portfolio_awards
 
   def complete?
     path.present?
@@ -25,9 +26,18 @@ class Portfolio < ActiveRecord::Base
   end
 
   def update_links(links)
+    return unless links
     example_links.destroy_all
     links.each do |link|
       example_links.create!(url: link) if link.present?
+    end
+  end
+
+  def update_awards(new_awards)
+    return unless new_awards
+    portfolio_awards.destroy_all
+    new_awards.each do |award|
+      portfolio_awards.create!(name: award) if award.present?
     end
   end
 

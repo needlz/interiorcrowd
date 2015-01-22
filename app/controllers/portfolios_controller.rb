@@ -33,6 +33,7 @@ class PortfoliosController < ApplicationController
     Portfolio.transaction do
       @portfolio.update_attributes!(portfolio_params)
       @portfolio.update_pictures(params[:portfolio])
+      @portfolio.update_awards(params[:portfolio][:awards])
     end
     redirect_after_updated(@portfolio)
   end

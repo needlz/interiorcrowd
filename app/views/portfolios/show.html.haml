@@ -14,7 +14,7 @@
           = @portfolio_view.education_view
         .attr.awards
           Awards:
-          = @portfolio_view.awards
+          = @portfolio_view.awards.try(:html_safe)
       .col-md-6.about-container
         #{ t('designer_center.portfolio.show.about_self') }:
         .about

@@ -21,6 +21,18 @@ RSpec.describe DesignersController do
       }
     end
 
+    let(:portfolio_images) { [Fabricate(:image), Fabricate(:image)] }
+    let(:portfolio_links) { ['link1', 'link2'] }
+
+    let(:portfolio_params) do
+      {
+        portfolio: {
+            picture_ids: portfolio_images.map(&:id).join(','),
+            example_links: portfolio_links
+        }
+      }
+    end
+
     it 'creates new designer' do
       expect(Designer.count).to eq 0
       post :create, designer_creation_params
@@ -34,10 +46,9 @@ RSpec.describe DesignersController do
 
     context 'portfolio passed' do
       it 'creates portfolio' do
-        images = [Fabricate(:image), Fabricate(:image)]
-        image_ids = images.map(&:id).join(',')
-        post :create, designer_creation_params.merge({ portfolio: { picture_ids: image_ids } })
-        expect(Designer.first.portfolio.pictures).to match_array images
+        post :create, designer_creation_params.merge(portfolio_params)
+        expect(Designer.first.portfolio.pictures).to match_array portfolio_images
+        expect(Designer.first.portfolio.example_links.map(&:url)).to match_array portfolio_links
       end
     end
 
