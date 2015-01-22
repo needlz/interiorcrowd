@@ -59,6 +59,7 @@ class PortfoliosController < ApplicationController
   end
 
   def redirect_after_updated(portfolio)
+    portfolio.assign_unique_path
     if portfolio.complete?
       redirect_to show_portfolio_path(url: portfolio.path)
     else

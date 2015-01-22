@@ -24,4 +24,38 @@ RSpec.describe Portfolio do
       end
     end
   end
+
+  describe 'generation of unique path' do
+    before do
+      portfolio.path = ''
+      designer.portfolio = portfolio
+      designer.first_name = 'John'
+      designer.last_name = 'Snow'
+    end
+
+    it 'returns designer\'s name if there are no portfolios with same path' do
+      portfolio.assign_unique_path
+      expect(portfolio.path).to eq 'john_snow'
+    end
+
+    it 'returns designer\'s name with index if there are portfolios with same path' do
+      Fabricate(:portfolio, path: 'john_snow')
+      portfolio.assign_unique_path
+      expect(portfolio.path).to eq 'john_snow_1'
+    end
+
+    it 'returns designer\'s name with unique index if there are portfolios with same name and with index' do
+      Fabricate(:portfolio, path: 'john_snow')
+      Fabricate(:portfolio, path: 'john_snow_1')
+      portfolio.assign_unique_path
+      expect(portfolio.path).to eq 'john_snow_2'
+    end
+
+    it 'returns designer\'s name with unique index if there are portfolios with same name and with wrong index' do
+      Fabricate(:portfolio, path: 'john_snow')
+      Fabricate(:portfolio, path: 'john_snow_2')
+      portfolio.assign_unique_path
+      expect(portfolio.path).to eq 'john_snow_1'
+    end
+  end
 end
