@@ -1,8 +1,8 @@
 .container.animated.fadeInDown
   .row.text-center.title-first
-    %h1{:style => "font-weight:normal;font-size:30px;color:#000000;"}= title.upcase
-    %h1{:style => "font-weight:normal;font-size:20px;color:#707070;"}
-      %i{:style => "line-height: 55px;"} Etiam risus ex, imperdiet et lobortis id, finibus sed diam. Pellentesque maximus suscipit cursus.
+    %h1.signUpTitle= title.upcase
+    %h1.signUpSubTitle
+      %i.lineHeight60 Etiam risus ex, imperdiet et lobortis id, finibus sed diam. Pellentesque maximus suscipit cursus.
   .row
     = render partial: header
 .content.container.animated.fadeInDown

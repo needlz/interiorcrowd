@@ -1,15 +1,19 @@
-%h1{:style => "font-size:20px;color:#231f20; "}= t('designer_center.portfolio.creation.characterize_style')
+%h1.font20.makeMeBlack= t('designer_center.portfolio.creation.characterize_style')
 - Portfolio::STYLES.in_groups_of(6, false) do |styles|
-  .col-md-12.no-padding-left{:style => "margin-top:31px;"}
+  .col-md-12.no-padding-left.marg-top40
   - styles.each do |style|
     .col-md-2.no-x-padding
       = form.check_box "#{ style }_style", class: 'hidden'
-      .tick-btn{:style => "border-radius: 0;"}
+      .tick-btn.borderRadius0
         %span ✓
-      = form.label "#{ style }_style", t("designer_center.portfolio.creation.styles.#{ style }"), :style => "font-size:20px;width: 75%;"
-.col-md-12.no-padding-left{:style => "margin-top:31px;"}
-  .col-md-2.no-x-padding
-    %label{:style => "font-size:20px;"} Other
-.col-md-5.form-group.no-x-padding{:style => "margin-top:20px;"}
-  = form.text_field :style_description, class: 'form-control', :style => "height: 75px;"
+      = form.label "#{ style }_style", t("designer_center.portfolio.creation.styles.#{ style }"), class: 'font20 width75percent'
+
+.col-md-12.no-padding-left.marg-top40
+  = check_box_tag "other_style", 0, false, class: 'hidden'
+  .tick-btn.borderRadius0
+    %span ✓
+  = form.label "other_style", 'Other', class: 'font20 width75percent'
+  %label.font20.width75percent{:for => "portfolio_vintage_style"}
+.col-md-12.form-group.no-x-padding.marg-top20
+  = form.text_field :style_description, class: 'form-control', :style => "height: 75px;", class: 'tellUsTextarea height75'
 .clearfix
