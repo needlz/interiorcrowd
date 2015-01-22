@@ -14,7 +14,7 @@ module Navigation
     end
 
     def active_class(tab)
-      'active' if tab == active_tab
+      'item-sel' if tab == active_tab
     end
 
     private

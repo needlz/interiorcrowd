@@ -1,7 +1,7 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
 
-  delegate :awards, :years_of_expirience, :about, to: :portfolio
+  delegate :awards, :years_of_expirience, :about, :personal_picture, to: :portfolio, allow_nil: true
 
   def initialize(portfolio)
     @portfolio = portfolio
@@ -61,6 +61,7 @@ class PortfolioView
   end
 
   def style_description
+    return '' unless portfolio
     styles = Portfolio::STYLES.select { |style| portfolio.send("#{ style }_style") }
     result = styles.map {|style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }.join(', ')
     result = result + '<br/>' + (portfolio.style_description ? portfolio.style_description : '' )
