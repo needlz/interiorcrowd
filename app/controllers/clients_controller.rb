@@ -47,6 +47,7 @@ class ClientsController < ApplicationController
                                    :email,
                                    :address,
                                    :name_on_card,
+                                   :card_type,
                                    :state,
                                    :zip,
                                    :password,
@@ -96,7 +97,7 @@ class ClientsController < ApplicationController
 
   def client_params
     params.require(:client).permit(:first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
-                                   :card_ex_year, :card_cvc, :email)
+                                   :card_ex_year, :card_cvc, :email, :city, :card_type)
   end
 
 end
