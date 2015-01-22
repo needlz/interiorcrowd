@@ -12,7 +12,7 @@
   .portfolio-creation
     = form_for Portfolio.new, url: portfolio_path, method: :post  do |f|
       = render partial: 'portfolios/form', locals: { form: f }
-      %div{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
+      %div.divider-line
       .text-center
         = f.submit update_button_text(f.object), class: 'btn1 btn1-confirm'
 

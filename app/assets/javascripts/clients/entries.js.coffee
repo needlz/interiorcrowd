@@ -1,3 +1,21 @@
+class EntriesPage
+
+  @init: ->
+    answers = new Answers()
+    answers.init()
+
+    PopulatedInputs.init()
+    ScrollBars.style()
+
+class ScrollBars
+
+  @style: ->
+    $('#scrollbox4').enscroll({
+      verticalTrackClass: 'track4',
+      verticalHandleClass: 'handle4',
+      minScrollbarLength: 28
+    });
+
 class @Answers
   init: ->
     @bindAnswerButtons()
@@ -69,14 +87,5 @@ class @Answers
         self.hidePopover($button)
     })
 
-$('document').ready ->
-  $('#scrollbox4').enscroll({
-    verticalTrackClass: 'track4',
-    verticalHandleClass: 'handle4',
-    minScrollbarLength: 28
-  });
-
-  PopulatedInputs.init()
-
-  answers = new Answers()
-  answers.init()
+$ ->
+  EntriesPage.init()

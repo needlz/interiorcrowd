@@ -7,7 +7,7 @@
     %h1.main-title= t('client_center.sign_up.title')
     = render :partial => 'home/msg'
   = form_for @client, {:id => "create", :method => "post"} do |f|
-    %div.divider
+    %div.divider-line
     %h3= t('client_center.sign_up.create_account')
     .col-md-12.no-padding-left
       .row.form
@@ -33,7 +33,7 @@
           %label= t('client_center.sign_up.confirm_password')
           = f.password_field :password_confirmation, :class => "form-control", tabindex: 5
           %span#err_cpassword.text-error
-      %div.divider
+      %div.divider-line
     %h3= t('client_center.sign_up.payment_information')
     .col-md-12.no-padding-left
       .row.form
@@ -98,7 +98,7 @@
               :class => "form-control left-control",
               tabindex: 10
           %span#err_zip.text-error
-      %div.divider
+      %div.divider-line
     .clearfix
     .text-center
       %h3.agreement
