@@ -1,7 +1,7 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
 
-  delegate :awards, :years_of_expirience, :about, :personal_picture, to: :portfolio, allow_nil: true
+  delegate :years_of_expirience, :about, :personal_picture, to: :portfolio, allow_nil: true
 
   def initialize(portfolio)
     @portfolio = portfolio
@@ -22,6 +22,7 @@ class PortfolioView
   end
 
   def expirience_level
+    return unless portfolio.years_of_expirience
     if portfolio.years_of_expirience < 5
       I18n.t('designer_center.portfolio.show.expirience_levels.novice')
     elsif 5 <= portfolio.years_of_expirience && portfolio.years_of_expirience < 10
@@ -66,6 +67,11 @@ class PortfolioView
     result = styles.map {|style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }.join(', ')
     result = result + '<br/>' + (portfolio.style_description ? portfolio.style_description : '' )
     result.html_safe
+  end
+
+  def awards
+    return unless portfolio.portfolio_awards.present?
+    portfolio.portfolio_awards.map(&:name).join('<br/>')
   end
 
   private

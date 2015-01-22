@@ -106,6 +106,12 @@ RSpec.describe PortfoliosController do
         patch :update, portfolio: { background_id: picture.id }
         expect(designer.portfolio.reload.background).to eq picture
       end
+
+      it 'updates awards' do
+        awards = ['award1', 'award2']
+        patch :update, portfolio: { awards: awards }
+        expect(designer.portfolio.reload.portfolio_awards.map(&:name)).to eq awards
+      end
     end
   end
 

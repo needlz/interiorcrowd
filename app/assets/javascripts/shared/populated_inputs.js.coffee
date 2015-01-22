@@ -24,7 +24,10 @@ class @PopulatedInputs
       @refreshLinkButtons('removed')
 
   @populateExamplesInputs: ->
-    @refreshLinkButtons('removed')
+    if $('.lnk_container .plus_wrapper').length > 1
+      @refreshLinkButtons('added')
+    else
+      @refreshLinkButtons('removed')
 
   @refreshLinkButtons: (change)->
     if change is 'added'
