@@ -7,6 +7,27 @@
   @include link;
 }
 
+.intc-pagination {
+  .pageNumber {
+    width: auto;
+    display: inline-block;
+  }
+
+  em, span {
+    font-size: 22px;
+    color: #231f20;
+    display: inline-block;
+    line-height: 56px;
+    padding: 0 23px;
+  }
+
+  em.current {
+    text-decoration: none;
+    background: #231f20;
+    color: #FFF;
+  }
+}
+
 .client-center {
   .header {
     border-bottom: 1px solid #eee;
@@ -26,7 +47,7 @@
       height: 300px;
       background-repeat: no-repeat;
       background-size: contain;
-      background-position-y: 25%;
+      background-position-x: 50%;
     }
   }
 
@@ -45,7 +66,6 @@
   .save-button {
     @include link;
   }
-
 
   .row.attribute {
     margin-bottom: 1em;
@@ -74,14 +94,79 @@
 
 .client-signup {
   .main-title {
-    font-weight:normal;
-  }
-
-  .divider {
-    padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;
+    font-weight: normal;
   }
 
   .agreement {
-    display: inline-block; margin-bottom: 50px;
+    display: inline-block;
+    margin-bottom: 50px;
+  }
+}
+
+.divider-line {
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e1e1e1;
+  margin-bottom: 60px;
+}
+
+.entries-page {
+  .picture-and-dimensions-reminder {
+    background-color: #f1f1f1;
+    position: relative;
+
+    .description {
+      padding-left: 20px;
+
+      .reminder {
+        font-size: 18px;
+      }
+
+      .contact {
+        font-size: 14px;
+        font-weight: normal;
+      }
+    }
+
+    .options {
+      padding-left: 45px;
+      padding-right: 45px;
+    }
+  }
+
+  .invite-designer-title {
+    font-weight: normal;
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+
+  .more-designers-link {
+    margin-top: 40px;
+
+    p {
+      font-size: 24px;
+      text-decoration: underline;
+      margin-bottom: 0;
+      font-weight: normal;
+      text-decoration-color: red;
+
+      a {
+        color: #a9a9a9;
+      }
+    }
+  }
+}
+
+.education {
+  .title {
+    font-size: 20px;
+    margin-top: 0px;
+  }
+
+  .tick-btn {
+    border-radius: 0;
+  }
+
+  label {
+    font-size: 20px;
   }
 }

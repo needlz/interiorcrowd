@@ -13,6 +13,7 @@ class ClientsController < ApplicationController
   def entries
     @contest = @client.last_contest
     if @contest
+      @contest_view = ContestView.new(@contest)
       requests = @contest.requests.published.includes(:designer, :lookbook)
       @contest_requests = requests.by_page(params[:page])
       invitable_designers = Designer.includes(portfolio: [:personal_picture]).all

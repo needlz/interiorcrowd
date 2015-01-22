@@ -1,14 +1,13 @@
-.rooms.text-package.text-center.text-center-sm.text-center-xs{:style => "border-bottom: 1px solid #e1e1e1;margin-bottom: 60px; margin-left: -15px;"}
 .col-md-12
-  .rooms.text-package.text-center.text-center-sm.text-center-xs{:style => "padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 60px;"}
-    %h3{:style => "font-weight:normal;margin-top:0px;margin-bottom:30px;"}
+  .rooms.text-package.text-center.text-center-sm.text-center-xs.divider-line
+    %h3.invite-designers-title
       %b Let’s explore and invite designers to your contest.
     - @invitable_designer_views.in_groups_of(2, false) do |designers|
       .clearfix
       - designers.each do |designer|
         = render partial: 'clients/client_center/entries/designer_to_invite', locals: { designer: designer }
-    .some-text.col-md-12.text-center{:style => "margin-top: 40px;"}
-      %p{:style => "font-size:24px;text-decoration: underline;margin-bottom: 0;font-weight:normal;text-decoration-color:red;"}
-        %a{:href => "#", :style => "color: #a9a9a9;"}
-          %i{:style => "color: #a9a9a9;"} See more designers
+    .some-text.col-md-12.text-center.more-designers-link
+      %p.more-designers-link
+        %a{:href => "#"}
+          %i See more designers
     .clearfix

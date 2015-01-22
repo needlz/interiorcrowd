@@ -1,3 +1,21 @@
+class EntriesPage
+
+  @init: ->
+    answers = new Answers()
+    answers.init()
+
+    PopulatedInputs.init()
+    ScrollBars.style()
+
+class ScrollBars
+
+  @style: ->
+    $('#scrollbox4').enscroll({
+      verticalTrackClass: 'track4',
+      verticalHandleClass: 'handle4',
+      minScrollbarLength: 28
+    });
+
 class @Answers
   init: ->
     @bindAnswerButtons()
@@ -5,28 +23,26 @@ class @Answers
     @bindWinnerDialogButtons()
 
   bindWinnerButton: ->
-    $('.winner-answer').popover({
-      html: true
-      placement: 'auto'
-      title: I18n.winner_dialog.title
-      content: ->
-        requestId = $(@).parents('.moodboard').attr('data-id')
-        $('.winner-dialog-template .winner-dialog').clone().attr('data-id', requestId)
-    })
+    $('.winner-answer').click (event)=>
+      requestId = $(event.target).parents('.moodboard').data('id')
+      $('#pickWinnerModal').data('id', requestId)
+      $('#pickWinnerModal').modal('show');
 
   bindWinnerDialogButtons: ->
     self = @
-    $('body').on('click', '.winner-dialog .no-button', ->
+    $('#pickWinnerModal').on('click', '.no-button', (event)->
+      event.preventDefault()
       self.hidePopover($(@))
-    ).on('click', '.winner-dialog .yes-button', ->
+    ).on('click', '.yes-button', (event)->
+      event.preventDefault()
       self.onDialogYesClick(@)
     )
 
   bindAnswerButtons: ->
     self = @
     $('.answers').find('.answer-no, .answer-maybe, .answer-favorite').click ->
-      requestId = $(@).parents('.moodboard').attr('data-id')
-      answer = $(@).attr('answer')
+      requestId = $(@).parents('.moodboard').data('id')
+      answer = $(@).data('answer')
       self.sendAnswer(requestId, answer)
 
   sendAnswer: (requestId, answer, custom_callbacks)->
@@ -41,7 +57,7 @@ class @Answers
     $.ajax(options)
 
   requestAnswerPath: (requestId)->
-    $(".moodboard[data-id='#{ requestId }'] .answers").attr('data-url')
+    "/contest_requests/#{ requestId }/answer"
 
   bindViewUpdate: (requestId, answer, callbacks)->
     onUpdate = $.extend({}, callbacks)
@@ -56,14 +72,13 @@ class @Answers
     $(".moodboard[data-id='#{ requestId }'] .current-answer").text(answer)
 
   hidePopover: ($popover_element)->
-    id = $popover_element.parents('.winner-dialog').attr('data-id')
-    $(".moodboard[data-id='#{id}'] .winner-answer").popover('hide')
+    $('#pickWinnerModal').modal('hide');
 
   onDialogYesClick: (button)->
     self = @
     $button = $(button)
-    $dialog = $button.parents('.winner-dialog')
-    requestId = $dialog.attr('data-id')
+    $dialog = $button.parents('#pickWinnerModal')
+    requestId = $dialog.data('id')
     $dialog.find(':button').prop('disabled', true)
     self.sendAnswer(requestId, 'winner', {
       success: (data)->
@@ -72,6 +87,5 @@ class @Answers
         self.hidePopover($button)
     })
 
-$('document').ready ->
-  answers = new Answers()
-  answers.init()
+$ ->
+  EntriesPage.init()

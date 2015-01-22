@@ -1,0 +1,19 @@
+.row
+  .hLine
+.row.designerFeedback
+  .col-md-10.col-md-offset-1
+    %h4
+      You don't have to make this choice alone. Want feedback on the designs?
+      = succeed "Invite" do
+        %br/
+    .row.lnk_container
+      .col-md-4
+        %label{:for => "nameInvite"} Name :
+        %input#nameInvite{:type => "text"}/
+      .col-md-6
+        %label{:for => "emailInvite"} E-mail address :
+        %input#emailInvite{:type => "text"}/
+      .col-md-1.disablePadding
+        %button.btnInvite
+          %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
+          %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}
