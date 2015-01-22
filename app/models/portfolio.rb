@@ -22,4 +22,16 @@ class Portfolio < ActiveRecord::Base
     personal_picture_id = portfolio_params[:personal_picture_id]
     Image.update_portfolio(self, personal_picture_id, portfolio_pictures_ids)
   end
+
+  def assign_unique_path
+    update_attributes!(path: unique_path) unless path.present?
+  end
+
+  private
+
+  def unique_path
+    preferred_path = URI.encode(designer.name.parameterize.underscore)
+    existing_paths = Portfolio.where('path LIKE ?', "#{ preferred_path }%").pluck(:path)
+    UniquePathGenerator.generate(preferred_path, existing_paths)
+  end
 end

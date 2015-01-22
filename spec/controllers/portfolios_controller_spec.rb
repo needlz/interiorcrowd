@@ -83,9 +83,10 @@ RSpec.describe PortfoliosController do
         expect(response).to redirect_to show_portfolio_path(url: new_portfolio_path)
       end
 
-      it 'redirects to portfolio editing if portfolio not completed' do
+      it 'automatically generates portfolio path' do
         patch :update, portfolio: { path: '' }
-        expect(response).to redirect_to edit_portfolio_path
+        expect(designer.portfolio.reload.path).to be_present
+        expect(response).to redirect_to show_portfolio_path(url: designer.portfolio.path)
       end
 
       it 'updates years_of_expirience' do

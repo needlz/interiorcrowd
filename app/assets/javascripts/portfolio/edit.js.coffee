@@ -26,6 +26,7 @@ class @PortfolioEditor
     @bindPictureUploaders()
     @bindSchoolCheckbox().trigger('change')
     PopulatedInputs.init()
+    @bindCheckboxes()
 
     $(".selectpicker").selectpicker style: "btn-selector-medium font15"
     $(".dropdown-toggle").click ->
@@ -40,34 +41,37 @@ class @PortfolioEditor
     $('#portfolio_education_school').change (event)->
       $('#sub1').toggleClass('active', $('#portfolio_education_school').is(':checked'));
 
-    $(".tick-btn").click ->
-      $(this).toggleClass "active"
-      $checkbox = $(this).prev(':checkbox')
-      $checkbox.prop('checked', $(this).hasClass('active'))
-      $checkbox.change()
-
-    $(".spinner .btn:first-of-type").on "click", (event)->
-      $(".spinner input").val(parseInt($(".spinner input").val(), 10) + 1)
-      event.preventDefault()
-
-    $(".spinner .btn:last-of-type").on "click", (event)->
-      value = parseInt($(".spinner input").val(), 10)
-      $(".spinner input").val(value - 1) if value >= 1
-      event.preventDefault()
-
-    $('.hidden:checkbox').change (event)->
-      $checkbox = $(@)
-      $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
-    $('.hidden:checkbox').change()
-
     $('#portfolio_pictures_preview').on 'click', '.cover-button', (event)->
       event.preventDefault()
       $selectButton = $(@)
       $selectedThumb = $selectButton.parents('.portfolio-item')
       CoverImage.toggle($selectedThumb)
 
+  bindCheckboxes: ->
+    $(".tick-btn").click ->
+      $(this).toggleClass "active"
+      $checkbox = $(this).prev(':checkbox')
+      $checkbox.prop('checked', $(this).hasClass('active'))
+      $checkbox.change()
+
+    $('.hidden:checkbox').change (event)->
+      $checkbox = $(@)
+      $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
+    $('.hidden:checkbox').change()
+
   bindYearsOfExpirience: ->
     $('#portfolio_years_of_expirience').keypress digitsFilter
+
+    $(".spinner .btn:first-of-type").on "click", (event)->
+      value = ~~$(".spinner input").val()
+      $(".spinner input").val(value + 1)
+      event.preventDefault()
+
+    $(".spinner .btn:last-of-type").on "click", (event)->
+      value = ~~$(".spinner input").val()
+      value = value - 1 if value >= 1
+      $(".spinner input").val(value)
+      event.preventDefault()
 
   bindPictureUploaders: ->
     PicturesUploadButton.init
