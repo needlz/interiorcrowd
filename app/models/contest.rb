@@ -18,6 +18,7 @@ class Contest < ActiveRecord::Base
   belongs_to :design_category
   belongs_to :design_space
   has_many :requests, class_name: 'ContestRequest'
+  has_many :designer_invitations
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
@@ -94,6 +95,12 @@ class Contest < ActiveRecord::Base
 
   def close_requests
     requests.update_all(status: 'closed')
+  end
+
+  def invite(designer_id)
+    designer = Designer.find(designer_id)
+    raise('Contest needs to be in submission state') unless submission?
+    designer_invitations.create!(designer: designer)
   end
 
   private

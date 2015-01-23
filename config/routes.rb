@@ -89,4 +89,6 @@ InteriorC::Application.routes.draw do
   end
 
   get '/:url', to: 'portfolios#show', as: 'show_portfolio'
+
+  resources :designer_invitations, only: [:create]
 end
