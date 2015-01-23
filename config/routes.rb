@@ -51,7 +51,7 @@ InteriorC::Application.routes.draw do
 
   resources :clients, only: [:create, :update] do
     member do
-      patch 'update_profile'
+      patch 'update'
     end
   end
 

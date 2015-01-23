@@ -70,11 +70,6 @@ class ClientsController < ApplicationController
 
   def update
     @client.update_attributes!(client_params)
-    redirect_to profile_client_center_index_path
-  end
-
-  def update_profile
-    @client.update_attributes!(client_params)
     render nothing: true
   end
 

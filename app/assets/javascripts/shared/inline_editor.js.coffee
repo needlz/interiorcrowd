@@ -33,7 +33,7 @@ class @InlineEditor
     $form = $optionsRow.find(@placeholderSelector).find('.edit')
     $form.html(formHtml).show()
     @afterEditFormRetrieved?(attribute, formHtml)
-    @editFormsCallbacks[attribute]?() if @editFormsCallbacks
+    @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
   onCancelClick: (event)=>
     event.preventDefault()

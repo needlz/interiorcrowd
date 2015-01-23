@@ -3,7 +3,6 @@ class @ProfileEditor extends InlineEditor
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
   numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
-  pencilImg: '<img src="/assets/pencil.png"/>'
 
   bindEvents: ->
     super()
@@ -41,15 +40,23 @@ class @ProfileEditor extends InlineEditor
     billing_information: ($form, $view)->
       @updateText($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
 
+  editFormsCallbacks:
+    billing_information: ($form, $view)->
+      @initSelectPicker()
+
   updateText: ($form, $view, field)->
     $input = $form.find("#client_#{ field }")
     $view.find(".#{ field }").text($input.val())
     $input.attr('value', $input.val())
 
   updateEditButton: ($elem)->
-    $elem.html(@pencilImg)
+    $editButton = $('.edit-button.template').html()
+    $elem.html($editButton)
 
-
+  initSelectPicker: ->
+    $('.expiration-picker').selectpicker({
+      style: 'btn-selector-medium font15'
+    });
 
 $ ->
   profile = new ProfileEditor()

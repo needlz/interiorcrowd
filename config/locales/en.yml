@@ -203,6 +203,9 @@ en:
         email: E-mail address
         username: Username
         password: Password
+        existing_password: Enter existing password
+        new_password: Enter new password
+        confirm_password: Confirm new password
         phone_number: Phone number
         billing_information: Credit Card on File
         billing_address: Billing Address
@@ -214,6 +217,7 @@ en:
         card_types:
           visa: Visa
           mastercard: Mastercard
+        ending_in: 'ending in'
     navigation:
       entries: Entries
       brief: Brief
