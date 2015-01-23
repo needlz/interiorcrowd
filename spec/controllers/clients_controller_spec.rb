@@ -92,7 +92,6 @@ RSpec.describe ClientsController do
         sign_in(client)
         patch :update, client: new_client_attributes, id: client.id
         client.reload
-        expect(response).to redirect_to(profile_client_center_index_path)
       end
 
       it 'client string attributes' do
