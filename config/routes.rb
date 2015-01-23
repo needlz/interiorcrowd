@@ -49,11 +49,7 @@ InteriorC::Application.routes.draw do
 
   resources :images, only: [:show, :create]
 
-  resources :clients, only: [:create, :update] do
-    member do
-      patch 'update'
-    end
-  end
+  resources :clients, only: [:create, :update]
 
   resources :client_center, only: [] do
     collection do

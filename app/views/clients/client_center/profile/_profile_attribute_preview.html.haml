@@ -10,5 +10,5 @@
           = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: {form: form}
           = form.submit class: 'button btn btn-primary done', value: t('client_center.attribute_done_button')
     .col-lg-4.text-right
-      %a.edit-button{:href => "#"}
-        = render :partial => 'clients/client_center/profile/edit_button_image'
+      %a.edit-button{href: '#'}
+        = render partial: 'clients/client_center/profile/edit_button_image'
