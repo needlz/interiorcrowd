@@ -1,61 +1,51 @@
 = form_for(@designer) do |f|
   %input#designer_image{name: 'portfolio[picture_ids]', type: 'hidden', value: @designer_images}
   %h3= t('designer_center.sign_up.get_started')
-  .col-md-12.no-padding-left.font20
-    .row.form
-      .col-md-5
-        %label= t('designer_center.sign_up.first_name')
-        = f.text_field :first_name, class: 'form-control'
-        %span#err_first_name.text-error
-      .col-md-offset-2.col-md-5
-        %label= t('designer_center.sign_up.email')
-        = f.text_field :email, class: 'form-control'
-        %span#err_email.text-error
-    .row.form
-      .col-md-5
-        %label= t('designer_center.sign_up.last_name')
-        = f.text_field :last_name, class: 'form-control'
-        %span#err_last_name.text-error
-      .col-md-offset-2.col-md-5
-        %label= t('designer_center.sign_up.password')
-        = f.password_field :password, class: 'form-control'
-        %span#err_password.text-error
-    .row.form
-      .col-md-5
-        %label= t('designer_center.sign_up.street_address')
-        %input.form-control{:type => "text"}/
-      .col-md-offset-2.col-md-5
-        %label= t('designer_center.sign_up.confirm_password')
-        = f.password_field :password_confirmation, class: 'form-control'
-        %span#err_cpassword.text-error
-  .col-md-12.no-padding-left
-    .row.form
-      .col-md-2
-        %label= t('designer_center.sign_up.city')
-        %input.form-control{:type => "text"}/
-      .col-md-offset-2.col-md-3.no-margin-left
-        %label= t('designer_center.sign_up.phone_number')
-        %input.form-control{:type => "text"}/
-    .row.form
-      .col-md-2
-        %label= t('designer_center.sign_up.state')
-        = select('designer',
+
+  .row
+    .col-md-5
+      %label.signUpInputLabel= t('designer_center.sign_up.first_name')
+      %span#err_first_name.text-error
+      = f.text_field :first_name, class: 'form-control'
+      %label.signUpInputLabel= t('designer_center.sign_up.last_name')
+      %span#err_last_name.text-error
+      = f.text_field :last_name, class: 'form-control'
+      %label.signUpInputLabel= t('designer_center.sign_up.street_address')
+      %input.form-control{:type => "text"}/
+      %label.signUpInputLabel= t('designer_center.sign_up.city')
+      %input.form-control{:type => "text"}/
+      .row
+        .col-md-5
+          %label.signUpInputLabel= t('designer_center.sign_up.state')
+          = select('designer',
               'state',
               options_for_select(PersonalData.state_options, 0),
               {},
               { class: 'selectpicker form-selector', tabindex: 9 })
-      .col-md-2
-        %label= t('designer_center.sign_up.zipcode')
-        = f.text_field :zip, class: 'form-control'
-        %span#err_zip.text-error
-    %div.divide-line
+        .col-md-7
+          %label.signUpInputLabel= t('designer_center.sign_up.zipcode')
+          %span#err_zip.text-error
+          = f.text_field :zip, class: 'form-control'
+    .col-md-5.col-md-offset-1
+      %label.signUpInputLabel= t('designer_center.sign_up.email')
+      %span#err_email.text-error
+      = f.text_field :email, class: 'form-control'
+      %label.signUpInputLabel= t('designer_center.sign_up.password')
+      %span#err_password.text-error
+      = f.password_field :password, class: 'form-control'
+      %label.signUpInputLabel= t('designer_center.sign_up.confirm_password')
+      %span#err_cpassword.text-error
+      = f.password_field :password_confirmation, class: 'form-control'
+      %label.signUpInputLabel= t('designer_center.sign_up.phone_number')
+      = f.password_field :phone_number, class: 'form-control'
+  .lineBreak
   = render partial: 'designers/new/portfolio'
-  .clearfix
-  .text-center
-    %h3.agreement
+  .row
+    .col-md-5.col-md-offset-4
+      %label.font20{:for => "agreeTermsInteriorCrowd"}= t('designer_center.sign_up.i_agree')
       = check_box_tag 'designer_agree', 'yes', false, name: '', class: 'hidden'
       .tick-btn
         %span ✓
-      = t('designer_center.sign_up.i_agree')
-    .clearfix
-    %button.btn1.btn1-confirm.create-account{:type => "button"}= t('designer_center.sign_up.register_button')
+  .paddBottom40
+  .text-center
+    %input.btn1.btn1-confirm.create-account{:name => "commit", :type => "submit", :value => t('designer_center.sign_up.register_button')}/

@@ -1,38 +1,38 @@
 .education
-  %h3.title= t('designer_center.portfolio.creation.education.title')
+  %h3.font20.makeMeBlack= t('designer_center.portfolio.creation.education.title')
   .col-md-12.no-padding-left
     .form
       .row.marg-bottom30.marg-top40
         .col-md-5
-          = form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted')
+          = form.label :education_gifted, t('designer_center.portfolio.creation.education.gifted'), class: 'font20'
           = form.check_box :education_gifted, class: 'hidden'
-          .tick-btn
+          .tick-btn.borderRadius0
             %span ✓
       .row.marg-bottom30
         .col-md-5
-          = form.label :education_school, t('designer_center.portfolio.creation.education.school')
+          = form.label :education_school, t('designer_center.portfolio.creation.education.school'), class: 'font20'
           = form.check_box :education_school, class: 'hidden'
-          .tick-btn
+          .tick-btn.borderRadius0
             %span ✓
       #sub1.col-md-6.sub-design-options
         .col-md-4
-          %label= t('designer_center.portfolio.creation.education.school_name')
+          %label.font20= t('designer_center.portfolio.creation.education.school_name')
         .col-md-8
           = form.text_field :school_name, class: 'form-control'
         .clearfix
-        .col-md-4{:style => "padding-top: 35px;"}
+        .col-md-4.paddTop25
           .col-md-12.no-padding-left.no-padding-right
-            %label= t('designer_center.portfolio.creation.education.degrees.title')
+            %label.font20= t('designer_center.portfolio.creation.education.degrees.title')
             .clearfix
-        .col-md-8{:style => "padding-top:20px;"}
+        .col-md-8.marg-top20
           .col-md-12.no-padding-left.no-padding-right
             .clearfix
             = @portfolio_view.education_degree_select('portfolio')
       .clearfix
       .row
         .col-md-5
-          = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed')
+          = form.label :education_apprenticed, t('designer_center.portfolio.creation.education.apprenticed'), class: 'font20'
           = form.check_box :education_apprenticed, class: 'hidden'
-          .tick-btn
+          .tick-btn.borderRadius0
             %span ✓
     .long-separator

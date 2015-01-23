@@ -244,7 +244,7 @@ en:
       links_to_work: Links to your portfolio / work
       upload_examples: Upload examples
       password: Password
-      confirm_password: Password (again)
+      confirm_password: Confirm password
       agreement: By clicking below, you agree to the terms and conditions.
       register_button: Create Account
       examples:

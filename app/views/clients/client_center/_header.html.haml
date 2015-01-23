@@ -1,9 +1,9 @@
-.row.my-menu.visible-lg{:style => "padding-top: 20px;"}
+.row.my-menu.visible-lg.paddTop20
   .col-md-6.no-padding-right.logo-pc
     .top-nav.pull-down
-      %label{:style => "font-size:20px;"}= t('client_center.welcome_user', username: @client.first_name)
+      %label.font20= t('client_center.welcome_user', username: @client.first_name)
   .col-md-6.no-padding-right.pull-down
     .top-nav
       .nav-collapse
         = render partial: 'shared/navigation'
-.rooms.text-package.text-center.text-center-sm.text-center-xs{:style => "border-bottom: 1px solid #e1e1e1;margin-bottom: 20px; margin-left: -15px;"}
+.rooms.text-package.text-center.text-center-sm.text-center-xs.underMenuLine

@@ -60,11 +60,11 @@ class @DesignerSignUp
 
   bindFileUploader: ->
     PicturesUploadButton.init
-      fileinputSelector: '#new_designer #file_input',
+      fileinputSelector: '#new_designer #portfolio_pictures',
       uploadButtonSelector: '#new_designer .upload-button',
       thumbs:
-        container: '#image_display'
-        selector: '#designer_image'
+        container: '#portfolio_pictures_preview .container'
+        selector: '#portfolio_pictures_ids'
         theme: 'new'
       I18n: I18n.examples
 

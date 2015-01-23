@@ -6,13 +6,14 @@
     window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }
 
 #designer-signup
-  .container.animated.fadeInDown
-    .row.text-center.title-first
-      .col-md-12
-        %h1.designer-center-title= t('designer_center.title').upcase
-        %h3.subtitle
-          %i= t('designer_center.sign_up.do_you_love')
-        %h3.subtitle
-          %i= t('designer_center.sign_up.looking_for')
-    %div.divide-line
-    = render 'form'
+  .designer-center
+    .container.animated.fadeInDown
+      .row.text-center.title-first
+        %h1.signUpTitle= t('designer_center.title').upcase
+        %h1.signUpSubTitle
+          %i.lineHeight25
+            = t('designer_center.sign_up.do_you_love')
+            %br/
+            = t('designer_center.sign_up.looking_for')
+        .long-separator
+      = render 'form'
