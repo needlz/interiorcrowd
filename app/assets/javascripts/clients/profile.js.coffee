@@ -3,6 +3,7 @@ class @ProfileEditor extends InlineEditor
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
   numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
+  pencilImg: '<img src="/assets/pencil.png"/>'
 
   bindEvents: ->
     super()
@@ -33,7 +34,7 @@ class @ProfileEditor extends InlineEditor
       @updateText($form, $view, 'first_name')
     last_name: ($form, $view)->
       @updateText($form, $view, 'last_name')
-    email: ($form, $view)->
+    username: ($form, $view)->
       @updateText($form, $view, 'email')
     address: ($form, $view)->
       @updateText($form, $view, field) for field in ['address', 'state', 'zip']
@@ -44,6 +45,11 @@ class @ProfileEditor extends InlineEditor
     $input = $form.find("#client_#{ field }")
     $view.find(".#{ field }").text($input.val())
     $input.attr('value', $input.val())
+
+  updateEditButton: ($elem)->
+    $elem.html(@pencilImg)
+
+
 
 $ ->
   profile = new ProfileEditor()

@@ -45,7 +45,7 @@ class @InlineEditor
   cancelEditing: (attribute)->
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
     $editButton = $optionsRow.find(@editButtonSelector)
-    $editButton.text(I18n.attribute_edit_button)
+    @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
@@ -55,3 +55,7 @@ class @InlineEditor
 
   optionsRow: ($child)->
     $child.parents(@attributeSelector).filter("[data-#{ @attributeIdentifierData }]")
+
+  updateEditButton: ($editButton)->
+    $editButton.text(I18n.attribute_edit_button)
+
