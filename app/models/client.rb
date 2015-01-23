@@ -10,6 +10,7 @@ class Client < ActiveRecord::Base
   
   has_many :contests
   belongs_to :designer_level
+  has_many :designer_invitations, through: :contests
   
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
