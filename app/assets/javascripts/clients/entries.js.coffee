@@ -36,10 +36,8 @@ class DesignerInvitations
       data: { designer_id: designerId, contest_id: @getContestId() }
       url: '/designer_invitations'
       type: 'POST'
-      datasType: 'json'
       success: (response)=>
-        if response.success
-          $button.text(I18n.invitations.invited).removeClass(@buttonSelector)
+        $button.closest('button').find('b').text(I18n.invitations.invited).removeClass(@buttonSelector)
     )
 
 class @Answers

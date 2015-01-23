@@ -97,6 +97,12 @@ class Contest < ActiveRecord::Base
     requests.update_all(status: 'closed')
   end
 
+  def invite(designer_id)
+    designer = Designer.find(designer_id)
+    raise('Contest needs to be in submission state') unless submission?
+    designer_invitations.create!(designer: designer)
+  end
+
   private
 
   def update_appeals(options)
