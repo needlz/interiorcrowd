@@ -6,8 +6,6 @@
 - content_for :client_center_content do
   .profile
     = render partial: 'home/msg'
-    = form_for @client do |f|
-      = render partial: 'clients/client_center/profile/profile_preview', locals: { form: f }
-      .save
-        = f.submit t('client_center.attribute_save_button'), class: 'btn btn-primary'
+    %div
+      = render partial: 'clients/client_center/profile/profile_preview'
 = render partial: 'clients/client_center/layout'

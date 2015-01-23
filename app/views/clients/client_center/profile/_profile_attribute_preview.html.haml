@@ -1,12 +1,14 @@
-.row.attribute{ data: { id: attribute } }
-  .col-xs-11.preview
-    .col-xs-3.title
-      %label= title
-    .col-xs-9.placeholder
+.row.edit-profile.attribute{ data: { id: attribute } }
+  .preview
+    .col-lg-4.title
+      %p= title
+    .col-lg-4.placeholder
       .view
         = render partial: "clients/client_center/profile/preview/#{ attribute }", locals: { client: client }
       .edit
-        = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: { form: form }
-        = render partial: 'clients/client_center/profile/forms/done_button'
-  .col-xs-1
-    %span.edit-button= t('client_center.attribute_edit_button')
+        = form_for @client, url: client_path(id: @client.id), method: 'patch', remote: true do |form|
+          = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: {form: form}
+          = form.submit class: 'button btn btn-primary done', value: t('client_center.attribute_done_button')
+    .col-lg-4.text-right
+      %a.edit-button{href: '#'}
+        = render partial: 'clients/client_center/profile/edit_button_image'

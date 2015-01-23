@@ -33,17 +33,30 @@ class @ProfileEditor extends InlineEditor
       @updateText($form, $view, 'first_name')
     last_name: ($form, $view)->
       @updateText($form, $view, 'last_name')
-    email: ($form, $view)->
+    username: ($form, $view)->
       @updateText($form, $view, 'email')
     address: ($form, $view)->
       @updateText($form, $view, field) for field in ['address', 'state', 'zip']
     billing_information: ($form, $view)->
       @updateText($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
 
+  editFormsCallbacks:
+    billing_information: ($form, $view)->
+      @initSelectPicker()
+
   updateText: ($form, $view, field)->
     $input = $form.find("#client_#{ field }")
     $view.find(".#{ field }").text($input.val())
     $input.attr('value', $input.val())
+
+  updateEditButton: ($elem)->
+    $editButton = $('.edit-button.template').html()
+    $elem.html($editButton)
+
+  initSelectPicker: ->
+    $('.expiration-picker').selectpicker({
+      style: 'btn-selector-medium font15'
+    });
 
 $ ->
   profile = new ProfileEditor()

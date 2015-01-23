@@ -33,7 +33,7 @@ class @InlineEditor
     $form = $optionsRow.find(@placeholderSelector).find('.edit')
     $form.html(formHtml).show()
     @afterEditFormRetrieved?(attribute, formHtml)
-    @editFormsCallbacks[attribute]?() if @editFormsCallbacks
+    @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
   onCancelClick: (event)=>
     event.preventDefault()
@@ -45,7 +45,7 @@ class @InlineEditor
   cancelEditing: (attribute)->
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
     $editButton = $optionsRow.find(@editButtonSelector)
-    $editButton.text(I18n.attribute_edit_button)
+    @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
@@ -55,3 +55,7 @@ class @InlineEditor
 
   optionsRow: ($child)->
     $child.parents(@attributeSelector).filter("[data-#{ @attributeIdentifierData }]")
+
+  updateEditButton: ($editButton)->
+    $editButton.text(I18n.attribute_edit_button)
+

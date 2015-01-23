@@ -170,3 +170,22 @@
     font-size: 20px;
   }
 }
+.edit-profile {
+    div:nth-child(2) {
+      div {
+        span {
+          font-size: 18px
+        }
+      }
+    }
+}
+
+.edit-profile div input[type=password], input[type=text] {
+  width: 360px;
+  border: 1px solid #a9a9a9;
+  height: 38px;
+  line-height: 38px;
+  margin-bottom: 10px;
+  padding: 0 5px;
+  border-radius: 5px;
+}

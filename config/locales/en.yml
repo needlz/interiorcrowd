@@ -194,14 +194,21 @@ en:
     attribute_done_button: Done
     profile:
       labels:
-        address: Street address
+        address: Contact Information
         city: City
         state: State
         zip: Zip code
         first_name: First Name
         last_name: Last Name
         email: E-mail address
-        billing_information: Billing information
+        username: Username
+        password: Password
+        existing_password: Enter existing password
+        new_password: Enter new password
+        confirm_password: Confirm new password
+        phone_number: Phone number
+        billing_information: Credit Card on File
+        billing_address: Billing Address
         card_number: Card number
         card_exp_month: Expiration month
         card_exp_year: Expiration year
@@ -210,6 +217,7 @@ en:
         card_types:
           visa: Visa
           mastercard: Mastercard
+        ending_in: 'ending in'
     navigation:
       entries: Entries
       brief: Brief
