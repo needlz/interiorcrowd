@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActionController::RoutingError, with: :render_404
 
+  PAGE_404_PATH = 'errors/404'
+
   def check_designer
     redirect_to login_sessions_path if session[:designer_id].blank?
     session[:designer_id]
@@ -24,6 +26,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render 'errors/404'
+    render PAGE_404_PATH
   end
 end

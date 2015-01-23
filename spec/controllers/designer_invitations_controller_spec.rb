@@ -10,7 +10,7 @@ RSpec.describe DesignerInvitationsController do
   describe 'POST create' do
     context 'not logged in' do
       it 'redirects to login page' do
-        post :create, designer_id: designer.id, contest_id: contest.id, format: :json
+        post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
         expect(response).to redirect_to client_login_sessions_path
       end
     end
@@ -21,9 +21,8 @@ RSpec.describe DesignerInvitationsController do
       end
 
       it 'doesn\'t create an invitation' do
-        post :create, designer_id: designer.id, contest_id: contest.id, format: :json
-        json = JSON.parse(response.body)
-        expect(json['success']).to eq false
+        post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
+        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
       end
     end
 
@@ -34,7 +33,7 @@ RSpec.describe DesignerInvitationsController do
 
       context 'unexisting designer id' do
         it 'doesn\'t create an invitation' do
-          post :create, designer_id: 0, contest_id: contest.id, format: :json
+          post :create, designer_id: 0, contest_id: contest.id, format: 'json'
           json = JSON.parse(response.body)
           expect(json['success']).to eq false
         end
@@ -42,8 +41,8 @@ RSpec.describe DesignerInvitationsController do
 
       context 'unexisting contest id' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, designer_id: designer.id, contest_id: 0, format: :json }.to raise_error
-          expect(client.designer_invitation.count).to eq 0
+          expect { post :create, designer_id: designer.id, contest_id: 0, format: 'json' }.to raise_error
+          expect(client.designer_invitations.count).to eq 0
         end
       end
 
@@ -53,7 +52,7 @@ RSpec.describe DesignerInvitationsController do
         end
 
         it 'doesn\'t create an invitation' do
-          post :create, designer_id: designer.id, contest_id: contest.id, format: :json
+          post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
           json = JSON.parse(response.body)
           expect(json['success']).to eq false
         end
@@ -61,16 +60,23 @@ RSpec.describe DesignerInvitationsController do
 
       context 'correct designer and contest id' do
         it 'creates an invitation' do
-          post :create, designer_id: designer.id, contest_id: contest.id
-          designer_invitation = client.designer_invitation[0]
+          post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
+          designer_invitation = client.designer_invitations[0]
           expect(designer_invitation.designer).to eq designer
           expect(designer_invitation.contest).to eq contest
         end
 
         it 'notifies about success' do
-          post :create, designer_id: designer.id, contest_id: contest.id, format: :json
+          post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
           json = JSON.parse(response.body)
           expect(json['success']).to eq true
+        end
+
+        it 'doesn\'t create an invitation if already invited' do
+          Fabricate(:designer_invitation, designer_id: designer.id, contest_id: contest.id)
+          post :create, designer_id: designer.id, contest_id: contest.id, format: 'json'
+          json = JSON.parse(response.body)
+          expect(json['success']).to eq false
         end
       end
     end

@@ -185,6 +185,10 @@ en:
         text: Please confirm
         'yes': 'Yes'
         'no': 'No'
+      invitations:
+        invite: INVITE TO CONTEST
+        sending_invitation: SENDING INVITATION...
+        invited: INVITED
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

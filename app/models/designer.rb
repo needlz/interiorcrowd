@@ -40,4 +40,8 @@ class Designer < ActiveRecord::Base
     end
   end
 
+  def invited_to_contest?(contest)
+    designer_invitations.exists?(contest_id: contest.id)
+  end
+
 end

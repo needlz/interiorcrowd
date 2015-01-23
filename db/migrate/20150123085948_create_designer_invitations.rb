@@ -4,5 +4,6 @@ class CreateDesignerInvitations < ActiveRecord::Migration
       t.integer :designer_id, null: false
       t.integer :contest_id, null: false
     end
+    add_index(:designer_invitations, [:designer_id, :contest_id], unique: true)
   end
 end
