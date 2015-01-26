@@ -1,20 +1,21 @@
-.col-md-6.no-x-padding.profile-card{ style: 'margin-top: 40px; border-left: 10px solid #fff;' }
+.col-md-6.no-x-padding.profile-card{ data: { id: designer.id } }
   .col-md-5.no-padding-left.img-responsive
     %img{:src => designer.personal_picture.try(:image).try(:url, :medium)}/
     .clearfix.visible-md.visible-xs.visible-sm
-    %button.btn7{:style => "font-size:16px;margin-top:20px;border: 1px solid #000000;", :type => "button"}
-      %b INVITE TO CONTEST
+    %button.btn7.designer-invitation-button{  :type => "button",
+      class: ('invite-designer' unless designer.invited_to_contest?(@contest))}
+      %b= designer.invited_to_contest?(@contest) ? t('client_center.entries.invitations.invited') : t('client_center.entries.invitations.invite')
   .col-md-7.no-x-padding.text-left.text-center-sm.text-center-xs
-    %h3{:style => "margin-top: 0;"}
+    %h3.designer-name
       %b
         %i= designer.name
-    .col-md-12{:style => "border-bottom: 1px solid #e1e1e1;margin-bottom:20px; height: 1px;"}
-    %h2{:style => "margin-top: 0;font-size:20px;"}
+    .col-md-12.first-section-separator
+    %h2.attribute-title
       %b Design Mindset
-    %h2{:style => "margin-top: 0;font-size:16px;"}
+    %h2.attribute-value
       %b= designer.about
-    .col-md-12{:style => "border-bottom: 1px solid #e1e1e1;padding-top: 10px;margin-bottom:20px; height: 1px;"}
-    %h2{:style => "margin-top: 0;font-size:20px;"}
+    .col-md-12.second-section-separator
+    %h2.attribute-title
       %b Style Specialty
-    %h2{:style => "margin-top: 0;font-size:16px;"}
+    %h2.attribute-value
       %b= designer.style_description

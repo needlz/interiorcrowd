@@ -12,11 +12,11 @@
  *= require_tree ./bootstrap
  *= require compiled/index.css
  *= require lib/animate.css
+ *= require style
  *= require clients
  *= require portfolio
  *= require jquery.mmenu.all
  *= require animate
- *= require style
  *= require contests
  *= require designers
  *= require designer_center

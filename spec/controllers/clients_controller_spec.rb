@@ -130,20 +130,32 @@ RSpec.describe ClientsController do
     before do
       sign_in(client)
       Fabricate(:contest, client: client)
+      Fabricate(:designer)
+    end
+
+    context 'designers present' do
+      let!(:designers) { Fabricate.times(3, :designer) }
+
+      it 'returns page' do
+        get :entries
+        expect(response).to render_template(:entries)
+      end
+
+      context 'responses present' do
+        it 'views only submitted and fulfillment requests' do
+          contest = Fabricate(:contest, client: client)
+          submitted = Fabricate(:contest_request, designer: designers[0], contest: contest, status: 'submitted')
+          draft = Fabricate(:contest_request, designer: designers[1], contest: contest, status: 'draft')
+          fulfillment = Fabricate(:contest_request, designer: designers[2], contest: contest, status: 'fulfillment')
+          get :entries
+          expect(assigns(:contest_requests)).to match_array([submitted, fulfillment])
+        end
+      end
     end
 
     it 'returns page' do
       get :entries
       expect(response).to render_template(:entries)
-    end
-
-    it 'views only submitted and fulfillment requests' do
-      contest = Fabricate(:contest, client: client)
-      submitted = Fabricate(:contest_request, designer: Fabricate(:designer), contest: contest, status: 'submitted')
-      draft = Fabricate(:contest_request, designer: Fabricate(:designer), contest: contest, status: 'draft')
-      fulfillment = Fabricate(:contest_request, designer: Fabricate(:designer), contest: contest, status: 'fulfillment')
-      get :entries
-      expect(assigns(:contest_requests)).to match_array([submitted, fulfillment])
     end
   end
 end

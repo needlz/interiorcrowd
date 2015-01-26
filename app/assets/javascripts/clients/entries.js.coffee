@@ -6,6 +6,7 @@ class EntriesPage
 
     PopulatedInputs.init()
     ScrollBars.style()
+    DesignerInvitations.bindInviteButtons()
 
 class ScrollBars
 
@@ -15,6 +16,29 @@ class ScrollBars
       verticalHandleClass: 'handle4',
       minScrollbarLength: 28
     });
+
+class DesignerInvitations
+
+  @buttonSelector: '.invite-designer'
+
+  @bindInviteButtons: ->
+    $('.profile-card').find(@buttonSelector).click (event)=>
+      $button = $(event.target)
+      designerId = $button.parents('.profile-card').data('id')
+      @sendInviteRequest(designerId, $button)
+
+  @getContestId: ->
+    $('input.contest').data('id')
+
+  @sendInviteRequest: (designerId, $button) ->
+    $button.text(I18n.invitations.sending_invitation)
+    $.ajax(
+      data: { designer_id: designerId, contest_id: @getContestId() }
+      url: '/designer_invitations'
+      type: 'POST'
+      success: (response)=>
+        $button.closest('button').find('b').text(I18n.invitations.invited).removeClass(@buttonSelector)
+    )
 
 class @Answers
   init: ->

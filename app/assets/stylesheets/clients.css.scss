@@ -170,6 +170,7 @@
     font-size: 20px;
   }
 }
+
 .profile {
   .edit-profile {
     div:nth-child(2) {
@@ -191,3 +192,42 @@
     border-radius: 5px;
   }
 }
+
+.profile-card {
+  margin-top: 40px;
+  border-left: 10px solid #fff;
+
+  .designer-invitation-button {
+    font-size: 16px;
+    margin-top: 20px;
+    border: 1px solid #000000;
+  }
+
+  .designer-name {
+    margin-top: 0;
+  }
+
+  .first-section-separator {
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+    height: 1px;
+  }
+
+  .second-section-separator {
+    border-bottom: 1px solid #e1e1e1;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    height: 1px;
+  }
+
+  .attribute-title {
+    margin-top: 0;
+    font-size: 20px;
+  }
+
+  .attribute-value {
+    margin-top: 0;
+    font-size: 16px;
+  }
+}
+
