@@ -10,6 +10,6 @@
   .col-md-8.disablePadding
     = render partial: 'contest_requests/moodboard_with_answers', locals: { contest_request: @request, show_answer_options: @show_answer_options }
   .col-md-4
-    = render partial: 'contest_requests/designer_info', locals: { designer: @request.designer, submitted_at: @request.created_at }
+    = render partial: 'contest_requests/submission_info', locals: { designer: @request.designer, submitted_at: @request.created_at }
 
 = render partial: 'clients/client_center/layout'
