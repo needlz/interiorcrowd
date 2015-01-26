@@ -30,8 +30,13 @@ class @InlineEditor
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
-    $form = $optionsRow.find(@placeholderSelector).find('.edit')
-    $form.html(formHtml).show()
+    $formHtml = $(formHtml)
+    if $.contains(document.documentElement, $formHtml[0])
+      $form = $formHtml
+      $form.show()
+    else
+      $form = $optionsRow.find(@placeholderSelector).find('.edit')
+      $form.html(formHtml).show()
     @afterEditFormRetrieved?(attribute, formHtml)
     @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
