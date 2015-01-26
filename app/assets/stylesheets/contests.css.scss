@@ -722,3 +722,14 @@
   visibility: visible!important;
   display: none;
 }
+
+.brief {
+  .edit-profile:nth-child(1) {
+    border: none;
+  }
+
+  .edit-profile {
+    border-top: 1px solid #e1e1e1;
+    padding: 40px 0px 30px;
+  }
+}

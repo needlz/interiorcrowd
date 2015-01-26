@@ -1,6 +1,8 @@
-.col-xs-3.title
-  %label= title
-.col-xs-9.attribute-form
-  .view
-    = value
-  .edit{ style: 'display: none;' }
+.col-lg-4
+  %p= title
+.col-lg-4
+  %p= value
+.col-lg-4.text-right
+  %a.edit-button{:href => "#"}
+    = image_tag 'pencil.png'
+.clearfix
