@@ -2,6 +2,7 @@ class @ContestEditing extends InlineEditor
 
   attributeIdentifierData: 'option'
   placeholderSelector: '.attribute-form'
+  attributeSelector: '.edit-profile'
 
   bindEvents: ->
     super()
@@ -59,25 +60,18 @@ class @ContestEditing extends InlineEditor
 
   editFormsCallbacks:
     space_pictures: ->
-      console.log('aa')
       SpacePicturesUploader.init()
     example_pictures: ->
-      console.log('aa')
       ExamplesUploader.init()
     desirable_colors: ->
-      console.log('aa')
       DesirableColorsEditor.init()
     undesirable_colors: ->
-      console.log('aa')
       UndesirableColorsEditor.init()
     area: ->
-      console.log('aa')
       RoomsEditor.init()
     appeals: ->
-      console.log('aa')
       AppealsForm.init()
     budget: ->
-      console.log('aa')
       BudgetOptions.init()
 
   previewCallbacks:
@@ -89,6 +83,10 @@ class @ContestEditing extends InlineEditor
   onSaveClick: (event)=>
     $saveButton = $(event.target)
     $saveButton.parents('form').submit()
+
+  updateEditButton: ($elem)->
+    $editButton = $('.edit-button.template').html()
+    $elem.html($editButton)
 
 $ ->
   window.brief = new ContestEditing()
