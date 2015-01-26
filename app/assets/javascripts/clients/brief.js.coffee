@@ -17,13 +17,13 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveClick: ->
-    $('body').on('click', '.attribute .save-button', @onSaveClick)
+    $('body').on('click', '.edit-profile .save-button', @onSaveClick)
 
   bindSaveSuccess: ->
-    $('body').on('ajax:success', '.attribute form', (event, data, status, xhr)=>
+    $('body').on('ajax:success', '.edit-profile form', (event, data, status, xhr)=>
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
-      $editButton = $(".row[data-option='#{ option }'] .edit-button")
+      $editButton = $(".edit-profile[data-option='#{ option }'] .edit-button")
       $optionsRow = @optionsRow($editButton)
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $optionsRow.find('.preview').html(data)
@@ -31,7 +31,7 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveError: ->
-    $('body').on('ajax:error', '.attribute form', (event, data, status, xhr)=>
+    $('body').on('ajax:error', '.edit-profile form', (event, data, status, xhr)=>
       $form = $(event.target)
       @optionsContainer($form).find('.has-error .control-label').text 'An error occured during saving'
     )
@@ -59,18 +59,25 @@ class @ContestEditing extends InlineEditor
 
   editFormsCallbacks:
     space_pictures: ->
+      console.log('aa')
       SpacePicturesUploader.init()
     example_pictures: ->
+      console.log('aa')
       ExamplesUploader.init()
     desirable_colors: ->
+      console.log('aa')
       DesirableColorsEditor.init()
     undesirable_colors: ->
+      console.log('aa')
       UndesirableColorsEditor.init()
     area: ->
+      console.log('aa')
       RoomsEditor.init()
     appeals: ->
+      console.log('aa')
       AppealsForm.init()
     budget: ->
+      console.log('aa')
       BudgetOptions.init()
 
   previewCallbacks:
