@@ -1,8 +1,12 @@
 .col-lg-4
   %p= "#{title}:"
 .col-lg-4
-  %p= value
+  .view
+    %p= value
+  .edit{ style: 'display: none;' }
 .col-lg-4.text-right
   %a.edit-button{:href => "#"}
     = image_tag 'pencil.png'
 .clearfix
+
+
