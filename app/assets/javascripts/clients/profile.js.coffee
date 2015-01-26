@@ -13,8 +13,7 @@ class @ProfileEditor extends InlineEditor
     $('.attribute').on('keypress', @numberFields, digitsFilter)
 
   getForm: (attribute, onEditFormRetrieved)=>
-    formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit").html()
-    $(".attribute[data-id='#{ attribute }'] .preview .edit").empty()
+    formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit")
     @onEditFormRetrieved(attribute, formHtml)
 
   bindDoneButton: ->
