@@ -5,13 +5,13 @@ class ContestNoteView
     @note = contest_note
   end
 
-  def for_html
+  def attributes
     { text: text,
       created_at: ago_text }
   end
 
   def text
-    CGI.escapeHTML(note.text).split("\n").join("<br/>")
+    ERB::Util.html_escape(note.text).split("\n").join("<br/>")
   end
 
   def ago_text

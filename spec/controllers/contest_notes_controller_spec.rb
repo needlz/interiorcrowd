@@ -61,6 +61,14 @@ RSpec.describe ContestNotesController do
           expect(json.size).to eq(1)
           expect(json[0]['text']).to eq note_text
         end
+
+        it 'escapes html symbols' do
+          note_text = '&'
+          post :create, contest_note: { contest_id: contest.id, text: note_text }
+          json = JSON.parse(response.body)
+          expect(json.size).to eq(1)
+          expect(json[0]['text']).to eq '&amp;'
+        end
       end
     end
   end
