@@ -33,10 +33,10 @@ class @InlineEditor
     $formHtml = $(formHtml)
     if $.contains(document.documentElement, $formHtml[0])
       $form = $formHtml
-      $form.show()
     else
       $form = $optionsRow.find(@placeholderSelector).find('.edit')
-      $form.html(formHtml).show()
+      $form.html(formHtml)
+    $form.show()
     @afterEditFormRetrieved?(attribute, formHtml)
     @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
