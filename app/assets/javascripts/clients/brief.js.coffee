@@ -24,7 +24,7 @@ class @ContestEditing extends InlineEditor
     $('body').on('ajax:success', '.edit-profile form', (event, data, status, xhr)=>
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
-      $editButton = $(".edit-profile[data-option='#{ option }'] .edit-button")
+      $editButton = $(".edit-profile[data-option='#{ option }'] .cancel-button")
       $optionsRow = @optionsRow($editButton)
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $optionsRow.find('.preview').html(data)
