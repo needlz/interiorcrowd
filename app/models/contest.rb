@@ -19,6 +19,8 @@ class Contest < ActiveRecord::Base
   belongs_to :design_space
   has_many :requests, class_name: 'ContestRequest'
   has_many :designer_invitations
+  has_many :contest_notes
+  has_many :notes, class_name: 'ContestNote'
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
