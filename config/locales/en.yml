@@ -186,6 +186,10 @@ en:
         maybe: Maybe
         favorite: Favorite
         winner: Winner
+      phases:
+        - 'Initial Concept'
+        - 'Customized Board and Product List'
+        - 'Final Design'
       winner_dialog:
         title: Ready to pick the Winner?
         text: Please confirm
@@ -195,9 +199,13 @@ en:
         invite: INVITE TO CONTEST
         sending_invitation: SENDING INVITATION...
         invited: INVITED
+      choose_concept: Choose your favorite design concept
+      congratulations: Congratulations! You have chosen a winner!
+      customized_board: Now your designer will make a customized board for you along with a shopping list.
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
+      submitted_on: Submitted on
     attribute_edit_button: Edit
     attribute_save_button: Save
     attribute_cancel_button: Cancel

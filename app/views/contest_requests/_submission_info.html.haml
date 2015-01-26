@@ -1,0 +1,12 @@
+.row
+  .col-md-3
+    = image_tag '/assets/profile-img.png'
+  .col-md-9
+    %p.designerName
+      = designer.name
+      %span
+        = t('client_center.moodboard_details.submitted_on')
+        = submitted_at.strftime('%m/%d/%Y')
+.hLine
+= render partial: 'contest_requests/designer_notes'
+.hLine

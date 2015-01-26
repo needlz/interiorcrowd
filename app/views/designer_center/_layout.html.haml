@@ -3,4 +3,4 @@
       locals: { header: 'designer_center/header',
                 title: t('designer_center.title'),
                 content: (yield :designer_center_content),
-                container_class: container_class  }
+                container_class: try(:container_class)  }

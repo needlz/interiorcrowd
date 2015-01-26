@@ -32,13 +32,21 @@ class @InlineEditor
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
-    $form = @editHolder($optionsRow)
-    $form.html(formHtml).show()
+
+    $formHtml = $(formHtml)
+    $form = @editHolder($optionsRow, $formHtml)
+    $form.show()
+
     @afterEditFormRetrieved?(attribute, formHtml)
     @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
-  editHolder: ($optionsRow)->
-    $optionsRow.find(@placeholderSelector).find('.edit')
+  editHolder: ($optionsRow, $formHtml)->
+    if $.contains(document.documentElement, $formHtml[0])
+      $form = $formHtml
+    else
+      $form = $optionsRow.find('.edit')
+      $form.html($formHtml)
+    $form
 
   onCancelClick: (event)=>
     event.preventDefault()

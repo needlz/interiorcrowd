@@ -52,4 +52,15 @@ module ContestsHelper
      { text: 'Green 1', id: '294635' }]
   end
 
+  def phases_classes(active_tab)
+    classes =  [['stepActive', '', ''],
+                ['step1', 'stepActive', 'bgBottom'],
+                ['backgroundTopRight', 'step1', 'stepActive']]
+    classes[active_tab]
+  end
+
+  def phases
+    t('client_center.entries.phases')
+  end
+
 end
