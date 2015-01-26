@@ -9,7 +9,7 @@ RSpec.describe ContestNotesController do
   describe 'POST create' do
     context 'not logged in' do
       it 'redirects to login page' do
-        post :create, contest_id: contest.id, text: 'text'
+        post :create, contest_note: { contest_id: contest.id, text: 'text' }
         expect(response).to redirect_to client_login_sessions_path
       end
     end
@@ -20,7 +20,7 @@ RSpec.describe ContestNotesController do
       end
 
       it 'doesn\'t create an invitation' do
-        post :create, contest_id: contest.id, text: 'text'
+        post :create, contest_note: { contest_id: contest.id, text: 'text' }
         expect(response).to render_template(ApplicationController::PAGE_404_PATH)
       end
     end
@@ -32,31 +32,34 @@ RSpec.describe ContestNotesController do
 
       context 'without text' do
         it 'doesn\'t create an invitation if text is not passed' do
-          expect { post :create, contest_id: contest.id }.to raise_error
+          expect { post :create, contest_note: { contest_id: contest.id } }.to raise_error
           expect(contest.notes.count).to eq 0
         end
 
         it 'doesn\'t create an invitation if text is empty' do
-          expect { post :create, contest_id: contest.id, text: '  ' }.to raise_error
+          expect { post :create, contest_note: { contest_id: contest.id, text: '  ' } }.to raise_error
         end
       end
 
       context 'unexisting contest id' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, contest_id: 0, text: 'text' }.to raise_error
+          expect { post :create, contest_note: { contest_id: 0, text: 'text' } }.to raise_error
         end
       end
 
       context 'correct contest id and text' do
         it 'creates an invitation' do
-          post :create, contest_id: contest.id, text: 'text'
+          post :create, contest_note: { contest_id: contest.id, text: 'text' }
           note = contest.notes[0]
           expect(note.text).to eq 'text'
         end
 
         it 'notifies about success' do
-          post :create, contest_id: contest.id, text: 'text'
-          expect(response).to be_ok
+          note_text = 'text'
+          post :create, contest_note: { contest_id: contest.id, text: note_text }
+          json = JSON.parse(response.body)
+          expect(json.size).to eq(1)
+          expect(json[0]['text']).to eq note_text
         end
       end
     end

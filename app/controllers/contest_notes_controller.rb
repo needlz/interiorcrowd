@@ -4,7 +4,9 @@ class ContestNotesController < ApplicationController
 
   def create
     @contest.notes.create!(text: note_params[:text].strip)
-    render nothing: true
+    last_notes = @contest.notes.order(created_at: :desc)
+    note_views = last_notes.map { |note| ContestNoteView.new(note) }
+    render json: note_views.map(&:for_html).to_json
   end
 
   private
