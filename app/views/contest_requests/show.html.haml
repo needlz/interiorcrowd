@@ -5,13 +5,11 @@
 
 - content_for :client_center_content do
   = render partial: 'clients/client_center/moodboard_winner_dialog'
-
-  = link_to t('client_center.moodboard_details.back'), entries_client_center_index_path
-  .row
-    .col-sm-9
-      = render partial: 'contest_requests/moodboard_with_answers', locals: { contest_request: @request, show_answer_options: @show_answer_options }
-      = render partial: 'contest_requests/designer_notes', locals: { notes: @request.feedback }
-    .col-sm-3
-      = render partial: 'contest_requests/designer_info', locals: { designer: @request.designer }
+  .col-md-12.disablePadding
+    = link_to t('client_center.moodboard_details.back'), entries_client_center_index_path, class: "backToEntries"
+  .col-md-8.disablePadding
+    = render partial: 'contest_requests/moodboard_with_answers', locals: { contest_request: @request, show_answer_options: @show_answer_options }
+  .col-md-4
+    = render partial: 'contest_requests/designer_info', locals: { designer: @request.designer, submitted_at: @request.created_at }
 
 = render partial: 'clients/client_center/layout'
