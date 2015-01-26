@@ -1,5 +1,6 @@
 .edit-profile{ data: { option: option } }
-  = render partial: "contests/previews/#{ option }_preview"
+  .preview
+    = render partial: "contests/previews/#{ option }_preview"
 
 .edit-button.template
   = render partial: 'clients/client_center/profile/edit_button_image'

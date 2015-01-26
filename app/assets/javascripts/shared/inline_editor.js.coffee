@@ -1,6 +1,7 @@
 class @InlineEditor
 
   editButtonSelector: '.edit-button'
+  cancelButtonSelector: '.cancel-button'
   attributeSelector: '.attribute'
   hiddenViewClass: 'hidden-view'
 
@@ -8,7 +9,8 @@ class @InlineEditor
     @bindEditClick()
 
   bindEditClick: ->
-    $(@attributeSelector).find(@editButtonSelector).click(@, @onEditClick)
+    $(@attributeSelector).on 'click', @editButtonSelector, @, @onEditClick
+    $(@attributeSelector).on 'click', @cancelButtonSelector, @, @onCancelClick
 
   onEditClick: (event)->
     event.preventDefault()
@@ -26,14 +28,17 @@ class @InlineEditor
   onEditFormRetrieved: (attribute, formHtml)=>
     $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
     $editButton.text(I18n.attribute_cancel_button)
-    $editButton.off('click').click(@, @onCancelClick)
+    $editButton.removeClass('edit-button').addClass('cancel-button')
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
-    $form = $optionsRow.find(@placeholderSelector).find('.edit')
+    $form = @editHolder($optionsRow)
     $form.html(formHtml).show()
     @afterEditFormRetrieved?(attribute, formHtml)
     @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
+
+  editHolder: ($optionsRow)->
+    $optionsRow.find(@placeholderSelector).find('.edit')
 
   onCancelClick: (event)=>
     event.preventDefault()
@@ -44,13 +49,13 @@ class @InlineEditor
 
   cancelEditing: (attribute)->
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
-    $editButton = $optionsRow.find(@editButtonSelector)
+    $editButton = $optionsRow.find(@cancelButtonSelector)
     @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
     $form.hide()
-    $editButton.off('click').click(@, @onEditClick)
+    $editButton.removeClass('cancel-button').addClass('edit-button')
     @afterCancelEditing?($optionsRow)
 
   optionsRow: ($child)->

@@ -88,6 +88,9 @@ class @ContestEditing extends InlineEditor
     $editButton = $('.edit-button.template').html()
     $elem.html($editButton)
 
+  editHolder: ($optionsRow)->
+    $optionsRow.find('.edit')
+
 $ ->
   window.brief = new ContestEditing()
   brief.bindEvents()

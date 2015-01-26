@@ -736,4 +736,25 @@
   .edit-profile .view:nth-child(1) p {
     font-weight: normal;
   }
+
+  .edit-profile {
+
+    .content {
+      margin: 0px 50px 0px 50px;
+
+      .edit {
+        display: none;
+      }
+
+    }
+  }
+
+  .cancel-button {
+    color: #428bca;
+    cursor: pointer;
+  }
+
+  .save-button {
+    color: white;
+  }
 }

@@ -1,12 +1,13 @@
 .col-lg-4
-  %p= "#{title}:"
+  %p= "#{title} :"
 .col-lg-4.attribute-form
   .view
     %p= value
-  .edit{ style: 'display: none;' }
 .col-lg-4.text-right
   .edit-button
     = render partial: 'clients/client_center/profile/edit_button_image'
+.content
+  .edit{ style: 'display: none;' }
 .clearfix
 
 
