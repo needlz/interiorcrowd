@@ -1,15 +1,9 @@
-.container.animated.fadeInDown.bottom60
+.container.animated.fadeInDown
   .row
     .col-md-8.disablePadding
       .moodboard-steps
-        %p.stepActive
-          %span 1
-          Initial Concept
-        %p
-          %span 2
-          Customized Board and Product List
-        %p
-          %span 3
-          Final Design
+        - phases.each_with_index do |word, index|
+          %p{class: phases_classes(active_tab-1)[index]}
+            %span= index+1
+            = word
         .clearfix
-      %p.chooseP Choose your favorite design concept
