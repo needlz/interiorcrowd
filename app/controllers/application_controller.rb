@@ -28,4 +28,10 @@ class ApplicationController < ActionController::Base
   def render_404
     render PAGE_404_PATH
   end
+
+  def check_contest_owner
+    return unless check_client
+    @client = Client.find(session[:client_id])
+    raise_404 unless @contest.client == @client
+  end
 end

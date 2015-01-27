@@ -196,6 +196,9 @@ en:
       choose_concept: Choose your favorite design concept
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
+      notes_title: Want to send a note to the designers?
+      send_note: Send
+      your_note: Your note
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
@@ -388,3 +391,4 @@ en:
       upload_moodboard: Upload your concept moodboard
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
+  time_ago: '%{time} ago'

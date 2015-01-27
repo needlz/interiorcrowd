@@ -25,8 +25,9 @@
           = render partial: 'clients/client_center/entries/notes'
           = render partial: 'clients/client_center/entries/user_invitations'
         - else
-          = render partial: 'clients/client_center/entries/designers_to_invite',
-              locals: { designers: @invitable_designer_views }
+          - if @contest.submission?
+            = render partial: 'clients/client_center/entries/designers_to_invite',
+                locals: { designers: @invitable_designer_views }
           = render partial: 'clients/client_center/entries/more_features'
   - else
     = render partial: 'clients/client_center/entries/winner'

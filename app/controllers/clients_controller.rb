@@ -20,6 +20,7 @@ class ClientsController < ApplicationController
         invitable_designers = Designer.includes(portfolio: [:personal_picture]).all
         @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
       end
+      @notes = @contest.notes.order(created_at: :desc).map { |note| ContestNoteView.new(note) }
     else
       @contest_requests = [].paginate
     end
