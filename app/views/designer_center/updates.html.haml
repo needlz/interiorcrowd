@@ -1,0 +1,36 @@
+- content_for :designer_center_content do
+  .container.animated.fadeInDown.bottom60
+    .row
+      .col-md-12.no-x-padding
+        %a.btn.invitesBtn{:href => "#"}= t('designer_center.updates.invites')
+        %a.btn.commentsBtn{:href => "#"}= t('designer_center.updates.comments')
+        %a.btn.winsBtn{:href => "#"}= t('designer_center.updates.wins')
+        %a.btn.notificationsBtn{:href => "#"}= t('designer_center.updates.notifications')
+
+    .row.marg-top20
+      .col-md-8.no-x-padding
+        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'green', text: 'Sarah commented on your moodboard. Read more.'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
+      .col-md-4
+        .sidebarComments.leaderboardSidebar
+          %p.designerName= t('designer_center.updates.leaderboard')
+          #scrollBoxComments{tabindex: "0"}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'17 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'39 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2hr ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'1d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+
+= render partial: 'designer_center/layout'
+
+:javascript
+    $('#scrollBoxComments').enscroll({
+    verticalTrackClass: 'scrollBoxCommentsTrack',
+    verticalHandleClass: 'scrollBoxCommentsHandle',
+    minScrollbarLength: 28
+    });

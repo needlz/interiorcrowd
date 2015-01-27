@@ -1,0 +1,9 @@
+.commentContainer
+  .row
+    .col-md-12
+      .row
+        .col-md-6
+          %p.comment-username= comment[:username]
+        .col-md-6
+          %p.comment-time= comment[:time]
+      %p.comment-text= comment[:text]
