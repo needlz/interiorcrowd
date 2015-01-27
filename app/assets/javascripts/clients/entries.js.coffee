@@ -141,11 +141,14 @@ class ResponsesFilter
     @styleDropdown()
 
   @bindDropdown: ->
-    $('.sortBySelect').change (event)->
+    $('.sortBySelect').change (event)=>
       answer = $(event.target).val()
-      $form = $('#responses-filter-form')
-      $form.find('[name="answer"]').val(answer)
-      $form.submit()
+      @sendFilterForm(answer)
+
+  @sendFilterForm: (answer)->
+    $form = $('#responses-filter-form')
+    $form.find('[name="answer"]').val(answer)
+    $form.submit()
 
   @styleDropdown: ->
     $(".selectpicker").selectpicker

@@ -38,6 +38,7 @@ class ContestRequest < ActiveRecord::Base
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
   scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
+  scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
 
   def moodboard_image_path
     lookbook_item = lookbook.try(:lookbook_details).try(:last)

@@ -16,7 +16,7 @@ class ClientsController < ApplicationController
       @contest_view = ContestView.new(@contest)
       all_requests = @contest.requests.published.includes(:designer, :lookbook)
       @requests_present = all_requests.present?
-      shown_requests = params[:answer].present? ? all_requests.where(answer: params[:answer]) : all_requests
+      shown_requests = all_requests.by_answer(params[:answer])
       @contest_requests = shown_requests.by_page(params[:page])
       unless @contest_requests.present?
         invitable_designers = Designer.includes(portfolio: [:personal_picture]).all
