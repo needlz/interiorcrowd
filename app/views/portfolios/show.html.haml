@@ -2,7 +2,7 @@
   .container.animated.fadeInDown
     .row
       .col-md-12.relative
-        %a.inviteToContest{:href => "#"} Invite to Contest
+        %a.inviteToContest{:href => "#"}= t('designer_center.portfolio.show.invite_to_contest')
         %a.editCover{:href => "#"}
           %img{:src => '/assets/edit.png'}/
 .container.animated.fadeInDown.bottom60
@@ -22,15 +22,15 @@
       %a.reviewsLink{:href => "#"} 5 reviews
     .col-md-8.user_portfolio_profile
       %h3= @portfolio_view.designer_name
-      %h4 About
+      %h4= t('designer_center.portfolio.show.about')
       %p= @portfolio_view.about
-      %h4 Design style
+      %h4= t('designer_center.portfolio.show.design_style')
       - @portfolio_view.style_description.each do |style|
         %span.designStyleSpan= style
     .col-md-12
       .hLine10.marg-top30.marg-bottom30
     .col-md-12.marg-bottom30
-      %h4.font20 Portfolio Examples
+      %h4.font20= t('designer_center.portfolio.show.portfolio_examples')
     - index = 1
     - @portfolio_view.pictures_urls.in_groups_of(3, false) do |urls|
       - urls.each do |url|
@@ -40,8 +40,8 @@
         - index += 1
       .col-md-12.marg-bottom30
     .col-md-12.marg-top30
-      %a.loadMoreLink{:href => "#"} Load More...
+      %a.loadMoreLink{:href => "#"}= t('designer_center.portfolio.show.load_more')
     .col-md-12
       .hLine10.marg-top30.marg-bottom30
       .col-md-12.text-center
-        %a.doneBtn{:href => "#"} Done
+        %a.doneBtn{:href => "#"}= t('designer_center.portfolio.show.done')

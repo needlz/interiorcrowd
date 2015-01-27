@@ -373,7 +373,13 @@ en:
           novice: Up and Coming Designer
           professional: Career professional
           expirienced: Very Expirienced
-        about_self: The designer about himself
+        about: About
+        design_style: Design style
+        portfolio_examples: Portfolio Examples
+        done: Done
+        load_more: Load More...
+        invite_to_contest: Invite to Contest
+
     contests_preview:
       suggested_contests_title: Suggested contests for you!
       suggested_contests_hint: We think that these contests are just right for your style.
