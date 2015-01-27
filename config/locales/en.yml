@@ -204,7 +204,6 @@ en:
       customized_board: Now your designer will make a customized board for you along with a shopping list.
       space:
         congratulations_new_space: Congratulations! Your new space is ready!
-        designer_name: Jane Designer
         designer_note: Thank you so much for working with us! We hope you love your new look!
         share: Share your look
         social:
@@ -212,6 +211,9 @@ en:
           facebook: Share
           pintrest: Pin it
           instagram: Post on
+        download: Download
+        complete_lock: Get the items to complete your look
+        item_note: 'Use discount code: IC2'
       notes_title: Want to send a note to the designers?
       send_note: Send
       your_note: Your note
@@ -415,3 +417,6 @@ en:
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'
+  paginate:
+    next: Next
+    previous: Previous

@@ -1,4 +1,4 @@
-.container.animated.fadeInDown.bottom60
+.container.animated.fadeInDown
   .row
     .col-md-12.marg-top40
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
@@ -10,7 +10,7 @@
           .col-md-1
             = image_tag 'avatar2.png', width: 90, height: 90, class: 'img-circle'
           .col-md-5
-            %p.designerName= t('client_center.entries.space.designer_name')
+            %p.designerName= request.designer.name
             %p.designerNote= t('client_center.entries.space.designer_note')
           .col-md-6
             %p.designerName= t('client_center.entries.space.share')
@@ -26,3 +26,12 @@
             = link_to '#', class: 'btn btn-social instagramColor' do
               = image_tag 'instagram_icon.png'
               = t('client_center.entries.space.social.instagram')
+
+
+.container.animated.fadeInDown
+  .row.marg-top40
+    .col-md-10.col-md-offset-1.no-x-padding
+      = render :partial => 'clients/client_center/entries/final_design', locals: {request: request}
+      .hLine10
+      = render :partial => 'clients/client_center/entries/design_item'
+      = render :partial => 'clients/client_center/entries/paginate'
