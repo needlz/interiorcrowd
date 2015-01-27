@@ -9,6 +9,7 @@
     .row.marg-top30
       .col-md-8.disablePadding
         = render partial: 'shared/moodboard', locals: { request: @request }
+        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
         -#%img{:src => "/assets/img-content.png"}
       .col-md-4
         .row
@@ -17,7 +18,6 @@
           .col-md-9
             %p.designerName= @request.designer.name
             %p.designerNote= @request.feedback
-
         %p.saveCancelP
           %a.editNoteBtn{:href => "#"} Edit
       .col-md-12.disablePadding.marg-top20
@@ -38,23 +38,23 @@
                 %img{:src => "/assets/gt.png"}/
 
 
-  #designer-response-view
-    .row
-      .col-sm-9.response{ data: { id: @request.id } }
-        = render partial: 'shared/moodboard', locals: { request: @request }
-        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-
-    .footer
-      .back-link
-        = link_to t('designer_center.respond_view.back'), designer_center_response_index_path
-      - if @request.draft?
-        = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
-          = f.hidden_field :status, value: 'submitted'
-        - if @request.contest.submission?
-          .pull-right
-            = link_to t('designer_center.respond.submit'), '#', class: 'submit'
-
-    #notes-edit-dialog
-      = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
+  -##designer-response-view
+  -#  .row
+  -#    .col-sm-9.response{ data: { id: @request.id } }
+  -#      = render partial: 'shared/moodboard', locals: { request: @request }
+  -#      = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+  -#
+  -#  .footer
+  -#    .back-link
+  -#      = link_to t('designer_center.respond_view.back'), designer_center_response_index_path
+  -#    - if @request.draft?
+  -#      = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+  -#        = f.hidden_field :status, value: 'submitted'
+  -#      - if @request.contest.submission?
+  -#        .pull-right
+  -#          = link_to t('designer_center.respond.submit'), '#', class: 'submit'
+  -#
+  -#  #notes-edit-dialog
+  -#    = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
 
 = render partial: 'designer_center/layout'
