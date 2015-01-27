@@ -217,6 +217,8 @@ en:
       notes_title: Want to send a note to the designers?
       send_note: Send
       your_note: Your note
+      filter_by: 'Filter by:'
+      responses_filter_all: All
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

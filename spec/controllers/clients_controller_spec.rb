@@ -142,13 +142,23 @@ RSpec.describe ClientsController do
       end
 
       context 'responses present' do
+        let(:contest) { Fabricate(:contest, client: client) }
+        let!(:submitted) { Fabricate(:contest_request, designer: designers[0], contest: contest, status: 'submitted') }
+        let!(:draft) { Fabricate(:contest_request, designer: designers[1], contest: contest, status: 'draft') }
+        let!(:fulfillment) { Fabricate(:contest_request, designer: designers[2], contest: contest, status: 'fulfillment') }
+
         it 'views only submitted and fulfillment requests' do
-          contest = Fabricate(:contest, client: client)
-          submitted = Fabricate(:contest_request, designer: designers[0], contest: contest, status: 'submitted')
-          draft = Fabricate(:contest_request, designer: designers[1], contest: contest, status: 'draft')
-          fulfillment = Fabricate(:contest_request, designer: designers[2], contest: contest, status: 'fulfillment')
           get :entries
           expect(assigns(:contest_requests)).to match_array([submitted, fulfillment])
+        end
+
+        it 'filters responses by answer' do
+          contest.start_winner_selection!
+          submitted.update_attributes!(answer: 'winner')
+          draft.update_attributes!(answer: 'no')
+          fulfillment.update_attributes!(answer: 'favorite')
+          get :entries, answer: 'winner'
+          expect(assigns(:contest_requests)).to match_array([submitted])
         end
       end
     end
