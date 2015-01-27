@@ -2557,8 +2557,152 @@ textarea.productsMoodboardAbove{
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
 }
 
-.designerShareBox .designerName,.designerShareBox .designerNote{
+.designerShareBox .designerName,.designerShareBox .designerNote {
     padding-left: 15px;
+}
+.inviteToContest {
+    font-weight: 700;
+    font-size: 18px;
+    border: 1px solid #000;
+    width: 176px;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    color: #000;
+    display: inline-block;
+    position: absolute;
+    left: 75%;
+    top: 330px;
+}
+
+.editCover {
+    display: inline-block;
+    position: absolute;
+    left: 92%;
+    top: 337px;
+}
+.cover_image{
+    /*margin-top: 10px;*/
+    width: 100%;
+    height: 399px;
+    background: url('/assets/cover_image.png') no-repeat center;
+    background-size: cover;
+}
+.portfolio_profile_image{
+    position: absolute;
+    top: -120px;
+}
+
+.under_portfolio_profile p{
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 32px;
+}
+.under_portfolio_profile p:nth-child(2){
+    padding-top: 60px;
+}
+.under_portfolio_profile p:nth-child(2) span,.under_portfolio_profile p:nth-child(3) span{
+    display: inline-block;
+    border: 1px solid #000;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align:center;
+    border-radius: 12px;
+    margin-right: 10px;
+}
+.under_portfolio_profile p:nth-child(3) span{
+    font-family: 'AvenirLTStd-Black';
+    border: none;
+}
+.under_portfolio_profile p:nth-child(4) img{
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+.profileRating{
+    height: 24px;
+    display: inline-block;
+    background: url('/assets/star.png');
+}
+.fiveStar{
+    width: 125px;
+}
+.fourStar{
+    width: 100px;
+}
+.threeStar{
+    width: 75px;
+}
+.twoStar{
+    width: 50px;
+}
+.oneStar{
+    width: 25px;
+}
+
+.user_portfolio_profile{
+    color: #000;
+}
+.user_portfolio_profile h3{
+    font-size: 24px;
+    font-family: 'AvenirLTStd-Black';
+}
+.user_portfolio_profile h4{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+.user_portfolio_profile p{
+    font-size: 16px;
+    line-height: 30px;
+}
+.user_portfolio_profile .designStyleSpan{
+    font-weight: 700;
+    color: #000;
+    border: 1px solid #000;
+    font-size: 16px;
+    padding: 6px 20px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.portfolio_example{
+    position: relative;
+}
+.portfolio_example img{
+    width: 100%;
+}
+.portfolio_example .numOfLikesPortfolio{
+    line-height: 20px;
+    height: 20px;
+    background: url('/assets/heart.png') no-repeat left;
+    display: inline-block;
+    padding-left: 30px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    top: 90%;
+    left: 80%;
+}
+.loadMoreLink{
+    color: #a7a7a7;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+    text-decoration: underline;
+    display: block;
+    text-align: center;
+}
+.doneBtn{
+    font-weight: 700;
+    color: #000;
+    font-size: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    /*display: inline-block;*/
+    padding: 5px 20px;
 }
 
 /*underMenuLine*/
