@@ -1,4 +1,4 @@
-.col-xs-3
-  %label= t('contests.titles.brief.designer_level')
-.col-xs-9
+- value_html = capture do
   %span.selection= @contest_view.designer_level.try(:name)
+= render(partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.designer_level'),
+                                                    value: value_html })
