@@ -8,6 +8,7 @@ class EntriesPage
     ScrollBars.style()
     DesignerInvitations.bindInviteButtons()
     ContestNotes.bindAjaxSuccess()
+    ResponsesFilter.init()
 
 class ScrollBars
 
@@ -132,6 +133,24 @@ class ContestNotes
     $note.find('.note-text').html(note.text)
     $note.find('.note-text').append($timeAgo)
     $notesList.append($note.html())
+
+class ResponsesFilter
+
+  @init: ->
+    @bindDropdown()
+    @styleDropdown()
+
+  @bindDropdown: ->
+    $('.sortBySelect').change (event)->
+      answer = $(event.target).val()
+      $form = $('#responses-filter-form')
+      $form.find('[name="answer"]').val(answer)
+      $form.submit()
+
+  @styleDropdown: ->
+    $(".selectpicker").selectpicker
+      style: "btn-selector-medium font15"
+      header: I18n.filter_by
 
 $ ->
   EntriesPage.init()

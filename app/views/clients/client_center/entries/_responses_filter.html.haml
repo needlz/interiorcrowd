@@ -1,0 +1,9 @@
+.col-md-offset-2.col-md-2.responses-filter-dropdown
+  = form_tag entries_client_center_index_path, id: 'responses-filter-form', method: 'get' do
+    = hidden_field_tag 'answer', ''
+  %select.selectpicker.form-selector.sortBySelect{  }
+    %option{ disabled: "disabled" }= t('client_center.entries.filter_by')
+    - responses_filter_options.each do |answer, name|
+      - attributes = { value: answer }
+      - attributes[:selected] = 'selected' if answer == selected_answer
+      %option{ attributes }= name
