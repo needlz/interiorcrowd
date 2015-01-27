@@ -62,11 +62,11 @@ class PortfolioView
   end
 
   def style_description
-    return '' unless portfolio
+    return [] unless portfolio
     styles = Portfolio::STYLES.select { |style| portfolio.send("#{ style }_style") }
     result = styles.map { |style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }
     result << portfolio.style_description
-    result.reject(&:empty?)
+    result.reject(&:blank?)
   end
 
   def awards
