@@ -202,6 +202,16 @@ en:
       choose_concept: Choose your favorite design concept
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
+      space:
+        congratulations_new_space: Congratulations! Your new space is ready!
+        designer_name: Jane Designer
+        designer_note: Thank you so much for working with us! We hope you love your new look!
+        share: Share your look
+        social:
+          twitter: Tweet
+          facebook: Share
+          pintrest: Pin it
+          instagram: Post on
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
