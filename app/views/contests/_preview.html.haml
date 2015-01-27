@@ -1,19 +1,19 @@
 = render partial: 'contests/preview/current_contest_infobox'
 
 .col-md-12.marg-top30.contestInfo
-  .row.borderBottom
-    - [:name, :area, :designer_level, :appeals, :desirable_colors, :undesirable_colors, :example_pictures, :space_pictures, :space_dimensions, :budget, :feedback].each do |attribute|
+  .row.borderBottom.sections_table
+    - ContestView::CONTEST_PREVIEW_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/profile/test_profile_attribute_preview', locals: { attribute: attribute }
 
 .col-md-12.disablePadding.marg-top30
-  / <div class="hLine"></div>
-
 
 .col-md-6.disablePadding
   %a.backToEntries{:href => "#"}
-    %img{:src => "img/lt.png"} &nbsp;&nbsp;&nbsp;Back to all current contests
+    = image_tag 'lt.png'
+    &nbsp;&nbsp;&nbsp;
+    = t('contests.titles.back')
 
 .col-md-6.disablePadding.text-right
   %a.submitMyDesign{:href => "#"}
-    Join this contest
-    %img{:src => "img/gt.png"}/
+    = t('contests.titles.join')
+    = image_tag 'gt.png'

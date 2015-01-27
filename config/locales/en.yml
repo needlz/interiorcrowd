@@ -40,6 +40,13 @@ en:
         accommodate_children: Accommodate Children
         accommodate_pets: Accommodate Pets
         additional_preferences: Preferences
+        floorplan: Floorplan
+        other_information: Other Information
+        name: Name
+        design_knowledge: Design Knowledge
+        design_style: Design Style
+      join: Join this contest
+      back: Back to all current contests
     design_style:
       title: Style Profile
       description: |
