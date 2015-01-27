@@ -212,6 +212,9 @@ en:
           facebook: Share
           pintrest: Pin it
           instagram: Post on
+      notes_title: Want to send a note to the designers?
+      send_note: Send
+      your_note: Your note
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
@@ -267,6 +270,7 @@ en:
       create_portfolio: Create Portfolio
       preview_contests: Preview Current Contests
       respond: Respond to Contests
+      updates: Updates
     sign_up:
       first_name: First Name
       street_address: Street address
@@ -304,6 +308,12 @@ en:
       get_started: To get started, tell us a bit more about yourself.
       i_agree: I agree with the InteriorCrowd term of use
     title: Designer Center
+    updates:
+      invites: Invites
+      comments: Comments
+      wins: Wins
+      notifications: Notifications
+      leaderboard: Leaderboard
     welcome_user: Welcome, %{username}
     portfolio:
       creation:
@@ -404,3 +414,4 @@ en:
       upload_moodboard: Upload your concept moodboard
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
+  time_ago: '%{time} ago'

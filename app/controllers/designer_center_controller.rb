@@ -14,6 +14,10 @@ class DesignerCenterController < ApplicationController
     end
   end
 
+  def updates
+    @navigation = Navigation::DesignerCenter.new(:requests)
+  end
+
   private
 
   def set_designer

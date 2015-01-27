@@ -13,9 +13,4 @@ class DesignerInvitationsController < ApplicationController
     @contest = Contest.find(params[:contest_id])
   end
 
-  def check_contest_owner
-    return unless check_client
-    @client = Client.find(session[:client_id])
-    raise_404 unless @contest.client == @client
-  end
 end

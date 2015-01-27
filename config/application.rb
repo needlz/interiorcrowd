@@ -53,5 +53,9 @@ module InteriorC
     Dir.glob("#{Rails.root}/app/assets/fonts/**/").each do |path|
       config.assets.paths << path
     end
+
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end

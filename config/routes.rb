@@ -72,6 +72,7 @@ InteriorC::Application.routes.draw do
   resources :designer_center, only: [] do
     collection do
       get '', to: 'designer_center#designer_center', as: ''
+      get 'updates', to: 'designer_center#updates', as: 'updates'
       resources :contests,
                 controller: 'designer_center_contests',
                 as: 'designer_center_contest',
@@ -91,4 +92,5 @@ InteriorC::Application.routes.draw do
   get '/:url', to: 'portfolios#show', as: 'show_portfolio'
 
   resources :designer_invitations, only: [:create]
+  resources :contest_notes, only: [:create]
 end

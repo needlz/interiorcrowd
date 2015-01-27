@@ -2,54 +2,23 @@
   .hLine
 .row.designerFeedback
   .col-md-5.col-md-offset-1
-    %h4 Want to send a note to the designers?
-    %textarea
-    %button.btn Send
+    = form_for ContestNote.new, remote: true do |f|
+      = f.hidden_field :contest_id, value: @contest.id
+      %h4= t('client_center.entries.notes_title')
+      = f.text_area :text
+      = f.submit t('client_center.entries.send_note'), class: 'btn'
   .col-md-5
-    %h4 Your note
-    #scrollbox4.notes
+    %h4= t('client_center.entries.your_note')
+    #scrollbox4.notes.client-notes-list
       %ul
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 15 min ago
-        %li.delimiter
-        %li
-          %p
-            Aliquam vitae metus vel tortor malesuada vehicula sit amet nec dui.
-            %span 21 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
-        %li.delimiter
-        %li
-          %p
-            Suspendisse sollicitudin bibendum metus.
-            %span 25 hr ago
+        .template
+          %li
+            %p.note-text
+              %span.time-ago
+          %li.delimiter
+        - @notes.each do |note|
+          %li
+            %p
+              = note.text.html_safe
+              %span= note.ago_text
+          %li.delimiter
