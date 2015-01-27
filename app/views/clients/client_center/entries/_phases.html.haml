@@ -1,7 +1,7 @@
 .container.animated.fadeInDown
   .row
     .col-md-8.disablePadding
-      .moodboard-steps
+      .moodboard-steps.marg-top30
         - phases.each_with_index do |word, index|
           %p{class: phases_classes(active_tab-1)[index]}
             %span= index+1

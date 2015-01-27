@@ -838,10 +838,10 @@ input.form-control {height: 40px;}
 
 .marg-bottom20 {margin-bottom: 20px;}
 .marg-top10 {margin-top: 10px !important;}
-.marg-top20 {margin-top: 20px;}
+.marg-top20 {margin-top: 20px !important;}
 
-.marg-bottom30 {margin-bottom: 30px;}
-.marg-top30 {margin-top: 30px;}
+.marg-bottom30 {margin-bottom: 30px !important;}
+.marg-top30 {margin-top: 30px !important;}
 
 
 .marg-bottom40 {margin-bottom: 40px;}
@@ -1083,6 +1083,13 @@ input.form-control {height: 40px;}
 .step1{
     background: url('/assets/step1.png') right no-repeat !important;
 }
+.moodboard-steps p:nth-child(2).step1{
+    width: 328px;
+    padding-left: 15px;
+}
+.backgroundTopRight{
+    background-position: top right !important;
+}
 p.stepActive{
     background: #a9aaaa;
     color: #FFF;
@@ -1242,7 +1249,7 @@ p.stepActive span{
 .track4 {
     width: 7px;
     background-clip: padding-box;
-    background: #transparent;
+    background: transparent;
     border-style: solid;
     border-color: transparent;
     border-width: 0;
@@ -1445,7 +1452,7 @@ h3.congrats span{
     font-size: 16px;
 }
 .userNameDrop button .caret{
-    background: url('/assets/user_caret.png');
+    background: url('img/user_caret.png');
     width: 14px;
     height: 8px;
     margin-left: 12px;
@@ -1480,7 +1487,7 @@ h3.congrats span{
 .saveCancelP a:nth-child(1){
     font-weight: 700;
 }
-.saveCancelP a.editNoteBtn{
+a.editNoteBtn{
     border: 1px solid #000;
     padding: 2px 12px;
     border-radius: 5px;
@@ -1572,11 +1579,25 @@ textarea.productsMoodboardAbove{
     border-bottom: 1px solid #e1e1e1;
     padding-left: 20px;
     line-height: 40px;
+    margin-bottom: 0px;
+}
+.btnGroupComments{
+    display:block;
+    width: 336px;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0px auto;
+    /*margin-bottom: 10px;*/
+    height: 60px;
 }
 .btnGroupComments li{
     background: #FFF;
+    padding: 0px;
 }
+
 .btnGroupComments li a{
+    padding: 10px 24px;
+    display: block;
     color: #000;
     font-weight: 700;
     text-shadow: none;
@@ -1594,10 +1615,14 @@ textarea.productsMoodboardAbove{
 }
 
 .commentContainer{
+    width: 100%;
     font-size: 14px;
     color: #000;
     padding: 15px;
     border-top: 1px solid #e1e1e1;
+}
+.commentContainer:first-child{
+    border-top: none;
 }
 .commentContainer:nth-child(even){
     background: #F8F8F8;
@@ -1616,26 +1641,31 @@ textarea.productsMoodboardAbove{
 #scrollBoxComments{
     overflow: auto;
     height: 480px;
+    padding-right: 0px !important;
+    width: 100% !important;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: 1px solid #e1e1e1;
 }
 .scrollBoxCommentsTrack {
     width: 7px;
     background-clip: padding-box;
-    background: #transparent;
+    background: transparent;
     border-style: solid;
     border-color: transparent;
     border-width: 0;
     border-left-width: 1px;
     margin: 5px 0px;
     padding-bottom: 5px;
+    right: 3px;
 }
 
 
 .scrollBoxCommentsHandle {
     border-radius: 5px;
-    width: 5px;
+    width: 9px;
     background-clip: padding-box;
     background: #a9a9a9;
-    background: red;
+    margin-right: 5px;
 }
 
 
@@ -1647,6 +1677,688 @@ textarea.productsMoodboardAbove{
     -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
 }
+
+.commentTextArea{
+    padding: 0 15px;
+}
+.commentTextArea p{
+    font-size: 16px;
+}
+.commentTextArea textarea{
+    width: 100%;
+    resize: none;
+    border: 1px solid #a9a9a9;
+    border-radius: 5px;
+    height: 70px;
+}
+.commentTextArea button{
+    background: transparent;
+    border: 1px solid #a9a9a9;
+    padding: 2px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.timeLeft{
+    font-size: 24px;
+    color: #000;
+    border: 1px solid #e1e1e1;
+    line-height: 50px;
+    height: 50px;
+    width: 300px;
+    margin: 10px auto;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.mark{
+    width: 19px;
+    height: 19px;
+    display: inline-block;
+    background: url('img/marks.png');
+    cursor: pointer;
+}
+.markRemove{
+    background-position: top right;
+}
+.markOk:hover,.markOkSelected{
+    background-position: bottom left;
+}
+.markRemove:hover,.markRemoveSelected{
+    background-position: bottom right;
+}
+
+#thanksModal .modal-dialog{
+    width: 800px;
+    text-align: center;
+}
+#thanksModal .modal-content{
+    box-shadow: none;
+    border-radius: 4px;
+    border: 2px solid #000;
+    padding: 80px 0px;
+}
+#thanksModal .modal-header{
+    border: none;
+    padding: 0px;
+}
+#thanksModal .modal-header h4{
+    font-size: 36px;
+    color: #000;
+}
+#thanksModal .modal-body{
+    padding: 0px;
+}
+#thanksModal .modal-body p{
+    font-size: 30px;
+    color: #000;
+    line-height: 70px;
+}
+.pageLink{
+    font-size: 18px;
+    color: #000;
+    display: inline-block;
+    margin: 0 10px;
+}
+.makeMeBold{
+    font-weight: 700;
+}
+
+.designerShareBox{
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 20px;
+}
+.designerShareBox .designerName,.designerShareBox .designerNote{
+    padding-left: 15px;
+}
+
+.btn-social{
+    width: 117px;
+    height: 45px;
+    line-height: 45px;
+    padding: 0px;
+    color: #FFF;
+    font-weight: 700;
+    margin-right: 12px;
+    display: inline-block;
+    font-size: 16px;
+}
+.btn-social img{
+    display: inline-block;
+    margin-right: 10px;
+}
+.twitterColor{
+    background: #55acee;
+}
+.facebookColor{
+    background: #3b5998;
+}
+.pintrestColor{
+    background: #bd081c;
+}
+.instagramColor{
+    background: #3f729b;
+}
+
+.final_moodboard{
+    position: relative;
+}
+
+.final_moodboard #final_moodboard{
+    width: 100%;
+}
+
+.final_moodboard .darkBorderBtn,.uploadFinalDesignBtn{
+    padding: 10px 32px;
+    border: 1px solid #000;
+}
+.blueLink{
+    color: #2b78a9;
+    text-decoration: underline;
+}
+.consumerNoteTextarea{
+    resize: none;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    display: block;
+    width: 65%;
+    min-height: 110px;
+    margin: 20px 0 50px;
+}
+
+.font18{
+    font-size: 18px;
+}
+.editProductItemBtn{
+    color: #000;
+    display: inline-block;
+    margin: 0px;
+    font-size: 16px;
+    font-weight: 700;
+    border: 1px solid #000;
+    padding: 2px 18px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+.productEditList label{
+    display: block;
+    font-size: 16px;
+    color: #000;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+.productEditList input[type=text]{
+    display: block;
+    border: 1px solid #a9a9a9;
+    height: 25px;
+    line-height: 25px;
+    padding: 0px 5px;
+    width: 260px;
+    margin-bottom: 14px;
+    display: block;
+}
+.btn-change-image{
+    position: absolute;
+    display: block;
+    border: 1px solid #000;
+    font-size: 16px;
+    color: #000;
+    border-radius: 10px;
+    background: transparent;
+    width: 150px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px;
+    text-align: center;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 15px;
+    font-weight: 700;
+}
+.inviteToContest{
+    font-weight: 700;
+    font-size: 18px;
+    border:1px solid #000;
+    width: 176px;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    color: #000;
+    display: inline-block;
+    position: absolute;
+    left: 75%;
+    top: 330px;
+}
+.editCover{
+    display: inline-block;
+    position: absolute;
+    left: 92%;
+    top: 337px;
+}
+.cover_image{
+    /*margin-top: 10px;*/
+    width: 100%;
+    height: 399px;
+    background: url('img/cover_image.png') no-repeat center;
+    background-size: cover;
+}
+.portfolio_profile_image{
+    position: absolute;
+    top: -120px;
+}
+
+.under_portfolio_profile p{
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 32px;
+}
+.under_portfolio_profile p:nth-child(2){
+    padding-top: 60px;
+}
+.under_portfolio_profile p:nth-child(2) span,.under_portfolio_profile p:nth-child(3) span{
+    display: inline-block;
+    border: 1px solid #000;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align:center;
+    border-radius: 12px;
+    margin-right: 10px;
+}
+.under_portfolio_profile p:nth-child(3) span{
+    font-family: 'AvenirLTStd-Black';
+    border: none;
+}
+.under_portfolio_profile p:nth-child(4) img{
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+.profileRating{
+    height: 24px;
+    display: inline-block;
+    background: url('img/star.png');
+}
+.fiveStar{
+    width: 125px;
+}
+.fourStar{
+    width: 100px;
+}
+.threeStar{
+    width: 75px;
+}
+.twoStar{
+    width: 50px;
+}
+.oneStar{
+    width: 25px;
+}
+
+.reviewsLink{
+    line-height: 24px;
+    font-size: 16px;
+    text-decoration: underline;
+    color: #000;
+    display: inline-block;
+    margin-left: 15px;
+    position: relative;
+    top: -4px;
+    font-weight: 700;
+}
+
+.user_portfolio_profile{
+    color: #000;
+}
+.user_portfolio_profile h3{
+    font-size: 24px;
+    font-family: 'AvenirLTStd-Black';
+}
+.user_portfolio_profile h4{
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+.user_portfolio_profile p{
+    font-size: 16px;
+    line-height: 30px;
+}
+.user_portfolio_profile .designStyleSpan{
+    font-weight: 700;
+    color: #000;
+    border: 1px solid #000;
+    font-size: 16px;
+    padding: 6px 20px;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.portfolio_example{
+    position: relative;
+}
+.portfolio_example img{
+    width: 100%;
+}
+.portfolio_example .numOfLikesPortfolio{
+    line-height: 20px;
+    height: 20px;
+    background: url('img/heart.png') no-repeat left;
+    display: inline-block;
+    padding-left: 30px;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    top: 90%;
+    left: 80%;
+}
+
+.loadMoreLink{
+    color: #a7a7a7;
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+    text-decoration: underline;
+    display: block;
+    text-align: center;
+}
+.doneBtn{
+    font-weight: 700;
+    color: #000;
+    font-size: 20px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    /*display: inline-block;*/
+    padding: 5px 20px;
+}
+.borderBottom{
+    border-bottom: 1px solid #e1e1e1;
+}
+#searchBox{
+    /*border: 1px solid red;*/
+    margin-top: 20px;
+    position: relative;
+
+}
+#searchBox input[type=text]{
+    width: 200px;
+    height: 34px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    border:1px solid #e1e1e1;
+}
+#searchBox input[type=text]::-webkit-input-placeholder {
+    color: #a9a9a9;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#searchBox input[type=text]:-moz-placeholder { /* Firefox 18- */
+    color: #a9a9a9;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#searchBox input[type=text]::-moz-placeholder {  /* Firefox 19+ */
+    color: #a9a9a9;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#searchBox input[type=text]:-ms-input-placeholder {
+    color: #a9a9a9;
+    font-size: 14px;
+    font-style: italic;
+}
+
+#searchBox button{
+    position: absolute;
+    right: 6px;
+    top: 7px;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.padd50Side{
+    padding: 0px 50px;
+}
+.faqNav{
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+}
+.faqNav li a{
+    font-size: 18px;
+    color: #000;
+    font-weight: 700;
+    line-height: 54px;
+    padding: 0px 15px;
+}
+.faqNav li a:hover,.faqNav li.active a{
+    background: #a9a9a9;
+    /*background:#FFF;*/
+    color: #FFF;
+}
+.panel-heading-faq{
+    cursor: pointer;
+    border: 1px solid #e1e1e1 !important;
+    background: #F8F8F8 !important;
+    background-image: none !important;
+    border-radius: 0px;
+}
+.panel-faq{
+    border-color: #FFF;
+    box-shadow: none;
+    border-radius: 0px;
+}
+.panel-faq .panel-heading+.panel-collapse>.panel-body {
+    border-top: none;
+}
+.panel-faq .panel-title{
+    padding: 0px 15px;
+    line-height: 53px;
+    background: url('img/collapsed.png') right center no-repeat;
+}
+.collapsed .panel-title{
+    padding: 0px 15px;
+    line-height: 53px;
+    background: url('img/collapse.png') right center no-repeat;
+}
+.collapsed{
+    background: #FFF !important;
+}
+/*.collapse.in{
+	background: #a9a9a9;
+}*/
+
+.panel-faq .panel-title a{
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+}
+.panel-collapse{
+    border-bottom: 1px solid #e1e1e1;
+}
+.panel-collapse .panel-body{
+    font-size: 16px;
+    color: #000;
+    padding: 30px;
+    padding-left: 50px;
+}
+.faqCategoryTitle{
+    font-size: 20px;
+    line-height: 60px;
+    color: #000;
+}
+
+.invitesBtn{
+    font-weight: 700;
+    color: #FFF;
+    font-size: 18px;
+    background: #5bbff8;
+    padding: 2px 12px;
+    margin-right: 20px;
+}
+.commentsBtn{
+    font-weight: 700;
+    color: #63cf4e;
+    font-size: 18px;
+    background: #FFF;
+    border: 1px solid #63cf4e;
+    padding: 2px 12px;
+    margin-right: 20px;
+}
+.winsBtn{
+    font-weight: 700;
+    color: #e5432d;
+    font-size: 18px;
+    background: #FFF;
+    border: 1px solid #e5432d;
+    padding: 2px 12px;
+    margin-right: 20px;
+}
+.notificationsBtn{
+    font-weight: 700;
+    color: #e4b701;
+    font-size: 18px;
+    background: #FFF;
+    border: 1px solid #e4b701;
+    padding: 2px 12px;
+}
+.designerNotification{
+    background: #F8F8F8 url('img/circle_arrow.png') right center no-repeat;
+    border: 1px solid #e1e1e1;
+    color: #000;
+    padding-left: 30px;
+    line-height: 72px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    border-left: 0px;
+    float: left;
+    width: 99%;
+    /*position:relative;*/
+}
+
+.designerNotification:hover{
+    background-color: #e1e1e1;
+}
+/*.designerNotification span{
+	display: inline-block;
+	margin-right: 30px;
+	height: 72px;
+	width: 5px;
+}*/
+
+.blueLabel{
+    background: #5bbff8;
+    display: inline-block;
+    height: 74px;
+    width: 5px;
+    float: left;
+}
+.greenLabel{
+    background: #63cf4e;
+    display: inline-block;
+    height: 74px;
+    width: 5px;
+    float: left;
+}
+.redLabel{
+    background: #e5432d;
+    display: inline-block;
+    height: 74px;
+    width: 5px;
+    float: left;
+}
+.yellowLabel{
+    background: #e4b701;
+    display: inline-block;
+    height: 74px;
+    width: 5px;
+    float: left;
+}
+.leaderboardSidebar #scrollBoxComments{
+    border: none;
+    height: 395px;
+    padding: 0px 20px !important;
+}
+.leaderboardSidebar .commentContainer:nth-child(even){
+    background-color: #FFF;
+}
+.leaderboardSidebar .commentContainer{
+    padding: 15px 0px;
+    font-size: 16px;
+}
+.leaderboardSidebar .commentContainer .comment-time{
+    font-size: 14px;
+}
+
+.contestInfoBox{
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 40px 70px;
+}
+.contestInfoBox .row .col-md-2{
+    border-left: 1px solid #e1e1e1;
+    height: 105px;
+}
+.contestInfoBox .row .col-md-2:nth-child(1){
+    border:none;
+}
+.contestInfoBox h4{
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    padding-bottom: 30px;
+}
+.contestInfoBox p{
+    text-align: center;
+    font-size: 14px;
+    color: #000;
+}
+.contestInfoBox p b{
+    font-size: 20px;
+}
+
+.contestInfo .col-md-3 h3{
+    font-size: 20px;
+    color: #000;
+    line-height: 36px;
+}
+.contestInfo .col-md-9 p{
+    font-size: 16px;
+    color: #000;
+    line-height: 70px;
+}
+.contestInfo .col-md-9 textarea{
+    border: 1px solid #000;
+    resize:none;
+    padding:20px;
+    width: 100%;
+    min-height: 100px;
+
+}
+.contestInfo .col-md-9 .exampleImg{
+    width: 22%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.contestInfo .col-md-9 .exampleSite{
+    display: block;
+    line-height: 50px;
+    color: #000;
+    font-size: 16px;
+    text-decoration: underline;
+}
+.contestInfo .col-md-9 .color{
+    /*display: inline-block;*/
+    float: left;
+    font-size: 16px;
+    color: #000;
+    line-height: 32px;
+    width: 165px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+}
+.contestInfo .col-md-9 .color span:nth-child(1){
+    display: inline-block;
+    width: 65px;
+    height: 32px;
+    line-height: 32px;
+    position: relative;
+    top: -8px;
+}
+.contestInfo .col-md-9 .color span:nth-child(2){
+    display: inline-block;
+    width: 90px;
+    height: 32px;
+    background: #8f8f8f;
+}
+.contestInfo .borderBottom{
+    padding: 30px 0px;
+}
+.contestInfo .col-md-3,.contestInfo .col-md-9{
+    padding: 0px;
+}
+.disableRightMargin{
+    margin-right: 0px !important;
+}
+
+
+
+
+
+
+
+
 
 
 
