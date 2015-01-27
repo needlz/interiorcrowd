@@ -69,6 +69,10 @@ class PortfolioView
     result.reject(&:empty?)
   end
 
+  def style_description_texts
+    style_description.join(', ')
+  end
+
   def awards
     return unless portfolio.portfolio_awards.present?
     portfolio.portfolio_awards.map(&:name).join('<br/>')
