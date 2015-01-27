@@ -17,9 +17,6 @@ class ContestView
     attr_reader attribute
   end
 
-  OLD_EDITABLE_ATTRIBUTES = [:category, :area, :appeals, :desirable_colors, :undesirable_colors, :example_pictures,
-    :example_links, :space_pictures, :space_dimensions, :budget, :feedback, :additional_preferences] + ACCOMMODATION_ATTRIBUTES
-
   EDITABLE_ATTRIBUTES = [
     :category, :area, :design_profile, :appeals, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
