@@ -282,6 +282,12 @@ en:
       get_started: To get started, tell us a bit more about yourself.
       i_agree: I agree with the InteriorCrowd term of use
     title: Designer Center
+    updates:
+      invites: Invites
+      comments: Comments
+      wins: Wins
+      notifications: Notifications
+      leaderboard: Leaderboard
     welcome_user: Welcome, %{username}
     portfolio:
       creation:

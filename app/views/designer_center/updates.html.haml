@@ -2,90 +2,29 @@
   .container.animated.fadeInDown.bottom60
     .row
       .col-md-12.no-x-padding
-        %a.btn.invitesBtn{:href => "#"} Invites
-        %a.btn.commentsBtn{:href => "#"} Comments
-        %a.btn.winsBtn{:href => "#"} Wins
-        %a.btn.notificationsBtn{:href => "#"} Notifications
+        %a.btn.invitesBtn{:href => "#"}= t('designer_center.updates.invites')
+        %a.btn.commentsBtn{:href => "#"}= t('designer_center.updates.comments')
+        %a.btn.winsBtn{:href => "#"}= t('designer_center.updates.wins')
+        %a.btn.notificationsBtn{:href => "#"}= t('designer_center.updates.notifications')
 
     .row.marg-top20
       .col-md-8.no-x-padding
-        %span.blueLabel
-        %p.designerNotification Congratulations! You have been invited to join a contest! Join now!
-        %span.greenLabel
-        %p.designerNotification Sarah commented on your moodboard. Read more.
-        %span.redLabel
-        %p.designerNotification You're a winner! Congrats! You have been selected to design ( Julia's Bedroom ).
-        %span.yellowLabel
-        %p.designerNotification Hurry! Only 3days left to finish ( Don's bathroom ).
-        %span.blueLabel
-        %p.designerNotification Congratulations! You have been invited to join a contest! Join now!
-        %span.redLabel
-        %p.designerNotification You're a winner! Congrats! You have been selected to design ( Julia's Bedroom ).
-        %span.yellowLabel
-        %p.designerNotification Hurry! Only 3days left to finish ( Don's bathroom ).
+        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'green', text: 'Sarah commented on your moodboard. Read more.'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
+        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
       .col-md-4
         .sidebarComments.leaderboardSidebar
-          %p.designerName Leaderboard
-          #scrollBoxComments{:style => "width: 311px; padding-right: 27px; outline: none; overflow: hidden;", :tabindex => "0"}
-            .commentContainer
-              .row
-                .col-md-12
-                  .row
-                    .col-md-6
-                      %p.comment-username InteriorCrowd Team
-                    .col-md-6
-                      %p.comment-time 17 min ago
-                  %p.comment-text Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.
-            .commentContainer
-              .row
-                .col-md-12
-                  .row
-                    .col-md-6
-                      %p.comment-username InteriorCrowd Team
-                    .col-md-6
-                      %p.comment-time 39 min ago
-                  %p.comment-text Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.
-            .commentContainer
-              .row
-                .col-md-12
-                  .row
-                    .col-md-6
-                      %p.comment-username InteriorCrowd Team
-                    .col-md-6
-                      %p.comment-time 2 hr ago
-                  %p.comment-text Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.
-            .commentContainer
-              .row
-                .col-md-12
-                  .row
-                    .col-md-6
-                      %p.comment-username InteriorCrowd Team
-                    .col-md-6
-                      %p.comment-time 1 d ago
-                  %p.comment-text Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.
-            .commentContainer
-              .row
-                .col-md-12
-                  .row
-                    .col-md-6
-                      %p.comment-username InteriorCrowd Team
-                    .col-md-6
-                      %p.comment-time 2d ago
-                  %p.comment-text Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.
-
-  -##designer-center-responses
-  -#  .row
-  -#    .col-md-7
-  -#      %h3= t('designer_center.responses.title')
-  -#      %h4 #{ t('designer_center.responses.list_title') }:
-  -#      - @current_responses.each do |response|
-  -#        .response
-  -#          = render partial: 'designer_center_requests/index/item',
-  -#              locals: { response: response }
-  -#    .col-md-5
-  -#      = render partial: 'designer_center_requests/index/notifications'
-  -#  .row
-  -#    = render partial: 'designer_center_requests/index/footer'
+          %p.designerName= t('designer_center.updates.leaderboard')
+          #scrollBoxComments{tabindex: "0"}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'17 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'39 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2hr ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'1d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
 
 = render partial: 'designer_center/layout'
 
