@@ -1,3 +1,49 @@
+.cover_image
+  .container.animated.fadeInDown
+    .row
+      .col-md-12.relative
+        %a.inviteToContest{:href => "#"} Invite to Contest
+        %a.editCover{:href => "#"}
+          %img{:src => '/assets/edit.png'}/
+.container.animated.fadeInDown.bottom60
+  .row.marg-top40
+    .col-md-4.relative.under_portfolio_profile
+      %img.portfolio_profile_image{:src => @portfolio_view.personal_picture_url}/
+      %p
+        %span= @portfolio_view.years_of_expirience
+        = @portfolio_view.expirience_level
+      %p
+        %span= @portfolio_view.education_icon
+        = @portfolio_view.education_view
+      %p
+        %img{:src => "/assets/profile-badge.png"}/
+        = @portfolio_view.awards.try(:html_safe)
+      %span.profileRating.fiveStar
+      %a.reviewsLink{:href => "#"} 5 reviews
+    .col-md-8.user_portfolio_profile
+      %h3= @portfolio_view.designer_name
+      %h4 About
+      %p= @portfolio_view.about
+      %h4 Design style
+      - @portfolio_view.style_description.each do |style|
+        %span.designStyleSpan= style
+    .col-md-12
+      .hLine10.marg-top30.marg-bottom30.col-md-12.marg-bottom30
+      %h4.font20 Portfolio Examples
+      - index = 1
+      - @portfolio_view.pictures_urls.in_groups_of(3, false) do |urls|
+        .col-md-12.marg-bottom30
+          - urls.each do |url|
+            = render partial: 'portfolios/item',
+                locals: { image_url: url,
+                          number: index }
+            - index += 1
+    .col-md-12.marg-top30
+      %a.loadMoreLink{:href => "#"} Load More...
+    .col-md-12
+      .hLine10.marg-top30.marg-bottom30.col-md-12.text-center
+      %a.doneBtn{:href => "#"} Done
+
 #in_pricing
   #portfolio
     .row

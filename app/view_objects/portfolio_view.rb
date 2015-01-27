@@ -50,12 +50,13 @@ class PortfolioView
   end
 
   def personal_picture_url
-    portfolio.personal_picture ? portfolio.personal_picture.image.url(:medium) : '/assets/blank.png'
+    portfolio.personal_picture ? portfolio.personal_picture.image.url(:medium) : '/assets/portfolio_profile_image.png'
   end
 
   def designer_name
     portfolio.designer.name
   end
+
 
   def pictures_urls
     portfolio.pictures.map { |picture| picture.image.url }
@@ -64,9 +65,8 @@ class PortfolioView
   def style_description
     return '' unless portfolio
     styles = Portfolio::STYLES.select { |style| portfolio.send("#{ style }_style") }
-    result = styles.map {|style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }.join(', ')
-    result = result + '<br/>' + (portfolio.style_description ? portfolio.style_description : '' )
-    result.html_safe
+    result = styles.map {|style| I18n.t("designer_center.portfolio.creation.styles.#{ style }") }
+    (result + [portfolio.style_description]).reject(&:empty?)
   end
 
   def awards
