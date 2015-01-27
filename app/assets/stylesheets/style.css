@@ -1452,7 +1452,7 @@ h3.congrats span{
     font-size: 16px;
 }
 .userNameDrop button .caret{
-    background: url('img/user_caret.png');
+    background: url('/assets/user_caret.png');
     width: 14px;
     height: 8px;
     margin-left: 12px;
