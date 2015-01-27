@@ -37,8 +37,8 @@
         = render partial: 'portfolios/item',
             locals: { image_url: url,
                       number: index }
-      .col-md-12.marg-bottom30
         - index += 1
+      .col-md-12.marg-bottom30
     .col-md-12.marg-top30
       %a.loadMoreLink{:href => "#"} Load More...
     .col-md-12

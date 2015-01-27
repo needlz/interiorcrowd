@@ -2557,9 +2557,9 @@ textarea.productsMoodboardAbove{
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
 }
 
-.designerShareBox .designerName,.designerShareBox .designerNote{
+.designerShareBox .designerName,.designerShareBox .designerNote {
     padding-left: 15px;
-
+}
 .inviteToContest {
     font-weight: 700;
     font-size: 18px;
