@@ -1,6 +1,9 @@
 class @InlineEditor
 
+  editButtonClassName: 'edit-button'
+  cancelButtonClassName: 'cancel-button'
   editButtonSelector: '.edit-button'
+  cancelButtonSelector: '.cancel-button'
   attributeSelector: '.attribute'
   hiddenViewClass: 'hidden-view'
 
@@ -8,7 +11,8 @@ class @InlineEditor
     @bindEditClick()
 
   bindEditClick: ->
-    $(@attributeSelector).find(@editButtonSelector).click(@, @onEditClick)
+    $(@attributeSelector).on 'click', @editButtonSelector, @, @onEditClick
+    $(@attributeSelector).on 'click', @cancelButtonSelector, @, @onCancelClick
 
   onEditClick: (event)->
     event.preventDefault()
@@ -26,19 +30,25 @@ class @InlineEditor
   onEditFormRetrieved: (attribute, formHtml)=>
     $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
     $editButton.text(I18n.attribute_cancel_button)
-    $editButton.off('click').click(@, @onCancelClick)
+    $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
+
     $formHtml = $(formHtml)
+    $form = @editHolder($optionsRow, $formHtml)
+    $form.show()
+
+    @afterEditFormRetrieved?(attribute, formHtml)
+    @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
+
+  editHolder: ($optionsRow, $formHtml)->
     if $.contains(document.documentElement, $formHtml[0])
       $form = $formHtml
     else
-      $form = $optionsRow.find(@placeholderSelector).find('.edit')
-      $form.html(formHtml)
-    $form.show()
-    @afterEditFormRetrieved?(attribute, formHtml)
-    @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
+      $form = $optionsRow.find('.edit')
+      $form.html($formHtml)
+    $form
 
   onCancelClick: (event)=>
     event.preventDefault()
@@ -49,13 +59,13 @@ class @InlineEditor
 
   cancelEditing: (attribute)->
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
-    $editButton = $optionsRow.find(@editButtonSelector)
+    $editButton = $optionsRow.find(@cancelButtonSelector)
     @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
     $form.hide()
-    $editButton.off('click').click(@, @onEditClick)
+    $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
     @afterCancelEditing?($optionsRow)
 
   optionsRow: ($child)->

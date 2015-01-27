@@ -2,6 +2,7 @@ class @ContestEditing extends InlineEditor
 
   attributeIdentifierData: 'option'
   placeholderSelector: '.attribute-form'
+  attributeSelector: '.edit-profile'
 
   bindEvents: ->
     super()
@@ -17,13 +18,13 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveClick: ->
-    $('body').on('click', '.attribute .save-button', @onSaveClick)
+    $('body').on('click', '.edit-profile .save-button', @onSaveClick)
 
   bindSaveSuccess: ->
-    $('body').on('ajax:success', '.attribute form', (event, data, status, xhr)=>
+    $('body').on('ajax:success', '.edit-profile form', (event, data, status, xhr)=>
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
-      $editButton = $(".row[data-option='#{ option }'] .edit-button")
+      $editButton = $(".edit-profile[data-option='#{ option }'] .cancel-button")
       $optionsRow = @optionsRow($editButton)
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $optionsRow.find('.preview').html(data)
@@ -31,7 +32,7 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveError: ->
-    $('body').on('ajax:error', '.attribute form', (event, data, status, xhr)=>
+    $('body').on('ajax:error', '.edit-profile form', (event, data, status, xhr)=>
       $form = $(event.target)
       @optionsContainer($form).find('.has-error .control-label').text 'An error occured during saving'
     )
@@ -82,6 +83,10 @@ class @ContestEditing extends InlineEditor
   onSaveClick: (event)=>
     $saveButton = $(event.target)
     $saveButton.parents('form').submit()
+
+  updateEditButton: ($elem)->
+    $editButton = $('.edit-button.template').html()
+    $elem.html($editButton)
 
 $ ->
   window.brief = new ContestEditing()

@@ -722,3 +722,39 @@
   visibility: visible!important;
   display: none;
 }
+
+.brief {
+  .edit-profile:nth-child(1) {
+    border: none;
+  }
+
+  .edit-profile {
+    border-top: 1px solid #e1e1e1;
+    padding: 40px 0px 30px;
+  }
+
+  .edit-profile .view:nth-child(1) p {
+    font-weight: normal;
+  }
+
+  .edit-profile {
+
+    .content {
+      margin: 0px 50px 0px 50px;
+
+      .edit {
+        display: none;
+      }
+
+    }
+  }
+
+  .cancel-button {
+    color: #428bca;
+    cursor: pointer;
+  }
+
+  .save-button {
+    color: white;
+  }
+}

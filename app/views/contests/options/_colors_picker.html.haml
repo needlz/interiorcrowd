@@ -2,7 +2,7 @@
   .colors-table
     %img.check{src: "/assets/check-icon.png", style: 'display: none'}
     - color_table_values.each do |color_object|
-      .color-cell{ data: { id: color_object[:id], text: color_object[:text] }, style: "background: ##{ color_object[:id] };" }
+      .color-cell.gal1{ data: { id: color_object[:id], text: color_object[:text] }, style: "background: ##{ color_object[:id] };" }
   .clearfix
   .text-center.picker-types-separator
     %b= t('contests.design_style.picker_types_separator')

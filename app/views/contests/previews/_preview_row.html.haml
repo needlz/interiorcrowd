@@ -1,6 +1,13 @@
-.col-xs-3.title
-  %label= title
-.col-xs-9.attribute-form
+.col-lg-4
+  %p= "#{title} :"
+.col-lg-4.attribute-form
   .view
-    = value
+    %p= value
+.col-lg-4.text-right
+  .edit-button
+    = render partial: 'clients/client_center/profile/edit_button_image'
+.content
   .edit{ style: 'display: none;' }
+.clearfix
+
+

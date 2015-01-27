@@ -1,6 +1,8 @@
 - value_html = capture do
+  (
   - @contest_view.additional_preferences.each do |preference, value|
     = render partial: 'contests/previews/additional_preference_row',
       locals: { preference: preference, value: value }
+  )
 = render(partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.additional_preferences'),
                                                     value: value_html })

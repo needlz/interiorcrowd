@@ -15,7 +15,8 @@
 
 - content_for :client_center_content do
   .contest.brief{ data: { id: @contest.id } }
-    - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
-      = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
+    .border-brief-box
+      - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
+        = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
 
-= render partial: 'clients/client_center/layout'
+= render partial: 'clients/client_center/layout', locals: { container_class: 'container-edit-profile'}

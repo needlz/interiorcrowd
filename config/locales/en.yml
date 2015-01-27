@@ -21,19 +21,25 @@ en:
       brief:
         design_categories: Need help with
         designer_level: Design knowledge
-        desirable_colors: Preffered colors
+        designer_profile: Design Profile
+        designer_package: Design Package
+        preferences_retailers: Preferences Retailers
+        elements_to_avoid: Elements to Avoid
+        entertaining: Entertaining
+        durability: Durability
+        desirable_colors: Ideal Color for the space
         undesirable_colors: Colors to avoid
-        example: Examples
-        areas: Rooms
-        design_budget: Budget for materials
+        example: Examples of Ideal Spaces
+        areas: Room
+        design_budget: Materials Budget
         feedback: Feedback
         space_dimensions: Dimensions of space
         links: Links
-        space_pictures: Pictures of space
+        space_pictures: Pictures of Your Space
         appeals: Appeals
-        accommodate_children: Accommodate children
-        accommodate_pets: Accommodate pets
-        additional_preferences: Additional preferences
+        accommodate_children: Accommodate Children
+        accommodate_pets: Accommodate Pets
+        additional_preferences: Preferences
     design_style:
       title: Style Profile
       description: |

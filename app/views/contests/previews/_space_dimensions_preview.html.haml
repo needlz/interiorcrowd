@@ -3,6 +3,7 @@
     - @contest_view.dimensions.each do |space_dimension|
       - if space_dimension.value.present?
         %p
-          = space_dimension.name
-          \: #{space_dimension.to_feet} ft #{space_dimension.to_inches} Inches
+
+          = "(#{space_dimension.name}"
+          \: #{space_dimension.to_feet} ft, #{space_dimension.to_inches} in)
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.space_dimensions'), value: value_html }
