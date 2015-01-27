@@ -29,13 +29,10 @@ RSpec.describe PortfoliosController do
         designer.portfolio = Fabricate(:portfolio)
       end
 
-      it 'can not be accessed by anonymous user' do
-        expect { get :edit }.to raise_error
-      end
-
       it 'can not be accessed by client' do
         sign_in(client)
-        expect { get :edit }.to raise_error
+        get :edit
+        expect(response).to redirect_to login_sessions_path
       end
 
       context 'when signed in as designer' do
@@ -55,6 +52,11 @@ RSpec.describe PortfoliosController do
       get :edit
       expect(response).to redirect_to new_portfolio_path
     end
+
+    it 'redirects to login page if user not logged' do
+      get :edit
+      expect(response).to redirect_to login_sessions_path
+    end
   end
 
   describe 'PATCH update' do
@@ -65,12 +67,14 @@ RSpec.describe PortfoliosController do
     end
 
     it 'can not be requested by anonymous user' do
-      expect { patch :update, portfolio: { years_of_expirience: '1' } }.to raise_error
+      patch :update, portfolio: { years_of_expirience: '1' }
+      expect(response).to redirect_to login_sessions_path
     end
 
     it 'can not be requested by client' do
       sign_in(client)
-      expect { patch :update }.to raise_error
+      patch :update
+      expect(response).to redirect_to login_sessions_path
     end
 
     context 'if signed in as designer' do
