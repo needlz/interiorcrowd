@@ -270,7 +270,7 @@ en:
   designer_center:
     navigation:
       create_portfolio: Create Portfolio
-      preview_contests: Preview Current Contests
+      preview_contests: Join New Contests
       respond: Respond to Contests
       updates: Updates
     sign_up:
@@ -418,6 +418,8 @@ en:
       back: < Exit without saving
       save_and_preview: Save my work & preview
       submit: Submit >
+      submit_design: Submit My Design
+      back: Back
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept moodboard
   supported_image_extensions: (.jpg, .tif, .png)

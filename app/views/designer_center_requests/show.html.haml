@@ -5,6 +5,39 @@
     I18n = #{ translations_to_json('client_center') }
 
 - content_for :designer_center_content do
+  .container.animated.fadeInDown.bottom60
+    .row.marg-top30
+      .col-md-8.disablePadding
+        = render partial: 'shared/moodboard', locals: { request: @request }
+        -#%img{:src => "/assets/img-content.png"}
+      .col-md-4
+        .row
+          .col-md-3
+            %img{:src => "/assets/profile-img.png"}/
+          .col-md-9
+            %p.designerName= @request.designer.name
+            %p.designerNote= @request.feedback
+
+        %p.saveCancelP
+          %a.editNoteBtn{:href => "#"} Edit
+      .col-md-12.disablePadding.marg-top20
+        .hLine
+      .col-md-6.disablePadding
+        = link_to designer_center_response_index_path do
+          .backToEntries
+            %img{:src => "/assets/lt.png"}/
+            =t('designer_center.respond.back')
+      .col-md-6.disablePadding.text-right
+        - if @request.draft?
+          = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+            = f.hidden_field :status, value: 'submitted'
+          - if @request.contest.submission?
+            = link_to '#', class: 'submit' do
+              .submitMyDesign
+                =t('designer_center.respond.submit_design')
+                %img{:src => "/assets/gt.png"}/
+
+
   #designer-response-view
     .row
       .col-sm-9.response{ data: { id: @request.id } }
