@@ -1,5 +1,7 @@
 class @InlineEditor
 
+  editButtonClassName: 'edit-button'
+  cancelButtonClassName: 'cancel-button'
   editButtonSelector: '.edit-button'
   cancelButtonSelector: '.cancel-button'
   attributeSelector: '.attribute'
@@ -28,7 +30,7 @@ class @InlineEditor
   onEditFormRetrieved: (attribute, formHtml)=>
     $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
     $editButton.text(I18n.attribute_cancel_button)
-    $editButton.removeClass('edit-button').addClass('cancel-button')
+    $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
@@ -63,7 +65,7 @@ class @InlineEditor
     $view.show()
     $form = $optionsRow.find('.edit')
     $form.hide()
-    $editButton.removeClass('cancel-button').addClass('edit-button')
+    $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
     @afterCancelEditing?($optionsRow)
 
   optionsRow: ($child)->
