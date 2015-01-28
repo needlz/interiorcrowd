@@ -14,7 +14,7 @@
         = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
 
   %p.saveCancelP
-    %a.save-button#save-button{:href => "#"} Save
-    %a.editNoteBtn.edit-button{:href => "#"} Edit
+    %a.save-button#save-button{:href => "#"}=t('designer_center.save_button')
+    %a.editNoteBtn.edit-button{:href => "#"}=t('designer_center.edit_button')
 .col-md-12.disablePadding.marg-top20
   .hLine
