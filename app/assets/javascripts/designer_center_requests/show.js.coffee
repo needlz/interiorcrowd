@@ -2,7 +2,7 @@ class @MoodboardEditor extends InlineEditor
 
   placeholderSelector: '.notes'
   attributeIdentifierData: 'attribute'
-  editClass: 'editNoteBtn'
+  editButtonClassName: 'edit-button editNoteBtn'
   saveClass: '.save-button'
 
   bindEvents: ->
@@ -37,6 +37,10 @@ class @MoodboardEditor extends InlineEditor
 
   contestId: ->
     $('.contest').data('id')
+
+  onCancelClick: (event)=>
+    super(event)
+    $(@saveClass).hide()
 
   afterEditFormRetrieved: (attribute, formHtml)->
     $saveButton = $("[data-attribute=#{ attribute }]").find('.save-button')
