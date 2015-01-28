@@ -29,10 +29,10 @@ class DesignerCenterRequestsController < ApplicationController
 
   def new
     @navigation = Navigation::DesignerCenter.new(:requests)
-    contest = Contest.find(params[:contest_id])
-    @contest_view = ContestView.new(contest)
-    @contest_short_details = ContestShortDetails.new(contest)
-    @request = ContestRequest.new(contest_id: contest.id)
+    @contest = Contest.find(params[:contest_id])
+    @contest_view = ContestView.new(@contest)
+    @contest_short_details = ContestShortDetails.new(@contest)
+    @request = ContestRequest.new(contest_id: @contest.id)
   end
 
   def create
