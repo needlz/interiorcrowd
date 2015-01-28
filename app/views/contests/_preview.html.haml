@@ -1,33 +1,21 @@
-.row
-  = render partial: 'contests/previews/category_preview'
-.row
-  = render partial: 'contests/previews/area_preview'
-.row
-  = render partial: 'contests/previews/designer_level_preview'
-.row
-  = render partial: 'contests/previews/appeals_preview'
-.row
-  = render partial: 'contests/previews/desirable_colors_preview'
-.row
-  = render partial: 'contests/previews/undesirable_colors_preview'
-.row
-  = render partial: 'contests/previews/example_pictures_preview'
-.row
-  = render partial: 'contests/previews/example_links_preview'
-.row
-  = render partial: 'contests/previews/space_pictures_preview'
-.row
-  = render partial: 'contests/previews/space_dimensions_preview'
-.row
-  = render partial: 'contests/previews/budget_preview'
-.row
-  = render partial: 'contests/previews/feedback_preview'
-- if @contest_view.additional_preferences
-  .row
-    = render partial: 'contests/previews/additional_preferences_preview'
-- unless @contest_view.accommodate_children.nil?
-  .row
-    = render partial: 'contests/previews/accommodate_children_preview'
-- unless @contest_view.accommodate_pets.nil?
-  .row
-    = render partial: 'contests/previews/accommodate_pets_preview'
+= render partial: 'contests/preview/current_contest_infobox'
+
+.col-md-12.marg-top30.contestInfo
+  .row.borderBottom.sections_table
+    - ContestView::CONTEST_PREVIEW_ATTRIBUTES.each do |attribute|
+      = render partial: 'clients/client_center/profile/contest_attribute_preview', locals: { attribute: attribute }
+
+.col-md-12.disablePadding.marg-top30
+
+.col-md-6.disablePadding
+  %a.backToEntries{:href => "#"}
+    = image_tag 'lt.png'
+    &nbsp;&nbsp;&nbsp;
+    = t('contests.titles.back')
+
+.col-md-6.disablePadding.text-right
+  %a.submitMyDesign{:href => "#"}
+    = t('contests.titles.join')
+    = image_tag 'gt.png'
+.clearfix
+  %p

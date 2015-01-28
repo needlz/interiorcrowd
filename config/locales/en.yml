@@ -32,6 +32,7 @@ en:
         example: Examples of Ideal Spaces
         areas: Room
         design_budget: Materials Budget
+        design_budget_for_materials: Design Budget for Materials
         feedback: Feedback
         space_dimensions: Dimensions of space
         links: Links
@@ -40,6 +41,13 @@ en:
         accommodate_children: Accommodate Children
         accommodate_pets: Accommodate Pets
         additional_preferences: Preferences
+        floorplan: Floorplan
+        other_information: Other Information
+        name: Name
+        design_knowledge: Design Knowledge
+        design_style: Design Style
+      join: Join this contest
+      back: Back to all current contests
     design_style:
       title: Style Profile
       description: |
@@ -389,6 +397,13 @@ en:
       suggested_contests_hint: We think that these contests are just right for your style.
       all_contests_title: See all current contests
       days_left: '%{days} left to enter'
+      contest_id: Contest ID#
+      contest_name: Contest Name
+      type: Type
+      room: Room
+      price: Price
+      days: Days left
+
     show_page:
       back_to_index: < Back to all current contests
       join: Join this contest >

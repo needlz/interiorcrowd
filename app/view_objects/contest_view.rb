@@ -23,6 +23,10 @@ class ContestView
     :design_package, :additional_preferences, :preferences_retailers, :element_to_avoid,
     :entertaining, :durability ] + ACCOMMODATION_ATTRIBUTES
 
+  CONTEST_PREVIEW_ATTRIBUTES = [
+    :name, :design_knowledge, :design_style, :desirable_colors, :undesirable_colors, :example_pictures,
+    :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :other_information ]
+
   def initialize(options)
     if options.kind_of?(Hash)
       initialize_from_options(HashWithIndifferentAccess.new(options))

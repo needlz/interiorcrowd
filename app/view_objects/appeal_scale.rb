@@ -52,6 +52,14 @@ class AppealScale
     100 - value.to_i
   end
 
+  def preferred_appeal_name
+    if value == ContestCreationWizard::APPEAL_FEEDBACK.first[:value]
+      first_name
+    elsif value == ContestCreationWizard::APPEAL_FEEDBACK.last[:value]
+      second_name
+    end
+  end
+
   private
 
   attr_reader :appeal

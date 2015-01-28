@@ -757,16 +757,45 @@
   .save-button {
     color: white;
   }
+}
 
-  .select2-container {
-    width: 100%;
+.select2-container {
+  width: 80%;
 
-    .selected-color-item {
+  .selected-color-item {
+    span {
+      font-size: 15px
+    }
+  }
+}
+
+.sections_table {
+  .view {
+    p {
       span {
-        font-size: 15px
+        font-weight: normal;
       }
     }
   }
+  .text-right {
+    display: none;
+  }
+}
 
+.normal-font {
+  font-weight: normal!important;
+}
 
+.contestInfo .comment textarea {
+  border: 1px solid #000;
+  resize: none;
+  padding: 20px;
+  width: 100%;
+  min-height: 100px;
+}
+
+.style-name {
+  font-size: 16px;
+  color: #000;
+  line-height: 70px;
 }

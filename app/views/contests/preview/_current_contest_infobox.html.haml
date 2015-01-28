@@ -1,0 +1,20 @@
+.contestInfoBox
+  .row
+    .col-md-2
+      %h4= t('designer_center.contests_preview.contest_id')
+      %p= @contest.id
+    .col-md-2
+      %h4= t('designer_center.contests_preview.contest_name')
+      %p= @contest.project_name
+    .col-md-2
+      %h4= t('designer_center.contests_preview.type')
+      %p= @contest.design_category.name
+    .col-md-2
+      %h4= t('designer_center.contests_preview.room')
+      %p= @contest.design_space.name
+    .col-md-2
+      %h4= t('designer_center.contests_preview.price')
+      %p= number_to_currency(BudgetPlan.find(@contest.budget_plan).price, precision: 0)
+    .col-md-2
+      %h4= t('designer_center.contests_preview.days')
+      %p= pluralize(@contest.days_left, 'day')
