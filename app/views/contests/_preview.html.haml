@@ -3,7 +3,7 @@
 .col-md-12.marg-top30.contestInfo
   .row.borderBottom.sections_table
     - ContestView::CONTEST_PREVIEW_ATTRIBUTES.each do |attribute|
-      = render partial: 'clients/client_center/profile/test_profile_attribute_preview', locals: { attribute: attribute }
+      = render partial: 'clients/client_center/profile/contest_attribute_preview', locals: { attribute: attribute }
 
 .col-md-12.disablePadding.marg-top30
 
