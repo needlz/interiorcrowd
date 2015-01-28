@@ -386,6 +386,13 @@ en:
       suggested_contests_hint: We think that these contests are just right for your style.
       all_contests_title: See all current contests
       days_left: '%{days} left to enter'
+      contest_id: Contest ID#
+      contest_name: Contest Name
+      type: Type
+      room: Room
+      price: Price
+      days_left: Days left
+
     show_page:
       back_to_index: < Back to all current contests
       join: Join this contest >

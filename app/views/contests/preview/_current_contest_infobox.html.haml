@@ -1,26 +1,20 @@
 .contestInfoBox
   .row
     .col-md-2
-      %h4 Contest ID#
-      %p 1234567#
+      %h4= t('designer_center.contests_preview.contest_id')
+      %p= @contest.id
     .col-md-2
-      %h4 Contest Name
-      %p My Dream Loft
+      %h4= t('designer_center.contests_preview.contest_name')
+      %p= @contest.project_name
     .col-md-2
-      %h4 Type
-      %p
-        Update
-        %br My Style
+      %h4= t('designer_center.contests_preview.type')
+      %p= @contest.design_category.name
     .col-md-2
-      %h4 Room
-      %p
-        Living
-        %br Room
+      %h4= t('designer_center.contests_preview.room')
+      %p= @contest.design_space.name
     .col-md-2
-      %h4 Price
-      %p $199
+      %h4= t('designer_center.contests_preview.price')
+      %p= number_to_currency(BudgetPlan.find(@contest.budget_plan).price, precision: 0)
     .col-md-2
-      %h4 Days left
-      %p
-        %b 15
-        %br days
+      %h4= t('designer_center.contests_preview.days_left')
+      %p= @contest.days_left

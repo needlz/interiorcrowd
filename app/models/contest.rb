@@ -104,6 +104,11 @@ class Contest < ActiveRecord::Base
     designer_invitations.create!(designer: designer)
   end
 
+  def days_left
+    days = (self.phase_end - Date.current.to_datetime) / (60*24*60)
+    days.to_i
+  end
+
   private
 
   def update_appeals(options)
