@@ -224,6 +224,8 @@ en:
       notes_title: Want to send a note to the designers?
       send_note: Send
       your_note: Your note
+      filter_by: 'Filter by:'
+      responses_filter_all: All
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
@@ -380,7 +382,13 @@ en:
           novice: Up and Coming Designer
           professional: Career professional
           expirienced: Very Expirienced
-        about_self: The designer about himself
+        about: About
+        design_style: Design style
+        portfolio_examples: Portfolio Examples
+        done: Done
+        load_more: Load More...
+        invite_to_contest: Invite to Contest
+
     contests_preview:
       suggested_contests_title: Suggested contests for you!
       suggested_contests_hint: We think that these contests are just right for your style.

@@ -759,6 +759,16 @@
   }
 }
 
+.select2-container {
+  width: 80%;
+
+  .selected-color-item {
+    span {
+      font-size: 15px
+    }
+  }
+}
+
 .sections_table {
   .view {
     p {
@@ -770,5 +780,4 @@
   .text-right {
     display: none;
   }
-
 }

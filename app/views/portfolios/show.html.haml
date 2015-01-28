@@ -1,34 +1,47 @@
-#in_pricing
-  #portfolio
+.cover_image
+  .container.animated.fadeInDown
     .row
-      .attr
-        %img{ style: 'width: 100px', src: @portfolio_view.personal_picture_url }
-      .col-md-6
-        .attr.name{ style: 'font-size: 20px' }
-          = @portfolio_view.designer_name
-        .attr.years_of_expirience
-          [#{ @portfolio_view.years_of_expirience }]
-          = @portfolio_view.expirience_level
-        .attr.education
-          [#{ @portfolio_view.education_icon }]
-          = @portfolio_view.education_view
-        .attr.awards
-          Awards:
-          = @portfolio_view.awards.try(:html_safe)
-      .col-md-6.about-container
-        #{ t('designer_center.portfolio.show.about_self') }:
-        .about
-          = @portfolio_view.about
-        .style-description= @portfolio_view.style_description
-    .attr
-      - index = 1
-      - @portfolio_view.pictures_urls.in_groups_of(2, false) do |urls|
-        .row.items-row
-          - urls.each do |url|
-            .col-lg-6.col-md-5.col-xs-12.col-sm-6.item
-              = render partial: 'portfolios/item',
-                  locals: { image_url: url,
-                            number: index }
-              - index += 1
-.row
-
+      .col-md-12.relative
+        %a.inviteToContest{:href => "#"}= t('designer_center.portfolio.show.invite_to_contest')
+        %a.editCover{:href => "#"}
+          %img{:src => '/assets/edit.png'}/
+.container.animated.fadeInDown.bottom60
+  .row.marg-top40
+    .col-md-4.relative.under_portfolio_profile
+      %img.portfolio_profile_image{:src => @portfolio_view.personal_picture_url}/
+      %p
+        %span= @portfolio_view.years_of_expirience
+        = @portfolio_view.expirience_level
+      %p
+        %span= @portfolio_view.education_icon
+        = @portfolio_view.education_view
+      %p
+        %img{:src => "/assets/profile-badge.png"}/
+        = @portfolio_view.awards.try(:html_safe)
+      %span.profileRating.fiveStar
+      %a.reviewsLink{:href => "#"} 5 reviews
+    .col-md-8.user_portfolio_profile
+      %h3= @portfolio_view.designer_name
+      %h4= t('designer_center.portfolio.show.about')
+      %p= @portfolio_view.about
+      %h4= t('designer_center.portfolio.show.design_style')
+      - @portfolio_view.style_description.each do |style|
+        %span.designStyleSpan= style
+    .col-md-12
+      .hLine10.marg-top30.marg-bottom30
+    .col-md-12.marg-bottom30
+      %h4.font20= t('designer_center.portfolio.show.portfolio_examples')
+    - index = 1
+    - @portfolio_view.pictures_urls.in_groups_of(3, false) do |urls|
+      - urls.each do |url|
+        = render partial: 'portfolios/item',
+            locals: { image_url: url,
+                      number: index }
+        - index += 1
+      .col-md-12.marg-bottom30
+    .col-md-12.marg-top30
+      %a.loadMoreLink{:href => "#"}= t('designer_center.portfolio.show.load_more')
+    .col-md-12
+      .hLine10.marg-top30.marg-bottom30
+      .col-md-12.text-center
+        %a.doneBtn{:href => "#"}= t('designer_center.portfolio.show.done')

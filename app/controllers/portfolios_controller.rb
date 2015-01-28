@@ -41,8 +41,7 @@ class PortfoliosController < ApplicationController
   private
 
   def set_designer
-    check_designer
-    @designer = Designer.find(session[:designer_id])
+    @designer = Designer.find(session[:designer_id]) if check_designer
   end
 
   def set_portfolio

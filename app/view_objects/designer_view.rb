@@ -1,7 +1,7 @@
 class DesignerView
 
   delegate :first_name, :last_name, :name, :id, :invited_to_contest?, to: :designer
-  delegate :personal_picture, :style_description, :about, to: :portfolio_view, allow_nil: true
+  delegate :personal_picture, :style_description_texts, :about, to: :portfolio_view, allow_nil: true
 
   def initialize(designer)
     @designer = designer

@@ -69,7 +69,7 @@ class @ContestEditing extends InlineEditor
       UndesirableColorsEditor.init()
     area: ->
       RoomsEditor.init()
-    appeals: ->
+    design_profile: ->
       AppealsForm.init()
     budget: ->
       BudgetOptions.init()
@@ -79,6 +79,8 @@ class @ContestEditing extends InlineEditor
       ContestPreview.init()
     undesirable_colors: ->
       ContestPreview.init()
+    design_profile: ->
+      AppealsForm.init()
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)

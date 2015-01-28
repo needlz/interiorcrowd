@@ -15,7 +15,7 @@ class DesignerCenterController < ApplicationController
   end
 
   def updates
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    @navigation = Navigation::DesignerCenter.new(:updates)
   end
 
   private
