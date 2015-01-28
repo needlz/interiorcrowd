@@ -26,10 +26,13 @@ InteriorC::Application.routes.draw do
     member do
       get 'respond'
       get 'option'
-      patch 'update'
       get 'show', as: 'show'
       get 'additional_details'
       patch 'save_additional_details'
+      resources :feedback,
+        controller: 'reviewer_feedbacks',
+        as: 'reviewer_feedbacks',
+        only: [:show, :create]
     end
 
     collection do

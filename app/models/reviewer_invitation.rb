@@ -7,6 +7,7 @@ class ReviewerInvitation < ActiveRecord::Base
   after_initialize :generate_url, if: :new_record?
 
   belongs_to :contest
+  has_many :feedbacks, class_name: 'ReviewerFeedback', foreign_key: 'invitation_id'
 
   private
 
@@ -16,7 +17,7 @@ class ReviewerInvitation < ActiveRecord::Base
   end
 
   def generate_url
-    self.url = SecureRandom.hex[0, 10]
+    self.url = TokenGenerator.generate
   end
 
 end

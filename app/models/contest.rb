@@ -21,6 +21,7 @@ class Contest < ActiveRecord::Base
   has_many :designer_invitations
   has_many :notes, class_name: 'ContestNote'
   has_many :reviewer_invitations
+  has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
