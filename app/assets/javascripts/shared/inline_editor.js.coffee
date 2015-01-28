@@ -30,7 +30,7 @@ class @InlineEditor
   onEditFormRetrieved: (attribute, formHtml)=>
     $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
     $editButton.text(I18n.attribute_cancel_button)
-    $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
+    $editButton.removeClass("#{@editButtonClassName} #{@editClass}").addClass(@cancelButtonClassName)
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
@@ -57,19 +57,14 @@ class @InlineEditor
     editor.cancelEditing(attribute)
 
   cancelEditing: (attribute)->
-    console.log('====')
-    console.log(@attributeSelector)
-    console.log(@attributeIdentifierData)
-    console.log(attribute)
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
-    console.log($optionsRow)
     $editButton = $optionsRow.find(@cancelButtonSelector)
     @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
     $form.hide()
-    $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
+    $editButton.removeClass(@cancelButtonClassName).addClass("#{@editButtonClassName} #{@editClass}")
     @afterCancelEditing?($optionsRow)
 
   optionsRow: ($child)->

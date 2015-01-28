@@ -6,7 +6,7 @@
 
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60
-    .row.marg-top30
+    .row.marg-top30.response{ data: { id: @request.id } }
       .col-md-8.disablePadding
         = render partial: 'shared/moodboard', locals: { request: @request }
       = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
@@ -20,9 +20,8 @@
           = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
             = f.hidden_field :status, value: 'submitted'
           - if @request.contest.submission?
-            = link_to '#', class: 'submit' do
-              .submitMyDesign
-                =t('designer_center.respond.submit_design')
-                %img{:src => "/assets/gt.png"}/
+            = link_to '#', class: 'submit submitMyDesign' do
+              =t('designer_center.respond.submit_design')
+              %img{:src => "/assets/gt.png"}/
 
 = render partial: 'designer_center/layout'

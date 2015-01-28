@@ -2,6 +2,8 @@ class @MoodboardEditor extends InlineEditor
 
   placeholderSelector: '.notes'
   attributeIdentifierData: 'attribute'
+  editClass: 'editNoteBtn'
+  saveClass: '.save-button'
 
   bindEvents: ->
     super()
@@ -14,13 +16,10 @@ class @MoodboardEditor extends InlineEditor
     (result)=>
       $optionsRow = $(".response .attribute[data-#{ @attributeIdentifierData }=#{ attribute }]")
       $optionsRow.find('.error').hide()
-      console.log('send this attribute = ')
-      console.log($optionsRow)
-      console.log($optionsRow.data(@attributeIdentifierData))
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $('.response .designer-notes-value').val(result[attribute].value)
-      $optionsRow.find('.view').html(result[attribute].html)
-
+      $optionsRow.find('.view p').show().text(result[attribute].value)
+      $(@saveClass).hide()
 
   onSaveError: (attribute)->
     (result)=>
@@ -32,8 +31,9 @@ class @MoodboardEditor extends InlineEditor
     responseId = $response.data('id')
     $editForm = $('#notes-edit-dialog').clone().data('id', responseId)
     designerNotes = $response.find('.designer-notes-value').val()
-    $editForm.find('.notes').val(designerNotes).text(designerNotes)
+    $editForm.find('.designDescription ').val(designerNotes).text(designerNotes)
     @onEditFormRetrieved(attribute, $editForm.html())
+    $(@saveClass).show()
 
   contestId: ->
     $('.contest').data('id')
@@ -43,17 +43,11 @@ class @MoodboardEditor extends InlineEditor
     $saveButton.show()
 
   onSaveClick: (event)=>
-    console.log('savushka')
-    console.log(event)
+    event.preventDefault()
     $saveButton = $(event.target)
     $attribute = $saveButton.parents('.attribute')
-    console.log($attribute)
     attribute = $attribute.data(@attributeIdentifierData)
-    console.log('attribute = ')
-
-    responseId = $saveButton.parents('.response').data('id')
-    feedback = $saveButton.parents('.edit').find('#contest_request_feedback').val()
-    console.log(attribute)
+    feedback = $saveButton.parents('.attribute').find('#contest_request_feedback').val()
     $.ajax(
       url: $attribute.data('url'),
       dataType: 'json'
@@ -73,7 +67,7 @@ class @ResponseView
     @bindSubmissionButton()
 
   bindSubmissionButton: ->
-    $('#designer-response-view .submit').click (event)->
+    $('.submit').click (event)->
       event.preventDefault()
       $('.edit_contest_request').submit()
 

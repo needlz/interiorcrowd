@@ -1,13 +1,3 @@
--#.designer-notes.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
--#  .row.title
--#    = t('client_center.moodboard_details.designer_notes')
--#
--#  %input.designer-notes-value{ type: 'hidden', value: request.feedback }
--#  .view
--#    = render partial: 'designer_center_requests/show/previews/feedback', locals: { request: request }
--#  = link_to t('designer_center.respond_view.edit_button'), '#', class: 'edit-button'
--#  .edit
--#  .error
 .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
   .row
     .col-md-3
@@ -23,22 +13,8 @@
       #notes-edit-dialog
         = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
 
-      -#.col-md-9
-      -#  %p.designerName Jane Designer
-      -#%textarea.designDescription
   %p.saveCancelP
-    -#%a.save-button{:href => "#"} Save
+    %a.save-button#save-button{:href => "#"} Save
     %a.editNoteBtn.edit-button{:href => "#"} Edit
 .col-md-12.disablePadding.marg-top20
   .hLine
--#
--#.designer-notes.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
--#  .row.notes
--#    %input.designer-notes-value{ type: 'hidden', value: request.feedback }
--#    .view
--#      = render partial: 'designer_center_requests/show/previews/feedback', locals: { request: request }
--#    .edit
--#    .error
-
-
-
