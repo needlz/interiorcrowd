@@ -399,7 +399,7 @@ en:
       type: Type
       room: Room
       price: Price
-      days_left: Days left
+      days: Days left
 
     show_page:
       back_to_index: < Back to all current contests

@@ -16,5 +16,5 @@
       %h4= t('designer_center.contests_preview.price')
       %p= number_to_currency(BudgetPlan.find(@contest.budget_plan).price, precision: 0)
     .col-md-2
-      %h4= t('designer_center.contests_preview.days_left')
-      %p= @contest.days_left
+      %h4= t('designer_center.contests_preview.days')
+      %p= pluralize(@contest.days_left, 'day')
