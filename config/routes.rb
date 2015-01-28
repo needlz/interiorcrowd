@@ -93,4 +93,5 @@ InteriorC::Application.routes.draw do
 
   resources :designer_invitations, only: [:create]
   resources :contest_notes, only: [:create]
+  resources :reviewer_invitations, only: [:create]
 end
