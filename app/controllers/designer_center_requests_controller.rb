@@ -22,7 +22,7 @@ class DesignerCenterRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
       format.json do
-        render json: format_changed_attributes(request, response_params)
+        render json: format_changed_attributes(response_params)
       end
     end
   end
@@ -60,13 +60,10 @@ class DesignerCenterRequestsController < ApplicationController
     @designer = Designer.find(session[:designer_id]) if check_designer
   end
 
-  def format_changed_attributes(request, changed_params)
+  def format_changed_attributes(changed_params)
     result = {}
     changed_params.each do |attribute, value|
-      result[attribute] = { html: render_to_string(partial: "/designer_center_requests/show/previews/#{ attribute }",
-                                                   locals: { request: request },
-                                                   formats: [:html]),
-                            value: value }
+      result[attribute] = { value: value }
     end
     result
   end
