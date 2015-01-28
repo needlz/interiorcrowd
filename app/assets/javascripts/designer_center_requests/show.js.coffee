@@ -14,9 +14,13 @@ class @MoodboardEditor extends InlineEditor
     (result)=>
       $optionsRow = $(".response .attribute[data-#{ @attributeIdentifierData }=#{ attribute }]")
       $optionsRow.find('.error').hide()
+      console.log('send this attribute = ')
+      console.log($optionsRow)
+      console.log($optionsRow.data(@attributeIdentifierData))
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $('.response .designer-notes-value').val(result[attribute].value)
       $optionsRow.find('.view').html(result[attribute].html)
+
 
   onSaveError: (attribute)->
     (result)=>
@@ -39,11 +43,17 @@ class @MoodboardEditor extends InlineEditor
     $saveButton.show()
 
   onSaveClick: (event)=>
+    console.log('savushka')
+    console.log(event)
     $saveButton = $(event.target)
     $attribute = $saveButton.parents('.attribute')
+    console.log($attribute)
     attribute = $attribute.data(@attributeIdentifierData)
+    console.log('attribute = ')
+
     responseId = $saveButton.parents('.response').data('id')
     feedback = $saveButton.parents('.edit').find('#contest_request_feedback').val()
+    console.log(attribute)
     $.ajax(
       url: $attribute.data('url'),
       dataType: 'json'

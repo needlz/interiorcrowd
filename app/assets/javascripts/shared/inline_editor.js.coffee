@@ -34,7 +34,6 @@ class @InlineEditor
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
-
     $formHtml = $(formHtml)
     $form = @editHolder($optionsRow, $formHtml)
     $form.show()
@@ -58,7 +57,12 @@ class @InlineEditor
     editor.cancelEditing(attribute)
 
   cancelEditing: (attribute)->
+    console.log('====')
+    console.log(@attributeSelector)
+    console.log(@attributeIdentifierData)
+    console.log(attribute)
     $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
+    console.log($optionsRow)
     $editButton = $optionsRow.find(@cancelButtonSelector)
     @updateEditButton($editButton)
     $view = $optionsRow.find('.view')
