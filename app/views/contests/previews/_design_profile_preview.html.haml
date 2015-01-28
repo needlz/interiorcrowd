@@ -1,3 +1,19 @@
 - value_html = capture do
-  %span.selection See image
+  %span.selection= t('contests.appeals.modern')
+  .clearfix
+    .col-md-12.no-x-padding
+      .live-tiles
+        .tile.width3.height2
+        .tile.width2.height150
+        .tile.width2.height4
+        .tile.width3.height150
+        .tile.width2.height250
+        .tile.width3
+        .tile.width15.height150
+        .tile.width15.height150
+        .tile.width15.height250
+        .tile.width15.height250
+        .tile.width3.height150
+        .tile.width4
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.designer_profile'), value: value_html }
+

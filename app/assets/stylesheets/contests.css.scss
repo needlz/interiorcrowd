@@ -757,4 +757,16 @@
   .save-button {
     color: white;
   }
+
+  .select2-container {
+    width: 100%;
+
+    .selected-color-item {
+      span {
+        font-size: 15px
+      }
+    }
+  }
+
+
 }

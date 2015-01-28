@@ -1,7 +1,10 @@
 class @AppealsForm
 
   @init: ()->
-    $(".live-tiles").isotope
+    $(".live-tiles").filter(
+      ->
+        !$(@).data('isotope')
+    ).isotope
       layoutMode: 'packery'
       packery:
         gutter: 10
