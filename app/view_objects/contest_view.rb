@@ -18,7 +18,7 @@ class ContestView
   end
 
   EDITABLE_ATTRIBUTES = [
-    :category, :area, :design_profile, :appeals, :desirable_colors, :undesirable_colors,
+    :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
     :design_package, :additional_preferences, :preferences_retailers, :element_to_avoid,
     :entertaining, :durability ] + ACCOMMODATION_ATTRIBUTES
@@ -44,6 +44,17 @@ class ContestView
 
   def package_selected?(package_id)
     package_id == @budget_plan.to_i
+  end
+
+  def design_styles
+    styles = appeal_scales.map do |appeal|
+      if appeal.value == ContestCreationWizard::APPEAL_FEEDBACK.first[:value]
+        appeal.first_name
+      elsif appeal.value == ContestCreationWizard::APPEAL_FEEDBACK.last[:value]
+        appeal.second_name
+      end
+    end
+    styles.compact.join(', ')
   end
 
   private

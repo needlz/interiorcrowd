@@ -1,3 +1,4 @@
 - value_html = capture do
-  %span.selection See image
+  %span.selection= @contest_view.design_styles
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.designer_profile'), value: value_html }
+
