@@ -785,3 +785,17 @@
 .normal-font {
   font-weight: normal!important;
 }
+
+.contestInfo .comment textarea {
+  border: 1px solid #000;
+  resize: none;
+  padding: 20px;
+  width: 100%;
+  min-height: 100px;
+}
+
+.style-name {
+  font-size: 16px;
+  color: #000;
+  line-height: 70px;
+}
