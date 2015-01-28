@@ -5,23 +5,23 @@
     I18n = #{ translations_to_json('client_center') }
 
 - content_for :designer_center_content do
-  #designer-response-view
-    .row
-      .col-sm-9.response{ data: { id: @request.id } }
+  .container.animated.fadeInDown.bottom60
+    .row.marg-top30.response{ data: { id: @request.id } }
+      .col-md-8.disablePadding
         = render partial: 'shared/moodboard', locals: { request: @request }
-        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-
-    .footer
-      .back-link
-        = link_to t('designer_center.respond_view.back'), designer_center_response_index_path
-      - if @request.draft?
-        = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
-          = f.hidden_field :status, value: 'submitted'
-        - if @request.contest.submission?
-          .pull-right
-            = link_to t('designer_center.respond.submit'), '#', class: 'submit'
-
-    #notes-edit-dialog
-      = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
+      = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+      .col-md-6.disablePadding
+        = link_to designer_center_response_index_path do
+          .backToEntries
+            %img{:src => "/assets/lt.png"}/
+            =t('designer_center.respond.back')
+      .col-md-6.disablePadding.text-right
+        - if @request.draft?
+          = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+            = f.hidden_field :status, value: 'submitted'
+          - if @request.contest.submission?
+            = link_to '#', class: 'submit submitMyDesign' do
+              =t('designer_center.respond.submit_design')
+              %img{:src => "/assets/gt.png"}/
 
 = render partial: 'designer_center/layout'

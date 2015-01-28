@@ -2,6 +2,8 @@ class @MoodboardEditor extends InlineEditor
 
   placeholderSelector: '.notes'
   attributeIdentifierData: 'attribute'
+  editButtonClassName: 'edit-button editNoteBtn'
+  saveClass: '.save-button'
 
   bindEvents: ->
     super()
@@ -16,7 +18,8 @@ class @MoodboardEditor extends InlineEditor
       $optionsRow.find('.error').hide()
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $('.response .designer-notes-value').val(result[attribute].value)
-      $optionsRow.find('.view').html(result[attribute].html)
+      $optionsRow.find('.view p').show().text(result[attribute].value)
+      $(@saveClass).hide()
 
   onSaveError: (attribute)->
     (result)=>
@@ -28,22 +31,27 @@ class @MoodboardEditor extends InlineEditor
     responseId = $response.data('id')
     $editForm = $('#notes-edit-dialog').clone().data('id', responseId)
     designerNotes = $response.find('.designer-notes-value').val()
-    $editForm.find('.notes').val(designerNotes).text(designerNotes)
+    $editForm.find('.designDescription ').val(designerNotes).text(designerNotes)
     @onEditFormRetrieved(attribute, $editForm.html())
+    $(@saveClass).show()
 
   contestId: ->
     $('.contest').data('id')
+
+  onCancelClick: (event)=>
+    super(event)
+    $(@saveClass).hide()
 
   afterEditFormRetrieved: (attribute, formHtml)->
     $saveButton = $("[data-attribute=#{ attribute }]").find('.save-button')
     $saveButton.show()
 
   onSaveClick: (event)=>
+    event.preventDefault()
     $saveButton = $(event.target)
     $attribute = $saveButton.parents('.attribute')
     attribute = $attribute.data(@attributeIdentifierData)
-    responseId = $saveButton.parents('.response').data('id')
-    feedback = $saveButton.parents('.edit').find('#contest_request_feedback').val()
+    feedback = $saveButton.parents('.attribute').find('#contest_request_feedback').val()
     $.ajax(
       url: $attribute.data('url'),
       dataType: 'json'
@@ -63,7 +71,7 @@ class @ResponseView
     @bindSubmissionButton()
 
   bindSubmissionButton: ->
-    $('#designer-response-view .submit').click (event)->
+    $('.submit').click (event)->
       event.preventDefault()
       $('.edit_contest_request').submit()
 

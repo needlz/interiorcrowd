@@ -34,7 +34,6 @@ class @InlineEditor
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
-
     $formHtml = $(formHtml)
     $form = @editHolder($optionsRow, $formHtml)
     $form.show()
