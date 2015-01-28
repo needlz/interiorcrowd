@@ -14,7 +14,7 @@
     = t('contests.titles.back')
 
 .col-md-6.disablePadding.text-right
-  %a.submitMyDesign{:href => "#"}
+  %a.submitMyDesign{:href => new_designer_center_response_path(contest_id: @contest.id)}
     = t('contests.titles.join')
     = image_tag 'gt.png'
 .clearfix
