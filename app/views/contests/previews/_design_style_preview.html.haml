@@ -1,7 +1,7 @@
 - value_html = capture do
   - @contest_view.appeal_scales.each do |style|
-    - if style.preferred_appeal_name
-      %span.selection.style-name= style.preferred_appeal_name
+    - if style.opinion
+      %span.selection.style-name= style.opinion
       .live-tiles
         .tile.width3.height2
         .tile.width2.height150
