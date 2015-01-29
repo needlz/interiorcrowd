@@ -60,7 +60,7 @@ class @ContestEditing extends InlineEditor
 
   editFormsCallbacks:
     space_pictures: ->
-      SpacePicturesUploader.init()
+      SpacePicturesUploader.init(I18n.contests.space.photos)
     example_pictures: ->
       ExamplesUploader.init()
     desirable_colors: ->

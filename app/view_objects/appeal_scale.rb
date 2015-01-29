@@ -53,10 +53,8 @@ class AppealScale
   end
 
   def opinion
-    if value == ContestCreationWizard::APPEAL_FEEDBACK.first[:value]
-      first_name
-    elsif value == ContestCreationWizard::APPEAL_FEEDBACK.last[:value]
-      second_name
+    ContestCreationWizard::APPEAL_FEEDBACK.each do |appeal|
+      return appeal[:name] if appeal[:value] == value
     end
   end
 

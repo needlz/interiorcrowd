@@ -724,6 +724,17 @@
 }
 
 .brief {
+  .exampleSite {
+    line-height: 50px;
+    color: #000;
+    font-size: 16px;
+    text-decoration: underline;
+  }
+
+  .comment textarea {
+    border: 1px solid #000; resize: none; padding: 20px; width: 100%; min-height: 100px;
+  }
+
   .edit-profile:nth-child(1) {
     border: none;
   }
@@ -760,12 +771,21 @@
 }
 
 .select2-container {
-  width: 80%;
+  width: 60%;
 
   .selected-color-item {
     span {
       font-size: 15px
     }
+  }
+  .select2-search-choice-close {
+    .glyphic-r {
+      top: 26px;
+      font-size: 20px;
+      right: 2px;
+      color: black;
+    }
+
   }
 }
 

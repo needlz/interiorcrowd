@@ -7,14 +7,15 @@
   = javascript_include_tag 'contests/undesirable_colors_options'
   = javascript_include_tag 'contests/area_options'
   = javascript_include_tag 'contests/budget_options'
+  = javascript_include_tag 'contests/inspiration_links'
   = render partial: 'shared/setup_uploadify'
   = render partial: 'shared/setup_colors_table'
 
   :javascript
-    I18n = #{ translations_to_json('client_center') }
+    I18n = #{ translations_to_json('') }
 
 - content_for :client_center_content do
-  .contest.brief{ data: { id: @contest.id } }
+  .contest.brief.container-edit-profile{ data: { id: @contest.id } }
     .border-brief-box
       - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
         = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
