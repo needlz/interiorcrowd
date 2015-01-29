@@ -1,20 +1,17 @@
-.col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
-  .row
-    .col-md-3
-      %img{:src => "/assets/profile-img.png"}/
-    .col-md-9
-      %input.designer-notes-value{ type: 'hidden', value: request.feedback }
-      %p.designerName= @request.designer.name
-      .notes
-        .view
-          %p.designerNote= request.feedback
-        .edit
-        .error
-      #notes-edit-dialog
-        = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
+.row
+  .col-md-3
+    %img{:src => "/assets/profile-img.png"}/
+  .col-md-9
+    %input.designer-notes-value{ type: 'hidden', value: request.feedback }
+    %p.designerName= @request.designer.name
+    .notes
+      .view
+        %p.designerNote= request.feedback
+      .edit
+      .error
+    #notes-edit-dialog
+      = render partial: 'designer_center_requests/show/forms/edit_notes_form', locals: { notes: @request.feedback }
 
-  %p.saveCancelP
-    %a.save-button#save-button{:href => "#"}=t('designer_center.save_button')
-    %a.editNoteBtn.edit-button{:href => "#"}=t('designer_center.edit_button')
-.col-md-12.disablePadding.marg-top20
-  .hLine
+%p.saveCancelP
+  %a.save-button#save-button{:href => "#"}=t('designer_center.save_button')
+  %a.editNoteBtn.edit-button{:href => "#"}=t('designer_center.edit_button')

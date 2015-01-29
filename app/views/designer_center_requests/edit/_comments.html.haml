@@ -1,0 +1,46 @@
+.sidebarComments
+  %p.designerName= t('designer_center.edit.comments')
+  %div{:role => "tabpanel"}
+
+    %ul.btn-group.btnGroupComments{:role => "tablist"}
+      %li.btn.btn-default.active{:role => "presentation"}
+        %a{"aria-controls" => "allComents", "data-toggle" => "tab", :href => "#allComents", :role => "tab"}= t('designer_center.edit.all')
+      %li.btn.btn-default{:role => "presentation"}
+        %a{"aria-controls" => "unreadComments", "data-toggle" => "tab", :href => "#unreadComments", :role => "tab"}= t('designer_center.edit.unread')
+      %li.btn.btn-default{:role => "presentation"}
+        %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
+      %li.btn.btn-default{:role => "presentation"}
+        %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= t('designer_center.edit.designer')
+    #scrollBoxComments.tab-content.notes
+      #allComents.tab-pane.active{:role => "tabpanel"}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+      #unreadComments.tab-pane{:role => "tabpanel"}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+      #meComments.tab-pane{:role => "tabpanel"}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+      #designerComments.tab-pane{:role => "tabpanel"}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+    .commentTextArea
+      %p.designerName= t('designer_center.edit.new_comment')
+      %textarea
+      %button= t('designer_center.edit.send')
+
+
+:javascript
+    $('#scrollBoxComments').enscroll({
+      verticalTrackClass: 'scrollBoxCommentsTrack',
+      verticalHandleClass: 'scrollBoxCommentsHandle',
+      minScrollbarLength: 28
+    });

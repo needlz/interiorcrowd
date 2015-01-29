@@ -9,19 +9,8 @@
     .row.marg-top30.response{ data: { id: @request.id } }
       .col-md-8.disablePadding
         = render partial: 'shared/moodboard', locals: { request: @request }
-      = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-      .col-md-6.disablePadding
-        = link_to designer_center_response_index_path do
-          .backToEntries
-            %img{:src => "/assets/lt.png"}/
-            =t('designer_center.respond.back')
-      .col-md-6.disablePadding.text-right
-        - if @request.draft?
-          = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
-            = f.hidden_field :status, value: 'submitted'
-          - if @request.contest.submission?
-            = link_to '#', class: 'submit submitMyDesign' do
-              =t('designer_center.respond.submit_design')
-              %img{:src => "/assets/gt.png"}/
+      .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
+        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+      = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'
