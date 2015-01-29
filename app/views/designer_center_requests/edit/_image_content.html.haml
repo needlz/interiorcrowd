@@ -1,4 +1,8 @@
 .col-md-4.relative
+  - if editable
     %img.small_close{:src => "/assets/small-close.png"}/
-    %img.productListIMG{:src => "/assets/placeholder.jpg"}/
+  %img.productListIMG{:src => "/assets/placeholder.jpg"}/
+  - if editable
     %textarea.productsMoodboardAbove{:style => "overflow: visible"}= text
+  - else
+    %p.productsMoodboardAbove{:style => "overflow: visible"}= text

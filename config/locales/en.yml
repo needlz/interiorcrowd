@@ -294,6 +294,8 @@ en:
       send: Send
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
+    preview:
+      this_is_preview: This is a preview of what the client will see.
     navigation:
       create_portfolio: Create Portfolio
       preview_contests: Join New Contests

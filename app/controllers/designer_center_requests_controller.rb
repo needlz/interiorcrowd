@@ -15,7 +15,11 @@ class DesignerCenterRequestsController < ApplicationController
 
   def edit
     @request = @designer.contest_requests.find(params[:id])
-    @contest = ContestShortDetails.new(@request.contest)
+    @navigation = Navigation::DesignerCenter.new(:requests)
+  end
+
+  def preview
+    @request = @designer.contest_requests.find(params[:id])
     @navigation = Navigation::DesignerCenter.new(:requests)
   end
 
