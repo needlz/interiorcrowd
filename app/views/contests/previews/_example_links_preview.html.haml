@@ -2,14 +2,9 @@
   - index = 0
   .row
     .col-md-9
-
       - @contest_view.links.try(:in_groups_of, 3, false) do |group|
         - group.each do |url|
-          .col-sm-4
-            %img.img-responsive{alt: "", src: url}/
+          = link_to url, url, class: 'exampleSite'
           - index = index + 1
-
-      = link_to 'www.pinterest.com/pin/29343835042520882/', '#', class: 'exampleSite'
-      = link_to 'www.pinterest.com/pin/29343835042520882/', '#', class: 'exampleSite'
 
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.links'), value: value_html }
