@@ -1,0 +1,10 @@
+.row.marg-top20
+  .col-md-4
+    = image_tag 'placeholder.jpg', class: 'productListIMG'
+  .col-md-8
+    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.product_name')
+    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.brand')
+    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.price')
+    %a.font20.blueLink{:href => "#"} www.wayfair.com/chair
+    %br
+      %a.editProductItemBtn{:href => "#"}= t('designer_center.final_upload.edit')

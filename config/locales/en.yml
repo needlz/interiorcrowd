@@ -294,6 +294,18 @@ en:
       send: Send
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
+    final_upload:
+      note_for_consumer: Create a note to consumer
+      file_info: Ensure that your file is a .pdf format so that the consumer can download it. If you need help, contact us.
+      upload: Upload your final design
+      upload_description: Tell the consumer how they can pull together their new look. Remember to be specific.
+      product_list: Product List
+      product_name: Product Name
+      brand: Brand
+      price: Price
+      edit: Edit
+      save_for_later: Save for later
+      submit: Submit
     navigation:
       create_portfolio: Create Portfolio
       preview_contests: Join New Contests
