@@ -7,7 +7,7 @@ class ContestView
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
-              :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples
+              :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples, :space_budget_value
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -78,6 +78,7 @@ class ContestView
     @dimensions = SpaceDimension.from(contest_params)
     @space_pictures = contest_options.space_image_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
     @space_pictures_ids = contest_options.space_image_ids
+    @space_budget_value = contest_params[:space_budget].to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
     @feedback = contest_params[:feedback]
     @budget_plan = contest_params[:budget_plan]
@@ -99,6 +100,7 @@ class ContestView
     @dimensions = SpaceDimension.from(contest)
     @space_pictures = contest.space_images.map { |space_image| space_image.image.url(:medium) }
     @space_pictures_ids = contest.space_images.pluck(:id)
+    @space_budget_value = contest.space_budget.to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
