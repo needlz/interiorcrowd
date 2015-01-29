@@ -13,8 +13,8 @@ class ReviewerInvitation < ActiveRecord::Base
   private
 
   def strip_whitespace
-    self.username = self.username.strip
-    self.email = self.email.strip
+    self.username.strip!
+    self.email.strip!
   end
 
   def generate_url

@@ -218,6 +218,9 @@ class ReviewerInvitations
   @updateRow: ($row, response)->
     $row.removeClass('lnk_container')
     $row.find('.buttons').empty()
+    $row.find('input').each ->
+      $('<span>', { text: @.value }).insertAfter(@)
+      $(@).remove()
     $link = $('<a>')
     $link.attr('href', response.url)
     $link.text(response.token)

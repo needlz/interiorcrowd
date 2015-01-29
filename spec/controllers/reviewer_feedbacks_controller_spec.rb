@@ -19,7 +19,7 @@ RSpec.describe ReviewerFeedbacksController do
     end
 
     context 'empty feedback' do
-      it 'doesn\'t create an feedback' do
+      it 'doesn\'t create a feedback' do
         expect { post :create, params(reviewer_feedback: { text: '  ' }) }.to raise_error
       end
     end
@@ -32,7 +32,7 @@ RSpec.describe ReviewerFeedbacksController do
     end
 
     context 'correct params' do
-      it 'creates an feedback' do
+      it 'creates a feedback' do
         post :create, params
         feedback = contest.reviewer_feedbacks[0]
         expect(feedback.text).to eq text.strip
