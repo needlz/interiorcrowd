@@ -203,6 +203,10 @@ en:
         text: Please confirm
         'yes': 'Yes'
         'no': 'No'
+      collaboration:
+        this_is_a_preview: Now that you have been chosen, the fun really begins. Please give the details on your design as well as comments about why you have chosen certain items. You can also upload a new moodboard as well.
+        check_message: Please click "check" if you like it or the "x" if you do not. Doing this will help the designer make the best design for you.
+        done_btn: Done and move to final design
       invitations:
         invite: INVITE TO CONTEST
         sending_invitation: SENDING INVITATION...

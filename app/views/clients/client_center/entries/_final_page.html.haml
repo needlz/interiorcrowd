@@ -2,7 +2,8 @@
   .row
     .col-md-12.marg-top40
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
-      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 3}
+      .col-md-8.disablePadding
+        = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 3}
 
     .col-md-12.marg-top20
       .designerShareBox

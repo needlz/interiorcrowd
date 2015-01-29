@@ -1,0 +1,7 @@
+%p.font20Bold.marg-top20= title
+.hLine10
+.row.marg-top20
+  .col-md-12
+    %p.grayP14= block_text
+  - image_texts.each do |text|
+    = render partial: 'clients/client_center/entries/collaboration/image_content', locals: {choosable: choosable,text: text}

@@ -1,0 +1,18 @@
+.container.animated.fadeInDown.bottom60
+  .row
+    .col-md-8.disablePadding
+      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
+      %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
+    .col-md-4
+      %p.timeLeft There are 3 days left
+    %br/
+    %br/
+  .col-md-8.disablePadding.relative
+    = render partial: 'shared/moodboard', locals: { request: @contest_requests[0] }
+    = render partial: 'clients/client_center/entries/collaboration/image_block', locals: {choosable: true, title: t('designer_center.edit.products_list'), block_text: t('client_center.entries.collaboration.check_message'), image_texts: ['This table would be perfect for you.', 'This lamp is pricey, but worth it as it will make the space unique.', ''] }
+    = render partial: 'clients/client_center/entries/collaboration/image_block', locals: {choosable: false, title: t('designer_center.edit.similar_styles'), block_text: '', image_texts: ['If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair.', 'If you want to take a bit of a risk, this piece is awesome', 'I love this inspiration room. What do you think?'] }
+
+  .col-md-4
+    = render partial: 'contest_requests/submission_info', locals: { designer: @contest_requests[0].designer, submitted_at: @contest_requests[0].created_at }
+    = render partial: 'designer_center_requests/edit/comments'
+  = render partial: 'clients/client_center/entries/collaboration/footer_buttons', locals: { request: @contest_requests[0] }
