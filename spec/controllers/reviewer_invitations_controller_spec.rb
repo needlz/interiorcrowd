@@ -12,7 +12,7 @@ RSpec.describe ReviewerInvitationsController do
     let(:username) { 'Dave Greenfield  ' }
 
     def params(options = {})
-      { reviewer_invitation: { email: email, username: username, contest_id: contest.id }.merge(options) }
+      { contest_id: contest.id, reviewer_invitation: { email: email, username: username } }.merge(options)
     end
 
     context 'not logged in' do
@@ -40,13 +40,13 @@ RSpec.describe ReviewerInvitationsController do
 
       context 'empty username passed' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, params(username: '') }.to raise_error
+          expect { post :create, params(reviewer_invitation: { username: '' }) }.to raise_error
         end
       end
 
       context 'empty email passed' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, params(email: '') }.to raise_error
+          expect { post :create, params(reviewer_invitation: { email: '' }) }.to raise_error
         end
       end
 
@@ -72,7 +72,10 @@ RSpec.describe ReviewerInvitationsController do
 
         it 'notifies about success' do
           post :create, params
-          expect(response).to be_ok
+          json = JSON.parse(response.body)
+          invitation = contest.reviewer_invitations[0]
+          expect(json['url']).to eq show_reviewer_feedbacks_url(id: contest.id, token: invitation.url)
+          expect(json['token']).to eq invitation.url
         end
       end
     end

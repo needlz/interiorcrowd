@@ -199,6 +199,15 @@ en:
         invite: INVITE TO CONTEST
         sending_invitation: SENDING INVITATION...
         invited: INVITED
+      reviewer_invitations:
+        feedback_time_format: '%b %m at %I %P'
+        title: Feedback
+        want_feedback: You don't have to make this choice alone. Want feedback on the designs?
+        invite: Invite
+        sending: Creating invitation...
+        feedback_link: 'Feedback link:'
+        name: 'Name:'
+        email: 'E-mail address:'
       choose_concept: Choose your favorite design concept
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.

@@ -38,9 +38,9 @@ RSpec.describe ReviewerFeedbacksController do
         expect(feedback.text).to eq text.strip
       end
 
-      it 'notifies about success' do
+      it 'redirects to show page' do
         post :create, params
-        expect(response).to be_ok
+        expect(response).to redirect_to show_reviewer_feedbacks_path(id: contest.id, token: invitation_token)
       end
     end
   end

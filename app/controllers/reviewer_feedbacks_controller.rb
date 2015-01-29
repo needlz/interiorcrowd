@@ -5,10 +5,11 @@ class ReviewerFeedbacksController < ApplicationController
   def create
     feedback_params[:text] = feedback_params[:text].strip
     @invitation.feedbacks.create!(feedback_params)
-    render nothing: true
+    redirect_to action: :show, id: params[:id], token: params[:token]
   end
 
   def show
+    @feedbacks = @invitation.feedbacks
     render
   end
 

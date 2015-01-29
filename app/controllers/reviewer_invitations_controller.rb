@@ -3,14 +3,14 @@ class ReviewerInvitationsController < ApplicationController
   before_filter :set_contest, :check_contest_owner
 
   def create
-    @contest.invite_reviewer(invite_params)
-    render nothing: true
+    invitation = @contest.invite_reviewer(invite_params)
+    render json: { url: show_reviewer_feedbacks_url(id: @contest.id, token: invitation.url), token: invitation.url }
   end
 
   private
 
   def set_contest
-    @contest = Contest.find(params[:reviewer_invitation][:contest_id])
+    @contest = Contest.find(params[:contest_id])
   end
 
   def invite_params

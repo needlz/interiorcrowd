@@ -32,7 +32,12 @@ InteriorC::Application.routes.draw do
       resources :feedback,
         controller: 'reviewer_feedbacks',
         as: 'reviewer_feedbacks',
-        only: [:show, :create]
+        only: [:create] do
+
+        collection do
+          get '', to: 'reviewer_feedbacks#show', as: 'show'
+        end
+      end
     end
 
     collection do

@@ -3,6 +3,7 @@ class ReviewerInvitation < ActiveRecord::Base
   before_validation :strip_whitespace
 
   validates_presence_of :username, :email
+  validates_format_of :email, :with => /@/
 
   after_initialize :generate_url, if: :new_record?
 

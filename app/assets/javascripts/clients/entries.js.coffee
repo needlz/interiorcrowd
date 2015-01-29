@@ -4,11 +4,15 @@ class EntriesPage
     answers = new Answers()
     answers.init()
 
-    PopulatedInputs.init()
     ScrollBars.style()
-    DesignerInvitations.bindInviteButtons()
+    contestId = @getContestId()
+    DesignerInvitations.bindInviteButtons(contestId)
     ContestNotes.bindAjaxSuccess()
     ResponsesFilter.init()
+    ReviewerInvitations.init(contestId)
+
+  @getContestId: ->
+    $('input.contest').data('id')
 
 class ScrollBars
 
@@ -23,19 +27,16 @@ class DesignerInvitations
 
   @buttonSelector: '.invite-designer'
 
-  @bindInviteButtons: ->
+  @bindInviteButtons: (contestId)->
     $('.profile-card').find(@buttonSelector).click (event)=>
       $button = $(event.target)
       designerId = $button.parents('.profile-card').data('id')
-      @sendInviteRequest(designerId, $button)
+      @sendInviteRequest(designerId, $button, contestId)
 
-  @getContestId: ->
-    $('input.contest').data('id')
-
-  @sendInviteRequest: (designerId, $button) ->
+  @sendInviteRequest: (designerId, $button, contestId) ->
     $button.text(I18n.invitations.sending_invitation)
     $.ajax(
-      data: { designer_id: designerId, contest_id: @getContestId() }
+      data: { designer_id: designerId, contest_id: contestId }
       url: '/designer_invitations'
       type: 'POST'
       success: (response)=>
@@ -155,5 +156,78 @@ class ResponsesFilter
       style: "btn-selector-medium font15"
       header: I18n.filter_by
 
+class InvitationInputs extends PopulatedInputs
+
+  @container: '.reviewer-invitations .invitations-inputs'
+
+  @generateNewLink: ->
+    $row = $('.reviewer-invitations .template .lnk_container').first()
+    $formclone = $row.clone()
+    $formclone.find('input').val ''
+    $formclone
+
+class ReviewerInvitations
+
+  @init: (contestId)->
+    @contestId = contestId
+    InvitationInputs.init()
+    @bindInviteButtons()
+
+  @bindInviteButtons: ->
+    $('.reviewer-invitations').on 'click', '.perform-invite', (event)=>
+      $button = $(event.target)
+      @inviteButtonClick($button)
+
+  @inviteButtonClick: ($button)->
+    $invitationRow = $button.parents('.invitation-row')
+    username = $invitationRow.find('.nameInvite').val()
+    email = $invitationRow.find('.emailInvite').val()
+    if @inputValid(username, email)
+      $button.text(I18n.reviewer_invitations.sending)
+      @sendInvite($button, username, email)
+
+  @inputValid: (username, email)->
+    username.length && email.length && /@/.test(email)
+
+  @sendInvite: ($button, username, email)->
+    $.ajax(
+      data: { reviewer_invitation: { username: username, email: email }, contest_id: @contestId }
+      url: '/reviewer_invitations'
+      type: 'POST'
+      success: (response)=>
+        @inviteOnSuccess($button, response)
+      error: ->
+        $button.text('Invite (error occured during last try)')
+    )
+
+  @invitedRows: ->
+    $(InvitationInputs.container).find('.invitation-row:not(.lnk_container)')
+
+  @invitableRows: ->
+    $(InvitationInputs.container).find('.invitation-row.lnk_container')
+
+  @inviteOnSuccess: ($button, response)->
+    $row = $button.closest('.invitation-row')
+    @updateRow($row, response)
+    @moveToTop($row)
+    if @invitableRows().length
+      InvitationInputs.populateExamplesInputs()
+    else
+      InvitationInputs.addLink()
+
+  @updateRow: ($row, response)->
+    $row.removeClass('lnk_container')
+    $row.find('.buttons').empty()
+    $link = $('<a>')
+    $link.attr('href', response.url)
+    $link.text(response.token)
+    $label = $('<label>').text(I18n.reviewer_invitations.feedback_link)
+    $row.find('.buttons').append($label, $link)
+
+  @moveToTop: ($row)->
+    if @invitedRows.length
+      $row.detach().insertAfter(@invitedRows.last())
+    else
+      $row.detach().prependTo($(InvitationInputs.container))
 $ ->
   EntriesPage.init()
