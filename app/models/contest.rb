@@ -20,6 +20,8 @@ class Contest < ActiveRecord::Base
   has_many :requests, class_name: 'ContestRequest'
   has_many :designer_invitations
   has_many :notes, class_name: 'ContestNote'
+  has_many :reviewer_invitations
+  has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
@@ -102,6 +104,10 @@ class Contest < ActiveRecord::Base
     designer = Designer.find(designer_id)
     raise('Contest needs to be in submission state') unless submission?
     designer_invitations.create!(designer: designer)
+  end
+
+  def invite_reviewer(invite_params)
+    reviewer_invitations.create!(invite_params)
   end
 
   private

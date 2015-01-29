@@ -73,6 +73,9 @@ class @ContestEditing extends InlineEditor
       AppealsForm.init()
     budget: ->
       BudgetOptions.init()
+    example_links: ->
+      linksEditor = new InspirationLinksEditor()
+      linksEditor.init()
 
   previewCallbacks:
     desirable_colors: ->

@@ -1,19 +1,34 @@
 .row
   .hLine
-.row.designerFeedback
+.row.designerFeedback.reviewer-invitations
   .col-md-10.col-md-offset-1
     %h4
-      You don't have to make this choice alone. Want feedback on the designs?
-      = succeed "Invite" do
+      = t('client_center.entries.reviewer_invitations.want_feedback')
+      = succeed t('client_center.entries.reviewer_invitations.invite') do
         %br/
-    .row.lnk_container
-      .col-md-4
-        %label{:for => "nameInvite"} Name :
-        %input#nameInvite{:type => "text"}/
-      .col-md-6
-        %label{:for => "emailInvite"} E-mail address :
-        %input#emailInvite{:type => "text"}/
-      .col-md-1.disablePadding
-        %button.btnInvite
-          %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
-          %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}
+    - @reviewer_invitations.each do |invitation|
+      = render partial: 'clients/client_center/entries/user_invitation_row',
+          locals: { invitation: invitation }
+    .template
+      = render partial: 'clients/client_center/entries/user_invitation_row',
+          locals: { invitation: nil }
+    .invitations-inputs
+      = render partial: 'clients/client_center/entries/user_invitation_row',
+          locals: { invitation: nil }
+
+- if @reviewer_feedbacks.present?
+  .row
+    .hLine
+  .row
+    .col-md-10.col-md-offset-1.disablePadding
+      %h3= t('client_center.entries.reviewer_invitations.title')
+  .row
+    .col-md-10.col-md-offset-1
+      - @reviewer_feedbacks.each do |feedback|
+        .row.feedbackFromOthers
+          .col-md-3
+            %p
+              = feedback.invitation.username
+              %span= feedback.created_at.in_time_zone.strftime(t('client_center.entries.reviewer_invitations.feedback_time_format'))
+          .col-md-9
+            %p= feedback.text

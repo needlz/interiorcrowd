@@ -28,10 +28,18 @@ InteriorC::Application.routes.draw do
     member do
       get 'respond'
       get 'option'
-      patch 'update'
       get 'show', as: 'show'
       get 'additional_details'
       patch 'save_additional_details'
+      resources :feedback,
+        controller: 'reviewer_feedbacks',
+        as: 'reviewer_feedbacks',
+        only: [:create] do
+
+        collection do
+          get '', to: 'reviewer_feedbacks#show', as: 'show'
+        end
+      end
     end
 
     collection do
@@ -97,4 +105,5 @@ InteriorC::Application.routes.draw do
 
   resources :designer_invitations, only: [:create]
   resources :contest_notes, only: [:create]
+  resources :reviewer_invitations, only: [:create]
 end
