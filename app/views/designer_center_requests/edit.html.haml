@@ -8,8 +8,13 @@
   .container.animated.fadeInDown.bottom60
     .row.marg-top30.response{ data: { id: @request.id } }
       .col-md-8.disablePadding
+        %p.thisIsAPreview Now that you have been chosen, the fun really begins. Please give the details on your design as well as comments about why you have chosen certain items. You can also upload a new moodboard as well.
+      .col-md-4
+      .col-md-8.disablePadding
         = render partial: 'shared/moodboard', locals: { request: @request }
       = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+
+
       = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'

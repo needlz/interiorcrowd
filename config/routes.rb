@@ -84,7 +84,7 @@ InteriorC::Application.routes.draw do
       resources :responses,
                controller: 'designer_center_requests',
                as: 'designer_center_response',
-               only: [:new, :create, :show, :index, :update]
+               only: [:new, :create, :show, :index, :update, :edit]
       resource :portfolio, only: [:edit, :update, :new, :create]
     end
   end
