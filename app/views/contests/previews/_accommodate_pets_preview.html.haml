@@ -1,4 +1,4 @@
 - value_html = capture do
-  %span.selection= t("contests.additional_details.space_needs_accommodate.#{ @contest_view.accommodate_pets ? 'yes' : 'no'}")
+  %span.selection= t("contests.additional_details.space_needs_accommodate.#{ @contest.accommodate_pets ? 'yes' : 'no'}")
 = render(partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.accommodate_pets'),
                                                     value: value_html })

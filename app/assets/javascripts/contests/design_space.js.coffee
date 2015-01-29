@@ -9,7 +9,7 @@ class DesignSpacePage
       containerSelector: '.space-view-details'
     )
     @dimensionViewDetailsToggle.init()
-    SpacePicturesUploader.init()
+    SpacePicturesUploader.init(I18n.photos)
     @validator = new ValidationMessages()
 
     @bindContinueButton()
