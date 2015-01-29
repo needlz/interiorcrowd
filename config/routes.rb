@@ -84,7 +84,9 @@ InteriorC::Application.routes.draw do
       resources :responses,
                controller: 'designer_center_requests',
                as: 'designer_center_response',
-               only: [:new, :create, :show, :index, :update, :edit]
+               only: [:new, :create, :show, :index, :update, :edit] do
+        get 'preview', on: :member,  as: 'preview'
+      end
       resource :portfolio, only: [:edit, :update, :new, :create]
     end
   end
