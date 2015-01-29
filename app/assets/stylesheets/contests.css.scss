@@ -731,6 +731,10 @@
     text-decoration: underline;
   }
 
+  .comment textarea {
+    border: 1px solid #000; resize: none; padding: 20px; width: 100%; min-height: 100px;
+  }
+
   .edit-profile:nth-child(1) {
     border: none;
   }
