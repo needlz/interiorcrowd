@@ -2122,12 +2122,12 @@ textarea.productsMoodboardAbove{
 .panel-faq .panel-title{
     padding: 0px 15px;
     line-height: 53px;
-    background: url('img/collapsed.png') right center no-repeat;
+    background: url('/assets/collapsed.png') right center no-repeat;
 }
 .collapsed .panel-title{
     padding: 0px 15px;
     line-height: 53px;
-    background: url('img/collapse.png') right center no-repeat;
+    background: url('/assets/collapse.png') right center no-repeat;
 }
 .collapsed{
     background: #FFF !important;

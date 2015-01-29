@@ -1,0 +1,17 @@
+.container.animated.fadeInDown.marg-top40
+  .row.borderBottom
+    .col-md-6
+      %h2 Frequently Asked Questions
+    .col-md-6.text-right
+      #searchBox
+        = text_field_tag 'search', nil, placeholder: 'Search...'
+        %button
+          = image_tag 'magnifier.png'
+  .row.marg-top20.bottom60
+    .col-md-12
+      .row.tabpanel.padd50Side
+        = render :partial => 'navigation_menu'
+        .col-md-9
+          .tab-content
+            = render partial: 'home/faq/customer'
+            = render partial: 'home/faq/designer'
