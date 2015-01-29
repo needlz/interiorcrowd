@@ -9,6 +9,8 @@ class ReviewerFeedbacksController < ApplicationController
   end
 
   def show
+    cookies[:token] = params[:token]
+    set_moodboards_variables
     @feedbacks = @invitation.feedbacks
     render
   end

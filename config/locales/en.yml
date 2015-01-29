@@ -223,6 +223,7 @@ en:
         feedback_link: 'Feedback link:'
         name: 'Name:'
         email: 'E-mail address:'
+        send_feedback: Send
       choose_concept: Choose your favorite design concept
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
