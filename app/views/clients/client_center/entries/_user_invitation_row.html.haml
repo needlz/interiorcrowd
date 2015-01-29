@@ -1,0 +1,22 @@
+.row.invitation-row{ class: ('lnk_container' unless invitation) }
+  .col-md-4
+    %label{:for => "nameInvite"}= t('client_center.entries.reviewer_invitations.name')
+    - if invitation
+      %span= invitation.username
+    - else
+      %input.nameInvite{:type => "text" }/
+  .col-md-5
+    %label{:for => "emailInvite"}= t('client_center.entries.reviewer_invitations.email')
+    - if invitation
+      %span= invitation.email
+    - else
+      %input.emailInvite{:type => "text" }/
+  .col-md-2.disablePadding.buttons
+    - if invitation.present?
+      %label= t('client_center.entries.reviewer_invitations.feedback_link')
+      = link_to invitation.url, show_reviewer_feedbacks_path(id: @contest.id, token: invitation.url)
+    - else
+      %button.btn.perform-invite= t('client_center.entries.reviewer_invitations.invite')
+      %button.btnInvite
+        %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
+        %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}

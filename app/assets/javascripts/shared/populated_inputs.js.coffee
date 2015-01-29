@@ -1,5 +1,7 @@
 class @PopulatedInputs
 
+  @container: 'body'
+
   @init: ->
     @bindAddLinkButton()
     @bindRemoveLinkButton()
@@ -10,12 +12,20 @@ class @PopulatedInputs
       event.preventDefault()
       @addLink()
 
-  @addLink: ->
-    $rows = $('.lnk_container:first').first()
+  @generateNewLink: ->
+    $rows = $(@container).find('.lnk_container:first').first()
     $formclone = $rows.clone()
     $formclone.find('input').val ''
-    $formclone.insertAfter $('.lnk_container:last')
-    @refreshLinkButtons('added')
+    $formclone
+
+  @addLink: ->
+    $newLink = @generateNewLink()
+    if $(@container).find('.lnk_container:last').length
+      $newLink.insertAfter($('.lnk_container:last'))
+    else
+      $(@container).append($newLink)
+    @populateExamplesInputs()
+    $newLink
 
   @bindRemoveLinkButton: ->
     $(document).on 'click', '.lnk_container .minus_wrapper', (event)=>
@@ -24,19 +34,20 @@ class @PopulatedInputs
       @refreshLinkButtons('removed')
 
   @populateExamplesInputs: ->
-    if $('.lnk_container .plus_wrapper').length > 1
+    if $(@container).find('.lnk_container .plus_wrapper').length > 1
       @refreshLinkButtons('added')
     else
       @refreshLinkButtons('removed')
 
   @refreshLinkButtons: (change)->
+    $container = $(@container)
     if change is 'added'
-      $('.lnk_container .plus_wrapper').hide()
-      $('.lnk_container .examplelabel label').hide().first().show()
-      $('.lnk_container .minus_wrapper').show() if $('.lnk_container .plus_wrapper').length > 1
-      $('.lnk_container .plus_wrapper:last').last().show()
+      $container.find('.lnk_container .plus_wrapper').hide()
+      $container.find('.lnk_container .examplelabel label').hide().first().show()
+      $container.find('.lnk_container .minus_wrapper').show() if $container.find('.lnk_container .plus_wrapper').length > 1
+      $container.find('.lnk_container .plus_wrapper:last').last().show()
     else if change is 'removed'
-      $('.lnk_container .minus_wrapper').hide()  if $('.lnk_container .plus_wrapper').length is 1
-      $('.lnk_container .plus_wrapper:last').last().show()
-      $('.lnk_container .examplelabel label').hide()
-      $('.lnk_container .examplelabel label').first().show()
+      $container.find('.lnk_container .minus_wrapper').hide() if $container.find('.lnk_container .plus_wrapper').length is 1
+      $container.find('.lnk_container .plus_wrapper:last').last().show()
+      $container.find('.lnk_container .examplelabel label').hide()
+      $container.find('.lnk_container .examplelabel label').first().show()

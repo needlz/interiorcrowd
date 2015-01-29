@@ -1,0 +1,9 @@
+.content.container.animated.fadeInDown
+  - @feedbacks.each do |feedback|
+    = feedback.text
+    %br/
+
+  = form_for ReviewerFeedback.new do |f|
+    = hidden_field_tag :token, params[:token]
+    = f.text_area :text
+    = f.submit
