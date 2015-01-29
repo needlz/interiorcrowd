@@ -1,9 +1,10 @@
 %p.font20Bold.marg-top20= title
 .hLine10
 .row.marg-top20
-  .col-md-12
-    %p.grayP14= t('designer_center.edit.upload_new')
+  - if editable
+    .col-md-12
+      %p.grayP14= t('designer_center.edit.upload_new')
   - image_texts.each do |text|
-    = render partial: 'designer_center_requests/edit/image_content', locals: {text: text}
-
-%a.darkBorderBtn{:href => "#"}= t('designer_center.edit.upload')
+    = render partial: 'designer_center_requests/edit/image_content', locals: {editable: editable, text: text}
+- if editable
+  %a.darkBorderBtn{:href => "#"}= t('designer_center.edit.upload')

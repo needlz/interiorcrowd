@@ -16,9 +16,8 @@
         .col-md-8.disablePadding
           = render partial: 'shared/moodboard', locals: { request: @request }
           %a.darkBorderBtn{:href => "#"}= t('designer_center.edit.upload_new')
-          = render partial: 'designer_center_requests/edit/image_block', locals: { title: t('designer_center.edit.products_list'), image_texts: ['This table would be perfect for you.', '.....', '.....'] }
-          = render partial: 'designer_center_requests/edit/image_block', locals: { title: t('designer_center.edit.similar_styles'), image_texts: ['Provide details on why you chose this. ( e.g, If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair. )', '.....', '.....'] }
-
+          = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.products_list'), image_texts: ['This table would be perfect for you.', '.....', '.....'] }
+          = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.similar_styles'), image_texts: ['Provide details on why you chose this. ( e.g, If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair. )', '.....', '.....'] }
         .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
           = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
           = render partial: 'designer_center_requests/edit/comments'

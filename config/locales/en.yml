@@ -309,6 +309,8 @@ en:
       cancel: Cancel
       save_for_later: Save for later
       submit: Submit
+    preview:
+      this_is_preview: This is a preview of what the client will see.
     navigation:
       create_portfolio: Create Portfolio
       preview_contests: Join New Contests
