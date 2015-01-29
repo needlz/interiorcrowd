@@ -52,7 +52,7 @@ class AppealScale
     100 - value.to_i
   end
 
-  def preferred_appeal_name
+  def opinion
     ContestCreationWizard::APPEAL_FEEDBACK.each do |appeal|
       return appeal[:name] if appeal[:value] == value
     end
