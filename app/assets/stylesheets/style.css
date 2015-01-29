@@ -1718,7 +1718,7 @@ textarea.productsMoodboardAbove{
     width: 19px;
     height: 19px;
     display: inline-block;
-    background: url('img/marks.png');
+    background: url('/assets/marks.png');
     cursor: pointer;
 }
 .markRemove{

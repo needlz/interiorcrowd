@@ -4,8 +4,8 @@
       %h3.congrats
         = t('client_center.entries.congratulations')
         %span= t('client_center.entries.customized_board')
-
-      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
+      .col-md-8.disablePadding
+        = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
       %br/
       %br/
     .col-md-8.disablePadding.relative

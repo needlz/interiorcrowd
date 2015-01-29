@@ -8,7 +8,11 @@
 - else
   = render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
   - content_for :client_center_content do
-    - if params[:winner].nil?
+    - if params[:winner].present?
+      = render partial: 'clients/client_center/entries/winner'
+    - elsif params[:collaboration].present?
+      =render partial: 'clients/client_center/entries/collaboration', locals: {request: @contest_requests.first}
+    - else
       .bottom60.entries-page
         - if @contest
           %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
@@ -17,7 +21,8 @@
             .bottom60
               .container.animated.fadeInDown
                 .row
-                  = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 1}
+                  .col-md-8.disablePadding
+                    = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 1}
                   = render partial: 'clients/client_center/entries/responses_filter', locals: { selected_answer: params[:answer] }
               %p.chooseP= t('client_center.entries.choose_concept')
             - @contest_requests.in_groups_of(2, false) do |contest_requests|
@@ -34,6 +39,4 @@
               = render partial: 'clients/client_center/entries/designers_to_invite',
                   locals: { designers: @invitable_designer_views }
             = render partial: 'clients/client_center/entries/more_features'
-    - else
-      = render partial: 'clients/client_center/entries/winner'
   = render partial: 'clients/client_center/layout'
