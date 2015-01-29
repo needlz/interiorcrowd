@@ -1,10 +1,31 @@
-.row.marg-top20
-  .col-md-4
-    = image_tag 'placeholder.jpg', class: 'productListIMG'
-  .col-md-8
-    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.product_name')
-    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.brand')
-    %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.price')
-    %a.font20.blueLink{:href => "#"} www.wayfair.com/chair
-    %br
-      %a.editProductItemBtn{:href => "#"}= t('designer_center.final_upload.edit')
+- if params[:edit_product]
+  .row.marg-top20
+    .col-md-4.relative
+      = button_tag 'Change image', class: 'btn btn-change-image'
+      = image_tag 'placeholder.jpg', class: 'productListIMG'
+    .col-md-8
+      .row.productEditList
+        .col-md-3
+          = label_tag 'product1', t('designer_center.final_upload.product_name')
+          = label_tag 'brand1', t('designer_center.final_upload.brand')
+          = label_tag 'price1', t('designer_center.final_upload.price')
+          = label_tag 'link1', t('designer_center.final_upload.link')
+        .col-md-9
+          = text_field_tag 'product1'
+          = text_field_tag 'brand1'
+          = text_field_tag 'price1'
+          = text_field_tag 'link1'
+      = link_to t('designer_center.final_upload.save'), '#', class: 'font16 makeMeBlack makeMeBold'
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      = link_to t('designer_center.final_upload.cancel'), '#', class: 'font16 makeMeBlack makeMeBold'
+- else
+  .row.marg-top20
+    .col-md-4
+      = image_tag 'placeholder.jpg', class: 'productListIMG'
+    .col-md-8
+      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.product_name')
+      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.brand')
+      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.price')
+      = link_to 'www.wayfair.com/chair', 'www.wayfair.com/chair', class: 'font20 blueLink'
+      %br
+      = link_to t('designer_center.final_upload.edit') , '#', class: 'editProductItemBtn'

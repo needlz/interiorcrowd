@@ -6,13 +6,13 @@
     .row
       .col-md-12
         %p.designerName= t('designer_center.final_upload.note_for_consumer')
-        %textarea.consumerNoteTextarea
+        = text_area_tag 'consumer-note', nil, class: 'consumerNoteTextarea'
         = render partial: 'shared/moodboard', locals: { request: @request }
         %p.grayP14.marg-top10
           %i= t('designer_center.final_upload.file_info')
-        %a.darkBorderBtn.uploadFinalDesignBtn.font20{:href => "#"}= t('designer_center.final_upload.upload')
+        = link_to t('designer_center.final_upload.upload'), '#', class: 'darkBorderBtn uploadFinalDesignBtn font20'
         %p.marg-top20.font16.makeMeBlack.makeMeBold= t('designer_center.final_upload.upload_description')
-        %textarea.consumerNoteTextarea
+        = text_area_tag 'consumer-note', nil, class: 'consumerNoteTextarea'
         %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')
         = render partial: 'designer_center_requests/edit/product_item'
 

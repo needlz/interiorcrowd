@@ -303,7 +303,10 @@ en:
       product_name: Product Name
       brand: Brand
       price: Price
+      link: Link
       edit: Edit
+      save: Save
+      cancel: Cancel
       save_for_later: Save for later
       submit: Submit
     navigation:
