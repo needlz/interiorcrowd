@@ -2703,5 +2703,102 @@ textarea.addCommentTextarea{
 .paddTop25{
     padding-top: 25px;
 }
+.homeEmailSignup{
+    background: #f4f4f4;
+    padding: 40px 0px;
+    overflow: hidden;
+}
+.homeEmailSignup h3{
+    font-size: 30px;
+    color: #000;
+}
+
+.homeEmailSignup p{
+    /*padding-bottom: 20px;*/
+    font-size: 18px;
+    color: #000;
+    line-height: 50px;
+
+}
+.homeEmailSignup input[type=text]{
+    width: 450px;
+    height: 39px;
+    padding: 0px 5px;
+    border-radius: 5px;
+    border: 1px solid #a9a9a9;
+}
+.homeEmailSignup .btn{
+    padding: 8px 30px;
+    background-color: #a9a9a9;
+    color: #FFF;
+    font-weight: 700;
+    margin-left: 15px;
+}
+.paddY20{
+    padding: 20px 0px;
+}
+.optionalSignup{
+    width: 580px;
+    margin: 40px auto;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+}
+.optionalSignup h4{
+    background-color: #f4f4f4;
+    color: #000;
+    font-style: italic;
+    margin: 0px;
+    padding-left: 20px;
+    line-height: 53px;
+    border-bottom: 1px solid #e1e1e1;
+
+}
+
+.optionalSignup .row{
+    margin: 40px 20px;
+}
+.optionalSignup .row .col-md-3 label{
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 33px;
+    padding-bottom: 15px;
+}
+.optionalSignup .row .col-md-9 input[type=text]{
+    display: inline-block;
+    width: 100%;
+    height: 33px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    margin-bottom: 27px;
+}
+.optionalSignup .row .col-md-9 textarea{
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    padding: 3px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    resize: none;
+    margin-top: 20px;
+}
+
+.optionalSignup .row .col-md-9 label{
+    display: inline-block;
+    margin-right: 40px;
+    font-size: 16px;
+}
+.optionalSignup .row .col-md-9 label input{
+    margin-right: 20px;
+}
+
+.optionalSignup .row .col-md-9 .btn{
+    width: 100%;
+    color: #FFF;
+    background-color: #a9a9a9;
+    font-weight: 700;
+    margin-top: 20px;
+}
 /*underMenuLine*/
 /* end portfolio creation page*/

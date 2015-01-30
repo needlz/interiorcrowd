@@ -14,7 +14,7 @@ InteriorC::Application.routes.draw do
   end
 
   get 'faq', to: 'home#faq'
-
+  get 'sign_up_beta', to: 'home#sign_up_beta'
   root 'home#index'
 
   resources :contest_requests, only: [:show, :create] do
