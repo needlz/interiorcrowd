@@ -1,8 +1,3 @@
-- content_for :head do
-  = javascript_include_tag 'clients/entries'
-  :javascript
-    I18n = #{ translations_to_json(['client_center', 'entries']) }
-
 .content.container.animated.fadeInDown
   = render partial: 'reviewer_feedbacks/content'
   .row
