@@ -564,3 +564,7 @@ en:
       questions_payment:
         - 'How do I win a contest?'
         - 'Can I include any work for InteriorCrowd into my portfolio?'
+
+  registration:
+    designer: 'You have successfully registered with us a designer. Your login details for Interior Crowd as below:'
+    client: ' You have successfully registered with us. Your login details for Interior Crowd as below:'
