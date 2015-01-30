@@ -26,8 +26,8 @@
 }
 
 .optionalSignup {
-  input[type='submit'] {
-    margin-top: 14px !important;
+  input.email[type='text'] {
+    margin-top: -6px !important;
   }
 }
 
