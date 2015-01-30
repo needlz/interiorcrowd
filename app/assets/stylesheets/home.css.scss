@@ -34,3 +34,17 @@
 .top-nav.pull-down {
   margin-top: 48px;
 }
+
+@media (max-width: 1199px) {
+  .main-menu > li > a {
+    padding: 30px 8px !important;
+  }
+
+  .menu-border {
+    margin-top: 0px !important;
+  }
+
+  .top-nav.pull-down {
+    margin-top: 32px;
+  }
+}
