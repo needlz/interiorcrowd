@@ -1,58 +1,67 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title>The page you were looking for doesn't exist (404)</title>
-  <style>
-  body {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-  }
+    <link href="/assets/bootstrap/bootstrap.css" rel="stylesheet">
+    <link href="/assets/bootstrap/bootstrap-theme.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/assets/fonts.css">
+    <link type="text/css" rel="stylesheet" href="/assets/jquery.mmenu.all.css" />
 
-  div.dialog {
-    width: 25em;
-    margin: 4em auto 0 auto;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 4em 0 4em;
-  }
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap-select.min.js"></script>
 
-  h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+    <script type="text/javascript" src="/assets/jquery.mmenu.min.all.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('nav#menu').mmenu(); // gen mobile menu
+        });
+    </script>
+ </head>
+<body class="grayBg">
+<div class="visible-xs visible-sm visible-md">
+    <div class="mobile-menu">
+        <a href="#menu"></a>
+    </div>
 
-  body > p {
-    width: 33em;
-    margin: 0 auto 1em;
-    padding: 1em 0;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow:0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
-</head>
+    <nav id="menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#about">About us</a>
+                <ul>
+                    <li><a href="#about/history">History</a></li>
+                    <li><a href="#about/team">The team</a>
+                        <ul>
+                            <li><a href="#about/team/management">Management</a></li>
+                            <li><a href="#about/team/sales">Sales</a></li>
+                            <li><a href="#about/team/development">Development</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#about/address">Our address</a></li>
+                </ul>
+            </li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</div>
 
-<body>
-  <!-- This file lives in public/404.html -->
-  <div class="dialog">
-    <h1>The page you were looking for doesn't exist.</h1>
-    <p>You may have mistyped the address or the page may have moved.</p>
-  </div>
-  <p>If you are the application owner check the logs for more information.</p>
+<div class="menu-border whiteBg border0">
+    <div class="container paddY20">
+        <div class="text-center logo-mobile">
+            <img src="/assets/logo.png" width="200" height="200" />
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center pageNotFound">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>404</h1>
+            <h3>OOOPS ! PAGE NOT FOUND</h3>
+            <p>The page you were looking for appears to have been moved, deleted or does not exist.</p>
+            <a href="#" class="btn">Back to Homepage</a>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

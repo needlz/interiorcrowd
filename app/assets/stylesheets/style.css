@@ -2735,9 +2735,65 @@ textarea.productsMoodboardAbove{
     font-weight: 700;
     margin-left: 15px;
 }
+.grayBg{
+    background-color: #f4f4f4;
+}
+.whiteBg{
+    background-color: #fff;
+}
 .paddY20{
     padding: 20px 0px;
 }
+
+.pageNotFound,.error500{
+    padding-top: 40px;
+}
+.pageNotFound h1{
+    font-size: 60px;
+    color: #000;
+}
+.pageNotFound h3,.error500 h3{
+    font-size: 30px;
+    color: #000;
+    font-weight: 400;
+}
+.pageNotFound p{
+    padding-bottom: 20px;
+    font-size: 20px;
+    color: #000;
+    line-height: 60px;
+
+}
+.pageNotFound .btn,.error500 .btn{
+    font-size: 20px;
+    background-color: #a9a9a9;
+    font-weight: 700;
+    color: #FFF;
+}
+
+.error500 h1{
+    color: #000;
+    font-size: 60px;
+}
+.error500 h1 span{
+    color: #848484;
+    font-size: 36px;
+}
+.error500 h1 img{
+    position: relative;
+    top: -8px;
+    left: -10px;
+}
+.error500 h3 a{
+    font-style: italic;
+    color: #000;
+    text-decoration: underline;
+    font-weight: 700;
+}
+.error500 .btn{
+    margin-top: 40px;
+}
+
 .optionalSignup{
     width: 580px;
     margin: 40px auto;
