@@ -819,9 +819,18 @@
   color: #000;
   line-height: 70px;
 }
+.pageNumber {
+  width: 398px
+}
+
+.designConcept {
+  .moodboard {
+    position: static;
+  }
+}
 
 .contestTableRow2 {
-  height: auto!important;
+  height: auto !important;
   .options {
     padding-bottom: 15px;
     padding-top: 15px;
