@@ -17,7 +17,8 @@
       %label= t('sign_up_beta.name')
       %label= t('sign_up_beta.role_switcher')
       %label= t('sign_up_beta.other_info')
-      %label.emailLabelPrivateBeta Email: *
+      %label.emailLabelPrivateBeta= t('sign_up_beta.email')
+
     .col-md-9
       %input{:type => "text"}/
       %label
@@ -29,6 +30,3 @@
       %textarea
       %input.email{:type => "text"}/
       %input.btn{:type => "submit", :value => "Go"}/
-
-    //h4= t('sign_up_beta.optional')
-
