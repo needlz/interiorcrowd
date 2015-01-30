@@ -59,11 +59,21 @@ RSpec.describe ContestRequestsController do
       end
     end
 
-    it 'does not save answer if contest is not in winner selection state' do
+    it 'saves answer if contest is in submission state' do
       expect(contest.status).to eq 'submission'
       post :answer, id: request.id, answer: 'favorite'
-      expect(answered).to be_falsy
+      expect(answered).to be_truthy
     end
+
+    it 'does not save answer if contest is not in winner selection or submission state' do
+      request
+      contest.start_winner_selection!
+      contest.winner_selected!
+      request.update_attributes!(status: 'fulfillment')
+      post :answer, id: request.id, answer: 'favorite'
+      expect(answered).to be_falsey
+    end
+
   end
 
   describe 'GET show' do

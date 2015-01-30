@@ -28,6 +28,11 @@ RSpec.describe ContestRequest do
     end
   end
 
+  it 'allows to set answer in submission state' do
+    request = Fabricate(:contest_request, designer: designer, status: 'submitted', contest: contest)
+    request.update_attributes!(answer: 'no')
+  end
+
   describe 'winner count validation' do
     let!(:request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
     let!(:other_request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
