@@ -34,4 +34,5 @@ class ApplicationController < ActionController::Base
     @client = Client.find(session[:client_id])
     raise_404 unless @contest.client == @client
   end
+
 end
