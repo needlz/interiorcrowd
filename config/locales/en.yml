@@ -253,7 +253,7 @@ en:
     attribute_done_button: Done
     profile:
       labels:
-        address: Contact Information
+        address: Street Address
         city: City
         state: State
         zip: Zip code
