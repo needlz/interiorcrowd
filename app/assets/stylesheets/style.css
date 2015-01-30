@@ -2577,6 +2577,7 @@ textarea.addCommentTextarea{
 .contestUnderway h3{
     font-size: 20px;
     color: #000;
+    margin-top: 0px;
 }
 .contestUnderway p{
     font-size: 14px;
@@ -2607,7 +2608,7 @@ textarea.addCommentTextarea{
     background-color: #FFF;
     padding: 6px 24px;
     font-weight: 700;
-    margin-right: 40px;
+    margin-right: 70px;
 }
 
 .contestUnderway #searchBox input[type=text]{
@@ -2616,6 +2617,68 @@ textarea.addCommentTextarea{
 .contestUnderway #searchBox button{
     top: 0px;
 }
+.contestTable{
+    border: 1px solid #e1e1e1;
+    margin: 40px 20px 30px;
+    border-radius: 5px;
+}
+.contestTableHeader{
+    margin: 0px;
+    background-color: #409863;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    line-height: 70px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.contestTableHeader > div{
+    padding: 0px;
+}
+.contestTableRow1{
+    border-top:1px solid #e1e1e1;
+    border-bottom:1px solid #e1e1e1;
+    background-color: #f0f0f0;
+    margin: 0px;
+    height: 90px;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #000;
+}
+
+.contestTableRow1 > div:nth-child(6){
+    color: #409863;
+    font-size: 20px;
+    font-weight: 700;
+}
+.contestTableRow1 > div:nth-child(6) span{
+    font-size: 14px;
+    display: block;
+    font-weight: 400;
+}
+.contestTableRow2{
+    background: #eaeaea;
+    height: 90px;
+    margin: 0px;
+    /*text-align: center;*/
+    padding-top: 30px;
+    font-size: 16px;
+}
+.contestTableRow2 .col-md-1,.contestTableRow2 .col-md-2{
+    font-weight: 700;
+}
+
+
+
+
+
+
 
 
 
@@ -2702,103 +2765,6 @@ textarea.addCommentTextarea{
 }
 .paddTop25{
     padding-top: 25px;
-}
-.homeEmailSignup{
-    background: #f4f4f4;
-    padding: 40px 0px;
-    overflow: hidden;
-}
-.homeEmailSignup h3{
-    font-size: 30px;
-    color: #000;
-}
-
-.homeEmailSignup p{
-    /*padding-bottom: 20px;*/
-    font-size: 18px;
-    color: #000;
-    line-height: 50px;
-
-}
-.homeEmailSignup input[type=text]{
-    width: 450px;
-    height: 39px;
-    padding: 0px 5px;
-    border-radius: 5px;
-    border: 1px solid #a9a9a9;
-}
-.homeEmailSignup .btn{
-    padding: 8px 30px;
-    background-color: #a9a9a9;
-    color: #FFF;
-    font-weight: 700;
-    margin-left: 15px;
-}
-.paddY20{
-    padding: 20px 0px;
-}
-.optionalSignup{
-    width: 580px;
-    margin: 40px auto;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-}
-.optionalSignup h4{
-    background-color: #f4f4f4;
-    color: #000;
-    font-style: italic;
-    margin: 0px;
-    padding-left: 20px;
-    line-height: 53px;
-    border-bottom: 1px solid #e1e1e1;
-
-}
-
-.optionalSignup .row{
-    margin: 40px 20px;
-}
-.optionalSignup .row .col-md-3 label{
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    color: #000;
-    line-height: 33px;
-    padding-bottom: 15px;
-}
-.optionalSignup .row .col-md-9 input[type=text]{
-    display: inline-block;
-    width: 100%;
-    height: 33px;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    margin-bottom: 27px;
-}
-.optionalSignup .row .col-md-9 textarea{
-    display: inline-block;
-    width: 100%;
-    height: 80px;
-    padding: 3px;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    resize: none;
-    margin-top: 20px;
-}
-
-.optionalSignup .row .col-md-9 label{
-    display: inline-block;
-    margin-right: 40px;
-    font-size: 16px;
-}
-.optionalSignup .row .col-md-9 label input{
-    margin-right: 20px;
-}
-
-.optionalSignup .row .col-md-9 .btn{
-    width: 100%;
-    color: #FFF;
-    background-color: #a9a9a9;
-    font-weight: 700;
-    margin-top: 20px;
 }
 /*underMenuLine*/
 /* end portfolio creation page*/

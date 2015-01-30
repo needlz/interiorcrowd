@@ -13,7 +13,6 @@
             = image_tag 'magnifier.png'
         %p
           - @current_responses.each do |response|
-            %hr
             .response
               = render partial: 'designer_center_requests/index/item', locals: { response: response }
       .col-md-4
