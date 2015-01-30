@@ -3,14 +3,10 @@
   :javascript
     I18n = #{ translations_to_json(['client_center', 'entries']) }
 
+
+
 .content.container.animated.fadeInDown
   = render partial: 'clients/client_center/entries/main_content'
-
-  - @feedbacks.each do |feedback|
-    = feedback.text
-    %br/
-
-  = form_for ReviewerFeedback.new do |f|
-    = hidden_field_tag :token, params[:token]
-    = f.text_area :text
-    = f.submit t('client_center.entries.reviewer_invitations.send_feedback')
+  .row
+    .hLine
+  = render partial: 'clients/client_center/entries/feedback/comment_form'
