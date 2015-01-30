@@ -67,6 +67,12 @@ RSpec.describe ContestRequestsController do
   end
 
   describe 'GET show' do
+    it 'redirects to login page if user not logged in' do
+      session[:client_id] = nil
+      get :show, id: request.id
+      expect(response).to redirect_to client_login_sessions_path
+    end
+
     it 'returns page' do
       get :show, id: request.id
       expect(response).to render_template(:show)

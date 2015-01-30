@@ -77,6 +77,7 @@ class ContestRequestsController < ApplicationController
   end
 
   def show
+    return unless check_client
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
     @show_answer_options = @request.contest.winner_selection?
