@@ -1,11 +1,10 @@
 - contests.each do |contest|
-  = render partial: 'designer_center_contests/index/contest_row',
-      locals: { classes: cycle('odd', 'even') + ' contest-item',
-                column_tag: :td,
-                id: contest.id,
-                project_name: contest.name,
-                design_category_name: contest.design_category,
-                design_space_name: contest.design_space,
-                days_left: contest.days_left,
-                days_count: contest.days_count,
-                price: contest.price }
+  .row.suggestedContestBody.contest-item{ class: "#{border_class if defined? border_class}", data: {id: contest.id} }
+    .col-md-2= contest.id
+    .col-md-2= contest.name
+    .col-md-2= contest.design_category
+    .col-md-2= contest.design_space
+    .col-md-2= contest.price
+    .col-md-2
+      = contest.days_count
+      %span days

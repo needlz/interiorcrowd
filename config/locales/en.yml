@@ -445,8 +445,8 @@ en:
         invite_to_contest: Invite to Contest
 
     contests_preview:
-      suggested_contests_title: Suggested contests for you!
-      suggested_contests_hint: We think that these contests are just right for your style.
+      suggested_contests_title: Suggested Contests for You Join Now
+      suggested_contests_hint: We think these contests are just right for your style.
       all_contests_title: See all current contests
       days_left: '%{days} left to enter'
       contest_id: Contest ID#
@@ -455,8 +455,10 @@ en:
       room: Room
       price: Price
       days: Days left
+      days_left_to_enter: Days left to enter
       qualifying_round: Qualifying Round
       fulfillment_period: Fulfillment Period
+      invite: Congratulations! You have been invited to join a contest! Join now!
 
     show_page:
       back_to_index: < Back to all current contests

@@ -1,5 +1,6 @@
-.all-contests.col-md-8
-  %h3= t('designer_center.contests_preview.all_contests_title')
-  %table.table.table-striped
-    %tbody
-      = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @current_contests }
+%h3= t('designer_center.contests_preview.all_contests_title')
+.suggestedContestBox
+  .row.suggestedContestHeader
+    = render partial: 'designer_center_contests/index/contest_row'
+  = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @current_contests, border_class: 'currentContestBody' }
+
