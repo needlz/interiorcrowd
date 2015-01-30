@@ -1,1 +1,6 @@
-Notifications will be there
+.sidebarComments.leaderboardSidebar
+  %p.designerName= t('designer_center.updates.notifications')
+  #scrollBoxComments
+    = render partial:'designer_center/comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'17 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+    = render partial:'designer_center/comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'39 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+    = render partial:'designer_center/comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2hr ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}

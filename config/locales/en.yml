@@ -450,6 +450,8 @@ en:
       room: Room
       price: Price
       days: Days left
+      qualifying_round: Qualifying Round
+      fulfillment_period: Fulfillment Period
 
     show_page:
       back_to_index: < Back to all current contests
