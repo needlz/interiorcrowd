@@ -511,10 +511,10 @@ en:
     private_beta: InteriorCrowd is currently in private beta.
     enter_email: If you are interested in joining the beta or learning more, please enter your e-mail address.
     go: GO
-    optional: Optional
     name: 'Name:'
     role_switcher: 'Are you a:'
     other_info: 'Other info:'
+    email: 'Email: *'
     consumer: Consumer
     designer: Designer
   faq:

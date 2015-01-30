@@ -1,29 +1,32 @@
-%body
-  .menu-border.whiteBg.border0
-    .container.paddY20
-      .text-center.logo-mobile
-        %img{:height => "200", :src => "/assets/logo.png", :width => "200"}/
-  .container-fluid.text-center.homeEmailSignup
-    .row
-      .col-md-12
-        %h3= t('sign_up_beta.private_beta')
-        %p= t('sign_up_beta.enter_email')
-        %input{:type => "text"}/
-        %button.btn= t('sign_up_beta.go')
-  .optionalSignup
-    %h4= t('sign_up_beta.optional')
-    .row
-      .col-md-3
-        %label= t('sign_up_beta.name')
-        %label= t('sign_up_beta.role_switcher')
-        %label= t('sign_up_beta.other_info')
-      .col-md-9
-        %input{:type => "text"}/
-        %label
-          %input{:name => "type", :type => "radio"}>/
-          = t('sign_up_beta.designer')
-        %label
-          %input{:name => "type", :type => "radio"}>/
-          = t('sign_up_beta.consumer')
-        %textarea
-        %input.btn{:type => "submit", :value => "Send"}/
+.menu-border.whiteBg.border0
+  .container.paddY20
+    .text-center.logo-mobile
+      %img{:height => "200", :src => "/assets/logo.png", :width => "200"}/
+.container-fluid.text-center.homeEmailSignup
+  .row
+    .col-md-12
+      %h3= t('sign_up_beta.private_beta')
+      %p= t('sign_up_beta.enter_email')
+      .container
+        .row
+          .col-md-12
+            .hLine10
+.optionalSignup
+  .row
+    .col-md-3
+      %label= t('sign_up_beta.name')
+      %label= t('sign_up_beta.role_switcher')
+      %label= t('sign_up_beta.other_info')
+      %label.emailLabelPrivateBeta= t('sign_up_beta.email')
+
+    .col-md-9
+      %input{:type => "text"}/
+      %label
+        %input{:name => "type", :type => "radio"}>/
+        = t('sign_up_beta.designer')
+      %label
+        %input{:name => "type", :type => "radio"}>/
+        = t('sign_up_beta.consumer')
+      %textarea
+      %input.email{:type => "text"}/
+      %input.btn{:type => "submit", :value => "Go"}/
