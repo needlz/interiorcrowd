@@ -1905,7 +1905,7 @@ textarea.productsMoodboardAbove{
     /*margin-top: 10px;*/
     width: 100%;
     height: 399px;
-    background: url('img/cover_image.png') no-repeat center;
+    background: url('/assets/cover_image.png') no-repeat center;
     background-size: cover;
 }
 .portfolio_profile_image{
@@ -1943,7 +1943,7 @@ textarea.productsMoodboardAbove{
 .profileRating{
     height: 24px;
     display: inline-block;
-    background: url('img/star.png');
+    background: url('/assets/star.png');
 }
 .fiveStar{
     width: 125px;
@@ -2008,7 +2008,7 @@ textarea.productsMoodboardAbove{
 .portfolio_example .numOfLikesPortfolio{
     line-height: 20px;
     height: 20px;
-    background: url('img/heart.png') no-repeat left;
+    background: url('/assets/heart.png') no-repeat left;
     display: inline-block;
     padding-left: 30px;
     color: #000;
@@ -2122,12 +2122,12 @@ textarea.productsMoodboardAbove{
 .panel-faq .panel-title{
     padding: 0px 15px;
     line-height: 53px;
-    background: url('img/collapsed.png') right center no-repeat;
+    background: url('/assets/collapsed.png') right center no-repeat;
 }
 .collapsed .panel-title{
     padding: 0px 15px;
     line-height: 53px;
-    background: url('img/collapse.png') right center no-repeat;
+    background: url('/assets/collapse.png') right center no-repeat;
 }
 .collapsed{
     background: #FFF !important;
@@ -2191,7 +2191,7 @@ textarea.productsMoodboardAbove{
     padding: 2px 12px;
 }
 .designerNotification{
-    background: #F8F8F8 url('img/circle_arrow.png') right center no-repeat;
+    background: #F8F8F8 url('/assets/circle_arrow.png') right center no-repeat;
     border: 1px solid #e1e1e1;
     color: #000;
     padding-left: 30px;

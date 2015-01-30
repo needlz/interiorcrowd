@@ -13,6 +13,8 @@ InteriorC::Application.routes.draw do
     end
   end
 
+  get 'faq', to: 'home#faq'
+
   root 'home#index'
 
   resources :contest_requests, only: [:show, :create] do

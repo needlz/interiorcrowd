@@ -491,3 +491,51 @@ en:
   paginate:
     next: Next
     previous: Previous
+
+  faq:
+    menu:
+      customer: Customer
+      designer: Designer
+    customer:
+      topics:
+        about: About InteriorCrowd
+        payment: Payment
+      questions_touch_ic:
+        - 'How do I get in touch with InteriorCrowd?'
+      answers_touch_ic: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."
+      questions_about_ic:
+        - 'Who are our designers?'
+        - 'How does the style profile work?'
+        - 'Which package should I choose?'
+        - 'How do contests work?'
+        - 'How many designs will I get?'
+        - 'How do I collaborate with my designer?'
+        - 'What deadlines are there?'
+      questions_payment:
+        - 'What does 100% money back guarantee mean?'
+        - 'I forgot my password - how do I log in?'
+
+    designer:
+      topics:
+        payment: Payment
+      questions_touch_ic:
+        - 'How can I be a designer for InteriorCrowd?'
+        - 'How do contests work?'
+        - 'Do I have direct contact with clients?'
+        - 'Where can I source products from?'
+
+      answers_touch_ic: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
+        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."
+
+      questions_payment:
+        - 'How do I win a contest?'
+        - 'Can I include any work for InteriorCrowd into my portfolio?'

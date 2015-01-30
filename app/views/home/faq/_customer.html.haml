@@ -1,0 +1,10 @@
+#customer.tab-pane.active{:role => "tabpanel"}
+  #accordion.panel-group{"aria-multiselectable" => "false", :role => "tablist"}
+    - faq_customer_touch_ic.each_with_index do |word, index|
+      = render partial: 'home/faq/spoiler_item', locals: { number: index + 1, question: word, answer: t('faq.customer.answers_touch_ic')}
+    %h2.faqCategoryTitle= t('faq.customer.topics.about')
+    - faq_customer_about_ic.each_with_index do |word, index|
+      = render partial: 'home/faq/spoiler_item', locals: { number: index + 2, question: word, answer: t('faq.customer.answers_touch_ic')}
+    %h2.faqCategoryTitle= t('faq.customer.topics.payment')
+    - faq_customer_payment.each_with_index do |word, index|
+      = render partial: 'home/faq/spoiler_item', locals: { number: index + 9, question: word, answer: t('faq.customer.answers_touch_ic')}
