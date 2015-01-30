@@ -21,7 +21,7 @@
               'state',
               options_for_select(PersonalData.state_options, 0),
               {},
-              { class: 'selectpicker form-selector', tabindex: 9 })
+              { class: 'selectpicker form-selector' })
         .col-md-7
           %label.signUpInputLabel= t('designer_center.sign_up.zipcode')
           %span#err_zip.text-error
@@ -37,7 +37,7 @@
       %span#err_cpassword.text-error
       = f.password_field :password_confirmation, class: 'form-control'
       %label.signUpInputLabel= t('designer_center.sign_up.phone_number')
-      = f.password_field :phone_number, class: 'form-control'
+      = f.text_field :phone_number, class: 'form-control'
   .lineBreak
   = render partial: 'designers/new/portfolio'
   .row
