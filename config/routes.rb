@@ -83,6 +83,7 @@ InteriorC::Application.routes.draw do
     collection do
       get '', to: 'designer_center#designer_center', as: ''
       get 'updates', to: 'designer_center#updates', as: 'updates'
+      get 'training', to: 'designer_center#training', as: 'training'
       resources :contests,
                 controller: 'designer_center_contests',
                 as: 'designer_center_contest',

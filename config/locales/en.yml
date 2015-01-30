@@ -485,6 +485,12 @@ en:
       back: Back
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept moodboard
+    training:
+      check_out: Check out latest training
+      first_steps: Five steps to getting started
+      how_to: How to improve your earings
+      examples: See example moodboards
+
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'

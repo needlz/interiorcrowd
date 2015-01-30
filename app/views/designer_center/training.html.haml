@@ -1,0 +1,10 @@
+- content_for :designer_center_content do
+  .container.animated.fadeInDown.bottom60
+    .row
+      .col-md-10.col-md-offset-1
+        %h3= t('designer_center.training.check_out')
+        = link_to t('designer_center.training.first_steps'), '#', class: 'designerNotification latestTraining'
+        = link_to t('designer_center.training.how_to'), '#', class: 'designerNotification latestTraining'
+        = link_to t('designer_center.training.examples'), '#', class: 'designerNotification latestTraining'
+
+= render partial: 'designer_center/layout'

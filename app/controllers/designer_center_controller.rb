@@ -18,6 +18,10 @@ class DesignerCenterController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:updates)
   end
 
+  def training
+    @navigation = Navigation::DesignerCenter.new(:training)
+  end
+
   private
 
   def set_designer
