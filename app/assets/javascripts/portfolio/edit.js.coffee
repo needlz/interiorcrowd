@@ -27,6 +27,7 @@ class @PortfolioEditor
     @bindSchoolCheckbox().trigger('change')
     PopulatedInputs.init()
     @bindCheckboxes()
+    @bindImageCoverButtons()
 
     $(".selectpicker").selectpicker style: "btn-selector-medium font15"
     $(".dropdown-toggle").click ->
@@ -35,12 +36,7 @@ class @PortfolioEditor
     $("ul.dropdown-menu li").click ->
       $(this).parent().parent().parent().find("div.dropdown-menu").toggle()
 
-    $(".pull-down").each ->
-      $(this).css "margin-top", $(this).parent().height() - $(this).height()
-
-    $('#portfolio_education_school').change (event)->
-      $('#sub1').toggleClass('active', $('#portfolio_education_school').is(':checked'));
-
+  bindImageCoverButtons: ->
     $('#portfolio_pictures_preview').on 'click', '.cover-button', (event)->
       event.preventDefault()
       $selectButton = $(@)
@@ -48,6 +44,9 @@ class @PortfolioEditor
       CoverImage.toggle($selectedThumb)
 
   bindCheckboxes: ->
+    $('#portfolio_education_school').change (event)->
+      $('#sub1').toggleClass('active', $('#portfolio_education_school').is(':checked'));
+
     $(".tick-btn").click ->
       $(this).toggleClass "active"
       $checkbox = $(this).prev(':checkbox')
