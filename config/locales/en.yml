@@ -223,8 +223,12 @@ en:
         feedback_link: 'Feedback link:'
         name: 'Name:'
         email: 'E-mail address:'
-        send_feedback: Send
+        send_feedback: Post Comment
+        comment_sent: Comment sent
+        comment_placeholder: Add a comment here...
       choose_concept: Choose your favorite design concept
+      need_idea: NEED YOUR IDEA!
+      you_invited:  You have been invited to give some feedback on %{name}'s contest.
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
       space:
