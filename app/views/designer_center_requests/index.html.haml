@@ -1,7 +1,7 @@
 - content_for :designer_center_content do
   #designer-center-responses
     .row
-      .col-md-8.contestUnderway
+      .col-md-8.contestUnderway.no-x-padding
         %h3= t('designer_center.responses.title')
         %p= t('designer_center.responses.list_title')
         = link_to t('designer_center.contests_preview.days'), '#', class: 'btn daysLeftBtn'
@@ -13,8 +13,7 @@
             = image_tag 'magnifier.png'
         %p
           - @current_responses.each do |response|
-            .response
-              = render partial: 'designer_center_requests/index/item', locals: { response: response }
+            = render partial: 'designer_center_requests/index/item', locals: { response: response }
       .col-md-4
         = render partial: 'designer_center_requests/index/notifications'
     .row

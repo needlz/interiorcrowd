@@ -466,7 +466,7 @@ en:
       item:
         status: Status
         listed_as: Currently listed as
-        to_do: To Do
+        to_do: To&nbsp;Do
         update_moodboard: Update Moodboard
         send_note: Send Note to Consumer
         create_shopping_list: Create Shoppping List
