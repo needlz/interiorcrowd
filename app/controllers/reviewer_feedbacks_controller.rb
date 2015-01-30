@@ -1,4 +1,5 @@
 class ReviewerFeedbacksController < ApplicationController
+  include MoodboardCollection
 
   before_filter :set_contest, :check_invitation
 
@@ -9,6 +10,8 @@ class ReviewerFeedbacksController < ApplicationController
   end
 
   def show
+    cookies[:token] = params[:token]
+    setup_moodboard_collection(@contest)
     @feedbacks = @invitation.feedbacks
     render
   end

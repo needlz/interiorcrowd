@@ -18,22 +18,7 @@
           %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
           = render partial: 'clients/client_center/entries/pictures_and_dimensions_reminder' unless @contest_view.try(:have_space_views_details)
           - if @requests_present
-            .bottom60
-              .container.animated.fadeInDown
-                .row
-                  .col-md-8.disablePadding
-                    = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 1}
-                  = render partial: 'clients/client_center/entries/responses_filter', locals: { selected_answer: params[:answer] }
-              %p.chooseP= t('client_center.entries.choose_concept')
-            - @contest_requests.in_groups_of(2, false) do |contest_requests|
-              .row.designConcept
-                - contest_requests.each do |contest_request|
-                  = render partial: 'clients/moodboard', locals: { contest_request: contest_request,
-                      show_answer_options: @contest.winner_selection? }
-            .pagination-row.text-center
-              = will_paginate(@contest_requests, class: 'pageNumber intc-pagination center-block')
-            = render partial: 'clients/client_center/entries/notes'
-            = render partial: 'clients/client_center/entries/user_invitations'
+            = render partial: 'clients/client_center/entries/main_content'
           - else
             - if @contest.submission?
               = render partial: 'clients/client_center/entries/designers_to_invite',
