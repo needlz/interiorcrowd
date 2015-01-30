@@ -1,13 +1,17 @@
-.clearfix
-  .col-md-1
-    = contest.id
+.row.contestTableHeader
+  .col-md-2= t('designer_center.contests_preview.contest_id')
+  .col-md-2= t('designer_center.contests_preview.contest_name')
+  .col-md-2= t('designer_center.contests_preview.type')
+  .col-md-2= t('designer_center.contests_preview.room')
+  .col-md-2= t('designer_center.contests_preview.price')
+  .col-md-2= t('designer_center.contests_preview.days')
+.row.contestTableRow1
+  .col-md-2= contest.id
+  .col-md-2= contest.name
+  .col-md-2= contest.design_category
+  .col-md-2= contest.design_space
+  .col-md-2= contest.price
   .col-md-2
-    = contest.name
-  .col-md-3
-    = contest.design_category
-  .col-md-3
-    = contest.design_space
-  .col-md-2
-    = contest.days_left
-  .col-md-1
-    = contest.price
+    = contest.days_count
+    %span days
+

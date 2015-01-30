@@ -2361,7 +2361,6 @@ textarea.productsMoodboardAbove{
     margin-right: 0px;
 }
 
-
 .feedbackInvite h3{
     font-family: 'AvenirLTStd-Black';
     color: #000;
@@ -2671,268 +2670,118 @@ textarea.addCommentTextarea{
     padding: 2px 12px;
     margin-right: 20px;
 }
-.commentsBtn{
-    font-weight: 700;
-    color: #63cf4e;
-    font-size: 18px;
-    background: #FFF;
-    border: 1px solid #63cf4e;
-    padding: 2px 12px;
-    margin-right: 20px;
-}
-.winsBtn{
-    font-weight: 700;
-    color: #e5432d;
-    font-size: 18px;
-    background: #FFF;
-    border: 1px solid #e5432d;
-    padding: 2px 12px;
-    margin-right: 20px;
-}
-.notificationsBtn{
-    font-weight: 700;
-    color: #e4b701;
-    font-size: 18px;
-    background: #FFF;
-    border: 1px solid #e4b701;
-    padding: 2px 12px;
-}
-
-.designerNotification{
-    background: #F8F8F8 url('/assets/circle_arrow.png') right center no-repeat;
-    border: 1px solid #e1e1e1;
+.feedbackInvite p{
     color: #000;
-    padding-left: 30px;
-    line-height: 72px;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    border-left: 0px;
-    float: left;
-    width: 99%;
-    /*position:relative;*/
-}
-
-.designerNotification:hover{
-    background-color: #e1e1e1;
-}
-/*.designerNotification span{
-	display: inline-block;
-	margin-right: 30px;
-	height: 72px;
-	width: 5px;
-}*/
-
-
-.blueLabel{
-    background: #5bbff8;
-    display: inline-block;
-    height: 74px;
-    width: 5px;
-    float: left;
-}
-.greenLabel{
-    background: #63cf4e;
-    display: inline-block;
-    height: 74px;
-    width: 5px;
-    float: left;
-}
-.redLabel{
-    background: #e5432d;
-    display: inline-block;
-    height: 74px;
-    width: 5px;
-    float: left;
-}
-.yellowLabel{
-    background: #e4b701;
-    display: inline-block;
-    height: 74px;
-    width: 5px;
-    float: left;
-}
-
-.leaderboardSidebar #scrollBoxComments{
-    border: none;
-    height: 395px;
-    padding: 0px 20px !important;
-}
-.leaderboardSidebar .commentContainer:nth-child(even){
-    background-color: #FFF;
-}
-.leaderboardSidebar .commentContainer{
-    padding: 15px 0px;
-    font-size: 16px;
-}
-.leaderboardSidebar .commentContainer .comment-time{
-    font-size: 14px;
-}
-
-
-.scrollBoxCommentsHandle {
-    border-radius: 5px;
-    width: 9px;
-    background-clip: padding-box;
-    background: #a9a9a9;
-    margin-right: 5px;
-}
-
-.dragging .scrollBoxCommentsHandle,
-.scrollBoxCommentsHandle:active {
-    background: gray; /* No RGBA support */
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.35);
-}
-
-.designerShareBox .designerName,.designerShareBox .designerNote {
-    padding-left: 15px;
-}
-.inviteToContest {
-    font-weight: 700;
     font-size: 18px;
-    border: 1px solid #000;
-    width: 176px;
+    font-weight: 700;
+}
+.feedbackInvite p span{
+    font-weight: 400;
+    display: inline-block;
+    margin-left: 20px;
+}
+.disableBorder{
+    border: none !important;
+}
+
+.designFeedbackInviteH3{
+    margin-bottom: 0px !important;
+    padding-bottom: 0px !important;
+    /*line-height: 40px !important;*/
+}
+
+.circleNumber{
+    font-size: 16px;
+    color: #000;
+    display: inline-block;
+    line-height: 25px;
     text-align: center;
-    height: 48px;
-    line-height: 48px;
-    color: #000;
-    display: inline-block;
-    position: absolute;
-    left: 75%;
-    top: 330px;
-}
-
-.editCover {
-    display: inline-block;
-    position: absolute;
-    left: 92%;
-    top: 337px;
-}
-.cover_image{
-    /*margin-top: 10px;*/
-    width: 100%;
-    height: 399px;
-    background: url('/assets/cover_image.png') no-repeat center;
-    background-size: cover;
-}
-.portfolio_profile_image{
-    position: absolute;
-    top: -120px;
-}
-
-.under_portfolio_profile p{
-    color: #000;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 32px;
-}
-.under_portfolio_profile p:nth-child(2){
-    padding-top: 60px;
-}
-.under_portfolio_profile p:nth-child(2) span,.under_portfolio_profile p:nth-child(3) span{
-    display: inline-block;
-    border: 1px solid #000;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align:center;
-    border-radius: 12px;
-    margin-right: 10px;
-}
-.under_portfolio_profile p:nth-child(3) span{
-    font-family: 'AvenirLTStd-Black';
-    border: none;
-}
-.under_portfolio_profile p:nth-child(4) img{
-    margin-right: 8px;
-    margin-bottom: 5px;
-}
-.profileRating{
-    height: 24px;
-    display: inline-block;
-    background: url('/assets/star.png');
-}
-.fiveStar{
-    width: 125px;
-}
-.fourStar{
-    width: 100px;
-}
-.threeStar{
-    width: 75px;
-}
-.twoStar{
-    width: 50px;
-}
-.oneStar{
     width: 25px;
-}
-
-.user_portfolio_profile{
-    color: #000;
-}
-.user_portfolio_profile h3{
-    font-size: 24px;
-    font-family: 'AvenirLTStd-Black';
-}
-.user_portfolio_profile h4{
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 18px;
-}
-.user_portfolio_profile p{
-    font-size: 16px;
-    line-height: 30px;
-}
-.user_portfolio_profile .designStyleSpan{
-    font-weight: 700;
-    color: #000;
+    height: 25px;
     border: 1px solid #000;
-    font-size: 16px;
-    padding: 6px 20px;
-    display: inline-block;
-    margin-right: 20px;
+    border-radius: 100%;
+    margin-top: 20px;
+}
+.commentSent{
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+    line-height: 60px;
+}
+textarea.addCommentTextarea{
+    padding: 10px;
+    height: 150px;
 }
 
-.portfolio_example{
+.grayBg{
+    background-color: #f4f4f4;
+}
+.whiteBg{
+    background-color: #fff;
+}
+.paddY20{
+    padding: 20px 0px;
+}
+
+.pageNotFound,.error500{
+    padding-top: 40px;
+}
+.pageNotFound h1{
+    font-size: 60px;
+    color: #000;
+}
+.pageNotFound h3,.error500 h3{
+    font-size: 30px;
+    color: #000;
+    font-weight: 400;
+}
+.pageNotFound p{
+    padding-bottom: 20px;
+    font-size: 20px;
+    color: #000;
+    line-height: 60px;
+
+}
+.pageNotFound .btn,.error500 .btn{
+    font-size: 20px;
+    background-color: #a9a9a9;
+    font-weight: 700;
+    color: #FFF;
+}
+
+.error500 h1{
+    color: #000;
+    font-size: 60px;
+}
+.error500 h1 span{
+    color: #848484;
+    font-size: 36px;
+}
+.error500 h1 img{
     position: relative;
+    top: -8px;
+    left: -10px;
 }
-.portfolio_example img{
-    width: 100%;
-}
-.portfolio_example .numOfLikesPortfolio{
-    line-height: 20px;
-    height: 20px;
-    background: url('/assets/heart.png') no-repeat left;
-    display: inline-block;
-    padding-left: 30px;
-    color: #000;
-    font-size: 18px;
-    font-weight: 700;
-    position: absolute;
-    top: 90%;
-    left: 80%;
-}
-.loadMoreLink{
-    color: #a7a7a7;
-    font-size: 20px;
+.error500 h3 a{
     font-style: italic;
-    font-weight: 700;
-    text-decoration: underline;
-    display: block;
-    text-align: center;
-}
-.doneBtn{
-    font-weight: 700;
     color: #000;
-    font-size: 20px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    /*display: inline-block;*/
-    padding: 5px 20px;
+    text-decoration: underline;
+    font-weight: 700;
 }
+.error500 .btn{
+    margin-top: 40px;
+}
+
+.latestTraining{
+    border: 1px solid #e1e1e1;
+    margin: 15px 140px;
+    width: 75%;
+}
+.latestTraining:hover{
+    color: #000;
+    text-decoration: none;
+}
+
 .homeEmailSignup{
     background: #f4f4f4;
     padding: 40px 0px;
@@ -3023,6 +2872,7 @@ textarea.addCommentTextarea{
     margin-top: 40px;
 }
 
+
 .optionalSignup{
     width: 580px;
     margin: 40px auto;
@@ -3085,6 +2935,199 @@ textarea.addCommentTextarea{
     background-color: #a9a9a9;
     font-weight: 700;
     margin-top: 20px;
+}
+
+.contestUnderway h3{
+    font-size: 20px;
+    color: #000;
+    margin-top: 0px;
+}
+.contestUnderway p{
+    font-size: 14px;
+    color: #a9a9a9;
+    font-style: italic;
+}
+.contestUnderway .daysLeftBtn{
+    font-size: 16px;
+    color: #fefefe;
+    background-color: #409863;
+    padding: 6px 24px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+.contestUnderway .qualifyingRoundBtn{
+    font-size: 16px;
+    color: #387a53;
+    border: 1px solid #387a53;
+    background-color: #FFF;
+    padding: 6px 24px;
+    font-weight: 700;
+    margin-right: 15px;
+}
+.contestUnderway .fulfillmentPeriodBtn{
+    font-size: 16px;
+    color: #165930;
+    border: 1px solid #165930;
+    background-color: #FFF;
+    padding: 6px 24px;
+    font-weight: 700;
+    margin-right: 70px;
+}
+
+.contestUnderway #searchBox input[type=text]{
+    height: 35px;
+}
+.contestUnderway #searchBox button{
+    top: 0px;
+}
+.contestTable{
+    border: 1px solid #e1e1e1;
+    margin: 40px 20px 30px;
+    border-radius: 5px;
+}
+.contestTableHeader{
+    margin: 0px;
+    background-color: #409863;
+    color: #FFF;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    line-height: 70px;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.contestTableHeader > div{
+    padding: 0px;
+}
+.contestTableRow1{
+    border-top:1px solid #e1e1e1;
+    border-bottom:1px solid #e1e1e1;
+    background-color: #f0f0f0;
+    margin: 0px;
+    height: 90px;
+    text-align: center;
+    padding-top: 30px;
+    font-size: 14px;
+    color: #000;
+}
+
+.contestTableRow1 > div:nth-child(6){
+    color: #409863;
+    font-size: 20px;
+    font-weight: 700;
+}
+.contestTableRow1 > div:nth-child(6) span{
+    font-size: 14px;
+    display: block;
+    font-weight: 400;
+}
+.contestTableRow2{
+    background: #eaeaea;
+    height: 90px;
+    margin: 0px;
+    /*text-align: center;*/
+    padding-top: 30px;
+    font-size: 16px;
+}
+.contestTableRow2 .col-md-1,.contestTableRow2 .col-md-2{
+    font-weight: 700;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*sign up page*/
+.paddBottom40{
+    padding-bottom: 40px;
+}
+.lineBreak{
+    padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 40px;
+}
+
+.signUpInputLabel{
+    font-size: 20px;
+    line-height: 40px;
+    margin-top: 20px;
+}
+.signUpTitle{
+    font-weight:normal;font-size:30px;color:#000000;
+}
+.signUpSubTitle{
+    font-weight:normal;font-size:20px;color:#707070;margin-top:15px;
+}
+.lineHeight25{
+    line-height: 25px;
+}
+.lineHeight60{
+    line-height: 60px;
+}
+.stateDropDown{
+    display: none; max-height: 460px; overflow: hidden; min-height: 197px;
+}
+.stateDropDown > ul{
+    max-height: 448px; overflow-y: auto; min-height: 185px;
+}
+.margin0{
+    margin: 0px;
+}
+.borderRadius3{
+    border-radius: 3px;
+}
+.glyphiconPlus,.glyphiconMinus{
+    top: 5px; left: 39px; position: static; float: left !important; margin-top: 6px;
+}
+.makeMeBlack{
+    color: #000;
+}
+.imageUploadInfo{
+    color:#504d4e;padding-bottom: 25px;margin-top: 0px;font-size:14px;
+}
+.dashedBorder{
+    border: 1px dashed black; padding-top: 40px; padding-bottom: 35px;
+}
+/* end sign up page*/
+/* portfolio creation page*/
+.width75percent{
+    width: 75%;
+}
+.border0{
+    border: 0;
+}
+.paddTop20{
+    padding-top: 20px;
+}
+.borderRadius0{
+    border-radius: 0px;
+}
+.tellUsTextarea{
+    min-width: 47% !important;
+    height:150px;
+    padding: 15px;
+    font-size: 18px;
+    margin-top: 20px;
+    border: 1px solid #000;
+    border-color:#000000;
+    resize:none;
+}
+.height75{
+    height: 75px;
+}
+.font16{
+    font-size: 16px;
+}
+.paddTop25{
+    padding-top: 25px;
 }
 /*underMenuLine*/
 /* end portfolio creation page*/

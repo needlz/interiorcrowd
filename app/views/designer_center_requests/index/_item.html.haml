@@ -1,9 +1,9 @@
-= render partial: 'shared/contest_short_view', locals: { contest: response.contest }
-.moodboard
-  .status
-    #{ t('designer_center.responses.item.status') }: #{ response.status_name }
-  - if response.answer
-    .listed-at
-      = t('designer_center.responses.item.listed_as', answer: response.answer )
-  .options
-    = render partial: "designer_center_requests/index/#{ response.status }_options", locals: { response_id: response.id }
+.contestTable
+  = render partial: 'shared/contest_short_view', locals: { contest: response.contest }
+  .row.contestTableRow2
+    .col-md-1= "#{t('designer_center.responses.item.status')}:"
+    .col-md-5= response.status_name
+    .col-md-1= "#{t('designer_center.responses.item.to_do')}:".html_safe
+    .col-md-5
+    .options{style: 'padding-left:10px;float:right'}
+      = render partial: "designer_center_requests/index/#{ response.status }_options", locals: { response_id: response.id }
