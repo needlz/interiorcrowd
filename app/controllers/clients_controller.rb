@@ -1,5 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
+  include MoodboardCollection
+
   before_filter :set_client, except: [:create]
 
   def client_center
@@ -13,7 +15,7 @@ class ClientsController < ApplicationController
   def entries
     @contest = @client.last_contest
     if @contest
-      set_moodboards_variables
+      setup_moodboard_collection(@contest)
     else
       @contest_requests = [].paginate
     end
