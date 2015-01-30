@@ -2361,6 +2361,7 @@ textarea.productsMoodboardAbove{
     margin-right: 0px;
 }
 
+
 .feedbackInvite h3{
     font-family: 'AvenirLTStd-Black';
     color: #000;
@@ -2511,8 +2512,8 @@ textarea.addCommentTextarea{
 
 .optionalSignup{
     width: 580px;
-    margin: 40px auto;
-    border: 1px solid #e1e1e1;
+    margin: 0px auto;
+    /*border: 1px solid #e1e1e1;*/
     border-radius: 5px;
 }
 .optionalSignup h4{
@@ -2527,7 +2528,7 @@ textarea.addCommentTextarea{
 }
 
 .optionalSignup .row{
-    margin: 40px 20px;
+    margin: 0px 20px;
 }
 .optionalSignup .row .col-md-3 label{
     display: block;
@@ -2554,6 +2555,7 @@ textarea.addCommentTextarea{
     border-radius: 5px;
     resize: none;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .optionalSignup .row .col-md-9 label{
@@ -2566,375 +2568,15 @@ textarea.addCommentTextarea{
 }
 
 .optionalSignup .row .col-md-9 .btn{
-    width: 100%;
+    width: 100px;
     color: #FFF;
     background-color: #a9a9a9;
     font-weight: 700;
-    margin-top: 20px;
-}
-
-
-
-
-
-
-
-
-/*sign up page*/
-.paddBottom40{
-    padding-bottom: 40px;
-}
-.lineBreak{
-    padding-bottom: 40px; border-bottom: 1px solid #e1e1e1;margin-bottom: 40px;
-}
-
-.signUpInputLabel{
-    font-size: 20px;
-    line-height: 40px;
-    margin-top: 20px;
-}
-.signUpTitle{
-    font-weight:normal;font-size:30px;color:#000000;
-}
-.signUpSubTitle{
-    font-weight:normal;font-size:20px;color:#707070;margin-top:15px;
-}
-.lineHeight25{
-    line-height: 25px;
-}
-.lineHeight60{
-    line-height: 60px;
-}
-.stateDropDown{
-    display: none; max-height: 460px; overflow: hidden; min-height: 197px;
-}
-.stateDropDown > ul{
-    max-height: 448px; overflow-y: auto; min-height: 185px;
-}
-.margin0{
-    margin: 0px;
-}
-.borderRadius3{
-    border-radius: 3px;
-}
-.glyphiconPlus,.glyphiconMinus{
-    top: 5px; left: 39px; position: static; float: left !important; margin-top: 6px;
-}
-.makeMeBlack{
-    color: #000;
-}
-.imageUploadInfo{
-    color:#504d4e;padding-bottom: 25px;margin-top: 0px;font-size:14px;
-}
-.dashedBorder{
-    border: 1px dashed black; padding-top: 40px; padding-bottom: 35px;
-}
-/* end sign up page*/
-/* portfolio creation page*/
-.width75percent{
-    width: 75%;
-}
-.border0{
-    border: 0;
-}
-.paddTop20{
-    padding-top: 20px;
-}
-.borderRadius0{
-    border-radius: 0px;
-}
-.tellUsTextarea{
-    min-width: 47% !important;
-    height:150px;
-    padding: 15px;
+    margin-top: 0px;
     font-size: 18px;
-    margin-top: 20px;
-    border: 1px solid #000;
-    border-color:#000000;
-    resize:none;
 }
-.height75{
-    height: 75px;
-}
-.font16{
-    font-size: 16px;
-}
-.paddTop25{
-    padding-top: 25px;
-}
-.invitesBtn{
-    font-weight: 700;
-    color: #FFF;
-    font-size: 18px;
-    background: #5bbff8;
-    padding: 2px 12px;
-    margin-right: 20px;
-}
-.feedbackInvite p{
-    color: #000;
-    font-size: 18px;
-    font-weight: 700;
-}
-.feedbackInvite p span{
-    font-weight: 400;
-    display: inline-block;
-    margin-left: 20px;
-}
-.disableBorder{
-    border: none !important;
-}
-
-.designFeedbackInviteH3{
-    margin-bottom: 0px !important;
-    padding-bottom: 0px !important;
-    /*line-height: 40px !important;*/
-}
-
-.circleNumber{
-    font-size: 16px;
-    color: #000;
-    display: inline-block;
-    line-height: 25px;
-    text-align: center;
-    width: 25px;
-    height: 25px;
-    border: 1px solid #000;
-    border-radius: 100%;
-    margin-top: 20px;
-}
-.commentSent{
-    font-weight: 700;
-    font-size: 18px;
-    color: #000;
-    line-height: 60px;
-}
-textarea.addCommentTextarea{
-    padding: 10px;
-    height: 150px;
-}
-
-.grayBg{
-    background-color: #f4f4f4;
-}
-.whiteBg{
-    background-color: #fff;
-}
-.paddY20{
-    padding: 20px 0px;
-}
-
-.pageNotFound,.error500{
-    padding-top: 40px;
-}
-.pageNotFound h1{
-    font-size: 60px;
-    color: #000;
-}
-.pageNotFound h3,.error500 h3{
-    font-size: 30px;
-    color: #000;
-    font-weight: 400;
-}
-.pageNotFound p{
-    padding-bottom: 20px;
-    font-size: 20px;
-    color: #000;
-    line-height: 60px;
-
-}
-.pageNotFound .btn,.error500 .btn{
-    font-size: 20px;
-    background-color: #a9a9a9;
-    font-weight: 700;
-    color: #FFF;
-}
-
-.error500 h1{
-    color: #000;
-    font-size: 60px;
-}
-.error500 h1 span{
-    color: #848484;
-    font-size: 36px;
-}
-.error500 h1 img{
-    position: relative;
-    top: -8px;
-    left: -10px;
-}
-.error500 h3 a{
-    font-style: italic;
-    color: #000;
-    text-decoration: underline;
-    font-weight: 700;
-}
-.error500 .btn{
-    margin-top: 40px;
-}
-
-.latestTraining{
-    border: 1px solid #e1e1e1;
-    margin: 15px 140px;
-    width: 75%;
-}
-.latestTraining:hover{
-    color: #000;
-    text-decoration: none;
-}
-
-.homeEmailSignup{
-    background: #f4f4f4;
-    padding: 40px 0px;
-    overflow: hidden;
-}
-.homeEmailSignup h3{
-    font-size: 30px;
-    color: #000;
-}
-
-.homeEmailSignup p{
-    /*padding-bottom: 20px;*/
-    font-size: 18px;
-    color: #000;
-    line-height: 50px;
-
-}
-.homeEmailSignup input[type=text]{
-    width: 450px;
-    height: 39px;
-    padding: 0px 5px;
-    border-radius: 5px;
-    border: 1px solid #a9a9a9;
-}
-.homeEmailSignup .btn{
-    padding: 8px 30px;
-    background-color: #a9a9a9;
-    color: #FFF;
-    font-weight: 700;
-    margin-left: 15px;
-}
-.grayBg{
-    background-color: #f4f4f4;
-}
-.whiteBg{
-    background-color: #fff;
-}
-.paddY20{
-    padding: 20px 0px;
-}
-
-.pageNotFound,.error500{
-    padding-top: 40px;
-}
-.pageNotFound h1{
-    font-size: 60px;
-    color: #000;
-}
-.pageNotFound h3,.error500 h3{
-    font-size: 30px;
-    color: #000;
-    font-weight: 400;
-}
-.pageNotFound p{
-    padding-bottom: 20px;
-    font-size: 20px;
-    color: #000;
-    line-height: 60px;
-
-}
-.pageNotFound .btn,.error500 .btn{
-    font-size: 20px;
-    background-color: #a9a9a9;
-    font-weight: 700;
-    color: #FFF;
-}
-
-.error500 h1{
-    color: #000;
-    font-size: 60px;
-}
-.error500 h1 span{
-    color: #848484;
-    font-size: 36px;
-}
-.error500 h1 img{
-    position: relative;
-    top: -8px;
-    left: -10px;
-}
-.error500 h3 a{
-    font-style: italic;
-    color: #000;
-    text-decoration: underline;
-    font-weight: 700;
-}
-.error500 .btn{
-    margin-top: 40px;
-}
-
-
-.optionalSignup{
-    width: 580px;
-    margin: 40px auto;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-}
-.optionalSignup h4{
-    background-color: #f4f4f4;
-    color: #000;
-    font-style: italic;
-    margin: 0px;
-    padding-left: 20px;
-    line-height: 53px;
-    border-bottom: 1px solid #e1e1e1;
-
-}
-
-.optionalSignup .row{
-    margin: 40px 20px;
-}
-.optionalSignup .row .col-md-3 label{
-    display: block;
-    font-size: 16px;
-    font-weight: 700;
-    color: #000;
-    line-height: 33px;
-    padding-bottom: 15px;
-}
-.optionalSignup .row .col-md-9 input[type=text]{
-    display: inline-block;
-    width: 100%;
-    height: 33px;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    margin-bottom: 27px;
-}
-.optionalSignup .row .col-md-9 textarea{
-    display: inline-block;
-    width: 100%;
-    height: 80px;
-    padding: 3px;
-    border: 1px solid #e1e1e1;
-    border-radius: 5px;
-    resize: none;
-    margin-top: 20px;
-}
-
-.optionalSignup .row .col-md-9 label{
-    display: inline-block;
-    margin-right: 40px;
-    font-size: 16px;
-}
-.optionalSignup .row .col-md-9 label input{
-    margin-right: 20px;
-}
-
-.optionalSignup .row .col-md-9 .btn{
-    width: 100%;
-    color: #FFF;
-    background-color: #a9a9a9;
-    font-weight: 700;
-    margin-top: 20px;
+.emailLabelPrivateBeta{
+    margin-top: 52px;
 }
 
 .contestUnderway h3{
@@ -3036,9 +2678,85 @@ textarea.addCommentTextarea{
 .contestTableRow2 .col-md-1,.contestTableRow2 .col-md-2{
     font-weight: 700;
 }
+.seeCompletedContests,.seeCurrentContests{
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #000;
+    margin-top: 0px;
+    background: url('/assets/collapse.png') no-repeat right center;
+    cursor: pointer;
+}
+#completedContestsBox,#currentContestsBox{
+    display: none;
+}
+
+.checkLatestTrainingLink{
+    font-size: 20px;
+    color: #a9a9a9;
+    font-weight: 700;
+    font-style: italic;
+    text-decoration: underline;
+}
+.notificationSidebar .designerName{
+    border: none;
+}
+.notificationSidebar .comment-time{
+    margin: 0px;
+}
+
+.notificationSidebar .commentContainer:first-child {
+    border-top:1px solid #e1e1e1;
+}
+
+.notificationSidebar .comment-text{
+    background: url('/assets/gray-bullet-list.png') no-repeat top left;
+    padding-left: 25px;
+}
+.notificationSidebar #scrollBoxComments{
+    height: 380px;
+}
 
 
+.joinContestBox{
+    border: 1px solid #e1e1e1;
+    border-left: 5px solid #53cf4d;
+    background: #fafafa;
+}
+.joinContestBox > .row > .col-md-12{
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    border-bottom: 1px solid #e1e1e1;
+    padding-left: 25px;
+    margin:0px;
+    height: 50px;
+    line-height: 50px;
+}
+.joinContestBox .row{
+    margin:0px;
+}
+.joinContestBox .row .col-md-2{
+    text-align: center;
+}
 
+.joinContestHeader > div{
+    font-weight: 700;
+    color: #000;
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+}
+.joinContestBody > div{
+    height: 50px;
+    color: #000;
+    font-size: 14px;
+}
+.grayItalic{
+    color: #a9a9a9;
+    font-size: 14px;
+    font-style: italic;
+}
 
 
 
