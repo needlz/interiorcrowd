@@ -2771,9 +2771,26 @@ textarea.addCommentTextarea{
     height: 90px;
     padding-top: 30px;
     text-align: center;
+}
+.suggestedContestBody{
     background: #fafafa;
+    border-top: 1px solid #e1e1e1;
+    border-right: 1px solid #e1e1e1;
+    border-left: 5px solid #f1ef6b;
+}
+.suggestedContestBody:hover{
+    background: #e1e1e1;
+}
+.suggestedContestBox{
+    margin: 0px 30px;
+}
+.currentContestBody{
+    border-left: 5px solid #e1e1e1;
 }
 
+.triangleUp{
+    background: url('/assets/collapsed.png') no-repeat right center;
+}
 
 
 
