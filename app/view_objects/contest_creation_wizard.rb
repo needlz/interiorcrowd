@@ -23,7 +23,7 @@ class ContestCreationWizard
 
   def initialize(options)
     @contest_attributes = options[:contest_attributes]
-    @active_step_index = self.class.creation_steps.index(options[:step]) + 1 if options[:step]
+    @active_step_index = self.class.creation_steps.index(options[:step]) if options[:step]
   end
 
   # design categories
@@ -69,8 +69,7 @@ class ContestCreationWizard
   end
 
   def budget_options
-    placeholder = [I18n.t('contests.space.budget.placeholder'), '']
-    [placeholder] + ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
+    ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
   end
 
   def budget_plans

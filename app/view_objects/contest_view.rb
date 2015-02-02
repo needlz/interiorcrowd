@@ -1,6 +1,6 @@
 class ContestView
 
-  CONTEST_DESIGN_BUDGETS = [ '$0 - $200', '$201 - $500', '$501 - $1000', '$1001 - $1500', '$1501 - $2500',
+  CONTEST_DESIGN_BUDGETS = [I18n.t('contests.space.budget.placeholder'), '$0 - $200', '$201 - $500', '$501 - $1000', '$1001 - $1500', '$1501 - $2500',
                              '$2501 - $3500', '$3501 - $5000', '$5001 - $7500', '$7501 - $10000', '$10000 +' ]
 
   ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
