@@ -1,5 +1,6 @@
 .answers{ data: { url: answer_contest_request_path(id: request_id) } }
-  %button.btn.answer-no{ data: {answer: 'no'} }= t('client_center.entries.answers.no')
-  %button.btn.answer-maybe{ data: {answer: 'maybe'} }= t('client_center.entries.answers.maybe')
-  %button.btn.answer-favorite{ data: {answer: 'favorite'} }= t('client_center.entries.answers.favorite')
-  %button.btn.disableMargin.winner-answer= t('client_center.entries.answers.winner')
+  =render partial: 'clients/answer', locals: { answer: answer, text: t('client_center.entries.answers.no'), btnClass: '' }
+  =render partial: 'clients/answer', locals: { answer: answer, text: t('client_center.entries.answers.maybe'), btnClass: '' }
+  =render partial: 'clients/answer', locals: { answer: answer, text: t('client_center.entries.answers.favorite'), btnClass: ''}
+  =render partial: 'clients/answer', locals: { answer: answer, text: t('client_center.entries.answers.winner'), btnClass: 'disableMargin' }
+
