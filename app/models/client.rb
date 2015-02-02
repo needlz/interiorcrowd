@@ -21,10 +21,6 @@ class Client < ActiveRecord::Base
      username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil
   end
 
-  def phone_number
-    '415-333-3333'
-  end
-
   def last_contest
     contests.order(:created_at).last
   end

@@ -2,7 +2,7 @@ class @ProfileEditor extends InlineEditor
 
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
-  numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
+  numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip, #client_billing_zip'
 
   bindEvents: ->
     super()
@@ -10,7 +10,7 @@ class @ProfileEditor extends InlineEditor
     @initNumberFields()
 
   initNumberFields: ->
-    $('.attribute').ForceNumericOnly();
+    $(@numberFields).ForceNumericOnly();
 
   getForm: (attribute, onEditFormRetrieved)=>
     formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit")
@@ -34,8 +34,12 @@ class @ProfileEditor extends InlineEditor
       @updateText($form, $view, 'last_name')
     username: ($form, $view)->
       @updateText($form, $view, 'email')
+    phone_number: ($form, $view)->
+      @updateText($form, $view, 'phone_number')
     address: ($form, $view)->
-      @updateText($form, $view, field) for field in ['address', 'state', 'zip']
+      @updateText($form, $view, field) for field in ['address', 'state', 'zip', 'city']
+    billing_address: ($form, $view)->
+      @updateText($form, $view, field) for field in ['billing_address', 'billing_state', 'billing_zip', 'billing_city']
     billing_information: ($form, $view)->
       @updateText($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
 
