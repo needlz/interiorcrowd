@@ -68,6 +68,9 @@ group :staging do
   gem 'rails_12factor'
 end
 
+gem 'mandrill-rails'
+gem 'mandrill-api'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

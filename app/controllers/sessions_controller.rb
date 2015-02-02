@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
         new_password = SecureRandom.urlsafe_base64(5)
         designer.password = Client.encrypt(new_password)
         designer.save
-        Mailer.reset_password_mail(designer, new_password).deliver
+        UserMailer.new.reset_password(designer, new_password)
         flash[:notice] = "An email has been sent to your registered email address."
         redirect_to login_sessions_path
        
@@ -56,7 +56,7 @@ class SessionsController < ApplicationController
         new_password = SecureRandom.urlsafe_base64(5)
         client.password = Client.encrypt(new_password)
         client.save
-        Mailer.reset_password_mail(designer_info, new_password).deliver
+        UserMailer.new.reset_password(client, new_password)
         flash[:notice] = "An email has been sent to your registered email address."
         redirect_to client_login_sessions_path
        else
