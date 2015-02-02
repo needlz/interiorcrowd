@@ -14,12 +14,14 @@
 .optionalSignup
   .row
     .col-md-3
+      %label.emailLabelPrivateBeta= t('sign_up_beta.email')
       %label= t('sign_up_beta.name')
       %label= t('sign_up_beta.role_switcher')
       %label= t('sign_up_beta.other_info')
-      %label.emailLabelPrivateBeta= t('sign_up_beta.email')
+
 
     .col-md-9
+      %input.email{:type => "text"}/
       %input{:type => "text"}/
       %label
         %input{:name => "type", :type => "radio"}>/
@@ -28,5 +30,4 @@
         %input{:name => "type", :type => "radio"}>/
         = t('sign_up_beta.consumer')
       %textarea
-      %input.email{:type => "text"}/
       %input.btn{:type => "submit", :value => "Go"}/
