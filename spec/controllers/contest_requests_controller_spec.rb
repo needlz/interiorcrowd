@@ -88,6 +88,12 @@ RSpec.describe ContestRequestsController do
       expect(response).to render_template(:show)
     end
 
+    it 'renders answers if contest is in submission state' do
+      expect(contest.status).to eq 'submission'
+      get :show, id: request.id
+      expect(response).to render_template(partial: '_answers')
+    end
+
     it 'raises error if client is not logged in' do
       session[:client_id] = 0
       expect { get :show, id: request.id }.to raise_error

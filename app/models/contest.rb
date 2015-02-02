@@ -110,6 +110,10 @@ class Contest < ActiveRecord::Base
     reviewer_invitations.create!(invite_params)
   end
 
+  def responses_answerable?
+    winner_selection? || submission?
+  end
+
   private
 
   def update_appeals(options)

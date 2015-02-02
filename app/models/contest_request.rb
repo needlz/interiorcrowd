@@ -51,6 +51,10 @@ class ContestRequest < ActiveRecord::Base
     (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
+  def answerable?
+    contest.responses_answerable?
+  end
+
   private
 
   def contest_status
@@ -60,7 +64,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def answerable
-    if !(contest.winner_selection? || contest.submission?) && answer.present?
+    if !answerable? && answer.present?
       errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
     end
   end
