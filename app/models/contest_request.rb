@@ -6,7 +6,7 @@ class ContestRequest < ActiveRecord::Base
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_uniqueness_of :designer_id, scope: :contest_id
-  validate :contest_status, :one_winner, :answerable, if: ->(request){ request.contest }
+  validate :contest_status, :one_winner, :allowed_answer, if: ->(request){ request.contest }
 
   state_machine :status, initial: :draft do
     event :submit do
@@ -63,7 +63,7 @@ class ContestRequest < ActiveRecord::Base
     end
   end
 
-  def answerable
+  def allowed_answer
     if !answerable? && answer.present?
       errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
     end
