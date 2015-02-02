@@ -59,7 +59,7 @@ class @PortfolioEditor
     $('.hidden:checkbox').change()
 
   bindYearsOfExpirience: ->
-    $('#portfolio_years_of_expirience').keypress digitsFilter
+    $('#portfolio_years_of_expirience').ForceNumericOnly();
 
     $(".spinner .btn:first-of-type").on "click", (event)->
       value = ~~$(".spinner input").val()

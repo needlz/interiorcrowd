@@ -8,7 +8,7 @@ class AccountCreation
     @bindNumericInputs()
 
   @bindNumericInputs: ->
-    $('#card_number, #card_cvc, #client_zip').keypress(digitsFilter)
+    $('#card_number, #card_cvc, #client_zip').ForceNumericOnly();
 
   @trimedVal: ($input)->
     $.trim($input.val())

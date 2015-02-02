@@ -10,7 +10,7 @@ class @ProfileEditor extends InlineEditor
     @initNumberFields()
 
   initNumberFields: ->
-    $('.attribute').on('keypress', @numberFields, digitsFilter)
+    $('.attribute').ForceNumericOnly();
 
   getForm: (attribute, onEditFormRetrieved)=>
     formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit")
