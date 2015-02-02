@@ -50,7 +50,7 @@ class @Answers
     @bindWinnerDialogButtons()
 
   bindWinnerButton: ->
-    $('.winner-answer').click (event)=>
+    $('.answer-winner').click (event)=>
       requestId = $(event.target).parents('.moodboard').data('id')
       $('#pickWinnerModal').data('id', requestId)
       $('#pickWinnerModal').modal('show');
@@ -96,7 +96,8 @@ class @Answers
     onUpdate
 
   updateView: (requestId, answer)->
-    $(".moodboard[data-id='#{ requestId }'] .current-answer").text(answer)
+    $('button.btn[data-answer]').removeClass('result-answer')
+    $("button.btn[data-answer=#{answer}]").addClass('result-answer')
 
   hidePopover: ($popover_element)->
     $('#pickWinnerModal').modal('hide');

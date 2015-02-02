@@ -9,5 +9,4 @@
         = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
     .hLine
     - if show_answer_options && @client
-      = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id }
-    %span.current-answer= contest_request.answer
+      = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id, answer: contest_request.answer }
