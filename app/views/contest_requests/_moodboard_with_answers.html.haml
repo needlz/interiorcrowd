@@ -1,5 +1,5 @@
-.moodboard{ data: { id: contest_request.id } }
-  = render partial: 'shared/moodboard', locals: { request: contest_request }
-- if show_answer_options
-  = render partial: 'contest_requests/answers'
-  %span.current-answer= contest_request.answer
+.designConcept.moodboard#client_btns{ data: { id: contest_request.id } }
+  .moodboard
+    = render partial: 'shared/moodboard', locals: { request: contest_request }
+  - if show_answer_options
+    = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id, answer: contest_request.answer }

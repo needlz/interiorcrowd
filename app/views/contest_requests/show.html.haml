@@ -4,7 +4,7 @@
     I18n = #{ translations_to_json(['client_center', 'entries']) }
 
 - content_for :client_center_content do
-  = render partial: 'clients/client_center/moodboard_winner_dialog'
+
   .col-md-12.disablePadding
     = link_to t('client_center.moodboard_details.back'), entries_client_center_index_path, class: "backToEntries"
   .col-md-8.disablePadding
@@ -13,3 +13,4 @@
     = render partial: 'contest_requests/submission_info', locals: { designer: @request.designer, submitted_at: @request.created_at }
 
 = render partial: 'clients/client_center/layout'
+= render partial: 'clients/client_center/moodboard_winner_dialog'
