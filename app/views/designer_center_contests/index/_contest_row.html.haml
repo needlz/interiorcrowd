@@ -1,7 +1,6 @@
-%tr{ class: classes, data: { id: id } }
-  = content_tag(column_tag, id)
-  = content_tag(column_tag, project_name)
-  = content_tag(column_tag, design_category_name)
-  = content_tag(column_tag, design_space_name)
-  = content_tag(column_tag, days_left)
-  = content_tag(column_tag, price)
+.col-md-2= t('designer_center.contests_preview.contest_id')
+.col-md-2= t('designer_center.contests_preview.contest_name')
+.col-md-2= t('designer_center.contests_preview.type')
+.col-md-2= t('designer_center.contests_preview.room')
+.col-md-2= t('designer_center.contests_preview.price')
+.col-md-2= t('designer_center.contests_preview.days_left_to_enter')

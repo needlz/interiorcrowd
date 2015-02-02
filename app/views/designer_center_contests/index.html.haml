@@ -3,10 +3,13 @@
 
 - content_for :designer_center_content do
   #contests-preview
-    .row
-      = render partial: 'designer_center_contests/index/notifications'
-      = render partial: 'designer_center_contests/index/suggested_contests'
-    .row
-      = render partial: 'designer_center_contests/index/all_contests'
-
+    .col-md-10.col-md-offset-1.marg-bottom30
+      .joinContestBox
+        = render partial: 'designer_center_contests/index/congrats'
+      .row
+        = render partial: 'designer_center_contests/index/suggested_contests'
+      .row
+        = render partial: 'designer_center_contests/index/all_contests'
+      .row
+        = render partial: 'designer_center_requests/index/footer'
 = render partial: 'designer_center/layout'
