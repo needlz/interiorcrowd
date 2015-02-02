@@ -2,7 +2,7 @@ class @ProfileEditor extends InlineEditor
 
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
-  numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip'
+  numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip, #client_billing_zip'
 
   bindEvents: ->
     super()
@@ -10,7 +10,7 @@ class @ProfileEditor extends InlineEditor
     @initNumberFields()
 
   initNumberFields: ->
-    $('#client_zip, #client_billing_zip').ForceNumericOnly();
+    $(@numberFields).ForceNumericOnly();
 
   getForm: (attribute, onEditFormRetrieved)=>
     formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit")
