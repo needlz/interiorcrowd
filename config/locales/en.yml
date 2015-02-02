@@ -459,6 +459,7 @@ en:
       qualifying_round: Qualifying Round
       fulfillment_period: Fulfillment Period
       invite: Congratulations! You have been invited to join a contest! Join now!
+      few_days: days
 
     show_page:
       back_to_index: < Back to all current contests

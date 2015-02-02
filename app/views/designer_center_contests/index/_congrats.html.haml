@@ -8,12 +8,4 @@
     .col-md-2= t('designer_center.contests_preview.price')
     .col-md-2= t('designer_center.contests_preview.days_left_to_enter')
   .row.joinContestBody
-    - @current_contests.each do |contest|
-      .col-md-2= contest.id
-      .col-md-2= contest.name
-      .col-md-2= contest.design_category
-      .col-md-2= contest.design_space
-      .col-md-2= contest.price
-      .col-md-2
-        = contest.days_count
-        %span days
+    = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @current_contests }

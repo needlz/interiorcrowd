@@ -3,4 +3,4 @@
 .suggestedContestBox
   .row.suggestedContestHeader
     = render partial: 'designer_center_contests/index/contest_row'
-  = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @suggested_contests }
+  = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @suggested_contests, border_class: 'suggestedContestBody' }

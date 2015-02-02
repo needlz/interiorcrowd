@@ -1,5 +1,5 @@
 - contests.each do |contest|
-  .row.suggestedContestBody.contest-item{ class: "#{border_class if defined? border_class}", data: {id: contest.id} }
+  .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: contest.id} }
     .col-md-2= contest.id
     .col-md-2= contest.name
     .col-md-2= contest.design_category
@@ -7,4 +7,4 @@
     .col-md-2= contest.price
     .col-md-2
       = contest.days_count
-      %span days
+      %span= t('designer_center.contests_preview.few_days')
