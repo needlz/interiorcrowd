@@ -87,4 +87,20 @@ RSpec.describe Contest do
       end
     end
   end
+
+  describe '#responses_answerable?' do
+    it 'returns true if contest is in submission or winner_selection state' do
+      %w(submission winner_selection).each do |status|
+        contest.update_attributes!(status: status)
+        expect(contest.responses_answerable?).to be_truthy
+      end
+    end
+
+    it 'returns false if contest is not in submission or winner_selection state' do
+      (Contest::STATUSES - %w(submission winner_selection)).each do |status|
+        contest.update_attributes!(status: status)
+        expect(contest.responses_answerable?).to be_falsey
+      end
+    end
+  end
 end

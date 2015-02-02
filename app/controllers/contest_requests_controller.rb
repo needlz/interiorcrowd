@@ -80,7 +80,7 @@ class ContestRequestsController < ApplicationController
     return unless check_client
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
-    @show_answer_options = @request.contest.winner_selection?
+    @show_answer_options = @request.answerable?
     @navigation = Navigation::ClientCenter.new(:entries)
   end
 end
