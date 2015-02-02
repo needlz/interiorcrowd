@@ -6,9 +6,6 @@ RSpec.describe ClientsController do
 
   include ClientsHelper
 
-  before do
-    allow_any_instance_of(Mailer).to receive(:user_registration).and_return(Hashie::Mash.new({ deliver: '' }))
-  end
 
   let(:client) { Fabricate(:client) }
   let(:appeals) do

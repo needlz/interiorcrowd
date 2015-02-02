@@ -568,3 +568,6 @@ en:
   registration:
     designer: 'You have successfully registered with us a designer. Your login details for Interior Crowd as below:'
     client: ' You have successfully registered with us. Your login details for Interior Crowd as below:'
+  invitation_to_content:
+    invite: You have been invited to take part in contest.
+  reset_password: 'Your password was reseted, here are your new credentionals:'

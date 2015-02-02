@@ -54,7 +54,6 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if @client.save
         UserMailer.new.user_registration(@client, user_ps)
-        # Mailer.user_registration(@client, user_ps).deliver
         session[:client_id] = @client.id
         contest = create_contest(@client.id)
         format.html { redirect_to additional_details_contest_path(id: contest.id) }
