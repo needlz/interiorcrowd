@@ -76,8 +76,8 @@ class AccountCreation
       $cvc = $("#card_cvc")
       cvc = @trimedVal($cvc)
       if cvc.length > 1
-        if not $.isNumeric(cvc) or cvc.length isnt 3
-          @validator.addMessage $("#err_cvc"), "Please enter valid CVC, must have 3 digits.", $cvc
+        if not ($.isNumeric(cvc) and cvc.length in [3..4])
+          @validator.addMessage $("#err_cvc"), "Please enter valid CVC, must have 3 or 4 digits.", $cvc
       else
         @validator.addMessage $("#err_cvc"), "Please enter CVC.", $cvc
     ->
