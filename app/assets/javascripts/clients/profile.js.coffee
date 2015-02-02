@@ -34,6 +34,8 @@ class @ProfileEditor extends InlineEditor
       @updateText($form, $view, 'last_name')
     username: ($form, $view)->
       @updateText($form, $view, 'email')
+    phone_number: ($form, $view)->
+      @updateText($form, $view, 'phone_number')
     address: ($form, $view)->
       @updateText($form, $view, field) for field in ['address', 'state', 'zip']
     billing_information: ($form, $view)->
