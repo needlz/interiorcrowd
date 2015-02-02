@@ -10,7 +10,7 @@ class @ProfileEditor extends InlineEditor
     @initNumberFields()
 
   initNumberFields: ->
-    $('.attribute').ForceNumericOnly();
+    $('.attribute').not('.edit-profile').ForceNumericOnly();
 
   getForm: (attribute, onEditFormRetrieved)=>
     formHtml = $(".attribute[data-id='#{ attribute }'] .preview .edit")
@@ -37,7 +37,9 @@ class @ProfileEditor extends InlineEditor
     phone_number: ($form, $view)->
       @updateText($form, $view, 'phone_number')
     address: ($form, $view)->
-      @updateText($form, $view, field) for field in ['address', 'state', 'zip']
+      @updateText($form, $view, field) for field in ['address', 'state', 'zip', 'city']
+    billing_address: ($form, $view)->
+      @updateText($form, $view, field) for field in ['billing_address', 'billing_state', 'billing_zip', 'billing_city']
     billing_information: ($form, $view)->
       @updateText($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
 

@@ -1,5 +1,10 @@
 .field
   %div
+    = form.label :state, t('client_center.profile.labels.city')
+  %div
+    = form.text_field :city
+.field
+  %div
     = form.label :address, t('client_center.profile.labels.address')
   %div
     = form.text_field :address
