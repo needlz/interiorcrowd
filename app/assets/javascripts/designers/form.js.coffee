@@ -24,7 +24,7 @@ class @DesignerSignUp
       $('#designer_agree').prop('checked', $(@).hasClass('active'))
 
   bindNumericInputs: ->
-    $('#designer_zip').keypress digitsFilter
+    $("#designer_zip").ForceNumericOnly();
 
   populateExamplesInputs: ->
     $.each(externaLinks, (index, link)=>
