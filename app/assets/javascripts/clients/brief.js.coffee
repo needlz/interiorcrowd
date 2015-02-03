@@ -74,7 +74,7 @@ class @ContestEditing extends InlineEditor
     budget: ->
       BudgetOptions.init()
     example_links: ->
-      InspirationLinks.init()
+      InspirationLinksEditor.init()
 
   previewCallbacks:
     desirable_colors: ->
@@ -91,9 +91,6 @@ class @ContestEditing extends InlineEditor
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()
     $elem.html($editButton)
-
-class @InspirationLinks extends PopulatedInputs
-  @container: '.links-options'
 
 $ ->
   window.brief = new ContestEditing()
