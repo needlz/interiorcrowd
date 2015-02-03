@@ -182,6 +182,17 @@ $.widget "custom.colorTags",
 
     @element.select2('readonly', true) if @options.readonly
 
+class @Colors
+  @set: =>
+    $.each $('.color-text'), (_, item) =>
+      colorName = $(item).text()
+      $(item).text(@.getName(colorName))
+
+  @getName: (color)->
+    $.map(colorNames, (item)->
+      return item.text if item.id == color
+    )
+
 class @ColorsEditor
 
   constructor: (options)->

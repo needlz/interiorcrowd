@@ -1,0 +1,32 @@
+.bottom60
+  .row.marg-top30.padd50Side
+    = render partial: 'contests/preview/current_contest_infobox'
+    %a.italicLink{:href => "#"}=t("designer_center.my_contests.design_profile")
+    %h2.font20.marg-top30=t("designer_center.my_contests.step_1")
+    %a.italicLink{:href => "#"}=t("designer_center.my_contests.examples_of_moodboards")
+    .row.disableMargin
+      .col-md-7.col-md-offset-1.marg-top20
+        %p.hintP
+          - link = link_to t("designer_center.my_contests.hint_link"), "#", class: 'italicLink'
+          = t('designer_center.my_contests.hint', link: link).html_safe
+          = render partial: 'designer_center_requests/my_contests/contest_box', locals: {contest: @contest, contest_view: @contest_view}
+          %a.seeMoreLink{:href => "#"}=t('designer_center.my_contests.see_more')
+
+    %h2.font20.marg-top30=t('designer_center.my_contests.ready_to_go')
+    %img.conceptMoodboardImg{:src => "/assets/placeholder1.jpg"}/
+    %a.submitMyDesign{:href => "#"}=t('designer_center.my_contests.upload_moodboard')
+    .row
+      .col-md-7
+        %textarea.aboutDesignTextarea{ placeholder: t('designer_center.my_contests.design_textarea_placeholder') }
+    = render partial: 'designer_center_requests/my_contests/footer_buttons'
+    .clearfix
+    .row.marg-top40
+      .col-md-4
+        %h2.font20.disableMargin=t('designer_center.my_contests.need_to_ask_question')
+      .col-md-8
+        %textarea.askQuestionTextarea
+
+:javascript
+  $(document).ready(function(){
+    Colors.set()
+  })
