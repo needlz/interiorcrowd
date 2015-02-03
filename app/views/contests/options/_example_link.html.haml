@@ -1,10 +1,11 @@
-.col-md-10.form-group.no-x-padding
-  %input.form-control{name: name,
-    type: "text",
-    value: value,
-    data: { name: 'design_style[ex_links][]' } }/
-.col-md-2
-  %a.remove-button{ href: '#' }
-    %i.glyphicon.glyphicon-minus.pull-right.glyphic-link
-  %a.add-button{ href: '#' }
-    %i.glyphicon.glyphicon-plus.pull-right.glyphic-link
+.lnk_container
+  .col-md-10.form-group.no-x-padding
+    %input.form-control{name: name,
+      type: "text",
+      value: value,
+      data: { name: 'design_style[ex_links][]' } }/
+  .col-md-2
+    %a.plus_wrapper.links{ href: '#' }
+      %i.glyphicon.glyphicon-plus.pull-right.glyphic-link.example-link-glyph.glyphiconPlus
+    %a.minus_wrapper.links{ href: '#' }
+      %i.glyphicon.glyphicon-minus.pull-right.glyphic-link.example-link-glyph.glyphiconMinus
