@@ -4,9 +4,6 @@ RSpec.describe DesignersController do
   render_views
 
   describe '#create' do
-    before do
-      allow_any_instance_of(Mailer).to receive(:designer_registration).and_return(Hashie::Mash.new({ deliver: '' }))
-    end
 
     let(:designer_creation_params) do
       {

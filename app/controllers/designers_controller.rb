@@ -24,7 +24,7 @@ class DesignersController < ApplicationController
         session[:external_links] = nil
         session[:designer_id] = @designer.id
         @designer.create_portfolio(params[:portfolio])
-        Mailer.designer_registration(@designer, user_ps).deliver
+        UserMailer.new.user_registration(@designer, user_ps)
         format.html { redirect_to designer_center_index_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else

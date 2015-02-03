@@ -15,6 +15,10 @@ class Client < ActiveRecord::Base
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
   end
+
+  def name
+    "#{ first_name } #{ last_name }"
+  end
   
   def self.authenticate(username, password)
      password = encrypt(password)

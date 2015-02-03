@@ -1,0 +1,21 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+
+development:
+  mailer_address: ''
+  mailer_password: ''
+  S3_BUCKET_NAME: 'icrowd-development'
+  AWS_ACCESS_KEY: AKIAJH6V52XNVZ4Y7X6Q
+  AWS_SECRET_ACCESS_KEY: 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
+  MANDRILL_EMAIL: 'erikneeds@gmail.com'
+  MANDRILL_PASSWORD: 'icrowd1icrowd'
+  MANDRILL_API_TOKEN: 'Z0cZS1bcBHxqxJEV0nRJMg'
