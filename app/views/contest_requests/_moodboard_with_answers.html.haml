@@ -2,4 +2,5 @@
   .moodboard
     = render partial: 'shared/moodboard', locals: { request: contest_request }
   - if show_answer_options
+    .bottom20
     = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id, answer: contest_request.answer }
