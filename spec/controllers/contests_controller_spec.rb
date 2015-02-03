@@ -115,5 +115,17 @@ RSpec.describe ContestsController do
         expect(response).to redirect_to ContestCreationWizard.creation_steps_paths.values[0]
       end
     end
+
+    context 'some data of preview step not passed' do
+      before do
+        prepare_contest_data
+        session[:preview][:b_plan] = nil
+      end
+
+      it 'redirects to preview page' do
+        get :account_creation
+        expect(response).to redirect_to ContestCreationWizard.creation_steps_paths[:preview]
+      end
+    end
   end
 end

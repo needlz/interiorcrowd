@@ -53,19 +53,21 @@ class ContestOptions
     missing_options.empty?
   end
 
-  def missing_options
-    missing_options = REQUIRED_CONTEST_ATTRIBUTES.select { |option| contest[option].blank? }
-    missing_options << :appeals if appeals.blank?
-    missing_options << :designer_level if designer_level.blank?
-    missing_options
-  end
-
   def uncompleted_chapter
     missing = missing_options
     REQUIRED_OPTIONS_BY_CHAPTER.each do |chapter, options|
       return chapter if (missing & options).present?
     end
     nil
+  end
+
+  private
+
+  def missing_options
+    missing_options = REQUIRED_CONTEST_ATTRIBUTES.select { |option| contest[option].blank? }
+    missing_options << :appeals if appeals.blank?
+    missing_options << :designer_level if designer_level.blank?
+    missing_options
   end
 
 end
