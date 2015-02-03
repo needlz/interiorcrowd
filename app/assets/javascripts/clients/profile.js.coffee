@@ -3,7 +3,7 @@ class @ProfileEditor extends InlineEditor
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
   numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip, #client_billing_zip'
-  clientCardNumberId: '#client_card_number'
+  cardNumber: 'card_number'
   fourDigitsDelta: -4
 
   bindEvents: ->
@@ -43,23 +43,28 @@ class @ProfileEditor extends InlineEditor
     billing_address: ($form, $view)->
       @updateText($form, $view, field) for field in ['billing_address', 'billing_state', 'billing_zip', 'billing_city']
     billing_information: ($form, $view)->
-      @updateCardNumber($form, $view, field) for field in ['card_number', 'card_ex_month', 'card_ex_year', 'card_cvc']
+      @updateText($form, $view, field) for field in ['card_ex_month', 'card_ex_year', 'card_cvc']
+      @updateCardNumber($form, $view, @cardNumber)
 
   editFormsCallbacks:
     billing_information: ($form, $view)->
       @initSelectPicker()
 
   updateText: ($form, $view, field)->
-    $input = $form.find("#client_#{ field }")
-    $view.find(".#{ field }").text($input.val())
-    $input.attr('value', $input.val())
+    @updateSection($form, $view, field, ($input)->
+      $input.val()
+    )
 
   updateCardNumber: ($form, $view, field)->
-    $input = $form.find(@clientCardNumberId)
-    four_digits = $input.val().slice(@fourDigitsDelta)
-    $view.find(".#{ field }").text(four_digits)
-    $input.attr('value', $input.val())
+    @updateSection($form, $view, field, ($input)=>
+      $input.val().slice(@fourDigitsDelta)
+    )
 
+  updateSection: ($form, $view, field, callback)->
+    $input = $form.find("#client_#{ field }")
+    value = callback($input)
+    $view.find(".#{ field }").text(value)
+    $input.attr('value', $input.val())
 
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()
