@@ -3,6 +3,8 @@ class @ProfileEditor extends InlineEditor
   attributeIdentifierData: 'id'
   placeholderSelector: '.placeholder'
   numberFields: '#client_card_number, #client_card_ex_month, #client_card_ex_year, #client_card_cvc, #client_zip, #client_billing_zip'
+  clientCardNumber: 'client_card_number'
+  fourDigitsDelta: -4
 
   bindEvents: ->
     super()
@@ -49,8 +51,15 @@ class @ProfileEditor extends InlineEditor
 
   updateText: ($form, $view, field)->
     $input = $form.find("#client_#{ field }")
-    $view.find(".#{ field }").text($input.val())
+    value = @processCardNumber($input)
+    $view.find(".#{ field }").text(value)
     $input.attr('value', $input.val())
+
+  processCardNumber: ($input)->
+    four_digits = $input.val()
+    if $input.attr('id') is @clientCardNumber
+      return four_digits.slice(@fourDigitsDelta)
+    four_digits
 
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()
