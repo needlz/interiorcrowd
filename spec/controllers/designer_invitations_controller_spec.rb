@@ -67,7 +67,7 @@ RSpec.describe DesignerInvitationsController do
         end
 
         it 'doesn\'t create an invitation if already invited' do
-          Fabricate(:designer_invitation, designer_id: designer.id, contest_id: contest.id)
+          Fabricate(:designer_invitation, user_id: designer.id, contest_id: contest.id)
           expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error
         end
       end

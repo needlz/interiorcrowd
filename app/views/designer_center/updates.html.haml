@@ -9,13 +9,8 @@
 
     .row.marg-top20
       .col-md-8.no-x-padding
-        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'green', text: 'Sarah commented on your moodboard. Read more.'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'blue', text: 'Congratulations! You have been invited to join a contest! Join now!'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'red', text: 'You\'re a winner! Congrats! You have been selected to design ( Julia\'s Bedroom ).'}}
-        = render partial:'designer_notification', locals: {notification: {color: 'yellow', text: 'Hurry! Only 3days left to finish ( Don\'s bathroom ).'}}
+        - @designer.user_notifications.map(&:view).each do |notification|
+          = render partial:'designer_notification', locals: { notification: notification }
       .col-md-4
         .sidebarComments.leaderboardSidebar
           %p.designerName= t('designer_center.updates.leaderboard')
