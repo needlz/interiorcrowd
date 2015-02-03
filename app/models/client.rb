@@ -29,10 +29,9 @@ class Client < ActiveRecord::Base
     contests.order(:created_at).last
   end
 
-  def last_four_digits
+  def last_four_card_digits
     four_digits = card_number[-4..-1]
-    return four_digits if four_digits.presence
-    card_number
+    four_digits.presence || card_number
   end
 
 end
