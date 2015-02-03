@@ -51,3 +51,6 @@ class @PopulatedInputs
       $container.find('.lnk_container .plus_wrapper:last').last().show()
       $container.find('.lnk_container .examplelabel label').hide()
       $container.find('.lnk_container .examplelabel label').first().show()
+
+class @InspirationLinksEditor extends PopulatedInputs
+  @container: '.links-options'

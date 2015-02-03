@@ -57,8 +57,7 @@ class DesignStylePage
     UndesirableColorsEditor.init()
     AppealsForm.init()
     ExamplesUploader.init()
-    inspirationLinksEditor = new InspirationLinksEditor()
-    inspirationLinksEditor.init()
+    InspirationLinksEditor.init()
 
     @bindDesignLevelItems($levelContainer)
 

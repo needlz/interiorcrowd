@@ -5,11 +5,8 @@
         %b= t('contests.design_style.add_links')
     .clearfix
 
-    .link-template.template
-      .link
-        = render partial: 'contests/options/example_link', locals: { value: '', name: '' }
-
     .links
+      = render partial: 'contests/options/example_link', locals: { value: '', name: 'design_style[ex_links][]' } unless @contest_view.links.present?
       - @contest_view.links.try(:each) do |url|
         .link
           = render partial: 'contests/options/example_link', locals: { value: url, name: 'design_style[ex_links][]' }

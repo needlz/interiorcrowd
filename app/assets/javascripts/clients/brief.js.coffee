@@ -74,8 +74,7 @@ class @ContestEditing extends InlineEditor
     budget: ->
       BudgetOptions.init()
     example_links: ->
-      linksEditor = new InspirationLinksEditor()
-      linksEditor.init()
+      InspirationLinksEditor.init()
 
   previewCallbacks:
     desirable_colors: ->
