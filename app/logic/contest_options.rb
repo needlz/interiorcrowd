@@ -13,9 +13,15 @@ class ContestOptions
       @contest[:design_space_id] = options[:design_brief][:design_area].to_i if options[:design_brief].key?(:design_area)
     end
     if options[:design_space]
+
       @contest[:space_length] = options[:design_space][:length] if options[:design_space].key?(:length)
       @contest[:space_width] = options[:design_space][:width] if options[:design_space].key?(:width)
       @contest[:space_height] = options[:design_space][:height] if options[:design_space].key?(:height)
+
+      @contest[:space_length_inches] = options[:design_space][:length_inches] if options[:design_space].key?(:length_inches)
+      @contest[:space_width_inches] = options[:design_space][:width_inches] if options[:design_space].key?(:width_inches)
+      @contest[:space_height_inches] = options[:design_space][:height_inches] if options[:design_space].key?(:height_inches)
+
       @contest[:space_budget] = options[:design_space][:f_budget] if options[:design_space].key?(:f_budget)
       @contest[:feedback] = options[:design_space][:feedback] if options[:design_space].key?(:feedback)
       @space_image_ids = options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space][:document_id]
