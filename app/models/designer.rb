@@ -6,7 +6,8 @@ class Designer < ActiveRecord::Base
 
   has_one :portfolio
   has_many :contest_requests
-  has_many :designer_invitations
+  has_many :user_notifications, foreign_key: :user_id
+  delegate :designer_notifications, to: :user_notifications
 
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
