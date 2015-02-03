@@ -1,5 +1,5 @@
-.bottom60.marg-top30
-  .container.animated.fadeInDown
+.bottom20.marg-top30.row
+  .animated.fadeInDown
     .row
       .col-md-12.feedbackInvite
         %h3= t('client_center.entries.need_idea')
@@ -10,7 +10,7 @@
         %p
           = t('designer_center.contests_preview.room')
           %span= @contest.design_space.name
-
+  %hr
 = render partial: 'clients/client_center/entries/feedback/feedback_items'
 = render partial: 'clients/client_center/entries/feedback/paginate'
 

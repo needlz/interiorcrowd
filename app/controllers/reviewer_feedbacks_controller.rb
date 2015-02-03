@@ -13,7 +13,7 @@ class ReviewerFeedbacksController < ApplicationController
     cookies[:token] = params[:token]
     setup_moodboard_collection(@contest)
     @feedbacks = @invitation.feedbacks
-    render
+    render(:layout => "layouts/without_navigation")
   end
 
   private
