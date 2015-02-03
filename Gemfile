@@ -39,7 +39,6 @@ gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'jquery-fileupload-rails'
-gem "rmagick"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

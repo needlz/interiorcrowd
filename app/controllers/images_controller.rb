@@ -1,8 +1,6 @@
-require 'pdf_thumbnail'
 class ImagesController < ApplicationController
     
   def create
-    PdfThumbnail.process(params[:image])
     @image = Image.new(params[:image])
     if @image.save
       render json: { files: [@image.thumbnail] }
