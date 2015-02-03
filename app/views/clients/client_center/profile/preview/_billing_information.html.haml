@@ -1,4 +1,4 @@
 %span.card_type= t("client_center.profile.labels.card_types.#{ client.card_type }") if client.card_type.present?
 %br
 %span= t('client_center.profile.labels.ending_in')
-%span.card_ex_year= client.card_ex_year
+%span.card_number= client.last_four_card_digits
