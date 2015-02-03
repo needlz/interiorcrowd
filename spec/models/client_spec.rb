@@ -12,13 +12,11 @@ RSpec.describe ContestRequest do
 
 
   it 'return last 4 digits of credit card' do
-    expect(card_number[-4..-1]).to eq last_four
     expect(client.card_number).to eq card_number
     expect(client.last_four_card_digits).to eq last_four
   end
 
   it 'return all digits if card number less than 4 digits' do
-    expect(less_than_four_digits_card_number).to eq less_than_four_digits_last_four
     expect(client2.card_number).to eq less_than_four_digits_card_number
     expect(client2.last_four_card_digits).to eq less_than_four_digits_last_four
   end
