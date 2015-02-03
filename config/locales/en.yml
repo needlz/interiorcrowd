@@ -491,11 +491,10 @@ en:
     respond:
       see_more: See More
       responding_to: Responding to
-      back: < Exit without saving
+      back: Exit without saving
       save_and_preview: Save my work & preview
       submit: Submit >
       submit_design: Submit My Design
-      back: Back
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept moodboard
     training:
@@ -503,6 +502,24 @@ en:
       first_steps: Five steps to getting started
       how_to: How to improve your earings
       examples: See example moodboards
+    my_contests:
+      design_profile: See the consumer design profile
+      step_1: Step 1 is to create a concept moodboard that incorporates the consumer’s style, needs, and colors.
+      examples_of_moodboards: See example of concept moodboards
+      hint: 'Hint: be sure that you review the %{link} before starting'
+      hint_link: consumer's design profile
+      type: 'Type :'
+      room: 'Room :'
+      design_style: 'Design Style :'
+      preferd_colors: 'Prefered Colors :'
+      colors_avoid: 'Colors Avoid :'
+      see_more: See more
+      ready_to_go: Ready to go?
+      upload_moodboard: Upload Your Concept Moodboard
+      design_textarea_placeholder: Tell the Consumer Something about your design.
+      need_to_ask_question: Need to ask a question?
+      save_and_preview: Save & Preview
+
 
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

@@ -2793,7 +2793,84 @@ textarea.addCommentTextarea{
 }
 
 
+@media only screen and (min-width: 2000px) {
+    .homePageSignupBeta {
+        zoom: 0.7; -moz-transform: scale(0.7); -moz-transform-origin: 0 0;
+        /* transform: scale(0.7);
+         transform-origin: 50% 10%;*/
+    }
+}
 
+.italicLink{
+    font-size: 14px;
+    color: #000;
+    font-style: italic;
+    line-height: 32px;
+    text-decoration: underline;
+}
+.hintP{
+    font-size: 14px;
+    color: #000;
+    font-style: italic;
+    line-height: 32px;
+}
+
+.conceptMoodboardBox{
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.conceptMoodboardBox .col-md-9 .color{
+    /*display: inline-block;*/
+    float: left;
+    font-size: 14px;
+    color: #000;
+    /*line-height: 32px;*/
+    width: 125px;
+    margin-right: 10px;
+    /*margin-bottom: 20px;*/
+}
+.conceptMoodboardBox .col-md-9 .color span:nth-child(1){
+    display: inline-block;
+    width:50px;
+    height: 19px;
+    line-height: 19px;
+    position: relative;
+    top: -5px;
+}
+.conceptMoodboardBox .col-md-9 .color span:nth-child(2){
+    display: inline-block;
+    width: 50px;
+    height: 19px;
+    background: #8f8f8f;
+}
+.seeMoreLink{
+    font-size: 14px;
+    text-decoration: underline;
+    color: #000;
+}
+.conceptMoodboardImg{
+    border: 1px dashed #e1e1e1;
+    padding: 30px;
+    margin: 30px 0px;
+}
+.aboutDesignTextarea{
+    margin: 30px 0px;
+    resize: none;
+    width: 100%;
+    padding: 10px 20px;
+    height: 90px;
+    border: 1px solid #a9a9a9;
+}
+.askQuestionTextarea{
+    width: 100%;
+    resize:none;
+    border-radius: 5px;
+    border: 1px solid #a9a9a9;
+    padding: 10px;
+    height: 120px;
+}
 
 
 
