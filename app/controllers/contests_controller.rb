@@ -117,11 +117,10 @@ class ContestsController < ApplicationController
   private
 
   def redirect_to_uncompleted_step
-    if uncomplete_step_path
-      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-      redirect_to uncomplete_step_path
-      true
-    end
+    return unless uncomplete_step_path
+    flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
+    redirect_to uncomplete_step_path
+    true
   end
 
   def set_creation_wizard
