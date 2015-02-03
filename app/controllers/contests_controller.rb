@@ -42,10 +42,7 @@ class ContestsController < ApplicationController
   end
 
   def preview
-    if uncomplete_step_path
-      flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-      redirect_to uncomplete_step_path and return
-    end
+    return if redirect_to_uncompleted_step
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -74,6 +71,7 @@ class ContestsController < ApplicationController
   end
 
   def account_creation
+    return if redirect_to_uncompleted_step
     @client = Client.new
   end
 
@@ -117,6 +115,13 @@ class ContestsController < ApplicationController
   end
 
   private
+
+  def redirect_to_uncompleted_step
+    return unless uncomplete_step_path
+    flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
+    redirect_to uncomplete_step_path
+    true
+  end
 
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,

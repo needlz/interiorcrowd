@@ -12,6 +12,12 @@ RSpec.describe ContestsController do
     session[:client_id] = client.id
   end
 
+  def prepare_contest_data
+    ContestCreationWizard.creation_steps.each do |step|
+      session[step] = { key: 'value' }
+    end
+  end
+
   describe 'GET option' do
     it 'returns html of options' do
       ContestView::EDITABLE_ATTRIBUTES.each do |option|
@@ -74,9 +80,7 @@ RSpec.describe ContestsController do
   describe 'GET preview' do
     context 'previous steps completed' do
       before do
-        ContestCreationWizard.creation_steps.each do |step|
-          session[step] = { key: 'value' }
-        end
+        prepare_contest_data
       end
 
       it 'renders page' do
@@ -89,6 +93,27 @@ RSpec.describe ContestsController do
     context 'previous steps uncompleted' do
       it 'redirects to uncompleted page' do
         get :preview
+        expect(response).to redirect_to ContestCreationWizard.creation_steps_paths.values[0]
+      end
+    end
+  end
+
+  describe 'GET account_creation' do
+    context 'previous steps completed' do
+      before do
+        prepare_contest_data
+      end
+
+      it 'renders page' do
+        get :account_creation
+        expect(response).to be_ok
+        expect(response).to render_template(:account_creation)
+      end
+    end
+
+    context 'previous steps uncompleted' do
+      it 'redirects to uncompleted page' do
+        get :account_creation
         expect(response).to redirect_to ContestCreationWizard.creation_steps_paths.values[0]
       end
     end

@@ -91,7 +91,7 @@ RSpec.describe ContestRequestsController do
     it 'renders answers if contest is in submission state' do
       expect(contest.status).to eq 'submission'
       get :show, id: request.id
-      expect(response).to render_template(partial: '_answers')
+      expect(response).to render_template(partial: '_moodboard_answers')
     end
 
     it 'raises error if client is not logged in' do
