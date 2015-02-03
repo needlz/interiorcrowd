@@ -1,8 +1,8 @@
 .row.my-menu.visible-lg.paddTop20
-  .col-md-3.no-padding-right.logo-pc
-    .top-nav.pull-down
+  .col-md-3.no-padding-right.logo-pc.username
+    .top-nav
       %label.font20= t('designer_center.welcome_user', username: @designer.first_name)
-  .col-md-9.no-padding-right.pull-down
+  .col-md-9.no-padding-right
     .top-nav
       .nav-collapse
         = render partial: 'shared/navigation'
