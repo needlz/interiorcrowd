@@ -2,8 +2,15 @@ class ContestOptions
 
   attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest
 
-  REQUIRED_OPTIONS = [:design_category_id, :design_space_id, :space_budget,
+  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_id, :space_budget,
                       :budget_plan, :project_name, :desirable_colors]
+
+  REQUIRED_OPTIONS_BY_CHAPTER = {
+      design_brief: [:design_category_id, :design_space_id],
+      design_style: [:designer_level, :appeals, :desirable_colors],
+      design_space: [:space_budget],
+      preview: [:budget_plan, :project_name]
+  }
 
   def initialize(hash)
     options = hash.with_indifferent_access
@@ -43,8 +50,22 @@ class ContestOptions
   end
 
   def required_present?
-    required_contest_options_present = !REQUIRED_OPTIONS.detect { |option| contest[option].blank? }
-    required_contest_options_present && appeals.present? && designer_level.present?
+    missing_options.empty?
+  end
+
+  def missing_options
+    missing_options = REQUIRED_CONTEST_ATTRIBUTES.select { |option| contest[option].blank? }
+    missing_options << :appeals if appeals.blank?
+    missing_options << :designer_level if designer_level.blank?
+    missing_options
+  end
+
+  def uncompleted_chapter
+    missing = missing_options
+    REQUIRED_OPTIONS_BY_CHAPTER.each do |chapter, options|
+      return chapter if (missing & options).present?
+    end
+    nil
   end
 
 end

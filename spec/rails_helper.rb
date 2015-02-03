@@ -59,7 +59,7 @@ RSpec.configure do |config|
           height: '10',
           f_budget: '2000',
           feedback: 'feedback',
-          document_id: '1,2' },
+          document_id: [Fabricate(:image).id, Fabricate(:image).id].join(',') },
       preview: {
           b_plan: '1',
           contest_name: 'contest_name' },
@@ -71,7 +71,7 @@ RSpec.configure do |config|
               some_appeal: {
                   reason: 'reason',
                   value: 100} },
-          document_id: '3,4',
+          document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
           ex_links: ['link1', 'link2'] },
     }
   end

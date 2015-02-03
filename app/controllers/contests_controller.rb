@@ -42,7 +42,7 @@ class ContestsController < ApplicationController
   end
 
   def preview
-    return if redirect_to_uncompleted_step
+    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
     @contest_view = ContestView.new(session.to_hash)
   end
 
@@ -71,7 +71,7 @@ class ContestsController < ApplicationController
   end
 
   def account_creation
-    return if redirect_to_uncompleted_step
+    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps)
     @client = Client.new
   end
 
@@ -116,10 +116,11 @@ class ContestsController < ApplicationController
 
   private
 
-  def redirect_to_uncompleted_step
-    return unless uncomplete_step_path
+  def redirect_to_uncompleted_step(validated_steps)
+    uncompleted_step_path = uncomplete_step_path(validated_steps)
+    return unless uncompleted_step_path
     flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-    redirect_to uncomplete_step_path
+    redirect_to uncompleted_step_path
     true
   end
 
@@ -133,9 +134,8 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
   end
 
-  def uncomplete_step_path
-    required_steps = ContestCreationWizard.creation_steps - [:preview]
-    uncomplete_step = required_steps.find { |step| session.to_hash.with_indifferent_access[step].blank? }
+  def uncomplete_step_path(validated_steps)
+    uncomplete_step = validated_steps.detect { |step| ContestOptions.new(session.to_hash).uncompleted_chapter == step }
     ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
   end
 

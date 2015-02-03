@@ -13,9 +13,7 @@ RSpec.describe ContestsController do
   end
 
   def prepare_contest_data
-    ContestCreationWizard.creation_steps.each do |step|
-      session[step] = { key: 'value' }
-    end
+    session.merge!(contest_options_source)
   end
 
   describe 'GET option' do
