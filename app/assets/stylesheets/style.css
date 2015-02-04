@@ -2613,14 +2613,14 @@ textarea.addCommentTextarea{
     background-color: #FFF;
     padding: 6px 24px;
     font-weight: 700;
-    margin-right: 70px;
+    margin-right: 65px;
 }
 
 .contestUnderway #searchBox input[type=text]{
     height: 35px;
 }
 .contestUnderway #searchBox button{
-    top: 0px;
+    top: -2px;
 }
 .contestTable{
     border: 1px solid #e1e1e1;
@@ -2872,6 +2872,163 @@ textarea.addCommentTextarea{
     height: 120px;
 }
 
+/*custom radio*/
+input[type="radio"] {
+    display:none;
+}
+input[type="radio"] + label,.review-step3 p {
+    color: #1a1a1a;
+    font-family: 'Open Sans', sans-serif;
+    font-size:12px;
+    font-weight: 400;
+}
+input[type="radio"] + label span {
+    display:inline-block;
+    width:30px;
+    height:30px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+input[type="radio"] + label span {
+    /*background-color:#292321;*/
+    background: url('/assets/radio.png') top;
+}
+
+input[type="radio"]:checked + label span{
+    /*background-color:#CC3300;*/
+    background-position: bottom;
+}
+
+input[type="radio"] + label span,
+input[type="radio"]:checked + label span {
+    -webkit-transition:background-color 0.4s linear;
+    -o-transition:background-color 0.4s linear;
+    -moz-transition:background-color 0.4s linear;
+    transition:background-color 0.4s linear;
+}
+
+
+input[type="radio"].smallRadio + label,.review-step3 p {
+    color: #1a1a1a;
+    font-family: 'Open Sans', sans-serif;
+    font-size:12px;
+    font-weight: 400;
+}
+input[type="radio"].smallRadio + label span {
+    display:inline-block;
+    width:16px;
+    height:16px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    cursor:pointer;
+    -moz-border-radius:  50%;
+    border-radius:  50%;
+}
+
+input[type="radio"].smallRadio + label span {
+    /*background-color:#292321;*/
+    background: url('/assets/radio_small.png') top;
+}
+
+input[type="radio"].smallRadio:checked + label span{
+    background-position: bottom;
+}
+
+input[type="radio"].smallRadio + label span,
+input[type="radio"].smallRadio:checked + label span {
+    -webkit-transition:background-color 0.4s linear;
+    -o-transition:background-color 0.4s linear;
+    -moz-transition:background-color 0.4s linear;
+    transition:background-color 0.4s linear;
+}
+.fullWidth{
+    width: 100% !important;
+}
+.lineHight37{
+    line-height: 37px !important;
+}
+
+/* for high resolution display */
+
+@media only screen and (min--moz-device-pixel-ratio: 2),
+
+only screen and (-o-min-device-pixel-ratio: 2/1),
+
+only screen and (-webkit-min-device-pixel-ratio: 2),
+
+only screen and (min-device-pixel-ratio: 2) {
+
+    .homePageSignupBeta {
+
+        zoom: 0.7; -moz-transform: scale(0.7); -moz-transform-origin: 50% 10%;
+        transform: scale(0.7);
+        transform-origin: 50% 10%;
+
+
+    }
+
+}
+
+.optionalSignup .row{
+    margin: 0px 20px;
+}
+.optionalSignup .labelHomeLeft{
+    float: left;
+    width: 25%;
+}
+.optionalSignup .labelHomeRight{
+    float: left;
+    width: 75%;
+}
+.optionalSignup .labelHomeLeft label{
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 33px;
+    padding-bottom: 15px;
+}
+.optionalSignup .labelHomeRight input[type=text]{
+    display: inline-block;
+    width: 100%;
+    height: 33px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    margin-bottom: 27px;
+}
+.optionalSignup .labelHomeRight textarea{
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    padding: 3px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    resize: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.optionalSignup .labelHomeRight label{
+    display: inline-block;
+    margin-right: 40px;
+    font-size: 16px;
+}
+.optionalSignup .labelHomeRight label input{
+    margin-right: 20px;
+}
+
+.optionalSignup .labelHomeRight .btn{
+    width: 100px;
+    color: #FFF;
+    background-color: #a9a9a9;
+    font-weight: 700;
+    margin-top: 0px;
+    font-size: 18px;
+}
 
 
 /*sign up page*/
