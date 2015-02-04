@@ -20,9 +20,11 @@ class ContestOptions
       @contest[:design_space_id] = options[:design_brief][:design_area].to_i if options[:design_brief].key?(:design_area)
     end
     if options[:design_space]
-      @contest[:space_length] = options[:design_space][:length] if options[:design_space].key?(:length)
-      @contest[:space_width] = options[:design_space][:width] if options[:design_space].key?(:width)
-      @contest[:space_height] = options[:design_space][:height] if options[:design_space].key?(:height)
+
+      @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length)
+      @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width)
+      @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height)
+
       @contest[:space_budget] = options[:design_space][:f_budget] if options[:design_space].key?(:f_budget)
       @contest[:feedback] = options[:design_space][:feedback] if options[:design_space].key?(:feedback)
       @space_image_ids = options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space][:document_id]
@@ -68,6 +70,14 @@ class ContestOptions
     missing_options << :appeals if appeals.blank?
     missing_options << :designer_level if designer_level.blank?
     missing_options
+  end
+
+  def self.calculate_inches(options, param)
+    sign = param.to_sym
+    sign_inches = "#{sign}_inches".to_sym
+    feet_in_inches = options[sign].to_f * 12 if options.try(:[], sign).present?
+    inches = options[sign_inches] if options.try(:[], sign_inches).present?
+    feet_in_inches.to_f + inches.to_f if feet_in_inches || inches
   end
 
 end

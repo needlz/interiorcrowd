@@ -6,9 +6,9 @@ RSpec.describe ContestOptions do
     expect(options.contest).to eq({
                                         design_category_id: source[:design_brief][:design_category].to_i,
                                         design_space_id: source[:design_brief][:design_area].to_i,
-                                        space_length: source[:design_space][:length],
-                                        space_width: source[:design_space][:width],
-                                        space_height: source[:design_space][:height],
+                                        space_length: ContestOptions.calculate_inches(source[:design_space], :length),
+                                        space_width: ContestOptions.calculate_inches(source[:design_space], :width),
+                                        space_height: ContestOptions.calculate_inches(source[:design_space], :height),
                                         space_budget: source[:design_space][:f_budget],
                                         feedback: source[:design_space][:feedback],
                                         budget_plan: source[:preview][:b_plan],

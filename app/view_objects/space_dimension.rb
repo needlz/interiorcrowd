@@ -29,11 +29,12 @@ class SpaceDimension
 
   def to_inches
     return unless value
-    value * INCHES_IN_FEET
+    value % INCHES_IN_FEET
   end
 
   def to_feet
-    value
+    return unless value
+    value.div INCHES_IN_FEET
   end
 
   def value=(value)

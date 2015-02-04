@@ -10,7 +10,8 @@
     %span.units= t('contests.space.dimensions.feet')
   .col-md-2
     .form-group
-      %input.form-control{ value: dimension.to_inches,
+      %input.form-control.in-inches{ name: "design_space[#{ dimension.inches_identifier }]",
+        value: number_with_precision(dimension.to_inches, precision: 2, strip_insignificant_zeros: true),
         id: dimension.inches_identifier}/
   .col-md-4
     %span.units= t('contests.space.dimensions.inches')
