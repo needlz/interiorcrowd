@@ -12,19 +12,21 @@
           .col-md-12
             .hLine10
 .optionalSignup
+  = render partial: 'home/msg'
   .labelHomeLeft
     %label.lineHight37= t('sign_up_beta.email')
     %label.lineHight37= t('sign_up_beta.name')
     %label.lineHight37= t('sign_up_beta.role_switcher')
   .labelHomeRight
-    = text_field_tag :email
-    = text_field_tag :name
-    = radio_button_tag :role, :designer, false, class: 'smallRadio'
-    = label_tag :role_designer do
-      %span
-      = t('sign_up_beta.designer')
-    = radio_button_tag :role, :consumer, false, class: 'smallRadio'
-    = label_tag :role_consumer do
-      %span
-      = t('sign_up_beta.consumer')
-    = button_tag t('sign_up_beta.go'), type: 'submit', class: 'btn fullWidth marg-top20'
+    = form_for BetaSubscriber.new do |f|
+      = f.text_field :email
+      = f.text_field :name
+      = f.radio_button :role, :designer, class: 'smallRadio'
+      = f.label :role_designer do
+        %span
+        = t('sign_up_beta.designer')
+      = f.radio_button :role, :consumer, class: 'smallRadio'
+      = f.label :role_consumer do
+        %span
+        = t('sign_up_beta.consumer')
+      = button_tag t('sign_up_beta.go'), type: 'submit', class: 'btn fullWidth marg-top20'
