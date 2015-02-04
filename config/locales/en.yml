@@ -537,6 +537,7 @@ en:
     email: 'Email: *'
     consumer: Consumer
     designer: Designer
+    go: 'Go'
   faq:
     menu:
       customer: Customer

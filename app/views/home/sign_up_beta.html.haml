@@ -12,22 +12,19 @@
           .col-md-12
             .hLine10
 .optionalSignup
-  .row
-    .col-md-3
-      %label.emailLabelPrivateBeta= t('sign_up_beta.email')
-      %label= t('sign_up_beta.name')
-      %label= t('sign_up_beta.role_switcher')
-      %label= t('sign_up_beta.other_info')
-
-
-    .col-md-9
-      %input.email{:type => "text"}/
-      %input{:type => "text"}/
-      %label
-        %input{:name => "type", :type => "radio"}>/
-        = t('sign_up_beta.designer')
-      %label
-        %input{:name => "type", :type => "radio"}>/
-        = t('sign_up_beta.consumer')
-      %textarea
-      %input.btn{:type => "submit", :value => "Go"}/
+  .labelHomeLeft
+    %label.lineHight37= t('sign_up_beta.email')
+    %label.lineHight37= t('sign_up_beta.name')
+    %label.lineHight37= t('sign_up_beta.role_switcher')
+  .labelHomeRight
+    = text_field_tag :email
+    = text_field_tag :name
+    = radio_button_tag :role, :designer, false, class: 'smallRadio'
+    = label_tag :role_designer do
+      %span
+      = t('sign_up_beta.designer')
+    = radio_button_tag :role, :consumer, false, class: 'smallRadio'
+    = label_tag :role_consumer do
+      %span
+      = t('sign_up_beta.consumer')
+    = button_tag t('sign_up_beta.go'), type: 'submit', class: 'btn fullWidth marg-top20'
