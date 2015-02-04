@@ -250,3 +250,18 @@ h3.congrats {
   color: white!important;
   background: black!important;
 }
+
+.novice.thumb {
+  padding-left: 0px;
+  img.pic {
+    width: calc(100% - 30px);
+  }
+}
+.ex-pos {
+  position: static!important;
+}
+
+.remove-thumb-button {
+  display: inline-block;
+  vertical-align: top;
+}
