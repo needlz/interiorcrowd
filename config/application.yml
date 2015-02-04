@@ -18,4 +18,4 @@ development:
   AWS_SECRET_ACCESS_KEY: 4tMyvEFuxlQ8uTrZ3fqimSGF1C2nE+fqfELEr617
   MANDRILL_EMAIL: 'erikneeds@gmail.com'
   MANDRILL_PASSWORD: 'icrowd1icrowd'
-  MANDRILL_API_TOKEN: 'Z0cZS1bcBHxqxJEV0nRJMg'
+  MANDRILL_API_TOKEN: 'XBnULwMuhI9LahaDwsG5-A'

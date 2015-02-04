@@ -12,7 +12,10 @@
           .col-md-12
             .hLine10
 .optionalSignup
-  = render partial: 'home/msg'
+  - if flash[:error].present?
+    .alert.alert-danger= flash[:error]
+  - if flash[:notice].present?
+    .alert.alert-success= flash[:notice]
   .labelHomeLeft
     %label.lineHight37= t('sign_up_beta.email')
     %label.lineHight37= t('sign_up_beta.name')

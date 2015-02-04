@@ -10,7 +10,6 @@ nine_key = 57
 numpad_zero = 96
 numpad_nine = 105
 
-
 jQuery.fn.ForceNumericOnly = ->
   @each ->
     $(this).keydown (e) ->

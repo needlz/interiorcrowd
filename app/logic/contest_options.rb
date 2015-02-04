@@ -20,7 +20,6 @@ class ContestOptions
       @contest[:design_space_id] = options[:design_brief][:design_area].to_i if options[:design_brief].key?(:design_area)
     end
     if options[:design_space]
-
       @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length) if options[:design_space].key?(:length)
       @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width) if options[:design_space].key?(:width)
       @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height) if options[:design_space].key?(:height)

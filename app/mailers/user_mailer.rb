@@ -28,6 +28,13 @@ class UserMailer
     mail to: [wrap_recipient(email, '', "to")], subject:subject
   end
 
+  def notify_about_new_subscriber(beta_subscriber)
+    return unless Rails.env.production?
+    template 'new_beta_subscriber'
+    set_template_values(new_subscriber_params(beta_subscriber))
+    mail to: [wrap_recipient('erikneeds@gmail.com', 'Erik Needham', "to")], subject: 'InteriorCrowd: new beta subscriber'
+  end
+
   private
 
   def set_user_params(user, password)
@@ -56,9 +63,12 @@ class UserMailer
     }
   end
 
-
   def wrap_recipient(email, name, type)
     { email: email, name: name, type: type }
+  end
+
+  def new_subscriber_params(beta_subscriber)
+    { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
   end
 
 end
