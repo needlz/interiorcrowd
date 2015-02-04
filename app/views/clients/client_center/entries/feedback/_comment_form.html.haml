@@ -1,11 +1,13 @@
 .row.designerFeedback.marg-bottom20
   .col-md-6.no-x-padding
-    = form_for ReviewerFeedback.new do |f|
+    - @invitation.feedbacks.each do |feedback|
+      = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
+    = form_for ReviewerFeedback.new, remote: true do |f|
       = hidden_field_tag :token, params[:token]
       = f.text_area :text, class: 'addCommentTextarea', placeholder: t('client_center.entries.reviewer_invitations.comment_placeholder')
       = f.submit t('client_center.entries.reviewer_invitations.send_feedback'), class: 'btn marg-top20'
-
       %p.commentSent
         = t('client_center.entries.reviewer_invitations.comment_sent')
         &nbsp;&nbsp;&nbsp;
         %span.glyphicon.glyphicon-ok{"aria-hidden" => "true"}
+
