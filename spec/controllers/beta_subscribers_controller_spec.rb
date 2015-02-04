@@ -16,7 +16,7 @@ RSpec.describe BetaSubscribersController do
 
       it 'renders beta signup page' do
         post :create, subscriber_params
-        expect(response).to render_template(:sign_up_beta)
+        expect(response).to redirect_to root_path
       end
     end
   end
