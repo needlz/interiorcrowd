@@ -1,5 +1,5 @@
 class @DesignSpacePage
-
+  @maxValueForInches = 11.99
   @inchesInputs: '.in-inches'
   @budgetDropdownSelector: '#design_space_f_budget'
 
@@ -16,7 +16,7 @@ class @DesignSpacePage
     @bindContinueButton()
 
   @bindInchesInputs: ->
-    $(@inchesInputs).NumberLimiter()
+    $(@inchesInputs).NumberLimiter(@maxValueForInches)
 
   @onSubmitClick: (event)=>
     event.preventDefault()

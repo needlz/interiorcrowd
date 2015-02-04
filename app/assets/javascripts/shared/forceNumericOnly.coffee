@@ -1,5 +1,3 @@
-MAX_VALUE = 11.99
-
 backspace = 8
 tab = 9
 enter = 13
@@ -33,8 +31,8 @@ jQuery.fn.ForceNumericOnly = ->
         $(e.target).val(oldText) unless text.match(/^[0-9]+$/)
       0
 
-jQuery.fn.NumberLimiter = ->
+jQuery.fn.NumberLimiter =(maxValue) ->
   @each ->
     $(this).on 'input', (e) ->
-      if ( $(this).val() > MAX_VALUE )
-        $(this).val(MAX_VALUE)
+      if ( $(this).val() > maxValue )
+        $(this).val(maxValue)
