@@ -52,9 +52,9 @@ class ContestOptions
   def self.calculate_inches(options, param)
     sign = param.to_sym
     sign_inches = "#{sign}_inches".to_sym
-    feet_in_inches = options[sign].to_f * 12 if options.key?(sign)
-    inches = options[sign_inches] if options.key?(sign_inches)
-    feet_in_inches.to_f + inches.to_f
+    feet_in_inches = options[sign].to_f * 12 if options.try(:[], sign).present?
+    inches = options[sign_inches] if options.try(:[], sign_inches).present?
+    feet_in_inches.to_f + inches.to_f if feet_in_inches || inches
   end
 
 end
