@@ -1,0 +1,16 @@
+:plain
+  var posting = new CommentPosting('#reviewer_feedback_text', '.commentSent')
+
+  $('form#new_reviewer_feedback').bind('ajax:error', function(evt, data, status, xhr){
+    posting.clearHintTimeout()
+  })
+
+  $('form#new_reviewer_feedback').bind('ajax:success', function(evt, data, status, xhr){
+
+    $( "#{escape_javascript(render partial: 'clients/client_center/entries/feedback_from_others',locals: { feedback: @feedback })}" ).insertBefore( ".new_reviewer_feedback:last" );
+    posting.clearTextArea();
+    posting.showHint();
+    posting.clearHintTimeout()
+    posting.setHintTimeout()
+    $('form#new_reviewer_feedback').unbind('ajax:success')
+  })

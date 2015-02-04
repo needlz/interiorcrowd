@@ -5,11 +5,12 @@ class ReviewerFeedbacksController < ApplicationController
 
   def create
     feedback_params[:text] = feedback_params[:text].strip
-    @invitation.feedbacks.create!(feedback_params)
-    redirect_to action: :show, id: params[:id], token: params[:token]
+    feedback = @invitation.feedbacks.create!(feedback_params)
+    redirect_to action: :show, id: params[:id], feedback_id: feedback.id, token: params[:token]
   end
 
   def show
+    @feedback = ReviewerFeedback.find_by_id(params[:feedback_id])
     cookies[:token] = params[:token]
     setup_moodboard_collection(@contest)
     @feedbacks = @invitation.feedbacks

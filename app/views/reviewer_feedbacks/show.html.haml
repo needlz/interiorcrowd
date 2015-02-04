@@ -1,3 +1,6 @@
+- content_for :head do
+  = javascript_include_tag 'contests/comment_posting'
+
 .content.container.animated.fadeInDown
   = render partial: 'reviewer_feedbacks/content'
   .row

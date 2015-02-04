@@ -1,0 +1,7 @@
+.row.feedbackFromOthers
+  .col-md-3
+    %p
+      = feedback.invitation.username
+      %span= feedback.created_at.in_time_zone.strftime(t('client_center.entries.reviewer_invitations.feedback_time_format'))
+  .col-md-9
+    %p= feedback.text

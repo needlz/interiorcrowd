@@ -215,7 +215,7 @@ en:
         sending_invitation: SENDING INVITATION...
         invited: INVITED
       reviewer_invitations:
-        feedback_time_format: '%b %m at %I %P'
+        feedback_time_format: '%b %d at %I %P'
         title: Feedback
         want_feedback: You don't have to make this choice alone. Want feedback on the designs?
         invite: Invite
