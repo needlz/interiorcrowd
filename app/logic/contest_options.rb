@@ -21,9 +21,9 @@ class ContestOptions
     end
     if options[:design_space]
 
-      @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length)
-      @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width)
-      @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height)
+      @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length) if options[:design_space].key?(:space_length)
+      @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width) if options[:design_space].key?(:space_width)
+      @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height) if options[:design_space].key?(:space_height)
 
       @contest[:space_budget] = options[:design_space][:f_budget] if options[:design_space].key?(:f_budget)
       @contest[:feedback] = options[:design_space][:feedback] if options[:design_space].key?(:feedback)
