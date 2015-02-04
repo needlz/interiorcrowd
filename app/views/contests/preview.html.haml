@@ -5,6 +5,7 @@
     I18n = #{ translations_to_json(['contests', 'creation', 'preview']) }
 
 - content_for :page_content do
+  = render :partial => 'home/msg'
   = form_tag save_preview_contests_path,  { id: 'account_creation', method: 'post' } do
     = render partial: 'contests/review/project_name'
     = render partial: 'contests/review/plans'
