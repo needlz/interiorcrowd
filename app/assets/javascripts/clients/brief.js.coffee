@@ -75,6 +75,8 @@ class @ContestEditing extends InlineEditor
       BudgetOptions.init()
     example_links: ->
       InspirationLinksEditor.init()
+    space_dimensions: ->
+      DesignSpacePage.bindInchesInputs()
 
   previewCallbacks:
     desirable_colors: ->

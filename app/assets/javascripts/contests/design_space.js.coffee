@@ -1,5 +1,6 @@
-class DesignSpacePage
+class @DesignSpacePage
 
+  @inchesInputs: '.in-inches'
   @budgetDropdownSelector: '#design_space_f_budget'
 
   @init: ->
@@ -13,6 +14,9 @@ class DesignSpacePage
     @validator = new ValidationMessages()
 
     @bindContinueButton()
+
+  @bindInchesInputs: ->
+    $(@inchesInputs).NumberLimiter()
 
   @onSubmitClick: (event)=>
     event.preventDefault()

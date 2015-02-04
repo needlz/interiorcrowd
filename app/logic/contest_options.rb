@@ -14,13 +14,9 @@ class ContestOptions
     end
     if options[:design_space]
 
-      @contest[:space_length] = options[:design_space][:length] if options[:design_space].key?(:length)
-      @contest[:space_width] = options[:design_space][:width] if options[:design_space].key?(:width)
-      @contest[:space_height] = options[:design_space][:height] if options[:design_space].key?(:height)
-
-      @contest[:space_length_inches] = options[:design_space][:length_inches] if options[:design_space].key?(:length_inches)
-      @contest[:space_width_inches] = options[:design_space][:width_inches] if options[:design_space].key?(:width_inches)
-      @contest[:space_height_inches] = options[:design_space][:height_inches] if options[:design_space].key?(:height_inches)
+      @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length)
+      @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width)
+      @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height)
 
       @contest[:space_budget] = options[:design_space][:f_budget] if options[:design_space].key?(:f_budget)
       @contest[:feedback] = options[:design_space][:feedback] if options[:design_space].key?(:feedback)
@@ -51,6 +47,14 @@ class ContestOptions
   def required_present?
     required_contest_options_present = !REQUIRED_OPTIONS.detect { |option| contest[option].blank? }
     required_contest_options_present && appeals.present? && designer_level.present?
+  end
+
+  def self.calculate_inches(options, param)
+    sign = param.to_sym
+    sign_inches = "#{sign}_inches".to_sym
+    feet_in_inches = options[sign].to_f * 12 if options.key?(sign)
+    inches = options[sign_inches] if options.key?(sign_inches)
+    feet_in_inches.to_f + inches.to_f
   end
 
 end

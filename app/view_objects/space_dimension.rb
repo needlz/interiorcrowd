@@ -33,6 +33,7 @@ class SpaceDimension
   end
 
   def to_feet
+    return unless value
     value.div INCHES_IN_FEET
   end
 

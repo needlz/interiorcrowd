@@ -1,3 +1,5 @@
+MAX_VALUE = 11.99
+
 jQuery.fn.ForceNumericOnly = ->
   @each ->
     $(this).keydown (e) ->
@@ -10,3 +12,9 @@ jQuery.fn.ForceNumericOnly = ->
         text = $(e.target).val()
         $(e.target).val(oldText) unless text.match(/^[0-9]+$/)
       0
+
+jQuery.fn.NumberLimiter = ->
+  @each ->
+    $(this).on 'input', (e) ->
+      if ( $(this).val() > MAX_VALUE )
+        $(this).val(MAX_VALUE)
