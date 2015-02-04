@@ -25,6 +25,7 @@ module MandrillMailer
   end
 
   def global_merge_vars
+    return unless @merge_vars
     @merge_vars.inject([]) do |arr, (key, val)|
       arr.push({ 'name' => key.upcase, 'content' => val }); arr
     end
