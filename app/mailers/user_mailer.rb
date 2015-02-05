@@ -24,7 +24,7 @@ class UserMailer
 
   def sign_up_beta_autoresponder(email)
     template 'sign_up_beta_autoresponder'
-    subject = "Interior Crowd Private Beta"
+    subject = "InteriorCrowd Private Beta"
     mail to: [wrap_recipient(email, '', "to")], subject:subject
   end
 
