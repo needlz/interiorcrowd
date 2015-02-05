@@ -2054,7 +2054,7 @@ textarea.productsMoodboardAbove{
 
 }
 #searchBox input[type=text]{
-    width: 200px;
+    width: 100%;
     height: 34px;
     padding: 0px 5px;
     border-radius: 5px;
@@ -2613,7 +2613,6 @@ textarea.addCommentTextarea{
     background-color: #FFF;
     padding: 6px 24px;
     font-weight: 700;
-    margin-right: 65px;
 }
 
 .contestUnderway #searchBox input[type=text]{
