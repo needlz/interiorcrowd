@@ -40,7 +40,8 @@ RSpec.describe ReviewerFeedbacksController do
 
       it 'redirects to show page' do
         post :create, params
-        expect(response).to redirect_to show_reviewer_feedbacks_path(id: contest.id, token: invitation_token)
+        feedback = contest.reviewer_feedbacks[0]
+        expect(response).to redirect_to show_reviewer_feedbacks_path(id: contest.id, feedback_id: feedback.id, token: invitation_token)
       end
     end
   end
