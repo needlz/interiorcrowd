@@ -201,16 +201,10 @@ class ReviewerInvitations
         $button.text('Invite (error occured during last try)')
     )
 
-  @invitedRows: ->
-    $(InvitationInputs.container).find('.invitation-row:not(.lnk_container)')
-
-  @invitableRows: ->
-    $(InvitationInputs.container).find('.invitation-row.lnk_container')
-
   @inviteOnSuccess: ($button, response)->
     $row = $button.closest('.invitation-row')
     @updateRow($row, response)
-    @moveToTop($row)
+    $row.remove()
     if @invitableRows().length
       InvitationInputs.populateExamplesInputs()
     else
@@ -228,10 +222,7 @@ class ReviewerInvitations
     $label = $('<label>').text(I18n.reviewer_invitations.feedback_link)
     $row.find('.buttons').append($label, $link)
 
-  @moveToTop: ($row)->
-    if @invitedRows.length
-      $row.detach().insertAfter(@invitedRows.last())
-    else
-      $row.detach().prependTo($(InvitationInputs.container))
+  @invitableRows: ->
+    $(InvitationInputs.container).find('.invitation-row.lnk_container')
 $ ->
   EntriesPage.init()

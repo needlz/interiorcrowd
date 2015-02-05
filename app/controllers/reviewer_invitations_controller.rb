@@ -4,7 +4,9 @@ class ReviewerInvitationsController < ApplicationController
 
   def create
     invitation = @contest.invite_reviewer(invite_params)
-    render json: { url: show_reviewer_feedbacks_url(id: @contest.id, token: invitation.url), token: invitation.url }
+    url = show_reviewer_feedbacks_url(id: @contest.id, token: invitation.url)
+    UserMailer.new.invitation_to_leave_a_feedback(invite_params, url)
+    render json: { url: url, token: invitation.url }
   end
 
   private
