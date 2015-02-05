@@ -6,15 +6,10 @@
       = t('client_center.entries.reviewer_invitations.want_feedback')
       = succeed t('client_center.entries.reviewer_invitations.invite') do
         %br/
-    - @reviewer_invitations.each do |invitation|
-      = render partial: 'clients/client_center/entries/user_invitation_row',
-          locals: { invitation: invitation }
     .template
-      = render partial: 'clients/client_center/entries/user_invitation_row',
-          locals: { invitation: nil }
+      = render partial: 'clients/client_center/entries/user_invitation_row'
     .invitations-inputs
-      = render partial: 'clients/client_center/entries/user_invitation_row',
-          locals: { invitation: nil }
+      = render partial: 'clients/client_center/entries/user_invitation_row'
 
 - if @reviewer_feedbacks.present?
   .row

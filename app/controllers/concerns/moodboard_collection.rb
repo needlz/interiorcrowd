@@ -12,7 +12,6 @@ module MoodboardCollection
       @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
     end
     @notes = contest.notes.order(created_at: :desc).map { |note| ContestNoteView.new(note) }
-    @reviewer_invitations = contest.reviewer_invitations
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)
   end
 

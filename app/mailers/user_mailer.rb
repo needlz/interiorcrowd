@@ -35,6 +35,12 @@ class UserMailer
     mail to: [wrap_recipient('erikneeds@gmail.com', 'Erik Needham', "to")], subject: 'InteriorCrowd: new beta subscriber'
   end
 
+  def feedback_invitation_create(params, url)
+    template 'feedback_invitation_create'
+    set_template_values(feedback_invitation_params(params, url))
+    mail to: [wrap_recipient(params['email'], params['username'], "to")]
+  end
+
   private
 
   def set_user_params(user, password)
@@ -69,6 +75,14 @@ class UserMailer
 
   def new_subscriber_params(beta_subscriber)
     { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
+  end
+
+  def feedback_invitation_params(params, url)
+    {
+        name: params['username'],
+        email: params['email'],
+        url: url
+    }
   end
 
 end
