@@ -533,12 +533,13 @@ en:
     enter_email: If you are interested in joining the beta or learning more, please enter your e-mail address.
     go: GO
     name: 'Name:'
-    role_switcher: 'Are you a:'
+    role_switcher: 'Are you:'
     other_info: 'Other info:'
     email: 'Email: *'
-    consumer: Consumer
-    designer: Designer
+    consumer: a consumer
+    designer: a designer
     go: 'Go'
+    success: Thank you so much for your inquiry! We can't wait to share the InteriorCrowd experience with you!
   faq:
     menu:
       customer: Customer
