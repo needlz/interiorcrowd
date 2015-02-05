@@ -35,8 +35,8 @@ class UserMailer
     mail to: [wrap_recipient('erikneeds@gmail.com', 'Erik Needham', "to")], subject: 'InteriorCrowd: new beta subscriber'
   end
 
-  def feedback_invitation_create(params, url)
-    template 'feedback_invitation_create'
+  def invitation_to_leave_a_feedback(params, url)
+    template 'invitation_to_leave_a_feedback'
     set_template_values(feedback_invitation_params(params, url))
     mail to: [wrap_recipient(params['email'], params['username'], "to")]
   end
