@@ -333,9 +333,9 @@ en:
     preview:
       this_is_preview: This is a preview of what the client will see.
     navigation:
-      create_portfolio: Create Portfolio
+      create_portfolio: Profile
       preview_contests: Join New Contests
-      respond: Respond to Contests
+      respond: My Contests
       updates: Updates
     sign_up:
       first_name: First Name
