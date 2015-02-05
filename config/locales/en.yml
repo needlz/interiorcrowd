@@ -460,6 +460,7 @@ en:
       fulfillment_period: Fulfillment Period
       invite: Congratulations! You have been invited to join a contest! Join now!
       few_days: days
+      search_placeholder: Search...
 
     show_page:
       back_to_index: < Back to all current contests
