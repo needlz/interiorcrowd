@@ -13,9 +13,9 @@
             = text_field_tag 'search'
             %button
               = image_tag 'magnifier.png'
-        %p
-          - @current_responses.each do |response|
-            = render partial: 'designer_center_requests/index/item', locals: { response: response }
+        .clearfix
+        - @current_responses.each do |response|
+          = render partial: 'designer_center_requests/index/item', locals: { response: response }
       .col-md-4.notifications-container
         = render partial: 'designer_center_requests/index/notifications'
     .row
