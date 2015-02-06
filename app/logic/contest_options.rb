@@ -51,6 +51,8 @@ class ContestOptions
       end
       @contest[:retailer] = options[:contest][:retailer] if options[:contest].has_key?(:retailer)
 
+      @contest[:elements_to_avoid] = options[:contest][:elements_to_avoid] if options[:contest].has_key?(:elements_to_avoid)
+
       ContestAdditionalPreference.preferences.each do |preference|
         @contest[preference] = options[:contest][preference] if options[:contest].has_key?(preference)
       end

@@ -16,6 +16,7 @@ RSpec.describe ContestOptions do
                                         desirable_colors: source[:design_style][:desirable_colors],
                                         undesirable_colors: source[:design_style][:undesirable_colors],
                                         retailer_ikea: source[:contest][:retailer_ikea],
+                                        elements_to_avoid: source[:contest][:elements_to_avoid],
                                    })
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))

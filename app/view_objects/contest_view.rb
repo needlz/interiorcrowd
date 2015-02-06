@@ -74,6 +74,11 @@ class ContestView
     I18n.t("client_center.entries.preferences_retailers.#{ retailer }")
   end
 
+  def elements_to_avoid
+    return 'None' if @elements_to_avoid.blank?
+    @elements_to_avoid
+  end
+
   private
 
   def initialize_from_options(options)
@@ -121,6 +126,7 @@ class ContestView
     @retailers = Contest::RETAILERS.map do |retailer|
       { name: retailer, value: contest.retailer_value(retailer) }
     end
+    @elements_to_avoid = contest.elements_to_avoid
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
   end

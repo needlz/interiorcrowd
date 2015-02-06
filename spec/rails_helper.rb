@@ -77,7 +77,8 @@ RSpec.configure do |config|
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
           ex_links: ['link1', 'link2'] },
       contest: {
-          retailer_ikea: true
+          retailer_ikea: true,
+          elements_to_avoid: 'Fur'
       }
     }
   end
