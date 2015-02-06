@@ -305,7 +305,10 @@ en:
         target: Target
         wayfair: Wayfair
         west_elm: West Elm
-
+      option_levels:
+        very: Very Important
+        somewhat: Somewhat Important
+        not: Not Important
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

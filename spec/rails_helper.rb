@@ -78,7 +78,9 @@ RSpec.configure do |config|
           ex_links: ['link1', 'link2'] },
       contest: {
           retailer_ikea: true,
-          elements_to_avoid: 'Fur'
+          elements_to_avoid: 'Fur',
+          entertaining: 1,
+          durability: 2
       }
     }
   end

@@ -79,6 +79,12 @@ class ContestView
     @elements_to_avoid
   end
 
+  def options_level(level)
+    { 1 => I18n.t('client_center.entries.option_levels.very'),
+      2 => ,
+      3 =>  }
+  end
+
   private
 
   def initialize_from_options(options)
