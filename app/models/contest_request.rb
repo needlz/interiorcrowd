@@ -43,7 +43,7 @@ class ContestRequest < ActiveRecord::Base
   def moodboard_image_path
     lookbook_item = lookbook.try(:lookbook_details).try(:last)
     return unless lookbook_item
-    return lookbook_item.image.image.url if lookbook_item.uploaded?
+    return lookbook_item.image.image.url if lookbook_item.uploaded? && lookbook_item.try(:image)
     return lookbook_item.url if lookbook_item.external?
   end
 

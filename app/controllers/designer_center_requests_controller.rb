@@ -10,6 +10,7 @@ class DesignerCenterRequestsController < ApplicationController
   def show
     @request = @designer.contest_requests.find(params[:id])
     @contest = ContestShortDetails.new(@request.contest)
+    @image_id = @request.lookbook.try(:lookbook_details).try(:last).try(:image_id)
     @navigation = Navigation::DesignerCenter.new(:requests)
   end
 
@@ -25,15 +26,17 @@ class DesignerCenterRequestsController < ApplicationController
 
   def update
     request = ContestRequest.find(params[:id])
-    ContestRequest.transaction do
-      request.update_attributes!(response_params)
-      request.submit! if params[:contest_request][:status] == 'submitted'
-    end
+    contest_editing = ContestRequestEditing.new({  request: request,
+                                                    contest_request: params['contest_request']
+                                                 })
+    contest_editing.perform
+
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
       format.json do
         render json: format_changed_attributes(response_params)
       end
+      format.js {render nothing: true}
     end
   end
 
