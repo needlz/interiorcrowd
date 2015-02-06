@@ -37,7 +37,7 @@ class @SpacePicturesUploader
       I18n: i18n
 
 class @ConceptBoardUploader
-  @init: ->
+  @init: (i18n)->
     PicturesUploadButton.init
       fileinputSelector: '.concept-board #concept_picture',
       uploadButtonSelector: '.concept-board .upload-button',
@@ -45,16 +45,14 @@ class @ConceptBoardUploader
         container: '.concept-board .thumbs'
         selector: '#personal_picture_id'
         theme: 'new'
-      I18n: I18n
+      I18n: i18n
       single: true
     @initSaveBtn()
 
   @initSaveBtn:->
     $('body').on('click', '.saveConceptBoard', @onSaveClick)
-    $('body').on 'click', '.cancelConceptBoard', ->
-      $(".initialImage").show()
-      $('.editable-mode').remove()
-
+    $('body').on 'click', '.cancelConceptBoard', =>
+      @hideEditableBlock()
 
   @onSaveClick: ()=>
     $.ajax(
@@ -63,10 +61,14 @@ class @ConceptBoardUploader
       type: 'PUT'
       dataType: "script"
       success: (data)=>
-        newSource = $('.editable-mode img:last').attr('src')
-        $(".initialImage img").attr('src', newSource)
-        $(".initialImage").show()
-        $('.editable-mode').remove()
+        @changeImageSource()
+        @hideEditableBlock()
 
     )
+  @hideEditableBlock: () ->
+    $(".initialImage").show()
+    $('.editable-mode').remove()
 
+  @changeImageSource: ->
+    newSource = $('.editable-mode img:last').attr('src')
+    $(".initialImage img").attr('src', newSource)

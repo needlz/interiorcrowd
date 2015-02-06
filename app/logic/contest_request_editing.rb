@@ -1,4 +1,4 @@
-class ContestRequestEdition
+class ContestRequestEditing
 
   def initialize(options)
     @request = options[:request]
@@ -8,6 +8,7 @@ class ContestRequestEdition
   def perform
     update_image
     update_text
+    update_status
   end
 
   private
@@ -24,6 +25,10 @@ class ContestRequestEdition
     if contest_request['feedback']
       request.update(feedback: contest_request['feedback'])
     end
+  end
+
+  def update_status
+    request.submit! if @contest_request[:status] == 'submitted'
   end
 
   attr_reader :request, :contest_request
