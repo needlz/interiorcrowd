@@ -115,6 +115,10 @@ class Contest < ActiveRecord::Base
     winner_selection? || submission?
   end
 
+  def designers_invitation_period?
+    submission?
+  end
+
   private
 
   def update_appeals(options)

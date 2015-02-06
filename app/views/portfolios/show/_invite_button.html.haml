@@ -1,0 +1,5 @@
+- if portfolio_view.invited_by_client?(@client)
+  .inviteToContest{:href => "#" }= t('designer_center.portfolio.show.invitations.invited')
+- else
+  %a.inviteToContest.active{:href => "#", data: { contest: { id: @client.last_contest.id } }}
+    = t('designer_center.portfolio.show.invite_to_contest')

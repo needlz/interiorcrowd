@@ -1,40 +1,13 @@
-#portfolio {
-  margin-top: 90px;
-  margin-left: 30px;
-
-  .row {
-    max-width: 1000px
-  }
-
-  .attr {
-    margin-bottom: 10px;
-  }
-
-  .items-row {
-    margin-bottom: 30px;
-
-    .item {
-      padding:30px;
-    }
-  }
-
-  .about {
-    border: 1px solid gray;
-  }
-
-  .item {
-    img {
-      width: 100%;
-    }
-
-    .number {
-      font-size: 20px;
-    }
+.portfolio-creation {
+  .cover-button {
+    cursor: pointer;
   }
 }
 
-.portfolio-item .glyphicon-remove {visibility: visible !important;}
+.portfolio-item .glyphicon-remove {
+  visibility: visible !important;
+}
 
-.designStyleSpan{
+.designStyleSpan {
   margin-bottom: 4px;
 }
