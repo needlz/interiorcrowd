@@ -35,3 +35,15 @@ class @SpacePicturesUploader
         selector: '#design_space_image_id'
         theme: 'new'
       I18n: i18n
+
+class @ConceptBoardUploader
+  @init: ->
+    PicturesUploadButton.init
+      fileinputSelector: '.concept-board #concept_picture',
+      uploadButtonSelector: '.concept-board .upload-button',
+      thumbs:
+        container: '.concept-board .thumbs'
+        selector: '#personal_picture_id'
+        theme: 'new'
+      I18n: I18n
+      single: true

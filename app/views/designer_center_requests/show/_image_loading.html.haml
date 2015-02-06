@@ -1,0 +1,26 @@
+.rooms.text-center-sm.text-center-xs.concept-board
+  .some-text.col-md-6.no-padding-left
+    %h1.font20.makeMeBlack= t('designer_center.portfolio.creation.upload_personal_picture.title')
+    %h1.imageUploadInfo
+      %i Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
+  .clearfix
+  - path = request.moodboard_image_path
+  .thumbs
+    .col-md-3.novice.no-padding-left.template.relative
+      = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+    - if path
+      .col-md-3.novice.no-padding-left.thumb.relative
+        = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+  .clearfix
+  .col-md-6.no-x-padding.marg-top20
+    %input#concept_picture.hidden{ name: 'image[image]', type: 'file' }
+    %input#personal_picture_id{ name: "portfolio[personal_picture_id]",
+      type: "hidden",
+      value: 'portfolio.personal_picture.try(:id) '}
+    -#%button.btn3.btn3-confirm.upload-button.margin0{:type => "button"}
+    %a.marg-top20.upload-button
+      = t('designer_center.portfolio.creation.upload_personal_picture.upload_button')
+    = link_to 'Save',designer_center_response_path, remote:true, class: 'marg-top20', method: 'put'
+    %a.marg-top20
+      save
+  .clearfix
