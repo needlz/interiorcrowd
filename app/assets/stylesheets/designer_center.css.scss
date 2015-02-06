@@ -79,3 +79,31 @@
   display: inline-block;
   cursor: pointer;
 }
+
+#searchBox {
+  width: 100% !important;
+
+  input {
+    width: 100% !important;
+  }
+}
+
+.fulfillmentPeriodBtn{
+ margin-right: 0px !important;
+}
+
+.contestUnderway #searchBox{
+  margin: auto !important;
+  float: inherit !important;
+}
+
+.contestUnderway #searchBox button {
+  top: 7px !important;
+}
+
+@media (max-width: 768px) {
+  .contestUnderway #searchBox button {
+    top: -2px !important;
+  }
+
+}
