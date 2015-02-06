@@ -5,21 +5,69 @@ RSpec.describe PortfoliosController do
   render_views
 
   let(:designer) { Fabricate(:designer) }
+  let(:not_owner) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest, client: client) }
 
   describe 'GET show' do
     before do
       designer.portfolio = Fabricate(:portfolio)
     end
 
-    it 'renders page' do
-      get :show, url: designer.portfolio.path
-      expect(response).to be_ok
+    context 'not logged in' do
+      it 'renders page' do
+        get :show, url: designer.portfolio.path
+        expect(response).to be_ok
+      end
+
+      it 'raises error if unknown portfolio passed' do
+        get :show, url: 'unknown'
+        expect(response).to render_template('errors/404')
+      end
+
+      it 'does not render invitation button' do
+        get :show, url: designer.portfolio.path
+        expect(response).to_not render_template('_invite_button')
+      end
+
+      it 'does not render edit button' do
+        get :show, url: designer.portfolio.path
+        expect(response).to_not render_template('_edit_button')
+      end
     end
 
-    it 'raises error if unknown portfolio passed' do
-      get :show, url: 'unknown'
-      expect(response).to render_template('errors/404')
+    context 'logged in as client' do
+      before do
+        sign_in(client)
+        contest
+      end
+
+      it 'renders invitation button' do
+        get :show, url: designer.portfolio.path
+        expect(response).to render_template('_invite_button')
+      end
+    end
+
+    context 'logged in as owner' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'renders edit button' do
+        get :show, url: designer.portfolio.path
+        expect(response).to render_template('_edit_button')
+      end
+    end
+
+    context 'logged in as other designer' do
+      before do
+        sign_in(not_owner)
+      end
+
+      it 'does not render edit button' do
+        get :show, url: designer.portfolio.path
+        expect(response).to_not render_template('_edit_button')
+      end
     end
   end
 

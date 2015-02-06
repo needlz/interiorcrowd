@@ -1,7 +1,8 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
+  include Rails.application.routes.url_helpers
 
-  delegate :years_of_expirience, :about, :personal_picture, to: :portfolio, allow_nil: true
+  delegate :years_of_expirience, :about, :personal_picture, :designer_id, :designer, to: :portfolio, allow_nil: true
 
   def initialize(portfolio)
     @portfolio = portfolio
@@ -74,8 +75,25 @@ class PortfolioView
   end
 
   def awards
-    return unless portfolio.portfolio_awards.present?
-    portfolio.portfolio_awards.map(&:name).join('<br/>')
+    portfolio.portfolio_awards.map(&:name)
+  end
+
+  def show_invitation?(client)
+    client && client.last_contest.designers_invitation_period?
+  end
+
+  def invited_by_client?(client)
+    designer.invited_to_contest?(client.last_contest)
+  end
+
+  def exit_portfolio_path(client, designer)
+    return client_center_index_path if client
+    return designer_center_index_path if designer
+    root_path
+  end
+
+  def owner?(owner)
+    designer == owner
   end
 
   private

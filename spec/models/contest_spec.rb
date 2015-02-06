@@ -103,4 +103,15 @@ RSpec.describe Contest do
       end
     end
   end
+
+  describe 'designers' do
+    it 'can be invited if contest has the submission state' do
+      expect(contest.designers_invitation_period?).to be_truthy
+    end
+
+    it 'can not be invited if contest has not the submission state' do
+      contest.start_winner_selection!
+      expect(contest.designers_invitation_period?).to be_falsey
+    end
+  end
 end
