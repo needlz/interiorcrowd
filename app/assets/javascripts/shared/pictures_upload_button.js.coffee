@@ -47,3 +47,26 @@ class @ConceptBoardUploader
         theme: 'new'
       I18n: I18n
       single: true
+    @initSaveBtn()
+
+  @initSaveBtn:->
+    $('body').on('click', '.saveConceptBoard', @onSaveClick)
+    $('body').on 'click', '.cancelConceptBoard', ->
+      $(".initialImage").show()
+      $('.editable-mode').remove()
+
+
+  @onSaveClick: ()=>
+    $.ajax(
+      data: { contest_request: { image_id: $('#personal_picture_id').val() } }
+      url: window.location.pathname
+      type: 'PUT'
+      dataType: "script"
+      success: (data)=>
+        newSource = $('.editable-mode img:last').attr('src')
+        $(".initialImage img").attr('src', newSource)
+        $(".initialImage").show()
+        $('.editable-mode').remove()
+
+    )
+

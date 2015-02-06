@@ -25,15 +25,17 @@ class DesignerCenterRequestsController < ApplicationController
 
   def update
     request = ContestRequest.find(params[:id])
-    ContestRequest.transaction do
-      request.update_attributes!(response_params)
-      request.submit! if params[:contest_request][:status] == 'submitted'
-    end
+    contest_editing = ContestRequestEdition.new({  request: request,
+                                                    contest_request: params['contest_request']
+                                                 })
+    contest_editing.perform
+
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
       format.json do
         render json: format_changed_attributes(response_params)
       end
+      format.js
     end
   end
 
