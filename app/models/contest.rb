@@ -3,6 +3,8 @@ class Contest < ActiveRecord::Base
 
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
   STATUSES = %w{submission winner_selection closed fulfillment finished}
+  RETAILERS = %i(anthropologie_home ballard_designs crate_and_barrel etsy gilt horchow ikea one_kings_lane pier_one
+         pottery_barn restoration_hardware room_and_board target wayfair west_elm)
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -117,6 +119,10 @@ class Contest < ActiveRecord::Base
 
   def designers_invitation_period?
     submission?
+  end
+
+  def retailer_value(retailer)
+    send("retailer_#{ retailer }")
   end
 
   private

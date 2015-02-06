@@ -61,6 +61,19 @@ class ContestView
     styles.compact.join(', ')
   end
 
+  def preferred_retailers
+    @retailers.select { |retailer| retailer[:value] }
+  end
+
+  def retailers_string
+    return 'None' if preferred_retailers.blank?
+    "(#{ preferred_retailers.map { |retailer| self.class.retailer_name(retailer[:name]) }.join(', ') })"
+  end
+
+  def self.retailer_name(retailer)
+    I18n.t("client_center.entries.preferences_retailers.#{ retailer }")
+  end
+
   private
 
   def initialize_from_options(options)
@@ -105,6 +118,9 @@ class ContestView
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
     @name = contest.project_name
+    @retailers = Contest::RETAILERS.map do |retailer|
+      { name: retailer, value: contest.retailer_value(retailer) }
+    end
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
   end

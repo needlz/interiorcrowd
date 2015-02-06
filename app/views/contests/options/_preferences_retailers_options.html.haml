@@ -1,0 +1,3 @@
+- Contest::RETAILERS.each do |retailer|
+  = form.check_box "retailer_#{ retailer }".to_sym
+  = form.label  "retailer_#{ retailer }".to_sym, ContestView.retailer_name(retailer)

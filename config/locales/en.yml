@@ -289,6 +289,23 @@ en:
         get_inspired: Get Inspired
         see_example: See example
         share_brief: Share brief <br> with your friend
+      preferences_retailers:
+        anthropologie_home: Anthropologie Home
+        ballard_designs: Ballard Designs
+        crate_and_barrel: Crate and Barrel
+        etsy: Etsy
+        gilt: Gilt
+        horchow: Horchow
+        ikea: Ikea
+        one_kings_lane: One Kings Lane
+        pier_one: Pier One
+        pottery_barn: Pottery Barn
+        restoration_hardware: Restoration Hardware
+        room_and_board: Room and Board
+        target: Target
+        wayfair: Wayfair
+        west_elm: West Elm
+
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

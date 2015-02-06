@@ -76,6 +76,9 @@ RSpec.configure do |config|
                   value: 100} },
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
           ex_links: ['link1', 'link2'] },
+      contest: {
+          retailer_ikea: true
+      }
     }
   end
 end

@@ -44,6 +44,13 @@ class ContestOptions
     if options[:contest]
       @contest[:accommodate_children] = options[:contest][:accommodate_children] if options[:contest].has_key?(:accommodate_children)
       @contest[:accommodate_pets] = options[:contest][:accommodate_pets] if options[:contest].has_key?(:accommodate_pets)
+
+      Contest::RETAILERS.each do |retailer|
+        attribute =  "retailer_#{ retailer }".to_sym
+        @contest[attribute] = options[:contest][attribute] if options[:contest].has_key?(attribute)
+      end
+      @contest[:retailer] = options[:contest][:retailer] if options[:contest].has_key?(:retailer)
+
       ContestAdditionalPreference.preferences.each do |preference|
         @contest[preference] = options[:contest][preference] if options[:contest].has_key?(preference)
       end
