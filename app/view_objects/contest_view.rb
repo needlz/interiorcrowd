@@ -7,7 +7,8 @@ class ContestView
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
-              :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples, :space_budget_value
+              :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
+              :space_budget_value
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -26,6 +27,12 @@ class ContestView
   CONTEST_PREVIEW_ATTRIBUTES = [
     :name, :design_knowledge, :design_style, :desirable_colors, :undesirable_colors, :example_pictures,
     :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :other_information ]
+
+  LEVELS = {
+    2 => :very,
+    1 => :somewhat,
+    0 => :not
+  }
 
   def initialize(options)
     if options.kind_of?(Hash)
@@ -76,13 +83,19 @@ class ContestView
 
   def elements_to_avoid
     return 'None' if @elements_to_avoid.blank?
-    @elements_to_avoid
+    ERB::Util.html_escape(@elements_to_avoid).split("\n").join('<br>')
   end
 
   def options_level(level)
-    { 1 => I18n.t('client_center.entries.option_levels.very'),
-      2 => ,
-      3 =>  }
+    I18n.t("client_center.entries.option_levels.#{ LEVELS[level.to_i] }")
+  end
+
+  def entertaining
+    options_level(@entertaining)
+  end
+
+  def durability
+    options_level(@durability)
   end
 
   private
@@ -133,6 +146,8 @@ class ContestView
       { name: retailer, value: contest.retailer_value(retailer) }
     end
     @elements_to_avoid = contest.elements_to_avoid
+    @entertaining = contest.entertaining
+    @durability = contest.durability
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
   end
