@@ -4,7 +4,7 @@
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
   = label_tag("design_brief_design_category_#{ design_category.id }") do
     %span.text-price
-      %b #{ t("contests.titles.brief.packages.#{ design_category.name }.name") }     $#{design_category.price}
+      %b #{ design_category.localized_name }     $#{design_category.price}
     %br
     %span.category-description
       %i= t("contests.titles.brief.packages.#{ design_category.name }.description")
