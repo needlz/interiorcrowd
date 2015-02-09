@@ -6,7 +6,10 @@
     .row
       .col-md-12
         %p.designerName= t('designer_center.final_upload.note_for_consumer')
-        = text_area_tag 'consumer-note', nil, class: 'consumerNoteTextarea'
+        = text_area_tag 'consumer-note',
+            nil,
+            class: 'consumerNoteTextarea',
+            placeholder: t('designer_center.final_upload.note_for_consumer_placeholder')
         = render partial: 'shared/moodboard', locals: { request: @request }
         %p.grayP14.marg-top10
           %i= t('designer_center.final_upload.file_info')

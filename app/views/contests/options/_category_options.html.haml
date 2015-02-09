@@ -1,9 +1,9 @@
 .packages.text-package.text-center-xs.text-center-sm
-  %h1 Choose the packages
+  %h1= t('contests.creation.packages.title')
   %span.subtitle
-    We’d love to help you with your design. let us know how we can work with you?
+    %b= t('contests.titles.brief.description.first_row')
     %br
-    How can we help you today?
+    = t('contests.titles.brief.description.second_row')
 %span#err_category.text-error
 - @creation_wizard.available_design_categories.each_with_index do |design_category, index|
   = render partial: 'contests/options/category_row',
