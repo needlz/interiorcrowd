@@ -90,7 +90,7 @@ en:
       width: Width
       height: Height (Optional)
     space:
-      title: Project Detail
+      title: Project Details
       description: Tell us information about your room. Show us pictures of your space to give more direction to the designers.
       details_toggle:
         title: Have pictures or dimension of your space?
@@ -155,6 +155,11 @@ en:
         budget: Quick Fix
         premier: Update My Style
         premium: Room Overhaul
+      pages:
+        design_brief: Choose Room
+        design_style: Style Profile
+        design_space: Project Details
+        preview: Review
     additional_details:
       call_us: Or, call us!
       thanks_title: Great job! Design concepts will be headed your way soon!

@@ -1,24 +1,10 @@
 .row.text-center.title-first
   %h1{style: "font-weight:normal;"}= t('contests.titles.creation').upcase
 .options-selector
-  .col-md-3.option-item.no-padding-right.no-padding-left{class: @creation_wizard.breadcrumb_class(0)}
-    .circle
-      %span 1
-    .text-selector.text-center
-      Choose Room
-  .col-md-3.option-item.no-padding-left.no-padding-right{class: @creation_wizard.breadcrumb_class(1)}
-    .circle
-      %span 2
-    .text-selector.text-center
-      Style Profile
-  .col-md-3.option-item.no-padding-left.no-padding-right{class: @creation_wizard.breadcrumb_class(2)}
-    .circle
-      %span 3
-    .text-selector.text-center
-      Project Detail
-  .col-md-3.option-item.no-padding-left{class: @creation_wizard.breadcrumb_class(3)}
-    .circle
-      %span 4
-    .text-selector.text-center
-      Review
+  - ContestCreationWizard.creation_steps.each_with_index do |step, index|
+    .col-md-3.option-item.no-padding-left{class: contest_creation_tab_class(index, ContestCreationWizard.creation_steps.length) }
+      .circle
+        %span= index + 1
+      .text-selector.text-center
+        = t("contests.creation.pages.#{ step }")
   .clearfix
