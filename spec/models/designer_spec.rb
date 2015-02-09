@@ -18,6 +18,11 @@ RSpec.describe Designer do
       expect(designer.portfolio).to be_present
     end
 
+    it 'automatically generates portfolio path' do
+      designer.create_portfolio(portfolio_params)
+      expect(designer.portfolio.reload.path).to be_present
+    end
+
     it 'creates portfolio if only one of parameter is present' do
       portfolio_params.each do |key, value|
         designer.create_portfolio({ key => value })

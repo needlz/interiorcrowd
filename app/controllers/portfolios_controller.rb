@@ -21,7 +21,6 @@ class PortfoliosController < ApplicationController
       @portfolio.update_attributes!(portfolio_params)
       @portfolio.update_pictures(params[:portfolio])
       @portfolio.update_awards(params[:portfolio][:awards])
-      @portfolio.assign_unique_path
     end
     redirect_after_updated(@portfolio)
   end
