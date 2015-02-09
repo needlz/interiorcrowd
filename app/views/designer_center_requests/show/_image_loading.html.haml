@@ -1,0 +1,21 @@
+.rooms.text-center-sm.text-center-xs.concept-board
+  .some-text.col-md-6.no-padding-left
+  .clearfix
+  - path = request.moodboard_image_path
+  .thumbs
+    .col-md-12.novice.no-padding-left.template.relative
+      = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+    - if path
+      .col-md-12.novice.no-padding-left.thumb.relative
+        = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+  .clearfix
+  .col-md-6.no-x-padding.marg-top20
+    %input#concept_picture.hidden{ name: 'image[image]', type: 'file' }
+    %input#personal_picture_id{ name: @image_id,
+      type: "hidden",
+      value: @image_id}
+    %a.marg-top20.upload-button.edit-picture-btn
+      = t('designer_center.portfolio.creation.upload_personal_picture.upload_button')
+    %a.marg-top20.saveConceptBoard.edit-picture-btn= t('designer_center.save_button')
+    %a.marg-top20.cancelConceptBoard.edit-picture-btn= t('designer_center.cancel_button')
+  .clearfix

@@ -35,3 +35,40 @@ class @SpacePicturesUploader
         selector: '#design_space_image_id'
         theme: 'new'
       I18n: i18n
+
+class @ConceptBoardUploader
+  @init: (i18n)->
+    PicturesUploadButton.init
+      fileinputSelector: '.concept-board #concept_picture',
+      uploadButtonSelector: '.concept-board .upload-button',
+      thumbs:
+        container: '.concept-board .thumbs'
+        selector: '#personal_picture_id'
+        theme: 'new'
+      I18n: i18n
+      single: true
+    @initSaveBtn()
+
+  @initSaveBtn:->
+    $('body').on('click', '.saveConceptBoard', @onSaveClick)
+    $('body').on 'click', '.cancelConceptBoard', =>
+      @hideEditableBlock()
+
+  @onSaveClick: ()=>
+    $.ajax(
+      data: { contest_request: { image_id: $('#personal_picture_id').val() } }
+      url: window.location.pathname
+      type: 'PUT'
+      dataType: "script"
+      success: (data)=>
+        @changeImageSource()
+        @hideEditableBlock()
+
+    )
+  @hideEditableBlock: () ->
+    $(".initialImage").show()
+    $('.editable-mode').remove()
+
+  @changeImageSource: ->
+    newSource = $('.editable-mode img:last').attr('src')
+    $(".initialImage img").attr('src', newSource)

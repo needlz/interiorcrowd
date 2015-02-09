@@ -2054,7 +2054,7 @@ textarea.productsMoodboardAbove{
 
 }
 #searchBox input[type=text]{
-    width: 100%;
+    /*width: 200px;*/
     height: 34px;
     padding: 0px 5px;
     border-radius: 5px;
@@ -2613,8 +2613,13 @@ textarea.addCommentTextarea{
     background-color: #FFF;
     padding: 6px 24px;
     font-weight: 700;
+    margin-right: 60px;
 }
 
+.contestUnderway #searchBox{
+    margin: 0px;
+    float: right;
+}
 .contestUnderway #searchBox input[type=text]{
     height: 35px;
 }
@@ -3028,6 +3033,29 @@ only screen and (min-device-pixel-ratio: 2) {
     margin-top: 0px;
     font-size: 18px;
 }
+
+.editMoodboardBtn {
+    font-size: 16px;
+    color: #000;
+    font-weight: 700;
+    border: 1px solid #a9a9a9;
+    border-radius: 5px;
+    padding: 5px 18px;
+    display: inline-block;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*sign up page*/
