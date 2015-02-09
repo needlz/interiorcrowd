@@ -8,6 +8,14 @@ class DesignerView
     @portfolio_view = PortfolioView.new(designer.portfolio)
   end
 
+  def portfolio_path
+    designer.try(:portfolio).try(:path)
+  end
+
+  def personal_picture_url
+    portfolio_view.personal_picture_url
+  end
+
   private
 
   attr_reader :designer, :portfolio_view
