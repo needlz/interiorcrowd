@@ -75,3 +75,11 @@
 .commentSent {
   visibility: hidden;
 }
+
+input[type="radio"] {
+  display: inline;
+}
+
+input[type="radio"].smallRadio, input[type="radio"].big-radio {
+  display: none;
+}
