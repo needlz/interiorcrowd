@@ -48,12 +48,5 @@ RSpec.describe DesignersController do
         expect(Designer.first.portfolio.example_links.map(&:url)).to match_array portfolio_links
       end
     end
-
-    context 'portfolio not passed' do
-      it 'does not create portfolio' do
-        post :create, designer_creation_params
-        expect(Designer.first.portfolio).to be_nil
-      end
-    end
   end
 end
