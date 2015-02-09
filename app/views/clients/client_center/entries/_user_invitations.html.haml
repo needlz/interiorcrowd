@@ -4,8 +4,6 @@
   .col-md-10.col-md-offset-1
     %h4
       = t('client_center.entries.reviewer_invitations.want_feedback')
-      = succeed t('client_center.entries.reviewer_invitations.invite') do
-        %br/
     .template
       = render partial: 'clients/client_center/entries/user_invitation_row'
     .invitations-inputs

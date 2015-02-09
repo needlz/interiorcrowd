@@ -79,7 +79,7 @@ en:
         no_appeals: Please pick your opinion for each appeal
       type_color_name: Type color name
       picker_types_separator: Or
-      add_links: Add your inspiration links ­ for example, a Pinterest board that shows your favorite examples.
+      add_links: Add your inspiration links - for example, a Pinterest board that shows your favorite examples.
       upload_button: Upload images
       uploading: Uploading...
       examples_toggle:
@@ -341,7 +341,7 @@ en:
       upload_new: Upload a new moodboard
       above_image: |
         Now that you’ve been chosen, the collaborative process begins. Please give your client as
-        much detail on your design as possible ­ adding comments as to why you’ve chosen certain
+        much detail on your design as possible - adding comments as to why you’ve chosen certain
         items.
       products_list: Products List
       similar_styles: Similar Styles
@@ -359,9 +359,9 @@ en:
       note_for_consumer_placeholder: |
         I had so much fun designing this for you. Thanks so much for the fun brief. Below you will find
         more detailed instructions on how to get this look in your amazing new living room.
-      file_info: Ensure that your file is a .pdf format so that the consumer can download it. If you need help, contact us.
+      file_info: Ensure that your file is a .pdf format so that the client can download it. If you need help, contact us.
       upload: Upload your final design
-      upload_description: Tell the consumer how they can pull together their new look. Remember to be specific.
+      upload_description: Tell the client how they can pull together their new look. Remember to be specific.
       product_list: Product List
       product_name: Product Name
       brand: Brand
@@ -413,7 +413,7 @@ en:
       become_designer: Become a Designer!
       do_you_love: Do you love interior design? Looking to expand your portfolio and reach new customers?
       get_started: To get started, tell us a bit more about yourself.
-      i_agree: I agree with the InteriorCrowd term of use
+      i_agree: I agree with the InteriorCrowd terms of use
     title: Designer Center
     updates:
       invites: Invites
@@ -520,7 +520,7 @@ en:
         listed_as: Currently listed as
         to_do: To&nbsp;Do
         update_moodboard: Update Moodboard
-        send_note: Send Note to Consumer
+        send_note: Send Note to Client
         create_shopping_list: Create Shoppping List
         create_3d_rendering: Create 3D rendering
         price: $%{price}
@@ -548,11 +548,11 @@ en:
       how_to_communicate: How do I communicate with the client?
       vendors: Which vendors can I use?
     my_contests:
-      design_profile: See the consumer design profile
-      step_1: Step 1 is to create a concept moodboard that incorporates the consumer’s style, needs, and colors.
+      design_profile: See the client design profile
+      step_1: Step 1 is to create a concept moodboard that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept moodboards
       hint: 'Hint: be sure that you review the %{link} before starting'
-      hint_link: consumer's design profile
+      hint_link: client's design profile
       type: 'Type :'
       room: 'Room :'
       design_style: 'Design Style :'
@@ -561,7 +561,7 @@ en:
       see_more: See more
       ready_to_go: Ready to go?
       upload_moodboard: Upload Your Concept Moodboard
-      design_textarea_placeholder: Tell the Consumer Something about your design.
+      design_textarea_placeholder: Tell the Client Something about your design.
       need_to_ask_question: Need to ask a question?
       save_and_preview: Save & Preview
 
@@ -580,7 +580,7 @@ en:
     role_switcher: 'Are you:'
     other_info: 'Other info:'
     email: 'Email: *'
-    consumer: a consumer
+    consumer: a customer
     designer: a designer
     go: 'Go'
     success: Thank you so much for your inquiry! We can't wait to share the InteriorCrowd experience with you!
@@ -594,32 +594,32 @@ en:
         answer: We love any feedback! Please email us at %{hello_email}
       what_is:
         question: What is InteriorCrowd?
-        answer: |
+        answer: >
           InteriorCrowd is a fun and affordable way for busy people to get an inspiring home design
           from a professional designer online. We connect designers with new clients, while our
-          software allows designers to focus on what they love ­ design.
+          software allows designers to focus on what they love - design.
       who_are_designers:
         question: Who are our designers?
-        answer: |
+        answer: >
           Our designers are talented professionals from anywhere in the world. They are chosen to
           design for InteriorCrowd based on a combination of factors like portfolio, awards and raw
           talent.
       style_profile:
         question: How does the style profile work?
-        answer: |
+        answer: >
           The style profile was created in collaboration with our designers as a fun and easy way to
           figure out how best to style an amazing new space for you. Most people don’t stick to one
           style, and the profile takes this into account.
       packages:
         question: Which package should I choose?
-        answer: |
-          It depends on how much help you need ­ The Quick Fix being the least amount of help, and
+        answer: >
+          It depends on how much help you need - The Quick Fix being the least amount of help, and
           Room Overhaul being the most. You’re not married to your decision though. If through the
           collaborative process with your designer, they realize you chose incorrectly, this choice can
           be amended (you might just need more help than you thought!).
       contests:
         question: How do contests work?
-        answer: |
+        answer: >
           First you fill out the style profile, then give us as much detailed information about your specific
           room’s needs as possible. All our designers then receive your brief and those who want to
           take on the project will send you a concept board reflecting their suggested direction for your
@@ -630,21 +630,22 @@ en:
         answer: You will always receive at least two designs, but it could be more.
       how_to_collaborate_with_designer:
         question: How do I collaborate with my designer?
-        answer: |
+        answer: >
           Every time your designer sends you a question you’ll receive an email notification with a link
           that will take you directly to the Client Center where you and your designer can communicate.
           Alternatively, just log in and go directly to your Client Center to send your designer a question.
       how_long:
         question: How long does the process take?
-        answer: |
+        answer: >
           Generally, the process takes between 1 to 2 weeks. We have a few deadlines in place to
           keep the process moving along swiftly. A huge benefit of InteriorCrowd is how quickly you can
-          go from frustration with your room ­ to inspired for your new space! So, we ask that you
+          go from frustration with your room - to inspired for your new space! So, we ask that you
           respond to your designer within the time frame given to you. All details are on the platform,
           and you will be notified along the way too.
       forgot_password:
-        question: I forgot my password ­ how do I log in?
-        answer: |
+        question: >
+          I forgot my password - how do I log in?
+        answer: >
           Please click on the forgot password link and enter your username. A link to reset your
           password will be sent to the email address on file. Click on that link, and you will be led to an
           area to reset the password. If you have any issues, you can always contact us at
@@ -653,14 +654,14 @@ en:
     designer:
       what_is_beta:
         question: What is beta mode?
-        answer: |
+        answer: >
           This means we are still testing the product and learning from both the client and designer’s
           experience. It also means that not all elements of the final product are available yet. The final
           product will look quite different to how it looks right now. There will be bugs too, so please be
-          patient ­ and let us know of any issues you’re experiencing.
+          patient - and let us know of any issues you’re experiencing.
       how_contest_work:
         question: How do contests work?
-        answer: |
+        answer: >
           First, a client fills out the style profile, giving us as much detailed information about their
           specific room’s needs as possible. All the designers will receive the brief and those who want
           to take on the project will send the client a concept board reflecting their suggested direction
@@ -669,23 +670,24 @@ en:
           designer.
       how_communicate_client:
         question: How do I communicate with the client?
-        answer: |
+        answer: >
           All communication will take place in the Client Center on the platform. You will always be
           notified via email if the client has added any feedback to your designs.
       specs_of_design:
         question: What are the specs of the designs I upload for the client?
         answer: |
-          Concept board: w:752px h:664 px
+          Concept board: w: 752px h: 664px
+
           Final Design: w: 851px h: 751px
       vendors:
         question: Which vendors can I source from?
-        answer: |
+        answer: >
           You are welcome to choose from vendors that meet your client’s aesthetic, budget, and
           quality requirements. But please choose reputable vendors that you know you can rely on.
           We want clients to have a positive experience when they order the goods.
       can_include_work_in_portfolio:
         question: Can I include the work I do for InteriorCrowd in my portfolio?
-        answer: |
+        answer: >
           In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
           reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
 

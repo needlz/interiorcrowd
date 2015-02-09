@@ -5,4 +5,4 @@
     %h4.panel-title
       %a= faq_item[:question]
   .panel-collapse.collapse{"aria-labelledby" => "heading#{number}", :role => "tabpanel", id: "collapse#{number}"}
-    .panel-body= faq_item[:answer].html_safe
+    .panel-body= faq_item[:answer].split("\n").join('<br/>').html_safe
