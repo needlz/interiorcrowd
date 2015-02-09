@@ -51,7 +51,7 @@ class PortfolioView
   end
 
   def personal_picture_url
-    portfolio.try(:personal_picture) ? portfolio.personal_picture.image.url(:medium) : '/assets/portfolio_profile_image.png'
+    portfolio.personal_picture ? portfolio.personal_picture.image.url(:medium) : '/assets/portfolio_profile_image.png'
   end
 
   def designer_name

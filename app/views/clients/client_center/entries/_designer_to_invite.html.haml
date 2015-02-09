@@ -1,21 +1,15 @@
 .col-md-6.no-x-padding.profile-card{ data: { id: designer.id } }
   .col-md-5.no-padding-left.img-responsive
-    -if designer.portfolio_path
-      = link_to(image_tag(designer.personal_picture_url),
-          show_portfolio_path(designer.portfolio_path))
-    -else
-      = image_tag(designer.personal_picture_url)
+    = link_to(image_tag(designer.personal_picture_url),
+        show_portfolio_path(designer.portfolio_path))
     .clearfix.visible-md.visible-xs.visible-sm
     %button.btn7.designer-invitation-button{  :type => "button",
       class: ('invite-designer' unless designer.invited_to_contest?(@contest))}
       %b= designer.invited_to_contest?(@contest) ? t('client_center.entries.invitations.invited') : t('client_center.entries.invitations.invite')
   .col-md-7.no-x-padding.text-left.text-center-sm.text-center-xs
     %h3.designer-name
-      -if designer.portfolio_path
-        = link_to( (render partial: 'clients/client_center/entries/designer_name', locals: {designer: designer}),
-            show_portfolio_path(designer.portfolio_path))
-      -else
-        =render partial: 'clients/client_center/entries/designer_name', locals: {designer: designer}
+      = link_to( (render partial: 'clients/client_center/entries/designer_name', locals: {designer: designer}),
+          show_portfolio_path(designer.portfolio_path))
     .col-md-12.first-section-separator
     %h2.attribute-title
       %b Design Mindset

@@ -10,23 +10,8 @@ class PortfoliosController < ApplicationController
     @portfolio_view = PortfolioView.new(portfolio)
   end
 
-  def new
-    return redirect_to edit_portfolio_path if @portfolio
-    @portfolio_view = PortfolioView.new(Portfolio.new)
-    @navigation = Navigation::DesignerCenter.new(:portfolio)
-  end
-
-  def create
-    portfolio = Portfolio.new(portfolio_params)
-    Portfolio.transaction do
-      @designer.portfolio = portfolio
-      portfolio.update_pictures(params[:portfolio])
-    end
-    redirect_after_updated(portfolio)
-  end
 
   def edit
-    return redirect_to new_portfolio_path unless @portfolio
     @portfolio_view = PortfolioView.new(@portfolio)
     @navigation = Navigation::DesignerCenter.new(:portfolio)
   end
@@ -36,6 +21,7 @@ class PortfoliosController < ApplicationController
       @portfolio.update_attributes!(portfolio_params)
       @portfolio.update_pictures(params[:portfolio])
       @portfolio.update_awards(params[:portfolio][:awards])
+      @portfolio.assign_unique_path
     end
     redirect_after_updated(@portfolio)
   end
@@ -61,7 +47,6 @@ class PortfoliosController < ApplicationController
   end
 
   def redirect_after_updated(portfolio)
-    portfolio.assign_unique_path
     if portfolio.complete?
       redirect_to show_portfolio_path(url: portfolio.path)
     else

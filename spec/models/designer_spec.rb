@@ -25,11 +25,6 @@ RSpec.describe Designer do
         designer.portfolio.destroy
       end
     end
-
-    it 'doesn\'t create portfolio if portfolio params are empty' do
-      designer.create_portfolio({})
-      expect(designer.portfolio).to be_nil
-    end
   end
 
 end

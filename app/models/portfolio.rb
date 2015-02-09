@@ -14,6 +14,7 @@ class Portfolio < ActiveRecord::Base
   belongs_to :designer
   has_many :example_links
   has_many :portfolio_awards
+  after_create  { |portfolio| portfolio.assign_unique_path}
 
   def complete?
     path.present?

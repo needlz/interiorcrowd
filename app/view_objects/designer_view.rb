@@ -1,7 +1,7 @@
 class DesignerView
 
   delegate :first_name, :last_name, :name, :id, :invited_to_contest?, to: :designer
-  delegate :personal_picture, :style_description_texts, :about, to: :portfolio_view, allow_nil: true
+  delegate :personal_picture_url, :personal_picture, :style_description_texts, :about, to: :portfolio_view, allow_nil: true
 
   def initialize(designer)
     @designer = designer
@@ -9,11 +9,7 @@ class DesignerView
   end
 
   def portfolio_path
-    designer.try(:portfolio).try(:path)
-  end
-
-  def personal_picture_url
-    portfolio_view.personal_picture_url
+    designer.portfolio.try(:path)
   end
 
   private

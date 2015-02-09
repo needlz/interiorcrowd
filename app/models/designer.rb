@@ -31,10 +31,10 @@ class Designer < ActiveRecord::Base
   end
 
   def create_portfolio(portfolio_params)
+    portfolio = Portfolio.create!(designer_id: id)
     if portfolio_params.present? && (portfolio_params[:picture_ids].present? ||
         portfolio_params[:example_links].present?
       )
-      portfolio = Portfolio.create!(designer_id: id)
       portfolio.update_pictures(portfolio_params)
       portfolio.update_links(portfolio_params[:example_links])
       save!

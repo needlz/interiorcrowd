@@ -127,11 +127,11 @@ RSpec.describe ClientsController do
     before do
       sign_in(client)
       Fabricate(:contest, client: client)
-      Fabricate(:designer)
+      Fabricate(:portfolio)
     end
 
     context 'designers present' do
-      let!(:designers) { Fabricate.times(3, :designer) }
+      let!(:designers) { Fabricate.times(3, :portfolio).map(&:designer) }
 
       it 'returns page' do
         get :entries
