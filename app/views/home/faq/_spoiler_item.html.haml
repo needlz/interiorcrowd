@@ -1,6 +1,8 @@
 .panel.panel-default.panel-faq
-  .panel-heading.panel-heading-faq.collapsed{"aria-controls" => "collapse#{number}", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse#{number}", :role => "tab", id: "heading#{number}"}
+  .panel-heading.panel-heading-faq.collapsed{ aria: { controls: "collapse#{number}", expanded: "false"},
+      data: { parent: "#accordion", toggle: "collapse" }, href: "#collapse#{number}",
+      role: "tab", id: "heading#{number}" }
     %h4.panel-title
-      %a= question
+      %a= faq_item[:question]
   .panel-collapse.collapse{"aria-labelledby" => "heading#{number}", :role => "tabpanel", id: "collapse#{number}"}
-    .panel-body= answer
+    .panel-body= faq_item[:answer].html_safe

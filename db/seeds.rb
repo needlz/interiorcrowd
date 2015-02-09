@@ -55,9 +55,9 @@ DesignSpace.create(id: 20, name: 'Garage', pos: 110, parent_id: 0)
 DesignSpace.create(id: 21, name: 'Closet', pos: 120, parent_id: 0)
 
 DesignerLevel.delete_all
-DesignerLevel.create(id: 1, name: 'Novice', image: 'back-pic.png')
-DesignerLevel.create(id: 2, name: 'Enthusiast', image: 'back-pic.png')
-DesignerLevel.create(id: 3, name: 'Savvy', image: 'back-pic.png')
+DesignerLevel.create(id: 1, name: 'novice', image: 'back-pic.png')
+DesignerLevel.create(id: 2, name: 'enthusiast', image: 'back-pic.png')
+DesignerLevel.create(id: 3, name: 'savvy', image: 'back-pic.png')
 
 Appeal.delete_all
 Appeal.create(id: 1, first_name: 'feminine', second_name: 'masculine', image: 'blank.png')

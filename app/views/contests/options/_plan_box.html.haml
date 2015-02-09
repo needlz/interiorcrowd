@@ -5,8 +5,6 @@
       %span.name
         %b= package.name
       %br/
-      %span.price
-        %b $#{ package.price }
     .first.text-center.body
       - package.services.each_with_index do |service, index|
         - style_class = index > 0 ? 'not-first' : ''

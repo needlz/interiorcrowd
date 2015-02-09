@@ -18,6 +18,7 @@ RSpec.describe ContestsController do
 
   describe 'GET option' do
     it 'returns html of options' do
+      allow_any_instance_of(DesignCategory).to receive(:name).and_return('quick_fix')
       ContestView::EDITABLE_ATTRIBUTES.each do |option|
         get :option, id: contest.id, option: option
         expect(response).to be_ok

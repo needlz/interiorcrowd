@@ -12,10 +12,12 @@ en:
       creation: Launch a New Design Contest
       design_categories: What do you need help with today?
       appeals: What do you think of the style below?
-      wanted_colors: What colors would you like in your space?
-      avoided_colors: What colors would you like to avoid?
-      example: Do you have any example of rooms that you like?
-      designer_level: Do you consider yourself an interior design
+      wanted_colors: Which colors would you like in your space?
+      avoided_colors: Which colors would you like to avoid?
+      example: |
+        Do you have a room in your home you love? Please send us pictures. They can also be
+        pictures of a friend’s home or something you’ve found online.
+      designer_level: How would you describe your level of design knowledge?
       areas: Which rooms needs help?
       brief:
         title: Choose the packages
@@ -68,9 +70,8 @@ en:
     design_style:
       title: Style Profile
       description: |
-        Now for the fun part, tell us about your style. We're excited to start
-        designing for you. Our Style Profile helps us get a sense of where your
-        style is now and where you would like it to be.
+        Now for the fun part! Tell us more about your style and what you’d like in your home. The
+        more we know about you, the easier it’ll be for us to provide you with a design you really love.
       quote: “The more we know about you, the better we can style for you.”
       validations:
         no_colors: Please enter data.
@@ -78,12 +79,16 @@ en:
         no_appeals: Please pick your opinion for each appeal
       type_color_name: Type color name
       picker_types_separator: Or
-      add_links: Add your inspiration links
+      add_links: Add your inspiration links ­ for example, a Pinterest board that shows your favorite examples.
       upload_button: Upload images
       uploading: Uploading...
       examples_toggle:
         'yes': 'Yes'
         'no': 'No'
+      designer_level:
+        novice: Novice
+        enthusiast: Enthusiast
+        savvy: Savvy
 
     appeals:
       feminine: Feminine
@@ -108,14 +113,16 @@ en:
       height: Height (Optional)
     space:
       title: Project Details
-      description: Tell us information about your room. Show us pictures of your space to give more direction to the designers.
+      description: |
+        Please share a little more information about your room. The more information you can
+        provide, the better your final design will be.
       details_toggle:
-        title: Have pictures or dimension of your space?
-        hint: You can upload it later in client center.
+        title: Do you have pictures and dimensions of your space?
+        hint: You can also upload them later in the client center.
         'yes': 'Yes'
         'no': 'No'
       photos:
-        title: Take photos of your room and upload to us.
+        title: Please take photos of your room so that the designers can see your space.
         image_requirements: At least 4 images with back to each coner. Images must be smaller than 10M.
         see_more: See more guideline
         hint: Please stand with your back in each corner of the room and take a picture.
@@ -129,7 +136,8 @@ en:
          uploading: Uploading...
       dimensions:
         title: Add dimensions of your space.
-        hint: While we love accuracy, we know that you might not have this info right now, so feel free to approximate and update later.
+        hint: Please see our %{faqs_link} for measuring your space if you need help.
+        faqs: FAQ's
         feet: Feet
         inches: Inches
       budget:
@@ -151,23 +159,23 @@ en:
         name_placeholder: MY Dream Loft
         name_error: Please enter project name.
         plan_error: Please choose package.
-        expect_designers:
-          one: Expect 1 designer
-          other: Expect %{designer_count} designers
       go_back: Back
       continue: Continue
       packages:
         title: Our design packages
         description: Pick a package - 100% money back guarantee
-        moodboard: Moodboard
+        moodboard: Concept boards
+        from_designers:
+          one: from at least 1 designer
+          other: from at least %{designer_count} designers
         product_list: Product list
         up_to_products:
           one: up to 1 product
           other: up to %{product_count} products
-        floor_plan: Floor plan
-        3d_rendering: 3D rendering
+        final_design: Final Design
         select: Select
         learn_more: Learn more about packages
+        instructions: Instructions from the designer
       plans:
         budget: Quick Fix
         premier: Update My Style
@@ -229,7 +237,9 @@ en:
         'yes': 'Yes'
         'no': 'No'
       collaboration:
-        this_is_a_preview: Now that you have been chosen, the fun really begins. Please give the details on your design as well as comments about why you have chosen certain items. You can also upload a new moodboard as well.
+        this_is_a_preview: |
+          Now that you have chosen a designer, the fun really starts. Please give your designer as
+          much feedback as possible to make sure you get the best design just for you
         check_message: Please click "check" if you like it or the "x" if you do not. Doing this will help the designer make the best design for you.
         done_btn: Done and move to final design
         modal:
@@ -242,7 +252,7 @@ en:
       reviewer_invitations:
         feedback_time_format: '%b %d at %I %P'
         title: Feedback
-        want_feedback: You don't have to make this choice alone. Want feedback on the designs?
+        want_feedback: You don’t have to make this decision alone. Invite friends and family to help you out.
         invite: Invite
         sending: Creating invitation...
         feedback_link: 'Feedback link:'
@@ -252,7 +262,7 @@ en:
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
       choose_concept: Choose your favorite design concept
-      need_idea: NEED YOUR IDEA!
+      need_idea: I need your help choosing a winner!
       you_invited:  You have been invited to give some feedback on %{name}'s contest.
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
@@ -312,7 +322,7 @@ en:
       brief: Brief
       profile: Profile
     sign_up:
-      title: CREATE YOUR ACCOUNT AND PAYMENT DETAIL
+      title: CREATE YOUR ACCOUNT
       create_account: Create your account
       password: Password
       confirm_password: Confirm Password
@@ -321,7 +331,7 @@ en:
       card_type: Card type
       select_year: Select Year
       select_month: Select Month
-      i_agree: I agree with the InteriorCrowd term of use
+      i_agree: I agree with the InteriorCrowd terms of use
       submit: Submit
   designer_center:
     edit_button: Edit
@@ -329,7 +339,10 @@ en:
     cancel_button: Cancel
     edit:
       upload_new: Upload a new moodboard
-      above_image: Now that you have been chosen, the fun really begins. Please give the details on your design as well as comments about why you have chosen certain items. You can also upload a new moodboard as well.
+      above_image: |
+        Now that you’ve been chosen, the collaborative process begins. Please give your client as
+        much detail on your design as possible ­ adding comments as to why you’ve chosen certain
+        items.
       products_list: Products List
       similar_styles: Similar Styles
       comments: Comments
@@ -342,7 +355,10 @@ en:
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
     final_upload:
-      note_for_consumer: Create a note to consumer
+      note_for_consumer: Write a note about your board here
+      note_for_consumer_placeholder: |
+        I had so much fun designing this for you. Thanks so much for the fun brief. Below you will find
+        more detailed instructions on how to get this look in your amazing new living room.
       file_info: Ensure that your file is a .pdf format so that the consumer can download it. If you need help, contact us.
       upload: Upload your final design
       upload_description: Tell the consumer how they can pull together their new look. Remember to be specific.
@@ -395,8 +411,7 @@ en:
         enter_first_name: Please enter first name.
         invalid_example_url: Please enter valid URL
       become_designer: Become a Designer!
-      do_you_love: Do you love interior design?
-      looking_for: Looking for a way to expand your portfolio and reach new customers??
+      do_you_love: Do you love interior design? Looking to expand your portfolio and reach new customers?
       get_started: To get started, tell us a bit more about yourself.
       i_agree: I agree with the InteriorCrowd term of use
     title: Designer Center
@@ -474,7 +489,7 @@ en:
           invited: Invited
 
     contests_preview:
-      suggested_contests_title: Suggested Contests for You Join Now
+      suggested_contests_title: Recommended contests for you to join.
       suggested_contests_hint: We think these contests are just right for your style.
       all_contests_title: See all current contests
       days_left: '%{days} left to enter'
@@ -497,7 +512,7 @@ en:
       view_response: View your response >
     responses:
       title: Contests Underway
-      list_title: You are currently participating in the folowing contests
+      list_title: You are currently participating in the following contests
       see_all_contests: See all current contests
       check_out_training: Check out our latest training!
       item:
@@ -528,10 +543,10 @@ en:
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept moodboard
     training:
-      check_out: Check out latest training
-      first_steps: Five steps to getting started
-      how_to: How to improve your earings
-      examples: See example moodboards
+      check_out: Check out our latest training materials here
+      how_contests_work: How do contests work?
+      how_to_communicate: How do I communicate with the client?
+      vendors: Which vendors can I use?
     my_contests:
       design_profile: See the consumer design profile
       step_1: Step 1 is to create a concept moodboard that incorporates the consumer’s style, needs, and colors.
@@ -574,48 +589,105 @@ en:
       customer: Customer
       designer: Designer
     customer:
-      topics:
-        about: About InteriorCrowd
-        payment: Payment
-      questions_touch_ic:
-        - 'How do I get in touch with InteriorCrowd?'
-      answers_touch_ic: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."
-      questions_about_ic:
-        - 'Who are our designers?'
-        - 'How does the style profile work?'
-        - 'Which package should I choose?'
-        - 'How do contests work?'
-        - 'How many designs will I get?'
-        - 'How do I collaborate with my designer?'
-        - 'What deadlines are there?'
-      questions_payment:
-        - 'What does 100% money back guarantee mean?'
-        - 'I forgot my password - how do I log in?'
+      get_in_touch:
+        question: How do I get in touch with InteriorCrowd?
+        answer: We love any feedback! Please email us at %{hello_email}
+      what_is:
+        question: What is InteriorCrowd?
+        answer: |
+          InteriorCrowd is a fun and affordable way for busy people to get an inspiring home design
+          from a professional designer online. We connect designers with new clients, while our
+          software allows designers to focus on what they love ­ design.
+      who_are_designers:
+        question: Who are our designers?
+        answer: |
+          Our designers are talented professionals from anywhere in the world. They are chosen to
+          design for InteriorCrowd based on a combination of factors like portfolio, awards and raw
+          talent.
+      style_profile:
+        question: How does the style profile work?
+        answer: |
+          The style profile was created in collaboration with our designers as a fun and easy way to
+          figure out how best to style an amazing new space for you. Most people don’t stick to one
+          style, and the profile takes this into account.
+      packages:
+        question: Which package should I choose?
+        answer: |
+          It depends on how much help you need ­ The Quick Fix being the least amount of help, and
+          Room Overhaul being the most. You’re not married to your decision though. If through the
+          collaborative process with your designer, they realize you chose incorrectly, this choice can
+          be amended (you might just need more help than you thought!).
+      contests:
+        question: How do contests work?
+        answer: |
+          First you fill out the style profile, then give us as much detailed information about your specific
+          room’s needs as possible. All our designers then receive your brief and those who want to
+          take on the project will send you a concept board reflecting their suggested direction for your
+          room. You pick which concept board you like the most (the winning design) and continue to
+          the next collaborative phase of designing your room with that specific designer.
+      how_many_designs:
+        question: How many designs will I get?
+        answer: You will always receive at least two designs, but it could be more.
+      how_to_collaborate_with_designer:
+        question: How do I collaborate with my designer?
+        answer: |
+          Every time your designer sends you a question you’ll receive an email notification with a link
+          that will take you directly to the Client Center where you and your designer can communicate.
+          Alternatively, just log in and go directly to your Client Center to send your designer a question.
+      how_long:
+        question: How long does the process take?
+        answer: |
+          Generally, the process takes between 1 to 2 weeks. We have a few deadlines in place to
+          keep the process moving along swiftly. A huge benefit of InteriorCrowd is how quickly you can
+          go from frustration with your room ­ to inspired for your new space! So, we ask that you
+          respond to your designer within the time frame given to you. All details are on the platform,
+          and you will be notified along the way too.
+      forgot_password:
+        question: I forgot my password ­ how do I log in?
+        answer: |
+          Please click on the forgot password link and enter your username. A link to reset your
+          password will be sent to the email address on file. Click on that link, and you will be led to an
+          area to reset the password. If you have any issues, you can always contact us at
+          %{hello_email}.
 
     designer:
-      topics:
-        payment: Payment
-      questions_touch_ic:
-        - 'How can I be a designer for InteriorCrowd?'
-        - 'How do contests work?'
-        - 'Do I have direct contact with clients?'
-        - 'Where can I source products from?'
-
-      answers_touch_ic: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-        3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-        Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
-        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-        Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic
-        synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS."
-
-      questions_payment:
-        - 'How do I win a contest?'
-        - 'Can I include any work for InteriorCrowd into my portfolio?'
+      what_is_beta:
+        question: What is beta mode?
+        answer: |
+          This means we are still testing the product and learning from both the client and designer’s
+          experience. It also means that not all elements of the final product are available yet. The final
+          product will look quite different to how it looks right now. There will be bugs too, so please be
+          patient ­ and let us know of any issues you’re experiencing.
+      how_contest_work:
+        question: How do contests work?
+        answer: |
+          First, a client fills out the style profile, giving us as much detailed information about their
+          specific room’s needs as possible. All the designers will receive the brief and those who want
+          to take on the project will send the client a concept board reflecting their suggested direction
+          for the room. The client then picks which concept board they like the most (the winning
+          design) and continue to the next collaborative phase of designing their room with that specific
+          designer.
+      how_communicate_client:
+        question: How do I communicate with the client?
+        answer: |
+          All communication will take place in the Client Center on the platform. You will always be
+          notified via email if the client has added any feedback to your designs.
+      specs_of_design:
+        question: What are the specs of the designs I upload for the client?
+        answer: |
+          Concept board: w:752px h:664 px
+          Final Design: w: 851px h: 751px
+      vendors:
+        question: Which vendors can I source from?
+        answer: |
+          You are welcome to choose from vendors that meet your client’s aesthetic, budget, and
+          quality requirements. But please choose reputable vendors that you know you can rely on.
+          We want clients to have a positive experience when they order the goods.
+      can_include_work_in_portfolio:
+        question: Can I include the work I do for InteriorCrowd in my portfolio?
+        answer: |
+          In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
+          reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
 
   registration:
     designer: 'You have successfully registered with us a designer. Your login details for Interior Crowd as below:'
@@ -623,3 +695,4 @@ en:
   invitation_to_content:
     invite: You have been invited to take part in contest.
   reset_password: 'Your password was reseted, here are your new credentionals:'
+  feedback_email: hello@interiorcrowd.com
