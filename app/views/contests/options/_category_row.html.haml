@@ -4,10 +4,10 @@
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
   = label_tag("design_brief_design_category_#{ design_category.id }") do
     %span.text-price
-      %b #{design_category.name}     $#{design_category.price}
+      %b #{ t("contests.titles.brief.packages.#{ design_category.name }.name") }     $#{design_category.price}
     %br
     %span.category-description
-      %i #{design_category.description}
+      %i= t("contests.titles.brief.packages.#{ design_category.name }.description")
 
 .clearfix
 .img-block

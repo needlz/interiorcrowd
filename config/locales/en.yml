@@ -15,10 +15,27 @@ en:
       wanted_colors: What colors would you like in your space?
       avoided_colors: What colors would you like to avoid?
       example: Do you have any example of rooms that you like?
-      areas: I need help with my...
       designer_level: Do you consider yourself an interior design
-      areas: Which rooms need help?
+      areas: Which rooms needs help?
       brief:
+        title: Choose the packages
+        description:
+          first_row: How can we transform your home?
+          second_row: Let’s start with one room. What does it need?
+        packages:
+          quick_fix:
+            name: Quick Fix
+            description: |
+              Does your room just need one or two things to bring it all together? Whether you know what
+              those things are or need help identifying them, let a stylist help you.
+          update_my_style:
+            name: Style Update
+            description: |
+              Do you need help taking your room to the next level? Perhaps you have some key items you
+              love, but some others that need to go (that College beanbag)?
+          total_room_overhaul:
+            name: Total Room Overhaul
+            description: Need lots of help? Don’t know where to start? Don’t worry, we’ll take care of you!
         design_categories: Need help with
         designer_level: Design knowledge
         designer_profile: Design Profile

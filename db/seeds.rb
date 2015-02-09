@@ -8,22 +8,19 @@
 
 DesignCategory.delete_all
 DesignCategory.create(id: 1,
-                      name: 'Quick Fix',
-                      description: 'choose this if you already have a style that you like but need to just pull it together',
+                      name: 'quick_fix',
                       pos: 1,
                       price: 99,
                       before_picture: 'contest_creation/before_picture.png',
                       after_picture: 'contest_creation/after_picture.png')
 DesignCategory.create(id: 2,
-                      name: 'Update My Style',
-                      description: 'choose this if your place needs updating to fit your current style',
+                      name: 'update_my_style',
                       pos: 2,
                       price: 99,
                       before_picture: 'contest_creation/before_picture.png',
                       after_picture: 'contest_creation/after_picture.png')
 DesignCategory.create(id: 3,
-                      name: 'Total Room Overhaul',
-                      description: 'choose this if you want to start from scratch and have a completely new space',
+                      name: 'total_room_overhaul',
                       pos: 3,
                       price: 199,
                       before_picture: 'contest_creation/before_picture.png',
