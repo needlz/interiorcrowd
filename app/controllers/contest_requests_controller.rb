@@ -70,6 +70,11 @@ class ContestRequestsController < ApplicationController
     end
   end
 
+  def add_comment
+    ConceptBoardComment.create(params['comment'].merge({user_id: session[:client_id]  || session[:designer_id] }))
+    render nothing: true
+  end
+
   def answer
     request = ContestRequest.find(params[:id])
     replied = request.reply(params[:answer], session[:client_id])

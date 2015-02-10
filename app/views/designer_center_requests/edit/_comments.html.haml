@@ -34,8 +34,8 @@
         = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
     .commentTextArea
       %p.designerName= t('designer_center.edit.new_comment')
-      %textarea
-      %button= t('designer_center.edit.send')
+      %textarea{ request: request.id }
+      %button.comment-create= t('designer_center.edit.send')
 
 
 :javascript
@@ -44,3 +44,7 @@
       verticalHandleClass: 'scrollBoxCommentsHandle',
       minScrollbarLength: 28
     });
+
+    $(document).ready(function(){
+     ConceptboardComment.init()
+    })

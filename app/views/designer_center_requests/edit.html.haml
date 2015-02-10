@@ -20,7 +20,7 @@
           = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.similar_styles'), image_texts: ['Provide details on why you chose this. ( e.g, If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair. )', '.....', '.....'] }
         .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
           = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-          = render partial: 'designer_center_requests/edit/comments'
+          = render partial: 'designer_center_requests/edit/comments', locals: { request: @request }
         = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'
