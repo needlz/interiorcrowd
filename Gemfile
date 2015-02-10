@@ -71,8 +71,4 @@ end
 gem 'mandrill-rails'
 gem 'mandrill-api'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'rollbar', '~> 1.4.2' #error notifier
