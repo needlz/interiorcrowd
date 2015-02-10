@@ -1,6 +1,5 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
-  before_filter :set_client, only: [:additional_details, :save_additional_details]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option, :update]
@@ -55,19 +54,6 @@ class ContestsController < ApplicationController
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to preview_contests_path and return
     end
-  end
-
-  def additional_details
-    @contest = @client.contests.find(params[:id])
-    @preferences = ContestAdditionalPreference.all
-    render
-  end
-
-  def save_additional_details
-    @contest = @client.contests.find(params[:id])
-    options = ContestOptions.new(params.with_indifferent_access)
-    @contest.update_from_options(options)
-    redirect_to brief_client_center_index_path
   end
 
   def account_creation
@@ -139,7 +125,4 @@ class ContestsController < ApplicationController
     ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
   end
 
-  def set_client
-    @client = Client.find(check_client)
-  end
 end

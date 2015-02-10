@@ -35,8 +35,6 @@ InteriorC::Application.routes.draw do
         get 'respond'
         get 'option'
         get 'show', as: 'show'
-        get 'additional_details'
-        patch 'save_additional_details'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
                   as: 'reviewer_feedbacks',
