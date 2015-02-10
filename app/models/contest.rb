@@ -22,6 +22,7 @@ class Contest < ActiveRecord::Base
   has_many :notes, class_name: 'ContestNote'
   has_many :reviewer_invitations
   has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
+  belongs_to :preferred_retailers, :class_name => 'PreferredRetailers', :foreign_key => :preferred_retailers_id
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
@@ -35,6 +36,7 @@ class Contest < ActiveRecord::Base
 
   after_initialize :defaults, if: :new_record?
   after_commit :delay_submission_end, on: :create
+  after_create :create_retailer_preferences, on: :create
 
   state_machine :status, initial: :submission do
     event :start_winner_selection do
@@ -77,6 +79,7 @@ class Contest < ActiveRecord::Base
     update_external_examples(options.example_links) if options.example_links
     update_space_images(options.space_image_ids) if options.space_image_ids
     update_example_images(options.liked_example_ids) if options.liked_example_ids
+    update_preferred_retailers(options.preferred_retailers) if options.preferred_retailers.present?
   end
 
   def days_left
@@ -119,6 +122,10 @@ class Contest < ActiveRecord::Base
     submission?
   end
 
+  def retailer_value(retailer)
+    send("retailer_#{ retailer }")
+  end
+
   private
 
   def update_appeals(options)
@@ -153,5 +160,13 @@ class Contest < ActiveRecord::Base
 
   def defaults
     self.phase_end ||= calculate_end_submission_date
+  end
+
+  def create_retailer_preferences
+    update_attributes!(preferred_retailers_id: PreferredRetailers.create!.id)
+  end
+
+  def update_preferred_retailers(preferred_retailers_params)
+    preferred_retailers.update_attributes!(preferred_retailers_params)
   end
 end

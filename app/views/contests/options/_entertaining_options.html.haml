@@ -1,0 +1,8 @@
+.col-md-2
+- ContestView::LEVELS.each do |level, name|
+  .col-md-3
+    = form.radio_button :entertaining, level, class: 'smallRadio'
+    = form.label "entertaining_#{ level }" do
+      %span
+    = form.label "entertaining_#{ level }" do
+      %span= @contest_view.options_level(level)

@@ -15,11 +15,15 @@ RSpec.describe ContestOptions do
                                         project_name: source[:preview][:contest_name],
                                         desirable_colors: source[:design_style][:desirable_colors],
                                         undesirable_colors: source[:design_style][:undesirable_colors],
-                                    })
+                                        elements_to_avoid: source[:contest][:elements_to_avoid],
+                                        entertaining: source[:contest][:entertaining],
+                                        durability: source[:contest][:durability]
+                                   })
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))
     expect(options.liked_example_ids).to eq(source[:design_style][:document_id].split(',').map(&:strip).map(&:to_i))
     expect(options.example_links).to eq(source[:design_style][:ex_links].map(&:strip))
+    expect(options.preferred_retailers).to eq(source[:contest][:preferred_retailers])
   end
 
   it 'gets options from hash with symbol keys' do

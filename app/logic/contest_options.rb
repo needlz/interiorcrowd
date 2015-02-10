@@ -1,6 +1,6 @@
 class ContestOptions
 
-  attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest
+  attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest, :preferred_retailers
 
   REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_id, :space_budget,
                       :budget_plan, :project_name, :desirable_colors]
@@ -44,6 +44,20 @@ class ContestOptions
     if options[:contest]
       @contest[:accommodate_children] = options[:contest][:accommodate_children] if options[:contest].has_key?(:accommodate_children)
       @contest[:accommodate_pets] = options[:contest][:accommodate_pets] if options[:contest].has_key?(:accommodate_pets)
+
+      @preferred_retailers = {}
+      if options[:contest][:preferred_retailers]
+        PreferredRetailers::RETAILERS.each do |retailer|
+          attribute =  retailer.to_sym
+          @preferred_retailers[attribute] = options[:contest][:preferred_retailers][attribute] if options[:contest][:preferred_retailers].has_key?(attribute)
+        end
+        @preferred_retailers[:other] = options[:contest][:preferred_retailers][:other] if options[:contest][:preferred_retailers].has_key?(:other)
+      end
+
+      @contest[:elements_to_avoid] = options[:contest][:elements_to_avoid] if options[:contest].has_key?(:elements_to_avoid)
+      @contest[:entertaining] = options[:contest][:entertaining] if options[:contest].has_key?(:entertaining)
+      @contest[:durability] = options[:contest][:durability] if options[:contest].has_key?(:durability)
+
       ContestAdditionalPreference.preferences.each do |preference|
         @contest[preference] = options[:contest][preference] if options[:contest].has_key?(preference)
       end
