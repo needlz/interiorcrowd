@@ -56,7 +56,7 @@ class ClientsController < ApplicationController
         UserMailer.new.user_registration(@client, user_ps)
         session[:client_id] = @client.id
         contest = create_contest(@client.id)
-        format.html { redirect_to additional_details_contest_path(id: contest.id) }
+        format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
         format.json { render json: @client, status: :created, location: @client }
       else
         flash[:error] = @client.errors.full_messages.join("</br>")

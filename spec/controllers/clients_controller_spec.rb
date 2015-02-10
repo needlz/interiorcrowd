@@ -49,10 +49,9 @@ RSpec.describe ClientsController do
       expect(Client.count).to eq 1
     end
 
-    it 'redirects to additional details page' do
+    it 'redirects to entries page' do
       post :create, { client: client_options }, contest_options_source
-      created_contest = Contest.last
-      expect(response).to redirect_to(additional_details_contest_path(id: created_contest.id))
+      expect(response).to redirect_to(entries_client_center_index_path({signed_up: true}) )
     end
 
     it 'saves attributes' do

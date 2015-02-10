@@ -1,10 +1,16 @@
-.container.animated.fadeInDown
-  .row.text-center.title-first
-    %h1.signUpTitle= title.upcase
-    %h1.signUpSubTitle
-      %i.lineHeight60
-  .row
-    = render partial: header
-
+- unless params[:signed_up]
+  .container.animated.fadeInDown
+    .row.text-center.title-first
+      %h1.signUpTitle= title.upcase
+      %h1.signUpSubTitle
+        %i.lineHeight60
+    .row
+      = render partial: header
+- else
+  .container.animated.fadeInDown
+    .row.text-center.title-first
+      %h1{style: 'font-weight:normal'}= t('contests.additional_details.thanks_title_capitalize')
+    .row
+      %hr
 .content.container.animated.fadeInDown{ class: (container_class if defined?(container_class)) }
   = content

@@ -188,6 +188,7 @@ en:
     additional_details:
       call_us: Or, call us!
       thanks_title: Great job! Design concepts will be headed your way soon!
+      thanks_title_capitalize: GREAT JOB! DESIGN CONCEPTS WILL BE HEADED YOUR WAY SOON
       thanks_subtitle: |
         Thank you for launching your contest. You should expect designs in 2 to 3 business days.
         In the meantime, feel free to give us more information so the designs will be a better fir fot you.
@@ -283,6 +284,11 @@ en:
       your_note: Your note
       filter_by: 'Filter by:'
       responses_filter_all: All
+      more_features:
+        title: Let’s explore more our feature.
+        get_inspired: Get Inspired
+        see_example: See example
+        share_brief: Share brief <br> with your friend
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
