@@ -53,7 +53,7 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
     respond_to do |format|
       if @client.save
-        Jobs::Mailer.schedule(:user_registration, [user_password])
+        Jobs::Mailer.schedule(:user_registration, [@client, user_password])
         session[:client_id] = @client.id
         contest = create_contest(@client.id)
         format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
