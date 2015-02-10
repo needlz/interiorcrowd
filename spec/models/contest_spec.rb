@@ -17,7 +17,7 @@ RSpec.describe Contest do
       params = { design_style: { document_id: new_examples_ids.join(',') } }
       options = ContestOptions.new(params)
       contest.update_from_options(options)
-      expect(contest.reload.liked_examples.pluck(:id)).to eq new_examples_ids
+      expect(contest.reload.liked_examples.pluck(:id)).to match_array new_examples_ids
     end
   end
 
@@ -45,7 +45,7 @@ RSpec.describe Contest do
 
     describe 'delayed job' do
       before do
-        Contests::SubmissionEndJob.new(contest.id).perform
+        Jobs::SubmissionEnd.new(contest.id).perform
       end
 
       it 'changes status of the contest' do
@@ -54,9 +54,9 @@ RSpec.describe Contest do
     end
 
     it 'creates delayed job on creation' do
-      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 0
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 0
       contest.run_callbacks(:commit)
-      expect(Delayed::Job.where('handler LIKE ?', "%#{ Contests::SubmissionEndJob.name }%").count).to eq 1
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 1
     end
   end
 

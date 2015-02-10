@@ -36,7 +36,7 @@ class ClientsController < ApplicationController
   end
 
   def create
-    user_ps = params[:client][:password]
+    user_password = params[:client][:password]
     params[:client][:password] = Client.encrypt(params[:client][:password])
     params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
     params[:client][:designer_level_id] = session[:design_style][:designer_level]
@@ -53,7 +53,7 @@ class ClientsController < ApplicationController
     @client = Client.new(params[:client])
     respond_to do |format|
       if @client.save
-        UserMailer.new.user_registration(@client, user_ps)
+        Jobs::Mailer.schedule(:user_registration, [user_password])
         session[:client_id] = @client.id
         contest = create_contest(@client.id)
         format.html { redirect_to additional_details_contest_path(id: contest.id) }

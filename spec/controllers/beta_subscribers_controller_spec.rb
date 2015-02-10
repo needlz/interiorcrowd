@@ -14,6 +14,12 @@ RSpec.describe BetaSubscribersController do
         expect(BetaSubscriber.count).to eq 1
       end
 
+      it 'creates mail jobs' do
+        post :create, subscriber_params
+        expect(Delayed::Job.where('handler LIKE ?', "%sign_up_beta_autoresponder%").count).to eq 1
+        expect(Delayed::Job.where('handler LIKE ?', "%notify_about_new_subscriber%").count).to eq 1
+      end
+
       it 'renders beta signup page' do
         post :create, subscriber_params
         expect(response).to redirect_to root_path

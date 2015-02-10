@@ -66,6 +66,11 @@ RSpec.describe ClientsController do
       end
       expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level]
     end
+
+    it 'creates mail job' do
+      post :create, { client: client_options }, contest_options_source
+      expect(Delayed::Job.where('handler LIKE ?', "%user_registration%").count).to eq 1
+    end
   end
 
   describe 'PATCH update' do

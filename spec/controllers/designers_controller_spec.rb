@@ -41,6 +41,11 @@ RSpec.describe DesignersController do
       expect(response).to redirect_to designer_center_index_path
     end
 
+    it 'creates mail job' do
+      post :create, designer_creation_params
+      expect(Delayed::Job.where('handler LIKE ?', "%user_registration%").count).to eq 1
+    end
+
     context 'portfolio passed' do
       it 'creates portfolio' do
         post :create, designer_creation_params.merge(portfolio_params)
