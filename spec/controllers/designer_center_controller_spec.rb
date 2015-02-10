@@ -41,10 +41,6 @@ RSpec.describe DesignerCenterController do
         end
       end
 
-      it 'redirects to portfolio creation if portfolio don\'t exists' do
-        get :designer_center
-        expect(response).to redirect_to new_portfolio_path
-      end
     end
   end
 end

@@ -1,7 +1,5 @@
 #designer.tab-pane{:role => "tabpanel"}
   #accordion1.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
-    - faq_designer_touch_ic.each_with_index do |word, index|
-      = render partial: 'home/faq/spoiler_item', locals: { number: index + 11, question: word, answer: t('faq.designer.answers_touch_ic')}
-    %h2.faqCategoryTitle= t('faq.designer.topics.payment')
-    - faq_designer_payment.each_with_index do |word, index|
-      = render partial: 'home/faq/spoiler_item', locals: { number: index + 15, question: word, answer: t('faq.designer.answers_touch_ic')}
+    - faq_designer_questions.each_with_index do |question, index|
+      = render partial: 'home/faq/spoiler_item', locals: { number: index + 1 + faq_client_questions.length,
+          faq_item: faq_item('designer', question) }

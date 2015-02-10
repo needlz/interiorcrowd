@@ -1,12 +1,12 @@
 class PackageView
 
   SERVICE_TEXT_TEMPLATES = {
-      designers: [{ message: 'contests.creation.preview.expect_designers', count_variable: :designer_count }],
-      moodboard: [{ message: 'contests.creation.packages.moodboard' }],
+      moodboard: [{ message: 'contests.creation.packages.moodboard' },
+                  { message: 'contests.creation.packages.from_designers', count_variable: :designer_count }],
       product_list: [{ message: 'contests.creation.packages.product_list'},
                      { message: 'contests.creation.packages.up_to_products', count_variable: :product_count }],
-      floor_plan: [{ message: 'contests.creation.packages.floor_plan' }],
-      rendering: [{ message: 'contests.creation.packages.3d_rendering' }]
+      final_design: [{ message: 'contests.creation.packages.final_design' }],
+      instructions: [{ message: 'contests.creation.packages.instructions' }]
   }
 
   delegate :id, :price, to: :plan

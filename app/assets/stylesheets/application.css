@@ -13,6 +13,7 @@
  *= require compiled/index.css
  *= require lib/animate.css
  *= require style
+ *= require home
  *= require clients
  *= require portfolio
  *= require jquery.mmenu.all
@@ -20,7 +21,6 @@
  *= require contests
  *= require designers
  *= require designer_center
- *= require home
  *= require fonts
  *= require lib/select2-3.5.2/select2-bootstrap
  *= require lib/select2-3.5.2/select2.css

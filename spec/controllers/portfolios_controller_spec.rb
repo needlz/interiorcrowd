@@ -95,12 +95,6 @@ RSpec.describe PortfoliosController do
       end
     end
 
-    it 'redirects to new portfolio page if portfolio not created' do
-      sign_in(designer)
-      get :edit
-      expect(response).to redirect_to new_portfolio_path
-    end
-
     it 'redirects to login page if user not logged' do
       get :edit
       expect(response).to redirect_to login_sessions_path
@@ -108,8 +102,6 @@ RSpec.describe PortfoliosController do
   end
 
   describe 'PATCH update' do
-    let(:new_portfolio_path) { 'my_portfolio' }
-
     before do
       designer.portfolio = Fabricate(:portfolio)
     end
@@ -128,17 +120,6 @@ RSpec.describe PortfoliosController do
     context 'if signed in as designer' do
       before do
         sign_in(designer)
-      end
-
-      it 'redirects to portfolio view if portfolio published' do
-        patch :update, portfolio: { path: new_portfolio_path }
-        expect(response).to redirect_to show_portfolio_path(url: new_portfolio_path)
-      end
-
-      it 'automatically generates portfolio path' do
-        patch :update, portfolio: { path: '' }
-        expect(designer.portfolio.reload.path).to be_present
-        expect(response).to redirect_to show_portfolio_path(url: designer.portfolio.path)
       end
 
       it 'updates years_of_expirience' do
@@ -164,35 +145,6 @@ RSpec.describe PortfoliosController do
         patch :update, portfolio: { awards: awards }
         expect(designer.portfolio.reload.portfolio_awards.map(&:name)).to eq awards
       end
-    end
-  end
-
-  describe 'GET new' do
-    before do
-      sign_in(designer)
-    end
-
-    it 'returns page if portfolio was not created' do
-      get :new
-      expect(response).to be_ok
-    end
-
-    it 'redirects to edit page if portfolio was created' do
-      designer.portfolio = Fabricate(:portfolio)
-      get :new
-      expect(response).to redirect_to edit_portfolio_path
-    end
-  end
-
-  describe 'POST create' do
-    before do
-      sign_in(designer)
-    end
-
-    it 'creates portfolio' do
-      expect(designer.portfolio).to_not be_present
-      post :create, portfolio: { years_of_expirience: '1' }
-      expect(designer.reload.portfolio).to be_present
     end
   end
 end

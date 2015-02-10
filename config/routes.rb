@@ -104,7 +104,7 @@ InteriorC::Application.routes.draw do
                   only: [:new, :create, :show, :index, :update, :edit] do
           get 'preview', on: :member,  as: 'preview'
         end
-        resource :portfolio, only: [:edit, :update, :new, :create]
+        resource :portfolio, only: [:edit, :update]
       end
     end
 
