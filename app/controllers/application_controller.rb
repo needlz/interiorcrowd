@@ -41,8 +41,6 @@ class ApplicationController < ActionController::Base
     extra_data[:client_id] = session[:client_id] if session[:client_id].present?
     extra_data[:designer_id] = session[:designer_id] if session[:designer_id].present?
     Rollbar.error(exception, extra_data)
-
-
   end
 
 end
