@@ -24,5 +24,10 @@
               = render partial: 'clients/client_center/entries/designers_to_invite',
                   locals: { designers: @invitable_designer_views }
             = render partial: 'clients/client_center/entries/more_features'
-  = render partial: 'clients/client_center/layout'
+  -if params[:signed_up].present?
+    = render partial: 'shared/congratulations_layout',
+        locals: { content: (yield :client_center_content),
+                  container_class: try(:container_class)  }
+  -else
+    = render partial: 'clients/client_center/layout'
 = render partial: 'clients/client_center/entries/collaboration/thanks_modal'

@@ -1,18 +1,14 @@
 .text-center
   %h3{:style => "font-weight:normal;margin-top:0px;margin-bottom:30px;"}
-    %b Let’s explore more our feature.
+    %b=t('client_center.entries.more_features.title')
   .clearfix
 .text-center.clearfix{ style: 'float: none; width: 100%' }
   .center-block{ style: 'display: inline-block;' }
     .col-md-4.circle-big{:style => "font-size:18px;margin-right:20px;"}
       %a.link-underline{:href => "#"}
-        %b Get Inspired
+        %b=t('client_center.entries.more_features.get_inspired')
     .col-md-4.circle-big{:style => "font-size:18px;margin-right:20px;"}
-      %a.link-underline{:href => "#"}
-        %b See example
+      %b= link_to t('client_center.entries.more_features.see_example'), client_center_index_path,  class: "link-underline"
     .col-md-4.circle-big{:style => "font-size:18px; padding-top: 50px;"}
       %a.link-underline{:href => "#"}
-        %b
-          Share brief
-          %br/
-          with your friend
+        %b=t('client_center.entries.more_features.share_brief').html_safe
