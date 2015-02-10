@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
-  rescue_from ActionController::RoutingError, with: :render_404
   rescue_from StandardError, with: :log_error
 
   PAGE_404_PATH = 'errors/404'
@@ -37,10 +36,12 @@ class ApplicationController < ActionController::Base
   private
 
   def log_error(exception)
+    return render_404 if exception.kind_of?(ActionController::RoutingError)
     extra_data = {}
     extra_data[:client_id] = session[:client_id] if session[:client_id].present?
     extra_data[:designer_id] = session[:designer_id] if session[:designer_id].present?
     Rollbar.error(exception, extra_data)
+    raise exception
   end
 
 end
