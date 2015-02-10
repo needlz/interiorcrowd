@@ -5,4 +5,5 @@ Fabricator(:contest) do
     design_space
     budget_plan 1
   end
+  preferred_retailers
 end

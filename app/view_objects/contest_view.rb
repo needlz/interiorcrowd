@@ -142,8 +142,8 @@ class ContestView
     @feedback = contest.feedback
     @budget_plan = contest.budget_plan
     @name = contest.project_name
-    @retailers = Contest::RETAILERS.map do |retailer|
-      { name: retailer, value: contest.retailer_value(retailer) }
+    @retailers = PreferredRetailers::RETAILERS.map do |retailer|
+      { name: retailer, value: contest.preferred_retailers.send(retailer) }
     end
     @elements_to_avoid = contest.elements_to_avoid
     @entertaining = contest.entertaining

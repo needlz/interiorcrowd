@@ -80,7 +80,11 @@ RSpec.configure do |config|
           retailer_ikea: true,
           elements_to_avoid: 'Fur',
           entertaining: 1,
-          durability: 2
+          durability: 2,
+          preferred_retailers: {
+            ikea: true,
+            other: 'other'
+          }
       }
     }
   end

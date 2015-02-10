@@ -1,4 +1,5 @@
-- Contest::RETAILERS.each do |retailer|
+- PreferredRetailers::RETAILERS.each do |retailer|
   .col-md-3
-    = form.check_box "retailer_#{ retailer }".to_sym
-    = form.label  "retailer_#{ retailer }".to_sym, ContestView.retailer_name(retailer)
+    = form.fields_for :preferred_retailers, form.object.preferred_retailers do |f|
+      = f.check_box retailer.to_sym
+      = f.label retailer.to_sym, ContestView.retailer_name(retailer)
