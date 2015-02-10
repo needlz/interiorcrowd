@@ -1,5 +1,6 @@
-module Contests
-  class SubmissionEndJob
+module Jobs
+
+  class SubmissionEnd
 
     def self.schedule(contest_id, args)
       Delayed::Job.enqueue(new(contest_id), args)
@@ -15,7 +16,7 @@ module Contests
     end
 
     def queue_name
-      Contests::QUEUE_NAME
+      Jobs::CONTESTS_QUEUE
     end
 
     private

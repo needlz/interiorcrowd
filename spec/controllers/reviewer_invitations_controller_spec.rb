@@ -77,6 +77,11 @@ RSpec.describe ReviewerInvitationsController do
           expect(json['url']).to eq show_reviewer_feedbacks_url(id: contest.id, token: invitation.url)
           expect(json['token']).to eq invitation.url
         end
+
+        it 'creates mail job' do
+          post :create, params
+          expect(Delayed::Job.where('handler LIKE ?', "%invitation_to_leave_a_feedback%").count).to eq 1
+        end
       end
     end
   end

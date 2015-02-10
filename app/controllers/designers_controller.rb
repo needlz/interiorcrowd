@@ -13,7 +13,7 @@ class DesignersController < ApplicationController
   end
 
   def create
-    user_ps = params[:designer][:password]
+    user_password = params[:designer][:password]
     params[:designer][:password] = Client.encrypt(params[:designer][:password])
     params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
     params[:designer][:ex_links] = params[:external_links].try(:reject) { |c| c.empty? }.try(:join, ',')
@@ -24,7 +24,7 @@ class DesignersController < ApplicationController
         session[:external_links] = nil
         session[:designer_id] = @designer.id
         @designer.create_portfolio(params[:portfolio])
-        UserMailer.new.user_registration(@designer, user_ps)
+        Jobs::Mailer.schedule(:user_registration, [@designer, user_password])
         format.html { redirect_to designer_center_index_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else
