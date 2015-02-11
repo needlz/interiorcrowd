@@ -1,34 +1,42 @@
 - content_for :head do
+  = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   = javascript_include_tag 'designer_center_requests/new'
   = javascript_include_tag 'designers/lookbook'
   = render partial: 'shared/setup_uploadify'
   = render partial: 'shared/setup_colors_table'
   :javascript
     I18n = #{ translations_to_json(['designer_center', 'respond']) }
+    conceptBoardUploaderI18n = #{ translations_to_json('designer_center.my_contests.concept_board_upload'.split('.')) }
 
 - content_for :designer_center_content do
-  - if params[:my_contests].present?
-    = render partial: 'designer_center_requests/my_contests'
-  -else
-    #respond
-      .contest
-        .clearfix
-          .col-md-7
-            = render partial: 'shared/contest_short_view', locals: { contest: @contest_short_details }
-            #accordion.panel-group{ aria: { multiselectable: 'true' }, role: 'tablist' }
-              .panel.panel-default
-                #headingTwo.panel-heading{ role: 'tab' }
-                  %h4.panel-title
-                    %a.collapsed{aria: { controls: 'collapseTwo', expanded: 'false' },
-                      data: {parent: '#accordion', toggle: 'collapse' }, href: '#collapseTwo' }
-                      = t('designer_center.respond.see_more')
-                #collapseTwo.panel-collapse.collapse{ aria: { labelledby: 'headingTwo' }, role: 'tabpanel' }
-                  .panel-body
-                    #details
-                      = render partial: 'contests/preview'
+  .bottom60
+    .row.marg-top30.padd50Side
+      = render partial: 'contests/preview/current_contest_infobox'
+      %a.italicLink{:href => "#"}=t("designer_center.my_contests.design_profile")
+      %h2.font20.marg-top30=t("designer_center.my_contests.step_1")
+      %a.italicLink{:href => "#"}=t("designer_center.my_contests.examples_of_moodboards")
+      .row.disableMargin
+        .col-md-7.col-md-offset-1.marg-top20
+          %p.hintP
+            - link = link_to t("designer_center.my_contests.hint_link"), "#", class: 'italicLink'
+            = t('designer_center.my_contests.hint', link: link).html_safe
+            = render partial: 'designer_center_requests/my_contests/contest_box',
+                locals: {contest: @contest, contest_view: @contest_view}
 
-      = render partial: 'designer_center_requests/new/response_form',
-          locals: { request: @request }
-      = render partial: 'designer_center_requests/footer',  locals: { request: @request }
+      %h2.font20.marg-top30=t('designer_center.my_contests.ready_to_go')
+      = form_for @request,
+          html: { class: 'response' },
+          url: designer_center_response_index_path(contest_id: @request.contest.id) do |f|
+        .concept-board
+          .conceptMoodboardImg
+            = render partial: 'designer_center_requests/concept_board_thumbnail',
+              locals: { request: @request,
+                placeholder_src: '/assets/placeholder1.jpg',
+                image_id_input_name: 'lookbook[picture][ids][]' }
+          %a.submitMyDesign.upload-button{:href => "#"}
+            =t('designer_center.my_contests.concept_board_upload.upload_button')
+        = f.hidden_field :status, value: 'draft'
+
+    = render partial: 'designer_center_requests/footer',  locals: { request: @request }
 
 = render partial: 'designer_center/layout'

@@ -586,7 +586,9 @@ en:
       colors_avoid: 'Colors Avoid :'
       see_more: See more
       ready_to_go: Ready to go?
-      upload_moodboard: Upload Your Concept Moodboard
+      concept_board_upload:
+        upload_button: Upload Your Concept Moodboard
+        uploading: Uploading...
       design_textarea_placeholder: Tell the Client Something about your design.
       need_to_ask_question: Need to ask a question?
       save_and_preview: Save & Preview

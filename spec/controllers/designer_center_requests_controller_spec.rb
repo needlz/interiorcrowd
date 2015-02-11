@@ -74,6 +74,15 @@ RSpec.describe DesignerCenterRequestsController do
       get :new, contest_id: contest.id
       expect(response).to render_template(:new)
     end
+
+    context 'response already exists' do
+      let!(:response) { Fabricate(:contest_request, contest: contest, designer: designer) }
+
+      it 'redirects to view of existing response' do
+        get :new, contest_id: contest.id
+        expect(response).to redirect_to designer_center_response_path(id: response.id)
+      end
+    end
   end
 
   describe 'POST create' do

@@ -1,0 +1,38 @@
+class @ConceptBoardUploader
+  @idSelector: '#concept_board_picture_id'
+
+  @init: (i18n)->
+    PicturesUploadButton.init
+      fileinputSelector: '.concept-board #concept_picture',
+      uploadButtonSelector: '.concept-board .upload-button',
+      thumbs:
+        container: '.concept-board .thumbs'
+        selector: @idSelector
+        theme: 'new'
+      I18n: i18n
+      single: true
+    @initSaveBtn()
+
+  @initSaveBtn:->
+    $('body').on('click', '.saveConceptBoard', @onSaveClick)
+    $('body').on 'click', '.cancelConceptBoard', =>
+      @hideEditableBlock()
+
+  @onSaveClick: ()=>
+    $.ajax(
+      data: { contest_request: { image_id: $(@idSelector).val() } }
+      url: window.location.pathname
+      type: 'PUT'
+      dataType: "script"
+      success: (data)=>
+        @changeImageSource()
+        @hideEditableBlock()
+
+    )
+  @hideEditableBlock: () ->
+    $(".initialImage").show()
+    $('.editable-mode').remove()
+
+  @changeImageSource: ->
+    newSource = $('.editable-mode img:last').attr('src')
+    $(".initialImage img").attr('src', newSource)

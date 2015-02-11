@@ -10,4 +10,8 @@ class DesignCategory < ActiveRecord::Base
     I18n.t("contests.titles.brief.packages.#{ name }.name")
   end
 
+  def localized_description
+    I18n.t("contests.titles.brief.packages.#{ name }.description")
+  end
+
 end
