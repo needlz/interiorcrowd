@@ -141,6 +141,9 @@ colorNames = [
   { text: 'Yellow Green', id: '9ACD32' },
 ]
 
+colorNamesFull = ->
+  colorNames.concat(colorTableValues)
+
 $.widget "custom.colorTags",
   _create: ()->
     formatColorItem = (item)->
@@ -151,8 +154,8 @@ $.widget "custom.colorTags",
     unless @element.data('select2')
       @element.select2({
         tags: ->
-          $.map(colorNames.concat(colorTableValues), (color)->
-            { id: color.id, text: color.text}
+          $.map(colorNamesFull(), (color)->
+            { id: color.id, text: color.text }
         )
         formatSelection: (item, container)->
           $colorName = $('<span></span>')
@@ -189,7 +192,7 @@ class @Colors
       $(item).text(@.getName(colorName))
 
   @getName: (color)->
-    $.map(colorNames, (item)->
+    $.map(colorNamesFull(), (item)->
       return item.text if item.id == color
     )
 

@@ -6,7 +6,7 @@ class ContestShortDetails
   def initialize(contest)
     @id = contest.id
     @name = contest.project_name
-    @design_category = contest.design_category.name
+    @design_category = contest.design_category.localized_name
     @design_space = contest.design_space.name
     @days_count = contest.days_left
     @days_left =
