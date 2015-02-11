@@ -305,6 +305,7 @@ en:
         target: Target
         wayfair: Wayfair
         west_elm: West Elm
+        other: 'Other:'
       option_levels:
         very: Very Important
         somewhat: Somewhat Important

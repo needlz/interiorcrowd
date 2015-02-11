@@ -8,7 +8,7 @@ class ContestView
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
-              :space_budget_value
+              :space_budget_value, :retailers, :other_retailers
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -73,8 +73,10 @@ class ContestView
   end
 
   def retailers_string
-    return 'None' if preferred_retailers.blank?
-    "(#{ preferred_retailers.map { |retailer| self.class.retailer_name(retailer[:name]) }.join(', ') })"
+    return 'None' if preferred_retailers.blank? && other_retailers.blank?
+    retailers_list = preferred_retailers.map { |retailer| self.class.retailer_name(retailer[:name]) }
+    retailers_list << other_retailers if other_retailers.present?
+    "(#{ retailers_list.join(', ') })"
   end
 
   def self.retailer_name(retailer)
@@ -145,6 +147,7 @@ class ContestView
     @retailers = PreferredRetailers::RETAILERS.map do |retailer|
       { name: retailer, value: contest.preferred_retailers.send(retailer) }
     end
+    @other_retailers = contest.preferred_retailers.other
     @elements_to_avoid = contest.elements_to_avoid
     @entertaining = contest.entertaining
     @durability = contest.durability
