@@ -10,7 +10,7 @@
   - content_for :client_center_content do
     - if params[:winner].present?
       = render partial: 'clients/client_center/entries/winner'
-    - elsif params[:collaboration].present?
+    - elsif @won_contest_request.present?
       =render partial: 'clients/client_center/entries/collaboration', locals: {request: @contest_requests.first}
     - else
       .bottom60.entries-page

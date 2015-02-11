@@ -9,6 +9,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def show
     @request = @designer.contest_requests.find(params[:id])
+
     @contest = ContestShortDetails.new(@request.contest)
     @image_id = @request.lookbook.try(:lookbook_details).try(:last).try(:image_id)
     @navigation = Navigation::DesignerCenter.new(:requests)
@@ -16,7 +17,9 @@ class DesignerCenterRequestsController < ApplicationController
 
   def edit
     @request = @designer.contest_requests.find(params[:id])
+    @comments = @request.comments
     @navigation = Navigation::DesignerCenter.new(:requests)
+    @current_user = current_user
   end
 
   def preview

@@ -13,25 +13,30 @@
         %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= t('designer_center.edit.designer')
     #scrollBoxComments.tab-content.notes
       #allComents.tab-pane.active{:role => "tabpanel"}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        - comments.each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
+
       #unreadComments.tab-pane{:role => "tabpanel"}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+
       #meComments.tab-pane{:role => "tabpanel"}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+
       #designerComments.tab-pane{:role => "tabpanel"}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
-        = render partial: 'designer_center_requests/edit/comment', locals: {user: 'Me'}
+        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+    .message-template{style: 'display: none'}
+      .commentContainer
+        .row
+          .col-md-2
+            %img{:height => "40", :src => "/assets/profile-img.png", :width => "40"}/
+          .col-md-10
+            .row
+              .col-md-6
+                %p.comment-username
+              .col-md-6
+                %p.comment-time
+            %p.comment-text
+
     .commentTextArea
       %p.designerName= t('designer_center.edit.new_comment')
       %textarea{ request: request.id }

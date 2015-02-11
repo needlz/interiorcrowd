@@ -29,4 +29,13 @@ module ApplicationHelper
     end
     content.html_safe
   end
+
+  def message_name(user, comment)
+    if comment.role == user.class.name
+      'Me' #user.name
+    else
+      comment.role
+    end
+
+  end
 end

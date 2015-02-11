@@ -20,6 +20,9 @@ class ClientsController < ApplicationController
       @contest_requests = [].paginate
     end
     @navigation = Navigation::ClientCenter.new(:entries)
+    @current_user = current_user
+
+    @won_contest_request = @contest.response_winner
     render 'clients/client_center/entries'
   end
 
