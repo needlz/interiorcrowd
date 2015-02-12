@@ -19,6 +19,9 @@ class CoverImage
   @setCover: (id)->
     $(@idInput).val(id)
 
+  @id: ->
+    $(@idInput).val()
+
 class @PortfolioEditor
 
   init: ->
@@ -35,6 +38,8 @@ class @PortfolioEditor
 
     $("ul.dropdown-menu li").click ->
       $(this).parent().parent().parent().find("div.dropdown-menu").toggle()
+
+
 
   bindImageCoverButtons: ->
     $('#portfolio_pictures_preview').on 'click', '.cover-button', (event)->
@@ -81,6 +86,7 @@ class @PortfolioEditor
         container: '#portfolio_pictures_preview .container'
         selector: '#portfolio_pictures_ids'
         theme: 'new'
+        onRemoved: @onPictureRemoved
 
     PicturesUploadButton.init
       I18n: I18n.upload_personal_picture
@@ -99,6 +105,10 @@ class @PortfolioEditor
     $checkbox = $('#portfolio_education_school')
     $checkbox.change(handler)
     $checkbox
+
+  onPictureRemoved: (pictureId)->
+    if `pictureId == CoverImage.id()`
+      CoverImage.setCover('')
 
 $ ->
   portfolioEditor = new PortfolioEditor()
