@@ -22,11 +22,11 @@ class ContestView
     :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
     :design_package, :additional_preferences, :preferences_retailers, :element_to_avoid,
-    :entertaining, :durability ] + ACCOMMODATION_ATTRIBUTES
+    :entertaining, :durability] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
     :name, :design_knowledge, :design_style, :desirable_colors, :undesirable_colors, :example_pictures,
-    :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :other_information ]
+    :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :feedback]
 
   LEVELS = {
     2 => :very,

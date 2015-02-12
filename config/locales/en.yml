@@ -52,7 +52,7 @@ en:
         areas: Room
         design_budget: Materials Budget
         design_budget_for_materials: Design Budget for Materials
-        feedback: Feedback
+        feedback: Other Information
         space_dimensions: Dimensions of space
         links: Links
         space_pictures: Pictures of Your Space
@@ -61,7 +61,6 @@ en:
         accommodate_pets: Accommodate Pets
         additional_preferences: Preferences
         floorplan: Floorplan
-        other_information: Other Information
         name: Name
         design_knowledge: Design Knowledge
         design_style: Design Style
