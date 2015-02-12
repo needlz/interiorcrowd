@@ -17,13 +17,17 @@
           = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #unreadComments.tab-pane{:role => "tabpanel"}
-        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        - comments.unread.each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #meComments.tab-pane{:role => "tabpanel"}
-        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        - comments.send(@current_user.class.name.downcase).each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #designerComments.tab-pane{:role => "tabpanel"}
-        -#= render partial: 'designer_center_requests/edit/comment', locals: {user: 'Consumer'}
+        - comments.where.not(role: @current_user.class.name).each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
+
     .message-template{style: 'display: none'}
       .commentContainer
         .row

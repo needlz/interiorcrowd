@@ -55,9 +55,10 @@ class @ConceptBoardUploader
       @hideEditableBlock()
 
   @onSaveClick: ()=>
+    id = $('.saveConceptBoard').attr('id')
     $.ajax(
       data: { contest_request: { image_id: $('#personal_picture_id').val() } }
-      url: window.location.pathname
+      url: "/designer_center/responses/#{id}"
       type: 'PUT'
       dataType: "script"
       success: (data)=>
