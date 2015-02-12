@@ -48,6 +48,12 @@ class ContestRequest < ActiveRecord::Base
     return lookbook_item.url if lookbook_item.external?
   end
 
+  def concept_board_image
+    lookbook_item = lookbook.try(:lookbook_details).try(:last)
+    return unless lookbook_item
+    lookbook_item.image if lookbook_item.uploaded? && lookbook_item.try(:image)
+  end
+
   def reply(answer, client_id)
     (contest.client_id == client_id) && update_attributes(answer: answer)
   end

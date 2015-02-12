@@ -12,11 +12,12 @@ class @ResponseEditor
       $('.response').submit()
 
   bindSaveButton: ->
-    $('.footer .save-and-preview').click (event)=>
+    $('.footer .submitMyDesign').click (event)=>
       event.preventDefault()
-      $('.response').submit()
-
+      $('#new_contest_request').submit()
 
 $ ->
   responseEditor = new ResponseEditor()
   responseEditor.init()
+  ConceptBoardUploader.init(window.conceptBoardUploaderI18n)
+  Colors.set()
