@@ -1,7 +1,7 @@
 class PackageView
 
   SERVICE_TEXT_TEMPLATES = {
-      moodboard: [{ message: 'contests.creation.packages.moodboard' },
+      conceptboard: [{ message: 'contests.creation.packages.conceptboard' },
                   { message: 'contests.creation.packages.from_designers', count_variable: :designer_count }],
       product_list: [{ message: 'contests.creation.packages.product_list'},
                      { message: 'contests.creation.packages.up_to_products', count_variable: :product_count }],

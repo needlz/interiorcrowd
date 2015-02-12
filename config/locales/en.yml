@@ -162,7 +162,7 @@ en:
       packages:
         title: Our design packages
         description: Pick a package - 100% money back guarantee
-        moodboard: Concept boards
+        conceptboard: Concept boards
         from_designers:
           one: from at least 1 designer
           other: from at least %{designer_count} designers
@@ -363,7 +363,7 @@ en:
     save_button: Save
     cancel_button: Cancel
     edit:
-      upload_new: Upload a new moodboard
+      upload_new: Upload a new concept board
       above_image: |
         Now that you’ve been chosen, the collaborative process begins. Please give your client as
         much detail on your design as possible - adding comments as to why you’ve chosen certain
@@ -544,7 +544,7 @@ en:
         status: Status
         listed_as: Currently listed as
         to_do: To&nbsp;Do
-        update_moodboard: Update Moodboard
+        update_moodboard: Update Concept Board
         send_note: Send Note to Client
         create_shopping_list: Create Shoppping List
         create_3d_rendering: Create 3D rendering
@@ -552,7 +552,7 @@ en:
         listed_as: 'Currently listed as: %{answer}'
       statuses:
         draft: Not submitted
-        submitted: Moodboard submitted
+        submitted: Concept board submitted
         fulfillment: Fulfillment period
         closed: Closed
     respond_view:
@@ -566,7 +566,7 @@ en:
       submit: Submit >
       submit_design: Submit My Design
       ready_to_go: Ready to go?
-      upload_moodboard: Upload your concept moodboard
+      upload_moodboard: Upload your concept board
     training:
       check_out: Check out our latest training materials here
       how_contests_work: How do contests work?
@@ -574,8 +574,8 @@ en:
       vendors: Which vendors can I use?
     my_contests:
       design_profile: See the client design profile
-      step_1: Step 1 is to create a concept moodboard that incorporates the client’s style, needs, and colors.
-      examples_of_moodboards: See example of concept moodboards
+      step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
+      examples_of_moodboards: See example of concept boards
       hint: 'Hint: be sure that you review the %{link} before starting'
       hint_link: client's design profile
       type: 'Type :'
@@ -586,7 +586,7 @@ en:
       see_more: See more
       ready_to_go: Ready to go?
       concept_board_upload:
-        upload_button: Upload Your Concept Moodboard
+        upload_button: Upload Your Concept Board
         uploading: Uploading...
       design_textarea_placeholder: Tell the Client Something about your design.
       need_to_ask_question: Need to ask a question?
