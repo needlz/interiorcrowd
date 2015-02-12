@@ -71,7 +71,6 @@ en:
       description: |
         Now for the fun part! Tell us more about your style and what you’d like in your home. The
         more we know about you, the easier it’ll be for us to provide you with a design you really love.
-      quote: “The more we know about you, the better we can style for you.”
       validations:
         no_colors: Please enter data.
         select_design_level: Please select one

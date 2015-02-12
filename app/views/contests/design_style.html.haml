@@ -20,10 +20,6 @@
       .col-md-6.no-x-padding
         %h1= t('contests.design_style.title')
         %span#description= t('contests.design_style.description')
-      .col-md-4.no-padding-right
-        %h1{ style: 'visibility:hidden;' }  
-        %span.quote
-          %i= t('contests.design_style.quote')
     = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
       = render partial: 'contests/options/designer_level_options'
       = render partial: 'contests/options/appeals_options'
