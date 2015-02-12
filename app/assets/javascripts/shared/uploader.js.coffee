@@ -15,6 +15,7 @@ $.fn.initUploader = (options)->
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
   uploader.init()
+  uploader
 
 class Uploader
 
@@ -23,10 +24,11 @@ class Uploader
   init: ()->
     @$container = $(@options.thumbs.container)
     @$imageIds = $(@options.thumbs.selector)
-    @thumbsTheme = if @options.thumbs.theme is 'new'
-        new RemovableThumbsTheme(@$container, @$imageIds)
-      else
-        new DefaultThumbsTheme(@$container, @$imageIds)
+    if @options.thumbs.theme is 'new'
+      @thumbsTheme = new RemovableThumbsTheme(@$container, @$imageIds)
+      @thumbsTheme.onRemoved = @options.thumbs.onRemoved
+    else
+      @thumbsTheme = new DefaultThumbsTheme(@$container, @$imageIds)
     @thumbsTheme.init()
 
     @bindUploadScript()
@@ -84,6 +86,7 @@ class RemovableThumbsTheme extends ThumbsTheme
     imageIds.splice(indexOfThumb, 1)
     @$imageIds.val(imageIds.join(','))
     $thumbContainer.remove()
+    @onRemoved?(imageId)
 
   thumbForSingleImageUploader: (imageUrl, imageId) ->
     $img = @$container.find('.thumb img:first')
