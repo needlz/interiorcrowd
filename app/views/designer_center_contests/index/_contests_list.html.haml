@@ -1,10 +1,10 @@
 - contests.each do |contest|
   .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: contest.id} }
-    .col-md-2= contest.id
-    .col-md-2= contest.name
-    .col-md-2= contest.design_category
-    .col-md-2= contest.design_space
-    .col-md-2= contest.price
-    .col-md-2
+    .col-xs-2= contest.id
+    .col-xs-2= contest.name
+    .col-xs-2= contest.design_category
+    .col-xs-2= contest.design_space
+    .col-xs-2= contest.price
+    .col-xs-2
       = contest.days_count
       %span= t('designer_center.contests_preview.few_days')
