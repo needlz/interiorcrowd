@@ -36,9 +36,9 @@ RSpec.describe DesignersController do
       expect(Designer.count).to eq 1
     end
 
-    it 'redirects to designer center' do
+    it 'redirects to portfolio editing page' do
       post :create, designer_creation_params
-      expect(response).to redirect_to designer_center_index_path
+      expect(response).to redirect_to edit_portfolio_path
     end
 
     it 'creates mail job' do
