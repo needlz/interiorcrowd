@@ -380,8 +380,8 @@ en:
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
     final_upload:
-      note_for_consumer: Write a note about your board here
-      note_for_consumer_placeholder: |
+      note_for_client: Write a note about your board here
+      note_for_client_placeholder: |
         I had so much fun designing this for you. Thanks so much for the fun brief. Below you will find
         more detailed instructions on how to get this look in your amazing new living room.
       file_info: Ensure that your file is a .pdf format so that the client can download it. If you need help, contact us.
@@ -607,7 +607,7 @@ en:
     role_switcher: 'Are you:'
     other_info: 'Other info:'
     email: 'Email: *'
-    consumer: a customer
+    client: a client
     designer: a designer
     go: 'Go'
     success: Thank you so much for your inquiry! We can't wait to share the InteriorCrowd experience with you!
