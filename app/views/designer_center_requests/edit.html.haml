@@ -1,5 +1,6 @@
 - content_for :head do
   = javascript_include_tag 'designer_center_requests/show'
+  = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
@@ -14,9 +15,10 @@
         .col-md-8.disablePadding
           %p.thisIsAPreview= t('designer_center.edit.above_image')
         .col-md-4
-        .col-md-8.disablePadding.initialImage
-          = render partial: 'shared/moodboard', locals: { request: @request }
-          = link_to t('designer_center.edit.upload_new'), designer_center_response_path, :remote => true, class: 'darkBorderBtn editMoodboardBtn'
+        .col-md-8.disablePadding
+          .initialImage
+            = render partial: 'shared/moodboard', locals: { request: @request }
+            = link_to t('designer_center.edit.upload_new'), designer_center_response_path, :remote => true, class: 'darkBorderBtn editMoodboardBtn'
           = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.products_list'), image_texts: ['This table would be perfect for you.', '.....', '.....'] }
           = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.similar_styles'), image_texts: ['Provide details on why you chose this. ( e.g, If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair. )', '.....', '.....'] }
         .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }

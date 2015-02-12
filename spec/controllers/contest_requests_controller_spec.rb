@@ -80,6 +80,7 @@ RSpec.describe ContestRequestsController do
     it 'creates comment' do
       session[:client_id] = client.id
       post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+      expect(ConceptBoardComment.exists?(text: 'text', contest_request_id: request.id, user_id: client.id)).to eq(true)
       expect(response).to be_ok
     end
   end

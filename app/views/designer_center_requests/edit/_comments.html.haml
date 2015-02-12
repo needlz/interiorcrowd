@@ -21,11 +21,11 @@
           = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #meComments.tab-pane{:role => "tabpanel"}
-        - comments.send(@current_user.class.name.downcase).each do |comment|
+        - comments.where(role: @current_user.role).each do |comment|
           = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #designerComments.tab-pane{:role => "tabpanel"}
-        - comments.where.not(role: @current_user.class.name).each do |comment|
+        - comments.where.not(role: @current_user.role).each do |comment|
           = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
     .message-template{style: 'display: none'}

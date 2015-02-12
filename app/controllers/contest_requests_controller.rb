@@ -71,7 +71,7 @@ class ContestRequestsController < ApplicationController
   end
 
   def add_comment
-    comment = ConceptBoardComment.create(params['comment'].merge({user_id: current_user.id, role: current_user.class.name }))
+    comment = ConceptBoardComment.create(params['comment'].merge({user_id: current_user.id, role: current_user.role }))
     render json: { comment: comment, user_name: current_user.name }
   end
 
