@@ -14,19 +14,19 @@ class BudgetPlan
                designer_count: 2,
                product_count: 2,
                name: 'budget',
-               services: [:moodboard, :product_list, :instructions]),
+               services: [:conceptboard, :product_list, :instructions]),
            new(id: 2,
                price: 199,
                designer_count: 2,
                product_count: 4,
                name: 'premier',
-               services: [:moodboard, :product_list, :final_design, :instructions]),
+               services: [:conceptboard, :product_list, :final_design, :instructions]),
            new(id: 3,
                price: 299,
                designer_count: 2,
                product_count: 8,
                name: 'premium',
-               services: [:moodboard, :product_list, :final_design, :instructions])
+               services: [:conceptboard, :product_list, :final_design, :instructions])
   ]
 
   attr_reader :id, :price, :designer_count, :product_count, :services, :name
