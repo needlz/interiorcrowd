@@ -613,7 +613,7 @@ en:
     success: Thank you so much for your inquiry! We can't wait to share the InteriorCrowd experience with you!
   faq:
     menu:
-      customer: Customer
+      customer: Client
       designer: Designer
     customer:
       get_in_touch:
@@ -725,3 +725,11 @@ en:
     invite: You have been invited to take part in contest.
   reset_password: 'Your password was reseted, here are your new credentionals:'
   feedback_email: hello@interiorcrowd.com
+
+  board_comments:
+    send: Send
+    sending: Sending...
+    me: Me
+    now: now
+    ago: ' ago'
+

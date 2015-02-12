@@ -33,6 +33,12 @@ class ApplicationController < ActionController::Base
     raise_404 unless @contest.client == @client
   end
 
+  def current_user
+    return Client.find(session[:client_id]) if session[:client_id]
+    return Designer.find(session[:designer_id]) if session[:designer_id]
+    nil
+  end
+
   private
 
   def log_error(exception)

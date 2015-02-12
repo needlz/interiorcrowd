@@ -16,6 +16,7 @@ class DesignerCenterRequestsController < ApplicationController
   def edit
     @request = @designer.contest_requests.find(params[:id])
     @navigation = Navigation::DesignerCenter.new(:requests)
+    @current_user = current_user
   end
 
   def preview

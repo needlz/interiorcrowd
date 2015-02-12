@@ -126,6 +126,10 @@ class Contest < ActiveRecord::Base
     send("retailer_#{ retailer }")
   end
 
+  def response_winner
+    requests.where(answer: 'winner').last
+  end
+
   private
 
   def update_appeals(options)

@@ -1,5 +1,6 @@
 class Client < ActiveRecord::Base
-  
+  include User
+
   ACTIVE_STATUS = 1
   INACTIVE_STATUS = 0
   
@@ -16,10 +17,6 @@ class Client < ActiveRecord::Base
      Digest::SHA1.hexdigest("#{text}")
   end
 
-  def name
-    "#{ first_name } #{ last_name }"
-  end
-  
   def self.authenticate(username, password)
      password = encrypt(password)
      username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil

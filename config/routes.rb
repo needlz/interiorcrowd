@@ -25,6 +25,7 @@ InteriorC::Application.routes.draw do
 
     resources :contest_requests, only: [:show, :create] do
       member do
+        post 'add_comment'
         get 'save_lookbook'
         post 'answer'
       end

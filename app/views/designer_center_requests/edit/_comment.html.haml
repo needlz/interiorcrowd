@@ -5,7 +5,7 @@
     .col-md-10
       .row
         .col-md-6
-          %p.comment-username= user
+          %p.comment-username= message_name(user, comment)
         .col-md-6
-          %p.comment-time 35 min ago
-      %p.comment-text Maecenas euismod luctus ipsum, vitae ornare nisl fringilla vel. Suspendisse vestibulum, neque ac tempor ultrices, dui nisi blandit lectus, vel tristique diam massa et augue.
+          %p.comment-time= time_ago_in_words(comment.created_at, include_seconds: true) + t('board_comments.ago')
+      %p.comment-text= comment.text
