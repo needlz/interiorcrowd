@@ -4,7 +4,7 @@
     I18n = #{ translations_to_json('designer_center.portfolio.show'.split('.')) }
 
 .designer-portfolio{ data: { id: @portfolio_view.designer_id } }
-  .cover_image
+  .cover_image{ style: "background-image: url('#{ @portfolio_view.cover_picture_url }')" }
     .container.animated.fadeInDown
       .row
         .col-md-12.relative
