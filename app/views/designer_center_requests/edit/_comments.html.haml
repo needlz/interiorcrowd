@@ -10,7 +10,7 @@
       %li.btn.btn-default{:role => "presentation"}
         %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
       %li.btn.btn-default{:role => "presentation"}
-        %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= t('designer_center.edit.designer')
+        %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(@current_user)
     #scrollBoxComments.tab-content.notes
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|

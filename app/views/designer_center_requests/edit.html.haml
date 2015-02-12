@@ -3,6 +3,7 @@
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
+    MessagesI18n = #{ translations_to_json(['board_comments']) }
 
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60

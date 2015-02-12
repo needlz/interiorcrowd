@@ -75,7 +75,6 @@ class ContestRequestsController < ApplicationController
     render json: { comment: comment, user_name: current_user.name }
   end
 
-
   def answer
     request = ContestRequest.find(params[:id])
     replied = request.reply(params[:answer], session[:client_id])

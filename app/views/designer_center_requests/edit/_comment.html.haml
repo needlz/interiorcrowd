@@ -7,5 +7,5 @@
         .col-md-6
           %p.comment-username= message_name(user, comment)
         .col-md-6
-          %p.comment-time= time_ago_in_words(comment.created_at, include_seconds: true) + ' ago'
+          %p.comment-time= time_ago_in_words(comment.created_at, include_seconds: true) + t('board_comments.ago')
       %p.comment-text= comment.text

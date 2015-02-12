@@ -56,7 +56,6 @@ class ContestRequest < ActiveRecord::Base
     contest.responses_answerable?
   end
 
-
   private
 
   def contest_status

@@ -161,6 +161,13 @@ RSpec.describe ClientsController do
           get :entries, answer: 'winner'
           expect(assigns(:contest_requests)).to match_array([submitted])
         end
+
+        it 'returns winner contest request' do
+          contest.start_winner_selection!
+          submitted.update_attributes!(answer: 'winner')
+          get :entries, answer: 'winner'
+          expect(assigns(:won_contest_request)).to eq(submitted)
+        end
       end
     end
 

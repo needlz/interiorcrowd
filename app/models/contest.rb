@@ -127,7 +127,7 @@ class Contest < ActiveRecord::Base
   end
 
   def response_winner
-    requests.where(status: 'winner').last
+    requests.where(answer: 'winner').last
   end
 
   private
