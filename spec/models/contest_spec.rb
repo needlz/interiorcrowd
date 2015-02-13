@@ -118,8 +118,6 @@ RSpec.describe Contest do
   describe '#has_other_winners?' do
     let(:request){ Fabricate(:contest_request, status: 'fulfillment',designer_id: 2, answer: 'winner', contest_id: contest.id) }
     let(:submitted_request){ Fabricate(:contest_request, designer_id: 1, status: 'submitted', answer: 'maybe', contest_id: contest.id) }
-    let(:client) { Fabricate(:client) }
-    let(:contest) { Fabricate(:contest, client_id: client.id) }
 
     it 'has no other winners for contest' do
       expect(contest.has_other_winners?(request.id)).to eq(false)
