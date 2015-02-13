@@ -10,8 +10,8 @@ RSpec.describe Image do
       image = portfolio.personal_picture
       new_image = Fabricate(:image)
       Image.update_portfolio_image(portfolio, Image::PORTFOLIO_PERSONAL, new_image.id)
-      expect(portfolio.personal_picture.reload).to eq new_image
-      expect(image).to be_destroyed
+      expect(portfolio.reload.personal_picture).to eq new_image
+      expect(Image.exists?(image.id)).to be_falsey
     end
 
     context 'image_id is integer' do
