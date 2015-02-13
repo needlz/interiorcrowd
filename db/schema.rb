@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211095457) do
+ActiveRecord::Schema.define(version: 20150213064335) do
 
   create_table "appeals", force: true do |t|
     t.string "image"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(version: 20150211095457) do
   create_table "portfolios", force: true do |t|
     t.integer "background_id"
     t.integer "designer_id",                             null: false
-    t.integer "years_of_expirience"
+    t.integer "years_of_experience"
     t.boolean "education_gifted"
     t.boolean "education_school"
     t.boolean "education_apprenticed"

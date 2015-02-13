@@ -52,6 +52,19 @@ class @Answers
       answer = $(@).data('answer')
       self.sendAnswer(requestId, answer)
 
+  onDialogYesClick: (button)->
+    self = @
+    $button = $(button)
+    $dialog = $button.parents('#pickWinnerModal')
+    requestId = $dialog.data('id')
+    $dialog.find(':button').prop('disabled', true)
+    self.sendAnswer(requestId, 'winner', {
+      success: (data)->
+        self.hidePopover($button)
+      error: ->
+        self.hidePopover($button)
+    })
+
   sendAnswer: (requestId, answer, custom_callbacks)->
     callbacks = @bindViewUpdate(requestId, answer, custom_callbacks)
     options = $.extend(
@@ -82,18 +95,7 @@ class @Answers
   hidePopover: ($popover_element)->
     $('#pickWinnerModal').modal('hide');
 
-  onDialogYesClick: (button)->
-    self = @
-    $button = $(button)
-    $dialog = $button.parents('#pickWinnerModal')
-    requestId = $dialog.data('id')
-    $dialog.find(':button').prop('disabled', true)
-    self.sendAnswer(requestId, 'winner', {
-      success: (data)->
-        self.hidePopover($button)
-      error: ->
-        self.hidePopover($button)
-    })
+
 
 class ContestNotes
 

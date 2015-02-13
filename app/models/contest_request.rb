@@ -8,6 +8,8 @@ class ContestRequest < ActiveRecord::Base
   validates_uniqueness_of :designer_id, scope: :contest_id
   validate :contest_status, :one_winner, :allowed_answer, if: ->(request){ request.contest }
 
+  after_update :change_status
+
   state_machine :status, initial: :draft do
     event :submit do
       transition draft: :submitted
@@ -41,6 +43,10 @@ class ContestRequest < ActiveRecord::Base
   scope :submitted, ->{ where(status: 'submitted') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
 
+  def change_status
+    winner! if (changed_to?(:answer, 'winner') && status == 'submitted')
+  end
+
   def moodboard_image_path
     lookbook_item = lookbook.try(:lookbook_details).try(:last)
     return unless lookbook_item
@@ -55,6 +61,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def reply(answer, client_id)
+    return if status == 'fulfillment'
     (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
@@ -77,7 +84,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def one_winner
-    if changed_to?(:answer, 'winner') && contest.requests.find_by_answer('winner')
+    if changed_to?(:answer, 'winner') && contest.has_other_winners?(id)
       errors.add(:answer, I18n.t('contest_requests.validations.one_winner'))
     end
   end

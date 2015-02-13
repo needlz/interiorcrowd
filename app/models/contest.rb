@@ -130,6 +130,10 @@ class Contest < ActiveRecord::Base
     requests.where(answer: 'winner').last
   end
 
+  def has_other_winners?(request_id)
+    requests.where(answer: 'winner').where.not(id: request_id).present?
+  end
+
   private
 
   def update_appeals(options)
