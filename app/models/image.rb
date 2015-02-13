@@ -58,7 +58,7 @@ class Image < ActiveRecord::Base
 
   def self.update_portfolio_image(portfolio, kind, image_id)
     portfolio_image = Image.of_kind(kind).find_by_portfolio_id(portfolio.id)
-    if portfolio_image && portfolio_image.id != image_id
+    if portfolio_image && portfolio_image.id != image_id.to_i
       portfolio_image.destroy
     end
     if picture = Image.find_by_id(image_id)
