@@ -5,7 +5,7 @@
   .col-md-2= t('designer_center.contests_preview.room')
   .col-md-2= t('designer_center.contests_preview.price')
   .col-md-2= t('designer_center.contests_preview.days')
-.row.contestTableRow1
+.row.contestTableRow1{ data: { id: contest.id } }
   .col-md-2= contest.id
   .col-md-2= contest.name
   .col-md-2= contest.design_category

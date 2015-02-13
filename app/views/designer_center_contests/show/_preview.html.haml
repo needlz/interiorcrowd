@@ -1,0 +1,6 @@
+= render partial: 'contests/preview/current_contest_infobox'
+
+.col-md-12.marg-top30.contestInfo
+  .row.borderBottom.sections_table
+    - ContestView::CONTEST_PREVIEW_ATTRIBUTES.each do |attribute|
+      = render partial: 'clients/client_center/profile/contest_attribute_preview', locals: { attribute: attribute }

@@ -10,26 +10,12 @@
 
 #designer-center-responses {
 
-  .response {
-    margin-bottom: 20px;
-
-    .moodboard {
-      margin-left: 50px;
-
-      div {
-        margin-top: 5px;
-      }
-
-      .options {
-        button {
-          margin-right: 10px;
-        }
-      }
-    }
-  }
-
   .notifications-container {
     position: inherit;
+  }
+
+  .row.contestTableRow1{
+    cursor: pointer;
   }
 }
 

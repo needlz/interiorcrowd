@@ -6,4 +6,5 @@
     .col-md-1= "#{t('designer_center.responses.item.to_do')}:".html_safe
     .col-md-5
     .options{style: 'padding-left:10px;float:right'}
-      = render partial: "designer_center_requests/index/#{ response.status }_options", locals: { response_id: response.id }
+      = render partial: "designer_center_requests/index/options_buttons",
+          locals: { buttons: ResponseButtons::Base.from_response(response).all }
