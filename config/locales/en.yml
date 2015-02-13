@@ -14,7 +14,7 @@ en:
       appeals: What do you think of the style below?
       wanted_colors: Which colors would you like in your space?
       avoided_colors: Which colors would you like to avoid?
-      example: |
+      example: >
         Do you have a room in your home you love? Please send us pictures. They can also be
         pictures of a friend’s home or something you’ve found online.
       designer_level: How would you describe your level of design knowledge?
@@ -27,12 +27,12 @@ en:
         packages:
           quick_fix:
             name: Quick Fix
-            description: |
+            description: >
               Does your room just need one or two things to bring it all together? Whether you know what
               those things are or need help identifying them, let a stylist help you.
           update_my_style:
             name: Style Update
-            description: |
+            description: >
               Do you need help taking your room to the next level? Perhaps you have some key items you
               love, but some others that need to go (that College beanbag)?
           total_room_overhaul:
@@ -68,7 +68,7 @@ en:
       back: Back to all current contests
     design_style:
       title: Style Profile
-      description: |
+      description: >
         Now for the fun part! Tell us more about your style and what you’d like in your home. The
         more we know about you, the easier it’ll be for us to provide you with a design you really love.
       validations:
@@ -187,7 +187,7 @@ en:
       call_us: Or, call us!
       thanks_title: Great job! Design concepts will be headed your way soon!
       thanks_title_capitalize: GREAT JOB! DESIGN CONCEPTS WILL BE HEADED YOUR WAY SOON
-      thanks_subtitle: |
+      thanks_subtitle: >
         Thank you for launching your contest. You should expect designs in 2 to 3 business days.
         In the meantime, feel free to give us more information so the designs will be a better fir fot you.
       description: Willing to share more about your design style to help the designers? Take our fun design quiz.
@@ -364,7 +364,7 @@ en:
     cancel_button: Cancel
     edit:
       upload_new: Upload a new concept board
-      above_image: |
+      above_image: >
         Now that you’ve been chosen, the collaborative process begins. Please give your client as
         much detail on your design as possible - adding comments as to why you’ve chosen certain
         items.
@@ -381,7 +381,7 @@ en:
       upload: Upload
     final_upload:
       note_for_client: Write a note about your board here
-      note_for_client_placeholder: |
+      note_for_client_placeholder: >
         I had so much fun designing this for you. Thanks so much for the fun brief. Below you will find
         more detailed instructions on how to get this look in your amazing new living room.
       file_info: Ensure that your file is a .pdf format so that the client can download it. If you need help, contact us.
@@ -463,7 +463,7 @@ en:
           rustic_elegance: Rustic Elegance
           color_pop: Color Pop
         title: Create your portfolio page
-        years_of_expirience: How many years of expirience do you have?
+        years_of_experience: How many years of experience do you have?
         education:
           title: 'Where did you study interior design? Please choose all that apply'
           gifted: I'm naturally gifted
@@ -499,10 +499,10 @@ en:
       show:
         degree_name: '%{degree} Degree'
         self_educated: Self-educated
-        expirience_levels:
+        experience_levels:
           novice: Up and Coming Designer
           professional: Career professional
-          expirienced: Very Expirienced
+          experienced: Very Experienced
         about: About
         design_style: Design style
         portfolio_examples: Portfolio Examples
@@ -539,7 +539,7 @@ en:
       title: Contests Underway
       list_title: You are currently participating in the following contests
       see_all_contests: See all current contests
-      check_out_training: Check out our latest training!
+      check_out_training: Check out our latest training materials here!
       item:
         status: Status
         listed_as: Currently listed as

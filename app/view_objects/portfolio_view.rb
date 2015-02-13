@@ -2,7 +2,7 @@ class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
   include Rails.application.routes.url_helpers
 
-  delegate :years_of_expirience, :about, :personal_picture, :designer_id, :designer, to: :portfolio, allow_nil: true
+  delegate :years_of_experience, :about, :personal_picture, :designer_id, :designer, to: :portfolio, allow_nil: true
 
   def initialize(portfolio)
     @portfolio = portfolio
@@ -22,14 +22,14 @@ class PortfolioView
     select(prefix, 'degree', options_for_select(degrees, portfolio.degree), {}, { class: 'selectpicker form-selector' })
   end
 
-  def expirience_level
-    return unless portfolio.years_of_expirience
-    if portfolio.years_of_expirience < 5
-      I18n.t('designer_center.portfolio.show.expirience_levels.novice')
-    elsif 5 <= portfolio.years_of_expirience && portfolio.years_of_expirience < 10
-      I18n.t('designer_center.portfolio.show.expirience_levels.professional')
-    elsif 10 <= portfolio.years_of_expirience
-      I18n.t('designer_center.portfolio.show.expirience_levels.expirienced')
+  def experience_level
+    return unless portfolio.years_of_experience
+    if portfolio.years_of_experience < 5
+      I18n.t('designer_center.portfolio.show.experience_levels.novice')
+    elsif 5 <= portfolio.years_of_experience && portfolio.years_of_experience < 10
+      I18n.t('designer_center.portfolio.show.experience_levels.professional')
+    elsif 10 <= portfolio.years_of_experience
+      I18n.t('designer_center.portfolio.show.experience_levels.experienced')
     end
   end
 
