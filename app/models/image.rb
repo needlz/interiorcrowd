@@ -8,7 +8,14 @@ class Image < ActiveRecord::Base
   UNIQUE_PORTFOLIO_ITEMS = [PORTFOLIO_PERSONAL]
 
   has_attached_file :image,
-                    styles: { medium: ['200x200>', :jpg], thumb: ['100x100>', :jpg]},
+                    styles: lambda { |im|
+                      { medium: ['200x200>', :jpg],
+                        thumb: ['100x100>', :jpg],
+                        original_size: ['#{a.instance.width}x#{a.instance.height}>', :jpg] }
+                    },
+                    convert_options: {
+                        all: '-background white -flatten +matte'
+                    },
                     path: ':class/:id/:style:filename'
   has_one :lookbook_details
 

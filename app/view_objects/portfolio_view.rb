@@ -56,7 +56,7 @@ class PortfolioView
 
   def cover_picture_url
     return unless portfolio.background
-    portfolio.background.image.url
+    portfolio.background.image.url(:original_size)
   end
 
   def designer_name
@@ -64,7 +64,7 @@ class PortfolioView
   end
 
   def pictures_urls
-    portfolio.pictures.map { |picture| picture.image.url }
+    portfolio.pictures.map { |picture| picture.image.url(:original_size) }
   end
 
   def style_description
