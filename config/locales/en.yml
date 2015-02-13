@@ -722,7 +722,10 @@ en:
     designer: 'You have successfully registered with us a designer. Your login details for Interior Crowd as below:'
     client: ' You have successfully registered with us. Your login details for Interior Crowd as below:'
   invitation_to_content:
-    invite: You have been invited to take part in contest.
+    invite: |
+            Great news! %{name} has invited you to participate in their contest.<br>
+            You can view the contest details in your %{link}. You only have three days to submit a design, so go check it out now!
+    link: Design Center
   reset_password: 'Your password was reseted, here are your new credentionals:'
   feedback_email: hello@interiorcrowd.com
 
