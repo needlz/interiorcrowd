@@ -68,4 +68,22 @@ RSpec.describe ContestRequest do
       end
     end
   end
+
+  describe '#reply' do
+    let(:request){ Fabricate(:contest_request, designer: designer, status: 'fulfillment', answer: 'winner', contest_id: contest.id) }
+    let(:submitted_request){ Fabricate(:contest_request, designer: designer, status: 'submitted', answer: 'maybe', contest_id: contest.id) }
+    let(:client) { Fabricate(:client) }
+    let(:contest) { Fabricate(:contest, client_id: client.id) }
+
+    it 'does not change answer for fullfillment request' do
+      request.reply('maybe', client.id)
+      expect(request.answer).to eq('winner')
+    end
+
+    it 'changes answer for fullfillment request' do
+      submitted_request.reply('favorite', client.id)
+      expect(submitted_request.answer).to eq('favorite')
+    end
+
+  end
 end

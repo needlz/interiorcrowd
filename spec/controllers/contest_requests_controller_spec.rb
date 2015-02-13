@@ -59,6 +59,11 @@ RSpec.describe ContestRequestsController do
       end
     end
 
+    it 'change status if answer is winner' do
+      post :answer, id: request.id, answer: 'winner'
+      expect(request.reload.status).to eq('fulfillment')
+    end
+
     it 'saves answer if contest is in submission state' do
       expect(contest.status).to eq 'submission'
       post :answer, id: request.id, answer: 'favorite'
