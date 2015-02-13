@@ -1,7 +1,7 @@
 class @ConceptBoardUploader
   @idSelector: '#concept_board_picture_id'
 
-  @init: (i18n)->
+  @init: (i18n)=>
     PicturesUploadButton.init
       fileinputSelector: '.concept-board #concept_picture',
       uploadButtonSelector: '.concept-board .upload-button',
@@ -11,7 +11,8 @@ class @ConceptBoardUploader
         theme: 'new'
       I18n: i18n
       single: true
-    @initSaveBtn()
+    @.initSaveBtn()
+
 
   @initSaveBtn:->
     $('body').on('click', '.saveConceptBoard', @onSaveClick)
