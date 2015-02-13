@@ -1,9 +1,9 @@
 .col-md-6.disablePadding.text-right
-- if contest_response = contest.response_of(designer)
-  %a.submitMyDesign{ href: edit_designer_center_response_path(id: contest_response) }
-    = t('designer_center.responses.item.update_moodboard')
-    = image_tag 'gt.png'
-- else
-  %a.submitMyDesign{:href => new_designer_center_response_path(contest_id: contest.id)}
-    = t('contests.titles.join')
-    = image_tag 'gt.png'
+  - if contest_response = contest.response_of(designer)
+    %a.submitMyDesign{ href: edit_designer_center_response_path(id: contest_response) }
+      = t('designer_center.responses.item.update_moodboard')
+      = image_tag 'gt.png'
+  - else
+    %a.submitMyDesign{:href => new_designer_center_response_path(contest_id: contest.id)}
+      = t('contests.titles.join')
+      = image_tag 'gt.png'
