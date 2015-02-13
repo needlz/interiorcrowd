@@ -4,6 +4,18 @@
   = render partial: 'shared/setup_colors_table'
 
 - content_for :designer_center_content do
-  = render partial: 'contests/preview'
+  = render partial: 'designer_center_contests/show/preview'
+
+  .col-md-12.disablePadding.marg-top30
+
+  .col-md-6.disablePadding
+    %a.backToEntries{ href: designer_center_contest_index_path }
+      = image_tag 'lt.png'
+      &nbsp;&nbsp;&nbsp;
+      = t('contests.titles.back')
+
+  = render partial: 'designer_center_contests/show/footer_buttons', locals: { contest: @contest, designer: @designer }
+  .clearfix
+    %p
 
 = render partial: 'designer_center/layout'

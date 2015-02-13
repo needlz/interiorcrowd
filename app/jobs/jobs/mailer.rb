@@ -1,7 +1,5 @@
 module Jobs
 
-  MAILER_QUEUE = 'mailer'
-
   class Mailer
 
     def self.schedule(mailer_method, mail_args, args = {})
