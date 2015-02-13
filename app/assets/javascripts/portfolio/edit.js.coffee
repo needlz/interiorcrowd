@@ -25,7 +25,7 @@ class CoverImage
 class @PortfolioEditor
 
   init: ->
-    @bindYearsOfExpirience()
+    @bindYearsOfExperience()
     @bindPictureUploaders()
     @bindSchoolCheckbox().trigger('change')
     PopulatedInputs.init()
@@ -63,8 +63,8 @@ class @PortfolioEditor
       $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
     $('.hidden:checkbox').change()
 
-  bindYearsOfExpirience: ->
-    $('#portfolio_years_of_expirience').ForceNumericOnly();
+  bindYearsOfExperience: ->
+    $('#portfolio_years_of_experience').ForceNumericOnly();
 
     $(".spinner .btn:first-of-type").on "click", (event)->
       value = ~~$(".spinner input").val()

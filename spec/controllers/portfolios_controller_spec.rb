@@ -107,7 +107,7 @@ RSpec.describe PortfoliosController do
     end
 
     it 'can not be requested by anonymous user' do
-      patch :update, portfolio: { years_of_expirience: '1' }
+      patch :update, portfolio: { years_of_experience: '1' }
       expect(response).to redirect_to login_sessions_path
     end
 
@@ -122,10 +122,10 @@ RSpec.describe PortfoliosController do
         sign_in(designer)
       end
 
-      it 'updates years_of_expirience' do
-        new_years_of_expirience = '1'
-        patch :update, portfolio: { years_of_expirience: new_years_of_expirience, path: 'path' }
-        expect(designer.portfolio.reload.years_of_expirience).to eq new_years_of_expirience.to_i
+      it 'updates years_of_experience' do
+        new_years_of_experience = '1'
+        patch :update, portfolio: { years_of_experience: new_years_of_experience, path: 'path' }
+        expect(designer.portfolio.reload.years_of_experience).to eq new_years_of_experience.to_i
       end
 
       it 'updates personal picture' do
