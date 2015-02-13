@@ -89,8 +89,9 @@ class @Answers
     onUpdate
 
   updateView: (requestId, answer)->
-    $('button.btn[data-answer]').removeClass('result-answer')
-    $("button.btn[data-answer=#{answer}]").addClass('result-answer')
+    $board = $(".moodboard[data-id=#{requestId}]")
+    $board.find("button.btn[data-answer]").removeClass('result-answer')
+    $board.find(" button.btn[data-answer=#{answer}]").addClass('result-answer')
 
   hidePopover: ($popover_element)->
     $('#pickWinnerModal').modal('hide');
