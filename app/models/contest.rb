@@ -106,7 +106,7 @@ class Contest < ActiveRecord::Base
   def invite(designer_id)
     designer = Designer.find(designer_id)
     raise('Contest needs to be in submission state') unless submission?
-    Jobs::Mailer.schedule(:invite_to_contest, [designer])
+    Jobs::Mailer.schedule(:invite_to_contest, [designer, self.client])
     designer_invitations.create!(designer: designer)
   end
 

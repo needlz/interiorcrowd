@@ -1,5 +1,6 @@
 class UserMailer
   include MandrillMailer
+  include Rails.application.routes.url_helpers
 
   def user_registration(user, password)
     template 'user_registration'
@@ -8,11 +9,10 @@ class UserMailer
     mail to: [wrap_recipient(user.email, user.first_name, "to")], subject:subject
   end
 
-  def invite_to_contest(designer)
+  def invite_to_contest(designer, client)
     template 'invite_to_contest'
-    subject = "Invitation to contest"
-    set_template_values(set_invitation_params(designer))
-    mail to: [wrap_recipient(designer.email, designer.name, "to")], subject:subject
+    set_template_values(set_invitation_params(client))
+    mail to: [wrap_recipient(designer.email, designer.name, "to")]
   end
 
   def reset_password(user, password)
@@ -53,11 +53,11 @@ class UserMailer
     }
   end
 
-  def set_invitation_params(user)
+  def set_invitation_params(client)
     {
-      name: user.name,
-      email: user.email,
-      text: I18n.t("invitation_to_content.invite")
+      text: I18n.t("invitation_to_content.invite",
+                   name: client.name,
+                   link: "<a href=#{designer_center_index_url(host: host)}> #{I18n.t("invitation_to_content.link")}</a>")
     }
   end
 
@@ -84,6 +84,10 @@ class UserMailer
         email: params['email'],
         url: url
     }
+  end
+
+  def host
+    ENV['APP_URL'] || 'http://localhost:3000'
   end
 
 end
