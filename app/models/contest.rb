@@ -40,7 +40,7 @@ class Contest < ActiveRecord::Base
 
   state_machine :status, initial: :submission do
     event :start_winner_selection do
-      transition submission: :winner_selection
+      transition submission: :winner_selection, do: :update_phase_end
     end
 
     event :close do
@@ -49,7 +49,7 @@ class Contest < ActiveRecord::Base
     after_transition on: :close, do: :close_requests
 
     event :winner_selected do
-      transition winner_selection: :fulfillment
+      transition winner_selection: :fulfillment, do: :update_phase_end
     end
 
     event :finish do
@@ -162,12 +162,12 @@ class Contest < ActiveRecord::Base
     Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
   end
 
-  def calculate_end_submission_date
-    Time.current + 3.days
+  def calculate_phase_end
+    ContestPhaseDuration.new(self).phase_end(Time.current)
   end
 
   def defaults
-    self.phase_end ||= calculate_end_submission_date
+    self.phase_end ||= calculate_phase_end
   end
 
   def create_retailer_preferences
@@ -176,5 +176,9 @@ class Contest < ActiveRecord::Base
 
   def update_preferred_retailers(preferred_retailers_params)
     preferred_retailers.update_attributes!(preferred_retailers_params)
+  end
+
+  def update_phase_end
+    update_attributes!(phase_end: calculate_phase_end)
   end
 end
