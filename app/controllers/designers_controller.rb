@@ -14,7 +14,8 @@ class DesignersController < ApplicationController
 
   def create
     user_password = params[:designer][:password]
-    params[:designer][:password] = Client.encrypt(params[:designer][:password])
+    params[:designer][:password] = Client.encrypt(user_password)
+    params[:designer][:plain_password] = user_password
     params[:designer][:password_confirmation] = Client.encrypt(params[:designer][:password_confirmation])
     params[:designer][:ex_links] = params[:external_links].try(:reject) { |c| c.empty? }.try(:join, ',')
     session[:external_links] = params[:designer][:ex_links]
@@ -80,7 +81,7 @@ class DesignersController < ApplicationController
   end
 
   def designer_params
-    params.require(:designer).permit(:first_name, :email, :last_name, :password,
+    params.require(:designer).permit(:first_name, :email, :last_name, :password, :plain_password,
                                      :password_confirmation, :zip, :portfolio, :external_links)
   end
 end

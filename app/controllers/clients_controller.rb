@@ -39,7 +39,8 @@ class ClientsController < ApplicationController
 
   def create
     user_password = params[:client][:password]
-    params[:client][:password] = Client.encrypt(params[:client][:password])
+    params[:client][:password] = Client.encrypt(user_password)
+    params[:client][:plain_password] = user_password
     params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
     params[:client][:designer_level_id] = session[:design_style][:designer_level]
     params.require(:client).permit(:first_name,
@@ -51,6 +52,7 @@ class ClientsController < ApplicationController
                                    :state,
                                    :zip,
                                    :password,
+                                   :plain_password,
                                    :designer_level_id)
     @client = Client.new(params[:client])
     respond_to do |format|
