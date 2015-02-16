@@ -2,43 +2,23 @@
   = stylesheet_link_tag 'compiled/sign-in'
   = javascript_include_tag 'sessions/login'
 
-/ Sign In Option 1
-#sign_in1{:style => "height:10px;"}
-/ Sign In Option 2
-#sign_in2
-  .container
-    .section_header
-      %h3 Client Sign in
-    .row.login
-      .col-sm-5.left_box
-        %h4 Log in to your account
-        .perk_box
-          .perk
-            %span.icos.ico1
-            %p
-              %strong Lorem alteration
-              in some form  injected humour these randomised words .
-          .perk
-            %span.icos.ico2
-            %p
-              %strong There are many variations
-              of passages of Lorem alteration in some form  injected humour these randomised words.
-          .perk
-            %span.icos.ico3
-            %p
-              %strong Alteration in some form
-              injected humour these randomised words.
-      .col-sm-6.signin_box
-        = render :partial => 'home/msg'
-        .box
-          .box_cont
-            .form
-              = form_tag client_authenticate_sessions_path, {:id => :login} do
-                %input#username.form-control{:name => "username", :placeholder => "Email", :type => "text"}/
-                %span#err_u.text-error
-                %input#password.form-control{:name => "password", :placeholder => "Password", :type => "password"}/
-                %span#err_p.text-error
-                .forgot
-                  %a{:href => client_retry_password_sessions_path}> Forgot Password
-                  \&nbsp;
-                %input{:type => "submit", :value => "sign in"}/
+.container.animated.fadeInDown.bottom60
+  .row
+    .col-md-6.col-md-offset-3.loginBox
+      %h2= t('login.client.title')
+      .row
+        .col-md-8.col-md-offset-2
+          = render :partial => 'home/msg'
+
+          = form_tag client_authenticate_sessions_path, {:id => :login} do
+            %span#err_u.text-error
+            %input{ id: 'username', placeholder: t('login.email'), type: "text", name: "username" }/
+            %span#err_p.text-error
+            %input{ id: 'password', placeholder: t('login.password'), type: "password", name: "password" }/
+            .row
+              .col-md-6
+                %input{:type => "checkbox"}/
+                = t('login.remember_me')
+              .col-md-6.text-right
+                %a.forgotPass{:href => client_retry_password_sessions_path}= t('login.forgot_password')
+            %input.btn.loginBtn{:type => "submit", :value => t('login.log_in')}/

@@ -737,3 +737,11 @@ en:
     now: now
     ago: ' ago'
 
+  login:
+    email: Email address
+    password: Password
+    forgot_password: Forgot password
+    log_in: Log in
+    remember_me: Remember me
+    client:
+      title: CLIENT LOG IN
