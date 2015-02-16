@@ -735,11 +735,11 @@ font-size: 22px;
 }
 
 .btn-selector-big .caret {
-background: url('./img/down-caret.png') 10px 22px no-repeat;
+background: url('/assets/down-caret.png') 10px 22px no-repeat;
 }
 
 .btn-selector-medium .caret {
-background: url('./img/down-caret.png') 10px 10px no-repeat;
+background: url('/assets/down-caret.png') 10px 10px no-repeat;
 }
 
 .btn-selector-medium {
@@ -907,12 +907,12 @@ z-index: 9;}
   border-color: #000;
 }
 .input-group-btn-vertical > .btn:first-child {
-  background: url('./img/icons/inc-icon.png') 5px -1px no-repeat;
+  background: url('/assets/icons/inc-icon.png') 5px -1px no-repeat;
   border-bottom: 0;
 }
 .input-group-btn-vertical > .btn:last-child {
   margin-top: -2px;
-  background: url('./img/icons/inc-icon2.png') 5px -1px no-repeat;
+  background: url('/assets/icons/inc-icon2.png') 5px -1px no-repeat;
 }
 .input-group-btn-vertical i{
   position: absolute;
@@ -1011,7 +1011,7 @@ padding: 8px 15px 8px 25px;
 	border: 1px solid #a9a9a9;
 }
 .sortBySelect .caret{
-	background: url('./img/caret.png') 15px 15px no-repeat;
+	background: url('/assets/caret.png') 15px 15px no-repeat;
 	top: 2px !important;
 	border-left: 1px solid #a9a9a9 !important;
 }
@@ -1055,7 +1055,7 @@ padding: 8px 15px 8px 25px;
 	float: left;
 	margin: 0px;
 	height: 44px;
-	background: url('img/step-delimiter.png') left bottom no-repeat;
+	background: url('assets/step-delimiter.png') left bottom no-repeat;
 }
 .moodboard-steps p span{
 	border: 1px solid #707070;
@@ -1081,7 +1081,7 @@ padding: 8px 15px 8px 25px;
 	background-position: left bottom !important; 
 }
 .step1{
-	background: url('img/step1.png') right no-repeat !important;
+	background: url('assets/step1.png') right no-repeat !important;
 }
 .moodboard-steps p:nth-child(2).step1{
 	width: 328px;
@@ -1458,7 +1458,7 @@ h3.congrats span{
 	font-size: 16px;
 }
 .userNameDrop button .caret{
-	background: url('img/user_caret.png');
+	background: url('assets/user_caret.png');
 	width: 14px;
 	height: 8px;
 	margin-left: 12px;
@@ -1725,7 +1725,7 @@ textarea.productsMoodboardAbove{
 	width: 19px;
 	height: 19px;
 	display: inline-block;
-	background: url('img/marks.png');
+	background: url('assets/marks.png');
 	cursor: pointer;
 }
 .markRemove{
@@ -1912,7 +1912,7 @@ textarea.productsMoodboardAbove{
   /*margin-top: 10px;*/
   width: 100%;
   height: 399px;
-  background: url('img/cover_image.png') no-repeat center;
+  background: url('assets/cover_image.png') no-repeat center;
   background-size: cover;
 }
 .portfolio_profile_image{
@@ -1950,7 +1950,7 @@ textarea.productsMoodboardAbove{
 .profileRating{
 	height: 24px;
 	display: inline-block;
-	background: url('img/star.png');
+	background: url('assets/star.png');
 }
 .fiveStar{
 	width: 125px;
@@ -2015,7 +2015,7 @@ textarea.productsMoodboardAbove{
 .portfolio_example .numOfLikesPortfolio{
 	line-height: 20px;
 	height: 20px;
-	background: url('img/heart.png') no-repeat left;
+	background: url('assets/heart.png') no-repeat left;
 	display: inline-block;
 	padding-left: 30px;
 	color: #000;
@@ -2129,12 +2129,12 @@ textarea.productsMoodboardAbove{
 .panel-faq .panel-title{
 	padding: 0px 15px;
 	line-height: 53px;
-	background: url('img/collapsed.png') right center no-repeat;
+	background: url('assets/collapsed.png') right center no-repeat;
 }
 .collapsed .panel-title{
 	padding: 0px 15px;
 	line-height: 53px;
-	background: url('img/collapse.png') right center no-repeat;
+	background: url('assets/collapse.png') right center no-repeat;
 }
 .collapsed{
 	background: #FFF !important;
@@ -2198,7 +2198,7 @@ textarea.productsMoodboardAbove{
 	padding: 2px 12px; 
 }
 .designerNotification{
-	background: #F8F8F8 url('img/circle_arrow.png') right center no-repeat;
+	background: #F8F8F8 url('assets/circle_arrow.png') right center no-repeat;
 	border: 1px solid #e1e1e1;
 	color: #000;
 	padding-left: 30px;
@@ -2688,7 +2688,7 @@ border-top-right-radius: 5px;
 	font-size: 20px;
 	color: #000;
 	margin-top: 0px;
-	background: url('img/collapse.png') no-repeat right center;
+	background: url('assets/collapse.png') no-repeat right center;
 	cursor: pointer;
 }
 #completedContestsBox,#currentContestsBox{
@@ -2714,7 +2714,7 @@ border-top-right-radius: 5px;
 }
 
 .notificationSidebar .comment-text{
-	background: url('img/gray-bullet-list.png') no-repeat top left;
+	background: url('assets/gray-bullet-list.png') no-repeat top left;
 	padding-left: 25px;
 }
 .notificationSidebar #scrollBoxComments{
@@ -2793,7 +2793,7 @@ border-top-right-radius: 5px;
 }
 
 .triangleUp{
-		background: url('img/collapsed.png') no-repeat right center;
+		background: url('assets/collapsed.png') no-repeat right center;
 }
 
 
@@ -2899,7 +2899,7 @@ input[type="radio"] + label span {
 
 input[type="radio"] + label span {
      /*background-color:#292321;*/
-     background: url('img/radio.png') top;
+     background: url('assets/radio.png') top;
 }
 
 input[type="radio"]:checked + label span{
@@ -2935,7 +2935,7 @@ input[type="radio"].smallRadio + label span {
 
 input[type="radio"].smallRadio + label span {
      /*background-color:#292321;*/
-     background: url('img/radio_small.png') top;
+     background: url('assets/radio_small.png') top;
 }
 
 input[type="radio"].smallRadio:checked + label span{
