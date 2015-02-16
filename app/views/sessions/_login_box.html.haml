@@ -7,9 +7,9 @@
           = render :partial => 'home/msg'
           = form_tag login_view[:auth_path], {:id => :login} do
             %span#err_u.text-error
-            %input#username{:placeholder => t('login.email'), :type => "text"}/
+            %input#username{:placeholder => t('login.email'), :type => "text", name: 'username' }/
             %span#err_p.text-error
-            %input#password{:placeholder => t('login.password'), :type => "password"}/
+            %input#password{:placeholder => t('login.password'), :type => "password", name: 'password' }/
             .row
               .col-md-6
                 %input#remember-me{:type => "checkbox"}/
