@@ -72,10 +72,6 @@ class ContestRequest < ActiveRecord::Base
     contest.responses_answerable?
   end
 
-  def notify_designer_about_win
-    DesignerWinnerNotification.create(user_type: 'DesignerNotification', user_id: designer_id, contest_id: contest_id)
-  end
-
   private
 
   def contest_status
@@ -96,4 +92,7 @@ class ContestRequest < ActiveRecord::Base
     end
   end
 
+  def notify_designer_about_win
+    DesignerWinnerNotification.new_record(designer_id, contest_id, id)
+  end
 end

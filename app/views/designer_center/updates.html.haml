@@ -9,7 +9,7 @@
 
     .row.marg-top20
       .col-md-8.no-x-padding
-        - @designer.user_notifications.map(&:view).each do |notification|
+        - @notificationView.each do |notification|
           = render partial:'designer_notification', locals: { notification: notification }
       .col-md-4
         .sidebarComments.leaderboardSidebar

@@ -1,9 +1,9 @@
 module DesignerNotifications
-  class ContestWinnerView
+  class DesignerWinnerNotificationView
     include Rails.application.routes.url_helpers
 
-    def initialize(designer_invitation, contest)
-      @designer_invitation = designer_invitation
+    def initialize(designer_notification, contest)
+      @designer_notification = designer_notification
       @contest = contest
     end
 
@@ -16,12 +16,12 @@ module DesignerNotifications
     end
 
     def href
-      designer_center_response_path(id: designer_invitation.contest_request)
+      designer_center_response_path(id: designer_notification.contest_request_id)
     end
 
     private
 
-    attr_reader :designer_invitation, :contest
+    attr_reader :designer_notification, :contest
 
   end
 end

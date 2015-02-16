@@ -18,7 +18,7 @@ class Contest < ActiveRecord::Base
   belongs_to :design_category
   belongs_to :design_space
   has_many :requests, class_name: 'ContestRequest'
-  has_many :designer_invitations
+  has_many :designer_invite_notifications
   has_many :notes, class_name: 'ContestNote'
   has_many :reviewer_invitations
   has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
@@ -107,7 +107,7 @@ class Contest < ActiveRecord::Base
     designer = Designer.find(designer_id)
     raise('Contest needs to be in submission state') unless submission?
     Jobs::Mailer.schedule(:invite_to_contest, [designer, self.client])
-    designer_invitations.create!(designer: designer)
+    designer_invite_notifications.create!(designer: designer)
   end
 
   def invite_reviewer(invite_params)

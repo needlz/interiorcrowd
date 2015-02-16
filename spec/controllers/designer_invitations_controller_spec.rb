@@ -56,7 +56,7 @@ RSpec.describe DesignerInvitationsController do
       context 'correct designer and contest id' do
         it 'creates an invitation' do
           post :create, designer_id: designer.id, contest_id: contest.id
-          designer_invitation = client.designer_invitations[0]
+          designer_invitation = client.designer_invite_notifications[0]
           expect(designer_invitation.designer).to eq designer
           expect(designer_invitation.contest).to eq contest
         end
@@ -67,7 +67,7 @@ RSpec.describe DesignerInvitationsController do
         end
 
         it 'doesn\'t create an invitation if already invited' do
-          Fabricate(:designer_invitation, user_id: designer.id, contest_id: contest.id)
+          Fabricate(:designer_invite_notification, user_id: designer.id, contest_id: contest.id)
           expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error
         end
       end
