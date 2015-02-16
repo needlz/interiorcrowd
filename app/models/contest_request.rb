@@ -36,6 +36,7 @@ class ContestRequest < ActiveRecord::Base
   belongs_to :contest
   belongs_to :lookbook
   has_many :comments, class_name: 'ConceptBoardComment'
+  has_many :product_items
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
