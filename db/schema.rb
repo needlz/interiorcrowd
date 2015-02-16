@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150213064335) do
+ActiveRecord::Schema.define(version: 20150216151747) do
 
   create_table "appeals", force: true do |t|
     t.string "image"
@@ -302,11 +302,11 @@ ActiveRecord::Schema.define(version: 20150213064335) do
 
   create_table "user_notifications", force: true do |t|
     t.integer  "user_id"
-    t.string   "user_type"
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "contest_id"
+    t.integer  "contest_request_id"
   end
 
   add_index "user_notifications", ["contest_id"], name: "index_user_notifications_on_contest_id", using: :btree

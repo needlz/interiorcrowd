@@ -12,6 +12,7 @@ class DesignerCenterController < ApplicationController
 
   def updates
     @navigation = Navigation::DesignerCenter.new(:updates)
+    @notifications_view = DesignerNotifications::NotificationView.new(@designer.user_notifications).all
   end
 
   def training

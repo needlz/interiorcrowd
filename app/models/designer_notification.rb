@@ -5,7 +5,7 @@ class DesignerNotification < UserNotification
   default_scope { where(type: types) }
 
   def self.types
-    %w(DesignerInvitation)
+    %w(DesignerInviteNotification DesignerWinnerNotification)
   end
 
 end

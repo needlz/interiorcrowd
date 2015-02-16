@@ -1,9 +1,10 @@
 module DesignerNotifications
-  class ContestInvitationView
+  class DesignerInviteNotificationView
     include Rails.application.routes.url_helpers
 
-    def initialize(designer_invitation)
+    def initialize(designer_invitation, contest)
       @designer_invitation = designer_invitation
+      @contest = contest
     end
 
     def color
@@ -15,12 +16,12 @@ module DesignerNotifications
     end
 
     def href
-      designer_center_contest_path(id: designer_invitation.contest_id)
+      designer_center_contest_path(id: contest.id)
     end
 
     private
 
-    attr_reader :designer_invitation
+    attr_reader :designer_invitation, :contest
 
   end
 end

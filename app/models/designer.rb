@@ -8,7 +8,7 @@ class Designer < ActiveRecord::Base
   has_one :portfolio
   has_many :contest_requests
   has_many :user_notifications, foreign_key: :user_id
-  has_many :designer_invitations, foreign_key: :user_id
+  has_many :designer_invite_notifications, foreign_key: :user_id
 
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
@@ -39,7 +39,7 @@ class Designer < ActiveRecord::Base
   end
 
   def invited_to_contest?(contest)
-    designer_invitations.exists?(contest_id: contest.id)
+    designer_invite_notifications.exists?(contest_id: contest.id)
   end
 
 end
