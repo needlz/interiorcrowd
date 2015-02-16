@@ -64,6 +64,7 @@ RSpec.describe ClientsController do
         expect(client.send(attribute)).to eq client_options[attribute].to_i
       end
       expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level]
+      expect(client.plain_password).to eq client_options[:password]
     end
 
     it 'creates mail job' do
