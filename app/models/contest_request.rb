@@ -93,6 +93,6 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def notify_designer_about_win
-    DesignerWinnerNotification.new_record(designer_id, contest_id, id)
+    DesignerWinnerNotification.create(user_id: designer_id, contest_id: contest_id, contest_request_id: id)
   end
 end
