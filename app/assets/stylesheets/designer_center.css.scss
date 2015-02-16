@@ -23,7 +23,10 @@
   display: none;
 }
 .btnGroupComments {
-  width: 337px!important;
+  width: 298px;
+  li:last-child {
+    width: 94px;
+  }
 }
 
 .productsMoodboardAbove {
