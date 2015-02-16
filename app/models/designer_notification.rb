@@ -8,4 +8,8 @@ class DesignerNotification < UserNotification
     %w(DesignerInvitation)
   end
 
+  def contest_request
+    ContestRequest.where(contest_id: contest.id, designer_id: user_id).last.id
+  end
+
 end

@@ -44,7 +44,10 @@ class ContestRequest < ActiveRecord::Base
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
 
   def change_status
-    winner! if (changed_to?(:answer, 'winner') && status == 'submitted')
+    if (changed_to?(:answer, 'winner') && status == 'submitted')
+      winner!
+      notify_designer_about_win
+    end
   end
 
   def moodboard_image_path
@@ -67,6 +70,10 @@ class ContestRequest < ActiveRecord::Base
 
   def answerable?
     contest.responses_answerable?
+  end
+
+  def notify_designer_about_win
+    DesignerWinnerNotification.create(user_type: 'DesignerNotification', user_id: designer_id, contest_id: contest_id)
   end
 
   private

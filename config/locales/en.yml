@@ -528,6 +528,7 @@ en:
       qualifying_round: Qualifying Round
       fulfillment_period: Fulfillment Period
       invite: Congratulations! You have been invited to join a contest! Join now!
+      winner: You're a winner! Congrats! You have been selected to design (%{winner_name}).
       few_days: days
       search_placeholder: Search...
 
