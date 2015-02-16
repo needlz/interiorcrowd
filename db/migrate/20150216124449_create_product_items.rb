@@ -8,6 +8,7 @@ class CreateProductItems < ActiveRecord::Migration
       t.decimal :price
       t.text :brand
       t.text :link
+      t.string :mark
       t.timestamps
     end
   end
