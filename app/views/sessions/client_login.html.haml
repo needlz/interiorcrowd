@@ -17,8 +17,8 @@
             %input{ id: 'password', placeholder: t('login.password'), type: "password", name: "password" }/
             .row
               .col-md-6
-                %input{:type => "checkbox"}/
-                = t('login.remember_me')
+                %input#remember-me{:type => "checkbox"}/
+                %label{ for: 'remember-me' }= t('login.remember_me')
               .col-md-6.text-right
                 %a.forgotPass{:href => client_retry_password_sessions_path}= t('login.forgot_password')
             %input.btn.loginBtn{:type => "submit", :value => t('login.log_in')}/
