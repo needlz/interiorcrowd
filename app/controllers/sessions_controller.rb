@@ -2,10 +2,12 @@ class SessionsController < ApplicationController
   
   def login
     redirect_to designer_center_index_path if session[:designer_id].present?
+    @login_view = LoginView.designer_login
   end
   
   def client_login
     redirect_to client_center_index_path if session[:client_id].present?
+    @login_view = LoginView.client_login
   end
   
   def client_authenticate
