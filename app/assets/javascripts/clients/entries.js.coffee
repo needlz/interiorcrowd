@@ -151,6 +151,19 @@ class InvitationInputs extends PopulatedInputs
     $formclone.find('input').val ''
     $formclone
 
+class @FulfillmentDesign
+  @submit: ->
+    id = $('.submitMyDesign').attr('request_id')
+    $.ajax(
+      data: { id: id }
+      url: "/contest_requests/#{id}/approve_fulfillment"
+      type: 'POST'
+      success: (data)->
+        $('#thanksModal').modal('show') if data.approved
+    )
+
+
+
 class ReviewerInvitations
 
   @init: (contestId)->

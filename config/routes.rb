@@ -28,6 +28,7 @@ InteriorC::Application.routes.draw do
         post 'add_comment'
         get 'save_lookbook'
         post 'answer'
+        post 'approve_fulfillment'
       end
     end
 

@@ -4,6 +4,6 @@
 .col-md-6.disablePadding.text-right
   = form_for request, url: designer_center_response_path(id: request.id) do |f|
     = f.hidden_field :status, value: 'submitted'
-  = link_to '#', class: 'submit submitMyDesign' do
+  = link_to '#', class: 'submit submitMyDesign', request_id: request.id do
     =t('client_center.entries.collaboration.done_btn')
     %img{:src => "/assets/gt.png"}/
