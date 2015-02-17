@@ -1,7 +1,7 @@
 class ContestRequest < ActiveRecord::Base
   self.per_page = 8
 
-  STATUSES = %w{draft submitted closed fulfillment failed finished}
+  STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
 
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
@@ -31,8 +31,12 @@ class ContestRequest < ActiveRecord::Base
       transition fulfillment: :failed
     end
 
+    event :approve_fulfillment do
+      transition fulfillment_ready: :fulfillment_approved
+    end
+
     event :finish do
-      transition fulfillment: :finished
+      transition fulfillment_approved: :finished
     end
   end
 
@@ -40,6 +44,7 @@ class ContestRequest < ActiveRecord::Base
   belongs_to :contest
   belongs_to :lookbook
   has_many :comments, class_name: 'ConceptBoardComment'
+  has_many :product_items
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }

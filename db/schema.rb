@@ -282,6 +282,18 @@ ActiveRecord::Schema.define(version: 20150216162046) do
     t.datetime "updated_at"
   end
 
+  create_table "product_items", force: true do |t|
+    t.text     "name"
+    t.integer  "contest_request_id"
+    t.integer  "image_id"
+    t.text     "text"
+    t.decimal  "price"
+    t.text     "brand"
+    t.text     "link"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "reviewer_feedbacks", force: true do |t|
     t.text     "text"
     t.integer  "invitation_id"

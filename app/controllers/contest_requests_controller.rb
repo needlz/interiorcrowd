@@ -81,6 +81,12 @@ class ContestRequestsController < ApplicationController
     render json: { answered: replied }
   end
 
+  def approve_fulfillment
+    request = ContestRequest.find(params[:id])
+    approved = request.approve_fulfillment!
+    render json: { approved: approved }
+  end
+
   def show
     return unless check_client
     @client = Client.find(session[:client_id])
