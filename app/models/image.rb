@@ -21,6 +21,7 @@ class Image < ActiveRecord::Base
 
   belongs_to :contest
   belongs_to :portfolio
+  has_one :product_item
 
   scope :of_kind, ->(kind){ where(kind: kind) }
   scope :liked_examples, ->{ of_kind(LIKED_EXAMPLE) }

@@ -114,5 +114,6 @@ InteriorC::Application.routes.draw do
     resources :contest_notes, only: [:create]
     resources :reviewer_invitations, only: [:create]
     resources :beta_subscribers, only: [:create]
+    resources :product_items, only: [:create, :update]
   end
 end
