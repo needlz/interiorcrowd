@@ -1,10 +1,10 @@
 .container.animated.fadeInDown.bottom60
   .row
-    .col-md-12.disablePadding
+    .col-md-12.disablePadding.winner-badge-offset-bottom
       %h3.congrats
         = t('client_center.entries.congratulations')
         %span= t('client_center.entries.customized_board')
-      .col-md-8.disablePadding
+      .col-md-8.disablePadding.winner-badge-offset-top
         = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
       %br/
       %br/

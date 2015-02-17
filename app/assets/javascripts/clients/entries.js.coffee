@@ -61,7 +61,7 @@ class @Answers
     self.sendAnswer(requestId, 'winner', {
       success: (data)->
         self.hidePopover($button)
-        location.reload();
+        location.pathname = '/client_center/entries';
       error: ->
         self.hidePopover($button)
     })

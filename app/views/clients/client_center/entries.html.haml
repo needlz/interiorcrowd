@@ -3,11 +3,10 @@
   :javascript
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
-
-- if params[:final].present?
+= render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
+- if @won_contest_request.try(:status) == 'finished'
   = render partial: 'clients/client_center/entries/final_page', locals: {request: @contest_requests.first}
 - else
-  = render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
   - content_for :client_center_content do
     - unless @won_contest_request
       .bottom60.entries-page
