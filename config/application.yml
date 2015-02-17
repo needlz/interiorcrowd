@@ -19,3 +19,4 @@ development:
   MANDRILL_EMAIL: 'erikneeds@gmail.com'
   MANDRILL_PASSWORD: 'icrowd1icrowd'
   MANDRILL_API_TOKEN: 'XBnULwMuhI9LahaDwsG5-A'
+  INFO_EMAIL: 'pavlov@interlink-ua.com'

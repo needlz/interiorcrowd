@@ -26,6 +26,7 @@ class DesignersController < ApplicationController
         session[:designer_id] = @designer.id
         @designer.create_portfolio(params[:portfolio])
         Jobs::Mailer.schedule(:user_registration, [@designer, user_password])
+        Jobs::Mailer.schedule(:designer_registration_info, [@designer])
         format.html { redirect_to edit_portfolio_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else

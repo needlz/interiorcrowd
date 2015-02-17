@@ -9,6 +9,12 @@ class UserMailer
     mail to: [wrap_recipient(user.email, user.first_name, "to")], subject:subject
   end
 
+  def designer_registration_info(user)
+    template 'designer_registration_info'
+    set_template_values(set_designer_params(user))
+    mail to: [wrap_recipient(ENV['INFO_EMAIL'], '', "to")]
+  end
+
   def invite_to_contest(designer, client)
     template 'invite_to_contest'
     set_template_values(set_invitation_params(client))
@@ -50,6 +56,14 @@ class UserMailer
        email: user.email,
        password: password,
        text: I18n.t("registration.#{user.class.name.downcase}")
+    }
+  end
+
+  def set_designer_params(designer)
+    {
+        name: designer.name,
+        email: designer.email,
+        phone: designer.phone_number || ''
     }
   end
 
