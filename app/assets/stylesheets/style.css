@@ -1055,7 +1055,7 @@ padding: 8px 15px 8px 25px;
 	float: left;
 	margin: 0px;
 	height: 44px;
-	background: url('assets/step-delimiter.png') left bottom no-repeat;
+	background: url('/assets/step-delimiter.png') left bottom no-repeat;
 }
 .moodboard-steps p span{
 	border: 1px solid #707070;
@@ -1081,7 +1081,7 @@ padding: 8px 15px 8px 25px;
 	background-position: left bottom !important; 
 }
 .step1{
-	background: url('assets/step1.png') right no-repeat !important;
+	background: url('/assets/step1.png') right no-repeat !important;
 }
 .moodboard-steps p:nth-child(2).step1{
 	width: 328px;
@@ -1458,7 +1458,7 @@ h3.congrats span{
 	font-size: 16px;
 }
 .userNameDrop button .caret{
-	background: url('assets/user_caret.png');
+	background: url('/assets/user_caret.png');
 	width: 14px;
 	height: 8px;
 	margin-left: 12px;
@@ -1725,7 +1725,7 @@ textarea.productsMoodboardAbove{
 	width: 19px;
 	height: 19px;
 	display: inline-block;
-	background: url('assets/marks.png');
+	background: url('/assets/marks.png');
 	cursor: pointer;
 }
 .markRemove{
@@ -1912,7 +1912,7 @@ textarea.productsMoodboardAbove{
   /*margin-top: 10px;*/
   width: 100%;
   height: 399px;
-  background: url('assets/cover_image.png') no-repeat center;
+  background: url('/assets/cover_image.png') no-repeat center;
   background-size: cover;
 }
 .portfolio_profile_image{
@@ -1950,7 +1950,7 @@ textarea.productsMoodboardAbove{
 .profileRating{
 	height: 24px;
 	display: inline-block;
-	background: url('assets/star.png');
+	background: url('/assets/star.png');
 }
 .fiveStar{
 	width: 125px;
@@ -2015,7 +2015,7 @@ textarea.productsMoodboardAbove{
 .portfolio_example .numOfLikesPortfolio{
 	line-height: 20px;
 	height: 20px;
-	background: url('assets/heart.png') no-repeat left;
+	background: url('/assets/heart.png') no-repeat left;
 	display: inline-block;
 	padding-left: 30px;
 	color: #000;
@@ -2129,12 +2129,12 @@ textarea.productsMoodboardAbove{
 .panel-faq .panel-title{
 	padding: 0px 15px;
 	line-height: 53px;
-	background: url('assets/collapsed.png') right center no-repeat;
+	background: url('/assets/collapsed.png') right center no-repeat;
 }
 .collapsed .panel-title{
 	padding: 0px 15px;
 	line-height: 53px;
-	background: url('assets/collapse.png') right center no-repeat;
+	background: url('/assets/collapse.png') right center no-repeat;
 }
 .collapsed{
 	background: #FFF !important;
@@ -2198,7 +2198,7 @@ textarea.productsMoodboardAbove{
 	padding: 2px 12px; 
 }
 .designerNotification{
-	background: #F8F8F8 url('assets/circle_arrow.png') right center no-repeat;
+	background: #F8F8F8 url('/assets/circle_arrow.png') right center no-repeat;
 	border: 1px solid #e1e1e1;
 	color: #000;
 	padding-left: 30px;
@@ -2688,7 +2688,7 @@ border-top-right-radius: 5px;
 	font-size: 20px;
 	color: #000;
 	margin-top: 0px;
-	background: url('assets/collapse.png') no-repeat right center;
+	background: url('/assets/collapse.png') no-repeat right center;
 	cursor: pointer;
 }
 #completedContestsBox,#currentContestsBox{
@@ -2714,7 +2714,7 @@ border-top-right-radius: 5px;
 }
 
 .notificationSidebar .comment-text{
-	background: url('assets/gray-bullet-list.png') no-repeat top left;
+	background: url('/assets/gray-bullet-list.png') no-repeat top left;
 	padding-left: 25px;
 }
 .notificationSidebar #scrollBoxComments{
@@ -2793,7 +2793,7 @@ border-top-right-radius: 5px;
 }
 
 .triangleUp{
-		background: url('assets/collapsed.png') no-repeat right center;
+		background: url('/assets/collapsed.png') no-repeat right center;
 }
 
 
@@ -2899,7 +2899,7 @@ input[type="radio"] + label span {
 
 input[type="radio"] + label span {
      /*background-color:#292321;*/
-     background: url('assets/radio.png') top;
+     background: url('/assets/radio.png') top;
 }
 
 input[type="radio"]:checked + label span{
@@ -2935,7 +2935,7 @@ input[type="radio"].smallRadio + label span {
 
 input[type="radio"].smallRadio + label span {
      /*background-color:#292321;*/
-     background: url('assets/radio_small.png') top;
+     background: url('/assets/radio_small.png') top;
 }
 
 input[type="radio"].smallRadio:checked + label span{

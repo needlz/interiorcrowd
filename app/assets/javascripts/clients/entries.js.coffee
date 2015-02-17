@@ -61,6 +61,7 @@ class @Answers
     self.sendAnswer(requestId, 'winner', {
       success: (data)->
         self.hidePopover($button)
+        location.pathname = '/client_center/entries';
       error: ->
         self.hidePopover($button)
     })
@@ -149,6 +150,19 @@ class InvitationInputs extends PopulatedInputs
     $formclone = $row.clone()
     $formclone.find('input').val ''
     $formclone
+
+class @FulfillmentDesign
+  @submit: ->
+    id = $('.submitMyDesign').attr('request_id')
+    $.ajax(
+      data: { id: id }
+      url: "/contest_requests/#{id}/approve_fulfillment"
+      type: 'POST'
+      success: (data)->
+        $('#thanksModal').modal('show') if data.approved
+    )
+
+
 
 class ReviewerInvitations
 

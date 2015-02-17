@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216151747) do
+ActiveRecord::Schema.define(version: 20150216162046) do
 
   create_table "appeals", force: true do |t|
     t.string "image"
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150216151747) do
     t.string   "billing_state"
     t.integer  "billing_zip"
     t.string   "billing_city"
+    t.string   "plain_password"
   end
 
   create_table "concept_board_comments", force: true do |t|
@@ -181,6 +182,7 @@ ActiveRecord::Schema.define(version: 20150216151747) do
     t.integer  "portfolio_background_id"
     t.string   "portfolio_path"
     t.string   "phone_number"
+    t.string   "plain_password"
   end
 
   create_table "example_links", force: true do |t|

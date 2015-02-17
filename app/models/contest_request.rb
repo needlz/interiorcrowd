@@ -1,7 +1,7 @@
 class ContestRequest < ActiveRecord::Base
   self.per_page = 8
 
-  STATUSES = %w{draft submitted closed fulfillment failed finished}
+  STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
 
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
@@ -23,12 +23,20 @@ class ContestRequest < ActiveRecord::Base
       transition submitted: :fulfillment
     end
 
+    event :ready_fulfillment do
+      transition fulfillment: :fulfillment_ready
+    end
+
     event :fail_fulfillment do
       transition fulfillment: :failed
     end
 
+    event :approve_fulfillment do
+      transition fulfillment_ready: :fulfillment_approved
+    end
+
     event :finish do
-      transition fulfillment: :finished
+      transition fulfillment_approved: :finished
     end
   end
 

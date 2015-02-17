@@ -86,6 +86,15 @@ RSpec.describe ContestRequestsController do
 
   end
 
+  describe 'POST approve_fulfillment' do
+    let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'fulfillment_ready') }
+
+    it 'changes status to fulfillment_approved' do
+      post :approve_fulfillment, id: contest_request.id
+      expect(contest_request.reload.status).to eq('fulfillment_approved')
+      expect(response).to be_ok
+  end
+
   describe 'POST add_comment' do
     it 'creates comment' do
       session[:client_id] = client.id
