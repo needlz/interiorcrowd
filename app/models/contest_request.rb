@@ -23,6 +23,10 @@ class ContestRequest < ActiveRecord::Base
       transition submitted: :fulfillment
     end
 
+    event :ready_fulfillment do
+      transition fulfillment: :fulfillment_ready
+    end
+
     event :fail_fulfillment do
       transition fulfillment: :failed
     end

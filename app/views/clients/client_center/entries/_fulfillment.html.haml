@@ -10,6 +10,6 @@
       %br/
     .col-md-8.disablePadding.relative
       = image_tag '/assets/winnerBadge.png', class: 'winnerBadge'
-      = render partial: 'shared/moodboard', locals: { request: @contest_requests[0] }
+      = render partial: 'shared/moodboard', locals: { request: request }
     .col-md-4
-      = render partial: 'contest_requests/submission_info', locals: { designer: @contest_requests[0].designer, submitted_at: @contest_requests[0].created_at, request: @contest_requests[0] }
+      = render partial: 'contest_requests/submission_info', locals: { designer: request.designer, submitted_at: request.created_at, request: request }

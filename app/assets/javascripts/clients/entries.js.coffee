@@ -61,6 +61,7 @@ class @Answers
     self.sendAnswer(requestId, 'winner', {
       success: (data)->
         self.hidePopover($button)
+        location.reload();
       error: ->
         self.hidePopover($button)
     })

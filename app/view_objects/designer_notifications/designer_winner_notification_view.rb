@@ -16,7 +16,7 @@ module DesignerNotifications
     end
 
     def href
-      designer_center_response_path(id: designer_notification.contest_request_id)
+      edit_designer_center_response_path(id: designer_notification.contest_request_id)
     end
 
     private
