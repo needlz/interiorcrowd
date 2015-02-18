@@ -9,6 +9,7 @@ class Designer < ActiveRecord::Base
   has_many :contest_requests
   has_many :user_notifications, foreign_key: :user_id
   has_many :designer_invite_notifications, foreign_key: :user_id
+  has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
 
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")

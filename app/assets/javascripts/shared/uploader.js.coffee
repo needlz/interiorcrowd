@@ -24,11 +24,9 @@ class Uploader
   init: ()->
     @$container = $(@options.thumbs.container)
     @$imageIds = $(@options.thumbs.selector)
-    if @options.thumbs.theme is 'new'
-      @thumbsTheme = new RemovableThumbsTheme(@$container, @$imageIds)
-      @thumbsTheme.onRemoved = @options.thumbs.onRemoved
-    else
-      @thumbsTheme = new DefaultThumbsTheme(@$container, @$imageIds)
+    themeClass = @options.thumbs.theme || DefaultThumbsTheme
+    @thumbsTheme = new themeClass(@$container, @$imageIds)
+    @thumbsTheme.onRemoved = @options.thumbs.onRemoved
     @thumbsTheme.init()
 
     @bindUploadScript()
@@ -56,13 +54,13 @@ class Uploader
         previousIds = @$imageIds.val() + ',' if @$imageIds.val().length
         @$imageIds.val(previousIds + imageId)
 
-class ThumbsTheme
+class @ThumbsTheme
 
   constructor: (@$container, @$imageIds)->
 
   init: ->
 
-class DefaultThumbsTheme extends ThumbsTheme
+class @DefaultThumbsTheme extends ThumbsTheme
 
   thumbForSingleImageUploader: (imageUrl, imageId) ->
     $img = @$container.find('img')
@@ -72,7 +70,7 @@ class DefaultThumbsTheme extends ThumbsTheme
   thumbForMultipleImageUploader: (imageUrl, imageId) ->
     @$container.append "<img src='#{ imageUrl }' />"
 
-class RemovableThumbsTheme extends ThumbsTheme
+class @RemovableThumbsTheme extends ThumbsTheme
 
   init: ->
     @$container.on 'click', '.remove-thumb-button', @removeThumb
@@ -82,7 +80,7 @@ class RemovableThumbsTheme extends ThumbsTheme
     $thumbContainer = $(event.target).parents('.thumb')
     imageIds = @$imageIds.val().split(',')
     imageId = $thumbContainer.data('id')
-    indexOfThumb = imageIds.indexOf(imageId)
+    indexOfThumb = imageIds.indexOf(imageId.toString())
     imageIds.splice(indexOfThumb, 1)
     @$imageIds.val(imageIds.join(','))
     $thumbContainer.remove()

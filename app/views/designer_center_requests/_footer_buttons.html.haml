@@ -5,7 +5,12 @@
     = link_to designer_center_response_index_path do
       .backToEntries
         %img{:src => "/assets/lt.png"}/
-        =t('designer_center.respond.back')
+        =t('designer_center.respond_view.back')
+  - elsif @request.fulfillment_editing?
+    = link_to edit_designer_center_response_path(id: @request.id) do
+      .backToEntries
+        %img{:src => "/assets/lt.png"}/
+        =t('designer_center.respond_view.go_back_and_edit')
 .col-md-6.disablePadding.text-right
   - if @request.draft?
     = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
@@ -13,7 +18,12 @@
     - if @request.contest.submission?
       = link_to '#', class: 'submit submitMyDesign' do
         =t('designer_center.respond.submit_design')
-  -else
+  - elsif @request.fulfillment?
+    = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+      = f.hidden_field :status, value: 'fulfillment_ready'
+      = link_to '#', class: 'submit submitMyDesign' do
+        =t('designer_center.respond.submit')
+  - else
     = link_to designer_center_response_index_path do
       .backToEntries
         =t('designer_center.respond.done')

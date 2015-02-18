@@ -1,6 +1,7 @@
 class ProductItemsController < ApplicationController
-  before_filter :set_designer
-  before_filter :set_contest_request
+  before_filter :set_designer, only: [:create, :update]
+  before_filter :set_client, only: [:mark]
+  before_filter :set_contest_request, only: [:create]
 
   def create
     product_item = ProductItem.create!(product_item_params)
@@ -8,9 +9,17 @@ class ProductItemsController < ApplicationController
   end
 
   def update
-    product_item = @contest_request.product_items.find(params[:id])
+    product_item = ProductItem.find(params[:id])
+    return raise_404 unless product_item.contest_request.designer == @designer
     product_item.update_attributes!(product_item_params)
     render nothing: true
+  end
+
+  def mark
+    product_item = ProductItem.find(params[:id])
+    return raise_404 unless product_item.contest_request.contest.client == @client
+    updated = product_item.update_attributes!(mark: params[:product_item][:mark])
+    render json: { updated: updated }
   end
 
   private
@@ -32,4 +41,7 @@ class ProductItemsController < ApplicationController
     @designer = Designer.find(session[:designer_id]) if check_designer
   end
 
+  def set_client
+    @client = Client.find_by_id(check_client)
+  end
 end

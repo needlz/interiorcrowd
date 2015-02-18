@@ -8,7 +8,7 @@ class @ConceptBoardUploader
       thumbs:
         container: '.concept-board .thumbs'
         selector: @idSelector
-        theme: 'new'
+        theme: RemovableThumbsTheme
       I18n: i18n
       single: true
     @.initSaveBtn()

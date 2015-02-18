@@ -22,7 +22,7 @@ class @ExamplesUploader
       thumbs:
         container: '#image_display'
         selector: '#design_style_image_id'
-        theme: 'new'
+        theme: RemovableThumbsTheme
       I18n: I18n
 
 class @SpacePicturesUploader
@@ -33,5 +33,5 @@ class @SpacePicturesUploader
       thumbs:
         container: '#image_display'
         selector: '#design_space_image_id'
-        theme: 'new'
+        theme: RemovableThumbsTheme
       I18n: i18n

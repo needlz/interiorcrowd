@@ -114,6 +114,10 @@ InteriorC::Application.routes.draw do
     resources :contest_notes, only: [:create]
     resources :reviewer_invitations, only: [:create]
     resources :beta_subscribers, only: [:create]
-    resources :product_items, only: [:create, :update]
+    resources :product_items, only: [:create, :update] do
+      member do
+        patch 'mark', to: 'product_items#mark', as: 'mark'
+      end
+    end
   end
 end
