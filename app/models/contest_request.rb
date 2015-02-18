@@ -81,6 +81,14 @@ class ContestRequest < ActiveRecord::Base
     contest.responses_answerable?
   end
 
+  def approve
+    return false if fulfillment_approved?
+    transaction do
+      DesignerInfoNotification.create(user_id: designer_id, contest_id: contest_id, contest_request_id: id)
+      approve_fulfillment!
+    end
+  end
+
   private
 
   def contest_status

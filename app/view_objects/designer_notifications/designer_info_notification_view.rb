@@ -1,5 +1,5 @@
 module DesignerNotifications
-  class DesignerWinnerNotificationView
+  class DesignerInfoNotificationView
     include Rails.application.routes.url_helpers
 
     def initialize(designer_notification, contest)
@@ -8,11 +8,11 @@ module DesignerNotifications
     end
 
     def color
-      'red'
+      'yellow'
     end
 
     def text
-      I18n.t('designer_center.contests_preview.winner', contest_name: contest.project_name)
+      I18n.t('designer_center.contests_preview.notification', contest_name: contest.project_name)
     end
 
     def href
