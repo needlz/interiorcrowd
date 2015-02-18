@@ -34,3 +34,20 @@
 .btnGroupComments {
   display: flex;
 }
+
+.tableCell {
+  display: table;
+  height: 350px;
+  border-top: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.tableCell p {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  padding: 0px 50px;
+  color: #231f20;
+  font-size: 18px;
+}

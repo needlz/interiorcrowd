@@ -2,7 +2,7 @@
   .col-md-3
     %p=t('designer_center.my_contests.type')
   .col-md-9
-    %p= contest.design_category.localized_name
+    %p= DesignCategoryView.new(contest.design_category).name
   .clearfix
   .col-md-3
     %p=t('designer_center.my_contests.room')

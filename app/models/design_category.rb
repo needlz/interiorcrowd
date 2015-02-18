@@ -6,12 +6,4 @@ class DesignCategory < ActiveRecord::Base
 
   scope :available, ->{ where(status: ACTIVE_STATUS).order(pos: :asc) }
 
-  def localized_name
-    I18n.t("contests.titles.brief.packages.#{ name }.name")
-  end
-
-  def localized_description
-    I18n.t("contests.titles.brief.packages.#{ name }.description")
-  end
-
 end

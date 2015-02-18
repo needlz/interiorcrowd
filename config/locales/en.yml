@@ -18,7 +18,7 @@ en:
         Do you have a room in your home you love? Please send us pictures. They can also be
         pictures of a friend’s home or something you’ve found online.
       designer_level: How would you describe your level of design knowledge?
-      areas: Which rooms needs help?
+      areas: Which room needs help?
       brief:
         title: Choose the packages
         description:
@@ -28,16 +28,36 @@ en:
           quick_fix:
             name: Quick Fix
             description: >
-              Does your room just need one or two things to bring it all together? Whether you know what
-              those things are or need help identifying them, let a stylist help you.
+              Does your room just need one or two things to bring it all together?
+            quote: >
+              “Our living room needed
+              a new rug to tie all the
+              other pieces together.
+              Our designer also added
+              a floor lamp that made a
+              huge difference to the room”
           update_my_style:
             name: Style Update
             description: >
-              Do you need help taking your room to the next level? Perhaps you have some key items you
-              love, but some others that need to go (that College beanbag)?
+              Do you need help taking your room to the next level?
+            quote: >
+              “We had some furniture
+              pieces that we loved, but
+              others we weren’t sure of.
+              Our stylist told us which
+              ones to get rid of and
+              found amazing
+              replacements that worked
+              with the things we loved”
           total_room_overhaul:
             name: Total Room Overhaul
-            description: Need lots of help? Don’t know where to start? Don’t worry, we’ll take care of you!
+            description: Need lots of help? Let’s start from the scratch!
+            quote: >
+              “I wanted a completely new look
+              for our bedroom. Anything we
+              wanted to keep went into the
+              guest room and we started from
+              scratch”
         design_categories: Need help with
         designer_level: Design knowledge
         designer_profile: Design Profile
