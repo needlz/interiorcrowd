@@ -23,6 +23,7 @@
                   title: t('designer_center.edit.similar_styles'),
                   image_list_name: :similar_styles,
                   contest_request: @request }
+
       .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
         = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
       = render partial: 'designer_center_requests/footer_buttons'
