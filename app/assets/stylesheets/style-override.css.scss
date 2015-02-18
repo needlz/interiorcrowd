@@ -4,29 +4,33 @@
   margin-bottom: 10px;
 }
 
-.joinContestBox .row .col-xs-2{
+.joinContestBox .row .col-xs-2 {
   text-align: center;
   padding: 0px;
 }
 
-.suggestedContestHeader div{
+.suggestedContestHeader div {
   line-height: 25px;
   margin-top: 10px;
   padding: 0px;
 }
 
-.joinContestBox > .row > .col-md-12{
+.joinContestBox > .row > .col-md-12 {
   height: 35px;
   line-height: 25px;
   margin-top: 10px;
   margin-bottom: 0px;
 }
 
-.cover_image{
+.cover_image {
   background-position: top;
 }
 
-.feedbackFromOthers > div:nth-child(1) p{
+.feedbackFromOthers > div:nth-child(1) p {
   font-size: 16px;
   word-wrap: break-word;
+}
+
+.btnGroupComments {
+  display: flex;
 }
