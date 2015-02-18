@@ -3,5 +3,10 @@
 .row.marg-top20
   .col-md-12
     %p.grayP14= block_text
-  - image_texts.each do |text|
-    = render partial: 'clients/client_center/entries/collaboration/image_content', locals: {choosable: choosable,text: text}
+  - image_items.each do |image_item|
+    = render partial: 'clients/client_center/entries/collaboration/image_content',
+        locals: { choosable: choosable,
+          id: image_item.id,
+          text: image_item.text,
+          image_path: image_item.image.image.url(:medium),
+          mark: image_item.mark }

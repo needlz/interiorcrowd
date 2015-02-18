@@ -7,7 +7,7 @@ module ResponseButtons
     def self.from_response(contest_response)
       status = contest_response.status
       status[0] = status[0].capitalize
-      klass = Object.const_get "ResponseButtons::#{ status }Buttons"
+      klass = Object.const_get "ResponseButtons::#{ status.camelize }Buttons"
       klass.new(contest_response.id)
     end
 

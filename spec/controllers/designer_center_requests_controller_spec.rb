@@ -67,6 +67,23 @@ RSpec.describe DesignerCenterRequestsController do
         end
       end
     end
+
+    def product_list_params
+      {
+        contest_request: {
+          product_items: {
+            image_ids: [Fabricate(:image), Fabricate(:image)].join(','),
+            texts: ['text 1', 'text 2'],
+            ids: ['', '']
+          }
+        }
+      }
+    end
+
+    it 'updates products list' do
+      patch :update, product_list_params.merge({ id: submitted_request.id })
+      expect(submitted_request.product_items.count).to eq 2
+    end
   end
 
   describe 'GET new' do
@@ -111,6 +128,37 @@ RSpec.describe DesignerCenterRequestsController do
       image = Fabricate(:image)
       post :create, contest_id: contest.id, lookbook: { picture: { ids: [image.id] } }, contest_request: { feedback: '' }
       expect(contest.requests[0].lookbook.lookbook_details).to be_present
+    end
+  end
+
+  describe 'GET edit' do
+    context 'request has draft status' do
+      it 'redirects to show page' do
+        request = draft_request
+        get :edit, id: request.id
+        expect(response).to redirect_to designer_center_response_path(id: request.id)
+      end
+    end
+
+    context 'request was submitted' do
+      it 'renders page' do
+        request = submitted_request
+
+        get :edit, id: request.id
+        expect(response).to render_template(:edit)
+
+        request.winner!
+        get :edit, id: request.id
+        expect(response).to render_template(:edit)
+
+        request.ready_fulfillment!
+        get :edit, id: request.id
+        expect(response).to render_template(:edit)
+
+        request.approve_fulfillment!
+        get :edit, id: request.id
+        expect(response).to render_template(:edit)
+      end
     end
   end
 end

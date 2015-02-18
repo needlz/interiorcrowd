@@ -1,7 +1,7 @@
-.col-md-4.relative
-  %img.productListIMG{:src => "/assets/placeholder.jpg"}/
+.col-md-4.relative.image-item{ data: { id: id } }
+  %img.productListIMG{ src: image_path }/
   - if choosable
     %p.text-right.marg-top10
-      %span.mark.markOk
-      %span.mark.markRemove
+      %span.mark.markOk{ data: { mark: 'ok' }, class: ('active' if mark == 'ok') }
+      %span.mark.markRemove{ data: { mark: 'remove' }, class: ('active' if mark == 'remove') }
   %p.productsMoodboardAbove= text

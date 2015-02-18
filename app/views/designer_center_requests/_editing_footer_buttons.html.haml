@@ -1,0 +1,19 @@
+.col-md-12.disablePadding.marg-top20
+  .hLine
+.col-md-6.disablePadding
+  - if @request.fulfillment_editing?
+    = link_to designer_center_response_index_path do
+      .backToEntries
+        %img{:src => "/assets/lt.png"}/
+        =t('designer_center.respond.back')
+.col-md-6.disablePadding.text-right
+  - if @request.submitted?
+    = link_to designer_center_response_index_path do
+      .backToEntries
+        =t('designer_center.respond.done')
+        %img{:src => "/assets/gt.png"}/
+  - elsif @request.fulfillment_editing?
+    = link_to '#' do
+      .backToEntries.save-fulfillment
+        =t('designer_center.respond.save_and_preview')
+        %img{:src => "/assets/gt.png"}/
