@@ -94,6 +94,11 @@ RSpec.describe ContestRequestsController do
       expect(contest_request.reload.status).to eq('fulfillment_approved')
       expect(response).to be_ok
     end
+
+    it 'sends notification' do
+      post :approve_fulfillment, id: contest_request.id
+      expect(UserNotification.exists?(user_id: contest_request.designer_id, contest_id: contest_request.contest_id, type: 'DesignerInfoNotification')).to eq(true)
+    end
   end
 
   describe 'POST add_comment' do

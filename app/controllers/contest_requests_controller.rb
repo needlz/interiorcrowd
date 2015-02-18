@@ -83,7 +83,7 @@ class ContestRequestsController < ApplicationController
 
   def approve_fulfillment
     request = ContestRequest.find(params[:id])
-    approved = request.approve_fulfillment!
+    approved = request.approve
     render json: { approved: approved }
   end
 
