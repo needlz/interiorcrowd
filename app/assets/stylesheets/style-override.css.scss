@@ -25,3 +25,8 @@
 .cover_image{
   background-position: top;
 }
+
+.feedbackFromOthers > div:nth-child(1) p{
+  font-size: 16px;
+  word-wrap: break-word;
+}
