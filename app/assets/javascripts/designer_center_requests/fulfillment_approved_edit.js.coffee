@@ -1,5 +1,8 @@
 class FulfillmentApprovedEdit
 
+  @init: ->
+    @bindFooterButtons()
+
   @form: ->
     $('.edit_contest_request')
 
