@@ -8,11 +8,10 @@ class @Notifications
     @.show(type)
 
   @initButtons: ->
-    self = @
-    $(@buttons).on 'click', ->
-      self.hideAllNotifications();
-      self.show($(@).attr('type'))
-      self.reverseColor(@)
+    $(@buttons).on 'click', =>
+      @.hideAllNotifications();
+      @.show($(event.target).attr('type'))
+      @.reverseColor(event.target)
 
   @hideAllNotifications: ->
     $('.notification').hide()
