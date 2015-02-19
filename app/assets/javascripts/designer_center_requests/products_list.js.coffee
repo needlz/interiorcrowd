@@ -1,21 +1,13 @@
-class ProductsList
+class ImageItemsList
 
-  constructor: (@thumbsSelector, @uploadButtonSelector)->
+  constructor: (@uploadOptions)->
 
   init: ->
     @bindUploadButton()
     @bindSaveButton()
 
   bindUploadButton: ->
-    $button = $(@uploadButtonSelector)
-    PicturesUploadButton.init
-      fileinputSelector: '.products-list #product_items',
-      uploadButtonSelector: @uploadButtonSelector,
-      thumbs:
-        container: @thumbsSelector
-        selector: '#contest_request_product_items_image_ids'
-        theme: ProductListThumbsTheme
-      I18n: I18n
+    PicturesUploadButton.init @uploadOptions
 
   bindSaveButton: ->
     $('.save-fulfillment').click (e)=>
@@ -41,5 +33,23 @@ class ProductListThumbsTheme extends RemovableThumbsTheme
     $container
 
 $ ->
-  productList = new ProductsList('.products-list .thumbs', '.products-list .upload-button')
+  productList = new ImageItemsList(
+    fileinputSelector: '.products-list #product_items',
+    uploadButtonSelector: '.products-list .upload-button',
+    thumbs:
+      container: '.products-list .thumbs'
+      selector: '#contest_request_product_items_image_ids'
+      theme: ProductListThumbsTheme
+    I18n: I18n
+  )
   productList.init()
+  similarStyles = new ImageItemsList(
+    fileinputSelector: '.similar-styles #similar_styles',
+    uploadButtonSelector: '.similar-styles .upload-button',
+    thumbs:
+      container: '.similar-styles .thumbs'
+      selector: '#contest_request_similar_styles_image_ids'
+      theme: ProductListThumbsTheme
+    I18n: I18n
+  )
+  similarStyles.init()

@@ -1,9 +1,6 @@
 %p.font20Bold.marg-top20= title
 .hLine10
 .row.marg-top20.thumbs
-  - if editable
-    .col-md-12
-      %p.grayP14= t('designer_center.edit.upload_new')
   .template
     = render partial: 'designer_center_requests/edit/image_content',
         locals: { editable: editable,

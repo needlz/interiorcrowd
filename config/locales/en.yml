@@ -577,7 +577,8 @@ en:
         draft: Not submitted
         submitted: Concept board submitted
         fulfillment: Fulfillment period
-        fulfillment_ready: Fulfillment period
+        fulfillment_ready: Fulfillment period (design submitted)
+        fulfillment_approved: Fulfillment period (design approved)
         closed: Closed
     respond_view:
       edit_button: Edit

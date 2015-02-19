@@ -4,8 +4,9 @@
 - content_for :designer_center_content do
   #contests-preview
     .col-md-10.col-md-offset-1.marg-bottom30
-      .joinContestBox
-        = render partial: 'designer_center_contests/index/congrats'
+      - if @invited_contests.present?
+        .joinContestBox
+          = render partial: 'designer_center_contests/index/congrats'
       .row
         = render partial: 'designer_center_contests/index/suggested_contests'
       .row

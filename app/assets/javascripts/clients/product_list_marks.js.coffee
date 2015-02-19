@@ -14,8 +14,8 @@ class ProductListMarks
     mark = $button.data('mark')
     id = $button.parents('.image-item').data('id')
     $.ajax(
-      data: { id: id, product_item: { mark: mark } }
-      url: "/product_items/#{id}/mark"
+      data: { id: id, image_item: { mark: mark } }
+      url: "/image_items/#{id}/mark"
       type: 'PATCH'
       success: (data)=>
         @onRequestSuccess($button, data)
