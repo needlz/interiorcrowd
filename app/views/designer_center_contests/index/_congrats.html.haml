@@ -8,4 +8,4 @@
     .col-xs-2= t('designer_center.contests_preview.price')
     .col-xs-2= t('designer_center.contests_preview.days_left_to_enter')
   .row.joinContestBody
-    = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @current_contests }
+    = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @invited_contests }

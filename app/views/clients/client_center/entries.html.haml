@@ -1,5 +1,7 @@
 - content_for :head do
   = javascript_include_tag 'clients/entries'
+  - if @won_contest_request && @won_contest_request.fulfillment_editing?
+    = javascript_include_tag 'clients/product_list_marks'
   :javascript
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }

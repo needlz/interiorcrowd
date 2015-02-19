@@ -90,3 +90,12 @@ input[type="radio"].smallRadio + label span {
 .btnGroupComments li a {
   padding: 10px 19px!important;
 }
+
+.image-items{
+  .markOk.active{
+    background-position: bottom left;
+  }
+  .markRemove.active{
+    background-position: bottom right;
+  }
+}

@@ -576,17 +576,19 @@ en:
         draft: Not submitted
         submitted: Concept board submitted
         fulfillment: Fulfillment period
+        fulfillment_ready: Fulfillment period
         closed: Closed
     respond_view:
       edit_button: Edit
-      back: < Back
+      back: Back
+      go_back_and_edit: Go back and edit
     respond:
       see_more: See More
       responding_to: Responding to
       back: Exit without saving
       done: Done
       save_and_preview: Save my work & preview
-      submit: Submit >
+      submit: Submit
       submit_design: Submit My Design
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept board

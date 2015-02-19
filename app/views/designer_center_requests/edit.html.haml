@@ -1,5 +1,6 @@
 - content_for :head do
   = javascript_include_tag 'designer_center_requests/show'
+  = javascript_include_tag 'designer_center_requests/products_list'
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   = render partial: 'shared/setup_uploadify'
   :javascript
@@ -18,12 +19,25 @@
         .col-md-8.disablePadding
           .initialImage
             = render partial: 'shared/moodboard', locals: { request: @request }
-            = link_to t('designer_center.edit.upload_new'), designer_center_response_path, :remote => true, class: 'darkBorderBtn editMoodboardBtn'
-          = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.products_list'), image_texts: ['This table would be perfect for you.', '.....', '.....'] }
-          = render partial: 'designer_center_requests/edit/image_block', locals: {editable: true, title: t('designer_center.edit.similar_styles'), image_texts: ['Provide details on why you chose this. ( e.g, If you have room in your budget, this piece will make your space amazing. It is an investment, but I feel that it will be worth it to have a high quality chair. )', '.....', '.....'] }
+            = link_to t('designer_center.edit.upload_new'),
+                designer_center_response_path,
+                remote: true,
+                class: 'darkBorderBtn editMoodboardBtn'
+          - if @request.fulfillment_editing?
+            = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+              .image-items
+                .products-list
+                  = render partial: 'designer_center_requests/edit/image_block',
+                      locals: {editable: true,
+                        title: t('designer_center.edit.products_list'),
+                        image_list_name: :product_items,
+                        contest_request: @request }
+
         .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
           = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-          = render partial: 'designer_center_requests/edit/comments', locals: { request: @request, comments: @request.comments }
-        = render partial: 'designer_center_requests/footer_buttons'
+          - if @request.commenting_enabled?
+            = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
+                comments: @request.comments }
+        = render partial: 'designer_center_requests/editing_footer_buttons'
 
 = render partial: 'designer_center/layout'

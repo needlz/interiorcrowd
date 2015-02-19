@@ -70,7 +70,7 @@ RSpec.describe ProductItemsController do
       }.merge(options)
     end
 
-    let(:product_item){ Fabricate(:product_item, contest_request: contest_request) }
+    let(:product_item){ Fabricate(:product_item, contest_request: contest_request, mark: 'ok') }
 
     context 'logged in as designer' do
       before do
@@ -85,6 +85,30 @@ RSpec.describe ProductItemsController do
         expect(product_item.image_id).to eq params[:product_item][:image_id].to_i
       end
     end
-
   end
+
+  describe 'PATCH mark' do
+    let(:new_mark){ 'remove' }
+
+    def generate_params
+      { product_item:
+            { mark: new_mark },
+        id: product_item.id
+      }
+    end
+
+    let(:product_item){ Fabricate(:product_item, contest_request: contest_request, mark: 'ok') }
+
+    before do
+      sign_in(client)
+    end
+
+    it 'updates mark' do
+      params = generate_params
+      patch :mark, params
+      product_item.reload
+      expect(product_item.mark).to eq new_mark
+    end
+  end
+
 end
