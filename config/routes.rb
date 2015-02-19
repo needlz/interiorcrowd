@@ -73,6 +73,7 @@ InteriorC::Application.routes.draw do
         get 'entries', to: 'clients#entries', as: 'entries'
         get 'brief', to: 'clients#brief', as: 'brief'
         get 'profile', to: 'clients#profile', as: 'profile'
+        get 'pictures_dimension', to: 'clients#pictures_dimension'
       end
     end
 

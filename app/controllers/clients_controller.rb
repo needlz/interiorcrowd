@@ -75,6 +75,13 @@ class ClientsController < ApplicationController
     render nothing: true
   end
 
+  def pictures_dimension
+    @contest = @client.last_contest
+    @contest_view = ContestView.new(@contest)
+    @navigation = Navigation::ClientCenter.new(:entries)
+    render 'clients/client_center/pictures_dimension'
+  end
+
   private
 
   def create_contest(user_id)
