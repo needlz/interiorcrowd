@@ -1,25 +1,25 @@
 .row.marg-top20
-  .col-md-3.disablePadding.text-center
-    = image_tag 'profileImg.png'
-    %p.designerName= contest_request.designer.name
-  .col-md-9
-    .row
-      .col-md-12
-        %p.designerName= t('designer_center.final_upload.note_for_client')
-        = text_area_tag 'consumer-note',
-            nil,
-            class: 'consumerNoteTextarea',
-            placeholder: t('designer_center.final_upload.note_for_client_placeholder')
-        = render partial: 'shared/moodboard', locals: { request: contest_request }
-        %p.grayP14.marg-top10
-          %i= t('designer_center.final_upload.file_info')
-        = link_to t('designer_center.final_upload.upload'), '#', class: 'darkBorderBtn uploadFinalDesignBtn font20'
-        %p.marg-top20.font16.makeMeBlack.makeMeBold= t('designer_center.final_upload.upload_description')
-        = text_area_tag 'consumer-note', nil, class: 'consumerNoteTextarea'
-        %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')
-        - product_items.each do |product_item|
-          = render partial: 'designer_center_requests/edit/product_item', locals: { product_item: product_item }
+  = form_for contest_request, url: designer_center_response_path(id: contest_request.id) do |f|
+    .col-md-3.disablePadding.text-center
+      = image_tag 'profileImg.png'
+      %p.designerName= contest_request.designer.name
+    .col-md-9
+      .row
+        .col-md-12
+          %p.designerName= t('designer_center.final_upload.note_for_client')
+          = f.text_area :final_note,
+              class: 'consumerNoteTextarea',
+              placeholder: t('designer_center.final_upload.note_for_client_placeholder')
+          = render partial: 'shared/moodboard', locals: { request: contest_request }
+          %p.grayP14.marg-top10
+            %i= t('designer_center.final_upload.file_info')
+          = link_to t('designer_center.final_upload.upload'), '#', class: 'darkBorderBtn uploadFinalDesignBtn font20'
+          %p.marg-top20.font16.makeMeBlack.makeMeBold= t('designer_center.final_upload.upload_description')
+          = f.text_area :pull_together_note, class: 'consumerNoteTextarea'
+          %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')
+          - product_items.each do |product_item|
+            = render partial: 'designer_center_requests/edit/product_item', locals: { product_item: product_item }
 
-  .col-md-12.disablePadding.marg-top20
-    .hLine
-  = render :partial => 'designer_center_requests/edit/bottom_buttons'
+    .col-md-12.disablePadding.marg-top20
+      .hLine
+    = render :partial => 'designer_center_requests/edit/bottom_buttons'

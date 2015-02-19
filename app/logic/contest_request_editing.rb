@@ -2,12 +2,13 @@ class ContestRequestEditing
 
   def initialize(options)
     @request = options[:request]
-    @contest_request_params = options[:contest_request]
+    @contest_request_params = options[:contest_request_options]
+    @contest_request_attributes = options[:contest_request_attributes]
   end
 
   def perform
     update_image
-    update_text
+    update_attributes
     update_status
     update_image_items
   end
@@ -22,15 +23,16 @@ class ContestRequestEditing
     end
   end
 
-  def update_text
-    if contest_request_params[:feedback]
-      request.update(feedback: contest_request_params[:feedback])
+  def update_attributes
+    if contest_request_attributes.present?
+      request.update_attributes!(contest_request_attributes)
     end
   end
 
   def update_status
     return request.submit! if contest_request_params[:status] == 'submitted'
     request.ready_fulfillment! if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
+    request.finish! if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
   end
 
   def update_product_list
@@ -74,6 +76,6 @@ class ContestRequestEditing
     ImageItemsEditing.new(request, contest_request_params).perform
   end
 
-  attr_reader :request, :contest_request_params
+  attr_reader :request, :contest_request_params, :contest_request_attributes
 
 end
