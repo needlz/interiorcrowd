@@ -7,9 +7,9 @@
           text: '',
           id: '',
           image_id: '',
-          image_path: '/assets/placeholder.jpg',
+          image_path: '',
           image_list_name: image_list_name,
-          mark: '' }
+          checked_mark: '' }
   - contest_request.send(image_list_name).includes(:image).each do |item|
     = render partial: 'designer_center_requests/edit/image_content',
         locals: { editable: editable,
@@ -18,7 +18,7 @@
           image_id: item.image.id,
           image_path: item.image.image.url(:medium),
           image_list_name: image_list_name,
-          mark: item.mark }
+          checked_mark: item.mark }
 - if editable
   = file_field_tag 'image[image]', class: 'hidden', id: image_list_name
   = hidden_field_tag "contest_request[#{ image_list_name }][image_ids]", contest_request.send(image_list_name).includes(:image).map(&:image).map(&:id).join(',')

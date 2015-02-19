@@ -7,6 +7,6 @@
     %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]" }= text
   - else
     %p.productsMoodboardAbove= text
-  - if mark.present?
-    %span.mark.markOk{ data: { mark: 'ok' }, class: ('active' if mark == 'ok') }
-    %span.mark.markRemove{ data: { mark: 'remove' }, class: ('active' if mark == 'remove') }
+  - if checked_mark.present?
+    - ImageItem::MARKS.each do |mark|
+      %span.mark{ data: { mark: mark }, class: ImageItemMarkView.new(mark, checked_mark).css_class }

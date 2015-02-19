@@ -15,6 +15,8 @@ class ImageItemsEditing
     end
   end
 
+  private
+
   def gather_attributes(kind)
     image_ids = contest_request_options[kind][:image_ids].split(',')
     attributes = image_ids.each_with_index.map do |image_id, index|
@@ -35,17 +37,16 @@ class ImageItemsEditing
     product_items_attributes.each do |product_item_attributes|
       if product_item_attributes[:id].present?
         product_item = contest_request.send(kind).find(product_item_attributes[:id])
-        set_image_item_kind(product_item_attributes[:attributes], kind)
-        assign_attributes(product_item, product_item_attributes[:attributes])
-        product_item.update_attributes!(product_item_attributes[:attributes])
+        update_item(product_item, product_item_attributes[:attributes])
       else
         contest_request.send(kind).create!(product_item_attributes[:attributes])
       end
     end
   end
 
-  def set_image_item_kind(attributes, kind)
-    attributes.merge!({ kind: kind.to_s })
+  def update_item(product_item, attributes)
+    assign_attributes(product_item, attributes)
+    product_item.update_attributes!(attributes)
   end
 
   def assign_attributes(product_item, attributes)

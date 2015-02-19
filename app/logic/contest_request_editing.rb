@@ -29,7 +29,7 @@ class ContestRequestEditing
   end
 
   def update_status
-    request.submit! if contest_request_params[:status] == 'submitted'
+    return request.submit! if contest_request_params[:status] == 'submitted'
     request.ready_fulfillment! if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
   end
 
