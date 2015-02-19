@@ -1,6 +1,6 @@
 .row.my-menu.picture-and-dimensions-reminder
   .col-md-6.no-padding-right.logo-pc.text-center-md.text-center-xs.text-center-sm.description
-    .top-nav.pull-down
+    .top-nav
       %label.reminder
         %b Don’t Forget Your Picture & Dimensions
       %label.contact
@@ -9,5 +9,7 @@
     %button.btn7.btn-need{:type => "button"}
       %b What do I need
     .clearfix.visible-md.visible-xs.visible-sm
-    %button.btn7.btn-ready{:type => "button"}
-      %b I’m ready to go
+    %a{href: pictures_dimension_client_center_index_path}
+      %button.btn7.btn-ready
+        %b I’m ready to go
+
