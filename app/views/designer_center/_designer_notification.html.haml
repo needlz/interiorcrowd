@@ -1,3 +1,4 @@
-%span{:class => "#{ notification.color }Label"}
-%a{ href: notification.href }
-  %p.designerNotification= notification.text
+.notification{type: notification.type}
+  %span{:class => "#{ notification.color }Label"}
+  %a{ href: notification.href }
+    %p.designerNotification= notification.text
