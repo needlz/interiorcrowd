@@ -1,11 +1,14 @@
+- content_for :head do
+  = javascript_include_tag 'designer_center_requests/updates'
+
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60
     .row
-      .col-md-12.no-x-padding
-        %a.btn.invitesBtn{:href => "#"}= t('designer_center.updates.invites')
-        %a.btn.commentsBtn{:href => "#"}= t('designer_center.updates.comments')
-        %a.btn.winsBtn{:href => "#"}= t('designer_center.updates.wins')
-        %a.btn.notificationsBtn{:href => "#"}= t('designer_center.updates.notifications')
+      .col-md-12.no-x-padding.updates-notifications
+        %a.btn.invitesBtn{type: 'invite', reverse: true}= t('designer_center.updates.invites')
+        %a.btn.commentsBtn{type: 'comment'}= t('designer_center.updates.comments')
+        %a.btn.winsBtn{type: 'win'}= t('designer_center.updates.wins')
+        %a.btn.notificationsBtn{type: 'notification'}= t('designer_center.updates.notifications')
 
     .row.marg-top20
       .col-md-8.no-x-padding

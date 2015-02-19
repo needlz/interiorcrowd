@@ -19,6 +19,10 @@ module DesignerNotifications
       designer_center_contest_path(id: contest.id)
     end
 
+    def type
+      'invite'
+    end
+
     private
 
     attr_reader :designer_invitation, :contest

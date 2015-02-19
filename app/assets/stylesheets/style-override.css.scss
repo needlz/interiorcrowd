@@ -51,3 +51,29 @@
   color: #231f20;
   font-size: 18px;
 }
+
+.invitesBtn {
+  color: #5bbff8;
+  background: #FFF;
+  border: 1px solid #5bbff8;
+}
+
+.invitesBtn[reverse] {
+  color: #FFF;
+  background: #5bbff8;
+}
+
+.commentsBtn[reverse] {
+  color: #FFF;
+  background: #63cf4e;
+}
+
+.winsBtn[reverse] {
+  color: #FFF;
+  background: #e5432d;
+}
+
+.notificationsBtn[reverse] {
+  color: #FFF;
+  background: #e4b701;
+}

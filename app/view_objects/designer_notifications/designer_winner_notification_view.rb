@@ -19,6 +19,10 @@ module DesignerNotifications
       edit_designer_center_response_path(id: designer_notification.contest_request_id)
     end
 
+    def type
+      'win'
+    end
+
     private
 
     attr_reader :designer_notification, :contest
