@@ -388,7 +388,7 @@ en:
         Now that you’ve been chosen, the collaborative process begins. Please give your client as
         much detail on your design as possible - adding comments as to why you’ve chosen certain
         items.
-      products_list: Products List
+      products_list: Product List
       similar_styles: Similar Styles
       comments: Comments
       all: All
@@ -567,6 +567,7 @@ en:
         listed_as: Currently listed as
         to_do: To&nbsp;Do
         update_moodboard: Update Concept Board
+        edit_concept_board: Edit concept board
         send_note: Send Note to Client
         create_shopping_list: Create Shoppping List
         create_3d_rendering: Create 3D rendering
@@ -596,11 +597,11 @@ en:
       how_to_communicate: How do I communicate with the client?
       vendors: Which vendors can I use?
     my_contests:
-      design_profile: See the client design profile
+      design_profile: See client's Style Profile
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
-      hint: 'Hint: be sure that you review the %{link} before starting'
-      hint_link: client's design profile
+      hint: 'Hint: Remember to review the %{link} first'
+      hint_link: client's Style Profile
       type: 'Type :'
       room: 'Room :'
       design_style: 'Design Style :'
@@ -766,8 +767,8 @@ en:
     log_in: Log in
     remember_me: Remember me
     client:
-      title: CLIENT LOG IN
+      title: CLIENT LOGIN
     designer:
-      title: DESIGNER LOG IN
+      title: DESIGNER LOGIN
       sign_up: Sign up
       dont_have_account: Don't have an account?
