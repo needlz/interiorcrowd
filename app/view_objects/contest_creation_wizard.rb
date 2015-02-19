@@ -28,7 +28,7 @@ class ContestCreationWizard
 
   # design categories
   def available_design_categories
-    @available_design_categories ||= DesignCategory.available
+    @available_design_categories ||= DesignCategory.available.map { |category| DesignCategoryView.new(category) }
   end
 
   def design_categories_checkboxes

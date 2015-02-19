@@ -105,7 +105,8 @@ class ContestView
   def initialize_from_options(options)
     contest_options = ContestOptions.new(options)
     contest_params = contest_options.contest
-    @category = DesignCategory.find_by_id(contest_params[:design_category_id])
+    design_category = DesignCategory.find_by_id(contest_params[:design_category_id])
+    @category = DesignCategoryView.new(design_category)
     @design_area = DesignSpace.find_by_id(contest_params[:design_space_id])
     @designer_level = DesignerLevel.find_by_id(contest_options.designer_level)
     @appeal_scales = AppealScale.from(contest_options.appeals)
@@ -127,7 +128,7 @@ class ContestView
   end
 
   def initialize_from_contest(contest)
-    @category = contest.design_category
+    @category = DesignCategoryView.new(contest.design_category)
     @design_area = contest.design_space
     @designer_level = contest.client.designer_level
     @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))

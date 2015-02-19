@@ -1,4 +1,4 @@
 - value_html = capture do
-  %span.selection= @contest_view.category.localized_name
+  %span.selection= @contest_view.category.name
 = render(partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.design_categories'),
                                                     value: value_html })

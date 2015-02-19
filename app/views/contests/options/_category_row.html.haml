@@ -4,15 +4,15 @@
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
   = label_tag("design_brief_design_category_#{ design_category.id }") do
     %span.text-price
-      %b #{ design_category.localized_name }     $#{design_category.price}
+      %b #{ design_category.name }
     %br
-    %span.category-description
-      %i= design_category.localized_description
+    %span.category-description.font20
+      %i= design_category.description
 
 .clearfix
 .img-block
-  .col-md-6.no-padding-left.no-padding-right
-    %img.img-responsive{ src: "/assets/#{design_category.before_picture}" }
-  .col-md-6.no-padding-left.no-padding-right
-    %img.img-responsive{ src: "/assets/#{design_category.after_picture}" }
+  .col-md-6.no-padding-right
+    %img.img-responsive{ src: "/assets/#{design_category.picture}" }
+  .col-md-6.no-padding-left.no-padding-right.tableCell
+    %p= design_category.quote
   .clearfix
