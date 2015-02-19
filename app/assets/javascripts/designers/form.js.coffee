@@ -65,7 +65,7 @@ class @DesignerSignUp
       thumbs:
         container: '#portfolio_pictures_preview .container'
         selector: '#portfolio_pictures_ids'
-        theme: 'new'
+        theme: RemovableThumbsTheme
       I18n: I18n.examples
 
   validLink: (link)->

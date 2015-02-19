@@ -48,14 +48,15 @@
     margin-top: 32px;
   }
 }
-.emailLabelPrivateBeta{
-  margin-top: -6px!important;
-  margin-bottom: 27px!important;
-  padding-bottom: 0px!important;
+
+.emailLabelPrivateBeta {
+  margin-top: -6px !important;
+  margin-bottom: 27px !important;
+  padding-bottom: 0px !important;
 }
 
 #client_btns {
-  text-align:left ;
+  text-align: left;
 }
 
 .navigation-btn:hover {
@@ -65,13 +66,15 @@
     color: #fff;
   }
 }
-.bottom20{
+
+.bottom20 {
   padding-bottom: 20px;
 }
 
 .logo-pc.username {
   padding-bottom: 7px;
 }
+
 .commentSent {
   visibility: hidden;
 }
@@ -87,6 +90,16 @@ input[type="radio"].smallRadio, input[type="radio"].big-radio {
 input[type="radio"].smallRadio + label span {
   background-repeat: no-repeat;
 }
+
 .btnGroupComments li a {
-  padding: 10px 19px!important;
+  padding: 10px 19px !important;
+}
+
+.image-items {
+  .markOk.active {
+    background-position: bottom left;
+  }
+  .markRemove.active {
+    background-position: bottom right;
+  }
 }

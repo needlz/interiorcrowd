@@ -85,7 +85,7 @@ class @PortfolioEditor
       thumbs:
         container: '#portfolio_pictures_preview .container'
         selector: '#portfolio_pictures_ids'
-        theme: 'new'
+        theme: RemovableThumbsTheme
         onRemoved: @onPictureRemoved
 
     PicturesUploadButton.init
@@ -96,7 +96,7 @@ class @PortfolioEditor
       thumbs:
         container: '.personal-picture .thumbs'
         selector: '.personal-picture #personal_picture_id'
-        theme: 'new'
+        theme: RemovableThumbsTheme
 
   bindSchoolCheckbox: ->
     handler = (event)=>

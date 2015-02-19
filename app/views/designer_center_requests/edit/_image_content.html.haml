@@ -1,8 +1,12 @@
-.col-md-4.relative
+.col-md-4.relative.thumb{ data: { id: image_id } }
   - if editable
     %img.small_close{:src => "/assets/small-close.png"}/
-  %img.productListIMG{:src => "/assets/placeholder.jpg"}/
+  %img.productListIMG.main-image{:src => image_path}/
+  = hidden_field_tag "contest_request[#{ image_list_name }][ids][]", id
   - if editable
-    %textarea.productsMoodboardAbove= text
+    %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]" }= text
   - else
     %p.productsMoodboardAbove= text
+  - if checked_mark.present?
+    - ImageItem::MARKS.each do |mark|
+      %span.mark{ data: { mark: mark }, class: ImageItemMarkView.new(mark, checked_mark).css_class }

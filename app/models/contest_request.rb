@@ -44,10 +44,12 @@ class ContestRequest < ActiveRecord::Base
   belongs_to :contest
   belongs_to :lookbook
   has_many :comments, class_name: 'ConceptBoardComment'
-  has_many :product_items
+  has_many :image_items
+  has_many :product_items, ->{ product_items }, class_name: 'ImageItem'
+  has_many :similar_styles, ->{ similar_styles }, class_name: 'ImageItem'
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
-  scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment']) }
+  scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
   scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
@@ -89,6 +91,18 @@ class ContestRequest < ActiveRecord::Base
     end
   end
 
+  def fulfillment_editing?
+    fulfillment? || fulfillment_ready? || fulfillment_approved?
+  end
+
+  def commenting_enabled?
+    fulfillment_editing?
+  end
+
+  def basic_editing_only?
+    draft?
+  end
+
   private
 
   def contest_status
@@ -98,7 +112,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def allowed_answer
-    if !answerable? && answer.present?
+    if !answerable? && answer.present? && answer_changed?
       errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
     end
   end

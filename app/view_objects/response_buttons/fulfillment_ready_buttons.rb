@@ -1,5 +1,5 @@
 module ResponseButtons
-  class SubmittedButtons < Base
+  class FulfillmentReadyButtons < Base
 
     def all
       [{ caption: I18n.t('designer_center.responses.item.update_moodboard'),

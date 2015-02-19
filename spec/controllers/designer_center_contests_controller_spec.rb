@@ -16,6 +16,26 @@ RSpec.describe DesignerCenterContestsController do
       get :index
       expect(response).to render_template(:index)
     end
+
+    describe 'list of contests the designer was invited to' do
+      context 'designer has no invitations' do
+        it 'is empty' do
+          get :index
+          expect(assigns(:invited_contests)).to be_empty
+        end
+      end
+
+      context 'designer has invitations' do
+        before do
+          Fabricate(:designer_invite_notification, user_id: designer.id, contest: contest)
+        end
+
+        it 'returns list of invitation contests' do
+          get :index
+          expect(assigns(:invited_contests).map(&:id)).to match_array [contest.id]
+        end
+      end
+    end
   end
 
   describe 'GET show' do

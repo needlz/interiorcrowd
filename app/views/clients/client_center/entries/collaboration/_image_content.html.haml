@@ -1,7 +1,8 @@
-.col-md-4.relative
-  %img.productListIMG{:src => "/assets/placeholder.jpg"}/
+.col-md-4.relative.image-item{ data: { id: id } }
+  %img.productListIMG{ src: image_path }/
   - if choosable
     %p.text-right.marg-top10
-      %span.mark.markOk
-      %span.mark.markRemove
+      - ImageItem::MARKS.each do |mark|
+        %span.mark{ data: { mark: mark },
+          class: ImageItemMarkView.new(mark, checked_mark).css_class } }
   %p.productsMoodboardAbove= text

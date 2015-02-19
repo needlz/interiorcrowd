@@ -1,10 +1,25 @@
 %p.font20Bold.marg-top20= title
 .hLine10
-.row.marg-top20
-  - if editable
-    .col-md-12
-      %p.grayP14= t('designer_center.edit.upload_new')
-  - image_texts.each do |text|
-    = render partial: 'designer_center_requests/edit/image_content', locals: {editable: editable, text: text}
+.row.marg-top20.thumbs
+  .template
+    = render partial: 'designer_center_requests/edit/image_content',
+        locals: { editable: editable,
+          text: '',
+          id: '',
+          image_id: '',
+          image_path: '',
+          image_list_name: image_list_name,
+          checked_mark: '' }
+  - contest_request.send(image_list_name).includes(:image).each do |item|
+    = render partial: 'designer_center_requests/edit/image_content',
+        locals: { editable: editable,
+          text: item.text,
+          id: item.id,
+          image_id: item.image.id,
+          image_path: item.image.image.url(:medium),
+          image_list_name: image_list_name,
+          checked_mark: item.mark }
 - if editable
-  %a.darkBorderBtn{:href => "#"}= t('designer_center.edit.upload')
+  = file_field_tag 'image[image]', class: 'hidden', id: image_list_name
+  = hidden_field_tag "contest_request[#{ image_list_name }][image_ids]", contest_request.send(image_list_name).includes(:image).map(&:image).map(&:id).join(',')
+  %a.darkBorderBtn.upload-button{:href => "#"}= t('designer_center.edit.upload')

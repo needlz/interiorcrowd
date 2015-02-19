@@ -15,6 +15,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def edit
     @request = @designer.contest_requests.find(params[:id])
+    return redirect_to designer_center_response_path(id: @request.id) if @request.basic_editing_only?
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
   end
@@ -26,8 +27,8 @@ class DesignerCenterRequestsController < ApplicationController
 
   def update
     request = ContestRequest.find(params[:id])
-    contest_editing = ContestRequestEditing.new({  request: request,
-                                                    contest_request: params['contest_request']
+    contest_editing = ContestRequestEditing.new({ request: request,
+                                                  contest_request: params[:contest_request]
                                                  })
     contest_editing.perform
 
