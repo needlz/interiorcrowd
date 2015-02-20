@@ -28,7 +28,8 @@ class DesignerCenterRequestsController < ApplicationController
   def update
     request = ContestRequest.find(params[:id])
     contest_editing = ContestRequestEditing.new({ request: request,
-                                                  contest_request: params[:contest_request]
+                                                  contest_request_options: params[:contest_request],
+                                                  contest_request_attributes: response_params
                                                  })
     contest_editing.perform
 
@@ -70,7 +71,7 @@ class DesignerCenterRequestsController < ApplicationController
   private
 
   def response_params
-    params.require(:contest_request).permit(:feedback)
+    params.require(:contest_request).permit(:feedback, :final_note, :pull_together_note)
   end
 
   def set_designer

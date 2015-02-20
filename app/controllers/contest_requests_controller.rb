@@ -1,6 +1,8 @@
 class ContestRequestsController < ApplicationController
   before_filter :check_designer, only: [:create, :save_lookbook]
-  before_filter :check_client, only: [:answer]
+  before_filter :check_client, only: [:answer, :download]
+  before_filter :check_contest_owner, only: [:answer, :download]
+  before_filter :set_request, only: [:answer, :approve_fulfillment, :add_comment, :download]
 
   def create
     @crequest = ContestRequest.new(params[:contest_request])
@@ -71,19 +73,18 @@ class ContestRequestsController < ApplicationController
   end
 
   def add_comment
-    comment = ConceptBoardComment.create(params['comment'].merge({user_id: current_user.id, role: current_user.role }))
+    return raise_404 unless current_user.can_comment_contest_request?(@request)
+    comment = ConceptBoardComment.create!(params['comment'].merge({user_id: current_user.id, role: current_user.role }))
     render json: { comment: comment, user_name: current_user.name }
   end
 
   def answer
-    request = ContestRequest.find(params[:id])
-    replied = request.reply(params[:answer], session[:client_id])
+    replied = @request.reply(params[:answer], session[:client_id])
     render json: { answered: replied }
   end
 
   def approve_fulfillment
-    request = ContestRequest.find(params[:id])
-    approved = request.approve
+    approved = @request.approve
     render json: { approved: approved }
   end
 
@@ -93,5 +94,21 @@ class ContestRequestsController < ApplicationController
     @request = ContestRequest.find(params[:id])
     @show_answer_options = @request.answerable?
     @navigation = Navigation::ClientCenter.new(:entries)
+  end
+
+  def download
+    return raise_404 unless current_user.can_download_concept_board?(@request)
+    redirect_to @request.download_url
+  end
+
+  private
+
+  def check_contest_owner
+    @client = Client.find(session[:client_id])
+    raise_404 unless @client
+  end
+
+  def set_request
+    @request = ContestRequest.find(params[:id])
   end
 end

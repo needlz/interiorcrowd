@@ -10,7 +10,7 @@
         = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: '' }
       - portfolio.pictures.try(:map) do |picture|
         .col-md-3.novice.thumb.portfolio-item{ data: { id: picture.id }, class: ('active' if picture.id == portfolio.background_id) }
-          = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: picture.image.url(:medium) }
+          = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: picture.medium_size_url }
   .clearfix
   .col-md-6.no-x-padding.marg-top40
     %input#portfolio_pictures.hidden{ name: 'image[image]', type: 'file', multiple: 'multiple' }

@@ -21,11 +21,11 @@
 - else
   .row.marg-top20
     .col-md-4
-      = image_tag 'placeholder.jpg', class: 'productListIMG'
+      = image_tag product_item.image.medium_size_url, class: 'productListIMG'
     .col-md-8
-      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.product_name')
-      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.brand')
-      %p.font16.makeMeBlack.lineHeight25.margin0= t('designer_center.final_upload.price')
-      = link_to 'www.wayfair.com/chair', 'www.wayfair.com/chair', class: 'font20 blueLink'
+      %p.font16.makeMeBlack.lineHeight25.margin0= product_item.name
+      %p.font16.makeMeBlack.lineHeight25.margin0= product_item.brand
+      %p.font16.makeMeBlack.lineHeight25.margin0= product_item.price
+      = link_to product_item.link.to_s, product_item.link.to_s, class: 'font20 blueLink'
       %br
       = link_to t('designer_center.final_upload.edit') , '#', class: 'editProductItemBtn'

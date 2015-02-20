@@ -37,4 +37,4 @@ class @ConceptBoardUploader
 
   @changeImageSource: ->
     newSource = $('.editable-mode img:last').attr('src')
-    $(".initialImage img").attr('src', newSource)
+    $(".initialImage img").attr({ src: newSource, alt: newSource})

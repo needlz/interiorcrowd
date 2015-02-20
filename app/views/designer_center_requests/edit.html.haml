@@ -2,6 +2,8 @@
   = javascript_include_tag 'designer_center_requests/show'
   = javascript_include_tag 'designer_center_requests/products_list'
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
+  - if @request.fulfillment_approved?
+    = javascript_include_tag 'designer_center_requests/fulfillment_approved_edit'
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
@@ -9,8 +11,9 @@
 
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60
-    - if params[:final]
-      = render 'designer_center_requests/edit/final_upload'
+    - if @request.fulfillment_approved?
+      = render partial: 'designer_center_requests/edit/final_upload',
+          locals: { contest_request: @request, product_items: @request.product_items.includes(:image) }
     - else
       .row.marg-top30.response{ data: { id: @request.id } }
         .col-md-8.disablePadding

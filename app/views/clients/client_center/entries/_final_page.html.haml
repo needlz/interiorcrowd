@@ -34,5 +34,6 @@
     .col-md-10.col-md-offset-1.no-x-padding
       = render :partial => 'clients/client_center/entries/final_design', locals: {request: request}
       .hLine10
-      = render :partial => 'clients/client_center/entries/design_item'
+      - request.product_items.each do |product_item|
+        = render :partial => 'clients/client_center/entries/design_item', locals: { product_item: product_item }
       = render :partial => 'clients/client_center/entries/paginate'

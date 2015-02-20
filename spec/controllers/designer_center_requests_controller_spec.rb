@@ -84,6 +84,23 @@ RSpec.describe DesignerCenterRequestsController do
       patch :update, product_list_params.merge({ id: submitted_request.id })
       expect(submitted_request.product_items.count).to eq 2
     end
+
+    context 'fulfillment approved' do
+      let(:request){ Fabricate(:contest_request, designer: designer, contest: contest, status: 'fulfillment_approved') }
+
+      it 'updates final note' do
+        new_final_note = 'new note'
+        patch :update, id: request.id, contest_request: { final_note: new_final_note }
+        expect(request.reload.final_note).to eq new_final_note
+      end
+
+      it 'updates pull together note' do
+        new_pull_together_note = 'new pull together note'
+        patch :update, id: request.id, contest_request: { pull_together_note: new_pull_together_note }
+        expect(request.reload.pull_together_note).to eq new_pull_together_note
+      end
+    end
+
   end
 
   describe 'GET new' do

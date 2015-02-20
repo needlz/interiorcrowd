@@ -69,7 +69,7 @@ class ContestsController < ApplicationController
     @image = Image.new(params[:image])
     
     if @image.save
-      render json: @image.image.url(:thumb)
+      render json: @image.medium_size_url
     else
       render json: { msg: "Upload Failed", error: @image.error }
     end

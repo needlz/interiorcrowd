@@ -31,4 +31,12 @@ class Client < ActiveRecord::Base
     four_digits.presence || card_number
   end
 
+  def can_comment_contest_request?(contest_request)
+    contest_request.contest_owner?(self)
+  end
+
+  def can_download_concept_board?(contest_request)
+    contest_request.contest_owner?(self)
+  end
+
 end
