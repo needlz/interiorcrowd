@@ -303,10 +303,10 @@ en:
       filter_by: 'Filter by:'
       responses_filter_all: All
       more_features:
-        title: Let’s explore more our feature.
-        get_inspired: Get Inspired
-        see_example: See example
-        share_brief: Share brief <br> with your friend
+        title: Want to explore some more?
+        get_inspired: Get inspired
+        see_example: See examples
+        share_brief: Share brief <br> with a friend
       preferences_retailers:
         anthropologie_home: Anthropologie Home
         ballard_designs: Ballard Designs
