@@ -16,7 +16,7 @@
           text: item.text,
           id: item.id,
           image_id: item.image.id,
-          image_path: item.image.image.url(:medium),
+          image_path: item.image.medium_size_url,
           image_list_name: image_list_name,
           checked_mark: item.mark }
 - if editable

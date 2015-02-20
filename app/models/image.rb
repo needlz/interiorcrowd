@@ -10,7 +10,6 @@ class Image < ActiveRecord::Base
   has_attached_file :image,
                     styles: lambda { |im|
                       { medium: ['200x200>', :jpg],
-                        thumb: ['100x100>', :jpg],
                         original_size: ['#{a.instance.width}x#{a.instance.height}>', :jpg] }
                     },
                     convert_options: {
@@ -71,9 +70,17 @@ class Image < ActiveRecord::Base
     {
       name: image_file_name,
       size: image_file_size,
-      url: image.url(:medium),
+      url: medium_size_url,
       id: id
     }
+  end
+
+  def medium_size_url
+    image.url(:medium)
+  end
+
+  def original_size_url
+    image.url(:original_size)
   end
 
 end

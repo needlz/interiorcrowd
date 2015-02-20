@@ -21,7 +21,7 @@
 - else
   .row.marg-top20
     .col-md-4
-      = image_tag product_item.image.image.url(:medium), class: 'productListIMG'
+      = image_tag product_item.image.medium_size_url, class: 'productListIMG'
     .col-md-8
       %p.font16.makeMeBlack.lineHeight25.margin0= product_item.name
       %p.font16.makeMeBlack.lineHeight25.margin0= product_item.brand

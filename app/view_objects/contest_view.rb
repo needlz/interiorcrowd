@@ -112,11 +112,11 @@ class ContestView
     @appeal_scales = AppealScale.from(contest_options.appeals)
     @desirable_colors = contest_params[:desirable_colors]
     @undesirable_colors = contest_params[:undesirable_colors]
-    @examples = contest_options.liked_example_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
+    @examples = contest_options.liked_example_ids.try(:map) { |example_id| Image.find(example_id).medium_size_url }
     @example_ids = contest_options.liked_example_ids
     @links = contest_options.example_links
     @dimensions = SpaceDimension.from(contest_params)
-    @space_pictures = contest_options.space_image_ids.try(:map) { |example_id| Image.find(example_id).image.url(:medium) }
+    @space_pictures = contest_options.space_image_ids.try(:map) { |example_id| Image.find(example_id).medium_size_url }
     @space_pictures_ids = contest_options.space_image_ids
     @space_budget_value = contest_params[:space_budget].to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
@@ -134,11 +134,11 @@ class ContestView
     @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
-    @examples = contest.liked_examples.map { |example| example.image.url(:medium) }
+    @examples = contest.liked_examples.map { |example| example.medium_size_url }
     @example_ids = contest.liked_examples.pluck(:id)
     @links = contest.liked_external_examples.pluck(:url)
     @dimensions = SpaceDimension.from(contest)
-    @space_pictures = contest.space_images.map { |space_image| space_image.image.url(:medium) }
+    @space_pictures = contest.space_images.map { |space_image| space_image.medium_size_url }
     @space_pictures_ids = contest.space_images.pluck(:id)
     @space_budget_value = contest.space_budget.to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]

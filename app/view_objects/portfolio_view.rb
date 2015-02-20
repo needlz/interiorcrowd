@@ -51,12 +51,12 @@ class PortfolioView
   end
 
   def personal_picture_url
-    portfolio.personal_picture ? portfolio.personal_picture.image.url(:medium) : '/assets/portfolio_profile_image.png'
+    portfolio.personal_picture ? portfolio.personal_picture.medium_size_url : '/assets/portfolio_profile_image.png'
   end
 
   def cover_picture_url
     return unless portfolio.background
-    portfolio.background.image.url(:original_size)
+    portfolio.background.original_size_url
   end
 
   def designer_name
@@ -64,7 +64,7 @@ class PortfolioView
   end
 
   def pictures_urls
-    portfolio.pictures.map { |picture| picture.image.url(:original_size) }
+    portfolio.pictures.map { |picture| picture.original_size_url }
   end
 
   def style_description

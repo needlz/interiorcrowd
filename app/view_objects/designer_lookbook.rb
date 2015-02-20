@@ -47,7 +47,7 @@ class DesignerLookbook
       lookbook_items.each do |item|
         image = item.image
         @ids << image.id
-        @paths << image.image.url(:medium)
+        @paths << image.medium_size_url
         @titles << item.description
       end
     end

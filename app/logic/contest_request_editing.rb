@@ -35,43 +35,6 @@ class ContestRequestEditing
     request.finish! if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
   end
 
-  def update_product_list
-    if contest_request[:product_items]
-      product_items_attributes = gather_product_items_attributes
-      clear_product_list(product_items_attributes)
-      update_product_items(product_items_attributes)
-    end
-  end
-
-  def gather_product_items_attributes
-    image_ids = contest_request[:product_items][:image_ids].split(',')
-    product_items_attributes = image_ids.each_with_index.map do |image_id, index|
-      { attributes:
-        { image_id: image_id,
-          text: contest_request[:product_items][:texts][index]
-        },
-        id: contest_request[:product_items][:ids][index]
-      }
-    end
-  end
-
-  def clear_product_list(product_items_attributes)
-    request.product_items.where.not(id: product_items_attributes.map{ |item| item[:id] }).destroy_all
-  end
-
-  def update_product_items(product_items_attributes)
-    product_items_attributes.each do |product_item_attributes|
-      if product_item_attributes[:id].present?
-        product_item = request.product_items.find(product_item_attributes[:id])
-        product_item.assign_attributes(product_item_attributes[:attributes])
-        product_item_attributes[:attributes].merge!({ mark: nil }) if product_item.image_id_changed?
-        product_item.update_attributes!(product_item_attributes[:attributes])
-      else
-        request.product_items.create!(product_item_attributes[:attributes])
-      end
-    end
-  end
-
   def update_image_items
     ImageItemsEditing.new(request, contest_request_params).perform
   end

@@ -27,7 +27,7 @@
         - @designer_images.split(',').each do |id|
           .col-md-3.novice.thumb.portfolio-item
             = render partial: 'contests/options/example_picture_thumb',
-                locals: { src: Image.find(id).image.url(:medium) }
+                locals: { src: Image.find(id).medium_size_url }
     .col-md-12.marg-top20
   .clearfix
   .col-md-6.no-x-padding.marg-top40
