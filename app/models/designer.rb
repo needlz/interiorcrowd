@@ -43,4 +43,8 @@ class Designer < ActiveRecord::Base
     designer_invite_notifications.exists?(contest_id: contest.id)
   end
 
+  def can_download_concept_board?(contest_request)
+    contest_request.designer == self
+  end
+
 end

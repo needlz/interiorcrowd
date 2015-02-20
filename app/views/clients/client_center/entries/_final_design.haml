@@ -1,5 +1,5 @@
 .final_moodboard.marg-top20
   = image_tag request.moodboard_image_path, id: 'final_moodboard'
   = image_tag 'final_design_badge.png', class: 'winnerBadge'
-  = link_to t('client_center.entries.space.download'), '#', class: 'darkBorderBtn font20'
+  = link_to t('client_center.entries.space.download'), download_contest_request_path(id: request.id), class: 'darkBorderBtn font20'
 %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')

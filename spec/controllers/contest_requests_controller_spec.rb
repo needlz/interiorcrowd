@@ -137,4 +137,26 @@ RSpec.describe ContestRequestsController do
       expect { get :show, id: 0 }.to raise_error
     end
   end
+
+  describe 'GET download' do
+    context 'not logged in' do
+      it 'redirects to client login' do
+        get :download, id: request.id
+        expect(response).to redirect_to client_login_sessions_path
+      end
+    end
+
+    context 'logged as the client' do
+      before do
+        sign_in(client)
+      end
+
+      it 'redirects to original file' do
+        stubbed_url = 'url'
+        allow_any_instance_of(ContestRequest).to receive(:download_url) { stubbed_url }
+        get :download, id: request.id
+        expect(response).to redirect_to stubbed_url
+      end
+    end
+  end
 end

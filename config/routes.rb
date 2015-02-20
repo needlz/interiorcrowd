@@ -29,6 +29,7 @@ InteriorC::Application.routes.draw do
         get 'save_lookbook'
         post 'answer'
         post 'approve_fulfillment'
+        get 'download'
       end
     end
 
