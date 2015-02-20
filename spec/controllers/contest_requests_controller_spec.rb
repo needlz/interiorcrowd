@@ -9,11 +9,11 @@ RSpec.describe ContestRequestsController do
   let(:designer) { Fabricate(:designer) }
   let(:request) { Fabricate(:contest_request, contest: contest, lookbook: Fabricate(:lookbook), designer: designer) }
 
-  before do
-    sign_in(client)
-  end
-
   describe 'POST answer' do
+    before do
+      sign_in(client)
+    end
+
     let(:answered) { JSON.parse(response.body)['answered'] }
 
     context 'contest in "winner selection" state' do
@@ -53,9 +53,9 @@ RSpec.describe ContestRequestsController do
       end
 
       it 'does not save if user is not logged as contest creator' do
-        session[:client_id] = 0
+        session[:client_id] = nil
         post :answer, id: request.id, answer: 'no'
-        expect(answered).to be_falsy
+        expect(response).to redirect_to client_login_sessions_path
       end
     end
 
@@ -87,6 +87,10 @@ RSpec.describe ContestRequestsController do
   end
 
   describe 'POST approve_fulfillment' do
+    before do
+      sign_in(client)
+    end
+
     let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'fulfillment_ready') }
 
     it 'changes status to fulfillment_approved' do
@@ -102,15 +106,64 @@ RSpec.describe ContestRequestsController do
   end
 
   describe 'POST add_comment' do
-    it 'creates comment' do
-      session[:client_id] = client.id
-      post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
-      expect(ConceptBoardComment.exists?(text: 'text', contest_request_id: request.id, user_id: client.id)).to eq(true)
-      expect(response).to be_ok
+    context 'logged as contest owner' do
+      before do
+        sign_in(client)
+      end
+
+      it 'creates comment' do
+        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        expect(ConceptBoardComment.exists?(text: 'text',
+                                           contest_request_id: request.id,
+                                           user_id: client.id)).to be_truthy
+        expect(response).to be_ok
+      end
+    end
+
+    context 'logged as other client' do
+      before do
+        sign_in(Fabricate(:client))
+      end
+
+      it 'renders 404' do
+        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+      end
+    end
+
+    context 'logged as request creator' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'creates comment' do
+        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        expect(ConceptBoardComment.exists?(text: 'text',
+                                           contest_request_id: request.id,
+                                           user_id: designer.id)).to be_truthy
+        expect(response).to be_ok
+      end
+    end
+
+    context 'not creator of request' do
+      before do
+        sign_in(Fabricate(:designer))
+      end
+
+      it 'renders 404' do
+        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+      end
     end
   end
 
   describe 'GET show' do
+    before do
+      sign_in(client)
+    end
+
     it 'redirects to login page if user not logged in' do
       session[:client_id] = nil
       get :show, id: request.id

@@ -103,6 +103,10 @@ class ContestRequest < ActiveRecord::Base
     draft?
   end
 
+  def contest_owner?(user)
+    contest.client == user
+  end
+
   def download_url
     s3_object = concept_board_image.image.s3_object
     s3_object.url_for(:get, expires: 20.seconds, response_content_disposition: 'attachment;').to_s
