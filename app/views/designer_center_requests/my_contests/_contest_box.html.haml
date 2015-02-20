@@ -17,7 +17,7 @@
   .col-md-3
     %p=t('designer_center.my_contests.preferd_colors')
   .col-md-9
-    - [contest_view.desirable_colors, 'FF0000', 'FF0000', 'FF0000'].each do |color|
+    - [contest_view.desirable_colors].each do |color|
       %p.color
         %span.color-text= color
         %span{style: "background: ##{color}"}
@@ -30,4 +30,4 @@
         %span.color-text= color
         %span{style: "background: ##{color}"}
   .clearfix
-  %a.seeMoreLink{:href => "#"}=t('designer_center.my_contests.see_more')
+  = link_to t('designer_center.my_contests.see_more'), designer_center_contest_path(contest.id), class: 'seeMoreLink'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216162046) do
+ActiveRecord::Schema.define(version: 20150218173506) do
 
   create_table "appeals", force: true do |t|
     t.string "image"
@@ -292,6 +292,7 @@ ActiveRecord::Schema.define(version: 20150216162046) do
     t.text     "link"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "kind"
   end
 
   create_table "reviewer_feedbacks", force: true do |t|
