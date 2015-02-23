@@ -45,6 +45,7 @@ class ImageItemsEditing
             { image_id: contest_request_options[kind][:image_ids][index],
               name: contest_request_options[kind][:names][index],
               brand: contest_request_options[kind][:brands][index],
+              price: contest_request_options[kind][:prices][index],
               link: contest_request_options[kind][:links][index]
             },
         id: id

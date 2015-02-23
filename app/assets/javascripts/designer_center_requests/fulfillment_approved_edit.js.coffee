@@ -8,8 +8,7 @@ class ProductItemsEditor extends InlineEditor
     $container = $(@attributeSelector).filter("[data-id='#{ productItemId }']")
     $editForm = $container.find('.edit-form')
     $editForm.removeClass('hidden')
-    $view = $container.find('.view')
-    $view.hide()
+    $container.find('.view').hide()
     @onEditFormRetrieved(productItemId, $editForm.html())
 
   afterCancelEditing: ($optionsRow)->
@@ -91,13 +90,15 @@ class ProductItemImageUploader
 
 class @FulfillmentApprovedEdit
 
-  imageIdInput: 'input[name="contest_request[product_items][image_ids][]"]'
+  @imageIdInput: 'input[name="contest_request[product_items][image_ids][]"]'
 
   @init: ->
     @bindFooterButtons()
     productItemsEditor = new ProductItemsEditor()
     productItemsEditor.imageIdInput = @imageIdInput
     productItemsEditor.bindEvents()
+    $('.edit-form .price').ForceNumericOnly()
+
 
   @form: ->
     $('.edit_contest_request')
@@ -105,12 +106,12 @@ class @FulfillmentApprovedEdit
   @bindFooterButtons: ->
     $form = @form()
 
-    $('.footer .save-button').click (e)->
+    $('.footer .save-button').click (e)=>
       e.preventDefault()
       $form.find('.edit-form').find(@imageIdInput).remove()
       $form.submit()
 
-    $('.footer .submit-button').click (e)->
+    $('.footer .submit-button').click (e)=>
       e.preventDefault()
       $form.find('.edit-form').find(@imageIdInput).remove()
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')

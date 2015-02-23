@@ -23,7 +23,8 @@
           %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')
           .product-list
             - product_items.each do |product_item|
-              = render partial: 'designer_center_requests/edit/product_item', locals: { product_item: product_item }
+              = render partial: 'designer_center_requests/edit/product_item',
+                  locals: { product_item: product_item }
 
     .col-md-12.disablePadding.marg-top20
       .hLine
