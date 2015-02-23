@@ -156,9 +156,9 @@ RSpec.describe ClientsController do
 
         it 'filters responses by answer' do
           contest.start_winner_selection!
-          submitted.update_attributes!(answer: 'winner')
           draft.update_attributes!(answer: 'no')
           fulfillment.update_attributes!(answer: 'favorite')
+          submitted.update_attributes!(answer: 'winner')
           get :entries, answer: 'winner'
           expect(assigns(:contest_requests)).to match_array([submitted])
         end

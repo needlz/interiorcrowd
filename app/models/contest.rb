@@ -39,17 +39,21 @@ class Contest < ActiveRecord::Base
   after_create :create_retailer_preferences, on: :create
 
   state_machine :status, initial: :submission do
+    after_transition on: :close, do: :close_requests
+    after_transition on: :start_winner_selection, do: :delay_winner_selection_end
+    after_transition on: :start_winner_selection, do: :update_phase_end
+    after_transition on: :winner_selected, do: :delay_winner_selection_end
+
     event :start_winner_selection do
       transition submission: :winner_selection
     end
 
     event :close do
-      transition submission: :closed
+      transition submission: :closed, winner_selection: :closed
     end
-    after_transition on: :close, do: :close_requests
 
     event :winner_selected do
-      transition winner_selection: :fulfillment
+      transition winner_selection: :fulfillment, submission: :fulfillment
     end
 
     event :finish do
@@ -83,7 +87,7 @@ class Contest < ActiveRecord::Base
   end
 
   def days_left
-    submission? ? ((phase_end - Time.current) / 1.day).ceil : 0
+    (submission? || winner_selection?) ? ((phase_end - Time.current) / 1.day).ceil : 0
   end
 
   def response_of(designer)
@@ -95,8 +99,16 @@ class Contest < ActiveRecord::Base
     start_winner_selection!
   end
 
+  def end_winner_selection
+    return close! if response_winner.blank?
+  end
+
   def delay_submission_end
     Jobs::SubmissionEnd.schedule(id, run_at: phase_end)
+  end
+
+  def delay_winner_selection_end
+    Jobs::WinnerSelectionEnd.schedule(id, run_at: phase_end)
   end
 
   def close_requests
@@ -162,12 +174,16 @@ class Contest < ActiveRecord::Base
     Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
   end
 
-  def calculate_end_submission_date
-    Time.current + 3.days
+  def update_phase_end
+    update_attributes!(phase_end: calculate_phase_end)
+  end
+
+  def calculate_phase_end
+    ContestPhaseDuration.new(self).phase_end(Time.current)
   end
 
   def defaults
-    self.phase_end ||= calculate_end_submission_date
+    self.phase_end ||= calculate_phase_end
   end
 
   def create_retailer_preferences
@@ -177,4 +193,5 @@ class Contest < ActiveRecord::Base
   def update_preferred_retailers(preferred_retailers_params)
     preferred_retailers.update_attributes!(preferred_retailers_params)
   end
+
 end

@@ -57,16 +57,16 @@ RSpec.describe ContestRequestsController do
         post :answer, id: request.id, answer: 'no'
         expect(response).to redirect_to client_login_sessions_path
       end
-    end
 
-    it 'changes status if answer is winner' do
-      post :answer, id: request.id, answer: 'winner'
-      expect(request.reload.status).to eq('fulfillment')
-    end
+      it 'changes status if answer is winner' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(request.reload.status).to eq('fulfillment')
+      end
 
-    it 'creates winner notification if answer is winner' do
-      post :answer, id: request.id, answer: 'winner'
-      expect(UserNotification.exists?(user_id: request.designer_id, contest_id: request.contest_id, type: 'DesignerWinnerNotification')).to eq(true)
+      it 'creates winner notification if answer is winner' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(UserNotification.exists?(user_id: request.designer_id, contest_id: request.contest_id, type: 'DesignerWinnerNotification')).to eq(true)
+      end
     end
 
     it 'saves answer if contest is in submission state' do

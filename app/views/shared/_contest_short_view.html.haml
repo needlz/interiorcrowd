@@ -12,6 +12,7 @@
   .col-md-2= contest.design_space
   .col-md-2= contest.price
   .col-md-2
-    = contest.days_count
-    %span days
+    = contest.days_till_end
+    - unless contest.status == 'fulfillment'
+      %span days
 

@@ -58,6 +58,7 @@ class ContestRequest < ActiveRecord::Base
     if (changed_to?(:answer, 'winner') && status == 'submitted')
       winner!
       notify_designer_about_win
+      contest.winner_selected!
     end
   end
 

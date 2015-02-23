@@ -60,6 +60,13 @@ RSpec.describe Contest do
     end
   end
 
+  describe 'winner_selection_end' do
+    it 'closes the contest if there were no winners requests' do
+      contest.end_winner_selection
+      expect(contest.reload).to be_closed
+    end
+  end
+
   describe '#close_requests' do
     it 'closes requests' do
       draft = Fabricate(:contest_request, contest: contest, designer: Fabricate(:designer), status: 'draft')
