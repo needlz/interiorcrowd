@@ -28,12 +28,13 @@
               = image_tag 'instagram_icon.png'
               = t('client_center.entries.space.social.instagram')
 
-
 .container.animated.fadeInDown
   .row.marg-top40
     .col-md-10.col-md-offset-1.no-x-padding
       = render :partial => 'clients/client_center/entries/final_design', locals: {request: request}
       .hLine10
-      - request.product_items.each do |product_item|
+      - @product_items.each do |product_item|
         = render :partial => 'clients/client_center/entries/design_item', locals: { product_item: product_item }
-      = render :partial => 'clients/client_center/entries/paginate'
+      .row.bottom60
+        .col-md-12.disablePadding.text-right.product-list-pagination
+          = will_paginate(@product_items, container: false, renderer: ProductListPaginationRenderer)

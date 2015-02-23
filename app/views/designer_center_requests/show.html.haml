@@ -11,7 +11,12 @@
       .col-md-8.disablePadding.initialImage
         = render partial: 'shared/moodboard', locals: { request: @request }
         = link_to t('designer_center.responses.item.edit_concept_board'), designer_center_response_path, :remote => true, class: 'editMoodboardBtn marg-top20'
-        - if @request.fulfillment_editing?
+        - if @request.fulfillment_approved? || @request.finished?
+          %p.font20Bold.marg-top20= t('designer_center.edit.products_list')
+          .hLine10
+          - @request.product_items.includes(:image).each do |product_item|
+            = render :partial => 'clients/client_center/entries/design_item', locals: { product_item: product_item }
+        - elsif @request.fulfillment_editing?
           .image-items
             = render partial: 'designer_center_requests/edit/image_block',
                 locals: { editable: false,

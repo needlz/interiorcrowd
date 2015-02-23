@@ -22,6 +22,9 @@ class ClientsController < ApplicationController
     @navigation = Navigation::ClientCenter.new(:entries)
     @current_user = current_user
     @won_contest_request = @contest.response_winner
+    if @won_contest_request
+      @product_items = @won_contest_request.product_items.includes(:image).paginate(per_page: 4, page: params[:page])
+    end
     render 'clients/client_center/entries'
   end
 
