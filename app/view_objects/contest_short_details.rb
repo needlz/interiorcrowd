@@ -16,7 +16,6 @@ class ContestShortDetails
       else
         I18n.t('designer_center.responses.statuses.closed')
       end
-
     @days_till_end = get_days_till_end(contest)
     @price = I18n.t('designer_center.responses.item.price',
                     price: BudgetPlan.find(contest.budget_plan).price)

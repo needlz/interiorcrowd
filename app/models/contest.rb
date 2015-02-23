@@ -53,7 +53,7 @@ class Contest < ActiveRecord::Base
     end
 
     event :winner_selected do
-      transition winner_selection: :fulfillment
+      transition winner_selection: :fulfillment, submission: :fulfillment
     end
 
     event :finish do

@@ -69,8 +69,6 @@ RSpec.describe ContestRequestsController do
       end
     end
 
-
-
     it 'saves answer if contest is in submission state' do
       expect(contest.status).to eq 'submission'
       post :answer, id: request.id, answer: 'favorite'
