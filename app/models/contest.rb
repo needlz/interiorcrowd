@@ -47,6 +47,7 @@ class Contest < ActiveRecord::Base
     event :start_winner_selection do
       transition submission: :winner_selection
     end
+
     event :close do
       transition submission: :closed, winner_selection: :closed
     end
