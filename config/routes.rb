@@ -3,6 +3,7 @@ InteriorC::Application.routes.draw do
   if Rails.env.production?
     root 'home#sign_up_beta'
     get 'sign_up_beta', to: 'home#sign_up_beta'
+
     resources :beta_subscribers, only: [:create]
   else
     resources :designers, only: [:new, :create, :update]
@@ -19,6 +20,7 @@ InteriorC::Application.routes.draw do
       end
     end
 
+    get 'terms_of_service', to: 'home#terms_of_service'
     get 'faq', to: 'home#faq'
     get 'sign_up_beta', to: 'home#sign_up_beta'
     root 'home#index'
