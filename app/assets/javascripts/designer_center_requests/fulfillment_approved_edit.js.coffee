@@ -44,15 +44,15 @@ class ProductItemsEditor extends InlineEditor
 
   updateImage: ($container, undo)->
     $viewImage = $container.find('.view img')
-    $editImage = $container.find('.edit-form img')
-    $editImageId = $container.find('.edit-form').find(@imageIdInput)
-    $viewImageId = $container.find('.view').find(@imageIdInput)
+    $editFormImage = $container.find('.edit-form img')
+    $editFormImageIdInput = $container.find('.edit-form').find(@imageIdInput)
+    $viewImageIdInput = $container.find('.view').find(@imageIdInput)
     if undo
-      $editImage.attr('src', $viewImage.attr('src'))
-      $editImageId.val($viewImageId.val())
+      $editFormImage.attr('src', $viewImage.attr('src'))
+      $editFormImageIdInput.val($viewImageIdInput.val())
     else
-      $viewImage.attr('src', $editImage.attr('src'))
-      $viewImageId.val($editImageId.val())
+      $viewImage.attr('src', $editFormImage.attr('src'))
+      $viewImageIdInput.val($editFormImageIdInput.val())
 
   updateTextFields: ($container, undo)->
     for attributeSelector in ['.name', '.brand', '.price']
@@ -108,15 +108,18 @@ class @FulfillmentApprovedEdit
 
     $('.footer .save-button').click (e)=>
       e.preventDefault()
-      $form.find('.edit-form').find(@imageIdInput).remove()
+      @clearEditFormInputs($form)
       $form.submit()
 
     $('.footer .submit-button').click (e)=>
       e.preventDefault()
-      $form.find('.edit-form').find(@imageIdInput).remove()
+      @clearEditFormInputs($form)
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')
       $status_input.appendTo($form)
       $form.submit()
+
+  @clearEditFormInputs: ($form)->
+    $form.find('.edit-form').find(@imageIdInput).remove()
 
 $ ->
   FulfillmentApprovedEdit.init()
