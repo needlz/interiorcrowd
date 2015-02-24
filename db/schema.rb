@@ -11,10 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218173506) do
+ActiveRecord::Schema.define(version: 20150224063644) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "appeals", force: true do |t|
-    t.string "image"
     t.string "first_name"
     t.string "second_name"
   end
@@ -78,11 +80,13 @@ ActiveRecord::Schema.define(version: 20150218173506) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
-    t.string   "status",      default: "draft"
+    t.string   "status",             default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer"
+    t.text     "final_note"
+    t.text     "pull_together_note"
   end
 
   create_table "contests", force: true do |t|
@@ -166,7 +170,6 @@ ActiveRecord::Schema.define(version: 20150218173506) do
   create_table "designer_levels", force: true do |t|
     t.integer "level"
     t.string  "name"
-    t.string  "image"
   end
 
   create_table "designers", force: true do |t|
@@ -290,6 +293,7 @@ ActiveRecord::Schema.define(version: 20150218173506) do
     t.decimal  "price"
     t.text     "brand"
     t.text     "link"
+    t.string   "mark"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "kind"

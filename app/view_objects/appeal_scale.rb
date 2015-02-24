@@ -58,6 +58,10 @@ class AppealScale
     end
   end
 
+  def collage_picture
+    "/assets/style_collages/collage#{ appeal.id }.jpg"
+  end
+
   private
 
   attr_reader :appeal

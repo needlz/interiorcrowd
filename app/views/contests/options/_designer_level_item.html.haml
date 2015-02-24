@@ -1,14 +1,8 @@
 .text-center.col-md-4.no-x-padding{:style => "position:relative", class: active && 'active' }
   .designer-level.level-block{ data: { id: designer_level.id } }
-    %img{ src: "/assets/back-pic.png" }/
+    %img{ src: designer_level_image(designer_level) }/
     .fade-text.text-center
-      %b
-        Lorem ipsum dolor sit
-        %br/
-        amet, consectetur adipiscing
-        %br/
-        elit. Nullam ut cursus erat.
     .check.text-center{ style: "#{ 'display: none' unless active }"}
-      %img{:src => "/assets/check.png"}/
+      %img{:src => "/assets/white_check.png"}/
   .text-center.all-under-block
     %h1= t("contests.design_style.designer_level.#{ designer_level.name }")
