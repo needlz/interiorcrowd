@@ -18,7 +18,7 @@
       .row.disableMargin
         .col-md-7.col-md-offset-1.marg-top20
           %p.hintP
-            - link = link_to t("designer_center.my_contests.hint_link"), "#", class: 'italicLink'
+            - link = link_to t("designer_center.my_contests.hint_link"), designer_center_contest_path(@contest.id), class: 'italicLink'
             = t('designer_center.my_contests.hint', link: link).html_safe
             = render partial: 'designer_center_requests/my_contests/contest_box',
                 locals: {contest: @contest, contest_view: @contest_view}

@@ -17,7 +17,7 @@
   .col-md-3
     %p=t('designer_center.my_contests.preferd_colors')
   .col-md-9
-    - [contest_view.desirable_colors].each do |color|
+    - contest_view.desirable_colors.split(',').each do |color|
       %p.color
         %span.color-text= color
         %span{style: "background: ##{color}"}
@@ -25,7 +25,7 @@
   .col-md-3
     %p=t('designer_center.my_contests.colors_avoid')
   .col-md-9
-    - [contest_view.undesirable_colors].each do |color|
+    - contest_view.undesirable_colors.split(',').each do |color|
       %p.color
         %span.color-text= color
         %span{style: "background: ##{color}"}
