@@ -6,8 +6,9 @@ $.fn.initUploader = (options)->
     type: 'POST'
   )
   @.fileupload
+    replaceFileInput: false
     add: (event, data)=>
-        # script uses native form of input by default, that causes side effects
+      # by default, script uses native form of input by default, this causes side effects
       $inputWithoutForm = $(@).clone()
       $inputWithoutForm.fileupload(options)
       $inputWithoutForm.fileupload('add', { files: data.files })

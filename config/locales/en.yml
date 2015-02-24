@@ -296,7 +296,6 @@ en:
           instagram: Post on
         download: Download
         complete_lock: Get the items to complete your look
-        item_note: 'Use discount code: IC2'
       notes_title: Want to send a note to the designers?
       send_note: Send
       your_note: Your note
@@ -409,7 +408,7 @@ en:
       upload: Upload your final design
       upload_description: Tell the client how they can pull together their new look. Remember to be specific.
       product_list: Product List
-      product_name: Product Name
+      name: Product Name
       brand: Brand
       price: Price
       link: Link

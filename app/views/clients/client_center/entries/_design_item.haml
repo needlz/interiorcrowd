@@ -2,6 +2,9 @@
   .col-md-5
     = image_tag product_item.image.medium_size_url, class: 'productListIMG'
   .col-md-7
+    - [:name, :brand].each do |attribute|
+      %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }= product_item.send(attribute)
+    - if product_item.price.present?
+      %p.font16.makeMeBlack.lineHeight25.margin0{ class: 'price' }$ #{ product_item.price }
     = link_to product_item.link.to_s, product_item.link.to_s, class: 'font20 blueLink'
-    %p.designerNote.font20= t('client_center.entries.space.item_note')
 .hLine10.marg-top30

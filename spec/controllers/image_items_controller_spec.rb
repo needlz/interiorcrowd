@@ -68,7 +68,11 @@ RSpec.describe ImageItemsController do
       { image_item:
             { contest_request_id: contest_request.id,
               image_id: Fabricate(:image).id,
-              text: 'new text' }
+              text: 'new text',
+              price: '30.5',
+              brand: 'new brand',
+              link: 'new link'
+            }
       }.merge(options)
     end
 
@@ -85,6 +89,9 @@ RSpec.describe ImageItemsController do
         product_item.reload
         expect(product_item.text).to eq params[:image_item][:text]
         expect(product_item.image_id).to eq params[:image_item][:image_id].to_i
+        expect(product_item.link).to eq params[:image_item][:link]
+        expect(product_item.price).to eq BigDecimal(params[:image_item][:price])
+        expect(product_item.brand).to eq params[:image_item][:brand]
       end
     end
   end
