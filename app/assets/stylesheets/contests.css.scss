@@ -718,8 +718,8 @@
 }
 
 .menu-room {
-  opacity: 1!important;
-  visibility: visible!important;
+  opacity: 1 !important;
+  visibility: visible !important;
   display: none;
 }
 
@@ -732,7 +732,11 @@
   }
 
   .comment textarea {
-    border: 1px solid #000; resize: none; padding: 20px; width: 100%; min-height: 100px;
+    border: 1px solid #000;
+    resize: none;
+    padding: 20px;
+    width: 100%;
+    min-height: 100px;
   }
 
   .edit-profile:nth-child(1) {
@@ -803,7 +807,7 @@
 }
 
 .normal-font {
-  font-weight: normal!important;
+  font-weight: normal !important;
 }
 
 .contestInfo .comment textarea {
@@ -819,6 +823,7 @@
   color: #000;
   line-height: 70px;
 }
+
 .pageNumber {
   width: 398px
 }
@@ -849,4 +854,12 @@
   input[type="text"] {
     width: 100%;
   }
+}
+
+.appeal-collage {
+  padding: 40px 0;
+}
+
+.appeal-collage-image {
+  width: 100%;
 }

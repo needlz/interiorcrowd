@@ -2,7 +2,7 @@
   - @contest_view.appeal_scales.each do |style|
     - if style.opinion
       %span.selection.style-name= style.opinion
-      %img{:src => style.collage_picture, style: 'width: 100%' }/
+      %img.appeal-collage-image{:src => style.collage_picture }/
       .comment
         = style.reason
     .clearfix

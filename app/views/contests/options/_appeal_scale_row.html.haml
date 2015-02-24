@@ -11,8 +11,8 @@
         .col-md-9
           .text
             = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", appeal_feedback[:name])
-  .col-md-12.no-x-padding{ style: 'padding: 40px 0;' }
-    %img{:src => scale.collage_picture, style: 'width: 100%' }/
+  .col-md-12.no-x-padding.appeal-collage
+    %img.appeal-collage-image{:src => scale.collage_picture }/
   .clearfix
   .telluswhy
     .title
