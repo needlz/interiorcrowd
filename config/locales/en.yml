@@ -376,7 +376,8 @@ en:
       card_type: Card type
       select_year: Select Year
       select_month: Select Month
-      i_agree: I agree with the InteriorCrowd terms of use
+      i_agree: I agree with the InteriorCrowd
+      terms_of_use: terms of use
       submit: Submit
   designer_center:
     edit_button: Edit
@@ -458,7 +459,8 @@ en:
       become_designer: Become a Designer!
       do_you_love: Do you love interior design? Looking to expand your portfolio and reach new customers?
       get_started: To get started, tell us a bit more about yourself.
-      i_agree: I agree with the InteriorCrowd terms of use
+      i_agree: I agree with the InteriorCrowd
+      terms_of_use: terms of use
     title: Designer Center
     updates:
       invites: Invites
@@ -775,3 +777,5 @@ en:
       title: DESIGNER LOGIN
       sign_up: Sign up
       dont_have_account: Don't have an account?
+
+  terms_of_service: 'Terms of service'

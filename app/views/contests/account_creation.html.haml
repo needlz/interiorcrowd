@@ -108,6 +108,9 @@
         .tick-btn
           %span{ tabindex: 16 } ✓
         = t('client_center.sign_up.i_agree')
+        .terms-of-use= t('client_center.sign_up.terms_of_use')
       .clearfix
       %button.btn1.btn1-confirm.submit-button{:type => "button", tabindex: 17 }
         = t('client_center.sign_up.submit')
+
+= render partial: 'home/terms_of_service_modal'
