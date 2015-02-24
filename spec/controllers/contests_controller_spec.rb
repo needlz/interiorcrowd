@@ -36,7 +36,7 @@ RSpec.describe ContestsController do
 
     it 'updates appeals of contest' do
       allow_any_instance_of(AppealScale).to receive(:name) { |key| key }
-      patch :update, option: 'appeals', id: contest.id, design_style: { appeals: appeal_values }
+      patch :update, option: 'design_profile', id: contest.id, design_style: { appeals: appeal_values }
       appeal_values.each do |identifier, value|
         appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }
         contest_appeal = contest.contests_appeals.where(appeal_id: appeal.id).first

@@ -25,7 +25,7 @@ class ContestView
     :entertaining, :durability] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
-    :name, :design_knowledge, :design_style, :desirable_colors, :undesirable_colors, :example_pictures,
+    :name, :design_knowledge, :design_profile, :desirable_colors, :undesirable_colors, :example_pictures,
     :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :feedback]
 
   LEVELS = {

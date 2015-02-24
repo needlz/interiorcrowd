@@ -2,21 +2,9 @@
   - @contest_view.appeal_scales.each do |style|
     - if style.opinion
       %span.selection.style-name= style.opinion
-      .live-tiles
-        .tile.width3.height2
-        .tile.width2.height150
-        .tile.width2.height4
-        .tile.width3.height150
-        .tile.width2.height250
-        .tile.width3
-        .tile.width15.height150
-        .tile.width15.height150
-        .tile.width15.height250
-        .tile.width15.height250
-        .tile.width3.height150
-        .tile.width4
+      %img{:src => style.collage_picture, style: 'width: 100%' }/
       .comment
-        %textarea= style.reason
+        = style.reason
     .clearfix
     %p
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.design_style'), value: value_html }
