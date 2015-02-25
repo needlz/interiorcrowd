@@ -10,11 +10,6 @@
     %p= contest.design_space.name
   .clearfix
   .col-md-3
-    %p=t('designer_center.my_contests.design_style')
-  .col-md-9
-    %p= contest_view.design_styles
-  .clearfix
-  .col-md-3
     %p=t('designer_center.my_contests.preferd_colors')
   .col-md-9
     - contest_view.desirable_colors.split(',').each do |color|
