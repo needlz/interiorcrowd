@@ -1,8 +1,10 @@
 .rooms.text-center-sm.text-center-xs.uploaded-images
-  .some-text.col-md-6.no-padding-left
+  .some-text.col-md-7.no-padding-left
     %h1.font20.makeMeBlack= t('designer_center.portfolio.creation.upload_pictrures.title')
     %h1.imageUploadInfo
-      %i Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
+      %i= t('designer_center.portfolio.creation.image_requirements')
+    %p.font16= t('designer_center.portfolio.creation.upload_pictrures.explanations')
+    %p.font16= t('designer_center.portfolio.creation.upload_pictrures.size_requirements')
   .clearfix
   #portfolio_pictures_preview.col-md-12.dashedBorder
     .container
