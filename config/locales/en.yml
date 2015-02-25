@@ -504,12 +504,15 @@ en:
           upload_button: Upload images
           uploading: Uploading...
           hint: needs to be %{extensions}
+          explanations: Please click on one of your portfolio pictures to use as the cover design on your page.
+          size_requirements: Cover image dimension must be at least 1920 pixels wide and 400 pixels tall.
         choose_background: Choose background for portfolio page by clicking on the above
         upload_personal_picture:
           title: Upload Your Personal Picture (optional)
           upload_button: Upload image
           uploading: Uploading...
           hint: needs to be %{extensions}
+          size_reuirements: The image dimension must be at least 150 pixels wide and 150 pixels tall.
         characterize_style: How do you characterize your design style?
         about: Tell us something about yourself
         about_placeholder: Describe your design style, how you work with clients, why you love interior design, etc.
@@ -517,6 +520,7 @@ en:
         update_button: Update Page
         no_path_error: must be specified in order to publish portfolio
         path: Name of page within %{domain}.
+        image_requirements: Images must be smaller than 10M with .jpg, .gif, .tif, .pdf
       show:
         degree_name: '%{degree} Degree'
         self_educated: Self-educated

@@ -1,9 +1,10 @@
 .rooms.text-center-sm.text-center-xs.personal-picture
   %div.lineBreak
-  .some-text.col-md-6.no-padding-left
+  .some-text.col-md-7.no-padding-left
     %h1.font20.makeMeBlack= t('designer_center.portfolio.creation.upload_personal_picture.title')
-    %h1.imageUploadInfo
-      %i Images must be smaller than 10M.with .jpg, .gif, .tif, .pdf
+    %h1.imageUploadInfo.disablePadding
+      %i= t('designer_center.portfolio.creation.image_requirements')
+    %p.font16= t('designer_center.portfolio.creation.upload_personal_picture.size_reuirements')
   .clearfix
   - path = portfolio.personal_picture.try(:image).try(:url, :medium)
   .thumbs
