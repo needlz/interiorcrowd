@@ -20,27 +20,8 @@
               img: request.concept_board_image.original_size_url,
               title: 'my design',
               url: @share_url } }
-              = link_to '#', class: 'btn btn-social twitterColor',
-                onclick: "return SocialShareButton.share(this);",
-                :rel => "nofollow ",
-                "data-site" => "twitter",
-                title: 'Share to Twitter' do
-                = image_tag 'twitter_icon.png'
-                = t('client_center.entries.space.social.twitter')
-              = link_to '#', class: 'btn btn-social facebookColor',
-                onclick: "return SocialShareButton.share(this);",
-                :rel => "nofollow ",
-                "data-site" => "facebook",
-                title: 'Share to Facebook' do
-                = image_tag 'facebook_icon.png'
-                = t('client_center.entries.space.social.facebook')
-              = link_to '#', class: 'btn btn-social pintrestColor',
-                onclick: "return SocialShareButton.share(this);",
-                :rel => "nofollow ",
-                "data-site" => "pinterest",
-                title: 'Share to Pinterest' do
-                = image_tag 'pintrest_icon.png'
-                = t('client_center.entries.space.social.pintrest')
+              - SocialShareButton.config.allow_sites.each do |site|
+                = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
 
 .container.animated.fadeInDown
   .row.marg-top40
