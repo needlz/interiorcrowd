@@ -22,6 +22,7 @@ class @ConceptboardComment
         @buttonSend.text(@i18n.sending)
       success: (data)=>
         @.newComment('allComents', data)
+        @.newComment('meComments', data)
         @.prepareSection()
       error: ->
     )
