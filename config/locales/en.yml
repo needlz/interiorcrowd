@@ -608,7 +608,6 @@ en:
       hint_link: client's Style Profile
       type: 'Type :'
       room: 'Room :'
-      design_style: 'Design Style :'
       preferd_colors: 'Prefered Colors :'
       colors_avoid: 'Colors Avoid :'
       see_more: See more
