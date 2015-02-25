@@ -212,4 +212,24 @@ RSpec.describe ContestRequestsController do
       end
     end
   end
+
+  describe 'GET public_design' do
+    context 'unexisting contest response token' do
+      it 'renders 404' do
+        get :design, token: '1111'
+        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+      end
+    end
+
+    context 'existing contest response token' do
+      let(:token){ TokenGenerator.generate }
+      before do
+        request.update_attributes!(token: token)
+      end
+
+      it 'renders page' do
+        get :design, token: token
+      end
+    end
+  end
 end

@@ -101,6 +101,13 @@ class ContestRequestsController < ApplicationController
     redirect_to @request.download_url
   end
 
+  def design
+    @request = ContestRequest.find_by_token(params[:token])
+    return raise_404 unless @request
+    @product_items = @request.product_items.includes(:image).paginate(per_page: 4, page: params[:page])
+    render 'contest_requests/public_design'
+  end
+
   private
 
   def check_contest_owner

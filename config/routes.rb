@@ -123,5 +123,8 @@ InteriorC::Application.routes.draw do
         patch 'mark', to: 'image_items#mark', as: 'mark'
       end
     end
+    resource :designs do
+      get '/:token', to: 'contest_requests#design', as: 'public'
+    end
   end
 end

@@ -19,5 +19,6 @@
 //= require jquery.mmenu.min.all
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+//= require social-share-button
 //= require_tree ./lib
 //= require_tree ./shared
