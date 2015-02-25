@@ -1,3 +1,14 @@
+class Buttons
+  @buttons =  '.contest-buttons .btn'
+
+  @init: ->
+    $(@buttons).on 'click', =>
+      @.reverseColor(event.target)
+
+  @reverseColor: (btn) ->
+    $(@buttons).removeAttr('reverse')
+    $(btn).attr('reverse', true)
+
 class ResponsesList
 
   @makeTableRowsClickable: ->
@@ -7,3 +18,4 @@ class ResponsesList
 
 $ ->
   ResponsesList.makeTableRowsClickable()
+  Buttons.init()

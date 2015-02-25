@@ -51,4 +51,10 @@ class Designer < ActiveRecord::Base
     contest_request.designer == self
   end
 
+  def requests_by_status(status)
+    return contest_requests.active unless status
+    statuses = ['submitted', 'fulfillment']
+    contest_requests.send(status) if statuses.include? status
+  end
+
 end

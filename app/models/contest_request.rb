@@ -52,7 +52,9 @@ class ContestRequest < ActiveRecord::Base
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
   scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
+  scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
+  scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
 
   def change_status
     if (changed_to?(:answer, 'winner') && status == 'submitted')

@@ -2,9 +2,16 @@ class DesignerCenterRequestsController < ApplicationController
   before_filter :set_designer
 
   def index
-    @responses = @designer.contest_requests.active.includes(contest: [:design_category, :design_space])
-    @current_responses = @responses.map{ |respond| ContestResponseView.new(respond) }
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    respond_to do |format|
+      format.any(:js, :html) {
+        @responses = @designer.requests_by_status(params[:status]).with_design_properties
+        @current_responses = @responses
+          .map{ |respond| ContestResponseView.new(respond) }
+          .sort_by{ |response| response.contest.days_count }
+          .reverse
+      }
+      @navigation = Navigation::DesignerCenter.new(:requests)
+    end
   end
 
   def show

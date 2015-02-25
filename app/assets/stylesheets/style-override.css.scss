@@ -92,3 +92,16 @@
   padding: 0px 40px;
   padding-bottom: 20px;
 }
+
+.contest-buttons {
+  .daysLeftBtn{
+    color: #165930;
+    border: 1px solid #387a53;
+    background-color: #FFF;
+  }
+
+  .btn[reverse] {
+    background-color: #409863!important;
+    color: #fefefe!important;
+  }
+}

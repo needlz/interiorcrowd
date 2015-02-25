@@ -7,18 +7,12 @@
       .col-md-8.contestUnderway.no-x-padding
         %h3= t('designer_center.responses.title')
         %p= t('designer_center.responses.list_title')
-        .col-md-8.col-sm-12.col-lg-9
-          = link_to t('designer_center.contests_preview.days'), '#', class: 'btn daysLeftBtn'
-          = link_to t('designer_center.contests_preview.qualifying_round'), '#', class: 'btn qualifyingRoundBtn'
-          = link_to t('designer_center.contests_preview.fulfillment_period'), '#', class: 'btn fulfillmentPeriodBtn'
-        .col-md-4.col-sm-12.col-lg-3
-          %span#searchBox.disableMargin
-            = text_field_tag 'search', '', placeholder: t('designer_center.contests_preview.search_placeholder')
-            %button
-              = image_tag 'magnifier.png'
+        .col-md-8.col-sm-12.col-lg-9.contest-buttons
+          = link_to t('designer_center.contests_preview.days'), designer_center_response_index_path, remote: true, reverse: true, class: 'btn daysLeftBtn'
+          = link_to t('designer_center.contests_preview.qualifying_round'), designer_center_response_index_path(status: 'submitted'), remote: true, class: 'btn qualifyingRoundBtn'
+          = link_to t('designer_center.contests_preview.fulfillment_period'), designer_center_response_index_path(status: 'fulfillment'), remote: true, class: 'btn fulfillmentPeriodBtn'
         .clearfix
-        - @current_responses.each do |response|
-          = render partial: 'designer_center_requests/index/item', locals: { response: response }
+        .responses= render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
       .col-md-4.notifications-container
         = render partial: 'designer_center_requests/index/notifications'
     .row
