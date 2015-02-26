@@ -10,6 +10,7 @@ class ContestRequest < ActiveRecord::Base
   validate :contest_status, :one_winner, :allowed_answer, if: ->(request){ request.contest }
 
   after_update :change_status
+  after_initialize :set_token, if: :new_record?
 
   state_machine :status, initial: :draft do
     event :submit do
@@ -56,8 +57,6 @@ class ContestRequest < ActiveRecord::Base
   scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
-
-  after_create :set_token
 
   def change_status
     if (changed_to?(:answer, 'winner') && status == 'submitted')

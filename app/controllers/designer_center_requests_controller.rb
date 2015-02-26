@@ -25,6 +25,7 @@ class DesignerCenterRequestsController < ApplicationController
     return redirect_to designer_center_response_path(id: @request.id) if @request.basic_editing_only?
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
+    @request_view = ContestResponseView.new(@request)
   end
 
   def preview
