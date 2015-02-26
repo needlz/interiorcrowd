@@ -3,7 +3,6 @@ class ConceptBoardComment < ActiveRecord::Base
 
   scope :designer, ->{ where(role: 'Designer') }
   scope :client, ->{ where(role: 'Client') }
-  scope :unread, ->{ where(read: false) }
 
   def income( user)
     send(user.class.name.downcase)
