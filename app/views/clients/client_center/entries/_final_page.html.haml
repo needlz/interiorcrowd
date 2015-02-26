@@ -2,8 +2,7 @@
   .row
     .col-md-12.marg-top40
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
-      .col-md-8.disablePadding
-        = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 3}
+      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 3}
 
     .col-md-12.marg-top20
       .designerShareBox
@@ -12,7 +11,7 @@
             = image_tag 'avatar2.png', width: 90, height: 90, class: 'img-circle'
           .col-md-5
             %p.designerName= request.designer.name
-            %p.designerNote= t('client_center.entries.space.designer_note')
+            %p.designerNote= request.final_note
           .col-md-6
             %p.designerName= t('client_center.entries.space.share')
             .social-share-button{ data: { desc: '',
@@ -29,6 +28,7 @@
       = render :partial => 'clients/client_center/entries/final_design', locals: {request: request}
       - if @product_items.present?
         %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')
+        %p.font16= request.pull_together_note
         .hLine10
         - @product_items.each do |product_item|
           = render :partial => 'clients/client_center/entries/design_item', locals: { product_item: product_item }
