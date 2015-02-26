@@ -2,7 +2,7 @@ class Buttons
   @buttons =  '.contest-buttons .btn'
 
   @init: ->
-    $(@buttons).on 'click', =>
+    $(@buttons).on 'click', (event)=>
       @.reverseColor(event.target)
 
   @reverseColor: (btn) ->
