@@ -1,0 +1,9 @@
+- if product_items.present?
+  .hLine10
+  - product_items.each do |product_item|
+    = render partial: 'clients/client_center/entries/design_item', locals: { product_item: product_item }
+  .row.bottom60
+    .col-md-12.disablePadding.text-right.product-list-pagination
+      = will_paginate(product_items, container: false, renderer: ProductListPaginationRenderer)
+- else
+  .row.bottom60

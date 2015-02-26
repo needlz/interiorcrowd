@@ -1,0 +1,17 @@
+.container.animated.fadeInDown
+  .row
+    .col-md-12.marg-top20
+      .designerShareBox
+        .row
+          .col-md-1
+            = image_tag 'avatar2.png', width: 90, height: 90, class: 'img-circle'
+          .col-md-5
+            %p.designerName= @request.designer.name
+            %p.designerNote= t('client_center.entries.space.designer_note')
+
+.container.animated.fadeInDown
+  .row.marg-top40
+    .col-md-10.col-md-offset-1.no-x-padding
+      = render :partial => 'clients/client_center/entries/final_design', locals: {request: @request}
+      = render partial: 'clients/client_center/entries/final_product_list',
+          locals: { product_items: @product_items, request: @request }

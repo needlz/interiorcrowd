@@ -106,4 +106,9 @@ RSpec.describe ContestRequest do
       expect(request.status).to eq('fulfillment_approved')
     end
   end
+
+  it 'sets unique token after creation' do
+    request = Fabricate(:contest_request, designer: designer, contest_id: contest.id)
+    expect(request.token).to be_present
+  end
 end

@@ -1,4 +1,5 @@
 class ContestRequest < ActiveRecord::Base
+  include Rails.application.routes.url_helpers
   self.per_page = 8
 
   STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
@@ -55,6 +56,8 @@ class ContestRequest < ActiveRecord::Base
   scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
+
+  after_create :set_token
 
   def change_status
     if (changed_to?(:answer, 'winner') && status == 'submitted')
@@ -137,5 +140,9 @@ class ContestRequest < ActiveRecord::Base
 
   def notify_designer_about_win
     DesignerWinnerNotification.create(user_id: designer_id, contest_id: contest_id, contest_request_id: id)
+  end
+
+  def set_token
+    self.token = TokenGenerator.generate
   end
 end

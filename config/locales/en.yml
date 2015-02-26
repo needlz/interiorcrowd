@@ -292,8 +292,11 @@ en:
         social:
           twitter: Tweet
           facebook: Share
-          pintrest: Pin it
-          instagram: Post on
+          pinterest: Pin it
+        share_to:
+          twitter: Share to Tweeter
+          facebook: Share to Facebook
+          pinterest: Share to Pintrest
         download: Download
         complete_lock: Get the items to complete your look
       notes_title: Want to send a note to the designers?
