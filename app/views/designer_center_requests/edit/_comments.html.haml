@@ -6,18 +6,12 @@
       %li.btn.btn-default.active{:role => "presentation"}
         %a{"aria-controls" => "allComents", "data-toggle" => "tab", :href => "#allComents", :role => "tab"}= t('designer_center.edit.all')
       %li.btn.btn-default{:role => "presentation"}
-        %a{"aria-controls" => "unreadComments", "data-toggle" => "tab", :href => "#unreadComments", :role => "tab"}= t('designer_center.edit.unread')
-      %li.btn.btn-default{:role => "presentation"}
         %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
       %li.btn.btn-default{:role => "presentation"}
         %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(@current_user)
     #scrollBoxComments.tab-content.notes
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
-
-      #unreadComments.tab-pane{:role => "tabpanel"}
-        - comments.unread.each do |comment|
           = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
 
       #meComments.tab-pane{:role => "tabpanel"}
