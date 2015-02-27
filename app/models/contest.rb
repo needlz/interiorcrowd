@@ -147,14 +147,18 @@ class Contest < ActiveRecord::Base
     requests.where(answer: 'winner').where.not(id: request_id).present?
   end
 
-  def losers
+  def losers_requests
     requests
      .where(ContestRequest.arel_table[:answer].eq(nil)
      .or(ContestRequest.arel_table[:answer].not_eq('winner')))
   end
 
   def close_losers_requests
-    losers.update_all(status: 'closed')
+    return unless losers_requests
+    losers_requests.update_all(status: 'closed')
+    losers_requests.each do |request|
+      DesignerLoserInfoNotification.create(user_id: request.designer_id, contest_id: request.contest_id, contest_request_id: request.id)
+    end
   end
 
   private

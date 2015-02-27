@@ -93,14 +93,19 @@ RSpec.describe ContestRequestsController do
       let!(:request_with_answer) { Fabricate(:contest_request, contest_id: contest.id, status: 'submitted', designer_id: 2, answer: 'maybe') }
       let!(:request_without_answer) { Fabricate(:contest_request, contest_id: contest.id, status: 'submitted', designer_id: 3) }
 
-      it 'should close requests which were not won and has answer' do
+      it 'closes requests which were not won and has answer' do
         post :answer, id: request.id, answer: 'winner'
         expect(request_with_answer.reload.status).to eq('closed')
       end
 
-      it 'should close requests which were not won and has no answer' do
+      it 'closes requests which were not won and has no answer' do
         post :answer, id: request.id, answer: 'winner'
         expect(request_without_answer.reload.status).to eq('closed')
+      end
+
+      it 'notifies about contest defeat' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(UserNotification.exists?(user_id: request_without_answer.designer_id, contest_id: request_without_answer.contest_id, type: 'DesignerLoserInfoNotification')).to eq(true)
       end
     end
   end
