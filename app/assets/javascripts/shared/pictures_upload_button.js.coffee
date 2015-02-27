@@ -1,6 +1,7 @@
 class @PicturesUploadButton
   @init: (options)->
-    $(options.uploadButtonSelector).click =>
+    $(options.uploadButtonSelector).click (event)=>
+      event.preventDefault()
       $(options.fileinputSelector).focus().click()
 
     $(options.fileinputSelector).initUploaderWithThumbs(
