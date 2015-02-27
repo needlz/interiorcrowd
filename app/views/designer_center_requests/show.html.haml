@@ -9,6 +9,9 @@
   .container.animated.fadeInDown.bottom60
     .row.marg-top30.response{ data: { id: @request.id } }
       .col-md-8.disablePadding.initialImage
+        - if @request.lost?
+          .col-md-12.loser-text.big=t('designer_center.responses.loser.title')
+          .col-md-12.loser-text.small=t('designer_center.responses.loser.add_to_portfolio')
         = render partial: 'shared/moodboard', locals: { request: @request }
         = link_to t('designer_center.responses.item.edit_concept_board'), designer_center_response_path, :remote => true, class: 'editMoodboardBtn marg-top20'
         - if @request.fulfillment_approved? || @request.finished?

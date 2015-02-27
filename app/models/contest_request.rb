@@ -52,6 +52,7 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
+  scope :view_on_board, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved', 'closed']) }
   scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
   scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
@@ -115,6 +116,10 @@ class ContestRequest < ActiveRecord::Base
   def download_url
     s3_object = concept_board_image.image.s3_object
     s3_object.url_for(:get, expires: 20.seconds, response_content_disposition: 'attachment;').to_s
+  end
+
+  def lost?
+    closed? && contest.status != 'closed'
   end
 
   private

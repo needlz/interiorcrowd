@@ -52,7 +52,7 @@ class Designer < ActiveRecord::Base
   end
 
   def requests_by_status(status)
-    return contest_requests.active unless status
+    return contest_requests.view_on_board unless status
     statuses = ['submitted', 'fulfillment']
     contest_requests.send(status) if statuses.include? status
   end

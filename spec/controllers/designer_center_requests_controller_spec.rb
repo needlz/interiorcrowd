@@ -6,7 +6,7 @@ RSpec.describe DesignerCenterRequestsController do
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b',undesirable_colors: 'EEE') }
   let(:other_contest) { Fabricate(:contest, client: client) }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
