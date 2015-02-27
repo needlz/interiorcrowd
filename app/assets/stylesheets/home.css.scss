@@ -121,5 +121,15 @@ input[type="radio"].smallRadio + label span {
 }
 
 .footer .main-menu > li > a {
-    padding: 0px 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+  padding-bottom: 14px;
+}
+
+.footer .footer-menu > li > a {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 16px;
+  padding-bottom: 14px;
 }

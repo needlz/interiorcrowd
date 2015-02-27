@@ -784,3 +784,53 @@ en:
       dont_have_account: Don't have an account?
 
   terms_of_service: 'Terms of service'
+  home:
+    lets_design: Let's design
+    places:
+      to_start_day: your place to start the day.
+      to_entertain: your place to entertain.
+      to_relax: your place to relax.
+      to_come_home: your place to come home.
+    how_it_works:
+      title: How it works
+      create_profile_step:
+        title: Complete our style profile & choose a package
+        description: >
+          This is super fun to do and will only take 10 minutes.
+          Choose a design package based on how much help your room needs.
+      choose_designer_step:
+        title: Choose your designer
+        description: >
+          Designers will put together concept boards to reflect their recommendations for you.
+          Choose who you’d like to work with on your final design.
+      final_design_step:
+        title: Receive final design & instructions
+        description: >
+          Your designer will work with you to ensure the final design meets your specific needs.
+          You will also receive a shopping list, discount codes and instructions.
+    get_started: Get started
+    example_moodboards:
+      Example Concept Boards
+    success_stories:
+      title: Our Success Stories
+      jane_story:
+        name: Jane L.
+        story: >
+          We really liked all the furniture in our dining area, but
+          were just missing something to give the room that Wow Factor. Our designer picked a statement light fixture
+          that we probably wouldn’t have picked ourselves and
+          it’s completely transformed the room.
+      john_story:
+        name: John G.
+        story: >
+          This bed was always one of my favorite pieces, but when my husband and I got married I wasn’t sure
+          it would work in our new bedroom. Our designer showed us with a few simple additions (wall color,
+          a side table - and a few accessories) how we could bring our things together in a room that we now both love.
+      audrey_story:
+        name: Audrey S.
+        story: >
+          I love the look & ease of our new living room! I was
+          so happy our designer was able to work in the hanging woven chair I’ve always wanted. We were particularly
+          impressed with the level of detail our designer was
+          able to plan for us - from the sofa right down to room
+          accessories like bowls for the table. It’s a perfect room.

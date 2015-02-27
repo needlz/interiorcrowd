@@ -21,6 +21,10 @@ class ContestCreationWizard
     creation_steps_paths.keys
   end
 
+  def self.budget_plans
+    BudgetPlan.all.map { |plan| PackageView.new(plan) }
+  end
+
   def initialize(options)
     @contest_attributes = options[:contest_attributes]
     @active_step_index = self.class.creation_steps.index(options[:step]) if options[:step]
@@ -70,10 +74,6 @@ class ContestCreationWizard
 
   def budget_options
     ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
-  end
-
-  def budget_plans
-    BudgetPlan.all.map { |plan| PackageView.new(plan) }
   end
 
   private
