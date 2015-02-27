@@ -4,7 +4,7 @@
   .smallUnderline
   .row
     - ContestCreationWizard.budget_plans.each_with_index do |package, index|
-      .col-sm-4{ class: ('middle-package' if (index + 1).modulo(2).zero?) }
+      .col-sm-4{ class: package_css_class(index, ContestCreationWizard.budget_plans.length) }
         .head-design-package
           %h5= package.name
         - package.services.each do |service|
