@@ -107,6 +107,11 @@ RSpec.describe ContestRequestsController do
         post :answer, id: request.id, answer: 'winner'
         expect(UserNotification.exists?(user_id: request_without_answer.designer_id, contest_id: request_without_answer.contest_id, type: 'DesignerLoserInfoNotification')).to eq(true)
       end
+
+      it 'returns true for losing request' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(request_without_answer.reload.lost?).to eq(true)
+      end
     end
   end
 

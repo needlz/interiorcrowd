@@ -116,6 +116,10 @@ class ContestRequest < ActiveRecord::Base
     s3_object.url_for(:get, expires: 20.seconds, response_content_disposition: 'attachment;').to_s
   end
 
+  def lost?
+    closed? && contest.status != 'closed'
+  end
+
   private
 
   def contest_status
