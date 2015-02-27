@@ -105,6 +105,9 @@ h1, h2, h3, h4, h5 {
     .text-justify-lg {
         text-align: justify;
     }
+    .design-packages .row > div{
+        width: 29%;
+    }
 }
 
 .menu-border{
@@ -3219,3 +3222,221 @@ padding-bottom: 40px;
 /*underMenuLine*/
 /* end portfolio creation page*/
 
+/*home page*/
+.lets-design{
+    width: 100%;
+    height: 499px;
+}
+.lets-design > div{
+    float: left;
+    height: 499px;
+    position: relative;
+}
+.lets-design > div:nth-child(1){
+    width: 29%;
+    background: url('/assets/start_the_day.jpg') no-repeat center;
+}
+.lets-design > div:nth-child(2){
+    width: 25.5%;
+    background: url('/assets/place_to-entertain.jpg') no-repeat center;
+}
+.lets-design > div:nth-child(3){
+    width: 18.5%;
+    background: url('/assets/place_to_relax.jpg') no-repeat center;
+}
+.lets-design > div:nth-child(4){
+    width: 27%;
+    background: url('/assets/place_to_come_home.jpg') no-repeat center;
+}
+
+.lets-design > div p{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    color: #FFF;
+    background: rgba(0,0,0,0.4);
+    font-size: 18px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    line-height: 65px;
+    font-weight: 700;
+}
+.lets-design > div p i{
+    font-weight: 400;
+}
+.getStartedBtn:hover,.getStartedBtn{
+    border: 2px solid #000;
+    font-size: 30px;
+    color: #000;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 10px 40px;
+    margin-top: 60px;
+    margin-bottom: 127px;
+    display: inline-block;
+}
+.arrowDownBtn{
+    display: block;
+    margin-bottom: 245px;
+}
+.font36{
+    font-size: 36px;
+}
+.smallUnderline{
+    background: #000;
+    width: 86px;
+    height: 1px;
+    margin: 10px auto 0px;
+}
+.how-it-works{
+    margin-top: 100px;
+}
+.how-it-works h4{
+    margin-top: 65px;
+    font-size: 20px;
+    font-family: 'AvenirLTStd-Black';
+    color: #333;
+    margin-bottom: 45px;
+}
+.how-it-works p{
+    text-align: left;
+    font-size: 18px;
+}
+.paddingBottom200{
+    padding-bottom: 200px;
+}
+.example-moodboards{
+    background: #edefed;
+    padding-top: 200px;
+}
+.moodboardExample1{
+    height: 507px;
+    height: 25vw;
+    background: url('/assets/example_moodboard1.jpg') no-repeat center;
+    background-size: 100% 100%;
+    margin-top: 109px;
+    margin-bottom: 328px;
+}
+.moodboardExample2{
+    height: 507px;
+    height: 25vw;
+    background: url('/assets/example_moodboard2.jpg') no-repeat center;
+    background-size: 100% 100%;
+    margin-top: 109px;
+    margin-bottom: 328px;
+    /*margin: 0px 16px;*/
+}
+.moodboardExample3{
+    height: 507px;
+    height: 25vw;
+    background: url('/assets/example_moodboard3.jpg') no-repeat center;
+    background-size: 100% 100%;
+    margin-top: 109px;
+    margin-bottom: 328px;
+}
+
+.success-story{
+    margin-bottom: 40px;
+}
+.marginTop100{
+    margin-top: 100px;
+}
+.success-story .col-sm-2,.success-story .col-sm-6{
+    padding: 0px;
+}
+.success-story .col-sm-10{
+    background: #FFF;
+}
+.success-story div.user-story{
+    padding: 30px 40px;
+    position: relative;
+}
+.success-story div.user-story h4{
+    font-style: italic;
+    font-weight: 700;
+    font-size: 24px;
+    margin: 0px;
+}
+.success-story div.user-story p{
+    font-size: 16px;
+}
+.success-story div.user-story div{
+    width: 25px;
+    height: 1px;
+    background: #000;
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+.pointer-right{
+    position: absolute;
+    right: -31px;
+    top: 32px;
+}
+.pointer-left{
+    position: absolute;
+    left: -31px;
+    top: 32px;
+}
+
+.design-packages{
+    margin-top: 300px;
+    padding-bottom: 51px;
+}
+.design-packages p{
+    font-size: 20px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.design-packages .smallUnderline{
+    margin-bottom: 104px;
+}
+.design-packages .row > div{
+    background: #FFF;
+    padding: 0px;
+    border-radius: 5px;
+    height: 570px;
+    width: 30.7%;
+}
+.design-packages .row .head-design-package{
+    border-radius: 5px;
+    border-top: 10px solid #515151;
+    height: 140px;
+    width: 100%;
+    display: table;
+    margin-bottom: 35px;
+}
+.design-packages .row h5{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    height: 140px;
+    padding-bottom: 10px;
+    color: #FFF;
+    font-size: 36px;
+    font-family: 'AvenirLTStd-Black';
+    background: #515151;
+    margin: 0px;
+}
+.design-packages .row p{
+    border-bottom: 1px solid #f0f0f0;
+    margin: 0px 50px;
+    padding: 15px 0px;
+    text-align: left;
+    font-size: 20px;
+    font-weight: 600;
+}
+.middle-package{
+    margin:0px 38px;
+}
+@media (max-width: 1200px) {
+    .design-packages .row > div{
+        width: 29.5%;
+    }
+}
+.getStartedBtnBottom:hover,.getStartedBtnBottom{
+    margin-top: 51px;
+    margin-bottom: 51px;
+}
+/*end home page*/

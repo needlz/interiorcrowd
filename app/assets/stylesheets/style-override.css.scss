@@ -86,9 +86,11 @@
   margin-top: 80px;
 }
 
-.logo-pc {padding: 8px 0;}
+.logo-pc {
+  padding: 8px 0;
+}
 
-.main-menu>li>a {
+.main-menu > li > a {
   padding: 0px 40px;
   padding-bottom: 20px;
 }
@@ -106,6 +108,19 @@
   }
 }
 
-.pinterestColor{
+.pinterestColor {
   background: #bd081c;
+}
+
+.how-it-works {
+  .title {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2em;
+  }
+}
+
+.how-it-works img {
+  height: 106px;
 }
