@@ -107,6 +107,10 @@ en:
         novice: Novice
         enthusiast: Enthusiast
         savvy: Savvy
+      level_info:
+        novice: ''
+        enthusiast: How do I choose?
+        savvy: How do I source it?
 
     appeals:
       feminine: Feminine

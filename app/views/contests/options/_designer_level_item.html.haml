@@ -1,7 +1,8 @@
 .text-center.col-md-4.no-x-padding{:style => "position:relative", class: active && 'active' }
   .designer-level.level-block{ data: { id: designer_level.id } }
     %img{ src: designer_level_image(designer_level) }/
-    .fade-text.text-center
+    .fade-text.text-center.design-knowledge
+      %p= t("contests.design_style.level_info.#{ designer_level.name }")
     .check.text-center{ style: "#{ 'display: none' unless active }"}
       %img{:src => "/assets/white_check.png"}/
   .text-center.all-under-block
