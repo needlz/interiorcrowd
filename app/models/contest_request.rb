@@ -50,6 +50,7 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
+  scope :view_on_board, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved', 'closed']) }
   scope :published, -> { where(status: ['submitted', 'fulfillment']) }
   scope :submitted, ->{ where(status: 'submitted') }
   scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }

@@ -84,6 +84,25 @@ RSpec.describe ContestRequestsController do
       expect(answered).to be_falsey
     end
 
+    context 'contest in "submission" state' do
+      before do
+        contest.update_attributes!(status: 'submission')
+      end
+
+      let!(:request) { Fabricate(:contest_request, contest_id: contest.id, status: 'submitted', designer_id: 1) }
+      let!(:request_with_answer) { Fabricate(:contest_request, contest_id: contest.id, status: 'submitted', designer_id: 2, answer: 'maybe') }
+      let!(:request_without_answer) { Fabricate(:contest_request, contest_id: contest.id, status: 'submitted', designer_id: 3) }
+
+      it 'should close requests which were not won and has answer' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(request_with_answer.reload.status).to eq('closed')
+      end
+
+      it 'should close requests which were not won and has no answer' do
+        post :answer, id: request.id, answer: 'winner'
+        expect(request_without_answer.reload.status).to eq('closed')
+      end
+    end
   end
 
   describe 'POST approve_fulfillment' do

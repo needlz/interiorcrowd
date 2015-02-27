@@ -43,6 +43,7 @@ class Contest < ActiveRecord::Base
     after_transition on: :start_winner_selection, do: :delay_winner_selection_end
     after_transition on: :start_winner_selection, do: :update_phase_end
     after_transition on: :winner_selected, do: :delay_winner_selection_end
+    after_transition on: :winner_selected, do: :close_losers_requests
 
     event :start_winner_selection do
       transition submission: :winner_selection
@@ -144,6 +145,16 @@ class Contest < ActiveRecord::Base
 
   def has_other_winners?(request_id)
     requests.where(answer: 'winner').where.not(id: request_id).present?
+  end
+
+  def losers
+    requests
+     .where(ContestRequest.arel_table[:answer].eq(nil)
+     .or(ContestRequest.arel_table[:answer].not_eq('winner')))
+  end
+
+  def close_losers_requests
+    losers.update_all(status: 'closed')
   end
 
   private
