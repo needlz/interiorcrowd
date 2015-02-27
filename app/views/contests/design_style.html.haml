@@ -17,7 +17,7 @@
   #design-style
     = render partial: 'home/msg'
     .packages.text-package
-      .col-md-6.no-x-padding
+      .col-md-12.no-x-padding
         %h1= t('contests.design_style.title')
         %span#description= t('contests.design_style.description')
     = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
