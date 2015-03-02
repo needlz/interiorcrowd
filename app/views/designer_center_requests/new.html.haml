@@ -36,7 +36,6 @@
           %a.submitMyDesign.upload-button{:href => "#"}
             =t('designer_center.my_contests.concept_board_upload.upload_button')
         = f.hidden_field :status, value: 'draft'
-
-    = render partial: 'designer_center_requests/footer',  locals: { request: @request }
+        = render partial: 'designer_center_requests/footer',  locals: { request: @request }
 
 = render partial: 'designer_center/layout'
