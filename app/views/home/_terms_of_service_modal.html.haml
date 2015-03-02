@@ -1,10 +1,15 @@
 #terms_of_service_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+
   .modal-dialog
     .modal-content
       .modal-header
-        %h4#myModalLabel.modal-title= t('terms_of_service')
+        %h4#myModalLabel.modal-title= t('terms_of_service.title')
+        %button.close.close-modal{"data-dismiss" => "modal", :type => "button"} ×
       .modal-body
         %p.SofiaProLight= render partial: 'home/terms_of_service'
+        .text-center
+          %button.btn1.btn1-confirm.close-btn{"data-dismiss" => "modal", :type => "button"}= t('terms_of_service.close')
+
 
 :javascript
   $('.terms-of-use').on('click', function(){
