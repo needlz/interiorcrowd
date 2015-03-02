@@ -14,6 +14,7 @@ class DesignerCenterController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:updates)
     notifications = @designer.user_notifications.includes(:contest)
     @notifications_view = DesignerNotifications::NotificationView.new(notifications).all
+    @comments = UpdateMessages.new(@designer.comments)
   end
 
   def training

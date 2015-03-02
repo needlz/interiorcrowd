@@ -18,11 +18,8 @@
         .sidebarComments.leaderboardSidebar
           %p.designerName= t('designer_center.updates.leaderboard')
           #scrollBoxComments{tabindex: "0"}
-            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'17 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
-            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'39 min ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
-            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2hr ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
-            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'1d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
-            = render partial:'comment_container', locals: {comment: {username: 'InteriorCrowd Team', time:'2d ago', text: 'Curabitur commodo dui ipsum, sed sollicitudin nisi aliquam suscipit.'}}
+            - @designer.comments.reverse.each do |comment|
+              = render partial: 'designer_center/comment', locals: {user: @designer, comment: comment}
 
 = render partial: 'designer_center/layout'
 

@@ -146,6 +146,18 @@ RSpec.describe DesignerCenterRequestsController do
       post :create, contest_id: contest.id, lookbook: { picture: { ids: [image.id] } }, contest_request: { feedback: '' }
       expect(contest.requests[0].lookbook.lookbook_details).to be_present
     end
+
+    it 'creates comment if comment exists' do
+      expect(designer.contest_requests).to be_empty
+      post :create, contest_id: contest.id, contest_request: { feedback: '' }, comment: 'comment'
+      expect(contest.requests[0].comments.first.text).to eq 'comment'
+    end
+
+    it 'does not create empty comment if comment does not exist' do
+      expect(designer.contest_requests).to be_empty
+      post :create, contest_id: contest.id, contest_request: { feedback: '' }
+      expect(contest.requests[0].comments.first).to eq nil
+    end
   end
 
   describe 'GET edit' do
