@@ -792,7 +792,9 @@ en:
       sign_up: Sign up
       dont_have_account: Don't have an account?
 
-  terms_of_service: 'Terms of service'
+  terms_of_service:
+    close: Close
+    title: Terms of service
   home:
     lets_design: Let's design
     places:
