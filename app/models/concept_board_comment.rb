@@ -8,4 +8,8 @@ class ConceptBoardComment < ActiveRecord::Base
     send(user.class.name.downcase)
   end
 
+  def user_name
+    role.constantize.find(user_id).name
+  end
+
 end
