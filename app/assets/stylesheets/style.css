@@ -2937,7 +2937,6 @@ input[type="radio"].smallRadio + label span {
 }
 
 input[type="radio"].smallRadio + label span {
-     /*background-color:#292321;*/
      background: url('/assets/radio_small.png') top;
 }
 
@@ -3228,39 +3227,41 @@ padding-bottom: 40px;
     height: 499px;
 }
 .lets-design > div{
-    float: left;
-    height: 499px;
-    position: relative;
+	float: left;
+	height: 499px;
+	position: relative;
 }
 .lets-design > div:nth-child(1){
-    width: 29%;
-    background: url('/assets/start_the_day.jpg') no-repeat center;
+	width: 26%;
+	background: url('/assets/start_the_day.jpg') no-repeat center;
 }
 .lets-design > div:nth-child(2){
-    width: 25.5%;
-    background: url('/assets/place_to-entertain.jpg') no-repeat center;
+	width: 25.5%;
+	width: 25%;
+	background: url('/assets/place_to-entertain.jpg') no-repeat center;
 }
 .lets-design > div:nth-child(3){
-    width: 18.5%;
-    background: url('/assets/place_to_relax.jpg') no-repeat center;
+	width: 18.5%;
+	width: 24%;
+	background: url('/assets/place_to_relax.jpg') no-repeat center;
 }
 .lets-design > div:nth-child(4){
-    width: 27%;
-    background: url('/assets/place_to_come_home.jpg') no-repeat center;
+	width: 27%;
+	width: 25%;
+	background: url('/assets/place_to_come_home.jpg') no-repeat center;
 }
 
 .lets-design > div p{
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    color: #FFF;
-    background: rgba(0,0,0,0.4);
-    font-size: 18px;
-    text-align: center;
-    margin: 0px;
-    padding: 0px;
-    line-height: 65px;
-    font-weight: 700;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	color: #FFF;
+	background: rgba(0,0,0,0.4);
+	font-size: 18px;
+	text-align: center;
+	margin: 0px;
+	font-weight: 700;
+	padding: 20px 0px;
 }
 .lets-design > div p i{
     font-weight: 400;
@@ -3291,7 +3292,10 @@ padding-bottom: 40px;
     margin: 10px auto 0px;
 }
 .how-it-works{
-    margin-top: 100px;
+	margin-top: 100px;
+}
+.how-it-works img{
+	height: 109px;
 }
 .how-it-works h4{
     margin-top: 65px;
@@ -3326,7 +3330,6 @@ padding-bottom: 40px;
     background-size: 100% 100%;
     margin-top: 109px;
     margin-bottom: 328px;
-    /*margin: 0px 16px;*/
 }
 .moodboardExample3{
     height: 507px;
