@@ -1,37 +1,32 @@
 class @Notifications
 
   @buttons = '.updates-notifications .btn'
-  @notificationsContainer = '.updates-notifications'
+  @notifications = '.updates-notifications .notification'
 
-  @init: (type) ->
+  @init: () ->
     @.initButtons()
-    @.hideAllNotifications()
-    @.show(type)
+    @filterNotificationTypes()
 
   @initButtons: ->
     $(@buttons).on 'click', (event)=>
       $button = $(event.target)
-      notificationsTypes = $button.attr('type').split(',')
-      @filterNotificationTypes(notificationsTypes)
+      @filterNotificationTypes($button.attr('type'))
       @.reverseColor($button)
 
-  @filterNotificationTypes: (notificationsTypes)->
+  @filterNotificationTypes: (notificationsType)->
     @.hideAllNotifications();
-    @.show(notificationsTypes)
+    @.show(notificationsType)
 
   @hideAllNotifications: ->
-    $(@notificationsContainer).find('.notification').hide()
+    $(@notifications).hide()
 
-  @show: (notificationsTypes) =>
-    for type in notificationsTypes
-      if type
-        $(@notificationsContainer).find(".notification[type=#{ type }]").show()
-      else
-        $(@notificationsContainer).find(".notification").show()
+  @show: (notificationsType) =>
+    notificationsFilter = if notificationsType then "[type=#{ notificationsType }]" else '*'
+    $(@notifications).filter(notificationsFilter).show()
 
   @reverseColor: ($btn) ->
     $(@buttons).removeAttr('reverse')
     $btn.attr('reverse', true)
 
 $ ->
-  Notifications.init([''])
+  Notifications.init()
