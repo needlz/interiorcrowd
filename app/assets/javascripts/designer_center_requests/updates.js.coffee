@@ -1,28 +1,32 @@
 class @Notifications
 
   @buttons = '.updates-notifications .btn'
+  @notifications = '.updates-notifications .notification'
 
-  @init: (type) ->
+  @init: () ->
     @.initButtons()
-    @.hideAllNotifications()
-    @.show(type)
+    @filterNotificationTypes()
 
   @initButtons: ->
-    $(@buttons).on 'click', =>
-      @.hideAllNotifications();
-      @.show($(event.target).attr('type'))
-      @.reverseColor(event.target)
+    $(@buttons).on 'click', (event)=>
+      $button = $(event.target)
+      @filterNotificationTypes($button.attr('type'))
+      @.reverseColor($button)
+
+  @filterNotificationTypes: (notificationsType)->
+    @.hideAllNotifications();
+    @.show(notificationsType)
 
   @hideAllNotifications: ->
-    $('.notification').hide()
+    $(@notifications).hide()
 
-  @show: (color) ->
-    $(".notification[type=#{color}]").show()
+  @show: (notificationsType) =>
+    notificationsFilter = if notificationsType then "[type=#{ notificationsType }]" else '*'
+    $(@notifications).filter(notificationsFilter).show()
 
-  @reverseColor: (btn) ->
+  @reverseColor: ($btn) ->
     $(@buttons).removeAttr('reverse')
-    $(btn).attr('reverse', true)
+    $btn.attr('reverse', true)
 
 $ ->
-  Notifications.init('invite')
-
+  Notifications.init()

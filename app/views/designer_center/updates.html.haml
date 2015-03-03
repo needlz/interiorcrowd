@@ -2,10 +2,11 @@
   = javascript_include_tag 'designer_center_requests/updates'
 
 - content_for :designer_center_content do
-  .container.animated.fadeInDown.bottom60
+  .container.animated.fadeInDown.bottom60.updates-notifications
     .row
-      .col-md-12.no-x-padding.updates-notifications
-        %a.btn.invitesBtn{type: 'invite', reverse: true}= t('designer_center.updates.invites')
+      .col-md-12.no-x-padding.filter-buttons
+        %a.btn.allBtn{type: '', reverse: true}= t('designer_center.updates.all')
+        %a.btn.invitesBtn{type: 'invite'}= t('designer_center.updates.invites')
         %a.btn.commentsBtn{type: 'comment'}= t('designer_center.updates.comments')
         %a.btn.winsBtn{type: 'win'}= t('designer_center.updates.wins')
         %a.btn.notificationsBtn{type: 'notification'}= t('designer_center.updates.notifications')
