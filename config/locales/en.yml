@@ -89,8 +89,9 @@ en:
     design_style:
       title: Style Profile
       description: >
-        Now for the fun part! Tell us more about your style and what you’d like in your home. The
-        more we know about you, the easier it’ll be for us to provide you with a design you really love.
+        Now for the really fun part! Please give us a better sense of where your style is now - and where
+        you would like it to be, by going through our style profile.
+        The more information we have, the easier it'll be to design something amazing for you.
       validations:
         no_colors: Please enter data.
         select_design_level: Please select one
