@@ -19,7 +19,7 @@
         .sidebarComments.leaderboardSidebar
           %p.designerName= t('designer_center.updates.leaderboard')
           #scrollBoxComments{tabindex: "0"}
-            - @designer.comments.reverse.each do |comment|
+            - @comments.each do |comment|
               = render partial: 'designer_center/comment', locals: {user: @designer, comment: comment}
 
 = render partial: 'designer_center/layout'

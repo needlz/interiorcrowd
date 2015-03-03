@@ -5,7 +5,7 @@ class ContestNotesController < ApplicationController
   def create
     @contest.notes.create!(text: note_params[:text].strip)
     last_notes = @contest.notes.order(created_at: :desc)
-    note_views = last_notes.map { |note| ContestNoteView.new(note) }
+    note_views = last_notes.map { |note| ContestNoteView.new(note, current_user) }
     render json: note_views.map(&:attributes).to_json
   end
 

@@ -14,7 +14,9 @@ class DesignerCenterController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:updates)
     notifications = @designer.user_notifications.includes(:contest)
     @notifications_view = DesignerNotifications::NotificationView.new(notifications).all
-    @comments = UpdateMessages.new(@designer.comments)
+    contests_notes = ContestNote.includes(contest: [:requests]).where(contest_requests: { designer_id: @designer.id })
+    comments = (@designer.comments.client + contests_notes).sort_by{ |comment| comment.updated_at }.reverse
+    @comments = comments.map{ |comment| CommentView.create(comment, current_user) }
   end
 
   def training

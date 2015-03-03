@@ -161,6 +161,10 @@ class Contest < ActiveRecord::Base
     end
   end
 
+  def client_name
+    client.name
+  end
+
   private
 
   def update_appeals(options)
