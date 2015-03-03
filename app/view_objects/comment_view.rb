@@ -16,10 +16,6 @@ class CommentView
     @author_name = comment.author_name
   end
 
-  def updated_at
-    comment.updated_at
-  end
-
   def updated_at_text
     time_ago_in_words(updated_at, include_seconds: true) + I18n.t('board_comments.ago')
   end

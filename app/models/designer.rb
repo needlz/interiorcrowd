@@ -11,6 +11,7 @@ class Designer < ActiveRecord::Base
   has_many :designer_invite_notifications, foreign_key: :user_id
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
+
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
   end
@@ -55,6 +56,11 @@ class Designer < ActiveRecord::Base
     return contest_requests.view_on_board unless status
     statuses = ['submitted', 'fulfillment']
     contest_requests.send(status) if statuses.include? status
+  end
+
+  def related_comments
+    contests_notes = ContestNote.includes(contest: [:requests]).where(contest_requests: { designer_id: id })
+    (comments.client + contests_notes).sort_by{ |comment| comment.updated_at }.reverse
   end
 
 end

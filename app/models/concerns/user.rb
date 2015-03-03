@@ -8,4 +8,12 @@ module User
   def role
     self.class.name
   end
+
+  def designer?
+    kind_of?(Designer)
+  end
+
+  def client?
+    kind_of?(Client)
+  end
 end
