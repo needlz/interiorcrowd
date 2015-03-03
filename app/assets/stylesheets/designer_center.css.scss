@@ -107,3 +107,26 @@
 .loser-text.small{
   font-size:22px;
 }
+
+
+.updates-notifications {
+  .allBtn {
+    color: #000;
+    background: #FFF;
+    border: 1px solid #000;
+  }
+
+  .allBtn[reverse] {
+    color: #FFF;
+    background: #000;
+  }
+
+  .filter-buttons {
+    .btn {
+      font-weight: 700;
+      font-size: 18px;
+      padding: 2px 12px;
+      margin-right: 20px;
+    }
+  }
+}
