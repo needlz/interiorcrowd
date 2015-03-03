@@ -2,6 +2,9 @@ require "rails_helper"
 
 RSpec.describe Designer do
   let(:designer) { Fabricate(:designer) }
+  let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest, client: client) }
+  let(:request) { Fabricate(:contest_request, designer: designer, contest: contest) }
 
   describe '#create_portfolio' do
     let(:images) { [Fabricate(:image), Fabricate(:image)] }
@@ -30,6 +33,13 @@ RSpec.describe Designer do
         designer.portfolio.destroy
       end
     end
+  end
+
+  it 'returns related comments' do
+    contest.notes.create!(text: 'a note for designers')
+    Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request)
+
+    expect(designer.related_comments.length).to eq 2
   end
 
 end

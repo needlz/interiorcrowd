@@ -12,9 +12,11 @@ class DesignerCenterController < ApplicationController
 
   def updates
     @navigation = Navigation::DesignerCenter.new(:updates)
+
     notifications = @designer.user_notifications.includes(:contest)
     @notifications_view = DesignerNotifications::NotificationView.new(notifications).all
-    @comments = UpdateMessages.new(@designer.comments)
+
+    @comments = @designer.related_comments.map{ |comment| CommentView.create(comment, current_user) }
   end
 
   def training
