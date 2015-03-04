@@ -31,13 +31,13 @@ RSpec.describe DesignerCenterController do
 
         it 'redirects to portfolio editing if the designer has no active requests' do
           get :designer_center
-          expect(response).to redirect_to designer_center_contest_index_path
+          expect(response).to redirect_to updates_designer_center_index_path
         end
 
         it 'redirects to responses list if the designer has active requests' do
           Fabricate(:contest_request, designer: designer, contest: Fabricate(:contest))
           get :designer_center
-          expect(response).to redirect_to designer_center_response_index_path
+          expect(response).to redirect_to updates_designer_center_index_path
         end
       end
 
