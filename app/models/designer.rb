@@ -59,7 +59,7 @@ class Designer < ActiveRecord::Base
   end
 
   def related_comments
-    contests_notes = ContestNote.includes(contest: [:requests]).where(contest_requests: { designer_id: id })
+    contests_notes = ContestNote.includes(contest: [:requests, :client]).where(contest_requests: { designer_id: id })
     (comments.client + contests_notes).sort_by{ |comment| comment.updated_at }.reverse
   end
 
