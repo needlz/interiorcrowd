@@ -233,6 +233,13 @@
     margin-top: 0;
     font-size: 16px;
   }
+
+  .img-responsive {
+    img {
+      max-height: 150px;
+      max-width: 100%;
+    }
+  }
 }
 .sections_table .view p span {
   font-size: 16px!important;
