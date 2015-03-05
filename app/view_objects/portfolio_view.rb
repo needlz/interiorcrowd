@@ -92,7 +92,7 @@ class PortfolioView
   end
 
   def exit_portfolio_path(client, designer)
-    return client_center_index_path if client
+    return entries_client_center_index_path if client
     return designer_center_index_path if designer
     root_path
   end
