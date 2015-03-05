@@ -10,9 +10,20 @@ class EntriesPage
     ContestNotes.bindAjaxSuccess()
     ResponsesFilter.init()
     ReviewerInvitations.init(contestId)
+    DesignerBlocks.fitHeight()
 
   @getContestId: ->
     $('input.contest').data('id')
+
+class DesignerBlocks
+
+  @profileCardPadding = 40
+
+  @fitHeight: ->
+    maxProfileCardHeight = 0
+    $('.profile-card').each ->
+      maxProfileCardHeight = $(@).height() if maxProfileCardHeight < $(@).height()
+    $('.profile-card').css 'height', maxProfileCardHeight + @profileCardPadding + 'px'
 
 class ScrollBars
 
@@ -162,8 +173,6 @@ class @FulfillmentDesign
         $('#thanksModal').modal('show') if data.approved
     )
 
-
-
 class ReviewerInvitations
 
   @init: (contestId)->
@@ -221,5 +230,6 @@ class ReviewerInvitations
 
   @invitableRows: ->
     $(InvitationInputs.container).find('.invitation-row.lnk_container')
+
 $ ->
   EntriesPage.init()
