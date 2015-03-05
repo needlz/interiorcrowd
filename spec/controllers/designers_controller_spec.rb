@@ -53,5 +53,10 @@ RSpec.describe DesignersController do
         expect(Designer.first.portfolio.example_links.map(&:url)).to match_array portfolio_links
       end
     end
+
+    it 'creates welcome notification' do
+      post :create, designer_creation_params
+      expect(Designer.first.user_notifications.length).to eq 1
+    end
   end
 end
