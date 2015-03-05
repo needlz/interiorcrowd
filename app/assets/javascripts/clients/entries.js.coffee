@@ -14,6 +14,19 @@ class EntriesPage
   @getContestId: ->
     $('input.contest').data('id')
 
+class @DesignerBlocks
+
+  @profileCardPadding = 40
+
+  @fitHeight: ->
+    maxProfileCardHeight = null
+    $('.designers-row').each (i, row)=>
+      maxProfileCardHeight = 0
+      $rowCards = $(row).find('.profile-card')
+      $rowCards.each ->
+        maxProfileCardHeight = $(@).height() if maxProfileCardHeight < $(@).height()
+      $rowCards.css 'height', "#{ maxProfileCardHeight + @profileCardPadding }px"
+
 class ScrollBars
 
   @style: ->
@@ -162,8 +175,6 @@ class @FulfillmentDesign
         $('#thanksModal').modal('show') if data.approved
     )
 
-
-
 class ReviewerInvitations
 
   @init: (contestId)->
@@ -221,5 +232,9 @@ class ReviewerInvitations
 
   @invitableRows: ->
     $(InvitationInputs.container).find('.invitation-row.lnk_container')
+
 $ ->
   EntriesPage.init()
+
+$(window).load ->
+  DesignerBlocks.fitHeight()

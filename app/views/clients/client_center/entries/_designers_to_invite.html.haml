@@ -4,8 +4,9 @@
       %b Let’s explore and invite designers to your contest.
     - @invitable_designer_views.in_groups_of(2, false) do |designers|
       .clearfix
-      - designers.each do |designer|
-        = render partial: 'clients/client_center/entries/designer_to_invite', locals: { designer: designer }
+      .designers-row
+        - designers.each do |designer|
+          = render partial: 'clients/client_center/entries/designer_to_invite', locals: { designer: designer }
     .some-text.col-md-12.text-center.more-designers-link
       %p.more-designers-link
         %a{:href => "#"}
