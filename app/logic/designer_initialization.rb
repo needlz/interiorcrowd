@@ -8,7 +8,7 @@ class DesignerInitialization
 
   def perform
     create_portfolio
-    welcome_notification
+    create_welcome_notification
     send_mails
   end
 
@@ -20,7 +20,7 @@ class DesignerInitialization
     designer.create_portfolio(portfolio_params)
   end
 
-  def welcome_notification
+  def create_welcome_notification
     designer.user_notifications.create(type: 'DesignerWelcomeNotification')
   end
 

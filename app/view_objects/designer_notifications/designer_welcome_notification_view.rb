@@ -8,7 +8,7 @@ module DesignerNotifications
     end
 
     def color
-      'purple'
+      'yellow'
     end
 
     def text

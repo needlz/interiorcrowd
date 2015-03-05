@@ -37,10 +37,14 @@ class @Notifications
     $(@buttons).removeAttr('reverse')
     $btn.attr('reverse', true)
 
+class Comments
+
+  @beautifyScroll: ->
+    $('#scrollBoxComments').enscroll
+      verticalTrackClass: 'scrollBoxCommentsTrack'
+      verticalHandleClass: 'scrollBoxCommentsHandle'
+      minScrollbarLength: 28
+
 $ ->
   Notifications.init()
-
-  $('#scrollBoxComments').enscroll
-    verticalTrackClass: 'scrollBoxCommentsTrack'
-    verticalHandleClass: 'scrollBoxCommentsHandle'
-    minScrollbarLength: 28
+  Comments.beautifyScroll()
