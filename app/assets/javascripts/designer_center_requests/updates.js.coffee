@@ -2,10 +2,19 @@ class @Notifications
 
   @buttons = '.updates-notifications .btn'
   @notifications = '.updates-notifications .notification'
+  @notificationPadding = 62
 
   @init: () ->
     @.initButtons()
     @filterNotificationTypes()
+    @resizeNotifications()
+
+  @resizeNotifications: ->
+    height = null
+    $('.leftBorderNotification').each (i, border)=>
+      $border = $(border)
+      height = "#{ $border.parent().find('.designerNotification').height() + @notificationPadding }px"
+      $border.css 'height', height
 
   @initButtons: ->
     $(@buttons).on 'click', (event)=>
@@ -28,5 +37,14 @@ class @Notifications
     $(@buttons).removeAttr('reverse')
     $btn.attr('reverse', true)
 
+class Comments
+
+  @beautifyScroll: ->
+    $('#scrollBoxComments').enscroll
+      verticalTrackClass: 'scrollBoxCommentsTrack'
+      verticalHandleClass: 'scrollBoxCommentsHandle'
+      minScrollbarLength: 28
+
 $ ->
   Notifications.init()
+  Comments.beautifyScroll()

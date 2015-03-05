@@ -24,9 +24,11 @@ class DesignersController < ApplicationController
       if @designer.save
         session[:external_links] = nil
         session[:designer_id] = @designer.id
-        @designer.create_portfolio(params[:portfolio])
-        Jobs::Mailer.schedule(:user_registration, [@designer, user_password])
-        Jobs::Mailer.schedule(:designer_registration_info, [@designer])
+        DesignerInitialization.new({
+          plain_password: user_password,
+          portfolio_params: params[:portfolio],
+          designer: @designer
+        }).perform
         format.html { redirect_to edit_portfolio_path, notice: 'Designer was successfully created.' }
         format.json { render action: 'show', status: :created, location: @designer }
       else

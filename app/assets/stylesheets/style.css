@@ -2205,14 +2205,15 @@ textarea.productsMoodboardAbove{
 	border: 1px solid #e1e1e1;
 	color: #000;
 	padding-left: 30px;
-	line-height: 72px;
 	font-size: 16px;
 	font-weight: 700;
 	margin-bottom: 30px;
 	border-left: 0px;
 	float: left;
 	width: 99%;
-    /*position:relative;*/
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 70px;
 }
 
 .designerNotification:hover{

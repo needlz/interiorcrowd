@@ -387,6 +387,9 @@ en:
       terms_of_use: terms of use
       submit: Submit
   designer_center:
+    welcome_message: >
+      Welcome to InteriorCrowd! We are very excited to have you on the platform!
+      Check out our latest training materials and get ready to transform the way you design online.
     edit_button: Edit
     save_button: Save
     cancel_button: Cancel
