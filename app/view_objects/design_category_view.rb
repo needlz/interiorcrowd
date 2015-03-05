@@ -18,8 +18,8 @@ class DesignCategoryView
     I18n.t("contests.titles.brief.packages.#{ design_category.name }.quote")
   end
 
-  def picture
-    design_category.before_picture
+  def picture_path
+    "/assets/categories/#{ name.parameterize.underscore }.jpg"
   end
 
   attr_reader :design_category

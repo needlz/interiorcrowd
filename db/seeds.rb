@@ -10,21 +10,15 @@ DesignCategory.delete_all
 DesignCategory.create(id: 1,
                       name: 'quick_fix',
                       pos: 1,
-                      price: 99,
-                      before_picture: 'contest_creation/before_picture.png',
-                      after_picture: 'contest_creation/after_picture.png')
+                      price: 99)
 DesignCategory.create(id: 2,
                       name: 'update_my_style',
                       pos: 2,
-                      price: 99,
-                      before_picture: 'contest_creation/before_picture.png',
-                      after_picture: 'contest_creation/after_picture.png')
+                      price: 99)
 DesignCategory.create(id: 3,
                       name: 'total_room_overhaul',
                       pos: 3,
-                      price: 199,
-                      before_picture: 'contest_creation/before_picture.png',
-                      after_picture: 'contest_creation/after_picture.png')
+                      price: 199)
 
 DesignSpace.delete_all
 DesignSpace.create(id: 1, name: 'Bedroom', pos: 10, parent_id: 0)
