@@ -146,9 +146,9 @@ en:
         'no': 'No'
       photos:
         title: Please take photos of your room so that the designers can see your space.
-        image_requirements: At least 4 images with back to each coner. Images must be smaller than 10M.
+        image_requirements: >
+          Take at least 4 images - with your back to each wall in the room. Images must be smaller than 10M.
         see_more: See more guideline
-        hint: Please stand with your back in each corner of the room and take a picture.
         upload_button: Upload images
         uploading: Uploading...
         prefer_to_email_or_text: Prefer to text or e-mail it to us?
@@ -235,8 +235,8 @@ en:
         antique_stores: Shop antique stores
         retailers: Shop retailers who are on-trend
       space_needs_accommodate:
-        accommodate_children: Does this space need to acoommodate children?
-        accommodate_pets: Does this space need to acoommodate pets?
+        accommodate_children: Does this space need to accommodate children?
+        accommodate_pets: Does this space need to accommodate pets?
         'yes': 'Yes'
         'no': 'No'
       done_button: Done!
