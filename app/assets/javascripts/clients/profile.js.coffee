@@ -49,6 +49,9 @@ class @ProfileEditor extends InlineEditor
   editFormsCallbacks:
     billing_information: ($form, $view)->
       @initSelectPicker()
+    phone_number: ($form, $view)->
+      $form.find('#client_phone_number').phoneNumber()
+
 
   updateText: ($form, $view, field)->
     @updateSection($form, $view, field, ($input)->

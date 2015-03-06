@@ -35,3 +35,7 @@ jQuery.fn.NumberLimiter =(maxValue) ->
     $(this).on 'input', (e) ->
       if ( $(this).val() > maxValue )
         $(this).val(maxValue)
+
+jQuery.fn.phoneNumber = ->
+  @each ->
+    $(this).mask('000 000 0000');
