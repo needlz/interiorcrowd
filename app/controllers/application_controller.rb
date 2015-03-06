@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from StandardError, with: :log_error
 
+  helper_method :current_user
+
   PAGE_404_PATH = 'errors/404'
 
   def check_designer

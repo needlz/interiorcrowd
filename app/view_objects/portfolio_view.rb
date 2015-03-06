@@ -91,10 +91,10 @@ class PortfolioView
     designer.invited_to_contest?(client.last_contest)
   end
 
-  def exit_portfolio_path(client, designer)
-    return entries_client_center_index_path if client
-    return designer_center_index_path if designer
-    root_path
+  def exit_portfolio_path(current_user)
+    return root_path unless current_user
+    return client_center_index_path if current_user.client?
+    designer_center_index_path if current_user.designer?
   end
 
   def owner?(owner)
