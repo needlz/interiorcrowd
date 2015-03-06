@@ -3301,7 +3301,7 @@ padding-bottom: 40px;
 .how-it-works h4{
     margin-top: 65px;
     font-size: 20px;
-    font-family: 'AvenirLTStd-Black';
+    font-weight: bold;
     color: #333;
     margin-bottom: 45px;
 }
@@ -3411,6 +3411,11 @@ padding-bottom: 40px;
     display: table;
     margin-bottom: 35px;
 }
+
+.design-packages .row .head-design-package h5 div{
+    margin: 0px 21%;
+}
+
 .design-packages .row h5{
     display: table-cell;
     vertical-align: middle;
@@ -3419,7 +3424,7 @@ padding-bottom: 40px;
     padding-bottom: 10px;
     color: #FFF;
     font-size: 36px;
-    font-family: 'AvenirLTStd-Black';
+    font-weight: bold;
     background: #515151;
     margin: 0px;
 }
@@ -3428,8 +3433,7 @@ padding-bottom: 40px;
     margin: 0px 50px;
     padding: 15px 0px;
     text-align: left;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 18px;
 }
 .middle-package{
     margin:0px 38px;
