@@ -26,6 +26,8 @@ class @DesignerSignUp
   bindNumericInputs: ->
     $("#designer_zip").ForceNumericOnly();
 
+    $('#designer_phone_number').phoneNumber()
+
   populateExamplesInputs: ->
     $.each(externaLinks, (index, link)=>
       $rows = $('.lnk_container:first').first()
