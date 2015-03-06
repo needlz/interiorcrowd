@@ -53,4 +53,4 @@
       .col-md-12
         .hLine10.marg-top30.marg-bottom30
         .col-md-12.text-center
-          %a.doneBtn{:href => @portfolio_view.exit_portfolio_path(@client, @designer) }= t('designer_center.portfolio.show.done')
+          %a.doneBtn{:href => @portfolio_view.exit_portfolio_path(current_user) }= t('designer_center.portfolio.show.done')

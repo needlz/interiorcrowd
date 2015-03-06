@@ -122,9 +122,9 @@ RSpec.describe ClientsController do
       expect(response).to redirect_to entries_client_center_index_path
     end
 
-    it 'redirects to Brief page if no responses present' do
+    it 'redirects to Entries page if no responses present' do
       get :client_center
-      expect(response).to redirect_to brief_client_center_index_path
+      expect(response).to redirect_to entries_client_center_index_path
     end
   end
 
