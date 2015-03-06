@@ -98,7 +98,7 @@ class ContestsController < ApplicationController
     @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
     @contest_view = ContestView.new(@contest)
     if params[:pictures_dimension]
-     redirect_to brief_client_center_index_path
+      redirect_to entries_client_center_index_path
     else
       render partial: "contests/previews/#{ params[:option] }_preview"
     end

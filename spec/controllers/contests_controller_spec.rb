@@ -44,6 +44,11 @@ RSpec.describe ContestsController do
         expect(contest_appeal.reason).to eq value[:reason]
       end
     end
+
+    it 'redirects to Entries page after pictures dimension edited' do
+      patch :update, option: 'space_dimensions', id: contest.id, pictures_dimension: true
+      expect(response).to redirect_to(entries_client_center_index_path)
+    end
   end
 
   describe 'GET preview' do
