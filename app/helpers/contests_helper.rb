@@ -69,4 +69,8 @@ module ContestsHelper
     css_class
   end
 
+  def force_link_protocol(link)
+    link =~ /^https?\:/ ? link : "http://#{ link }"
+  end
+
 end
