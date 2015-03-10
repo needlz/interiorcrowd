@@ -1,4 +1,4 @@
 $ ->
   $(location.hash).collapse('show');
-  panelId = $(location.hash).parents('[role="tabpanel"]').attr('id')
+  panelId = $(location.hash).closest('[role="tabpanel"]').attr('id')
   $("a[href='##{ panelId }']").tab('show');

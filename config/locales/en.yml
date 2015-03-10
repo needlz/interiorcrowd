@@ -1,4 +1,6 @@
 en:
+  header:
+    need_help: Need help?
   error_during_saving:
   contest_requests:
     validations:

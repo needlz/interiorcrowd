@@ -31,4 +31,10 @@ module HomeHelper
       answer: t("faq.#{ faq_chapter }.#{ question_name }.answer", answer_i18n_params) }
   end
 
+  def need_help_path
+    return faq_path unless current_user
+    return faq_path + '#designer' if current_user.designer?
+    faq_path + '#client'
+  end
+
 end
