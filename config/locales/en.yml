@@ -595,7 +595,7 @@ en:
         send_note: Send Note to Client
         create_shopping_list: Create Shoppping List
         create_3d_rendering: Create 3D rendering
-        price: $%{price}
+        price: X
         listed_as: 'Currently listed as: %{answer}'
       statuses:
         draft: Not submitted

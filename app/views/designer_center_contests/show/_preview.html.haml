@@ -1,4 +1,5 @@
-= render partial: 'contests/preview/current_contest_infobox'
+= render partial: 'contests/preview/current_contest_infobox',
+    locals: { contest: ContestShortDetails.new(@contest) }
 
 .col-md-12.marg-top30.contestInfo
   .row.borderBottom.sections_table
