@@ -34,10 +34,12 @@
   .menu-border
     .container
       .text-center.logo-mobile.visible-sm.visible-xs
-        %img{src: '/assets/logo2.png'}/
+        %a{ href: root_path }
+          %img{src: '/assets/logo2.png'}/
       .row.my-menu.visible-lg.visible-md
         .col-md-2.no-padding-right.logo-pc
-          %img{ src: '/assets/logo2.png' }
+          %a{ href: root_path }
+            %img{ src: '/assets/logo2.png' }
         %a.btn.btn2-success.pull-right{href: '#'}
           %b Need help?
         .col-md-10.no-padding-right
