@@ -33,7 +33,7 @@ RSpec.describe ImageItemsController do
 
       it 'doesn\'t create an item' do
         post :create, generate_params
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 

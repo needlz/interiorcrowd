@@ -1,11 +1,8 @@
 InteriorC::Application.routes.draw do
 
-  if Rails.env.production?
-    root 'home#sign_up_beta'
-    get 'sign_up_beta', to: 'home#sign_up_beta'
+  def draw_routes
+    root 'home#index'
 
-    resources :beta_subscribers, only: [:create]
-  else
     resources :designers, only: [:new, :create, :update]
 
     resources :sessions, only: [] do
@@ -23,7 +20,6 @@ InteriorC::Application.routes.draw do
     get 'terms_of_service', to: 'home#terms_of_service'
     get 'faq', to: 'home#faq'
     get 'sign_up_beta', to: 'home#sign_up_beta'
-    root 'home#index'
 
     resources :contest_requests, only: [:show, :create] do
       member do
@@ -127,4 +123,22 @@ InteriorC::Application.routes.draw do
       get '/:token', to: 'contest_requests#design', as: 'public'
     end
   end
+
+  if Rails.env.production? || Rails.env.development? || Rails.env.test?
+    constraints subdomain: /^(www)?$/ do
+      root 'home#sign_up_beta', as: 'beta_signup'
+      get 'sign_up_beta', to: 'home#sign_up_beta'
+
+      resources :beta_subscribers, only: [:create]
+    end
+
+    constraints subdomain: 'beta' do
+      post '/create_beta_session', to: 'home#create_beta_session'
+      get '/sign_in_beta', to: 'home#sign_in_beta', as: 'sign_in_beta'
+      draw_routes
+    end
+  else
+    draw_routes
+  end
+
 end

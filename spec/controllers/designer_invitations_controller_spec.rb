@@ -22,7 +22,7 @@ RSpec.describe DesignerInvitationsController do
 
       it 'doesn\'t create an invitation' do
         post :create, designer_id: designer.id, contest_id: contest.id
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 

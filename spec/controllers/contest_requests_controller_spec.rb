@@ -157,7 +157,7 @@ RSpec.describe ContestRequestsController do
       it 'renders 404' do
         post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
         expect(ConceptBoardComment.exists?).to be_falsey
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -183,7 +183,7 @@ RSpec.describe ContestRequestsController do
       it 'renders 404' do
         post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
         expect(ConceptBoardComment.exists?).to be_falsey
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
   end
@@ -246,7 +246,7 @@ RSpec.describe ContestRequestsController do
     context 'unexisting contest response token' do
       it 'renders 404' do
         get :design, token: '1111'
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 

@@ -1,0 +1,23 @@
+.menu-border.whiteBg.border0
+  .container.paddY20
+    .text-center.logo-mobile
+      %img{:height => "200", :src => "/assets/logo.png", :width => "200"}/
+.container-fluid.text-center.homeEmailSignup
+  .row
+    .col-md-12
+      %h3= t('sign_up_beta.private_beta')
+      .container
+        .row
+          .col-md-12
+            .hLine10
+.optionalSignup
+  - if flash[:error].present?
+    .alert.alert-danger= flash[:error]
+  - if flash[:notice].present?
+    .alert.alert-success= flash[:notice]
+  .labelHomeLeft
+    %label.lineHight37= t('sign_in_beta.sign_in')
+  .labelHomeRight
+    = form_tag create_beta_session_path do
+      = password_field_tag :password
+      = button_tag t('sign_in_beta.go'), type: 'submit', class: 'btn fullWidth marg-top20'

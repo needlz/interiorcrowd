@@ -177,4 +177,16 @@ RSpec.describe ClientsController do
       expect(response).to render_template(:entries)
     end
   end
+
+  describe 'GET pictures_dimension' do
+    before do
+      sign_in(client)
+      Fabricate(:contest, client: client)
+    end
+
+    it 'returns page' do
+      get :pictures_dimension
+      expect(response).to render_template(:pictures_dimension)
+    end
+  end
 end

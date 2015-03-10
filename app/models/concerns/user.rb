@@ -16,4 +16,8 @@ module User
   def client?
     kind_of?(Client)
   end
+
+  def beta?
+    session[:beta]
+  end
 end

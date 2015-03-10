@@ -27,7 +27,7 @@ RSpec.describe ReviewerFeedbacksController do
     context 'unexisting token' do
       it 'doesn\'t create an invitation' do
         post :create, params(token: '')
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -51,7 +51,7 @@ RSpec.describe ReviewerFeedbacksController do
     context 'unexisting token' do
       it 'renders unknown path error' do
         get :show, id: contest.id
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 
