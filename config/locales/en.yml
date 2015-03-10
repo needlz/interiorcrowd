@@ -772,8 +772,8 @@ en:
   invitation_to_content:
     invite: |
             Great news! %{name} has invited you to participate in their contest.<br>
-            You can view the contest details in your %{link}. You only have three days to submit a design, so go check it out now!
-    link: Design Center
+            You can view the contest details %{link} — or just go to your Designer Center. You only have three days to submit a design, so go check it out now!
+    link: here
   reset_password: 'Your password was reseted, here are your new credentionals:'
   feedback_email: hello@interiorcrowd.com
 
