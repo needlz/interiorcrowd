@@ -70,7 +70,7 @@ class UserMailer
   def set_invitation_params(client)
     {
       text: I18n.t("invitation_to_content.invite",
-                   name: client.name,
+                   name: client.name.upcase,
                    link: "<a href=#{designer_center_index_url(host: host)}> #{I18n.t("invitation_to_content.link")}</a>")
     }
   end
