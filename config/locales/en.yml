@@ -147,7 +147,7 @@ en:
       photos:
         title: Please take photos of your room so that the designers can see your space.
         image_requirements: >
-          Take at least 4 images - with your back to each wall in the room. Images must be smaller than 10M.
+          Take at least 4 images - with your back to each corner in the room. Images must be smaller than 10M.
         see_more: See more guideline
         upload_button: Upload images
         uploading: Uploading...
@@ -179,7 +179,7 @@ en:
         select_room: Please select one.
       preview:
         name_label: Give your project name
-        name_placeholder: MY Dream Loft
+        name_placeholder: My Dream Loft
         name_error: Please enter project name.
         plan_error: Please choose package.
       go_back: Back
