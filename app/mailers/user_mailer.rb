@@ -38,8 +38,10 @@ class UserMailer
     return unless Rails.env.production?
     template 'new_beta_subscriber'
     set_template_values(new_subscriber_params(beta_subscriber))
-    mail to: [wrap_recipient('erikneeds@gmail.com', 'Erik Needham', "to"),
-              wrap_recipient('heathernatsch@yahoo.com', 'Heather Natsch', "to")], subject: 'InteriorCrowd: new beta subscriber'
+    recipients = ENV['BETA_NOTIFICATION_EMAILS'].split(',').map do |email|
+      wrap_recipient(email, 'InteriorCrowd', 'to')
+    end
+    mail to: recipients, subject: 'InteriorCrowd: new beta subscriber'
   end
 
   def invitation_to_leave_a_feedback(params, url)
