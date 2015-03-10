@@ -5,13 +5,15 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  PAGE_404_PATH = 'errors/404'
+  before_filter :check_beta_area_access
+
+  PAGE_404_PATH = 'public/404.html'
 
   def check_designer
     redirect_to login_sessions_path if session[:designer_id].blank?
     session[:designer_id]
   end
-  
+
   def check_client
     redirect_to client_login_sessions_path if session[:client_id].blank?
     session[:client_id]
@@ -26,7 +28,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render PAGE_404_PATH
+    render file: PAGE_404_PATH, layout: 'sign_up', status: 404
   end
 
   def check_contest_owner
@@ -41,6 +43,12 @@ class ApplicationController < ActionController::Base
     nil
   end
 
+  def check_beta_area_access
+    return if Rails.env.staging?
+    return unless beta_page?
+    redirect_to sign_in_beta_path unless beta_access_granted?
+  end
+
   private
 
   def log_error(exception)
@@ -51,5 +59,16 @@ class ApplicationController < ActionController::Base
     return render_404 if exception.kind_of?(ActionController::RoutingError)
     raise exception
   end
+
+  def beta_access_granted?
+    session[:beta]
+  end
+
+  def beta_page?
+    inside_beta_subdomain = (request.subdomain == 'beta')
+    on_beta_sign_in_page = (controller_name == 'home' && %w(sign_in_beta create_beta_session).include?(action_name))
+    inside_beta_subdomain && !on_beta_sign_in_page
+  end
+
 
 end

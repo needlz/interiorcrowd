@@ -29,7 +29,7 @@ RSpec.describe ReviewerInvitationsController do
 
       it 'doesn\'t create an invitation' do
         post :create, params
-        expect(response).to render_template(ApplicationController::PAGE_404_PATH)
+        expect(response).to have_http_status(:not_found)
       end
     end
 

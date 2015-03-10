@@ -6,4 +6,24 @@ class HomeController < ApplicationController
   def sign_up_beta
     render layout: 'sign_up'
   end
+
+  def sign_in_beta
+    return redirect_to root_path if beta_access_granted?
+    render layout: 'sign_up'
+  end
+
+  def create_beta_session
+    if beta_authentication(params[:password].strip)
+      session[:beta] = true
+    else
+      flash[:error] = "Wrong password"
+    end
+    redirect_to root_path
+  end
+
+  private
+
+  def beta_authentication(password)
+    password == ENV['BETA_PASSWORD']
+  end
 end

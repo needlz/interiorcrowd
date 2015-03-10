@@ -659,6 +659,9 @@ en:
     designer: a designer
     go: 'Go'
     success: Thank you so much for your inquiry! We can't wait to share the InteriorCrowd experience with you!
+  sign_in_beta:
+    sign_in: Password
+    go: Go
   faq:
     menu:
       customer: Client

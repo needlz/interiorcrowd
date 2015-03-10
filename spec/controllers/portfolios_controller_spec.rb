@@ -22,7 +22,7 @@ RSpec.describe PortfoliosController do
 
       it 'raises error if unknown portfolio passed' do
         get :show, url: 'unknown'
-        expect(response).to render_template('errors/404')
+        expect(response).to have_http_status(:not_found)
       end
 
       it 'does not render invitation button' do
