@@ -11,8 +11,11 @@
 - content_for :designer_center_content do
   .bottom60
     .row.marg-top30.padd50Side
-      = render partial: 'contests/preview/current_contest_infobox'
-      = link_to t("designer_center.my_contests.design_profile"), designer_center_contest_path(@contest.id), class: 'italicLink'
+      = render partial: 'contests/preview/current_contest_infobox',
+          locals: { contest: ContestShortDetails.new(@contest) }
+      = link_to t("designer_center.my_contests.design_profile"),
+          designer_center_contest_path(@contest.id),
+          class: 'italicLink'
       %h2.font20.marg-top30=t("designer_center.my_contests.step_1")
       %a.italicLink{:href => "#"}=t("designer_center.my_contests.examples_of_moodboards")
       .row.disableMargin
