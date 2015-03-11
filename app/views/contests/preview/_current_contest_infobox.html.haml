@@ -1,20 +1,17 @@
 .contestInfoBox
   .row
-    .col-md-2
+    .col-md-2.disableBorder.width20
       %h4= t('designer_center.contests_preview.contest_id')
       %p= contest.id
-    .col-md-2
+    .col-md-2.disableBorder.width20
       %h4= t('designer_center.contests_preview.contest_name')
       %p= contest.name
-    .col-md-2
+    .col-md-2.disableBorder.width20
       %h4= t('designer_center.contests_preview.type')
       %p= contest.design_category
-    .col-md-2
+    .col-md-2.disableBorder.width20
       %h4= t('designer_center.contests_preview.room')
       %p= contest.design_space
-    .col-md-2
-      %h4= t('designer_center.contests_preview.price')
-      %p= contest.price
-    .col-md-2
+    .col-md-2.disableBorder.width20
       %h4= t('designer_center.contests_preview.days')
       %p= contest.days_till_end

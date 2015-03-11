@@ -2,7 +2,7 @@ class DesignerCenterContestsController < ApplicationController
   before_filter :set_designer
 
   def index
-    contests = Contest.current.includes(:design_category, :design_space)
+    contests = Contest.current.includes(:design_category, :design_space, :client)
     @invited_contests = @designer.invited_contests.all.map { |contest| ContestShortDetails.new(contest) }
     @current_contests = contests.map { |contest| ContestShortDetails.new(contest) }
     @suggested_contests = @current_contests

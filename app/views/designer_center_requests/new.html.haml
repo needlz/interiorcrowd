@@ -10,26 +10,18 @@
 
 - content_for :designer_center_content do
   .bottom60
-    .row.marg-top30.padd50Side
-      = render partial: 'contests/preview/current_contest_infobox',
-          locals: { contest: ContestShortDetails.new(@contest) }
-      = link_to t("designer_center.my_contests.design_profile"),
-          designer_center_contest_path(@contest.id),
-          class: 'italicLink'
-      %h2.font20.marg-top30=t("designer_center.my_contests.step_1")
-      %a.italicLink{:href => "#"}=t("designer_center.my_contests.examples_of_moodboards")
-      .row.disableMargin
-        .col-md-7.col-md-offset-1.marg-top20
-          %p.hintP
-            - link = link_to t("designer_center.my_contests.hint_link"), designer_center_contest_path(@contest.id), class: 'italicLink'
-            = t('designer_center.my_contests.hint', link: link).html_safe
-            = render partial: 'designer_center_requests/my_contests/contest_box',
-                locals: {contest: @contest, contest_view: @contest_view}
+    = render partial: 'clients/client_center/entries/phases', locals: { active_tab: 1 }
+    = render partial: 'contests/preview/current_contest_infobox',
+        locals: { contest: ContestShortDetails.new(@contest) }
+    = link_to t("designer_center.my_contests.design_profile"),
+        designer_center_contest_path(@contest.id),
+        class: 'italicLink'
 
-      %h2.font20.marg-top30=t('designer_center.my_contests.ready_to_go')
-      = form_for @request,
-          html: { class: 'response' },
-          url: designer_center_response_index_path(contest_id: @request.contest.id) do |f|
+    = form_for @request,
+        html: { class: 'response' },
+        url: designer_center_response_index_path(contest_id: @request.contest.id) do |f|
+
+      .col-md-8.disablePadding
         .concept-board
           .conceptMoodboardImg
             = render partial: 'designer_center_requests/concept_board_thumbnail',
@@ -38,7 +30,24 @@
                 image_id_input_name: 'lookbook[picture][ids][]' }
           %a.submitMyDesign.upload-button{:href => "#"}
             =t('designer_center.my_contests.concept_board_upload.upload_button')
-        = f.hidden_field :status, value: 'draft'
-        = render partial: 'designer_center_requests/footer',  locals: { request: @request }
+      .col-md-4
+        .row
+          .col-md-3
+            %img{:src => "/assets/profile-img.png"}/
+          .col-md-9
+            %p.designerName Jane Designer
+            %p.designerNote
+            .commentTextArea
+              %textarea{ style: '', name: 'contest_request[feedback]', placeholder: 'Say something about your design.' }
+
+        .sidebarComments
+          %p.designerName Comments
+          %div{:role => "tabpanel"}
+            .commentTextArea
+              %br
+              %textarea.height150{ name: 'comment' }
+              .clearfix
+      = f.hidden_field :status, value: 'draft'
+      = render partial: 'designer_center_requests/footer',  locals: { request: @request }
 
 = render partial: 'designer_center/layout'
