@@ -855,3 +855,12 @@ en:
           impressed with the level of detail our designer was
           able to plan for us - from the sofa right down to room
           accessories like bowls for the table. It’s a perfect room.
+  mails:
+    registration:
+      subject: InteriorCrowd Registration
+    password_reset:
+      subject: InteriorCrowd Password Reset
+    beta_autorespond:
+      subject: InteriorCrowd Private Beta
+    beta_subscriber:
+      subject: 'InteriorCrowd: new beta subscriber'

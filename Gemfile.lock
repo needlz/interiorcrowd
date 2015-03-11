@@ -84,7 +84,10 @@ GEM
       haml (>= 3.1, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
+    handy (0.0.28)
+      hashr
     hashie (3.3.2)
+    hashr (0.0.22)
     hike (1.2.3)
     hpricot (0.8.6)
     html2haml (1.0.1)
@@ -250,6 +253,7 @@ DEPENDENCIES
   figaro
   haml
   haml-rails
+  handy
   hashie
   jbuilder (~> 1.2)
   jquery-fileupload-rails

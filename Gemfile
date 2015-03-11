@@ -28,6 +28,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'figaro'
+gem 'handy'
 gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
