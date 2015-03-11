@@ -111,4 +111,20 @@ RSpec.describe ContestRequest do
     request = Fabricate(:contest_request, designer: designer, contest_id: contest.id)
     expect(request.token).to be_present
   end
+
+  it 'can be edited if not closed' do
+    request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
+    expect(request.editable?).to be_truthy
+  end
+
+  it 'can not be edited if closed' do
+    request = Fabricate(:contest_request, status: 'closed', designer: Fabricate(:designer), contest: contest)
+    expect(request.editable?).to be_falsy
+  end
+
+  it 'can not be edited if contest closed' do
+    request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
+    contest.update_attributes!(status: 'closed')
+    expect(request.editable?).to be_falsy
+  end
 end

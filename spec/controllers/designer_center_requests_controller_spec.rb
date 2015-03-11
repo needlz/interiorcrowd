@@ -54,6 +54,12 @@ RSpec.describe DesignerCenterRequestsController do
       expect(submitted_request.reload.feedback).to eq new_feedback
     end
 
+    it 'does not update if request is closed' do
+      contest.update_attributes!(status: 'closed')
+      patch :update, id: submitted_request.id, contest_request: { feedback: new_feedback }
+      expect(response).to have_http_status(:not_found)
+    end
+
     describe 'status' do
       it 'changes status to "submitted"' do
         patch :update, id: draft_request.id, contest_request: { status: 'submitted' }
