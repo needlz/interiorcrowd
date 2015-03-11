@@ -12,14 +12,8 @@
         %a.btn.notificationsBtn{type: 'notification'}= t('designer_center.updates.notifications')
 
     .row.marg-top20
-      .col-md-8.no-x-padding
+      .col-md-12.no-x-padding
         - @notifications_view.each do |notification|
           = render partial:'designer_notification', locals: { notification: notification }
-      .col-md-4
-        .sidebarComments.leaderboardSidebar
-          %p.designerName= t('designer_center.updates.leaderboard')
-          #scrollBoxComments{tabindex: "0"}
-            - @comments.each do |comment|
-              = render partial: 'designer_center/comment', locals: {user: @designer, comment: comment}
 
 = render partial: 'designer_center/layout'
