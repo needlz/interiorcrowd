@@ -4,7 +4,7 @@ class UserMailer
 
   def user_registration(user, password)
     template 'user_registration'
-    subject = "InteriorCrowd Registration"
+    subject = I18n.t('mails.registration.subject')
     set_template_values(set_user_params(user, password))
     mail to: [wrap_recipient(user.email, user.first_name, "to")], subject:subject
   end
@@ -12,7 +12,7 @@ class UserMailer
   def designer_registration_info(user)
     template 'designer_registration_info'
     set_template_values(set_designer_params(user))
-    mail to: [wrap_recipient(ENV['INFO_EMAIL'], '', "to")]
+    mail to: [wrap_recipient(Settings['INFO_EMAIL'], '', "to")]
   end
 
   def invite_to_contest(designer, client)
@@ -23,14 +23,14 @@ class UserMailer
 
   def reset_password(user, password)
     template 'interiorcrowd_password_reset'
-    subject = "InteriorCrowd Password Reset"
+    subject = I18n.t('mails.password_reset.subject')
     set_template_values(set_reset_password_params(user, password))
     mail to: [wrap_recipient(user.email, user.name, "to")], subject:subject
   end
 
   def sign_up_beta_autoresponder(email)
     template 'sign_up_beta_autoresponder'
-    subject = "InteriorCrowd Private Beta"
+    subject = I18n.t('mails.beta_autorespond.subject')
     mail to: [wrap_recipient(email, '', "to")], subject:subject
   end
 
@@ -38,10 +38,10 @@ class UserMailer
     return unless Rails.env.production?
     template 'new_beta_subscriber'
     set_template_values(new_subscriber_params(beta_subscriber))
-    recipients = ENV['BETA_NOTIFICATION_EMAILS'].split(',').map do |email|
+    recipients = Settings.beta_notification_emails.map do |email|
       wrap_recipient(email, 'InteriorCrowd', 'to')
     end
-    mail to: recipients, subject: 'InteriorCrowd: new beta subscriber'
+    mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject.subject')
   end
 
   def invitation_to_leave_a_feedback(params, url)
@@ -103,7 +103,7 @@ class UserMailer
   end
 
   def host
-    ENV['APP_URL'] || 'http://localhost:3000'
+    Settings['APP_URL'] || 'http://localhost:3000'
   end
 
 end
