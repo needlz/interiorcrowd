@@ -1,0 +1,24 @@
+common: &defaults
+  mailer:
+    address: <%= ENV['MAILER_ADDRESS'] %>
+    password: <%= ENV['MAILER_PASSWORD'] %>
+  aws:
+    bucket_name: <%= ENV['S3_BUCKET_NAME'] %>
+    access_key: <%= ENV['AWS_ACCESS_KEY'] %>
+    secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  mandrill:
+    email: <%= ENV['MANDRILL_EMAIL'] %>
+    password: <%= ENV['MANDRILL_PASSWORD'] %>
+    api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
+  info_email: <%= ENV['INFO_EMAIL'] %>
+  app_host: <%= ENV['APP_URL'] %>
+  rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
+
+development:
+
+test:
+
+staging:
+
+production:
+  beta_notification_emails: <%=  ENV['BETA_NOTIFICATION_EMAILS'] && ENV['BETA_NOTIFICATION_EMAILS'].split(',') %>

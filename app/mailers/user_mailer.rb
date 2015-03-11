@@ -12,7 +12,7 @@ class UserMailer
   def designer_registration_info(user)
     template 'designer_registration_info'
     set_template_values(set_designer_params(user))
-    mail to: [wrap_recipient(Settings['INFO_EMAIL'], '', "to")]
+    mail to: [wrap_recipient(Settings.info_email, '', "to")]
   end
 
   def invite_to_contest(designer, client)
@@ -103,7 +103,7 @@ class UserMailer
   end
 
   def host
-    Settings['APP_URL'] || 'http://localhost:3000'
+    Settings.app_host || 'http://localhost:3000'
   end
 
 end
