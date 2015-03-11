@@ -19,3 +19,9 @@ class ResponsesList
 $ ->
   ResponsesList.makeTableRowsClickable()
   Buttons.init()
+
+  $('h3.seeCompletedContests').click ->
+    $('#completedContestsBox').toggleClass 'show'
+
+  $('h3.seeCurrentContests').click ->
+    $('#currentContestsBox').toggleClass 'show'
