@@ -35,6 +35,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def update
     request = ContestRequest.find(params[:id])
+    return raise_404 unless request.editable?
     contest_editing = ContestRequestEditing.new({ request: request,
                                                   contest_request_options: params[:contest_request],
                                                   contest_request_attributes: response_params

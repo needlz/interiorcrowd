@@ -122,6 +122,10 @@ class ContestRequest < ActiveRecord::Base
     closed? && contest.status != 'closed'
   end
 
+  def editable?
+    !(closed? || contest.closed?)
+  end
+
   private
 
   def contest_status
