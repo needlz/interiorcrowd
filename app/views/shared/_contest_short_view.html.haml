@@ -10,7 +10,7 @@
   .col-md-2= contest.name
   .col-md-2= contest.design_category
   .col-md-2= contest.design_space
-  .col-md-2 X
+  .col-md-2= contest.price
   .col-md-2
     = contest.days_till_end
     - unless contest.status == 'fulfillment'

@@ -6,3 +6,5 @@ unless Rails.env.test?
       password:  Settings.mandrill.password
   }
 end
+
+ActionMailer::Base.add_delivery_method :mandrill_delivery, MandrillMailer

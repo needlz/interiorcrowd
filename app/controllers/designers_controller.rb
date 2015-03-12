@@ -85,6 +85,6 @@ class DesignersController < ApplicationController
 
   def designer_params
     params.require(:designer).permit(:first_name, :email, :last_name, :password, :plain_password,
-                                     :password_confirmation, :zip, :portfolio, :external_links)
+                                     :password_confirmation, :zip, :portfolio, :external_links, :state, :phone_number)
   end
 end

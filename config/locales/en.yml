@@ -772,8 +772,8 @@ en:
           reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
 
   registration:
-    designer: 'You have successfully registered with us a designer. Your login details for Interior Crowd as below:'
-    client: ' You have successfully registered with us. Your login details for Interior Crowd as below:'
+    mail_to: hello@interiorcrowd.com
+    link_here: here
   invitation_to_content:
     invite: |
             Great news! %{name} has invited you to participate in their contest.<br>
@@ -856,8 +856,10 @@ en:
           able to plan for us - from the sofa right down to room
           accessories like bowls for the table. It’s a perfect room.
   mails:
-    registration:
-      subject: InteriorCrowd Registration
+    client_registration:
+      subject: Thanks for joining InteriorCrowd
+    designer_registration:
+      subject: Congrats! You're now a designer on InteriorCrowd.
     password_reset:
       subject: InteriorCrowd Password Reset
     beta_autorespond:

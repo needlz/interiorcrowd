@@ -12,7 +12,7 @@ module Jobs
     end
 
     def perform
-      UserMailer.new.send(mailer_method, *mail_args)
+      UserMailer.send(mailer_method, *mail_args)
     end
 
     def queue_name
