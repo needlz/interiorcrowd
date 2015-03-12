@@ -3547,3 +3547,11 @@ padding-bottom: 40px;
 .height150{
     height: 150px !important;
 }
+
+.notes ul li.Client {
+    list-style: disc url("/assets/list_style_type_red.png");
+}
+
+.notes ul li.Designer {
+    list-style: disc url("/assets/list_style_type_blue.png");
+}

@@ -9,11 +9,15 @@ class Buttons
     $(@buttons).removeAttr('reverse')
     $(btn).attr('reverse', true)
 
+class CollapsiblePanels
+
+  @bind: ->
+    $('h3.seeCompletedContests').click ->
+      $('#completedContestsBox').toggleClass 'show'
+
+    $('h3.seeCurrentContests').click ->
+      $('#currentContestsBox').toggleClass 'show'
+
 $ ->
   Buttons.init()
-
-  $('h3.seeCompletedContests').click ->
-    $('#completedContestsBox').toggleClass 'show'
-
-  $('h3.seeCurrentContests').click ->
-    $('#currentContestsBox').toggleClass 'show'
+  CollapsiblePanels.bind()

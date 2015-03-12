@@ -11,12 +11,12 @@
           - unless contest.status == 'fulfillment'
             %span days
     .col-md-4.contestDesignerBtn
-      %a.btn{ href: designer_center_contest_path(id: contest.id) } View brief
+      %a.btn{ href: designer_center_contest_path(id: contest.id) }= t('designer_center.responses.item.view_brief')
       %a.btn{ href: edit_designer_center_response_path(id: response.id) }
-        Comments
+        = t('designer_center.responses.item.comments')
         %span= response.comments_count
       %a.btn{ href: edit_designer_center_response_path(id: response.id) }
-        GO
+        = t('designer_center.responses.item.go')
         %img{:src => "/assets/go_right.png"}/
 
   .row.contestTableRow2

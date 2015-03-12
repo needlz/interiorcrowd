@@ -13,17 +13,17 @@
           .row.contestTableHeader
             .col-md-8
               .row
-                .col-md-2 Client name
+                .col-md-2= t('designer_center.contests_preview.client_name')
                 .col-md-2= t('designer_center.contests_preview.contest_name')
                 .col-md-2= t('designer_center.contests_preview.type')
                 .col-md-2= t('designer_center.contests_preview.room')
                 .col-md-2= t('designer_center.contests_preview.days')
         = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
 
-        %h3.seeCompletedContests See all completed contests
+        %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
         #completedContestsBox
           = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
-        %h3.seeCurrentContests.marg-top40 See all current contests
+        %h3.seeCurrentContests.marg-top40= t('designer_center.contests_preview.all_contests_title')
         #currentContestsBox
           = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
     .row

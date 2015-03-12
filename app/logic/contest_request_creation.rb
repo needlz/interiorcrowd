@@ -6,14 +6,12 @@ class ContestRequestCreation
     @request_params = options[:request_params]
     @lookbook_params = options[:lookbook_params]
     @need_submit = options[:need_submit]
-    @comment = options[:comment]
   end
 
   def perform
     ContestRequest.transaction do
       create_request
       create_lookbook
-      create_comment
       request.submit! if need_submit
       request
     end
@@ -40,11 +38,6 @@ class ContestRequestCreation
     end
   end
 
-  def create_comment
-    return if comment.blank?
-    request.comments.create(text: comment, read: false, role: 'Designer', user_id: designer.id)
-  end
-
-  attr_reader :contest, :designer, :request, :request_params, :lookbook_params, :need_submit, :comment
+  attr_reader :contest, :designer, :request, :request_params, :lookbook_params, :need_submit
 
 end

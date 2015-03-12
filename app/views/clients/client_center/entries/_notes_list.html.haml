@@ -1,0 +1,8 @@
+- notes.each do |note|
+  %li{ class: note.author_role }
+    %p.makeMeBold
+      = note.name
+    %p
+      = note.text.html_safe
+      %span= note.ago_text
+  %li.delimiter

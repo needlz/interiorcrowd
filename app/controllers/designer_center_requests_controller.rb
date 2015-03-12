@@ -68,8 +68,7 @@ class DesignerCenterRequestsController < ApplicationController
                                            contest: contest,
                                            request_params: response_params,
                                            lookbook_params: params[:lookbook],
-                                           need_submit: params[:contest_request][:status] == 'submitted',
-                                           comment: params[:comment] }
+                                           need_submit: params[:contest_request][:status] == 'submitted' }
     )
 
     request = contest_creation.perform
