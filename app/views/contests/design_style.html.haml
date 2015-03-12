@@ -26,9 +26,11 @@
       = render partial: 'contests/options/desirable_colors_options'
       = render partial: 'contests/options/undesirable_colors_options'
 
-      = render partial: 'contests/options/have_examples'
-      .examples-view-details
+      .clearfix
+        = render partial: 'contests/options/have_examples'
+      .examples-view-details.clearfix
         = render partial: 'contests/options/example_pictures_options'
+      .clearfix.marg-top40
         = render partial: 'contests/options/example_links_options'
       .col-md-12.no-x-padding.text-center.footer-buttons
         .bedr.col-md-offset-3.col-md-2.navigation-btn

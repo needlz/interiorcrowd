@@ -177,6 +177,6 @@ class ContestView
   end
 
   def set_have_examples
-    @have_examples = @links.present? || @example_ids.present?
+    @have_examples = @example_ids.present?
   end
 end
