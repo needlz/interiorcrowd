@@ -13,7 +13,9 @@ RSpec.describe DesignersController do
                     email: 'address@example.com',
                     zip: '123',
                     password: '123',
-                    password_confirmation: '123'
+                    password_confirmation: '123',
+                    state: 'Alabama',
+                    phone_number: '123'
         }
       }
     end
@@ -43,7 +45,7 @@ RSpec.describe DesignersController do
 
     it 'creates mail job' do
       post :create, designer_creation_params
-      expect(Delayed::Job.where('handler LIKE ?', "%user_registration%").count).to eq 1
+      expect(Delayed::Job.where('handler LIKE ?', "%designer_registered%").count).to eq 1
     end
 
     context 'portfolio passed' do

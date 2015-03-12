@@ -35,4 +35,8 @@ InteriorC::Application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_view.raise_on_missing_translations = true
+
+  config.before_initialize do
+    InteriorC::Application.routes.default_url_options[:host] = 'beta.interiorcrowd.com'
+  end
 end

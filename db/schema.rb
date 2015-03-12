@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150305100819) do
+ActiveRecord::Schema.define(version: 20150310150806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(version: 20150305100819) do
     t.string   "portfolio_path"
     t.string   "phone_number"
     t.string   "plain_password"
+    t.string   "state"
   end
 
   create_table "example_links", force: true do |t|

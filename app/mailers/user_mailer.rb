@@ -1,12 +1,19 @@
-class UserMailer
+class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
-  def user_registration(user, password)
+  def client_registered(client, password)
     template 'user_registration'
-    subject = I18n.t('mails.registration.subject')
-    set_template_values(set_user_params(user, password))
-    mail to: [wrap_recipient(user.email, user.first_name, "to")], subject:subject
+    subject = I18n.t('mails.client_registration.subject')
+    set_template_values(set_client_registration_params(client, password))
+    mail to: [wrap_recipient(client.email, client.first_name, "to")], subject: subject
+  end
+
+  def designer_registered(designer, password)
+    template 'user_registration'
+    subject = I18n.t('mails.designer_registration.subject')
+    set_template_values(set_designer_registration_params(designer, password))
+    mail to: [wrap_recipient(designer.email, designer.first_name, "to")], subject: subject
   end
 
   def designer_registration_info(user)
@@ -52,20 +59,30 @@ class UserMailer
 
   private
 
-  def set_user_params(user, password)
+  def set_client_registration_params(user, password)
+    @name = user.name
+    @email = user.email
+    @password = password
+    @client_faq_link = faq_url(anchor: 'client')
     {
-       name: user.name,
-       email: user.email,
-       password: password,
-       text: I18n.t("registration.#{user.class.name.downcase}")
+      text: render_to_string('mails/client_registration')
+    }
+  end
+
+  def set_designer_registration_params(designer, password)
+    @name = designer.name
+    @email = designer.email
+    @password = password
+    {
+        text: render_to_string('mails/designer_registration')
     }
   end
 
   def set_designer_params(designer)
     {
-        name: designer.name,
-        email: designer.email,
-        phone: designer.phone_number || ''
+      name: designer.name,
+      email: designer.email,
+      phone: designer.phone_number || ''
     }
   end
 
@@ -79,10 +96,10 @@ class UserMailer
 
   def set_reset_password_params(user, password)
     {
-        name: user.name,
-        email: user.email,
-        password: password,
-        text: I18n.t("reset_password")
+      name: user.name,
+      email: user.email,
+      password: password,
+      text: I18n.t("reset_password")
     }
   end
 
@@ -96,9 +113,9 @@ class UserMailer
 
   def feedback_invitation_params(params, url)
     {
-        name: params['username'],
-        email: params['email'],
-        url: url
+      name: params['username'],
+      email: params['email'],
+      url: url
     }
   end
 
