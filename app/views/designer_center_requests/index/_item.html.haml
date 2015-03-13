@@ -1,10 +1,21 @@
-.contestTable
-  = render partial: 'shared/contest_short_view', locals: { contest: response.contest }
+.contestTable.contestDesigner
+  .row.text-left.contestTableRow1{ data: { id: contest.id } }
+    .col-md-8
+      .row
+        .col-md-2.makeMeBold= contest.client_name
+        .col-md-2= contest.name
+        .col-md-2= contest.design_category
+        .col-md-2= contest.design_space
+        .col-md-2.greenDay= contest.days_left
+    .col-md-4.contestDesignerBtn
+      %a.btn{ href: designer_center_contest_path(id: contest.id) }= t('designer_center.responses.item.view_brief')
+      %a.btn{ href: edit_designer_center_response_path(id: response.id) }
+        = t('designer_center.responses.item.comments')
+        %span= response.comments_count
+      %a.btn{ href: edit_designer_center_response_path(id: response.id) }
+        = t('designer_center.responses.item.go')
+        %img{:src => "/assets/go_right.png"}/
+
   .row.contestTableRow2
     .col-md-1= "#{t('designer_center.responses.item.status')}:"
     .col-md-5= response.status_name
-    .col-md-1= "#{t('designer_center.responses.item.to_do')}:".html_safe
-    .col-md-5
-    .options{style: 'padding-left:10px;float:right'}
-      = render partial: "designer_center_requests/index/options_buttons",
-          locals: { buttons: ResponseButtons::Base.from_response(response).all }

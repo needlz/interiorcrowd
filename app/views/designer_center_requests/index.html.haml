@@ -3,18 +3,26 @@
 
 - content_for :designer_center_content do
   #designer-center-responses
-    .row
-      .col-md-8.contestUnderway.no-x-padding
-        %h3= t('designer_center.responses.title')
-        %p= t('designer_center.responses.list_title')
-        .col-md-8.col-sm-12.col-lg-9.contest-buttons
-          = link_to t('designer_center.contests_preview.days'), designer_center_response_index_path, remote: true, reverse: true, class: 'btn daysLeftBtn'
-          = link_to t('designer_center.contests_preview.qualifying_round'), designer_center_response_index_path(status: 'submitted'), remote: true, class: 'btn qualifyingRoundBtn'
-          = link_to t('designer_center.contests_preview.fulfillment_period'), designer_center_response_index_path(status: 'fulfillment'), remote: true, class: 'btn fulfillmentPeriodBtn'
-        .clearfix
-        .responses= render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
-      .col-md-4.notifications-container
-        = render partial: 'designer_center_requests/index/notifications'
+    .row.no-x-padding
+      .col-md-12.contestUnderway.no-x-padding
+        .row
+          .col-md-8
+            %h3= t('designer_center.responses.title')
+            %p= t('designer_center.responses.list_title')
+        .contestTable.contestDesigner.noBorderRadius.onlyBottomBorder
+          .row.contestTableHeader
+            .col-md-8
+              .row
+                .col-md-2= t('designer_center.contests_preview.client_name')
+                .col-md-2= t('designer_center.contests_preview.contest_name')
+                .col-md-2= t('designer_center.contests_preview.type')
+                .col-md-2= t('designer_center.contests_preview.room')
+                .col-md-2= t('designer_center.contests_preview.days')
+        = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
+
+        %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
+        #completedContestsBox
+          = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
     .row
       = render partial: 'designer_center_requests/index/footer'
 = render partial: 'designer_center/layout', locals: { container_class: 'bottom60 marg-top20' }

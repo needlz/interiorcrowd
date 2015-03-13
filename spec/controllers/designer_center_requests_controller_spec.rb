@@ -6,7 +6,7 @@ RSpec.describe DesignerCenterRequestsController do
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b',undesirable_colors: 'EEE') }
+  let(:contest) { Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE') }
   let(:other_contest) { Fabricate(:contest, client: client) }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
@@ -152,12 +152,6 @@ RSpec.describe DesignerCenterRequestsController do
       image = Fabricate(:image)
       post :create, contest_id: contest.id, lookbook: { picture: { ids: [image.id] } }, contest_request: { feedback: '' }
       expect(contest.requests[0].lookbook.lookbook_details).to be_present
-    end
-
-    it 'creates comment if comment exists' do
-      expect(designer.contest_requests).to be_empty
-      post :create, contest_id: contest.id, contest_request: { feedback: '' }, comment: 'comment'
-      expect(contest.requests[0].comments.first.text).to eq 'comment'
     end
 
     it 'does not create empty comment if comment does not exist' do

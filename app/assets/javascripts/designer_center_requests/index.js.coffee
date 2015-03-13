@@ -9,13 +9,12 @@ class Buttons
     $(@buttons).removeAttr('reverse')
     $(btn).attr('reverse', true)
 
-class ResponsesList
+class CollapsiblePanels
 
-  @makeTableRowsClickable: ->
-    $('.row.contestTableRow1').click (event)->
-      $row = $(event.target).closest('.row.contestTableRow1')
-      document.location = "/designer_center/contests/#{ $row.data('id') }"
+  @bind: ->
+    $('h3.seeCompletedContests').click ->
+      $('#completedContestsBox').toggleClass 'show'
 
 $ ->
-  ResponsesList.makeTableRowsClickable()
   Buttons.init()
+  CollapsiblePanels.bind()

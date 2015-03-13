@@ -4,13 +4,14 @@ RSpec.describe ContestNotesController do
   render_views
 
   let(:client) { Fabricate(:client) }
+  let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client) }
 
   describe 'POST create' do
     context 'not logged in' do
       it 'redirects to login page' do
         post :create, contest_note: { contest_id: contest.id, text: 'text' }
-        expect(response).to redirect_to client_login_sessions_path
+        expect(response).to have_http_status(:not_found)
       end
     end
 
@@ -54,21 +55,30 @@ RSpec.describe ContestNotesController do
           expect(note.text).to eq 'text'
         end
 
-        it 'notifies about success' do
+        it 'saves client id' do
           note_text = 'text'
           post :create, contest_note: { contest_id: contest.id, text: note_text }
-          json = JSON.parse(response.body)
-          expect(json.size).to eq(1)
-          expect(json[0]['text']).to eq note_text
+          expect(contest.notes[0].client).to eq client
+          expect(contest.notes[0].designer).to be_nil
         end
 
-        it 'escapes html symbols' do
-          note_text = '&'
-          post :create, contest_note: { contest_id: contest.id, text: note_text }
-          json = JSON.parse(response.body)
-          expect(json.size).to eq(1)
-          expect(json[0]['text']).to eq '&amp;'
+        it 'renders notes list' do
+          post :create, contest_note: { contest_id: contest.id, text: 'text' }
+          expect(response).to render_template(partial: '_notes_list')
         end
+      end
+    end
+
+    context 'logged in as designer' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'saves designer id' do
+        note_text = 'text'
+        post :create, contest_note: { contest_id: contest.id, text: note_text }
+        expect(contest.notes[0].designer).to eq designer
+        expect(contest.notes[0].client).to be_nil
       end
     end
   end

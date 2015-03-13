@@ -1,7 +1,8 @@
 class ContestShortDetails
   include ActionView::Helpers::DateHelper
 
-  attr_reader :id, :name, :design_category, :design_space, :days_left, :price, :days_count, :days_till_end, :status
+  attr_reader :id, :name, :design_category, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
+              :client_name
 
   def initialize(contest)
     @id = contest.id
@@ -9,17 +10,12 @@ class ContestShortDetails
     @design_category = DesignCategoryView.new(contest.design_category).name
     @design_space = contest.design_space.name
     @days_count = contest.days_left
-    @days_left =
-      if contest.submission?
-        I18n.t('designer_center.contests_preview.days_left',
-                             days: distance_of_time_in_words(Time.current, contest.phase_end.in_time_zone))
-      else
-        I18n.t('designer_center.responses.statuses.closed')
-      end
     @days_till_end = get_days_till_end(contest)
+    @days_left = "#{ days_till_end}#{ ' days' if contest.fulfillment? }"
     @price = I18n.t('designer_center.responses.item.price',
                     price: BudgetPlan.find(contest.budget_plan).price)
     @status = contest.status
+    @client_name = contest.client.name
   end
 
   def get_days_till_end(contest)

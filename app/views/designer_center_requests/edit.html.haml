@@ -24,7 +24,7 @@
             = render partial: 'shared/moodboard', locals: { request: @request }
             - if @request.editable?
               = link_to t('designer_center.edit.upload_new'),
-                  designer_center_response_path,
+                  designer_center_response_path(id: @request.id),
                   remote: true,
                   class: 'darkBorderBtn editMoodboardBtn'
           - if @request.fulfillment_editing?

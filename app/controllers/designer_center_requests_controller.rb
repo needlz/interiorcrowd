@@ -4,7 +4,7 @@ class DesignerCenterRequestsController < ApplicationController
   def index
     respond_to do |format|
       format.any(:js, :html) {
-        @responses = @designer.requests_by_status(params[:status]).with_design_properties
+        @responses = @designer.requests_by_status(params[:status]).with_design_properties.includes(contest: [:client])
         @current_responses = @responses
           .map{ |respond| ContestResponseView.new(respond) }
           .sort_by{ |response| response.contest.days_count }
@@ -68,8 +68,7 @@ class DesignerCenterRequestsController < ApplicationController
                                            contest: contest,
                                            request_params: response_params,
                                            lookbook_params: params[:lookbook],
-                                           need_submit: params[:contest_request][:status] == 'submitted',
-                                           comment: params[:comment] }
+                                           need_submit: params[:contest_request][:status] == 'submitted' }
     )
 
     request = contest_creation.perform

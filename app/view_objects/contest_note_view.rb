@@ -19,4 +19,8 @@ class ContestNoteView < CommentView
     entries_client_center_index_path if spectator.client?
   end
 
+  def name
+    author.client? ? I18n.t('board_comments.me') : author_name
+  end
+
 end

@@ -110,8 +110,6 @@ class @Answers
   hidePopover: ($popover_element)->
     $('#pickWinnerModal').modal('hide');
 
-
-
 class ContestNotes
 
   @bindAjaxSuccess: ->
@@ -119,19 +117,7 @@ class ContestNotes
       @refreshNotes(data)
 
   @refreshNotes: (notes) ->
-    $notesList = $('.client-notes-list ul')
-    $notesList.find('> :not(.template)').remove()
-    $template = $notesList.find('.template')
-    $.each notes, (index, note)=>
-      @prependNote($notesList, $template, note)
-
-  @prependNote: ($notesList, $template, note)->
-    $note = $template.clone()
-    $timeAgo = $note.find('.time-ago')
-    $timeAgo.text(note.created_at)
-    $note.find('.note-text').html(note.text)
-    $note.find('.note-text').append($timeAgo)
-    $notesList.append($note.html())
+    $('.client-notes-list ul').html(notes)
 
 class ResponsesFilter
 

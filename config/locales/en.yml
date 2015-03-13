@@ -308,7 +308,7 @@ en:
         complete_lock: Get the items to complete your look
       notes_title: Want to send a note to the designers?
       send_note: Send
-      your_note: Your note
+      your_note: Messages
       filter_by: 'Filter by:'
       responses_filter_all: All
       more_features:
@@ -556,6 +556,8 @@ en:
       suggested_contests_title: Recommended contests for you to join.
       suggested_contests_hint: We think these contests are just right for your style.
       all_contests_title: See all current contests
+      completed_contests_title: See all completed contests
+      client_name: Client name
       days_left: '%{days} left to enter'
       contest_id: Contest ID#
       contest_name: Contest Name
@@ -597,6 +599,9 @@ en:
         create_3d_rendering: Create 3D rendering
         price: X
         listed_as: 'Currently listed as: %{answer}'
+        view_brief: View brief
+        comments: Comments
+        go: GO
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
@@ -641,7 +646,9 @@ en:
       design_textarea_placeholder: Tell the Client Something about your design.
       need_to_ask_question: Need to ask a question?
       save_and_preview: Save & Preview
-
+      say_about_design: Say something about your design.
+      comments: Comments
+      send: Send
 
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found

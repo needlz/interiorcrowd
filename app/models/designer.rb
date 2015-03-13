@@ -52,6 +52,10 @@ class Designer < ActiveRecord::Base
     contest_request.designer == self
   end
 
+  def can_comment_contest?(contest)
+    true
+  end
+
   def requests_by_status(status)
     return contest_requests.view_on_board unless status
     statuses = ['submitted', 'fulfillment']

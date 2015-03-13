@@ -39,4 +39,8 @@ class Client < ActiveRecord::Base
     contest_request.contest_owner?(self)
   end
 
+  def can_comment_contest?(contest)
+    contest.client == self
+  end
+
 end

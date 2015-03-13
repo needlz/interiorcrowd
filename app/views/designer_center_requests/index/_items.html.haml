@@ -1,2 +1,2 @@
 - current_responses.each do |response|
-  = render partial: 'designer_center_requests/index/item', locals: { response: response }
+  = render partial: 'designer_center_requests/index/item', locals: { response: response, contest: response.contest }

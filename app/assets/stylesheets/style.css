@@ -2689,6 +2689,7 @@ border-top-right-radius: 5px;
 .seeCompletedContests,.seeCurrentContests{
 	border-bottom: 1px solid #e1e1e1;
 	padding-bottom: 10px;
+    margin-bottom: 1.5em;
 	font-size: 20px;
 	color: #000;
 	margin-top: 0px;
@@ -3448,3 +3449,110 @@ padding-bottom: 40px;
     margin-bottom: 51px;
 }
 /*end home page*/
+
+/*contest page*/
+.contestDesigner{
+    margin: 20px auto;
+}
+.contestDesigner > div{
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: left;
+}
+.contestDesigner > div > div{
+    padding: 0px;
+}
+.contestDesigner .col-md-8 .row .col-md-2{
+    width: 20%;
+}
+
+.contestDesigner .contestTableHeader{
+    background: transparent;
+    text-align: left;
+    color: #333333;
+}
+.contestDesigner .contestTableRow1{
+    background: #fafafa;
+    border-top: none;
+}
+.contestDesigner .contestTableRow2{
+    background: #f0f0f0;
+}
+.contestDesignerBtn .btn{
+    color: #409863;
+    border: 1px solid #409863;
+    margin-right: 12px;
+    font-size: 16px;
+}
+.contestDesignerBtn .btn span{
+    display: inline-block;
+    border: 1px solid #409863;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 9px;
+    margin-left: 5px;
+    font-size: 11px;
+}
+.contestDesignerBtn .btn:nth-child(3){
+    background: #409863;
+    color: #FFF;
+    font-weight: 700;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.contestDesignerBtn .btn:nth-child(3) img{
+    position: relative;
+    top: -2px;
+    margin-left: 5px;
+}
+.greenDay{
+    color: #409863;
+    font-size: 20px;
+    font-weight: 700;
+    width: 70px !important;
+    text-align:center;
+}
+.greenDay span{
+    font-size: 14px;
+    font-weight: 400;
+    display: block;
+}
+.noBorderRadius{
+    border-radius: 0px;
+}
+.onlyBottomBorder{
+    border: none;
+    border-bottom: 1px solid #e1e1e1;
+}
+.designerContestSearch{
+    position: absolute !important;
+    right: 15px;
+    margin-top: 0px !important;
+}
+.designerContestSearch button{
+    top: 7px !important;
+}
+/* end contest page*/
+
+.italicLink {
+    font-size: 14px;
+    color: #000;
+    font-style: italic;
+    line-height: 32px;
+    text-decoration: underline;
+}
+.width20{
+    width: 20%;
+}
+.height150{
+    height: 150px !important;
+}
+
+.notes ul li.Client {
+    list-style: disc url("/assets/list_style_type_red.png");
+}
+
+.notes ul li.Designer {
+    list-style: disc url("/assets/list_style_type_blue.png");
+}
