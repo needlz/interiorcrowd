@@ -20,7 +20,7 @@ class ContestNoteView < CommentView
   end
 
   def name
-    author_role == 'Client' ? I18n.t('board_comments.me') : author_name
+    author.client? ? I18n.t('board_comments.me') : author_name
   end
 
 end

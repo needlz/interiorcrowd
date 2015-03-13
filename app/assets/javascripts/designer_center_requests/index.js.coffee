@@ -15,9 +15,6 @@ class CollapsiblePanels
     $('h3.seeCompletedContests').click ->
       $('#completedContestsBox').toggleClass 'show'
 
-    $('h3.seeCurrentContests').click ->
-      $('#currentContestsBox').toggleClass 'show'
-
 $ ->
   Buttons.init()
   CollapsiblePanels.bind()

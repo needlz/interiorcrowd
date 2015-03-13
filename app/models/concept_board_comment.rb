@@ -4,16 +4,20 @@ class ConceptBoardComment < ActiveRecord::Base
   scope :designer, ->{ where(role: 'Designer') }
   scope :client, ->{ where(role: 'Client') }
 
-  def income( user)
+  def income(user)
     send(user.class.name.downcase)
   end
 
   def author_name
-    role.constantize.find(user_id).name
+    author.name
   end
 
   def author_role
     role
+  end
+
+  def author
+    role.constantize.find(user_id)
   end
 
 end

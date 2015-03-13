@@ -1,18 +1,18 @@
 class ContestNoteCreation
 
-  def initialize(contest, note_params, current_user)
+  def initialize(contest, text, current_user)
     @contest = contest
     @client_id = current_user.id if current_user.client?
     @designer_id = current_user.id if current_user.designer?
-    @note_params = note_params
+    @text = text.strip
   end
 
   def perform
-    contest.notes.create!(text: note_params[:text].strip, client_id: client_id, designer_id: designer_id)
+    contest.notes.create!(text: text, client_id: client_id, designer_id: designer_id)
   end
 
   private
 
-  attr_reader :client_id, :designer_id, :contest, :note_params
+  attr_reader :client_id, :designer_id, :contest, :text
 
 end

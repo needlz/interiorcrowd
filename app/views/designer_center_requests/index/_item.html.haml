@@ -6,10 +6,7 @@
         .col-md-2= contest.name
         .col-md-2= contest.design_category
         .col-md-2= contest.design_space
-        .col-md-2.greenDay
-          = contest.days_till_end
-          - unless contest.status == 'fulfillment'
-            %span days
+        .col-md-2.greenDay= contest.days_left
     .col-md-4.contestDesignerBtn
       %a.btn{ href: designer_center_contest_path(id: contest.id) }= t('designer_center.responses.item.view_brief')
       %a.btn{ href: edit_designer_center_response_path(id: response.id) }
