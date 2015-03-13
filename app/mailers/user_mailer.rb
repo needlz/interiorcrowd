@@ -48,13 +48,15 @@ class UserMailer < ActionMailer::Base
     recipients = Settings.beta_notification_emails.map do |email|
       wrap_recipient(email, 'InteriorCrowd', 'to')
     end
-    mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject.subject')
+    mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject')
   end
 
-  def invitation_to_leave_a_feedback(params, url)
+  def invitation_to_leave_a_feedback(params, url, client)
+    client_name = client.name
     template 'invitation_to_leave_a_feedback'
-    set_template_values(feedback_invitation_params(params, url))
-    mail to: [wrap_recipient(params['email'], params['username'], "to")]
+    set_template_values(feedback_invitation_params(url, client_name))
+    mail to: [wrap_recipient(params['email'], params['username'], 'to')],
+         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: client_name)
   end
 
   private
@@ -111,11 +113,12 @@ class UserMailer < ActionMailer::Base
     { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
   end
 
-  def feedback_invitation_params(params, url)
+  def feedback_invitation_params(url, client_name)
+    @site_url = host
+    @client_name = client_name
+    @page_url = url
     {
-      name: params['username'],
-      email: params['email'],
-      url: url
+      text: render_to_string('mails/invite_to_leave_feedback')
     }
   end
 
