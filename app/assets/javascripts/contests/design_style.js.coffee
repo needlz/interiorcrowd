@@ -7,7 +7,7 @@ class Validations
     $('.likes input:checked').length == @appealsCount
 
   clearHiddenInputs: ->
-    $('.example-pictures, .links-options').find('input').attr('name', '') unless @examplesToggle.showing()
+    $('.example-pictures').find('input').attr('name', '') unless @examplesToggle.showing()
 
   validate: ->
     $(".text-error").text('')
