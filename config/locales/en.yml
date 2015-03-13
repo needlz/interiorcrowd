@@ -97,7 +97,7 @@ en:
       validations:
         no_colors: Please enter data.
         select_design_level: Please select one
-        no_appeals: Please pick your opinion for each appeal
+        no_appeals: Please tell us what you think of this style.
       type_color_name: Type color name
       picker_types_separator: Or
       add_links: Add your inspiration links - for example, a Pinterest board that shows your favorite examples.

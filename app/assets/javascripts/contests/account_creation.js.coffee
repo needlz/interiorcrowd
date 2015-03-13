@@ -35,11 +35,11 @@ class AccountCreation
       $password = $("#client_password")
       password = @trimedVal($password)
       if password.length < 1
-        @validator.addMessage $("#err_password"), "Please enter paswword.", $password
+        @validator.addMessage $("#err_password"), "Please enter password.", $password
       $c_password = $("#client_password_confirmation")
       c_password = @trimedVal($c_password)
       if c_password.length < 1
-        @validator.addMessage $("#err_cpassword"), "Please enter confirm paswword.", $c_password
+        @validator.addMessage $("#err_cpassword"), "Please enter confirm password.", $c_password
       else
         unless c_password is password
           @validator.addMessage $("#err_cpassword"), "Password and Confirm password must be same.", $c_password

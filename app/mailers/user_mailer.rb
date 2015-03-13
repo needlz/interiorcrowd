@@ -60,9 +60,6 @@ class UserMailer < ActionMailer::Base
   private
 
   def set_client_registration_params(user, password)
-    @name = user.name
-    @email = user.email
-    @password = password
     @client_faq_link = faq_url(anchor: 'client')
     {
       text: render_to_string('mails/client_registration')
@@ -70,9 +67,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def set_designer_registration_params(designer, password)
-    @name = designer.name
-    @email = designer.email
-    @password = password
     {
         text: render_to_string('mails/designer_registration')
     }
