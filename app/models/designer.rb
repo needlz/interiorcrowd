@@ -62,9 +62,19 @@ class Designer < ActiveRecord::Base
     contest_requests.send(status) if statuses.include? status
   end
 
+  def related_contest_comments
+    commented_contests_ids = Contest.includes(:notes).where(contest_notes: { designer_id: id }).group('contests.id').pluck(:id)
+    contests_participated_ids = Contest.joins(:requests).where(contest_requests: { designer_id: id }).group('contests.id').pluck(:id)
+    related_contests_ids = (commented_contests_ids + contests_participated_ids).uniq
+    ContestNote.joins(:contest).where('contests.id IN (?) AND (contest_notes.client_id IS NOT NULL)', related_contests_ids).order(created_at: :desc).includes(contest: [:client])
+  end
+
   def related_comments
-    contests_notes = ContestNote.includes(contest: [:requests, :client]).where(contest_requests: { designer_id: id })
-    (comments.client + contests_notes).sort_by{ |comment| comment.updated_at }.reverse
+    (comments.by_client.includes(contest_request: [:contest]) + related_contest_comments).sort_by{ |comment| comment.updated_at }.reverse
+  end
+
+  def notifications
+    (related_comments + user_notifications.includes(:contest)).sort_by{ |comment| comment.updated_at }.reverse
   end
 
 end

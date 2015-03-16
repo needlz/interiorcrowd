@@ -35,11 +35,19 @@ RSpec.describe Designer do
     end
   end
 
-  it 'returns related comments' do
-    contest.notes.create!(text: 'a note for designers')
-    Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request)
+  context 'has comments and notifications' do
+    let!(:concept_board_comment) { Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request) }
+    let!(:contest_comment) { contest.notes.create!(text: 'a note for designers', client_id: client.id) }
+    let!(:contest_comment_form_other_designer) { contest.notes.create!(text: 'a note from other designer', designer_id: Fabricate(:designer).id) }
+    let!(:notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
 
-    expect(designer.related_comments.length).to eq 2
+    it 'returns related comments' do
+      expect(designer.related_comments.length).to eq 2
+    end
+
+    it 'returns list of all related notifications' do
+      expect(designer.notifications).to match_array([concept_board_comment, contest_comment, notification])
+    end
   end
 
 end

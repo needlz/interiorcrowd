@@ -17,4 +17,12 @@ class ContestNote < ActiveRecord::Base
     author.class.to_s
   end
 
+  def type
+    'ContestComment'
+  end
+
+  def contest_owner_name
+    contest.client.name
+  end
+
 end

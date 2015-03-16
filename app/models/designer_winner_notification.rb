@@ -4,6 +4,5 @@ class DesignerWinnerNotification < DesignerNotification
 
   belongs_to :contest
   has_one :client, through: :contest
-  belongs_to :designer, foreign_key: :user_id
 
 end

@@ -2,9 +2,9 @@ module DesignerNotifications
   class DesignerInfoNotificationView
     include Rails.application.routes.url_helpers
 
-    def initialize(designer_notification, contest)
+    def initialize(designer_notification)
       @designer_notification = designer_notification
-      @contest = contest
+      @contest = designer_notification.contest
     end
 
     def color
