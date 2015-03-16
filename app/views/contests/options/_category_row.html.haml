@@ -4,10 +4,7 @@
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
   = label_tag("design_brief_design_category_#{ design_category.id }") do
     %span.text-price
-      %b #{ design_category.name }
-    %br
-    %span.category-description.font20
-      %i= design_category.description
+      %b= design_category.description
 
 .clearfix
 .img-block
