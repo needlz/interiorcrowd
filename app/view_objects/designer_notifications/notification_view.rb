@@ -8,7 +8,7 @@ module DesignerNotifications
       user_notifications
         .map {|notification| "DesignerNotifications::#{notification.type}View"
         .constantize
-        .new(notification, notification.contest)
+        .new(notification)
       }
     end
 

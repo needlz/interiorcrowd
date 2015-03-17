@@ -6,6 +6,8 @@ RSpec.describe DesignerCenterController do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest, client: client) }
+  let(:request) { Fabricate(:contest_request, designer: designer, contest: contest) }
 
   describe 'GET designer_center' do
     it 'can not be accessed by anonymous user' do
@@ -41,6 +43,23 @@ RSpec.describe DesignerCenterController do
         end
       end
 
+    end
+  end
+
+  describe 'GET updates' do
+    before do
+      sign_in(designer)
+    end
+
+    let!(:concept_board_comment) { Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request) }
+    let!(:contest_comment) { contest.notes.create!(text: 'a note for designers', client_id: client.id) }
+    let!(:contest_comment_form_other_designer) { contest.notes.create!(text: 'a note from other designer', designer_id: Fabricate(:designer).id) }
+    let!(:notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
+    let!(:winner_notification) { DesignerWinnerNotification.create!(user_id: designer.id, contest_id: contest.id) }
+
+    it 'renders page' do
+      get :updates
+      expect(response).to render_template(:updates)
     end
   end
 end

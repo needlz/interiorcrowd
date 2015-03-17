@@ -1,8 +1,8 @@
 class ConceptBoardComment < ActiveRecord::Base
   belongs_to :contest_request
 
-  scope :designer, ->{ where(role: 'Designer') }
-  scope :client, ->{ where(role: 'Client') }
+  scope :by_designer, ->{ where(role: 'Designer') }
+  scope :by_client, ->{ where(role: 'Client') }
 
   def income(user)
     send(user.class.name.downcase)
@@ -18,6 +18,14 @@ class ConceptBoardComment < ActiveRecord::Base
 
   def author
     role.constantize.find(user_id)
+  end
+
+  def author_role
+    role
+  end
+
+  def type
+    'ConceptBoardComment'
   end
 
 end

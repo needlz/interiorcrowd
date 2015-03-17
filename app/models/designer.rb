@@ -62,9 +62,17 @@ class Designer < ActiveRecord::Base
     contest_requests.send(status) if statuses.include? status
   end
 
+  def notifications
+    transaction do
+      (related_comments + user_notifications.includes(:contest)).sort_by{ |comment| comment.updated_at }.reverse
+    end
+  end
+
+  private
+
   def related_comments
-    contests_notes = ContestNote.includes(contest: [:requests, :client]).where(contest_requests: { designer_id: id })
-    (comments.client + contests_notes).sort_by{ |comment| comment.updated_at }.reverse
+    comments_query = DesignerInboxCommentsQuery.new(self)
+    comments_query.all
   end
 
 end

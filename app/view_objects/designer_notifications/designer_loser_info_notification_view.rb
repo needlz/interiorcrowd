@@ -2,8 +2,8 @@ module DesignerNotifications
   class DesignerLoserInfoNotificationView < DesignerInfoNotificationView
   include Rails.application.routes.url_helpers
 
-    def initialize(designer_notification, contest)
-      super(designer_notification, contest)
+    def initialize(designer_notification)
+      super(designer_notification)
     end
 
     def text
