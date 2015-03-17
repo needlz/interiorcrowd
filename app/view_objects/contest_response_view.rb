@@ -7,6 +7,12 @@ class ContestResponseView
     'submitted' => I18n.t('designer_center.edit.update_submission')
   }
 
+  def self.for_responses(responses)
+    responses.map{ |response| new(response) }
+      .sort_by{ |response| response.contest.days_count }
+      .reverse
+  end
+
   def initialize(response)
     @id = response.id
     @status = response.status

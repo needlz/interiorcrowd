@@ -14,6 +14,18 @@ RSpec.describe DesignerCenterRequestsController do
                                       status: 'submitted',
                                       lookbook: Fabricate(:lookbook))
   end
+  let(:finished_request) do Fabricate(:contest_request,
+                                       designer: designer,
+                                       contest: contest,
+                                       status: 'finished',
+                                       lookbook: Fabricate(:lookbook))
+  end
+  let(:closed_request) do Fabricate(:contest_request,
+                                      designer: designer,
+                                      contest: contest,
+                                      status: 'closed',
+                                      lookbook: Fabricate(:lookbook))
+  end
   let(:draft_request) { Fabricate(:contest_request, designer: designer, contest: other_contest, status: 'draft') }
   let(:other_designers_request) { Fabricate(:contest_request, designer: other_designer, contest: contest) }
 
@@ -38,11 +50,6 @@ RSpec.describe DesignerCenterRequestsController do
     it 'returns page' do
       get :index
       expect(response).to render_template(:index)
-    end
-
-    it 'lists index of a designer' do
-      get :index
-      expect(assigns(:responses)).to eq [submitted_request, draft_request]
     end
   end
 

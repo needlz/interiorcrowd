@@ -610,6 +610,7 @@ en:
         fulfillment_ready: Fulfillment period (design submitted)
         fulfillment_approved: Fulfillment period (design approved)
         closed: Closed
+        finished: Finished
     respond_view:
       edit_button: Edit
       back: Back

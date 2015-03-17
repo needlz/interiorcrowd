@@ -4,11 +4,9 @@ class DesignerCenterRequestsController < ApplicationController
   def index
     respond_to do |format|
       format.any(:js, :html) {
-        @responses = @designer.requests_by_status(params[:status]).with_design_properties.includes(contest: [:client])
-        @current_responses = @responses
-          .map{ |respond| ContestResponseView.new(respond) }
-          .sort_by{ |response| response.contest.days_count }
-          .reverse
+        responses_query = DesignerResponsesQuery.new(@designer)
+        @current_responses = ContestResponseView.for_responses(responses_query.current_responses)
+        @completed_responses = ContestResponseView.for_responses(responses_query.completed_responses)
       }
       @navigation = Navigation::DesignerCenter.new(:requests)
     end
