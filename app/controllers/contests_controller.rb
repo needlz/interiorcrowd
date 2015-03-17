@@ -135,17 +135,14 @@ class ContestsController < ApplicationController
   end
 
   def on_previewed
-    if current_user.try(:client?)
-      contest_creation = ContestCreation.new(@client.id, session) do
-        clear_creation_storage
-      end
+    return redirect_to account_creation_contests_path unless current_user.try(:client?)
 
-      contest_creation.perform
-
-      redirect_to entries_client_center_index_path
-    else
-      redirect_to account_creation_contests_path
+    contest_creation = ContestCreation.new(@client.id, session) do
+      clear_creation_storage
     end
+    contest_creation.perform
+
+    redirect_to entries_client_center_index_path
   end
 
 end

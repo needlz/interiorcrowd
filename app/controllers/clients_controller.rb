@@ -59,9 +59,10 @@ class ClientsController < ApplicationController
       if @client.save
         Jobs::Mailer.schedule(:client_registered, [@client, user_password])
         session[:client_id] = @client.id
-        contest = ContestCreation.new(@client.id, session) do
+        contest_creation = ContestCreation.new(@client.id, session) do
           clear_creation_storage
-        end.perform
+        end
+        contest_creation.perform
         format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
         format.json { render json: @client, status: :created, location: @client }
       else
