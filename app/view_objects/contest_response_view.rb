@@ -9,8 +9,8 @@ class ContestResponseView
 
   def self.for_responses(responses)
     responses.map{ |response| new(response) }
-    .sort_by{ |response| response.contest.days_count }
-    .reverse
+      .sort_by{ |response| response.contest.days_count }
+      .reverse
   end
 
   def initialize(response)

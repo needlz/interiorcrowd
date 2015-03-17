@@ -58,7 +58,7 @@ class Designer < ActiveRecord::Base
 
   def requests_by_status(statuses)
     return contest_requests.active unless statuses
-    contest_requests.where('status IN (?)', statuses)
+    contest_requests.where(status: statuses)
   end
 
   def notifications
