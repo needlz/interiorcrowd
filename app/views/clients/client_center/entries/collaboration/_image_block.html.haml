@@ -8,5 +8,5 @@
         locals: { choosable: choosable,
           id: image_item.id,
           text: image_item.text,
-          image_path: image_item.image.medium_size_url,
+          image_path: image_item.image.try(:medium_size_url),
           checked_mark: image_item.mark }
