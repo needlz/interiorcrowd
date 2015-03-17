@@ -874,4 +874,4 @@ en:
     beta_subscriber:
       subject: 'InteriorCrowd: new beta subscriber'
     invitation_to_leave_feedback:
-      subject: 'Subject: %{client_name} needs your help picking a design'
+      subject: '%{client_name} needs your help picking a design'

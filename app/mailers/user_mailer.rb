@@ -62,7 +62,6 @@ class UserMailer < ActionMailer::Base
   private
 
   def set_client_registration_params(user, password)
-    @client_faq_link = faq_url(anchor: 'client')
     {
       text: render_to_string('mails/client_registration')
     }
