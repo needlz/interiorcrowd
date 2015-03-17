@@ -46,10 +46,10 @@ class ContestsController < ApplicationController
   end
 
   def save_preview
-    @client = Client.new
+    @client = current_client
     if params[:preview].present?
       session[:preview] = params[:preview]
-      redirect_to account_creation_contests_path
+      on_previewed
     else
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to preview_contests_path and return
@@ -127,6 +127,25 @@ class ContestsController < ApplicationController
   def uncomplete_step_path(validated_steps)
     uncomplete_step = validated_steps.detect { |step| ContestOptions.new(session.to_hash).uncompleted_chapter == step }
     ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
+  end
+
+  def current_client
+    return current_user if current_user.try(:client?)
+    Client.new
+  end
+
+  def on_previewed
+    if current_user.try(:client?)
+      contest_creation = ContestCreation.new(@client.id, session) do
+        clear_creation_storage
+      end
+
+      contest_creation.perform
+
+      redirect_to entries_client_center_index_path
+    else
+      redirect_to account_creation_contests_path
+    end
   end
 
 end

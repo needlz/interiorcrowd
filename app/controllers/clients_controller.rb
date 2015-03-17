@@ -59,7 +59,9 @@ class ClientsController < ApplicationController
       if @client.save
         Jobs::Mailer.schedule(:client_registered, [@client, user_password])
         session[:client_id] = @client.id
-        contest = create_contest(@client.id)
+        contest = ContestCreation.new(@client.id, session) do
+          clear_creation_storage
+        end.perform
         format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
         format.json { render json: @client, status: :created, location: @client }
       else
@@ -83,21 +85,6 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def create_contest(user_id)
-    contest_options = ContestOptions.new(session.to_hash.merge(client_id: user_id))
-    raise ArgumentError unless contest_options.required_present?
-    contest = Contest.create_from_options(contest_options)
-    clear_session
-    contest
-  end
-
-  def clear_session
-    session[:design_brief] = nil
-    session[:design_style] = nil
-    session[:design_space] = nil
-    session[:preview] = nil
-  end
 
   def set_client
     check_client

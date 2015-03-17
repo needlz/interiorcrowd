@@ -186,6 +186,7 @@ en:
         plan_error: Please choose package.
       go_back: Back
       continue: Continue
+      create: Create
       packages:
         title: Our design packages
         description: Pick a package - 100% money back guarantee
