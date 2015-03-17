@@ -1,6 +1,6 @@
 .row.marg-top30
   .col-md-5
-    = image_tag product_item.image.try(:medium_size_url), class: 'productListIMG'
+    = image_tag product_item.medium_size_image_url, class: 'productListIMG'
   .col-md-7
     - [:name, :brand].each do |attribute|
       %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }= product_item.send(attribute)

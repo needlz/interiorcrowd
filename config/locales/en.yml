@@ -413,6 +413,8 @@ en:
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
       update_submission: If you would like to update your concept board submission, please use the edit buttons below.
+      update_concept_board: >
+        Update your concept board to reflect a more customized look for client.
     final_upload:
       note_for_client: Write a note about your board here
       note_for_client_placeholder: >
@@ -424,6 +426,7 @@ en:
       product_list: Product List
       name: Product Name
       brand: Brand
+      dimensions: Dimensions
       price: Price
       link: Link
       edit: Edit
@@ -657,6 +660,13 @@ en:
         Add text here explaining why this product would be great for their space.
       ok: Like
       remove: Dislike
+      product_list_title: >
+        This is where you upload pictures of products you've included in your board.
+        You can include why they would work for the client in the box below.
+      similar_styles_title: >
+        'Similar styles' can be additional items that you'd also like the client to see,
+        but have not included in the board. They might also be out of the client's budget.
+        Write in the comment box why you added it.
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'

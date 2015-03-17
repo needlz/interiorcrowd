@@ -1854,6 +1854,8 @@ textarea.productsMoodboardAbove{
   border-radius: 5px;
   display: inline-block;
   margin-top: 50px;
+  width: 100%;
+  text-align: center;
 }
 
 .productEditList label{
@@ -3046,6 +3048,12 @@ only screen and (min-device-pixel-ratio: 2) {
   border-radius: 5px;
   padding: 5px 18px;
   display: inline-block;
+  margin-top: 10px;
+}
+
+.editMoodboardBtn:hover{
+  color: #000;
+  text-decoration: none;
 }
 
 .loginBox{

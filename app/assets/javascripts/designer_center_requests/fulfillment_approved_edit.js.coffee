@@ -2,10 +2,11 @@ class ProductItemsEditor extends InlineEditor
 
   attributeIdentifierData: 'id'
   attributeSelector: '.product-item'
+  sameEditCancelbutton: false
 
-  getForm: (id)->
+  getForm: (id, $button)->
     productItemId = id
-    $container = $(@attributeSelector).filter("[data-id='#{ productItemId }']")
+    $container = $button.closest(@attributeSelector)
     $editForm = $container.find('.edit-form')
     $editForm.removeClass('hidden')
     $container.find('.view').hide()
@@ -21,12 +22,12 @@ class ProductItemsEditor extends InlineEditor
     ProductItemImageUploader.init(@imageIdInput)
 
   bindSaveClick: ->
-    $(@attributeSelector).on 'click', '.save-button', (e)=>
+    $(document).on 'click', "#{@attributeSelector} .save-button", (e)=>
       e.preventDefault()
       $saveButton = $(e.target)
       $container = $saveButton.parents(@attributeSelector)
       @update($container)
-      @cancelEditing($container.data('id'))
+      @cancelEditing($container.data('id'), $saveButton)
 
   onCancelClick: (event)=>
     super(event)
@@ -55,7 +56,7 @@ class ProductItemsEditor extends InlineEditor
       $viewImageIdInput.val($editFormImageIdInput.val())
 
   updateTextFields: ($container, undo)->
-    for attributeSelector in ['.name', '.brand', '.price']
+    for attributeSelector in ['.name', '.brand', '.dimensions', '.price']
       $input = $container.find('.edit-form').find(attributeSelector)
       $caption = $container.find('.view').find(attributeSelector)
       @updatePlainTextField($input, $caption, undo)
@@ -94,11 +95,11 @@ class @FulfillmentApprovedEdit
 
   @init: ->
     @bindFooterButtons()
+    @bindAddProductButton()
     productItemsEditor = new ProductItemsEditor()
     productItemsEditor.imageIdInput = @imageIdInput
     productItemsEditor.bindEvents()
     $('.edit-form .price').ForceNumericOnly()
-
 
   @form: ->
     $('.edit_contest_request')
@@ -117,6 +118,20 @@ class @FulfillmentApprovedEdit
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')
       $status_input.appendTo($form)
       $form.submit()
+
+  @bindAddProductButton: ->
+    $('.add-product-button').click =>
+      @addProductItem()
+
+  @addProductItem: ->
+    $.ajax(
+      url: '/image_items/new'
+      success: (formHtml)=>
+        @appendProductItemForm(formHtml)
+    )
+
+  @appendProductItemForm: (formHtml)->
+    $('.product-list').append(formHtml)
 
   @clearEditFormInputs: ($form)->
     $form.find('.edit-form').find(@imageIdInput).remove()
