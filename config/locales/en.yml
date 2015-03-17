@@ -650,7 +650,11 @@ en:
       say_about_design: Say something about your design.
       comments: Comments
       send: Send
-
+    product_items:
+      text_placeholder: >
+        Add text here explaining why this product would be great for their space.
+      ok: Like
+      remove: Dislike
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'

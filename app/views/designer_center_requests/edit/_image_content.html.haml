@@ -4,9 +4,10 @@
   %img.productListIMG.main-image{:src => image_path}/
   = hidden_field_tag "contest_request[#{ image_list_name }][ids][]", id
   - if editable
-    %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]" }= text
+    %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]",
+      placeholder: t('designer_center.product_items.text_placeholder') }= text
   - else
     %p.productsMoodboardAbove= text
   - if checked_mark.present?
-    - ImageItem::MARKS.each do |mark|
-      %span.mark{ data: { mark: mark }, class: ImageItemMarkView.new(mark, checked_mark).css_class }
+    - mark_view = ImageItemMarkView.new(checked_mark)
+    %span{ class: mark_view.css_class }= mark_view.text
