@@ -56,10 +56,9 @@ class Designer < ActiveRecord::Base
     true
   end
 
-  def requests_by_status(status)
-    return contest_requests.view_on_board unless status
-    statuses = ['submitted', 'fulfillment']
-    contest_requests.send(status) if statuses.include? status
+  def requests_by_status(statuses)
+    return contest_requests.active unless statuses
+    contest_requests.where('status IN (?)', statuses)
   end
 
   def notifications

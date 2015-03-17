@@ -22,8 +22,7 @@
 
         %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
         #completedContestsBox
-          = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
-
+          = render partial: 'designer_center_requests/index/items', locals: { current_responses: @completed_responses }
     .row
       = render partial: 'designer_center_requests/index/footer'
 = render partial: 'designer_center/layout', locals: { container_class: 'bottom60 marg-top20' }
