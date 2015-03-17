@@ -18,6 +18,9 @@
       .bedr.col-md-2.continue.navigation-btn
         %a.order{:href => "#"}
           %div.continue-button
-            %b= t('contests.creation.continue')
+            - if current_user.try(:client?)
+              %b= t('contests.creation.create')
+            - else
+              %b= t('contests.creation.continue')
 
 = render partial: 'contests/contest_creation_page'

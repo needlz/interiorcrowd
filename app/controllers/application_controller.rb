@@ -49,6 +49,13 @@ class ApplicationController < ActionController::Base
     redirect_to sign_in_beta_path unless beta_access_granted?
   end
 
+  def clear_creation_storage
+    session[:design_brief] = nil
+    session[:design_style] = nil
+    session[:design_space] = nil
+    session[:preview] = nil
+  end
+
   private
 
   def log_error(exception)

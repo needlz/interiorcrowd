@@ -8,15 +8,15 @@ RSpec.describe ContestsController do
   let(:contest) { Fabricate(:contest, client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
 
-  before do
-    session[:client_id] = client.id
-  end
-
   def prepare_contest_data
     session.merge!(contest_options_source)
   end
 
   describe 'GET option' do
+    before do
+      sign_in(client)
+    end
+
     it 'returns html of options' do
       allow_any_instance_of(DesignCategory).to receive(:name).and_return('quick_fix')
       ContestView::EDITABLE_ATTRIBUTES.each do |option|
@@ -32,6 +32,10 @@ RSpec.describe ContestsController do
   end
 
   describe 'PATCH update' do
+    before do
+      sign_in(client)
+    end
+
     let(:appeal_values){ Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] }
 
     it 'updates appeals of contest' do
@@ -52,6 +56,10 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET preview' do
+    before do
+      sign_in(client)
+    end
+
     context 'previous steps completed' do
       before do
         prepare_contest_data
@@ -103,5 +111,38 @@ RSpec.describe ContestsController do
         expect(response).to redirect_to ContestCreationWizard.creation_steps_paths[:preview]
       end
     end
+  end
+
+  describe 'POST save_preview' do
+    def prepare_params
+      session.merge!(contest_options_source.except(:preview))
+    end
+
+    it 'reloads page if "preview" parameter was not passed' do
+      prepare_params
+      post :save_preview
+      expect(response).to redirect_to(preview_contests_path)
+    end
+
+    it 'redirects to account creation page if user is not logged in as client' do
+      prepare_params
+      post :save_preview, contest_options_source
+      expect(response).to redirect_to(account_creation_contests_path)
+    end
+
+    context 'logged in as client' do
+      before do
+        sign_in(client)
+        contest
+        prepare_params
+      end
+
+      it 'creates contest' do
+        post :save_preview, contest_options_source
+        expect(client.contests.count).to eq 2
+        expect(response).to redirect_to(entries_client_center_index_path)
+      end
+    end
+
   end
 end
