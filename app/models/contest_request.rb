@@ -60,11 +60,7 @@ class ContestRequest < ActiveRecord::Base
   scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
 
   def change_status
-    if (changed_to?(:answer, 'winner') && status == 'submitted')
-      winner!
-      notify_designer_about_win
-      contest.winner_selected!
-    end
+    selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')
   end
 
   def moodboard_image_path
@@ -153,4 +149,17 @@ class ContestRequest < ActiveRecord::Base
   def set_token
     self.token = TokenGenerator.generate
   end
+
+  def selected_as_winner
+    winner!
+    notify_designer_about_win
+    contest.winner_selected!
+    create_default_image_items
+  end
+
+  def create_default_image_items
+    product_items.create!
+    similar_styles.create!
+  end
+
 end
