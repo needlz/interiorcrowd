@@ -15,6 +15,10 @@
       = render partial: 'designer_center_requests/edit/final_upload',
           locals: { contest_request: @request, product_items: @request.product_items.includes(:image) }
     - else
+      .row
+        - if @request_view.current_phase_index.present?
+          = render partial: 'clients/client_center/entries/phases',
+          locals: { active_tab: @request_view.current_phase_index }
       .row.marg-top30.response{ data: { id: @request.id } }
         .col-md-8.disablePadding
           %p.thisIsAPreview= @request_view.header_text
