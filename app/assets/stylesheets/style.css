@@ -1343,13 +1343,13 @@ button.btnInvite span{
 	padding: 20px 0px 20px 60px;
 }
 
-#pickWinnerModal .modal-dialog{
+#pickWinnerModal .modal-dialog, #finalizeConfirmation .modal-dialog{
 	width: 500px;
 	box-shadow: none;
 	border: 2px solid #040707;
 	border-radius: 10px;
 }
-#pickWinnerModal .modal-content{
+#pickWinnerModal .modal-content, #finalizeConfirmation .modal-content{
 	border-radius: 10px;
 	box-shadow: none;
 	font-size: 30px;
@@ -1357,17 +1357,17 @@ button.btnInvite span{
 	text-align: center;
 	padding-top: 15px;
 }
-#pickWinnerModal .modal-content p{
+#pickWinnerModal .modal-content p, #finalizeConfirmation .modal-content p{
 	line-height: 60px;	
 }
-#pickWinnerModal .modal-footer{
+#pickWinnerModal .modal-footer, #finalizeConfirmation .modal-footer{
 	border-top: 2px solid #040707;
 	margin-top: 60px; 
 }
 /*#pickWinnerModal .modal-footer .row{
 
 }*/
-#pickWinnerModal .modal-content a{
+#pickWinnerModal .modal-content a, #finalizeConfirmation .modal-content a{
 	font-weight: 700;
 	text-align: center;
 	background: #e3e4e5;
@@ -1375,19 +1375,19 @@ button.btnInvite span{
 	height: 94px;
 	line-height: 94px;
 } 
-#pickWinnerModal .modal-content a:hover{
+#pickWinnerModal .modal-content a:hover, #finalizeConfirmation .modal-content a:hover{
 	text-decoration: none;
 	background: #adafb1;
 	color: #FFF;
 
 }
-#pickWinnerModal .modal-content a:nth-child(1){
+#pickWinnerModal .modal-content a:nth-child(1), #finalizeConfirmation .modal-content a:nth-child(1){
 	border-right: 2px solid #040707;
 	-webkit-border-bottom-left-radius: 10px;
 -moz-border-radius-bottomleft: 10px;
 border-bottom-left-radius: 10px;
 }
-#pickWinnerModal .modal-content a:nth-child(2){
+#pickWinnerModal .modal-content a:nth-child(2), #finalizeConfirmation .modal-content a:nth-child(2){
 		-webkit-border-bottom-right-radius: 10px;
 -moz-border-radius-bottomright: 10px;
 border-bottom-right-radius: 10px;
@@ -1739,6 +1739,10 @@ textarea.productsMoodboardAbove{
 }
 .markRemove:hover,.markRemoveSelected{
 	background-position: bottom right;
+}
+
+#finalizeConfirmation .modal-dialog {
+    width: 700px;
 }
 
 #thanksModal .modal-dialog{

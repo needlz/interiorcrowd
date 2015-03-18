@@ -1,7 +1,11 @@
 - content_for :head do
   = javascript_include_tag 'clients/entries'
-  - if @won_contest_request && @won_contest_request.fulfillment_editing?
-    = javascript_include_tag 'clients/product_list_marks'
+  - if @won_contest_request
+    - if @won_contest_request.fulfillment_editing?
+      = javascript_include_tag 'clients/product_list_marks'
+    - if @won_contest_request.fulfillment_ready?
+      = javascript_include_tag 'clients/final_design_dialog'
+
   :javascript
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
@@ -25,7 +29,8 @@
                   locals: { designers: @invitable_designer_views }
             = render partial: 'clients/client_center/entries/more_features'
     - else
-      = render partial: "clients/client_center/entries/#{@won_contest_request.status}", locals: {request: @won_contest_request}
+      = render partial: "clients/client_center/entries/#{@won_contest_request.status}",
+          locals: {request: @won_contest_request}
 
   -if params[:signed_up].present?
     = render partial: 'shared/congratulations_layout',
@@ -34,3 +39,4 @@
   -else
     = render partial: 'clients/client_center/layout'
 = render partial: 'clients/client_center/entries/collaboration/thanks_modal'
+= render partial: 'clients/client_center/entries/collaboration/finalize_design_confirmation'

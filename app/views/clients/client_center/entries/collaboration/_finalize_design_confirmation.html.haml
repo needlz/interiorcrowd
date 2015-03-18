@@ -1,0 +1,10 @@
+#finalizeConfirmation.modal.fade{ area: { hidden: 'true', labelledby: 'myModalLabel' }, role: 'dialog', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p= t('client_center.entries.collaboration.finalize_design_modal.title')
+        %p{ style: 'padding-left: 20px; padding-left: 20px;' }= t('client_center.entries.collaboration.finalize_design_modal.body')
+      .modal-footer.disablePadding
+        .row.disableMargin
+          %a.col-md-6.yes-button{:href => "#"}= t('client_center.entries.winner_dialog.yes')
+          %a.col-md-6.no-button{:href => "#"}= t('client_center.entries.winner_dialog.no')
