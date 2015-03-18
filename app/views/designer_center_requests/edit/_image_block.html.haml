@@ -11,13 +11,13 @@
           image_path: '',
           image_list_name: image_list_name,
           checked_mark: '' }
-  - contest_request.send(image_list_name).includes(:image).each do |item|
+  - image_items.each do |item|
     = render partial: 'designer_center_requests/edit/image_content',
         locals: { editable: editable,
           text: item.text,
           id: item.id,
-          image_id: item.image.try(:id),
-          image_path: item.image.try(:medium_size_url),
+          image_id: item.image_id,
+          image_path: item.thumb_url,
           image_list_name: image_list_name,
           checked_mark: item.mark }
 - if editable

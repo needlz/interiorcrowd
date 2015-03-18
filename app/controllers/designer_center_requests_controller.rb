@@ -16,6 +16,7 @@ class DesignerCenterRequestsController < ApplicationController
     @request = @designer.contest_requests.find(params[:id])
     @contest = ContestShortDetails.new(@request.contest)
     @navigation = Navigation::DesignerCenter.new(:requests)
+    set_image_item_views
   end
 
   def edit
@@ -24,6 +25,7 @@ class DesignerCenterRequestsController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
     @request_view = ContestResponseView.new(@request)
+    set_image_item_views
   end
 
   def preview
@@ -92,5 +94,10 @@ class DesignerCenterRequestsController < ApplicationController
       result[attribute] = { value: value }
     end
     result
+  end
+
+  def set_image_item_views
+    @product_items = ImageItemView.for_image_items(@request.product_items.includes(:image))
+    @similar_styles = ImageItemView.for_image_items(@request.similar_styles.includes(:image))
   end
 end

@@ -37,14 +37,16 @@
                         title: t('designer_center.edit.products_list'),
                         subtitle: t('designer_center.product_items.product_list_title'),
                         image_list_name: :product_items,
-                        contest_request: @request }
+                        contest_request: @request,
+                        image_items: @product_items }
                 .similar-styles
                   = render partial: 'designer_center_requests/edit/image_block',
                       locals: { editable: true,
                         title: t('designer_center.edit.similar_styles'),
                         subtitle: t('designer_center.product_items.similar_styles_title'),
                         image_list_name: :similar_styles,
-                        contest_request: @request }
+                        contest_request: @request,
+                        image_items: @similar_styles }
         .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
           = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
           - if @request.commenting_enabled?

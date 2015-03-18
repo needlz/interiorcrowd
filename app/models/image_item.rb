@@ -16,7 +16,7 @@ class ImageItem < ActiveRecord::Base
   belongs_to :contest_request
 
   def medium_size_image_url
-    image.try(:medium_size_url) || '/assets/portfolio_example.png'
+    image.try(:medium_size_url)
   end
 
   def image_id
