@@ -84,7 +84,6 @@ RSpec.describe ContestRequest do
       submitted_request.reply('favorite', client.id)
       expect(submitted_request.answer).to eq('favorite')
     end
-
   end
 
   describe '#approve' do
@@ -126,5 +125,19 @@ RSpec.describe ContestRequest do
     request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
     contest.update_attributes!(status: 'closed')
     expect(request.editable?).to be_falsy
+  end
+
+  describe 'winner selection' do
+    let(:request){ Fabricate(:contest_request, designer: designer, status: 'submitted', contest_id: contest.id) }
+
+    it 'creates default product item' do
+      request.update_attributes!(answer: 'winner')
+      expect(request.product_items.count).to eq 1
+    end
+
+    it 'creates default similar style item' do
+      request.update_attributes!(answer: 'winner')
+      expect(request.similar_styles.count).to eq 1
+    end
   end
 end

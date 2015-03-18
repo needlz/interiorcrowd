@@ -12,7 +12,7 @@ class ImageItem < ActiveRecord::Base
     scope kind, ->{ where(kind: kind.to_s) }
   end
 
-  belongs_to :image
+  belongs_to :image, dependent: :destroy
   belongs_to :contest_request
 
 end
