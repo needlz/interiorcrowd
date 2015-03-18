@@ -22,6 +22,10 @@ class ImageItemsController < ApplicationController
     render json: { updated: updated }
   end
 
+  def new
+    render partial: 'designer_center_requests/edit/product_item', locals: { product_item: ImageItem.new }
+  end
+
   private
 
   def set_contest
@@ -29,7 +33,8 @@ class ImageItemsController < ApplicationController
   end
 
   def product_item_params
-    params.require(:image_item).permit(:image_id, :text, :name, :price, :brand, :link, :contest_request_id, :kind)
+    params.require(:image_item).permit(:image_id, :text, :name, :price, :brand, :link, :contest_request_id, :kind,
+                                       :dimensions)
   end
 
   def set_contest_request

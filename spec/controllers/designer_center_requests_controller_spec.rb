@@ -34,7 +34,13 @@ RSpec.describe DesignerCenterRequestsController do
   end
 
   describe 'GET show' do
-    it 'returns page' do
+    it 'returns page of submitted request' do
+      get :show, id: submitted_request.id
+      expect(response).to render_template(:show)
+    end
+
+    it 'returns page of winner response' do
+      submitted_request.update_attributes!(answer: 'winner')
       get :show, id: submitted_request.id
       expect(response).to render_template(:show)
     end

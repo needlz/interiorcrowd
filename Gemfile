@@ -59,6 +59,7 @@ group :development do
   gem 'sass-rails-source-maps'
   gem 'rails_best_practices'
   gem 'lol_dba'  #https://github.com/plentz/lol_dba
+  gem 'parallel_tests'
 end
 
 group :test do

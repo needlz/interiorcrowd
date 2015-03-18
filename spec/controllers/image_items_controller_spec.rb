@@ -71,7 +71,8 @@ RSpec.describe ImageItemsController do
               text: 'new text',
               price: '30.5',
               brand: 'new brand',
-              link: 'new link'
+              link: 'new link',
+              dimensions: 'dimensions'
             }
       }.merge(options)
     end
@@ -92,6 +93,7 @@ RSpec.describe ImageItemsController do
         expect(product_item.link).to eq params[:image_item][:link]
         expect(product_item.price).to eq BigDecimal(params[:image_item][:price])
         expect(product_item.brand).to eq params[:image_item][:brand]
+        expect(product_item.dimensions).to eq params[:image_item][:dimensions]
       end
     end
   end

@@ -6,31 +6,33 @@ class @InlineEditor
   cancelButtonSelector: '.cancel-button'
   attributeSelector: '.attribute'
   hiddenViewClass: 'hidden-view'
+  sameEditCancelbutton: true
 
   bindEvents: ->
     @bindEditClick()
 
   bindEditClick: ->
-    $(@attributeSelector).on 'click', @editButtonSelector, @, @onEditClick
-    $(@attributeSelector).on 'click', @cancelButtonSelector, @, @onCancelClick
+    $(document).on 'click', "#{@attributeSelector} #{@editButtonSelector}", @, @onEditClick
+    $(document).on 'click', "#{@attributeSelector} #{@cancelButtonSelector}", @, @onCancelClick
 
   onEditClick: (event)->
     event.preventDefault()
     $button = $(event.target)
     editor = event.data
     attribute = $button.parents(editor.attributeSelector).data(editor.attributeIdentifierData)
-    editor.requestAttributeForm(attribute)
+    editor.requestAttributeForm(attribute, $button)
 
   formPlaceholder: ($childElement)->
     @optionsRow($childElement).find(@placeholderSelector)
 
-  requestAttributeForm: (attribute)->
-    @getForm(attribute)
+  requestAttributeForm: (attribute, $button)->
+    @getForm(attribute, $button)
 
   onEditFormRetrieved: (attribute, formHtml)=>
     $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
-    $editButton.text(I18n.attribute_cancel_button)
-    $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
+    if @sameEditCancelbutton
+      $editButton.text(I18n.attribute_cancel_button)
+      $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
     $optionsRow = @optionsRow($editButton)
     $preview = $optionsRow.find(@placeholderSelector).find('.view')
     $preview.hide()
@@ -51,20 +53,21 @@ class @InlineEditor
 
   onCancelClick: (event)=>
     event.preventDefault()
-    $editButton = $(event.target)
+    $cancelButton = $(event.target)
     editor = event.data
-    attribute = editor.optionsRow($editButton).data(editor.attributeIdentifierData)
-    editor.cancelEditing(attribute)
+    attribute = editor.optionsRow($cancelButton).data(editor.attributeIdentifierData)
+    editor.cancelEditing(attribute, $cancelButton)
 
-  cancelEditing: (attribute)->
-    $optionsRow = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
+  cancelEditing: (attribute, $cancelButton)->
+    $optionsRow = if $cancelButton then $cancelButton.closest(@attributeSelector) else $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
     $editButton = $optionsRow.find(@cancelButtonSelector)
-    @updateEditButton($editButton)
+    if @sameEditCancelbutton
+      @updateEditButton($editButton)
+      $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
     $view = $optionsRow.find('.view')
     $view.show()
     $form = $optionsRow.find('.edit')
     $form.hide()
-    $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
     @afterCancelEditing?($optionsRow)
 
   optionsRow: ($child)->
@@ -72,4 +75,3 @@ class @InlineEditor
 
   updateEditButton: ($editButton)->
     $editButton.text(I18n.attribute_edit_button)
-
