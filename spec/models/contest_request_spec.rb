@@ -121,6 +121,11 @@ RSpec.describe ContestRequest do
     expect(request.editable?).to be_falsy
   end
 
+  it 'can not be edited if finished' do
+    request = Fabricate(:contest_request, status: 'finished', designer: Fabricate(:designer), contest: contest)
+    expect(request.editable?).to be_falsy
+  end
+
   it 'can not be edited if contest closed' do
     request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
     contest.update_attributes!(status: 'closed')
