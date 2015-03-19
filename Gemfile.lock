@@ -129,6 +129,9 @@ GEM
     multi_json (1.10.1)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
+    numbers_and_words (0.10.0)
+      activesupport
+      i18n
     orm_adapter (0.5.0)
     paperclip (3.5.4)
       activemodel (>= 3.0.0)
@@ -271,6 +274,7 @@ DEPENDENCIES
   mandrill-api
   mandrill-rails
   mime-types
+  numbers_and_words
   paperclip (~> 3.0)
   parallel_tests
   pg

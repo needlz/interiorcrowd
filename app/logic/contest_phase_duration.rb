@@ -1,12 +1,18 @@
 class ContestPhaseDuration
 
+  DAYS = {
+    'submission' => 7,
+    'winner_selection' => 3,
+    'fulfillment' => 3
+  }
+
   def initialize(contest)
     @contest = contest
   end
 
   def phase_end(phase_start_time)
-    statuses = %w(submission winner_selection fulfillment)
-    phase_start_time + 3.days if statuses.include? contest.status 
+    duration = DAYS[contest.status]
+    (phase_start_time + duration.days) if duration
   end
 
   private

@@ -26,7 +26,7 @@ class DesignerInboxCommentsQuery
       where(designer_responses[:designer_id].eq(designer.id).
       and(designer_responses[:contest_id].eq(contests[:id])))
 
-    ContestNote.joins(:contest).
+    ContestNote.joins(:contest).includes(:contest).
       where(notes[:client_id].not_eq(nil)).
       where(commented_contests.exists.or(participated_contests.exists))
   end
