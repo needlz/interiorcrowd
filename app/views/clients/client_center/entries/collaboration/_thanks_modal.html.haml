@@ -5,12 +5,3 @@
         %h4#myModalLabel.modal-title= t('client_center.entries.collaboration.modal.title')
       .modal-body
         %p.SofiaProLight= t('client_center.entries.collaboration.modal.body')
-
-:javascript
-  $(document).ready(function(){
-    $('.submitMyDesign').on('click', function(){
-      FulfillmentDesign.submit()
-    })
-  })
-
-

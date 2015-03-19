@@ -272,6 +272,9 @@ en:
         modal:
           title: Thanks !
           body: Your designer will put together your final design.
+        finalize_design_modal:
+          title: Ready for the final design?
+          body: If you still have feedback or want more options, please click no.
       invitations:
         invite: INVITE TO CONTEST
         sending_invitation: SENDING INVITATION...
