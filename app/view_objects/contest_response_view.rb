@@ -4,6 +4,7 @@ class ContestResponseView
 
   HEADER_TEXTS = {
     'fulfillment' => I18n.t('designer_center.edit.above_image'),
+    'fulfillment_ready' => I18n.t('designer_center.edit.above_image'),
     'submitted' => I18n.t('designer_center.edit.update_submission')
   }
 
