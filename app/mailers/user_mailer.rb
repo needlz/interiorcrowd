@@ -82,10 +82,11 @@ class UserMailer < ActionMailer::Base
   end
 
   def set_invitation_params(client)
+    @client_name = client.name.upcase
+    @days = ContestPhaseDuration::DAYS['submission']
+    @host = host
     {
-      text: I18n.t("invitation_to_content.invite",
-                   name: client.name.upcase,
-                   link: "<a href=#{designer_center_index_url(host: host)}> #{I18n.t("invitation_to_content.link")}</a>")
+      text: render_to_string('mails/invite_to_contest')
     }
   end
 

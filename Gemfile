@@ -76,3 +76,4 @@ gem 'mandrill-api'
 
 gem 'rollbar', '~> 1.4.2' #error notifier
 gem 'social-share-button'
+gem 'numbers_and_words' #humanize numbers output
