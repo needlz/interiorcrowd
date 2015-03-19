@@ -180,6 +180,17 @@ RSpec.describe ClientsController do
       get :entries
       expect(response).to render_template(:entries)
     end
+
+    context 'client has no contest' do
+      before do
+        client.contests.destroy_all
+      end
+
+      it 'redirects to contest creation' do
+        get :entries
+        expect(response).to redirect_to(design_brief_contests_path)
+      end
+    end
   end
 
   describe 'GET pictures_dimension' do

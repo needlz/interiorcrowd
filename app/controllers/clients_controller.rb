@@ -10,6 +10,7 @@ class ClientsController < ApplicationController
 
   def entries
     @contest = @client.last_contest
+    return redirect_to design_brief_contests_path unless @contest
     if @contest
       setup_moodboard_collection(@contest)
     else
