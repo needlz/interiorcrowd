@@ -39,31 +39,13 @@ class ClientsController < ApplicationController
   end
 
   def create
-    user_password = params[:client][:password]
-    params[:client][:password] = Client.encrypt(user_password)
-    params[:client][:plain_password] = user_password
-    params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
-    params[:client][:designer_level_id] = session[:design_style][:designer_level]
-    params.require(:client).permit(:first_name,
-                                   :last_name,
-                                   :email,
-                                   :address,
-                                   :name_on_card,
-                                   :card_type,
-                                   :state,
-                                   :zip,
-                                   :password,
-                                   :plain_password,
-                                   :designer_level_id)
+    prepare_creation_params
     @client = Client.new(params[:client])
     respond_to do |format|
       if @client.save
-        Jobs::Mailer.schedule(:client_registered, [@client, user_password])
-        session[:client_id] = @client.id
-        contest_creation = ContestCreation.new(@client.id, session) do
-          clear_creation_storage
-        end
-        contest_creation.perform
+        initialize_client
+        create_contest
+
         format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
         format.json { render json: @client, status: :created, location: @client }
       else
@@ -93,11 +75,44 @@ class ClientsController < ApplicationController
     @client = Client.find_by_id(session[:client_id])
   end
 
+  def prepare_creation_params
+    @user_password = params[:client][:password]
+    params[:client][:password] = Client.encrypt(@user_password)
+    params[:client][:plain_password] = @user_password
+    params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
+    params[:client][:designer_level_id] = session[:design_style][:designer_level]
+    params.require(:client).permit(:email,
+                                   :address,
+                                   :name_on_card,
+                                   :card_type,
+                                   :state,
+                                   :zip,
+                                   :password,
+                                   :plain_password,
+                                   :designer_level_id)
+  end
+
   def client_params
     params.require(:client).permit(
         :first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
         :card_ex_year, :card_cvc, :email, :city, :card_type, :phone_number, :billing_address,
         :billing_state, :billing_zip, :billing_city)
+  end
+
+  def initialize_client
+    client_initialization = ClientInitialization.new({
+      plain_password: @user_password,
+      client: @client
+    })
+    client_initialization.perform
+    session[:client_id] = @client.id
+  end
+
+  def create_contest
+    contest_creation = ContestCreation.new(@client.id, session) do
+      clear_creation_storage
+    end
+    contest_creation.perform
   end
 
 end

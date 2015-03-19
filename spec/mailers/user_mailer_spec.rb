@@ -13,7 +13,11 @@ RSpec.describe UserMailer do
   end
 
   it 'creates designer registration info mail' do
-    expect(UserMailer.designer_registration_info(designer)).to be_present
+    expect(UserMailer.user_registration_info(designer)).to be_present
+  end
+
+  it 'creates client registration info mail' do
+    expect(UserMailer.user_registration_info(client)).to be_present
   end
 
   it 'creates invitation to contest mail' do
