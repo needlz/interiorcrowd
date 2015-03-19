@@ -119,7 +119,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def editable?
-    !(closed? || contest.closed?)
+    !(closed? || finished?) && contest.editable?
   end
 
   private

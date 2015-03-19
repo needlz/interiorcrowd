@@ -165,6 +165,10 @@ class Contest < ActiveRecord::Base
     client.name
   end
 
+  def editable?
+    !(closed? || finished?)
+  end
+
   private
 
   def update_appeals(options)
