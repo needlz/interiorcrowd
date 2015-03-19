@@ -16,9 +16,9 @@ class UserMailer < ActionMailer::Base
     mail to: [wrap_recipient(designer.email, designer.first_name, "to")], subject: subject
   end
 
-  def designer_registration_info(user)
-    template 'designer_registration_info'
-    set_template_values(set_designer_params(user))
+  def user_registration_info(user)
+    template "#{ user.role.downcase }_registration_info"
+    set_template_values(set_user_params(user))
     mail to: [wrap_recipient(Settings.info_email, '', "to")]
   end
 
@@ -73,11 +73,11 @@ class UserMailer < ActionMailer::Base
     }
   end
 
-  def set_designer_params(designer)
+  def set_user_params(user)
     {
-      name: designer.name,
-      email: designer.email,
-      phone: designer.phone_number || ''
+      name: user.name,
+      email: user.email,
+      phone: user.phone_number || ''
     }
   end
 
