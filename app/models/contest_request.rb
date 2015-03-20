@@ -158,8 +158,8 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def create_default_image_items
-    product_items.create!
-    similar_styles.create!
+    product_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'))
+    similar_styles.create!(text: I18n.t('designer_center.product_items.text_placeholder'))
   end
 
 end
