@@ -1,4 +1,4 @@
-class Delayed::Job < ActiveRecord::Base
+class DelayedJob < ActiveRecord::Base
 
   belongs_to :contest
 

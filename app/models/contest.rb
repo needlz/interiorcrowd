@@ -26,6 +26,8 @@ class Contest < ActiveRecord::Base
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
+  scope :active, ->{ where(status: ['submission', 'winner_selection', 'fulfillment']) }
+  scope :inactive, ->{ where(status: ['closed', 'finished']) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false

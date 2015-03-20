@@ -11,10 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317080326) do
+ActiveRecord::Schema.define(version: 20150320083130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: true do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "admin_users", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "appeals", force: true do |t|
     t.string "first_name"
@@ -30,16 +63,16 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   end
 
   create_table "clients", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+    t.text     "first_name"
+    t.text     "last_name"
+    t.text     "email"
     t.string   "password"
-    t.string   "name_on_card"
-    t.string   "card_type"
-    t.string   "address"
-    t.string   "state"
+    t.text     "name_on_card"
+    t.text     "card_type"
+    t.text     "address"
+    t.text     "state"
     t.integer  "zip"
-    t.string   "card_number"
+    t.text     "card_number"
     t.integer  "card_ex_month"
     t.integer  "card_ex_year"
     t.integer  "card_cvc"
@@ -47,12 +80,12 @@ ActiveRecord::Schema.define(version: 20150317080326) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
-    t.string   "city"
-    t.string   "phone_number"
-    t.string   "billing_address"
-    t.string   "billing_state"
+    t.text     "city"
+    t.text     "phone_number"
+    t.text     "billing_address"
+    t.text     "billing_state"
     t.integer  "billing_zip"
-    t.string   "billing_city"
+    t.text     "billing_city"
     t.string   "plain_password"
   end
 
@@ -82,22 +115,22 @@ ActiveRecord::Schema.define(version: 20150317080326) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
-    t.string   "status",             default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer"
+    t.string   "status",             default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token"
   end
 
   create_table "contests", force: true do |t|
-    t.string   "desirable_colors"
-    t.string   "undesirable_colors"
+    t.text     "desirable_colors"
+    t.text     "undesirable_colors"
     t.integer  "space_budget"
     t.text     "feedback"
-    t.string   "project_name"
+    t.text     "project_name"
     t.integer  "budget_plan"
     t.integer  "client_id"
     t.datetime "created_at"
@@ -133,6 +166,12 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
+  create_table "contests_images", force: true do |t|
+    t.integer "contest_id"
+    t.integer "image_id"
+    t.integer "kind"
+  end
+
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",   default: 0, null: false
     t.integer  "attempts",   default: 0, null: false
@@ -151,7 +190,7 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "design_categories", force: true do |t|
-    t.string   "name"
+    t.text     "name"
     t.integer  "pos"
     t.integer  "price"
     t.integer  "status",     default: 1
@@ -160,7 +199,7 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   end
 
   create_table "design_spaces", force: true do |t|
-    t.string   "name"
+    t.text     "name"
     t.integer  "pos"
     t.integer  "parent_id"
     t.integer  "status",     default: 1
@@ -170,28 +209,28 @@ ActiveRecord::Schema.define(version: 20150317080326) do
 
   create_table "designer_levels", force: true do |t|
     t.integer "level"
-    t.string  "name"
+    t.text    "name"
   end
 
   create_table "designers", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+    t.text     "first_name"
+    t.text     "last_name"
+    t.text     "email"
     t.string   "password"
-    t.string   "zip"
-    t.string   "ex_links"
-    t.string   "ex_document_ids"
+    t.text     "zip"
+    t.text     "ex_links"
+    t.text     "ex_document_ids"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "portfolio_background_id"
-    t.string   "portfolio_path"
-    t.string   "phone_number"
-    t.string   "plain_password"
+    t.text     "portfolio_path"
+    t.text     "phone_number"
+    t.text     "plain_password"
     t.string   "state"
   end
 
   create_table "example_links", force: true do |t|
-    t.string   "url"
+    t.text     "url"
     t.integer  "portfolio_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -199,7 +238,7 @@ ActiveRecord::Schema.define(version: 20150317080326) do
 
   create_table "image_links", force: true do |t|
     t.integer "contest_id"
-    t.string  "url"
+    t.text    "url"
   end
 
   create_table "images", force: true do |t|
@@ -219,7 +258,7 @@ ActiveRecord::Schema.define(version: 20150317080326) do
     t.integer  "lookbook_id"
     t.integer  "image_id"
     t.text     "description"
-    t.string   "url"
+    t.text     "url"
     t.integer  "doc_type"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -240,18 +279,17 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   end
 
   create_table "portfolios", force: true do |t|
-    t.integer "background_id"
     t.integer "designer_id",                             null: false
     t.integer "years_of_experience"
     t.boolean "education_gifted"
     t.boolean "education_school"
     t.boolean "education_apprenticed"
-    t.string  "school_name"
-    t.string  "degree"
+    t.text    "school_name"
+    t.text    "degree"
     t.text    "awards"
     t.text    "style_description"
     t.text    "about"
-    t.string  "path"
+    t.text    "path"
     t.boolean "modern_style",            default: false
     t.boolean "vintage_style",           default: false
     t.boolean "traditional_style",       default: false
@@ -264,6 +302,7 @@ ActiveRecord::Schema.define(version: 20150317080326) do
     t.boolean "transitional_style",      default: false
     t.boolean "rustic_elegance_style",   default: false
     t.boolean "color_pop_style",         default: false
+    t.integer "background_id"
   end
 
   create_table "preferred_retailers", force: true do |t|
@@ -312,10 +351,10 @@ ActiveRecord::Schema.define(version: 20150317080326) do
   add_index "reviewer_feedbacks", ["invitation_id"], name: "index_reviewer_feedbacks_on_invitation_id", using: :btree
 
   create_table "reviewer_invitations", force: true do |t|
-    t.string   "username"
-    t.string   "email"
+    t.text     "username"
+    t.text     "email"
     t.integer  "contest_id"
-    t.string   "url"
+    t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
