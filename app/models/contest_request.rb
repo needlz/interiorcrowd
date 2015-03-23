@@ -158,8 +158,9 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def create_default_image_items
-    product_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'))
-    similar_styles.create!(text: I18n.t('designer_center.product_items.text_placeholder'))
+    ImageItem::KINDS.each do |kind|
+      image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'), kind: kind.to_s)
+    end
   end
 
 end
