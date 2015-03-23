@@ -1745,32 +1745,6 @@ textarea.productsMoodboardAbove{
     width: 700px;
 }
 
-#thanksModal .modal-dialog{
-	width: 800px;
-	text-align: center;
-}
-#thanksModal .modal-content{
-	box-shadow: none;
-	border-radius: 4px;
-	border: 2px solid #000;
-	padding: 80px 0px;
-}
-#thanksModal .modal-header{
-	border: none;
-	padding: 0px;
-}
-#thanksModal .modal-header h4{
-	font-size: 36px;
-	color: #000;
-}
-#thanksModal .modal-body{
-	padding: 0px;
-}
-#thanksModal .modal-body p{
-	font-size: 30px;
-	color: #000;
-	line-height: 70px;
-}
 .pageLink{
 	font-size: 18px;
 	color: #000;
