@@ -269,9 +269,6 @@ en:
           much feedback as possible to make sure you get the best design just for you
         check_message: Please click "check" if you like it or the "x" if you do not. Doing this will help the designer make the best design for you.
         done_btn: Done and move to final design
-        modal:
-          title: Thanks !
-          body: Your designer will put together your final design.
         finalize_design_modal:
           title: Ready for the final design?
           body: If you still have feedback or want more options, please click no.
