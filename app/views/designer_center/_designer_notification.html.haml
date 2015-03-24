@@ -1,5 +1,5 @@
 .notification.row{type: notification.type}
   .leftBorderNotification{:class => "#{ notification.color }Label"}
-  %a{ href: notification.href }
-    %p.designerNotification
+  %a{ href: notification.path(current_user) }
+    %p.designerNotification{ class: notification.read_class }
       = notification.text

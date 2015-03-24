@@ -1,8 +1,9 @@
 module DesignerNotifications
-  class DesignerWelcomeNotificationView
+  class DesignerWelcomeNotificationView < NotificationView
     include Rails.application.routes.url_helpers
 
     def initialize(designer_notification)
+      super(designer_notification)
       @designer_notification = designer_notification
     end
 
@@ -14,7 +15,7 @@ module DesignerNotifications
       I18n.t('designer_center.welcome_message')
     end
 
-    def href
+    def href(spectator = nil)
       training_designer_center_index_path
     end
 

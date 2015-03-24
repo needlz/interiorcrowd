@@ -2222,15 +2222,13 @@ textarea.productsMoodboardAbove{
     padding-right: 70px;
 }
 
+.designerNotification.read {
+    color: #777;
+}
+
 .designerNotification:hover{
 	background-color: #e1e1e1;
 }
-/*.designerNotification span{
-	display: inline-block;
-	margin-right: 30px;
-	height: 72px;
-	width: 5px;
-}*/
 
 .blueLabel{
 	background: #5bbff8;

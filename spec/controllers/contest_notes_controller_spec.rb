@@ -49,7 +49,7 @@ RSpec.describe ContestNotesController do
       end
 
       context 'correct contest id and text' do
-        it 'creates an invitation' do
+        it 'creates an comment' do
           post :create, contest_note: { contest_id: contest.id, text: 'text' }
           note = contest.notes[0]
           expect(note.text).to eq 'text'
@@ -65,6 +65,27 @@ RSpec.describe ContestNotesController do
         it 'renders notes list' do
           post :create, contest_note: { contest_id: contest.id, text: 'text' }
           expect(response).to render_template(partial: '_notes_list')
+        end
+
+        context 'contest has subscribed designers' do
+          let(:not_participating_designer) { Fabricate(:designer) }
+          let(:designer_with_request) { Fabricate(:designer) }
+          let(:request) { Fabricate(:contest_request, designer: designer_with_request, contest: contest) }
+
+          before do
+            contest.notes.create!(designer: designer, text: 'comment')
+          end
+
+          it 'notifies subscribed designers' do
+            comment_text = 'text'
+            request
+            post :create, contest_note: { contest_id: contest.id, text: comment_text }
+            notification = designer.user_notifications.find_by_type('ContestCommentDesignerNotification')
+            notification2 = designer_with_request.user_notifications.find_by_type('ContestCommentDesignerNotification')
+            expect(not_participating_designer.user_notifications).to be_empty
+            expect(notification2.contest_comment.text).to eq comment_text
+            expect(notification.contest_comment.text).to eq comment_text
+          end
         end
       end
     end

@@ -1,8 +1,10 @@
 module DesignerNotifications
-  class DesignerInviteNotificationView
+
+  class DesignerInviteNotificationView < NotificationView
     include Rails.application.routes.url_helpers
 
     def initialize(designer_invitation)
+      super(designer_invitation)
       @designer_invitation = designer_invitation
       @contest = designer_invitation.contest
     end
@@ -15,7 +17,7 @@ module DesignerNotifications
       I18n.t('designer_center.contests_preview.invite')
     end
 
-    def href
+    def href(spectator = nil)
       designer_center_contest_path(id: contest.id)
     end
 
@@ -28,4 +30,5 @@ module DesignerNotifications
     attr_reader :designer_invitation, :contest
 
   end
+
 end

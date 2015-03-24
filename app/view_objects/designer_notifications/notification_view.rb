@@ -1,19 +1,31 @@
 module DesignerNotifications
+
   class NotificationView
-    def initialize(user_notifications)
-      @user_notifications = user_notifications
+    include Rails.application.routes.url_helpers
+
+    def self.for_notifications(user_notifications)
+      user_notifications.map {|notification| for_notification(notification) }
     end
 
-    def all
-      user_notifications
-        .map {|notification| "DesignerNotifications::#{notification.type}View"
-        .constantize
-        .new(notification)
-      }
+    def self.for_notification(notification)
+      view_class = "DesignerNotifications::#{notification.type}View".constantize
+      view_class.new(notification)
     end
 
-    private
+    attr_reader :notification
 
-    attr_reader :user_notifications
+    def initialize(notification)
+      @notification = notification
+    end
+
+    def read_class
+      'read' if notification.read
+    end
+
+    def path(spectator = nil)
+      return href(spectator) if notification.read
+      notification_path(id: notification.id)
+    end
+
   end
 end

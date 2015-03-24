@@ -1,10 +1,11 @@
 module DesignerNotifications
 
-  class ContestCommentView
+  class ContestCommentDesignerNotificationView < NotificationView
     include Rails.application.routes.url_helpers
 
-    def initialize(comment)
-      @comment = comment
+    def initialize(notification)
+      super(notification)
+      @comment = notification.contest_comment
       @contest = comment.contest
     end
 
@@ -16,7 +17,7 @@ module DesignerNotifications
       "#{ comment.contest_owner_name }: #{ comment.text }"
     end
 
-    def href
+    def href(spectator = nil)
       designer_center_contest_path(id: contest.id)
     end
 
