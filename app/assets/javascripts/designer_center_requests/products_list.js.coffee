@@ -25,12 +25,17 @@ class ProductListThumbsTheme extends RemovableThumbsTheme
     @$container.on 'click', '.small_close', @removeThumb
 
   createThumb: (imageUrl, imageId)->
+    @removeDefaultItems()
+
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
     $container.data('id', imageId)
     $container.find('img.main-image').attr('src', imageUrl)
     $container
+
+  removeDefaultItems: ->
+    @remove(@$container.find('.thumb.default'))
 
 $ ->
   productList = new ImageItemsList(

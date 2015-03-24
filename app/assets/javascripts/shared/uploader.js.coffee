@@ -79,14 +79,19 @@ class @RemovableThumbsTheme extends ThumbsTheme
   removeThumb: (event)=>
     event.preventDefault()
     $thumbContainer = $(event.target).parents('.thumb')
-    imageIds = @$imageIds.val().split(',')
-    imageId = $thumbContainer.data('id')
-    if imageId
-      indexOfThumb = imageIds.indexOf(imageId.toString())
-      imageIds.splice(indexOfThumb, 1)
-      @$imageIds.val(imageIds.join(','))
-    $thumbContainer.remove()
-    @onRemoved?(imageId)
+    @remove($thumbContainer)
+
+  remove: ($thumbContainer)->
+    $thumbContainer.each (i, element)=>
+      $thumb = $(element)
+      imageIds = @$imageIds.val().split(',')
+      imageId = $thumb.data('id')
+      if imageId
+        indexOfThumb = imageIds.indexOf(imageId.toString())
+        imageIds.splice(indexOfThumb, 1)
+        @$imageIds.val(imageIds.join(','))
+      $thumb.remove()
+      @onRemoved?(imageId)
 
   thumbForSingleImageUploader: (imageUrl, imageId) ->
     $img = @$container.find('.thumb img:first')
