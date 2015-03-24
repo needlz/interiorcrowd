@@ -22,5 +22,4 @@
           checked_mark: item.mark }
 - if editable
   = file_field_tag 'image[image]', class: 'hidden', id: image_list_name
-  = hidden_field_tag "contest_request[#{ image_list_name }][image_ids]", contest_request.send(image_list_name).includes(:image).map(&:image).try(:map){|i| i.try(:id)}.try(:join, ',')
   %a.darkBorderBtn.upload-button{:href => "#"}= t('designer_center.edit.upload')

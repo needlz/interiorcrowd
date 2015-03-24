@@ -81,12 +81,15 @@ class @RemovableThumbsTheme extends ThumbsTheme
     $thumbContainer = $(event.target).parents('.thumb')
     @remove($thumbContainer)
 
+  getImageId: ($thumb)->
+    $thumb.data('id')
+
   remove: ($thumbContainer)->
     $thumbContainer.each (i, element)=>
       $thumb = $(element)
-      imageIds = @$imageIds.val().split(',')
-      imageId = $thumb.data('id')
-      if imageId
+      imageIds = @$imageIds.val().split(',') if @$imageIds.val()
+      imageId = @getImageId($thumb)
+      if imageId && imageIds
         indexOfThumb = imageIds.indexOf(imageId.toString())
         imageIds.splice(indexOfThumb, 1)
         @$imageIds.val(imageIds.join(','))

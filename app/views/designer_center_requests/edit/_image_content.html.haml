@@ -1,8 +1,9 @@
-.col-md-4.relative.thumb{ data: { id: image_id }, class: ('default' if image_path == '/assets/portfolio_example.png') }
+.col-md-4.relative.thumb{ data: { id: id }, class: ('default' if image_path == '/assets/portfolio_example.png') }
   - if editable
     %img.small_close{:src => "/assets/small-close.png"}/
-  %img.productListIMG.main-image{:src => image_path}/
+  %img.productListIMG.main-image{ src: image_path, data: { id: image_id }}/
   = hidden_field_tag "contest_request[#{ image_list_name }][ids][]", id
+  = hidden_field_tag "contest_request[#{ image_list_name }][image_ids][]", image_id, class: 'image-id'
   - if editable
     %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]",
       placeholder: t('designer_center.product_items.text_placeholder') }= text

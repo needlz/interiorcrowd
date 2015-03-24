@@ -159,7 +159,9 @@ class ContestRequest < ActiveRecord::Base
 
   def create_default_image_items
     ImageItem::KINDS.each do |kind|
-      image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'), kind: kind.to_s)
+      unless image_items.where(kind: kind.to_s).exists?
+        image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'), kind: kind.to_s)
+      end
     end
   end
 

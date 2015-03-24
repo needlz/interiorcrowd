@@ -30,9 +30,12 @@ class ProductListThumbsTheme extends RemovableThumbsTheme
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
-    $container.data('id', imageId)
-    $container.find('img.main-image').attr('src', imageUrl)
+    $container.find('img.main-image').attr('src', imageUrl).data('id', imageId)
+    $container.find('.image-id').val(imageId)
     $container
+
+  getImageId: ($thumb)->
+    $thumb.find('.main-image').data('id')
 
   removeDefaultItems: ->
     @remove(@$container.find('.thumb.default'))
@@ -43,7 +46,6 @@ $ ->
     uploadButtonSelector: '.products-list .upload-button',
     thumbs:
       container: '.products-list .thumbs'
-      selector: '#contest_request_product_items_image_ids'
       theme: ProductListThumbsTheme
     I18n: I18n
   )
@@ -53,7 +55,6 @@ $ ->
     uploadButtonSelector: '.similar-styles .upload-button',
     thumbs:
       container: '.similar-styles .thumbs'
-      selector: '#contest_request_similar_styles_image_ids'
       theme: ProductListThumbsTheme
     I18n: I18n
   )
