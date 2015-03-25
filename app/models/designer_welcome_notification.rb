@@ -1,5 +1,1 @@
-class DesignerWelcomeNotification < DesignerNotification
-
-  belongs_to :contest
-
-end
+class DesignerWelcomeNotification < DesignerNotification; end

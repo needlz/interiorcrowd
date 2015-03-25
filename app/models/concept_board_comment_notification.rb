@@ -1,0 +1,1 @@
+class ConceptBoardCommentNotification < DesignerNotification; end

@@ -28,4 +28,8 @@ class ConceptBoardComment < ActiveRecord::Base
     'ConceptBoardComment'
   end
 
+  def mark_as_read
+    update_attributes!(read: true)
+  end
+
 end

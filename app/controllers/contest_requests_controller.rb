@@ -74,7 +74,8 @@ class ContestRequestsController < ApplicationController
 
   def add_comment
     return raise_404 unless current_user.can_comment_contest_request?(@request)
-    comment = ConceptBoardComment.create!(params['comment'].merge({user_id: current_user.id, role: current_user.role }))
+    comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
+    comment = comment_creation.perform
     render json: { comment: comment, user_name: current_user.name }
   end
 

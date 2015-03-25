@@ -38,9 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return Client.find(session[:client_id]) if session[:client_id]
-    return Designer.find(session[:designer_id]) if session[:designer_id]
-    nil
+    @current_user ||= fetch_current_user
   end
 
   def check_beta_area_access
@@ -54,6 +52,11 @@ class ApplicationController < ActionController::Base
     session[:design_style] = nil
     session[:design_space] = nil
     session[:preview] = nil
+  end
+
+  def authenticate
+    raise_404 unless current_user
+    current_user
   end
 
   private
@@ -77,5 +80,10 @@ class ApplicationController < ActionController::Base
     inside_beta_subdomain && !on_beta_sign_in_page
   end
 
+  def fetch_current_user
+    return Client.find(session[:client_id]) if session[:client_id]
+    return Designer.find(session[:designer_id]) if session[:designer_id]
+    nil
+  end
 
 end

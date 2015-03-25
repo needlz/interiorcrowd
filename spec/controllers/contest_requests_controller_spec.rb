@@ -7,7 +7,9 @@ RSpec.describe ContestRequestsController do
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client) }
   let(:designer) { Fabricate(:designer) }
-  let(:request) { Fabricate(:contest_request, contest: contest, lookbook: Fabricate(:lookbook), designer: designer) }
+  let(:request) { Fabricate(:contest_request, contest: contest,
+                            lookbook: Fabricate(:lookbook),
+                            designer: designer) }
 
   describe 'POST answer' do
     before do
@@ -147,6 +149,11 @@ RSpec.describe ContestRequestsController do
                                            user_id: client.id)).to be_truthy
         expect(response).to be_ok
       end
+
+      it 'notifies designer' do
+        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        expect(designer.reload.user_notifications[0]).to be_kind_of(ConceptBoardCommentNotification)
+      end
     end
 
     context 'logged as other client' do
@@ -172,6 +179,10 @@ RSpec.describe ContestRequestsController do
                                            contest_request_id: request.id,
                                            user_id: designer.id)).to be_truthy
         expect(response).to be_ok
+      end
+
+      it 'does not notify designer' do
+        expect(designer.user_notifications).to be_empty
       end
     end
 

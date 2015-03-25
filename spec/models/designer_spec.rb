@@ -37,33 +37,28 @@ RSpec.describe Designer do
   context 'has comments and notifications' do
     let(:contest_with_requests) { Fabricate(:contest, client: client) }
     let(:request) { Fabricate(:contest_request, designer: designer, contest: contest_with_requests) }
-    let(:concept_board_comment_of_client) { Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request) }
-    let(:concept_board_comment_of_designer) { Fabricate(:concept_board_designer_comment, user_id: designer.id, contest_request: request) }
+    let(:concept_board_comment_of_client) { ConceptBoardCommentNotification.create!(user_id: designer.id) }
 
-    let(:contest_comment_of_client) { contest.notes.create!(text: 'a note for designers', client_id: client.id) }
-    let(:contest_comment_of_other_client) { Fabricate(:contest).notes.create!(text: 'a note from other client', client_id: client.id) }
-    let(:contest_comment_of_designer) { contest.notes.create!(text: 'a note for client', designer_id: designer.id) }
-    let(:contest_comment_from_other_designer) { contest.notes.create!(text: 'a note from other designer', designer_id: Fabricate(:designer).id) }
-    let(:notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
+    let(:notification_for_designer) { ContestCommentDesignerNotification.create!(user_id: designer.id) }
+    let(:notification_for_other_designer) { ContestCommentDesignerNotification.create!(user_id: Fabricate(:designer).id) }
+    let(:invite_notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
 
     it 'returns list of all related notifications' do
       concept_board_comment_of_client
-      concept_board_comment_of_designer
-      contest_comment_of_client
-      contest_comment_of_other_client
-      contest_comment_of_designer
-      contest_comment_from_other_designer
-      notification
-      expect(designer.notifications).to match_array([concept_board_comment_of_client, contest_comment_of_client, notification])
+      notification_for_designer
+      notification_for_other_designer
+      invite_notification
+      expect(designer.notifications).to match_array([concept_board_comment_of_client,
+                                                     notification_for_designer,
+                                                     invite_notification])
     end
 
     it 'returns list of all related notifications' do
-      contest_comment_of_client
-      contest_comment_of_other_client
-      contest_comment_of_designer
-      contest_comment_from_other_designer
-      notification
-      expect(designer.notifications).to match_array([contest_comment_of_client, notification])
+      notification_for_designer
+      notification_for_other_designer
+      invite_notification
+      expect(designer.notifications).to match_array([notification_for_designer,
+                                                     invite_notification])
     end
   end
 

@@ -2,6 +2,7 @@ InteriorC::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
+
   def draw_routes
     root 'home#index'
 
@@ -123,6 +124,11 @@ InteriorC::Application.routes.draw do
     end
     resource :designs do
       get '/:token', to: 'contest_requests#design', as: 'public'
+    end
+    resources :notifications, only: [:show] do
+      collection do
+        get '/comments/:id', to: 'notifications#show_comment', as: 'comment'
+      end
     end
   end
 

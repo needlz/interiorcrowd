@@ -1,4 +1,5 @@
 module DesignerNotifications
+
   class DesignerLoserInfoNotificationView < DesignerInfoNotificationView
   include Rails.application.routes.url_helpers
 
@@ -10,7 +11,7 @@ module DesignerNotifications
       I18n.t('designer_center.contests_preview.loser_notification', contest_name: contest.project_name)
     end
 
-    def href
+    def href(spectator = nil)
       designer_center_response_path(id: designer_notification.contest_request_id)
     end
 
@@ -19,4 +20,5 @@ module DesignerNotifications
     attr_reader :designer_notification, :contest
 
   end
+
 end

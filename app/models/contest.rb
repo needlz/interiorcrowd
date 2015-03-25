@@ -18,6 +18,7 @@ class Contest < ActiveRecord::Base
   belongs_to :design_category
   belongs_to :design_space
   has_many :requests, class_name: 'ContestRequest'
+  has_many :participants, class_name: 'Designer', through: :requests, source: :designer
   has_many :designer_invite_notifications
   has_many :notes, class_name: 'ContestNote'
   has_many :reviewer_invitations
@@ -170,6 +171,11 @@ class Contest < ActiveRecord::Base
 
   def editable?
     !(closed? || finished?)
+  end
+
+  def subscribed_designers
+    query = SubscribedDesignersQuery.new(self)
+    query.relation
   end
 
   private

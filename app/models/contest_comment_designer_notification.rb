@@ -1,0 +1,1 @@
+class ContestCommentDesignerNotification < DesignerNotification; end
