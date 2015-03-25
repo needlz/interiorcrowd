@@ -19,7 +19,7 @@ class DesignCategoryView
   end
 
   def picture_name
-    name.parameterize.underscore
+    design_category.name.parameterize.underscore
   end
 
   attr_reader :design_category

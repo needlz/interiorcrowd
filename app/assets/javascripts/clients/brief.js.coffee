@@ -77,6 +77,8 @@ class @ContestEditing extends InlineEditor
       InspirationLinksEditor.init()
     space_dimensions: ->
       DesignSpacePage.bindInchesInputs()
+    design_package: ->
+      Packages.init()
 
   previewCallbacks:
     desirable_colors: ->

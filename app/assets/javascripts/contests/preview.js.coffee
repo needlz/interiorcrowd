@@ -1,21 +1,9 @@
 class ReviewPage
 
   @init: ->
-    @initActivePlan()
-    @bindPlansBoxes()
+    Packages.init()
     @bindContinueButton()
     @validator = new ValidationMessages()
-
-  @initActivePlan: ->
-    plan_id = $('#plan_id').val()
-    $('#' + plan_id).addClass 'active' if plan_id.length > 0
-
-  @bindPlansBoxes: ->
-    $('.plan').click (event) ->
-      $('.plan-container').removeClass('active')
-      $plan = $(event.target).parents('.plan-container')
-      $plan.addClass('active')
-      $('#plan_id').val($plan.data('id'))
 
   @bindContinueButton: ->
     $('.continue').click (e) =>
@@ -35,7 +23,7 @@ class ReviewPage
     if pname.length < 1
       @validator.addMessage $('#err_prj_name'), I18n.name_error, $('.project-name')
 
-    pbudget = $.trim($('#plan_id').val())
+    pbudget = Packages.selectedPackage()
     if pbudget.length < 1
       @validator.addMessage $('#err_plan'), I18n.plan_error, $('.packages-description')
 

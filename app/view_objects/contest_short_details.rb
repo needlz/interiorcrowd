@@ -1,13 +1,13 @@
 class ContestShortDetails
   include ActionView::Helpers::DateHelper
 
-  attr_reader :id, :name, :design_category, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
+  attr_reader :id, :name, :package_name, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
               :client_name
 
   def initialize(contest)
     @id = contest.id
     @name = contest.project_name
-    @design_category = DesignCategoryView.new(contest.design_category).name
+    @package_name = PackageView.new(BudgetPlan.find(contest.budget_plan)).name
     @design_space = contest.design_space.name
     @days_count = contest.days_left
     @days_till_end = get_days_till_end(contest)
