@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    @current_user ||= set_current_user
+    @current_user ||= fetch_current_user
   end
 
   def check_beta_area_access
@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
     inside_beta_subdomain && !on_beta_sign_in_page
   end
 
-  def set_current_user
+  def fetch_current_user
     return Client.find(session[:client_id]) if session[:client_id]
     return Designer.find(session[:designer_id]) if session[:designer_id]
     nil

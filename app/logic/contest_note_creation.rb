@@ -23,7 +23,7 @@ class ContestNoteCreation
   end
 
   def subscribed_designers_ids
-    contest.subscribed_designers.map(&:id) #add tests to not use pluck
+    contest.subscribed_designers.map(&:id)
   end
 
 end

@@ -1,3 +1,1 @@
-class DesignerWelcomeNotification < DesignerNotification
-
-end
+class DesignerWelcomeNotification < DesignerNotification; end

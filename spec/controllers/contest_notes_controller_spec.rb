@@ -74,12 +74,15 @@ RSpec.describe ContestNotesController do
 
           before do
             contest.notes.create!(designer: designer, text: 'comment')
+            Fabricate(:contest_request, designer: designer_with_request, contest: Fabricate(:contest))
           end
 
           it 'notifies subscribed designers' do
             comment_text = 'text'
             request
             post :create, contest_note: { contest_id: contest.id, text: comment_text }
+            expect(designer.reload.user_notifications.reload.count).to eq 1
+            expect(designer_with_request.reload.user_notifications.reload.count).to eq 1
             notification = designer.user_notifications.find_by_type('ContestCommentDesignerNotification')
             notification2 = designer_with_request.user_notifications.find_by_type('ContestCommentDesignerNotification')
             expect(not_participating_designer.user_notifications).to be_empty

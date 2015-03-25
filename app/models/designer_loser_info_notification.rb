@@ -1,4 +1,1 @@
-class DesignerLoserInfoNotification < DesignerInfoNotification
-
-end
-
+class DesignerLoserInfoNotification < DesignerInfoNotification; end

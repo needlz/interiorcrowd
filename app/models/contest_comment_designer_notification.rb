@@ -1,3 +1,1 @@
-class ContestCommentDesignerNotification < DesignerNotification
-
-end
+class ContestCommentDesignerNotification < DesignerNotification; end

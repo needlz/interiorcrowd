@@ -7,8 +7,8 @@ class ConceptBoardCommentCreation
   end
 
   def perform
+    comment_attributes = comment_options.merge(user_id: author.id, role: author.role)
     ActiveRecord::Base.transaction do
-      comment_attributes = comment_options.merge(user_id: author.id, role: author.role)
       @comment = contest_request.comments.create!(comment_attributes)
       notify_designer(@comment) if author.client?
     end

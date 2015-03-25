@@ -1,3 +1,1 @@
-class ConceptBoardCommentNotification < DesignerNotification
-
-end
+class ConceptBoardCommentNotification < DesignerNotification; end

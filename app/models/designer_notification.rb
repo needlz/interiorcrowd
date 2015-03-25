@@ -9,4 +9,8 @@ class DesignerNotification < UserNotification
        ContestCommentDesignerNotification ConceptBoardCommentNotification)
   end
 
+  def recipient
+    designer
+  end
+
 end
