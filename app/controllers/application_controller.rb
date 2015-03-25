@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
   end
 
   def beta_access_granted?
-    session[:beta]
+    cookies.signed[:beta]
   end
 
   def beta_page?

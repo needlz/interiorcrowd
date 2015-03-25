@@ -20,6 +20,6 @@ module User
   end
 
   def beta?
-    session[:beta]
+    cookies.signed[:beta]
   end
 end

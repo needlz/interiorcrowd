@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 
   def create_beta_session
     if beta_authentication(params[:password].strip)
-      session[:beta] = true
+      cookies.permanent.signed[:beta] = true
     else
       flash[:error] = "Wrong password"
     end
