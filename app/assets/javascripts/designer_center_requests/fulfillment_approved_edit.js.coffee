@@ -78,16 +78,20 @@ class ProductItemsEditor extends InlineEditor
 class ProductItemImageUploader
 
   @init: (imageIdInput)->
+    @imageIdInput = imageIdInput
     $('.product-list .product-item').each (index, element)=>
-      PicturesUploadButton.init
-        fileinputSelector: $(element).find('input[type="file"]')
-        uploadButtonSelector: $(element).find('.btn-change-image')
-        thumbs:
-          container: $(element).find('.edit-form')
-          selector: $(element).find('.edit-form').find(imageIdInput)
-          theme: DefaultThumbsTheme
-        I18n: I18n
-        single: true
+      @initItem(element)
+
+  @initItem: (element)->
+    PicturesUploadButton.init
+      fileinputSelector: $(element).find('input[type="file"]')
+      uploadButtonSelector: $(element).find('.btn-change-image')
+      thumbs:
+        container: $(element).find('.edit-form')
+        selector: $(element).find('.edit-form').find(@imageIdInput)
+        theme: DefaultThumbsTheme
+      I18n: I18n
+      single: true
 
 class @FulfillmentApprovedEdit
 
@@ -128,10 +132,13 @@ class @FulfillmentApprovedEdit
       url: '/image_items/new'
       success: (formHtml)=>
         @appendProductItemForm(formHtml)
+        $('.edit-form .price').ForceNumericOnly()
     )
 
   @appendProductItemForm: (formHtml)->
-    $('.product-list').append(formHtml)
+    elem = $(formHtml)
+    $('.product-list').append(elem)
+    ProductItemImageUploader.initItem(elem)
 
   @clearEditFormInputs: ($form)->
     $form.find('.edit-form').find(@imageIdInput).remove()

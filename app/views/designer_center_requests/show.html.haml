@@ -21,9 +21,9 @@
         - if @request.fulfillment_approved? || @request.finished?
           %p.font20Bold.marg-top20= t('designer_center.edit.products_list')
           .hLine10
-          - @request.product_items.includes(:image).each do |product_item|
+          - @request.image_items.order(:created_at).includes(:image).each do |item|
             = render partial: 'clients/client_center/entries/design_item',
-                locals: { product_item: product_item }
+                locals: { image_item: item }
         - elsif @request.fulfillment_editing?
           .image-items
             = render partial: 'designer_center_requests/edit/image_block',

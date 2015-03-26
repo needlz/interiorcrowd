@@ -22,9 +22,9 @@
           = f.text_area :pull_together_note, class: 'consumerNoteTextarea'
           %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')
           .product-list
-            - product_items.each do |product_item|
-              = render partial: 'designer_center_requests/edit/product_item',
-                  locals: { product_item: product_item }
+            - image_items.order(:created_at).each do |product_item|
+              = render partial: 'designer_center_requests/edit/image_item',
+                  locals: { image_item: product_item }
           .pull-right
             .add-product-button
               + Add more product

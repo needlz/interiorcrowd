@@ -23,7 +23,7 @@ class ImageItemsController < ApplicationController
   end
 
   def new
-    render partial: 'designer_center_requests/edit/product_item', locals: { product_item: ImageItem.new }
+    render partial: 'designer_center_requests/edit/image_item', locals: { image_item: ImageItem.new(kind: 'product_items') }
   end
 
   private

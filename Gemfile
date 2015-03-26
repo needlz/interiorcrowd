@@ -47,7 +47,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end
 
@@ -65,10 +65,6 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
   gem 'simplecov', require: false
-end
-
-group :staging do
-  gem 'rails_12factor'
 end
 
 gem 'mandrill-rails'
