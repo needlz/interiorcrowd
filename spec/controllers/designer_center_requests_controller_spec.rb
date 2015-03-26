@@ -104,7 +104,22 @@ RSpec.describe DesignerCenterRequestsController do
       expect(submitted_request.product_items.count).to eq 2
     end
 
-    context 'fulfillment approved' do
+    context 'request with fulfillment status' do
+      let(:request){ Fabricate(:contest_request, designer: designer, contest: contest, status: 'fulfillment') }
+
+      before do
+        request.image_items.create!(kind: 'product_items')
+        request.image_items.create!(kind: 'similar_styles')
+      end
+
+      it 'clears image items if no params passed' do
+        expect(request.image_items.count).to eq 2
+        patch :update, id: request.id
+        expect(request.reload.image_items.count).to eq 0
+      end
+    end
+
+    context 'request with fulfillment approved status' do
       let(:request){ Fabricate(:contest_request, designer: designer, contest: contest, status: 'fulfillment_approved') }
 
       it 'updates final note' do

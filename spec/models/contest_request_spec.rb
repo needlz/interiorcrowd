@@ -144,5 +144,12 @@ RSpec.describe ContestRequest do
       request.update_attributes!(answer: 'winner')
       expect(request.similar_styles.count).to eq 1
     end
+
+    it 'does not create default items if an item already present' do
+      request.product_items.create!(kind: 'product_items')
+      expect(request.product_items.count).to eq 1
+      request.update_attributes!(answer: 'winner')
+      expect(request.product_items.count).to eq 1
+    end
   end
 end

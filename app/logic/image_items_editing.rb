@@ -7,7 +7,7 @@ class ImageItemsEditing
 
   def perform
     ImageItem::KINDS.each do |kind|
-      if contest_request_options[kind]
+      if !contest_request_options || contest_request_options[kind]
         product_items_attributes = gather_attributes(kind)
         clear_items(kind, product_items_attributes)
         update_items(kind, product_items_attributes)
@@ -18,35 +18,16 @@ class ImageItemsEditing
   private
 
   def gather_attributes(kind)
-    image_ids = contest_request_options[kind][:image_ids]
-    if image_ids.kind_of?(String)
-      gather_creation_attributes(kind)
-    else
-      gather_editing_attributes(kind)
-    end
-  end
-
-  def gather_creation_attributes(kind)
-    image_ids = contest_request_options[kind][:image_ids].split(',')
-    image_ids.each_with_index.map do |image_id, index|
-      { attributes:
-            { image_id: image_id,
-              text: contest_request_options[kind][:texts][index]
-            },
-        id: contest_request_options[kind][:ids][index]
-      }
-    end
-  end
-
-  def gather_editing_attributes(kind)
+    return [] unless contest_request_options
     ids = contest_request_options[kind][:ids]
     ids.each_with_index.map do |id, index|
       { attributes:
             { image_id: contest_request_options[kind][:image_ids][index],
-              name: contest_request_options[kind][:names][index],
-              brand: contest_request_options[kind][:brands][index],
-              price: contest_request_options[kind][:prices][index],
-              link: contest_request_options[kind][:links][index]
+              name: contest_request_options[kind][:names].try(:[], index),
+              brand: contest_request_options[kind][:brands].try(:[], index),
+              price: contest_request_options[kind][:prices].try(:[], index),
+              link: contest_request_options[kind][:links].try(:[], index),
+              text: contest_request_options[kind][:texts].try(:[], index)
             },
         id: id
       }

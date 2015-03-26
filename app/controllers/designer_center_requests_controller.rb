@@ -81,7 +81,7 @@ class DesignerCenterRequestsController < ApplicationController
   private
 
   def response_params
-    params.require(:contest_request).permit(:feedback, :final_note, :pull_together_note)
+    params.permit(contest_request: [:feedback, :final_note, :pull_together_note])[:contest_request]
   end
 
   def set_designer
