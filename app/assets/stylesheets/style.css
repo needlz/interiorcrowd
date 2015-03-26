@@ -2198,6 +2198,7 @@ textarea.productsMoodboardAbove{
 
 .designerNotification.read {
     color: #777;
+    font-weight: lighter;
 }
 
 .designerNotification:hover{
