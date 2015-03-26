@@ -19,12 +19,12 @@ class ReviewPage
     @validator.reset()
     $('.text-error').text('')
 
-    pname = $.trim($('#project_name').val())
-    if pname.length < 1
+    contest_name = $.trim($('#project_name').val())
+    if contest_name.length < 1
       @validator.addMessage $('#err_prj_name'), I18n.name_error, $('.project-name')
 
-    pbudget = Packages.selectedPackage()
-    if pbudget.length < 1
+    package_id = Packages.selectedPackage()
+    if package_id.length < 1
       @validator.addMessage $('#err_plan'), I18n.plan_error, $('.packages-description')
 
 $ ->

@@ -7,7 +7,7 @@ class ContestShortDetails
   def initialize(contest)
     @id = contest.id
     @name = contest.project_name
-    @package_name = PackageView.new(BudgetPlan.find(contest.budget_plan)).name
+    @package_name = PackageView.new(contest.package).name
     @design_space = contest.design_space.name
     @days_count = contest.days_left
     @days_till_end = get_days_till_end(contest)

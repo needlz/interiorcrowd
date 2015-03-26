@@ -178,6 +178,10 @@ class Contest < ActiveRecord::Base
     query.relation
   end
 
+  def package
+    BudgetPlan.find(budget_plan)
+  end
+
   private
 
   def update_appeals(options)
