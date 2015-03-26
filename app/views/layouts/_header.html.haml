@@ -1,31 +1,32 @@
 %nav#menu.mm-menu.mm-horizontal.mm-offcanvas
   %ul#mm-0.mm-list.mm-panel.mm-opened.mm-current
     %li
-      %a{href: '#'} Home
-    %li.mm-selected
-      %a.mm-subopen{href: '#mm-1'}
-      %a{href: '#about'} About us
+      %a{href: "#"}= t('header.get_inspired')
     %li
-      %a{href: '#contact'} Contact
+      %a{href: "#"}= t('header.portfolio')
+    %li
+      %a{href: "#"}= t('header.how_it_works')
+    - if session[:designer_id].present?
+      %li
+        %a{href: designer_center_index_path}= t('header.designer_center')
+      %li
+        %a{href: logout_sessions_path}= t('header.sign_out')
+    - elsif session[:client_id].present?
+      %li
+        %a{href: client_center_index_path}= t('header.client_center')
+      %li
+        %a{href: logout_sessions_path}= t('header.sign_out')
+    - else
+      %li.dropdown
+        %a.mm-subopen{href: '#mm-1'}
+        %a{href: '#about'}= t('header.login')
   %ul#mm-1.mm-list.mm-panel.mm-hidden
     %li.mm-subtitle
-      %a.mm-subclose{href: '#mm-0'} About us
+      %a.mm-subclose{href: '#mm-0'}= t('header.login')
     %li
-      %a{href: '#about/history'} History
+      %a{href: client_login_sessions_path}= t('header.client_login')
     %li
-      %a.mm-subopen{href: '#mm-2'}
-      %a{href: '#about/team'} The team
-    %li
-      %a{href: '#about/address'} Our address
-  %ul#mm-2.mm-list.mm-panel.mm-hidden
-    %li.mm-subtitle
-      %a.mm-subclose{href: '#mm-1'} The team
-    %li
-      %a{href: '#about/team/management'} Management
-    %li
-      %a{href: '#about/team/sales'} Sales
-    %li
-      %a{href: '#about/team/development'} Development
+      %a{href: login_sessions_path}= t('header.designer_login')
 
 .mm-page.mm-slideout
   .visible-xs.visible-sm
@@ -47,28 +48,28 @@
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.pull-right
                 %li
-                  %a{href: "#"} Get Inspired
+                  %a{href: "#"}= t('header.get_inspired')
                 %li
-                  %a{href: "#"} Portfolio
+                  %a{href: "#"}= t('header.portfolio')
                 %li
-                  %a{href: "#"} How it works
+                  %a{href: "#"}= t('header.how_it_works')
                 - if session[:designer_id].present?
                   %li
-                    %a{href: designer_center_index_path} Designer Center
+                    %a{href: designer_center_index_path}= t('header.designer_center')
                   %li
-                    %a{href: logout_sessions_path} Sign Out
+                    %a{href: logout_sessions_path}= t('header.sign_out')
                 - elsif session[:client_id].present?
                   %li
-                    %a{href: client_center_index_path} Client Center
+                    %a{href: client_center_index_path}= t('header.client_center')
                   %li
-                    %a{href: logout_sessions_path} Sign Out
+                    %a{href: logout_sessions_path}= t('header.sign_out')
                 - else
                   %li.dropdown
                     %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: 'sign-in.html' }
-                      Login
+                      = t('header.login')
                       %b.caret
                     %ul.dropdown-menu
                       %li
-                        %a{href: client_login_sessions_path} Client login
+                        %a{href: client_login_sessions_path}= t('header.client_login')
                       %li
-                        %a{href: login_sessions_path} Designer login
+                        %a{href: login_sessions_path}= t('header.designer_login')

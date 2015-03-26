@@ -1,6 +1,15 @@
 en:
   header:
     need_help: Need help?
+    get_inspired: Get Inspired
+    portfolio: Portfolio
+    how_it_works: How it works
+    designer_center: Designer Center
+    client_center: Client Center
+    sign_out: Sign Out
+    login: Login
+    designer_login: Designer login
+    client_login: Client login
   error_during_saving:
   contest_requests:
     validations:
