@@ -8,7 +8,7 @@ class ContestView
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
-              :space_budget_value, :retailers, :other_retailers
+              :space_budget_value, :retailers, :other_retailers, :package_view, :package
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -19,9 +19,9 @@ class ContestView
   end
 
   EDITABLE_ATTRIBUTES = [
-    :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
+    :design_package, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
-    :design_package, :additional_preferences, :preferences_retailers, :element_to_avoid,
+    :additional_preferences, :preferences_retailers, :element_to_avoid,
     :entertaining, :durability] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
@@ -121,8 +121,8 @@ class ContestView
     @space_budget_value = contest_params[:space_budget].to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
     @feedback = contest_params[:feedback]
-    @budget_plan = contest_params[:budget_plan]
     @name = contest_params[:project_name]
+    set_package(contest_params)
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
   end
@@ -143,7 +143,6 @@ class ContestView
     @space_budget_value = contest.space_budget.to_i
     @budget = CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
     @feedback = contest.feedback
-    @budget_plan = contest.budget_plan
     @name = contest.project_name
     @retailers = PreferredRetailers::RETAILERS.map do |retailer|
       { name: retailer, value: contest.preferred_retailers.send(retailer) }
@@ -152,6 +151,7 @@ class ContestView
     @elements_to_avoid = contest.elements_to_avoid
     @entertaining = contest.entertaining
     @durability = contest.durability
+    set_package(contest.attributes.with_indifferent_access)
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
   end
@@ -178,5 +178,11 @@ class ContestView
 
   def set_have_examples
     @have_examples = @example_ids.present?
+  end
+
+  def set_package(contest_params)
+    @budget_plan = contest_params[:budget_plan]
+    @package = BudgetPlan.find(budget_plan) if budget_plan
+    @package_view = PackageView.new(BudgetPlan.find(budget_plan)) if package
   end
 end

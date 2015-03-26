@@ -28,7 +28,7 @@ en:
           second_row: Let’s start with one room. Let us know which best describes your needs.
         packages:
           quick_fix:
-            name: Quick Fix
+            name: Few things
             description: >
               Does your room just need one or two things to bring it all together?
             quote: >
@@ -39,7 +39,7 @@ en:
               a floor lamp that made a
               huge difference to the room”
           update_my_style:
-            name: Style Update
+            name: Take room to the next level
             description: >
               Do you need help taking your room to the next level?
             quote: >
@@ -52,7 +52,7 @@ en:
               replacements that worked
               with the things we loved”
           total_room_overhaul:
-            name: Total Room Overhaul
+            name: Completely new look
             description: Need lots of help? Not sure where to start?
             quote: >
               “I wanted a completely new look
