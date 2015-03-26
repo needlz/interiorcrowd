@@ -14,7 +14,7 @@
     - if @request.fulfillment_approved?
       = render partial: 'designer_center_requests/edit/final_upload',
           locals: { contest_request: @request,
-                    image_items: @request.image_items.order(:created_at).includes(:image) }
+                    image_items: @request_view.image_items }
     - else
       .row
         - if @request_view.current_phase_index.present?
