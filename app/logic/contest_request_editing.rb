@@ -7,9 +7,11 @@ class ContestRequestEditing
   end
 
   def perform
-    update_image
     update_attributes
-    update_status
+    if contest_request_params
+      update_image
+      update_status
+    end
     update_image_items
   end
 
