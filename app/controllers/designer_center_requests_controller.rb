@@ -14,6 +14,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def show
     @request = @designer.contest_requests.find(params[:id])
+    @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
     @navigation = Navigation::DesignerCenter.new(:requests)
     set_image_item_views

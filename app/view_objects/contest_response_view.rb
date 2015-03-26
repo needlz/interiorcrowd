@@ -1,6 +1,6 @@
 class ContestResponseView
 
-  attr_reader :contest, :status, :status_name, :answer, :id, :header_text, :comments_count
+  attr_reader :contest, :status, :status_name, :answer, :id, :header_text, :comments_count, :image_items
 
   HEADER_TEXTS = {
     'fulfillment' => I18n.t('designer_center.edit.above_image'),
@@ -31,6 +31,7 @@ class ContestResponseView
     @contest = ContestShortDetails.new(response.contest)
     @header_text = HEADER_TEXTS[response.status]
     @comments_count = response.comments.count
+    @image_items = response.image_items.for_view
   end
 
   def current_phase_index
