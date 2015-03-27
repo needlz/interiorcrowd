@@ -6,6 +6,7 @@ module HomeHelper
      :what_is,
      :who_are_designers,
      :style_profile,
+     :measuring,
      :packages,
      :contests,
      :how_many_designs,
