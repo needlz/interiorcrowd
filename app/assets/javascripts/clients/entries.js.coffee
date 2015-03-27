@@ -7,7 +7,7 @@ class EntriesPage
     ScrollBars.style()
     contestId = @getContestId()
     DesignerInvitationButton.bindInviteButtons(contestId)
-    ContestNotes.bindAjaxSuccess()
+    ContestNotes.init()
     ResponsesFilter.init()
     ReviewerInvitations.init(contestId)
 
@@ -112,9 +112,17 @@ class @Answers
 
 class ContestNotes
 
+  @init: ->
+    @bindAjaxSuccess()
+    @bindClearingOfTextarea()
+
   @bindAjaxSuccess: ->
     $('body').on 'ajax:success', '#new_contest_note', (event, data, status, xhr)=>
       @refreshNotes(data)
+
+  @bindClearingOfTextarea: ->
+    $('body').on 'ajax:send', '#new_contest_note', (event, data, status, xhr)=>
+      $('#contest_note_text').val('')
 
   @refreshNotes: (notes) ->
     $('.client-notes-list ul').html(notes)
