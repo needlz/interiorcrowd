@@ -762,7 +762,14 @@ en:
           password will be sent to the email address on file. Click on that link, and you will be led to an
           area to reset the password. If you have any issues, you can always contact us at
           %{hello_email}.
-
+      measuring:
+        question: How do I measure my room?
+        answer: >
+          Get your tape measure ready! We find it’s easiest to make a simple drawing of your space
+          first and then fill in the measurements as you go. You can also take a photo of this drawing and
+          upload it to the other photo’s of your space. Your designer can guide you if they need more
+          detailed measurements, but for now, just measure the length and width of the room,
+          indicating important details like door openings and indentations/nooks.
     designer:
       what_is_beta:
         question: What is beta mode?
