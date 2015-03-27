@@ -618,9 +618,9 @@ en:
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
-        fulfillment: Fulfillment period
-        fulfillment_ready: Fulfillment period (design submitted)
-        fulfillment_approved: Fulfillment period (design approved)
+        fulfillment: Create Design
+        fulfillment_ready: Design submitted and Collaboration
+        fulfillment_approved: Create Final Design
         closed: Closed
         finished: Finished
     respond_view:
