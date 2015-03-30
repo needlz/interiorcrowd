@@ -16,16 +16,27 @@ class DesignerCenterRequestsController < ApplicationController
     @request = @designer.contest_requests.find(params[:id])
     @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
+    @show_page = ConceptBoardPreview.new({
+      contest_request: @request,
+      preferred_view: params[:view],
+      view_context: view_context
+    })
     @navigation = Navigation::DesignerCenter.new(:requests)
     set_image_item_views
   end
 
   def edit
     @request = @designer.contest_requests.find(params[:id])
-    return redirect_to designer_center_response_path(id: @request.id) if @request.basic_editing_only?
+    return redirect_to designer_center_response_path(id: @request.id) unless @request.details_editable?
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
     @request_view = ContestResponseView.new(@request)
+    @editing_page = ConceptBoardEditing.new({
+      contest_request: @request,
+      contest_request_view: @request_view,
+      preferred_view: params[:view],
+      view_context: view_context
+    })
     set_image_item_views
   end
 

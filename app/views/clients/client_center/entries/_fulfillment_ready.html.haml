@@ -1,7 +1,8 @@
 .container.animated.fadeInDown.bottom60
   .row
     .col-md-8.disablePadding
-      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
+      = render partial: 'clients/client_center/entries/phases',
+          locals: { stripe: PhasesStripe.new(last_step: 1) }
       %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
     .col-md-4
       %p.timeLeft There are 3 days left

@@ -1,6 +1,6 @@
 .moodboard-steps.marg-top30
-  - phases.each_with_index do |word, index|
-    %p{class: phases_classes(active_tab-1)[index]}
-      %span= index+1
-      = word
+  - PhasesStripe::PHASES.each_with_index do |phase_name, index|
+    %p{ class: stripe.css_class(index) }
+      %span= index + 1
+      = stripe.text(index)
   .clearfix
