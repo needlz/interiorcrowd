@@ -8,14 +8,6 @@ class ContestResponseView
     'submitted' => I18n.t('designer_center.edit.update_submission')
   }
 
-  STATUSES_TO_PHASES = {
-    'draft' => 1,
-    'submitted' => 1,
-    'fulfillment' => 2,
-    'fulfillment_ready' => 2,
-    'fulfillment_approved' => 3
-  }
-
   def self.for_responses(responses)
     responses.map{ |response| new(response) }
       .sort_by{ |response| response.contest.days_count }
@@ -35,7 +27,7 @@ class ContestResponseView
   end
 
   def current_phase_index
-    STATUSES_TO_PHASES[response.status]
+    ContestPhases.status_to_index(response.status)
   end
 
   private

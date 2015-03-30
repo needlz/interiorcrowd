@@ -2,7 +2,8 @@
   .row
     .col-md-12
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
-      = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 3}
+      = render partial: 'clients/client_center/entries/phases',
+          locals: { stripe: PhasesStripe.new(last_step: 2) }
 
     .col-md-12.marg-top20
       .designerShareBox
@@ -16,7 +17,7 @@
             %p.designerName= t('client_center.entries.space.share')
             .social-share-button{ data: { desc: '',
               popup: 'true',
-              img: request.concept_board_image.original_size_url,
+              img: request.concept_board_image_path,
               title: 'my design',
               url: @share_url } }
               - SocialShareButton.config.allow_sites.each do |site|

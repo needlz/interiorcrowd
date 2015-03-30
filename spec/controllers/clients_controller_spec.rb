@@ -137,7 +137,7 @@ RSpec.describe ClientsController do
     end
 
     context 'designers present' do
-      let!(:designers) { Fabricate.times(3, :portfolio).map(&:designer) }
+      let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
 
       it 'returns page' do
         get :entries
@@ -169,6 +169,17 @@ RSpec.describe ClientsController do
           submitted.update_attributes!(answer: 'winner')
           get :entries, answer: 'winner'
           expect(assigns(:won_contest_request)).to eq(submitted)
+        end
+
+        context 'has finished concept board' do
+          before do
+            Fabricate(:contest_request, designer: designers[3], contest: contest, status: 'finished', answer: 'winner')
+          end
+
+          it 'returns page' do
+            get :entries
+            expect(response).to render_template(:entries)
+          end
         end
       end
     end

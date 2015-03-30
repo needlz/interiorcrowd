@@ -5,12 +5,15 @@
         = t('client_center.entries.congratulations')
         %span= t('client_center.entries.customized_board')
       .col-md-8.disablePadding.winner-badge-offset-top
-        = render partial: 'clients/client_center/entries/phases', locals: {active_tab: 2}
+        = render partial: 'clients/client_center/entries/phases',
+                 locals: { stripe: PhasesStripe.new(active_step: 1, view_context: self, status: request.status) }
       %br/
       %br/
     .col-md-8.disablePadding.relative
       = image_tag '/assets/winnerBadge.png', class: 'winnerBadge'
       = render partial: 'shared/moodboard', locals: { request: request }
     .col-md-4
-      = render partial: 'contest_requests/submission_info', locals: { designer: request.designer, submitted_at: request.created_at, request: request }
-      = render partial: 'designer_center_requests/edit/comments', locals: { request: request, comments: request.comments }
+      = render partial: 'contest_requests/submission_info',
+          locals: { designer: request.designer, submitted_at: request.created_at, request: request }
+      = render partial: 'designer_center_requests/edit/comments',
+          locals: { request: request, comments: request.comments }

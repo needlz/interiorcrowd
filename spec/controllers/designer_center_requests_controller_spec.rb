@@ -20,6 +20,12 @@ RSpec.describe DesignerCenterRequestsController do
                                        status: 'finished',
                                        lookbook: Fabricate(:lookbook))
   end
+  let(:fulfillment_ready_request) do Fabricate(:contest_request,
+                                      designer: designer,
+                                      contest: contest,
+                                      status: 'fulfillment_ready',
+                                      lookbook: Fabricate(:lookbook))
+  end
   let(:closed_request) do Fabricate(:contest_request,
                                       designer: designer,
                                       contest: contest,
@@ -43,6 +49,13 @@ RSpec.describe DesignerCenterRequestsController do
       submitted_request.update_attributes!(answer: 'winner')
       get :show, id: submitted_request.id
       expect(response).to render_template(:show)
+    end
+
+    it 'returns page for each phase view' do
+      ContestPhases.indices.each do |index|
+        get :show, id: finished_request.id, view: index
+        expect(response).to render_template(:show)
+      end
     end
   end
 
@@ -214,6 +227,21 @@ RSpec.describe DesignerCenterRequestsController do
 
         request.approve_fulfillment!
         get :edit, id: request.id
+        expect(response).to render_template(:edit)
+      end
+    end
+
+    context 'request is finished' do
+      it 'redirects to show page' do
+        request = finished_request
+        get :edit, id: request.id
+        expect(response).to redirect_to(designer_center_response_path(id: request.id))
+      end
+    end
+
+    it 'returns page for initial and fulfillment phases' do
+      [0..1].each do |index|
+        get :edit, id: fulfillment_ready_request.id, view: index
         expect(response).to render_template(:edit)
       end
     end

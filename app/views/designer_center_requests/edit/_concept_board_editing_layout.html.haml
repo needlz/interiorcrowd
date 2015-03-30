@@ -1,0 +1,27 @@
+.row.marg-top30.response{ data: { id: @request.id } }
+  .col-md-8.disablePadding
+    %p.thisIsAPreview= @request_view.header_text
+  .col-md-4
+  .col-md-8.disablePadding
+    .initialImage
+      = render partial: 'shared/moodboard', locals: { request: @request }
+      .concept-board-upload-hint= t('designer_center.edit.update_concept_board')
+      - if @request.editable?
+        = link_to t('designer_center.edit.upload_new'),
+            designer_center_response_path(id: @request.id),
+            remote: true,
+            class: 'darkBorderBtn editMoodboardBtn'
+  .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
+    = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+    - if @request.commenting_enabled?
+      = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
+          comments: @request.comments }
+  .col-md-12.disablePadding.marg-top20
+    .hLine
+  .col-md-6.disablePadding
+  .col-md-6.disablePadding.text-right
+    - if @request.submitted?
+      = link_to designer_center_response_index_path do
+        .backToEntries
+          =t('designer_center.respond.done')
+          %img{:src => "/assets/gt.png"}/

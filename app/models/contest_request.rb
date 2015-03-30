@@ -63,7 +63,7 @@ class ContestRequest < ActiveRecord::Base
     selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')
   end
 
-  def moodboard_image_path
+  def concept_board_image_path
     lookbook_item = lookbook.try(:lookbook_details).try(:last)
     return unless lookbook_item
     return lookbook_item.image.original_size_url if lookbook_item.uploaded? && lookbook_item.try(:image)
@@ -101,8 +101,8 @@ class ContestRequest < ActiveRecord::Base
     fulfillment_editing?
   end
 
-  def basic_editing_only?
-    draft?
+  def details_editable?
+    !draft? && editable?
   end
 
   def contest_owner?(user)

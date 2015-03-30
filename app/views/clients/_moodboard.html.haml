@@ -2,9 +2,9 @@
   .designBox
     %h3= contest_request.designer.name
     .designItem
-      - if contest_request.moodboard_image_path
+      - if contest_request.concept_board_image_path
         %a{ href: contest_request_path(id: contest_request.id) }
-          .image-container{ style: "background-image: url(#{ contest_request.moodboard_image_path })" }
+          .image-container{ style: "background-image: url(#{ contest_request.concept_board_image_path })" }
       - else
         = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
     .hLine

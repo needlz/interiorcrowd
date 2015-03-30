@@ -7,42 +7,24 @@
 
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60
-    .row.marg-top30.response{ data: { id: @request.id } }
-      .col-md-8.disablePadding.initialImage
-        - if @request.lost?
-          .col-md-12.loser-text.big=t('designer_center.responses.loser.title')
-          .col-md-12.loser-text.small=t('designer_center.responses.loser.add_to_portfolio')
-        = render partial: 'shared/moodboard', locals: { request: @request }
-        - if @request.editable?
-          = link_to t('designer_center.responses.item.edit_concept_board'),
-              designer_center_response_path,
-              remote: true,
-              class: 'editMoodboardBtn marg-top20'
-        - if @request.fulfillment_approved? || @request.finished?
-          %p.font20Bold.marg-top20= t('designer_center.edit.products_list')
-          .hLine10
-          - @request_view.image_items.each do |item|
-            = render partial: 'clients/client_center/entries/design_item',
-                locals: { image_item: item }
-        - elsif @request.fulfillment_editing?
-          .image-items
-            = render partial: 'designer_center_requests/edit/image_block',
-                locals: { editable: false,
-                  title: t('designer_center.edit.products_list'),
-                  subtitle: '',
-                  image_list_name: :product_items,
-                  contest_request: @request,
-                  image_items: @product_items }
-            = render partial: 'designer_center_requests/edit/image_block',
-                locals: { editable: false,
-                  title: t('designer_center.edit.similar_styles'),
-                  subtitle: '',
-                  image_list_name: :similar_styles,
-                  contest_request: @request,
-                  image_items: @similar_styles }
+    = render partial: 'clients/client_center/entries/phases',
+             locals: { stripe: @show_page.phases_stripe }
 
-      .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
-        = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
-      = render partial: 'designer_center_requests/footer_buttons'
+  .row.marg-top30.response{ data: { id: @request.id } }
+    .col-md-8.disablePadding.initialImage
+      - if @request.lost?
+        .col-md-12.loser-text.big=t('designer_center.responses.loser.title')
+        .col-md-12.loser-text.small=t('designer_center.responses.loser.add_to_portfolio')
+      = render partial: 'shared/moodboard', locals: { request: @request }
+      - if @request.editable?
+        = link_to t('designer_center.responses.item.edit_concept_board'),
+            designer_center_response_path,
+            remote: true,
+            class: 'editMoodboardBtn marg-top20'
+      = render @show_page.image_items_partial if @show_page.image_items_partial
+
+    .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
+      = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+    = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'
