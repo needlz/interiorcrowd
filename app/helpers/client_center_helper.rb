@@ -8,4 +8,8 @@ module ClientCenterHelper
       'winner' => t('client_center.entries.answers.winner') }
   end
 
+  def show_time_button?
+    false
+  end
+
 end
