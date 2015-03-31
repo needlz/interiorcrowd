@@ -12,11 +12,11 @@
           show_portfolio_path(designer.portfolio_path))
     .col-md-12.first-section-separator
     %h2.attribute-title
-      %b Design Mindset
-    %h2.attribute-value
+      %b= t('client_center.entries.designer_profile.about_title')
+    %h2.attribute-value.about
       %b= designer.about
     .col-md-12.second-section-separator
     %h2.attribute-title
-      %b Style Specialty
-    %h2.attribute-value
+      %b= t('client_center.entries.designer_profile.style_specialty')
+    %h2.attribute-value.style-description
       %b= designer.style_description_texts

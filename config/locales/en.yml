@@ -347,6 +347,9 @@ en:
         very: Very Important
         somewhat: Somewhat Important
         not: Not Important
+      designer_profile:
+        about_title: Design Mindset
+        style_specialty: Style Specialty
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

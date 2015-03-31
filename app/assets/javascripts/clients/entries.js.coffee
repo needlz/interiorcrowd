@@ -19,6 +19,8 @@ class @DesignerBlocks
   @profileCardPadding = 40
 
   @fitHeight: ->
+    @setupEllipsis()
+
     maxProfileCardHeight = null
     $('.designers-row').each (i, row)=>
       maxProfileCardHeight = 0
@@ -26,6 +28,9 @@ class @DesignerBlocks
       $rowCards.each ->
         maxProfileCardHeight = $(@).height() if maxProfileCardHeight < $(@).height()
       $rowCards.css 'height', "#{ maxProfileCardHeight + @profileCardPadding }px"
+
+  @setupEllipsis: ->
+    $('.profile-card .attribute-value.about').dotdotdot({ height: 50 });
 
 class ScrollBars
 
