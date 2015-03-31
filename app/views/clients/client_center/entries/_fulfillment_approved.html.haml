@@ -4,8 +4,9 @@
       = render partial: 'clients/client_center/entries/phases',
           locals: { stripe: PhasesStripe.new(last_step: 2) }
       %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
-    .col-md-4
-      %p.timeLeft There are 3 days left
+    - if show_time_button?
+      .col-md-4
+        %p.timeLeft There are 3 days left
     %br/
     %br/
   .col-md-8.disablePadding.relative
