@@ -21,6 +21,7 @@ class DesignerCenterRequestsController < ApplicationController
       preferred_view: params[:view],
       view_context: view_context
     })
+    @visible_image_items = @show_page.image_items.for_view
     @navigation = Navigation::DesignerCenter.new(:requests)
     set_image_item_views
   end
@@ -33,10 +34,10 @@ class DesignerCenterRequestsController < ApplicationController
     @request_view = ContestResponseView.new(@request)
     @editing_page = ConceptBoardEditing.new({
       contest_request: @request,
-      contest_request_view: @request_view,
       preferred_view: params[:view],
       view_context: view_context
     })
+    @visible_image_items = @editing_page.image_items.for_view
     set_image_item_views
   end
 
@@ -109,7 +110,7 @@ class DesignerCenterRequestsController < ApplicationController
   end
 
   def set_image_item_views
-    @product_items = ImageItemView.for_image_items(@request.product_items.includes(:image))
-    @similar_styles = ImageItemView.for_image_items(@request.similar_styles.includes(:image))
+    @product_items = ImageItemView.for_image_items(@visible_image_items.product_items)
+    @similar_styles = ImageItemView.for_image_items(@visible_image_items.similar_styles)
   end
 end

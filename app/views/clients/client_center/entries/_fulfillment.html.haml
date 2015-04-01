@@ -6,7 +6,7 @@
         %span= t('client_center.entries.customized_board')
       .col-md-8.disablePadding.winner-badge-offset-top
         = render partial: 'clients/client_center/entries/phases',
-                 locals: { stripe: PhasesStripe.new(active_step: 1, view_context: self, status: request.status) }
+                 locals: { stripe: @entries_page.phases_stripe }
       %br/
       %br/
     .col-md-8.disablePadding.relative

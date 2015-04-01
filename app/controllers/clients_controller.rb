@@ -20,7 +20,11 @@ class ClientsController < ApplicationController
     @current_user = current_user
     @won_contest_request = @contest.response_winner
     if @won_contest_request
-      @product_items = @won_contest_request.image_items.for_view.paginate(per_page: 4, page: params[:page])
+      @entries_page = EntriesConceptBoard.new({
+          contest_request: @won_contest_request,
+          view_context: view_context
+      })
+      @visible_image_items = @entries_page.image_items.for_view.paginate(per_page: 4, page: params[:page])
       @share_url = public_designs_url(token: @won_contest_request.token)
     end
     render 'clients/client_center/entries'

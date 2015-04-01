@@ -1,5 +1,5 @@
 %p.font20Bold.marg-top20= t('designer_center.edit.products_list')
 .hLine10
-- @request_view.image_items.each do |item|
+- @visible_image_items.each do |item|
   = render partial: 'clients/client_center/entries/design_item',
            locals: { image_item: item }

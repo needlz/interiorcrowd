@@ -1,6 +1,3 @@
-require 'simplecov'
-SimpleCov.start
-
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience

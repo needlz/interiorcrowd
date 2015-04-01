@@ -12,6 +12,14 @@ class ContestPhases
     INDICES_TO_PHASES[index]
   end
 
+  def self.phase_to_index(phase)
+    INDICES_TO_PHASES.key(phase)
+  end
+
+  def self.status_to_phase(status)
+    index_to_phase(status_to_index(status))
+  end
+
   private
 
   STATUSES_TO_INDICES = {
@@ -26,7 +34,7 @@ class ContestPhases
 
   INDICES_TO_PHASES = {
       0 => :initial,
-      1 => :product_list,
+      1 => :collaboration,
       2 => :final_design
   }
 

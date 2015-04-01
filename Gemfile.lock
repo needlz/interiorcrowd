@@ -88,7 +88,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    docile (1.1.5)
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -255,11 +254,6 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     sexp_processor (4.5.0)
-    simplecov (0.9.2)
-      docile (~> 1.1.0)
-      multi_json (~> 1.0)
-      simplecov-html (~> 0.9.0)
-    simplecov-html (0.9.0)
     social-share-button (0.1.8)
       coffee-rails
       sass-rails
@@ -326,7 +320,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sass-rails-source-maps
   sdoc
-  simplecov
   social-share-button
   sprockets (= 2.11.0)
   state_machine
