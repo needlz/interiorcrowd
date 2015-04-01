@@ -610,8 +610,8 @@ en:
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
-        fulfillment: Create Design
-        fulfillment_ready: Design submitted and Collaboration
+        fulfillment: Create Custom Board and Product List
+        fulfillment_ready: Custom Board and Product List Collaboration
         fulfillment_approved: Create Final Design
         closed: Closed
         finished: Finished
