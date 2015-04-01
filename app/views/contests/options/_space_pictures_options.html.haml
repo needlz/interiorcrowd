@@ -9,7 +9,9 @@
 
     .col-md-12.thumbs
       %span#image_display
-        = render partial: 'contests/options/removable_thumbnails', locals: { urls: @contest_view.space_pictures }
+        = render partial: 'contests/options/removable_thumbnails',
+            locals: { urls: @contest_view.space_pictures,
+                      ids: @contest_view.space_pictures_ids }
 
     .clearfix
     %input#design_space_image_id{:name => "design_space[document_id]",

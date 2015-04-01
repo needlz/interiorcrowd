@@ -1,7 +1,9 @@
 .design-style-options
   .example-pictures
     #image_display.col-md-12
-      = render partial: 'contests/options/removable_thumbnails', locals: { urls: @contest_view.examples }
+      = render partial: 'contests/options/removable_thumbnails',
+          locals: { urls: @contest_view.examples,
+                    ids: @contest_view.example_ids }
 
     .col-md-6.no-x-padding.file-input-container
       %button.btn3.btn3-confirm.upload-button{ type: 'button' }= t('contests.design_style.upload_button')

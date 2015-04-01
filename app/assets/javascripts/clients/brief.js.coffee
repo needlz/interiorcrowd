@@ -90,7 +90,8 @@ class @ContestEditing extends InlineEditor
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)
-    $saveButton.parents('form').submit()
+    $saveButton.parents('form').find($.rails.fileInputSelector).remove()
+    $saveButton.parents('form').trigger('submit.rails');
 
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()
