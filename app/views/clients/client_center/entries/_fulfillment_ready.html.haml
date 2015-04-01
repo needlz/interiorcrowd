@@ -2,7 +2,7 @@
   .row
     .col-md-8.disablePadding
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: PhasesStripe.new(last_step: 1) }
+          locals: { stripe: @entries_page.phases_stripe }
       %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
     - if show_time_button?
       .col-md-4
@@ -16,12 +16,12 @@
           locals: { choosable: true,
           title: t('designer_center.edit.products_list'),
           block_text: t('client_center.entries.collaboration.check_message'),
-          image_items: request.product_items.includes(:image) }
+          image_items: request.product_items.for_view }
       = render partial: 'clients/client_center/entries/collaboration/image_block',
           locals: { choosable: true,
           title: t('designer_center.edit.similar_styles'),
           block_text: t('client_center.entries.collaboration.check_message'),
-          image_items: request.similar_styles.includes(:image) }
+          image_items: request.similar_styles.for_view }
 
   .col-md-4
     = render partial: 'contest_requests/submission_info', locals: { designer: request.designer, submitted_at: request.created_at, request: request  }

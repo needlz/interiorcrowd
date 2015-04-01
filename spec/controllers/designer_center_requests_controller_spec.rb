@@ -146,6 +146,16 @@ RSpec.describe DesignerCenterRequestsController do
         patch :update, id: request.id, contest_request: { pull_together_note: new_pull_together_note }
         expect(request.reload.pull_together_note).to eq new_pull_together_note
       end
+
+      it 'clears image items if no params passed' do
+        request.image_items.create!(kind: 'product_items')
+        request.image_items.create!(kind: 'similar_styles')
+        request.image_items.create!(kind: 'product_items', mark: ImageItem::MARKS[:LIKE])
+        request.image_items.create!(kind: 'similar_styles', mark: ImageItem::MARKS[:LIKE])
+        expect(request.image_items.count).to eq 4
+        patch :update, id: request.id
+        expect(request.reload.image_items.count).to eq 2
+      end
     end
 
   end

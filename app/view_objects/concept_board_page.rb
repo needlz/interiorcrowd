@@ -1,37 +1,53 @@
 class ConceptBoardPage
 
+  attr_reader :phases_stripe
+
   def initialize(options)
     @contest_request = options[:contest_request]
     @preferred_view_index = options[:preferred_view].to_i if options[:preferred_view]
     @contest_request_view = options[:contest_request_view]
     @view_context = options[:view_context]
 
-    @phases_stripe = PhasesStripe.new(active_step: selected_step || last_phase_index,
-                                      last_step: last_phase_index,
-                                      view_context: @view_context,
-                                      status: @contest_request.status,
-                                      contest_request: @contest_request,
-                                      step_url_renderer: self)
+    @phases_stripe = create_phases_stripe
   end
 
   def selected_step
     @preferred_view_index
   end
 
+  def image_items
+    contest_request.visible_image_items(active_phase)
+  end
+
+  protected
+
+  def create_phases_stripe
+    PhasesStripe.new(active_step: active_step,
+                     last_step: last_phase_index,
+                     view_context: @view_context,
+                     status: @contest_request.status,
+                     contest_request: @contest_request,
+                     step_url_renderer: self)
+  end
+
   private
 
   attr_reader :contest_request, :preferred_view_index, :contest_request_view, :view_context
 
+  def active_step
+    selected_step || last_phase_index
+  end
+
+  def active_phase
+    ContestPhases.index_to_phase(active_step)
+  end
+
   def phase_dependent_partial
-    partial_by_view_index(preferred_view_index || last_phase_index)
+    send(active_phase)
   end
 
   def last_phase_index
     @last_index ||= ContestPhases.status_to_index(contest_request.status)
-  end
-
-  def partial_by_view_index(view_index)
-    send(ContestPhases.index_to_phase(view_index))
   end
 
   def phase_url_params(index)

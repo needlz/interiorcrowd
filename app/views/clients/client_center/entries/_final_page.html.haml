@@ -27,15 +27,15 @@
   .row.marg-top40
     .col-md-10.col-md-offset-1.no-x-padding
       = render :partial => 'clients/client_center/entries/final_design', locals: {request: request}
-      - if @product_items.present?
+      - if @visible_image_items.present?
         %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')
         %p.font16= request.pull_together_note
         .hLine10
-        - @product_items.each do |product_item|
+        - @visible_image_items.each do |product_item|
           = render :partial => 'clients/client_center/entries/design_item', locals: { image_item: product_item }
         .row.bottom60
           .col-md-12.disablePadding.text-right.product-list-pagination
             .pull-left
-              = will_paginate(@product_items, container: false, renderer: ProductListPaginationRenderer)
+              = will_paginate(@visible_image_items, container: false, renderer: ProductListPaginationRenderer)
             .pull-right
               = link_to 'Start a new contest', design_brief_contests_path, class: 'create-contest-button'

@@ -122,6 +122,10 @@ class ContestRequest < ActiveRecord::Base
     !(closed? || finished?) && contest.editable?
   end
 
+  def visible_image_items(for_phase)
+    image_items.send(for_phase)
+  end
+
   private
 
   def contest_status

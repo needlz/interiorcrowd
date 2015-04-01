@@ -17,6 +17,8 @@ class ContestRequestEditing
 
   private
 
+  attr_reader :request, :contest_request_params, :contest_request_attributes
+
   def update_image
     if contest_request_params[:image_id]
       lookbook_id = request.lookbook.id
@@ -38,9 +40,18 @@ class ContestRequestEditing
   end
 
   def update_image_items
-    ImageItemsEditing.new(request, contest_request_params).perform
+    request_phase = ContestPhases.status_to_phase(request.status)
+    new_item_attributes = {final: true} if finalize_image_items?(request_phase)
+    items_editing = ImageItemsEditing.new(
+      contest_request_options: contest_request_params,
+      items_scope: request.visible_image_items(request_phase),
+      new_items_attributes: new_item_attributes
+    )
+    items_editing.perform
   end
 
-  attr_reader :request, :contest_request_params, :contest_request_attributes
+  def finalize_image_items?(request_phase)
+    request_phase == :final_design
+  end
 
 end

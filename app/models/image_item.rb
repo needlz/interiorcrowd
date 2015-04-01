@@ -2,10 +2,14 @@ class ImageItem < ActiveRecord::Base
 
   self.table_name = 'product_items'
 
-  KINDS = %i(product_items similar_styles)
-  MARKS = %w(ok remove)
+  MARKS = {
+    LIKE: 'ok',
+    DISLIKE: 'remove'
+  }
 
-  validates_inclusion_of :mark, in: MARKS, allow_nil: true
+  KINDS = %i(product_items similar_styles)
+
+  validates_inclusion_of :mark, in: MARKS.values, allow_nil: true
   validates_inclusion_of :kind, in: KINDS.map(&:to_s)
 
   belongs_to :image, dependent: :destroy
@@ -16,6 +20,10 @@ class ImageItem < ActiveRecord::Base
   end
 
   scope :for_view, ->{ order(:created_at).includes(:image) }
+  scope :liked, ->{ where(mark: MARKS[:LIKE]) }
+  scope :final_design, ->{ where('final = ? OR mark = ?', true, MARKS[:LIKE]) }
+  scope :collaboration, ->{ where(final: false) }
+  scope :initial, ->{ none }
 
   def medium_size_image_url
     image.try(:medium_size_url)

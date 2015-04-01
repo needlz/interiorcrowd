@@ -1,7 +1,5 @@
 class ConceptBoardEditing < ConceptBoardPage
 
-  attr_reader :phases_stripe
-
   def phase_url(index)
     view_context.edit_designer_center_response_path(phase_url_params(index))
   end
@@ -18,7 +16,7 @@ class ConceptBoardEditing < ConceptBoardPage
     }
   end
 
-  def product_list
+  def collaboration
     { partial: 'designer_center_requests/edit/image_items_editing_layout',
       locals: { request: contest_request }
     }
@@ -27,7 +25,7 @@ class ConceptBoardEditing < ConceptBoardPage
   def final_design
     { partial: 'designer_center_requests/edit/final_upload',
       locals: { contest_request: contest_request,
-                image_items: contest_request_view.image_items }
+                image_items: image_items }
     }
   end
 

@@ -1,8 +1,9 @@
 class ImageItemsEditing
 
-  def initialize(contest_request, contest_request_options)
-    @contest_request_options = contest_request_options
-    @contest_request = contest_request
+  def initialize(options)
+    @contest_request_options = options[:contest_request_options]
+    @items_scope = options[:items_scope]
+    @new_items_attributes = options[:new_items_attributes]
   end
 
   def perform
@@ -36,16 +37,19 @@ class ImageItemsEditing
   end
 
   def clear_items(kind, product_items_attributes)
-    contest_request.send(kind).where.not(id: product_items_attributes.map{ |item| item[:id] }).destroy_all
+    items_ids = product_items_attributes.map{ |item| item[:id] }
+    items_scope.send(kind).where.not(id: items_ids).destroy_all
   end
 
   def update_items(kind, product_items_attributes)
     product_items_attributes.each do |product_item_attributes|
       if product_item_attributes[:id].present?
-        product_item = contest_request.send(kind).find(product_item_attributes[:id])
+        product_item = items_scope.send(kind).find(product_item_attributes[:id])
         update_item(product_item, product_item_attributes[:attributes])
       else
-        contest_request.send(kind).create!(product_item_attributes[:attributes])
+        item_attributes = product_item_attributes[:attributes]
+        item_attributes.merge!(new_items_attributes) if new_items_attributes
+        items_scope.send(kind).create!(item_attributes)
       end
     end
   end
@@ -60,6 +64,6 @@ class ImageItemsEditing
     attributes.merge!({ mark: nil }) if product_item.image_id_changed?
   end
 
-  attr_reader :contest_request, :contest_request_options
+  attr_reader :contest_request_options, :items_scope, :new_items_attributes
 
 end
