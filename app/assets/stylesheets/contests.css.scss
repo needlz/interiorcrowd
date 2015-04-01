@@ -862,3 +862,16 @@
 .appeal-collage-image {
   width: 100%;
 }
+
+.category-block {
+  .image {
+    width: 100%;
+    height: 350px;
+    background-size: cover;
+  }
+
+  .quote {
+    padding: 0px 90px;
+    font-style: oblique;
+  }
+}

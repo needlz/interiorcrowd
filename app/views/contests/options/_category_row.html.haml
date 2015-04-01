@@ -7,9 +7,9 @@
       %b= design_category.description
 
 .clearfix
-.img-block
-  .col-md-6.no-padding-right
-    %img.img-responsive{ src:  "/assets/categories/#{ design_category.picture_name }.jpg" }
-  .col-md-6.no-padding-left.no-padding-right.tableCell
-    %p= design_category.quote
+.img-block.category-block
+  .col-md-5.no-padding-right
+    %div.image{ style: "background-image: url('/assets/categories/#{ design_category.picture_name }.jpg');" }
+  .col-md-7.no-padding-left.no-padding-right.tableCell
+    %p.quote= design_category.quote
   .clearfix
