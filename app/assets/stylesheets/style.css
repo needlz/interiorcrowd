@@ -399,21 +399,6 @@ font-weight: bold;
 	padding-bottom:50px;
 }
 
-/* ---- isotope ---- */
-
-.live-tiles {
-	padding: 40px 0;
-}
-
-/* clear fix */
-.live-tiles:after {
-  content: '';
-  display: block;
-  clear: both;
-}
-
-/* ---- isotope ---- */
-
 .tile {
   float: left;
   width: 10%;
@@ -2282,17 +2267,17 @@ textarea.productsMoodboardAbove{
 	font-size: 20px;
 }
 
-.contestInfo .col-md-3 h3{
+.contestInfo .col-lg-3 h3{
 	font-size: 20px;
 	color: #000;
 	line-height: 36px;
 }
-.contestInfo .col-md-9 p{
+.contestInfo .col-lg-7 p{
 	font-size: 16px;
 	color: #000;
 	line-height: 70px;
 }
-.contestInfo .col-md-9 textarea{
+.contestInfo .col-lg-7 textarea{
 	border: 1px solid #000;
 	resize:none;
 	padding:20px;
@@ -2300,19 +2285,19 @@ textarea.productsMoodboardAbove{
 	min-height: 100px;
 
 }
-.contestInfo .col-md-9 .exampleImg{
+.contestInfo .col-lg-7 .imageWithOverlay{
 	width: 22%;
 	margin-right: 20px;
 	margin-bottom: 20px;
 }
-.contestInfo .col-md-9 .exampleSite{
+.contestInfo .col-lg-7 .exampleSite{
 	display: block;
 	line-height: 50px;
 	color: #000;
 	font-size: 16px;
 	text-decoration: underline;
 }
-.contestInfo .col-md-9 .color{
+.contestInfo .col-lg-7 .color{
 	/*display: inline-block;*/
 	float: left;
 	font-size: 16px;
@@ -2322,7 +2307,7 @@ textarea.productsMoodboardAbove{
 	margin-right: 40px;
 	margin-bottom: 20px;
 }
-.contestInfo .col-md-9 .color span:nth-child(1){
+.contestInfo .col-lg-7 .color span:nth-child(1){
 	display: inline-block;
 	width: 65px;
 	height: 32px;
@@ -2330,7 +2315,7 @@ textarea.productsMoodboardAbove{
 	position: relative;
 	top: -8px;
 }
-.contestInfo .col-md-9 .color span:nth-child(2){
+.contestInfo .col-lg-7 .color span:nth-child(2){
 	display: inline-block;
 	width: 90px;
 	height: 32px;
@@ -2339,7 +2324,7 @@ textarea.productsMoodboardAbove{
 .contestInfo .borderBottom{
 	padding: 30px 0px;
 }
-.contestInfo .col-md-3,.contestInfo .col-md-9{
+.contestInfo .col-lg-4, .contestInfo .col-lg-7{
 	padding: 0px;
 }
 .disableRightMargin{
@@ -3545,4 +3530,98 @@ padding-bottom: 40px;
 
 .notes ul li.Designer {
     list-style: disc url("/assets/list_style_type_blue.png");
+}
+
+#designBriefModal .modal-content{
+    box-shadow: none;
+    border:none;
+    background: transparent;
+}
+#designBriefModal .modal-dialog{
+    width: 70%;
+}
+#designBriefModal button{
+    position: absolute;
+    right: -45px;
+    opacity: 1;
+}
+.fullWidth{
+    width: 100%;
+}
+.contestViewingBox .row .col-md-2 {
+    border-left: 1px solid transparent;
+    width: 20%;
+}
+.loveIt{
+    color: #fd5b92 !important;
+}
+.likeIt{
+    color: #28aca0 !important;
+}
+.leaveIt{
+    color: #717171 !important;
+}
+.designStyle a{
+    color: #bcbcbc;
+    font-weight: 700;
+    display: inline-block;
+    margin-left: 10px;
+    border:1px solid #bcbcbc;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 10px;
+    text-align: center;
+}
+.popover.bottom>.arrow{
+    background: url('img/popover-triangle.png');
+    width: 21px;
+    height: 22px;
+    top: -22px;
+    left: 98% !important;
+}
+.popover>.arrow, .popover>.arrow:after{
+    border-style: none;
+}
+.popover.bottom{
+    margin-top: 30px;
+}
+.popover{
+    background-color: rgba(0,0,0,0.8);
+    color: #FFF;
+    font-size: 16px;
+    border: none;
+    border-radius: 0px;
+    box-shadow: none;
+    position: relative;
+    max-width: none;
+    width: 804px;
+    left: 50% !important;
+    margin-left: -268px;
+    padding-top: 0px;
+}
+
+.overlayExampleImg{
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right:0px;
+    bottom: 57%;
+    background: rgba(0,0,0,0.5);
+}
+.overlayExampleImg a{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+.imageWithOverlay:hover > .overlayExampleImg{
+    display: block;
+}
+
+.imageWithOverlay {
+    position: relative;
 }

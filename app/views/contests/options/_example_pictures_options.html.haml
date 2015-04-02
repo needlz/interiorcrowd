@@ -2,7 +2,7 @@
   .example-pictures
     #image_display.col-md-12
       = render partial: 'contests/options/removable_thumbnails',
-          locals: { urls: @contest_view.examples,
+          locals: { urls: @contest_view.examples.map(&:medium_size_url),
                     ids: @contest_view.example_ids }
 
     .col-md-6.no-x-padding.file-input-container

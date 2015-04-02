@@ -10,7 +10,7 @@
     .col-md-12.thumbs
       %span#image_display
         = render partial: 'contests/options/removable_thumbnails',
-            locals: { urls: @contest_view.space_pictures,
+            locals: { urls: @contest_view.space_pictures.map(&:medium_size_url),
                       ids: @contest_view.space_pictures_ids }
 
     .clearfix

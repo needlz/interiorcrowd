@@ -55,7 +55,6 @@ class DesignStylePage
 
     DesirableColorsEditor.init()
     UndesirableColorsEditor.init()
-    AppealsForm.init()
     ExamplesUploader.init()
     InspirationLinksEditor.init()
 

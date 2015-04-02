@@ -38,4 +38,8 @@ module HomeHelper
     faq_path + '#client'
   end
 
+  def enlarge_icon_path
+    '/assets/enlarge.png'
+  end
+
 end
