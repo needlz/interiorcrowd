@@ -2,7 +2,12 @@
   - @contest_view.appeal_scales.each do |style|
     - if style.opinion
       %span.selection.style-name= style.opinion
-      %img.appeal-collage-image{:src => style.collage_picture }/
+
+      = render partial: 'shared/image_with_enlarge_button',
+          locals: { image_class: 'appeal-collage-image',
+                    thumb_path: style.collage_picture,
+                    original_size_path: style.collage_picture }
+
       .comment
         = style.reason
     .clearfix

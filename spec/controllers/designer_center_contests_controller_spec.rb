@@ -40,6 +40,8 @@ RSpec.describe DesignerCenterContestsController do
 
   describe 'GET show' do
     it 'returns page' do
+      Fabricate(:example_image, contest: contest)
+      Fabricate(:space_image, contest: contest)
       get :show, id: contest.id
       expect(response).to render_template(:show)
     end

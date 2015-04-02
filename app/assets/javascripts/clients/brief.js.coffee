@@ -69,8 +69,6 @@ class @ContestEditing extends InlineEditor
       UndesirableColorsEditor.init()
     area: ->
       RoomsEditor.init()
-    design_profile: ->
-      AppealsForm.init()
     budget: ->
       BudgetOptions.init()
     example_links: ->
@@ -86,7 +84,11 @@ class @ContestEditing extends InlineEditor
     undesirable_colors: ->
       ContestPreview.init()
     design_profile: ->
-      AppealsForm.init()
+      PicturesZoom.init('.imageWithOverlay a')
+    space_pictures: ->
+      PicturesZoom.initGallery(buttonSelector: '[data-option=space_pictures] a', galleryName: 'space')
+    example_pictures: ->
+      PicturesZoom.initGallery(buttonSelector: '[data-option=example_pictures] a', galleryName: 'examples')
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)
