@@ -18,7 +18,7 @@ class ContestResponseView
     @response = response
     @id = response.id
     @status = response.status
-    @status_name = I18n.t('designer_center.responses.statuses.' + response.status)
+    @status_name = ContestResponseView.status_name(response.status)
     @answer = I18n.t("client_center.entries.answers.#{ response.answer }") if response.submitted? && response.answer
     @contest = ContestShortDetails.new(response.contest)
     @header_text = HEADER_TEXTS[response.status]
@@ -28,6 +28,10 @@ class ContestResponseView
 
   def current_phase_index
     ContestPhases.status_to_index(response.status)
+  end
+
+  def self.status_name(status)
+    I18n.t('designer_center.responses.statuses.' + status)
   end
 
   private
