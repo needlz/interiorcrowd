@@ -1,7 +1,7 @@
 - value_html = capture do
   - @contest_view.space_pictures.try(:each) do |image|
     = render partial: 'shared/image_with_enlarge_button',
-        locals: { container_class: 'pull-left',
+        locals: { container_class: 'pull-left gallery-item',
                   image_class: 'fullWidth',
                   thumb_path: image.medium_size_url,
                   original_size_path: image.original_size_url,
