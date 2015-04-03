@@ -584,6 +584,7 @@ en:
       back_to_index: < Back to all current contests
       join: Join this contest >
       view_response: View your response >
+      download_images: Download all photo
     responses:
       title: Contests Underway
       list_title: You are currently participating in the following contests

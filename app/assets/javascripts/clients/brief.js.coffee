@@ -87,9 +87,9 @@ class @ContestEditing extends InlineEditor
       ContestPreview.initStyleCollagesZooming()
       ContestPreview.initStyleDetailsPopups()
     space_pictures: ->
-      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=space_pictures] a', galleryName: 'space')
+      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=space_pictures] a.enlarge', galleryName: 'space')
     example_pictures: ->
-      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=example_pictures] a', galleryName: 'examples')
+      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=example_pictures] a.enlarge', galleryName: 'examples')
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)

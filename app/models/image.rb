@@ -87,4 +87,9 @@ class Image < ActiveRecord::Base
     0
   end
 
+  def url_for_downloading
+    s3_object = image.s3_object
+    s3_object.url_for(:get, expires: 20.seconds, response_content_disposition: 'attachment;').to_s
+  end
+
 end

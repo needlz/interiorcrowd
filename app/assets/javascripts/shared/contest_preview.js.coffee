@@ -4,7 +4,7 @@ class @ContestPreview
     $('.colors').colorTags({ readonly: true })
 
   @initStyleCollagesZooming: ->
-    PicturesZoom.init('.imageWithOverlay a')
+    PicturesZoom.init('.designStyleParent .imageWithOverlay a')
 
   @initStyleDetailsPopups: ->
     $('[data-toggle="popover"]').popover(viewport: '.designStyleParent', container: '.designStyleParent')

@@ -40,6 +40,7 @@ RSpec.describe DesignerCenterContestsController do
 
   describe 'GET show' do
     it 'returns page' do
+      allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
       Fabricate(:example_image, contest: contest)
       Fabricate(:space_image, contest: contest)
       contest.contests_appeals.create!(appeal_id: Appeal.create!(name: 'vintage').id)

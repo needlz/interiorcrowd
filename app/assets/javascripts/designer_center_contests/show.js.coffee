@@ -7,8 +7,8 @@ class DesignerCenterContestBrief
     @initExamplesZooming()
 
   @initExamplesZooming: ->
-    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=space_pictures] a', galleryName: 'space')
-    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=example_pictures] a', galleryName: 'examples')
+    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=space_pictures] a.enlarge', galleryName: 'space')
+    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=example_pictures] a.enlarge', galleryName: 'examples')
 
 $ ->
   DesignerCenterContestBrief.init()
