@@ -83,4 +83,8 @@ class Image < ActiveRecord::Base
     image.url(:original_size)
   end
 
+  def likes_count
+    0
+  end
+
 end

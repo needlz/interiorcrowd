@@ -2,7 +2,9 @@ class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
   include Rails.application.routes.url_helpers
 
-  delegate :years_of_experience, :about, :personal_picture, :designer_id, :designer, to: :portfolio, allow_nil: true
+  delegate :years_of_experience, :about, :personal_picture, :designer_id, :designer, :pictures,
+           to: :portfolio,
+           allow_nil: true
 
   def initialize(portfolio)
     @portfolio = portfolio
