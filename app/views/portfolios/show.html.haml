@@ -45,7 +45,7 @@
         - urls.each do |url|
           = render partial: 'portfolios/item',
               locals: { image_url: url,
-                        number: index }
+                        likes_count: 0 }
           - index += 1
         .col-md-12.marg-bottom30
       .col-md-12.marg-top30

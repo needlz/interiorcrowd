@@ -1,4 +1,4 @@
 .col-md-4.portfolio_example
   %img{ src: image_url }
-  %span.numOfLikesPortfolio= (number)
-
+  - if likes_count > 0
+    %span.numOfLikesPortfolio (#{ likes_count })
