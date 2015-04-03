@@ -3,9 +3,9 @@ class ContestCreationWizard
   attr_reader :active_step_index
 
   APPEAL_FEEDBACK = [
-    { name: 'Love it!', value: 100 },
-    { name: 'Like it!', value: 50 },
-    { name: 'Leave it...', value: 0 }
+    { name: :love_it, value: 100 },
+    { name: :like_it, value: 50 },
+    { name: :leave_it, value: 0 }
   ]
 
   def self.creation_steps_paths

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby "2.0.0"
+ruby '2.0.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'
 gem 'activerecord-session_store'
@@ -33,7 +33,7 @@ gem 'handy'
 gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
-gem 'aws-sdk', '< 2.0'
+gem 'aws-sdk', '< 2.0' # incompatibility with SDK v2
 gem 'hashie'
 gem 'fabrication'
 gem 'sprockets', '2.11.0'

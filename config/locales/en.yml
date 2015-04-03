@@ -114,20 +114,19 @@ en:
         savvy: How do I source it?
 
     appeals:
-      feminine: Feminine
-      masculine: Masculine
-      elegant: Elegant
+      vintage: Vintage
       eclectic: Eclectic
+      midcentury_modern: Mid-Century Modern
+      rustic_elegance: Rustic Elegance
+      coastal: Coastal
       traditional: Traditional
+      transitional: Transitional
       modern: Modern
-      conservative: Conservative
-      bold: Bold
-      muted: Muted
-      colorful: Colorful
-      timeless: Timeless
-      trendy: Trendy
-      fancy: Fancy
-      playful: Playful
+      hollywood_regence: Hollywood Regence
+    appeal_values:
+      like_it: Like it
+      leave_it: Leave it...
+      love_it: Love it!
 
       placeholder: Tell us why (optional)
     dimensions:

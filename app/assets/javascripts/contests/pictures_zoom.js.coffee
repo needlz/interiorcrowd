@@ -1,7 +1,7 @@
 class @PicturesZoom
 
-  @init: (buttonSelector)->
-    $(buttonSelector).colorbox()
+  @init: (enlargeButtonSelector)->
+    $(enlargeButtonSelector).colorbox()
 
   @initGallery: (options)->
-    $(options.buttonSelector).colorbox(rel: options.galleryName)
+    $(options.enlargeButtonSelector).colorbox(rel: options.galleryName)

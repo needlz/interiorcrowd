@@ -1,21 +1,23 @@
 class AppealScale
 
   SCALES = [
-      { first: :feminine, second: :masculine },
-      { first: :elegant, second: :eclectic },
-      { first: :traditional, second: :modern },
-      { first: :conservative, second: :bold },
-      { first: :muted, second: :colorful },
-      { first: :timeless, second: :trendy },
-      { first: :fancy, second: :playful }
+    :vintage,
+    :eclectic,
+    :midcentury_modern,
+    :rustic_elegance,
+    :coastal,
+    :traditional,
+    :transitional,
+    :modern,
+    :hollywood_regence
   ]
 
-  attr_reader :first, :second, :value
+  attr_reader :value
   attr_accessor :reason
 
   def initialize(appeal)
     @appeal = appeal
-    @first, @second = appeal.first_name, appeal.second_name
+    @key = appeal.name
     @value = default_value
   end
 
@@ -32,12 +34,8 @@ class AppealScale
     appeal.identifier
   end
 
-  def first_name
-    name(first)
-  end
-
-  def second_name
-    name(second)
+  def name
+    localized_name(key)
   end
 
   def value=(value)
@@ -53,18 +51,26 @@ class AppealScale
   end
 
   def opinion
-    ContestCreationWizard::APPEAL_FEEDBACK.each do |appeal|
-      return appeal[:name] if appeal[:value] == value
-    end
+    AppealScale.localized_appeal_value(value_key)
   end
 
   def collage_picture
     "/assets/style_collages/collage#{ appeal.id }.jpg"
   end
 
+  def value_key
+    ContestCreationWizard::APPEAL_FEEDBACK.each do |appeal|
+      return appeal[:name] if appeal[:value] == value
+    end
+  end
+
+  def self.localized_appeal_value(value)
+    I18n.t("contests.appeal_values.#{ value }")
+  end
+
   private
 
-  attr_reader :appeal
+  attr_reader :appeal, :key
 
   def self.initialize_from_options(options)
     Appeal.all.order(:id).map do |appeal|
@@ -88,8 +94,8 @@ class AppealScale
     0
   end
 
-  def name(key)
-    I18n.t "contests.appeals.#{ key.to_s }"
+  def localized_name(key)
+    I18n.t("contests.appeals.#{ key.to_s }")
   end
 
 end

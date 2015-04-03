@@ -2272,12 +2272,12 @@ textarea.productsMoodboardAbove{
 	color: #000;
 	line-height: 36px;
 }
-.contestInfo .col-lg-7 p{
+.contestInfo .col-lg-8 p{
 	font-size: 16px;
 	color: #000;
 	line-height: 70px;
 }
-.contestInfo .col-lg-7 textarea{
+.contestInfo .col-lg-8 textarea{
 	border: 1px solid #000;
 	resize:none;
 	padding:20px;
@@ -2285,19 +2285,19 @@ textarea.productsMoodboardAbove{
 	min-height: 100px;
 
 }
-.contestInfo .col-lg-7 .gallery-item{
+.contestInfo .col-lg-8 .gallery-item{
 	width: 22%;
 	margin-right: 20px;
 	margin-bottom: 20px;
 }
-.contestInfo .col-lg-7 .exampleSite{
+.contestInfo .col-lg-8 .exampleSite{
 	display: block;
 	line-height: 50px;
 	color: #000;
 	font-size: 16px;
 	text-decoration: underline;
 }
-.contestInfo .col-lg-7 .color{
+.contestInfo .col-lg-8 .color{
 	/*display: inline-block;*/
 	float: left;
 	font-size: 16px;
@@ -2307,7 +2307,7 @@ textarea.productsMoodboardAbove{
 	margin-right: 40px;
 	margin-bottom: 20px;
 }
-.contestInfo .col-lg-7 .color span:nth-child(1){
+.contestInfo .col-lg-8 .color span:nth-child(1){
 	display: inline-block;
 	width: 65px;
 	height: 32px;
@@ -2315,7 +2315,7 @@ textarea.productsMoodboardAbove{
 	position: relative;
 	top: -8px;
 }
-.contestInfo .col-lg-7 .color span:nth-child(2){
+.contestInfo .col-lg-8 .color span:nth-child(2){
 	display: inline-block;
 	width: 90px;
 	height: 32px;
@@ -2323,8 +2323,8 @@ textarea.productsMoodboardAbove{
 }
 .contestInfo .borderBottom{
 	padding: 30px 0px;
-}
-.contestInfo .col-lg-4, .contestInfo .col-lg-7{
+}f
+.contestInfo .col-lg-3, .contestInfo .col-lg-8{
 	padding: 0px;
 }
 .disableRightMargin{
@@ -3101,18 +3101,6 @@ only screen and (min-device-pixel-ratio: 2) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /*sign up page*/
 .paddBottom40{
 padding-bottom: 40px;
@@ -3552,13 +3540,13 @@ padding-bottom: 40px;
     border-left: 1px solid transparent;
     width: 20%;
 }
-.loveIt{
+.LoveIt{
     color: #fd5b92 !important;
 }
-.likeIt{
+.LikeIt{
     color: #28aca0 !important;
 }
-.leaveIt{
+.LeaveIt{
     color: #717171 !important;
 }
 .designStyle a{
@@ -3574,7 +3562,7 @@ padding-bottom: 40px;
     text-align: center;
 }
 .popover.bottom>.arrow{
-    background: url('img/popover-triangle.png');
+    background: url('/assets/popover-triangle.png');
     width: 21px;
     height: 22px;
     top: -22px;
@@ -3593,12 +3581,8 @@ padding-bottom: 40px;
     border: none;
     border-radius: 0px;
     box-shadow: none;
-    position: relative;
     max-width: none;
-    width: 804px;
-    left: 50% !important;
-    margin-left: -268px;
-    padding-top: 0px;
+    width: 100%;
 }
 
 .overlayExampleImg{
