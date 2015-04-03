@@ -555,6 +555,7 @@ en:
         invitations:
           sending_invitation: Sending invitation...
           invited: Invited
+        about_read_more: Read more...
 
     contests_preview:
       suggested_contests_title: Recommended contests for you to join.

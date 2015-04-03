@@ -35,4 +35,9 @@ RSpec.describe Image do
     end
   end
 
+  it 'has no likes' do
+    image = Fabricate(:image)
+    expect(image.likes_count).to eq 0
+  end
+
 end

@@ -1965,7 +1965,7 @@ textarea.productsMoodboardAbove{
 	font-weight: 700;
 	margin-bottom: 18px;
 }
-.user_portfolio_profile p{
+.user_portfolio_profile .about{
 	font-size: 16px;
 	line-height: 30px;
 }
@@ -1974,7 +1974,8 @@ textarea.productsMoodboardAbove{
 	color: #000;
 	border: 1px solid #000;
 	font-size: 16px;
-	padding: 6px 20px;
+	padding: 4px 20px;
+	border-radius: 10px;
 	display: inline-block;
 	margin-right: 20px;
 }
