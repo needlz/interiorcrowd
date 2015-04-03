@@ -32,7 +32,9 @@
       .col-md-8.user_portfolio_profile
         %h3= @portfolio_view.designer_name
         %h4= t('designer_center.portfolio.show.about')
-        %p= @portfolio_view.about
+        .about
+          .text.collapsed= @portfolio_view.about
+          = link_to('Read more...', '#', class: 'readmore')
         %h4= t('designer_center.portfolio.show.design_style')
         - @portfolio_view.style_description.each do |style|
           %span.designStyleSpan= style
