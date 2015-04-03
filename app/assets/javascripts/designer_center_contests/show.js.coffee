@@ -1,6 +1,14 @@
-$ ->
-  ContestPreview.init()
+class DesignerCenterContestBrief
 
-  PicturesZoom.init('.imageWithOverlay a')
-  PicturesZoom.initGallery(buttonSelector: '[data-id=space_pictures] a', galleryName: 'space')
-  PicturesZoom.initGallery(buttonSelector: '[data-id=example_pictures] a', galleryName: 'examples')
+  @init: ->
+    ContestPreview.initColorPickers()
+    ContestPreview.initStyleCollagesZooming()
+    ContestPreview.initStyleDetailsPopups()
+    @initExamplesZooming()
+
+  @initExamplesZooming: ->
+    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=space_pictures] a', galleryName: 'space')
+    PicturesZoom.initGallery(enlargeButtonSelector: '[data-id=example_pictures] a', galleryName: 'examples')
+
+$ ->
+  DesignerCenterContestBrief.init()

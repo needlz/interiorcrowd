@@ -4,7 +4,7 @@ class Appeal < ActiveRecord::Base
   has_many :contests, through: :contests_appeals
 
   def identifier
-    first_name.to_sym
+    name.to_sym
   end
 
 end

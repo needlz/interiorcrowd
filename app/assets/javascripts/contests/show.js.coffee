@@ -1,2 +1,2 @@
 $ ->
-  ContestPreview.init()
+  ContestPreview.initColorPickers()

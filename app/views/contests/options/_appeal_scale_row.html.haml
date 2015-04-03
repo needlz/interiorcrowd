@@ -10,7 +10,7 @@
           = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", '')
         .col-md-9
           .text
-            = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", appeal_feedback[:name])
+            = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", AppealScale.localized_appeal_value(appeal_feedback[:name]))
   .col-md-12.no-x-padding.appeal-collage
     %img.appeal-collage-image{:src => scale.collage_picture }/
   .clearfix

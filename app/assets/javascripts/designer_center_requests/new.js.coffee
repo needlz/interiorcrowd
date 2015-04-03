@@ -1,7 +1,7 @@
 class @ResponseEditor
 
   init: ->
-    ContestPreview.init()
+    ContestPreview.initColorPickers()
     @bindSubmitButton()
     @bindSaveButton()
     @bindCommentsSendButton()

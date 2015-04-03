@@ -6,7 +6,7 @@ RSpec.describe ContestsController do
 
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client) }
-  let(:appeals) { (0..2).map { |index| Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }") } }
+  let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
   def prepare_contest_data
     session.merge!(contest_options_source)
@@ -39,7 +39,7 @@ RSpec.describe ContestsController do
     let(:appeal_values){ Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] }
 
     it 'updates appeals of contest' do
-      allow_any_instance_of(AppealScale).to receive(:name) { |key| key }
+      allow_any_instance_of(AppealScale).to receive(:name) { |key| 'string' }
       patch :update, option: 'design_profile', id: contest.id, design_style: { appeals: appeal_values }
       appeal_values.each do |identifier, value|
         appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }

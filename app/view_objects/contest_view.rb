@@ -57,17 +57,6 @@ class ContestView
     package_id == @budget_plan.to_i
   end
 
-  def design_styles
-    styles = appeal_scales.map do |appeal|
-      if appeal.value == ContestCreationWizard::APPEAL_FEEDBACK.first[:value]
-        appeal.first_name
-      elsif appeal.value == ContestCreationWizard::APPEAL_FEEDBACK.last[:value]
-        appeal.second_name
-      end
-    end
-    styles.compact.join(', ')
-  end
-
   def preferred_retailers
     @retailers.select { |retailer| retailer[:value] }
   end

@@ -2,7 +2,7 @@ class @ContestEditing extends InlineEditor
 
   attributeIdentifierData: 'option'
   placeholderSelector: '.attribute-form'
-  attributeSelector: '.edit-profile'
+  attributeSelector: '.attribute'
 
   bindEvents: ->
     super()
@@ -18,13 +18,13 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveClick: ->
-    $('body').on('click', '.edit-profile .save-button', @onSaveClick)
+    $('body').on('click', "#{ @attributeSelector } .save-button", @onSaveClick)
 
   bindSaveSuccess: ->
-    $('body').on('ajax:success', '.edit-profile form', (event, data, status, xhr)=>
+    $('body').on('ajax:success', "#{ @attributeSelector } form", (event, data, status, xhr)=>
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
-      $editButton = $(".edit-profile[data-option='#{ option }'] .cancel-button")
+      $editButton = $("#{ @attributeSelector }[data-option='#{ option }'] .cancel-button")
       $optionsRow = @optionsRow($editButton)
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
       $optionsRow.find('.preview').html(data)
@@ -32,7 +32,7 @@ class @ContestEditing extends InlineEditor
     )
 
   bindSaveError: ->
-    $('body').on('ajax:error', '.edit-profile form', (event, data, status, xhr)=>
+    $('body').on('ajax:error', "#{ @attributeSelector } form", (event, data, status, xhr)=>
       $form = $(event.target)
       @optionsContainer($form).find('.has-error .control-label').text 'An error occured during saving'
     )
@@ -80,15 +80,16 @@ class @ContestEditing extends InlineEditor
 
   previewCallbacks:
     desirable_colors: ->
-      ContestPreview.init()
+      ContestPreview.initColorPickers()
     undesirable_colors: ->
-      ContestPreview.init()
+      ContestPreview.initColorPickers()
     design_profile: ->
-      PicturesZoom.init('.imageWithOverlay a')
+      ContestPreview.initStyleCollagesZooming()
+      ContestPreview.initStyleDetailsPopups()
     space_pictures: ->
-      PicturesZoom.initGallery(buttonSelector: '[data-option=space_pictures] a', galleryName: 'space')
+      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=space_pictures] a', galleryName: 'space')
     example_pictures: ->
-      PicturesZoom.initGallery(buttonSelector: '[data-option=example_pictures] a', galleryName: 'examples')
+      PicturesZoom.initGallery(enlargeButtonSelector: '[data-option=example_pictures] a', galleryName: 'examples')
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)

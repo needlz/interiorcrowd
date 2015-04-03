@@ -42,6 +42,7 @@ RSpec.describe DesignerCenterContestsController do
     it 'returns page' do
       Fabricate(:example_image, contest: contest)
       Fabricate(:space_image, contest: contest)
+      contest.contests_appeals.create!(appeal_id: Appeal.create!(name: 'vintage').id)
       get :show, id: contest.id
       expect(response).to render_template(:show)
     end
