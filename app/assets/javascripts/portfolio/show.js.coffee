@@ -13,6 +13,9 @@ class InvitationButton extends DesignerInvitationButton
 
 class @Portfolio
 
+  @aboutExpandButtonSelector: '.user_portfolio_profile .about .readmore'
+  @aboutTextSelector: '.user_portfolio_profile .about .text'
+
   @init: ->
     contestId = $(InvitationButton.buttonSelector).data('contest-id')
     InvitationButton.bindInviteButtons(contestId)
@@ -20,13 +23,17 @@ class @Portfolio
     @initAboutEllipsis()
     $(window).resize =>
       @initAboutEllipsis()
-    $('.user_portfolio_profile .about .readmore').click (e)=>
-      e.preventDefault()
-      $('.user_portfolio_profile .about .text').dotdotdot()
-      $('.user_portfolio_profile .about .readmore').hide()
 
-  @initAboutEllipsis: (height)->
-    $('.user_portfolio_profile .about .text').dotdotdot({ height: 100 })
+    $(@aboutExpandButtonSelector).click (e)=>
+      e.preventDefault()
+      @expandAboutBlock()
+      $(@aboutExpandButtonSelector).hide()
+
+  @initAboutEllipsis: ->
+    $(@aboutTextSelector).dotdotdot({ height: 100 })
+
+  @expandAboutBlock: ->
+    $(@aboutTextSelector).dotdotdot()
 
 $ ->
   Portfolio.init()

@@ -34,7 +34,7 @@
         %h4= t('designer_center.portfolio.show.about')
         .about
           .text.collapsed= @portfolio_view.about
-          = link_to('Read more...', '#', class: 'readmore')
+          = link_to t('designer_center.portfolio.show.about_read_more'), '#', class: 'readmore'
         %h4= t('designer_center.portfolio.show.design_style')
         - @portfolio_view.style_description.each do |style|
           %span.designStyleSpan= style
