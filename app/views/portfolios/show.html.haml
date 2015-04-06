@@ -4,7 +4,7 @@
     I18n = #{ translations_to_json('designer_center.portfolio.show'.split('.')) }
 
 .designer-portfolio{ data: { id: @portfolio_view.designer_id } }
-  .cover_image{ style: "background-image: url('#{ @portfolio_view.cover_picture_url }')" }
+  .cover_image{ style: "background-image: url('#{ j(@portfolio_view.cover_picture_url) }')" }
     .container.animated.fadeInDown
       .row
         .col-md-12.relative
@@ -15,7 +15,7 @@
   .container.animated.fadeInDown.bottom60
     .row.marg-top40
       .col-md-4.relative.under_portfolio_profile
-        .image-container.portfolio_profile_image{ style: "background-image: url('#{ @portfolio_view.personal_picture_url }')" }
+        .image-container.portfolio_profile_image{ style: "background-image: url('#{ j(@portfolio_view.personal_picture_url) }')" }
         %p
           %span= @portfolio_view.years_of_experience
           = @portfolio_view.experience_level
