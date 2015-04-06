@@ -39,7 +39,11 @@ module HomeHelper
   end
 
   def enlarge_icon_path
-    '/assets/enlarge.png'
+    '/assets/icons/enlarge.png'
+  end
+
+  def download_icon_path
+    '/assets/icons/download.png'
   end
 
 end

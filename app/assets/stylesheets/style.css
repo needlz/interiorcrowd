@@ -3598,11 +3598,22 @@ padding-bottom: 40px;
     bottom: 57%;
     background: rgba(0,0,0,0.5);
 }
-.overlayExampleImg a{
+.overlayExampleImg a.enlarge{
     position: absolute;
     right: 10px;
     bottom: 10px;
 }
+
+.overlayExampleImg a.download{
+    position: absolute;
+    right: 50px;
+    bottom: 10px;
+}
+
+.overlayExampleImg a.download img{
+    width: 30px;
+}
+
 .imageWithOverlay:hover > .overlayExampleImg{
     display: block;
 }

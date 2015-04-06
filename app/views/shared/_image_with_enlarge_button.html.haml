@@ -1,5 +1,8 @@
 .imageWithOverlay{ class: (container_class if defined?(container_class)) }
   %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
   .overlayExampleImg
-    %a{ class: (enlarge_button_class if defined?(enlarge_button_class)), href: original_size_path }
+    - if defined?(url_for_downloading)
+      %a.download{ href: url_for_downloading }
+        %img{ src: download_icon_path }
+    %a.enlarge{ class: (enlarge_button_class if defined?(enlarge_button_class)), href: original_size_path }
       %img{ src: enlarge_icon_path }

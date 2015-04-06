@@ -110,8 +110,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def download_url
-    s3_object = concept_board_image.image.s3_object
-    s3_object.url_for(:get, expires: 20.seconds, response_content_disposition: 'attachment;').to_s
+    concept_board_image.url_for_downloading
   end
 
   def lost?
