@@ -21,8 +21,8 @@ class ImageItem < ActiveRecord::Base
 
   scope :for_view, ->{ order(:created_at).includes(:image) }
   scope :liked, ->{ where(mark: MARKS[:LIKE]) }
-  scope :final_design, ->{ where('final = ? OR mark = ?', true, MARKS[:LIKE]) }
-  scope :collaboration, ->{ where(final: false) }
+  scope :final_design, ->{ where('final = ? OR mark = ? OR mark IS NULL', true, MARKS[:LIKE]) }
+  scope :collaboration, ->{ all }
   scope :initial, ->{ none }
 
   def medium_size_image_url

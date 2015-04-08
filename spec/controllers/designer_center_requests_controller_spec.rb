@@ -148,9 +148,9 @@ RSpec.describe DesignerCenterRequestsController do
       end
 
       it 'clears image items if no params passed' do
+        request.image_items.create!(kind: 'product_items', mark: ImageItem::MARKS[:DISLIKE])
+        request.image_items.create!(kind: 'similar_styles', mark: ImageItem::MARKS[:DISLIKE])
         request.image_items.create!(kind: 'product_items')
-        request.image_items.create!(kind: 'similar_styles')
-        request.image_items.create!(kind: 'product_items', mark: ImageItem::MARKS[:LIKE])
         request.image_items.create!(kind: 'similar_styles', mark: ImageItem::MARKS[:LIKE])
         expect(request.image_items.count).to eq 4
         patch :update, id: request.id

@@ -24,7 +24,7 @@ class ClientsController < ApplicationController
           contest_request: @won_contest_request,
           view_context: view_context
       })
-      @visible_image_items = @entries_page.image_items.for_view.paginate(per_page: 4, page: params[:page])
+      @visible_image_items = @entries_page.image_items.paginate(per_page: 4, page: params[:page])
       @share_url = public_designs_url(token: @won_contest_request.token)
     end
     render 'clients/client_center/entries'

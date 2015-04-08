@@ -21,7 +21,7 @@ class DesignerCenterRequestsController < ApplicationController
       preferred_view: params[:view],
       view_context: view_context
     })
-    @visible_image_items = @show_page.image_items.for_view
+    @visible_image_items = @show_page.image_items
     @navigation = Navigation::DesignerCenter.new(:requests)
     set_image_item_views
   end
@@ -37,7 +37,7 @@ class DesignerCenterRequestsController < ApplicationController
       preferred_view: params[:view],
       view_context: view_context
     })
-    @visible_image_items = @editing_page.image_items.for_view
+    @visible_image_items = @editing_page.image_items
     set_image_item_views
   end
 

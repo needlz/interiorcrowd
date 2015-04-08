@@ -60,6 +60,7 @@ group :development do
   gem 'rails_best_practices'
   gem 'lol_dba'  #https://github.com/plentz/lol_dba
   gem 'parallel_tests'
+  gem 'awesome_print', require: 'ap'
 end
 
 group :test do
