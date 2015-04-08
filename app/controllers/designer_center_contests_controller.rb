@@ -13,6 +13,7 @@ class DesignerCenterContestsController < ApplicationController
     @contest = Contest.find(params[:id])
     @contest_view = ContestView.new(@contest)
     @navigation = Navigation::DesignerCenter.new(:contests)
+    @show_space_pictures_download_button = true
   end
 
   private

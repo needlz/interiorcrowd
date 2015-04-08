@@ -26,6 +26,7 @@ ActiveAdmin.register ContestRequest do
     column :token
     column :created_at
     column :updated_at
+    actions
   end
 
 end

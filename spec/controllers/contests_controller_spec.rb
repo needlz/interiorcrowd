@@ -143,6 +143,75 @@ RSpec.describe ContestsController do
         expect(response).to redirect_to(entries_client_center_index_path)
       end
     end
+  end
 
+  describe 'GET download_all_images_url' do
+    before do
+      Fabricate(:space_image, contest: contest)
+      allow_any_instance_of(ImagesArchiveGeneration).to receive(:completed?) { false }
+      allow_any_instance_of(ImagesArchiveGeneration).to receive(:download_url) { 'url' }
+      allow_any_instance_of(ImagesArchiveGeneration).to receive(:send_to_s3) do
+        allow_any_instance_of(ImagesArchiveGeneration).to receive(:completed?) { true }
+      end
+    end
+
+    context 'if no valid image type passed' do
+      let(:params) { { id: contest.id } }
+
+      it 'returns 404' do
+        get :download_all_images_url, params
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'does not schedule job' do
+        !DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").exists?
+      end
+    end
+
+    context 'if wrong image type passed' do
+      let(:params) { { id: contest.id, type: 'what?' } }
+
+      it 'raises error if wrong image type passed' do
+        expect{ get :download_all_images_url, params }.to raise_error(ArgumentError)
+      end
+
+      it 'does not schedule job' do
+        !DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").exists?
+      end
+    end
+
+    context 'if valid image type passed' do
+      let(:params) { { id: contest.id, type: 'space_pictures' } }
+
+      it 'returns nothing if archivation not yet performed' do
+        get :download_all_images_url, params
+        expect(response.body).to eq ' '
+      end
+
+      it 'schedules job' do
+        get :download_all_images_url, params
+        expect(DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").count).to eq 1
+      end
+
+      it 'returns archive path if archivation performed' do
+        allow_any_instance_of(Image).to receive(:image_file_name) { "#{ Random.rand }.file" }
+        allow_any_instance_of(Image).to receive(:image) do
+          o = Object.new
+          def o.copy_to_local_file(style, path)
+            File.open path, "w" do |file|
+              file.write('text')
+            end
+          end
+          o
+        end
+        get :download_all_images_url, params
+        job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").first
+        job.invoke_job
+        job.destroy
+        get :download_all_images_url, params
+        expect(response.body).to be_present
+        FileUtils.rm_rf(Dir["#{ Rails.root }/tmp/image_archives/*"])
+      end
+    end
   end
 end

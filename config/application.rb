@@ -51,6 +51,12 @@ module InteriorC
     config.i18n.enforce_available_locales = false
     config.session_store :active_record_store
 
+    AWS.config(
+      bucket: ENV['S3_BUCKET_NAME'],
+      access_key_id: ENV['AWS_ACCESS_KEY'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    )
+
     Dir.glob("#{Rails.root}/app/assets/fonts/**/").each do |path|
       config.assets.paths << path
     end

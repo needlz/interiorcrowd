@@ -3,6 +3,8 @@
   = javascript_include_tag 'designer_center_contests/show'
   = javascript_include_tag 'contests/pictures_zoom'
   = render partial: 'shared/setup_colors_table'
+  :javascript
+    downloadAllI18n = #{ translations_to_json('designer_center.show_page'.split('.')) }
 
 - content_for :designer_center_content do
   = render partial: 'designer_center_contests/show/preview'

@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
-  before_filter :set_contest, only: [:show, :respond, :option, :update]
+  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
 
   def index
     @contests = Contest.by_page(params[:page])
@@ -102,6 +102,15 @@ class ContestsController < ApplicationController
     else
       render partial: "contests/previews/#{ params[:option] }_preview"
     end
+  end
+
+  def download_all_images_url
+    @images_type = params[:type]
+    raise_404 unless @images_type
+
+    archive_path = Jobs::GeneratePhotosArchive.request_archive(@contest, @images_type)
+    return render(json: archive_path.to_json) if archive_path
+    render nothing: true
   end
 
   private

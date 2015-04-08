@@ -1,7 +1,7 @@
 = render partial: 'contests/preview/current_contest_infobox',
     locals: { contest: ContestShortDetails.new(@contest) }
 
-.col-md-12.marg-top30.contestInfo
+.col-md-12.marg-top30.contestInfo{ data: { id: @contest.id } }
   .row.borderBottom.sections_table
     - ContestView::CONTEST_PREVIEW_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/profile/contest_attribute_preview', locals: { attribute: attribute }
