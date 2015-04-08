@@ -39,6 +39,7 @@ InteriorC::Application.routes.draw do
         get 'respond'
         get 'option'
         get 'show', as: 'show'
+        get 'download_all_images_url'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
                   as: 'reviewer_feedbacks',

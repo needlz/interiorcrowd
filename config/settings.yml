@@ -13,6 +13,7 @@ common: &defaults
   info_email: <%= ENV['INFO_EMAIL'] %>
   app_host: <%= ENV['APP_URL'] %>
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
+  root_folder: <%= Rails.root %>
 
 development:
 

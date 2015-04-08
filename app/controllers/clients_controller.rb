@@ -32,7 +32,7 @@ class ClientsController < ApplicationController
 
   def brief
     @contest = @client.last_contest
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
     @navigation = Navigation::ClientCenter.new(:brief)
     render 'clients/client_center/brief'
   end
@@ -67,7 +67,7 @@ class ClientsController < ApplicationController
 
   def pictures_dimension
     @contest = @client.last_contest
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
     @navigation = Navigation::ClientCenter.new(:entries)
     render 'clients/client_center/pictures_dimension'
   end

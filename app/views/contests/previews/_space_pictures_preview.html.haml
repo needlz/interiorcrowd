@@ -7,4 +7,10 @@
                   original_size_path: image.original_size_url,
                   url_for_downloading: image.url_for_downloading,
                   enlarge_button_class: 'space' }
+
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.space_pictures'), value: value_html }
+- if @contest_view.download_all_photo_button_visible?
+  .col-lg-3.download-all-btn-container
+    %a.btn.download-all{ href: download_all_images_url_contest_path(id: @contest.id, type: 'space_pictures') }
+      %i.glyphicon.glyphicon-download-alt
+      %span.text= t('designer_center.show_page.download_images')

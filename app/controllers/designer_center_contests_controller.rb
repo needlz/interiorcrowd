@@ -11,7 +11,7 @@ class DesignerCenterContestsController < ApplicationController
 
   def show
     @contest = Contest.find(params[:id])
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest, allow_download_all_photo: true)
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
