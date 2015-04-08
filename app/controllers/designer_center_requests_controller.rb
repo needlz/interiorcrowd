@@ -70,7 +70,7 @@ class DesignerCenterRequestsController < ApplicationController
     return redirect_to designer_center_response_path(id: existing_request.id) if existing_request
 
     @navigation = Navigation::DesignerCenter.new(:requests)
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
     @contest_short_details = ContestShortDetails.new(@contest)
     @request = ContestRequest.new(contest_id: @contest.id)
   end

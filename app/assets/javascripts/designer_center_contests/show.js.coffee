@@ -13,54 +13,42 @@ class DesignerCenterContestBrief
 
 class DownloadAllPhotoButton
 
-  @init: ->
+  @init: (imagesType)->
     $('.download-all').click (event)=>
       event.preventDefault()
-      return if @processing
-
       $button = $(event.target).closest('.download-all')
+
+      return if $button.data('download-button')
+
       request_url = "/contests/#{ $button.parents('.contestInfo').data('id') }/download_all_images_url"
-
-      downloadButton = new DownloadAllPhotoButton($button, request_url)
+      downloadButton = new DownloadAllPhotoButton($button, request_url, imagesType)
       downloadButton.init()
+      $button.data('download-button', downloadButton)
 
-  constructor: (@$button, @path)->
+  constructor: (@$button, @path, @imagesType)->
 
   init: ->
     @$button.find('.text').text(downloadAllI18n.generating_archive)
 
+    @processing = true
+    @checkIfDownloaded()
+
+  checkIfDownloaded: =>
     $.ajax(
-      data: { type: 'space_pictures' }
+      data: { type: @imagesType }
       url: @path
       success: (path)=>
         if path.trim().length > 0
-          @executeDonwload(path)
+          @executeDownload(path)
         else
-          @bindCheckInterval()
+          setTimeout(@checkIfDownloaded, 1500)
     )
-    @processing = true
 
-  bindCheckInterval: ->
-    @interval = setInterval(=>
-      $.ajax(
-        data: { type: 'space_pictures' }
-        url: url
-        success: (path)=>
-          @checkArchivationProcess()
-      )
-    , 3000);
-
-  checkArchivationProcess: =>
-    if path.trim().length > 0
-      @executeDonwload(path)
-      clearInterval(@interval)
-
-  executeDonwload: (path)->
+  executeDownload: (path)=>
     @processing = false
     @$button.find('.text').text(downloadAllI18n.download_images)
     window.location.href = path
 
-
 $ ->
   DesignerCenterContestBrief.init()
-  DownloadAllPhotoButton.init()
+  DownloadAllPhotoButton.init('space_images')

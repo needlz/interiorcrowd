@@ -8,7 +8,7 @@ class ContestView
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
-              :space_budget_value, :retailers, :other_retailers, :package_view, :package
+              :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -35,11 +35,12 @@ class ContestView
   }
 
   def initialize(options)
-    if options.kind_of?(Hash)
-      initialize_from_options(HashWithIndifferentAccess.new(options))
+    if options[:contest_attributes].kind_of?(Hash)
+      initialize_from_options(HashWithIndifferentAccess.new(options[:contest_attributes]))
     else
-      initialize_from_contest(options)
+      initialize_from_contest(options[:contest_attributes])
     end
+    @allow_download_all_photo = options[:allow_download_all_photo]
     set_have_space_views_details
     set_have_examples
   end
@@ -87,6 +88,10 @@ class ContestView
 
   def durability
     options_level(@durability)
+  end
+
+  def download_all_photo_button_visible?
+    allow_download_all_photo && space_pictures.present?
   end
 
   private

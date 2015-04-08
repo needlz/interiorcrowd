@@ -2,7 +2,7 @@ module MoodboardCollection
   extend ActiveSupport::Concern
 
   def setup_moodboard_collection(contest)
-    @contest_view = ContestView.new(contest)
+    @contest_view = ContestView.new(contest_attributes: contest)
     all_requests = contest.requests.published.includes(:designer, :lookbook)
     @requests_present = all_requests.present?
     @comments_present = contest.notes.present?

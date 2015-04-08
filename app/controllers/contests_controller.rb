@@ -10,7 +10,7 @@ class ContestsController < ApplicationController
   
   def show
     @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
   end
   
   def design_brief
@@ -42,7 +42,7 @@ class ContestsController < ApplicationController
 
   def preview
     return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
-    @contest_view = ContestView.new(session.to_hash)
+    @contest_view = ContestView.new(contest_attributes: session.to_hash)
   end
 
   def save_preview
@@ -86,7 +86,7 @@ class ContestsController < ApplicationController
 
   def option
     @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
     option = params[:option]
     render partial: 'contests/options/attribute_form', locals: { fields_partial: "contests/options/#{ option }_options",
                                                                  option: option }
@@ -96,7 +96,7 @@ class ContestsController < ApplicationController
     options = ContestOptions.new(params.with_indifferent_access)
     @contest.update_from_options(options)
     @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
-    @contest_view = ContestView.new(@contest)
+    @contest_view = ContestView.new(contest_attributes: @contest)
     if params[:pictures_dimension]
       redirect_to entries_client_center_index_path
     else
@@ -108,7 +108,7 @@ class ContestsController < ApplicationController
     @images_type = params[:type]
     raise_404 unless @images_type
 
-    archive_path = Jobs::GeneratePhotosArchive.request_archive(@contest, @images_type)
+    archive_path = ImagesArchivationMonitor.request_archive(@contest, @images_type)
     return render(json: archive_path.to_json) if archive_path
     render nothing: true
   end
@@ -126,7 +126,7 @@ class ContestsController < ApplicationController
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
                                                  step: params[:action].to_sym)
-    @contest_view = ContestView.new(session.to_hash)
+    @contest_view = ContestView.new(contest_attributes: session.to_hash)
   end
 
   def set_contest

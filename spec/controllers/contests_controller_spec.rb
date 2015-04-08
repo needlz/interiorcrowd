@@ -181,7 +181,7 @@ RSpec.describe ContestsController do
     end
 
     context 'if valid image type passed' do
-      let(:params) { { id: contest.id, type: 'space_pictures' } }
+      let(:params) { { id: contest.id, type: 'space_images' } }
 
       it 'returns nothing if archivation not yet performed' do
         get :download_all_images_url, params

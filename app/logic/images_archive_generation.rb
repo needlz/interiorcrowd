@@ -2,25 +2,19 @@ require 'zip'
 
 class ImagesArchiveGeneration
 
+  ARCHIVES_BUCKET = 'tmp/image_archives'
+  SERVER_TMP_FOLDER = 'tmp'
+  IMAGES_ARCHIVES_LOCAL_FOLDER = "#{ SERVER_TMP_FOLDER }/image_archives"
+
   attr_reader :archive_path
 
   def initialize(contest, type)
     begin
-      @images = ContestView.new(contest)
-      @images = @images.send(type)
+      @images = contest.send(type)
     rescue NoMethodError
       raise ArgumentError, 'Wrong image type'
     end
-    @archive_path = ImagesArchiveGeneration.archive_path(contest, type)
-  end
-
-  def self.in_tmp_folder(path)
-    "#{ tmp_dir }#{ path }"
-  end
-
-  def self.archive_path(contest, type)
-    name = "contest_#{ contest.id }_#{ type }.zip"
-    ImagesArchiveGeneration.in_tmp_folder(name)
+    @archive_path = fetch_archive_path(contest, type)
   end
 
   def completed?
@@ -28,7 +22,7 @@ class ImagesArchiveGeneration
   end
 
   def perform
-    Dir.mkdir(ImagesArchiveGeneration.tmp_dir) unless File.exists?(ImagesArchiveGeneration.tmp_dir)
+    prepare_tmp_folder
     generate_archive
     send_to_s3
     remove_temporary_files
@@ -67,15 +61,13 @@ class ImagesArchiveGeneration
 
   def local_files
     return @files if @files
-    @files = []
-    images.each do |image|
+    @files = images.map do |image|
       name = image.image_file_name
-      path = ImagesArchiveGeneration.in_tmp_folder(name)
+      path = in_tmp_folder(name)
 
       image.image.copy_to_local_file(nil, path)
-      @files << { name: name, path: path }
+      { name: name, path: path }
     end
-    @files
   end
 
   def delete_temporary_file(path)
@@ -84,13 +76,26 @@ class ImagesArchiveGeneration
 
   def archive_s3_object
     s3 = AWS::S3.new
-    bucket = s3.buckets[ENV['S3_BUCKET_NAME']]
+    bucket = s3.buckets[Settings.aws.bucket_name]
 
-    AWS::S3::S3Object.new(bucket, 'tmp/image_archives/' + File.basename(archive_path))
+    AWS::S3::S3Object.new(bucket, "#{ ARCHIVES_BUCKET }/#{ File.basename(archive_path) }")
   end
 
-  def self.tmp_dir
-    "#{ Rails.root }/tmp/image_archives/"
+  def tmp_dir
+    "#{ Settings.root_folder }/#{ IMAGES_ARCHIVES_LOCAL_FOLDER }"
+  end
+
+  def fetch_archive_path(contest, type)
+    name = "contest_#{ contest.id }_#{ type }.zip"
+    in_tmp_folder(name)
+  end
+
+  def in_tmp_folder(path)
+    "#{ tmp_dir }/#{ path }"
+  end
+
+  def prepare_tmp_folder
+    Dir.mkdir(tmp_dir) unless File.exists?(tmp_dir)
   end
 
 end
