@@ -50,8 +50,8 @@ en:
               Do you need help taking your room to the next level?
             quote: >
               “We had some furniture pieces that we loved, but others we weren’t sure of.
-              Our stylist told us what to get of — and made the things we liked (like the bookshelf)
-              look amazing by just rearranging it.”
+              Our stylist told us what to get rid of, and rearranged the things we liked.
+              Everything now looks amazing.”
           total_room_overhaul:
             name: Completely new look
             description: Need lots of help? Not sure where to start?
@@ -533,7 +533,9 @@ en:
           size_reuirements: The image dimension must be at least 150 pixels wide and 150 pixels tall.
         characterize_style: How do you characterize your design style?
         about: Tell us something about yourself
-        about_placeholder: Describe your design style, how you work with clients, why you love interior design, etc.
+        about_placeholder: >
+          Please summarize in one or two sentences what your approach to interior design
+          is and/or why you love interior design.
         create_button: Create Page
         update_button: Update Page
         no_path_error: must be specified in order to publish portfolio
