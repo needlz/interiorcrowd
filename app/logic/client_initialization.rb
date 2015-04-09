@@ -6,7 +6,7 @@ class ClientInitialization
   end
 
   def perform
-    Jobs::Mailer.schedule(:client_registered, [client, plain_password])
+    Jobs::Mailer.schedule(:client_registered, [client])
     Jobs::Mailer.schedule(:user_registration_info, [client])
   end
 

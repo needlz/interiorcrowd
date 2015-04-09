@@ -3,13 +3,15 @@ require 'rails_helper'
 RSpec.describe UserMailer do
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
+  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer) }
 
   it 'creates client welcoming mail' do
-    expect(UserMailer.client_registered(client, 'password')).to be_present
+    expect(UserMailer.client_registered(client)).to be_present
   end
 
   it 'creates designer welcoming mail' do
-    expect(UserMailer.designer_registered(designer, 'password')).to be_present
+    expect(UserMailer.designer_registered(designer)).to be_present
   end
 
   it 'creates designer registration info mail' do
@@ -34,6 +36,10 @@ RSpec.describe UserMailer do
 
   it 'creates mail with invitation to leave a feedback' do
     expect(UserMailer.invitation_to_leave_a_feedback({username: 'username', email: 'email'}, 'url', client)).to be_present
+  end
+
+  it 'creates mail about new concept board received' do
+    expect(UserMailer.concept_board_received(contest_request)).to be_present
   end
 
 end
