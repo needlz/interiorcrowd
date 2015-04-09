@@ -671,6 +671,7 @@ en:
         'Similar styles' can be additional items that you'd also like the client to see,
         but have not included in the board. They might also be out of the client's budget.
         Write in the comment box why you added it.
+      add_item: + Add more product
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'

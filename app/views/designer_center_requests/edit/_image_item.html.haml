@@ -20,7 +20,7 @@
                 = label_tag attribute, t("designer_center.final_upload.#{ attribute.to_s }")
               .col-md-9
                 = text_field_tag "contest_request[#{ image_item.kind }][#{ attribute.to_s.pluralize }][]",
-                    image_item.send(attribute),
+                    ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self),
                     class: attribute.to_s
 
   .view
@@ -30,5 +30,6 @@
       = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
     .col-md-8
       - [:name, :brand, :dimensions, :price].each do |attribute|
-        %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }= image_item.send(attribute)
+        %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }
+          = ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self)
       = link_to image_item.link.to_s, image_item.link.to_s, class: 'font20 blueLink link'

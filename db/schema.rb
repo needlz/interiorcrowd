@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406090840) do
+ActiveRecord::Schema.define(version: 20150409123028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,6 +235,24 @@ ActiveRecord::Schema.define(version: 20150406090840) do
     t.datetime "updated_at"
   end
 
+  create_table "image_items", force: true do |t|
+    t.text     "name"
+    t.integer  "contest_request_id"
+    t.integer  "image_id"
+    t.text     "text"
+    t.decimal  "price"
+    t.text     "brand"
+    t.text     "link"
+    t.string   "mark"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "kind"
+    t.text     "dimensions"
+    t.boolean  "final",              default: false
+    t.integer  "price_cents"
+    t.string   "price_currency",     default: "USD", null: false
+  end
+
   create_table "image_links", force: true do |t|
     t.integer "contest_id"
     t.text    "url"
@@ -323,22 +341,6 @@ ActiveRecord::Schema.define(version: 20150406090840) do
     t.text     "other"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "product_items", force: true do |t|
-    t.text     "name"
-    t.integer  "contest_request_id"
-    t.integer  "image_id"
-    t.text     "text"
-    t.decimal  "price"
-    t.text     "brand"
-    t.text     "link"
-    t.string   "mark"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "kind"
-    t.text     "dimensions"
-    t.boolean  "final",              default: false
   end
 
   create_table "reviewer_feedbacks", force: true do |t|

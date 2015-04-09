@@ -1,13 +1,13 @@
 class ImageItem < ActiveRecord::Base
 
-  self.table_name = 'product_items'
-
   MARKS = {
     LIKE: 'ok',
     DISLIKE: 'remove'
   }
 
   KINDS = %i(product_items similar_styles)
+
+  monetize :price_cents, allow_nil: true
 
   validates_inclusion_of :mark, in: MARKS.values, allow_nil: true
   validates_inclusion_of :kind, in: KINDS.map(&:to_s)

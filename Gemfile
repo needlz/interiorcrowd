@@ -74,3 +74,4 @@ gem 'social-share-button'
 gem 'numbers_and_words' #humanize numbers output
 gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'rubyzip', '>= 1.0.0'
+gem 'money-rails' # parses currency input
