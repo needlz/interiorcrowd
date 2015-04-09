@@ -100,10 +100,13 @@ class @FulfillmentApprovedEdit
   @init: ->
     @bindFooterButtons()
     @bindAddProductButton()
+    @bindPriceInputs()
     productItemsEditor = new ProductItemsEditor()
     productItemsEditor.imageIdInput = @imageIdInput
     productItemsEditor.bindEvents()
-    $('.edit-form .price').ForceNumericOnly()
+
+  @bindPriceInputs: ->
+    $('.edit-form .price').currencyInput()
 
   @form: ->
     $('.edit_contest_request')
@@ -132,7 +135,7 @@ class @FulfillmentApprovedEdit
       url: '/image_items/new'
       success: (formHtml)=>
         @appendProductItemForm(formHtml)
-        $('.edit-form .price').ForceNumericOnly()
+        @bindPriceInputs()
     )
 
   @appendProductItemForm: (formHtml)->

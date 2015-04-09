@@ -18,6 +18,8 @@ class ImageItemsEditing
 
   private
 
+  attr_reader :contest_request_options, :items_scope, :new_items_attributes
+
   def gather_attributes(kind)
     return [] unless contest_request_options
     ids = contest_request_options[kind][:ids]
@@ -26,7 +28,7 @@ class ImageItemsEditing
             { image_id: contest_request_options[kind][:image_ids][index],
               name: contest_request_options[kind][:names].try(:[], index),
               brand: contest_request_options[kind][:brands].try(:[], index),
-              price: contest_request_options[kind][:prices].try(:[], index),
+              price: to_money(contest_request_options[kind][:prices].try(:[], index)),
               link: contest_request_options[kind][:links].try(:[], index),
               text: contest_request_options[kind][:texts].try(:[], index),
               dimensions: contest_request_options[kind][:dimensions].try(:[], index)
@@ -64,6 +66,8 @@ class ImageItemsEditing
     attributes.merge!({ mark: nil }) if product_item.image_id_changed?
   end
 
-  attr_reader :contest_request_options, :items_scope, :new_items_attributes
+  def to_money(value)
+    value.to_money if value.present?
+  end
 
 end

@@ -32,6 +32,10 @@ jQuery.fn.ForceNumericOnly = ->
         $(e.target).val(oldText) unless text.match(/^[0-9]+$/)
       0
 
+jQuery.fn.currencyInput = ->
+  @each ->
+    $(@).keyfilter(/[\d\.\s\$,]/)
+
 jQuery.fn.NumberLimiter =(maxValue) ->
   @each ->
     $(this).on 'input', (e) ->
