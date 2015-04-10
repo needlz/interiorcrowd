@@ -592,6 +592,9 @@ en:
       view_response: View your response >
       download_images: Download all photo
       generating_archive: Generating archive...
+      winner_already_chosen: >
+        Client has already chosen a winner. You won't be able to submit a concept board,
+        but you can view the brief.
     responses:
       title: Contests Underway
       list_title: You are currently participating in the following contests

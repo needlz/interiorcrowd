@@ -76,16 +76,17 @@ class DesignerCenterRequestsController < ApplicationController
   end
 
   def create
-    contest = Contest.current.find(params[:contest_id])
+    contest = Contest.current.find_by_id(params[:contest_id])
+    return raise_404 unless contest
     contest_creation = ContestRequestCreation.new({ designer: @designer,
                                            contest: contest,
                                            request_params: response_params,
                                            lookbook_params: params[:lookbook],
                                            need_submit: params[:contest_request][:status] == 'submitted' }
     )
-
     request = contest_creation.perform
 
+    return raise_404 unless request
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
     end

@@ -64,7 +64,7 @@ class Designer < ActiveRecord::Base
 
   def notifications
     transaction do
-      designer_notifications = user_notifications.includes(:contest, :contest_comment)
+      designer_notifications = user_notifications.includes(:contest, :contest_comment, :concept_board_comment)
       designer_notifications.sort_by{ |comment| comment.created_at }.reverse
     end
   end

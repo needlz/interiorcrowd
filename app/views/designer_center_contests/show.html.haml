@@ -7,6 +7,9 @@
     downloadAllI18n = #{ translations_to_json('designer_center.show_page'.split('.')) }
 
 - content_for :designer_center_content do
+  - unless @contest.submission?
+    = render partial: 'designer_center_contests/show/winner_selected_warning'
+
   = render partial: 'designer_center_contests/show/preview'
 
   .col-md-12.disablePadding.marg-top30
@@ -17,7 +20,8 @@
       &nbsp;&nbsp;&nbsp;
       = t('contests.titles.back')
 
-  = render partial: 'designer_center_contests/show/footer_buttons', locals: { contest: @contest, designer: @designer }
+  = render partial: 'designer_center_contests/show/footer_buttons',
+      locals: { contest: @contest, designer: @designer }
   .clearfix
     %p
 
