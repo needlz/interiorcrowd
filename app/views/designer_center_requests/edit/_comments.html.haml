@@ -8,19 +8,19 @@
       %li.btn.btn-default{:role => "presentation"}
         %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
       %li.btn.btn-default{:role => "presentation"}
-        %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(@current_user)
+        %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(current_user)
     #scrollBoxComments.tab-content.notes
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
 
       #meComments.tab-pane{:role => "tabpanel"}
-        - comments.where(role: @current_user.role).each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
+        - comments.where(role: current_user.role).each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
 
       #designerComments.tab-pane{:role => "tabpanel"}
-        - comments.where.not(role: @current_user.role).each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: @current_user, comment: comment}
+        - comments.where.not(role: current_user.role).each do |comment|
+          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
 
     .message-template{style: 'display: none'}
       .commentContainer
