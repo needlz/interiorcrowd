@@ -29,7 +29,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def reset_password(user, password)
-    template 'interiorcrowd_password_reset'
+    template 'reset_password'
     subject = I18n.t('mails.password_reset.subject')
     set_template_values(set_reset_password_params(user, password))
     mail to: [wrap_recipient(user.email, user.name, "to")], subject:subject

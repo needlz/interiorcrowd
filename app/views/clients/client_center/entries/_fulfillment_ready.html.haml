@@ -24,6 +24,9 @@
           image_items: request.similar_styles.for_view }
 
   .col-md-4
-    = render partial: 'contest_requests/submission_info', locals: { designer: request.designer, submitted_at: request.created_at, request: request  }
-    = render partial: 'designer_center_requests/edit/comments', locals: { request: request, comments: request.comments }
-  = render partial: 'clients/client_center/entries/collaboration/footer_buttons', locals: { request: request }
+    = render partial: 'contest_requests/submission_info',
+        locals: { designer: request.designer, submitted_at: request.created_at, request: request  }
+    = render partial: 'designer_center_requests/edit/comments',
+        locals: { request: request, comments: request.comments }
+  = render partial: 'clients/client_center/entries/collaboration/footer_buttons',
+      locals: { request: request }
