@@ -39,9 +39,11 @@ class ProductItemsEditor extends InlineEditor
     @updateImage($container)
     @updateTextFields($container)
 
-  undo: ($container)->
-    @updateImage($container, true)
-    @updateTextFields($container, true)
+  undo: ($containers)->
+    $containers.each (index, container)=>
+      $container = $(container)
+      @updateImage($container, true)
+      @updateTextFields($container, true)
 
   updateImage: ($container, undo)->
     $viewImage = $container.find('.view img')
@@ -101,9 +103,9 @@ class @FulfillmentApprovedEdit
     @bindFooterButtons()
     @bindAddProductButton()
     @bindPriceInputs()
-    productItemsEditor = new ProductItemsEditor()
-    productItemsEditor.imageIdInput = @imageIdInput
-    productItemsEditor.bindEvents()
+    @productItemsEditor = new ProductItemsEditor()
+    @productItemsEditor.imageIdInput = @imageIdInput
+    @productItemsEditor.bindEvents()
 
   @bindPriceInputs: ->
     $('.edit-form .price').currencyInput()
@@ -145,6 +147,7 @@ class @FulfillmentApprovedEdit
 
   @clearEditFormInputs: ($form)->
     $form.find('.edit-form').find(@imageIdInput).remove()
+    @productItemsEditor.undo($(@productItemsEditor.attributeSelector))
 
 $ ->
   FulfillmentApprovedEdit.init()

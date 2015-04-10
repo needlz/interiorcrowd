@@ -11,7 +11,7 @@
 - content_for :designer_center_content do
   .bottom60.contest{ data: { id: @contest.id } }
     = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: PhasesStripe.new(active_step: 1, view_context: self, status: @request.status) }
+             locals: { stripe: PhasesStripe.new(active_step: 0, view_context: self, status: @request.status) }
     = render partial: 'contests/preview/current_contest_infobox',
         locals: { contest: ContestShortDetails.new(@contest) }
     = link_to t("designer_center.my_contests.design_profile"),
@@ -27,7 +27,7 @@
           .conceptMoodboardImg
             = render partial: 'designer_center_requests/concept_board_thumbnail',
               locals: { request: @request,
-                placeholder_src: '/assets/placeholder1.jpg',
+                placeholder_src: '/assets/img-content.png',
                 image_id_input_name: 'lookbook[picture][ids][]' }
           %a.submitMyDesign.upload-button{:href => "#"}
             =t('designer_center.my_contests.concept_board_upload.upload_button')
@@ -39,10 +39,12 @@
             %p.designerName= @designer.name
             %p.designerNote
             .commentTextArea
-              %textarea{ style: '', name: 'contest_request[feedback]', placeholder: t('designer_center.my_contests.say_about_design') }
-
+              %textarea{ style: '',
+                name: 'contest_request[feedback]',
+                placeholder: t('designer_center.my_contests.say_about_design') }
+        .hLine
         .sidebarComments
-          %p.designerName= t('designer_center.my_contests.comments')
+          %p.designerName= t('designer_center.edit.comments')
           %div{ role: "tabpanel" }
             .commentTextArea
               %br

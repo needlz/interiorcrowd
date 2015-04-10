@@ -1,12 +1,11 @@
-.bottom60
-  .container.animated.fadeInDown
-    .row
-      .col-md-8.disablePadding
-        = render partial: 'clients/client_center/entries/phases',
-                 locals: { stripe: PhasesStripe.new(last_step: 0) }
-      = render partial: 'clients/client_center/entries/responses_filter', locals: { selected_answer: params[:answer] }
-  - if @requests_present
-    %p.chooseP= t('client_center.entries.choose_concept')
+.container.animated.fadeInDown
+  .row
+    .col-md-8.disablePadding
+      = render partial: 'clients/client_center/entries/phases',
+               locals: { stripe: PhasesStripe.new(last_step: 0) }
+    = render partial: 'clients/client_center/entries/responses_filter', locals: { selected_answer: params[:answer] }
+- if @requests_present
+  %p.chooseP{ style: 'margin-top: 35px' }= t('client_center.entries.choose_concept')
 = render partial: 'clients/client_center/entries/feedback/feedback_items'
 .pagination-row.text-center
   = will_paginate(@contest_requests, class: 'pageNumber intc-pagination center-block')

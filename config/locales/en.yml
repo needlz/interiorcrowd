@@ -49,8 +49,7 @@ en:
             description: >
               Do you need help taking your room to the next level?
             quote: >
-              “We had some furniture pieces that we loved, but others we weren’t sure of.
-              Our stylist told us what to get rid of, and rearranged the things we liked.
+              “Our stylist told us what to get rid of, and rearranged the things we liked.
               Everything now looks amazing.”
           total_room_overhaul:
             name: Completely new look
@@ -285,7 +284,12 @@ en:
         send_feedback: Post Comment
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
-      choose_concept: Choose your favorite design concept
+      choose_concept: >
+        During the Initial Concept stage, designers will submit boards which reflect your aesthetic and needs.
+        You can rate the designers for reference, request feedback from friends and family,
+        as well as send a message to all designers. Once you determine your favorite, please
+        choose that particular designer as the winner. In the next step of the process, you
+        will be able to collaborate with your designer on specific items and your design.
       need_idea: I need your help choosing a winner!
       you_invited:  You have been invited to give some feedback on %{name}'s contest.
       congratulations: Congratulations! You have chosen a winner!
@@ -403,7 +407,7 @@ en:
         as comments about why you have chosen certain items. You can also upload a new moodboard as well.
       products_list: Product List
       similar_styles: Similar Styles
-      comments: Comments
+      comments: Questions and Comments
       all: All
       me: Me
       designer: Designer
@@ -657,7 +661,6 @@ en:
       need_to_ask_question: Need to ask a question?
       save_and_preview: Save & Preview
       say_about_design: Say something about your design.
-      comments: Comments
       send: Send
     product_items:
       text_placeholder: >
