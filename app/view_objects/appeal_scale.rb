@@ -9,7 +9,7 @@ class AppealScale
     :traditional,
     :transitional,
     :modern,
-    :hollywood_regence
+    :hollywood_regency
   ]
 
   attr_reader :value
