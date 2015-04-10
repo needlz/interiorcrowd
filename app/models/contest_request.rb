@@ -98,7 +98,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def commenting_enabled?
-    fulfillment_editing?
+    submitted? || fulfillment_editing?
   end
 
   def details_editable?
