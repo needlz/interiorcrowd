@@ -16,7 +16,7 @@ class ConceptBoardPage
   end
 
   def image_items
-    contest_request.visible_image_items(active_phase)
+    contest_request.visible_image_items(active_phase).for_view
   end
 
   protected
