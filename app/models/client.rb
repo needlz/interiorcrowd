@@ -4,11 +4,10 @@ class Client < ActiveRecord::Base
   ACTIVE_STATUS = 1
   INACTIVE_STATUS = 0
   
-  validates  :email, :first_name, :last_name, presence: true
+  validates  :email, :first_name, :last_name, presence: true, uniqueness: true
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
-  validates :email, uniqueness: true
-  
+
   has_many :contests
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests

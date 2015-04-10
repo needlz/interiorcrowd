@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409123028) do
+ActiveRecord::Schema.define(version: 20150410092557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 20150409123028) do
     t.text     "billing_city"
     t.string   "plain_password"
   end
+
+  add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
 
   create_table "concept_board_comments", force: true do |t|
     t.integer  "user_id"
@@ -227,6 +229,8 @@ ActiveRecord::Schema.define(version: 20150409123028) do
     t.text     "plain_password"
     t.string   "state"
   end
+
+  add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree
 
   create_table "example_links", force: true do |t|
     t.text     "url"

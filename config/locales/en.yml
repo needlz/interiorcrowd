@@ -815,7 +815,7 @@ en:
     link_here: here
   invitation_to_content:
     link: here
-  reset_password: 'Your password was reseted, here are your new credentionals:'
+  reset_password: 'Your password was reseted, here are your new credentials:'
   feedback_email: hello@interiorcrowd.com
 
   board_comments:
