@@ -1,4 +1,5 @@
 class Contest < ActiveRecord::Base
+
   self.per_page = 10
 
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
@@ -34,6 +35,7 @@ class Contest < ActiveRecord::Base
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category
   validates_presence_of :design_space
+  normalize_attributes *ContestAdditionalPreference::PREFERENCES.keys
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
     validates_inclusion_of preference, in: options.map(&:to_s), allow_nil: true
   end

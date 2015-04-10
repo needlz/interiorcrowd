@@ -4,6 +4,7 @@ class Designer < ActiveRecord::Base
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, uniqueness: true
+  normalize_attributes :email
 
   has_one :portfolio
   has_many :contest_requests
