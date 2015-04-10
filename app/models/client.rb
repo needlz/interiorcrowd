@@ -8,6 +8,7 @@ class Client < ActiveRecord::Base
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, presence: true, uniqueness: true
+  normalize_attributes :email
 
   has_many :contests
   belongs_to :designer_level
