@@ -3,7 +3,7 @@ class ContestView
   ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
-              :links, :space_pictures, :budget, :feedback, :budget_plan, :name, :designer_level, :example_ids,
+              :links, :space_pictures, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
               :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo
 
@@ -110,7 +110,6 @@ class ContestView
     @space_pictures_ids = contest_options.space_image_ids
     @space_pictures = Image.where(id: contest_options.space_image_ids).order(:created_at)
     @space_budget_value = contest_params[:space_budget]
-    @budget = contest_params[:space_budget]
     @feedback = contest_params[:feedback]
     @name = contest_params[:project_name]
     set_package(contest_params)
@@ -132,7 +131,6 @@ class ContestView
     @space_pictures_ids = contest.space_images.pluck(:id)
     @space_pictures = contest.space_images.order(:created_at)
     @space_budget_value = contest.space_budget
-    @budget = contest.space_budget
     @feedback = contest.feedback
     @name = contest.project_name
     @retailers = PreferredRetailers::RETAILERS.map do |retailer|
