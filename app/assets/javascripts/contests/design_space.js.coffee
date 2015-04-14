@@ -24,8 +24,8 @@ class @DesignSpacePage
     @clearHiddenInputs
 
     @validator.reset()
-    budget = parseInt($.trim($(@budgetDropdownSelector).val()))
-    if isNaN(budget) || budget < 1
+    budget = $.trim($(@budgetDropdownSelector).val())
+    unless budget.length
       @validator.addMessage $("#err_budget"), I18n.budget.select_error, $('.design-budget')
 
     if @validator.valid

@@ -1,8 +1,5 @@
 class ContestView
 
-  CONTEST_DESIGN_BUDGETS = [I18n.t('contests.space.budget.placeholder'), '$0 - $200', '$201 - $500', '$501 - $1000', '$1001 - $1500', '$1501 - $2500',
-                             '$2501 - $3500', '$3501 - $5000', '$5001 - $7500', '$7501 - $10000', '$10000 +' ]
-
   ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
 
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
@@ -112,8 +109,8 @@ class ContestView
     @dimensions = SpaceDimension.from(contest_params)
     @space_pictures_ids = contest_options.space_image_ids
     @space_pictures = Image.where(id: contest_options.space_image_ids).order(:created_at)
-    @space_budget_value = contest_params[:space_budget].to_i
-    @budget = CONTEST_DESIGN_BUDGETS[contest_params[:space_budget].to_i]
+    @space_budget_value = contest_params[:space_budget]
+    @budget = contest_params[:space_budget]
     @feedback = contest_params[:feedback]
     @name = contest_params[:project_name]
     set_package(contest_params)
@@ -134,8 +131,8 @@ class ContestView
     @dimensions = SpaceDimension.from(contest)
     @space_pictures_ids = contest.space_images.pluck(:id)
     @space_pictures = contest.space_images.order(:created_at)
-    @space_budget_value = contest.space_budget.to_i
-    @budget = CONTEST_DESIGN_BUDGETS[contest.space_budget.to_i]
+    @space_budget_value = contest.space_budget
+    @budget = contest.space_budget
     @feedback = contest.feedback
     @name = contest.project_name
     @retailers = PreferredRetailers::RETAILERS.map do |retailer|
