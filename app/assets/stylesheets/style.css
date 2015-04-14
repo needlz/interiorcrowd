@@ -630,18 +630,25 @@ color: #7E7E7E;
 }
 
 .btn5-confirm:hover {
-	
 	background: #000;
 	color: #e1e1e1;
 }
-.dreamloft{
-font-size:30px !important;
-margin-top:20px;
-resize: none;
-height:50px !important;
+
+.dreamloft {
+    font-size:30px !important;
+    margin-top:20px;
+    resize: none;
+    height:50px !important;
 }
 
-.btn6{
+.budget-input {
+    width: 39%;
+    color: #555;
+    background-color: #fff;
+    height: 40px;
+}
+
+.btn6 {
     background: none repeat scroll 0 0 #dbdbdb;
     border: 5px solid #dbdbdb;
     border-radius: 0;

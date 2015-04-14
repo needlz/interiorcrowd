@@ -72,10 +72,6 @@ class ContestCreationWizard
     APPEAL_FEEDBACK
   end
 
-  def budget_options
-    ContestView::CONTEST_DESIGN_BUDGETS.map.with_index { |text, i| [text, i] }
-  end
-
   private
 
   attr_reader :contest_attributes
