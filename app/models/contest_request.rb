@@ -4,6 +4,8 @@ class ContestRequest < ActiveRecord::Base
 
   STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
 
+  normalize_attributes :answer
+
   validates_inclusion_of :answer, in: %w{no maybe favorite winner}, allow_nil: true
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_uniqueness_of :designer_id, scope: :contest_id
