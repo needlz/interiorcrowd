@@ -1,4 +1,3 @@
-.col-md-4.portfolio_example
-  %img{ src: picture.medium_size_url }
+.col-md-4.portfolio_example{ style: "background: url(#{picture.medium_size_url})" }
   - if picture.likes_count > 0
     %span.numOfLikesPortfolio (#{ picture.likes_count })

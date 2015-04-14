@@ -1562,6 +1562,45 @@ color: #000;
 .productListIMG{
 	width: 100%;
 }
+
+.main-image {
+    width:auto;
+    max-width:227px;
+    max-height:227px;
+    height:auto;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    margin:auto;
+}
+
+.main-image-block {
+    width:227px;
+    height:227px;
+    position:relative;
+}
+
+.product-image {
+    width:auto;
+    max-width:364px;
+    max-height:300px;
+    height:auto;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right: 0;
+    left: 0;
+    margin:auto;
+}
+
+.product-image-block {
+    width:364px;
+    height:300px;
+    position:relative;
+}
+
 textarea.productsMoodboardAbove{
 	width: 100%;
 	resize: none;
@@ -1570,11 +1609,13 @@ textarea.productsMoodboardAbove{
 	padding: 10px;
 	overflow: visible;
 }
+
 .small_close{
 	cursor: pointer;
 	position: absolute;
 	right: 25px;
-	top: 5px;
+	top: 15px;
+    z-index: 2;
 }
 
 .sidebarComments{
@@ -1989,10 +2030,15 @@ textarea.productsMoodboardAbove{
 
 .portfolio_example{
 	position: relative;
+    width:364px;
+    height:300px;
+    background-size: contain!important;
+    background-repeat: no-repeat!important;
+    background-position: center!important;
+    margin-right: 8px;
+    margin-left: 8px;
 }
-.portfolio_example img{
-	width: 100%;
-}
+
 .portfolio_example .numOfLikesPortfolio{
 	line-height: 20px;
 	height: 20px;
