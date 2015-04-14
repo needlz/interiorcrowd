@@ -195,7 +195,8 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     it 'raises error if contest not specified' do
-      expect { post :create, contest_id: 0, contest_request: { feedback: '' } }.to raise_error
+      post :create, contest_id: 0, contest_request: { feedback: '' }
+      expect(response).to have_http_status(:not_found)
     end
 
     it 'creates lookbook' do
@@ -208,6 +209,17 @@ RSpec.describe DesignerCenterRequestsController do
       expect(designer.contest_requests).to be_empty
       post :create, contest_id: contest.id, contest_request: { feedback: '' }
       expect(contest.requests[0].comments.first).to eq nil
+    end
+
+    context 'contest winner already selected' do
+      before do
+        contest.update_attributes!(status: 'fulfillment')
+      end
+
+      it 'does not create request' do
+        post :create, contest_id: contest.id, contest_request: { feedback: '' }
+        expect(contest.requests).to be_empty
+      end
     end
   end
 
