@@ -312,6 +312,12 @@ en:
       your_note: Messages
       filter_by: 'Filter by:'
       responses_filter_all: All
+      signed_up_message: Your new design is only days away! Designers will be matched to your project immediately. Below, you can explore and invite designers to your contest as well.
+      see_more_designers: See more designers
+      picture_dimensions: Don’t Forget Your Picture & Dimensions
+      email_pictures: You can e-mail pictures to us at pictures@interiorcrowd.com
+      what_do_i_need: What do I need
+      ready_to_go: I’m ready to go
       more_features:
         title: Want to explore some more?
         get_inspired: Get inspired
