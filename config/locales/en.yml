@@ -165,6 +165,7 @@ en:
         title: What is your design budget for materials?
         hint: 'Note: This does not include any design fees'
         select_error: Please enter budget.
+        placeholder: '$2500'
       other_feedback:
         title: Other feedback or instructions?
         placeholder: Leave a comment...

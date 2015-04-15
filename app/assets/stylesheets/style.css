@@ -642,10 +642,7 @@ color: #7E7E7E;
 }
 
 .budget-input {
-    width: 39%;
-    color: #555;
-    background-color: #fff;
-    height: 40px;
+    height: 48px!important;
 }
 
 .btn6 {
