@@ -2,8 +2,6 @@ class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
-  before_filter :set_host
-
   def client_registered(client)
     template 'user_registration'
     subject = I18n.t('mails.client_registration.subject')
@@ -24,8 +22,9 @@ class UserMailer < ActionMailer::Base
     mail to: [wrap_recipient(Settings.info_email, '', "to")]
   end
 
-  def invite_to_contest(designer, client)
+  def invite_to_contest(designer, client, host)
     template 'invite_to_contest'
+    @host = host
     set_template_values(set_invitation_params(client))
     mail to: [wrap_recipient(designer.email, designer.name, "to")]
   end
@@ -53,20 +52,22 @@ class UserMailer < ActionMailer::Base
     mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject')
   end
 
-  def invitation_to_leave_a_feedback(params, url, client)
+  def invitation_to_leave_a_feedback(params, url, client, host)
     template 'invitation_to_leave_a_feedback'
     @client_name = client.name
     @page_url = url
+    @host = host
     set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))
     mail to: [wrap_recipient(params['email'], params['username'], 'to')],
-         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: client_name)
+         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name)
   end
 
-  def concept_board_received(contest_request)
+  def concept_board_received(contest_request, host)
     client = contest_request.contest.client
     email = client.email
     username = client.name
     template 'generic_notification'
+    @host = host
     set_template_values(text: render_to_string('mails/new_concept_board_received'))
     mail to: [wrap_recipient(email, username, 'to')],
          subject: I18n.t('mails.concept_board_received.subject')
@@ -105,10 +106,6 @@ class UserMailer < ActionMailer::Base
 
   def new_subscriber_params(beta_subscriber)
     { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
-  end
-
-  def set_host
-    @host = Settings.app_host || 'http://localhost:3000'
   end
 
 end

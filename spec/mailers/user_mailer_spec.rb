@@ -23,7 +23,7 @@ RSpec.describe UserMailer do
   end
 
   it 'creates invitation to contest mail' do
-    expect(UserMailer.invite_to_contest(designer, client)).to be_present
+    expect(UserMailer.invite_to_contest(designer, client, 'example.com')).to be_present
   end
 
   it 'creates mail about password reset' do
@@ -35,11 +35,11 @@ RSpec.describe UserMailer do
   end
 
   it 'creates mail with invitation to leave a feedback' do
-    expect(UserMailer.invitation_to_leave_a_feedback({username: 'username', email: 'email'}, 'url', client)).to be_present
+    expect(UserMailer.invitation_to_leave_a_feedback({username: 'username', email: 'email'}, 'url', client, 'example.com')).to be_present
   end
 
   it 'creates mail about new concept board received' do
-    expect(UserMailer.concept_board_received(contest_request)).to be_present
+    expect(UserMailer.concept_board_received(contest_request, 'example.com')).to be_present
   end
 
 end

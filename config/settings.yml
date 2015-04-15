@@ -11,15 +11,16 @@ common: &defaults
     password: <%= ENV['MANDRILL_PASSWORD'] %>
     api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
   info_email: <%= ENV['INFO_EMAIL'] %>
-  app_host: <%= ENV['APP_URL'] %>
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
   root_folder: <%= Rails.root %>
 
 development:
-
+  app_host: 'local.home:3000'
 test:
 
 staging:
+  app_host: 'dev-intc.herokuapp.com'
 
 production:
+  app_host: 'interiorcrowd.com'
   beta_notification_emails: <%=  ENV['BETA_NOTIFICATION_EMAILS'] && ENV['BETA_NOTIFICATION_EMAILS'].split(',') %>

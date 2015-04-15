@@ -6,7 +6,7 @@ class ContestRequestSubmission
 
   def perform
     contest_request.submit!
-    Jobs::Mailer.schedule(:concept_board_received, [contest_request])
+    Jobs::Mailer.schedule(:concept_board_received, [contest_request, Settings.app_host])
   end
 
   private
