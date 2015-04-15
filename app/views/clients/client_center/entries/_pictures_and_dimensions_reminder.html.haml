@@ -2,14 +2,14 @@
   .col-md-6.no-padding-right.logo-pc.text-center-md.text-center-xs.text-center-sm.description
     .top-nav
       %label.reminder
-        %b Don’t Forget Your Picture & Dimensions
+        %b=t('client_center.entries.picture_dimensions')
       %label.contact
-        %i You can e-mail pictures to us at pictures@interiorcrowd.com
+        %i=t('client_center.entries.email_pictures')
   .col-md-6.text-right.text-center-md.text-center-xs.text-center-sm.pull-top.options
     %button.btn7.btn-need{:type => "button"}
-      %b What do I need
+      %b=t('client_center.entries.what_do_i_need')
     .clearfix.visible-md.visible-xs.visible-sm
     %a{href: pictures_dimension_client_center_index_path}
       %button.btn7.btn-ready
-        %b I’m ready to go
+        %b=t('client_center.entries.ready_to_go')
 
