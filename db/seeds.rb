@@ -48,6 +48,10 @@ DesignSpace.create(id: 19, name: 'Foyer', pos: 100, parent_id: 0)
 DesignSpace.create(id: 20, name: 'Garage', pos: 110, parent_id: 0)
 DesignSpace.create(id: 21, name: 'Closet', pos: 120, parent_id: 0)
 
+DesignSpace.create(id: 22, name: 'Office', pos: 130, parent_id: 0)
+DesignSpace.create(id: 23, name: 'Home', pos: 131, parent_id: 22)
+DesignSpace.create(id: 24, name: 'Commercial', pos: 132, parent_id: 22)
+
 DesignerLevel.delete_all
 DesignerLevel.create(id: 1, name: 'novice')
 DesignerLevel.create(id: 2, name: 'enthusiast')
