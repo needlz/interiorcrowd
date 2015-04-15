@@ -6,4 +6,5 @@
         %i= t('contests.space.budget.hint')
     .clearfix
       %span.text-error{ id: 'err_budget' }
-    = text_field(:design_space, :f_budget, class: 'selectpicker budget-input', value: @contest_view.space_budget_value)
+    = text_field(:design_space, :f_budget, class: 'selectpicker budget-input form-control',
+                 value: @contest_view.space_budget_value, placeholder: t('contests.space.budget.placeholder'))
