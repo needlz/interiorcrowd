@@ -1,5 +1,6 @@
 .col-md-4.relative.image-item{ data: { id: id } }
-  %img.productListIMG{ src: image_path }/
+  .main-image-block
+    %img.productListIMG.main-image{ src: image_path }/
   - if choosable
     %p.text-right.marg-top10
       - ImageItem::MARKS.values.each do |mark|

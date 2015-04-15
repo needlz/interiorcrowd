@@ -11,15 +11,17 @@
           image_path: '',
           image_list_name: image_list_name,
           checked_mark: '' }
-  - image_items.each do |item|
-    = render partial: 'designer_center_requests/edit/image_content',
-        locals: { editable: editable,
-          text: item.text,
-          id: item.id,
-          image_id: item.image_id,
-          image_path: item.thumb_url,
-          image_list_name: image_list_name,
-          checked_mark: item.mark }
+  - image_items.in_groups_of(3, false).each do |items|
+    .row
+      - items.each do |item|
+        = render partial: 'designer_center_requests/edit/image_content',
+            locals: { editable: editable,
+              text: item.text,
+              id: item.id,
+              image_id: item.image_id,
+              image_path: item.thumb_url,
+              image_list_name: image_list_name,
+              checked_mark: item.mark }
 - if editable
   = file_field_tag 'image[image]', class: 'hidden', id: image_list_name
   %a.darkBorderBtn.upload-button{:href => "#"}= t('designer_center.edit.upload')
