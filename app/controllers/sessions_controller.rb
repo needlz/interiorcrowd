@@ -66,6 +66,7 @@ class SessionsController < ApplicationController
   def authenticate_user(user, url)
     if user.present?
       session["#{user.class.name.downcase}_id".to_sym] = user.id
+      track_login
       return redirect_to session[:login_after] if session[:login_after]
       redirect_to send("#{user.class.name.downcase}_login_sessions_path")
     else
@@ -75,4 +76,10 @@ class SessionsController < ApplicationController
     end
   end
   
+  def track_login
+    tracker = EventTracker.new
+    tracker.user = current_user
+    tracker.login
+  end
+
 end
