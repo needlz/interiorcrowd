@@ -22,9 +22,8 @@ class UserMailer < ActionMailer::Base
     mail to: [wrap_recipient(Settings.info_email, '', "to")]
   end
 
-  def invite_to_contest(designer, client, host)
+  def invite_to_contest(designer, client)
     template 'invite_to_contest'
-    @host = host
     set_template_values(set_invitation_params(client))
     mail to: [wrap_recipient(designer.email, designer.name, "to")]
   end
@@ -52,22 +51,21 @@ class UserMailer < ActionMailer::Base
     mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject')
   end
 
-  def invitation_to_leave_a_feedback(params, url, client, host)
+  def invitation_to_leave_a_feedback(params, url, client, beta_url)
     template 'invitation_to_leave_a_feedback'
     @client_name = client.name
     @page_url = url
-    @host = host
+    @beta_url = beta_url
     set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))
     mail to: [wrap_recipient(params['email'], params['username'], 'to')],
          subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name)
   end
 
-  def concept_board_received(contest_request, host)
+  def concept_board_received(contest_request)
     client = contest_request.contest.client
     email = client.email
     username = client.name
     template 'generic_notification'
-    @host = host
     set_template_values(text: render_to_string('mails/new_concept_board_received'))
     mail to: [wrap_recipient(email, username, 'to')],
          subject: I18n.t('mails.concept_board_received.subject')
