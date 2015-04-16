@@ -722,6 +722,15 @@
   opacity: 1 !important;
   visibility: visible !important;
   display: none;
+
+  .children {
+    margin-top: 42px;
+    margin-bottom: 42px;
+
+    .option-item {
+      padding:10px;
+    }
+  }
 }
 
 .brief {

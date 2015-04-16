@@ -50,9 +50,9 @@ class @DesignArea
     $children = @childrenAreas.filter("[data-id='#{ id }']")
     $children.animate(opacity: 'show', 200)
     $children.find('.menu-room').show()
-    $children.insertAfter(@lastInRow(id))
+    $children.insertAfter(@lastRoomInRow(id))
 
-  lastInRow: (id)->
+  lastRoomInRow: (id)->
     $roomButton = @parentAreas.filter("[data-id='#{ id }']").parents('.areas-row')
     $lastRoomButtonInRow = $roomButton.nextAll('.last-in-row')
     if $lastRoomButtonInRow.length
