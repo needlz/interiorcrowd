@@ -915,3 +915,5 @@ en:
       subject: '%{client_name} needs your help picking a design'
     concept_board_received:
       subject: You have a new concept board to look at!
+    product_list_feedback:
+      subject: Your client has given you feedback
