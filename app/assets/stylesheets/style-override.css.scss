@@ -158,9 +158,10 @@
   margin-bottom: 27px;
 }
 .moodboard-steps {
-  width: 690px;
-  p.stepActive {
-    width: 200px;
+  width: 720px;
+  margin-left: -2px;
+  p:first-child {
+    width: 240px;
   }
 }
 
