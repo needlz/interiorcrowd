@@ -41,14 +41,11 @@ class Contest < ActiveRecord::Base
   end
 
   after_initialize :defaults, if: :new_record?
-  after_commit :delay_submission_end, on: :create
+  after_update :create_phase_end_job
   after_create :create_retailer_preferences, on: :create
 
   state_machine :status, initial: :submission do
     after_transition on: :close, do: :close_requests
-    after_transition on: :start_winner_selection, do: :delay_winner_selection_end
-    after_transition on: :start_winner_selection, do: :update_phase_end
-    after_transition on: :winner_selected, do: :delay_winner_selection_end
     after_transition on: :winner_selected, do: :close_losers_requests
 
     event :start_winner_selection do
@@ -56,7 +53,7 @@ class Contest < ActiveRecord::Base
     end
 
     event :close do
-      transition submission: :closed, winner_selection: :closed
+      transition submission: :closed, winner_selection: :closed, fullfilment: :closed
     end
 
     event :winner_selected do
@@ -108,14 +105,6 @@ class Contest < ActiveRecord::Base
 
   def end_winner_selection
     return close! if response_winner.blank?
-  end
-
-  def delay_submission_end
-    Jobs::SubmissionEnd.schedule(id, run_at: phase_end)
-  end
-
-  def delay_winner_selection_end
-    Jobs::WinnerSelectionEnd.schedule(id, run_at: phase_end)
   end
 
   def close_requests
@@ -212,16 +201,9 @@ class Contest < ActiveRecord::Base
     Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
   end
 
-  def update_phase_end
-    update_attributes!(phase_end: calculate_phase_end)
-  end
-
-  def calculate_phase_end
-    ContestPhaseDuration.new(self).phase_end(Time.current)
-  end
-
   def defaults
-    self.phase_end ||= calculate_phase_end
+    current_milestone_info = ContestMilestone.new(self)
+    self.phase_end ||= current_milestone_info.phase_end(Time.current)
   end
 
   def create_retailer_preferences
@@ -230,6 +212,11 @@ class Contest < ActiveRecord::Base
 
   def update_preferred_retailers(preferred_retailers_params)
     preferred_retailers.update_attributes!(preferred_retailers_params)
+  end
+
+  def create_phase_end_job
+    milestone_end_job_updater = ContestMilestoneEndJobUpdater.new(self)
+    milestone_end_job_updater.perform
   end
 
 end
