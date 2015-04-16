@@ -54,10 +54,11 @@ RSpec.describe Contest do
     end
 
     it 'creates delayed job on creation' do
-      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 0
+      submission_end_jobs = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%")
+      expect(submission_end_jobs.count).to eq 0
       contest.run_callbacks(:commit)
-      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 1
-      delayed_job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").first
+      expect(submission_end_jobs.count).to eq 1
+      delayed_job = submission_end_jobs.first
       expect(delayed_job.contest_id).to eq contest.id
     end
   end
@@ -122,8 +123,9 @@ RSpec.describe Contest do
       contest.start_winner_selection!
       expect(contest.designers_invitation_period?).to be_falsey
 
-      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%").count).to eq 1
-      delayed_job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%").first
+      winner_selection_end_jobs = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%")
+      expect(winner_selection_end_jobs.count).to eq 1
+      delayed_job = winner_selection_end_jobs.first
       expect(delayed_job.contest_id).to eq contest.id
     end
   end
