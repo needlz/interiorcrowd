@@ -21,3 +21,4 @@ development:
   MANDRILL_API_TOKEN: 'XBnULwMuhI9LahaDwsG5-A'
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
   BETA_PASSWORD: 'beta'
+  APP_HOST: 'local.home:3000'

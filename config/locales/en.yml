@@ -913,3 +913,5 @@ en:
       subject: 'InteriorCrowd: new beta subscriber'
     invitation_to_leave_feedback:
       subject: '%{client_name} needs your help picking a design'
+    concept_board_received:
+      subject: You have a new concept board to look at!

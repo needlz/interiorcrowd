@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
-  rescue_from StandardError, with: :log_error
+  rescue_from StandardError, with: :log_error unless Rails.env.development?
 
   helper_method :current_user
 

@@ -11,9 +11,10 @@ common: &defaults
     password: <%= ENV['MANDRILL_PASSWORD'] %>
     api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
   info_email: <%= ENV['INFO_EMAIL'] %>
-  app_host: <%= ENV['APP_URL'] %>
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
   root_folder: <%= Rails.root %>
+  app_host: <%= ENV['APP_HOST'] %>
+  app_url: <%= ENV['APP_URL'] %>
 
 development:
 

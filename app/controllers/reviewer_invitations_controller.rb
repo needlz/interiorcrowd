@@ -5,7 +5,7 @@ class ReviewerInvitationsController < ApplicationController
   def create
     invitation = @contest.invite_reviewer(invite_params)
     url = show_reviewer_feedbacks_url(id: @contest.id, token: invitation.url)
-    Jobs::Mailer.schedule(:invitation_to_leave_a_feedback, [invite_params, url, @client])
+    Jobs::Mailer.schedule(:invitation_to_leave_a_feedback, [invite_params, url, @client, Settings.app_url])
     render json: { url: url, token: invitation.url }
   end
 

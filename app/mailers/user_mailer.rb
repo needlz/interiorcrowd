@@ -2,17 +2,17 @@ class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
-  def client_registered(client, password)
+  def client_registered(client)
     template 'user_registration'
     subject = I18n.t('mails.client_registration.subject')
-    set_template_values(set_client_registration_params(client, password))
+    set_template_values(text: render_to_string('mails/client_registration'))
     mail to: [wrap_recipient(client.email, client.first_name, "to")], subject: subject
   end
 
-  def designer_registered(designer, password)
+  def designer_registered(designer)
     template 'user_registration'
     subject = I18n.t('mails.designer_registration.subject')
-    set_template_values(set_designer_registration_params(designer, password))
+    set_template_values(text: render_to_string('mails/designer_registration'))
     mail to: [wrap_recipient(designer.email, designer.first_name, "to")], subject: subject
   end
 
@@ -51,27 +51,27 @@ class UserMailer < ActionMailer::Base
     mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject')
   end
 
-  def invitation_to_leave_a_feedback(params, url, client)
-    client_name = client.name
+  def invitation_to_leave_a_feedback(params, url, client, beta_url)
     template 'invitation_to_leave_a_feedback'
-    set_template_values(feedback_invitation_params(url, client_name))
+    @client_name = client.name
+    @page_url = url
+    @beta_url = beta_url
+    set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))
     mail to: [wrap_recipient(params['email'], params['username'], 'to')],
-         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: client_name)
+         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name)
+  end
+
+  def concept_board_received(contest_request)
+    client = contest_request.contest.client
+    email = client.email
+    username = client.name
+    template 'generic_notification'
+    set_template_values(text: render_to_string('mails/new_concept_board_received'))
+    mail to: [wrap_recipient(email, username, 'to')],
+         subject: I18n.t('mails.concept_board_received.subject')
   end
 
   private
-
-  def set_client_registration_params(user, password)
-    {
-      text: render_to_string('mails/client_registration')
-    }
-  end
-
-  def set_designer_registration_params(designer, password)
-    {
-        text: render_to_string('mails/designer_registration')
-    }
-  end
 
   def set_user_params(user)
     {
@@ -84,7 +84,6 @@ class UserMailer < ActionMailer::Base
   def set_invitation_params(client)
     @client_name = client.name.upcase
     @days = ContestPhaseDuration::DAYS['submission']
-    @host = host
     {
       text: render_to_string('mails/invite_to_contest')
     }
@@ -95,7 +94,7 @@ class UserMailer < ActionMailer::Base
       name: user.name,
       email: user.email,
       password: password,
-      text: I18n.t("reset_password")
+      text: I18n.t('reset_password')
     }
   end
 
@@ -105,19 +104,6 @@ class UserMailer < ActionMailer::Base
 
   def new_subscriber_params(beta_subscriber)
     { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
-  end
-
-  def feedback_invitation_params(url, client_name)
-    @site_url = host
-    @client_name = client_name
-    @page_url = url
-    {
-      text: render_to_string('mails/invite_to_leave_feedback')
-    }
-  end
-
-  def host
-    Settings.app_host || 'http://localhost:3000'
   end
 
 end

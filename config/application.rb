@@ -57,5 +57,7 @@ module InteriorC
     config.generators do |g|
       g.test_framework :rspec
     end
+
+    config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
   end
 end
