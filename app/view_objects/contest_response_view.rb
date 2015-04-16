@@ -30,6 +30,10 @@ class ContestResponseView
     ContestPhases.status_to_index(response.status)
   end
 
+  def initial_concept_board?
+    current_phase_index == 0
+  end
+
   def self.status_name(status)
     I18n.t('designer_center.responses.statuses.' + status)
   end

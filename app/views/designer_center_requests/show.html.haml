@@ -7,7 +7,7 @@
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
 - content_for :designer_center_content do
-  .container.animated.fadeInDown.bottom60
+  .animated.fadeInDown.bottom60.phase-initial
     = render partial: 'clients/client_center/entries/phases',
              locals: { stripe: @show_page.phases_stripe }
 

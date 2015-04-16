@@ -157,3 +157,19 @@
   border-radius: 5px;
   margin-bottom: 27px;
 }
+.moodboard-steps {
+  width: 690px;
+  p.stepActive {
+    width: 200px;
+  }
+}
+
+.commentTextArea {
+  overflow:hidden;
+  button {
+    float: right;
+  }
+}
+.sidebarComments > p{
+  margin-bottom: -1px;
+}

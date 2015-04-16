@@ -250,7 +250,7 @@ en:
         favorite: Favorite
         winner: Winner
       phases:
-        - 'Initial Concept'
+        - 'Initial Concept Boards'
         - 'Customized Board and Product List'
         - 'Final Design'
       winner_dialog:
@@ -410,7 +410,6 @@ en:
       all: All
       me: Me
       designer: Designer
-      new_comment: New comment
       send: Send
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
