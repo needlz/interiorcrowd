@@ -3,7 +3,7 @@ module Jobs
   class SubmissionEnd
 
     def self.schedule(contest_id, args)
-      Delayed::Job.enqueue(new(contest_id), args)
+      Delayed::Job.enqueue(new(contest_id), { contest_id: contest_id }.merge(args))
     end
 
     def initialize(contest_id)

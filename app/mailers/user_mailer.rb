@@ -83,7 +83,7 @@ class UserMailer < ActionMailer::Base
 
   def set_invitation_params(client)
     @client_name = client.name.upcase
-    @days = ContestPhaseDuration::DAYS['submission']
+    @days = ContestMilestone::DAYS['submission']
     {
       text: render_to_string('mails/invite_to_contest')
     }

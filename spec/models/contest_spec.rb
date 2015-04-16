@@ -57,6 +57,8 @@ RSpec.describe Contest do
       expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 0
       contest.run_callbacks(:commit)
       expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").count).to eq 1
+      delayed_job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%").first
+      expect(delayed_job.contest_id).to eq contest.id
     end
   end
 
@@ -119,6 +121,10 @@ RSpec.describe Contest do
     it 'can not be invited if contest has not the submission state' do
       contest.start_winner_selection!
       expect(contest.designers_invitation_period?).to be_falsey
+
+      expect(Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%").count).to eq 1
+      delayed_job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%").first
+      expect(delayed_job.contest_id).to eq contest.id
     end
   end
 
