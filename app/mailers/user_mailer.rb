@@ -51,6 +51,14 @@ class UserMailer < ActionMailer::Base
     mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject')
   end
 
+  def product_list_feedback(params, contest_request_id)
+    template 'product_list_feedback'
+    @url = designer_center_response_url(contest_request_id)
+    set_template_values(text: render_to_string('mails/product_list_feedback'))
+    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
+         subject: I18n.t('mails.product_list_feedback.subject')
+  end
+
   def invitation_to_leave_a_feedback(params, url, client, beta_url)
     template 'invitation_to_leave_a_feedback'
     @client_name = client.name

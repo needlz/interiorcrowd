@@ -15,6 +15,7 @@ common: &defaults
   root_folder: <%= Rails.root %>
   app_host: <%= ENV['APP_HOST'] %>
   app_url: <%= ENV['APP_URL'] %>
+  marks_digest_minutes_interval:  <%= ENV['MARKS_DIGEST_MINUTES_INTERVAL'] %>
 
 development:
 

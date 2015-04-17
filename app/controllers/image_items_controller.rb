@@ -18,8 +18,8 @@ class ImageItemsController < ApplicationController
   def mark
     product_item = ImageItem.find(params[:id])
     return raise_404 unless product_item.contest_request.contest.client == @client
-    updated = product_item.update_attributes!(mark: params[:image_item][:mark])
-    render json: { updated: updated }
+    ImageItemUpdater.new(product_item, params[:image_item]).perform
+    render json: { updated: product_item }
   end
 
   def new

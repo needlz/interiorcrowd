@@ -42,4 +42,8 @@ RSpec.describe UserMailer do
     expect(UserMailer.concept_board_received(contest_request)).to be_present
   end
 
+  it 'creates mail about mark product list items' do
+    expect(UserMailer.product_list_feedback({username: 'username', email: 'email'}, contest_request.id)).to be_present
+  end
+
 end
