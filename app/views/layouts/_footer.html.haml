@@ -1,39 +1,40 @@
-.container-fluid.menu-border2.footer
-  .container
-    .row.my-menu
-      .col-md-12
-        .top-nav.col-md-7
-          .nav-collapse
-            %ul.nav.nav-tabs.text-menu.main-menu.footer-menu
-              %li
-                %a{:href => "#"} About
-              %li
-                %a{:href => "#"} Designer Center
-              %li= link_to 'Terms', terms_of_service_path
-              %li
-                %a{:href => "#"} Privacy Policy
-        .top-nav.col-md-5
-          .nav-collapse.pull-right
-            %ul.nav.nav-tabs.text-menu.main-menu
-              %li
-                %a{:href => "#"}
-                  %img{:src => "/assets/icons/twitter.png"}/
-              %li
-                %a{:href => "#"}
-                  %img{:src => "/assets/icons/facebook.png"}/
-              %li
-                %a{:href => "#"}
-                  %img{:src => "/assets/icons/instagram.png"}/
-              %li
-                %a{:href => "#"}
-                  %img{:src => "/assets/icons/pinterest.png"}/
-.col-md-12.text-center.copyright
-  %b
-    = succeed "2014 InteriorCrowd" do
-      %span.copyright-sign ©
+.container-fluid.footer
+  .menu-border2
+    .container
+      .row.my-menu
+        .col-md-12
+          .top-nav.col-md-7
+            .nav-collapse
+              %ul.nav.nav-tabs.text-menu.main-menu.footer-menu
+                %li
+                  %a{ href: coming_soon_path } About
+                - if current_user.designer?
+                  %li
+                    %a{ href: coming_soon_path } Designer Center
+                %li= link_to 'Terms', terms_of_service_path
+                %li
+                  %a{ href: coming_soon_path } Privacy Policy
+          .top-nav.col-md-5
+            .nav-collapse.pull-right
+              %ul.nav.nav-tabs.text-menu.main-menu
+                %li
+                  %a{ href: coming_soon_path }
+                    %img{:src => '/assets/icons/twitter.png' }/
+                %li
+                  %a{ href: coming_soon_path }
+                    %img{:src => '/assets/icons/facebook.png' }/
+                %li
+                  %a{ href: coming_soon_path }
+                    %img{:src => '/assets/icons/instagram.png' }/
+                %li
+                  %a{ href: coming_soon_path }
+                    %img{:src => '/assets/icons/pinterest.png' }/
+  .col-md-12.text-center.copyright
+    %b
+      = succeed "2014 InteriorCrowd" do
+        %span.copyright-sign ©
   :javascript
       $( '.room-selector' ).click(function() {
       	$(this).toggleClass('active');
       	return false;
       });
-#mm-blocker.mm-slideout

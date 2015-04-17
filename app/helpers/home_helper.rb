@@ -33,7 +33,7 @@ module HomeHelper
   end
 
   def need_help_path
-    return faq_path unless current_user
+    return faq_path if current_user.anonymous?
     return faq_path + '#designer' if current_user.designer?
     faq_path + '#client'
   end

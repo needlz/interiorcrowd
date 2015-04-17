@@ -74,5 +74,18 @@ RSpec.describe HomeController do
     end
   end
 
+  describe 'GET coming_soon' do
+    it 'returns page' do
+      get :coming_soon
+      expect(response).to render_template(:coming_soon)
+    end
+
+    it 'knows return url' do
+      get :sign_in_beta
+      get :coming_soon
+      expect(response).to render_template(:coming_soon)
+    end
+  end
+
 end
 

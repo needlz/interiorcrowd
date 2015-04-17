@@ -112,7 +112,7 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    get '/:url', to: 'portfolios#show', as: 'show_portfolio'
+
 
     resources :designer_invitations, only: [:create]
     resources :contest_notes, only: [:create]
@@ -131,6 +131,9 @@ InteriorC::Application.routes.draw do
         get '/comments/:id', to: 'notifications#show_comment', as: 'comment'
       end
     end
+
+    get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
+    get '/:url', to: 'portfolios#show', as: 'show_portfolio'
   end
 
   if Rails.env.production? || Rails.env.development? || Rails.env.test?
