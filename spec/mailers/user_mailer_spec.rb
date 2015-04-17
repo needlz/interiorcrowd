@@ -46,4 +46,9 @@ RSpec.describe UserMailer do
     expect(UserMailer.product_list_feedback({username: 'username', email: 'email'}, contest_request.id)).to be_present
   end
 
+  it 'creates mail about new concept board comment' do
+    %w(designer client).each do |role|
+      expect(UserMailer.comment_on_board({ username: 'John Doe', email: 'johnD@example.com', role: role}, contest_request.id)).to be_present
+    end
+  end
 end

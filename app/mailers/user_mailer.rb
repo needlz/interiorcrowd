@@ -79,6 +79,14 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t('mails.concept_board_received.subject')
   end
 
+  def comment_on_board(params, contest_request_id)
+    template "comment_on_board"
+    @url = url_for_comment_on_board(params[:role], contest_request_id)
+    set_template_values(text: render_to_string("mails/#{params[:role]}s_comment_on_board"))
+    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
+         subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject")
+  end
+
   private
 
   def set_user_params(user)
@@ -112,6 +120,11 @@ class UserMailer < ActionMailer::Base
 
   def new_subscriber_params(beta_subscriber)
     { email: beta_subscriber.email, name: beta_subscriber.name, role: beta_subscriber.role }
+  end
+
+  def url_for_comment_on_board(user_role, contest_request_id)
+    return designer_center_response_url(contest_request_id) if user_role == 'client'
+    entries_client_center_index_url
   end
 
 end
