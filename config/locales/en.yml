@@ -915,3 +915,9 @@ en:
       subject: '%{client_name} needs your help picking a design'
     concept_board_received:
       subject: You have a new concept board to look at!
+
+  coming_soon:
+    title: NEW CONTENT COMING SOON!
+    subtitle: Thanks for being part of our beta program as we continue to build InteriorCrowd
+    go_back: '< Go Back'
+

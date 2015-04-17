@@ -19,6 +19,10 @@ module User
     kind_of?(Client)
   end
 
+  def anonymous?
+    self.class == Object
+  end
+
   def beta?
     cookies.signed[:beta]
   end

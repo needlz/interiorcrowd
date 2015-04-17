@@ -139,12 +139,12 @@ class ContestsController < ApplicationController
   end
 
   def current_client
-    return current_user if current_user.try(:client?)
+    return current_user if current_user.client?
     Client.new
   end
 
   def on_previewed
-    return redirect_to account_creation_contests_path unless current_user.try(:client?)
+    return redirect_to account_creation_contests_path unless current_user.client?
 
     contest_creation = ContestCreation.new(@client.id, session) do
       clear_creation_storage

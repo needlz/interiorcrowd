@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    raise_404 unless current_user
+    raise_404 if current_user.anonymous?
     current_user
   end
 
@@ -83,7 +83,9 @@ class ApplicationController < ActionController::Base
   def fetch_current_user
     return Client.find(session[:client_id]) if session[:client_id]
     return Designer.find(session[:designer_id]) if session[:designer_id]
-    nil
+    anonym = Object.new
+    anonym.extend(User)
+    anonym
   end
 
 end
