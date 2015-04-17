@@ -47,6 +47,7 @@ class ContestRequestEditing
       items_scope: request.visible_image_items(request_phase),
       new_items_attributes: new_item_attributes
     )
+    NewProductListItemNotifier.new(request).perform if items_editing.has_new_product_items
     items_editing.perform
   end
 
@@ -62,6 +63,10 @@ class ContestRequestEditing
   def perform_finish
     request.finish!
     request.contest.finish!
+  end
+
+  def are_there_new_product_items?
+    contest_request_params['product_items']['ids'].detect(&:blank?) == ''
   end
 
 end
