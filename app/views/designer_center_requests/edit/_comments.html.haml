@@ -1,7 +1,7 @@
 .sidebarComments
   %p.designerName= t('designer_center.edit.comments')
   %div{:role => "tabpanel"}
-    - unless @request_view.initial_concept_board?
+    - if show_comment_switcher
       %ul.btn-group.btnGroupComments{:role => "tablist"}
         %li.btn.btn-default.active{:role => "presentation"}
           %a{"aria-controls" => "allComents", "data-toggle" => "tab", :href => "#allComents", :role => "tab"}= t('designer_center.edit.all')

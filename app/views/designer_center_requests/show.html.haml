@@ -28,7 +28,7 @@
       = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
       - if @request.commenting_enabled?
         = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
-            comments: @request.comments }
+            comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board? }
     = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'
