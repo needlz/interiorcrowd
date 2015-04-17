@@ -7,6 +7,7 @@ RSpec.describe DesignerCenterRequestsController do
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE') }
+  let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
   let(:other_contest) { Fabricate(:contest, client: client) }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
@@ -133,7 +134,10 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     context 'request with fulfillment approved status' do
-      let(:request){ Fabricate(:contest_request, designer: designer, contest: contest, status: 'fulfillment_approved') }
+      let(:request){ Fabricate(:contest_request,
+                               designer: designer,
+                               contest: fulfillment_contest,
+                               status: 'fulfillment_approved') }
 
       it 'updates final note' do
         new_final_note = 'new note'
@@ -155,6 +159,12 @@ RSpec.describe DesignerCenterRequestsController do
         expect(request.image_items.count).to eq 4
         patch :update, id: request.id
         expect(request.reload.image_items.count).to eq 2
+      end
+
+      it 'finishes contest and contest request' do
+        patch :update, id: request.id, contest_request: { status: 'finished' }
+        expect(request.reload).to be_finished
+        expect(fulfillment_contest.reload).to be_finished
       end
     end
 

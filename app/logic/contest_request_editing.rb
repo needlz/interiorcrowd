@@ -36,7 +36,7 @@ class ContestRequestEditing
   def update_status
     return perform_submission if contest_request_params[:status] == 'submitted'
     request.ready_fulfillment! if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
-    request.finish! if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
+    perform_finish if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
   end
 
   def update_image_items
@@ -57,6 +57,11 @@ class ContestRequestEditing
   def perform_submission
     submission = ContestRequestSubmission.new(request)
     submission.perform
+  end
+
+  def perform_finish
+    request.finish!
+    request.contest.finish!
   end
 
 end

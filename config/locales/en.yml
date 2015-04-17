@@ -13,7 +13,7 @@ en:
   error_during_saving:
   contest_requests:
     validations:
-      contest_submission: can not be "submitted" if a contest is not in "submission" state
+      contest_submission: can not be "submitted" if a contest is not in "submission" or "winner_selection" state
       not_answerable: can not be set if a contest is not in "submission" or "winner_selection" state
       one_winner: only one winner per contest is allowed
   contests:

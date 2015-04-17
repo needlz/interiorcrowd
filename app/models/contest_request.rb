@@ -130,7 +130,7 @@ class ContestRequest < ActiveRecord::Base
   private
 
   def contest_status
-    if (changed_to?(:status, 'submitted') || contest_id_changed?) && !contest.submission?
+    if (status == 'submitted') && !(contest.submission? || contest.winner_selection?)
       errors.add(:status, I18n.t('contest_requests.validations.contest_submission'))
     end
   end
