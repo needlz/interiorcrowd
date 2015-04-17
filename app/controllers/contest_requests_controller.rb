@@ -74,7 +74,6 @@ class ContestRequestsController < ApplicationController
 
   def add_comment
     return raise_404 unless current_user.can_comment_contest_request?(@request)
-    CommentNotifier.new(@request, current_user).perform
     comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
     comment = comment_creation.perform
     render json: { comment: comment, user_name: current_user.name }

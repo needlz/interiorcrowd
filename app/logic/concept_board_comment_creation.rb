@@ -11,6 +11,7 @@ class ConceptBoardCommentCreation
     ActiveRecord::Base.transaction do
       @comment = contest_request.comments.create!(comment_attributes)
       notify_designer(@comment) if author.client?
+      CommentNotifier.new(contest_request, author).perform
     end
     @comment
   end
