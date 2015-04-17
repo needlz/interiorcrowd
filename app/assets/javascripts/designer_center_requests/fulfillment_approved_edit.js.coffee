@@ -73,9 +73,15 @@ class ProductItemsEditor extends InlineEditor
   updateLinkField: ($input, $caption, undo)->
     @updatePlainTextField($input, $caption, undo)
     if undo
-      $input.val($caption.attr('href'))
+      $input.val($caption.text())
     else
-      $caption.attr('href', $input.val())
+      $caption.attr('href', @link($input.val()))
+
+  link: (href)->
+    if href.match /^https?\:/
+      href
+    else
+      "http://#{ href }"
 
 class ProductItemImageUploader
 
@@ -147,7 +153,8 @@ class @FulfillmentApprovedEdit
 
   @clearEditFormInputs: ($form)->
     $form.find('.edit-form').find(@imageIdInput).remove()
-    @productItemsEditor.undo($(@productItemsEditor.attributeSelector))
+    beingEdited = $(@productItemsEditor.attributeSelector).find('.edit-form:not(.hidden)').parents(@productItemsEditor.attributeSelector)
+    @productItemsEditor.undo(beingEdited)
 
 $ ->
   FulfillmentApprovedEdit.init()

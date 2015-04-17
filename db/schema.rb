@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410092557) do
+ActiveRecord::Schema.define(version: 20150416120329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -128,7 +128,7 @@ ActiveRecord::Schema.define(version: 20150410092557) do
   create_table "contests", force: true do |t|
     t.text     "desirable_colors"
     t.text     "undesirable_colors"
-    t.integer  "space_budget"
+    t.string   "space_budget"
     t.text     "feedback"
     t.text     "project_name"
     t.integer  "budget_plan"
@@ -173,9 +173,9 @@ ActiveRecord::Schema.define(version: 20150410092557) do
   end
 
   create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
+    t.integer  "priority",           default: 0, null: false
+    t.integer  "attempts",           default: 0, null: false
+    t.text     "handler",                        null: false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 20150410092557) do
     t.datetime "updated_at"
     t.integer  "contest_id"
     t.string   "image_type"
+    t.integer  "contest_request_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
