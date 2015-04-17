@@ -2,4 +2,4 @@
 .hLine10
 - @visible_image_items.each do |item|
   = render partial: 'clients/client_center/entries/design_item',
-           locals: { image_item: item }
+           locals: { image_item: ImageItemView.new(item) }

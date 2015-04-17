@@ -7,7 +7,7 @@
     downloadAllI18n = #{ translations_to_json('designer_center.show_page'.split('.')) }
 
 - content_for :designer_center_content do
-  - unless @contest.submission?
+  - if @show_winner_selected_warning
     = render partial: 'designer_center_contests/show/winner_selected_warning'
 
   = render partial: 'designer_center_contests/show/preview'

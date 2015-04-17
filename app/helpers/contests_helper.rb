@@ -59,6 +59,7 @@ module ContestsHelper
   end
 
   def force_link_protocol(link)
+    return '' unless link.present?
     link =~ /^https?\:/ ? link : "http://#{ link }"
   end
 

@@ -24,7 +24,7 @@
           .product-list
             - image_items.each do |product_item|
               = render partial: 'designer_center_requests/edit/image_item',
-                  locals: { image_item: product_item }
+                  locals: { image_item: ImageItemView.new(product_item) }
           .pull-right
             .add-product-button
               = t('designer_center.product_items.add_item')

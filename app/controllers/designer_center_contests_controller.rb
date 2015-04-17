@@ -12,6 +12,7 @@ class DesignerCenterContestsController < ApplicationController
   def show
     @contest = Contest.find(params[:id])
     @contest_view = ContestView.new(contest_attributes: @contest, allow_download_all_photo: true)
+    @show_winner_selected_warning = @contest.response_winner && !@contest.response_of(@designer)
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 

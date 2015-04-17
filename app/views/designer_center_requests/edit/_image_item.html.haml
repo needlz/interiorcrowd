@@ -32,4 +32,4 @@
       - [:name, :brand, :dimensions, :price].each do |attribute|
         %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }
           = ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self)
-      = link_to image_item.link.to_s, image_item.link.to_s, class: 'font20 blueLink link'
+      = link_to image_item.link, image_item.link_href, class: 'font20 blueLink link'
