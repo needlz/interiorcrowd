@@ -22,7 +22,9 @@ development:
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
   BETA_PASSWORD: 'beta'
   APP_HOST: 'local.home:3000'
-  MARKS_DIGEST_MINUTES_INTERVAL: 1
+  MARKS_DIGEST_MINUTES_INTERVAL: '1'
+  COMMENT_BOARD_DIGEST_MINUTES_INTERVAL: '1'
+
 
 test:
   APP_HOST: 'local.home:3000'
