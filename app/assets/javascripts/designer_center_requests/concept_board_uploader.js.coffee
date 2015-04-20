@@ -29,7 +29,7 @@ class @ConceptBoardUploader
       success: (data)=>
         @changeImageSource()
         @hideEditableBlock()
-
+        @fitCommentsArea()
     )
   @hideEditableBlock: () ->
     $(".initialImage").show()
@@ -38,3 +38,9 @@ class @ConceptBoardUploader
   @changeImageSource: ->
     newSource = $('.editable-mode img:last').attr('src')
     $(".initialImage img").attr({ src: newSource, alt: newSource})
+
+  @fitCommentsArea: ->
+    imageHeight = parseInt($('.initialImage').css('height'))
+    height2 = $('div[data-attribute=feedback]').css('height')
+    height = imageHeight - 323
+    $('#scrollBoxComments').css('height', "#{height}px")
