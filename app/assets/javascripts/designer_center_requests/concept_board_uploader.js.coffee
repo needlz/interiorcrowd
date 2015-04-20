@@ -41,6 +41,5 @@ class @ConceptBoardUploader
 
   @fitCommentsArea: ->
     imageHeight = parseInt($('.initialImage').css('height'))
-    height2 = $('div[data-attribute=feedback]').css('height')
-    height = imageHeight - 323
-    $('#scrollBoxComments').css('height', "#{height}px")
+    commentsHeight = imageHeight - 323
+    $('#scrollBoxComments').css('height', "#{commentsHeight}px")
