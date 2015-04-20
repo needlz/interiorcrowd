@@ -87,6 +87,14 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject")
   end
 
+  def new_product_list_item(params)
+    template "new_product_list_item"
+    @url = entries_client_center_index_url
+    set_template_values(text: render_to_string("mails/new_product_list_item"))
+    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
+         subject: I18n.t("mails.new_product_list_item.subject")
+  end
+
   private
 
   def set_user_params(user)
