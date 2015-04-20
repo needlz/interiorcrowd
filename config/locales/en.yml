@@ -920,3 +920,5 @@ en:
       subject: Your client has commented on your board
     designers_comment_on_board:
       subject: Your designer has left a comment for you
+    note_to_concept_board:
+      subject: A client has left a comment for you

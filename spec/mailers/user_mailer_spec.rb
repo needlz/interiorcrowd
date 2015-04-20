@@ -51,4 +51,8 @@ RSpec.describe UserMailer do
       expect(UserMailer.comment_on_board({ username: 'John Doe', email: 'johnD@example.com', role: role}, contest_request.id)).to be_present
     end
   end
+
+  it 'creates mail about clients comment to designer' do
+    expect(UserMailer.note_to_concept_board({username: 'username', email: 'email'})).to be_present
+  end
 end

@@ -87,6 +87,14 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject")
   end
 
+  def note_to_concept_board(params)
+    template "note_to_concept_board"
+    @url = updates_designer_center_index_url
+    set_template_values(text: render_to_string("mails/note_to_concept_board"))
+    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
+         subject: I18n.t("mails.note_to_concept_board.subject")
+  end
+
   private
 
   def set_user_params(user)
