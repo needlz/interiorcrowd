@@ -13,9 +13,9 @@
 }
 
 .copyright {
-  margin-top: 40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
   font-size: 18px;
-  margin-bottom: 40px;
 
   .copyright-sign {
     font-size: 27px;
@@ -103,17 +103,20 @@ input[type="radio"].smallRadio + label span {
     background-position: bottom right;
   }
 }
+
 .terms-of-services {
   .marg-top {
     margin-top: 15px;
   }
 }
+
 #terms_of_service_modal {
   overflow: scroll;
   .modal-dialog {
-    width: 90%!important;
+    width: 90% !important;
   }
 }
+
 .terms-of-use {
   cursor: pointer;
   color: #428bca;
@@ -135,7 +138,7 @@ input[type="radio"].smallRadio + label span {
 }
 
 .close-modal {
-  margin-top: -25px!important;
+  margin-top: -25px !important;
 }
 
 .close-btn {
@@ -151,4 +154,27 @@ input[type="radio"].smallRadio + label span {
 .black-hover:hover {
   background: #000;
   color: #fff;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+#body-container {
+  min-height: 100%;
+  position: relative;
+}
+
+#body-content {
+  padding-bottom: 180px; /* Height of the footer */
+}
+
+#body-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 180px; /* Height of the footer */
 }

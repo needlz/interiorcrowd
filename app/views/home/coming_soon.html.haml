@@ -1,0 +1,11 @@
+:css
+  body { background-color: #F5F6F5 }
+  #body-header, #body-footer, .copyright { background-color: white }
+
+.container-fluid.text-center.pageNotFound{ style: 'height: 100%;' }
+  .row
+    .col-md-12
+      %h1{ style: 'font-size: 50px; font-weight: bold; margin-top: 50px;' }= t('coming_soon.title')
+      %p= t('coming_soon.subtitle')
+      - back_url = (Rails.application.routes.recognize_path(request.referrer)[:action] == 'coming_soon') ? root_path : request.referrer
+      = link_to t('coming_soon.go_back'), back_url, style: 'width: 200px; padding: 10px', class: 'btn'

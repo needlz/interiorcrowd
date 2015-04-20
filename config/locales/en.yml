@@ -924,3 +924,8 @@ en:
       subject: A client has left a comment for you
     new_product_list_item:
       subject: Your designer has added a product list for you to review
+
+  coming_soon:
+    title: NEW CONTENT COMING SOON!
+    subtitle: Thanks for being part of our beta program as we continue to build InteriorCrowd
+    go_back: '< Go Back'

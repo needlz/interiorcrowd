@@ -19,7 +19,7 @@
       .bedr.col-md-2.continue.navigation-btn
         %a.order{:href => "#"}
           %div.continue-button
-            - if current_user.try(:client?)
+            - if current_user.client?
               %b= t('contests.creation.create')
             - else
               %b= t('contests.creation.continue')

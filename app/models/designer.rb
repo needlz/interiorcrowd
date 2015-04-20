@@ -69,4 +69,8 @@ class Designer < ActiveRecord::Base
     end
   end
 
+  def portfolio_path
+    portfolio.try(:path)
+  end
+
 end

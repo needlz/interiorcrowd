@@ -1,17 +1,18 @@
 %nav#menu.mm-menu.mm-horizontal.mm-offcanvas
   %ul#mm-0.mm-list.mm-panel.mm-opened.mm-current
     %li
-      %a{href: "#"}= t('header.get_inspired')
+      %a{ href: coming_soon_path }= t('header.get_inspired')
+    - if current_user.designer? && current_user.portfolio_path
+      %li
+        %a{ href: show_portfolio_path(current_user.portfolio_path) }= t('header.portfolio')
     %li
-      %a{href: "#"}= t('header.portfolio')
-    %li
-      %a{href: "#"}= t('header.how_it_works')
-    - if session[:designer_id].present?
+      %a{ href: coming_soon_path }= t('header.how_it_works')
+    - if current_user.designer?
       %li
         %a{href: designer_center_index_path}= t('header.designer_center')
       %li
         %a{href: logout_sessions_path}= t('header.sign_out')
-    - elsif session[:client_id].present?
+    - elsif current_user.client?
       %li
         %a{href: client_center_index_path}= t('header.client_center')
       %li
@@ -48,17 +49,18 @@
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.pull-right
                 %li
-                  %a{href: "#"}= t('header.get_inspired')
+                  %a{ href: coming_soon_path }= t('header.get_inspired')
+                - if current_user.designer? && current_user.portfolio_path
+                  %li
+                    %a{ href: show_portfolio_path(current_user.portfolio_path) }= t('header.portfolio')
                 %li
-                  %a{href: "#"}= t('header.portfolio')
-                %li
-                  %a{href: "#"}= t('header.how_it_works')
-                - if session[:designer_id].present?
+                  %a{ href: coming_soon_path }= t('header.how_it_works')
+                - if current_user.designer?
                   %li
                     %a{href: designer_center_index_path}= t('header.designer_center')
                   %li
                     %a{href: logout_sessions_path}= t('header.sign_out')
-                - elsif session[:client_id].present?
+                - elsif current_user.client?
                   %li
                     %a{href: client_center_index_path}= t('header.client_center')
                   %li
