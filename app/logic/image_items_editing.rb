@@ -1,5 +1,5 @@
 class ImageItemsEditing
-  attr_reader  :has_new_product_items
+  attr_accessor  :has_new_product_items
 
   def initialize(options)
     @contest_request_options = options[:contest_request_options]
