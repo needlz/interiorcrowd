@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe ContestRequestEditing do
 
-  let(:request) { Fabricate(:contest_request, designer: Fabricate(:designer), contest: Fabricate(:contest)) }
+  let(:request) { Fabricate(:contest_request, designer: Fabricate(:designer), contest: Fabricate(:contest, client: Fabricate(:client))) }
   let(:params) do
     {
       product_items: {

@@ -48,6 +48,7 @@ class ContestRequestEditing
       new_items_attributes: new_item_attributes
     )
     items_editing.perform
+    NewProductListItemNotifier.new(request).perform if items_editing.has_new_product_items
   end
 
   def finalize_image_items?(request_phase)

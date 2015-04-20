@@ -55,4 +55,8 @@ RSpec.describe UserMailer do
   it 'creates mail about clients comment to designer' do
     expect(UserMailer.note_to_concept_board({username: 'username', email: 'email'})).to be_present
   end
+
+  it 'creates mail about new product list items' do
+    expect(UserMailer.new_product_list_item({username: 'username', email: 'email'})).to be_present
+  end
 end

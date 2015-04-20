@@ -922,3 +922,5 @@ en:
       subject: Your designer has left a comment for you
     note_to_concept_board:
       subject: A client has left a comment for you
+    new_product_list_item:
+      subject: Your designer has added a product list for you to review
