@@ -1,9 +1,11 @@
 class ImageItemsEditing
+  attr_accessor  :has_new_product_items
 
   def initialize(options)
     @contest_request_options = options[:contest_request_options]
     @items_scope = options[:items_scope]
     @new_items_attributes = options[:new_items_attributes]
+    @has_new_product_items = false
   end
 
   def perform
@@ -52,6 +54,7 @@ class ImageItemsEditing
         item_attributes = product_item_attributes[:attributes]
         item_attributes.merge!(new_items_attributes) if new_items_attributes
         items_scope.send(kind).create!(item_attributes)
+        @has_new_product_items = true
       end
     end
   end
