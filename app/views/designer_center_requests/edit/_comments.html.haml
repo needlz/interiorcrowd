@@ -50,4 +50,9 @@
 
     $(document).ready(function(){
      ConceptboardComment.init()
+     ConceptBoardUploader.fitCommentsArea()
+    })
+
+    $(window).resize(function(){
+      ConceptBoardUploader.fitCommentsArea()
     })
