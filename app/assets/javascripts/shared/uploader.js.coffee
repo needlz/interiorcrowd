@@ -52,7 +52,7 @@ class Uploader
       else
         @thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
         previousIds = ''
-        previousIds = @$imageIds.val() + ',' if @$imageIds.val().length
+        previousIds = @$imageIds.val() + ',' if @$imageIds.val()
         @$imageIds.val(previousIds + imageId)
 
 class @ThumbsTheme
@@ -103,11 +103,11 @@ class @RemovableThumbsTheme extends ThumbsTheme
     else
       $template = @$container.find('.template')
       $thumb = @createThumb(imageUrl, imageId)
-      @$container.append $thumb
+      @insertThumb($thumb)
 
   thumbForMultipleImageUploader: (imageUrl, imageId) ->
     $thumb = @createThumb(imageUrl, imageId)
-    @$container.append($thumb)
+    @insertThumb($thumb)
 
   createThumb: (imageUrl, imageId)->
     $template = @$container.find('.template')
@@ -116,3 +116,6 @@ class @RemovableThumbsTheme extends ThumbsTheme
     $container.data('id', imageId)
     $container.find('img:first').attr('src', imageUrl)
     $container
+
+  insertThumb: (thumb) ->
+    @$container.append(thumb)

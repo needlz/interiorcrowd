@@ -5,11 +5,13 @@
                      subtitle: '',
                      image_list_name: :product_items,
                      contest_request: @request,
-                     image_items: @product_items }
+                     image_items: @product_items,
+                     with_row: true }
   = render partial: 'designer_center_requests/edit/image_block',
            locals: { editable: false,
                      title: t('designer_center.edit.similar_styles'),
                      subtitle: '',
                      image_list_name: :similar_styles,
                      contest_request: @request,
-                     image_items: @similar_styles }
+                     image_items: @similar_styles,
+                     with_row: true }
