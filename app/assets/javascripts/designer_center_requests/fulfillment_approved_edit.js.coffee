@@ -103,7 +103,7 @@ class ProductItemImageUploader
 
 class @FulfillmentApprovedEdit
 
-  @imageIdInput: 'input[name="contest_request[product_items][image_ids][]"]'
+  @imageIdInput: 'input[name*="[image_ids][]"]'
 
   @init: ->
     @bindFooterButtons()

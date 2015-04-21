@@ -53,10 +53,10 @@ class ContestRequest < ActiveRecord::Base
   has_many :similar_styles, ->{ similar_styles }, class_name: 'ImageItem'
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
-  scope :active, -> { where(status: ['draft', 'submitted', 'fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
-  scope :published, -> { where(status: ['submitted', 'fulfillment']) }
-  scope :submitted, ->{ where(status: 'submitted') }
-  scope :fulfillment, ->{ where(status: ['fulfillment', 'fulfillment_ready', 'fulfillment_approved']) }
+  scope :active, -> { where(status: %w(draft submitted fulfillment fulfillment_ready fulfillment_approved)) }
+  scope :published, -> { where(status: %w(submitted fulfillment)) }
+  scope :submitted, ->{ where(status: %w(submitted)) }
+  scope :fulfillment, ->{ where(status: %w(fulfillment fulfillment_ready fulfillment_approved)) }
   scope :finished, ->{ where(status: 'finished') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
