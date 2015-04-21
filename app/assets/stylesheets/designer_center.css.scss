@@ -135,7 +135,9 @@
 .removeMark {
   color: red;
 }
-
+.item-mark {
+  height: 20px!important;
+}
 .create-contest-button, .create-contest-button:hover {
   border: 1px solid #a9a9a9;
   padding: 5px 12px;
