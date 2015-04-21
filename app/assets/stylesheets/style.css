@@ -1684,7 +1684,6 @@ textarea.productsMoodboardAbove{
 }
 #scrollBoxComments{
 	overflow: auto;
-	height: 480px;
 	padding-right: 0px !important;
 	width: 100% !important;
 	border-bottom: 1px solid #e1e1e1;
@@ -2027,6 +2026,7 @@ textarea.productsMoodboardAbove{
 
 .portfolio_example{
 	position: relative;
+    margin-bottom: 20px;
     width:364px;
     height:300px;
     background-size: contain!important;
@@ -2652,7 +2652,7 @@ textarea.addCommentTextarea{
 }
 .contestTable{
 	border: 1px solid #e1e1e1;
-	margin: 40px 20px 30px;
+	margin: 40px 20px 40px;
 	border-radius: 5px;
 }
 .contestTableHeader{
@@ -2662,7 +2662,7 @@ textarea.addCommentTextarea{
 	font-weight: 700;
 	font-size: 16px;
 	text-align: center;
-	line-height: 70px;
+    padding-top: 2em;
 	-webkit-border-top-left-radius: 5px;
 -webkit-border-top-right-radius: 5px;
 -moz-border-radius-topleft: 5px;
@@ -2678,7 +2678,7 @@ border-top-right-radius: 5px;
 	border-bottom:1px solid #e1e1e1;
 	background-color: #f0f0f0;
 	margin: 0px;
-	height: 90px;
+	height: 95px;
 	text-align: center;
 	padding-top: 30px;
 	font-size: 14px;
@@ -2697,22 +2697,18 @@ border-top-right-radius: 5px;
 }
 .contestTableRow2{
 	background: #eaeaea;
-	height: 90px;
+	height: 80px;
 	margin: 0px;
-	/*text-align: center;*/
 	padding-top: 30px;
 	font-size: 16px;
 }
 .contestTableRow2 .col-md-1,.contestTableRow2 .col-md-2{
 	font-weight: 700;
 }
-.seeCompletedContests,.seeCurrentContests{
-	border-bottom: 1px solid #e1e1e1;
-	padding-bottom: 10px;
-    margin-bottom: 1.5em;
+.seeCompletedContests {
+    margin-top: 3em !important;
 	font-size: 20px;
 	color: #000;
-	margin-top: 0px;
 	background: url('/assets/collapse.png') no-repeat right center;
 	cursor: pointer;
 }
@@ -3466,7 +3462,7 @@ padding-bottom: 40px;
 
 /*contest page*/
 .contestDesigner{
-    margin: 20px auto;
+    margin: 0 auto 30px;
 }
 .contestDesigner > div{
     padding-left: 20px;
