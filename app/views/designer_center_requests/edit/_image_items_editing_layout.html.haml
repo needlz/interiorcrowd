@@ -21,7 +21,7 @@
                 image_list_name: :product_items,
                 contest_request: @request,
                 image_items: @product_items,
-                with_row: false }
+                wrap_row_with_block: false }
         .similar-styles
           = render partial: 'designer_center_requests/edit/image_block',
               locals: { editable: true,
@@ -30,7 +30,7 @@
                 image_list_name: :similar_styles,
                 contest_request: @request,
                 image_items: @similar_styles,
-                with_row: false }
+                wrap_row_with_block: false }
   .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
     = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
     - if @request.commenting_enabled?
