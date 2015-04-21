@@ -10,6 +10,5 @@
       placeholder: t('designer_center.product_items.text_placeholder') }= text
   - else
     %p.productsMoodboardAbove= text
-  - if checked_mark.present?
-    - mark_view = ImageItemMarkView.new(checked_mark)
-    %span{ class: mark_view.css_class }= mark_view.text
+  - mark_view = ImageItemMarkView.new(checked_mark)
+  %div{ class: mark_view.css_class }= mark_view.text
