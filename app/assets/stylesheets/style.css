@@ -2026,6 +2026,7 @@ textarea.productsMoodboardAbove{
 
 .portfolio_example{
 	position: relative;
+    margin-bottom: 20px;
     width:364px;
     height:300px;
     background-size: contain!important;
