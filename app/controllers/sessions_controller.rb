@@ -37,11 +37,11 @@ class SessionsController < ApplicationController
     if request.method == 'POST'
        designer = Designer.find_by_email(params[:email])
        if designer.present?
-         designer.change_password
-         flash[:notice] = "An email has been sent to your registered email address."
+         designer.reset_password
+         flash[:notice] = t('reset_password.email_send')
          redirect_to login_sessions_path
        else
-         flash[:error] = "Email does not exist."
+         flash[:error] = t('reset_password.email_does_not_exist')
          redirect_to retry_password_sessions_path
        end
     end     
@@ -51,11 +51,11 @@ class SessionsController < ApplicationController
     if request.method == 'POST'
        client = Client.find_by_email(params[:email])
        if client.present?
-         client.change_password
-         flash[:notice] = "An email has been sent to your registered email address."
+         client.reset_password
+         flash[:notice] = t('reset_password.email_send')
          redirect_to client_login_sessions_path
        else
-         flash[:error] = "Email does not exist."
+         flash[:error] = t('reset_password.email_does_not_exist')
          redirect_to client_retry_password_sessions_path
        end
     end     

@@ -825,6 +825,9 @@ en:
     link: here
   reset_password: 'Your password was reseted, here are your new credentials:'
   feedback_email: hello@interiorcrowd.com
+  reset_password:
+    email_send: An email has been sent to your registered email address.
+    email_does_not_exist: Email does not exist.
 
   board_comments:
     send: Send
