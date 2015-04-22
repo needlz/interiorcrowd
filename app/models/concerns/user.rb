@@ -26,4 +26,13 @@ module User
   def beta?
     cookies.signed[:beta]
   end
+
+  def change_password
+    new_password = SecureRandom.urlsafe_base64(5)
+    self.password = Client.encrypt(new_password)
+    self.plain_password = new_password
+    self.save
+    Jobs::Mailer.schedule(:reset_password, [self, new_password])
+  end
+
 end
