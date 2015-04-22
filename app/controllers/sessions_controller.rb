@@ -37,15 +37,11 @@ class SessionsController < ApplicationController
     if request.method == 'POST'
        designer = Designer.find_by_email(params[:email])
        if designer.present?
-        new_password = SecureRandom.urlsafe_base64(5)
-        designer.password = Client.encrypt(new_password)
-        designer.save
-        Jobs::Mailer.schedule(:reset_password, [designer, new_password])
-        flash[:notice] = "An email has been sent to your registered email address."
-        redirect_to login_sessions_path
-       
+         designer.reset_password
+         flash[:notice] = t('reset_password.email_send')
+         redirect_to login_sessions_path
        else
-         flash[:error] = "Email does not exist."
+         flash[:error] = t('reset_password.email_does_not_exist')
          redirect_to retry_password_sessions_path
        end
     end     
@@ -55,14 +51,11 @@ class SessionsController < ApplicationController
     if request.method == 'POST'
        client = Client.find_by_email(params[:email])
        if client.present?
-        new_password = SecureRandom.urlsafe_base64(5)
-        client.password = Client.encrypt(new_password)
-        client.save
-        Jobs::Mailer.schedule(:reset_password, [client, new_password])
-        flash[:notice] = "An email has been sent to your registered email address."
-        redirect_to client_login_sessions_path
+         client.reset_password
+         flash[:notice] = t('reset_password.email_send')
+         redirect_to client_login_sessions_path
        else
-         flash[:error] = "Email does not exist."
+         flash[:error] = t('reset_password.email_does_not_exist')
          redirect_to client_retry_password_sessions_path
        end
     end     
