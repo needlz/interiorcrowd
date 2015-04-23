@@ -34,6 +34,18 @@ RSpec.describe DesignerCenterContestsController do
           get :index
           expect(assigns(:invited_contests).map(&:id)).to match_array [contest.id]
         end
+
+        it 'return current list of contest of non test user' do
+          get :index
+          expect(assigns(:current_contests).size).to eq(1)
+        end
+
+        it 'does not return contest of test user' do
+          client.roles << :test
+          client.save
+          get :index
+          expect(assigns(:current_contests).size).to eq(0)
+        end
       end
     end
   end

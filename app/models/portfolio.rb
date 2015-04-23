@@ -46,6 +46,12 @@ class Portfolio < ActiveRecord::Base
     update_attributes!(path: unique_path) unless path.present?
   end
 
+  def visible_to(user)
+    return true if !designer.has_role? :test
+    return true if user.can_view_test_pages?
+    false
+  end
+
   private
 
   def unique_path

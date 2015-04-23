@@ -1,3 +1,4 @@
+require 'role_model'
 class Designer < ActiveRecord::Base
   include User
   validates  :email, :first_name, :last_name, presence: true
@@ -12,9 +13,17 @@ class Designer < ActiveRecord::Base
   has_many :designer_invite_notifications, foreign_key: :user_id
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
+  include RoleModel
+
+  roles_attribute :roles_mask
+  roles :test
 
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
+  end
+
+  def self.all_visible_to(user)
+    user.can_view_test_pages? ? all : where(roles_mask: nil)
   end
 
   def self.authenticate(username, password)

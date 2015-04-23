@@ -26,4 +26,8 @@ module User
   def beta?
     cookies.signed[:beta]
   end
+
+  def can_view_test_pages?
+    !anonymous? && (self.has_role? :test)
+  end
 end

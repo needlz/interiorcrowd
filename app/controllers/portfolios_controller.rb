@@ -4,7 +4,7 @@ class PortfoliosController < ApplicationController
 
   def show
     portfolio = Portfolio.find_by_path(params[:url])
-    raise_404 unless portfolio
+    raise_404 unless (portfolio && portfolio.visible_to(current_user))
     @client = Client.find_by_id(session[:client_id])
     @designer = Designer.find_by_id(session[:designer_id])
     @portfolio_view = PortfolioView.new(portfolio)

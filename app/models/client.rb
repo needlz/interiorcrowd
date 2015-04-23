@@ -1,3 +1,4 @@
+require 'role_model'
 class Client < ActiveRecord::Base
   include User
 
@@ -13,7 +14,12 @@ class Client < ActiveRecord::Base
   has_many :contests
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests
-  
+
+  include RoleModel
+
+  roles_attribute :roles_mask
+  roles :test
+
   def self.encrypt(text)
      Digest::SHA1.hexdigest("#{text}")
   end

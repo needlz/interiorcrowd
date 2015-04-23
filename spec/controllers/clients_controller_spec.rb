@@ -144,6 +144,28 @@ RSpec.describe ClientsController do
         expect(response).to render_template(:entries)
       end
 
+      context 'test designer' do
+        let!(:make_designer_test) {  designers.last.roles << :test
+                                     designers.last.save }
+
+        it 'does not show test designer for common client' do
+          get :entries
+          expect(assigns(:invitable_designers).include?(designers.last)).to eq(false)
+        end
+
+        it 'shows common designer for test client' do
+          get :entries
+          expect(assigns(:invitable_designers).include?(designers.first)).to eq(true)
+        end
+
+        it 'shows test designer for test client' do
+          client.roles << :test
+          client.save
+          get :entries
+          expect(assigns(:invitable_designers).include?(designers.last)).to eq(true)
+        end
+      end
+
       context 'responses present' do
         let(:contest) { Fabricate(:contest, client: client) }
         let!(:submitted) { Fabricate(:contest_request, designer: designers[0], contest: contest, status: 'submitted') }

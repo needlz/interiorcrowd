@@ -8,9 +8,10 @@ module MoodboardCollection
     @comments_present = contest.notes.present?
     shown_requests = all_requests.by_answer(params[:answer])
     @contest_requests = shown_requests.by_page(params[:page])
+
     unless @contest_requests.present?
-      invitable_designers = Designer.includes(portfolio: [:personal_picture]).all
-      @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
+      @invitable_designers = Designer.includes(portfolio: [:personal_picture]).all_visible_to(current_user)
+      @invitable_designer_views = @invitable_designers.map { |designer| DesignerView.new(designer) }
     end
     @notes = contest.notes.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, current_user) }
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)

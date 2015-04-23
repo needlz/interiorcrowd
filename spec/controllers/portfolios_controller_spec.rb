@@ -14,6 +14,31 @@ RSpec.describe PortfoliosController do
       designer.portfolio = Fabricate(:portfolio)
     end
 
+    context 'designer is test user' do
+      let!(:make_designer_test) {  designer.roles << :test
+                                   designer.save }
+      it 'can be open if current user is test user' do
+        client.roles << :test
+        client.save
+        contest
+        sign_in(client)
+        get :show, url: designer.portfolio.path
+        expect(response).to be_ok
+      end
+
+      it 'can`t be open by non test user' do
+        sign_in(client)
+        get :show, url: designer.portfolio.path
+        expect(response.status).to eq(404)
+      end
+
+      it 'can`t be open by non logged user' do
+        get :show, url: designer.portfolio.path
+        expect(response.status).to eq(404)
+      end
+
+    end
+
     context 'not logged in' do
       it 'renders page' do
         get :show, url: designer.portfolio.path
