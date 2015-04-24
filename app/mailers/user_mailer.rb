@@ -53,7 +53,7 @@ class UserMailer < ActionMailer::Base
 
   def product_list_feedback(params, contest_request_id)
     template 'product_list_feedback'
-    @url = designer_center_response_url(contest_request_id)
+    @url = edit_designer_center_response_url(contest_request_id)
     set_template_values(text: render_to_string('mails/product_list_feedback'))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
          subject: I18n.t('mails.product_list_feedback.subject')

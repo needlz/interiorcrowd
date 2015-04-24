@@ -5,13 +5,21 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  before_filter :check_beta_area_access
+  before_filter  :check_beta_area_access
 
   PAGE_404_PATH = 'public/404.html'
 
   def check_designer
     redirect_to login_sessions_path if session[:designer_id].blank?
     session[:designer_id]
+  end
+
+  def aaa
+    puts '**************'
+    session[:return_to] = request.url
+    puts session[:return_to]
+    # puts "===========check_client after================"
+    # session[:return_to] = nil unless session[:client_id].blank?
   end
 
   def check_client
@@ -44,6 +52,9 @@ class ApplicationController < ActionController::Base
   def check_beta_area_access
     return if Rails.env.staging?
     return unless beta_page?
+    puts "_____________"
+    puts session[:return_to].present?
+    aaa unless session[:return_to].present?
     redirect_to sign_in_beta_path unless beta_access_granted?
   end
 

@@ -1,6 +1,14 @@
 class SessionsController < ApplicationController
   
   def login
+    puts 'login = '
+    session[:login_after] = nil
+    a = session[:return_to]
+    session[:return_to] = nil
+    puts a
+    puts session[:return_to]
+    session[:login_after] = a
+    puts session[:login_after]
     redirect_to designer_center_index_path if session[:designer_id].present?
     @login_view = LoginView.designer_login
   end
@@ -23,10 +31,20 @@ class SessionsController < ApplicationController
   
   
   def authenticate
+    puts 'authenticate = '
+
     designer = Designer.authenticate(params[:username], params[:password])
+    puts designer.inspect
     if designer.present?
+        puts '***'
+        puts session[:return_to].inspect
+        puts '888'
         session[:designer_id] = designer.id
-        redirect_to designer_center_index_path(designer)
+        puts "LOGIN_AFTER = "
+        puts session[:login_after]
+        session[:return_to] = nil
+        return redirect_to session[:login_after] if session[:login_after]
+        redirect_to designer_center_index_path
     else
       flash[:error] = 'Incorrect Username or Password!'
       redirect_to login_sessions_url
@@ -64,6 +82,7 @@ class SessionsController < ApplicationController
   
   def logout
     reset_session
+
     redirect_to root_path
   end
   
