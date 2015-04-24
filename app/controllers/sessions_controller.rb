@@ -14,12 +14,12 @@ class SessionsController < ApplicationController
   
   def client_authenticate
     client = Client.authenticate(params[:username], params[:password])
-    auth(client, client_login_sessions_url)
+    authenticate_user(client, client_login_sessions_url)
   end
   
   def authenticate
     designer = Designer.authenticate(params[:username], params[:password])
-    auth(designer, login_sessions_url)
+    authenticate_user(designer, login_sessions_url)
   end
   
   def retry_password
@@ -63,11 +63,11 @@ class SessionsController < ApplicationController
     session[:return_to] = nil
   end
 
-  def auth(user, url)
+  def authenticate_user(user, url)
     if user.present?
       session["#{user.class.name.downcase}_id".to_sym] = user.id
       return redirect_to session[:login_after] if session[:login_after]
-      redirect_to eval("#{user.class.name.downcase}_login_sessions_path")
+      redirect_to send("#{user.class.name.downcase}_login_sessions_path")
     else
       flash[:error] = 'Incorrect Username or Password!'
       session[:return_to] = session[:login_after]
