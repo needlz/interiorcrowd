@@ -1,17 +1,13 @@
 class SessionsController < ApplicationController
-  
+
+  before_filter :set_link_after_login, only: [:login, :client_login]
+
   def login
-    session[:login_after] = nil
-    session[:login_after] = session[:return_to]
-    session[:return_to] = nil
     redirect_to designer_center_index_path if session[:designer_id].present?
     @login_view = LoginView.designer_login
   end
   
   def client_login
-    session[:login_after] = nil
-    session[:login_after] = session[:return_to]
-    session[:return_to] = nil
     redirect_to client_center_index_path if session[:client_id].present?
     @login_view = LoginView.client_login
   end
@@ -73,6 +69,13 @@ class SessionsController < ApplicationController
   def logout
     reset_session
     redirect_to root_path
+  end
+
+  private
+
+  def set_link_after_login
+    session[:login_after] = session[:return_to]
+    session[:return_to] = nil
   end
   
 end
