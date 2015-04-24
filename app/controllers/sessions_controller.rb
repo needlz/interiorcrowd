@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
     client = Client.authenticate(params[:username], params[:password])
     if client.present?
         session[:client_id] = client.id
-        session[:return_to] = nil
         return redirect_to session[:login_after] if session[:login_after]
         redirect_to client_center_index_path
     else
@@ -34,7 +33,6 @@ class SessionsController < ApplicationController
     designer = Designer.authenticate(params[:username], params[:password])
     if designer.present?
         session[:designer_id] = designer.id
-        session[:return_to] = nil
         return redirect_to session[:login_after] if session[:login_after]
         redirect_to designer_center_index_path
     else
