@@ -10,7 +10,6 @@ class HomeController < ApplicationController
   end
 
   def sign_in_beta
-    puts '______________2'
     return redirect_to root_path if beta_access_granted?
     render layout: 'sign_up'
   end

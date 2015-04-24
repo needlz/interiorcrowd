@@ -1,5 +1,5 @@
 class DesignerCenterController < ApplicationController
-  before_filter :aaa ,:set_designer
+  before_filter :set_designer
 
   def designer_center
     if @designer.portfolio.complete?
