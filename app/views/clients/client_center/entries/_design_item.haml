@@ -6,5 +6,5 @@
       %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }= image_item.send(attribute)
     - if image_item.price.present?
       %p.font16.makeMeBlack.lineHeight25.margin0{ class: 'price' }$ #{ image_item.price }
-    = link_to image_item.link, image_item.link_href, target: '_blank', class: 'font20 blueLink'
+    = link_to image_item.link, image_item.link_href, target: '_blank', class: "font20 blueLink #{ tracked_link }", data: { name: 'Final design - product item link' }
 .hLine10.marg-top30

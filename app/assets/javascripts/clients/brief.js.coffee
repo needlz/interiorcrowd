@@ -24,6 +24,7 @@ class @ContestEditing extends InlineEditor
     $('body').on('ajax:success', "#{ @attributeSelector } form", (event, data, status, xhr)=>
       $form = $(event.target)
       option = $form.parents('[data-option]').data('option')
+      mixpanel.track('Contest edited', { attributes: option })
       $editButton = $("#{ @attributeSelector }[data-option='#{ option }'] .cancel-button")
       $optionsRow = @optionsRow($editButton)
       @cancelEditing($optionsRow.data(@attributeIdentifierData))

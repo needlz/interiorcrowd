@@ -3,7 +3,8 @@
 .container.paddingBottom200
   .row
     .col-md-12.text-center
-      %a.getStartedBtn.black-hover{href: design_brief_contests_path}= t('home.get_started')
+      %a.getStartedBtn.black-hover{ href: design_brief_contests_path, class: tracked_link }
+        = t('home.get_started')
       %span.arrowDownBtn
         %img{src: "/assets/down-arrow.png"}/
       = render partial: 'home/index/how_it_works'
@@ -26,5 +27,6 @@
 .container
   .row
     .col-md-12.text-center
-      %a.getStartedBtn.getStartedBtnBottom.black-hover{href: design_brief_contests_path}= t('home.get_started')
+      %a.getStartedBtn.getStartedBtnBottom.black-hover{ href: design_brief_contests_path, class: tracked_link }
+        = t('home.get_started')
       

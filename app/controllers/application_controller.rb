@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  before_filter :check_beta_area_access, :set_return_to_link
+  before_filter :check_beta_area_access, :set_return_to_link, :setup_event_tracker
 
   PAGE_404_PATH = 'public/404.html'
 
@@ -90,6 +90,11 @@ class ApplicationController < ActionController::Base
     anonym = Object.new
     anonym.extend(User)
     anonym
+  end
+
+  def setup_event_tracker
+    @event_tracker = EventTracker.new
+    @event_tracker.user = current_user
   end
 
 end

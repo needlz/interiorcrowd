@@ -1,3 +1,6 @@
+- content_for :title do
+  Contest creation - Preview
+
 - content_for :head do
   = javascript_include_tag 'contests/preview'
   = javascript_include_tag 'contests/packages'
@@ -7,12 +10,16 @@
 
 - content_for :page_content do
   = render :partial => 'home/msg'
-  = form_tag save_preview_contests_path,  { id: 'account_creation', method: 'post' } do
+  = form_tag save_preview_contests_path,
+      { id: 'account_creation',
+        method: 'post' } do
     = render partial: 'contests/review/project_name'
     = render partial: 'contests/review/plans'
     .col-md-12.no-x-padding.text-center.footer-buttons{}
       .bedr.col-md-offset-3.col-md-2.navigation-btn
-        %a{href: design_space_contests_path}
+        %a{ href: design_space_contests_path,
+            class: tracked_link,
+            data: { name: 'Contest creation - Preview - Back to Step 3' } }
           %div.back-button
             %b= t('contests.creation.go_back')
       .col-md-1
@@ -23,5 +30,6 @@
               %b= t('contests.creation.create')
             - else
               %b= t('contests.creation.continue')
+    = hidden_mixpanel_submit_tag
 
 = render partial: 'contests/contest_creation_page'

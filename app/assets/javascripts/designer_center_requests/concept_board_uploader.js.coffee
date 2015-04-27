@@ -27,6 +27,7 @@ class @ConceptBoardUploader
       type: 'PUT'
       dataType: "script"
       success: (data)=>
+        mixpanel.track('Concept board image updated', { contest_request_id: id })
         @changeImageSource()
         @hideEditableBlock()
         CommentsBlock.fitCommentsArea()

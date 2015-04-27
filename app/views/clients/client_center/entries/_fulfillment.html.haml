@@ -9,7 +9,7 @@
                  locals: { stripe: @entries_page.phases_stripe }
       %br/
       %br/
-    .col-md-8.disablePadding.relative
+    .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
       = image_tag '/assets/winnerBadge.png', class: 'winnerBadge'
       = render partial: 'shared/moodboard', locals: { request: request }
     .col-md-4

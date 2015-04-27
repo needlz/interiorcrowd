@@ -91,12 +91,12 @@ class AccountCreation
       validation.apply @
 
   @bindSubmitButton: ->
-    $(".submit-button").click (e) =>
+    $('.submit-button').click (e) =>
       e.preventDefault()
-      $(".text-error").html ""
+      $('.text-error').html('')
       @validate()
       if @validator.valid
-        $("#new_client").submit()
+        $('#new_client [type=submit]').click()
       else
         @validator.focusOnMessage()
         false

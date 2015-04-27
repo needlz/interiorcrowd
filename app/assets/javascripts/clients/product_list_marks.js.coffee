@@ -19,6 +19,8 @@ class ProductListMarks
       type: 'PATCH'
       success: (data)=>
         @onRequestSuccess($button, data)
+        mixpanel.track 'Product item or Similar style marked',
+          { mark: mark, contest_request_id: $('.contest-request').data('id') }
     )
 
   @onRequestSuccess: ($button, data)->

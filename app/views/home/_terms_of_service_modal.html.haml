@@ -1,4 +1,5 @@
-#terms_of_service_modal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#terms_of_service_modal.modal.fade{ aria: { hidden: 'true', labelledby: 'myModalLabel' },
+  role: 'dialog', tabindex: '-1' }
 
   .modal-dialog
     .modal-content
@@ -8,11 +9,12 @@
       .modal-body
         %p.SofiaProLight= render partial: 'home/terms_of_service'
         .text-center
-          %button.btn1.btn1-confirm.close-btn{"data-dismiss" => "modal", :type => "button"}= t('terms_of_service.close')
+          %button.btn1.btn1-confirm.close-btn{"data-dismiss" => "modal", :type => "button"}
+            = t('terms_of_service.close')
 
 
 :javascript
   $('.terms-of-use').on('click', function(){
     $('#terms_of_service_modal').modal('show')
+    mixpanel.track('Button clicked', { name: 'Client - Terms of use' })
   })
-

@@ -15,6 +15,10 @@ class @DesignSpacePage
 
     @bindContinueButton()
 
+    mixpanel.track_forms '#design_space', 'Contest creation - Step 3', (form)->
+      $form = $(form)
+      { data: $form.serializeArray() }
+
   @bindInchesInputs: ->
     $(@inchesInputs).NumberLimiter(@maxValueForInches)
 
@@ -29,7 +33,7 @@ class @DesignSpacePage
       @validator.addMessage $("#err_budget"), I18n.budget.select_error, $('.design-budget')
 
     if @validator.valid
-      $("#design_space").submit()
+      $("#design_space [type=submit]").click()
     else
       @validator.focusOnMessage()
       false

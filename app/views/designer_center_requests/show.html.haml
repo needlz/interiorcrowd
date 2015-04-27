@@ -14,14 +14,14 @@
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding.initialImage
       - if @request.lost?
-        .col-md-12.loser-text.big=t('designer_center.responses.loser.title')
-        .col-md-12.loser-text.small=t('designer_center.responses.loser.add_to_portfolio')
+        .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
+        .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
       = render partial: 'shared/moodboard', locals: { request: @request }
       - if @request.editable?
         = link_to t('designer_center.responses.item.edit_concept_board'),
             designer_center_response_path,
             remote: true,
-            class: 'editMoodboardBtn marg-top20'
+            class: "editMoodboardBtn marg-top20"
       = render @show_page.image_items_partial if @show_page.image_items_partial
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }

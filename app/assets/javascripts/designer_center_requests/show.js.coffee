@@ -14,6 +14,7 @@ class @MoodboardEditor extends InlineEditor
 
   onSaveSuccess: (attribute) ->
     (result)=>
+      mixpanel.track('Concept board notes edited', { contest_request_id: $response.data('id') })
       $optionsRow = $(".response .attribute[data-#{ @attributeIdentifierData }=#{ attribute }]")
       $optionsRow.find('.error').hide()
       @cancelEditing($optionsRow.data(@attributeIdentifierData))
@@ -73,7 +74,9 @@ class @ResponseView
   bindSubmissionButton: ->
     $('.submit').click (event)->
       event.preventDefault()
-      $('.edit_contest_request').submit()
+      $form = $('.edit_contest_request')
+      mixpanel.track $form.data('name'), { data: $form.serializeArray() }
+      $form.find('[type=submit]').click()
 
 $ ->
   responseView = new ResponseView()

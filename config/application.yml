@@ -24,7 +24,8 @@ development:
   APP_HOST: 'local.home:3000'
   MARKS_DIGEST_MINUTES_INTERVAL: '1'
   COMMENT_BOARD_DIGEST_MINUTES_INTERVAL: '1'
-
+  MIXPANEL_TOKEN: 44f85b93d0a057277bc70151571c80a0
+  APP_URL: 'http://local.home:3000'
 
 test:
   APP_HOST: 'local.home:3000'

@@ -1,0 +1,36 @@
+- unless current_user.anonymous?
+  :javascript
+    $(function(){
+      if (mixpanel){
+        mixpanel.people.set({ "Email": #{ current_user.email.to_json } });
+        mixpanel.identify(#{ @event_tracker.current_user_identifier.to_json });
+        mixpanel.alias(#{ @event_tracker.current_user_identifier.to_json });
+      }
+    })
+
+:javascript
+  $(function() {
+    if (mixpanel){
+      mixpanel.track('Visit',
+        {
+          'Action name': #{ "#{ controller_name }##{ action_name }".to_json },
+          'Page name': #{ content_for?(:title) ? yield(:title).to_json : "#{ controller_name }##{ action_name }".to_json },
+          'Page url': #{ request.original_url.to_json }
+        }
+      )
+
+      mixpanel.track_links('.#{ tracked_link }',
+        'Link clicked',
+        function(element){
+          var $link = $(element).closest('.#{ tracked_link }')
+          var result = {}
+          result.url = $link.attr('href')
+          result.link_name = $link.data('name')
+          if(!result.link_name){
+            result.link_name = $link.text()
+          }
+          return result
+        }
+      )
+    }
+  })

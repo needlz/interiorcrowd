@@ -6,9 +6,10 @@
       .clearfix
       .designers-row
         - designers.each do |designer|
-          = render partial: 'clients/client_center/entries/designer_to_invite', locals: { designer: designer }
+          = render partial: 'clients/client_center/entries/designer_to_invite',
+            locals: { designer: designer }
     .some-text.col-md-12.text-center.more-designers-link
       %p.more-designers-link
-        %a{:href => "#"}
-          %i=t('client_center.entries.see_more_designers')
+        %a{ href: coming_soon_path, class: tracked_link }
+          %i= t('client_center.entries.see_more_designers')
     .clearfix

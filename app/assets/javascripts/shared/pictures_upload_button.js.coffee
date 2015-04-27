@@ -12,6 +12,7 @@ class @PicturesUploadButton
           $(options.uploadButtonSelector).text(options.I18n.uploading)
         stop: (event)=>
           $(options.uploadButtonSelector).text(options.I18n.upload_button)
+          options.uploading.onUploaded(event)
       single: options.single
     )
 

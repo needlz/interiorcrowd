@@ -7,27 +7,27 @@
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.footer-menu
                 %li
-                  %a{ href: coming_soon_path } About
+                  %a{ href: coming_soon_path, class: tracked_link } About
                 - if current_user.designer?
                   %li
-                    %a{ href: coming_soon_path } Designer Center
-                %li= link_to 'Terms', terms_of_service_path
+                    %a{ href: coming_soon_path, class: tracked_link } Designer Center
+                %li= link_to 'Terms', terms_of_service_path, class: tracked_link
                 %li
-                  %a{ href: coming_soon_path } Privacy Policy
+                  %a{ href: coming_soon_path, class: tracked_link } Privacy Policy
           .top-nav.col-md-5
             .nav-collapse.pull-right
               %ul.nav.nav-tabs.text-menu.main-menu
                 %li
-                  %a{ href: coming_soon_path }
+                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Twitter' } }
                     %img{:src => '/assets/icons/twitter.png' }/
                 %li
-                  %a{ href: coming_soon_path }
+                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Facebook' } }
                     %img{:src => '/assets/icons/facebook.png' }/
                 %li
-                  %a{ href: coming_soon_path }
+                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Instagram' } }
                     %img{:src => '/assets/icons/instagram.png' }/
                 %li
-                  %a{ href: coming_soon_path }
+                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Pinterest' } }
                     %img{:src => '/assets/icons/pinterest.png' }/
   .col-md-12.text-center.copyright
     %b

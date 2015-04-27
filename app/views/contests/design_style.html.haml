@@ -20,7 +20,8 @@
       .col-md-12.no-x-padding
         %h1= t('contests.design_style.title')
         %span#description= t('contests.design_style.description')
-    = form_tag save_design_style_contests_path, {id: 'design_style', method: 'post'} do
+    = form_tag save_design_style_contests_path,
+        { id: 'design_style', method: 'post' } do
       = render partial: 'contests/options/designer_level_options'
       = render partial: 'contests/options/appeals_options'
       = render partial: 'contests/options/desirable_colors_options'
@@ -34,7 +35,7 @@
         = render partial: 'contests/options/example_links_options'
       .col-md-12.no-x-padding.text-center.footer-buttons
         .bedr.col-md-offset-3.col-md-2.navigation-btn
-          %a{href: design_brief_contests_path}
+          %a{ href: design_brief_contests_path, class: tracked_link, data: { name: 'Contest creation - back to Step 1' } }
             %div.back-button
               %b= t('contests.creation.go_back')
         .col-md-1
@@ -42,5 +43,6 @@
           %a.order{:href => "#"}
             %div.continue-button
               %b= t('contests.creation.continue')
+      = hidden_mixpanel_submit_tag
 
 = render partial: 'contests/contest_creation_page'

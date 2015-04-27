@@ -1,22 +1,22 @@
 %nav#menu.mm-menu.mm-horizontal.mm-offcanvas
   %ul#mm-0.mm-list.mm-panel.mm-opened.mm-current
     %li
-      %a{ href: coming_soon_path }= t('header.get_inspired')
+      %a{ href: coming_soon_path, class: tracked_link }= t('header.get_inspired')
     - if current_user.designer? && current_user.portfolio_path
       %li
-        %a{ href: show_portfolio_path(current_user.portfolio_path) }= t('header.portfolio')
+        %a{ href: show_portfolio_path(current_user.portfolio_path), class: tracked_link }= t('header.portfolio')
     %li
-      %a{ href: coming_soon_path }= t('header.how_it_works')
+      %a{ href: coming_soon_path, class: tracked_link }= t('header.how_it_works')
     - if current_user.designer?
       %li
-        %a{href: designer_center_index_path}= t('header.designer_center')
+        %a{ href: designer_center_index_path, class: tracked_link }= t('header.designer_center')
       %li
-        %a{href: logout_sessions_path}= t('header.sign_out')
+        %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
     - elsif current_user.client?
       %li
-        %a{href: client_center_index_path}= t('header.client_center')
+        %a{ href: client_center_index_path, class: tracked_link }= t('header.client_center')
       %li
-        %a{href: logout_sessions_path}= t('header.sign_out')
+        %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
     - else
       %li.dropdown
         %a.mm-subopen{href: '#mm-1'}
@@ -25,9 +25,9 @@
     %li.mm-subtitle
       %a.mm-subclose{href: '#mm-0'}= t('header.login')
     %li
-      %a{href: client_login_sessions_path}= t('header.client_login')
+      %a{ href: client_login_sessions_path, class: tracked_link }= t('header.client_login')
     %li
-      %a{href: login_sessions_path}= t('header.designer_login')
+      %a{ href: login_sessions_path, class: tracked_link }= t('header.designer_login')
 
 .mm-page.mm-slideout
   .visible-xs.visible-sm
@@ -36,35 +36,35 @@
   .menu-border
     .container
       .text-center.logo-mobile.visible-sm.visible-xs
-        %a{ href: root_path }
+        %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
           %img{src: '/assets/logo2.png'}/
       .row.my-menu.visible-lg.visible-md
         .col-md-2.no-padding-right.logo-pc
-          %a{ href: root_path }
+          %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
             %img{ src: '/assets/logo2.png' }
-        %a.btn.btn2-success.pull-right{href: need_help_path }
+        %a.btn.btn2-success.pull-right{ href: need_help_path, class: tracked_link }
           %b= t('header.need_help')
         .col-md-10.no-padding-right
           .top-nav.pull-down
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.pull-right
                 %li
-                  %a{ href: coming_soon_path }= t('header.get_inspired')
+                  %a{ href: coming_soon_path, class: tracked_link }= t('header.get_inspired')
                 - if current_user.designer? && current_user.portfolio_path
                   %li
-                    %a{ href: show_portfolio_path(current_user.portfolio_path) }= t('header.portfolio')
+                    %a{ href: show_portfolio_path(current_user.portfolio_path), class: tracked_link }= t('header.portfolio')
                 %li
-                  %a{ href: coming_soon_path }= t('header.how_it_works')
+                  %a{ href: coming_soon_path, class: tracked_link }= t('header.how_it_works')
                 - if current_user.designer?
                   %li
-                    %a{href: designer_center_index_path}= t('header.designer_center')
+                    %a{ href: designer_center_index_path, class: tracked_link }= t('header.designer_center')
                   %li
-                    %a{href: logout_sessions_path}= t('header.sign_out')
+                    %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
                 - elsif current_user.client?
                   %li
-                    %a{href: client_center_index_path}= t('header.client_center')
+                    %a{ href: client_center_index_path, class: tracked_link }= t('header.client_center')
                   %li
-                    %a{href: logout_sessions_path}= t('header.sign_out')
+                    %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
                 - else
                   %li.dropdown
                     %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: 'sign-in.html' }
@@ -72,6 +72,6 @@
                       %b.caret
                     %ul.dropdown-menu
                       %li
-                        %a{href: client_login_sessions_path}= t('header.client_login')
+                        %a{ href: client_login_sessions_path, class: tracked_link }= t('header.client_login')
                       %li
-                        %a{href: login_sessions_path}= t('header.designer_login')
+                        %a{ href: login_sessions_path, class: tracked_link }= t('header.designer_login')

@@ -10,11 +10,16 @@ class ImageItemsList
     PicturesUploadButton.init @uploadOptions
 
   bindSaveButton: ->
-    $('.save-fulfillment').click (e)=>
+    $('.save-fulfillment').off('click').click (e)=>
       e.preventDefault()
       $form = $('.edit_contest_request')
       @removeTemplateInputs($form)
-      $form.submit()
+      mixpanel.track('Product list updated',
+        { data: $form.serializeArray(), contest_request_id: $('.response').data('id') }
+      )
+      setTimeout ->
+        $form.submit()
+      , 300
 
   removeTemplateInputs: ($form)->
     $form.find('.template').empty()
@@ -48,6 +53,9 @@ $ ->
       container: '.products-list .thumbs'
       theme: ProductListThumbsTheme
     I18n: I18n
+    uploading:
+      onUploaded: (event)->
+        mixpanel.track 'Product item uploaded'
   )
   productList.init()
   similarStyles = new ImageItemsList(
@@ -57,5 +65,8 @@ $ ->
       container: '.similar-styles .thumbs'
       theme: ProductListThumbsTheme
     I18n: I18n
+    uploading:
+      onUploaded: (event)->
+        mixpanel.track 'Similar style uploaded'
   )
   similarStyles.init()

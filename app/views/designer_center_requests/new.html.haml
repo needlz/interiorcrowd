@@ -16,10 +16,10 @@
         locals: { contest: ContestShortDetails.new(@contest) }
     = link_to t("designer_center.my_contests.design_profile"),
         designer_center_contest_path(@contest.id),
-        class: 'italicLink'
+        class: "italicLink #{ tracked_link }"
 
     = form_for @request,
-        html: { class: 'response' },
+        html: { class: "response" },
         url: designer_center_response_index_path(contest_id: @contest.id) do |f|
 
       .col-md-8.disablePadding
@@ -49,9 +49,10 @@
             .commentTextArea
               %br
               %textarea.height150{ name: 'text' }
-              %button.pull-right.send-button= t('designer_center.my_contests.send')
+              %button.pull-right.send-buttson= t('designer_center.my_contests.send')
               .clearfix
       = f.hidden_field :status, value: 'draft'
+      = hidden_mixpanel_submit_tag
       = render partial: 'designer_center_requests/footer',  locals: { request: @request }
 
 = render partial: 'designer_center/layout'

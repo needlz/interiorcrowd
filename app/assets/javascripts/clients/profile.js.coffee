@@ -10,6 +10,9 @@ class @ProfileEditor extends InlineEditor
     super()
     @bindDoneButton()
     @initNumberFields()
+    $('form.client-profile-form').on 'ajax:success', (e)=>
+      $form = $(e.target)
+      mixpanel.track('Client profile edited', { client_id: $form.data('client-id') })
 
   initNumberFields: ->
     $(@numberFields).ForceNumericOnly();

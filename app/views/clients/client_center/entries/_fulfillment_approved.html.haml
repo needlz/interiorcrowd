@@ -9,7 +9,7 @@
         %p.timeLeft There are 3 days left
     %br/
     %br/
-  .col-md-8.disablePadding.relative
+  .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
     = render partial: 'shared/moodboard', locals: { request: request }
     .image-items
       = render partial: 'clients/client_center/entries/collaboration/image_block',

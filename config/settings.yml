@@ -17,6 +17,7 @@ common: &defaults
   app_url: <%= ENV['APP_URL'] %>
   marks_digest_minutes_interval:  <%= ENV['MARKS_DIGEST_MINUTES_INTERVAL'] %>
   comment_board_digest_minutes_interval: <%= ENV['COMMENT_BOARD_DIGEST_MINUTES_INTERVAL'] %>
+  mixpanel_token: <%= ENV['MIXPANEL_TOKEN'] %>
 
 development:
 

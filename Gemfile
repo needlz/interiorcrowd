@@ -77,3 +77,4 @@ gem 'activeadmin', '~> 1.0.0.pre1'
 gem 'rubyzip', '>= 1.0.0'
 gem 'money-rails' # parses currency input
 gem 'attribute_normalizer'
+gem 'mixpanel-ruby' # analytics tool

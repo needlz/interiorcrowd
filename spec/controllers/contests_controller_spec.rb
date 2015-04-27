@@ -214,4 +214,25 @@ RSpec.describe ContestsController do
       end
     end
   end
+
+  describe 'GET design_style' do
+    it 'renders page' do
+      get :design_style
+      expect(response).to render_template(:design_style)
+    end
+  end
+
+  describe 'GET design_space' do
+    it 'renders page' do
+      get :design_space
+      expect(response).to render_template(:design_space)
+    end
+  end
+
+  describe 'GET design_brief' do
+    it 'renders page' do
+      get :design_brief
+      expect(response).to render_template(:design_brief)
+    end
+  end
 end

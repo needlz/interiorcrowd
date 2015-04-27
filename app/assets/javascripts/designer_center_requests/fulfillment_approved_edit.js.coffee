@@ -136,6 +136,7 @@ class @FulfillmentApprovedEdit
 
   @bindAddProductButton: ->
     $('.add-product-button').click =>
+      mixpanel.track('Product item added to final design')
       @addProductItem()
 
   @addProductItem: ->

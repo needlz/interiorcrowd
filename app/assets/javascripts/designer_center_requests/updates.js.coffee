@@ -19,7 +19,9 @@ class @Notifications
   @initButtons: ->
     $(@buttons).on 'click', (event)=>
       $button = $(event.target)
-      @filterNotificationTypes($button.attr('type'))
+      type = $button.attr('type')
+      mixpanel.track('Designer: updates filtered', { type: type })
+      @filterNotificationTypes(type)
       @.reverseColor($button)
 
   @filterNotificationTypes: (notificationsType)->

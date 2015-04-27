@@ -12,3 +12,5 @@ $(document).ready ->
       $("#err_f").text "Please enter email."
       bool = false
     false  unless bool
+
+  mixpanel.tracke_forms '#reset-password', 'Password reset'

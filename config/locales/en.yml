@@ -823,7 +823,7 @@ en:
     link_here: here
   invitation_to_content:
     link: here
-  reset_password: 'Your password was reseted, here are your new credentials:'
+  reset_password_text: 'Your password was reseted, here are your new credentials:'
   feedback_email: hello@interiorcrowd.com
   reset_password:
     email_send: An email has been sent to your registered email address.
@@ -932,3 +932,8 @@ en:
     title: NEW CONTENT COMING SOON!
     subtitle: Thanks for being part of our beta program as we continue to build InteriorCrowd
     go_back: '< Go Back'
+
+  password_reset:
+    enter_email: Enter your email address below.
+    know_password: Know your password?
+    sign_in: Sign in

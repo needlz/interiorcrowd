@@ -6,6 +6,10 @@ class @ResponseEditor
     @bindSaveButton()
     @bindCommentsSendButton()
 
+    mixpanel.track_forms '#new_contest_request', 'Contest creation - Preview', (form)->
+      $form = $(form)
+      { data: $form.serializeArray() }
+
   bindSubmitButton: ->
     $('.submit-button').click (event)=>
       event.preventDefault()
@@ -15,7 +19,7 @@ class @ResponseEditor
   bindSaveButton: ->
     $('.footer .submitMyDesign').click (event)=>
       event.preventDefault()
-      $('#new_contest_request').submit()
+      $('#new_contest_request [type=submit]').click()
 
   bindCommentsSendButton: ->
     $('.sidebarComments .send-button').click (event)=>
