@@ -39,7 +39,8 @@ class @PortfolioEditor
     $("ul.dropdown-menu li").click ->
       $(this).parent().parent().parent().find("div.dropdown-menu").toggle()
 
-
+    mixpanel.track_forms '.edit_portfolio', 'Portfolio edited', (form)->
+      { designer_id: $(form).data('designer-id') }
 
   bindImageCoverButtons: ->
     $('#portfolio_pictures_preview').on 'click', '.cover-button', (event)->

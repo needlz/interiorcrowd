@@ -22,3 +22,7 @@ class @CommentPosting
     hintTimer = setTimeout(=>
       @.hideHint()
     , 3000)
+
+$ ->
+  $('.new_reviewer_feedback').on 'ajax:success', ->
+    mixpanel.track('Contest commented by a reviewer', { contest_id: $('.contest').data('id') })

@@ -7,9 +7,11 @@
 - content_for :page_content do
   #choose-room
     = render partial: 'home/msg'
-    = form_tag save_design_brief_contests_path, { id: 'design_categories', method: 'post' } do
+    = form_tag save_design_brief_contests_path,
+        { id: 'design_categories', method: 'post' } do
       = render partial: 'contests/options/category_options'
       = render partial: 'contests/options/area_options'
+      = hidden_mixpanel_submit_tag
     .text-center
       %button.btn1.btn1-confirm{ type: 'button' }= t('contests.creation.continue')
 

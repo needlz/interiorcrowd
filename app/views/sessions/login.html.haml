@@ -5,7 +5,7 @@
 - login_box_footer = capture do
   %p
     = t('login.designer.dont_have_account')
-    %a{ href: new_designer_path }= t('login.designer.sign_up')
+    %a{ href: new_designer_path, class: tracked_link }= t('login.designer.sign_up')
 
 = render partial: 'sessions/login_box',
     locals: { footer: login_box_footer, login_view: @login_view }

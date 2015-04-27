@@ -6,8 +6,13 @@
       .view
         = render partial: "clients/client_center/profile/preview/#{ attribute }", locals: { client: client }
       .edit
-        = form_for @client, url: client_path(id: @client.id), method: 'patch', remote: true do |form|
-          = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: {form: form}
+        = form_for @client,
+            url: client_path(id: @client.id),
+            method: 'patch',
+            remote: true,
+            html: { class: 'client-profile-form' },
+            data: { client: { id: @client.id } } do |form|
+          = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: { form: form }
           = form.submit class: 'button btn btn-primary done', value: t('client_center.attribute_done_button')
     .col-lg-4.text-right
       %a.edit-button{href: '#'}

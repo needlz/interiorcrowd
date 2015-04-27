@@ -4,6 +4,7 @@ class ContestRequestEditing
     @request = options[:request]
     @contest_request_params = options[:contest_request_options]
     @contest_request_attributes = options[:contest_request_attributes]
+    @event_tracker = options[:event_tracker]
   end
 
   def perform
@@ -17,7 +18,7 @@ class ContestRequestEditing
 
   private
 
-  attr_reader :request, :contest_request_params, :contest_request_attributes
+  attr_reader :request, :contest_request_params, :contest_request_attributes, :event_tracker
 
   def update_image
     if contest_request_params[:image_id]
@@ -58,11 +59,13 @@ class ContestRequestEditing
   def perform_submission
     submission = ContestRequestSubmission.new(request)
     submission.perform
+    event_tracker.contest_request_submitted(request)
   end
 
   def perform_finish
     request.finish!
     request.contest.finish!
+    event_tracker.final_design_submitted(request)
   end
 
 end

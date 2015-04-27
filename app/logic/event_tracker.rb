@@ -17,15 +17,27 @@ class EventTracker
     tracker.people.increment(current_user_identifier, {
         'Logins' => 1,
     })
-    tracker.track(current_user_identifier, "#{ user.role.capitalize } login")
+    tracker.track(current_user_identifier, login_event_name)
+  end
+
+  def current_user_identifier
+    "#{ user.role } #{ user.id }" unless user.anonymous?
+  end
+
+  def contest_request_submitted(contest_request)
+    tracker.track(current_user_identifier, 'Concept board submitted', { contest_request_id: contest_request.id })
+  end
+
+  def final_design_submitted(contest_request)
+    tracker.track(current_user_identifier, 'Final design submitted', { contest_request_id: contest_request.id })
   end
 
   private
 
   attr_reader :tracker
 
-  def current_user_identifier
-    "#{ user.role } #{ user.id }" if user
+  def login_event_name
+    "#{ user.role.capitalize } logged in"
   end
 
 end

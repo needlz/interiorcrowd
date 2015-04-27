@@ -30,11 +30,10 @@ class Validations
     @validate()
     if @validator.valid
       @clearHiddenInputs()
-      $("#design_style").submit()
+      $("#design_style [type=submit]").click()
     else
       @validator.focusOnMessage()
       false
-
 
   init: ->
     $(".continue").click(@onSubmitClick)
@@ -59,6 +58,10 @@ class DesignStylePage
     InspirationLinksEditor.init()
 
     @bindDesignLevelItems($levelContainer)
+
+    mixpanel.track_forms '#design_style', 'Contest creation - Step 2', (form)->
+      $form = $(form)
+      { data: $form.serializeArray() }
 
   @bindDesignLevelItems: ($levelContainer)->
     $('.level-block').click (event)=>

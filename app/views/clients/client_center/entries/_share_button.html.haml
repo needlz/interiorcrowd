@@ -1,8 +1,7 @@
 = link_to '#', class: "btn btn-social #{ site }Color",
-                onclick: "return SocialShareButton.share(this);",
+                onclick: "return SocialShareButton.share(this); mixpanel.track('Share', { site: #{ site.to_json } })",
                 :rel => "nofollow ",
                 "data-site" => "#{ site }",
                 title: t("client_center.entries.space.share_to.#{ site }") do
   = image_tag "#{ site }_icon.png"
   = t("client_center.entries.space.social.#{ site }")
-

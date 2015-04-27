@@ -6,6 +6,7 @@ class @FulfillmentDesign
       url: "/contest_requests/#{id}/approve_fulfillment"
       type: 'POST'
       success: (data)->
+        mixpanel.track('Products list approved', { contest_request_id: id })
         location.reload();
     )
 

@@ -5,7 +5,7 @@
       .row
         .col-md-8.col-md-offset-2
           = render :partial => 'home/msg'
-          = form_tag login_view[:auth_path], {:id => :login} do
+          = form_tag login_view[:auth_path], { id: :login } do
             %span#err_u.text-error
             %input#username{:placeholder => t('login.email'), :type => "text", name: 'username' }/
             %span#err_p.text-error
@@ -15,6 +15,6 @@
                 %input#remember-me{:type => "checkbox"}/
                 %label.normal-font{ for: 'remember-me' }= t('login.remember_me')
               .col-md-6.text-right
-                %a.forgotPass{ href: login_view[:forgot_password_path] }= t('login.forgot_password')
+                %a.forgotPass{ href: login_view[:forgot_password_path], class: tracked_link }= t('login.forgot_password')
             %input.btn.loginBtn{:type => "submit", :value => t('login.log_in')}/
             = footer if defined? footer

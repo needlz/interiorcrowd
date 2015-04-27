@@ -19,8 +19,10 @@ class @DesignerInvitationButton
 
   @sendInviteRequest: (designerId, $button, contestId) ->
     @beforeRequest($button)
+    data = { designer_id: designerId, contest_id: contestId }
+    mixpanel.track('Designer invited', data)
     $.ajax(
-      data: { designer_id: designerId, contest_id: contestId }
+      data: data
       url: '/designer_invitations'
       type: 'POST'
       success: (response)=>

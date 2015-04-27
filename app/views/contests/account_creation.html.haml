@@ -112,5 +112,6 @@
       .clearfix
       %button.btn1.btn1-confirm.submit-button{:type => "button", tabindex: 17 }
         = t('client_center.sign_up.submit')
+    = hidden_mixpanel_submit_tag
 
 = render partial: 'home/terms_of_service_modal'

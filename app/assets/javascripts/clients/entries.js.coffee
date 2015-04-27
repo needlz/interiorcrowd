@@ -93,6 +93,7 @@ class @Answers
         data: { answer: answer }
       },
       callbacks)
+    mixpanel.track('Answer to concept board', { answer: answer, concept_board_id: requestId })
     $.ajax(options)
 
   requestAnswerPath: (requestId)->
@@ -123,6 +124,7 @@ class ContestNotes
 
   @bindAjaxSuccess: ->
     $('body').on 'ajax:success', '#new_contest_note', (event, data, status, xhr)=>
+      mixpanel.track 'Contest note sent', { contest_id: EntriesPage.getContestId() }
       @refreshNotes(data)
 
   @bindClearingOfTextarea: ->
@@ -137,6 +139,7 @@ class ResponsesFilter
   @init: ->
     @bindDropdown()
     @styleDropdown()
+    mixpanel.track_forms '#responses-filter-form', 'Concept boards filtered'
 
   @bindDropdown: ->
     $('.sortBySelect').change (event)=>
@@ -146,7 +149,7 @@ class ResponsesFilter
   @sendFilterForm: (answer)->
     $form = $('#responses-filter-form')
     $form.find('[name="answer"]').val(answer)
-    $form.submit()
+    $form.find('[type=submit]').click()
 
   @styleDropdown: ->
     $(".selectpicker").selectpicker
@@ -187,6 +190,7 @@ class ReviewerInvitations
     username.length && email.length && /@/.test(email)
 
   @sendInvite: ($button, username, email)->
+    mixpanel.track('Reviewer invited', { username: username, email: email, contest_id: @contestId })
     $.ajax(
       data: { reviewer_invitation: { username: username, email: email }, contest_id: @contestId }
       url: '/reviewer_invitations'

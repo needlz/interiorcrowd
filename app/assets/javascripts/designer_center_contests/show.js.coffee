@@ -20,7 +20,9 @@ class DownloadAllPhotoButton
 
       return if $button.data('download-button')
 
-      request_url = "/contests/#{ $button.parents('.contestInfo').data('id') }/download_all_images_url"
+      contestId = $button.parents('.contestInfo').data('id')
+      mixpanel.track('Download all photo', { contest_id: contestId })
+      request_url = "/contests/#{ contestId }/download_all_images_url"
       downloadButton = new DownloadAllPhotoButton($button, request_url, imagesType)
       downloadButton.init()
       $button.data('download-button', downloadButton)

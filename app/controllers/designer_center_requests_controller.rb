@@ -51,7 +51,8 @@ class DesignerCenterRequestsController < ApplicationController
     return raise_404 unless request.editable?
     contest_editing = ContestRequestEditing.new({ request: request,
       contest_request_options: params[:contest_request],
-      contest_request_attributes: response_params
+      contest_request_attributes: response_params,
+      event_tracker: @event_tracker
     })
     contest_editing.perform
 

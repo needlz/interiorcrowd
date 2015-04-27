@@ -39,12 +39,12 @@
   .col-md-12.disablePadding.marg-top20
     .hLine
   .col-md-6.disablePadding
-    = link_to designer_center_response_index_path do
+    = link_to designer_center_response_index_path, class: tracked_link do
       .backToEntries
         %img{ src: '/assets/lt.png' }/
-        =t('designer_center.respond.back')
+        = t('designer_center.respond.back')
   .col-md-6.disablePadding.text-right
     = link_to '#' do
       .backToEntries.save-fulfillment
-        =t('designer_center.respond.save_and_preview')
+        = t('designer_center.respond.save_and_preview')
         %img{ src: '/assets/gt.png' }/

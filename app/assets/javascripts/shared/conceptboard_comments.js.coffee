@@ -21,6 +21,7 @@ class @ConceptboardComment
       beforeSend: =>
         @buttonSend.text(@i18n.sending)
       success: (data)=>
+        mixpanel.track 'Concept board commented'
         @.newComment('allComents', data)
         @.newComment('meComments', data)
         @.prepareSection()

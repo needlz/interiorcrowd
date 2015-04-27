@@ -1,3 +1,6 @@
+- content_for :title do
+  Client Center - Entries
+
 - content_for :head do
   = javascript_include_tag 'clients/entries'
   - if @won_contest_request
@@ -9,6 +12,7 @@
   :javascript
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
+
 = render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
 - if @won_contest_request.try(:status) == 'finished'
   - content_for :client_center_content do

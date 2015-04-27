@@ -42,15 +42,19 @@
 
 
 :javascript
-    $('#scrollBoxComments').enscroll({
-      verticalTrackClass: 'scrollBoxCommentsTrack',
-      verticalHandleClass: 'scrollBoxCommentsHandle',
-      minScrollbarLength: 28
-    });
-
     $(document).ready(function(){
+      $('#scrollBoxComments').enscroll({
+        verticalTrackClass: 'scrollBoxCommentsTrack',
+        verticalHandleClass: 'scrollBoxCommentsHandle',
+        minScrollbarLength: 28
+      });
+
       ConceptboardComment.init()
       CommentsBlock.fitCommentsArea()
+
+      $('.btnGroupComments a').click(function(){
+        mixpanel.track('Concept board comments filtered by sender')
+      })
     })
 
     $(window).resize(function(){

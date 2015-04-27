@@ -5,12 +5,16 @@ class ReviewPage
     @bindContinueButton()
     @validator = new ValidationMessages()
 
+    mixpanel.track_forms '#account_creation', 'Contest creation - Preview', (form)->
+      $form = $(form)
+      { data: $form.serializeArray() }
+
   @bindContinueButton: ->
     $('.continue').click (e) =>
       e.preventDefault()
       @validate()
       if @validator.valid
-        $('#account_creation').submit()
+        $('#account_creation [type=submit]').click()
       else
         @validator.focusOnMessage()
         false

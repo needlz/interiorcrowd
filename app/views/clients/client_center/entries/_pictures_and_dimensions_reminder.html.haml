@@ -6,10 +6,10 @@
       %label.contact
         %i=t('client_center.entries.email_pictures')
   .col-md-6.text-right.text-center-md.text-center-xs.text-center-sm.pull-top.options
-    %button.btn7.btn-need{:type => "button"}
-      %b=t('client_center.entries.what_do_i_need')
+    %a{ href: coming_soon_path, class: tracked_link }
+      %button.btn7.btn-need{:type => "button"}
+        %b=t('client_center.entries.what_do_i_need')
     .clearfix.visible-md.visible-xs.visible-sm
-    %a{href: pictures_dimension_client_center_index_path}
+    %a{ href: pictures_dimension_client_center_index_path, class: tracked_link }
       %button.btn7.btn-ready
         %b=t('client_center.entries.ready_to_go')
-

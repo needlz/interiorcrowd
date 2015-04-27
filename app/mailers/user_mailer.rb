@@ -127,7 +127,7 @@ class UserMailer < ActionMailer::Base
       name: user.name,
       email: user.email,
       password: password,
-      text: I18n.t('reset_password')
+      text: I18n.t('reset_password_text')
     }
   end
 
