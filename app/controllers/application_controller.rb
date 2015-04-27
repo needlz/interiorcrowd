@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  before_filter :check_beta_area_access
+  before_filter :check_beta_area_access, :set_return_to_link
 
   PAGE_404_PATH = 'public/404.html'
 
@@ -41,12 +41,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= fetch_current_user
   end
 
-  def check_beta_area_access
-    return if Rails.env.staging?
-    return unless beta_page?
-    redirect_to sign_in_beta_path unless beta_access_granted?
-  end
-
   def clear_creation_storage
     session[:design_brief] = nil
     session[:design_style] = nil
@@ -60,6 +54,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_beta_area_access
+    return if Rails.env.staging?
+    return unless beta_page?
+    redirect_to sign_in_beta_path unless beta_access_granted?
+  end
+
+  def set_return_to_link
+    session[:return_to] = request.url unless session[:return_to].present?
+  end
 
   def log_error(exception)
     extra_data = {}

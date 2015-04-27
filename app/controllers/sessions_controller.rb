@@ -1,5 +1,7 @@
 class SessionsController < ApplicationController
-  
+
+  before_filter :set_link_after_login, only: [:login, :client_login]
+
   def login
     redirect_to designer_center_index_path if session[:designer_id].present?
     @login_view = LoginView.designer_login
@@ -12,25 +14,12 @@ class SessionsController < ApplicationController
   
   def client_authenticate
     client = Client.authenticate(params[:username], params[:password])
-    if client.present?
-        session[:client_id] = client.id
-        redirect_to client_center_index_path
-    else
-      flash[:error] = 'Incorrect Username or Password!'
-      redirect_to client_login_sessions_url
-    end   
+    authenticate_user(client, client_login_sessions_url)
   end
-  
   
   def authenticate
     designer = Designer.authenticate(params[:username], params[:password])
-    if designer.present?
-        session[:designer_id] = designer.id
-        redirect_to designer_center_index_path(designer)
-    else
-      flash[:error] = 'Incorrect Username or Password!'
-      redirect_to login_sessions_url
-    end   
+    authenticate_user(designer, login_sessions_url)
   end
   
   def retry_password
@@ -65,6 +54,25 @@ class SessionsController < ApplicationController
   def logout
     reset_session
     redirect_to root_path
+  end
+
+  private
+
+  def set_link_after_login
+    session[:login_after] = session[:return_to]
+    session[:return_to] = nil
+  end
+
+  def authenticate_user(user, url)
+    if user.present?
+      session["#{user.class.name.downcase}_id".to_sym] = user.id
+      return redirect_to session[:login_after] if session[:login_after]
+      redirect_to send("#{user.class.name.downcase}_login_sessions_path")
+    else
+      flash[:error] = 'Incorrect Username or Password!'
+      session[:return_to] = session[:login_after]
+      redirect_to url
+    end
   end
   
 end

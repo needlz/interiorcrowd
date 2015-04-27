@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    session[:return_to] = nil
+    session[:login_after] = nil
     render
   end
 
