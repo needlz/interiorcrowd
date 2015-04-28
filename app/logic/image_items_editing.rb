@@ -60,6 +60,7 @@ class ImageItemsEditing
   end
 
   def update_item(product_item, attributes)
+    attributes.delete_if { |key, value| value.nil? }
     assign_attributes(product_item, attributes)
     product_item.update_attributes!(attributes)
   end
