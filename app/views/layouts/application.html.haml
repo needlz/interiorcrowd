@@ -5,7 +5,7 @@
     = favicon_link_tag '/assets/favicon.ico'
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
-    = render file: 'app/assets/javascripts/mixpanel.js.haml'
+    = render 'shared/mixpanel'
     = csrf_meta_tags
     %meta{ content: 'IE=edge', http: { equiv: 'X-UA-Compatible' } }
     / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
