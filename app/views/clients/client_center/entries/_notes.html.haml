@@ -1,13 +1,13 @@
 .row
   .hLine
 .row.designerFeedback
-  .col-md-5.col-md-offset-1
+  .col-sm-6
     = form_for ContestNote.new, remote: true do |f|
       = f.hidden_field :contest_id, value: @contest.id
       %h4= t('client_center.entries.notes_title')
       = f.text_area :text
       = f.submit t('client_center.entries.send_note'), class: 'btn'
-  .col-md-5
+  .col-sm-6
     %h4= t('client_center.entries.your_note')
     #scrollbox4.notes.client-notes-list
       %ul

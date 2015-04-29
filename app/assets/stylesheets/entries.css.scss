@@ -1,0 +1,162 @@
+.designBox > img{
+  display: none;
+}
+.addMorePeople{display: none;}
+.moreConceptBoards{
+  border: 1px solid #e1e1e1;
+  color: #666666;
+  font-size: 16px;
+  display: none;
+  padding: 10px 0px;
+}
+@media (max-width: 1200px){
+  .designConcept .btn, .btnDesignOption{
+    width: 83px;
+  }
+}
+@media (max-width: 992px){
+
+  .sortByDiv{
+    float: right;
+    position: relative;
+    bottom: 60px;
+  }
+  .designConcept .designItem{
+    height: 250px;
+  }
+  .designConcept .btn, .btnDesignOption {
+    width: 22%;
+    margin-right: 3%;
+    font-size: 13px;
+  }
+  .top-nav .nav-tabs>li{
+    float: left;
+  }
+  .top-nav .nav-tabs{
+    float: none !important;
+  }
+}
+@media (max-width: 768px){
+
+  .designConcept > div{
+    padding-right: 15px !important;
+    padding-left: 15px !important;
+  }
+  .addMorePeople{
+    display: inline-block;
+    font-size: 14px;
+    color: #a9a9a9;
+    margin-left: 10px;
+  }
+  button.btnInvite{
+    margin-top: 0px;
+    padding: 10px 0px;
+  }
+  button.btnInvite span{
+    font-size: 14px;
+    color: #a9a9a9;
+    top:0px;
+  }
+  .invitePeopleBlock{
+    margin: 25px 15px 0px;
+    text-align: center;
+    border: 1px dashed #a9a9a9;
+  }
+  .moodboard-steps{
+    width: 100%;
+  }
+  .moodboard-steps p:nth-child(1){
+    width: 25%;
+  }
+  .moodboard-steps p:nth-child(2){
+    width: 50%;
+  }
+  .moodboard-steps p:nth-child(3){
+    width: 25%;
+  }
+
+}
+@media (max-width: 640px){
+  .designerFeedback .btn{width: 100%;}
+  .feedbackFromOthers > div:nth-child(2){
+    border: none;
+  }
+  .feedbackFromOthers > div:nth-child(2) p{
+    padding: 0px;
+  }
+  .moreConceptBoards{
+    display: block;
+  }
+  .pageNumber{
+    display: none;
+  }
+
+}
+
+@media (min-width: 480px){
+  .moodboard-steps p span{
+    float: left;
+    display: block;
+    margin-top: 9px;
+  }
+
+
+}
+@media (max-width: 480px){
+
+  .moodboard-steps p{
+    line-height: 15px;
+  }
+  .moodboard-steps{
+    border: none;
+  }
+  .moodboard-steps p{
+    width: 100% !important;
+    display: block;
+    float: none;
+    background: none;
+    line-height: 44px;
+    padding-left: 5px;
+    color: #aaaaaa;
+  }
+  .moodboard-steps p span{
+    margin-right: 5px;
+  }
+  .moodboard-steps p.stepActive{
+    color: #333333;
+  }
+  .moodboard-steps p.stepActive span{
+    border-color: #333333;
+  }
+  .chooseP{
+    visibility: hidden;
+  }
+  .designBox .designItem,.designBox .hLine{
+    display: none;
+  }
+  .designBox:nth-child(n+1){
+    margin-bottom: 50px;
+  }
+  .designBox > img{
+    display: block;
+    width: 100%;
+  }
+  .designConcept > div > div{
+    padding: 0px 0px 10px;
+    border: 1px solid #f0f0f0;
+    border-top: 3px solid #aaaaaa;
+    background: #FFF;
+  }
+  .designConcept h3{
+    border: none;
+    padding-left: 10px;
+  }
+  .designConcept .btn{
+    width: 40%;
+    margin: 4%;
+  }
+  .designConcept .btn.disableMargin{
+    margin: 4% !important;
+  }
+
+}

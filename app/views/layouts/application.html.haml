@@ -16,6 +16,11 @@
     = render partial: 'shared/setup_mixpanel'
 
     = yield :head
+
+    :javascript
+      $(function() {
+        $('nav#menu').mmenu(); // gen mobile menu
+      });
   %body.pull_top
     #body-container
       #body-header

@@ -32,10 +32,14 @@
   text-align: center;
 
   .image-container {
-    height: 300px;
+    height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+  }
+
+  .answers {
+    white-space: nowrap;
   }
 }
 
@@ -250,6 +254,8 @@ h3.congrats {
 }
 
 .responses-filter-dropdown{
+  padding-left: 0px;
+
   .popover-title button { display: none }
 }
 
@@ -290,4 +296,8 @@ h3.congrats {
 
 .picture-and-dimensions-reminder a {
   text-decoration: none;
+}
+
+.entries-container {
+  padding-top: 20px;
 }

@@ -1,12 +1,13 @@
 .row.invitation-row.lnk_container
-  .col-md-4
+  .col-sm-5
     %label{:for => "nameInvite"}= t('client_center.entries.reviewer_invitations.name')
     %input.nameInvite{:type => "text" }/
-  .col-md-5
+  .col-sm-6
     %label{:for => "emailInvite"}= t('client_center.entries.reviewer_invitations.email')
     %input.emailInvite{:type => "text" }/
-  .col-md-2.disablePadding.buttons
-    %button.btn.perform-invite= t('client_center.entries.reviewer_invitations.invite')
+  .col-sm-1.disablePadding.buttons
     %button.btnInvite
       %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
       %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}
+  .col-sm-12
+    %button.btn.perform-invite= t('client_center.entries.reviewer_invitations.invite')
