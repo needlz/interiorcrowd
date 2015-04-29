@@ -56,6 +56,7 @@ RSpec.describe DesignerCenterController do
     let!(:contest_comment_form_other_designer) { contest.notes.create!(text: 'a note from other designer', designer_id: Fabricate(:designer).id) }
     let!(:notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
     let!(:winner_notification) { DesignerWinnerNotification.create!(user_id: designer.id, contest_id: contest.id) }
+    let!(:loser_notification) { DesignerLoserInfoNotification.create!(user_id: designer.id, contest_id: contest.id) }
 
     it 'renders page' do
       get :updates

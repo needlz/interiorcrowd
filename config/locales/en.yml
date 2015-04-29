@@ -587,7 +587,7 @@ en:
       invite: Congratulations! You have been invited to join a contest! Join now!
       winner: You're a winner! Congrats! You have been selected to design (%{contest_name}).
       notification: '%{contest_name} is ready to move onto the final design.'
-      loser_notification: "You didn't win the contest: (%{contest_name})."
+      loser_notification: "%{client_name} has chosen a winner for the %{project_name} project."
       few_days: days
       search_placeholder: Search...
 
