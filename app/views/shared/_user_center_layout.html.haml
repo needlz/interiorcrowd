@@ -3,7 +3,6 @@
     %h1.signUpTitle= title.upcase
     %h1.signUpSubTitle
       %i.lineHeight60
-  .row
-    = render partial: header
+  = render partial: header
 .content.container.animated.fadeInDown{ class: (container_class if defined?(container_class)) }
   = content

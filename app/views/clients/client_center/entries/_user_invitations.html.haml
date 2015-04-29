@@ -2,20 +2,18 @@
   .row
     .hLine
   .row
-    .col-md-10.col-md-offset-1.disablePadding
+    .disablePadding
       %h3= t('client_center.entries.reviewer_invitations.title')
   .row
-    .col-md-10.col-md-offset-1
-      - @reviewer_feedbacks.each do |feedback|
-        = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
+    - @reviewer_feedbacks.each do |feedback|
+      = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
 
 .row
   .hLine
 .row.designerFeedback.reviewer-invitations
-  .col-md-10.col-md-offset-1
-    %h4
-      = t('client_center.entries.reviewer_invitations.want_feedback')
-    .template
-      = render partial: 'clients/client_center/entries/user_invitation_row'
-    .invitations-inputs
-      = render partial: 'clients/client_center/entries/user_invitation_row'
+  %h4
+    = t('client_center.entries.reviewer_invitations.want_feedback')
+  .template
+    = render partial: 'clients/client_center/entries/user_invitation_row'
+  .invitations-inputs.marg-bottom30
+    = render partial: 'clients/client_center/entries/user_invitation_row'
