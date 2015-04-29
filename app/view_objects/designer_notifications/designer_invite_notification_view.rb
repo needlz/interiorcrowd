@@ -14,7 +14,7 @@ module DesignerNotifications
     end
 
     def text
-      I18n.t('designer_center.contests_preview.invite')
+      I18n.t('designer_center.contests_preview.invite', contest_name: contest.project_name)
     end
 
     def href(spectator = nil)
