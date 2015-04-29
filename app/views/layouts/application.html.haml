@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title= content_for?(:title) ? yield(:title) : 'InteriorCrowd'
+    %title= page_title
     = favicon_link_tag '/assets/favicon.ico'
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
@@ -13,7 +13,7 @@
       = javascript_include_tag('html5shiv')
       = javascript_include_tag('respond')
 
-    = render partial: 'shared/setup_mixpanel'
+    = render partial: 'shared/global_scripts'
 
     = yield :head
 

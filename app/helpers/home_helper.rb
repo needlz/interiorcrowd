@@ -46,4 +46,8 @@ module HomeHelper
     '/assets/icons/download.png'
   end
 
+  def page_title
+    content_for?(:title) ? content_for(:title) : 'InteriorCrowd'
+  end
+
 end
