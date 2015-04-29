@@ -15,6 +15,9 @@ class @InlineEditor
     $(document).on 'click', "#{@attributeSelector} #{@editButtonSelector}", @, @onEditClick
     $(document).on 'click', "#{@attributeSelector} #{@cancelButtonSelector}", @, @onCancelClick
 
+  editAll: ->
+    $("#{@attributeSelector} #{@editButtonSelector}").click()
+
   onEditClick: (event)->
     event.preventDefault()
     $button = $(event.target)

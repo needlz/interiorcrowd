@@ -66,14 +66,14 @@ class ProductItemsEditor extends InlineEditor
 
   updatePlainTextField: ($input, $caption, undo)->
     if undo
-      $input.val($caption.text())
+      $input.val($.trim($caption.text()))
     else
       $caption.text($input.val())
 
   updateLinkField: ($input, $caption, undo)->
     @updatePlainTextField($input, $caption, undo)
     if undo
-      $input.val($caption.text())
+      $input.val($.trim($caption.text()))
     else
       $caption.attr('href', @link($input.val()))
 
@@ -124,12 +124,10 @@ class @FulfillmentApprovedEdit
 
     $('.footer .save-button').click (e)=>
       e.preventDefault()
-      @clearEditFormInputs($form)
       $form.submit()
 
     $('.footer .submit-button').click (e)=>
       e.preventDefault()
-      @clearEditFormInputs($form)
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')
       $status_input.appendTo($form)
       $form.submit()
@@ -152,10 +150,9 @@ class @FulfillmentApprovedEdit
     $('.product-list').append(elem)
     ProductItemImageUploader.initItem(elem)
 
-  @clearEditFormInputs: ($form)->
-    $form.find('.edit-form').find(@imageIdInput).remove()
-    beingEdited = $(@productItemsEditor.attributeSelector).find('.edit-form:not(.hidden)').parents(@productItemsEditor.attributeSelector)
-    @productItemsEditor.undo(beingEdited)
+  @editAll: ->
+    @productItemsEditor.editAll()
 
 $ ->
   FulfillmentApprovedEdit.init()
+  FulfillmentApprovedEdit.editAll()
