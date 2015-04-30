@@ -1,15 +1,20 @@
+:css
+  label .text-price {
+    padding-left: 0px !important;
+  }
+
 .col-md-12{ class: classes }
-  .col-md-1
+  .col-xs-2
     = contest_creation_category_radiobutton(design_category)
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
-  = label_tag("design_brief_design_category_#{ design_category.id }") do
+  = label_tag("design_brief_design_category_#{ design_category.id }", class: 'col-xs-10') do
     %span.text-price
       %b= design_category.description
 
 .clearfix
 .img-block.category-block
-  .col-md-5.no-padding-right
+  .col-sm-5.no-padding-right
     %div.image{ style: "background-image: url('/assets/categories/#{ design_category.picture_name }.jpg');" }
-  .col-md-7.no-padding-left.no-padding-right.tableCell
+  .col-sm-7.no-padding-left.no-padding-right.tableCell
     %p.quote= design_category.quote
   .clearfix
