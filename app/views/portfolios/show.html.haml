@@ -43,7 +43,7 @@
       .col-md-12.marg-bottom30
         %h4.font20= t('designer_center.portfolio.show.portfolio_examples')
       - index = 1
-      - @portfolio_view.pictures.in_groups_of(3, false) do |pictures|
+      - @portfolio_view.pictures.order(:created_at).in_groups_of(3, false) do |pictures|
         - pictures.each do |picture|
           = render partial: 'portfolios/item',
               locals: { picture: picture }
