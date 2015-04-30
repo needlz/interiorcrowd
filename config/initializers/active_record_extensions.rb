@@ -8,3 +8,8 @@ module ActiveRecord
   end
 end
 
+class Object
+  def to_bool
+    ActiveRecord::ConnectionAdapters::Column.value_to_boolean(self)
+  end
+end

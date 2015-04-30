@@ -1,3 +1,9 @@
+:css
+  .text {
+    float: left;
+    margin-top: 4px;
+  }
+
 .design-style-options
   .fav-colors
     .col-md-12.no-x-padding
@@ -10,4 +16,26 @@
           value: @contest_view.desirable_colors,
           class: 'color-typeahead'}
 
-    = render partial: 'contests/options/colors_picker', locals: { k: 'm', selected_colors_input: selected_colors_input }
+    = render partial: 'contests/options/colors_picker', locals: { selected_colors_input: selected_colors_input }
+
+    .col-md-12.designers-requirements
+      %label
+        = hidden_field_tag 'design_style[designers_explore_other_colors]', '0'
+        = check_box_tag 'design_style[designers_explore_other_colors]',
+            '1',
+            @contest_view.designers_explore_other_colors,
+            class: 'hidden'
+        .tick-btn.borderRadius0
+          %span ✓
+        .text= t('contests.design_style.want_designers.explore_other_colors')
+      %br
+      %label
+        = hidden_field_tag 'design_style[designers_only_use_these_colors]', '0'
+        = check_box_tag 'design_style[designers_only_use_these_colors]',
+            '1',
+            @contest_view.designers_only_use_these_colors,
+            class: 'hidden'
+        .tick-btn.borderRadius0
+          %span ✓
+        .text= t('contests.design_style.want_designers.only_use_these_colors')
+    .clearfix

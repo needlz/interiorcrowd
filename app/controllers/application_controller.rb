@@ -19,10 +19,6 @@ class ApplicationController < ActionController::Base
     session[:client_id]
   end
 
-  def to_bool(value)
-    ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
-  end
-
   def raise_404
     raise ActionController::RoutingError.new(t('page_not_found'))
   end

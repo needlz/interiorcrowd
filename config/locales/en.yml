@@ -111,7 +111,9 @@ en:
         novice: ''
         enthusiast: How do I choose?
         savvy: How do I source it?
-
+      want_designers:
+        explore_other_colors: I want the designers to explore other color options for me
+        only_use_these_colors: I want the designers to only use these colors
     appeals:
       vintage: Vintage
       eclectic: Eclectic

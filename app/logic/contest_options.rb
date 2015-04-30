@@ -39,6 +39,8 @@ class ContestOptions
       @liked_example_ids = options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style][:document_id]
       @example_links = options[:design_style][:ex_links].delete_if(&:blank?) if options[:design_style][:ex_links]
       @designer_level = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
+      @contest[:designers_explore_other_colors] = options[:design_style][:designers_explore_other_colors].to_bool if options[:design_style].key?(:designers_explore_other_colors)
+      @contest[:designers_only_use_these_colors] = options[:design_style][:designers_only_use_these_colors].to_bool if options[:design_style].key?(:designers_only_use_these_colors)
     end
     @contest[:client_id] = options[:client_id] if options.has_key?(:client_id)
     if options[:contest]
