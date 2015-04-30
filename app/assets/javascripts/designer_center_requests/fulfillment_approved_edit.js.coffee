@@ -124,10 +124,12 @@ class @FulfillmentApprovedEdit
 
     $('.footer .save-button').click (e)=>
       e.preventDefault()
+      @clearEditFormInputs($form)
       $form.submit()
 
     $('.footer .submit-button').click (e)=>
       e.preventDefault()
+      @clearEditFormInputs($form)
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')
       $status_input.appendTo($form)
       $form.submit()
@@ -145,10 +147,14 @@ class @FulfillmentApprovedEdit
         @bindPriceInputs()
     )
 
-  @appendProductItemForm: (formHtml)->
-    elem = $(formHtml)
-    $('.product-list').append(elem)
-    ProductItemImageUploader.initItem(elem)
+  @appendProductItemForm: (formHtml)=>
+    $elem = $(formHtml)
+    $('.product-list').append($elem)
+    ProductItemImageUploader.initItem($elem)
+    $elem.find("#{ @productItemsEditor.editButtonSelector }").click()
+
+  @clearEditFormInputs: ($form)->
+    $form.find('.edit-form').find(@imageIdInput).remove()
 
   @editAll: ->
     @productItemsEditor.editAll()
