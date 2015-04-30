@@ -53,16 +53,7 @@ class @PortfolioEditor
     $('#portfolio_education_school').change (event)->
       $('#sub1').toggleClass('active', $('#portfolio_education_school').is(':checked'));
 
-    $(".tick-btn").click ->
-      $(this).toggleClass "active"
-      $checkbox = $(this).prev(':checkbox')
-      $checkbox.prop('checked', $(this).hasClass('active'))
-      $checkbox.change()
-
-    $('.hidden:checkbox').change (event)->
-      $checkbox = $(@)
-      $checkbox.next('.tick-btn').toggleClass('active', $checkbox.is(':checked'))
-    $('.hidden:checkbox').change()
+    StyledCheckboxes.init(styledCheckboxSelector: '.tick-btn')
 
   bindYearsOfExperience: ->
     $('#portfolio_years_of_experience').ForceNumericOnly();

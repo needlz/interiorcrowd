@@ -5,7 +5,8 @@ class ContestView
   attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
-              :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo
+              :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo,
+              :designers_explore_other_colors, :designers_only_use_these_colors
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -112,6 +113,8 @@ class ContestView
     @space_budget_value = contest_params[:space_budget]
     @feedback = contest_params[:feedback]
     @name = contest_params[:project_name]
+    @designers_explore_other_colors = contest_params[:designers_explore_other_colors]
+    @designers_only_use_these_colors = contest_params[:designers_only_use_these_colors]
     set_package(contest_params)
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
@@ -140,6 +143,8 @@ class ContestView
     @elements_to_avoid = contest.elements_to_avoid
     @entertaining = contest.entertaining
     @durability = contest.durability
+    @designers_explore_other_colors = contest.designers_explore_other_colors
+    @designers_only_use_these_colors = contest.designers_only_use_these_colors
     set_package(contest.attributes.with_indifferent_access)
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)

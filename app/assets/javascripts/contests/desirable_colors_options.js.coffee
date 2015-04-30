@@ -6,3 +6,5 @@ class @DesirableColorsEditor
       $colorsTable: $('.fav-colors .colors-table')
       $colorInput: $('.fav-colors .color-name')
     desirableColorsEditor.init()
+
+    StyledCheckboxes.init(styledCheckboxSelector: '.tick-btn', inLabel: true)

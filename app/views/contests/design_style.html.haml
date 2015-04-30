@@ -25,6 +25,7 @@
       = render partial: 'contests/options/designer_level_options'
       = render partial: 'contests/options/appeals_options'
       = render partial: 'contests/options/desirable_colors_options'
+      .hLine
       = render partial: 'contests/options/undesirable_colors_options'
 
       .clearfix
@@ -35,7 +36,9 @@
         = render partial: 'contests/options/example_links_options'
       .col-md-12.no-x-padding.text-center.footer-buttons
         .bedr.col-md-offset-3.col-md-2.navigation-btn
-          %a{ href: design_brief_contests_path, class: tracked_link, data: { name: 'Contest creation - back to Step 1' } }
+          %a{ href: design_brief_contests_path,
+              class: tracked_link,
+              data: { name: 'Contest creation - back to Step 1' } }
             %div.back-button
               %b= t('contests.creation.go_back')
         .col-md-1

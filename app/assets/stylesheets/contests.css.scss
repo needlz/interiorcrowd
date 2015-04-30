@@ -202,6 +202,23 @@
 }
 
 .design-style-options {
+  .want-designers-to-explore {
+    padding-left: 20px;
+    margin-top: 1em;
+
+    .checkmark {
+      margin-right: 10px;
+    }
+  }
+
+  .designers-requirements {
+    margin-top: 1em;
+
+    label {
+      padding: 0.3em 0em;
+    }
+  }
+
   .appeal-options {
     .header {
       margin-top: 17px;
@@ -970,5 +987,11 @@ label.col-xs-11{
 
   b {
     white-space: nowrap
+  }
+}
+
+.desired-colors-preview {
+  .select2-choices {
+    border: none !important;
   }
 }

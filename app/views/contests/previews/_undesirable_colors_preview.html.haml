@@ -1,4 +1,5 @@
 - value_html = capture do
-  .design-style-options
+  .design-style-options.desired-colors-preview
     %input.colors.selection{value: @contest_view.undesirable_colors}
+
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.undesirable_colors'), value: value_html }

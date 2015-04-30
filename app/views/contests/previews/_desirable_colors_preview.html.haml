@@ -1,4 +1,15 @@
 - value_html = capture do
-  .design-style-options
-    %input.colors.selection{value: @contest_view.desirable_colors}
-= render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.desirable_colors'), value: value_html }
+  .design-style-options.font16.desired-colors-preview
+    %input.colors.selection{value: @contest_view.desirable_colors }
+
+    - if @contest_view.designers_explore_other_colors
+      .clearfix.want-designers-to-explore
+        %span.glyphicon.glyphicon-ok.checkmark
+        = t('contests.design_style.want_designers.explore_other_colors')
+    - if @contest_view.designers_only_use_these_colors
+      .clearfix.want-designers-to-explore
+        %span.glyphicon.glyphicon-ok.checkmark
+        = t('contests.design_style.want_designers.only_use_these_colors')
+
+= render partial: 'contests/previews/preview_row',
+    locals: { title: t('contests.titles.brief.desirable_colors'), value: value_html }
