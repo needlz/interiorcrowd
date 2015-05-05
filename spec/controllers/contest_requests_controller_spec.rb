@@ -2,6 +2,10 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ContestRequestsController do
+
+  before do
+    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+  end
   render_views
 
   let(:client) { Fabricate(:client) }

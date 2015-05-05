@@ -6,7 +6,6 @@ RSpec.describe ClientsController do
 
   include ClientsHelper
 
-
   let(:client) { Fabricate(:client) }
   let(:appeals) do
     (0..2).map do |index|
@@ -134,6 +133,7 @@ RSpec.describe ClientsController do
       sign_in(client)
       Fabricate(:contest, client: client)
       Fabricate(:portfolio)
+      allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
     end
 
     context 'designers present' do

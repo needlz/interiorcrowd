@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe DesignerCenterRequestsController do
   render_views
 
+  before do
+    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+  end
+
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
