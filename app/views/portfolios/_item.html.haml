@@ -1,3 +1,5 @@
-.col-md-4.portfolio_example{ style: "background: url(#{picture.medium_size_url})" }
+.col-md-4.portfolio_example
+  = render partial: 'shared/image_with_enlarge_button',
+      locals: { thumb_path: picture.medium_size_url, original_size_path: picture.original_size_url }
   - if picture.likes_count > 0
     %span.numOfLikesPortfolio (#{ picture.likes_count })

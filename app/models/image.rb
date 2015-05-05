@@ -9,7 +9,8 @@ class Image < ActiveRecord::Base
 
   has_attached_file :image,
                     styles: lambda { |im|
-                      { medium: ['200x200>', :jpg],
+                      { medium: ['300x300>', :jpg],
+                        large: ['600x600>', :jpg],
                         original_size: ['#{a.instance.width}x#{a.instance.height}>', :jpg] }
                     },
                     convert_options: {

@@ -24,7 +24,20 @@
 }
 
 .portfolio-remove-thumb-button {
-  position: absolute; right: 0px;
+  position: absolute;
+  right: 0px;
+}
+
+.portfolio_example{
+  .imageWithOverlay {
+
+    overflow: hidden;
+    height: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .editCover{

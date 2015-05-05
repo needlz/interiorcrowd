@@ -37,3 +37,5 @@ class @Portfolio
 
 $ ->
   Portfolio.init()
+
+  PicturesZoom.initGallery(enlargeButtonSelector: '.portfolio_example a.enlarge', galleryName: 'portfolio')
