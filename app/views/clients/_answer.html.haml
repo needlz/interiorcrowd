@@ -1,1 +1,3 @@
-%button.btn{ class: ("answer-#{text.downcase} #{btnClass} #{'result-answer' if answer==text.downcase}"), data: {answer: text.downcase} }= text
+.col-md-3.text-center.disablePadding
+  %button.btn{ class: ("answer-#{text.downcase} #{'result-answer' if answer==text.downcase}"),
+    data: {answer: text.downcase} }= text

@@ -1,2 +1,11 @@
 .moodboard
-  = image_tag request.concept_board_image_path, style: 'width: 100%'
+  = render partial: 'shared/image_with_enlarge_button',
+      locals: { url_for_downloading: request.download_url,
+                original_size_path: request.concept_board_image_path,
+                thumb_path: request.concept_board_image.medium_size_url,
+                image_class: 'full-width' }
+
+:javascript
+  $(function(){
+    PicturesZoom.init('.moodboard .enlarge')
+  })
