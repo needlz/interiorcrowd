@@ -1108,16 +1108,16 @@ p.stepActive span{
 .designConcept{
 	margin-bottom: 35px;
 }
-.designConcept > div > div{
+.designConcept .moodboard .imageWithOverlay, .designConcept .moodboard .designBox{
 	background: #F8F8F8;
 	padding: 0px 25px 25px;
 	border-top: 3px solid #aaaaaa; 
 }
-.designConcept > div:nth-child(1){
+.designConcept .moodboard:nth-child(1){
 	padding-left: 0px;
 	/*padding-right: 0px;*/
 }
-.designConcept > div:nth-child(2){
+.designConcept .moodboard:nth-child(2){
 	padding-left: 0px;
 }
 .designConcept .designItem{
@@ -1154,12 +1154,11 @@ p.stepActive span{
 .designConcept .btn,.btnDesignOption{
 	background: no-repeat;
 	border: 1px solid #e1e1e1;
-	width: 108px;
+	width: 90%;
 	height: 38px;
 	line-height: 38px;
 	padding: 0px;
 	border-radius: 0px;
-	margin-right: 25px;
 	font-size: 20px;
 	color: #000;
 	font-weight: 400;
