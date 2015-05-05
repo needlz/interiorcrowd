@@ -77,7 +77,7 @@ class Image < ActiveRecord::Base
   end
 
   def medium_size_url
-    image.url(:medium)
+    image.url(:large)
   end
 
   def original_size_url
