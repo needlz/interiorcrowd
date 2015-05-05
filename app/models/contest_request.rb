@@ -112,7 +112,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def download_url
-    concept_board_image.url_for_downloading
+    concept_board_image.try(:url_for_downloading)
   end
 
   def lost?
