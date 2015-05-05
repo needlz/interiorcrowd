@@ -58,13 +58,12 @@ class ApplicationController < ActionController::Base
   end
 
   def set_return_to_link
+    return unless request.method == 'GET'
     session[:return_to] = request.url unless session[:return_to].present?
   end
 
   def log_error(exception)
-    extra_data = {}
-    extra_data[:client_id] = session[:client_id] if session[:client_id].present?
-    extra_data[:designer_id] = session[:designer_id] if session[:designer_id].present?
+    extra_data = { session: session.to_hash }
     Rollbar.error(exception, extra_data)
     return render_404 if exception.kind_of?(ActionController::RoutingError)
     raise exception

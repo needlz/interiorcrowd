@@ -65,11 +65,11 @@ class SessionsController < ApplicationController
 
   def authenticate_user(user, url)
     if user.present?
-      session["#{user.class.name.downcase}_id".to_sym] = user.id
+      session["#{ user.class.name.downcase }_id".to_sym] = user.id
       @current_user = fetch_current_user
       track_login
       return redirect_to session[:login_after] if session[:login_after]
-      redirect_to send("#{user.class.name.downcase}_login_sessions_path")
+      redirect_to send("#{ user.class.name.downcase }_login_sessions_path")
     else
       flash[:error] = 'Incorrect Username or Password!'
       session[:return_to] = session[:login_after]
