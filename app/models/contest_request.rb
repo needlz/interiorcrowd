@@ -51,6 +51,7 @@ class ContestRequest < ActiveRecord::Base
   has_many :image_items
   has_many :product_items, ->{ product_items }, class_name: 'ImageItem'
   has_many :similar_styles, ->{ similar_styles }, class_name: 'ImageItem'
+  has_one :sound
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: %w(draft submitted fulfillment fulfillment_ready fulfillment_approved)) }
@@ -125,6 +126,10 @@ class ContestRequest < ActiveRecord::Base
 
   def visible_image_items(for_phase)
     image_items.send(for_phase)
+  end
+
+  def name
+    "Concept board #{ id }"
   end
 
   private

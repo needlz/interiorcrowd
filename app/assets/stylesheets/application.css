@@ -12,6 +12,7 @@
  *= require_tree ./bootstrap
  *= require compiled/index.css
  *= require lib/animate.css
+ *= require jquery-ui/slider
  *= require style
  *= require home
  *= require clients
@@ -19,6 +20,7 @@
  *= require jquery.mmenu.all
  *= require animate
  *= require contests
+ *= require contest_requests
  *= require designers
  *= require designer_center
  *= require designer_center_responses

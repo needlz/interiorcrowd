@@ -1,0 +1,27 @@
+= javascript_include_tag 'contest_requests/voice_playback'
+= stylesheet_link_tag 'lib/jplayer.blue.monday'
+
+%p.designerInfo
+  = t('client_center.moodboard_details.designer_thoughts')
+%p.designerInfoText= t('client_center.moodboard_details.designer_thoughts_hint')
+
+#jquery_jplayer_1.jp-jplayer
+#jp_container_1.jp-audio{"aria-label" => "media player", :role => "application"}
+  .jp-type-single
+    .jp-gui.jp-interface
+      .jp-controls
+        .play-buttons.font20
+          %span.glyphicon.glyphicon-play.player-play{ style: 'color: white;' }
+          %span.glyphicon.glyphicon-pause.player-pause{ style: 'color: white;' }
+        .jp-progress
+          .jp-seek-bar
+            .jp-play-bar
+        .jp-time-holder
+          .jp-current-time{"aria-label" => "time", :role => "timer"}  
+          .jp-duration{"aria-label" => "duration", :role => "timer"}
+        .jp-volume-controls
+          .glyphicon.glyphicon-volume-down.volume-icon
+          .volume-bar
+    .jp-no-solution
+      %span Update Required
+      To play the media you will need to either update your browser to a recent version

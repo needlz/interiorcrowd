@@ -353,6 +353,8 @@ en:
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes
+      designer_thoughts: Designer's thoughts
+      designer_thoughts_hint: Hear the designer's vision for your space
       submitted_on: Submitted on
     attribute_edit_button: Edit
     attribute_save_button: Save
