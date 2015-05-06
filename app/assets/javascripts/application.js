@@ -20,5 +20,12 @@
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
-//= require_tree ./lib
+//= require jquery-ui/slider
+//= require lib/enscroll-0.6.1.min
+//= require lib/jPlayer-2.9.2/jquery.jplayer.min
+//= require lib/jquery.colorbox
+//= require lib/jquery.dotdotdot
+//= require lib/jquery.keyfilter
+//= require lib/jquery.mask
+//= require lib/select2-3.5.2/select2
 //= require_tree ./shared
