@@ -19,6 +19,7 @@ class ContestNoteCreation
   def notify_designers(comment)
     subscribed_designers_ids.each do |designer|
       ContestCommentDesignerNotification.create!(contest_comment_id: comment.id, user_id: designer.id)
+      duplicate_in_concept_board_inbox(comment, designer)
       send_email(designer)
     end
   end
@@ -48,6 +49,15 @@ class ContestNoteCreation
 
   def digest_minutes_interval
     Settings.comment_board_digest_minutes_interval.to_i.minutes.from_now.utc
+  end
+
+  private
+
+  def duplicate_in_concept_board_inbox(comment, designer)
+    contest_request = contest.response_of(designer)
+    if contest_request
+      ConceptBoardComment.create!(user_id: client_id, role: 'Client', contest_request_id: contest_request.id, contest_note_id: comment.id)
+    end
   end
 
 end

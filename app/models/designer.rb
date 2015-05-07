@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: designers
+#
+#  id                      :integer          not null, primary key
+#  first_name              :text
+#  last_name               :text
+#  email                   :text
+#  password                :string(255)
+#  zip                     :text
+#  ex_links                :text
+#  ex_document_ids         :text
+#  created_at              :datetime
+#  updated_at              :datetime
+#  portfolio_background_id :integer
+#  portfolio_path          :text
+#  phone_number            :text
+#  plain_password          :text
+#  state                   :string(255)
+#
+
 class Designer < ActiveRecord::Base
   include User
   validates  :email, :first_name, :last_name, presence: true

@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: reviewer_invitations
+#
+#  id         :integer          not null, primary key
+#  username   :text
+#  email      :text
+#  contest_id :integer
+#  url        :text
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class ReviewerInvitation < ActiveRecord::Base
 
   before_validation :strip_whitespace

@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: contests_appeals
+#
+#  id         :integer          not null, primary key
+#  contest_id :integer
+#  appeal_id  :integer
+#  reason     :text
+#  value      :integer
+#
+
 class ContestsAppeal < ActiveRecord::Base
 
   belongs_to :contest

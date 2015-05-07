@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: design_categories
+#
+#  id         :integer          not null, primary key
+#  name       :text
+#  pos        :integer
+#  price      :integer
+#  status     :integer          default(1)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class DesignCategory < ActiveRecord::Base
   
   ACTIVE_STATUS = 1

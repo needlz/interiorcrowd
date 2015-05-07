@@ -1,3 +1,40 @@
+# == Schema Information
+#
+# Table name: contests
+#
+#  id                              :integer          not null, primary key
+#  desirable_colors                :text
+#  undesirable_colors              :text
+#  space_budget                    :string(255)
+#  feedback                        :text
+#  project_name                    :text
+#  budget_plan                     :integer
+#  client_id                       :integer
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  space_length                    :decimal(10, 2)   default(0.0)
+#  space_width                     :decimal(10, 2)   default(0.0)
+#  space_height                    :decimal(10, 2)
+#  design_category_id              :integer
+#  design_space_id                 :integer
+#  status                          :string(255)      default("submission")
+#  phase_end                       :datetime
+#  theme                           :string(255)
+#  space                           :string(255)
+#  accessories                     :string(255)
+#  space_changes                   :string(255)
+#  shop                            :string(255)
+#  accommodate_children            :boolean
+#  accommodate_pets                :boolean
+#  retailer                        :text
+#  elements_to_avoid               :text
+#  entertaining                    :integer
+#  durability                      :integer
+#  preferred_retailers_id          :integer
+#  designers_explore_other_colors  :boolean          default(FALSE)
+#  designers_only_use_these_colors :boolean          default(FALSE)
+#
+
 class Contest < ActiveRecord::Base
 
   self.per_page = 10

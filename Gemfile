@@ -78,3 +78,4 @@ gem 'rubyzip', '>= 1.0.0'
 gem 'money-rails' # parses currency input
 gem 'attribute_normalizer'
 gem 'mixpanel-ruby' # analytics tool
+gem 'annotate', '~> 2.6.6' # add a comment summarizing the current schema of models

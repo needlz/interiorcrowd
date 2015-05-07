@@ -49,7 +49,7 @@
             .commentTextArea
               %br
               %textarea.height150{ name: 'text' }
-              %button.pull-right.send-buttson= t('designer_center.my_contests.send')
+              %button.pull-right.send-button= t('designer_center.my_contests.send')
               .clearfix
       = f.hidden_field :status, value: 'draft'
       = hidden_mixpanel_submit_tag

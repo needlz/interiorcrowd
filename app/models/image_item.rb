@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: image_items
+#
+#  id                 :integer          not null, primary key
+#  name               :text
+#  contest_request_id :integer
+#  image_id           :integer
+#  text               :text
+#  price              :decimal(, )
+#  brand              :text
+#  link               :text
+#  mark               :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  kind               :string(255)
+#  dimensions         :text
+#  final              :boolean          default(FALSE)
+#  price_cents        :integer
+#  price_currency     :string(255)      default("USD"), not null
+#
+
 class ImageItem < ActiveRecord::Base
 
   MARKS = {

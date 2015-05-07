@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: lookbook_details
+#
+#  id          :integer          not null, primary key
+#  lookbook_id :integer
+#  image_id    :integer
+#  description :text
+#  url         :text
+#  doc_type    :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class LookbookDetail < ActiveRecord::Base
   belongs_to :lookbook
   belongs_to :image

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430133546) do
+ActiveRecord::Schema.define(version: 20150507161651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150430133546) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.integer  "contest_note_id"
   end
 
   create_table "contest_notes", force: true do |t|
@@ -379,6 +380,14 @@ ActiveRecord::Schema.define(version: 20150430133546) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
+
+  create_table "sounds", force: true do |t|
+    t.integer  "contest_request_id"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
+    t.datetime "audio_updated_at"
+  end
 
   create_table "user_notifications", force: true do |t|
     t.integer  "user_id"
