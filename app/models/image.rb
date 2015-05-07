@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: images
+#
+#  id                 :integer          not null, primary key
+#  image              :string(255)
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  contest_id         :integer
+#  kind               :string(255)
+#  designer_id        :integer
+#  portfolio_id       :integer
+#
+
 class Image < ActiveRecord::Base
 
   LIKED_EXAMPLE = 'liked_example'

@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: contest_requests
+#
+#  id                 :integer          not null, primary key
+#  designer_id        :integer
+#  contest_id         :integer
+#  designs            :text
+#  feedback           :text
+#  created_at         :datetime
+#  updated_at         :datetime
+#  lookbook_id        :integer
+#  answer             :string(255)
+#  status             :string(255)      default("draft")
+#  final_note         :text
+#  pull_together_note :text
+#  token              :string(255)
+#
+
 class ContestRequest < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   self.per_page = 8
@@ -100,7 +119,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def commenting_enabled?
-    submitted? || fulfillment_editing?
+    submitted? || fulfillment_editing? || true
   end
 
   def details_editable?

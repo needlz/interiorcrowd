@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: design_spaces
+#
+#  id         :integer          not null, primary key
+#  name       :text
+#  pos        :integer
+#  parent_id  :integer
+#  status     :integer          default(1)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class DesignSpace < ActiveRecord::Base
   ACTIVE_STATUS = 1
 

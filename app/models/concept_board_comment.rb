@@ -1,5 +1,20 @@
+# == Schema Information
+#
+# Table name: concept_board_comments
+#
+#  id                 :integer          not null, primary key
+#  user_id            :integer
+#  text               :text
+#  contest_request_id :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#  role               :string(255)
+#  contest_note_id    :integer
+#
+
 class ConceptBoardComment < ActiveRecord::Base
   belongs_to :contest_request
+  belongs_to :contest_note
 
   scope :by_designer, ->{ where(role: 'Designer') }
   scope :by_client, ->{ where(role: 'Client') }

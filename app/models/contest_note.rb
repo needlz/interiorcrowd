@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: contest_notes
+#
+#  id          :integer          not null, primary key
+#  text        :text
+#  contest_id  :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#  designer_id :integer
+#  client_id   :integer
+#
+
 class ContestNote < ActiveRecord::Base
 
   validates_presence_of :text
@@ -6,6 +19,7 @@ class ContestNote < ActiveRecord::Base
   belongs_to :designer
   belongs_to :client
   has_many :contest_comment_designer_notifications, foreign_key: :contest_comment_id
+  has_many :concept_board_comments, dependent: :destroy
 
   scope :by_client, ->{ where.not(client_id: nil) }
 

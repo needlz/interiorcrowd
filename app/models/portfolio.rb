@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: portfolios
+#
+#  id                      :integer          not null, primary key
+#  designer_id             :integer          not null
+#  years_of_experience     :integer
+#  education_gifted        :boolean
+#  education_school        :boolean
+#  education_apprenticed   :boolean
+#  school_name             :text
+#  degree                  :text
+#  awards                  :text
+#  style_description       :text
+#  about                   :text
+#  path                    :text
+#  modern_style            :boolean          default(FALSE)
+#  vintage_style           :boolean          default(FALSE)
+#  traditional_style       :boolean          default(FALSE)
+#  contemporary_style      :boolean          default(FALSE)
+#  coastal_style           :boolean          default(FALSE)
+#  global_style            :boolean          default(FALSE)
+#  eclectic_style          :boolean          default(FALSE)
+#  hollywood_glam_style    :boolean          default(FALSE)
+#  midcentury_modern_style :boolean          default(FALSE)
+#  transitional_style      :boolean          default(FALSE)
+#  rustic_elegance_style   :boolean          default(FALSE)
+#  color_pop_style         :boolean          default(FALSE)
+#  background_id           :integer
+#
+
 class Portfolio < ActiveRecord::Base
 
   DEGREES = %w(associate bachelor master doctorate)
