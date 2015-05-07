@@ -28,6 +28,8 @@ class Client < ActiveRecord::Base
   end
 
   def last_four_card_digits
+    return unless card_number
+    card_number if card_number.length < 4
     four_digits = card_number[-4..-1]
     four_digits.presence || card_number
   end

@@ -173,6 +173,10 @@ class Contest < ActiveRecord::Base
     BudgetPlan.find(budget_plan)
   end
 
+  def name
+    project_name
+  end
+
   private
 
   def update_appeals(options)

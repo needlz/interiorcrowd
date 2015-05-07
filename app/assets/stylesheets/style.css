@@ -1405,13 +1405,13 @@ border-bottom-right-radius: 10px;
 	top: 3px;
 	font-family: "Courier New", Courier, monospace;
 }
-.designerName{
+.designerInfo{
 	font-size: 18px;
 	font-weight: 700;
 	padding-top: 7px;
 	color: #000;
 }
-.designerName span,.designerNote{
+.designerInfo span, .designerInfoText{
 	font-size: 16px;
 	display: block;
 	font-weight: 400;

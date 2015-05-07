@@ -5,5 +5,9 @@ class PreferredRetailers < ActiveRecord::Base
 
   has_one :contest
 
+  def name
+    "Preferred retailers list #{ id }"
+  end
+
 end
 
