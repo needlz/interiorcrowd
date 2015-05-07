@@ -1,4 +1,4 @@
-.container.animated.fadeInDown
+.animated.fadeInDown.disablePadding
   .row
     .col-md-12
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
@@ -23,13 +23,15 @@
               - SocialShareButton.config.allow_sites.each do |site|
                 = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
 
-.container.animated.fadeInDown
+.animated.fadeInDown.disablePadding
   .row.marg-top40
     .col-md-10.col-md-offset-1.no-x-padding
       = render partial: 'clients/client_center/entries/final_design', locals: {request: request}
       - if @visible_image_items.present?
+        - if request.pull_together_note.present?
+          %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.pull_together')
+          %p.font16= request.pull_together_note
         %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')
-        %p.font16= request.pull_together_note
         .hLine10
         - @visible_image_items.each do |product_item|
           = render partial: 'clients/client_center/entries/design_item',
