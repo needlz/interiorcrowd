@@ -1,6 +1,18 @@
 .col-sm-6.moodboard{ data: { id: contest_request.id } }
   .designBox
-    %h3= contest_request.designer.name
+    .title
+      %span.designerName
+        = contest_request.designer.name
+      - if contest_request.sound
+        .player.pull-right
+          %div.pull-right
+            %img.playback-icon{ src: '/assets/listen_icon.png' }
+          .voice
+            %span.text.pull-right= t('client_center.entries.listen_to_designer')
+            .control.hidden
+              = render partial: 'shared/audio_player',
+                  locals: { filepath: contest_request.sound.url_for_streaming, id: "voice_palyer_#{ contest_request.id }" }
+    .hLine
     .designItem
       - if contest_request.concept_board_image_path
         %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
@@ -9,4 +21,5 @@
         = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
     .hLine
     - if show_answer_options && @client
-      = render partial: 'clients/moodboard_answers', locals: { request_id: contest_request.id, answer: contest_request.answer }
+      = render partial: 'clients/moodboard_answers',
+          locals: { request_id: contest_request.id, answer: contest_request.answer }
