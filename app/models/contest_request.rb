@@ -171,27 +171,13 @@ class ContestRequest < ActiveRecord::Base
     end
   end
 
-  def notify_designer_about_win
-    DesignerWinnerNotification.create(user_id: designer_id, contest_id: contest_id, contest_request_id: id)
-  end
-
   def set_token
     self.token = TokenGenerator.generate
   end
 
   def selected_as_winner
-    winner!
-    notify_designer_about_win
-    contest.winner_selected!
-    create_default_image_items
-  end
-
-  def create_default_image_items
-    ImageItem::KINDS.each do |kind|
-      unless image_items.where(kind: kind.to_s).exists?
-        image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'), kind: kind.to_s)
-      end
-    end
+    select_winner = SelectWinner.new(self)
+    select_winner.perform
   end
 
 end

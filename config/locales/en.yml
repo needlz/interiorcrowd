@@ -933,6 +933,8 @@ en:
       subject: A client has left a comment for you
     new_product_list_item:
       subject: Your designer has added a product list for you to review
+    notify_designer_about_win:
+      subject: You won!
 
   coming_soon:
     title: NEW CONTENT COMING SOON!

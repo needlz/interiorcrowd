@@ -104,6 +104,16 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t("mails.new_product_list_item.subject")
   end
 
+  def notify_designer_about_win(contest_request)
+    template 'generic_notification'
+    designer = contest_request.designer
+    @contest = contest_request.contest
+    @client = @contest.client
+    set_template_values(text: render_to_string('mails/notify_designer_about_win'))
+    mail to: [wrap_recipient(designer.email, designer.name, 'to')],
+         subject: I18n.t('mails.notify_designer_about_win.subject')
+  end
+
   private
 
   def set_user_params(user)
@@ -115,7 +125,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def set_invitation_params(client)
-    @client_name = client.name.upcase
+    @client_name = client.name
     @days = ContestMilestone::DAYS['submission']
     {
       text: render_to_string('mails/invite_to_contest')
