@@ -1427,6 +1427,7 @@ border-bottom-right-radius: 10px;
 	position: absolute;
 	top: -27px;
   	left: -24px;
+    z-index: 1;
 }
 h3.congrats{
 	background: #F8F8F8;
