@@ -59,5 +59,7 @@ module InteriorC
     end
 
     config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

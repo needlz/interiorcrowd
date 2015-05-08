@@ -185,7 +185,7 @@ RSpec.describe ContestsController do
 
       it 'returns nothing if archivation not yet performed' do
         get :download_all_images_url, params
-        expect(response.body).to eq ' '
+        expect(response.body).to eq ''
       end
 
       it 'schedules job' do
