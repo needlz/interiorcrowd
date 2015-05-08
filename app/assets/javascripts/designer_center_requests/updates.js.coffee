@@ -50,3 +50,5 @@ class Comments
 $ ->
   Notifications.init()
   Comments.beautifyScroll()
+  $(window).resize ->
+    Notifications.resizeNotifications()
