@@ -10,7 +10,7 @@ class ClientsController < ApplicationController
 
   def entries
     @contest = @client.last_contest
-    return redirect_to design_brief_contests_path unless @contest
+    return redirect_to design_brief_contests_path unless contest_active?
     if @contest
       setup_moodboard_collection(@contest)
     else
@@ -117,6 +117,10 @@ class ClientsController < ApplicationController
       clear_creation_storage
     end
     contest_creation.perform
+  end
+
+  def contest_active?
+    @contest && !@contest.closed?
   end
 
 end

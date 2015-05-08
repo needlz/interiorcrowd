@@ -120,7 +120,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def commenting_enabled?
-    submitted? || fulfillment_editing? || true
+    submitted? || fulfillment_editing?
   end
 
   def details_editable?
