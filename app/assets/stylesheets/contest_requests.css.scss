@@ -1,3 +1,82 @@
-// Place all the styles related to the contest_requests controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.designer-voice {
+  margin-bottom: 10px;
+}
+
+.volume-bar{
+  width: 45px;
+  height: 5px;
+  position: absolute;
+  left: 15px;
+  top: 2px;
+
+  .ui-slider-handle {
+    height: 15px;
+    width: 5px;
+    margin-left: -2px;
+  }
+}
+
+.volume-icon {
+  top: -6px;
+}
+
+.play-buttons {
+  float: left;
+
+  span {
+    top: -6px;
+    cursor: pointer;
+  }
+}
+
+.designBox {
+  text-align: left;
+
+  .title {
+    line-height: 55px;
+    margin-bottom: -24px;
+  }
+
+  .designerName {
+    font-size: 24px;
+    font-weight: bold;
+    width: 50%;
+  display: inline-block;
+  }
+
+  .player {
+    display: inline;
+    width: 50%;
+    margin-top: 13px;
+
+    .voice {
+      margin-right: 35px;
+
+      .text {
+        margin-right: 10px;
+        line-height: 31px;
+      }
+    }
+
+    .jp-time-holder {
+      display: none;
+    }
+
+    .jp-volume-controls {
+      display: none;
+    }
+
+    .jp-interface {
+      height: 31px !important;
+    }
+
+    .jp-controls {
+      padding-top: 7px !important;
+    }
+  }
+
+  .playback-icon {
+    cursor: pointer;
+    vertical-align: inherit;
+  }
+}

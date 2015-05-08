@@ -1,0 +1,9 @@
+= javascript_include_tag 'contest_requests/voice_playback'
+
+%p.designerInfo
+  = t('client_center.moodboard_details.designer_thoughts')
+%p.designerInfoText= t('client_center.moodboard_details.designer_thoughts_hint')
+
+.player
+  = render partial: 'shared/audio_player',
+      locals: { filepath: request.sound.url_for_streaming, id: "voice_playback_#{ request.id }" }

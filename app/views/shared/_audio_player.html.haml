@@ -1,0 +1,20 @@
+.jp-jplayer{ data: { filepath: filepath } }
+.jp-audio{"aria-label" => "media player", :role => "application", id: id }
+  .jp-type-single
+    .jp-gui.jp-interface
+      .jp-controls
+        .play-buttons.font20
+          %span.glyphicon.glyphicon-play.player-play{ style: 'color: white;' }
+          %span.glyphicon.glyphicon-pause.player-pause{ style: 'color: white;' }
+        .jp-progress
+          .jp-seek-bar
+            .jp-play-bar
+        .jp-time-holder
+          .jp-current-time{"aria-label" => "time", :role => "timer"}  
+          .jp-duration{"aria-label" => "duration", :role => "timer"}
+        .jp-volume-controls
+          .glyphicon.glyphicon-volume-down.volume-icon
+          .volume-bar
+    .jp-no-solution
+      %span Update Required
+      To play the media you will need to either update your browser to a recent version

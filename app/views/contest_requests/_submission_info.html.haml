@@ -13,5 +13,7 @@
         = t('client_center.moodboard_details.submitted_on')
         = submitted_at.strftime('%m/%d/%Y')
 .hLine
+.designer-voice
+  = render partial: 'contest_requests/listen', locals: { request: request } if request.sound
 = render partial: 'contest_requests/designer_notes', locals: { request: request }
 .hLine

@@ -3,7 +3,7 @@ module MoodboardCollection
 
   def setup_moodboard_collection(contest)
     @contest_view = ContestView.new(contest_attributes: contest)
-    all_requests = contest.requests.published.includes(:designer, :lookbook)
+    all_requests = contest.requests.published.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
     @comments_present = contest.notes.present?
     shown_requests = all_requests.by_answer(params[:answer])
