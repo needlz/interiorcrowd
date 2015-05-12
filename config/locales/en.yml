@@ -597,6 +597,9 @@ en:
       few_days: days
       search_placeholder: Search...
 
+    notifications:
+      successfully_submitted: Congrats! Your concept board for "%{contest_name}" has been submitted.
+
     show_page:
       back_to_index: < Back to all current contests
       join: Join this contest >

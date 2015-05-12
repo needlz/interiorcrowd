@@ -16,6 +16,10 @@ class ContestRequestEditing
     update_image_items
   end
 
+  def submitted?
+    @submitted
+  end
+
   private
 
   attr_reader :request, :contest_request_params, :contest_request_attributes, :event_tracker
@@ -60,6 +64,7 @@ class ContestRequestEditing
     submission = ContestRequestSubmission.new(request)
     submission.perform
     event_tracker.contest_request_submitted(request)
+    @submitted = true
   end
 
   def perform_finish

@@ -56,8 +56,15 @@ class DesignerCenterRequestsController < ApplicationController
     })
     contest_editing.perform
 
+    redirection =
+      if contest_editing.submitted?
+        updates_designer_center_index_path
+      else
+        designer_center_response_path(id: request.id)
+      end
+
     respond_to do |format|
-      format.html { redirect_to designer_center_response_path(id: request.id) }
+      format.html { redirect_to redirection }
       format.json do
         render json: format_changed_attributes(response_params)
       end

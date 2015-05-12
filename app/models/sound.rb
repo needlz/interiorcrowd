@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: sounds
+#
+#  id                 :integer          not null, primary key
+#  contest_request_id :integer
+#  audio_file_name    :string(255)
+#  audio_content_type :string(255)
+#  audio_file_size    :integer
+#  audio_updated_at   :datetime
+#
+
 class Sound < ActiveRecord::Base
   include Downloadable
 
