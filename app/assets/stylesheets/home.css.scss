@@ -102,6 +102,14 @@ input[type="radio"].smallRadio + label span {
   .markRemove.active {
     background-position: bottom right;
   }
+
+  .upload-button {
+    margin-top: 0px;
+  }
+
+  .thumb {
+    margin-bottom: 0px;
+  }
 }
 
 .terms-of-services {
