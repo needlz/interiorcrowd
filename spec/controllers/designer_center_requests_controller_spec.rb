@@ -97,11 +97,21 @@ RSpec.describe DesignerCenterRequestsController do
         expect(draft_request.reload.status).to eq 'submitted'
       end
 
+      it 'redirects to Updates page' do
+        patch :update, id: draft_request.id, contest_request: { status: 'submitted' }
+        expect(response).to redirect_to updates_designer_center_index_path
+      end
+
       it 'does not change status to any other status than "submitted"' do
         (ContestRequest::STATUSES - ['submitted']).each do |status|
           patch :update, id: draft_request.id, contest_request: { status: status }
           expect(draft_request.reload.status).to eq 'draft'
         end
+      end
+
+      it 'creates notification' do
+        patch :update, id: draft_request.id, contest_request: { status: 'submitted' }
+        expect(BoardSubmittedDesignerNotification.first.designer).to eq designer
       end
     end
 
@@ -134,6 +144,11 @@ RSpec.describe DesignerCenterRequestsController do
         expect(request.image_items.count).to eq 2
         patch :update, id: request.id
         expect(request.reload.image_items.count).to eq 0
+      end
+
+      it 'redirects to Updates page' do
+        patch :update, id: request.id
+        expect(response).to redirect_to designer_center_response_path(id: request.id)
       end
     end
 
