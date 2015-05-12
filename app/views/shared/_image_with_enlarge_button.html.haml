@@ -1,5 +1,8 @@
 .imageWithOverlay{ class: (container_class if defined?(container_class)) }
-  %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
+  - if defined?(use_div) && use_div
+    .image-container{ style: "background-image: url(#{ j(thumb_path) })", class: (image_class if defined?(image_class)) }
+  - else
+    %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
   .overlayExampleImg
     - if defined?(url_for_downloading)
       %a.download{ href: url_for_downloading }

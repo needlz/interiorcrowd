@@ -12,12 +12,6 @@
   margin-bottom: 4px;
 }
 
-.image-container {
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position-x: 50%;
-}
-
 .portfolio_profile_image{
   width: 150px;
   height: 150px;
@@ -37,6 +31,13 @@
     img {
       width: 100%;
     }
+  }
+
+  .image-container {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100%;
   }
 }
 
