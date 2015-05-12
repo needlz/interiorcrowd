@@ -1,5 +1,5 @@
 class @ConceptBoardUploader
-  @idSelector: '#concept_board_picture_id'
+  @imageIdSelector: '#concept_board_picture_id'
 
   @init: (i18n)=>
     PicturesUploadButton.init
@@ -7,35 +7,26 @@ class @ConceptBoardUploader
       uploadButtonSelector: '.concept-board .upload-button',
       thumbs:
         container: '.concept-board .thumbs'
-        selector: @idSelector
+        selector: @imageIdSelector
         theme: RemovableThumbsTheme
+        onRemoved: =>
+          @saveChange()
+          CommentsBlock.fitCommentsArea()
       I18n: i18n
       single: true
-    @.initSaveBtn()
+      uploading:
+        onUploaded: (event)=>
+          @saveChange()
 
-
-  @initSaveBtn:->
-    $('body').on('click', '.saveConceptBoard', @onSaveClick)
-    $('body').on 'click', '.cancelConceptBoard', =>
-      @hideEditableBlock()
-
-  @onSaveClick: ()=>
-    id = $('.saveConceptBoard').attr('id')
-    $.ajax(
-      data: { contest_request: { image_id: $(@idSelector).val() } }
-      url: "/designer_center/responses/#{id}"
-      type: 'PUT'
-      dataType: "script"
-      success: (data)=>
-        mixpanel.track('Concept board image updated', { contest_request_id: id })
-        @changeImageSource()
-        @hideEditableBlock()
-        CommentsBlock.fitCommentsArea()
-    )
-  @hideEditableBlock: () ->
-    $(".initialImage").show()
-    $('.editable-mode').remove()
-
-  @changeImageSource: ->
-    newSource = $('.editable-mode img:last').attr('src')
-    $(".initialImage img").attr({ src: newSource, alt: newSource})
+  @saveChange: ()=>
+    requestId = $('.response[data-id]').data('id')
+    if requestId
+      $.ajax(
+        data: { contest_request: { image_id: $(@imageIdSelector).val() } }
+        url: "/designer_center/responses/#{ requestId }"
+        type: 'PUT'
+        dataType: "script"
+        success: (data)=>
+          mixpanel.track('Concept board image updated', { contest_request_id: requestId })
+          CommentsBlock.fitCommentsArea()
+      )

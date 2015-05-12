@@ -3,7 +3,5 @@
       locals: { request: request, placeholder_src: nil, image_id_input_name: '' }
   .clearfix
   %a.marg-top20.upload-button.edit-picture-btn
-    = t('designer_center.portfolio.creation.upload_personal_picture.upload_button')
-  %a.marg-top20.saveConceptBoard.edit-picture-btn{id: @request.id}= t('designer_center.save_button')
-  %a.marg-top20.cancelConceptBoard.edit-picture-btn= t('designer_center.cancel_button')
-  .clearfix
+    = button_title
+    -#t('designer_center.portfolio.creation.upload_personal_picture.upload_button')

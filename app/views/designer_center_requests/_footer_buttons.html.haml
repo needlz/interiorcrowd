@@ -32,7 +32,7 @@
       - if @request.contest.submission?
         = link_to '#', class: 'submit submitMyDesign high-button' do
           = t('designer_center.respond.submit_design')
-    - elsif @request.fulfillment? || true
+    - elsif @request.fulfillment?
       = form_for @request,
           url: designer_center_response_path(id: @request.id),
           html: { class: "edit_contest_request", data: { name: 'Submit products list' } } do |f|
