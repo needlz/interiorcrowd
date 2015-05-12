@@ -7,9 +7,13 @@
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
 - content_for :designer_center_content do
-  .animated.fadeInDown.bottom60.phase-initial
+  .animated.fadeInDown.phase-initial
     = render partial: 'clients/client_center/entries/phases',
              locals: { stripe: @show_page.phases_stripe }
+    = link_to designer_center_response_index_path, class: tracked_link do
+      .backToEntries
+        %img{ src: '/assets/lt.png' }/
+        = t('designer_center.edit.back_to_contests')
 
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding.initialImage

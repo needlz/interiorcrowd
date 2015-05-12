@@ -1,18 +1,27 @@
+:css
+  .concept-board-footer-buttons {
+    margin-bottom: 10px;
+  }
+
+  .concept-board-footer-buttons .high-button {
+    margin-top: -10px;
+  }
+
 .col-md-12.disablePadding.marg-top20
   .hLine
-.row
+.col-md-12.disablePadding.concept-board-footer-buttons
   .col-md-6.disablePadding
-    - if @request.draft?
-      = link_to designer_center_response_index_path, class: tracked_link do
-        .backToEntries
-          %img{ src: '/assets/lt.png' }/
-          = t('designer_center.respond_view.back')
-    - elsif @request.fulfillment_editing?
+    - if @request.fulfillment_editing?
       = link_to edit_designer_center_response_path(id: @request.id),
           class: tracked_link do
         .backToEntries
           %img{ src: '/assets/lt.png' }/
           = t('designer_center.respond_view.go_back_and_edit')
+    - else
+      = link_to designer_center_response_index_path, class: tracked_link do
+        .backToEntries
+          %img{ src: '/assets/lt.png' }/
+          = t('designer_center.respond_view.back')
   .col-md-6.disablePadding.text-right
     - if @request.draft?
       = form_for @request,
@@ -21,21 +30,13 @@
         = f.hidden_field :status, value: 'submitted'
         = hidden_mixpanel_submit_tag
       - if @request.contest.submission?
-        .marg-bottom20
-          = link_to '#', class: 'submit submitMyDesign' do
-            = t('designer_center.respond.submit_design')
-    - elsif @request.fulfillment?
+        = link_to '#', class: 'submit submitMyDesign high-button' do
+          = t('designer_center.respond.submit_design')
+    - elsif @request.fulfillment? || true
       = form_for @request,
           url: designer_center_response_path(id: @request.id),
           html: { class: "edit_contest_request", data: { name: 'Submit products list' } } do |f|
         = f.hidden_field :status, value: 'fulfillment_ready'
         = hidden_mixpanel_submit_tag
-        .marg-bottom20
-          = link_to '#', class: 'submit submitMyDesign' do
-            = t('designer_center.respond.submit')
-    - else
-      .marg-bottom20
-        = link_to designer_center_response_index_path, class: tracked_link do
-          .backToEntries.btn-done
-            = t('designer_center.respond.done')
-            %img{ src: '/assets/gt.png' }/
+        = link_to '#', class: 'submit submitMyDesign high-button' do
+          = t('designer_center.respond.submit')
