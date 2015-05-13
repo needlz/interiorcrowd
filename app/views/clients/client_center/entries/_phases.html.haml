@@ -1,6 +1,6 @@
 .moodboard-steps
   - PhasesStripe::PHASES.each_with_index do |phase_name, index|
     %p{ class: stripe.css_class(index) }
-      %span= index + 1
-      = stripe.text(index)
+      %span.number= index + 1
+      %span.name= stripe.text(index)
   .clearfix
