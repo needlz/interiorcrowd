@@ -80,3 +80,54 @@
     vertical-align: inherit;
   }
 }
+
+#new_contest_request {
+  .sidebarComments{
+    border: none;
+  }
+  .sidebarComments > p{
+    border: none;
+    padding-left: 0px;
+    line-height: 0px;
+    margin-bottom: 0px;
+  }
+
+  .commentTextArea{
+    padding: 0px;
+  }
+
+  .noteTextarea{
+    height: 10em;
+  }
+
+  .designerName {
+    height: 66px;
+  }
+
+  .designerName p{
+    line-height: 66px;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  .designerTitle {
+    margin-bottom: 1.5em;
+  }
+
+  .commentTextArea textarea{
+    height: 100%;
+  }
+
+  .comments-title {
+    font-weight: bold;
+  }
+
+  .comment-textarea{
+    height: 6em;
+    overflow: visible;
+  }
+
+  .conceptMoodboardImg{
+    margin-top: 0px;
+  }
+}
