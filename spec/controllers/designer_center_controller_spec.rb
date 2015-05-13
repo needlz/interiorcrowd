@@ -12,13 +12,13 @@ RSpec.describe DesignerCenterController do
   describe 'GET designer_center' do
     it 'can not be accessed by anonymous user' do
       get :designer_center
-      expect(response).to redirect_to login_sessions_path
+      expect(response).to redirect_to designer_login_sessions_path
     end
 
     it 'can not be accessed by a client' do
       sign_in(client)
       get :designer_center
-      expect(response).to redirect_to login_sessions_path
+      expect(response).to redirect_to designer_login_sessions_path
     end
 
     context 'if logged as designer' do
