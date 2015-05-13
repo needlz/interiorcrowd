@@ -2,7 +2,7 @@
   %h1{style: "font-weight:normal;"}= t('contests.titles.creation').upcase
 .options-selector
   - ContestCreationWizard.creation_steps.each_with_index do |step, index|
-    .col-xs-6.col-md-3.option-item.no-padding-left{class: contest_creation_tab_class(index, ContestCreationWizard.creation_steps.length) }
+    .col-xs-3.option-item.no-padding-left{class: contest_creation_tab_class(index, ContestCreationWizard.creation_steps.length) }
       .circle
         %span= index + 1
       .text-selector.text-center
