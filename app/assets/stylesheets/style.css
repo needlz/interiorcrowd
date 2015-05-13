@@ -1043,13 +1043,13 @@ padding: 8px 15px 8px 25px;
 .moodboard-steps p{
 	padding-left: 30px;
 	font-size: 16px;
-	color: #707070;	
+	color: #707070;
 	float: left;
 	margin: 0px;
 	height: 44px;
 	background: url('/assets/step-delimiter.png') left bottom no-repeat;
 }
-.moodboard-steps p span{
+.moodboard-steps p .number{
 	border: 1px solid #707070;
 	border-radius: 13px;
 	display: inline-block;
@@ -1066,7 +1066,7 @@ padding: 8px 15px 8px 25px;
 }
 .moodboard-steps p:nth-child(3),.bottomStepBackground{
 	width: 150px;
-	background-position: left top; 
+	background-position: left top;
 	/*text-align: right;*/
 }
 
@@ -1084,6 +1084,11 @@ padding: 8px 15px 8px 25px;
 	width: 328px;
 	padding-left: 15px;
 }
+
+.moodboard-steps p .name{
+    margin-left: 5px;
+}
+
 .backgroundTopRight{
 	background-position: top right !important;
 }
@@ -1096,7 +1101,7 @@ p.stepActive{
 	color: #FFF;
 	padding-left: 8px;
 }
-p.stepActive span{
+p.stepActive .number{
 	border-color: #FFF;
 }
 .disablePadding{

@@ -14,6 +14,7 @@
  *= require lib/animate.css
  *= require jquery-ui/slider
  *= require style
+ *= require style-override
  *= require home
  *= require clients
  *= require portfolio
@@ -25,7 +26,6 @@
  *= require designer_center
  *= require designer_center_responses
  *= require fonts
- *= require style-override
  *= require lib/select2-3.5.2/select2-bootstrap
  *= require lib/select2-3.5.2/select2.css
  *= require lib/colorbox
