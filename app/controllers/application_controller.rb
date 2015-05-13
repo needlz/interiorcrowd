@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_return_to_link
-    return unless request.method == 'GET'
+    return if request.method != 'GET' || controller_name == 'sessions'
     session[:return_to] = request.url unless session[:return_to].present?
   end
 

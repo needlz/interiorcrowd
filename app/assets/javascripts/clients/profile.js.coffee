@@ -10,8 +10,10 @@ class @ProfileEditor extends InlineEditor
     super()
     @bindDoneButton()
     @initNumberFields()
-    $('form.client-profile-form').on 'ajax:success', (e)=>
+    $('form.client-profile-form').on 'ajax:success', (e, data)=>
       $form = $(e.target)
+      $preview = $form.parents('.edit-profile.attribute').find('.view')
+      $preview.html(data)
       mixpanel.track('Client profile edited', { client_id: $form.data('client-id') })
 
   initNumberFields: ->
@@ -28,26 +30,8 @@ class @ProfileEditor extends InlineEditor
       attribute = $attributeRow.data(editor.attributeIdentifierData)
       $form = $attributeRow.find('.edit')
       $view = $attributeRow.find('.view')
-      editor.previewCallbacks[attribute].apply(editor, [$form, $view]) if editor.previewCallbacks[attribute]?
       editor.cancelEditing(attribute)
     )
-
-  previewCallbacks:
-    first_name: ($form, $view)->
-      @updateText($form, $view, 'first_name')
-    last_name: ($form, $view)->
-      @updateText($form, $view, 'last_name')
-    username: ($form, $view)->
-      @updateText($form, $view, 'email')
-    phone_number: ($form, $view)->
-      @updateText($form, $view, 'phone_number')
-    address: ($form, $view)->
-      @updateText($form, $view, field) for field in ['address', 'state', 'zip', 'city']
-    billing_address: ($form, $view)->
-      @updateText($form, $view, field) for field in ['billing_address', 'billing_state', 'billing_zip', 'billing_city']
-    billing_information: ($form, $view)->
-      @updateText($form, $view, field) for field in ['card_ex_month', 'card_ex_year', 'card_cvc']
-      @updateCardNumber($form, $view, @cardNumber)
 
   editFormsCallbacks:
     billing_information: ($form, $view)->
@@ -55,22 +39,6 @@ class @ProfileEditor extends InlineEditor
     phone_number: ($form, $view)->
       $form.find('#client_phone_number').phoneNumber()
 
-
-  updateText: ($form, $view, field)->
-    @updateSection($form, $view, field, ($input)->
-      $input.val()
-    )
-
-  updateCardNumber: ($form, $view, field)->
-    @updateSection($form, $view, field, ($input)=>
-      $input.val().slice(@fourDigitsDelta)
-    )
-
-  updateSection: ($form, $view, field, callback)->
-    $input = $form.find("#client_#{ field }")
-    value = callback($input)
-    $view.find(".#{ field }").text(value)
-    $input.attr('value', $input.val())
 
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()

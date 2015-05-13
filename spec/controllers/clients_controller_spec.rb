@@ -12,9 +12,10 @@ RSpec.describe ClientsController do
       Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }")
     end
   end
+  let(:default_password) { 'password' }
   let(:client_options){
-    { password: 'password',
-      password_confirmation: 'password',
+    { password: default_password,
+      password_confirmation: default_password,
       first_name: 'firstname',
       last_name: 'lastname',
       email: 'email@example.com',
@@ -89,22 +90,69 @@ RSpec.describe ClientsController do
       }
     end
 
-    describe 'updates' do
+    describe 'client attributes updating' do
       before do
         sign_in(client)
         patch :update, client: new_client_attributes, id: client.id
         client.reload
       end
 
-      it 'client string attributes' do
+      it 'updates client string attributes' do
         new_client_attributes.except(*integer_attributes).each do |attribute, value|
           expect(client[attribute]).to eq value
         end
       end
 
-      it 'client integer attributes' do
+      it 'updates client integer attributes' do
         integer_attributes.each do |attribute|
           expect(client[attribute]).to eq new_client_attributes[attribute].to_i
+        end
+      end
+    end
+
+    describe 'client password updating' do
+      let(:new_password) { 'new password' }
+
+      context 'correct params' do
+        before do
+          sign_in(client)
+          patch :update, password: { old_password: default_password,
+                                     new_password: new_password,
+                                     confirm_password: new_password }, id: client.id
+          client.reload
+        end
+
+        it 'updates password' do
+          expect(client.valid_password?(default_password)).to be_falsey
+          expect(client.valid_password?(new_password)).to be_truthy
+        end
+      end
+
+      context 'wrong confirmation password' do
+        before do
+          sign_in(client)
+          patch :update, password: { old_password: default_password,
+                                     new_password: new_password,
+                                     confirm_password: 'wrong' }, id: client.id
+          client.reload
+        end
+
+        it 'does not change password' do
+          expect(client.valid_password?(default_password)).to be_truthy
+        end
+      end
+
+      context 'wrong old password' do
+        before do
+          sign_in(client)
+          patch :update, password: { old_password: 'wrong',
+                                     new_password: new_password,
+                                     confirm_password: new_password }, id: client.id
+          client.reload
+        end
+
+        it 'does not change password' do
+          expect(client.valid_password?(default_password)).to be_truthy
         end
       end
     end

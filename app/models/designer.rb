@@ -34,15 +34,6 @@ class Designer < ActiveRecord::Base
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
 
-  def self.encrypt(text)
-     Digest::SHA1.hexdigest("#{text}")
-  end
-
-  def self.authenticate(username, password)
-     password = encrypt(password)
-     username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil
-  end
-
   def has_active_requests?
     contest_requests.active.exists?
   end

@@ -45,15 +45,6 @@ class Client < ActiveRecord::Base
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests
   
-  def self.encrypt(text)
-     Digest::SHA1.hexdigest("#{text}")
-  end
-
-  def self.authenticate(username, password)
-     password = encrypt(password)
-     username.present? && password.present? ? self.find_by_email_and_password(username, password) : nil
-  end
-
   def last_contest
     contests.order(:created_at).last
   end
