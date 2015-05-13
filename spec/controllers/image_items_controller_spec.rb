@@ -22,7 +22,7 @@ RSpec.describe ImageItemsController do
     context 'not logged in' do
       it 'redirects to designer login page' do
         post :create, generate_params
-        expect(response).to redirect_to login_sessions_path
+        expect(response).to redirect_to designer_login_sessions_path
       end
     end
 
@@ -44,7 +44,7 @@ RSpec.describe ImageItemsController do
 
       it 'redirects to designer login page' do
         post :create, generate_params
-        expect(response).to redirect_to login_sessions_path
+        expect(response).to redirect_to designer_login_sessions_path
       end
     end
 

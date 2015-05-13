@@ -80,7 +80,7 @@ RSpec.describe PortfoliosController do
       it 'can not be accessed by client' do
         sign_in(client)
         get :edit
-        expect(response).to redirect_to login_sessions_path
+        expect(response).to redirect_to designer_login_sessions_path
       end
 
       context 'when signed in as designer' do
@@ -97,7 +97,7 @@ RSpec.describe PortfoliosController do
 
     it 'redirects to login page if user not logged' do
       get :edit
-      expect(response).to redirect_to login_sessions_path
+      expect(response).to redirect_to designer_login_sessions_path
     end
   end
 
@@ -108,13 +108,13 @@ RSpec.describe PortfoliosController do
 
     it 'can not be requested by anonymous user' do
       patch :update, portfolio: { years_of_experience: '1' }
-      expect(response).to redirect_to login_sessions_path
+      expect(response).to redirect_to designer_login_sessions_path
     end
 
     it 'can not be requested by client' do
       sign_in(client)
       patch :update
-      expect(response).to redirect_to login_sessions_path
+      expect(response).to redirect_to designer_login_sessions_path
     end
 
     context 'if signed in as designer' do

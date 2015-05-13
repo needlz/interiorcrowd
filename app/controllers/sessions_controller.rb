@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
-  before_filter :set_link_after_login, only: [:login, :client_login]
+  before_filter :set_link_after_login, only: [:designer_login, :client_login]
 
-  def login
+  def designer_login
     redirect_to designer_center_index_path if session[:designer_id].present?
     @login_view = LoginView.designer_login
   end
@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   
   def authenticate
     designer = Designer.authenticate(params[:username], params[:password])
-    authenticate_user(designer, login_sessions_url)
+    authenticate_user(designer, designer_login_sessions_url)
   end
   
   def retry_password
@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
        if designer.present?
          designer.reset_password
          flash[:notice] = t('reset_password.email_send')
-         redirect_to login_sessions_path
+         redirect_to designer_login_sessions_path
        else
          flash[:error] = t('reset_password.email_does_not_exist')
          redirect_to retry_password_sessions_path

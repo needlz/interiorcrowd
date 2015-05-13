@@ -11,7 +11,7 @@ InteriorC::Application.routes.draw do
     resources :sessions, only: [] do
       collection do
         get 'logout'
-        get 'login'
+        get 'designer_login'
         get 'client_login'
         post 'client_authenticate'
         post 'authenticate'

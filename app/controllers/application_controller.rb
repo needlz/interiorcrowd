@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   PAGE_404_PATH = 'public/404.html'
 
   def check_designer
-    redirect_to login_sessions_path if session[:designer_id].blank?
+    redirect_to designer_login_sessions_path if session[:designer_id].blank?
     session[:designer_id]
   end
 
