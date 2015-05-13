@@ -61,8 +61,19 @@ class ClientsController < ApplicationController
   end
 
   def update
-    @client.update_attributes!(client_params)
-    render nothing: true
+    client_updater = ClientUpdater.new(
+        client: @client,
+        client_attributes: (client_params if params[:client]),
+        password_options: params[:password]
+    )
+    Client.transaction do
+      client_updater.perform
+    end
+    if params[:attribute].present?
+      render partial: "clients/client_center/profile/preview/#{ params[:attribute] }", locals: { client: @client }
+    else
+      render nothing: true
+    end
   end
 
   def pictures_dimension
