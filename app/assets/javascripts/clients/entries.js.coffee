@@ -43,7 +43,7 @@ class ScrollBars
 
 class @Answers
 
-  requestIdContainerSelector: '.designConcept'
+  requestIdContainerSelector: '.moodboard, .designConcept'
 
   init: ->
     @bindAnswerButtons()
