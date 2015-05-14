@@ -42,6 +42,9 @@ class ScrollBars
     });
 
 class @Answers
+
+  requestIdContainerSelector: '.designConcept'
+
   init: ->
     @bindAnswerButtons()
     @bindWinnerButton()
@@ -49,7 +52,7 @@ class @Answers
 
   bindWinnerButton: ->
     $('.answer-winner').click (event)=>
-      requestId = $(event.target).parents('.moodboard').data('id')
+      requestId = $(event.target).parents(@requestIdContainerSelector).data('id')
       $('#pickWinnerModal').data('id', requestId)
       $('#pickWinnerModal').modal('show');
 
@@ -65,9 +68,9 @@ class @Answers
 
   bindAnswerButtons: ->
     self = @
-    $('.answers').find('.answer-no, .answer-maybe, .answer-favorite').click ->
-      requestId = $(@).parents('.moodboard').data('id')
-      answer = $(@).data('answer')
+    $('.answers').find('.answer-no, .answer-maybe, .answer-favorite').click (e)=>
+      requestId = $(e.target).parents(@requestIdContainerSelector).data('id')
+      answer = $(e.target).data('answer')
       self.sendAnswer(requestId, answer)
 
   onDialogYesClick: (button)->
@@ -108,8 +111,8 @@ class @Answers
       onUpdateSuccess?(response)
     onUpdate
 
-  updateView: (requestId, answer)->
-    $board = $(".moodboard[data-id=#{requestId}]")
+  updateView: (requestId, answer)=>
+    $board = $(@requestIdContainerSelector).filter("[data-id=#{requestId}]")
     $board.find("button.btn[data-answer]").removeClass('result-answer')
     $board.find(" button.btn[data-answer=#{answer}]").addClass('result-answer')
 
