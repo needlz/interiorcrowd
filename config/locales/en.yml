@@ -427,8 +427,7 @@ en:
       please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
       upload: Upload
       update_submission: If you would like to update your concept board submission, please use the edit buttons below.
-      update_concept_board: >
-        Update your concept board to reflect a more customized look for client.
+      back_to_contests: Back to My Contests
     final_upload:
       note_for_client: Write a note about your board here
       note_for_client_placeholder: >

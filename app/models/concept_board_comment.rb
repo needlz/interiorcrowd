@@ -16,6 +16,8 @@ class ConceptBoardComment < ActiveRecord::Base
   belongs_to :contest_request
   belongs_to :contest_note
 
+  default_scope { order(created_at: :desc) }
+
   scope :by_designer, ->{ where(role: 'Designer') }
   scope :by_client, ->{ where(role: 'Client') }
 

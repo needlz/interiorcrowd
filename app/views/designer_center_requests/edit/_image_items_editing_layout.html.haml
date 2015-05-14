@@ -1,16 +1,14 @@
-.row.marg-top30.response{ data: { id: @request.id } }
+.row.marg-top10.response{ data: { id: @request.id } }
   .col-md-8.disablePadding
     %p.thisIsAPreview= @request_view.header_text
   .col-md-4
   .col-md-8.disablePadding
     .initialImage
-      = render partial: 'shared/moodboard', locals: { request: @request }
-      .concept-board-upload-hint= t('designer_center.edit.update_concept_board')
       - if @request.editable?
-        = link_to t('designer_center.edit.upload_new'),
-            designer_center_response_path(id: @request.id),
-            remote: true,
-            class: 'darkBorderBtn editMoodboardBtn'
+        = render partial: 'designer_center_requests/show/image_loading',
+            locals: { request: @request, button_title: t('designer_center.edit.upload_new') }
+      - else
+        = render partial: 'shared/moodboard', locals: { request: @request }
     = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
       .image-items
         .products-list
@@ -39,7 +37,7 @@
   .col-md-12.disablePadding.marg-top20
     .hLine
   .col-md-6.disablePadding
-    = link_to designer_center_response_index_path, class: tracked_link do
+    = link_to designer_center_response_path(id: @request_view.id), class: tracked_link do
       .backToEntries
         %img{ src: '/assets/lt.png' }/
         = t('designer_center.respond.back')

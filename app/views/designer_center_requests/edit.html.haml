@@ -9,12 +9,18 @@
     I18n = #{ translations_to_json('client_center') }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
+    ConceptBoardUploader.init(window.conceptBoardUploaderI18n)
+
 - content_for :designer_center_content do
   .container.animated.fadeInDown.bottom60
     .row
       - if @request_view.current_phase_index.present?
         = render partial: 'clients/client_center/entries/phases',
                  locals: { stripe: @editing_page.phases_stripe }
+      = link_to designer_center_response_index_path, class: tracked_link do
+        .backToEntries
+          %img{ src: '/assets/lt.png' }/
+          = t('designer_center.edit.back_to_contests')
     = render @editing_page.view_partial
 
 = render partial: 'designer_center/layout'
