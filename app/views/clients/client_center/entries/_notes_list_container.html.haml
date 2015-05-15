@@ -1,0 +1,9 @@
+%h4= t('client_center.entries.your_note')
+#scrollbox4.notes.client-notes-list
+  %ul
+    .template
+      %li
+        %p.note-text
+          %span.time-ago
+      %li.delimiter
+    = render partial: 'clients/client_center/entries/notes_list', locals: { notes: notes }

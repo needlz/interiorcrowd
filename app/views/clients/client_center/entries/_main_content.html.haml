@@ -1,7 +1,8 @@
+- readonly = defined?(readonly) ? readonly : false
 .row
   .col-md-8.disablePadding
     = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: PhasesStripe.new(last_step: 0) }
+             locals: { stripe: phases_stripe }
   = render partial: 'clients/client_center/entries/responses_filter',
       locals: { selected_answer: params[:answer] }
 - if @requests_present
@@ -11,5 +12,5 @@
 .pagination-row.text-center
   = will_paginate(@contest_requests, class: 'pageNumber intc-pagination center-block')
 - if @client
-  = render partial: 'clients/client_center/entries/notes'
-  = render partial: 'clients/client_center/entries/user_invitations'
+  = render partial: 'clients/client_center/entries/notes', locals: { readonly: readonly }
+  = render partial: 'clients/client_center/entries/user_invitations', locals: { readonly: readonly }

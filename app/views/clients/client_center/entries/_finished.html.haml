@@ -3,7 +3,7 @@
     .col-md-12
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: PhasesStripe.new(last_step: 2) }
+          locals: { stripe: @entries_page.phases_stripe }
 
     .col-md-12.marg-top20
       .designerShareBox
