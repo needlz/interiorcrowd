@@ -18,7 +18,12 @@ module DesignerNotifications
     end
 
     def href(spectator = nil)
-      designer_center_response_path(id: contest.response_of(spectator).id)
+      contest_request = contest.response_of(spectator)
+      if contest_request
+        designer_center_response_path(id: contest.response_of(spectator).id)
+      else
+        designer_center_contest_path(id: contest.id)
+      end
     end
 
     def type

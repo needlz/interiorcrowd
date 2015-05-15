@@ -15,32 +15,29 @@
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
 = render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
-- if @won_contest_request.try(:status) == 'finished'
-  - content_for :client_center_content do
-    = render partial: 'clients/client_center/entries/final_page', locals: {request: @won_contest_request}
-  = render partial: 'clients/client_center/layout'
-- else
-  - content_for :client_center_content do
-    .entries-container
-      - unless @won_contest_request
-        - if @contest
-          %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
-          = render partial: 'clients/client_center/entries/pictures_and_dimensions_reminder' unless @contest_view.try(:have_space_views_details)
-          - if @requests_present || @comments_present
-            = render partial: 'clients/client_center/entries/main_content'
-          - else
-            - if @contest.designers_invitation_period?
-              = render partial: 'clients/client_center/entries/designers_to_invite',
-                  locals: { designers: @invitable_designer_views }
-            = render partial: 'clients/client_center/entries/more_features'
-      - else
-        = render partial: "clients/client_center/entries/#{@won_contest_request.status}",
-            locals: {request: @won_contest_request}
+- content_for :client_center_content do
+  .entries-container
+    - unless @won_contest_request
+      - if @contest
+        %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
+        = render partial: 'clients/client_center/entries/pictures_and_dimensions_reminder' unless @contest_view.try(:have_space_views_details)
+        - if @requests_present || @comments_present
+          = render partial: 'clients/client_center/entries/main_content',
+              locals: { phases_stripe: PhasesStripe.new(last_step: 0) }
+        - else
+          - if @contest.designers_invitation_period?
+            = render partial: 'clients/client_center/entries/designers_to_invite',
+                locals: { designers: @invitable_designer_views }
+          = render partial: 'clients/client_center/entries/more_features'
+    - else
+      = render @entries_page.partial
 
-  - if params[:signed_up].present?
-    = render partial: 'shared/congratulations_layout',
-        locals: { content: (yield :client_center_content),
-                  container_class: try(:container_class)  }
-  - else
-    = render partial: 'clients/client_center/layout', locals: { container_class: 'bottom60 entries-page' }
+- if params[:signed_up].present?
+  = render partial: 'shared/congratulations_layout',
+      locals: { content: (yield :client_center_content),
+                container_class: try(:container_class)  }
+- else
+  = render partial: 'clients/client_center/layout',
+      locals: { container_class: ('bottom60 entries-page' unless @won_contest_request.try(:status) == 'finished') }
+
 = render partial: 'clients/client_center/entries/collaboration/finalize_design_confirmation'

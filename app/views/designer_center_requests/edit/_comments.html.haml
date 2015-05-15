@@ -34,12 +34,11 @@
               .col-md-6
                 %p.comment-time
             %p.comment-text
-
-    .commentTextArea
-      %p.designerName
-      %textarea{ request: request.id }
-      %button.comment-create= t('designer_center.edit.send')
-
+    - unless defined?(readonly) && readonly
+      .commentTextArea
+        %p.designerName
+        %textarea{ request: request.id }
+        %button.comment-create= t('designer_center.edit.send')
 
 :javascript
     $(document).ready(function(){

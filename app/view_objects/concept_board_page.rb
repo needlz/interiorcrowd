@@ -1,14 +1,11 @@
-class ConceptBoardPage
-
-  attr_reader :phases_stripe
+class ConceptBoardPage < PhasesHolder
 
   def initialize(options)
     @contest_request = options[:contest_request]
     @preferred_view_index = options[:preferred_view].to_i if options[:preferred_view]
     @contest_request_view = options[:contest_request_view]
     @view_context = options[:view_context]
-
-    @phases_stripe = create_phases_stripe
+    super()
   end
 
   def selected_step
