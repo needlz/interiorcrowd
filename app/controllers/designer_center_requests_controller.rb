@@ -2,7 +2,6 @@ class DesignerCenterRequestsController < ApplicationController
   before_filter :set_designer
 
   def index
-    binding.pry
     respond_to do |format|
       format.any(:js, :html) {
         responses_query = DesignerResponsesQuery.new(@designer)
@@ -14,7 +13,6 @@ class DesignerCenterRequestsController < ApplicationController
   end
 
   def show
-    binding.pry
     @request = @designer.contest_requests.find(params[:id])
     @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
@@ -29,7 +27,6 @@ class DesignerCenterRequestsController < ApplicationController
   end
 
   def edit
-    binding.pry
     @request = @designer.contest_requests.find(params[:id])
     return redirect_to designer_center_response_path(id: @request.id) if !@request.details_editable? || @request.draft? || @request.submitted?
     @navigation = Navigation::DesignerCenter.new(:requests)
