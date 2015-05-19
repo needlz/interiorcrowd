@@ -1,0 +1,133 @@
+.designer-voice {
+  margin-bottom: 10px;
+}
+
+.volume-bar{
+  width: 45px;
+  height: 5px;
+  position: absolute;
+  left: 15px;
+  top: 2px;
+
+  .ui-slider-handle {
+    height: 15px;
+    width: 5px;
+    margin-left: -2px;
+  }
+}
+
+.volume-icon {
+  top: -6px;
+}
+
+.play-buttons {
+  float: left;
+
+  span {
+    top: -6px;
+    cursor: pointer;
+  }
+}
+
+.designBox {
+  text-align: left;
+
+  .title {
+    line-height: 55px;
+    margin-bottom: -24px;
+  }
+
+  .designerName {
+    font-size: 24px;
+    font-weight: bold;
+    width: 50%;
+  display: inline-block;
+  }
+
+  .player {
+    display: inline;
+    width: 50%;
+    margin-top: 13px;
+
+    .voice {
+      margin-right: 35px;
+
+      .text {
+        margin-right: 10px;
+        line-height: 31px;
+      }
+    }
+
+    .jp-time-holder {
+      display: none;
+    }
+
+    .jp-volume-controls {
+      display: none;
+    }
+
+    .jp-interface {
+      height: 31px !important;
+    }
+
+    .jp-controls {
+      padding-top: 7px !important;
+    }
+  }
+
+  .playback-icon {
+    cursor: pointer;
+    vertical-align: inherit;
+  }
+}
+
+#new_contest_request {
+  .sidebarComments{
+    border: none;
+  }
+  .sidebarComments > p{
+    border: none;
+    padding-left: 0px;
+    line-height: 0px;
+    margin-bottom: 0px;
+  }
+
+  .commentTextArea{
+    padding: 0px;
+  }
+
+  .noteTextarea{
+    height: 10em;
+  }
+
+  .designerName {
+    height: 66px;
+  }
+
+  .designerName p{
+    line-height: 66px;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  .designerTitle {
+    margin-bottom: 1.5em;
+  }
+
+  .commentTextArea textarea{
+    height: 100%;
+  }
+
+  .comments-title {
+    font-weight: bold;
+  }
+
+  .comment-textarea{
+    height: 6em;
+    overflow: visible;
+  }
+
+  .conceptMoodboardImg{
+    margin-top: 0px;
+  }
+}

@@ -845,6 +845,7 @@ en:
     me: Me
     now: now
     ago: ' ago'
+    all_designer: to all
 
   login:
     email: Email address

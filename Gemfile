@@ -61,6 +61,7 @@ group :development do
   gem 'lol_dba'  #https://github.com/plentz/lol_dba
   gem 'parallel_tests'
   gem 'awesome_print', require: 'ap'
+  gem 'pry'
 end
 
 group :test do

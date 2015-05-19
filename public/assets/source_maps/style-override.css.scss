@@ -1,0 +1,176 @@
+.joinContestHeader div {
+  line-height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.joinContestBox .row .col-xs-2 {
+  text-align: center;
+  padding: 0px;
+}
+
+.suggestedContestHeader div {
+  line-height: 25px;
+  margin-top: 10px;
+  padding: 0px;
+}
+
+.joinContestBox > .row > .col-md-12 {
+  height: 35px;
+  line-height: 25px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.cover_image {
+  background-position: top;
+}
+
+.feedbackFromOthers > div:nth-child(1) p {
+  font-size: 16px;
+  word-wrap: break-word;
+}
+
+.btnGroupComments {
+  display: flex;
+}
+
+.tableCell {
+  display: table;
+  height: 350px;
+  border-top: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.tableCell p {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  padding: 0px 50px;
+  color: #231f20;
+  font-size: 18px;
+}
+
+.invitesBtn {
+  color: #5bbff8;
+  background: #FFF;
+  border: 1px solid #5bbff8;
+}
+
+.invitesBtn[reverse] {
+  color: #FFF;
+  background: #5bbff8;
+}
+
+.commentsBtn[reverse] {
+  color: #FFF;
+  background: #63cf4e;
+}
+
+.winsBtn[reverse] {
+  color: #FFF;
+  background: #e5432d;
+}
+
+.notificationsBtn[reverse] {
+  color: #FFF;
+  background: #e4b701;
+}
+
+.btn-change-image {
+  background-color: white;
+}
+
+.title-first {
+  margin-top: 80px;
+}
+
+.logo-pc {
+  padding: 8px 0;
+}
+
+.main-menu > li > a {
+  padding: 0px 40px;
+  padding-bottom: 20px;
+}
+
+.contest-buttons {
+  .daysLeftBtn {
+    color: #165930;
+    border: 1px solid #387a53;
+    background-color: #FFF;
+  }
+
+  .btn[reverse] {
+    background-color: #409863 !important;
+    color: #fefefe !important;
+  }
+}
+
+.pinterestColor {
+  background: #bd081c;
+}
+
+.how-it-works {
+  .title {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 2em;
+  }
+}
+
+.how-it-works img {
+  height: 106px;
+}
+
+.design-knowledge {
+  top: inherit;
+}
+
+.design-knowledge p {
+  position: absolute;
+  color: #FFF;
+  background: rgba(25,25,25,0.3);
+  width: 99%;
+  font-weight: 700;
+  font-size: 30px;
+  top: 100%;
+  margin-top: -70px;
+  line-height: 70px;
+}
+
+.level-block {
+  border: 1px solid #e1e1e1;
+}
+
+.design-style-options .designer-levels .designer-level .check {
+  bottom: 45%;
+}
+
+.optionalSignup .labelHomeRight input[type=password]{
+  display: inline-block;
+  width: 100%;
+  height: 33px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  margin-bottom: 27px;
+}
+.moodboard-steps {
+  width: 720px;
+  margin-left: -2px;
+  p:first-child {
+    width: 240px;
+  }
+}
+
+.commentTextArea {
+  overflow:hidden;
+  button {
+    float: right;
+  }
+}
+.sidebarComments > p{
+  margin-bottom: -1px;
+}
