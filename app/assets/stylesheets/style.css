@@ -3670,12 +3670,8 @@ padding-bottom: 40px;
     position: relative;
 }
 
-@media (max-width: 319px) {
+@media (max-width: 320px) {
   .main-menu>li>a>img {
     display: inline-block !important;
-  }
-
-  .text-price {
-    font-size: 20px;
   }
 }
