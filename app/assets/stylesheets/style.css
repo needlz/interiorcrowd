@@ -504,8 +504,8 @@ color: #7E7E7E;
 	
 	
 	.main-menu>li>a>img {
-	margin: 0 auto;
-	display: block;
+  	margin: 0 auto;
+  	display: block;
 	}	
 }
 
@@ -3668,4 +3668,14 @@ padding-bottom: 40px;
 
 .imageWithOverlay {
     position: relative;
+}
+
+@media (max-width: 320px) {
+  .main-menu>li>a>img {
+    display: inline-block !important;
+  }
+
+  .text-price {
+    font-size: 20px;
+  }
 }

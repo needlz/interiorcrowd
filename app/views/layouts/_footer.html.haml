@@ -3,7 +3,7 @@
     .container
       .row.my-menu
         .col-md-12
-          .top-nav.col-sm-7
+          .top-nav.col-md-7.col-sm-12
             .nav-collapse
               %ul.nav.nav-tabs.text-menu.main-menu.footer-menu
                 %li
@@ -14,20 +14,20 @@
                 %li= link_to 'Terms', terms_of_service_path, class: tracked_link
                 %li
                   %a{ href: coming_soon_path, class: tracked_link } Privacy Policy
-          .top-nav.col-sm-5
+          .top-nav.col-md-5.col-sm-12
             .nav-collapse.pull-right
               %ul.nav.nav-tabs.text-menu.main-menu
                 %li
                   %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Twitter' } }
                     %img{:src => '/assets/icons/twitter.png' }/
                 %li
-                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Facebook' } }
+                  %a{ href: coming_soon_path, class: tracked_link + " right-side", data: { name: 'Facebook' } }
                     %img{:src => '/assets/icons/facebook.png' }/
                 %li
                   %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Instagram' } }
                     %img{:src => '/assets/icons/instagram.png' }/
                 %li
-                  %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Pinterest' } }
+                  %a{ href: coming_soon_path, class: tracked_link + " right-side", data: { name: 'Pinterest' } }
                     %img{:src => '/assets/icons/pinterest.png' }/
   .col-md-12.text-center.copyright
     %b

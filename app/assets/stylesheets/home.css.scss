@@ -132,11 +132,11 @@ input[type="radio"].smallRadio + label span {
 }
 
 .footer .main-menu > li > a {
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 10px 25px 14px !important;
+/*  padding-right: 25px;
   padding-top: 10px;
   padding-bottom: 14px;
-}
+*/}
 
 .footer .footer-menu > li > a {
   padding-left: 25px;
@@ -214,7 +214,7 @@ body {
   }
 
   .footer  .top-nav.col-sm-5 .nav-collapse li {
-    width: 50%;
+    /*width: 50%;*/
   }
 
 }
@@ -261,4 +261,27 @@ body {
     border-color: #333333;
   }
 
+}
+
+@media (max-width: 1024px) and (min-width: 321px) {
+  .footer .main-menu > li {
+    width: 25%;
+  }
+  .footer .main-menu.footer-menu > li {
+    width: 33.3333%;
+  }
+}
+
+@media (max-width: 320px) {
+  .footer .main-menu.footer-menu > li {
+    width: 100%;
+  }
+
+  .footer .main-menu > li > a {
+    padding: 20px 30px !important;
+  }  
+
+  .footer .main-menu > li > a.right-side {
+    text-align: left;
+  }  
 }
