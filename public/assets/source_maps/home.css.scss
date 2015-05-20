@@ -263,7 +263,7 @@ body {
 
 }
 
-@media (max-width: 1024px) and (min-width: 321px) {
+@media (max-width: 991px) and (min-width: 320px) {
   .footer .main-menu > li {
     width: 25%;
   }
@@ -272,7 +272,7 @@ body {
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 319px) {
   .footer .main-menu.footer-menu > li {
     width: 100%;
   }
@@ -283,5 +283,9 @@ body {
 
   .footer .main-menu > li > a.right-side {
     text-align: left;
-  }  
+  }
+
+  .footer .main-menu > li {
+    width: 50%;
+  }
 }
