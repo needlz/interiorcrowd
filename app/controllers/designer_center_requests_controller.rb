@@ -28,7 +28,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def edit
     @request = @designer.contest_requests.find(params[:id])
-    return redirect_to designer_center_response_path(id: @request.id) unless @request.details_editable?
+    return redirect_to designer_center_response_path(id: @request.id) if !@request.details_editable? || @request.draft? || @request.submitted?
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
     @request_view = ContestResponseView.new(@request)

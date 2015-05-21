@@ -1,0 +1,10 @@
+.level-block {
+  display: inline-block;
+  margin-left: -10px;
+  cursor: pointer;
+}
+
+.typeahead.dropdown-menu {
+  max-height: 200px;
+  overflow-y: auto;
+}

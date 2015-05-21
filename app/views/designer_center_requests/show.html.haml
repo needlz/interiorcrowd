@@ -6,22 +6,29 @@
     I18n = #{ translations_to_json('client_center') }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
+    сonceptBoardUploaderI18n = #{ translations_to_json(['contests', 'space', 'uploading_image']) }
+    ConceptBoardUploader.init(window.conceptBoardUploaderI18n)
+
 - content_for :designer_center_content do
-  .animated.fadeInDown.bottom60.phase-initial
+  .animated.fadeInDown.phase-initial
     = render partial: 'clients/client_center/entries/phases',
              locals: { stripe: @show_page.phases_stripe }
+    = link_to designer_center_response_index_path, class: tracked_link do
+      .backToEntries
+        %img{ src: '/assets/lt.png' }/
+        = t('designer_center.edit.back_to_contests')
 
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding.initialImage
       - if @request.lost?
         .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
         .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
-      = render partial: 'shared/moodboard', locals: { request: @request }
       - if @request.editable?
-        = link_to t('designer_center.responses.item.edit_concept_board'),
-            designer_center_response_path,
-            remote: true,
-            class: "editMoodboardBtn marg-top20"
+        = render partial: 'designer_center_requests/show/image_loading',
+            locals: { request: @request,
+              button_title: t('designer_center.responses.item.edit_concept_board') }
+      - else
+        = render partial: 'shared/moodboard', locals: { request: @request }
       = render @show_page.image_items_partial if @show_page.image_items_partial
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }

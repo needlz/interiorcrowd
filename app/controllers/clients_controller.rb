@@ -22,7 +22,8 @@ class ClientsController < ApplicationController
     if @won_contest_request
       @entries_page = EntriesConceptBoard.new({
           contest_request: @won_contest_request,
-          view_context: view_context
+          view_context: view_context,
+          preferred_view: params[:view]
       })
       @visible_image_items = @entries_page.image_items.paginate(per_page: 4, page: params[:page])
       @share_url = public_designs_url(token: @won_contest_request.token)

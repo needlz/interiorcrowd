@@ -116,11 +116,11 @@ ActiveRecord::Schema.define(version: 20150507161651) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
+    t.string   "status",             default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer"
-    t.string   "status",             default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token"
@@ -168,12 +168,6 @@ ActiveRecord::Schema.define(version: 20150507161651) do
 
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
-
-  create_table "contests_images", force: true do |t|
-    t.integer "contest_id"
-    t.integer "image_id"
-    t.integer "kind"
-  end
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",           default: 0, null: false
@@ -304,6 +298,7 @@ ActiveRecord::Schema.define(version: 20150507161651) do
   end
 
   create_table "portfolios", force: true do |t|
+    t.integer "background_id"
     t.integer "designer_id",                             null: false
     t.integer "years_of_experience"
     t.boolean "education_gifted"
@@ -327,7 +322,6 @@ ActiveRecord::Schema.define(version: 20150507161651) do
     t.boolean "transitional_style",      default: false
     t.boolean "rustic_elegance_style",   default: false
     t.boolean "color_pop_style",         default: false
-    t.integer "background_id"
   end
 
   create_table "preferred_retailers", force: true do |t|

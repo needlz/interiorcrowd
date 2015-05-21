@@ -80,7 +80,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def comment_on_board(params, contest_request_id)
-    template "comment_on_board"
+    template 'comment_on_board'
     @url = url_for_comment_on_board(params[:role], contest_request_id)
     set_template_values(text: render_to_string("mails/#{params[:role]}s_comment_on_board"))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
@@ -89,11 +89,13 @@ class UserMailer < ActionMailer::Base
 
 
   def note_to_concept_board(params)
-    template "note_to_concept_board"
+    template 'note_to_concept_board'
     @url = updates_designer_center_index_url
-    set_template_values(text: render_to_string("mails/note_to_concept_board"))
+    @client_name = params[:client_name]
+    @comment = ERB::Util.html_escape(params[:comment]).split("\n").join("<br/>")
+    set_template_values(text: render_to_string('mails/note_to_concept_board'))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t("mails.note_to_concept_board.subject")
+         subject: I18n.t('mails.note_to_concept_board.subject')
   end
 
   def new_product_list_item(params)

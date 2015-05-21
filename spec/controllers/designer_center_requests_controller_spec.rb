@@ -271,7 +271,7 @@ RSpec.describe DesignerCenterRequestsController do
         request = submitted_request
 
         get :edit, id: request.id
-        expect(response).to render_template(:edit)
+        expect(response).to redirect_to designer_center_response_path(id: request.id)
 
         request.winner!
         get :edit, id: request.id

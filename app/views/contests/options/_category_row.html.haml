@@ -4,10 +4,10 @@
   }
 
 .col-md-12{ class: classes }
-  .col-xs-2
+  .col-xs-2.col-sm-1
     = contest_creation_category_radiobutton(design_category)
     = label_tag("design_brief_design_category_#{ design_category.id }", '')
-  = label_tag("design_brief_design_category_#{ design_category.id }", class: 'col-xs-10') do
+  = label_tag("design_brief_design_category_#{ design_category.id }", class: 'col-xs-10 col-sm-11') do
     %span.text-price
       %b= design_category.description
 

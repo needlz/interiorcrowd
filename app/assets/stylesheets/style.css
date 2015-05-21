@@ -333,7 +333,7 @@ font-weight: bold;
 	left: 0;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
 	
 	.circle2 {margin: 0 auto; margin-bottom: 20px;}
 	
@@ -497,15 +497,15 @@ color: #7E7E7E;
 
 .footer-menu li a {padding-top: 16px;}
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
 	.footer-menu li a {
 		text-align: center;
 	}	
 	
 	
 	.main-menu>li>a>img {
-	margin: 0 auto;
-	display: block;
+  	margin: 0 auto;
+  	display: block;
 	}	
 }
 
@@ -929,7 +929,7 @@ padding-left:12px;
 padding-right:12px;
 }
 
-@media (max-width: 992px) { 
+@media (max-width: 991px) { 
 
 	.circle-big {
 	 width: 100%; 
@@ -3668,4 +3668,10 @@ padding-bottom: 40px;
 
 .imageWithOverlay {
     position: relative;
+}
+
+@media (max-width: 320px) {
+  .main-menu>li>a>img {
+    display: inline-block !important;
+  }
 }

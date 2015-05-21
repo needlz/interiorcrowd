@@ -2,7 +2,8 @@
 .hLine10
 .row.marg-top20
   .col-md-12
-    %p.grayP14= block_text
+    - if defined?(block_text)
+      %p.grayP14= block_text
   - image_items.each do |image_item|
     = render partial: 'clients/client_center/entries/collaboration/image_content',
         locals: { choosable: choosable,

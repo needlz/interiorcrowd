@@ -4,8 +4,10 @@
       %img{:height => "40", :src => "/assets/profile-img.png", :width => "40"}/
     .col-md-10
       .row
-        .col-md-6
+        .col-md-3
           %p.comment-username= message_name(user, comment)
+        .col-md-3
+          .comment-text= message_to_name(user, comment)
         .col-md-6
           %p.comment-time= time_ago_in_words(comment.created_at, include_seconds: true) + t('board_comments.ago')
-      %p.comment-text= comment.text
+      %p.comment-text= message_body(comment)
