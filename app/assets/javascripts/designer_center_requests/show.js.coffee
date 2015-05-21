@@ -81,4 +81,3 @@ class @ResponseView
 $ ->
   responseView = new ResponseView()
   responseView.init()
-  ConceptBoardUploader.init(window.conceptBoardUploaderI18n)
