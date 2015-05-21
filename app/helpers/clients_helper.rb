@@ -8,12 +8,8 @@ module ClientsHelper
     if comment.role == user.role
       t('board_comments.me')
     else
-      if user.role == t('faq.menu.customer')
-        author = comment.author
-        author.nil? ? "" : author.first_name + " " +  author.last_name
-      else
-        comment.role
-      end
+      author = comment.author
+      author.nil? ? "" : author.first_name + " " +  author.last_name
     end
   end
 
