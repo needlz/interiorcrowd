@@ -19,6 +19,7 @@ class @ConceptBoardUploader
           @saveChange()
 
   @saveChange: ()=>
+    alert "saveChange"
     requestId = $('.response[data-id]').data('id')
     if requestId
       $.ajax(
