@@ -24,7 +24,8 @@ class ContestNote < ActiveRecord::Base
   scope :by_client, ->{ where.not(client_id: nil) }
 
   def author_name
-    contest.client_name
+    # contest.client_name
+    author.name
   end
 
   def author
