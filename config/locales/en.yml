@@ -157,6 +157,9 @@ en:
       uploading_image:
          upload_button: Upload images
          uploading: Uploading...
+      final_upload:
+        upload_button: Edit your final design
+        uploading: Uploading...
       dimensions:
         title: Add dimensions of your space.
         hint: Please see our %{faqs_link} for measuring your space if you need help.
