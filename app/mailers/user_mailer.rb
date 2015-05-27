@@ -82,6 +82,7 @@ class UserMailer < ActionMailer::Base
   def comment_on_board(params, contest_request_id)
     template 'comment_on_board'
     @url = url_for_comment_on_board(params[:role], contest_request_id)
+    @author_name = params[:username]
     set_template_values(text: render_to_string("mails/#{params[:role]}s_comment_on_board"))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
          subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject")

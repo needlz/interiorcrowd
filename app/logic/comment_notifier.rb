@@ -3,7 +3,7 @@ class CommentNotifier
   def initialize(contest_request, user)
     @contest_request = contest_request
     @user_role = user.class.name.downcase
-
+    @author = user
   end
 
   def perform
@@ -13,11 +13,11 @@ class CommentNotifier
 
   private
 
-  attr_reader :user_role, :contest_request
+  attr_reader :user_role, :contest_request, :author
 
   def send_email
     Jobs::Mailer.schedule("comment_on_board",
-                          [{ username: user.name, email: user.email, role: user_role, search_by: "#{user_role}s_comment_on_board" }, contest_request.id],
+                          [{ username: author.name, email: user.email, role: user_role, search_by: "#{user_role}s_comment_on_board" }, contest_request.id],
                           { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
   end
 
