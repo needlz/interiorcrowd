@@ -21,3 +21,4 @@
     = form_tag create_beta_session_path do
       = password_field_tag :password
       = button_tag t('sign_in_beta.go'), type: 'submit', class: 'btn fullWidth marg-top20'
+      = hidden_field_tag "incoming_url", @incoming_url

@@ -187,6 +187,11 @@ body {
   height: 180px; /* Height of the footer */
 }
 
+#body-footer .footer {
+  padding-right:0px !important;
+  padding-left:0px !important;
+}
+
 .mm-page {
   height: 100%;
 }
