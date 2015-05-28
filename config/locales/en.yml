@@ -265,10 +265,12 @@ en:
         'yes': 'Yes'
         'no': 'No'
       collaboration:
-        this_is_a_preview: |
-          Now that you have chosen a designer, the fun really starts. Please give your designer as
-          much feedback as possible to make sure you get the best design just for you
-        check_message: Please click "check" if you like it or the "x" if you do not. Doing this will help the designer make the best design for you.
+        this_is_a_preview: >
+          Now that you have chosen your designer, the fun really begins.
+          Please give your designer as much feedback as possible.
+        check_message: >
+          Please click "check" if you like it or the "x" if you do not.
+          Doing this will help the designer make the best design for you.
         done_btn: Done and move to final design
         finalize_design_modal:
           title: Ready for the final design?
@@ -956,3 +958,7 @@ en:
     enter_email: Enter your email address below.
     know_password: Know your password?
     sign_in: Sign in
+
+  product_list:
+    expand: ... see more
+    collapse: Hide

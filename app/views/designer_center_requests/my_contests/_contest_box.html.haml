@@ -25,4 +25,6 @@
         %span.color-text= color
         %span{style: "background: ##{color}"}
   .clearfix
-  = link_to t('designer_center.my_contests.see_more'), designer_center_contest_path(contest.id), class: 'seeMoreLink'
+  = link_to t('designer_center.my_contests.see_more'),
+      designer_center_contest_path(contest.id),
+      class: 'seeMoreLink'
