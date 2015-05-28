@@ -2,7 +2,10 @@ class ContestNoteCreation
 
   def initialize(contest, text, current_user)
     @contest = contest
-    @client_id = current_user.id if current_user.client?
+    if current_user.client?
+      @client_id = current_user.id
+      @client = Client.find(current_user.id)
+    end
     @designer_id = current_user.id if current_user.designer?
     @text = text.strip
   end
@@ -14,7 +17,7 @@ class ContestNoteCreation
 
   private
 
-  attr_reader :client_id, :designer_id, :contest, :text
+  attr_reader :client_id, :designer_id, :contest, :text, :client
 
   def notify_designers(comment)
     subscribed_designers_ids.each do |designer|
@@ -35,7 +38,10 @@ class ContestNoteCreation
 
   def schedule_email(designer)
     Jobs::Mailer.schedule(:note_to_concept_board,
-                          [{ username: designer.name, email: designer.email, note_to_designer: designer.id }],
+                          [{ username: designer.name,
+                             email: designer.email,
+                             client_name: client.name,
+                             comment: text }],
                           { run_at: digest_minutes_interval, contest_id: contest.id })
   end
 
@@ -51,12 +57,13 @@ class ContestNoteCreation
     Settings.comment_board_digest_minutes_interval.to_i.minutes.from_now.utc
   end
 
-  private
-
   def duplicate_in_concept_board_inbox(comment, designer)
     contest_request = contest.response_of(designer)
     if contest_request
-      ConceptBoardComment.create!(user_id: client_id, role: 'Client', contest_request_id: contest_request.id, contest_note_id: comment.id)
+      ConceptBoardComment.create!(user_id: client_id,
+                                  role: 'Client',
+                                  contest_request_id: contest_request.id,
+                                  contest_note_id: comment.id)
     end
   end
 
