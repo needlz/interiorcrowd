@@ -6,7 +6,6 @@
   })
 
   $('form#new_reviewer_feedback').bind('ajax:success', function(evt, data, status, xhr){
-
     $( "#{escape_javascript(render partial: 'clients/client_center/entries/feedback_from_others',locals: { feedback: @feedback })}" ).insertBefore( ".new_reviewer_feedback:last" );
     posting.clearTextArea();
     posting.showHint();

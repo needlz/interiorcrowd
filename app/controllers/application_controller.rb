@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   def check_beta_area_access
     return if Rails.env.staging?
     return unless beta_page?
-    redirect_to sign_in_beta_path unless beta_access_granted?
+    redirect_to sign_in_beta_path(:url => request.original_url) unless beta_access_granted?
   end
 
   def set_return_to_link

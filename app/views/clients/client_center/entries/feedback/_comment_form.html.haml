@@ -6,6 +6,7 @@
       = hidden_field_tag :token, params[:token]
       = f.text_area :text, class: 'addCommentTextarea', placeholder: t('client_center.entries.reviewer_invitations.comment_placeholder')
       = f.submit t('client_center.entries.reviewer_invitations.send_feedback'), class: 'btn marg-top20'
+      = hidden_mixpanel_submit_tag
       %p.commentSent
         = t('client_center.entries.reviewer_invitations.comment_sent')
         &nbsp;&nbsp;&nbsp;

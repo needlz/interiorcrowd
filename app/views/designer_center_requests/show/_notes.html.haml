@@ -3,7 +3,8 @@
     %img{:src => "/assets/profile-img.png"}/
   .col-md-9
     %input.designer-notes-value{ type: 'hidden', value: request.feedback }
-    %p.designerName= @request.designer.name
+    %p.designerName
+      %b= @request.designer.name
     .notes
       .view
         %p.designerNote= request.feedback
