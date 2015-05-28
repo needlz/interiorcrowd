@@ -850,6 +850,8 @@ en:
     now: now
     ago: ' ago'
     all_designer: to all
+    to_all_designer: to all designers
+    to_you: to you
 
   login:
     email: Email address
