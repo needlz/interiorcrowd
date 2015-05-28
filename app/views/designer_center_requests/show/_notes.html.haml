@@ -1,10 +1,10 @@
 .row
   .col-md-3
     %img{:src => "/assets/profile-img.png"}/
-  .col-md-9
+  .col-md-9.disablePadding.submission-info
     %input.designer-notes-value{ type: 'hidden', value: request.feedback }
-    %p.designerName
-      %b= @request.designer.name
+    %p.designerName{ style: 'margin: 8px 0px 0px 0px' }
+      %b{ style: 'font-size: 18px' }= @request.designer.name
     .notes
       .view
         %p.designerNote= request.feedback
