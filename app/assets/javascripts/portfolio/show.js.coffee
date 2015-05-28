@@ -15,6 +15,7 @@ class @Portfolio
 
   @aboutExpandButtonSelector: '.user_portfolio_profile .about .readmore'
   @aboutTextSelector: '.user_portfolio_profile .about .text'
+  @maxAboutHeightPx: 100
 
   @init: ->
     contestId = $(InvitationButton.buttonSelector).data('contest-id')
@@ -30,7 +31,9 @@ class @Portfolio
       $(@aboutExpandButtonSelector).hide()
 
   @initAboutEllipsis: ->
-    $(@aboutTextSelector).dotdotdot({ height: 100 })
+    $(@aboutTextSelector).dotdotdot({ height: @maxAboutHeightPx })
+    if $(@aboutTextSelector).height() < 100
+      $(@aboutExpandButtonSelector).hide()
 
   @expandAboutBlock: ->
     $(@aboutTextSelector).dotdotdot()
