@@ -38,6 +38,8 @@
       .text-center.logo-mobile.visible-sm.visible-xs
         %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
           %img{src: '/assets/logo2.png'}/
+        %a.btn.btn2-success.pull-right{ href: need_help_path, class: tracked_link }
+          %b= t('header.need_help')
       .row.my-menu.visible-lg.visible-md
         .col-md-2.no-padding-right.logo-pc
           %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
