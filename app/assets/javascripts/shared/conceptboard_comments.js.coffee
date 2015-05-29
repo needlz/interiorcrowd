@@ -39,6 +39,6 @@ class @ConceptboardComment
     $category =  $("##{category}")
     hasComments = $category.find('.commentContainer:last').length > 0
     if hasComments
-      $($('.message-template').html()).insertAfter($category.find(".commentContainer:last"))
+      $($('.message-template').html()).insertBefore($category.find(".commentContainer:first"))
     else
       $category.html($('.message-template').html())

@@ -48,12 +48,15 @@ RSpec.describe UserMailer do
 
   it 'creates mail about new concept board comment' do
     %w(designer client).each do |role|
-      expect(UserMailer.comment_on_board({ username: 'John Doe', email: 'johnD@example.com', role: role}, contest_request.id)).to be_present
+      expect(UserMailer.comment_on_board({ username: 'John Doe', email: 'johnD@example.com', role: role, comment: 'text'}, contest_request.id)).to be_present
     end
   end
 
   it 'creates mail about clients comment to designer' do
-    expect(UserMailer.note_to_concept_board({username: 'username', email: 'email'})).to be_present
+    expect(UserMailer.note_to_concept_board({username: 'username',
+                                             email: 'email',
+                                             comment: 'text of comment',
+                                             client_name: 'client\'s name'})).to be_present
   end
 
   it 'creates mail about new product list items' do

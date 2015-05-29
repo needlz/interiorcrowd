@@ -1,7 +1,11 @@
 Hi there!
 %br
 %br
-#{ @author_name } has left the following comment.
+#{ @author_name } has left the following comment:
+%br
+%br
+%div{ style: 'border-left: 1px solid #888; padding-left: 20px;' }
+  #{ @comment.html_safe }
 %br
 You can respond by clicking here #{ link_to('here', @url) } to view in the Client Center.
 %br
@@ -9,4 +13,4 @@ You can respond by clicking here #{ link_to('here', @url) } to view in the Clien
 Chat soon!
 %br
 %br
-The InteriorCrowd Team
+InteriorCrowd
