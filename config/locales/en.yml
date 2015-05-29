@@ -173,7 +173,12 @@ en:
         placeholder: '$2500'
       other_feedback:
         title: Other feedback or instructions?
-        placeholder: Leave a comment...
+        placeholder: |
+          Please provide additional details to the designers about your project. Some useful things to add could be:
+          * Does this room need to accommodate kids or pets?
+          * Do you know exactly what the room needs (but need help sourcing) or are you looking for inspiration?
+          * If there are particular items of furniture you need, let the designer know what they are.
+          * Are there any particular items in the room you’d like to keep?
         send: Send
     creation:
       errors:
