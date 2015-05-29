@@ -1,10 +1,17 @@
 Hi there!
 %br
 %br
-Your client has left you a note. You can view it #{ link_to('here', @url) }.
+#{ @author_name } has left the following comment:
+%br
+%br
+%div{ style: 'border-left: 1px solid #888; padding-left: 20px;' }
+  #{ @comment.html_safe }
+%br
+%br
+To respond, you can click #{ link_to('here', @url) }.
 %br
 %br
 Chat soon!
 %br
 %br
-The InteriorCrowd Team
+InteriorCrowd
