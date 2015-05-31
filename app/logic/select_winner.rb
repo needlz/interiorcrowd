@@ -25,7 +25,9 @@ class SelectWinner
   def create_default_image_items
     ImageItem::KINDS.each do |kind|
       unless contest_request.image_items.where(kind: kind.to_s).exists?
-        contest_request.image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'),
+        # contest_request.image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'),
+        #                                     kind: kind.to_s)
+        contest_request.image_items.create!(text: '',
                                             kind: kind.to_s)
       end
     end
