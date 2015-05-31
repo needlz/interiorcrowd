@@ -22,16 +22,17 @@
         = t('designer_center.edit.back_to_contests')
 
   .row.marg-top30.response{ data: { id: @request.id } }
-    .col-md-8.disablePadding.initialImage
-      - if @request.lost?
-        .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
-        .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
-      - if @request.editable?
-        = render partial: 'designer_center_requests/show/image_loading',
-            locals: { request: @request,
-              button_title: t('designer_center.responses.item.edit_concept_board') }
-      - else
-        = render partial: 'shared/moodboard', locals: { request: @request }
+    .col-md-8.disablePadding
+      .initialImage
+        - if @request.lost?
+          .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
+          .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
+        - if @request.editable?
+          = render partial: 'designer_center_requests/show/image_loading',
+              locals: { request: @request,
+                button_title: t('designer_center.responses.item.edit_concept_board') }
+        - else
+          = render partial: 'shared/moodboard', locals: { request: @request }
       = render @show_page.image_items_partial if @show_page.image_items_partial
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }

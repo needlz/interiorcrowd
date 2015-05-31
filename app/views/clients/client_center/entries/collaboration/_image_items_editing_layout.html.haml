@@ -2,25 +2,33 @@
 
 .container.animated.fadeInDown.bottom60
   .row
-    .col-md-8.disablePadding{ style: 'margin-bottom: 20px;' }
+    .col-md-8.disablePadding
       = render partial: 'clients/client_center/entries/phases',
           locals: { stripe: @entries_page.phases_stripe }
+      %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
+    - if show_time_button?
+      .col-md-4
+        %p.timeLeft There are 3 days left
     %br/
     %br/
   .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
     = render partial: 'shared/moodboard', locals: { request: request }
     .image-items
       = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: false,
+          locals: { choosable: true,
           title: t('designer_center.edit.products_list'),
-          image_items: request.product_items.for_view }
+          block_text: t('client_center.entries.collaboration.check_message'),
+          image_items: product_items.for_mark }
       = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: false,
+          locals: { choosable: true,
           title: t('designer_center.edit.similar_styles'),
-          image_items: request.similar_styles.for_view }
+          block_text: t('client_center.entries.collaboration.check_message'),
+          image_items: similar_styles.for_mark }
 
   .col-md-4
     = render partial: 'contest_requests/submission_info',
         locals: { designer: request.designer, submitted_at: request.created_at, request: request  }
     = render partial: 'designer_center_requests/edit/comments',
-        locals: { request: request, comments: request.comments, show_comment_switcher: true, readonly: true }
+        locals: { request: request, comments: request.comments, show_comment_switcher: true }
+  = render partial: 'clients/client_center/entries/collaboration/footer_buttons',
+      locals: { request: request }

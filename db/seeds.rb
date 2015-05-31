@@ -38,7 +38,7 @@ DesignSpace.create(id: 12, name: 'Guest (half bath)', pos: 36, parent_id: 6)
 
 DesignSpace.create(id: 13, name: 'Kitchen', pos: 40, parent_id: 0)
 DesignSpace.create(id: 14, name: 'Living Room', pos: 50, parent_id: 0)
-DesignSpace.create(id: 15, name: 'Family Room/Den', pos: 60, parent_id: 0)
+DesignSpace.create(id: 15, name: 'Family Room', pos: 60, parent_id: 0)
 
 DesignSpace.create(id: 16, name: 'Dining Room', pos: 70, parent_id: 0)
 DesignSpace.create(id: 17, name: 'Mudroom', pos: 80, parent_id: 0)

@@ -5,6 +5,7 @@
     = favicon_link_tag '/assets/favicon.ico'
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
+    = render 'shared/mixpanel'
     = csrf_meta_tags
     / Le HTML5 shim, for IE6-8 support of HTML5 elements
     /[if lt IE 9]
@@ -13,6 +14,10 @@
     = render partial: 'shared/global_scripts'
 
   %body.pull_top
-    = render partial: 'layouts/logo_header'
-    = yield
-    = render partial: 'layouts/footer'
+    #body-container
+      #body-header
+        = render partial: 'layouts/logo_header'
+      #body-content
+        = yield
+      #body-footer
+        = render partial: 'layouts/footer'

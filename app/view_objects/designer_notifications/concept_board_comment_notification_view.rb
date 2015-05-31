@@ -13,7 +13,7 @@ module DesignerNotifications
     end
 
     def text
-      "#{ comment.author_name }: #{ comment.text }"
+      "#{ comment.author_name }(" + I18n.t('board_comments.to_you') + "): #{ comment.text }"
     end
 
     def href(spectator = nil)

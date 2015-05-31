@@ -1,7 +1,7 @@
 .row
   .col-md-3
     = image_tag '/assets/profile-img.png'
-  .col-md-9
+  .col-md-9.disablePadding.submission-info
     %p.designerName
       - designer_view = DesignerView.new(designer)
       - if designer_view.portfolio_path.present?
@@ -9,9 +9,9 @@
           = designer.name
       - else
         = designer.name
-      %span
-        = t('client_center.moodboard_details.submitted_on')
-        = submitted_at.strftime('%m/%d/%Y')
+    %span.submitted-on
+      = t('client_center.moodboard_details.submitted_on')
+      = submitted_at.strftime('%m/%d/%Y')
 .hLine
 .designer-voice
   = render partial: 'contest_requests/listen', locals: { request: request } if request.sound

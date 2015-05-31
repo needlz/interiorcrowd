@@ -41,8 +41,42 @@
   }
 }
 
-.editCover{
-  img {
-    background-color: rgba(0,0,0,0.4)
+.editCover {
+
+  text-decoration: none !important;
+  border-radius: 5px;
+  border: white solid 2px;
+  padding: 10px 25px;
+
+  .label {
+    padding: 0px;
+    display: inline;
+    font-size: 16px;
+    margin-right: 5px;
   }
+  img {
+    display: inline;
+    margin-top: -6px;
+    width: 13px;
+  }
+}
+
+.editCover:hover, .inviteToContest:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.inviteToContest, .inviteToContest:hover, .inviteToContest:focus{
+  font-weight: 700;
+  font-size: 16px;
+  border: 2px solid white;
+  width: 176px;
+  text-align: center;
+  height: 48px;
+  line-height: 48px;
+  color: white;
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 330px;
+  border-radius: 5px;
 }

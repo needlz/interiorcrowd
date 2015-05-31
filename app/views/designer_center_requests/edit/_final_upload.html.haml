@@ -1,3 +1,6 @@
+:javascript
+  сonceptBoardUploaderI18n = #{ translations_to_json(['contests', 'space', 'final_upload']) }
+
 .row.marg-top20.response{ data: { id: @request.id } }
   = form_for contest_request, url: designer_center_response_path(id: contest_request.id) do |f|
     .col-md-3.disablePadding.text-center
@@ -11,13 +14,8 @@
               class: 'consumerNoteTextarea',
               placeholder: t('designer_center.final_upload.note_for_client_placeholder')
           .initialImage
-            = render partial: 'shared/moodboard', locals: { request: contest_request }
-            %p.grayP14.marg-top10
-              %i= t('designer_center.final_upload.file_info')
-            = link_to t('designer_center.final_upload.upload'),
-                designer_center_response_path,
-                remote: true,
-                class: 'darkBorderBtn uploadFinalDesignBtn font20 upload-button'
+            = render partial: 'designer_center_requests/show/image_loading',
+                locals: { request: @request, button_title: t('designer_center.final_upload.upload')}
           %p.marg-top20.font16.makeMeBlack.makeMeBold= t('designer_center.final_upload.upload_description')
           = f.text_area :pull_together_note, class: 'consumerNoteTextarea'
           %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')

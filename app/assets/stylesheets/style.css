@@ -1910,24 +1910,11 @@ textarea.productsMoodboardAbove{
 	bottom: 15px;
 	font-weight: 700;
 }
-.inviteToContest{
-	font-weight: 700;
-	font-size: 18px;
-	border:1px solid #000;
-	width: 176px;
-	text-align: center;
-	height: 48px;
-	line-height: 48px;
-	color: #000;
-	display: inline-block;
-	position: absolute;
-	left: 75%;
-	top: 330px;
-}
+
 .editCover{
 	display: inline-block;
 	position: absolute;
-	left: 92%;
+	right: 0px;
 	top: 337px;
 }
 .cover_image{

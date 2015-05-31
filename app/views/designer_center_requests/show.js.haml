@@ -1,8 +1,0 @@
-:plain
-  $(".initialImage").after(function() {
-    return $(this).clone().html("#{escape_javascript(render(partial: 'designer_center_requests/show/image_loading', 
-    locals: { request: @request, button_title: t('designer_center.final_upload.upload')}))}");
-  });
-  $(".initialImage:last").removeClass('initialImage').addClass('editable-mode')
-  $(".initialImage").hide()
-  ConceptBoardUploader.init(#{ translations_to_json(['contests', 'space', 'uploading_image']) })
