@@ -4,6 +4,6 @@
       %h1.title= t('contests.space.other_feedback.title')
     .clearfix
     .col-md-12.no-padding-left.no-padding-right
-      %textarea{ placeholder: t('contests.space.other_feedback.placeholder'), type: 'text', name: 'design_space[feedback]' }
+      %textarea{ type: 'text', name: 'design_space[feedback]' }
         = @contest_view.feedback
     .clearfix
