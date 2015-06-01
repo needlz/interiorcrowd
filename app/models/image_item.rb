@@ -42,6 +42,7 @@ class ImageItem < ActiveRecord::Base
   end
 
   scope :for_view, ->{ order(:created_at).includes(:image) }
+  scope :for_mark, ->{ where("image_id is not NULL").order(:created_at).includes(:image) }
   scope :liked, ->{ where(mark: MARKS[:LIKE]) }
   scope :final_design, ->{ where('final = ? OR mark = ? OR mark IS NULL', true, MARKS[:LIKE]) }
   scope :collaboration, ->{ all }
