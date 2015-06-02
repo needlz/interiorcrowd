@@ -583,6 +583,11 @@ en:
           invited: Invited
         about_read_more: Read more...
         edit_profile: Edit profile
+        cover_dragging:
+          label: Drag to reposition your cover photo
+          start_dragging: Click to start repositioning your cover photo
+          save: Save
+          cancel: Cancel
 
     contests_preview:
       suggested_contests_title: Recommended contests for you to join.

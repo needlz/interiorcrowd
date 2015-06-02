@@ -145,6 +145,12 @@ RSpec.describe PortfoliosController do
         patch :update, portfolio: { awards: awards }
         expect(designer.portfolio.reload.portfolio_awards.map(&:name)).to eq awards
       end
+
+      it 'updates position of cover image' do
+        new_position = '20% 30%'
+        patch :update, portfolio: { cover_position: new_position }
+        expect(designer.portfolio.reload.cover_position).to eq new_position
+      end
     end
   end
 end

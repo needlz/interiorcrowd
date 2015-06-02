@@ -1915,7 +1915,7 @@ textarea.productsMoodboardAbove{
 	display: inline-block;
 	position: absolute;
 	right: 0px;
-	top: 337px;
+    bottom: -10px;
 }
 .cover_image{
   /*margin-top: 10px;*/

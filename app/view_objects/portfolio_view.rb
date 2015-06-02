@@ -3,6 +3,7 @@ class PortfolioView
   include Rails.application.routes.url_helpers
 
   delegate :years_of_experience, :about, :personal_picture, :designer_id, :designer, :pictures,
+           :cover_position,
            to: :portfolio,
            allow_nil: true
 
