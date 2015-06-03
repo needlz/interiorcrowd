@@ -18,9 +18,10 @@ class PortfoliosController < ApplicationController
 
   def update
     Portfolio.transaction do
-      @portfolio.update_attributes!(portfolio_params)
-      @portfolio.update_pictures(params[:portfolio]) if pictures_updated?
-      @portfolio.update_awards(params[:portfolio][:awards]) if awards_updated?
+      porfolio_update = PortfolioUpdater.new(portfolio: @portfolio,
+                                             portfolio_options: params[:portfolio],
+                                             portfolio_attributes: portfolio_params)
+      porfolio_update.perform
     end
     respond_to do |format|
       format.html { redirect_after_updated(@portfolio) }

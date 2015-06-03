@@ -51,7 +51,7 @@ RSpec.describe DesignersController do
     context 'portfolio passed' do
       it 'creates portfolio' do
         post :create, designer_creation_params.merge(portfolio_params)
-        expect(Designer.first.portfolio.pictures).to match_array portfolio_images
+        expect(Designer.first.portfolio.pictures.reload).to match_array portfolio_images
         expect(Designer.first.portfolio.example_links.map(&:url)).to match_array portfolio_links
       end
     end
