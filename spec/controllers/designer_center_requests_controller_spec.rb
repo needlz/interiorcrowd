@@ -10,7 +10,10 @@ RSpec.describe DesignerCenterRequestsController do
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE') }
+  let(:contest) { Fabricate(:contest,
+                            client: client,
+                            desirable_colors: '955e3a,ffb81b',
+                            undesirable_colors: 'EEE') }
   let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
   let(:other_contest) { Fabricate(:contest, client: client) }
   let(:submitted_request) do Fabricate(:contest_request,
@@ -119,7 +122,7 @@ RSpec.describe DesignerCenterRequestsController do
       {
         contest_request: {
           product_items: {
-            image_ids: [Fabricate(:image), Fabricate(:image)].join(','),
+            image_ids: [Fabricate(:image).id, Fabricate(:image)].join(','),
             texts: ['text 1', 'text 2'],
             ids: ['', '']
           }
@@ -149,6 +152,18 @@ RSpec.describe DesignerCenterRequestsController do
       it 'redirects to Updates page' do
         patch :update, id: request.id
         expect(response).to redirect_to designer_center_response_path(id: request.id)
+      end
+
+      it 'clears empty image items if status changed to fulfillment_ready' do
+        request.image_items.create!(kind: 'product_items')
+        request.image_items.create!(kind: 'similar_styles')
+        request.product_items.each{ |item| item.update_attributes!(image_id: Fabricate(:image).id) }
+        patch :update,
+              id: request.id,
+              contest_request: { status: 'fulfillment_ready' }
+        expect(request.reload.status).to eq 'fulfillment_ready'
+        expect(request.product_items.reload.count).to eq 2
+        expect(request.similar_styles.reload.count).to eq 0
       end
     end
 
@@ -235,7 +250,10 @@ RSpec.describe DesignerCenterRequestsController do
 
     it 'creates lookbook' do
       image = Fabricate(:image)
-      post :create, contest_id: contest.id, lookbook: { picture: { ids: [image.id] } }, contest_request: { feedback: '' }
+      post :create,
+           contest_id: contest.id,
+           lookbook: { picture: { ids: [image.id] } },
+           contest_request: { feedback: '' }
       expect(contest.requests[0].lookbook.lookbook_details).to be_present
     end
 

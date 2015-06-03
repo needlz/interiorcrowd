@@ -5,6 +5,7 @@ class ContestRequestEditing
     @contest_request_params = options[:contest_request_options]
     @contest_request_attributes = options[:contest_request_attributes]
     @event_tracker = options[:event_tracker]
+    @image_items_updater = ImageItemsDefaultUpdater
   end
 
   def perform
@@ -22,7 +23,8 @@ class ContestRequestEditing
 
   private
 
-  attr_reader :request, :contest_request_params, :contest_request_attributes, :event_tracker
+  attr_reader :request, :contest_request_params, :contest_request_attributes, :event_tracker,
+              :image_items_updater
 
   def update_image
     if contest_request_params[:image_id]
@@ -40,17 +42,18 @@ class ContestRequestEditing
 
   def update_status
     return perform_submission if contest_request_params[:status] == 'submitted'
-    request.ready_fulfillment! if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
+    perform_ready_fulfillment if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
     perform_finish if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
   end
 
   def update_image_items
-    request_phase = ContestPhases.status_to_phase(request.status)
-    new_item_attributes = {final: true} if finalize_image_items?(request_phase)
+    phase = ContestPhases.status_to_phase(request.status)
+    new_item_attributes = { final: true } if finalize_image_items?(phase)
     items_editing = ImageItemsEditing.new(
       contest_request_options: contest_request_params,
-      items_scope: request.visible_image_items(request_phase),
-      new_items_attributes: new_item_attributes
+      items_scope: request.visible_image_items(phase),
+      new_items_attributes: new_item_attributes,
+      image_items_updater: image_items_updater
     )
     items_editing.perform
     NewProductListItemNotifier.new(request).perform if items_editing.has_new_product_items
@@ -71,6 +74,15 @@ class ContestRequestEditing
     request.finish!
     request.contest.finish!
     event_tracker.final_design_submitted(request)
+  end
+
+  def perform_ready_fulfillment
+    request.ready_fulfillment!
+    destroy_empty_image_items
+  end
+
+  def destroy_empty_image_items
+    request.image_items.where(image_id: nil).destroy_all
   end
 
 end

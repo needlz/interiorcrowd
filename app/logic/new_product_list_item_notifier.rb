@@ -13,7 +13,7 @@ class NewProductListItemNotifier
   attr_reader :request, :client
 
   def send_email
-    Jobs::Mailer.schedule("new_product_list_item",
+    Jobs::Mailer.schedule(:new_product_list_item,
                           [{ username: client.name, email: client.email }],
                           { contest_request_id: request.id })
   end

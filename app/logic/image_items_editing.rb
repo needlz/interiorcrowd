@@ -6,6 +6,7 @@ class ImageItemsEditing
     @items_scope = options[:items_scope]
     @new_items_attributes = options[:new_items_attributes]
     @has_new_product_items = false
+    @items_updater = options[:image_items_updater]
   end
 
   def perform
@@ -49,25 +50,14 @@ class ImageItemsEditing
     product_items_attributes.each do |product_item_attributes|
       if product_item_attributes[:id].present?
         product_item = items_scope.send(kind).find(product_item_attributes[:id])
-        update_item(product_item, product_item_attributes[:attributes])
+        @items_updater.update_existing(product_item, product_item_attributes)
       else
         item_attributes = product_item_attributes[:attributes]
         item_attributes.merge!(new_items_attributes) if new_items_attributes
-        items_scope.send(kind).create!(item_attributes)
-        @has_new_product_items = true
+        created_item = @items_updater.create_with_attributes(items_scope.send(kind), item_attributes)
+        @has_new_product_items ||= created_item
       end
     end
-  end
-
-  def update_item(product_item, attributes)
-    attributes.delete_if { |key, value| value.nil? }
-    assign_attributes(product_item, attributes)
-    product_item.update_attributes!(attributes)
-  end
-
-  def assign_attributes(product_item, attributes)
-    product_item.assign_attributes(attributes)
-    attributes.merge!({ mark: nil }) if product_item.image_id_changed?
   end
 
   def to_money(value)
