@@ -4,14 +4,22 @@
     I18n = #{ translations_to_json('designer_center.portfolio.show'.split('.')) }
 
 .designer-portfolio{ data: { id: @portfolio_view.designer_id } }
-  .cover_image{ style: ("background-image: url('#{ j(@portfolio_view.cover_picture_url) }')" if @portfolio_view.cover_picture_url) }
+  .cover_image{ cover_image_options }
+  .bottom-stripe{ class: ('with-buttons' if @portfolio_view.owner?(@designer) || @portfolio_view.show_invitation?(@client)) }
     .container.animated.fadeInDown
       .row
         .col-md-12.relative
-          - if @portfolio_view.show_invitation?(@client)
-            = render partial: 'portfolios/show/invite_button', locals: { portfolio_view: @portfolio_view }
-          - if @portfolio_view.owner?(@designer)
-            = render partial: 'portfolios/show/edit_button'
+          .col-md-4
+          .col-md-8.buttons-container
+            - if @portfolio_view.owner?(@designer)
+              %span.glyphicon.glyphicon-move.drag-icon
+              %span.drag-label= t('designer_center.portfolio.show.cover_dragging.start_dragging')
+              %span.drag-menu{ style: 'display: none;' }
+                %span.drag-save.drag-menu-button= t('designer_center.portfolio.show.cover_dragging.save')
+                %span.drag-cancel.drag-menu-button= t('designer_center.portfolio.show.cover_dragging.cancel')
+              = render partial: 'portfolios/show/edit_button'
+            - if @portfolio_view.show_invitation?(@client)
+              = render partial: 'portfolios/show/invite_button', locals: { portfolio_view: @portfolio_view }
   .container.animated.fadeInDown.bottom60
     .row.marg-top40
       .col-md-4.relative.under_portfolio_profile

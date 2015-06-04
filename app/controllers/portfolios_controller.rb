@@ -18,11 +18,15 @@ class PortfoliosController < ApplicationController
 
   def update
     Portfolio.transaction do
-      @portfolio.update_attributes!(portfolio_params)
-      @portfolio.update_pictures(params[:portfolio])
-      @portfolio.update_awards(params[:portfolio][:awards])
+      porfolio_update = PortfolioUpdater.new(portfolio: @portfolio,
+                                             portfolio_options: params[:portfolio],
+                                             portfolio_attributes: portfolio_params)
+      porfolio_update.perform
     end
-    redirect_after_updated(@portfolio)
+    respond_to do |format|
+      format.html { redirect_after_updated(@portfolio) }
+      format.json { render nothing: true }
+    end
   end
 
   private
@@ -38,7 +42,8 @@ class PortfoliosController < ApplicationController
   def portfolio_params
     result = params.require(:portfolio).permit(:years_of_experience, :education_gifted, :degree, :school_name,
       :education_apprenticed, :education_school, :awards, :style_description, :about, :path,
-      *(Portfolio::STYLES.map{|style| "#{style}_style" }), :background_id)
+      *(Portfolio::STYLES.map{|style| "#{style}_style" }), :background_id, :cover_x_percents_offset,
+      :cover_y_percents_offset)
     [:education_gifted, :education_school, :education_apprenticed].each do |param|
       result[param] = result[param].to_bool
     end
@@ -51,5 +56,13 @@ class PortfoliosController < ApplicationController
     else
       redirect_to edit_portfolio_path
     end
+  end
+
+  def pictures_updated?
+    params[:portfolio][:picture_ids] || params[:portfolio][:personal_picture_id]
+  end
+
+  def awards_updated?
+    params[:portfolio][:awards]
   end
 end

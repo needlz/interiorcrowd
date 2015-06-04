@@ -28,4 +28,5 @@
 //= require lib/jquery.keyfilter
 //= require lib/jquery.mask
 //= require lib/select2-3.5.2/select2
+//= require lib/draggable_background
 //= require_tree ./shared

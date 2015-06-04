@@ -51,28 +51,6 @@ class Portfolio < ActiveRecord::Base
     path.present?
   end
 
-  def update_pictures(portfolio_params)
-    portfolio_pictures_ids = portfolio_params[:picture_ids].try(:split, ',').try(:map, &:to_i)
-    personal_picture_id = portfolio_params[:personal_picture_id]
-    Image.update_portfolio(self, personal_picture_id, portfolio_pictures_ids)
-  end
-
-  def update_links(links)
-    return unless links
-    example_links.destroy_all
-    links.each do |link|
-      example_links.create!(url: link) if link.present?
-    end
-  end
-
-  def update_awards(new_awards)
-    return unless new_awards
-    portfolio_awards.destroy_all
-    new_awards.each do |award|
-      portfolio_awards.create!(name: award) if award.present?
-    end
-  end
-
   def assign_unique_path
     update_attributes!(path: unique_path) unless path.present?
   end

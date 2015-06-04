@@ -77,6 +77,61 @@
   display: inline-block;
   position: absolute;
   right: 0px;
-  top: 330px;
   border-radius: 5px;
+  bottom: -10px;
+}
+
+.bottom-stripe{
+  height: 80px;
+  width: 100%;
+  margin-top: -80px;
+  color: white;
+
+  .relative {
+    height: 80px;
+  }
+
+  .buttons-container {
+    position: absolute;
+    bottom: 28px;
+    left: 33%;
+
+    .drag-label {
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      margin-right: 1em;
+      cursor: pointer;
+    }
+
+    .drag-icon {
+      color: white;
+      font-size: 16px;
+      padding-right: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .drag-menu{
+    float: right;
+
+    .drag-menu-button{
+      color: #fff;
+      border-radius: 5px;
+      border: white solid 2px;
+      padding: 10px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      margin-left: 1em;
+      cursor: pointer;
+    }
+  }
+}
+
+.bottom-stripe.with-buttons {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.cover_image {
+  background-position: 0% 0%;
 }
