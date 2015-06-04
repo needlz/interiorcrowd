@@ -585,7 +585,7 @@ en:
         edit_profile: Edit profile
         cover_dragging:
           label: Drag to reposition your cover photo
-          start_dragging: Click to start repositioning your cover photo
+          start_dragging: Click here to start repositioning your cover photo
           save: Save
           cancel: Cancel
 

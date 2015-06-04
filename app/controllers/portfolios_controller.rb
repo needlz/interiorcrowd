@@ -42,7 +42,8 @@ class PortfoliosController < ApplicationController
   def portfolio_params
     result = params.require(:portfolio).permit(:years_of_experience, :education_gifted, :degree, :school_name,
       :education_apprenticed, :education_school, :awards, :style_description, :about, :path,
-      *(Portfolio::STYLES.map{|style| "#{style}_style" }), :background_id, :cover_position, :cover_width)
+      *(Portfolio::STYLES.map{|style| "#{style}_style" }), :background_id, :cover_x_percents_offset,
+      :cover_y_percents_offset)
     [:education_gifted, :education_school, :education_apprenticed].each do |param|
       result[param] = result[param].to_bool
     end

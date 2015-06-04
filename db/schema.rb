@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150602142507) do
+ActiveRecord::Schema.define(version: 20150603091629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -304,7 +304,7 @@ ActiveRecord::Schema.define(version: 20150602142507) do
   end
 
   create_table "portfolios", force: true do |t|
-    t.integer "designer_id",                               null: false
+    t.integer "designer_id",                             null: false
     t.integer "years_of_experience"
     t.boolean "education_gifted"
     t.boolean "education_school"
@@ -328,8 +328,9 @@ ActiveRecord::Schema.define(version: 20150602142507) do
     t.boolean "rustic_elegance_style",   default: false
     t.boolean "color_pop_style",         default: false
     t.integer "background_id"
-    t.text    "cover_position",          default: "0% 0%"
     t.integer "cover_width"
+    t.float   "cover_x_percents_offset"
+    t.float   "cover_y_percents_offset"
   end
 
   create_table "preferred_retailers", force: true do |t|

@@ -1914,7 +1914,7 @@ textarea.productsMoodboardAbove{
 .editCover{
 	display: inline-block;
 	position: absolute;
-	right: 0px;
+	right: 15px;
     bottom: -10px;
 }
 .cover_image{

@@ -3,61 +3,8 @@
   :javascript
     I18n = #{ translations_to_json('designer_center.portfolio.show'.split('.')) }
 
-:css
-
-  .bottom-stripe .relative {
-    height: 80px;
-  }
-
-  .bottom-stripe .buttons-container {
-    position: absolute;
-    bottom: 28px;
-    left: 33%;
-  }
-
-  .bottom-stripe .buttons-container .drag-label {
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 1em;
-    cursor: pointer;
-  }
-
-  .bottom-stripe .buttons-container .drag-icon {
-    color: white;
-    font-size: 16px;
-    padding-right: 5px;
-    cursor: pointer;
-  }
-
-  .bottom-stripe {
-    height: 80px;
-    width: 100%;
-    margin-top: -80px;
-    color: white;
-  }
-
-  .bottom-stripe.with-buttons {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .cover_image {
-    background-position: 0% 0%;
-  }
-
-  .drag-menu-button{
-    color: #fff;
-    border-radius: 5px;
-    border: white solid 2px;
-    padding: 10px 25px;
-    font-size: 16px;
-    font-weight: bold;
-    margin-right: 1em;
-    cursor: pointer;
-  }
-
 .designer-portfolio{ data: { id: @portfolio_view.designer_id } }
-  .cover_image{ style: "#{ ("background-image: url('#{ j(@portfolio_view.cover_picture_url) }');" if @portfolio_view.cover_picture_url) } background-position: #{ @portfolio_view.cover_position };" }
+  .cover_image{ cover_image_options }
   .bottom-stripe{ class: ('with-buttons' if @portfolio_view.owner?(@designer) || @portfolio_view.show_invitation?(@client)) }
     .container.animated.fadeInDown
       .row

@@ -147,9 +147,9 @@ RSpec.describe PortfoliosController do
       end
 
       it 'updates position of cover image' do
-        new_position = '20% 30%'
-        patch :update, portfolio: { cover_position: new_position }
-        expect(designer.portfolio.reload.cover_position).to eq new_position
+        patch :update, portfolio: { cover_x_percents_offset: '1', cover_y_percents_offset: '2' }
+        expect(designer.portfolio.reload.cover_x_percents_offset).to eq 1
+        expect(designer.portfolio.reload.cover_y_percents_offset).to eq 2
       end
     end
   end

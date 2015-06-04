@@ -45,20 +45,42 @@ class @CoverDragging
   @dragMenuSelector: '.bottom-stripe .drag-menu'
   @dragCancelButtonSelector: '.bottom-stripe .drag-cancel'
   @dragSaveButtonSelector: '.bottom-stripe .drag-save'
+  @editProfileButtonSelector: '.bottom-stripe .editCover'
   @dragging: false
   @height: null
   @width: null
   @dragging: false
   @initialPosition: null
+  @offsetInPercents: null
 
   @init: ->
-    @initialPosition = $(@draggableCoverSelector).css('background-position')
+    @offsetInPercents = {
+      x: $(@draggableCoverSelector).data('x'),
+      y: $(@draggableCoverSelector).data('y')
+    }
+
+    @bindEvents()
+    @startImageSizeCalucaltion()
+
+  @startImageSizeCalucaltion: ->
+    @initInterval = setInterval(
+      =>
+        @recalculatePixels()
+        if @width && @height
+          clearInterval(@initInterval)
+      , 100
+    )
+
+  @bindEvents: ->
+    $(window).resize =>
+      @recalculatePixels()
+
     $(@dragLabelSelector).click =>
       @startDragging() unless @dragging
 
     $(@dragCancelButtonSelector).click =>
       @exitDragging()
-      @revertReposition()
+      @recalculatePixels()
 
     $(@dragSaveButtonSelector).click =>
       @exitDragging()
@@ -67,65 +89,60 @@ class @CoverDragging
   @startDragging: =>
     @dragging = true
     $(@dragLabelSelector).text(I18n.cover_dragging.label)
-#    @percentsToPixels()
-    $(@draggableCoverSelector).backgroundDraggable(done: =>
-      @afterDragged()
-    );
+    $(@draggableCoverSelector).backgroundDraggable();
     @showButtons()
 
-  @afterDragged: =>
+  @recalculateScaledImageSize: =>
     image_url = $(@draggableCoverSelector).css('background-image')
-    image_url = image_url.match(/^url\("?(.+?)"?\)$/);
+    image_url = image_url.match(/^url\(("|')?(.+?)("|')?\)$/);
     bgW = null
     bgH = null
 
-    image_url = image_url[1]
+    image_url = image_url[2]
     background = new Image()
 
     div = $(@draggableCoverSelector).get(0)
+
     background.src = image_url
-    background.onload = ->
-      if background.width > background.height
-        ratio = background.height / background.width
-        if div.offsetWidth > div.offsetHeight
-          bgW = div.offsetWidth
-          bgH = Math.round(div.offsetWidth * ratio)
-          if bgH < div.offsetHeight
-            bgH = div.offsetHeight
-            bgW = Math.round(bgH / ratio)
-        else
-          bgW = Math.round(div.offsetHeight / ratio)
+
+    if background.width > background.height
+      ratio = background.height / background.width
+      if div.offsetWidth > div.offsetHeight
+        bgW = div.offsetWidth
+        bgH = Math.round(div.offsetWidth * ratio)
+        if bgH < div.offsetHeight
           bgH = div.offsetHeight
+          bgW = Math.round(bgH / ratio)
       else
-        ratio = background.width / background.height
-        if div.offsetHeight > div.offsetWidth
-          bgH = div.offsetHeight
-          bgW = Math.round(div.offsetHeight * ratio)
-          if bgW > div.offsetWidth
-            bgW = div.offsetWidth
-            bgH = Math.round(bgW / ratio)
-        else
-          bgW = Math.round(div.offsetWidth / ratio)
-          bgH = div.offsetWidth
-    background.onload()
+        bgW = Math.round(div.offsetHeight / ratio)
+        bgH = div.offsetHeight
+    else
+      ratio = background.width / background.height
+      if div.offsetHeight > div.offsetWidth
+        bgH = div.offsetHeight
+        bgW = Math.round(div.offsetHeight * ratio)
+        if bgW > div.offsetWidth
+          bgW = div.offsetWidth
+          bgH = Math.round(bgW / ratio)
+      else
+        bgW = Math.round(div.offsetWidth / ratio)
+        bgH = div.offsetWidth
 
     @height = bgH;
-    @width = bgW;
+    @width = bgW || div.offsetWidth;
 
   @saveReposition: =>
     @exitDragging()
-#    @pixelsToPercents()
-    @initialPosition = $(@draggableCoverSelector).css('background-position')
-    @sendRequest(@initialPosition)
-
-  @revertReposition: =>
-    $(@draggableCoverSelector).css('background-position', @initialPosition)
+    @offsetInPercents = @pixelsToPercents()
+    @sendRequest()
 
   @showButtons: ->
     $(@dragMenuSelector).show()
+    $(@editProfileButtonSelector).hide()
 
   @hideButtons: ->
     $(@dragMenuSelector).hide()
+    $(@editProfileButtonSelector).show()
 
   @exitDragging: ->
     @dragging = false
@@ -133,35 +150,38 @@ class @CoverDragging
     $(@draggableCoverSelector).backgroundDraggable('disable');
     $(@dragLabelSelector).text(I18n.cover_dragging.start_dragging)
 
+  @recalculatePixels: ->
+    @recalculateScaledImageSize()
+    newPosition = "#{ (@offsetInPercents.x * @width / 100) - @width/2 }px #{ (@offsetInPercents.y * @height / 100) - @height/2 }px"
+    $(@draggableCoverSelector).css('background-position', newPosition)
+
   @pixelsToPercents: ->
+    pixels = @getPixels()
+    y = (pixels.y + @height/2)/(@height)*100
+    x = (pixels.x + @width/2)/(@width)*100
+    { y: y, x: x }
+
+  @getPixels: ->
     backgroundPosition = $(@draggableCoverSelector).css('background-position')
     displacement = backgroundPosition.split(' ')
-    yFloat = parseFloat(displacement[1])
-    xFloat = parseFloat(displacement[0])
-    y = -(yFloat/(@height + $(@draggableCoverSelector).height()))*100
-    x = -(xFloat/(@width))*100
-    $(@draggableCoverSelector).css('background-position', "#{ x }% #{ y }%")
+    { x: parseFloat(displacement[0]), y: parseFloat(displacement[1]) }
 
-  @percentsToPixels: ->
-    backgroundPosition = $(@draggableCoverSelector).css('background-position')
-    displacement = backgroundPosition.split(' ')
-    yPercents = parseFloat(displacement[1])
-    xPercents = parseFloat(displacement[0])
-    y = -yPercents/100*(@height + $(@draggableCoverSelector).height() + 400)
-    x = -xPercents/100*(@width)
-    $(@draggableCoverSelector).css('background-position', "#{ x }px #{ y }px")
-
-  @sendRequest: (@initialPosition)=>
+  @sendRequest: =>
+    container = $(@draggableCoverSelector).get(0)
     $.ajax(
-      data: { portfolio: { cover_position: @initialPosition } }
+      data: {
+        portfolio: {
+          cover_x_percents_offset: @offsetInPercents.x,
+          cover_y_percents_offset: @offsetInPercents.y
+        }
+      }
       url: '/designer_center/portfolio'
       type: 'PATCH'
       dataType: 'json'
-      success: (data)=>
-        console.log 'saved'
     )
 
 $ ->
   Portfolio.init()
   CoverDragging.init()
   PicturesZoom.initGallery(enlargeButtonSelector: '.portfolio_example a.enlarge', galleryName: 'portfolio')
+  CoverDragging.recalculateScaledImageSize()
