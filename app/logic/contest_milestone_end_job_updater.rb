@@ -5,10 +5,8 @@ class ContestMilestoneEndJobUpdater
   end
 
   def perform
-    if contest.phase_end_changed? || contest.status_changed?
-      clear_phase_end_jobs
-      create_phase_job if (contest.phase_end > Time.current)
-    end
+    clear_phase_end_jobs
+    create_phase_job if (contest.phase_end && contest.phase_end > Time.current)
   end
 
   private

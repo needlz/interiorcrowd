@@ -6,19 +6,9 @@ RSpec.describe Contest do
     Fabricate(:contest,
               client: client,
               liked_examples: Fabricate.times(2, :example_image),
-              space_images: Fabricate.times(2, :space_image)
+              space_images: Fabricate.times(2, :space_image),
+              status: 'submission'
     )
-  end
-
-  describe 'images association' do
-    it 'updates liked examples' do
-      old_examples = contest.liked_examples
-      new_examples_ids = [old_examples[0].id, Fabricate(:image).id]
-      params = { design_style: { document_id: new_examples_ids.join(',') } }
-      options = ContestOptions.new(params)
-      contest.update_from_options(options)
-      expect(contest.reload.liked_examples.pluck(:id)).to match_array new_examples_ids
-    end
   end
 
   it 'delays submission time by 7 days' do

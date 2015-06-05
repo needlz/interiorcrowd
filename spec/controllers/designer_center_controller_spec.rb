@@ -6,7 +6,7 @@ RSpec.describe DesignerCenterController do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:request) { Fabricate(:contest_request, designer: designer, contest: contest) }
 
   describe 'GET designer_center' do
@@ -37,7 +37,7 @@ RSpec.describe DesignerCenterController do
         end
 
         it 'redirects to responses list if the designer has active requests' do
-          Fabricate(:contest_request, designer: designer, contest: Fabricate(:contest))
+          Fabricate(:contest_request, designer: designer, contest: Fabricate(:contest, status: 'submission'))
           get :designer_center
           expect(response).to redirect_to updates_designer_center_index_path
         end

@@ -305,3 +305,26 @@ h3.congrats {
 .entries-container {
   padding-top: 20px;
 }
+
+.more-features{
+  margin-top: 2em;
+
+  .title{
+    font-weight:normal;
+    margin-top:0px;
+    margin-bottom:30px;
+  }
+
+  .items{
+    float: none;
+    width: 100%;
+
+    .center-block{
+      display: inline-block;
+    }
+
+    .circle-big{
+      font-size:18px;
+    }
+  }
+}

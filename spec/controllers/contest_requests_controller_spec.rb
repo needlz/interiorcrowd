@@ -9,7 +9,7 @@ RSpec.describe ContestRequestsController do
   render_views
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:designer) { Fabricate(:designer) }
   let(:request) { Fabricate(:contest_request, contest: contest,
                             lookbook: Fabricate(:lookbook),

@@ -164,7 +164,7 @@ RSpec.describe ClientsController do
     end
 
     it 'redirects to Entries page if responses present' do
-      client_contest =  Fabricate(:contest, client: client)
+      client_contest =  Fabricate(:contest, client: client, status: 'submission')
       Fabricate(:contest_request, contest: client_contest)
       get :client_center
       expect(response).to redirect_to entries_client_center_index_path
@@ -179,7 +179,7 @@ RSpec.describe ClientsController do
   describe 'GET entries' do
     before do
       sign_in(client)
-      Fabricate(:contest, client: client)
+      Fabricate(:contest, client: client, status: 'submission')
       Fabricate(:portfolio)
       allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
     end
@@ -193,10 +193,19 @@ RSpec.describe ClientsController do
       end
 
       context 'responses present' do
-        let(:contest) { Fabricate(:contest, client: client) }
-        let!(:submitted) { Fabricate(:contest_request, designer: designers[0], contest: contest, status: 'submitted') }
-        let!(:draft) { Fabricate(:contest_request, designer: designers[1], contest: contest, status: 'draft') }
-        let!(:fulfillment) { Fabricate(:contest_request, designer: designers[2], contest: contest, status: 'fulfillment') }
+        let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+        let!(:submitted) { Fabricate(:contest_request,
+                                     designer: designers[0],
+                                     contest: contest,
+                                     status: 'submitted') }
+        let!(:draft) { Fabricate(:contest_request,
+                                 designer: designers[1],
+                                 contest: contest,
+                                 status: 'draft') }
+        let!(:fulfillment) { Fabricate(:contest_request,
+                                       designer: designers[2],
+                                       contest: contest,
+                                       status: 'fulfillment') }
 
         it 'views only submitted and fulfillment requests' do
           get :entries

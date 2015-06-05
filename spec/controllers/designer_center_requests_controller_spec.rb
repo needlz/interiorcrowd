@@ -13,9 +13,10 @@ RSpec.describe DesignerCenterRequestsController do
   let(:contest) { Fabricate(:contest,
                             client: client,
                             desirable_colors: '955e3a,ffb81b',
-                            undesirable_colors: 'EEE') }
+                            undesirable_colors: 'EEE',
+                            status: 'submission') }
   let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
-  let(:other_contest) { Fabricate(:contest, client: client) }
+  let(:other_contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
                                       contest: contest,
@@ -40,8 +41,13 @@ RSpec.describe DesignerCenterRequestsController do
                                       status: 'closed',
                                       lookbook: Fabricate(:lookbook))
   end
-  let(:draft_request) { Fabricate(:contest_request, designer: designer, contest: other_contest, status: 'draft') }
-  let(:other_designers_request) { Fabricate(:contest_request, designer: other_designer, contest: contest) }
+  let(:draft_request) { Fabricate(:contest_request,
+                                  designer: designer,
+                                  contest: other_contest,
+                                  status: 'draft') }
+  let(:other_designers_request) { Fabricate(:contest_request,
+                                            designer: other_designer,
+                                            contest: contest) }
 
   before do
     sign_in(designer)
@@ -314,6 +320,7 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     it 'returns page for initial and fulfillment phases' do
+      expect(contest.phase_end).to be_present
       [0..1].each do |index|
         get :edit, id: fulfillment_ready_request.id, view: index
         expect(response).to render_template(:edit)

@@ -7,24 +7,40 @@ RSpec.describe DesignerResponsesQuery do
 
   let!(:submitted_request) do Fabricate(:contest_request,
                                        designer: designer,
-                                       contest: Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE'),
+                                       contest: Fabricate(:contest,
+                                                          client: client,
+                                                          desirable_colors: '955e3a,ffb81b',
+                                                          undesirable_colors: 'EEE',
+                                                          status: 'submission'),
                                        status: 'submitted',
                                        lookbook: Fabricate(:lookbook))
   end
   let!(:finished_request) do Fabricate(:contest_request,
                                       designer: designer,
-                                      contest: Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE'),
+                                      contest: Fabricate(:contest,
+                                                         client: client,
+                                                         desirable_colors: '955e3a,ffb81b',
+                                                         undesirable_colors: 'EEE',
+                                                         status: 'submission'),
                                       status: 'finished',
                                       lookbook: Fabricate(:lookbook))
   end
   let!(:closed_request) do Fabricate(:contest_request,
                                     designer: designer,
-                                    contest: Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE'),
+                                    contest: Fabricate(:contest,
+                                                       client: client,
+                                                       desirable_colors: '955e3a,ffb81b',
+                                                       undesirable_colors: 'EEE',
+                                                       status: 'submission'),
                                     status: 'closed',
                                     lookbook: Fabricate(:lookbook))
   end
   let!(:draft_request) { Fabricate(:contest_request, designer: designer,
-                                   contest: Fabricate(:contest, client: client, desirable_colors: '955e3a,ffb81b', undesirable_colors: 'EEE'),
+                                   contest: Fabricate(:contest,
+                                                      client: client,
+                                                      desirable_colors: '955e3a,ffb81b',
+                                                      undesirable_colors: 'EEE',
+                                                      status: 'submission'),
                                    status: 'draft') }
 
   let(:responses_query) { DesignerResponsesQuery.new(designer) }

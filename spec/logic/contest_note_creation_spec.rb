@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ContestNoteCreation do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:designer) { Fabricate(:designer) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer) }
 
