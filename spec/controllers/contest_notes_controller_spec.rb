@@ -5,7 +5,7 @@ RSpec.describe ContestNotesController do
 
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
 
   describe 'POST create' do
     context 'not logged in' do
@@ -74,7 +74,9 @@ RSpec.describe ContestNotesController do
 
           before do
             contest.notes.create!(designer: designer, text: 'comment')
-            Fabricate(:contest_request, designer: designer_with_request, contest: Fabricate(:contest))
+            Fabricate(:contest_request,
+                      designer: designer_with_request,
+                      contest: Fabricate(:contest, status: 'submission'))
           end
 
           it 'notifies subscribed designers' do

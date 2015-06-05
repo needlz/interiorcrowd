@@ -6,7 +6,8 @@ RSpec.describe Contest do
     Fabricate(:contest,
               client: client,
               liked_examples: Fabricate.times(2, :example_image),
-              space_images: Fabricate.times(2, :space_image)
+              space_images: Fabricate.times(2, :space_image),
+              status: 'submission'
     )
   end
 

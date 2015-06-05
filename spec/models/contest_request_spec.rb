@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ContestRequest do
 
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest) }
+  let(:contest) { Fabricate(:contest, status: 'submission') }
 
   it 'validates uniqueness of designer response per contest' do
     contest.requests << Fabricate(:contest_request, designer: designer)
@@ -73,7 +73,7 @@ RSpec.describe ContestRequest do
     let(:request){ Fabricate(:contest_request, designer: designer, status: 'fulfillment', answer: 'winner', contest_id: contest.id) }
     let(:submitted_request){ Fabricate(:contest_request, designer: designer, status: 'submitted', answer: 'maybe', contest_id: contest.id) }
     let(:client) { Fabricate(:client) }
-    let(:contest) { Fabricate(:contest, client_id: client.id) }
+    let(:contest) { Fabricate(:contest, client_id: client.id, status: 'submission') }
 
     it 'does not change answer for fullfillment request' do
       request.reply('maybe', client.id)

@@ -5,7 +5,7 @@ RSpec.describe DesignerCenterContestsController do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
 
   before do
     sign_in(designer)

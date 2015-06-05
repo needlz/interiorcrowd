@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UserMailer do
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer) }
 
   it 'creates client welcoming mail' do

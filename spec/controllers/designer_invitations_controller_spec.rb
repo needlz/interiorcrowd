@@ -5,7 +5,7 @@ RSpec.describe DesignerInvitationsController do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
 
   describe 'POST create' do
     context 'not logged in' do

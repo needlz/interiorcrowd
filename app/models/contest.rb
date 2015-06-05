@@ -40,7 +40,7 @@ class Contest < ActiveRecord::Base
   self.per_page = 10
 
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
-  STATUSES = %w{submission winner_selection closed fulfillment finished}
+  STATUSES = %w{brief_pending submission winner_selection closed fulfillment finished}
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -77,13 +77,17 @@ class Contest < ActiveRecord::Base
     validates_inclusion_of preference, in: options.map(&:to_s), allow_nil: true
   end
 
-  after_initialize :defaults, if: :new_record?
-  after_update :create_phase_end_job
+  after_update :create_phase_end_job, on: :create
+  after_update :update_phase_end_job
   after_create :create_retailer_preferences, on: :create
 
-  state_machine :status, initial: :submission do
+  state_machine :status, initial: :brief_pending do
     after_transition on: :close, do: :close_requests
     after_transition on: :winner_selected, do: :close_losers_requests
+
+    event :submit do
+      transition brief_pending: :submission
+    end
 
     event :start_winner_selection do
       transition submission: :winner_selection
@@ -242,11 +246,6 @@ class Contest < ActiveRecord::Base
     Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
   end
 
-  def defaults
-    current_milestone_info = ContestMilestone.new(self)
-    self.phase_end ||= current_milestone_info.phase_end(Time.current)
-  end
-
   def create_retailer_preferences
     update_attributes!(preferred_retailers_id: PreferredRetailers.create!.id)
   end
@@ -256,6 +255,25 @@ class Contest < ActiveRecord::Base
   end
 
   def create_phase_end_job
+    if !phase_end
+      update_column(:phase_end, ContestMilestone.new(self).phase_end(Time.current))
+    end
+    if phase_end
+      update_milestone_job
+    end
+  end
+
+  def update_phase_end_job
+    if status_changed?
+      update_column(:phase_end, ContestMilestone.new(self).phase_end(Time.current))
+      update_milestone_job
+    end
+    if phase_end_changed?
+      update_milestone_job
+    end
+  end
+
+  def update_milestone_job
     milestone_end_job_updater = ContestMilestoneEndJobUpdater.new(self)
     milestone_end_job_updater.perform
   end
