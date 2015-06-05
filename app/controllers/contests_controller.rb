@@ -94,12 +94,14 @@ class ContestsController < ApplicationController
 
   def update
     options = ContestOptions.new(params.with_indifferent_access)
-    @contest.update_from_options(options)
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
-    @contest_view = ContestView.new(contest_attributes: @contest)
+    contest_updater = ContestUpdater.new(@contest, options)
+    contest_updater.perform
+
     if params[:pictures_dimension]
       redirect_to entries_client_center_index_path
     else
+      @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
+      @contest_view = ContestView.new(contest_attributes: @contest)
       render partial: "contests/previews/#{ params[:option] }_preview"
     end
   end

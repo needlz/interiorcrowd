@@ -110,25 +110,10 @@ class Contest < ActiveRecord::Base
     contest = new(options.contest)
     contest.transaction do
       contest.save!
-      contest.on_update_from_options(options)
+      options_updater = ContestUpdater.new(contest, options)
+      options_updater.update_options
     end
     contest
-  end
-
-  def update_from_options(options)
-    transaction do
-      update_attributes(options.contest) if options.contest
-      on_update_from_options(options)
-    end
-  end
-
-  def on_update_from_options(options)
-    return unless options
-    update_appeals(options.appeals) if options.appeals
-    update_external_examples(options.example_links) if options.example_links
-    update_space_images(options.space_image_ids) if options.space_image_ids
-    update_example_images(options.liked_example_ids) if options.liked_example_ids
-    update_preferred_retailers(options.preferred_retailers) if options.preferred_retailers.present?
   end
 
   def days_left
@@ -220,38 +205,8 @@ class Contest < ActiveRecord::Base
 
   private
 
-  def update_appeals(options)
-    Appeal.all.each do |appeal|
-      contest_appeal = contests_appeals.where(appeal_id: appeal.id).first_or_initialize
-      if options[appeal.identifier]
-        contest_appeal.assign_attributes(options[appeal.identifier])
-        contest_appeal.save
-      end
-    end
-  end
-
-  def update_external_examples(urls)
-    return unless urls
-    liked_external_examples.destroy_all
-    urls.each do |url|
-      liked_external_examples << ImageLink.new(url: url)
-    end
-  end
-
-  def update_space_images(image_ids)
-    Image.update_contest(self, image_ids, Image::SPACE)
-  end
-
-  def update_example_images(image_ids)
-    Image.update_contest(self, image_ids, Image::LIKED_EXAMPLE)
-  end
-
   def create_retailer_preferences
     update_attributes!(preferred_retailers_id: PreferredRetailers.create!.id)
-  end
-
-  def update_preferred_retailers(preferred_retailers_params)
-    preferred_retailers.update_attributes!(preferred_retailers_params)
   end
 
   def create_phase_end_job

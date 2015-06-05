@@ -11,7 +11,6 @@ class ContestCreation
     raise ArgumentError unless contest_options.required_present?
     contest = Contest.create_from_options(contest_options)
     after_created_callback.call(contest) if after_created_callback.present?
-    contest.submit! if contest.space_images.exists?
     contest
   end
 
