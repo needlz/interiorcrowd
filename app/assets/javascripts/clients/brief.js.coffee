@@ -70,14 +70,14 @@ class @ContestEditing extends InlineEditor
       UndesirableColorsEditor.init()
     area: ->
       RoomsEditor.init()
-    budget: ->
-      BudgetOptions.init()
     example_links: ->
       InspirationLinksEditor.init()
     space_dimensions: ->
-      DesignSpacePage.bindInchesInputs()
+      DesignSpaceOptions.bindInchesInputs()
     design_package: ->
       Packages.init()
+    feedback: ->
+      DesignSpaceOptions.init(feedbackPlaceholder: I18n.contests.space.other_feedback.placeholder)
 
   previewCallbacks:
     desirable_colors: ->
