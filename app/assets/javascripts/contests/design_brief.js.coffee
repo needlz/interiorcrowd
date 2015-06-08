@@ -31,5 +31,5 @@ class ChooseRoomPage
 $(document).ready ->
   ChooseRoomPage.init()
   mixpanel.track_forms '#design_categories', 'Contest creation - Step 1', (form)->
-    $form = $form
+    $form = $(form)
     { data: $form.serializeArray() }

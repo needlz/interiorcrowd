@@ -1,2 +1,4 @@
 $ ->
-  mixpanel.track_forms '#design_space', 'Pictures & dimensions updated', { contest_id: $form.data('contest').id }
+  mixpanel.track_forms '#design_space', 'Pictures & dimensions updated', (form)->
+    $form = $(form)
+    { data: $form.serializeArray() }

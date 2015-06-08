@@ -15,7 +15,8 @@ jQuery.fn.ForceNumericOnly = ->
   @each ->
     $(this).keydown (e) ->
       key = e.charCode or e.keyCode or 0
-      key == backspace or
+      e.ctrlKey or
+        key == backspace or
         key == tab or
         key == enter or
         key == delete_key or
@@ -27,10 +28,12 @@ jQuery.fn.ForceNumericOnly = ->
 
     $(this).on 'input paste', (e) ->
       oldText = $(e.target).val()
-      setTimeout ->
-        text = $(e.target).val()
-        $(e.target).val(oldText) unless text.match(/^[0-9]+$/)
-      0
+      setTimeout(
+        ->
+          text = $(e.target).val()
+          $(e.target).val(oldText) unless text.match(/^[0-9\.\-]+$/)
+        0
+      )
 
 jQuery.fn.currencyInput = ->
   @each ->

@@ -3,7 +3,7 @@
     %span.name= dimension.name
   .col-md-2
     .form-group
-      %input.form-control{ name: "design_space[#{ dimension.identifier }]",
+      %input.form-control.in-feet{ name: "design_space[#{ dimension.identifier }]",
         value: dimension.to_feet,
         id: dimension.feet_identifier}/
   .col-md-1
