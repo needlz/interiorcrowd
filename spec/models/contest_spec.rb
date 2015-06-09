@@ -112,17 +112,20 @@ RSpec.describe Contest do
     it 'can not be invited if contest has not the submission state' do
       contest.start_winner_selection!
       expect(contest.designers_invitation_period?).to be_falsey
-
-      winner_selection_end_jobs = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::WinnerSelectionEnd.name }%")
-      expect(winner_selection_end_jobs.count).to eq 1
-      delayed_job = winner_selection_end_jobs.first
-      expect(delayed_job.contest_id).to eq contest.id
     end
   end
 
   describe '#has_other_winners?' do
-    let(:request){ Fabricate(:contest_request, status: 'fulfillment',designer_id: 2, answer: 'winner', contest_id: contest.id) }
-    let(:submitted_request){ Fabricate(:contest_request, designer_id: 1, status: 'submitted', answer: 'maybe', contest_id: contest.id) }
+    let(:request){ Fabricate(:contest_request,
+                             status: 'fulfillment',
+                             designer_id: 2,
+                             answer: 'winner',
+                             contest_id: contest.id) }
+    let(:submitted_request){ Fabricate(:contest_request,
+                                       designer_id: 1,
+                                       status: 'submitted',
+                                       answer: 'maybe',
+                                       contest_id: contest.id) }
 
     it 'has no other winners for contest' do
       expect(contest.has_other_winners?(request.id)).to eq(false)
