@@ -3,7 +3,7 @@ unless Rails.env.test?
       address:   'smtp.mandrillapp.com',
       port:      587,
       user_name: Settings.mandrill.email,
-      password:  Settings.mandrill.password
+      password:  Settings.mandrill.api_token
   }
 end
 
