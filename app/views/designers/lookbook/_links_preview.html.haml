@@ -1,7 +1,0 @@
-- index = 0
-- @lookbook_view.links.in_groups_of(3, false) do |group|
-  .row.post_row{:style => "width:75%"}
-    - group.each do |url|
-      = render partial: 'designers/lookbook/picture_preview',
-      locals: { title: @lookbook_view.link_titles[index], url: url }
-      - index = index + 1

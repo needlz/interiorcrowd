@@ -1,7 +1,7 @@
 class ImagesController < ApplicationController
     
   def create
-    @image = Image.new(params[:image])
+    @image = Image.new(params[:image].merge(uploader_role: current_user.role, uploader_id: current_user.id))
     if @image.save
       render json: { files: [@image.thumbnail] }
     else

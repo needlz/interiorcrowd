@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603091629) do
+ActiveRecord::Schema.define(version: 20150610072431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -277,6 +277,8 @@ ActiveRecord::Schema.define(version: 20150603091629) do
     t.string   "kind"
     t.integer  "designer_id"
     t.integer  "portfolio_id"
+    t.string   "uploader_role"
+    t.integer  "uploader_id"
   end
 
   create_table "lookbook_details", force: true do |t|

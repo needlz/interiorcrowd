@@ -1,5 +1,5 @@
 class DesignersController < ApplicationController
-  before_filter :check_designer, only: [:welcome, :lookbook, :preview_lookbook]
+  before_filter :check_designer, only: [:welcome]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
   def thank_you
@@ -54,27 +54,6 @@ class DesignersController < ApplicationController
 
   def welcome
     render
-  end
-  
-  def lookbook
-    if request.method == "POST"
-      session[:lookbook] = params
-      redirect_to preview_lookbook_designer_path(params[:id])
-    else
-      lookbook_options =
-        if session[:lookbook].present?
-          session[:lookbook]
-        else
-          designer = Designer.find(session[:designer_id])
-          Contest.find(params[:id]).response_of(designer).try(:lookbook)
-        end
-      @lookbook_view = DesignerLookbook.new(lookbook_options)
-    end  
-  end
-  
-  def preview_lookbook
-    redirect_to lookbook_designer_path(params[:id]) if session[:lookbook].blank?
-    @lookbook_view = DesignerLookbook.new(session[:lookbook])
   end
 
   private
