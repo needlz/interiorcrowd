@@ -15,7 +15,9 @@ RSpec.describe DesignersController do
                     password: '123',
                     password_confirmation: '123',
                     state: 'Alabama',
-                    phone_number: '123'
+                    phone_number: '123',
+                    address: 'Elm Street',
+                    city: 'city'
         }
       }
     end
@@ -36,6 +38,20 @@ RSpec.describe DesignersController do
       expect(Designer.count).to eq 0
       post :create, designer_creation_params
       expect(Designer.count).to eq 1
+    end
+
+    it 'sets attributes' do
+      post :create, designer_creation_params
+      attributes = designer_creation_params[:designer]
+      designer = Designer.last
+      expect(designer.first_name).to eq attributes[:first_name]
+      expect(designer.last_name).to eq attributes[:last_name]
+      expect(designer.email).to eq attributes[:email]
+      expect(designer.zip).to eq attributes[:zip]
+      expect(designer.state).to eq attributes[:state]
+      expect(designer.phone_number).to eq attributes[:phone_number]
+      expect(designer.address).to eq attributes[:address]
+      expect(designer.city).to eq attributes[:city]
     end
 
     it 'redirects to portfolio editing page' do

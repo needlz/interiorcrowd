@@ -25,7 +25,7 @@ class Designer < ActiveRecord::Base
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, uniqueness: true
-  normalize_attributes :email
+  normalize_attributes :email, :first_name, :last_name, :email, :zip, :state, :phone_number, :address, :city
 
   has_one :portfolio
   has_many :contest_requests
@@ -36,10 +36,6 @@ class Designer < ActiveRecord::Base
 
   def has_active_requests?
     contest_requests.active.exists?
-  end
-
-  def state
-    0
   end
 
   def create_portfolio(portfolio_params)
