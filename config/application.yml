@@ -16,9 +16,8 @@ development:
   S3_BUCKET_NAME: 'icrowd-development'
   AWS_ACCESS_KEY: AKIAJH6V52XNVZ4Y7X6Q
   AWS_SECRET_ACCESS_KEY: 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
-  MANDRILL_EMAIL: 'erikneeds@gmail.com'
-  MANDRILL_PASSWORD: 'icrowd1icrowd'
-  MANDRILL_API_TOKEN: 'XBnULwMuhI9LahaDwsG5-A'
+  MANDRILL_EMAIL: 'hello@interiorcrowd.com'
+  MANDRILL_API_TOKEN: 'IqRBhcv59Pu64Z1UVXg7pg'
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
   BETA_PASSWORD: 'beta'
   APP_HOST: 'local.home:3000'

@@ -8,7 +8,6 @@ common: &defaults
     secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   mandrill:
     email: <%= ENV['MANDRILL_EMAIL'] %>
-    password: <%= ENV['MANDRILL_PASSWORD'] %>
     api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
   info_email: <%= ENV['INFO_EMAIL'] %>
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
