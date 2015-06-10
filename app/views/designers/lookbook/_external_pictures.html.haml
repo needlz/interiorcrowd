@@ -1,4 +1,0 @@
-#image_display.row.img_container
-  - lookbook_view.links.try(:each_with_index) do |path, index|
-    = render partial: 'designers/lookbook/external_picture_row',
-        locals: {url: path, title: lookbook_view.link_titles[index]}

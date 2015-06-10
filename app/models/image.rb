@@ -106,6 +106,12 @@ class Image < ActiveRecord::Base
     0
   end
 
+  def uploader
+    return if !uploader_id || !uploader_role
+    uploader_class = uploader_role.constantize
+    uploader_class.find(uploader_id)
+  end
+
   private
 
   def attachment
