@@ -15,7 +15,7 @@
               placeholder: t('designer_center.final_upload.note_for_client_placeholder')
           .initialImage
             = render partial: 'designer_center_requests/show/image_loading',
-                locals: { request: @request, button_title: t('designer_center.final_upload.upload')}
+                locals: { image: @request.concept_board_current_image, button_title: t('designer_center.final_upload.upload')}
           %p.marg-top20.font16.makeMeBlack.makeMeBold= t('designer_center.final_upload.upload_description')
           = f.text_area :pull_together_note, class: 'consumerNoteTextarea'
           %p.font18.makeMeBlack.makeMeBold= t('designer_center.final_upload.product_list')

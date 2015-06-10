@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20150610072431) do
     t.integer  "card_ex_month"
     t.integer  "card_ex_year"
     t.integer  "card_cvc"
-    t.integer  "status",            default: 1
+    t.integer  "status",             default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
@@ -86,6 +86,8 @@ ActiveRecord::Schema.define(version: 20150610072431) do
     t.integer  "billing_zip"
     t.text     "billing_city"
     t.string   "plain_password"
+    t.string   "stripe_customer_id"
+    t.text     "stripe_card_status", default: "pending"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -289,6 +291,7 @@ ActiveRecord::Schema.define(version: 20150610072431) do
     t.integer  "doc_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phase"
   end
 
   create_table "lookbooks", force: true do |t|

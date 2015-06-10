@@ -17,7 +17,7 @@
             %p.designerName= t('client_center.entries.space.share')
             .social-share-button{ data: { desc: '',
               popup: 'true',
-              img: request.concept_board_image_path,
+              img: request.concept_board_current_image_path,
               title: 'my design',
               url: @share_url } }
               - SocialShareButton.config.allow_sites.each do |site|
@@ -26,7 +26,8 @@
 .animated.fadeInDown.disablePadding
   .row.marg-top40
     .col-md-10.col-md-offset-1.no-x-padding
-      = render partial: 'clients/client_center/entries/final_design', locals: {request: request}
+      = render partial: 'clients/client_center/entries/final_design',
+          locals: { request: request }
       - if @visible_image_items.present?
         - if request.pull_together_note.present?
           %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.pull_together')

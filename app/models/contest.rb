@@ -129,10 +129,6 @@ class Contest < ActiveRecord::Base
     start_winner_selection!
   end
 
-  def end_winner_selection
-    return close! if response_winner.blank?
-  end
-
   def close_requests
     requests.update_all(status: 'closed')
   end

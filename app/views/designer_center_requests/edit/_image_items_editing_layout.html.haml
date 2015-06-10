@@ -6,7 +6,7 @@
     .initialImage
       - if @request.editable?
         = render partial: 'designer_center_requests/show/image_loading',
-            locals: { request: @request, button_title: t('designer_center.edit.upload_new') }
+            locals: { image: @request.concept_board_current_image, button_title: t('designer_center.edit.upload_new') }
       - else
         = render partial: 'shared/moodboard', locals: { request: @request }
     = form_for @request, url: designer_center_response_path(id: @request.id) do |f|

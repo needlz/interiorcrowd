@@ -53,18 +53,22 @@ RSpec.describe ContestRequest do
   end
 
   describe '#concept_board_image' do
-    let(:request_with_lookbook_item){ Fabricate(:contest_request, designer: designer, lookbook: Fabricate(:lookbook)) }
-    let(:request_without_lookbook_items){ Fabricate(:contest_request, designer: designer, lookbook: Lookbook.create!) }
+    let(:request_with_lookbook_item){ Fabricate(:contest_request,
+                                                designer: designer,
+                                                lookbook: Fabricate(:lookbook)) }
+    let(:request_without_lookbook_items){ Fabricate(:contest_request,
+                                                    designer: designer,
+                                                    lookbook: Lookbook.create!) }
 
     context 'uploaded lookbook item present' do
       it 'returns concept moodboard image' do
-        expect(request_with_lookbook_item.concept_board_image).to be_present
+        expect(request_with_lookbook_item.concept_board_current_image).to be_present
       end
     end
 
     context 'there is no uploaded lookbook item' do
       it 'returns nil' do
-        expect(request_without_lookbook_items.concept_board_image).to be_nil
+        expect(request_without_lookbook_items.concept_board_current_image).to be_nil
       end
     end
   end

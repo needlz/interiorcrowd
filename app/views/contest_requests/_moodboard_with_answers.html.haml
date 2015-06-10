@@ -1,6 +1,8 @@
 .designConcept#client_btns{ data: { id: contest_request.id } }
-  = render partial: 'shared/moodboard', locals: { request: contest_request }
+  = render partial: 'shared/moodboard',
+      locals: { image: contest_request.concept_board_image_by_phase(:initial) }
   - if show_answer_options
     .bottom20
     = render partial: 'clients/moodboard_answers',
         locals: { request_id: contest_request.id, answer: contest_request.answer }
+    .bottom20

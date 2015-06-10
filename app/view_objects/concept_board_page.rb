@@ -16,6 +16,10 @@ class ConceptBoardPage < PhasesHolder
     contest_request.visible_image_items(active_phase).for_view
   end
 
+  def concept_board_image
+    contest_request.concept_board_image_by_phase(active_phase)
+  end
+
   protected
 
   def create_phases_stripe

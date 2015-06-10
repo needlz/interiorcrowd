@@ -1,9 +1,10 @@
 .moodboard
-  = render partial: 'shared/image_with_enlarge_button',
-      locals: { url_for_downloading: request.download_url,
-                original_size_path: request.concept_board_image_path,
-                thumb_path: request.concept_board_image.try(:medium_size_url),
-                image_class: 'full-width' }
+  - if image
+    = render partial: 'shared/image_with_enlarge_button',
+        locals: { url_for_downloading: image.url_for_downloading,
+                  original_size_path: image.original_size_url,
+                  thumb_path: image.medium_size_url,
+                  image_class: 'full-width' }
 
 :javascript
   $(function(){
