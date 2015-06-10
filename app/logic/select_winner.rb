@@ -5,7 +5,9 @@ class SelectWinner
   end
 
   def perform
-    contest_request.winner!
+    PhaseUpdater.new(contest_request).perform_phase_change do
+      contest_request.winner!
+    end
     contest_request.contest.winner_selected!
     create_default_image_items
     notify_designer_about_win
@@ -25,8 +27,6 @@ class SelectWinner
   def create_default_image_items
     ImageItem::KINDS.each do |kind|
       unless contest_request.image_items.where(kind: kind.to_s).exists?
-        # contest_request.image_items.create!(text: I18n.t('designer_center.product_items.text_placeholder'),
-        #                                     kind: kind.to_s)
         contest_request.image_items.create!(text: '',
                                             kind: kind.to_s)
       end

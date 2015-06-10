@@ -85,17 +85,25 @@ class ContestRequest < ActiveRecord::Base
     selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')
   end
 
-  def concept_board_image_path
-    lookbook_item = lookbook.try(:lookbook_details).try(:last)
-    return unless lookbook_item
-    return lookbook_item.image.original_size_url if lookbook_item.uploaded? && lookbook_item.try(:image)
-    return lookbook_item.url if lookbook_item.external?
+  def concept_board_current_image_path
+    current_image = concept_board_current_image
+    current_image.original_size_url if current_image
   end
 
-  def concept_board_image
-    lookbook_item = lookbook.try(:lookbook_details).try(:last)
+  def concept_board_current_image
+    lookbook_item = current_lookbook_item
     return unless lookbook_item
-    lookbook_item.image if lookbook_item.uploaded? && lookbook_item.try(:image)
+    lookbook_item.image if lookbook_item.uploaded?
+  end
+
+  def current_lookbook_item
+    return if !lookbook || !lookbook.lookbook_details
+    item = nil
+    phases_count = ContestPhases::INDICES_TO_PHASES.keys.count
+    item_index = (phases_count - 1).downto(0).find do |i|
+      item = lookbook.lookbook_details.find_by_phase(ContestPhases.index_to_phase(i))
+    end
+    item if item_index
   end
 
   def reply(answer, client_id)
@@ -110,8 +118,12 @@ class ContestRequest < ActiveRecord::Base
   def approve
     return false if fulfillment_approved?
     transaction do
-      DesignerInfoNotification.create(user_id: designer_id, contest_id: contest_id, contest_request_id: id)
-      approve_fulfillment!
+      DesignerInfoNotification.create(user_id: designer_id,
+                                      contest_id: contest_id,
+                                      contest_request_id: id)
+      PhaseUpdater.new(self).perform_phase_change do
+        approve_fulfillment!
+      end
     end
   end
 
@@ -132,7 +144,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def download_url
-    concept_board_image.try(:url_for_downloading)
+    concept_board_current_image.try(:url_for_downloading)
   end
 
   def lost?
@@ -145,6 +157,12 @@ class ContestRequest < ActiveRecord::Base
 
   def visible_image_items(for_phase)
     image_items.send(for_phase)
+  end
+
+  def concept_board_image_by_phase(phase)
+    return if !lookbook || !lookbook.lookbook_details
+    lookbook_item = lookbook.lookbook_details.find_by_phase(phase)
+    lookbook_item.try(:image)
   end
 
   def name

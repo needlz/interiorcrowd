@@ -11,12 +11,13 @@
             %span.text.pull-right= t('client_center.entries.listen_to_designer')
             .control.hidden
               = render partial: 'shared/audio_player',
-                  locals: { filepath: contest_request.sound.url_for_streaming, id: "voice_palyer_#{ contest_request.id }" }
+                  locals: { filepath: contest_request.sound.url_for_streaming,
+                    id: "voice_palyer_#{ contest_request.id }" }
     .hLine
     .designItem
-      - if contest_request.concept_board_image_path
+      - if contest_request.concept_board_image_by_phase('initial')
         %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
-          .image-container{ style: "background-image: url(#{ j(contest_request.concept_board_image_path) })" }
+          .image-container{ style: "background-image: url(#{ j(contest_request.concept_board_image_by_phase('initial').medium_size_url) })" }
       - else
         = link_to t('client_center.no_images'), contest_request_path(id: contest_request.id)
     .hLine
