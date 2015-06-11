@@ -44,6 +44,7 @@ class Client < ActiveRecord::Base
   has_many :contests
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests
+  has_many :promocodes
   
   def last_contest
     contests.order(:created_at).last

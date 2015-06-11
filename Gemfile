@@ -82,3 +82,4 @@ gem 'attribute_normalizer'
 gem 'mixpanel-ruby' # analytics tool
 gem 'annotate', '~> 2.6.6' # add a comment summarizing the current schema of models
 gem 'heroku-api'
+gem 'i18n-js', '>= 3.0.0.rc8'

@@ -132,6 +132,12 @@ InteriorC::Application.routes.draw do
       end
     end
 
+    resources :promocodes, only: [] do
+      collection do
+        get '', to: 'promocodes#apply', as: 'apply'
+      end
+    end
+
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/:url', to: 'portfolios#show', as: 'show_portfolio'
   end

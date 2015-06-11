@@ -45,8 +45,8 @@ class ClientsController < ApplicationController
   end
 
   def create
-    prepare_creation_params
-    @client = Client.new(params[:client])
+    client_params = prepare_creation_params
+    @client = Client.new(client_params)
     respond_to do |format|
       if @client.save
         initialize_client
@@ -65,7 +65,7 @@ class ClientsController < ApplicationController
   def update
     client_updater = ClientUpdater.new(
         client: @client,
-        client_attributes: (client_params if params[:client]),
+        client_attributes: (client_update_params if params[:client]),
         password_options: params[:password]
     )
     Client.transaction do
@@ -98,28 +98,26 @@ class ClientsController < ApplicationController
     params[:client][:plain_password] = @user_password
     params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
     params[:client][:designer_level_id] = session[:design_style][:designer_level]
-    params.require(:client).permit(:email,
-                                   :address,
-                                   :name_on_card,
-                                   :card_type,
-                                   :state,
-                                   :zip,
-                                   :password,
-                                   :plain_password,
-                                   :designer_level_id)
-  end
-
-  def client_params
     params.require(:client).permit(
         :first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
         :card_ex_year, :card_cvc, :email, :city, :card_type, :phone_number, :billing_address,
-        :billing_state, :billing_zip, :billing_city)
+        :billing_state, :billing_zip, :billing_city, :password, :plain_password, :password_confirmation,
+        :designer_level_id, :name_on_card
+    )
+  end
+
+  def client_update_params
+    params.require(:client).permit(
+        :first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
+        :card_ex_year, :card_cvc, :email, :city, :card_type, :phone_number, :billing_address,
+        :billing_state, :billing_zip, :billing_city, :name_on_card)
   end
 
   def initialize_client
     client_initialization = ClientInitialization.new({
       plain_password: @user_password,
-      client: @client
+      client: @client,
+      promocode: params[:client][:promocode]
     })
     client_initialization.perform
     session[:client_id] = @client.id

@@ -392,12 +392,13 @@ en:
         card_number: Card number
         card_exp_month: Expiration month
         card_exp_year: Expiration year
-        card_exp_date: Expiration Date
+        card_exp_date: Expiration date
         card_cvc: CVC
         card_types:
           visa: Visa
           mastercard: Mastercard
         ending_in: 'ending in'
+
     navigation:
       entries: Entries
       brief: Brief
@@ -415,6 +416,11 @@ en:
       i_agree: I agree with the InteriorCrowd
       terms_of_use: terms of use
       submit: Submit
+      add_promocode: Add promotions code if applicable
+      apply_promocode: Apply
+      promocode_invalid: The code you entered is invalid.
+      promocode_valid: The code you entered has been applied. You %{profit}.
+      promocode_server_error: Server error
   designer_center:
     welcome_message: >
       Welcome to InteriorCrowd! We are very excited to have you on the platform!
