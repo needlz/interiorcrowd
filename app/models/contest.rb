@@ -40,7 +40,9 @@ class Contest < ActiveRecord::Base
   self.per_page = 10
 
   CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
-  STATUSES = %w{brief_pending submission winner_selection closed fulfillment finished}
+  STATUSES = %w[brief_pending submission winner_selection closed fulfillment finished]
+  COLLABORATION_STATUSES = %w[submission winner_selection fulfillment]
+  NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -65,7 +67,7 @@ class Contest < ActiveRecord::Base
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
-  scope :active, ->{ where(status: ['submission', 'winner_selection', 'fulfillment']) }
+  scope :active, ->{ where(status: COLLABORATION_STATUSES) }
   scope :inactive, ->{ where(status: ['closed', 'finished']) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
 
@@ -174,7 +176,9 @@ class Contest < ActiveRecord::Base
     return unless losers_requests
     losers_requests.update_all(status: 'closed')
     losers_requests.each do |request|
-      DesignerLoserInfoNotification.create(user_id: request.designer_id, contest_id: request.contest_id, contest_request_id: request.id)
+      DesignerLoserInfoNotification.create(user_id: request.designer_id,
+                                           contest_id: request.contest_id,
+                                           contest_request_id: request.id)
     end
   end
 
