@@ -62,7 +62,6 @@ group :development do
   gem 'parallel_tests'
   gem 'awesome_print', require: 'ap'
   gem 'pry'
-  gem 'pry-rails'
 end
 
 group :test do

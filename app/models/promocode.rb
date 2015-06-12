@@ -1,3 +1,13 @@
+# == Schema Information
+#
+# Table name: promocodes
+#
+#  id        :integer          not null, primary key
+#  client_id :integer
+#  token     :text
+#  profit    :text
+#
+
 class Promocode < ActiveRecord::Base
 
   belongs_to :client

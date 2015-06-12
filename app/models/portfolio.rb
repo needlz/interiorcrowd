@@ -27,6 +27,9 @@
 #  rustic_elegance_style   :boolean          default(FALSE)
 #  color_pop_style         :boolean          default(FALSE)
 #  background_id           :integer
+#  cover_width             :integer
+#  cover_x_percents_offset :float
+#  cover_y_percents_offset :float
 #
 
 class Portfolio < ActiveRecord::Base
