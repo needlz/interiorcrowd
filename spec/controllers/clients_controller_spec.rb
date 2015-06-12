@@ -13,6 +13,7 @@ RSpec.describe ClientsController do
     end
   end
   let(:default_password) { 'password' }
+  let(:promocode) { Fabricate(:promocode) }
   let(:client_options){
     { password: default_password,
       password_confirmation: default_password,
@@ -27,7 +28,8 @@ RSpec.describe ClientsController do
       card_ex_month: '12',
       card_ex_year: '2000',
       card_cvc: '123',
-      zip: '81100'
+      zip: '81100',
+      promocode: promocode.token
     }
   }
   let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
@@ -57,7 +59,7 @@ RSpec.describe ClientsController do
     it 'saves attributes' do
       post :create, { client: client_options }, contest_options_source
       client = Client.order(:created_at).last
-      client_options.except(:password, :password_confirmation, *integer_attributes).each do |attribute, value|
+      client_options.except(:password, :password_confirmation, :promocode, *integer_attributes).each do |attribute, value|
         expect(client.send(attribute)).to eq value
       end
       integer_attributes.each do |attribute|
@@ -71,6 +73,12 @@ RSpec.describe ClientsController do
       post :create, { client: client_options }, contest_options_source
       expect(Delayed::Job.where('handler LIKE ?', "%client_registered%").count).to eq 1
       expect(Delayed::Job.where('handler LIKE ?', "%user_registration_info%").count).to eq 1
+    end
+
+    it 'applies promocode' do
+      post :create, { client: client_options }, contest_options_source
+      client = Client.last
+      expect(client.promocodes).to be_exists
     end
   end
 
