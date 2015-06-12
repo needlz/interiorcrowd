@@ -46,7 +46,9 @@ class Client < ActiveRecord::Base
   has_many :designer_invite_notifications, through: :contests
   
   def last_contest
-    contests.order(:created_at).last
+    non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')
+    contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 1 ELSE 0 END DESC"
+    contests.order(contests_order_query).order(created_at: :desc).first
   end
 
   def last_four_card_digits
