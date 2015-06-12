@@ -17,7 +17,7 @@
 #  space_height                    :decimal(10, 2)
 #  design_category_id              :integer
 #  design_space_id                 :integer
-#  status                          :string(255)      default("submission")
+#  status                          :string(255)      default("brief_pending")
 #  phase_end                       :datetime
 #  theme                           :string(255)
 #  space                           :string(255)

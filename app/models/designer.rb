@@ -17,6 +17,8 @@
 #  phone_number            :text
 #  plain_password          :text
 #  state                   :string(255)
+#  address                 :text
+#  city                    :text
 #
 
 class Designer < ActiveRecord::Base

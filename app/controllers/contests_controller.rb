@@ -4,10 +4,6 @@ class ContestsController < ApplicationController
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
 
-  def index
-    @contests = Contest.by_page(params[:page])
-  end
-  
   def show
     @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
     @contest_view = ContestView.new(contest_attributes: @contest)

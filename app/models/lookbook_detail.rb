@@ -10,6 +10,7 @@
 #  doc_type    :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  phase       :string(255)
 #
 
 class LookbookDetail < ActiveRecord::Base

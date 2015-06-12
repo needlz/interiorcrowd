@@ -13,6 +13,8 @@
 #  kind               :string(255)
 #  designer_id        :integer
 #  portfolio_id       :integer
+#  uploader_role      :string(255)
+#  uploader_id        :integer
 #
 
 class Image < ActiveRecord::Base

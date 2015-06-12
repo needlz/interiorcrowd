@@ -2,31 +2,33 @@
 #
 # Table name: clients
 #
-#  id                :integer          not null, primary key
-#  first_name        :text
-#  last_name         :text
-#  email             :text
-#  password          :string(255)
-#  name_on_card      :text
-#  card_type         :text
-#  address           :text
-#  state             :text
-#  zip               :integer
-#  card_number       :text
-#  card_ex_month     :integer
-#  card_ex_year      :integer
-#  card_cvc          :integer
-#  status            :integer          default(1)
-#  created_at        :datetime
-#  updated_at        :datetime
-#  designer_level_id :integer
-#  city              :text
-#  phone_number      :text
-#  billing_address   :text
-#  billing_state     :text
-#  billing_zip       :integer
-#  billing_city      :text
-#  plain_password    :string(255)
+#  id                 :integer          not null, primary key
+#  first_name         :text
+#  last_name          :text
+#  email              :text
+#  password           :string(255)
+#  name_on_card       :text
+#  card_type          :text
+#  address            :text
+#  state              :text
+#  zip                :integer
+#  card_number        :text
+#  card_ex_month      :integer
+#  card_ex_year       :integer
+#  card_cvc           :integer
+#  status             :integer          default(1)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  designer_level_id  :integer
+#  city               :text
+#  phone_number       :text
+#  billing_address    :text
+#  billing_state      :text
+#  billing_zip        :integer
+#  billing_city       :text
+#  plain_password     :string(255)
+#  stripe_customer_id :string(255)
+#  stripe_card_status :text             default("pending")
 #
 
 class Client < ActiveRecord::Base
