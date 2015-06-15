@@ -15,11 +15,11 @@ module MandrillMailer
     recipients = options[:to]
 
     return if recipients.map { |recipient| recipient[:email] }.any?(&:blank?)
-    message               = {
-        subject:           options[:subject],
-        to:                recipients,
+    message = {
+        to: recipients,
         global_merge_vars: global_merge_vars
     }
+    message.merge!(subject: options[:subject]) if options[:subject]
 
     api.messages.send_template(@template_name, [], message)
   end
@@ -27,7 +27,8 @@ module MandrillMailer
   def global_merge_vars
     return unless @merge_vars
     @merge_vars.inject([]) do |arr, (key, val)|
-      arr.push({ 'name' => key.upcase, 'content' => val }); arr
+      arr.push({ 'name' => key.upcase, 'content' => val });
+      arr
     end
   end
 

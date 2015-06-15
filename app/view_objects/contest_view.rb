@@ -167,7 +167,7 @@ class ContestView
   end
 
   def set_have_space_views_details
-    @have_space_views_details = @dimensions.find { |dimension| dimension.value.present? } || @space_pictures_ids.present?
+    @have_space_views_details = @space_pictures_ids.present?
   end
 
   def set_have_examples
