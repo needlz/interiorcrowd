@@ -2,37 +2,50 @@ class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
+  class RenderHelper < ActionView::Base
+    include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TagHelper
+
+    def default_url_options
+      Rails.configuration.action_mailer.default_url_options
+    end
+  end
+
+  def renderer
+    @renderer ||= RenderHelper.new(Rails.root.join('app', 'views'))
+  end
+
   def client_registered(client)
-    template 'user_registration'
-    subject = I18n.t('mails.client_registration.subject')
-    set_template_values(text: render_to_string('mails/client_registration'))
-    mail to: [wrap_recipient(client.email, client.first_name, "to")], subject: subject
+    template 'client_welcome_mail'
+    set_template_values(login_link: renderer.client_login_sessions_url,
+                        submission_days: ContestMilestone::DAYS['submission'])
+    mail to: [wrap_recipient(client.email, client.first_name, 'to')]
   end
 
   def designer_registered(designer)
     template 'user_registration'
     subject = I18n.t('mails.designer_registration.subject')
     set_template_values(text: render_to_string('mails/designer_registration'))
-    mail to: [wrap_recipient(designer.email, designer.first_name, "to")], subject: subject
+    mail to: [wrap_recipient(designer.email, designer.first_name, 'to')], subject: subject
   end
 
   def user_registration_info(user)
     template "#{ user.role.downcase }_registration_info"
     set_template_values(set_user_params(user))
-    mail to: [wrap_recipient(Settings.info_email, '', "to")]
+    mail to: [wrap_recipient(Settings.info_email, '', 'to')]
   end
 
   def invite_to_contest(designer, client)
     template 'invite_to_contest'
     set_template_values(set_invitation_params(client))
-    mail to: [wrap_recipient(designer.email, designer.name, "to")]
+    mail to: [wrap_recipient(designer.email, designer.name, 'to')]
   end
 
   def reset_password(user, password)
     template 'reset_password'
     subject = I18n.t('mails.password_reset.subject')
     set_template_values(set_reset_password_params(user, password))
-    mail to: [wrap_recipient(user.email, user.name, "to")], subject:subject
+    mail to: [wrap_recipient(user.email, user.name, 'to')], subject:subject
   end
 
   def sign_up_beta_autoresponder(email)

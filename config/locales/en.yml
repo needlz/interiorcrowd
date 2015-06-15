@@ -939,8 +939,6 @@ en:
           able to plan for us - from the sofa right down to room
           accessories like bowls for the table. It’s a perfect room.
   mails:
-    client_registration:
-      subject: Thanks for joining InteriorCrowd
     designer_registration:
       subject: Congrats! You're now a designer on InteriorCrowd.
     password_reset:
