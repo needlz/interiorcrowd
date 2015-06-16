@@ -17,6 +17,10 @@ module Navigation
       'item-sel' if tab == active_tab
     end
 
+    def to_mobile_menu
+      tabs.inject({}){ |items, (tab, navigation_link)| items[navigation_link[:name]] = navigation_link[:href]; items }
+    end
+
     private
 
     attr_reader :current_route
