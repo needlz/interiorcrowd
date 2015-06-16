@@ -1,5 +1,5 @@
-.col-md-3.novice.template
+.col-sm-4.col-md-3.col-xs-6.col-vs-12.novice.template
   = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
 - urls.try(:each_with_index) do |path, index|
-  .col-md-3.novice.thumb{ data: { id: ids[index] } }
+  .col-sm-4.col-md-3.col-xs-6.col-vs-12.novice.thumb{ data: { id: ids[index] } }
     = render partial: 'contests/options/example_picture_thumb', locals: { src: path }

@@ -1,33 +1,24 @@
 .space-options
   .space-pictures
-    .description
-      .some-text.col-md-8.no-padding-left
-        %h1.title= t('contests.space.photos.title')
-        %span.requirements{:style => ""}
-          %i= t('contests.space.photos.image_requirements')
-    .clearfix
+    .row.marginTop40
+      .description.col-md-9.col-sm-8
+        %h4.title= t('contests.space.photos.title')
+        %p.fourImages
+          = t('contests.space.photos.image_requirements')
+      .clearfix
 
-    .col-md-12.thumbs
-      %span#image_display
+    .col-md-12.thumbs.uploadedImages
+      .row#image_display
         = render partial: 'contests/options/removable_thumbnails',
             locals: { urls: @contest_view.space_pictures.map(&:medium_size_url),
                       ids: @contest_view.space_pictures_ids }
 
     .clearfix
-    %input#design_space_image_id{:name => "design_space[document_id]",
-      type: "hidden",
+    %input#design_space_image_id{ name: 'design_space[document_id]',
+      type: 'hidden',
       value: @contest_view.space_pictures_ids.try(:join, ',') }
-    .col-md-6.no-x-padding.upload-button-container
-      %button.btn3.btn3-confirm.upload-button{ :type => "button"}= t('contests.space.photos.upload_button')
-      %input.hidden#file_input{ name: 'image[image]', type: 'file', multiple: 'multiple' }
-    .clearfix
-    .col-md-4.no-padding-left.alternatives
-      %span
-        %i= t('contests.space.photos.prefer_to_email_or_text')
-      %br/
-      %span
-        %i= t('contests.space.photos.text_to')
-      %br/
-      %span
-        %i= t('contests.space.photos.email_to')
-    .clearfix
+    %a.uploadImagesBtn.upload-button= t('contests.space.photos.upload_button')
+    %input.hidden#file_input{ name: 'image[image]', type: 'file', multiple: 'multiple' }
+    %p= t('contests.space.photos.prefer_to_email_or_text')
+    %p= t('contests.space.photos.text_to')
+    %p= t('contests.space.photos.email_to')

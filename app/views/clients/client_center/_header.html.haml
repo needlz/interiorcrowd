@@ -1,9 +1,6 @@
-.row.my-menu.paddTop20
-  .col-md-6.no-padding-right.logo-pc.username
-    .top-nav
-      %label.font20= t('client_center.welcome_user', username: @client.first_name)
-  .col-md-6.no-padding-right.pull-down
-    .top-nav
-      .nav-collapse
-        = render partial: 'shared/navigation'
-.rooms.text-package.text-center.text-center-sm.text-center-xs.underMenuLine
+.row.paddTop20
+  .col-sm-4
+    %p.welcomeP= t('client_center.welcome_user', username: @client.first_name)
+  .col-sm-8
+    = render partial: 'shared/navigation'
+.fullWidthLine.hidden-xs

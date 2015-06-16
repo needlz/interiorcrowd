@@ -8,13 +8,15 @@
     %li
       %a{ href: coming_soon_path, class: tracked_link }= t('header.how_it_works')
     - if current_user.designer?
-      %li
-        %a{ href: designer_center_index_path, class: tracked_link }= t('header.designer_center')
+      %li.dropdown
+        %a.mm-subopen{href: '#mm-designer-center'}
+        %a{href: '#mm-designer-center'}= t('header.designer_center')
       %li
         %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
     - elsif current_user.client?
-      %li
-        %a{ href: client_center_index_path, class: tracked_link }= t('header.client_center')
+      %li.dropdown
+        %a.mm-subopen{href: '#mm-client-center'}
+        %a{href: '#mm-client-center'}= t('header.client_center')
       %li
         %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
     - else
@@ -28,6 +30,18 @@
       %a{ href: client_login_sessions_path, class: tracked_link }= t('header.client_login')
     %li
       %a{ href: designer_login_sessions_path, class: tracked_link }= t('header.designer_login')
+  %ul#mm-client-center.mm-list.mm-panel.mm-hidden
+    %li.mm-subtitle
+      %a.mm-subclose{href: '#mm-0'}= t('header.client_center')
+    - Navigation::ClientCenter.new.tabs.each do |tab, navigation_link|
+      %li
+        = link_to navigation_link[:name], navigation_link[:href], class: "#{ tracked_link }"
+  %ul#mm-designer-center.mm-list.mm-panel.mm-hidden
+    %li.mm-subtitle
+      %a.mm-subclose{href: '#mm-0'}= t('header.designer_center')
+    - Navigation::DesignerCenter.new.tabs.each do |tab, navigation_link|
+      %li
+        = link_to navigation_link[:name], navigation_link[:href], class: "#{ tracked_link }"
 
 .mm-page.mm-slideout
   .visible-xs.visible-sm

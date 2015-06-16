@@ -57,4 +57,8 @@ class SpaceDimension
     "#{identifier}_inches"
   end
 
+  def optional?
+    !mandatory
+  end
+
 end

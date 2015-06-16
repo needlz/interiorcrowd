@@ -3,4 +3,4 @@
       locals: { title: t('client_center.title'),
                 header: 'clients/client_center/header',
                 content: (yield :client_center_content),
-                container_class: try(:container_class) }
+                container_class: (container_class if defined?(container_class)) }

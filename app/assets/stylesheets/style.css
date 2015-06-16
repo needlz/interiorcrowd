@@ -14,13 +14,13 @@
 
 body { font-family: AvenirLTStd-Light; }
 
-h1, h2, h3, h4, h5 { 
-	font-family: AvenirLTStd-Light; 
-	font-weight: bold; 
-	font-style: normal; 
+h1, h2, h3, h4, h5 {
+	font-family: AvenirLTStd-Light;
+	font-weight: bold;
+	font-style: normal;
 }
 
-.AvenirLTStd-Light { 
+.AvenirLTStd-Light {
 	font-family: AvenirLTStd-Light;
 	font-weight: normal;
 	font-style: normal;
@@ -133,13 +133,12 @@ color: #707070;
 }
 
 .main-menu>li>a {
-padding: 10px 40px;
-font-weight: 600;
-line-height: 25px;
-padding-bottom: 14px;
-text-align: right;
-padding-right: 0;
-font-size: 16px;
+    padding: 10px 40px;
+    line-height: 25px;
+    padding-bottom: 14px;
+    text-align: right;
+    padding-right: 0;
+    font-size: 16px;
 }
 
 .title-first{
@@ -488,12 +487,6 @@ input.form-control {
 }
 
 .logo-pc {padding: 10px 0;}
-.nav-tabs>li>a {border: 0}
-.nav-tabs>li>a:hover, .nav>li>a:focus {
-border: 0;
-background: none;
-color: #7E7E7E;
-}
 
 .footer-menu li a {padding-top: 16px;}
 
@@ -915,21 +908,7 @@ z-index: 9;}
 	opacity:1;
 }
 
-.item-sel {
-padding-bottom: 0;
-border-bottom: 3px solid #A0A0A0;
-font-weight: bold;
-font-size: 24px;
-}
-
-.item-sel a {color: #000;}
-
-.p-l-r{
-padding-left:12px;
-padding-right:12px;
-}
-
-@media (max-width: 991px) { 
+@media (max-width: 991px) {
 
 	.circle-big {
 	 width: 100%; 
@@ -3661,4 +3640,138 @@ padding-bottom: 40px;
   .main-menu>li>a>img {
     display: inline-block !important;
   }
+}
+
+/* new footer */
+
+.mobileMenu{
+    position: relative;
+}
+
+.mobileMenu a{
+    background: center center no-repeat transparent;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAbCAMAAAA9O+1hAAAADFBMVEUzMzMzMzMzMzMzMzMKAG/3AAAAA3RSTlMAaYc9lQKzAAAAG0lEQVQ4y2NgZCYSMDGMKh1wMBoFo7E1PJUCAOVMChjqhypgAAAAAElFTkSuQmCC);
+    display: block;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 30px;
+    right: 0px;
+}
+
+.footerLinks a{
+    font-size: 14px;
+    color: #231f20;
+    font-family: 'AvenirLTStd-Medium';
+    display: inline-block;
+    line-height: 75px;
+    padding: 0px 25px;
+}
+.footerSocial{
+    text-align: right;
+}
+.footerSocial a{
+    display: inline-block;
+    line-height: 75px;
+    padding: 0px 25px;
+}
+@media(max-width:992px){
+    .footerSocial a,.footerLinks a{
+        padding: 0px 20px;
+    }
+
+    /*}
+    @media(max-width:767px){*/
+    .footerLinks,.footerSocial{
+        text-align: center;
+    }
+    .footerSocial a{
+        padding: 0px 5%;
+    }
+    .footerLinks a{
+        padding-top: 25px;
+        line-height: 25px;
+    }
+    .copyright{
+        font-size: 14px !important;
+    }
+}
+@media(max-width:480px){
+    .footerSocial a{
+        padding: 0px;
+        float: left;
+        width: 30%;
+        padding: 0px 12px;
+    }
+    .footerSocial a:nth-child(1){
+        width: 20%;
+        text-align: left;
+    }
+    .footerSocial a:nth-child(4){
+        width: 20%;
+        text-align: right;
+    }
+}
+@media(max-width:360px){
+    .footerLinks a{
+        display: block;
+    }
+    .footerSocial a{
+        width: 50% !important;
+        /*text-align: center !important;*/
+    }
+    .footerSocial a:nth-child(odd){
+        text-align: right;
+        padding-right: 20px;
+    }
+    .footerSocial a:nth-child(even){
+        text-align: left;
+        padding-left: 20px;
+    }
+}
+.copyright{
+    font-size: 18px;
+    color: #231f20;
+    padding: 40px 0px;
+    font-family: 'AvenirLTStd-Roman';
+}
+.copyright .copyright-sign {
+    font-size: 27px;
+    margin-right: 7px;
+    position: relative;
+    top: 3px;
+}
+
+.fullWidthLine{
+    background: #e1e1e1;
+    width: 100%;
+    height: 1px;
+}
+
+
+.tabNav{
+    border-color: transparent;
+}
+.tabNav>li>a{
+    color: #000;
+    font-family: 'AvenirLTStd-Light';
+    font-size: 20px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0px;
+}
+.tabNav>li>a.active{
+    border-color: #aaaaaa;
+    font-family: 'AvenirLTStd-Medium';
+}
+.tabNav>li>a:hover,.tabNav>li>a:focus,.item-sel > a{
+    font-family: 'AvenirLTStd-Medium' !important;
+    background: transparent !important;
+    border-color: #aaaaaa !important;
+}
+
+.welcomeP{
+    font-size: 20px;
+    margin: 0px;
+    line-height: 45px;
 }

@@ -4,7 +4,7 @@ class @DesignSpaceOptions
   @numericInputs: '.in-inches, .in-feet'
   @feedbackTextareaSelector: 'textarea[name="design_space[feedback]"]'
 
-  @init: (options)->
+  @init: (options = {})->
     @feedbackPlaceholder = options.feedbackPlaceholder
     @setupFeedbackPlaceholder()
 

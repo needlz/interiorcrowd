@@ -1,6 +1,8 @@
 = content_for :head do
   = render partial: 'shared/setup_uploadify'
   = javascript_include_tag 'contests/pictures_dimensions'
+  = javascript_include_tag 'contests/design_space_options'
+  = stylesheet_link_tag 'new-style'
   :javascript
     I18n = #{ translations_to_json(['contests', 'space']) }
     $(document).ready(function(){
@@ -10,10 +12,12 @@
 - content_for :client_center_content do
   = form_tag contest_path(id: @contest.id, pictures_dimension: true), id: 'design_space',
       method: 'put', data: { contest: { id: @contest.id } } do
-    .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
+    .enterDimension
       .space-view-details
+
         = render partial: 'contests/options/space_pictures_options'
         = render partial: 'contests/options/space_dimensions_options'
+    .fullWidthLine.marginTop40
     .text-center.marg-top30
-      %input.btn1.btn1-confirm{:name => "commit", :type => "submit", :value => "Save"}
-= render partial: 'clients/client_center/layout'
+      %input.saveBtn{ name: 'commit', type: 'submit', value: 'Save' }
+= render partial: 'clients/client_center/layout', locals: { container_class: 'briefEditing' }

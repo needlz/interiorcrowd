@@ -5,7 +5,7 @@ module Navigation
 
     attr_accessor :active_tab
 
-    def initialize(active_tab)
+    def initialize(active_tab = nil)
       @active_tab = active_tab
     end
 
