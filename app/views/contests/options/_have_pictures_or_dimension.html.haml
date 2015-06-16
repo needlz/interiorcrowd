@@ -1,17 +1,22 @@
-.pictures-or-dimensions
-  %h1.title= t('contests.space.details_toggle.title')
-  %span.hint
-    %i= t('contests.space.details_toggle.hint')
-  .clearfix
+%h3.marginTop20.title= t('contests.space.details_toggle.title')
+%p= t('contests.space.details_toggle.hint')
+.row.yesNoRadio.hidden-xs
   - %w(yes no).each do |value|
-    .question.col-md-2
-      .col-md-1
+    .question.col-sm-3
+      .col-sm-2
         = radio_button_tag('details_toggle',
           value,
           @contest_view.conditional_block_radio_button_active?(@contest_view.have_space_views_details, value),
           class: 'regular-radio big-radio')
         = label_tag("details_toggle_#{ value }", '')
-      .col-md-1.caption
-        %span.text-price
-          %b= label_tag("details_toggle_#{ value }", t("contests.space.details_toggle.#{ value }"))
-  .clearfix
+      .col-sm-8.caption
+        = label_tag("details_toggle_#{ value }", t("contests.space.details_toggle.#{ value }"))
+.row.yesNoRadioBtn.visible-xs
+  - %w(yes no).each do |value|
+    .col-xs-6
+      %span.customRadioBtn{ data: { value: value } }
+        = radio_button_tag('mobile_details_toggle',
+                  value,
+                  @contest_view.conditional_block_radio_button_active?(@contest_view.have_space_views_details, value))
+        = label_tag("mobile_details_toggle_#{ value }", t("contests.space.details_toggle.#{ value }"))
+.clearfix

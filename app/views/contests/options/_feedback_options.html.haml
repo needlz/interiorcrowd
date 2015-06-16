@@ -1,9 +1,5 @@
 .space-options
   .feedback
-    .col-md-12.no-padding-left
-      %h1.title= t('contests.space.other_feedback.title')
-    .clearfix
-    .col-md-12.no-padding-left.no-padding-right
-      %textarea{ type: 'text', name: 'design_space[feedback]' }
-        = @contest_view.feedback
-    .clearfix
+    %h3.marginTop60.title= t('contests.space.other_feedback.title')
+    %textarea{ type: 'text', name: 'design_space[feedback]', class: 'feedbackInstructions' }
+      = @contest_view.feedback

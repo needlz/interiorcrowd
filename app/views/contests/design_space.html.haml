@@ -8,41 +8,38 @@
   :javascript
     I18n = #{ translations_to_json(['contests', 'space']) }
 
-  :css
-    body { font-family: AvenirLTStd-Light; }
-
 - content_for :page_content do
-  = render partial: 'home/msg'
-  = form_tag save_design_space_contests_path,
-      { id: 'design_space',
-        method: 'post' } do
-    .packages.text-package.title
-      %h1= t('contests.space.title')
-      .col-md-6.description
-        %span= t('contests.space.description')
-    .clearfix
-    .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
+  .newDesignContest.enterDimension
+    = render partial: 'home/msg'
+    = form_tag save_design_space_contests_path,
+        { id: 'design_space',
+          method: 'post' } do
+      .packages.text-package.title
+        %h3= t('contests.space.title')
+        %p.lightFont= t('contests.space.description')
       = render partial: 'contests/options/have_pictures_or_dimension'
       .space-view-details
 
         = render partial: 'contests/options/space_pictures_options'
         = render partial: 'contests/options/space_dimensions_options'
+      .fullWidthLine.marginTop40
       = render partial: 'contests/options/budget_options'
+      .fullWidthLine.marginTop40
       = render partial: 'contests/options/feedback_options'
 
-    = hidden_mixpanel_submit_tag
+      = hidden_mixpanel_submit_tag
 
-    .col-md-12.no-x-padding.text-center.footer-buttons
-      .bedr.col-md-offset-3.col-md-2.navigation-btn
+      .fullWidthLine.marginTop20
+      .text-center
         %a{ href: design_style_contests_path,
-            class: tracked_link,
+            class: "backBtn #{ tracked_link }",
+            data: { name: 'Contest creation - Back to Step 2' } }= t('contests.creation.go_back')
+        %a.continueBtn{ href: '#' }= t('contests.creation.continue')
+        .clearfix
+        %a{ href: design_style_contests_path,
+            class: "backBtnLink #{ tracked_link }",
             data: { name: 'Contest creation - Back to Step 2' } }
-          %div.back-button
-            %b= t('contests.creation.go_back')
-      .col-md-1
-      .bedr.col-md-2.continue.navigation-btn
-        %a.order{:href => "#"}
-          %div.continue-button
-            %b= t('contests.creation.continue')
+          %img{ src: '/assets/back-to-small.png' }
+          = t('contests.creation.go_back')
 
 = render partial: 'contests/contest_creation_page'
