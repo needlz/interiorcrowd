@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611122237) do
+ActiveRecord::Schema.define(version: 20150616091620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(version: 20150611122237) do
     t.integer  "contest_id"
     t.string   "image_type"
     t.integer  "contest_request_id"
+    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -301,6 +302,12 @@ ActiveRecord::Schema.define(version: 20150611122237) do
     t.text     "feedback"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "outbound_emails", force: true do |t|
+    t.string "mailer_method"
+    t.text   "mail_args"
+    t.string "status",        default: "not yet sent"
   end
 
   create_table "portfolio_awards", force: true do |t|
