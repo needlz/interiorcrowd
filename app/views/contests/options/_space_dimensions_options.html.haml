@@ -1,10 +1,6 @@
-.space-options
-  .dimensions
-    .col-md-12.no-padding-left
-      %h1.title= t('contests.space.dimensions.title')
-      %span.hint= t('contests.space.dimensions.hint', faqs_link: link_to(t('contests.space.dimensions.faqs', class: tracked_link), faq_path(anchor: 'collapse5'))).html_safe
-    .clearfix.dimensions-margin
-    = render partial: 'contests/options/dimension_of_space_row',
-             collection: @contest_view.dimensions,
-             as: :dimension
-    .clearfix
+.space-options.dimensions
+  %h4.marginTop40= t('contests.space.dimensions.title')
+  %p.lightFont= t('contests.space.dimensions.hint', faqs_link: link_to(t('contests.space.dimensions.faqs', class: tracked_link), faq_path(anchor: 'collapse5'))).html_safe
+  = render partial: 'contests/options/dimension_of_space_row',
+           collection: @contest_view.dimensions,
+           as: :dimension

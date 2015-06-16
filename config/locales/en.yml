@@ -133,7 +133,8 @@ en:
     dimensions:
       length: Length
       width: Width
-      height: Height (Optional)
+      height: Height
+    optional_dimension: (Optional)
     space:
       title: Project Details
       description: |

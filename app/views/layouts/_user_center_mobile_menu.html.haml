@@ -1,0 +1,7 @@
+- navigation = "Navigation::#{ role.capitalize }Center".constantize.new
+%ul.mm-list.mm-panel.mm-hidden{ id: "mm-#{ role }-center" }
+  %li.mm-subtitle
+    %a.mm-subclose{href: '#mm-0'}= t("header.#{ role }_center")
+  - navigation.tabs.each do |tab, navigation_link|
+    %li
+      = link_to navigation_link[:name], navigation_link[:href], class: "#{ tracked_link }"

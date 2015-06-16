@@ -1,0 +1,16 @@
+%ul#mm-0.mm-list.mm-panel.mm-opened.mm-current
+  - mobile_menu.items.each do |item|
+    - if item.children.present?
+      %li.dropdown
+        %a.mm-subopen{href: "#mm-#{ item.identifier }"}
+        %a{href: "#mm-#{ item.identifier }"}= item.name
+    - else
+      = render partial: 'layouts/mobile_menu_item', locals: { item: item }
+
+- mobile_menu.items.each do |item|
+  - if item.children.present?
+    %ul.mm-list.mm-panel.mm-hidden{ id: "mm-#{ item.identifier }" }
+      %li.mm-subtitle
+        %a.mm-subclose{href: '#mm-0'}= item.name
+      - item.children.each do |subitem|
+        = render partial: 'layouts/mobile_menu_item', locals: { item: subitem }

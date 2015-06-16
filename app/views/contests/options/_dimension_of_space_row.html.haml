@@ -1,20 +1,23 @@
-.col-md-12.no-x-padding.dimension
-  .col-md-2.no-padding-left
-    %span.name= dimension.name
-  .col-md-2
-    .form-group
-      %input.form-control.in-feet{ name: "design_space[#{ dimension.identifier }]",
+.row.roomDimension
+  .col-md-2.col-xs-2
+    %p
+      - if dimension.optional?
+        = precede(dimension.name) do
+          %span.optionalLabel.lineHeight20= t('contests.optional_dimension')
+      - else
+        = dimension.name
+  .col-md-4.col-xs-5
+    %p
+      %input.in-feet{ name: "design_space[#{ dimension.identifier }]",
         value: dimension.to_feet,
         id: dimension.feet_identifier}/
-  .col-md-1
-    %span.units= t('contests.space.dimensions.feet')
-  .col-md-2
-    .form-group
-      %input.form-control.in-inches{ name: "design_space[#{ dimension.inches_identifier }]",
+      %span.units= t('contests.space.dimensions.feet')
+  .col-md-4.col-xs-5
+    %p
+      %input.in-inches{ name: "design_space[#{ dimension.inches_identifier }]",
         value: number_with_precision(dimension.to_inches, precision: 2, strip_insignificant_zeros: true),
         id: dimension.inches_identifier}/
-  .col-md-4
-    %span.units= t('contests.space.dimensions.inches')
+      %span.units= t('contests.space.dimensions.inches')
 - if dimension.mandatory
   .clearfix
     %span.text-error{ id: "err_#{dimension.identifier}"}

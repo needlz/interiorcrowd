@@ -29,4 +29,30 @@ module ApplicationHelper
     end
     content.html_safe
   end
+
+  def mobile_menu
+    return @links if @links
+    @links = MobileMenu.new(t('header.get_inspired') => coming_soon_path)
+
+    if current_user.designer? && current_user.portfolio_path
+      @links.append(t('header.portfolio') => show_portfolio_path(current_user.portfolio_path))
+    end
+
+    @links.append(t('header.how_it_works') => coming_soon_path)
+
+    if current_user.designer?
+      @links.append({ t('header.designer_center') => Navigation::DesignerCenter.new.to_mobile_menu,
+                      t('header.sign_out') => logout_sessions_path })
+    elsif current_user.client?
+      @links.append({ t('header.client_center') => Navigation::ClientCenter.new.to_mobile_menu,
+                      t('header.sign_out') => logout_sessions_path })
+    else
+      @links.append({ t('header.login') => {
+          t('header.client_login') => client_login_sessions_path,
+          t('header.designer_login') => designer_login_sessions_path
+      } })
+    end
+    @links
+  end
+
 end

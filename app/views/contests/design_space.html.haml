@@ -1,18 +1,22 @@
 = content_for :head do
   = javascript_include_tag 'contests/design_space'
   = javascript_include_tag 'contests/design_space_options'
+  = stylesheet_link_tag 'new-style'
 
   = render partial: 'shared/setup_uploadify'
 
   :javascript
     I18n = #{ translations_to_json(['contests', 'space']) }
 
+  :css
+    body { font-family: AvenirLTStd-Light; }
+
 - content_for :page_content do
   = render partial: 'home/msg'
   = form_tag save_design_space_contests_path,
       { id: 'design_space',
         method: 'post' } do
-    .packages.text-package.text-center-xs.text-center-sm.title
+    .packages.text-package.title
       %h1= t('contests.space.title')
       .col-md-6.description
         %span= t('contests.space.description')
@@ -20,6 +24,7 @@
     .rooms.text-package.text-center-sm.text-center-xs.rooms-conditional-options
       = render partial: 'contests/options/have_pictures_or_dimension'
       .space-view-details
+
         = render partial: 'contests/options/space_pictures_options'
         = render partial: 'contests/options/space_dimensions_options'
       = render partial: 'contests/options/budget_options'

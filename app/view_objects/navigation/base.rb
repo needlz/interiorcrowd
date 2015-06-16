@@ -5,7 +5,7 @@ module Navigation
 
     attr_accessor :active_tab
 
-    def initialize(active_tab)
+    def initialize(active_tab = nil)
       @active_tab = active_tab
     end
 
@@ -15,6 +15,10 @@ module Navigation
 
     def active_class(tab)
       'item-sel' if tab == active_tab
+    end
+
+    def to_mobile_menu
+      tabs.inject({}){ |items, (tab, navigation_link)| items[navigation_link[:name]] = navigation_link[:href]; items }
     end
 
     private
