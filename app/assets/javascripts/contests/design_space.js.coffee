@@ -6,6 +6,7 @@ class DesignSpacePage
     DesignSpaceOptions.init(feedbackPlaceholder: I18n.other_feedback.placeholder)
     @dimensionViewDetailsToggle = new OptionsContainerToggle(
       radioButtonsSelector: '[name="details_toggle"]',
+      mobileButtonsSelector: '.customRadioBtn',
       containerSelector: '.space-view-details'
     )
     @dimensionViewDetailsToggle.init()
@@ -37,7 +38,7 @@ class DesignSpacePage
       false
 
   @bindContinueButton: ->
-    $('.continue').click(@onSubmitClick)
+    $('.continueBtn').click(@onSubmitClick)
 
   @clearHiddenInputs: ->
     $('.space-pictures, .dimensions').find('input').attr('name', '') unless @dimensionViewDetailsToggle.showing()

@@ -1,9 +1,7 @@
 .space-options
   .design-budget
-    .col-md-12.no-padding-left.description
-      %h1.title= t('contests.space.budget.title')
-      %span.hint
-        %i= t('contests.space.budget.hint')
+    %h3.marginTop40= t('contests.space.budget.title')
+    %p= t('contests.space.budget.hint')
     .clearfix
       %span.text-error{ id: 'err_budget' }
     = text_field(:design_space, :f_budget, class: 'selectpicker budget-input form-control',
