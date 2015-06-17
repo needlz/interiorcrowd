@@ -17,7 +17,7 @@ module Jobs
       UserMailer.send(mailer_method, *mail_args)
       if outbound_email_id
         email = OutboundEmail.find_by_id(outbound_email_id)
-        email.update_attributes!(status: 'sent') if email
+        email.sent if email
       end
     end
 
