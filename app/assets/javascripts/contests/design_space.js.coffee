@@ -21,8 +21,8 @@ class DesignSpacePage
   @onSubmitClick: (event)=>
     event.preventDefault()
     $('.text-error').text('')
-    $feedbackTextarea = $(@feedbackTextareaSelector)
-    if $feedbackTextarea.val() == @feedbackPlaceholder
+    $feedbackTextarea = $(DesignSpaceOptions.feedbackTextareaSelector)
+    if $feedbackTextarea.val() == DesignSpaceOptions.feedbackPlaceholder
       $feedbackTextarea.val ''
     @clearHiddenInputs()
 

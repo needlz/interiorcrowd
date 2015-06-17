@@ -10,13 +10,17 @@
     %p
       %input.in-feet{ name: "design_space[#{ dimension.identifier }]",
         value: dimension.to_feet,
-        id: dimension.feet_identifier}/
+        id: dimension.feet_identifier,
+        data: { placeholder: t('contests.space.dimensions.feet') }}/
       %span.units= t('contests.space.dimensions.feet')
   .col-md-4.col-xs-5
     %p
       %input.in-inches{ name: "design_space[#{ dimension.inches_identifier }]",
-        value: number_with_precision(dimension.to_inches, precision: 2, strip_insignificant_zeros: true),
-        id: dimension.inches_identifier}/
+        value: number_with_precision(dimension.to_inches,
+        precision: 2,
+        strip_insignificant_zeros: true),
+        id: dimension.inches_identifier,
+        data: { placeholder: t('contests.space.dimensions.inches') }}/
       %span.units= t('contests.space.dimensions.inches')
 - if dimension.mandatory
   .clearfix

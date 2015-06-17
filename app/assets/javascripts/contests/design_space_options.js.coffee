@@ -9,6 +9,7 @@ class @DesignSpaceOptions
     @setupFeedbackPlaceholder()
 
     @bindInchesInputs()
+    @mobileInputsPlaceholder()
 
   @bindInchesInputs: ->
     $(@inchesInputs).NumberLimiter(@maxValueForInches)
@@ -25,3 +26,17 @@ class @DesignSpaceOptions
     $textarea.blur ->
       if $(this).val() == ''
         $(this).val placeholder
+
+  @mobileInputsPlaceholder: ->
+    @toggleMobileInputsPlaceholder()
+    $(window).resize =>
+      @toggleMobileInputsPlaceholder()
+
+  @toggleMobileInputsPlaceholder: ->
+    showPlaceholder = window.matchMedia('(max-width: 320px)').matches
+    $('.roomDimension input').each (index, input)->
+      $input = $(input)
+      if showPlaceholder
+        $input.attr('placeholder', $input.data('placeholder'))
+      else
+        $input.attr('placeholder', '')

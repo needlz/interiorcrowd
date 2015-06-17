@@ -27,11 +27,14 @@ jQuery.fn.ForceNumericOnly = ->
         key >= numpad_zero and key <= numpad_nine
 
     $(this).on 'input paste', (e) ->
-      oldText = $(e.target).val()
+      $input = $(e.target)
+      oldText = $input.val()
       setTimeout(
         ->
-          text = $(e.target).val()
-          $(e.target).val(oldText) unless text.match(/^[0-9\.\-]+$/)
+          text = $input.val()
+          unless text.match(/^[0-9\.\-]+$/)
+            $input.val(oldText)
+            $input.trigger('change')
         0
       )
 
@@ -44,6 +47,7 @@ jQuery.fn.NumberLimiter =(maxValue) ->
     $(this).on 'input', (e) ->
       if ( $(this).val() > maxValue )
         $(this).val(maxValue)
+        $(this).trigger('change')
 
 jQuery.fn.phoneNumber = ->
   @each ->
