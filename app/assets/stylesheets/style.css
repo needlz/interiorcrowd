@@ -922,40 +922,6 @@ border-radius:5px;
 padding: 8px 15px 8px 25px;
 }
 
-.edit-profile div:nth-child(1) p{
-	font-weight: 700;
-	font-size: 20px;
-}
-.edit-profile div:nth-child(2) p{
-	font-size: 18px;
-}
-.edit-profile{
-	border-top: 1px solid #e1e1e1;
-	padding: 40px 0px 30px;
-}
-.edit-profile div p a{
-	color: #000;
-	text-decoration: underline;
-}
-.edit-profile:nth-child(1){
-	border:none;
-}
-.edit-profile div input[type=password]{
-	width: 360px;
-	border: 1px solid #a9a9a9;
-	height: 38px;
-	line-height: 38px;
-	margin-bottom: 10px;
-	padding: 0 5px;
-	border-radius: 5px;
-}
-.edit-profile div p.password-info{
-	color: #a9a9a9;
-	font-size: 14px;
-}
-.container-edit-profile{
-	padding:0px 40px 60px 40px;
-}
 .border-brief-box{
 	border: 1px solid #e1e1e1;
 	border-radius: 15px;
