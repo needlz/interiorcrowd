@@ -1,11 +1,14 @@
 - content_for :head do
+  = stylesheet_link_tag 'new-style.css'
+
   = javascript_include_tag 'clients/profile'
+
   :javascript
     I18n = #{ translations_to_json(:client_center) }
 
 - content_for :client_center_content do
   .profile
     = render partial: 'home/msg'
-    %div
+    .profileEditingBox.hidden-xs
       = render partial: 'clients/client_center/profile/profile_preview'
 = render partial: 'clients/client_center/layout', locals: { container_class: 'container-edit-profile'}

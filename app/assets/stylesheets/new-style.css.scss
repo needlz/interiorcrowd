@@ -432,43 +432,44 @@ body{
 .profileEditingBox .row{
   padding: 30px 0px;
 }
-.profileEditingBox .row > div:nth-child(1) p{
+.profileEditingBox .row .title p{
   margin: 0px;
   font-size: 18px;
   padding-left: 20px;
 }
-.profileEditingBox .row > div:nth-child(2) p{
+.profileEditingBox .row .placeholder p{
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
 }
-.profileEditingBox .row > div:nth-child(2) a{
+.profileEditingBox .row .placeholder a{
   color: #000;
   text-decoration: underline;
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
 }
-.profileEditingBox .row > div:nth-child(3) a{
+.profileEditingBox .row .edit-button a{
   display: inline-block;
   /*margin-right: 15px;*/
 }
 .profileEditingBox label{
   display: block;
 }
-.profileEditingBox label span{
+.profileEditingBox span{
   color: #a9a9a9;
   font-size: 14px;
   line-height: 40px;
   font-family: 'AvenirLTStd-Light';
 }
-.profileEditingBox label input[type=text]{
+.profileEditingBox input[type=text], .profileEditingBox input[type=password]{
   display: block;
-  width: 100%;
   height: 38px;
+  width: 367px;
+}
+.profileEditingBox input[type=text], .profileEditingBox input[type=password], .profileEditingBox .bootstrap-select .selectpicker{
   border-radius: 3px;
   border: 1px solid #a9a9a9;
-  width: 367px;
 }
 .savePassBtn,.cancelPassBtn{
   display: inline-block;
@@ -481,12 +482,26 @@ body{
   text-decoration: none !important;
   font-family: 'AvenirLTStd-Medium' !important;
   font-size: 20px !important;
+  background-color: white;
+  cursor: pointer;
 }
 @media(max-width: 1200px){
   .profileEditingBox{
     margin: 0px;
   }
 }
+.profileEditingBox .menu-buttons{
+  margin-top: 10px;
+}
+
+.profileEditingBox .row .address p{
+  display: inline;
+}
+
+.profileEditingBox .row .billing-address p{
+  display: inline;
+}
+
 /* end CC-profile-editing*/
 
 /* start CC-finish-intake-form */
@@ -1901,4 +1916,10 @@ button.btnInvite span{
 h1, h2, h3, h4, h5 {
   font-weight: inherit;
   font-family: inherit;
+}
+
+.bootstrap-select{
+  span{
+    color: black;
+  }
 }
