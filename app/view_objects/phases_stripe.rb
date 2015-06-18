@@ -2,9 +2,7 @@ class PhasesStripe
 
   PHASES = I18n.t('client_center.entries.phases')
 
-  ACTIVE_STEP_TO_STEPS_CSS =  [['stepActive', '', ''],
-              ['step1', 'stepActive', 'bgBottom'],
-              ['backgroundTopRight', 'step1', 'stepActive']]
+  ACTIVE_STEP_TO_STEPS_CSS = ['stepOne', 'stepTwo', 'stepThree']
 
   def initialize(options)
     @active_step = options[:active_step]
@@ -16,12 +14,13 @@ class PhasesStripe
   end
 
   def css_class(index)
-    ACTIVE_STEP_TO_STEPS_CSS[active_step || last_step][index]
+    "#{ ACTIVE_STEP_TO_STEPS_CSS[index] } #{ 'active' if (active_step || last_step) == index }"
   end
 
   def text(index)
-    return view_context.link_to PHASES[index], step_url_renderer.phase_url(index) if link?(index)
-    PHASES[index]
+    title = PHASES[index].html_safe
+    return view_context.link_to title, step_url_renderer.phase_url(index) if link?(index)
+    title
   end
 
   private

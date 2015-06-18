@@ -205,19 +205,6 @@ body {
 
 @media (max-width: 768px){
 
-  .moodboard-steps{
-    width: 100%;
-  }
-  .moodboard-steps p:nth-child(1){
-    width: 25%;
-  }
-  .moodboard-steps p:nth-child(2){
-    width: 50%;
-  }
-  .moodboard-steps p:nth-child(3){
-    width: 25%;
-  }
-
   .footer  .top-nav.col-sm-5 .nav-collapse li {
     /*width: 50%;*/
   }
@@ -226,44 +213,6 @@ body {
 @media (max-width: 640px){
   .moreConceptBoards{
     display: block;
-  }
-
-}
-
-@media (min-width: 480px){
-  .moodboard-steps p .number{
-    float: left;
-    display: block;
-    margin-top: 9px;
-  }
-
-
-}
-@media (max-width: 480px){
-
-  .moodboard-steps p{
-    line-height: 15px;
-  }
-  .moodboard-steps{
-    border: none;
-  }
-  .moodboard-steps p{
-    width: 100% !important;
-    display: block;
-    float: none;
-    background: none;
-    line-height: 44px;
-    padding-left: 5px;
-    color: #aaaaaa;
-  }
-  .moodboard-steps p .number{
-    margin-right: 5px;
-  }
-  .moodboard-steps p.stepActive{
-    color: #333333;
-  }
-  .moodboard-steps p.stepActive .number{
-    border-color: #333333;
   }
 
 }

@@ -15,6 +15,7 @@
  *= require jquery-ui/slider
  *= require style
  *= require style-override
+ *= require shared-style
  *= require home
  *= require clients
  *= require portfolio
