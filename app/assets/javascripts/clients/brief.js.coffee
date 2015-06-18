@@ -94,6 +94,7 @@ class @ContestEditing extends InlineEditor
 
   onSaveClick: (event)=>
     $saveButton = $(event.target)
+    DesignSpaceOptions.clearFeedback()
     $saveButton.parents('form').find($.rails.fileInputSelector).remove()
     $saveButton.parents('form').trigger('submit.rails');
 

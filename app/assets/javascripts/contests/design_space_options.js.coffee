@@ -40,3 +40,8 @@ class @DesignSpaceOptions
         $input.attr('placeholder', $input.data('placeholder'))
       else
         $input.attr('placeholder', '')
+
+  @clearFeedback: ->
+    $feedbackTextarea = $(@feedbackTextareaSelector)
+    if $feedbackTextarea.val() == @feedbackPlaceholder
+      $feedbackTextarea.val ''

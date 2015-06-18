@@ -177,25 +177,24 @@ body{
 .briefEditingBox .row{
   padding: 30px 0px;
 }
-.briefEditingBox .row > div:nth-child(1) p{
+.briefEditingBox .row .title p{
   margin: 0px;
   font-size: 18px;
   padding-left: 20px;
 }
-.briefEditingBox .row > div:nth-child(2) p{
+.briefEditingBox .row .attribute-form p{
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
 }
-.briefEditingBox .row > div:nth-child(2) a{
+.briefEditingBox .row .attribute-form a{
   color: #000;
   text-decoration: underline;
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
 }
-.briefEditingBox .row > div:nth-child(3) a{
-  display: inline-block;
+.briefEditingBox .row .edit-button, .briefEditingBox .row .cancel-button{
   margin-right: 15px;
 }
 
