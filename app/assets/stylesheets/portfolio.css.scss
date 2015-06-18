@@ -61,24 +61,26 @@
   }
 }
 
-.editCover:hover, .inviteToContest:hover {
-  background-color: rgba(0, 0, 0, 0.4);
-}
+.designer-portfolio{
+  .editCover:hover, .inviteToContest:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 
-.inviteToContest, .inviteToContest:hover, .inviteToContest:focus{
-  font-weight: 700;
-  font-size: 16px;
-  border: 2px solid white;
-  width: 176px;
-  text-align: center;
-  height: 48px;
-  line-height: 48px;
-  color: white;
-  display: inline-block;
-  position: absolute;
-  right: 0px;
-  border-radius: 5px;
-  bottom: -10px;
+  .inviteToContest, .inviteToContest:hover, .inviteToContest:focus{
+    font-weight: 700;
+    font-size: 16px;
+    border: 2px solid white;
+    width: 176px;
+    text-align: center;
+    height: 48px;
+    line-height: 48px;
+    color: white;
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+    border-radius: 5px;
+    bottom: -10px;
+  }
 }
 
 .bottom-stripe{

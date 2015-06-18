@@ -1,15 +1,12 @@
-.col-md-12
-  .rooms.text-package.text-center.text-center-sm.text-center-xs.divider-line
-    %h3.invite-designers-title
-      %b=t('client_center.entries.signed_up_message')
-    - @invitable_designer_views.in_groups_of(2, false) do |designers|
-      .clearfix
-      .designers-row
-        - designers.each do |designer|
-          = render partial: 'clients/client_center/entries/designer_to_invite',
-            locals: { designer: designer }
-    .some-text.col-md-12.text-center.more-designers-link
-      %p.more-designers-link
-        %a{ href: coming_soon_path, class: tracked_link }
-          %i= t('client_center.entries.see_more_designers')
-    .clearfix
+%p.daysAway
+  = t('client_center.entries.signed_up_message')
+  %span.mdLineBreaker
+  = t('client_center.entries.signed_up_message_below')
+
+- @invitable_designer_views.in_groups_of(2, false) do |designers|
+  .row.designers-row
+    - designers.each do |designer|
+      = render partial: 'clients/client_center/entries/designer_to_invite',
+        locals: { designer: designer }
+%a.seeMoreDesigners{ href: coming_soon_path, class: tracked_link }
+  = t('client_center.entries.see_more_designers')

@@ -197,7 +197,7 @@ RSpec.describe ClientsController do
 
       it 'returns page' do
         get :entries
-        expect(response).to render_template(:entries)
+        expect(response).to render_template(:entries_invitations)
       end
 
       context 'responses present' do

@@ -508,12 +508,12 @@ body{
   font-size: 14px;
   color: #000;
 }
-.dontForgetPicDim > div:nth-child(3){
+.dontForgetPicDim .buttons{
   /*background: red;*/
   text-align: right;
   padding-right: 50px;
 }
-.dontForgetPicDim > div:nth-child(3) a.btn{
+.dontForgetPicDim .buttons a.btn{
   padding: 0px;
   line-height: 38px;
   width: 166px;
@@ -540,11 +540,17 @@ body{
   line-height: 32px;
   margin-bottom: 40px;
 }
+
+.profile-card{
+  padding-bottom: 30px;
+}
+
 .designerBox{
   background: #f6f6f6;
   margin: 15px 0px;
   padding: 15px 0px;
   color: #000;
+  height: 100%;
 }
 .designerBox img{
   width: 100%;
@@ -554,6 +560,11 @@ body{
   font-size: 24px;
   margin-bottom: 10px;
 }
+
+.designerBox .designerName a{
+  color: inherit;
+}
+
 .designerBox .designMindset{
   font-size: 20px;
   margin: 5px 0px;
@@ -573,6 +584,9 @@ body{
   line-height: 38px;
   margin-top: 20px;
   font-family: 'AvenirLTStd-Heavy';
+}
+.designerBox .inviteToContest.designer-invitation-button{
+  cursor: pointer;
 }
 .seeMoreDesigners,.seeMoreDesigners:hover{
   margin: 60px 0px 40px;
@@ -624,7 +638,7 @@ h3.exploreMore{
   .dontForgetPicDim h4{
     font-size: 16px;
   }
-  .dontForgetPicDim > div:nth-child(3) a.btn{
+  .dontForgetPicDim .buttons a.btn{
     font-size: 16px;
   }
   .daysAway{
@@ -651,7 +665,7 @@ h3.exploreMore{
   .dontForgetPicDim{
     text-align: center;
   }
-  .dontForgetPicDim > div:nth-child(3){
+  .dontForgetPicDim .buttons{
     text-align: center;
     margin-top: 5px;
   }
@@ -704,6 +718,9 @@ h3.exploreMore{
   .seeMoreDesigners, .seeMoreDesigners:hover{
     margin: 40px 0px;
   }
+  .profile-card{
+    padding-bottom: 0px;
+  }
 }
 @media(max-width: 480px){
   .daysAway {
@@ -743,10 +760,10 @@ h3.exploreMore{
   .seeMoreDesigners, .seeMoreDesigners:hover{
     font-size: 18px;
   }
-  .dontForgetPicDim > div:nth-child(3){
+  .dontForgetPicDim .buttons{
     padding-right: 15px;
   }
-  .dontForgetPicDim > div:nth-child(3) a.btn{
+  .dontForgetPicDim .buttons a.btn{
     margin: 10px auto;
     display: block;
   }

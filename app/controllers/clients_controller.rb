@@ -29,7 +29,12 @@ class ClientsController < ApplicationController
       @share_url = public_designs_url(token: @won_contest_request.token)
     end
 
-    render 'clients/client_center/entries'
+    if @won_contest_request || @requests_present || @comments_present
+      render 'clients/client_center/entries'
+    else
+      render 'clients/client_center/entries_invitations'
+    end
+
   end
 
   def brief

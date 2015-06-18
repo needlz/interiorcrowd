@@ -1,15 +1,10 @@
 .more-features
-  .text-center
-    %h3.title
-      %b=t('client_center.entries.more_features.title')
+  %h3.exploreMore= t('client_center.entries.more_features.title')
+  .text-center.circleLinks
+    %a{ href: coming_soon_path, class: tracked_link }
+      %span= t('client_center.entries.more_features.get_inspired')
+    %a{ href: client_center_index_path, class: tracked_link }
+      %span= t('client_center.entries.more_features.see_example')
+    %a{ href: coming_soon_path, class: tracked_link }
+      %span= t('client_center.entries.more_features.share_brief').html_safe
     .clearfix
-  .text-center.clearfix.items
-    .center-block
-      .col-md-4.circle-big{ style: 'margin-right:20px;' }
-        %a.link-underline{ href: coming_soon_path, class: tracked_link }
-          %b=t('client_center.entries.more_features.get_inspired')
-      .col-md-4.circle-big{ style: 'margin-right:20px;' }
-        %b= link_to t('client_center.entries.more_features.see_example'), client_center_index_path, class: "link-underline #{ tracked_link }"
-      .col-md-4.circle-big{ style: 'padding-top: 50px;' }
-        %a.link-underline{ href: coming_soon_path, class: tracked_link }
-          %b=t('client_center.entries.more_features.share_brief').html_safe
