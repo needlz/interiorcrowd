@@ -3,7 +3,8 @@ class @DesignerInvitationButton
   @I18n: ->
     I18n.invitations
 
-  @buttonSelector: '.profile-card .invite-designer'
+  @activenessClass: 'designer-invitation-button'
+  @buttonSelector: ".profile-card .#{ @activenessClass }"
 
   @getDesignerId: ($button)->
     $button.parents('.profile-card').data('id')
@@ -30,4 +31,4 @@ class @DesignerInvitationButton
     )
 
   @onSuccess: ($button) ->
-    $button.closest('button').find('b').text(@I18n().invited).removeClass(@buttonSelector)
+    $button.text(@I18n().invited).off('click').removeClass(@activenessClass)

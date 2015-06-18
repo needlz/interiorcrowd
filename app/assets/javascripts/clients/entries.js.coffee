@@ -16,18 +16,20 @@ class EntriesPage
 
 class @DesignerBlocks
 
-  @profileCardPadding = 40
-
   @fitHeight: ->
     @setupEllipsis()
 
     maxProfileCardHeight = null
+    oneInRow = window.matchMedia('(max-width: 768px)').matches
+
     $('.designers-row').each (i, row)=>
       maxProfileCardHeight = 0
       $rowCards = $(row).find('.profile-card')
-      $rowCards.each ->
-        maxProfileCardHeight = $(@).height() if maxProfileCardHeight < $(@).height()
-      $rowCards.css 'height', "#{ maxProfileCardHeight + @profileCardPadding }px"
+      $rowCards.css 'height', ''
+      if !oneInRow
+        $rowCards.each ->
+          maxProfileCardHeight = $(@).height() if maxProfileCardHeight < $(@).height()
+        $rowCards.css 'height', "#{ maxProfileCardHeight }px"
 
   @setupEllipsis: ->
     $('.profile-card .attribute-value.about').dotdotdot({ height: 50 });
@@ -231,5 +233,7 @@ class ReviewerInvitations
 $ ->
   EntriesPage.init()
 
-$(window).load ->
-  DesignerBlocks.fitHeight()
+  $(window).load ->
+    DesignerBlocks.fitHeight()
+  $(window).resize ->
+    DesignerBlocks.fitHeight()
