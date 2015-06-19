@@ -154,7 +154,7 @@ class @FulfillmentApprovedEdit
     $elem.find("#{ @productItemsEditor.editButtonSelector }").click()
 
   @clearEditFormInputs: ($form)->
-    $form.find('.edit-form').find(@imageIdInput).remove()
+    $form.find('.product-item .view').find(@imageIdInput).remove()
 
   @editAll: ->
     @productItemsEditor.editAll()
