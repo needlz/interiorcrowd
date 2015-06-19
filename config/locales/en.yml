@@ -262,9 +262,9 @@ en:
         favorite: Favorite
         winner: Winner
       phases:
-        - 'Initial Concept Boards'
-        - 'Customized Board and Product List'
-        - 'Final Design'
+        - 'Initial Concept<span></span>Boards'
+        - 'Customized Board<span></span>and Product List'
+        - 'Final<span></span>Design'
       winner_dialog:
         title: Ready to pick the Winner?
         text: Please confirm

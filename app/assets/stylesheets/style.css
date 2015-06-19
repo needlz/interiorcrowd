@@ -963,60 +963,11 @@ padding: 8px 15px 8px 25px;
     margin-top: 10px;
 }
 
-.moodboard-steps{
-	border: 1px solid #a9aaaa;
-	border-radius: 3px;
-	line-height: 44px;
-	margin-bottom: 10px;
-	width: 670px;
-}
-.moodboard-steps p{
-	padding-left: 30px;
-	font-size: 16px;
-	color: #707070;
-	float: left;
-	margin: 0px;
-	height: 44px;
-	background: url('/assets/step-delimiter.png') left bottom no-repeat;
-}
-.moodboard-steps p .number{
-	border: 1px solid #707070;
-	border-radius: 13px;
-	display: inline-block;
-	width: 25px;
-	height: 25px;
-	line-height: 25px;
-	text-align: center;
-}
-.moodboard-steps p:nth-child(1){
-	width: 190px;
-}
-.moodboard-steps p:nth-child(2){
-	width: 320px;
-}
-.moodboard-steps p:nth-child(3),.bottomStepBackground{
-	width: 150px;
-	background-position: left top;
-	/*text-align: right;*/
-}
-
-.moodboard-steps a {
-    color: #707070;
-}
-
 .bgBottom{
 	background-position: left bottom !important; 
 }
 .step1{
 	background: url('/assets/step1.png') right no-repeat !important;
-}
-.moodboard-steps p:nth-child(2).step1{
-	width: 328px;
-	padding-left: 15px;
-}
-
-.moodboard-steps p .name{
-    margin-left: 5px;
 }
 
 .backgroundTopRight{
@@ -1340,17 +1291,7 @@ border-bottom-right-radius: 10px;
 	top: 3px;
 	font-family: "Courier New", Courier, monospace;
 }
-.designerInfo{
-	font-size: 18px;
-	font-weight: 700;
-	padding-top: 7px;
-	color: #000;
-}
-.designerInfo span, .designerInfoText{
-	font-size: 16px;
-	display: block;
-	font-weight: 400;
-}
+
 .makeBorderBottom{
 	padding-bottom: 20px;
 	border-bottom: 1px solid #e1e1e1;
@@ -1578,7 +1519,6 @@ textarea.productsMoodboardAbove{
 	padding: 10px 24px;
 	display: block;
 	color: #000;
-	font-weight: 700;
 	text-shadow: none;
 }
 .btnGroupComments li a:hover{
@@ -1676,7 +1616,6 @@ textarea.productsMoodboardAbove{
   	border-radius: 5px;
   	font-size: 16px;
   	color: #000;
-  	font-weight: 700;
   	margin: 15px 0;
 }
 
