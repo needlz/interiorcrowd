@@ -12,6 +12,7 @@ $.fn.initUploader = (options)->
       $inputWithoutForm = $(@).clone()
       $inputWithoutForm.fileupload(options)
       $inputWithoutForm.fileupload('add', { files: data.files })
+      $(@).val('')
 
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
