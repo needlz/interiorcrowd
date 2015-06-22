@@ -256,6 +256,10 @@ RSpec.describe ClientsController do
       fulfillment.image_items.create!(kind: 'product_items', final: true)
       get :entries
       expect(response).to render_template(:entries)
+      ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
+        get :entries, view: phase_index
+        expect(response).to render_template(:entries)
+      end
     end
 
     context 'client has no contest' do

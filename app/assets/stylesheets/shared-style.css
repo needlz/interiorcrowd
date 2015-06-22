@@ -1278,3 +1278,93 @@ h3.exploreMore{
     }
 }
 /* end CC-finish-intake-form */
+
+/* start CC-viewing-moodboard */
+.backTo{
+    font-size: 18px;
+    color: #000;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.viewingMoodboard{
+    color: #000;
+    padding-bottom: 60px;
+}
+.viewingMoodboard h4{
+    font-size: 18px;
+    margin-top: 10px;
+}
+.viewingMoodboard p{
+    font-size: 16px;
+    font-family: 'AvenirLTStd-Light';
+}
+.viewingMoodboard audio{
+    width: 100%;
+    display: block;
+    max-width: 100%;
+}
+.viewingMoodboard .voteBtn{
+    font-size: 18px;
+    font-family: 'AvenirLTStd-Light';
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 0px;
+    margin-top: 20px;
+    width: 22%;
+    display: block;
+    float: left;
+    margin-right: 4%;
+}
+.viewingMoodboard .voteBtn:nth-child(5){
+    margin-right: 0px;
+}
+.fullScreenMoodboard{
+    width: 40px;
+    height: 40px;
+    background: url('/assets/enlarge-icon.png');
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+@media(max-width: 992px){
+    .viewingMoodboard .voteBtn{
+        margin-bottom: 40px;
+    }
+    .viewingMoodboard h4{
+        font-size: 20px;
+        margin-top: 20px;
+        margin-bottom: 0px;
+    }
+}
+@media(max-width: 768px){
+    .viewingMoodboard h4{
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+}
+@media(max-width: 480px){
+    .viewingMoodboard .col-xs-3{
+        padding-right: 0px;
+    }
+    .nameOfDesigner{
+        margin-top: 5px !important;
+    }
+    .viewingMoodboard .voteBtn{
+        margin-bottom: 0px;
+        width: 48%;
+    }
+    .viewingMoodboard .voteBtn:nth-child(odd){
+        margin-left: 2%;
+        margin-right: 0px;
+    }
+    .viewingMoodboard .voteBtn:nth-child(even){
+        margin-right: 2%;
+        margin-left: 0px;
+    }
+    .viewingMoodboard .col-md-4{
+        margin-top: 40px;
+    }
+
+}
+/* end CC-viewing-moodboard */
