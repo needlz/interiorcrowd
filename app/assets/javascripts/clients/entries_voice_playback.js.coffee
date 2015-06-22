@@ -1,5 +1,7 @@
 class @EntriesVoicePlayback
 
+  @descriptionSelector: '.voice-description';
+
   @init: (playerSelector)->
     $(playerSelector).each (i, element)=>
       @bindPlayback($(element).find('.playback-icon'))
@@ -16,7 +18,7 @@ class @EntriesVoicePlayback
   @bindPlayback: ($button)->
     $button.click =>
       $player = $button.closest('.player').find('.control')
-      $description = $button.closest('.player').find('.voice .text')
+      $description = $button.closest('.player').find(@descriptionSelector)
       if $player.hasClass('hidden')
         @showPlayer($player, $description)
       else

@@ -1,12 +1,10 @@
-= stylesheet_link_tag 'new-style'
-
 .animated.fadeInDown.bottom60
   .row.congratulationsBox.hidden-ss
     %h4= t('client_center.entries.congratulations')
     %p= t('client_center.entries.customized_board')
 
   = render partial: 'clients/client_center/entries/phases',
-           locals: { stripe: @entries_page.phases_stripe }
+           locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
   .row.congratulationsBox.visible-ss
     %h4= t('client_center.entries.congratulations')
     %p= t('client_center.entries.customized_board')
@@ -17,7 +15,7 @@
           %span
           %p The winner
           .clearfix
-        = render partial: 'shared/moodboard', locals: { image: @entries_page.concept_board_image }
+        = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
     .col-md-4
       = render partial: 'contest_requests/submission_info',
           locals: { designer: request.designer, submitted_at: request.created_at, request: request }

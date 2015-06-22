@@ -16,6 +16,7 @@
  *= require style
  *= require style-override
  *= require shared-style
+ *= require shared-style-override
  *= require home
  *= require clients
  *= require portfolio

@@ -1,6 +1,5 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
-  include MoodboardCollection
 
   before_filter :set_client, except: [:create]
 
@@ -11,30 +10,23 @@ class ClientsController < ApplicationController
   def entries
     @contest = @client.last_contest
     return redirect_to design_brief_contests_path unless contest_active?
-    if @contest
-      setup_moodboard_collection(@contest)
-    else
-      @contest_requests = [].paginate
-    end
     @navigation = Navigation::ClientCenter.new(:entries)
     @current_user = current_user
-    @won_contest_request = @contest.response_winner
-    if @won_contest_request
-      @entries_page = EntriesConceptBoard.new({
-          contest_request: @won_contest_request,
-          view_context: view_context,
-          preferred_view: params[:view]
-      })
-      @visible_image_items = @entries_page.image_items.paginate(per_page: 4, page: params[:page])
-      @share_url = public_designs_url(token: @won_contest_request.token)
-    end
 
-    if @won_contest_request || @requests_present || @comments_present
+    @entries_page = EntriesPage.new(
+      contest: @contest,
+      view: params[:view],
+      answer: params[:answer],
+      page: params[:page],
+      current_user: current_user,
+      view_context: view_context
+    )
+
+    if @entries_page.show_submissions? || @entries_page.won_contest_request
       render 'clients/client_center/entries'
     else
       render 'clients/client_center/entries_invitations'
     end
-
   end
 
   def brief

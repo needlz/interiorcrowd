@@ -926,34 +926,6 @@ padding: 8px 15px 8px 25px;
 	border: 1px solid #e1e1e1;
 	border-radius: 15px;
 }
-.sortBySelect{
-}
-.sortBySelect button{
-	border: 1px solid #a9a9a9;
-}
-.sortBySelect .caret{
-	background: url('/assets/caret.png') 15px 15px no-repeat;
-	top: 2px !important;
-	border-left: 1px solid #a9a9a9 !important;
-}
-.sortBySelect li:nth-child(1){
-	display: none;
-}
-.sortBySelect .dropdown-menu>li>a{
-	padding: 7px 20px;
-	font-size: 16px;
-	color: #000;
-	border-top: 1px solid #e1e1e1;
-}
-.sortBySelect .dropdown-menu>li:nth-child(2)>a{
-	border-top: none;
-}
-.sortBySelect .dropdown-menu{
-	min-height: 100px !important;
-	border-radius: 0px;
-	top: 37px;
-	border: 1px solid #a9a9a9;
-}
 
 .chooseP{
 	font-size: 18px;
@@ -994,10 +966,10 @@ p.stepActive .number{
 .designConcept{
 	margin-bottom: 35px;
 }
-.designConcept .moodboard .imageWithOverlay, .designConcept .moodboard .designBox{
+.designConcept .moodboard .imageWithOverlay{
 	background: #F8F8F8;
 	padding: 0px 25px 25px;
-	border-top: 3px solid #aaaaaa; 
+	border-top: 3px solid #aaaaaa;
 }
 .designConcept .moodboard:nth-child(1){
 	padding-left: 0px;
@@ -1012,13 +984,7 @@ p.stepActive .number{
 	background: #FFF;
 	border: 1px solid #e3e3e3;
 }
-.designConcept h3{
-	font-size: 24px;
-	color: #000;
-	border-bottom: 1px solid #e1e1e1;
-	padding-bottom: 18px;
-	margin-bottom: 24px;
-}
+
 .hLine{
 	background: #e1e1e1;
 	width: 100%;
@@ -1068,66 +1034,6 @@ p.stepActive .number{
 	text-decoration: none;
 	background: #231f20;
 	color: #FFF;
-}
-
-.designerFeedback h4{
-	font-weight: 700;
-	font-size: 20px;
-	color: #000;
-	padding-bottom: 20px;
-}
-.designerFeedback textarea{
-	width: 100%;
-	height: 98px;
-	resize: none;
-	border: 3px solid #e1e1e1;
-	border-radius: 3px;
-}
-.designerFeedback .btn{
-	background: #FFF;
-	margin-top: 10px;
-	color: #000;
-	font-size: 20px;
-	border: 1px solid #000;
-	font-weight: 600;
-}
-.designerFeedback .notes{
-	background: #F8F8F8;
-	border: 1px solid #e1e1e1;
-	border-radius: 10px;
-	height: 160px;
-	width: 100% !important;
-	padding-right: 0px !important;
-	/*padding: 20px 10px;*/
-}
-/*.designerFeedback .notes ul{
-	list-style-position: inside;
-	margin-left: -40px;
-}*/
-.designerFeedback .notes ul li.delimiter{
-	/*width: 100%;*/
-	height: 1px;
-	background: #e1e1e1;
-	list-style-type: none;
-	padding: 0px;
-	margin-left: -40px;
-}
-.designerFeedback .notes ul li {
-	font-size: 30px;
-	/*padding:10px 15px;*/
-	/*border-top: 1px solid #e1e1e1;*/
-}
-.designerFeedback .notes ul li p{
-	/*margin-left: -15px;*/
-	padding-left: 10px;
-	font-size: 16px;
-	color: #000;
-}
-.designerFeedback .notes ul li p span{
-	display: block;
-	font-style: italic;
-	color: #a9a9a9;
-	font-size: 14px;
 }
 
 #scrollbox4 {
@@ -1299,7 +1205,7 @@ border-bottom-right-radius: 10px;
 .relative{
 	position: relative;
 }
-.winnerBadge{
+.winnerBadgeFinal{
 	position: absolute;
 	top: -27px;
   	left: -24px;

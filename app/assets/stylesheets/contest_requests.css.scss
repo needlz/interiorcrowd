@@ -30,34 +30,7 @@
 }
 
 .designBox {
-  text-align: left;
-
-  .title {
-    line-height: 55px;
-    margin-bottom: -24px;
-  }
-
-  .designerName {
-    font-size: 24px;
-    font-weight: bold;
-    width: 50%;
-  display: inline-block;
-  }
-
   .player {
-    display: inline;
-    width: 50%;
-    margin-top: 13px;
-
-    .voice {
-      margin-right: 35px;
-
-      .text {
-        margin-right: 10px;
-        line-height: 31px;
-      }
-    }
-
     .jp-time-holder {
       display: none;
     }
@@ -77,7 +50,6 @@
 
   .playback-icon {
     cursor: pointer;
-    vertical-align: inherit;
   }
 }
 

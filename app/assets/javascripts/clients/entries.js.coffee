@@ -115,8 +115,8 @@ class @Answers
 
   updateView: (requestId, answer)=>
     $board = $(@requestIdContainerSelector).filter("[data-id=#{requestId}]")
-    $board.find("button.btn[data-answer]").removeClass('result-answer')
-    $board.find(" button.btn[data-answer=#{answer}]").addClass('result-answer')
+    $board.find("[data-answer]").removeClass('result-answer')
+    $board.find(" [data-answer=#{answer}]").addClass('result-answer')
 
   hidePopover: ($popover_element)->
     $('#pickWinnerModal').modal('hide');

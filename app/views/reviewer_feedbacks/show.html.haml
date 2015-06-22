@@ -1,8 +1,12 @@
 - content_for :head do
+  = stylesheet_link_tag 'new-style'
+  = stylesheet_link_tag 'shared-style'
+  = stylesheet_link_tag 'shared-style-override'
+
   = javascript_include_tag 'contests/comment_posting'
 
 .content.container.animated.fadeInDown
-  = render partial: 'reviewer_feedbacks/content'
+  = render partial: 'reviewer_feedbacks/content', locals: { feedback_page: @feedback_page }
   .row
     .hLine
   = render partial: 'clients/client_center/entries/feedback/comment_form'

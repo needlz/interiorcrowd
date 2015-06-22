@@ -3,13 +3,13 @@
     .col-md-12
       %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: @entries_page.phases_stripe }
+          locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
 
     .col-md-12.marg-top20
       .designerShareBox
         .row
           .col-md-1
-            = image_tag 'avatar2.png', width: 90, height: 90, class: 'img-circle'
+            = image_tag '/assets/avatar2.png', width: 90, height: 90, class: 'img-circle'
           .col-md-5
             %p.designerName= request.designer.name
             %p.designerNote= request.final_note
@@ -19,7 +19,7 @@
               popup: 'true',
               img: request.concept_board_current_image_path,
               title: 'my design',
-              url: @share_url } }
+              url: @entries_page.share_url } }
               - SocialShareButton.config.allow_sites.each do |site|
                 = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
 
@@ -28,20 +28,20 @@
     .col-md-10.col-md-offset-1.no-x-padding
       = render partial: 'clients/client_center/entries/final_design',
           locals: { request: request }
-      - if @visible_image_items.present?
+      - if @entries_page.visible_image_items.present?
         - if request.pull_together_note.present?
           %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.pull_together')
           %p.font16= request.pull_together_note
         %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')
         .hLine10
-        - @visible_image_items.each do |product_item|
+        - @entries_page.visible_image_items.each do |product_item|
           - unless product_item.image_id.nil?
             = render partial: 'clients/client_center/entries/design_item',
                 locals: { image_item: ImageItemView.new(product_item) }
         .row.bottom60
           .col-md-12.disablePadding.text-right.product-list-pagination
             .pull-left
-              = will_paginate(@visible_image_items,
+              = will_paginate(@entries_page.visible_image_items,
                   container: false,
                   renderer: ProductListPaginationRenderer)
             .pull-right

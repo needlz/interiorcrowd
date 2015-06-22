@@ -1,6 +1,6 @@
 .final_moodboard.marg-top20
   = image_tag request.concept_board_current_image_path, id: 'final_moodboard'
-  = image_tag 'final_design_badge.png', class: 'winnerBadge'
+  = image_tag '/assets/final_design_badge.png', class: 'winnerBadgeFinal'
   = link_to t('client_center.entries.space.download'),
       download_contest_request_path(id: request.id),
       class: "darkBorderBtn font20 #{ tracked_link }",

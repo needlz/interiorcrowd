@@ -1,16 +1,11 @@
+.fullWidthLine.marginTop40.marginBottom40
 - if @reviewer_feedbacks.present?
-  .row
-    .hLine
-  .row
-    .disablePadding
-      %h3= t('client_center.entries.reviewer_invitations.title')
-  .row
-    - @reviewer_feedbacks.each do |feedback|
-      = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
+  .row.feedBackTitle
+    %h3= t('client_center.entries.reviewer_invitations.title')
+  - @reviewer_feedbacks.each do |feedback|
+    = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
 - unless readonly
-  .row
-    .hLine
-  .row.designerFeedback.reviewer-invitations
+  .row.sendDesignerFeedback.reviewer-invitations
     %h4
       = t('client_center.entries.reviewer_invitations.want_feedback')
     .template
