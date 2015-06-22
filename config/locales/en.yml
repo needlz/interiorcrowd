@@ -407,7 +407,7 @@ en:
       brief: Brief
       profile: Profile
     sign_up:
-      title: CREATE YOUR ACCOUNT
+      title: Create your account <span></span> and <span></span> payment detail
       create_account: Create your account
       password: Password
       confirm_password: Confirm Password
