@@ -4,7 +4,7 @@
 .row.marg-top20.response{ data: { id: @request.id } }
   = form_for contest_request, url: designer_center_response_path(id: contest_request.id) do |f|
     .col-md-3.disablePadding.text-center
-      = image_tag 'profileImg.png'
+      = image_tag '/assets/profileImg.png'
       %p.designerName= contest_request.designer.name
     .col-md-9
       .row

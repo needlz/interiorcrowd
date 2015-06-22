@@ -4,7 +4,7 @@
   .row
     .col-md-8.disablePadding
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: @entries_page.phases_stripe }
+          locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
       %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
     - if show_time_button?
       .col-md-4
@@ -12,7 +12,7 @@
     %br/
     %br/
   .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
-    = render partial: 'shared/moodboard', locals: { image: @entries_page.concept_board_image }
+    = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
     .image-items
       = render partial: 'clients/client_center/entries/collaboration/image_block',
           locals: { choosable: true,

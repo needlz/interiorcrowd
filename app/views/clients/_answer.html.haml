@@ -1,3 +1,2 @@
-.col-md-3.text-center.disablePadding
-  %button.btn{ class: ("answer-#{text.downcase} #{'result-answer' if answer==text.downcase}"),
+%span.voteBtn{ class: ("answer-#{text.downcase} #{'result-answer' if answer==text.downcase}"),
     data: {answer: text.downcase} }= text

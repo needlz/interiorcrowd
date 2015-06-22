@@ -1,5 +1,4 @@
 class ReviewerFeedbacksController < ApplicationController
-  include MoodboardCollection
 
   before_filter :set_contest, :check_invitation
 
@@ -12,9 +11,9 @@ class ReviewerFeedbacksController < ApplicationController
   def show
     @feedback = ReviewerFeedback.find_by_id(params[:feedback_id])
     cookies[:token] = params[:token]
-    setup_moodboard_collection(@contest)
+    @feedback_page = FeedbackPage.new(contest: @contest)
     @feedbacks = @invitation.feedbacks
-    render(:layout => "layouts/without_navigation")
+    render(layout: 'layouts/without_navigation')
   end
 
   private

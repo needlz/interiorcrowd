@@ -10,23 +10,24 @@
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
-= render partial: 'clients/client_center/moodboard_winner_dialog' if @contest_requests.present?
+= render partial: 'clients/client_center/moodboard_winner_dialog' if @entries_page.contest_requests.present?
 - content_for :client_center_content do
   .entries-container
     - if @contest
-      %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
-      - unless @contest_view.try(:have_space_views_details)
-        = render partial: 'clients/client_center/entries/pictures_and_dimensions_reminder_new_style'
-      - if @contest.designers_invitation_period?
-        = render partial: 'clients/client_center/entries/designers_to_invite',
-            locals: { designers: @invitable_designer_views }
-      .fullWidthLine
-      = render partial: 'clients/client_center/entries/more_features'
+      .entries-initial
+        %input.hidden.contest{ type: 'hidden', data: { id: @entries_page.contest.id } }
+        - unless @entries_page.contest_view.have_space_views_details
+          = render partial: 'clients/client_center/entries/pictures_and_dimensions_reminder_new_style'
+        - if @entries_page.contest.designers_invitation_period?
+          = render(partial: 'clients/client_center/entries/designers_to_invite',
+              locals: { designers: @entries_page.invitable_designer_views })
+        .fullWidthLine
+        = render partial: 'clients/client_center/entries/more_features'
 
 - if params[:signed_up].present?
   = render partial: 'shared/congratulations_layout',
       locals: { content: (yield :client_center_content),
-                container_class: try(:container_class)  }
+                container_class: (container_class if defined?(container_class))  }
 - else
   = render partial: 'clients/client_center/layout',
-      locals: { container_class: ('entries-page' unless @won_contest_request.try(:status) == 'finished') }
+      locals: { container_class: ('entries-page' unless @entries_page.won_contest_request.try(:status) == 'finished') }

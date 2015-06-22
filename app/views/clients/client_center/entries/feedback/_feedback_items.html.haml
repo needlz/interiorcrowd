@@ -4,9 +4,14 @@
     EntriesVoicePlayback.init('.player')
   })
 
-- @contest_requests.in_groups_of(2, false) do |contest_requests|
-  .row.designConcept
+- contest_page.contest_requests.in_groups_of(2, false) do |contest_requests|
+  .designConcept
     - contest_requests.each do |contest_request|
       = render partial: 'clients/moodboard',
                locals: { contest_request: contest_request,
-                 show_answer_options: @contest.winner_selection? || @contest.submission? }
+                 show_answer_options: contest_page.show_answer_options? }
+.clearfix
+.pagination-row.text-center
+  = will_paginate(contest_page.contest_requests,
+      class: 'pageNumber center-block',
+      renderer: SubmissionsPaginationRenderer)

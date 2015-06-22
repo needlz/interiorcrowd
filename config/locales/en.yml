@@ -262,9 +262,9 @@ en:
         favorite: Favorite
         winner: Winner
       phases:
-        - 'Initial Concept<span></span>Boards'
-        - 'Customized Board<span></span>and Product List'
-        - 'Final<span></span>Design'
+        - 'Initial Concept<span></span> Boards'
+        - 'Customized Board<span></span> and Product List'
+        - 'Final<span></span> Design'
       winner_dialog:
         title: Ready to pick the Winner?
         text: Please confirm
@@ -297,6 +297,7 @@ en:
         send_feedback: Post Comment
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
+        more_boards: More concept boards
       choose_concept: >
         During the Initial Concept stage, designers will submit boards which reflect your aesthetic and needs.
         You can rate the designers for reference, request feedback from friends and family,
@@ -979,3 +980,6 @@ en:
   product_list:
     expand: ... see more
     collapse: Hide
+
+  will_paginate:
+    next_label: Next

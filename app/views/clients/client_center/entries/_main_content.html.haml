@@ -1,16 +1,21 @@
+= stylesheet_link_tag 'new-style'
+
 - readonly = defined?(readonly) ? readonly : false
 .row
-  .col-md-8.disablePadding
+  .col-md-9
     = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: phases_stripe }
-  = render partial: 'clients/client_center/entries/responses_filter',
-      locals: { selected_answer: params[:answer] }
-- if @requests_present
-  .row
-    %p.chooseP= t('client_center.entries.choose_concept')
-= render partial: 'clients/client_center/entries/feedback/feedback_items'
-.pagination-row.text-center
-  = will_paginate(@contest_requests, class: 'pageNumber intc-pagination center-block')
+        locals: { stripe: phases_stripe }
+    - if contest_page.requests_present?
+      %p.favDesignConcept.hidden-xs= t('client_center.entries.choose_concept')
+  .col-md-3
+    .hidden-xs
+      = render partial: 'clients/client_center/entries/responses_filter',
+          locals: { selected_answer: contest_page.answer }
+.row.marginTop40Mobile
+  .col-md-12.concept-board-items
+    = render partial: 'clients/client_center/entries/feedback/feedback_items',
+        locals: { contest_page: contest_page }
 - if @client
-  = render partial: 'clients/client_center/entries/notes', locals: { readonly: readonly }
+  .fullWidthLine.marginTop40.marginBottom40.hidden-xs
+  = render partial: 'clients/client_center/entries/notes', locals: { readonly: readonly, notes: contest_page.notes }
   = render partial: 'clients/client_center/entries/user_invitations', locals: { readonly: readonly }

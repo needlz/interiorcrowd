@@ -352,3 +352,929 @@ a:hover{
 
 }
 /* end CC-after-choosing-winner */
+
+.dontForgetPicDim{
+    /*text-align: center;*/
+    background: #f1f1f1;
+    /*border-bottom: 1px solid #e1e1e1;*/
+    margin: 0px 0px 40px;
+    padding: 20px 0px;
+}
+.dontForgetPicDim h4{
+    margin: 0px;
+    font-size: 18px;
+    color: #000;
+}
+.dontForgetPicDim p{
+    font-family: 'AvenirLTStd-LightOblique';
+    margin: 0px;
+    font-size: 14px;
+    color: #000;
+}
+.dontForgetPicDim .buttons{
+    /*background: red;*/
+    text-align: right;
+    padding-right: 50px;
+}
+.dontForgetPicDim .buttons a.btn{
+    padding: 0px;
+    line-height: 38px;
+    width: 166px;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'AvenirLTStd-Medium';
+    margin-left: 10px;
+}
+.topRightClose{
+    position: absolute;
+    /*display: none;*/
+    background: url("/assets/cross.png");
+    width: 26px;
+    height: 26px;
+    top: 8px;
+    right: 7px;
+}
+
+@media(max-width: 1200px){
+    .topRightClose{
+        top: 50%;
+        margin-top: -13px;
+    }
+    .dontForgetPicDim h4{
+        font-size: 16px;
+    }
+    .dontForgetPicDim .buttons a.btn{
+        font-size: 16px;
+    }
+}
+
+@media(max-width: 992px){
+    .dontForgetPicDim{
+        text-align: center;
+    }
+    .dontForgetPicDim .buttons{
+        text-align: center;
+        margin-top: 5px;
+    }
+    .topRightClose {
+        top: auto;
+        /*margin-top: 10px; */
+    }
+}
+
+@media(max-width: 768px){
+    .dontForgetPicDim h4 {
+        font-size: 14px;
+    }
+    .dontForgetPicDim p{
+        margin: 5px 0px;
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 480px){
+    .dontForgetPicDim .buttons{
+        padding-right: 15px;
+    }
+    .dontForgetPicDim .buttons a.btn{
+        margin: 10px auto;
+        display: block;
+    }
+    .dontForgetPicDim{
+        padding: 20px 0px 5px;
+    }
+    .dontForgetPicDim h4{
+        margin-top: 20px;
+    }
+}
+
+/* start CC-entries */
+.sortBySelect button{
+    border: 1px solid #a9a9a9;
+}
+.sortBySelect .caret{
+    background: url('/assets/caret1.png') 15px 15px no-repeat;
+    top: 2px !important;
+    border-left: 1px solid #a9a9a9 !important;
+}
+.sortBySelect li:nth-child(1){
+    display: none;
+}
+.sortBySelect .dropdown-menu>li>a{
+    padding: 7px 20px;
+    font-size: 16px;
+    color: #000;
+    border-top: 1px solid #e1e1e1;
+}
+.sortBySelect .dropdown-menu>li:nth-child(2)>a{
+    border-top: none;
+}
+.sortBySelect .dropdown-menu{
+    min-height: 100px !important;
+    border-radius: 0px;
+    top: 37px;
+    border: 1px solid #a9a9a9;
+}
+div.form-selector {
+    width: 100%;
+}
+.btn-selector-medium {
+    font-size: 22px;
+    border: 1px solid #000;
+    margin: 0;
+    border-radius: 0;
+    background: none;
+    color: #8B8B8B;
+    font-style: italic;
+    height: 40px;
+    padding-right: 60px !important;
+}
+.btn-selector-medium span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'AvenirLTStd-LightOblique';
+    font-size: 18px;
+    color: #a9a9a9;
+}
+.font15 {
+    font-size: 15px;
+}
+.bootstrap-select.btn-group .btn .caret {
+    width: 42px;
+    height: 100%;
+    border: 0;
+    top: 2px;
+    border-left: 1px solid #000;
+}
+.favDesignConcept{
+    font-family: 'AvenirLTStd-LightOblique';
+    font-size: 18px;
+    color: #a9a9a9;
+    margin: 20px 0px 40px;
+}
+.entriesPage{
+    padding-bottom: 60px;
+}
+.entriesPage .entries-initial .steps123{
+    margin-bottom: 10px;
+}
+.designBox{
+    padding: 20px;
+    background: #f8f8f8;
+    border-top: 3px solid #aaaaaa;
+    margin-bottom: 40px;
+}
+.designBox .mobileBoard{
+    display: none;
+}
+.designBox h3{
+    margin-top: 0px;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 18px;
+    font-family: 'AvenirLTStd-Roman';
+}
+.designBox p{
+    font-family: 'AvenirLTStd-LightOblique';
+    font-size: 14px;
+    color: #a9a9a9;
+}
+.designBox .designImg{
+    width: 100%;
+    height: 350px;
+    border: 1px solid #eaeaea;
+    margin: 20px 0px;
+    background: #FFF;
+}
+.designBox .voteBtn{
+    border:1px solid #E4E4E4;
+    display: block;
+    float: left;
+    margin-top: 20px;
+    color: #000;
+    font-size: 20px;
+    font-family: 'AvenirLTStd-Light';
+    width: 22%;
+    margin-right: 4%;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+.designBox .voteBox .voteBtn:nth-child(4){
+    margin-right: 0px;
+}
+.pageNumber {
+    border: 1px solid #231f20;
+    border-radius: 3px;
+    height: 58px;
+    width: 340px;
+    margin: 0 auto;
+}
+.pageNumber a, .pageNumber span {
+    font-size: 22px;
+    color: #231f20;
+    line-height: 56px;
+    padding: 0 23px;
+    width: 60px;
+    float: left;
+}
+
+.pageNumber a:hover, span.activePageNumber{
+    text-decoration: none;
+    background: #231f20;
+    color: #FFF;
+}
+
+.designerFeedback{
+    padding: 0px 100px;
+}
+.designerFeedback h4{
+    font-size: 20px;
+    color: #000;
+    padding-bottom: 20px;
+}
+.designerFeedback textarea{
+    width: 100%;
+    height: 98px;
+    resize: none;
+    border: 3px solid #e1e1e1;
+    border-radius: 3px;
+}
+.designerFeedback .btn{
+    width: 90px;
+    background: #FFF;
+    margin-top: 10px;
+    color: #000;
+    font-size: 18px;
+    border: 1px solid #000;
+}
+.designerFeedback .notes{
+    background: #F8F8F8;
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    height: 200px;
+    width: 100% !important;
+    padding-right: 0px !important;
+    /*padding: 20px 10px;*/
+}
+/*.designerFeedback .notes ul{
+	list-style-position: inside;
+	margin-left: -40px;
+}*/
+.designerFeedback .notes ul li.delimiter{
+    height: 1px;
+    background: #e1e1e1;
+    list-style-type: none;
+    padding: 0px;
+    margin-left: -40px;
+}
+.designerFeedback .notes ul li {
+    font-size: 30px;
+    padding: 10px 15px;
+    /*border-top: 1px solid #e1e1e1;*/
+}
+.designerFeedback .notes ul li p{
+    margin-left: -15px;
+    padding-left: 10px;
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 3px;
+}
+.designerFeedback .notes ul li p:nth-child(2){
+    color: #333;
+    font-family: 'AvenirLTStd-Light';
+}
+.designerFeedback .notes ul li p span{
+    display: block;
+    font-style: italic;
+    color: #a9a9a9;
+    font-size: 14px;
+}
+
+.notes ul li:nth-child(4n+1){
+    list-style: disc url("/assets/list_style_type_blue.png");
+}
+
+.notes ul li:nth-child(4n+3){
+    list-style: disc url("/assets/list_style_type_red.png");
+}
+
+.designerFeedback #scrollbox4 {
+    overflow: auto;
+}
+
+.designerFeedback .track4 {
+    width: 7px;
+    background-clip: padding-box;
+    background: transparent;
+    border-style: solid;
+    border-color: transparent;
+    border-width: 0;
+    border-left-width: 1px;
+    margin: 5px 0px;
+    padding-bottom: 5px;
+}
+
+
+.designerFeedback .handle4 {
+    border-radius: 5px;
+    width: 5px;
+    background-clip: padding-box;
+    background: #a9a9a9;
+}
+.feedBackTitle{
+    padding-left: 115px;
+}
+.feedbackFromOthers{
+    background: #F8F8F8;
+    padding: 20px;
+    color: #000;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin: 10px 100px 20px;
+}
+.feedbackFromOthers > div:nth-child(1) p{
+    font-size: 24px;
+    /*font-weight: 700;*/
+    /*font-style: italic;*/
+    font-family: 'AvenirLTStd-MediumOblique';
+    padding-top: 20px;
+}
+.feedbackFromOthers > div:nth-child(1) p span{
+    font-size: 14px;
+    display: block;
+    font-weight: 400;
+    font-family: 'AvenirLTStd-Light';
+}
+.feedbackFromOthers > div:nth-child(2){
+    border-left: 1px solid #e1e1e1;
+}
+.feedbackFromOthers > div:nth-child(2) p{
+    margin: 0px;
+    font-size: 16px;
+    padding: 20px 0px 20px 60px;
+    font-family: 'AvenirLTStd-Light';
+}
+.sendDesignerFeedback{
+    margin: 0px 85px;
+}
+.sendDesignerFeedback label{
+    display: block;
+    color: #000;
+    font-size: 20px;
+    font-weight: 400;
+
+}
+.sendDesignerFeedback input[type=text]{
+    border: 1px solid #000;
+    width: 100%;
+    height: 38px;
+    line-height: 38px;
+    padding: 0px 5px;
+}
+.sendDesignerFeedback .btn{
+    font-size: 18px;
+    color: #000;
+    width: 90px;
+    border: 1px solid #000;
+    background: #FFF;
+    margin-top: 20px;
+}
+/*.sendDesignerFeedback input#emailInvite{
+	width: 75%;
+}*/
+.bottom60{
+    padding-bottom: 60px;
+}
+button.btnInvite{
+    outline: none;
+    background: transparent;
+    border: none;
+    /*line-height: 40px;*/
+    font-size: 30px;
+    margin: 0px;
+    margin-top: 24px;
+}
+button.btnInvite span{
+    top: 10px;
+}
+.disablePadding {
+    padding: 0px !important;
+}
+@media(max-width: 1200px){
+    .designerFeedback{
+        padding: 0px;
+    }
+    .feedBackTitle{
+        padding-left: 15px;
+    }
+    .feedbackFromOthers {
+        margin: 10px 0px 20px;
+    }
+    .sendDesignerFeedback{
+        margin: 0px;
+    }
+    .sendDesignerFeedback > div{
+        padding: 0px;
+    }
+    .sendDesignerFeedback .col-sm-1{
+        /*text-align: right;*/
+    }
+    .designBox .designImg{
+        height: 280px;
+    }
+}
+@media(max-width: 992px){
+    .designBox .designImg{
+        height: 210px;
+    }
+    .feedbackFromOthers > div:nth-child(2) p {
+        padding: 20px 0px 20px 40px;
+    }
+    .sortBySelect{
+        float: right !important;
+        width: 210px !important;
+    }
+    .designBox .voteBtn{
+        font-size: 16px;
+    }
+    button.btnInvite{
+        font-size: 25px;
+    }
+    button.btnInvite span{
+        top: 14px;
+    }
+}
+@media(max-width: 767px){
+    .designBox .designImg{
+        height: 275px;
+    }
+    .marginTop40Mobile{
+        margin-top: 40px;
+    }
+    .loadMoreBoards{
+        line-height: 43px;
+        display: block;
+        font-size: 16px;
+        color: #666666;
+        width: 100%;
+        text-align: center;
+        border-radius: 3px;
+        border: 1px solid #e1e1e1;
+        margin-bottom: 40px;
+    }
+    .designerFeedback .btn{
+        width: 100%;
+        line-height: 43px;
+        margin: 20px 0px 40px;
+    }
+    .feedbackFromOthers > div:nth-child(2){
+        border: none;
+    }
+    .feedbackFromOthers > div:nth-child(2) p{
+        padding: 0px;
+    }
+    .sendDesignerFeedback label{
+        margin-top: 20px;
+    }
+    .invitePeopleBlock {
+        margin: 25px 15px 0px;
+        text-align: center;
+        border: 1px dashed #a9a9a9;
+    }
+    button.btnInviteMobile {
+        outline: none;
+        background: transparent;
+        border: none;
+        line-height: 43px;
+        font-size: 30px;
+        margin: 0px;
+        /*margin-top: 24px;*/
+    }
+    button.btnInviteMobile span {
+        font-size: 14px;
+        color: #a9a9a9;
+        top: 0px;
+    }
+    .addMorePeople {
+        display: inline-block;
+        font-size: 14px;
+        color: #a9a9a9;
+        margin-left: 10px;
+    }
+    .sendDesignerFeedback input[type=submit]{
+        width: 100%;
+        line-height: 43px;
+    }
+    .feedbackFromOthers{
+        padding: 5px 0px;
+    }
+    .designBox .voteBtn{
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 480px){
+    .designBox .mobileBoard{
+        display: block;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .designBox .fullWidthLine,.designBox .designImg{
+        display: none;
+    }
+    .designBox{
+        padding: 0px;
+        border-bottom: 1px solid #f0f0f0;
+        border-left: 1px solid #f0f0f0;
+        border-right: 1px solid #f0f0f0;
+        padding-bottom: 20px;
+        background: #FFF;
+    }
+    .designBox h3{
+        padding-left: 10px;
+    }
+    .designBox p{
+        padding-right: 10px;
+    }
+    .designBox .voteBtn{
+        margin-right: 3%;
+        margin-left: 3%;
+        width: 44%;
+    }
+}
+/* end CC-entries */
+
+/* start CC-brief-editing*/
+.displayTitle{
+    font-family: 'SofiaProLight';
+    text-align: center;
+    font-size: 30px;
+    color: #000;
+    margin: 60px 0px 40px;
+}
+.avenirBlack{
+    font-family: 'AvenirLTStd-Black';
+}
+.welcomeP{
+    font-size: 20px;
+    margin: 0px;
+    line-height: 45px;
+}
+.tabNav{
+    border-color: transparent;
+}
+.tabNav>li>a{
+    color: #000;
+    font-family: 'AvenirLTStd-Light';
+    font-size: 20px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    border-radius: 0px;
+}
+.tabNav>li>a.active{
+    border-color: #aaaaaa;
+    font-family: 'AvenirLTStd-Medium';
+}
+.tabNav>li>a:hover,.tabNav>li>a:focus{
+    font-family: 'AvenirLTStd-Medium';
+    background: transparent;
+    border-color: #aaaaaa;
+}
+
+.briefEditingBox{
+    border: 1px solid #e1e1e1;
+    border-radius: 10px;
+    margin: 40px 50px 60px;
+}
+.briefEditingBox .row{
+    padding: 30px 0px;
+}
+.briefEditingBox .row .title p{
+    margin: 0px;
+    font-size: 18px;
+    padding-left: 20px;
+}
+.briefEditingBox .row .attribute-form p{
+    margin: 0px;
+    font-family: 'AvenirLTStd-Light';
+    font-size: 16px;
+}
+.briefEditingBox .row .attribute-form a{
+    color: #000;
+    text-decoration: underline;
+    margin: 0px;
+    font-family: 'AvenirLTStd-Light';
+    font-size: 16px;
+}
+.briefEditingBox .row .edit-button, .briefEditingBox .row .cancel-button{
+    margin-right: 15px;
+}
+
+@media(max-width: 1200px){
+    .briefEditingBox{
+        margin: 40px 0px 60px;
+    }
+}
+@media(max-width: 768px){
+    .displayTitle{
+        font-size: 24px;
+    }
+    .welcomeP{
+        text-align: center;
+        font-size: 18px;
+    }
+}
+/* end CC-brief-editing*/
+
+/* start CC-finish-intake-form */
+.dontForgetPicDim{
+    /*text-align: center;*/
+    background: #f1f1f1;
+    /*border-bottom: 1px solid #e1e1e1;*/
+    margin: 0px 0px 40px;
+    padding: 20px 0px;
+}
+.dontForgetPicDim h4{
+    margin: 0px;
+    font-size: 18px;
+    color: #000;
+}
+.dontForgetPicDim p{
+    font-family: 'AvenirLTStd-LightOblique';
+    margin: 0px;
+    font-size: 14px;
+    color: #000;
+}
+.dontForgetPicDim .buttons{
+    /*background: red;*/
+    text-align: right;
+    padding-right: 50px;
+}
+.dontForgetPicDim .buttons a.btn{
+    padding: 0px;
+    line-height: 38px;
+    width: 166px;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    font-size: 18px;
+    color: #000;
+    font-family: 'AvenirLTStd-Medium';
+    margin-left: 10px;
+}
+.topRightClose{
+    position: absolute;
+    /*display: none;*/
+    background: url("/assets/cross.png");
+    width: 26px;
+    height: 26px;
+    top: 8px;
+    right: 7px;
+}
+.daysAway{
+    text-align: center;
+    font-size: 24px;
+    color: #010101;
+    line-height: 32px;
+    margin-bottom: 40px;
+}
+
+.profile-card{
+    padding-bottom: 30px;
+}
+
+.designerBox{
+    background: #f6f6f6;
+    margin: 15px 0px;
+    padding: 15px 0px;
+    color: #000;
+    height: 100%;
+}
+.designerBox img{
+    width: 100%;
+}
+.designerBox .designerName{
+    font-family: 'AvenirLTStd-MediumOblique';
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.designerBox .designerName a{
+    color: inherit;
+}
+
+.designerBox .designMindset{
+    font-size: 20px;
+    margin: 5px 0px;
+}
+.designerBox .designerDesc{
+    font-family: 'AvenirLTStd-Light';
+    font-size: 16px;
+    margin: 10px 0px;
+}
+.designerBox .inviteToContest{
+    display: block;
+    font-size: 16px;
+    color: #000;
+    border: 1px solid #000;
+    width: 100%;
+    text-align: center;
+    line-height: 38px;
+    margin-top: 20px;
+    font-family: 'AvenirLTStd-Heavy';
+}
+.designerBox .inviteToContest.designer-invitation-button{
+    cursor: pointer;
+}
+.seeMoreDesigners,.seeMoreDesigners:hover{
+    margin: 60px 0px 40px;
+    font-size: 24px;
+    text-decoration: underline;
+    text-align: center;
+    display: block;
+    font-family: 'AvenirLTStd-LightOblique';
+    color: #a9a9a9;
+}
+h3.exploreMore{
+    font-size: 24px;
+    color: #000;
+    text-align: center;
+    margin: 50px 0px;
+}
+.circleLinks{
+    width: 525px;
+    margin: 0px auto;
+}
+.circleLinks a{
+    margin: 0px 10px 60px;
+    width: 155px;
+    height: 155px;
+    display: table;
+    color: #000;
+    text-decoration: underline;
+    border: 1px solid #000;
+    border-radius: 100%;
+    float: left;
+    /*padding: 50px 0px;*/
+}
+.circleLinks a span{
+    font-size: 18px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.mdLineBreaker{
+    display: block;
+}
+.show480{
+    display: none;
+}
+@media(max-width: 1200px){
+    .topRightClose{
+        top: 50%;
+        margin-top: -13px;
+    }
+    .dontForgetPicDim h4{
+        font-size: 16px;
+    }
+    .dontForgetPicDim .buttons a.btn{
+        font-size: 16px;
+    }
+    .daysAway{
+        font-size: 22px;
+        line-height: 30px;
+    }
+    .designerBox .designerName{
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .designerBox .designMindset{
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+    .designerBox .inviteToContest{
+        font-size: 15px;
+        font-family: 'AvenirLTStd-Medium';
+    }
+    .seeMoreDesigners, .seeMoreDesigners:hover,h3.exploreMore{
+        font-size: 22px;
+    }
+}
+@media(max-width: 992px){
+    .dontForgetPicDim{
+        text-align: center;
+    }
+    .dontForgetPicDim .buttons{
+        text-align: center;
+        margin-top: 5px;
+    }
+    .topRightClose {
+        top: auto;
+        /*margin-top: 10px; */
+    }
+    .daysAway{
+        font-size: 18px;
+    }
+    .mdLineBreaker{
+        display: none;
+    }
+    .designerBox .designMindset{
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+    .designerBox .inviteToContest{
+        line-height: 15px;
+        padding: 7px 0px;
+    }
+    .designerBox .designerDesc{
+        line-height: 18px;
+        font-size: 15px;
+        margin: 5px 0px;
+    }
+    .designerBox .col-xs-5{
+        padding-right: 0px;
+    }
+}
+@media(max-width: 768px){
+    .dontForgetPicDim h4 {
+        font-size: 14px;
+    }
+    .dontForgetPicDim p{
+        margin: 5px 0px;
+        font-size: 13px;
+    }
+    .seeMoreDesigners, .seeMoreDesigners:hover, h3.exploreMore{
+        font-size: 20px;
+    }
+    .seeMoreDesigners, .seeMoreDesigners:hover{
+        margin: 40px 0px;
+    }
+    .profile-card{
+        padding-bottom: 0px;
+    }
+}
+@media(max-width: 550px) {
+    .circleLinks{
+        width: auto;
+        padding-bottom: 35px;
+    }
+    .circleLinks a{
+        float: none;
+        margin: 0px auto 24px;
+    }
+}
+@media(max-width: 480px){
+    .daysAway {
+        font-size: 16px;
+        line-height: 24px;
+    }
+    .designerBox > div{
+        width: 100%;
+        float: none;
+    }
+    .designerBox .col-xs-5 {
+        padding-left: 0px;
+    }
+    .hide480{
+        display: none !important;
+    }
+    .show480{
+        display: block !important;
+    }
+    .designerBox + .inviteToContest{
+        line-height: 50px;
+        border-color: transparent;
+        background: #e1e1e1;
+        text-align: center;
+        color: #000;
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+    .designerBox{
+        padding: 0px;
+        margin: 0px;
+        padding-bottom: 15px;
+    }
+    .designerBox .designerName{
+        margin-top: 10px;
+    }
+    .seeMoreDesigners, .seeMoreDesigners:hover{
+        font-size: 18px;
+    }
+    .dontForgetPicDim .buttons{
+        padding-right: 15px;
+    }
+    .dontForgetPicDim .buttons a.btn{
+        margin: 10px auto;
+        display: block;
+    }
+    .dontForgetPicDim{
+        padding: 20px 0px 5px;
+    }
+    .dontForgetPicDim h4{
+        margin-top: 20px;
+    }
+}
+/* end CC-finish-intake-form */

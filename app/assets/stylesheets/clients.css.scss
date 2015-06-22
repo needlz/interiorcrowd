@@ -9,7 +9,7 @@
 
 .intc-pagination {
   .pageNumber {
-    width: auto;
+    width: 398px;
     display: inline-block;
   }
 
@@ -29,21 +29,11 @@
 }
 
 .moodboard {
-  text-align: center;
-
   .image-container {
     height: 100%;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
-  }
-
-  .answers {
-    white-space: nowrap;
-    height: 38px;
-    left: -1%;
-    width: 102%;
-    position: relative;
   }
 }
 

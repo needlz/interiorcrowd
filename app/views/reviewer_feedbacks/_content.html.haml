@@ -6,13 +6,13 @@
         %p= t('client_center.entries.you_invited', name: @contest.client.first_name)
         %p
           = t('designer_center.contests_preview.contest_name')
-          %span= @contest_view.name
+          %span= feedback_page.contest_view.name
         %p
           = t('designer_center.contests_preview.room')
-          %span= @contest.design_space.name
+          %span= feedback_page.contest.design_space.name
   %hr
-= render partial: 'clients/client_center/entries/feedback/feedback_items'
-= render partial: 'clients/client_center/entries/feedback/paginate'
+= render partial: 'clients/client_center/entries/feedback/feedback_items',
+    locals: { contest_page: feedback_page }
 
 - if @client
   = render partial: 'clients/client_center/entries/notes'

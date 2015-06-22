@@ -1,0 +1,43 @@
+.saveBtn:hover,.saveBtn{
+  background-color: inherit;
+}
+
+@media(max-width: 480px){
+  .designerBox {
+    border-top: 1px solid #E3E3E3;
+    border-left: 1px solid #E3E3E3;
+    border-right: 1px solid #E3E3E3;
+  }
+
+  .inviteToContest {
+    border-bottom: 1px solid #E3E3E3;
+    border-left: 1px solid #E3E3E3;
+    border-right: 1px solid #E3E3E3;
+  }
+}
+
+.winnerBadge{
+  z-index: 1;
+}
+
+.designBox {
+  .title{
+    height: 3em;
+  }
+}
+
+.pageNumber a, .pageNumber span{
+  width: initial;
+}
+
+.pageNumber{
+  display: inline-block;
+  width: auto;
+  padding-left: 0px;
+}
+
+.designBox .voice-description{
+  font-family: 'AvenirLTStd-LightOblique';
+  font-size: 14px;
+  color: #a9a9a9;
+}

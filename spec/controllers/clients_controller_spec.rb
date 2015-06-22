@@ -217,7 +217,7 @@ RSpec.describe ClientsController do
 
         it 'views only submitted and fulfillment requests' do
           get :entries
-          expect(assigns(:contest_requests)).to match_array([submitted, fulfillment])
+          expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
         end
 
         it 'filters responses by answer' do
@@ -226,14 +226,14 @@ RSpec.describe ClientsController do
           fulfillment.update_attributes!(answer: 'favorite')
           submitted.update_attributes!(answer: 'winner')
           get :entries, answer: 'winner'
-          expect(assigns(:contest_requests)).to match_array([submitted])
+          expect(assigns(:entries_page).contest_requests).to match_array([submitted])
         end
 
         it 'returns winner contest request' do
           contest.start_winner_selection!
           submitted.update_attributes!(answer: 'winner')
           get :entries, answer: 'winner'
-          expect(assigns(:won_contest_request)).to eq(submitted)
+          expect(assigns(:entries_page).won_contest_request).to eq(submitted)
         end
 
         context 'has finished concept board' do

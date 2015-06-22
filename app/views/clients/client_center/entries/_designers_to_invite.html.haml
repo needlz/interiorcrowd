@@ -3,7 +3,7 @@
   %span.mdLineBreaker
   = t('client_center.entries.signed_up_message_below')
 
-- @invitable_designer_views.in_groups_of(2, false) do |designers|
+- designers.in_groups_of(2, false) do |designers|
   .row.designers-row
     - designers.each do |designer|
       = render partial: 'clients/client_center/entries/designer_to_invite',
