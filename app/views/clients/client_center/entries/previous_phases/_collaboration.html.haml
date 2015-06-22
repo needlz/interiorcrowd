@@ -4,11 +4,11 @@
   .row
     .col-md-8.disablePadding{ style: 'margin-bottom: 20px;' }
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: @entries_concept_board_page.phases_stripe }
+          locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
     %br/
     %br/
   .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
-    = render partial: 'shared/moodboard', locals: { image: @entries_concept_board_page.concept_board_image }
+    = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
     .image-items
       = render partial: 'clients/client_center/entries/collaboration/image_block',
           locals: { choosable: false,
