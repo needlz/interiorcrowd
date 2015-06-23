@@ -29,6 +29,23 @@ class ClientsController < ApplicationController
     end
   end
 
+  def concept_boards_page
+    @contest = @client.last_contest
+    entries_page = EntriesPage.new(
+        contest: @contest,
+        view: params[:view],
+        answer: params[:answer],
+        page: params[:page],
+        current_user: current_user,
+        view_context: view_context
+    )
+    render json: {
+      new_items_html: render_to_string(partial: 'clients/client_center/entries/feedback/feedback_items',
+                                       locals: {contest_page: entries_page}),
+      show_mobile_pagination: entries_page.show_mobile_pagination?,
+      next_page: entries_page.requests_next_page_index }
+  end
+
   def brief
     @contest = @client.last_contest
     @contest_view = ContestView.new(contest_attributes: @contest)

@@ -285,4 +285,17 @@ RSpec.describe ClientsController do
       expect(response).to render_template(:pictures_dimension)
     end
   end
+
+  describe 'GET concept_boards_page' do
+    before do
+      sign_in(client)
+      Fabricate(:contest, client: client)
+    end
+
+    it 'returns json' do
+      get :concept_boards_page
+      json = JSON.parse(response.body)
+      expect(json).to include('new_items_html', 'show_mobile_pagination', 'next_page')
+    end
+  end
 end

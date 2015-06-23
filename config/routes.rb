@@ -74,6 +74,7 @@ InteriorC::Application.routes.draw do
       collection do
         get '', to: 'clients#client_center', as: ''
         get 'entries', to: 'clients#entries', as: 'entries'
+        get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'concept_boards_page'
         get 'brief', to: 'clients#brief', as: 'brief'
         get 'profile', to: 'clients#profile', as: 'profile'
         get 'pictures_dimension', to: 'clients#pictures_dimension'
