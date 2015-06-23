@@ -1,4 +1,4 @@
-class MobileMenu
+class MenuBuilder
 
   class MenuItem
 

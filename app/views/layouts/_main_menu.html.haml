@@ -13,30 +13,14 @@
     .top-nav.pull-down
       .nav-collapse
         %ul.nav.nav-tabs.text-menu.main-menu.pull-right
-          %li
-            %a{ href: coming_soon_path, class: tracked_link }= t('header.get_inspired')
-          - if current_user.designer? && current_user.portfolio_path
-            %li
-              %a{ href: show_portfolio_path(current_user.portfolio_path), class: tracked_link }= t('header.portfolio')
-          %li
-            %a{ href: coming_soon_path, class: tracked_link }= t('header.how_it_works')
-          - if current_user.designer?
-            %li
-              %a{ href: designer_center_index_path, class: tracked_link }= t('header.designer_center')
-            %li
-              %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
-          - elsif current_user.client?
-            %li
-              %a{ href: client_center_index_path, class: tracked_link }= t('header.client_center')
-            %li
-              %a{ href: logout_sessions_path, class: tracked_link }= t('header.sign_out')
-          - else
-            %li.dropdown
-              %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: 'sign-in.html' }
-                = t('header.login')
-                %b.caret
-              %ul.dropdown-menu
-                %li
-                  %a{ href: client_login_sessions_path, class: tracked_link }= t('header.client_login')
-                %li
-                  %a{ href: designer_login_sessions_path, class: tracked_link }= t('header.designer_login')
+          - main_menu.items.each do |item|
+            - if item.children
+              %li.dropdown
+                %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: item.href }
+                  = item.name
+                  %b.caret
+                %ul.dropdown-menu
+                  - item.children.each do |subitem|
+                    = render partial: 'layouts/mobile_menu_item', locals: { item: subitem }
+            - else
+              = render partial: 'layouts/mobile_menu_item', locals: { item: item }

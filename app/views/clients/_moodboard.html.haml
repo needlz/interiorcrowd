@@ -1,5 +1,10 @@
 .col-sm-6.moodboard{ data: { id: contest_request.id } }
   .designBox
+    - if contest_request.concept_board_image_by_phase('initial')
+      %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
+        %img.mobileBoard{ src: contest_request.concept_board_image_by_phase('initial').medium_size_url }
+    - else
+      %img.mobileBoard{ src: '/assets/portfolio_example.png' }
     .row.title
       - if contest_request.sound
         .col-xs-3.designerName
@@ -22,11 +27,6 @@
         .designerName
           %h3= contest_request.designer.name
     .fullWidthLine
-    - if contest_request.concept_board_image_by_phase('initial')
-      %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
-        %img.mobileBoard{ src: contest_request.concept_board_image_by_phase('initial').medium_size_url }
-    - else
-      %img.mobileBoard{ src: '/assets/portfolio_example.png' }
     .designImg
       - if contest_request.concept_board_image_by_phase('initial')
         %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }

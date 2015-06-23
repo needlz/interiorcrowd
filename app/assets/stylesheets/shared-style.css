@@ -103,11 +103,10 @@ a:hover{
     text-align: center;
     margin-right: 10px;
 }
-.steps123 p, .steps123 p a{
+.steps123 p{
     display: inline-block;
     margin: 0px;
     font-size: 14px;
-    color: #A9AAAA
 }
 .steps123 .stepOne{
     float: left;
@@ -121,17 +120,54 @@ a:hover{
     float: left;
     padding: 0px 8px;
 }
-.steps123 .stepOne.active{
+
+.steps123 .stepOne{
+    position: relative;
+    margin-right: 30px;
+    padding-left: 30px;
+}
+.steps123 .stepOne:before{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(169, 170, 170, 0);
+    border-color: transparent;
+    border-left-color: #a9aaaa;
+    border-width: 23px;
+    margin-top: -23px;
+}
+.steps123 .stepOne:after{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #FFF;
+    border-width: 22px;
+    margin-top: -22px;
+}
+
+
+.stepOneActive .stepOne{
     background: #a9aaaa;
     color: #FFF;
     position: relative;
     margin-right: 30px;
 }
-.steps123 .stepOne.active span{
+.stepOneActive .stepOne span{
     border-color: #fff;
     color: #fff;
 }
-.steps123 .stepOne.active:after{
+.stepOneActive .stepOne:after{
     left: 100%;
     top: 50%;
     border: solid transparent;
@@ -146,18 +182,55 @@ a:hover{
     margin-top: -22px;
 }
 
-.steps123 .stepTwo.active{
-    background: #a9aaaa;
-    color: #FFF;
+
+.steps123 .stepTwo{
     position: relative;
     margin-right: 30px;
     padding-left: 30px;
 }
-.steps123 .stepTwo.active span{
+.steps123 .stepTwo:before{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(169, 170, 170, 0);
+    border-color: transparent;
+    border-left-color: #a9aaaa;
+    border-width: 23px;
+    margin-top: -23px;
+}
+.steps123 .stepTwo:after{
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-left-color: #FFF;
+    border-width: 22px;
+    margin-top: -22px;
+}
+
+
+.stepTwoActive .stepTwo{
+    background: #a9aaaa;
+    color: #FFF;
+    position: relative;
+    margin-right: 30px;
+    padding-left: 60px;
+}
+.stepTwoActive .stepTwo span{
     border-color: #fff;
     color: #fff;
 }
-.steps123 .stepTwo.active:before{
+.stepTwoActive .stepTwo:before{
     left: 0%;
     top: 50%;
     border: solid transparent;
@@ -172,7 +245,7 @@ a:hover{
     border-width: 22px;
     margin-top: -22px;
 }
-.steps123 .stepTwo.active:after{
+.stepTwoActive .stepTwo:after{
     left: 100%;
     top: 50%;
     border: solid transparent;
@@ -186,18 +259,30 @@ a:hover{
     border-width: 22px;
     margin-top: -22px;
 }
+.stepTwoActive .stepOne,.stepThreeActive .stepTwo{
+    position: relative;
+    margin-right: 0px;
+    padding-left: 30px;
+}
+.stepTwoActive .stepOne:before,.stepThreeActive .stepTwo:before{
+    display: none;
+}
+.stepTwoActive .stepOne:after,.stepThreeActive .stepTwo:after{
+    display: none;
+}
 
-.steps123 .stepThree.active{
+.stepThreeActive .stepThree{
     background: #a9aaaa;
     color: #FFF;
     position: relative;
     padding-left: 30px;
+    padding-right: 15px;
 }
-.steps123 .stepThree.active span{
+.stepThreeActive .stepThree span{
     border-color: #fff;
     color: #fff;
 }
-.steps123 .stepThree.active:before{
+.stepThreeActive .stepThree:before{
     left: 0%;
     top: 50%;
     border: solid transparent;
@@ -212,11 +297,6 @@ a:hover{
     border-width: 22px;
     margin-top: -22px;
 }
-
-.steps123 .active p{
-    color: #FFF;
-}
-
 .visible-ss{
     display: none !important;
 }
@@ -236,7 +316,7 @@ a:hover{
         padding: 0px;
     }
     .steps123 .stepThree{
-        width: 20%;
+        width: 25%;
         margin: 0px;
         padding: 0px;
     }
@@ -249,7 +329,7 @@ a:hover{
         width: 45%;
     }
     .steps123 .stepThree{
-        width: 20%;
+        width: 25%;
     }
     .winningMoodboard .col-md-4 {
         margin-top: 40px;
@@ -275,6 +355,9 @@ a:hover{
     }
     .steps123 .stepTwo{
         width: 40%;
+    }
+    .steps123 .stepThree {
+        width: 30%;
     }
     .congratulationsBox h4{
         font-size: 20px;
@@ -309,16 +392,16 @@ a:hover{
         display: none;
         line-height: 20px;
     }
-    .steps123 .active{
+    .steps123 .active,.stepOneActive .stepOne,.stepTwoActive .stepTwo,.stepThreeActive .stepThree{
         color: #000;
         background: transparent !important;
         padding: 0px !important;
         margin: 0px !important;
     }
-    .steps123 .active p{
+    .steps123 .active p,.stepOneActive .stepOne p,.stepTwoActive .stepTwo p,.stepThreeActive .stepThree p{
         color: #000;
     }
-    .steps123 .active > span{
+    .steps123 .active > span,.stepOneActive .stepOne > span,.stepTwoActive .stepTwo > span,.stepThreeActive .stepThree > span{
         color: #000 !important;
         border-color: #000 !important;
     }
