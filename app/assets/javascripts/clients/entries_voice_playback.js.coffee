@@ -1,6 +1,7 @@
 class @EntriesVoicePlayback
 
   @descriptionSelector: '.voice-description';
+  @playbackSwitcherSelector: '.playback-switch';
 
   @init: (playerSelector)->
     $(playerSelector).each (i, element)=>
@@ -17,23 +18,25 @@ class @EntriesVoicePlayback
 
   @bindPlayback: ($button)->
     $button.click =>
-      $player = $button.closest('.player').find('.control')
-      $description = $button.closest('.player').find(@descriptionSelector)
-      if $player.hasClass('hidden')
-        @showPlayer($player, $description)
+      $playerContainer = $button.closest('.player')
+      $description = $playerContainer.find(@descriptionSelector)
+      if $playerContainer.find('.control').hasClass('hidden')
+        @showPlayer($playerContainer, $description)
       else
-        @hidePlayer($player, $description)
+        @hidePlayer($playerContainer, $description)
 
-  @showPlayer: ($player, $description)->
-    $player.removeClass('hidden')
+  @showPlayer: ($playerContainer, $description)->
+    $playerContainer.find('.control').removeClass('hidden')
+    $playerContainer.find(@playbackSwitcherSelector).addClass('active')
     $description.hide()
 
-  @hidePlayer: ($player, $description)->
-    $player.addClass('hidden')
-    $player.find('.jp-jplayer').jPlayer('stop')
-    @resetPlayer($player)
+  @hidePlayer: ($playerContainer, $description)->
+    $playerContainer.find('.control').addClass('hidden')
+    $playerContainer.find('.jp-jplayer').jPlayer('stop')
+    $playerContainer.find(@playbackSwitcherSelector).removeClass('active')
+    @resetPlayer($playerContainer)
     $description.show()
 
-  @resetPlayer: ($player)->
-    $player.find('.player-play').show()
-    $player.find('.player-pause').hide()
+  @resetPlayer: ($playerContainer)->
+    $playerContainer.find('.player-play').show()
+    $playerContainer.find('.player-pause').hide()

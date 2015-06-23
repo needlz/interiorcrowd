@@ -29,6 +29,14 @@ class ContestPage
     @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
   end
 
+  def show_mobile_pagination?
+    requests_next_page_index
+  end
+
+  def requests_next_page_index
+    contest_requests.current_page + 1 if contest_requests.current_page < contest_requests.total_pages
+  end
+
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
               :answer, :view_context
 

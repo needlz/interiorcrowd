@@ -1,0 +1,25 @@
+= javascript_include_tag 'clients/entries_voice_playback'
+= javascript_include_tag 'contests/entries_mobile_pagination'
+:javascript
+  $(function(){
+    EntriesVoicePlayback.init('.player')
+    EntriesMobilePagination.init('.loadMoreBoards')
+  })
+
+.items
+  - contest_page.contest_requests.in_groups_of(2, false) do |contest_requests|
+    .designConcept
+      - contest_requests.each do |contest_request|
+        = render partial: 'clients/moodboard',
+                 locals: { contest_request: contest_request,
+                   show_answer_options: contest_page.show_answer_options? }
+.clearfix
+- if contest_page.show_mobile_pagination?
+  .row.visible-xs
+    .col-sm-12
+      %a.loadMoreBoards{ href: '#', data: { page: contest_page.requests_next_page_index } }
+        = t('client_center.entries.reviewer_invitations.more_boards')
+.pagination-row.text-center.hidden-xs
+  = will_paginate(contest_page.contest_requests,
+      class: 'pageNumber center-block',
+      renderer: SubmissionsPaginationRenderer)

@@ -9,10 +9,10 @@
             = render partial: 'shared/audio_player',
                 locals: { filepath: contest_request.sound.url_for_streaming,
                   id: "voice_palyer_#{ contest_request.id }" }
-          %p.visible-ss
+          %p.visible-ss.playback-switch
             %span
               %img.playback-icon{ src: '/assets/listen_icon.png' }
-          %p.hidden-ss
+          %p.hidden-ss.playback-switch
             %span.voice-description
               = t('client_center.entries.listen_to_designer')
             %span

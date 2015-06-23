@@ -13,7 +13,7 @@
           locals: { selected_answer: contest_page.answer }
 .row.marginTop40Mobile
   .col-md-12.concept-board-items
-    = render partial: 'clients/client_center/entries/feedback/feedback_items',
+    = render partial: 'clients/client_center/entries/feedback/feedback_items_with_pagination',
         locals: { contest_page: contest_page }
 - if @client
   .fullWidthLine.marginTop40.marginBottom40.hidden-xs
