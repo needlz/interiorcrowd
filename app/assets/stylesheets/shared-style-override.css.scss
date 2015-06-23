@@ -36,10 +36,16 @@
   padding-left: 0px;
 }
 
-.designBox .voice-description{
-  font-family: 'AvenirLTStd-LightOblique';
-  font-size: 14px;
-  color: #a9a9a9;
+.designBox {
+  .voice-description {
+    font-family: 'AvenirLTStd-LightOblique';
+    font-size: 14px;
+    color: #a9a9a9;
+  }
+
+  img.mobileBoard{
+    border-bottom: 1px solid #E3E3E3;
+  }
 }
 
 .viewingMoodboard .voteBtn:nth-child(4){
@@ -55,4 +61,8 @@
   .playback-switch.active{
     margin-top: -31px;
   }
+}
+
+.steps123{
+  white-space: nowrap;
 }
