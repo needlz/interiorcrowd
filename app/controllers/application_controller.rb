@@ -83,6 +83,9 @@ class ApplicationController < ActionController::Base
     return Client.find(session[:client_id]) if session[:client_id]
     return Designer.find(session[:designer_id]) if session[:designer_id]
     anonym = Object.new
+    def anonym.role
+      'Anonym'
+    end
     anonym.extend(User)
     anonym
   end
