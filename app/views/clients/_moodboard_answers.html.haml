@@ -1,14 +1,8 @@
-.voteBox.answers{ data: { url: answer_contest_request_path(id: request_id) } }
-  = render partial: 'clients/answer',
-      locals: { answer: answer,
-                text: t('client_center.entries.answers.no') }
-  = render partial: 'clients/answer',
-      locals: { answer: answer,
-                text: t('client_center.entries.answers.maybe') }
-  = render partial: 'clients/answer',
-      locals: { answer: answer,
-                text: t('client_center.entries.answers.favorite') }
-  = render partial: 'clients/answer',
-      locals: { answer: answer,
-                text: t('client_center.entries.answers.winner') }
 .clearfix
+.voteBox.answers{ data: { url: answer_contest_request_path(id: request_id) } }
+  - ContestRequest::ANSWERS.each do |answer_option|
+    = render partial: 'clients/answer',
+        locals: { answer: answer,
+                  text: t("client_center.entries.answers.#{ answer_option }"),
+                  css_class: (button_class if defined?(button_class)) }
+  .clearfix

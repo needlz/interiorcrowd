@@ -1,8 +1,5 @@
-.container.animated.fadeInDown
-  .row.text-center.title-first
-    %h1.signUpTitle= title.upcase
-    %h1.signUpSubTitle
-      %i.lineHeight60
-  = render partial: header
+.animated.fadeInDown
+  %h2.displayTitle= title.upcase
 .content.container.animated.fadeInDown{ class: (container_class if defined?(container_class)) }
+  = render partial: header
   = content

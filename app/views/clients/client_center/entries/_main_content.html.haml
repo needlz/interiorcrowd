@@ -2,6 +2,13 @@
 
 - readonly = defined?(readonly) ? readonly : false
 .row
+  .col-md-12.timeLeftToSubmitParent
+    %p.timeLeftToSubmit
+      = t('client_center.entries.submission.day_left_to_submit',
+          time_left: distance_of_time_in_words(Time.current,
+            contest_page.contest.phase_end,
+            false,
+            highest_measure_only: true))
   .col-md-9
     = render partial: 'clients/client_center/entries/phases',
         locals: { stripe: phases_stripe }
@@ -11,7 +18,7 @@
     .hidden-xs
       = render partial: 'clients/client_center/entries/responses_filter',
           locals: { selected_answer: contest_page.answer }
-.row.marginTop40Mobile
+.row.marginTop40Mobile.setTopMarginTimeLeftToSubmit
   .col-md-12.concept-board-items
     = render partial: 'clients/client_center/entries/feedback/feedback_items_with_pagination',
         locals: { contest_page: contest_page }

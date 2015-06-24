@@ -94,6 +94,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotiw (3.0.1)
+      actionpack (>= 3)
+      i18n
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -322,6 +325,7 @@ DEPENDENCIES
   daemons
   delayed_job_active_record
   devise
+  dotiw
   erb2haml
   fabrication
   figaro
