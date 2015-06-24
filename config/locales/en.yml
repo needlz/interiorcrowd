@@ -365,6 +365,8 @@ en:
         about_title: Design Mindset
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
+      winner_selection:
+        hint: Please pick a winner!
       submission:
         day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
     moodboard_details:
