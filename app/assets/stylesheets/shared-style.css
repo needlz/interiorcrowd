@@ -1667,3 +1667,50 @@ h3.exploreMore{
     }
 }
 /* end Credit-Card-Form */
+
+.timeLeftToSubmit{
+    font-size: 16px;
+    color: #FFF;
+    background: #a9a9a9;
+    border-radius: 3px;
+    line-height: 40px;
+    text-align: center;
+    margin-top: 20px;
+}
+.timeLeftToSubmitParent{
+    position: absolute;
+    top: 50px;
+    z-index: 99;
+    width: 100%;
+}
+
+.timeLeftToSubmitParent + div > p.favDesignConcept{
+    margin-top: 90px;
+}
+@media(max-width: 768px){
+    .setTopMarginTimeLeftToSubmit{
+        margin-top: 0px;
+    }
+}
+
+@media(max-width: 767px){
+    .setTopMarginTimeLeftToSubmit{
+        margin-top: 80px;
+    }
+}
+
+@media(max-width: 480px){
+    .timeLeftToSubmit{
+        line-height: 25px;
+        padding: 10px 0px;
+    }
+    .timeLeftToSubmit span{
+        display: block;
+    }
+    .timeLeftToSubmitParent{
+        top: 130px;
+    }
+    .setTopMarginTimeLeftToSubmit{
+        margin-top: 110px;
+    }
+}

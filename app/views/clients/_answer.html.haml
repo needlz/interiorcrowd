@@ -1,2 +1,2 @@
-%span.voteBtn.btn{ class: ("answer-#{text.downcase} #{'result-answer' if answer==text.downcase}"),
+%a.voteBtn{ class: "answer-#{text.downcase} #{'result-answer' if answer == text.downcase} #{ css_class if defined?(css_class) }",
     data: {answer: text.downcase} }= text

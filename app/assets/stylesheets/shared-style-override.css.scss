@@ -66,3 +66,13 @@
 .steps123{
   white-space: nowrap;
 }
+
+.timeLeftToSubmitParent{
+  top: 140px;
+}
+
+@media(max-width: 480px){
+  .timeLeftToSubmitParent{
+    top: 220px;
+  }
+}

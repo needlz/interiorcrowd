@@ -82,3 +82,4 @@ gem 'annotate', '~> 2.6.6' # add a comment summarizing the current schema of mod
 gem 'heroku-api'
 gem 'i18n-js', '>= 3.0.0.rc8'
 gem 'awesome_print', require: 'ap'
+gem 'dotiw' # better distance of time in words

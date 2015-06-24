@@ -1003,18 +1003,7 @@ p.stepActive .number{
 	height: 1px;
 	margin: 25px 0px;
 }
-.designConcept .btn,.btnDesignOption{
-	background: no-repeat;
-	border: 1px solid #e1e1e1;
-	width: 90%;
-	height: 38px;
-	line-height: 38px;
-	padding: 0px;
-	border-radius: 0px;
-	font-size: 20px;
-	color: #000;
-	font-weight: 400;
-}
+
 .pageNumber{
 	border: 1px solid #231f20;
 	border-radius: 3px;
