@@ -4,7 +4,7 @@ class ContestPage
     @contest = options[:contest]
 
     @view_context = options[:view_context]
-    @contest_view = ContestView.new(contest_attributes: contest)
+    @contest_view = ContestView.new(contest_attributes: contest) if contest
     all_requests = contest.requests.ever_published.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
     @comments_present = contest.notes.present?
@@ -35,6 +35,10 @@ class ContestPage
 
   def requests_next_page_index
     contest_requests.current_page + 1 if contest_requests.current_page < contest_requests.total_pages
+  end
+
+  def timeline_hint
+    nil
   end
 
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,

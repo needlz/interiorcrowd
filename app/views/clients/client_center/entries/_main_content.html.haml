@@ -2,13 +2,9 @@
 
 - readonly = defined?(readonly) ? readonly : false
 .row
-  .col-md-12.timeLeftToSubmitParent
-    %p.timeLeftToSubmit
-      = t('client_center.entries.submission.day_left_to_submit',
-          time_left: distance_of_time_in_words(Time.current,
-            contest_page.contest.phase_end,
-            false,
-            highest_measure_only: true))
+  - if contest_page.timeline_hint
+    = render partial: 'clients/client_center/entries/timeline_hint',
+        locals: { text: contest_page.timeline_hint }
   .col-md-9
     = render partial: 'clients/client_center/entries/phases',
         locals: { stripe: phases_stripe }
@@ -24,5 +20,6 @@
         locals: { contest_page: contest_page }
 - if @client
   .fullWidthLine.marginTop40.marginBottom40.hidden-xs
-  = render partial: 'clients/client_center/entries/notes', locals: { readonly: readonly, notes: contest_page.notes }
+  = render partial: 'clients/client_center/entries/notes',
+      locals: { readonly: readonly, notes: contest_page.notes }
   = render partial: 'clients/client_center/entries/user_invitations', locals: { readonly: readonly }
