@@ -1,10 +1,12 @@
 class Validations
 
+  continueButtonSelector: '.continueBtn'
+
   constructor: (@appealsCount, @levelContainer, @examplesToggle)->
     @validator = new ValidationMessages()
 
   allAppealsSelected: ->
-    $('.likes input:checked').length == @appealsCount
+    $('.appeal .loveLikeLeave input:checked').length == @appealsCount
 
   clearHiddenInputs: ->
     $('.example-pictures').find('input').attr('name', '') unless @examplesToggle.showing()
@@ -13,9 +15,9 @@ class Validations
     $(".text-error").text('')
     @validator.reset()
 
-    designerLevel = parseInt(@levelContainer.val())
-    if isNaN(designerLevel)
-      @validator.addMessage $("#err-designer-level"), I18n.validations.select_design_level, $('.designer-levels')
+#    designerLevel = parseInt(@levelContainer.val())
+#    if isNaN(designerLevel)
+#      @validator.addMessage $("#err-designer-level"), I18n.validations.select_design_level, $('.designer-levels')
 
     unless @allAppealsSelected()
       @validator.addMessage $("#err-appeals"), I18n.validations.no_appeals, $('.appeal-options')
@@ -36,7 +38,7 @@ class Validations
       false
 
   init: ->
-    $(".continue").click(@onSubmitClick)
+    $(@continueButtonSelector).click(@onSubmitClick)
 
 class DesignStylePage
 
@@ -64,14 +66,12 @@ class DesignStylePage
       { data: $form.serializeArray() }
 
   @bindDesignLevelItems: ($levelContainer)->
-    $('.level-block').click (event)=>
-      $selectedLevel = $(event.target).closest('.level-block')
-      newId = $selectedLevel.data('id')
-      $levelContainer.val(newId)
-      $('.level-block').removeClass('active')
-      $('.level-block').find('.check').hide()
-      $selectedLevel.addClass('active')
-      $selectedLevel.find('.check').show()
+    $('.interiorDesignLevel input:radio').change (event)->
+      $radio = $(event.target)
+      console.log $radio.data('name')
+      $('.interiorDesignLevelMobile div').removeClass('active')
+      if $radio.is(':checked')
+        $('.interiorDesignLevelMobile label').filter('.' + $radio.data('name')).parent().addClass('active')
 
 $ ->
   DesignStylePage.init()

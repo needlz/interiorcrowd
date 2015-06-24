@@ -1,11 +1,11 @@
-.lnk_container
-  .col-md-10.form-group.no-x-padding
-    %input.form-control{name: name,
+.lnk_container.row
+  .col-lg-10.col-sm-11
+    %input.tellUsInput.marginTop20{name: name,
       type: "text",
       value: value,
       data: { name: 'design_style[ex_links][]' } }/
-  .col-md-2
-    %a.plus_wrapper.links{ href: '#' }
+  .col-sm-1.hidden-xs.disablePadding{ style: 'margin-top: 20px;' }
+    %a.plus_wrapper.links.btnInvite.addInspirationalLinks{ href: '#' }
       %i.glyphicon.glyphicon-plus.pull-right.glyphic-link.example-link-glyph.glyphiconPlus
-    %a.minus_wrapper.links{ href: '#' }
+    %a.minus_wrapper.links.btnInvite.addInspirationalLinks{ href: '#' }
       %i.glyphicon.glyphicon-minus.pull-right.glyphic-link.example-link-glyph.glyphiconMinus

@@ -54,3 +54,12 @@ class @PopulatedInputs
 
 class @InspirationLinksEditor extends PopulatedInputs
   @container: '.links-options'
+
+  @init: ->
+    super()
+    @bindMobileAddButton()
+
+  @bindMobileAddButton: ->
+    $('.btnInviteMobile').click =>
+      event.preventDefault()
+      @addLink()

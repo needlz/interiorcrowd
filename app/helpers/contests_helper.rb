@@ -53,9 +53,7 @@ module ContestsHelper
   end
 
   def contest_creation_tab_class(tab_index, tabs_count)
-    css_class = @creation_wizard.breadcrumb_class(tab_index)
-    css_class = css_class + ' no-padding-right' unless tab_index == tabs_count - 1
-    css_class
+    @creation_wizard.breadcrumb_class(tab_index)
   end
 
   def force_link_protocol(link)
