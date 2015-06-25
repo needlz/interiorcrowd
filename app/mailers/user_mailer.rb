@@ -2,17 +2,8 @@ class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
-  class RenderHelper < ActionView::Base
-    include Rails.application.routes.url_helpers
-    include ActionView::Helpers::TagHelper
-
-    def default_url_options
-      Rails.configuration.action_mailer.default_url_options
-    end
-  end
-
   def renderer
-    @renderer ||= RenderHelper.new(Rails.root.join('app', 'views'))
+    @renderer ||= RenderingHelper.new
   end
 
   def client_registered(client)

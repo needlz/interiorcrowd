@@ -39,7 +39,6 @@ class Contest < ActiveRecord::Base
 
   self.per_page = 10
 
-  CONTEST_DESIGN_BUDGET_PLAN = {1 => "$99", 2 => "$199", 3 => "$299"}
   STATUSES = %w[brief_pending submission winner_selection closed fulfillment finished]
   COLLABORATION_STATUSES = %w[submission winner_selection fulfillment]
   NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES

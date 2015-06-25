@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe EntriesPage do
 
   let(:client){ Fabricate(:client) }
-  let(:contest){ Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest){ Fabricate(:contest, client: client, status: 'submission', phase_end: Time.current) }
   let(:entries_page){ EntriesPage.new(
       contest: contest,
       view: nil,
       answer: nil,
       page: nil,
       current_user: nil,
-      view_context: nil
+      view_context: RenderingHelper.new
   ) }
 
   context 'contest in winner_selection state' do
@@ -20,6 +20,10 @@ RSpec.describe EntriesPage do
 
     it 'shows submissions list' do
       expect(entries_page.show_submissions?).to be_truthy
+    end
+
+    it 'returns timeline hint' do
+      expect(entries_page.timeline_hint).to be_present
     end
   end
 
