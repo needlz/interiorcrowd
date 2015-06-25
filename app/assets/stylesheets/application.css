@@ -13,10 +13,11 @@
  *= require compiled/index.css
  *= require lib/animate.css
  *= require jquery-ui/slider
+ *= require lib/select2-3.5.2/select2-bootstrap
+ *= require lib/select2-3.5.2/select2.css
  *= require style
  *= require style-override
  *= require shared-style
- *= require shared-style-override
  *= require home
  *= require clients
  *= require portfolio
@@ -28,8 +29,7 @@
  *= require designer_center
  *= require designer_center_responses
  *= require fonts
- *= require lib/select2-3.5.2/select2-bootstrap
- *= require lib/select2-3.5.2/select2.css
+ *= require shared-style-override
  *= require lib/colorbox
  *= require lib/jplayer.blue.monday
  *= require jquery.fileupload-ui

@@ -20,7 +20,7 @@ en:
     default_selection: Select one
     continue_button: Continue
     titles:
-      creation: Launch a New Design Contest
+      creation: Launch <span></span> a New Design Contest
       design_categories: What do you need help with today?
       appeals: What do you think of the style below?
       wanted_colors: Which colors would you like in your space?
@@ -114,6 +114,8 @@ en:
       want_designers:
         explore_other_colors: I want the designers to explore other color options for me
         only_use_these_colors: I want the designers to only use these colors
+      add_more_links: Add more links
+      enlarge_picture: Enlarge picture
     appeals:
       vintage: Vintage
       eclectic: Eclectic

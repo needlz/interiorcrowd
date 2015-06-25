@@ -76,3 +76,44 @@
     top: 220px;
   }
 }
+
+.interiorDesignLevelMobile .active label,.interiorDesignLevelMobile .active label{
+  background: #333333 !important;
+  color: #FFF !important;
+}
+
+.designSteps{
+  p {
+    white-space: nowrap;
+  }
+}
+
+.interiorDesignLevelMobile label{
+  font-weight: normal;
+}
+
+.loveLikeLeave label{
+  font-weight: normal;
+}
+
+@media(max-width: 480px){
+  .loveLikeLeave label{
+    display: inline;
+  }
+
+  .big-radio + label{
+    padding: 10px;
+  }
+  .big-radio:checked + label:after{
+    width: 14px;
+    height: 14px;
+    left: 3px;
+    top: 3px;
+  }
+}
+
+.appeal-picture-enlarge{
+  margin-top: 5px;
+  text-decoration: underline;
+  cursor: pointer;
+}

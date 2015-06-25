@@ -1,24 +1,21 @@
 .appeal
-  .likes.row
+  .row.yesNoRadio.loveLikeLeave.marginTop40.marginBottom40
     - @creation_wizard.available_appeal_feedback.each do |appeal_feedback|
-      .col-md-3.no-x-padding.option
-        .col-md-3
-          = radio_button_tag("design_style[appeals][#{ scale.identifier }][value]",
-              appeal_feedback[:value],
-              scale.value == appeal_feedback[:value],
-              class: 'regular-radio big-radio')
-          = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", '')
-        .col-md-9
-          .text
-            = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }", AppealScale.localized_appeal_value(appeal_feedback[:name]))
-  .col-md-12.no-x-padding.appeal-collage
-    %img.appeal-collage-image{:src => scale.collage_picture }/
-  .clearfix
-  .telluswhy
-    .title
-      %span Tell us why
-      %span.optional (optional)
-    .form-group
-      %textarea#comment.form-control{ rows: "4",
-        name: "design_style[appeals][#{ scale.identifier }][reason]" }= scale.reason
-  .col-md-12.border
+      .col-lg-2.col-md-3.col-xs-4.option
+        = radio_button_tag("design_style[appeals][#{ scale.identifier }][value]",
+            appeal_feedback[:value],
+            scale.value == appeal_feedback[:value],
+            class: 'regular-radio big-radio')
+        = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }",
+            '', class: '', style: 'margin-right: 5%;')
+        = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }",
+            AppealScale.localized_appeal_value(appeal_feedback[:name]), class: 'true-label')
+
+  %img.fullWidth.appeal-collage-image{ src: scale.collage_picture }/
+  %a.appeal-picture-enlarge.pull-right.visible-xs{ href: scale.collage_picture }
+    = t('contests.design_style.enlarge_picture')
+  %p.tellUs
+    Tell us why
+    %span.optional (optional)
+  = text_field_tag "design_style[appeals][#{ scale.identifier }][reason]", scale.reason, class: 'tellUsInput'
+  .fullWidthLine.marginTop40

@@ -1,11 +1,19 @@
 .design-style-options
-  .designer-levels.interior-design.clearfix
+  .designer-levels
     = hidden_field_tag 'design_style[designer_level]', @contest_view.designer_level.try(:id)
-    .col-md-12.no-x-padding.title
-      %h1= t('contests.titles.designer_level')
-      .clearfix
-        #err-designer-level.text-error
-    - @creation_wizard.available_designer_levels.each do |designer_level|
-      = render partial: 'contests/options/designer_level_item',
-          locals: { designer_level: designer_level,
-                    active: designer_level == @contest_view.designer_level }
+    %h3.marginTop40= t('contests.titles.designer_level')
+    .row.marginTop40.interiorDesignLevel.hidden-xs
+      #err-designer-level.text-error
+      - @creation_wizard.available_designer_levels.each do |designer_level|
+        = render partial: 'contests/options/designer_level_item',
+            locals: { designer_level: designer_level,
+                      active: designer_level == @contest_view.designer_level }
+    .row.marginTop40.interiorDesignLevelMobile.visible-xs
+      - @creation_wizard.available_designer_levels.each do |designer_level|
+        .col-sm-4{ class: (designer_level == @contest_view.designer_level) && 'active' }
+          = label_tag 'design_style[designer_level]',
+              '',
+              for: "design_style_designer_level_#{ designer_level.id }",
+              class: designer_level.name,
+              data: { name: designer_level.name } do
+            = t("contests.design_style.designer_level.#{ designer_level.name }")

@@ -1,10 +1,7 @@
 .design-style-options
   .appeal-options
-    .all-block-bar
-      .col-md-12.no-x-padding.header
-        %h1.title= t('contests.titles.appeals')
-      .clearfix
-        %span#err-appeals.text-error
-      = render partial: 'contests/options/appeal_scale_row',
-            collection: @contest_view.appeal_scales,
-            as: :scale
+    %h3.marginTop40= t('contests.titles.appeals')
+    %span#err-appeals.text-error
+    = render partial: 'contests/options/appeal_scale_row',
+          collection: @contest_view.appeal_scales,
+          as: :scale

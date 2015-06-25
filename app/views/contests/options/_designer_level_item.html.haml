@@ -1,9 +1,10 @@
-.text-center.col-md-4.no-x-padding{:style => "position:relative", class: active && 'active' }
-  .designer-level.level-block{ data: { id: designer_level.id } }
-    %img{ src: designer_level_image(designer_level) }/
-    .fade-text.text-center.design-knowledge
-      %p= t("contests.design_style.level_info.#{ designer_level.name }")
-    .check.text-center{ style: "#{ 'display: none' unless active }"}
-      %img{:src => "/assets/white_check.png"}/
-  .text-center.all-under-block
-    %h1= t("contests.design_style.designer_level.#{ designer_level.name }")
+.col-xs-4{ class: active && 'active' }
+  = radio_button_tag 'design_style[designer_level]', designer_level.id, active, data: { name: designer_level.name }
+  = label_tag 'design_style[designer_level]',
+      '',
+      for: "design_style_designer_level_#{ designer_level.id }",
+      style: "background-image: url('#{ j(designer_level_image(designer_level)) }')",
+      class: designer_level.name do
+    %span
+    %p.hide= t("contests.design_style.level_info.#{ designer_level.name }")
+  %h4= t("contests.design_style.designer_level.#{ designer_level.name }")

@@ -1,14 +1,13 @@
 .design-style-options
   .links-options
-    .col-md-12.no-x-padding.title
-      %span
-        %b= t('contests.design_style.add_links')
-    .clearfix
-
+    %h3= t('contests.design_style.add_links')
     .links
       = render partial: 'contests/options/example_link', locals: { value: '', name: 'design_style[ex_links][]' } unless @contest_view.links.present?
       - @contest_view.links.try(:each) do |url|
         .link
           = render partial: 'contests/options/example_link', locals: { value: url, name: 'design_style[ex_links][]' }
-
-    .col-md-12.bottom-border
+      .row.visible-xs
+        .col-sm-12.invitePeopleBlock
+          %button.btnInviteMobile
+            %span.glyphicon.glyphicon-plus{ aria: { hidden: 'true' } }
+            %span.addMorePeople= t('contests.design_style.add_more_links')
