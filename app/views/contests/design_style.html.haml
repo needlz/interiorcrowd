@@ -21,7 +21,7 @@
         .col-md-12
           = render partial: 'home/msg'
           %h4= t('contests.design_style.title')
-          %p#lightFont.marginTop20= t('contests.design_style.description')
+          %p.lightFont.marginTop20= t('contests.design_style.description')
           = form_tag save_design_style_contests_path,
               { id: 'design_style', method: 'post' } do
             = render partial: 'contests/options/designer_level_options'

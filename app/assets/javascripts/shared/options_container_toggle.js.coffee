@@ -7,8 +7,7 @@ class @OptionsContainerToggle
     @bindMobileButtons()
 
   showing: ->
-#    $(@options.radioButtonsSelector).filter(':checked').val() is 'yes'
-    true
+    $(@options.radioButtonsSelector).filter(':checked').val() is 'yes'
 
   refreshView: (visible)->
     $(@options.containerSelector).toggle(visible)

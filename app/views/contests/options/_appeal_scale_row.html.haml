@@ -7,14 +7,15 @@
             scale.value == appeal_feedback[:value],
             class: 'regular-radio big-radio')
         = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }",
-            '', style: 'margin-right: 5%;')
+            '', class: '', style: 'margin-right: 5%;')
         = label_tag("design_style_appeals_#{ scale.identifier }_value_#{ appeal_feedback[:value] }",
             AppealScale.localized_appeal_value(appeal_feedback[:name]), class: 'true-label')
 
   %img.fullWidth.appeal-collage-image{ src: scale.collage_picture }/
+  %a.appeal-picture-enlarge.pull-right.visible-xs{ href: scale.collage_picture }
+    = t('contests.design_style.enlarge_picture')
   %p.tellUs
     Tell us why
     %span.optional (optional)
   = text_field_tag "design_style[appeals][#{ scale.identifier }][reason]", scale.reason, class: 'tellUsInput'
   .fullWidthLine.marginTop40
-

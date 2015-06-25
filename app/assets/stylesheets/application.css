@@ -18,7 +18,6 @@
  *= require style
  *= require style-override
  *= require shared-style
- *= require shared-style-override
  *= require home
  *= require clients
  *= require portfolio
@@ -30,6 +29,7 @@
  *= require designer_center
  *= require designer_center_responses
  *= require fonts
+ *= require shared-style-override
  *= require lib/colorbox
  *= require lib/jplayer.blue.monday
  *= require jquery.fileupload-ui

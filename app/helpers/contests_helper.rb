@@ -52,10 +52,6 @@ module ContestsHelper
      { text: 'Green 1', id: '294635' }]
   end
 
-  def contest_creation_tab_class(tab_index, tabs_count)
-    @creation_wizard.breadcrumb_class(tab_index)
-  end
-
   def force_link_protocol(link)
     return '' unless link.present?
     link =~ /^https?\:/ ? link : "http://#{ link }"

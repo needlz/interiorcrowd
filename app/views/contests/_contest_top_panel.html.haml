@@ -1,7 +1,7 @@
 %h3.newDesignTitle= t('contests.titles.creation').upcase.html_safe
 .row.designSteps.hideUnder480
   - ContestCreationWizard.creation_steps.each_with_index do |step, index|
-    %a.col-xs-3{class: contest_creation_tab_class(index, ContestCreationWizard.creation_steps.length) }
+    %a.col-xs-3{class: @creation_wizard.breadcrumb_class(index) }
       %span= index + 1
       %p= t("contests.creation.pages.#{ step }")
   .clearfix
