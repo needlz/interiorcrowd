@@ -1,17 +1,5 @@
 %input#plan_id{ name: 'preview[b_plan]',
                 type: 'hidden',
-                value: @contest_view.budget_plan }
+                value: @contest_view.budget_plan || BudgetPlan::PLANS[0].id }
 
-.rooms.text-package.text-center-sm.text-center-xs.plans-container
-  .packages.text-package.text-center-xs.text-center-sm
-    %h1.text-center= t('contests.creation.packages.title')
-    .text-center.packages-description
-      %i= t('contests.creation.packages.description')
-
-  = render partial: 'contests/options/plan_options'
-
-  .some-text.col-md-12.text-center.learn-more-container
-    %p
-      %a{ href: coming_soon_path, class: tracked_link }
-        %i= t('contests.creation.packages.learn_more')
-  .clearfix
+= render partial: 'contests/options/plan_options'
