@@ -191,30 +191,27 @@ en:
       preview:
         name_label: Give your project name
         name_placeholder: My Dream Loft
-        name_error: Please enter project name.
-        plan_error: Please choose package.
+        name_error: Please enter project name
+        plan_error: Please choose package
       go_back: Back
       continue: Continue
       create: Create
       packages:
         title: Our design packages
         description: Pick a package - 100% money back guarantee
-        conceptboard: Concept boards
-        from_designers:
-          one: from at least 1 designer
-          other: from at least %{designer_count} designers
-        product_list: Product list
-        up_to_products:
-          one: up to 1 product
-          other: up to %{product_count} products
-        final_design: Final Design
+
+        multiple_desings: Multiple designs from a range of interior designers
+        collaboration: One-on-one collaboration time with chosen designer
+        concept_board: Customized moodboard for your new space
+        product_list: Product list with links to purchase immediately
+        floor_plan: Floor plan & detailed instructions
         select: Select
-        learn_more: Learn more about packages
-        instructions: Instructions from the designer
       plans:
         budget: Quick Fix
         premier: Update My Style
         premium: Room Overhaul
+        first: One low flat fee of <span>$299</span>
+        includes: includes
       pages:
         design_brief: Choose Room
         design_style: Style Profile

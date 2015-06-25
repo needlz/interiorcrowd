@@ -9,8 +9,8 @@ class @PicturesZoom
     =>
       fitToScreen = !@smallScreen()
       newOptions = $.extend({}, options)
-      if fitToScreen then $.extend(newOptions, @fitToScreenOptions)
-      console.log $(selector)
+      if fitToScreen
+        $.extend(newOptions, @fitToScreenOptions)
       $(selector).colorbox.remove()
       $(selector).colorbox(newOptions)
 

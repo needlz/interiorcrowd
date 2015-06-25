@@ -1,12 +1,7 @@
-.first-block-quick.col-md-4.plan-container{ data: { id: package.id },
-                                            class: ('active' if @contest_view.package_selected?(package.id)) }
-  .col-md-12.plan
-    .first.text-center.header
-      %span.name
-        %b= package.name
-      %br/
-    .first.text-center.body
+.row.oneLowFlatFee.plan-container{ data: { id: package.id },
+    class: ('active' if @contest_view.package_selected?(package.id)) }
+  .col-sm-12
+    %h1 #{ package.name.html_safe } #{ t('contests.creation.plans.includes') }:
+    %ul
       - package.services.each_with_index do |service, index|
-        - style_class = index > 0 ? 'not-first' : ''
-        %div.service{ class: style_class }
-          %span= service.html_safe
+        %li= service.html_safe

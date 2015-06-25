@@ -1,5 +1,7 @@
 class ReviewPage
 
+  @continuButtonSelector: '.continueBtn'
+
   @init: ->
     Packages.init()
     @bindContinueButton()
@@ -10,7 +12,7 @@ class ReviewPage
       { data: $form.serializeArray() }
 
   @bindContinueButton: ->
-    $('.continue').click (e) =>
+    $(@continuButtonSelector).click (e) =>
       e.preventDefault()
       @validate()
       if @validator.valid
