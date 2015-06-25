@@ -33,12 +33,24 @@ class EntriesPage < ContestPage
                                              false,
                                              highest_measure_only: true))
     elsif contest.winner_selection?
-      I18n.t('client_center.entries.winner_selection.hint')
+      select_winner_hint
     end
   end
 
-
-
   attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
+
+  private
+
+  def select_winner_hint
+    if contest.phase_end < Time.current
+      I18n.t('client_center.entries.winner_selection.hint')
+    else
+      I18n.t('client_center.entries.winner_selection.day_left',
+             time_left: view_context.distance_of_time_in_words(Time.current,
+                                                               contest.phase_end,
+                                                               false,
+                                                               highest_measure_only: true))
+    end
+  end
 
 end

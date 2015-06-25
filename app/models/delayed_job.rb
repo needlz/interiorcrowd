@@ -17,6 +17,7 @@
 #  contest_id         :integer
 #  image_type         :string(255)
 #  contest_request_id :integer
+#  outbound_email_id  :integer
 #
 
 class DelayedJob < ActiveRecord::Base

@@ -8,9 +8,14 @@
 
 DesignCategory.delete_all
 DesignCategory.create(id: 1,
-                      name: 'first',
-                      pos: 1,
-                      price: 299)
+                      name: 'quick_fix',
+                      pos: 1)
+DesignCategory.create(id: 2,
+                      name: 'update_my_style',
+                      pos: 2)
+DesignCategory.create(id: 3,
+                      name: 'total_room_overhaul',
+                      pos: 3)
 
 DesignSpace.delete_all
 DesignSpace.create(id: 1, name: 'Bedroom', pos: 10, parent_id: 0)

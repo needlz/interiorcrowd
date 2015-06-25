@@ -2,11 +2,12 @@ class ContestMilestone
 
   DAYS = {
     'submission' => 7,
+    'winner_selection' => 7,
     'fulfillment' => 3
   }
 
   WORKERS = {
-    'submission' => Jobs::SubmissionEnd,
+    'submission' => Jobs::SubmissionEnd
   }
 
   def initialize(contest)
