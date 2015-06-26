@@ -35,7 +35,7 @@ RSpec.describe Contest do
 
     describe 'delayed job' do
       before do
-        Jobs::SubmissionEnd.new(contest.id).perform
+        Jobs::ContestMilestoneEnd.new(contest.id, 'submission').perform
       end
 
       it 'changes status of the contest' do
@@ -44,7 +44,7 @@ RSpec.describe Contest do
     end
 
     it 'creates delayed job on creation' do
-      submission_end_jobs = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::SubmissionEnd.name }%")
+      submission_end_jobs = jobs_with_handler_like(Jobs::ContestMilestoneEnd.name)
       expect(submission_end_jobs.count).to eq 0
       contest.run_callbacks(:commit)
       expect(submission_end_jobs.count).to eq 1

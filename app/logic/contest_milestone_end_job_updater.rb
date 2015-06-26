@@ -14,12 +14,12 @@ class ContestMilestoneEndJobUpdater
   attr_reader :contest
 
   def create_phase_job
-    worker_class = ContestMilestone.new(contest).worker_class
-    worker_class.schedule(contest.id, run_at: contest.phase_end) if worker_class
+    performer_class = ContestMilestone.new(contest).end_milestone_performer_class
+    Jobs::ContestMilestoneEnd.schedule(contest.id, contest.status, run_at: contest.phase_end) if performer_class
   end
 
   def clear_phase_end_jobs
-    phase_job_classes = ContestMilestone::WORKERS.values.map{ |job| "(handler LIKE '%#{ job.name }%')" }.join(' OR ')
+    phase_job_classes = "(handler LIKE '%#{ Jobs::ContestMilestoneEnd.name }%')"
     Delayed::Job.where(contest_id: contest.id).where(phase_job_classes).destroy_all
   end
 

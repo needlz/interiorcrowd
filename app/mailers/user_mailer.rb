@@ -134,6 +134,16 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
+  def remind_about_picking_winner(contest)
+    template 'client_hasnt_picked_a_winner'
+    client = contest.client
+    set_template_values(
+        ENTRIES_URL: renderer.entries_client_center_index_url,
+        HELLO_ADDRESS: I18n.t('registration.mail_to')
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
   private
 
   def set_user_params(user)

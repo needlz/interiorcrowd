@@ -164,7 +164,7 @@ RSpec.describe ContestsController do
       end
 
       it 'does not schedule job' do
-        !DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").exists?
+        !jobs_with_handler_like(Jobs::GeneratePhotosArchive.name).exists?
       end
     end
 
@@ -176,7 +176,7 @@ RSpec.describe ContestsController do
       end
 
       it 'does not schedule job' do
-        !DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").exists?
+        !jobs_with_handler_like(Jobs::GeneratePhotosArchive.name).exists?
       end
     end
 
@@ -190,7 +190,7 @@ RSpec.describe ContestsController do
 
       it 'schedules job' do
         get :download_all_images_url, params
-        expect(DelayedJob.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").count).to eq 1
+        expect(jobs_with_handler_like(Jobs::GeneratePhotosArchive.name).count).to eq 1
       end
 
       it 'returns archive path if archivation performed' do
@@ -205,7 +205,7 @@ RSpec.describe ContestsController do
           o
         end
         get :download_all_images_url, params
-        job = Delayed::Job.where('handler LIKE ?', "%#{ Jobs::GeneratePhotosArchive.name }%").first
+        job = jobs_with_handler_like(Jobs::GeneratePhotosArchive.name).first
         job.invoke_job
         job.destroy
         get :download_all_images_url, params

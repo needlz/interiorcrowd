@@ -209,7 +209,7 @@ RSpec.describe DesignerCenterRequestsController do
 
       it 'logs finish event to Mixpanel' do
         patch :update, id: request.id, contest_request: { status: 'finished' }
-        expect(DelayedJob.where('handler LIKE \'%MixpanelLogRecord%\'').count).to eq 1
+        expect(jobs_with_handler_like('MixpanelLogRecord').count).to eq 1
       end
     end
 
