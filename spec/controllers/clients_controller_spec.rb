@@ -29,7 +29,7 @@ RSpec.describe ClientsController do
       card_ex_year: '2000',
       card_cvc: '123',
       zip: '81100',
-      promocode: promocode.token
+      promocode: promocode.promocode
     }
   }
   let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }

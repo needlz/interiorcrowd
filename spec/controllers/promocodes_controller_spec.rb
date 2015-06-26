@@ -4,8 +4,8 @@ RSpec.describe PromocodesController do
   render_views
 
   let(:profit) { 'some profit' }
-  let(:code) { Fabricate(:promocode, profit: profit) }
-  let(:valid_token) { code.token }
+  let(:code) { Fabricate(:promocode, display_message: profit) }
+  let(:valid_token) { code.promocode }
   let(:invalid_token) { '1111' }
 
   describe 'GET apply' do

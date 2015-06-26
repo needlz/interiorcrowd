@@ -1,16 +1,15 @@
 class PromocodesController < ApplicationController
 
   def apply
-    token = params[:code]
-    render json: check_promocode(token)
+    render json: check_promocode(params[:code])
   end
 
   private
 
-  def check_promocode(token)
-    code = Promocode.active.find_by_token(token)
+  def check_promocode(promocode)
+    code = Promocode.active.find_by_promocode(promocode)
     result = { valid: code.present? }
-    result.merge!(profit: code.profit) if code
+    result.merge!(profit: code.display_message) if code
     result
   end
 
