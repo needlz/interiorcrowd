@@ -90,26 +90,6 @@ RSpec.describe ContestRequest do
     end
   end
 
-  describe '#approve' do
-    let(:request){ Fabricate(:contest_request, designer: designer, status: 'fulfillment_ready', answer: 'winner', contest_id: contest.id) }
-    let(:approved_request){ Fabricate(:contest_request, designer: designer, status: 'fulfillment_approved', answer: 'winner', contest_id: contest.id) }
-
-    it 'does not create notification for fulfillment_approved request' do
-      approved_request.approve
-      expect(UserNotification.exists?(user_id: approved_request.designer_id, contest_id: approved_request.contest_id, type: 'DesignerInfoNotification')).to eq(false)
-    end
-
-    it 'creates notification for fulfillment_ready request' do
-      request.approve
-      expect(UserNotification.exists?(user_id: request.designer_id, contest_id: request.contest_id, type: 'DesignerInfoNotification')).to eq(true)
-    end
-
-    it 'approves fulfillment_ready request' do
-      request.approve
-      expect(request.status).to eq('fulfillment_approved')
-    end
-  end
-
   it 'sets unique token after creation' do
     request = Fabricate(:contest_request, designer: designer, contest_id: contest.id)
     expect(request.token).to be_present

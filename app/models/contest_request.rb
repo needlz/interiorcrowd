@@ -116,18 +116,6 @@ class ContestRequest < ActiveRecord::Base
     contest.responses_answerable?
   end
 
-  def approve
-    return false if fulfillment_approved?
-    transaction do
-      DesignerInfoNotification.create(user_id: designer_id,
-                                      contest_id: contest_id,
-                                      contest_request_id: id)
-      PhaseUpdater.new(self).perform_phase_change do
-        approve_fulfillment!
-      end
-    end
-  end
-
   def fulfillment_editing?
     fulfillment? || fulfillment_ready? || fulfillment_approved?
   end

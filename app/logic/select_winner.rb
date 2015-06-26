@@ -11,6 +11,7 @@ class SelectWinner
     contest_request.contest.winner_selected!
     create_default_image_items
     notify_designer_about_win
+    notify_client
   end
 
   private
@@ -31,6 +32,10 @@ class SelectWinner
                                             kind: kind.to_s)
       end
     end
+  end
+
+  def notify_client
+    Jobs::Mailer.schedule(:client_has_picked_a_winner, [contest_request])
   end
 
 end

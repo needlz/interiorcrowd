@@ -28,8 +28,9 @@ class ContestRequestsController < ApplicationController
   end
 
   def approve_fulfillment
-    approved = @request.approve
-    render json: { approved: approved }
+    approve_fulfillment = ApproveFulfillment.new(@request)
+    approve_fulfillment.perform
+    render json: { approved: approve_fulfillment.approved }
   end
 
   def show

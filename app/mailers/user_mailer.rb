@@ -144,6 +144,25 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
+  def client_has_picked_a_winner(contest_request)
+    template 'client_has_picked_a_winner'
+    client = contest_request.contest.client
+    set_template_values(
+        HELLO_ADDRESS: I18n.t('registration.mail_to')
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
+  def client_ready_for_final_design(contest_request)
+    template 'client_ready_for_final_design'
+    client = contest_request.contest.client
+    designer = contest_request.designer
+    set_template_values(
+        CLIENT_NAME: client.name
+    )
+    mail(to: [wrap_recipient(designer.email, designer.name, 'to')])
+  end
+
   private
 
   def set_user_params(user)
