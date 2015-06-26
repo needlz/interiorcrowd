@@ -163,6 +163,15 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(designer.email, designer.name, 'to')])
   end
 
+  def client_hasnt_picked_a_winner_to_designers(contest)
+    template 'client_ready_for_final_design'
+    designers = Designer.joins(:contest_requests).where(contest_requests: { id: contest.requests.submitted.pluck(:id) })
+    set_template_values(
+        CONTEST_NAME: contest.name
+    )
+    mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
+  end
+
   private
 
   def set_user_params(user)
