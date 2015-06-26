@@ -49,6 +49,10 @@ RSpec.configure do |config|
     end
   end
 
+  def jobs_with_handler_like(string)
+    Delayed::Job.where('handler LIKE ?', "%#{ string }%")
+  end
+
   def contest_options_source
     @contest_options_source ||= { design_brief: {
         design_category: Fabricate(:design_category).id,

@@ -61,7 +61,7 @@ RSpec.describe DesignersController do
 
     it 'creates mail job' do
       post :create, designer_creation_params
-      expect(Delayed::Job.where('handler LIKE ?', "%designer_registered%").count).to eq 1
+      expect(jobs_with_handler_like('designer_registered').count).to eq 1
     end
 
     context 'portfolio passed' do

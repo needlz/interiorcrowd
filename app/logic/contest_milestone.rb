@@ -6,9 +6,14 @@ class ContestMilestone
     'fulfillment' => 3
   }
 
-  WORKERS = {
-    'submission' => Jobs::SubmissionEnd
-  }
+  def self.end_milestone_performer(contest_status)
+    class_name = "End#{ contest_status.camelize }"
+    begin
+      class_name.constantize
+    rescue NameError
+      nil
+    end
+  end
 
   def initialize(contest)
     @contest = contest
@@ -19,8 +24,8 @@ class ContestMilestone
     (phase_start_time + duration.days) if duration
   end
 
-  def worker_class
-    WORKERS[contest.status]
+  def end_milestone_performer_class
+    ContestMilestone.end_milestone_performer(contest.status)
   end
 
   private

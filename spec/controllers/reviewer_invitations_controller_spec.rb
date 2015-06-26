@@ -80,7 +80,7 @@ RSpec.describe ReviewerInvitationsController do
 
         it 'creates mail job' do
           post :create, params
-          expect(Delayed::Job.where('handler LIKE ?', "%invitation_to_leave_a_feedback%").count).to eq 1
+          expect(jobs_with_handler_like('invitation_to_leave_a_feedback').count).to eq 1
         end
       end
     end
