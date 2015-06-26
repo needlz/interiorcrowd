@@ -113,11 +113,11 @@
           .col-xs-12
             %label
               = text_field_tag 'client[promocode]', '', class: 'form-control', tabindex: 8
+              %button.apply-promocode-button.clickable= t('client_center.sign_up.apply_promocode')
+              .clearfix
               #promocode-error.text-error.promocode-message.soft-hide= t('client_center.sign_up.promocode_invalid')
               #promocode-valid.promocode-message.soft-hide
               #promocode-request-error.promocode-message.soft-hide= t('client_center.sign_up.promocode_server_error')
-              %button.apply-promocode-button.clickable= t('client_center.sign_up.apply_promocode')
-              .clearfix
     .fullWidthLine
     %p.iAgreeTerms
       %span.customCheckbox

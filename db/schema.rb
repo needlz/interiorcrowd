@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625145604) do
+ActiveRecord::Schema.define(version: 20150626084747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,14 @@ ActiveRecord::Schema.define(version: 20150625145604) do
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
+
+  create_table "clients_promocodes", id: false, force: true do |t|
+    t.integer "promocode_id", null: false
+    t.integer "client_id",    null: false
+  end
+
+  add_index "clients_promocodes", ["client_id", "promocode_id"], name: "index_clients_promocodes_on_client_id_and_promocode_id", using: :btree
+  add_index "clients_promocodes", ["promocode_id", "client_id"], name: "index_clients_promocodes_on_promocode_id_and_client_id", using: :btree
 
   create_table "concept_board_comments", force: true do |t|
     t.integer  "user_id"
@@ -372,12 +380,10 @@ ActiveRecord::Schema.define(version: 20150625145604) do
   end
 
   create_table "promocodes", force: true do |t|
-    t.integer "client_id"
     t.text    "token"
     t.text    "profit"
+    t.boolean "active", default: true
   end
-
-  add_index "promocodes", ["client_id"], name: "index_promocodes_on_client_id", using: :btree
 
   create_table "reviewer_feedbacks", force: true do |t|
     t.text     "text"

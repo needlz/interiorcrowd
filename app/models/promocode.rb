@@ -10,9 +10,9 @@
 
 class Promocode < ActiveRecord::Base
 
-  belongs_to :client
+  has_and_belongs_to_many :clients
 
-  scope :unused, ->{ where(client_id: nil) }
+  scope :active, ->{ where(active: true) }
 
   def self.generate_token
     SecureRandom.hex[0, 10]

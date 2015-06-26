@@ -8,7 +8,7 @@ class PromocodesController < ApplicationController
   private
 
   def check_promocode(token)
-    code = Promocode.unused.find_by_token(token)
+    code = Promocode.active.find_by_token(token)
     result = { valid: code.present? }
     result.merge!(profit: code.profit) if code
     result
