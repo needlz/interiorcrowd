@@ -23,10 +23,11 @@
         $('nav#menu').mmenu(); // gen mobile menu
       });
   %body.pull_top
-    #body-container
-      #body-header
-        = render partial: 'layouts/header'
-      #body-content
-        = yield
-      #body-footer
-        = render partial: 'layouts/footer'
+    .mm-page.mm-slideout
+      #body-container
+        #body-header
+          = render partial: 'layouts/header'
+        #body-content
+          = yield
+        #body-footer
+          = render partial: 'layouts/footer'
