@@ -11,7 +11,7 @@ class ContestNoteView < CommentView
   end
 
   def ago_text
-    I18n.t('time_ago', time: distance_of_time_in_words(Time.current, comment.created_at.in_time_zone))
+    I18n.t('time_ago', time: distance_of_time_in_words(Time.current, comment.created_at.in_time_zone, false, highest_measure_only: true))
   end
 
   def href

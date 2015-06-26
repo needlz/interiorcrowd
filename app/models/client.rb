@@ -51,7 +51,7 @@ class Client < ActiveRecord::Base
   
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')
-    contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 1 ELSE 0 END DESC"
+    contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 2 ELSE CASE WHEN contests.status = \'finished\' THEN 1 ELSE 0 END END DESC"
     contests.order(contests_order_query).order(created_at: :desc).first
   end
 
