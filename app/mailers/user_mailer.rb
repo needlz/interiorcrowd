@@ -113,13 +113,17 @@ class UserMailer < ActionMailer::Base
   end
 
   def notify_designer_about_win(contest_request)
-    template 'generic_notification'
+    template 'Winner_designer'
     designer = contest_request.designer
-    @contest = contest_request.contest
-    @client = @contest.client
-    set_template_values(text: render_to_string('mails/notify_designer_about_win'))
-    mail to: [wrap_recipient(designer.email, designer.name, 'to')],
-         subject: I18n.t('mails.notify_designer_about_win.subject')
+    contest = contest_request.contest
+    client = contest.client
+    set_template_values(
+        HELLO_ADDRESS: I18n.t('registration.mail_to'),
+        CONTEST_URL: renderer.designer_center_contest_url(id: contest.id),
+        CONTEST_NAME: contest.name,
+        CLIENT_NAME: client.name
+    )
+    mail to: [wrap_recipient(designer.email, designer.name, 'to')]
   end
 
   def please_pick_winner(contest)
