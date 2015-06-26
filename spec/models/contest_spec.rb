@@ -21,7 +21,7 @@ RSpec.describe Contest do
 
   describe 'submission end' do
     it 'closes the contest if there were less than 3 requests' do
-      contest.end_submission
+      EndSubmission.new(contest).perform
       expect(contest.reload).to be_closed
     end
 
@@ -29,7 +29,7 @@ RSpec.describe Contest do
       3.times do
         contest.requests << Fabricate(:contest_request, designer: Fabricate(:designer))
       end
-      contest.end_submission
+      EndSubmission.new(contest).perform
       expect(contest.reload).to be_winner_selection
     end
 

@@ -66,4 +66,9 @@ RSpec.describe UserMailer do
   it 'creates mail about designer\'s win' do
     expect(UserMailer.notify_designer_about_win(contest_request)).to be_present
   end
+
+  it 'creates mail to notify about winner selection' do
+    expect(UserMailer.please_pick_winner(contest)).to be_present
+  end
+
 end

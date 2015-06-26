@@ -1,9 +1,12 @@
 class ContestCreation
 
-  def initialize(client_id, params, &after_created)
+  def initialize(client_id, params)
     @client_id = client_id
     @params = params
-    @after_created_callback = after_created
+  end
+
+  def on_success(&block)
+    @after_created_callback = block
   end
 
   def perform

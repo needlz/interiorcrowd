@@ -129,7 +129,8 @@ class ClientsController < ApplicationController
   end
 
   def create_contest
-    contest_creation = ContestCreation.new(@client.id, session) do
+    contest_creation = ContestCreation.new(@client.id, session)
+    contest_creation.on_success do
       clear_creation_storage
     end
     contest_creation.perform
