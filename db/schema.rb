@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626084747) do
+ActiveRecord::Schema.define(version: 20150626161524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -380,9 +380,11 @@ ActiveRecord::Schema.define(version: 20150626084747) do
   end
 
   create_table "promocodes", force: true do |t|
-    t.text    "token"
-    t.text    "profit"
-    t.boolean "active", default: true
+    t.text    "promocode"
+    t.text    "display_message"
+    t.boolean "active",            default: true
+    t.integer "discount_cents",    default: 0,     null: false
+    t.string  "discount_currency", default: "USD", null: false
   end
 
   create_table "reviewer_feedbacks", force: true do |t|

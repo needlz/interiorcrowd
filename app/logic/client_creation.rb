@@ -25,7 +25,7 @@ class ClientCreation
   end
 
   def apply_promocode
-    code = Promocode.active.find_by_token(promocode)
+    code = Promocode.active.find_by_promocode(promocode)
     client.promocodes << code if code
   end
 
