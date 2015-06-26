@@ -75,6 +75,14 @@ RSpec.describe UserMailer do
     it 'remind about picking a winner' do
       expect(UserMailer.remind_about_picking_winner(contest)).to be_present
     end
+
+    it 'winner picked' do
+      expect(UserMailer.client_has_picked_a_winner(contest_request)).to be_present
+    end
+
+    it 'to designer: client ready for final design' do
+      expect(UserMailer.client_ready_for_final_design(contest_request)).to be_present
+    end
   end
 
 end
