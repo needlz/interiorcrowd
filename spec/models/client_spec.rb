@@ -51,6 +51,15 @@ RSpec.describe ContestRequest do
         expect(client.last_contest).to eq pending_contest
       end
     end
+
+    context 'finished contest before closed' do
+      let!(:finished_contest) { Fabricate(:contest, status: 'finished', client: client, created_at: 1.days.ago) }
+      let!(:closed_contest) { Fabricate(:contest, status: 'closed', client: client, created_at: Time.current) }
+
+      it 'returns last finished contest' do
+        expect(client.last_contest).to eq finished_contest
+      end
+    end
   end
 
 end
