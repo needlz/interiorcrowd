@@ -32,7 +32,7 @@ class PackageView
   end
 
   def name
-    I18n.t("contests.creation.plans.#{ plan.name }")
+    I18n.t("contests.creation.plans.#{ plan.name }").html_safe
   end
 
   private

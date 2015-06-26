@@ -59,18 +59,19 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client_params = prepare_creation_params
-    @client = Client.new(client_params)
+    client_creation = ClientCreation.new(client_attributes: prepare_creation_params,
+                                         promocode: params[:client][:promocode])
+    @client = client_creation.perform.client
     respond_to do |format|
-      if @client.save
-        initialize_client
+      if client_creation.saved
+        session[:client_id] = @client.id
         create_contest
 
-        format.html { redirect_to entries_client_center_index_path({signed_up: true}) }
+        format.html { redirect_to entries_client_center_index_path({ signed_up: true }) }
         format.json { render json: @client, status: :created, location: @client }
       else
-        flash[:error] = @client.errors.full_messages.join("</br>")
-        format.html { render template: "contests/account_creation" }
+        flash[:error] = @client.errors.full_messages.join('</br>')
+        format.html { render template: 'contests/account_creation' }
         format.json { render json: @client.errors, status: :unprocessable_entity }
       end
     end
@@ -125,16 +126,6 @@ class ClientsController < ApplicationController
         :first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
         :card_ex_year, :card_cvc, :email, :city, :card_type, :phone_number, :billing_address,
         :billing_state, :billing_zip, :billing_city, :name_on_card)
-  end
-
-  def initialize_client
-    client_initialization = ClientInitialization.new({
-      plain_password: @user_password,
-      client: @client,
-      promocode: params[:client][:promocode]
-    })
-    client_initialization.perform
-    session[:client_id] = @client.id
   end
 
   def create_contest

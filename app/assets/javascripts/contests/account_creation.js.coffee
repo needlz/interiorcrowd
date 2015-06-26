@@ -17,6 +17,7 @@ class Promocode
   @bindApplyPromocodeButton: ->
     $applyButton = $(@applyButtonSelector)
     $applyButton.one 'click', (event)=>
+      event.preventDefault()
       @requestPromocode()
 
   @bindPromocodeInput: ->
