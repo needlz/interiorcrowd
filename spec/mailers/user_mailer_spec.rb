@@ -4,7 +4,7 @@ RSpec.describe UserMailer do
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
-  let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer) }
+  let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'submitted') }
 
   describe 'mail creation' do
     it 'client welcoming' do
@@ -81,7 +81,8 @@ RSpec.describe UserMailer do
     end
 
     it 'to designer: client ready for final design' do
-      expect(UserMailer.client_ready_for_final_design(contest_request)).to be_present
+      contest_request
+      expect(UserMailer.client_hasnt_picked_a_winner_to_designers(contest)).to be_present
     end
   end
 
