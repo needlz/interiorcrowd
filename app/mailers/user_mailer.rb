@@ -122,6 +122,18 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t('mails.notify_designer_about_win.subject')
   end
 
+  def please_pick_winner(contest)
+    template 'client_must_pick_a_winner'
+    client = contest.client
+    set_template_values(
+        DAYS_TO_PICK_WINNER: ContestMilestone::DAYS['winner_selection'],
+        ENTRIES_URL: renderer.entries_client_center_index_url,
+        CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client'),
+        HELLO_ADDRESS: I18n.t('registration.mail_to')
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
   private
 
   def set_user_params(user)

@@ -125,11 +125,6 @@ class Contest < ActiveRecord::Base
     requests.find_by_designer_id(designer.id)
   end
 
-  def end_submission
-    return close! if requests.submitted.count < 3
-    start_winner_selection!
-  end
-
   def close_requests
     requests.update_all(status: 'closed')
   end

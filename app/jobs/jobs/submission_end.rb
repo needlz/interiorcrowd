@@ -12,7 +12,8 @@ module Jobs
 
     def perform
       contest = Contest.find(contest_id)
-      contest.end_submission
+      end_submission = EndSubmission.new(contest)
+      end_submission.perform
     end
 
     def queue_name
