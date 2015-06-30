@@ -108,13 +108,9 @@ class @FulfillmentApprovedEdit
   @init: ->
     @bindFooterButtons()
     @bindAddProductButton()
-    @bindPriceInputs()
     @productItemsEditor = new ProductItemsEditor()
     @productItemsEditor.imageIdInput = @imageIdInput
     @productItemsEditor.bindEvents()
-
-  @bindPriceInputs: ->
-    $('.edit-form .price').currencyInput()
 
   @form: ->
     $('.edit_contest_request')
