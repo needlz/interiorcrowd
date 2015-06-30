@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626161524) do
+ActiveRecord::Schema.define(version: 20150630080243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,7 +261,6 @@ ActiveRecord::Schema.define(version: 20150626161524) do
     t.integer  "contest_request_id"
     t.integer  "image_id"
     t.text     "text"
-    t.decimal  "price"
     t.text     "brand"
     t.text     "link"
     t.string   "mark"
@@ -270,8 +269,7 @@ ActiveRecord::Schema.define(version: 20150626161524) do
     t.string   "kind"
     t.text     "dimensions"
     t.boolean  "final",              default: false
-    t.integer  "price_cents"
-    t.string   "price_currency",     default: "USD", null: false
+    t.text     "price"
   end
 
   create_table "image_links", force: true do |t|

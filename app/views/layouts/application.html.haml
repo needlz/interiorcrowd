@@ -1,22 +1,7 @@
 !!!
 %html
   %head
-    %title= page_title
-    = favicon_link_tag '/assets/favicon.ico'
-    = stylesheet_link_tag    "application", media: "all"
-    = javascript_include_tag "application"
-    = render 'shared/mixpanel'
-    = csrf_meta_tags
-    %meta{ content: 'IE=edge', http: { equiv: 'X-UA-Compatible' } }
-    %meta{:content => "width=device-width,initial-scale=1.0", :name => "viewport"}/
-    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
-    /[if lt IE 9]
-      = javascript_include_tag('html5shiv')
-      = javascript_include_tag('respond')
-
-    = render partial: 'shared/global_scripts'
-
-    = yield :head
+    = render partial: 'layouts/head'
 
     :javascript
       $(function() {
