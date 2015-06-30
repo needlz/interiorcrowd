@@ -17,7 +17,7 @@
     = render partial: 'clients/client_center/entries/phases',
              locals: { stripe: @show_page.phases_stripe }
     = link_to designer_center_response_index_path, class: tracked_link do
-      .backToEntries
+      .backToEntries.col-sm-12
         %img{ src: '/assets/lt.png' }/
         = t('designer_center.edit.back_to_contests')
 

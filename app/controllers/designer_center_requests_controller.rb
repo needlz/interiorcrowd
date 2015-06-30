@@ -68,7 +68,7 @@ class DesignerCenterRequestsController < ApplicationController
       format.json do
         render json: format_changed_attributes(response_params)
       end
-      format.js {render nothing: true}
+      format.js { render nothing: true }
     end
   end
 

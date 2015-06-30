@@ -84,6 +84,11 @@ RSpec.describe UserMailer do
       contest_request
       expect(UserMailer.client_hasnt_picked_a_winner_to_designers(contest)).to be_present
     end
+
+    it 'to client: final design submitted' do
+      contest_request
+      expect(UserMailer.designer_submitted_final_design(contest_request)).to be_present
+    end
   end
 
 end

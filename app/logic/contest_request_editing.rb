@@ -72,8 +72,8 @@ class ContestRequestEditing
   end
 
   def perform_finish
-    request.finish!
-    request.contest.finish!
+    finish_contest_request = FinishContestRequest.new(request)
+    finish_contest_request.perform
     event_tracker.final_design_submitted(request)
   end
 

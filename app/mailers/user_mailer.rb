@@ -118,7 +118,7 @@ class UserMailer < ActionMailer::Base
     contest = contest_request.contest
     client = contest.client
     set_template_values(
-        HELLO_ADDRESS: I18n.t('registration.mail_to'),
+        HELLO_ADDRESS: contact_email,
         CONTEST_URL: renderer.designer_center_contest_url(id: contest.id),
         CONTEST_NAME: contest.name,
         CLIENT_NAME: client.name
@@ -133,7 +133,7 @@ class UserMailer < ActionMailer::Base
         DAYS_TO_PICK_WINNER: ContestMilestone::DAYS['winner_selection'],
         ENTRIES_URL: renderer.entries_client_center_index_url,
         CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client'),
-        HELLO_ADDRESS: I18n.t('registration.mail_to')
+        HELLO_ADDRESS: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
@@ -143,7 +143,7 @@ class UserMailer < ActionMailer::Base
     client = contest.client
     set_template_values(
         ENTRIES_URL: renderer.entries_client_center_index_url,
-        HELLO_ADDRESS: I18n.t('registration.mail_to')
+        HELLO_ADDRESS: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
@@ -152,7 +152,7 @@ class UserMailer < ActionMailer::Base
     template 'client_has_picked_a_winner'
     client = contest_request.contest.client
     set_template_values(
-        HELLO_ADDRESS: I18n.t('registration.mail_to')
+        HELLO_ADDRESS: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
@@ -174,6 +174,15 @@ class UserMailer < ActionMailer::Base
         CONTEST_NAME: contest.name
     )
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
+  end
+
+  def designer_submitted_final_design(contest_request)
+    template 'Designer_submitted_final_design'
+    client = contest_request.contest.client
+    set_template_values(
+        HELLO_ADDRESS: contact_email
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
   private
@@ -214,6 +223,10 @@ class UserMailer < ActionMailer::Base
   def url_for_comment_on_board(user_role, contest_request_id)
     return designer_center_response_url(contest_request_id) if user_role == 'client'
     entries_client_center_index_url
+  end
+
+  def contact_email
+    I18n.t('registration.mail_to')
   end
 
 end
