@@ -197,6 +197,10 @@ class Contest < ActiveRecord::Base
     project_name
   end
 
+  def submitted_contests
+    requests.submitted
+  end
+
   private
 
   def create_retailer_preferences

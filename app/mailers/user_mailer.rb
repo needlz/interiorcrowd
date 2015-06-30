@@ -185,6 +185,12 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
+  def no_concept_boards_received_after_three_days(contest)
+    template 'No_concept_boards_received_after_three_days'
+    client = contest.client
+    mail(to: [wrap_recipient(client.email, client.name, 'to'), wrap_recipient(contact_email, 'InteriorCrowd', 'to')])
+  end
+
   private
 
   def set_user_params(user)
