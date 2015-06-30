@@ -19,7 +19,8 @@ class ContestUpdater
     update_example_images(contest_options.liked_example_ids) if contest_options.liked_example_ids
     update_preferred_retailers(contest_options.preferred_retailers) if contest_options.preferred_retailers.present?
     if contest.brief_pending? && contest.space_images.exists?
-      contest.submit!
+      submit_contest = SubmitContest.new(contest)
+      submit_contest.perform
     end
   end
 
