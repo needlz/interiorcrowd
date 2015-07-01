@@ -5,7 +5,7 @@ class SubscribedDesignersQueryNotSubmitted
   end
 
   def designers
-    result = contest.subscribed_designers
+    result = Designer.all
     result.reject { |designer| contest.response_of(designer).try(:submitted?) }
   end
 

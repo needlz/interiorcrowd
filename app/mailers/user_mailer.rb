@@ -213,6 +213,16 @@ class UserMailer < ActionMailer::Base
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
   end
 
+  def four_days_left_to_submit_concept_board(contest)
+    template 'four_days_left_to_submit_concept_board'
+    designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
+    set_template_values(
+        CONTEST_NAME: contest.name,
+        NEW_CONTESTS_URL: renderer.designer_center_contest_index_url
+    )
+    mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
+  end
+
   private
 
   def set_user_params(user)
