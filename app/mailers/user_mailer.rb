@@ -205,8 +205,7 @@ class UserMailer < ActionMailer::Base
 
   def one_day_left_to_submit_concept_board(contest)
     template 'One_day_left_to_choose_a_winner'
-    designers = contest.subscribed_designers
-    designers.reject { |designer| contest.response_of(designer).submitted? }
+    designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
         CONTEST_NAME: contest.name,
         NEW_CONTESTS_URL: renderer.designer_center_contest_index_url
