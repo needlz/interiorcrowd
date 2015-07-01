@@ -191,6 +191,29 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to'), wrap_recipient(contact_email, 'InteriorCrowd', 'to')])
   end
 
+  def one_day_left_to_choose_a_winner(contest)
+    template 'One_day_left_to_choose_a_winner'
+    client = contest.client
+    set_template_values(
+        HELLO_ADDRESS: contact_email,
+        CLIENT_NAME: client.name,
+        ENTRIES_URL: renderer.entries_client_center_index_url,
+        FAQ_URL: renderer.faq_url(anchor: 'client')
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
+  def one_day_left_to_submit_concept_board(contest)
+    template 'One_day_left_to_choose_a_winner'
+    designers = contest.subscribed_designers
+    designers.reject { |designer| contest.response_of(designer).submitted? }
+    set_template_values(
+        CONTEST_NAME: contest.name,
+        NEW_CONTESTS_URL: renderer.designer_center_contest_index_url
+    )
+    mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
+  end
+
   private
 
   def set_user_params(user)
