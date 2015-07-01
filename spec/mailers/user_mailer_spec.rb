@@ -90,11 +90,17 @@ RSpec.describe UserMailer do
       expect(UserMailer.designer_submitted_final_design(contest_request)).to be_present
     end
 
-
-    it 'to client: final design submitted' do
+    it 'to client: no concept boards received in three days' do
       expect(UserMailer.no_concept_boards_received_after_three_days(contest)).to be_present
     end
 
+    it 'to client: last day to choose winner' do
+      expect(UserMailer.one_day_left_to_choose_a_winner(contest)).to be_present
+    end
+
+    it 'to designer: last day to submit design' do
+      expect(UserMailer.one_day_left_to_submit_concept_board(contest)).to be_present
+    end
   end
 
 end
