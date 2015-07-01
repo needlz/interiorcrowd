@@ -1,7 +1,10 @@
-.final_moodboard.marg-top20
-  = image_tag request.concept_board_current_image_path, id: 'final_moodboard'
-  = image_tag '/assets/final_design_badge.png', class: 'winnerBadgeFinal'
-  = link_to t('client_center.entries.space.download'),
-      download_contest_request_path(id: request.id),
-      class: "darkBorderBtn font20 #{ tracked_link }",
-      data: { name: 'Final design - download' }
+.winnerBadge
+  %span
+  %p Final Design
+  .clearfix
+- if request.concept_board_current_image
+  = render partial: 'shared/image_with_enlarge_button',
+      locals: { url_for_downloading: request.concept_board_current_image.url_for_downloading,
+                original_size_path: request.concept_board_current_image.original_size_url,
+                thumb_path: request.concept_board_current_image.medium_size_url,
+                image_class: 'full-width' }

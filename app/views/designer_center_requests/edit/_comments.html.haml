@@ -1,5 +1,7 @@
-.sidebarComments
-  %p.designerName= t('designer_center.edit.comments')
+.sidebarComments.marginTop20
+  .row
+    .col-xs-12
+      %p.commentTabs.text-left= t('designer_center.edit.comments')
   %div{:role => "tabpanel"}
     - if show_comment_switcher
       %ul.btn-group.btnGroupComments{:role => "tablist"}
@@ -9,7 +11,7 @@
           %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
         %li.btn.btn-default{:role => "presentation"}
           %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(current_user)
-    #scrollBoxComments.tab-content.notes
+    #scrollBoxComments.tab-content.notes.questionBox
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|
           = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}

@@ -15,9 +15,9 @@ module DesignerNotifications
 
     def text
       if comment.designer.nil?
-        "#{ comment.contest_owner_name }(" + I18n.t('board_comments.to_all_designer') + "): #{ comment.text }"
+        "#{ comment.contest_owner_name } (#{ I18n.t('board_comments.to_all_designer') }): #{ comment.text }"
       else
-        "#{ comment.contest_owner_name }(" + I18n.t('board_comments.to_you') + "): #{ comment.text }"
+        "#{ comment.contest_owner_name } (#{ I18n.t('board_comments.to_you') }): #{ comment.text }"
       end
     end
 

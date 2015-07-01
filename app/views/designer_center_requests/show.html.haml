@@ -13,13 +13,17 @@
     })
 
 - content_for :designer_center_content do
-  .animated.fadeInDown.phase-initial
-    = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: @show_page.phases_stripe }
-    = link_to designer_center_response_index_path, class: tracked_link do
-      .backToEntries.col-sm-12
-        %img{ src: '/assets/lt.png' }/
-        = t('designer_center.edit.back_to_contests')
+  .row.marginTop40
+    .col-lg-8
+      = render partial: 'clients/client_center/entries/phases',
+               locals: { stripe: @show_page.phases_stripe,
+                         css_class: 'marginBottom40' }
+    .col-lg-4.marginBottom40
+      - if @request.contest.submission?
+        %p.daysLeft= " #{ distance_of_time_in_words(Time.current,
+                                                @request.contest.phase_end,
+                                                false,
+                                                highest_measure_only: true) } left to edit your board"
 
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding
@@ -36,6 +40,7 @@
       = render @show_page.image_items_partial if @show_page.image_items_partial
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
+
       = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
       - if @request.sound
         .designer-voice

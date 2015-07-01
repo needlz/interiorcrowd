@@ -1,0 +1,15 @@
+.col-xs-6
+  .itemBox
+    .row
+      .col-lg-6.col-sm-7.itemBoxLeft{ style: 'height: 264px;' }
+        .image-container{ style: "background-image: url(#{ j(image_item.thumb_url) }); height: 100%; background-size: contain; background-repeat: no-repeat; background-position: center;" }
+      .col-lg-6.col-sm-5.itemBoxRight{ style: 'height: 264px;' }
+        %h4= image_item.name
+        %p= image_item.brand
+        %p= image_item.dimensions
+        %p= image_item.price
+        = link_to 'SHOP NOW', image_item.link_href,
+          target: '_blank',
+          class: "#{ tracked_link }",
+          data: { name: 'Final design - product item link' }
+        .clearfix

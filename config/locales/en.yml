@@ -308,7 +308,8 @@ en:
       congratulations: Congratulations! You have chosen a winner!
       customized_board: Now your designer will make a customized board for you along with a shopping list.
       space:
-        congratulations_new_space: Congratulations! Your new space is ready!
+        congratulations: Congratulations!
+        new_space_ready: Your new space is ready!
         designer_note: Thank you so much for working with us! We hope you love your new look!
         share: Share your look
         social:
@@ -369,6 +370,8 @@ en:
         day_left: '%{time_left} left to pick a winner'
       submission:
         day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
+    winner_selected:
+      the_winner: The winner
     moodboard_details:
       back: < Back to Entries
       designer_notes: Designer's Notes

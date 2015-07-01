@@ -1567,21 +1567,6 @@ textarea.productsMoodboardAbove{
 	padding-left: 15px;
 }
 
-.btn-social{
-	width: 117px;
-	height: 45px;
-	line-height: 45px;
-	padding: 0px;
-	color: #FFF;
-	font-weight: 700;
-	margin-right: 12px;
-	display: inline-block;
-	font-size: 16px;
-}
-.btn-social img{
-	display: inline-block;
-	margin-right: 10px;
-}
 .twitterColor{
 	background: #55acee;
 }

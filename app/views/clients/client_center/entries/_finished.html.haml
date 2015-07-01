@@ -1,50 +1,54 @@
-.animated.fadeInDown.disablePadding
-  .row
-    .col-md-12
-      %h3.text-center.makeMeBlack= t('client_center.entries.space.congratulations_new_space')
-      = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
+= stylesheet_link_tag 'new-style'
+= javascript_include_tag 'contest_requests/finished_concept_board'
 
-    .col-md-12.marg-top20
-      .designerShareBox
-        .row
-          .col-md-1
-            = image_tag '/assets/avatar2.png', width: 90, height: 90, class: 'img-circle'
-          .col-md-5
-            %p.designerName= request.designer.name
-            %p.designerNote= request.final_note
-          .col-md-6
-            %p.designerName= t('client_center.entries.space.share')
-            .social-share-button{ data: { desc: '',
-              popup: 'true',
-              img: request.concept_board_current_image_path,
-              title: 'my design',
-              url: @entries_page.share_url } }
-              - SocialShareButton.config.allow_sites.each do |site|
-                = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
+%h2.newSpaceReady
+  = t('client_center.entries.space.congratulations')
+  %span
+  = t('client_center.entries.space.new_space_ready')
+.container.ccFinalPage
+  = render partial: 'clients/client_center/entries/phases',
+            locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
+  .row.designerDetail
+    .col-sm-2.text-center
+      = image_tag '/assets/profile-img1.png', width: 90, height: 90, class: 'img-circle'
+    .col-sm-10
+      %h4.centerXS= request.designer.name
+      %p= request.final_note
+      %h4= t('client_center.entries.space.share')
+      .row.shareLook.social-share-button
+        - SocialShareButton.config.allow_sites.each do |site|
+          .col-xs-4{ share_button_parent_data(request, @entries_page.share_url) }
+            = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
 
-.animated.fadeInDown.disablePadding
-  .row.marg-top40
-    .col-md-10.col-md-offset-1.no-x-padding
+  .row.finalMoodboard
+    .col-sm-12
       = render partial: 'clients/client_center/entries/final_design',
-          locals: { request: request }
-      - if @entries_page.visible_image_items.present?
-        - if request.pull_together_note.present?
-          %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.pull_together')
-          %p.font16= request.pull_together_note
-        %p.makeMeBold.font20.makeMeBlack.marg-top20= t('client_center.entries.space.complete_lock')
-        .hLine10
-        - @entries_page.visible_image_items.each do |product_item|
-          - unless product_item.image_id.nil?
-            = render partial: 'clients/client_center/entries/design_item',
-                locals: { image_item: ImageItemView.new(product_item) }
-        .row.bottom60
-          .col-md-12.disablePadding.text-right.product-list-pagination
-            .pull-left
-              = will_paginate(@entries_page.visible_image_items,
-                  container: false,
-                  renderer: ProductListPaginationRenderer)
-            .pull-right
-              = link_to 'Start a new contest',
-                  design_brief_contests_path,
-                  class: "create-contest-button #{ tracked_link }"
+                locals: { request: request }
+  .row
+    .col-sm-12
+      = link_to t('client_center.entries.space.download'),
+          download_contest_request_path(id: request.id),
+          class: "downloadFinalMoodboard #{ tracked_link }",
+          data: { name: 'Final design - download' }
+
+  .row.moodboardInstructions
+    .col-sm-12
+      %h4= t('client_center.entries.space.pull_together')
+      %p= request.pull_together_note
+      %h4= t('client_center.entries.space.complete_lock')
+  .fullWidthLine.marginBottom40.marginTop20
+
+  .row.itemRow
+    - @entries_page.visible_image_items.each do |product_item|
+      - unless product_item.image_id.nil?
+        = render partial: 'clients/client_center/entries/final_design_image_item',
+            locals: { image_item: ImageItemView.new(product_item) }
+    = will_paginate(@entries_page.visible_image_items,
+        container: false,
+        renderer: ProductListPaginationRenderer)
+  .fullWidthLine.marginTop40
+  .row
+    .col-sm-12.startNewContest
+      = link_to 'Start a new contest',
+          design_brief_contests_path,
+          class: "create-contest-button #{ tracked_link }"
