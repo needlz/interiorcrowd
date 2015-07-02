@@ -432,6 +432,20 @@ en:
       promocode_valid: The code you entered has been applied. You %{profit}.
       promocode_server_error: Server error
   designer_center:
+    milestones:
+      winner_selection:
+        time_left: '%{time_left} left for the client to pick a winner'
+        expired: Client will pick a winner soon
+      submitted:
+        time_left: '%{time_left} left to edit your board'
+      fulfillment_approved:
+        time_left: '%{time_left} left to submit instructions'
+        expired: Please get in touch if you need assistance
+      fulfillment:
+        time_left: '%{time_left} left in this phase'
+        expired: Deadline extended
+      draft:
+        time_left: '%{time_left} left to submit your board'
     welcome_message: >
       Welcome to InteriorCrowd! We are very excited to have you on the platform!
       Check out our latest training materials and get ready to transform the way you design online.
@@ -445,7 +459,7 @@ en:
         as comments about why you have chosen certain items. You can also upload a new moodboard as well.
       products_list: Product List
       similar_styles: Similar Styles
-      comments: Questions and Comments
+      comments: Comments
       all: All
       me: Me
       designer: Designer

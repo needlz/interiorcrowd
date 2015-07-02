@@ -16,6 +16,9 @@ class DesignerCenterRequestsController < ApplicationController
     @request = @designer.contest_requests.find(params[:id])
     @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
+    @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
+                                                                         contest_request: @request,
+                                                                         view_context: view_context)
     @show_page = ConceptBoardPreview.new({
       contest_request: @request,
       preferred_view: params[:view],
@@ -32,6 +35,9 @@ class DesignerCenterRequestsController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
     @request_view = ContestResponseView.new(@request)
+    @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
+                                                                         contest_request: @request,
+                                                                         view_context: view_context)
     @editing_page = ConceptBoardEditing.new({
       contest_request: @request,
       preferred_view: params[:view],

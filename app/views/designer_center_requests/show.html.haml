@@ -19,11 +19,8 @@
                locals: { stripe: @show_page.phases_stripe,
                          css_class: 'marginBottom40' }
     .col-lg-4.marginBottom40
-      - if @request.contest.submission?
-        %p.daysLeft= " #{ distance_of_time_in_words(Time.current,
-                                                @request.contest.phase_end,
-                                                false,
-                                                highest_measure_only: true) } left to edit your board"
+      - if @contest_request_milestone.designer_hint
+        %p.daysLeft= @contest_request_milestone.designer_hint
 
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding

@@ -1,16 +1,20 @@
 .sidebarComments.marginTop20
   .row
-    .col-xs-12
-      %p.commentTabs.text-left= t('designer_center.edit.comments')
-  %div{:role => "tabpanel"}
     - if show_comment_switcher
-      %ul.btn-group.btnGroupComments{:role => "tablist"}
-        %li.btn.btn-default.active{:role => "presentation"}
-          %a{"aria-controls" => "allComents", "data-toggle" => "tab", :href => "#allComents", :role => "tab"}= t('designer_center.edit.all')
-        %li.btn.btn-default{:role => "presentation"}
-          %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
-        %li.btn.btn-default{:role => "presentation"}
-          %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(current_user)
+      .col-xs-4
+        %p.commentTabs.text-left= t('designer_center.edit.comments')
+      .col-xs-8
+        %ul.btn-group.btnGroupComments{:role => "tablist"}
+          %li.btn.btn-default.active{:role => "presentation"}
+            %a{"aria-controls" => "allComents", "data-toggle" => "tab", :href => "#allComents", :role => "tab"}= t('designer_center.edit.all')
+          %li.btn.btn-default{:role => "presentation"}
+            %a{"aria-controls" => "meComments", "data-toggle" => "tab", :href => "#meComments", :role => "tab"}= t('designer_center.edit.me')
+          %li.btn.btn-default{:role => "presentation"}
+            %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(current_user)
+    - else
+      .col-xs-12
+        %p.commentTabs.text-left= t('designer_center.edit.comments')
+  %div{:role => "tabpanel"}
     #scrollBoxComments.tab-content.notes.questionBox
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|
