@@ -12,7 +12,7 @@ class EntriesPage < ContestPage
                                                                 view_context: view_context,
                                                                 preferred_view: options[:view]
                                                             })
-      @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 4, page: options[:page])
+      @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 10, page: options[:page])
       @share_url = view_context.public_designs_url(token: won_contest_request.token)
     end
   end

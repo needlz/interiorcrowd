@@ -13,11 +13,13 @@
       .relative
         .winnerBadge
           %span
-          %p The winner
+          %p= t('client_center.winner_selected.the_winner')
           .clearfix
-        = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
+        = render partial: 'shared/moodboard',
+          locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
     .col-md-4
       = render partial: 'contest_requests/submission_info',
           locals: { designer: request.designer, submitted_at: request.created_at, request: request }
+      .fullWidthLine.hidden-xs.hidden-sm
       = render partial: 'designer_center_requests/edit/comments',
-          locals: { request: request, comments: request.comments, show_comment_switcher: true }
+          locals: { request: request, comments: request.comments, show_comment_switcher: false }

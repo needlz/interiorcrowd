@@ -1,0 +1,2 @@
+$ ->
+  PicturesZoom.init('.enlarge')

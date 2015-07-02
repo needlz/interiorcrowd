@@ -39,4 +39,12 @@ module ApplicationHelper
     return @mobile_menu if @mobile_menu
     @mobile_menu = Menu.get(current_user, self).mobile_items
   end
+
+  def share_button_parent_data(request, url)
+    { data: { desc: '',
+              popup: 'true',
+              img: request.concept_board_current_image_path,
+              title: 'my design',
+              url: url } }
+  end
 end
