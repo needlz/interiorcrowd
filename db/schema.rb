@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630080243) do
+ActiveRecord::Schema.define(version: 20150702125142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20150630080243) do
     t.decimal  "space_height",                    precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
-    t.string   "status",                                                   default: "submission"
+    t.string   "status",                                                   default: "brief_pending"
     t.datetime "phase_end"
     t.string   "theme"
     t.string   "space"
