@@ -1449,11 +1449,11 @@ h3.exploreMore{
         margin-bottom: 0px;
         width: 48%;
     }
-    .viewingMoodboard .voteBtn:nth-child(odd){
+    .viewingMoodboard .voteBtn:nth-child(even){
         margin-left: 2%;
         margin-right: 0px;
     }
-    .viewingMoodboard .voteBtn:nth-child(even){
+    .viewingMoodboard .voteBtn:nth-child(odd){
         margin-right: 2%;
         margin-left: 0px;
     }
