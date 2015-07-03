@@ -28,18 +28,12 @@ class EntriesPage < ContestPage
   def timeline_hint
     if contest.submission?
       I18n.t('client_center.entries.submission.day_left_to_submit',
-        time_left: view_context.distance_of_time_in_words(Time.current,
-                                             contest.phase_end,
-                                             false,
-                                             highest_measure_only: true))
+        time_left: time_till_milestone_end)
     elsif contest.winner_selection?
       select_winner_hint
     elsif funfillment_phase?
       I18n.t('client_center.entries.fullfilment.time_left',
-        time_left: view_context.distance_of_time_in_words(Time.current,
-                                                         contest.phase_end,
-                                                         false,
-                                                         highest_measure_only: true))
+        time_left: time_till_milestone_end)
     end
   end
 
@@ -60,9 +54,27 @@ class EntriesPage < ContestPage
     'bottom60 entries-page' if contest.submission? || contest.winner_selection?
   end
 
+  def onload_popups
+    result = []
+    if won_contest_request
+      result << ['clients/client_center/entries/collaboration/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
+      result << ['clients/client_center/entries/popups/wait_for_final_design',
+                 contest: contest,
+                 time_left: time_till_milestone_end] if won_contest_request.fulfillment_approved?
+    end
+    result
+  end
+
   attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
 
   private
+
+  def time_till_milestone_end
+    view_context.distance_of_time_in_words(Time.current,
+                                           contest.phase_end,
+                                           false,
+                                           highest_measure_only: true)
+  end
 
   def funfillment_phase?
     contest.fulfillment? || contest.fulfillment_ready? || contest.fulfillment_approved?

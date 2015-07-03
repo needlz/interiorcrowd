@@ -1,0 +1,18 @@
+:javascript
+  $(window).load(function(){
+    $('#thanksModal').modal('show');
+  });
+
+#thanksModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
+    role: 'dialog',
+    style: 'display: block; padding-right: 15px; display: none;',
+    tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %h4= t('client_center.entries.fulfillment_approved.modal.thanks')
+        - if Time.current < contest.phase_end
+          %p= t('client_center.entries.fulfillment_approved.modal.designer_will_put_together').html_safe
+          %h4= t('client_center.entries.fulfillment_approved.modal.time_left', time_left: time_left)
+        - else
+          %p= t('client_center.entries.fulfillment_approved.modal.get_in_touch').html_safe
