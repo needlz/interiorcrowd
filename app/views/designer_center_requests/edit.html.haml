@@ -1,4 +1,5 @@
 - content_for :head do
+  = stylesheet_link_tag 'new-style'
   = javascript_include_tag 'designer_center_requests/show'
   = javascript_include_tag 'designer_center_requests/products_list'
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
@@ -14,15 +15,13 @@
     })
 
 - content_for :designer_center_content do
-  .container.animated.fadeInDown.bottom60
-    .row
+  .row.marginTop40
+    .col-lg-8
       - if @request_view.current_phase_index.present?
         = render partial: 'clients/client_center/entries/phases',
                  locals: { stripe: @editing_page.phases_stripe }
-      = link_to designer_center_response_index_path, class: tracked_link do
-        .backToEntries.col-sm-12
-          %img{ src: '/assets/lt.png' }/
-          = t('designer_center.edit.back_to_contests')
+    .col-lg-4.marginBottom40
+      %p.daysLeft= @contest_request_milestone.designer_hint
     = render @editing_page.view_partial
 
 = render partial: 'designer_center/layout'

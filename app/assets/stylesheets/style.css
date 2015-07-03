@@ -1266,22 +1266,7 @@ a.editNoteBtn{
 	padding: 2px 12px;
 	border-radius: 5px;
 }
-.submitMyDesign{
-	font-size: 20px;
-	color: #000;
-	font-weight: 700;
-	border: 1px solid #000;
-	border-radius: 3px;
-	padding: 10px 20px;
-	display: inline-block;
-}
-.submitMyDesign:hover{
-	text-decoration: none;
-	color: #000;
-}
-.submitMyDesign img{
-	margin-left: 5px;
-}
+
 .font20{
 	font-size: 20px !important;
 }
@@ -1545,7 +1530,7 @@ textarea.productsMoodboardAbove{
 	width: 100%;
 }
 
-.final_moodboard .darkBorderBtn,.uploadFinalDesignBtn{
+.final_moodboard .darkBorderBtn{
 	padding: 10px 32px;
 	border: 1px solid #000;
 }
@@ -1597,24 +1582,6 @@ textarea.productsMoodboardAbove{
 	width: 260px;
 	margin-bottom: 14px;
 	display: block;
-}
-.btn-change-image{
-	position: absolute;
-	display: block;
-	border: 1px solid #000;
-	font-size: 16px;
-	color: #000;
-	border-radius: 10px;
-	background: transparent;
-	width: 150px;
-	height: 40px;
-	line-height: 40px;
-	padding: 0px;
-	text-align: center;
-	left: 50%;
-	margin-left: -75px;
-	bottom: 15px;
-	font-weight: 700;
 }
 
 .editCover{

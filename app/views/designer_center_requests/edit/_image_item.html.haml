@@ -1,35 +1,34 @@
-.row.marg-top20.product-item{ data: { id: image_item.id } }
+.row.dcUploadDesgin.product-item{ data: { id: image_item.id } }
   .edit-form.hidden
-    .row.marg-top20
-      .col-md-4
-        %div.relative
-          = button_tag 'Change image', class: 'btn btn-change-image', type: 'button'
+    .col-sm-3
+      .row
+        .relative
+          = button_tag 'Change image', class: 'btn btnChangeImage', type: 'button'
           = image_tag image_item.medium_size_image_url, class: 'productListIMG'
           = file_field_tag 'image[image]', class: 'hidden'
           = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
-        %div
-          = link_to t('designer_center.final_upload.save'), '#', class: 'font16 makeMeBlack makeMeBold save-button'
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          = link_to t('designer_center.final_upload.cancel'), '#', class: 'font16 makeMeBlack makeMeBold cancel-button'
-      .col-md-8
-        .row.productEditList
-          = hidden_field_tag "contest_request[#{ image_item.kind }][ids][]", image_item.id
-          - [:name, :brand, :dimensions, :price, :link].each do |attribute|
-            .clearfix
-              .col-md-3
-                = label_tag attribute, t("designer_center.final_upload.#{ attribute.to_s }")
-              .col-md-9
-                = text_field_tag "contest_request[#{ image_item.kind }][#{ attribute.to_s.pluralize }][]",
-                    ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self),
-                    class: attribute.to_s
+        %a.cancelSaveLinks.save-button{ href: '#' }= t('designer_center.final_upload.save')
+        %a.cancelSaveLinks.cancel-button{ href: '#' }= t('designer_center.final_upload.cancel')
+    .col-sm-9
+      = hidden_field_tag "contest_request[#{ image_item.kind }][ids][]", image_item.id
+      - [:name, :brand, :dimensions, :price, :link].each do |attribute|
+        .clearfix
+          .col-sm-3.dcLabels
+            = label_tag attribute, t("designer_center.final_upload.#{ attribute.to_s }")
+          .col-sm-9.dcEditFields
+            = text_field_tag "contest_request[#{ image_item.kind }][#{ attribute.to_s.pluralize }][]",
+                ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self),
+                class: attribute.to_s
 
   .view
-    .col-md-4
-      = image_tag image_item.medium_size_image_url, class: 'productListIMG'
-      = link_to t('designer_center.final_upload.edit'), '#', class: 'editProductItemBtn edit-button'
-      = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
-    .col-md-8
-      - [:name, :brand, :dimensions, :price].each do |attribute|
-        %p.font16.makeMeBlack.lineHeight25.margin0{ class: attribute.to_s }
-          = ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self)
-      = link_to image_item.link, image_item.link_href, class: 'font20 blueLink link'
+    .col-sm-6
+      .row
+        .col-sm-7.relative
+          = image_tag image_item.medium_size_image_url, class: 'productListIMG'
+          = link_to t('designer_center.final_upload.edit'), '#', class: 'dcEditDesign edit-button'
+          = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
+        .col-sm-5.dcLabels
+          - [:name, :brand, :dimensions, :price].each do |attribute|
+            %p{ class: attribute.to_s }
+              = ImageItemAttributeValueRenderers::Base.create(image_item, attribute, self)
+          = link_to image_item.link, image_item.link_href, class: 'link'
