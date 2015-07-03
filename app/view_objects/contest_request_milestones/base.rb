@@ -12,6 +12,10 @@ module ContestRequestMilestones
 
     attr_reader :contest, :contest_request, :view_context
 
+    def expired?
+      Time.current < contest.phase_end
+    end
+
   end
 
 end

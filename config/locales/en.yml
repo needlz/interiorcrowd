@@ -372,6 +372,12 @@ en:
         day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
       fullfilment:
         time_left: '%{time_left} left in this phase'
+      fulfillment_approved:
+        modal:
+          thanks: Thanks!
+          designer_will_put_together: You designer will put <span></span> together your final design.
+          time_left: '%{time_left} left'
+          get_in_touch: Please get in touch if <span></span> you need assistance
     winner_selected:
       the_winner: The winner
     moodboard_details:

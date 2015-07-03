@@ -3,7 +3,7 @@ module ContestRequestMilestones
   class FulfillmentApproved < Base
 
     def designer_hint
-      if Time.current < contest.phase_end
+      if expired?
         time_left = view_context.distance_of_time_in_words(Time.current,
                                               contest.phase_end,
                                               false,

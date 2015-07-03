@@ -35,4 +35,5 @@
   = render partial: 'clients/client_center/layout',
       locals: { container_class: @entries_page.container_css_class }
 
-= render partial: 'clients/client_center/entries/collaboration/finalize_design_confirmation'
+- @entries_page.onload_popups.each do |partial_options|
+  = render(*partial_options)
