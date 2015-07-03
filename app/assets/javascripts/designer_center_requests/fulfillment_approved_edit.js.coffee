@@ -93,7 +93,7 @@ class ProductItemImageUploader
   @initItem: (element)->
     PicturesUploadButton.init
       fileinputSelector: $(element).find('input[type="file"]')
-      uploadButtonSelector: $(element).find('.btn-change-image')
+      uploadButtonSelector: $(element).find('.btnChangeImage')
       thumbs:
         container: $(element).find('.edit-form')
         selector: $(element).find('.edit-form').find(@imageIdInput)
@@ -131,7 +131,8 @@ class @FulfillmentApprovedEdit
       $form.submit()
 
   @bindAddProductButton: ->
-    $('.add-product-button').click =>
+    $('.add-product-button').click (e)=>
+      e.preventDefault()
       mixpanel.track('Product item added to final design')
       @addProductItem()
 

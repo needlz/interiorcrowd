@@ -3710,3 +3710,129 @@ a.uploadNewConceptBoard{
     }
 }
 /* end CC-waiting-final-design */
+
+/* start DC-fulfillment-final-upload-edit */
+.fulfillmentPage .consumerNoteTextarea{
+    resize: none;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    min-height: 160px;
+    margin: 20px 0 40px;
+}
+.pdfFile{
+    color: #a9a9a9;
+    font-size: 14px;
+    font-family: "AvenirLTStd-LightOblique";
+    margin: 20px 0px;
+}
+.uploadFinalDesignBtn,.uploadFinalDesignBtn:hover{
+    color: #000;
+    font-size: 20px;
+    width: 290px;
+    text-align: center;
+    line-height: 49px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: inline-block;
+}
+.fulfillmentPage .pullNewLook{
+    resize: none;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    min-height: 220px;
+    margin: 10px 0 40px;
+}
+.dcUploadDesgin{
+    margin-bottom: 40px;
+}
+.dcUploadDesgin .btnChangeImage{
+    background: transparent;
+    padding: 0px;
+    font-size: 16px;
+    font-family: "AvenirLTStd-Medium";
+    position: absolute;
+    width: 150px;
+    line-height: 38px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    left: 50%;
+    margin-left: -75px;
+    bottom: 15px;
+}
+.dcUploadDesgin .dcLabels label{
+    display: block;
+    font-size: 16px;
+    font-family: "AvenirLTStd-Light";
+    color: #000;
+    margin-bottom: 25px;
+    font-weight: normal;
+}
+.dcUploadDesgin .cancelSaveLinks{
+    color: #000;
+    font-size: 16px;
+    display: inline-block;
+    margin-right: 15px;
+    margin-top: 10px;
+}
+.dcUploadDesgin .dcEditFields input{
+    border: 1px solid #a9a9a9;
+    line-height: 25px;
+    width: 100%;
+    display: block;
+    margin-bottom: 18px;
+}
+.dcUploadDesgin .dcEditDesign{
+    width: 100%;
+    line-height: 27px;
+    display: block;
+    color: #000;
+    font-size: 16px;
+    border: 1px solid #a9a9a9;
+    border-radius: 3px;
+    margin-top: 10px;
+    text-align: center;
+}
+.dcUploadDesgin .dcLabels p{
+    font-size: 16px;
+    font-family: "AvenirLTStd-Light";
+    color: #000;
+    margin-bottom: 15px;
+}
+.dcUploadDesgin .dcLabels a{
+    font-size: 18px;
+    font-family: "AvenirLTStd-Light";
+    color: #2b78a9;
+    text-decoration: underline;
+}
+.plusProduct,.plusProduct:hover{
+    color: #333333;
+    font-size: 16px;
+    padding-right: 15px;
+    display: inline-block;
+}
+.plusProduct span{
+    font-weight: 700;
+    font-size: 20px;
+    padding-right: 3px;
+}
+.saveOrSubmit{
+    text-align: right;
+    margin: 40px 0px 60px;
+}
+.saveOrSubmit a {
+    font-size: 20px;
+    color: #000;
+    line-height: 45px;
+    /*width: 125px;*/
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 0px 25px;
+    margin-left: 30px;
+}
+/* end DC-fulfillment-final-upload-edit */
