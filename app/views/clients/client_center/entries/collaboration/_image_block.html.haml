@@ -1,14 +1,14 @@
 - if image_items.count > 0
-  %p.font20Bold.marg-top20= title
-  .hLine10
-  .row.marg-top20
-    .col-md-12
-      - if defined?(block_text)
-        %p.grayP14= block_text
-    - image_items.each do |image_item|
-      = render partial: 'clients/client_center/entries/collaboration/image_content',
-          locals: { choosable: choosable,
-            id: image_item.id,
-            text: image_item.text,
-            image_path: image_item.image.try(:medium_size_url),
-            checked_mark: image_item.mark }
+  .row.productList
+    - if defined?(block_text)
+      .col-sm-12
+        %h4= title
+        .fullWidthLine.marginBottom20.marginTop20
+        %p.light14Gray= block_text
+
+  .items
+    - image_items.in_groups_of(2, false).each do |items|
+      .row
+        - items.each do |item|
+          = render partial: 'designer_center_requests/edit/image_content_client_view',
+              locals: { item: ImageItemView.new(item), markable: choosable }

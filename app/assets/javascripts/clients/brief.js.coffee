@@ -55,7 +55,7 @@ class @ContestEditing extends InlineEditor
   formHtmlPath: ->
     "/contests/#{ @contestId() }/option"
 
-  afterEditFormRetrieved: (attribute, formHtml)->
+  afterEditFormRetrieved: (attribute, $form)->
     $saveButton = $("[data-option=#{ attribute }]").find('.save-button')
     $saveButton.show()
 

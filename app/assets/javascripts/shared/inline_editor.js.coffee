@@ -7,6 +7,10 @@ class @InlineEditor
   attributeSelector: '.attribute'
   hiddenViewClass: 'hidden-view'
   sameEditCancelbutton: true
+  placeholderSelector: null
+
+  init: ()->
+    @bindEvents()
 
   bindEvents: ->
     @bindEditClick()
@@ -23,34 +27,34 @@ class @InlineEditor
     $button = $(event.target)
     editor = event.data
     attribute = $button.parents(editor.attributeSelector).data(editor.attributeIdentifierData)
-    editor.requestAttributeForm(attribute, $button)
+    editor.getForm(attribute, $button)
 
-  formPlaceholder: ($childElement)->
-    @optionsRow($childElement).find(@placeholderSelector)
-
-  requestAttributeForm: (attribute, $button)->
-    @getForm(attribute, $button)
+  attributeElement: (attribute)->
+    $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]")
 
   onEditFormRetrieved: (attribute, formHtml)=>
-    $editButton = $(@attributeSelector).filter("[data-#{ @attributeIdentifierData }=#{ attribute }]").find(@editButtonSelector)
+    $editButton = @attributeElement(attribute).find(@editButtonSelector)
     if @sameEditCancelbutton
       $editButton.text(I18n.attribute_cancel_button)
       $editButton.removeClass(@editButtonClassName).addClass(@cancelButtonClassName)
     $optionsRow = @optionsRow($editButton)
-    $preview = $optionsRow.find(@placeholderSelector).find('.view')
+    if @placeholderSelector
+      $preview = $optionsRow.find(@placeholderSelector).find('div.view')
+    else
+      $preview = $optionsRow.find('div.view')
     $preview.hide()
     $formHtml = $(formHtml)
     $form = @editHolder($optionsRow, $formHtml)
     $form.show()
 
-    @afterEditFormRetrieved?(attribute, formHtml)
+    @afterEditFormRetrieved?(attribute, $form)
     @editFormsCallbacks[attribute].apply(@, [$form, $preview]) if @editFormsCallbacks && @editFormsCallbacks[attribute]
 
   editHolder: ($optionsRow, $formHtml)->
     if $.contains(document.documentElement, $formHtml[0])
       $form = $formHtml
     else
-      $form = $optionsRow.find('.edit')
+      $form = $optionsRow.find('div.edit')
       $form.html($formHtml)
     $form
 
@@ -67,9 +71,9 @@ class @InlineEditor
     if @sameEditCancelbutton
       @updateEditButton($editButton)
       $editButton.removeClass(@cancelButtonClassName).addClass(@editButtonClassName)
-    $view = $optionsRow.find('.view')
+    $view = $optionsRow.find('div.view')
     $view.show()
-    $form = $optionsRow.find('.edit')
+    $form = $optionsRow.find('div.edit')
     $form.hide()
     @afterCancelEditing?($optionsRow)
 

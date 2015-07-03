@@ -43,7 +43,7 @@ class @MoodboardEditor extends InlineEditor
     super(event)
     $(@saveClass).hide()
 
-  afterEditFormRetrieved: (attribute, formHtml)->
+  afterEditFormRetrieved: (attribute, $form)->
     $saveButton = $("[data-attribute=#{ attribute }]").find('.save-button')
     $saveButton.show()
 

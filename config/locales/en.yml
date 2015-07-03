@@ -370,6 +370,8 @@ en:
         day_left: '%{time_left} left to pick a winner'
       submission:
         day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
+      fullfilment:
+        time_left: '%{time_left} left in this phase'
     winner_selected:
       the_winner: The winner
     moodboard_details:
@@ -695,7 +697,7 @@ en:
     respond:
       see_more: See More
       responding_to: Responding to
-      back: Exit without saving
+      back: Back
       done: Done
       save_and_preview: Save my work & preview
       submit: Submit

@@ -18,7 +18,7 @@ class ConceptBoardEditing < ConceptBoardPage
 
   def collaboration
     { partial: 'designer_center_requests/edit/image_items_editing_layout',
-      locals: { request: contest_request }
+      locals: { request: contest_request, editable: true }
     }
   end
 

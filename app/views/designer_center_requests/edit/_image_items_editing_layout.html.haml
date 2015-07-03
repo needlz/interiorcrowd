@@ -1,48 +1,51 @@
-.row.marg-top10.response{ data: { id: @request.id } }
-  .col-md-8.disablePadding
-    %p.thisIsAPreview= @request_view.header_text
-  .col-md-4
-  .col-md-8.disablePadding
-    .initialImage
-      - if @request.editable?
-        = render partial: 'designer_center_requests/show/image_loading',
-            locals: { image: @request.concept_board_current_image, button_title: t('designer_center.edit.upload_new') }
-      - else
-        = render partial: 'shared/moodboard', locals: { request: @request }
-    = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
-      .image-items
-        .products-list
-          = render partial: 'designer_center_requests/edit/image_block',
-              locals: { editable: true,
-                title: t('designer_center.edit.products_list'),
-                subtitle: t('designer_center.product_items.product_list_title'),
-                image_list_name: :product_items,
-                contest_request: @request,
-                image_items: @product_items,
-                wrap_row_with_block: false }
-        .similar-styles
-          = render partial: 'designer_center_requests/edit/image_block',
-              locals: { editable: true,
-                title: t('designer_center.edit.similar_styles'),
-                subtitle: t('designer_center.product_items.similar_styles_title'),
-                image_list_name: :similar_styles,
-                contest_request: @request,
-                image_items: @similar_styles,
-                wrap_row_with_block: false }
-  .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
-    = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+.row.collaborationScreen.marg-top10.response{ data: { id: @request.id } }
+  .col-lg-8.col-md-7
+    %p.giveDesignerFeedback= @request_view.header_text
+  .col-lg-4.col-md-5.hidden-lg
+    - if @contest_request_milestone.designer_hint
+      %p.daysLeft= @contest_request_milestone.designer_hint
+
+.row.viewingMoodboard.winningMoodboard
+  .col-lg-8.col-md-7
+    .relative
+      .initialImage
+        - if @request.editable?
+          = render partial: 'designer_center_requests/show/image_loading',
+              locals: { image: @request.concept_board_current_image, button_title: t('designer_center.edit.upload_new') }
+        - else
+          = render partial: 'shared/moodboard', locals: { request: @request }
+  .col-lg-4.col-md-5
     - if @request.commenting_enabled?
-      = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
-          comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board? }
-  .col-md-12.disablePadding.marg-top20
-    .hLine
-  .col-md-6.disablePadding
-    = link_to designer_center_response_path(id: @request_view.id), class: tracked_link do
-      .backToEntries
-        %img{ src: '/assets/lt.png' }/
-        = t('designer_center.respond.back')
-  .col-md-6.disablePadding.text-right
-    = link_to '#' do
-      .backToEntries.save-fulfillment
-        = t('designer_center.respond.save_and_preview')
-        %img{ src: '/assets/gt.png' }/
+      = render partial: 'designer_center_requests/edit/comments',
+          locals: { request: @request,
+                    comments: @request.comments,
+                    show_comment_switcher: !@request_view.initial_concept_board? }
+.fullWidthLine.marginBottom40
+= form_for @request, url: designer_center_response_path(id: @request.id) do |f|
+  .image-items
+    .list-kind{ data: { kind: :product_items } }
+      = render partial: 'designer_center_requests/edit/image_block',
+          locals: { editable: editable,
+            title: t('designer_center.edit.products_list'),
+            subtitle: t('designer_center.product_items.product_list_title'),
+            image_list_name: :product_items,
+            contest_request: @request,
+            image_items: @product_items,
+            wrap_row_with_block: false }
+    .fullWidthLine.marginBottom40.marginTop20
+    .list-kind{ data: { kind: :similar_styles } }
+      = render partial: 'designer_center_requests/edit/image_block',
+          locals: { editable: editable,
+            title: t('designer_center.edit.similar_styles'),
+            subtitle: t('designer_center.product_items.similar_styles_title'),
+            image_list_name: :similar_styles,
+            contest_request: @request,
+            image_items: @similar_styles,
+            wrap_row_with_block: false }
+
+.fullWidthLine.marginTop20
+.row
+  = link_to designer_center_response_path(id: @request_view.id), class: tracked_link do
+    .backToEntries
+      %img{ src: '/assets/lt.png' }/
+      = t('designer_center.respond.back')
