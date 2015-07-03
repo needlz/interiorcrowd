@@ -1,14 +1,25 @@
-.col-md-4.relative.thumb{ data: { id: id }, class: ('default' if image_path == '/assets/portfolio_example.png') }
-  - if editable
-    %img.small_close{:src => "/assets/small-close.png"}/
-  .ranged-item.main-image-block
-    %img.productListIMG.main-image{ src: image_path, data: { id: image_id }}/
-  = hidden_field_tag "contest_request[#{ image_list_name }][ids][]", id
-  = hidden_field_tag "contest_request[#{ image_list_name }][image_ids][]", image_id, class: 'image-id'
-  - if editable
-    %textarea.productsMoodboardAbove{ name: "contest_request[#{ image_list_name }][texts][]",
-      placeholder: t('designer_center.product_items.text_placeholder') }= text
-  - else
-    %p.productsMoodboardAbove= text
-  - mark_view = ImageItemMarkView.new(checked_mark)
-  %div{ class: mark_view.css_class }= mark_view.text
+.row.dcProduct.item{ data: { id: item.id }, class: ('default' if item.thumb_url == '/assets/portfolio_example.png') }
+  .view
+    .col-sm-7
+      .row
+        .col-sm-4.dcProductLeft
+          .row.dcProductHead{ class: item.mark_css_class }
+            .col-sm-8
+              = item.mark_text
+            .col-sm-4.text-right
+              - if editable
+                %a.dcProductTrash{ href: '#' }
+          .dcProductImage
+            %img.fullWidth{ src: item.thumb_url, data: { id: item.image_id }}/
+          - if editable
+            %a.dcEditProduct.edit{ href: '#' } Edit
+        .col-sm-8.dcProductMiddle
+          %p= item.name
+          %p= item.brand
+          %p= item.dimensions
+          %p= item.price
+          %a{ href: item.link_href }= item.link
+    .col-sm-5.dcProductRight
+      %p.dcProductDesc{ tabindex: '0', style: 'width: 418px; padding-right: 17px; outline: none; overflow: hidden;' }
+        = item.text
+  .edit

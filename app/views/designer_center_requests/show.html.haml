@@ -34,7 +34,6 @@
                 button_title: t('designer_center.responses.item.edit_concept_board') }
         - else
           = render partial: 'shared/moodboard', locals: { image:  @show_page.concept_board_image }
-      = render @show_page.image_items_partial if @show_page.image_items_partial
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
 
@@ -46,6 +45,7 @@
       - if @request.commenting_enabled?
         = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
             comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board? }
+    = render @show_page.image_items_partial if @show_page.image_items_partial
     = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'

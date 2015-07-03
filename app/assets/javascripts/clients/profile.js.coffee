@@ -31,8 +31,6 @@ class @ProfileEditor extends InlineEditor
       editor = event.data
       $attributeRow = $(event.target).parents(editor.attributeSelector)
       attribute = $attributeRow.data(editor.attributeIdentifierData)
-      $form = $attributeRow.find('.edit')
-      $view = $attributeRow.find('.view')
       editor.cancelEditing(attribute)
     )
 

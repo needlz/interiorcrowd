@@ -1,72 +1,119 @@
-class ImageItemsList
+class ImageItemsEditor extends InlineEditor
 
-  constructor: (@uploadOptions)->
+  attributeIdentifierData: 'id'
+  attributeSelector: '.dcProduct'
+  sameEditCancelbutton: false
+  editButtonSelector: '.dcEditProduct.edit'
 
-  init: ->
-    @bindUploadButton()
-    @bindSaveButton()
+  cancelButtonSelector: '.dcEditProduct.cancel'
+  saveButtonSelector: '.dcEditProduct.save'
+  deleteButtonSelector: '.dcProductTrash'
 
-  bindUploadButton: ->
-    PicturesUploadButton.init @uploadOptions
+  bindEvents: ->
+    super()
+    @bindDeleteClick()
 
-  bindSaveButton: ->
-    $('.save-fulfillment').off('click').click (e)=>
-      e.preventDefault()
-      $form = $('.edit_contest_request')
-      @removeTemplateInputs($form)
-      mixpanel.track('Product list updated',
-        { data: $form.serializeArray(), contest_request_id: $('.response').data('id') }
+  bindDeleteClick: ->
+    $(document).on 'click', "#{@attributeSelector} #{@deleteButtonSelector}", @, (event)=>
+      event.preventDefault()
+      imageItemId = @optionsRow($(event.target)).data('id')
+      $.ajax(
+        url: "/image_items/#{ imageItemId }"
+        method: 'DELETE'
+        success: (response)=>
+          if response.destroyed
+            @attributeElement(imageItemId).remove()
       )
-      setTimeout ->
-        $form.submit()
-      , 300
 
-  removeTemplateInputs: ($form)->
-    $form.find('.template').empty()
+  getForm: (id, $button)->
+    @requestEditForm(id)
 
-class ProductListThumbsTheme extends RemovableThumbsTheme
+  requestEditForm: (imageItemId)->
+    $.ajax(
+      url: "/image_items/#{ imageItemId }/edit/"
+      method: 'GET'
+      success: (response)=>
+        @onEditFormRetrieved(imageItemId, response)
+    )
 
-  init: ->
-    @$container.on 'click', '.small_close', @removeThumb
+  afterEditFormRetrieved: (imageItemId, $form)->
+    ImageItemsView.init()
 
-  createThumb: (imageUrl, imageId)->
-    @removeDefaultItems()
+    $thumb = $form.find('.dcProductImage')
 
-    $template = @$container.find('.template')
-    $container = $template.clone()
-    $container.removeClass('template').addClass('thumb')
-    $container.find('img.main-image').attr('src', imageUrl).data('id', imageId)
-    $container.find('.image-id').val(imageId)
-    $container
+    PicturesUploadButton.init
+      fileinputSelector: $thumb.find('input[type="file"]')
+      uploadButtonSelector: $thumb.find('img')
+      thumbs:
+        container: $thumb
+        selector: $thumb.find('#image_item_image_id')
+        theme: DefaultThumbsTheme
+      I18n: I18n
+      single: true
 
-  getImageId: ($thumb)->
-    $thumb.find('.main-image').data('id')
+    $form.find(@cancelButtonSelector).one 'click', (e)=>
+      e.preventDefault()
+      @cancelEditing(imageItemId)
 
-  removeDefaultItems: ->
-    @remove(@$container.find('.thumb.default'))
+    $form.find(@saveButtonSelector).one 'click', (e)=>
+      e.preventDefault()
+      $form = $(e.target).closest('form')
+      $form.on 'ajax:success', (event, data)=>
+        @cancelEditing(imageItemId)
+        @updateView($form, data)
+      $form.trigger('submit.rails')
+
+  updateView: ($child, data)->
+    $view = @optionsRow($child).find('div.view')
+    $view.html(data)
+
+    ImageItemsView.init()
+
+  save: (imageItemId)->
+    $.ajax(
+      url: "/image_items/#{ imageItemId }"
+      method: 'PATCH'
+      data: {}
+      success: (response)=>
+        @cancelEditing(imageItemId)
+    )
+
+  append: (kind)->
+    $.ajax(
+      url: "/image_items/default"
+      method: 'GET'
+      data: { collaboration: true, kind: kind, contest_request_id: @contestRequestId() }
+      success: (response)=>
+        $newItem = $(response)
+        $lastElement = $('.image-items .list-kind').filter("[data-kind='#{ kind }']").find('.dcAddProductItems').closest('.dcProduct')
+        $newItem.insertBefore($lastElement)
+
+        ImageItemsView.init()
+    )
+
+  contestRequestId: ->
+    $('.response[data-id]').data('id')
+
+class @ImageItemsView
+
+  @init: ->
+    $('.dcProductDesc').each (index, element)->
+      $element = $(element)
+      unless $element.data('enscroll')
+        $element.enscroll({
+          verticalTrackClass: 'scrollBoxCommentsTrack',
+          verticalHandleClass: 'scrollBoxCommentsHandle',
+          minScrollbarLength: 28
+        });
 
 $ ->
-  productList = new ImageItemsList(
-    fileinputSelector: '.products-list #product_items',
-    uploadButtonSelector: '.products-list .upload-button',
-    thumbs:
-      container: '.products-list .thumbs'
-      theme: ProductListThumbsTheme
-    I18n: I18n
-    uploading:
-      onUploaded: (event)->
-        mixpanel.track 'Product item uploaded'
-  )
-  productList.init()
-  similarStyles = new ImageItemsList(
-    fileinputSelector: '.similar-styles #similar_styles',
-    uploadButtonSelector: '.similar-styles .upload-button',
-    thumbs:
-      container: '.similar-styles .thumbs'
-      theme: ProductListThumbsTheme
-    I18n: I18n
-    uploading:
-      onUploaded: (event)->
-        mixpanel.track 'Similar style uploaded'
-  )
-  similarStyles.init()
+  itemsEditor = new ImageItemsEditor()
+  itemsEditor.init()
+
+  $('.dcAddProductItems').click (e)->
+    e.preventDefault()
+    $button = $(e.target).closest('[data-kind]')
+    kind = $button.data('kind')
+    itemsEditor.append(kind)
+
+  ImageItemsView.init()

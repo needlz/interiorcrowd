@@ -95,6 +95,12 @@ RSpec.describe ImageItemsController do
         expect(product_item.brand).to eq params[:image_item][:brand]
         expect(product_item.dimensions).to eq params[:image_item][:dimensions]
       end
+
+      it 'renders partial' do
+        params = generate_params(id: product_item.id)
+        patch :update, params
+        expect(response).to render_template(partial: 'designer_center_requests/edit/_image_content')
+      end
     end
   end
 
@@ -119,6 +125,17 @@ RSpec.describe ImageItemsController do
       patch :mark, params
       product_item.reload
       expect(product_item.mark).to eq new_mark
+    end
+  end
+
+  describe 'GET default' do
+    before do
+      sign_in(designer)
+    end
+
+    it 'returns partial' do
+      get :default, kind: 'product_items', contest_request_id: contest_request.id
+      expect(response).to render_template(partial: 'designer_center_requests/edit/_image_content')
     end
   end
 

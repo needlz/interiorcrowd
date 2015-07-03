@@ -1,34 +1,45 @@
 = render partial: 'shared/setup_image_items_collapsible_text'
 
-.container.animated.fadeInDown.bottom60
-  .row
-    .col-md-8.disablePadding
+.container.briefEditing.collaborationScreen.row
+  .row.marginTop40
+    .col-lg-8
       = render partial: 'clients/client_center/entries/phases',
-          locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
-      %p.thisIsAPreview= t('client_center.entries.collaboration.this_is_a_preview')
-    - if show_time_button?
-      .col-md-4
-        %p.timeLeft There are 3 days left
-    %br/
-    %br/
-  .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
-    = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
-    .image-items
-      = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: true,
-          title: t('designer_center.edit.products_list'),
-          block_text: t('client_center.entries.collaboration.check_message'),
-          image_items: product_items.for_mark }
-      = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: true,
-          title: t('designer_center.edit.similar_styles'),
-          block_text: t('client_center.entries.collaboration.check_message'),
-          image_items: similar_styles.for_mark }
+                locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
+    .col-lg-4.visible-lg
+      - if @entries_page.timeline_hint
+        %p.daysLeft= @entries_page.timeline_hint
+    .col-lg-8.col-md-7
+      %p.giveDesignerFeedback= t('client_center.entries.collaboration.this_is_a_preview')
+    .col-lg-4.col-md-5.hidden-lg
+      - if @entries_page.timeline_hint
+        %p.daysLeft= @entries_page.timeline_hint
 
-  .col-md-4
-    = render partial: 'contest_requests/submission_info',
-        locals: { designer: request.designer, submitted_at: request.created_at, request: request  }
-    = render partial: 'designer_center_requests/edit/comments',
-        locals: { request: request, comments: request.comments, show_comment_switcher: true }
-  = render partial: 'clients/client_center/entries/collaboration/footer_buttons',
-      locals: { request: request }
+  .row.viewingMoodboard.winningMoodboard
+    .col-lg-8.col-md-7
+      .relative
+        = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
+
+    .col-lg-4.col-md-5
+      = render partial: 'designer_center_requests/edit/comments',
+              locals: { request: request, comments: request.comments, show_comment_switcher: true }
+  .image-items
+    = render partial: 'clients/client_center/entries/collaboration/image_block',
+        locals: { choosable: true,
+        title: t('designer_center.edit.products_list'),
+        block_text: t('client_center.entries.collaboration.check_message'),
+        image_items: product_items.for_mark }
+    = render partial: 'clients/client_center/entries/collaboration/image_block',
+        locals: { choosable: true,
+        title: t('designer_center.edit.similar_styles'),
+        block_text: t('client_center.entries.collaboration.check_message'),
+        image_items: similar_styles.for_mark }
+
+  .fullWidthLine.marginTop20
+  .row
+    .col-sm-12.doneAndMove
+      - if request.fulfillment_ready?
+        = form_for request, url: designer_center_response_path(id: request.id) do |f|
+          = f.hidden_field :status, value: 'submitted'
+        = link_to '#', class: 'submit submitMyDesign', request_id: request.id do
+          =t('client_center.entries.collaboration.done_btn')
+          %img{:src => "/assets/gt.png"}/

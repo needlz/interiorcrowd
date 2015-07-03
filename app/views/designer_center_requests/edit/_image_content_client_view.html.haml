@@ -1,0 +1,25 @@
+.col-xs-6.productVote{ data: { id: item.id },
+    class: ('default' if item.thumb_url == '/assets/portfolio_example.png') }
+  .row
+    .col-md-5
+      %img.fullWidth{ src: item.thumb_url, data: { id: item.image_id }}/
+      - if markable
+        = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH' do
+          .productRadio
+            - ImageItem::MARKS.each do |key, value|
+              %input{ type: 'radio',
+                  name: "image_item[mark]",
+                  id: "p_#{ item.id }_#{ key }",
+                  value: value }
+              %label{ for: "p_#{ item.id }_#{ key }" }
+                %span
+            .clearfix
+    .col-md-7.productVoteRight
+      %h4= item.name
+      %p= item.brand
+      %p= item.dimensions
+      %p= item.price
+      %a{ href: item.link_href }= item.link
+      %p.about-text{ style: 'height: 7em;' }
+        = item.text
+  .clearfix

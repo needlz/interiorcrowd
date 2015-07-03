@@ -1,0 +1,9 @@
+.row.productList
+  .col-sm-12
+    %h4= title
+    %p.light14Gray= subtitle
+
+.items
+  - image_items.each do |item|
+    = render partial: 'designer_center_requests/edit/image_content_client_view',
+        locals: { image_list_name: image_list_name, item: item, markable: false }

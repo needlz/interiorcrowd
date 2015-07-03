@@ -1,35 +1,21 @@
 class ProductListMarks
 
-  @imageMarksSelector: '.image-items .mark'
+  @imageMarksSelector: '.productRadio input[type="radio"]'
 
   @init: ()->
     $imageMarks = $(@imageMarksSelector)
-    $imageMarks.click(@onMarkClick)
+    $imageMarks.change(@onMarkClick)
+    $imageMarks.on 'ajax.success', (e, data)->
+      console.log data
+      mixpanel.track 'Product item or Similar style marked',
+        { mark: mark, contest_request_id: $('.concept-board').data('id') }
 
   @onMarkClick: (event)=>
-    $markButton = $(event.target)
-    @sendRequest($markButton)
+    $form = $(event.target).closest('form')
+    @sendRequest($form)
 
-  @sendRequest: ($button)->
-    mark = $button.data('mark')
-    id = $button.parents('.image-item').data('id')
-    $.ajax(
-      data: { id: id, image_item: { mark: mark } }
-      url: "/image_items/#{id}/mark"
-      type: 'PATCH'
-      success: (data)=>
-        @onRequestSuccess($button, data)
-        mixpanel.track 'Product item or Similar style marked',
-          { mark: mark, contest_request_id: $('.contest-request').data('id') }
-    )
-
-  @onRequestSuccess: ($button, data)->
-    @toggleActivity($button)
-
-  @toggleActivity: ($button)->
-    $otherButtons = $button.parent().find('.mark')
-    $otherButtons.removeClass('active')
-    $button.addClass('active')
+  @sendRequest: ($form)->
+    $form.trigger('submit.rails')
 
 $ ->
   ProductListMarks.init()

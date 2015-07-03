@@ -19,6 +19,22 @@ class ImageItemView
     force_link_protocol(image_item.link)
   end
 
+  def mark_css_class
+    if mark == ImageItem::MARKS[:LIKE]
+      'greenHead'
+    elsif mark == ImageItem::MARKS[:DISLIKE]
+      'redHead'
+    end
+  end
+
+  def mark_text
+    if mark == ImageItem::MARKS[:LIKE]
+      'Client likes'
+    elsif mark == ImageItem::MARKS[:DISLIKE]
+      'Client dislikes'
+    end
+  end
+
   private
 
   attr_reader :image_item

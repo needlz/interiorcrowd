@@ -31,6 +31,7 @@ class ImageItem < ActiveRecord::Base
 
   validates_inclusion_of :mark, in: MARKS.values, allow_nil: true
   validates_inclusion_of :kind, in: KINDS.map(&:to_s)
+  validates_presence_of :contest_request
 
   belongs_to :image, dependent: :destroy
   belongs_to :contest_request
