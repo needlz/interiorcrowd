@@ -9,6 +9,10 @@ class BudgetPlan
     @services = attributes[:services]
   end
 
+  def price_in_cents
+    price * 100
+  end
+
   PLANS = [new(id: 1,
                price: 299,
                name: 'first',

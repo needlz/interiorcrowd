@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'figaro'
-gem 'handy'
+gem 'handy', '0.0.28'
 gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
@@ -83,3 +83,4 @@ gem 'heroku-api'
 gem 'i18n-js', '>= 3.0.0.rc8'
 gem 'awesome_print', require: 'ap'
 gem 'dotiw' # better distance of time in words
+gem 'stripe'

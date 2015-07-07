@@ -2,10 +2,12 @@
 #
 # Table name: promocodes
 #
-#  id        :integer          not null, primary key
-#  client_id :integer
-#  token     :text
-#  profit    :text
+#  id                :integer          not null, primary key
+#  promocode         :text
+#  display_message   :text
+#  active            :boolean          default(TRUE)
+#  discount_cents    :integer          default(0), not null
+#  discount_currency :string(255)      default("USD"), not null
 #
 
 class Promocode < ActiveRecord::Base

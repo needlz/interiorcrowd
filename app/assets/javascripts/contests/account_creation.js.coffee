@@ -95,11 +95,11 @@ class AccountCreation
       if trimedVal($name_on_card).length < 1
         @validator.addMessage $("#err_name_on_card"), "Please enter name.", $name_on_card
     ->
-      $address = $("#client_address")
+      $address = $("#client_billing_address")
       if trimedVal($address).length < 1
         @validator.addMessage $("#err_address"), "Please enter address.", $address
     ->
-      $state = $("#client_state")
+      $state = $("#client_billing_state")
       state = trimedVal($state)
       if state.length > 1
         rege = /^[a-zA-Z]+$/
@@ -108,7 +108,7 @@ class AccountCreation
       else
         @validator.addMessage $("#err_state"), "Please enter state.", $state
     ->
-      $zip = $("#client_zip")
+      $zip = $("#client_billing_zip")
       zip = trimedVal($zip)
       if zip.length > 1
         unless $.isNumeric(zip)

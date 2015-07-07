@@ -41,7 +41,7 @@ class Client < ActiveRecord::Base
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, presence: true, uniqueness: true
-  normalize_attributes :email
+  normalize_attributes :email, :stripe_customer_id, :billing_address, :billing_state, :billing_zip, :billing_city
 
   has_many :contests
   belongs_to :designer_level
@@ -72,6 +72,10 @@ class Client < ActiveRecord::Base
 
   def can_comment_contest?(contest)
     contest.client == self
+  end
+
+  def stripe_customer?
+    stripe_customer_id
   end
 
 end
