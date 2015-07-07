@@ -5,10 +5,8 @@
 
 .items
   - image_items.each do |item|
-    .view
-      = render partial: 'designer_center_requests/edit/image_content',
-          locals: { image_list_name: image_list_name, item: item, editable: editable }
-    .edit
+    = render partial: 'designer_center_requests/edit/image_content',
+          locals: { image_list_name: image_list_name, item: item, editable: editable, mode: :view }
 
 - if editable
   .row.dcProduct

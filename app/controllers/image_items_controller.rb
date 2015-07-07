@@ -13,7 +13,7 @@ class ImageItemsController < ApplicationController
     return raise_404 unless @item.contest_request.designer == @designer
     @item.update_attributes!(product_item_params)
     render partial: 'designer_center_requests/edit/image_content',
-           locals: { item: ImageItemView.new(@item), editable: true }
+           locals: { item: ImageItemView.new(@item), editable: true, mode: :view }
   end
 
   def mark
@@ -40,7 +40,7 @@ class ImageItemsController < ApplicationController
   def default
     contest_request = @designer.contest_requests.find(params[:contest_request_id])
     item_view = ImageItemView.new(ImageItem.create!(kind: params[:kind], contest_request_id: contest_request.id))
-    render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view, editable: true }
+    render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view, editable: true, mode: :edit }
   end
 
   private

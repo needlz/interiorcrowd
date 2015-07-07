@@ -141,7 +141,6 @@ class @FulfillmentApprovedEdit
       url: '/image_items/new'
       success: (formHtml)=>
         @appendProductItemForm(formHtml)
-        @bindPriceInputs()
     )
 
   @appendProductItemForm: (formHtml)=>
