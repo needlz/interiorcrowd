@@ -142,6 +142,11 @@ InteriorC::Application.routes.draw do
       end
     end
 
+    resources :final_note_to_designer,
+              controller: 'final_note_to_designer',
+              as: 'final_note_to_designer',
+              only: [:create]
+
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/:url', to: 'portfolios#show', as: 'show_portfolio'
   end
