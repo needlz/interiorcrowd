@@ -80,6 +80,7 @@ class ImageItemsEditor extends InlineEditor
 
   append: (kind)->
     $.ajax(
+      async: false,
       url: "/image_items/default"
       method: 'GET'
       data: { collaboration: true, kind: kind, contest_request_id: @contestRequestId() }
@@ -87,7 +88,8 @@ class ImageItemsEditor extends InlineEditor
         $newItem = $(response)
         $lastElement = $('.image-items .list-kind').filter("[data-kind='#{ kind }']").find('.dcAddProductItems').closest('.dcProduct')
         $newItem.insertBefore($lastElement)
-
+        @afterEditFormRetrieved($newItem.data('id'), $newItem.find('div.edit'))
+        $newItem.find('img').click()
         ImageItemsView.init()
     )
 
@@ -114,6 +116,7 @@ $ ->
     e.preventDefault()
     $button = $(e.target).closest('[data-kind]')
     kind = $button.data('kind')
+
     itemsEditor.append(kind)
 
   ImageItemsView.init()

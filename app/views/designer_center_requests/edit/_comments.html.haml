@@ -1,8 +1,9 @@
 .sidebarComments.marginTop20
   .row
+    - comments_title = current_user.client? ? t('designer_center.edit.question') : t('designer_center.edit.comments')
     - if show_comment_switcher
       .col-xs-4
-        %p.commentTabs.text-left= t('designer_center.edit.comments')
+        %p.commentTabs.text-left= comments_title
       .col-xs-8
         %ul.btn-group.btnGroupComments{:role => "tablist"}
           %li.btn.btn-default.active{:role => "presentation"}
@@ -13,7 +14,7 @@
             %a{"aria-controls" => "designerComments", "data-toggle" => "tab", :href => "#designerComments", :role => "tab"}= collocutor(current_user)
     - else
       .col-xs-12
-        %p.commentTabs.text-left= t('designer_center.edit.comments')
+        %p.commentTabs.text-left= comments_title
   %div{:role => "tabpanel"}
     #scrollBoxComments.tab-content.notes.questionBox
       #allComents.tab-pane.active{:role => "tabpanel"}
