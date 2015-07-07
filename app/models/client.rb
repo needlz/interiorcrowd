@@ -47,8 +47,8 @@ class Client < ActiveRecord::Base
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests
   has_and_belongs_to_many :promocodes
+  has_many :contest_requests, through: :contests, source: :requests
 
-  
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')
     contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 2 ELSE CASE WHEN contests.status = \'finished\' THEN 1 ELSE 0 END END DESC"

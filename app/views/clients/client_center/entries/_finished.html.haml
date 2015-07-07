@@ -45,6 +45,17 @@
     = will_paginate(@entries_page.visible_image_items,
         container: false,
         renderer: ProductListPaginationRenderer)
+
+  .fullWidthLine.marginBottom40.marginTop20
+  .row
+    .col-sm-12.finalNoteToDesigner
+      %h4= t('client_center.finished.final_note.title')
+      = form_tag final_note_to_designer_index_path, remote: true, id: 'final-note-to-designer' do
+        = hidden_field_tag 'contest_request_id', request.id
+        %textarea{ placeholder: t('client_center.finished.final_note.placeholder'),
+                   name: 'final_note[text]' }
+        %button.pull-right.send-button= t('client_center.finished.final_note.button')
+
   .fullWidthLine.marginTop40
   .row
     .col-sm-12.startNewContest

@@ -14,20 +14,9 @@
 #  concept_board_comment_id :integer
 #
 
-class DesignerNotification < UserNotification
+class FinalNoteDesignerNotification < DesignerNotification;
 
-  belongs_to :designer, foreign_key: :user_id
-
-  default_scope { where(type: types) }
-
-  def self.types
-    %w(DesignerInviteNotification DesignerWinnerNotification DesignerInfoNotification DesignerWelcomeNotification
-       ContestCommentDesignerNotification ConceptBoardCommentNotification BoardSubmittedDesignerNotification
-       FinalNoteDesignerNotification)
-  end
-
-  def recipient
-    designer
-  end
+  belongs_to :contest_request
+  has_one :final_note_to_designer, foreign_key: :designer_notification_id
 
 end

@@ -129,3 +129,20 @@
 .uploadFinalDesignBtn{
   cursor: pointer;
 }
+
+.finalNoteToDesigner{
+  textarea{
+    color: inherit;
+  }
+
+  .send-button{
+    font-size: 20px;
+    color: #000;
+    line-height: 35px;
+    text-align: center;
+    border: 1px solid #000;
+    border-radius: 5px;
+    display: block;
+    background-color: white;
+  }
+}

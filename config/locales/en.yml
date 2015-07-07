@@ -439,6 +439,14 @@ en:
       promocode_invalid: The code you entered is invalid.
       promocode_valid: The code you entered has been applied. You %{profit}.
       promocode_server_error: Server error
+    finished:
+      final_note:
+        title: Want to send a final note to your designer?
+        placeholder: >
+          Our designers love feedback from their clients.
+          Let your designer know what you're going to do with their design and if you enjoyed the process of
+          working with them.
+        button: Send
   designer_center:
     milestones:
       winner_selection:

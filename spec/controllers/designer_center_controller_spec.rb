@@ -51,12 +51,27 @@ RSpec.describe DesignerCenterController do
       sign_in(designer)
     end
 
-    let!(:concept_board_comment) { Fabricate(:concept_board_client_comment, user_id: client.id, contest_request: request) }
-    let!(:contest_comment) { contest.notes.create!(text: 'a note for designers', client_id: client.id) }
-    let!(:contest_comment_form_other_designer) { contest.notes.create!(text: 'a note from other designer', designer_id: Fabricate(:designer).id) }
-    let!(:notification) { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }
-    let!(:winner_notification) { DesignerWinnerNotification.create!(user_id: designer.id, contest_id: contest.id) }
-    let!(:loser_notification) { DesignerLoserInfoNotification.create!(user_id: designer.id, contest_id: contest.id) }
+    let!(:concept_board_comment) { Fabricate(:concept_board_client_comment,
+                                             user_id: client.id,
+                                             contest_request: request) }
+    let!(:contest_comment) { contest.notes.create!(text: 'a note for designers',
+                                                   client_id: client.id) }
+    let!(:contest_comment_form_other_designer) { contest.notes.create!(text: 'a note from other designer',
+                                                                       designer_id: Fabricate(:designer).id) }
+    let!(:notification) { Fabricate(:designer_invite_notification,
+                                    designer: designer,
+                                    contest: contest) }
+    let!(:winner_notification) { DesignerWinnerNotification.create!(user_id: designer.id,
+                                                                    contest_id: contest.id) }
+    let!(:loser_notification) { DesignerLoserInfoNotification.create!(user_id: designer.id,
+                                                                      contest_id: contest.id) }
+    let!(:final_note) do
+      notification = FinalNoteDesignerNotification.create!(user_id: designer.id,
+                                                           contest_request: request)
+      FinalNoteToDesigner.create!(designer_notification_id: notification.id)
+      notification
+    end
+
 
     it 'renders page' do
       get :updates
