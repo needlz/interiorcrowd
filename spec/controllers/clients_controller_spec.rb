@@ -26,7 +26,7 @@ RSpec.describe ClientsController do
       city: 'City',
       state: 'state',
       card_ex_month: '12',
-      card_ex_year: '2000',
+      card_ex_year: Time.current.year + 5,
       card_cvc: '123',
       zip: '81100',
       promocode: promocode.promocode
@@ -80,6 +80,11 @@ RSpec.describe ClientsController do
       client = Client.last
       expect(client.promocodes).to be_exists
     end
+
+    it 'schedules checking of billing info' do
+      post :create, { client: client_options }, contest_options_source
+      expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1
+    end
   end
 
   describe 'PATCH update' do
@@ -90,10 +95,10 @@ RSpec.describe ClientsController do
         city: 'new city',
         state: 'new state',
         zip: '123456',
-        card_number: '4242',
+        card_number: test_card_number,
         card_type: 'new type',
         card_ex_month: '12',
-        card_ex_year: '2002',
+        card_ex_year: Time.current.year + 5,
         card_cvc: '444'
       }
     end

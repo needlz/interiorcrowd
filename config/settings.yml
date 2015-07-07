@@ -19,6 +19,7 @@ common: &defaults
   comment_board_digest_minutes_interval: <%= ENV['COMMENT_BOARD_DIGEST_MINUTES_INTERVAL'] %>
   mixpanel_token: <%= ENV['MIXPANEL_TOKEN'] %>
   google_analytics_property_id: <%= ENV['GOOGLE_ANALYTICS_PROPERTY_ID'] %>
+  stripe_api_key: <%= ENV['STRIPE_API_KEY'] %>
 
 development:
 

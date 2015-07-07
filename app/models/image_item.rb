@@ -7,7 +7,6 @@
 #  contest_request_id :integer
 #  image_id           :integer
 #  text               :text
-#  price              :decimal(, )
 #  brand              :text
 #  link               :text
 #  mark               :string(255)
@@ -16,8 +15,7 @@
 #  kind               :string(255)
 #  dimensions         :text
 #  final              :boolean          default(FALSE)
-#  price_cents        :integer
-#  price_currency     :string(255)      default("USD"), not null
+#  price              :text
 #
 
 class ImageItem < ActiveRecord::Base

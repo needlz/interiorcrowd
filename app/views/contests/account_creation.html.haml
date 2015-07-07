@@ -44,17 +44,17 @@
           %span#err_name_on_card.text-error
         %label
           %p= t('client_center.profile.labels.address')
-          = f.text_field :address, class: 'form-control', tabindex: 7
+          = f.text_field :billing_address, class: 'form-control', tabindex: 7
           %span#err_address.text-error
         %label
           %p= t('client_center.profile.labels.city')
-          = f.text_field :city, class: 'form-control', tabindex: 8
+          = f.text_field :billing_city, class: 'form-control', tabindex: 8
         .row
           .col-xs-8.col-ss-6
             %label
               %p= t('client_center.profile.labels.state')
               = select('client',
-                  'state',
+                  'billing_state',
                   options_for_select(PersonalData.state_options, 0),
                   {},
                   { class: 'selectpicker form-selector', tabindex: 9 })
@@ -62,7 +62,7 @@
           .col-xs-4.col-ss-6
             %label
               %p= t('client_center.profile.labels.zip')
-              = f.text_field :zip,
+              = f.text_field :billing_zip,
                   class: 'form-control left-control',
                   tabindex: 10
               %span#err_zip.text-error

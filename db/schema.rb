@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150706162554) do
+ActiveRecord::Schema.define(version: 20150707162847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,15 @@ ActiveRecord::Schema.define(version: 20150706162554) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "client_payments", force: true do |t|
+    t.integer "client_id"
+    t.string  "payment_status",   default: "pending"
+    t.text    "last_error"
+    t.string  "stripe_charge_id"
+  end
+
+  add_index "client_payments", ["client_id"], name: "index_client_payments_on_client_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.text     "first_name"

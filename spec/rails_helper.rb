@@ -92,4 +92,8 @@ RSpec.configure do |config|
       }
     }
   end
+
+  def test_card_number
+    '4242424242424242'
+  end
 end
