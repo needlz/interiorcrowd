@@ -1,7 +1,7 @@
 class ScheduleWarningAboutWinnerSelectionEnd < MailBeforeContestMilestoneEnd
 
   def self.scheduler_interval
-    1.hour
+    Jobs::TimeConditionalNotifications::INTERVAL
   end
 
   def self.period_before_milestone_end
