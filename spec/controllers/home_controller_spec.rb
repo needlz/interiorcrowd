@@ -87,5 +87,19 @@ RSpec.describe HomeController do
     end
   end
 
+  describe 'GET privacy_policy' do
+    it 'returns page' do
+      get :privacy_policy
+      expect(response).to render_template(:privacy_policy)
+    end
+  end
+
+  describe 'GET terms_of_service' do
+    it 'returns page' do
+      get :terms_of_service
+      expect(response).to render_template(:terms_of_service)
+    end
+  end
+
 end
 

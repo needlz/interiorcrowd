@@ -4358,3 +4358,13 @@ a.uploadNewConceptBoard{
     }
 }
 /*end homepage*/
+
+/*start privacy policy page*/
+.privacyPolicyPage{
+    padding: 20px 0px;
+    font-family: "AvenirLTStd-Light";
+}
+.privacyPolicyPage p{
+    margin-bottom: 20px;
+}
+/* end privacy policy */

@@ -113,8 +113,6 @@ InteriorC::Application.routes.draw do
       end
     end
 
-
-
     resources :designer_invitations, only: [:create]
     resources :contest_notes, only: [:create]
     resources :reviewer_invitations, only: [:create]
@@ -148,6 +146,7 @@ InteriorC::Application.routes.draw do
               only: [:create]
 
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
+    get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
     get '/:url', to: 'portfolios#show', as: 'show_portfolio'
   end
 

@@ -403,9 +403,15 @@ body{
 }
 /* end CC-confirm-winner */
 
-
 .bootstrap-select{
   span{
     color: black;
+  }
+}
+
+.privacyPolicyPage{
+  h1, h2, h3, h4, h5{
+    font-weight: normal;
+    font-family: 'AvenirLTStd-Light';
   }
 }
