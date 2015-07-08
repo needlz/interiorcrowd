@@ -78,18 +78,21 @@ class ImageItemsEditor extends InlineEditor
         @cancelEditing(imageItemId)
     )
 
-  append: (kind)->
+  append: (kind, imageId)->
     $.ajax(
       async: false,
       url: "/image_items/default"
       method: 'GET'
-      data: { collaboration: true, kind: kind, contest_request_id: @contestRequestId() }
+      data:
+        collaboration: true
+        kind: kind
+        contest_request_id: @contestRequestId()
+        image_id: imageId
       success: (response)=>
         $newItem = $(response)
         $lastElement = $('.image-items .list-kind').filter("[data-kind='#{ kind }']").find('.dcAddProductItems').closest('.dcProduct')
         $newItem.insertBefore($lastElement)
         @afterEditFormRetrieved($newItem.data('id'), $newItem.find('div.edit'))
-        $newItem.find('img').click()
         ImageItemsView.init()
     )
 
@@ -112,11 +115,20 @@ $ ->
   itemsEditor = new ImageItemsEditor()
   itemsEditor.init()
 
-  $('.dcAddProductItems').click (e)->
-    e.preventDefault()
-    $button = $(e.target).closest('[data-kind]')
-    kind = $button.data('kind')
-
-    itemsEditor.append(kind)
-
   ImageItemsView.init()
+
+  $('.dcAddProductItems').each (index, element)->
+    $addButton = $(element)
+
+    PicturesUploadButton.init
+      fileinputSelector: $addButton.find('input[type="file"]')
+      uploadButtonSelector: $addButton.find('a')
+      thumbs:
+        selector: $addButton.find('#image_item_image_id')
+      I18n: I18n
+      single: true
+      uploading:
+        onUploaded: (event)=>
+          kind = $addButton.data('kind')
+          imageId = $addButton.find('#image_item_image_id').val()
+          itemsEditor.append(kind, imageId)

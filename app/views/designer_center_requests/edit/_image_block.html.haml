@@ -13,6 +13,9 @@
     .col-sm-7
       .row
         .col-sm-4.dcAddProductItems{ data: { kind: image_list_name } }
+          = file_field_tag 'image[image]', class: 'hidden'
+          = hidden_field_tag 'image_item[image_id]', ''
+          .uploaded-image.hidden
           %a{ href: '#' }
             %span +
             Add product items
