@@ -1,26 +1,24 @@
-.text-center.logo-mobile.visible-sm.visible-xs
-  %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
-    %img{src: '/assets/logo2.png'}/
-  %a.btn.btn2-success.pull-right{ href: need_help_path, class: tracked_link }
-    %b= t('header.need_help')
-.row.my-menu.visible-lg.visible-md
-  .col-md-2.no-padding-right.logo-pc
+.row
+  .col-xs-2
     %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
-      %img{ src: '/assets/logo2.png' }
-  %a.btn.btn2-success.pull-right{ href: need_help_path, class: tracked_link }
-    %b= t('header.need_help')
-  .col-md-10.no-padding-right
-    .top-nav.pull-down
-      .nav-collapse
-        %ul.nav.nav-tabs.text-menu.main-menu.pull-right
-          - main_menu.items.each do |item|
-            - if item.children
-              %li.dropdown
-                %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: item.href }
-                  = item.name
-                  %b.caret
-                %ul.dropdown-menu
-                  - item.children.each do |subitem|
-                    = render partial: 'layouts/mobile_menu_item', locals: { item: subitem }
-            - else
-              = render partial: 'layouts/mobile_menu_item', locals: { item: item }
+      %img{src: '/assets/logo2.png'}/
+
+  .col-xs-10
+    %a.btn.needHelp.pull-right{ href: need_help_path, class: tracked_link }
+      = t('header.need_help')
+    .clearfix
+    %ul.nav.nav-tabs.pull-right.hidden-xs.hidden-sm
+      - main_menu.items.each do |item|
+        - if item.children
+          %li.dropdown
+            %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: item.href }
+              = item.name
+              %img{:src => "/assets/down-arrow.png"}/
+            %ul.dropdown-menu
+              - item.children.each do |subitem|
+                = render partial: 'layouts/mobile_menu_item', locals: { item: subitem }
+        - else
+          = render partial: 'layouts/mobile_menu_item', locals: { item: item }
+    .visible-xs.visible-sm
+      .mobileMenu
+        %a{href: '#menu'}

@@ -2,5 +2,5 @@
   .bedr
     %a{:href => "#"}
       .room.room-selector-sub.fixWrap{ class: ('active' if active), data: { id: area.id } }
-        %b= area.name
+        = area.name
         %i.glyphicon.glyphicon-ok.option-selected{ style: ('display: none' if !active) }
