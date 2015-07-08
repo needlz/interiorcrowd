@@ -20,9 +20,11 @@
 #  outbound_email_id  :integer
 #
 
-class DelayedJob < ActiveRecord::Base
+class DelayedJob < Delayed::Backend::ActiveRecord::Job
 
   belongs_to :contest
+
+  scope :by_handler_like, ->(string){ where('handler LIKE ?', "%#{ string }%") }
 
   def error(job, exception)
     Rollbar.error(exception, job_id: job.id)

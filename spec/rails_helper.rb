@@ -50,7 +50,7 @@ RSpec.configure do |config|
   end
 
   def jobs_with_handler_like(string)
-    Delayed::Job.where('handler LIKE ?', "%#{ string }%")
+    DelayedJob.by_handler_like(string)
   end
 
   def contest_options_source

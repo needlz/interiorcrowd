@@ -1,8 +1,6 @@
 namespace :notifications do
   desc 'notifications dependant on future events'
-  task :schedule do
-    ScheduleWarningAboutWinnerSelectionEnd.perform
-    ScheduleWarningAboutSubmissionEnd.perform
-    ScheduleWarningAboutSubmissionEndClose.perform
+  task schedule: :environment do
+    Jobs::TimeConditionalNotifications.schedule_if_needed
   end
 end
