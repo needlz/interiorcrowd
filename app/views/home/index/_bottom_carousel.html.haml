@@ -1,0 +1,62 @@
+.container1
+  #bottomCarouselHome.carousel.slide.carousel-fade{"data-ride" => "carousel"}
+    / Indicators
+    %ol.carousel-indicators.visible-xs
+      %li{"data-slide-to" => "0", "data-target" => "#bottomCarouselHome"}
+      %li.active{"data-slide-to" => "1", "data-target" => "#bottomCarouselHome"}
+      %li{"data-slide-to" => "2", "data-target" => "#bottomCarouselHome"}
+      %li{"data-slide-to" => "3", "data-target" => "#bottomCarouselHome"}
+    / Wrapper for slides
+    .carousel-inner{:role => "listbox"}
+      .item
+        %img{:src => "/assets/kirsten-room1.jpg"}/
+        .carousel-caption
+          %div
+            %img{:src => "/assets/kirsten-profile.jpg"}/
+            %h5 Kirsten
+            %p
+              %span “
+              As soon as the process began, I felt instantly inspired to go out and buy all the new furniture the designer recommended for my space. It was so easy! 
+              %span ”
+      .item.active
+        %img{:src => "/assets/cathy-room1.jpg"}/
+        .carousel-caption
+          %div
+            %img{:src => "/assets/cathy-profile.jpg"}/
+            %h5 Cathy
+            %p
+              %span “
+              I never felt comfortable in this room - there were just too many things wrong with it. Now, it brings me a lot of joy to be in this room. 
+              %span ”
+      .item
+        %img{:src => "/assets/kevin-room1.jpg"}/
+        .carousel-caption
+          %div
+            %img{:src => "/assets/kevin-profile.jpg"}/
+            %h5 Kevin
+            %p
+              %span “
+              Our priorities changed a lot when we had kids and our home became cluttered. Our designer provided some amazing solutions that were both practical - and nice to look at. 
+              %span ”
+      .item
+        %img{:src => "/assets/melanie-room1.jpg"}/
+        .carousel-caption
+          %div
+            %img{:src => "/assets/melanie-profile.jpg"}/
+            %h5 Melanie
+            %p
+              %span “
+              I always thought an interior designer would be too expensive, so I didn’t even consider it. My designer worked with my busy schedule - and it was actually fun! 
+              %span ”
+    / Controls
+    %a.left.carousel-control.hidden-xs{"data-slide" => "prev",
+        :href => "#bottomCarouselHome",
+        :role => "button",
+        :style => "margin-left: 375px;"}
+      %img{:src => "/assets/carouselPrev.png"}/
+    %a.right.carousel-control.hidden-xs{"data-slide" => "next",
+        :href => "#bottomCarouselHome",
+        :role => "button",
+        :style => "margin-right: 375px;"}
+      %img{:src => "/assets/carouselNext.png"}/
+  %a.getStartedBottom{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase

@@ -3836,3 +3836,525 @@ a.uploadNewConceptBoard{
     margin-left: 30px;
 }
 /* end DC-fulfillment-final-upload-edit */
+
+/*start homepage*/
+
+.topCarouselHome{
+    padding: 0px;
+}
+.topCarouselHome .carousel-inner>.item{
+    height: 42vw;
+}
+.topCarouselHome .carousel-inner>.item>img{
+    max-width: 112%;
+}
+.topCarouselHome .carousel-inner>.item .carousel-caption{
+    font-size: 50px;
+    font-family: 'BodoniSevITC-BookItalOS';
+    top: 0%;
+    text-shadow: none;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    background: rgba(32,32,32,0.40);
+    padding-top: 100px;
+    letter-spacing: 1.5px;
+}
+.topCarouselHome .carousel-inner>.item .carousel-caption span{
+    font-family: 'BodoniSevITC-Bold'
+}
+.topCarouselHome .carousel-inner>.item .carousel-caption a.getStartedBtn{
+    display: block;
+    background: #409863;
+    font-family: "AvenirLTStd-Medium";
+    color: #fefffe;
+    font-size: 22px;
+    line-height: 50px;
+    width: 195px;
+    margin: 30px auto 0px;
+    letter-spacing: normal;
+}
+.topCarouselHome .carousel-control{
+    display: none;
+}
+.topCarouselHome a.getStartedTop{
+    display: none;
+}
+.circleDownArrow{
+    background: url('/assets/circle-down-arrow.png');
+    width: 25px;
+    height: 24px;
+    display: block;
+    margin: 10px auto;
+}
+.whatWeDoBox{
+    text-align: center;
+    background: #f4f4f4;
+}
+.whatWeDoBox h2{
+    font-family: 'BodoniSevITC-BookOS';
+    font-size: 30px;
+    margin-top: 70px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+.shortUnderline{
+    background: #929292;
+    height: 1px;
+    width: 50px;
+    margin: 0px auto;
+}
+.whatWeDoBox p{
+    font-family: 'AvenirLTStd-Medium';
+    font-size: 24px;
+    margin-top: 40px;
+    margin-bottom: 135px;
+    /*line-height: 32px;*/
+    color: #666;
+    padding: 0 4%;
+    line-height: 1.5;
+}
+
+.justineStory h2{
+    text-align: center;
+    font-family: 'BodoniSevITC-BookOS';
+    font-size: 30px;
+    margin-top: 85px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+.justineLeft{
+    padding: 0px;
+    position: relative;
+}
+.justineLeft .justineOverlay{
+    background: rgba(10,10,10,0.71);
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: none;
+}
+.justineLeft .justineOverlay .justinePlay{
+    width: 55px;
+    height: 54px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -27px;
+    margin-left: -27px;
+    background: url('/assets/play-btn.png');
+}
+.justineRight{
+    border: 3px solid #5f5f5f;
+    border-left: 0px;
+    padding: 0px 60px;
+    display: table;
+}
+.justineRight > div{
+    display: table-cell;
+    vertical-align: middle;
+
+}
+.justineRight h3{
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 40px;
+    margin-top: 0px;
+}
+.justineRight p{
+    font-size: 20px;
+    color: #666666;
+    font-family: "AvenirLTStd-Light";
+    margin-bottom: 40px;
+}
+.justineRight a{
+    font-size: 18px;
+    color: #409863;
+    font-family: "AvenirLTStd-Light";
+}
+
+.whatToExpect{
+    background: #f4f4f4;
+    padding: 180px 0px 160px;
+}
+.whatToExpect .row{
+    background: #FFF;
+    margin: 0px 20px;
+    padding-bottom: 50px;
+}
+.whatToExpect h2{
+    text-align: center;
+    font-family: 'BodoniSevITC-BookOS';
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: #333333;
+}
+.whatToExpect img{
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+.whatToExpect h5{
+    color: #666666;
+    font-size: 18px;
+    font-family: "AvenirLTStd-Heavy";
+}
+.whatToExpect p{
+    color: #666666;
+    font-size: 16px;
+    font-family: "AvenirLTStd-Light";
+}
+
+.bottomCarouselHome{
+    padding: 0px;
+    background: #fafafa;
+}
+.bottomCarouselHome .item,.bottomCarouselHome .item > div{
+    height: 400px;
+}
+.bottomCarouselHome .item > img{
+    position: relative;
+    top: -39%;
+}
+.bottomCarouselHome .carousel-control.left,.bottomCarouselHome .carousel-control.right{
+    background-image: none;
+    opacity: 1;
+    text-shadow: none;
+    width: 25px;
+}
+.bottomCarouselHome .carousel-control{
+
+}
+.bottomCarouselHome .carousel-control img{
+    position: absolute;
+    top: 50%;
+    margin-top: -24px;
+    left: 0%;
+}
+.bottomCarouselHome .carousel-caption{
+    background: rgba(10,10,10,0.71);
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    text-shadow: none;
+    display: table;
+}
+.bottomCarouselHome .carousel-caption > div{
+    display: table-cell;
+    vertical-align: middle;
+}
+.bottomCarouselHome .carousel-caption img{
+    border-radius: 100%;
+    border: 7px solid #FFF;
+}
+.bottomCarouselHome .carousel-caption h5{
+    font-family: "AvenirLTStd-Heavy";
+    font-size: 30px;
+    margin: 10px 0px 20px;
+}
+.bottomCarouselHome .carousel-caption p{
+    font-family: "AvenirLTStd-MediumOblique";
+    font-size: 24px;
+    color: #fefefe;
+    margin: 0px;
+    padding: 0 25%;
+}
+.bottomCarouselHome .carousel-caption p span{
+    font-family: "Times New Roman", serif;
+}
+.bottomCarouselHome a.getStartedBottom{
+    display: block;
+    background: #409863;
+    font-family: "AvenirLTStd-Medium";
+    color: #fefffe;
+    font-size: 22px;
+    line-height: 50px;
+    width: 195px;
+    margin: 60px auto;
+    text-align: center;
+}
+@media (min-width: 991px){
+    .topCarouselHome .carousel-inner>.item{
+        /*height: 30vw;*/
+    }
+    .topCarouselHome .carousel-inner>.item>img{
+        /*position: absolute;*/
+        /*top: -32%;*/
+    }
+}
+@media (max-width: 1200px){
+    .topCarouselHome .carousel-inner>.item .carousel-caption{
+        font-size: 45px;
+    }
+    .topCarouselHome .carousel-inner>.item{
+        height: 49vw;
+    }
+    .topCarouselHome .carousel-inner>.item .carousel-caption a.getStartedBtn{
+        font-size: 20px;
+        width: 185px;
+        margin: 15px auto 0px;
+    }
+    .whatWeDoBox p{
+        font-size: 24px;
+        line-height: 34px;
+    }
+    .justineRight{
+        padding: 0px 15px;
+    }
+    .whatToExpect {
+        background: #f4f4f4;
+        padding: 160px 0px 140px;
+    }
+    .bottomCarouselHome .item > img {
+        top: -20%;
+    }
+    .bottomCarouselHome .carousel-caption h5,.bottomCarouselHome .carousel-caption p{
+        font-size: 24px;
+    }
+    .bottomCarouselHome a.getStartedBottom{
+        font-size: 20px;
+    }
+    .bottomCarouselHome .carousel-caption p{
+        padding: 0 18%;
+    }
+
+}
+@media (max-width: 992px){
+    .topCarouselHome .carousel-inner>.item .carousel-caption{
+        font-size: 40px;
+        /*top: 5%;*/
+        letter-spacing: normal;
+    }
+    .topCarouselHome .carousel-inner>.item{
+        height: 55vw;
+    }
+    .whatWeDoBox h2{
+        margin-top: 100px;
+    }
+    .whatWeDoBox p {
+        font-size: 22px;
+        line-height: 32px;
+    }
+    .justineRight {
+        border: 3px solid #5f5f5f;
+        border-top: 0px;
+        padding: 55px 30px;
+        text-align: center;
+    }
+    .whatToExpect {
+        background: #f4f4f4;
+        padding: 130px 0px 105px;
+    }
+    .whatToExpect h5{
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0px;
+    }
+    .whatToExpect p{
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0px;
+    }
+    .bottomCarouselHome .item > img {
+        top: 0%;
+    }
+    .bottomCarouselHome .carousel-caption h5, .bottomCarouselHome .carousel-caption p {
+        font-size: 20px;
+    }
+    .bottomCarouselHome .carousel-caption p{
+        padding: 0px 16%;
+    }
+    .bottomCarouselHome .item > img{
+        max-width: 115%;
+    }
+    .bottomCarouselHome > .container,.whatToExpect > .container,.justineFluid{
+        padding: 0px;
+    }
+}
+@media (max-width: 640px){
+    .topCarouselHome .carousel-inner>.item{
+        padding-top: 128px;
+        height: 85vw;
+    }
+    .topCarouselHome .carousel-inner>.item>img {
+        max-width: 110%;
+    }
+    .topCarouselHome .carousel-inner>.item .carousel-caption{
+        font-size: 30px;
+        line-height: 32px;
+        color: #666666;
+        top: 7%;
+        background-color: transparent;
+        padding-top: 0px;
+    }
+    .topCarouselHome .carousel-inner>.item .carousel-caption span{
+        display: block;
+    }
+    .topCarouselHome .carousel-inner>.item .carousel-caption a.getStartedBtn{
+        display: none;
+    }
+    .topCarouselHome a.getStartedTop{
+        display: block;
+        background: #409863;
+        font-family: "AvenirLTStd-Medium";
+        color: #fefffe;
+        font-size: 22px;
+        line-height: 50px;
+        width: 90%;
+        margin: 20px auto;
+        text-align: center;
+    }
+    .whatWeDoBox h2 {
+        margin-top: 40px;
+        font-size: 24px;
+    }
+    .whatWeDoBox p {
+        font-size: 20px;
+        line-height: 28px;
+        margin-top: 30px;
+        padding: 0px 20px;
+        margin-bottom: 60px;
+    }
+    .justineStory h2{
+        margin-top: 40px;
+        font-size: 24px;
+    }
+    .justineRight h3{
+        font-size: 20px;
+    }
+    .justineRight p,.justineRight a{
+        font-size: 18px;
+    }
+    .whatToExpect{
+        padding: 40px 0px 0px;
+    }
+    .whatToExpect h2{
+        font-size: 24px;
+    }
+    .whatToExpect .row{
+        margin: 0px;
+        padding-bottom: 60px;
+    }
+    .bottomCarouselHome .carousel-caption img{
+        width: 100px;
+        height: 100px;
+    }
+    .bottomCarouselHome .carousel-caption h5{
+        font-size: 18px;
+        margin: 5px 0px 10px;
+    }
+    .bottomCarouselHome .carousel-caption p{
+        font-size: 18px;
+        padding: 0px 20px 20px;
+        line-height: 20px;
+    }
+    .bottomCarouselHome .item, .bottomCarouselHome .item > div{
+        height: 290px;
+    }
+    .bottomCarouselHome .item > img{
+        max-width: 115%;
+        position: relative;
+        left: -5%;
+    }
+    .bottomCarouselHome .carousel-indicators{
+        bottom: 5px;
+    }
+    .bottomCarouselHome a.getStartedBottom{
+        font-size: 22px;
+        width: 90%;
+        /*margin: 60px 20px;*/
+    }
+}
+@media (max-width: 500px){
+    .bottomCarouselHome .item > img{
+        max-width: 125%;
+    }
+}
+@media (max-width: 420px){
+    .topCarouselHome .carousel-inner>.item{
+        height: 105vw;
+        padding-top: 110px;
+    }
+    .topCarouselHome .carousel-inner>.item>img{
+        max-width: 130%;
+        position: relative;
+        left: -15%;
+    }
+    .topCarouselHome .carousel-inner>.item .carousel-caption {
+        top: 5%;
+    }
+    .topCarouselHome a.getStartedTop {
+        margin: 15px auto;
+    }
+    .whatWeDoBox p{
+        margin-bottom: 40px;
+    }
+    .justineRight {
+        padding: 40px 10px;
+    }
+    .justineRight p{
+        font-size: 16px;
+    }
+    .bottomCarouselHome .carousel-caption h5,.bottomCarouselHome .carousel-caption p{
+        font-size: 16px;
+    }
+    .bottomCarouselHome .item > img {
+        max-width: 240%;
+        left: -120%;
+    }
+    .bottomCarouselHome .item, .bottomCarouselHome .item > div {
+        height: 340px;
+    }
+}
+
+.carousel-fade .carousel-inner .item {
+    opacity: 0;
+    transition-property: opacity;
+}
+
+.carousel-fade .carousel-inner .active {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+    left: 0;
+    opacity: 0;
+    z-index: 1;
+}
+
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+    opacity: 1;
+}
+
+.carousel-fade .carousel-control {
+    z-index: 10;
+}
+
+
+@media all and (transform-3d), (-webkit-transform-3d) {
+    .carousel-fade .carousel-inner > .item.next,
+    .carousel-fade .carousel-inner > .item.active.right {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.prev,
+    .carousel-fade .carousel-inner > .item.active.left {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .carousel-fade .carousel-inner > .item.next.left,
+    .carousel-fade .carousel-inner > .item.prev.right,
+    .carousel-fade .carousel-inner > .item.active {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+}
+/*end homepage*/

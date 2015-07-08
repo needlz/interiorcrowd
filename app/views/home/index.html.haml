@@ -1,32 +1,17 @@
-.lets-design
-  = render partial: 'home/index/lets_design_header'
-.container.paddingBottom200
-  .row
-    .col-md-12.text-center
-      %a.getStartedBtn.black-hover{ href: design_brief_contests_path, class: tracked_link }
-        = t('home.get_started')
-      %span.arrowDownBtn
-        %img{src: "/assets/down-arrow.png"}/
-      = render partial: 'home/index/how_it_works'
-.container-fluid.example-moodboards
-  .row
-    .col-md-12.text-center
-      %h3.font36= t('home.example_moodboards')
-      .smallUnderline
-  .row
-    .col-sm-4.disablePadding
-      .moodboardExample1
-    .col-sm-4
-      .moodboardExample2
-    .col-sm-4.disablePadding
-      .moodboardExample3
-  .container
-    = render partial: 'home/index/success_stories'
-    .row
-      = render partial: 'home/index/packages'
-.container
-  .row
-    .col-md-12.text-center
-      %a.getStartedBtn.getStartedBtnBottom.black-hover{ href: design_brief_contests_path, class: tracked_link }
-        = t('home.get_started')
-      
+- content_for :head do
+  = javascript_include_tag 'home/main'
+
+.container-fluid.topCarouselHome
+  = render 'home/index/top_carousel'
+
+.container-fluid.whatWeDoBox
+  = render 'home/index/what_we_do'
+
+.container-fluid.justineStory
+  = render 'home/index/story'
+
+.container-fluid.whatToExpect
+  = render 'home/index/what_to_expect'
+
+.container-fluid.bottomCarouselHome
+  = render 'home/index/bottom_carousel'

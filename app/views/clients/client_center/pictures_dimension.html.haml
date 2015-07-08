@@ -2,7 +2,6 @@
   = render partial: 'shared/setup_uploadify'
   = javascript_include_tag 'contests/pictures_dimensions'
   = javascript_include_tag 'contests/design_space_options'
-  = stylesheet_link_tag 'new-style'
   :javascript
     I18n = #{ translations_to_json(['contests', 'space']) }
     $(document).ready(function(){

@@ -3,7 +3,7 @@
 
 - content_for :head do
   = stylesheet_link_tag 'entries'
-  = stylesheet_link_tag 'new-style'
+
   = javascript_include_tag 'clients/entries'
   - @entries_page.javascripts.each do |script|
     = javascript_include_tag script

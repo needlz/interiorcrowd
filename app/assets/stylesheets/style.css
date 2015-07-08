@@ -2940,18 +2940,8 @@ padding-bottom: 40px;
 .lets-design > div p i{
     font-weight: 400;
 }
-.getStartedBtn:hover,.getStartedBtn{
-    border: 2px solid #000;
-    font-size: 30px;
-    color: #000;
-    text-decoration: none;
-    font-weight: 700;
-    border-radius: 5px;
-    padding: 10px 40px;
-    margin-top: 60px;
-    margin-bottom: 127px;
-    display: inline-block;
-}
+
+
 .arrowDownBtn{
     display: block;
     margin-bottom: 245px;
@@ -3116,10 +3106,7 @@ padding-bottom: 40px;
         width: 29.5%;
     }
 }
-.getStartedBtnBottom:hover,.getStartedBtnBottom{
-    margin-top: 51px;
-    margin-bottom: 51px;
-}
+
 /*end home page*/
 
 /*contest page*/

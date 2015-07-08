@@ -17,6 +17,7 @@
  *= require lib/select2-3.5.2/select2.css
  *= require style
  *= require style-override
+ *= require new-style
  *= require shared-style
  *= require home
  *= require clients

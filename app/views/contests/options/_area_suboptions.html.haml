@@ -2,5 +2,5 @@
 .menu-room.row{ data: { id: parent.id } }
   .menu-room.text-center.children
     - areas.each do |area|
-      %span.m-room.option-item{ data: { id: area.id },
+      %span.m-room.option-item.lightFont{ data: { id: area.id },
         class: ('active' if @contest_view.design_area == area)}= area.name
