@@ -3,7 +3,7 @@
   :javascript
     I18n = #{ translations_to_json('designer_center.portfolio.show'.split('.')) }
 
-.designer-portfolio{ data: { id: @portfolio_view.designer_id } }
+.designer-portfolio.lightFont{ data: { id: @portfolio_view.designer_id } }
   .cover_image{ cover_image_options }
   .bottom-stripe{ class: ('with-buttons' if @portfolio_view.owner?(@designer) || @portfolio_view.show_invitation?(@client)) }
     .container.animated.fadeInDown

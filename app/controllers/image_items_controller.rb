@@ -39,7 +39,9 @@ class ImageItemsController < ApplicationController
 
   def default
     contest_request = @designer.contest_requests.find(params[:contest_request_id])
-    item_view = ImageItemView.new(ImageItem.create!(kind: params[:kind], contest_request_id: contest_request.id))
+    item_view = ImageItemView.new(ImageItem.create!(kind: params[:kind],
+                                                    contest_request_id: contest_request.id,
+                                                    image_id: params[:image_id] ))
     render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view, editable: true, mode: :edit }
   end
 

@@ -9,7 +9,7 @@
     I18n = #{ translations_to_json('designer_center.portfolio.creation'.split('.')) }
 
 - content_for :designer_center_content do
-  .portfolio-creation{ data: { designer: { id: @portfolio.designer.id } } }
+  .portfolio-creation.lightFont{ data: { designer: { id: @portfolio.designer.id } } }
     = form_for @portfolio, url: portfolio_path, method: :patch  do |f|
       = render partial: 'portfolios/form', locals: { form: f }
       %div.lineBreak
