@@ -12,13 +12,15 @@ class AppealScale
     :hollywood_regency
   ]
 
-  attr_reader :value
+  attr_reader :value, :description, :retailers
   attr_accessor :reason
 
   def initialize(appeal)
     @appeal = appeal
     @key = appeal.name
     @value = default_value
+    @description = I18n.t("contests.appeals.#{ key.to_s }.description")
+    @retailers = I18n.t("contests.appeals.#{ key.to_s }.retailers")
   end
 
   def self.from(options)
@@ -95,7 +97,7 @@ class AppealScale
   end
 
   def localized_name(key)
-    I18n.t("contests.appeals.#{ key.to_s }")
+    I18n.t("contests.appeals.#{ key.to_s }.name")
   end
 
 end
