@@ -11,7 +11,7 @@
   .hLine
 .col-md-12.disablePadding.concept-board-footer-buttons
   .col-xs-6.backBtn
-    - if @request.fulfillment_editing?
+    - if @request.fulfillment_approved?
       = link_to edit_designer_center_response_path(id: @request.id),
           class: tracked_link do
         .backToEntries
@@ -32,11 +32,3 @@
       - if @request.contest.submission?
         = link_to '#', class: 'submit submitMyDesign high-button' do
           = t('designer_center.respond.submit_design')
-    - elsif @request.fulfillment?
-      = form_for @request,
-          url: designer_center_response_path(id: @request.id),
-          html: { class: "edit_contest_request", data: { name: 'Submit products list' } } do |f|
-        = f.hidden_field :status, value: 'fulfillment_ready'
-        = hidden_mixpanel_submit_tag
-        = link_to '#', class: 'submit submitMyDesign high-button' do
-          = t('designer_center.respond.submit')

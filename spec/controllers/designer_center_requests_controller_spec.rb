@@ -62,7 +62,7 @@ RSpec.describe DesignerCenterRequestsController do
     it 'returns page of winner response' do
       submitted_request.update_attributes!(answer: 'winner')
       get :show, id: submitted_request.id
-      expect(response).to render_template(:show)
+      expect(response).to redirect_to edit_designer_center_response_path(id: submitted_request.id)
     end
 
     it 'returns page for each phase view' do
@@ -142,7 +142,10 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     context 'request with fulfillment status' do
-      let(:request){ Fabricate(:contest_request, designer: designer, contest: contest, status: 'fulfillment') }
+      let(:request){ Fabricate(:contest_request,
+                               designer: designer,
+                               contest: contest,
+                               status: 'fulfillment') }
 
       before do
         request.image_items.create!(kind: 'product_items')

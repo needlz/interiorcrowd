@@ -43,9 +43,15 @@
             image_items: @similar_styles,
             wrap_row_with_block: false }
 
-.fullWidthLine.marginTop20
-.row
-  = link_to designer_center_response_path(id: @request_view.id), class: tracked_link do
-    .backToEntries.marginTop20
-      %img{ src: '/assets/lt.png' }/
-      = t('designer_center.respond.back')
+- if @request.fulfillment?
+  .fullWidthLine.marginTop20
+  .row
+    .pull-right.marginTop20.marginBottom20
+      = form_for @request,
+          url: designer_center_response_path(id: @request.id),
+          html: { class: "edit_contest_request",
+            data: { name: 'Submit products list' } } do |f|
+        = f.hidden_field :status, value: 'fulfillment_ready'
+        = hidden_mixpanel_submit_tag
+        = link_to '#', class: 'submit submitMyDesign high-button' do
+          = t('designer_center.respond.submit')
