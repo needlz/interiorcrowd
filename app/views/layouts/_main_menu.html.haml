@@ -1,8 +1,6 @@
 .row
   .col-xs-2
-    %a{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
-      %img{src: '/assets/logo2.png'}/
-
+    %a.logo{ href: root_path, class: tracked_link, data: { name: 'Homepage icon' } }
   .col-xs-10
     %a.btn.needHelp.pull-right{ href: need_help_path, class: tracked_link }
       = t('header.need_help')

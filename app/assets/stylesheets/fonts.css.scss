@@ -24,26 +24,39 @@
  * © 2014 MyFonts Inc
 */
 
-
 /* @import must be at top of file, otherwise CSS will not work */
 /*@import url("//hello.myfonts.net/count/2cc7a1");*/
 
-
-@font-face {font-family: 'SofiaProLight';src: url('/assets/2CC7A1_0_0.eot');src: url('/assets/2CC7A1_0_0.eot?#iefix') format('embedded-opentype'),url('/assets/2CC7A1_0_0.woff2') format('woff2'),url('/assets/2CC7A1_0_0.woff') format('woff'),url('/assets/2CC7A1_0_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'AvenirLTStd-Light';src: url('webfonts/2CC7A1_1_0.eot');src: url('webfonts/2CC7A1_1_0.eot?#iefix') format('embedded-opentype'),url('webfonts/2CC7A1_1_0.woff2') format('woff2'),url('webfonts/2CC7A1_1_0.woff') format('woff'),url('webfonts/2CC7A1_1_0.ttf') format('truetype');}
+@import url("//hello.myfonts.net/count/2e8e58");
 
 @font-face {
-    font-family: 'AvenirLTStd-Black';
-    src: url('/assets/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
-    url('/assets/AvenirLTStd-Black.otf')  format('opentype'),
-    url('/assets/AvenirLTStd-Black.woff') format('woff'), url('/assets/AvenirLTStd-Black.ttf')  format('truetype'),
-    url('/assets/AvenirLTStd-Black.svg#AvenirLTStd-Black') format('svg');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'SofiaProLight';
+  src: url('/assets/2CC7A1_0_0.eot');
+  src: url('/assets/2CC7A1_0_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2CC7A1_0_0.woff2') format('woff2'),
+  url('/assets/2CC7A1_0_0.woff') format('woff'),
+  url('/assets/2CC7A1_0_0.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'AvenirLTStd-Light';
+  src: url('webfonts/2CC7A1_1_0.eot');
+  src: url('webfonts/2CC7A1_1_0.eot?#iefix') format('embedded-opentype'),
+  url('webfonts/2CC7A1_1_0.woff2') format('woff2'),
+  url('webfonts/2CC7A1_1_0.woff') format('woff'),
+  url('webfonts/2CC7A1_1_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Black';
+  src: url('/assets/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
+  url('/assets/AvenirLTStd-Black.otf') format('opentype'),
+  url('/assets/AvenirLTStd-Black.woff') format('woff'),
+  url('/assets/AvenirLTStd-Black.ttf') format('truetype'),
+  url('/assets/AvenirLTStd-Black.svg#AvenirLTStd-Black') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
   font-family: 'SofiaProLight';
@@ -66,18 +79,20 @@
 @font-face {
   font-family: 'AvenirLTStd-Black';
   src: url('/assets/AvenirLTStd-Black.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-Black.otf')  format('opentype'),
-  url('/assets/AvenirLTStd-Black.woff') format('woff'), url('/assets/AvenirLTStd-Black.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-Black.otf') format('opentype'),
+  url('/assets/AvenirLTStd-Black.woff') format('woff'),
+  url('/assets/AvenirLTStd-Black.ttf') format('truetype'),
   url('/assets/AvenirLTStd-Black.svg#AvenirLTStd-Black') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'AvenirLTStd-Medium';
   src: url('/assets/AvenirLTStd-Medium.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-Medium.otf')  format('opentype'),
+  url('/assets/AvenirLTStd-Medium.otf') format('opentype'),
   url('/assets/AvenirLTStd-Medium.woff') format('woff'),
-  url('/assets/AvenirLTStd-Medium.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-Medium.ttf') format('truetype'),
   url('/assets/AvenirLTStd-Medium.svg#AvenirLTStd-Medium') format('svg');
   font-weight: normal;
   font-style: normal;
@@ -86,9 +101,9 @@
 @font-face {
   font-family: 'AvenirLTStd-MediumOblique';
   src: url('/assets/AvenirLTStd-MediumOblique.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-MediumOblique.otf')  format('opentype'),
+  url('/assets/AvenirLTStd-MediumOblique.otf') format('opentype'),
   url('/assets/AvenirLTStd-MediumOblique.woff') format('woff'),
-  url('/assets/AvenirLTStd-MediumOblique.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-MediumOblique.ttf') format('truetype'),
   url('/assets/AvenirLTStd-MediumOblique.svg#AvenirLTStd-MediumOblique') format('svg');
   font-weight: normal;
   font-style: normal;
@@ -97,21 +112,20 @@
 @font-face {
   font-family: 'AvenirLTStd-LightOblique';
   src: url('/assets/AvenirLTStd-LightOblique.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-LightOblique.otf')  format('opentype'),
+  url('/assets/AvenirLTStd-LightOblique.otf') format('opentype'),
   url('/assets/AvenirLTStd-LightOblique.woff') format('woff'),
-  url('/assets/AvenirLTStd-LightOblique.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-LightOblique.ttf') format('truetype'),
   url('/assets/AvenirLTStd-LightOblique.svg#AvenirLTStd-LightOblique') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-
 @font-face {
   font-family: 'AvenirLTStd-Roman';
   src: url('/assets/AvenirLTStd-Roman.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-Roman.otf')  format('opentype'),
+  url('/assets/AvenirLTStd-Roman.otf') format('opentype'),
   url('/assets/AvenirLTStd-Roman.woff') format('woff'),
-  url('/assets/AvenirLTStd-Roman.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-Roman.ttf') format('truetype'),
   url('/assets/AvenirLTStd-Roman.svg#AvenirLTStd-Roman') format('svg');
   font-weight: normal;
   font-style: normal;
@@ -120,40 +134,92 @@
 @font-face {
   font-family: 'AvenirLTStd-Heavy';
   src: url('/assets/AvenirLTStd-Heavy.eot?#iefix') format('embedded-opentype'),
-  url('/assets/AvenirLTStd-Heavy.otf')  format('opentype'),
+  url('/assets/AvenirLTStd-Heavy.otf') format('opentype'),
   url('/assets/AvenirLTStd-Heavy.woff') format('woff'),
-  url('/assets/AvenirLTStd-Heavy.ttf')  format('truetype'),
+  url('/assets/AvenirLTStd-Heavy.ttf') format('truetype'),
   url('/assets/AvenirLTStd-Heavy.svg#AvenirLTStd-Heavy') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-@import url("//hello.myfonts.net/count/2e8e58");
+@font-face {
+  font-family: 'BodoniSevITC-BookItal';
+  src: url('/assets/2E8E58_0_0.eot');
+  src: url('/assets/2E8E58_0_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_0_0.woff2') format('woff2'),
+  url('/assets/2E8E58_0_0.woff') format('woff'),
+  url('/assets/2E8E58_0_0.ttf') format('truetype');
+}
 
+@font-face {
+  font-family: 'BodoniSevITC-Book';
+  src: url('/assets/2E8E58_1_0.eot');
+  src: url('/assets/2E8E58_1_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_1_0.woff2') format('woff2'),
+  url('/assets/2E8E58_1_0.woff') format('woff'),
+  url('/assets/2E8E58_1_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'BodoniSevITC-BookItal';src: url('/assets/2E8E58_0_0.eot');src: url('/assets/2E8E58_0_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_0_0.woff2') format('woff2'),url('/assets/2E8E58_0_0.woff') format('woff'),url('/assets/2E8E58_0_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BodoniSevITC-BookSC';
+  src: url('/assets/2E8E58_2_0.eot');
+  src: url('/assets/2E8E58_2_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_2_0.woff2') format('woff2'),
+  url('/assets/2E8E58_2_0.woff') format('woff'),
+  url('/assets/2E8E58_2_0.ttf') format('truetype');
+}
 
+@font-face {
+  font-family: 'BodoniSevITC-BookItalOS';
+  src: url('/assets/2E8E58_3_0.eot');
+  src: url('/assets/2E8E58_3_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_3_0.woff2') format('woff2'),
+  url('/assets/2E8E58_3_0.woff') format('woff'),
+  url('/assets/2E8E58_3_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'BodoniSevITC-Book';src: url('/assets/2E8E58_1_0.eot');src: url('/assets/2E8E58_1_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_1_0.woff2') format('woff2'),url('/assets/2E8E58_1_0.woff') format('woff'),url('/assets/2E8E58_1_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BodoniSevITC-BookOS';
+  src: url('/assets/2E8E58_4_0.eot');
+  src: url('/assets/2E8E58_4_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_4_0.woff2') format('woff2'),
+  url('/assets/2E8E58_4_0.woff') format('woff'),
+  url('/assets/2E8E58_4_0.ttf') format('truetype');
+}
 
+@font-face {
+  font-family: 'BodoniSevITC-BoldItalOS';
+  src: url('/assets/2E8E58_5_0.eot');
+  src: url('/assets/2E8E58_5_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_5_0.woff2') format('woff2'),
+  url('/assets/2E8E58_5_0.woff') format('woff'),
+  url('/assets/2E8E58_5_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'BodoniSevITC-BookSC';src: url('/assets/2E8E58_2_0.eot');src: url('/assets/2E8E58_2_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_2_0.woff2') format('woff2'),url('/assets/2E8E58_2_0.woff') format('woff'),url('/assets/2E8E58_2_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BodoniSevITC-BoldItal';
+  src: url('/assets/2E8E58_6_0.eot');
+  src: url('/assets/2E8E58_6_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_6_0.woff2') format('woff2'),
+  url('/assets/2E8E58_6_0.woff') format('woff'),
+  url('/assets/2E8E58_6_0.ttf') format('truetype');
+}
 
+@font-face {
+  font-family: 'BodoniSevITC-Bold';
+  src: url('/assets/2E8E58_7_0.eot');
+  src: url('/assets/2E8E58_7_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_7_0.woff2') format('woff2'),
+  url('/assets/2E8E58_7_0.woff') format('woff'),
+  url('/assets/2E8E58_7_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'BodoniSevITC-BookItalOS';src: url('/assets/2E8E58_3_0.eot');src: url('/assets/2E8E58_3_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_3_0.woff2') format('woff2'),url('/assets/2E8E58_3_0.woff') format('woff'),url('/assets/2E8E58_3_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'BodoniSevITC-BookOS';src: url('/assets/2E8E58_4_0.eot');src: url('/assets/2E8E58_4_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_4_0.woff2') format('woff2'),url('/assets/2E8E58_4_0.woff') format('woff'),url('/assets/2E8E58_4_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'BodoniSevITC-BoldItalOS';src: url('/assets/2E8E58_5_0.eot');src: url('/assets/2E8E58_5_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_5_0.woff2') format('woff2'),url('/assets/2E8E58_5_0.woff') format('woff'),url('/assets/2E8E58_5_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'BodoniSevITC-BoldItal';src: url('/assets/2E8E58_6_0.eot');src: url('/assets/2E8E58_6_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_6_0.woff2') format('woff2'),url('/assets/2E8E58_6_0.woff') format('woff'),url('/assets/2E8E58_6_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'BodoniSevITC-Bold';src: url('/assets/2E8E58_7_0.eot');src: url('/assets/2E8E58_7_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_7_0.woff2') format('woff2'),url('/assets/2E8E58_7_0.woff') format('woff'),url('/assets/2E8E58_7_0.ttf') format('truetype');}
-
-
-@font-face {font-family: 'BodoniSevITC-BoldOS';src: url('/assets/2E8E58_8_0.eot');src: url('/assets/2E8E58_8_0.eot?#iefix') format('embedded-opentype'),url('/assets/2E8E58_8_0.woff2') format('woff2'),url('/assets/2E8E58_8_0.woff') format('woff'),url('/assets/2E8E58_8_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BodoniSevITC-BoldOS';
+  src: url('/assets/2E8E58_8_0.eot');
+  src: url('/assets/2E8E58_8_0.eot?#iefix') format('embedded-opentype'),
+  url('/assets/2E8E58_8_0.woff2') format('woff2'),
+  url('/assets/2E8E58_8_0.woff') format('woff'),
+  url('/assets/2E8E58_8_0.ttf') format('truetype');
+}
 
