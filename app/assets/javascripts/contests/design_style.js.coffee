@@ -58,7 +58,6 @@ class DesignStylePage
   @bindDesignLevelItems: ($levelContainer)->
     $('.interiorDesignLevel input:radio').change (event)->
       $radio = $(event.target)
-      console.log $radio.data('name')
       $('.interiorDesignLevelMobile div').removeClass('active')
       if $radio.is(':checked')
         $('.interiorDesignLevelMobile label').filter('.' + $radio.data('name')).parent().addClass('active')

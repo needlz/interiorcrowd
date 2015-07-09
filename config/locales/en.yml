@@ -117,15 +117,106 @@ en:
       add_more_links: Add more links
       enlarge_picture: Enlarge picture
     appeals:
-      vintage: Vintage
-      eclectic: Eclectic
-      midcentury_modern: Mid-Century Modern
-      rustic_elegance: Rustic Elegance
-      coastal: Coastal
-      traditional: Traditional
-      transitional: Transitional
-      modern: Modern
-      hollywood_regency: Hollywood Regency
+      vintage:
+        name: Vintage
+        description: >
+          Originally sourced from flea-markets and antique stores to bring more eclectic pieces
+          (and a bit of history) into a room, the vintage trend is now reflected by the
+          increased popularity of retailers creating new pieces with a vintage feel. Choose
+          either original pieces or “vintage inspired” from more mainstream retailers.
+        retailers: >
+          -Budget-friendly original pieces and replicas: Etsy & Chairish
+          -For inspiration (or for the less budget-conscious): 1stdibs
+          -”Vintage Inspired” retailers: Restoration Hardware, Anthropologie,
+          One King’s Lane, Schoolhouse Electric, Rejuvenation
+      eclectic:
+        name: Eclectic
+        description: >
+          It’s all about mixing and matching various styles and colors to create a unique look.
+          Pick from a variety of modern retailers and match with vintage pieces for a more ‘worldly’ feel.
+          Brighten up the room with patterns, color pops and ethnic prints.
+        retailers: >
+          -For the less budget conscious: Design Within Reach, BluDot, Hive Modern, Coup d’etat
+          -More budget friendly: Room & Board, CB2
+          -Vintage Inspired: One King’s Lane.
+          -Worldly approach: Anthropologie, Cost Plus, Pier 1
+      midcentury_modern:
+        name: Mid-Century Modern
+        description: >
+          Often called "mod" and most definitely “retro”, this style is marked by simplicity,
+          clean lines, organic forms, and materials such as wood, metal, and plastic.
+          A key element is to bring the outdoors in by making the space feel as light and airy as possible.
+          Molded plywood and plastic is very popular in modern furniture, as well as polished metal.
+          Furniture is minimal and raised off the floor to allow the space to open up.
+        retailers: >
+          -Room and Board, HD Buttercup, West Elm, CB2 and Design Within Reach, Dwell Studio, BoConcept,
+          Cisco Brothers
+          -Online representing physical showrooms: 1st Dibs
+          -Online-only retailers: One King’s Lane, Chairish, Wayfair, Amazon
+          (if you know what you are looking for) Dot & Bo.
+      rustic_elegance:
+        name: Rustic Elegance
+        description: >
+          Rustic elegance is a combination of natural materials (like distressed wood) with modern or
+          luxurious decor or accessories (like chandeliers) - to present a room that is cozy but stylish.
+          This style incorporates some of the farm-inspired pieces that echo that comfortable lifestyle.
+        retailers: >
+          Restoration Hardware, Rejuvenation, Schoolhouse Electric
+      coastal:
+        name: Coastal
+        description: >
+          Light and relaxed is the essence of coastal (also called california casual).
+          This style uses light colors (blue and green hues with bright whites) and an abundance
+          of natural materials like distressed or cerused wooden furniture, jute rugs and handmade
+          accessories to create a breezy, summery vibe. Many retailers will have pieces fitting
+          this casual coastal theme - for example, nautical accents from West Elm, raffia furniture
+          from Serena & Lily, and striped pillows from Pier 1.
+        retailers: >
+          Serena & Lily, West Elm, Pottery Barn, Wisteria, Pier 1, Home Goods
+          Online Only Retailers: Wayfair, One King’s Lane
+      traditional:
+        name: Traditional
+        description: >
+          Trademarks of this style generally include deep wood tones, an abundance of
+          architectural details (thick moldings, for example), and elegant furnishings.
+          One of the most important facets of traditional interior design is the silhouettes of the pieces.
+          Wingback chairs, claw footed tables - chairs or tubs, and curved furniture pieces are
+          examples of how designers are finding inspiration in the ornate decor from the 18th and 19th centuries.
+          Antiques are also often integrated into this design style, but many companies like
+          Pottery Barn, Baker Furniture and Ballard Designs sell new pieces that mimic the lines of the old.
+        retailers: >
+          Baker, Kravet, Jan Showers, C. Mariani, Cache Collection, Caperton Collection, Dennis & Leen,
+          Ann Getty House Collection, Pottery Barn, Baker Furniture, Ballard Designs
+      transitional:
+        name: Transitional
+        description: >
+          Transitional is a blend of traditional and contemporary styles, mid-way between Old World
+          traditional and the world of chrome and glass contemporary; incorporating lines that are
+          less ornate than traditional designs, but not as severely basic as contemporary lines.
+        retailers: >
+          Formations, David Iatesta, Ironies, Oly Studio, Made Goods, Mr. Brown Home,
+          Julian Chichester, Ruby Living, Williams-Sonoma Home, Crate & Barrel
+      modern:
+        name: Modern
+        description: >
+          Clean, straight lines and simple, minimalistic decor are the main characteristics of a
+          modern style. Many retailers today have pieces that are modern, with bigger brands
+          like Design Within Reach, Room and Board being amongst the most popular.
+          For more budget-conscious options, look at IKEA and CB2.
+        retailers: >
+          Design Within Reach, Scandinavian Designs, Roche Bobois, Herman Miller, Dot & Bo, EQ3, IKEA, CB2
+      hollywood_regency:
+        name: Hollywood Regency
+        description: >
+          Hollywood celebrates glitz and glamour - a time when cocktail parties were more popular
+          than television series. This look can be achieved by mixing furniture from various other
+          styles (from traditional to modern Art Deco) with an emphasis on details - glamorous mirrors,
+          lacquered furniture, lots of gold and unexpected color combinations. The more luxurious,
+          the better. Original Dorothy Draper items can be purchased from 1stdibs for a great investment
+          piece, or go to Jonathan Adler for fun accessories.
+        retailers: >
+          1st Dibs, Jonathan Adler, Ruby Living, Z Gallerie, Oly Studio, Made Goods, Mr. Brown Home,
+          Julian Chichester, Arteriors Home, Chairish, Pier1, William Sonoma Home, Horchow
     appeal_values:
       like_it: Like it
       leave_it: Leave it...
@@ -481,7 +572,9 @@ en:
       me: Me
       designer: Designer
       send: Send
-      please_upload: Please upload a picture of each item. Then provide detail on why you chose it. The client will provide per-tem feedback
+      please_upload: >
+        Please upload a picture of each item. Then provide detail on why you chose it. The client will
+        provide per-tem feedback
       upload: Upload
       update_submission: If you would like to update your concept board submission, please use the edit buttons below.
       back_to_contests: Back to My Contests
@@ -490,7 +583,9 @@ en:
       note_for_client_placeholder: >
         I had so much fun designing this for you. Thanks so much for the fun brief. Below you will find
         more detailed instructions on how to get this look in your amazing new living room.
-      file_info: Ensure that your file is a .pdf format so that the client can download it. If you need help, contact us.
+      file_info: >
+        Ensure that your file is a .pdf format so that the client can download it. If you need help,
+        contact us.
       upload: Edit your final design
       upload_description: Tell the client how they can pull together their new look. Remember to be specific.
       product_list: Product List

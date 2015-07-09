@@ -11,7 +11,8 @@
                 data: { container: 'body',
                   toggle: 'popover',
                   placement: 'bottom',
-                  content: 'Etiam tincidunt cursus orci, id viverra enim feugiat sed. Quisque non convallis elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In faucibus facilisis eleifend. Integer odio nibh, sollicitudin et pulvinar quis, hendrerit eget lorem.',
+                  html: 'true',
+                  content: render('contests/previews/style_description_popup', { style: style }),
                   viewport: 'body' } }
               ?
         .row
