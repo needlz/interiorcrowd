@@ -198,13 +198,13 @@ class UserMailer < ActionMailer::Base
         HELLO_ADDRESS: contact_email,
         CLIENT_NAME: client.name,
         ENTRIES_URL: renderer.entries_client_center_index_url,
-        FAQ_URL: renderer.faq_url(anchor: 'client')
+        CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client')
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
   def one_day_left_to_submit_concept_board(contest)
-    template 'One_day_left_to_choose_a_winner'
+    template 'One_day_left_to_submit_concept_board'
     designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
         CONTEST_NAME: contest.name,
