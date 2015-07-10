@@ -7,7 +7,10 @@
       %a{ href: terms_of_service_path, class: tracked_link } Terms
       %a{ href: privacy_policy_path, class: tracked_link } Privacy Policy
     .col-md-6.footerSocial
-      %a{ href: coming_soon_path, class: tracked_link, data: { name: 'Twitter' } }
+      %a{ href: 'https://twitter.com/InteriorCrowd',
+          class: tracked_link,
+          data: { name: 'Twitter' },
+          target: '_blank' }
         %img{:src => '/assets/icons/twitter.png' }/
       %a{ href: coming_soon_path, class: tracked_link + " right-side", data: { name: 'Facebook' } }
         %img{:src => '/assets/icons/facebook.png' }/
