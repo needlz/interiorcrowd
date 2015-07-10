@@ -124,22 +124,21 @@ en:
           (and a bit of history) into a room, the vintage trend is now reflected by the
           increased popularity of retailers creating new pieces with a vintage feel. Choose
           either original pieces or “vintage inspired” from more mainstream retailers.
-        retailers: >
-          -Budget-friendly original pieces and replicas: Etsy & Chairish
-          -For inspiration (or for the less budget-conscious): 1stdibs
-          -”Vintage Inspired” retailers: Restoration Hardware, Anthropologie,
-          One King’s Lane, Schoolhouse Electric, Rejuvenation
+        retailers: |
+          - Budget-friendly original pieces and replicas: Etsy & Chairish
+          - For inspiration (or for the less budget-conscious): 1stdibs
+          - ”Vintage Inspired” retailers: Restoration Hardware, Anthropologie, One King’s Lane, Schoolhouse Electric, Rejuvenation
       eclectic:
         name: Eclectic
         description: >
           It’s all about mixing and matching various styles and colors to create a unique look.
           Pick from a variety of modern retailers and match with vintage pieces for a more ‘worldly’ feel.
           Brighten up the room with patterns, color pops and ethnic prints.
-        retailers: >
-          -For the less budget conscious: Design Within Reach, BluDot, Hive Modern, Coup d’etat
-          -More budget friendly: Room & Board, CB2
-          -Vintage Inspired: One King’s Lane.
-          -Worldly approach: Anthropologie, Cost Plus, Pier 1
+        retailers: |
+          - For the less budget conscious: Design Within Reach, BluDot, Hive Modern, Coup d’etat
+          - More budget friendly: Room & Board, CB2
+          - Vintage Inspired: One King’s Lane.
+          - Worldly approach: Anthropologie, Cost Plus, Pier 1
       midcentury_modern:
         name: Mid-Century Modern
         description: >
@@ -148,12 +147,11 @@ en:
           A key element is to bring the outdoors in by making the space feel as light and airy as possible.
           Molded plywood and plastic is very popular in modern furniture, as well as polished metal.
           Furniture is minimal and raised off the floor to allow the space to open up.
-        retailers: >
-          -Room and Board, HD Buttercup, West Elm, CB2 and Design Within Reach, Dwell Studio, BoConcept,
+        retailers: |
+          - Room and Board, HD Buttercup, West Elm, CB2 and Design Within Reach, Dwell Studio, BoConcept,
           Cisco Brothers
-          -Online representing physical showrooms: 1st Dibs
-          -Online-only retailers: One King’s Lane, Chairish, Wayfair, Amazon
-          (if you know what you are looking for) Dot & Bo.
+          - Online representing physical showrooms: 1st Dibs
+          - Online-only retailers: One King’s Lane, Chairish, Wayfair, Amazon (if you know what you are looking for) Dot & Bo.
       rustic_elegance:
         name: Rustic Elegance
         description: >
@@ -171,7 +169,7 @@ en:
           accessories to create a breezy, summery vibe. Many retailers will have pieces fitting
           this casual coastal theme - for example, nautical accents from West Elm, raffia furniture
           from Serena & Lily, and striped pillows from Pier 1.
-        retailers: >
+        retailers: |
           Serena & Lily, West Elm, Pottery Barn, Wisteria, Pier 1, Home Goods
           Online Only Retailers: Wayfair, One King’s Lane
       traditional:

@@ -150,21 +150,6 @@ InteriorC::Application.routes.draw do
     get '/:url', to: 'portfolios#show', as: 'show_portfolio'
   end
 
-  if Rails.env.production? || Rails.env.development? || Rails.env.test?
-    constraints subdomain: /^(www)?$/ do
-      root 'home#sign_up_beta', as: 'beta_signup'
-      get 'sign_up_beta', to: 'home#sign_up_beta'
-
-      resources :beta_subscribers, only: [:create]
-    end
-
-    constraints subdomain: 'beta' do
-      post '/create_beta_session', to: 'home#create_beta_session'
-      get '/sign_in_beta', to: 'home#sign_in_beta', as: 'sign_in_beta'
-      draw_routes
-    end
-  else
-    draw_routes
-  end
+  draw_routes
 
 end

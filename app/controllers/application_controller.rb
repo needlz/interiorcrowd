@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
-  before_filter :check_beta_area_access, :set_return_to_link, :setup_event_tracker
+  before_filter :set_return_to_link, :setup_event_tracker
 
   PAGE_404_PATH = 'public/404.html'
 
@@ -51,12 +51,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def check_beta_area_access
-    return if Rails.env.staging?
-    return unless beta_page?
-    redirect_to sign_in_beta_path(:url => request.original_url) unless beta_access_granted?
-  end
-
   def set_return_to_link
     return if request.method != 'GET' || controller_name == 'sessions'
     session[:return_to] = request.url unless session[:return_to].present?
@@ -67,16 +61,6 @@ class ApplicationController < ActionController::Base
     Rollbar.error(exception, extra_data)
     return render_404 if exception.kind_of?(ActionController::RoutingError)
     raise exception
-  end
-
-  def beta_access_granted?
-    cookies.signed[:beta]
-  end
-
-  def beta_page?
-    inside_beta_subdomain = (request.subdomain == 'beta')
-    on_beta_sign_in_page = (controller_name == 'home' && %w(sign_in_beta create_beta_session).include?(action_name))
-    inside_beta_subdomain && !on_beta_sign_in_page
   end
 
   def fetch_current_user

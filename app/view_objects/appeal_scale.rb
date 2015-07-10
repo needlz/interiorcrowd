@@ -57,7 +57,7 @@ class AppealScale
   end
 
   def collage_picture
-    "/assets/style_collages/collage#{ appeal.id }.jpg"
+    "/assets/style_collages/Collage#{ appeal.id }.png"
   end
 
   def value_key
