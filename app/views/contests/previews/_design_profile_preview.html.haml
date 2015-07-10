@@ -3,9 +3,9 @@
     - @contest_view.appeal_scales.each do |style|
       - if style.opinion
         .row
-          %p.col-sm-6{ class: style.value_key.to_s.camelize }
+          %p.col-sm-6.disablePadding{ class: style.value_key.to_s.camelize }
             %b= style.opinion
-          %p.col-sm-6.designStyle.text-right
+          %p.col-sm-6.designStyle.text-right.disablePadding
             = style.name.upcase
             %a{ href: 'javascript:void(0)',
                 data: { container: 'body',

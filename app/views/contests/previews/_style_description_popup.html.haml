@@ -1,3 +1,4 @@
 = style.description
 %b Retailers:
-%span= style.retailers
+%br
+%span= style.retailers.split("\n").join('<br>').html_safe
