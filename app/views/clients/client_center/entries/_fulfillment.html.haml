@@ -16,7 +16,7 @@
           %p= t('client_center.winner_selected.the_winner')
           .clearfix
         = render partial: 'shared/moodboard',
-          locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
+          locals: { items: @entries_page.entries_concept_board_page.current_lookbook_items }
     .col-md-4
       = render partial: 'contest_requests/submission_info',
           locals: { designer: request.designer, submitted_at: request.created_at, request: request }

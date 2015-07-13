@@ -96,7 +96,7 @@ class UserMailer < ActionMailer::Base
 
   def note_to_concept_board(params)
     template 'note_to_concept_board'
-    @url = updates_designer_center_index_url
+    @url = designer_center_updates_url
     @client_name = params[:client_name]
     @comment = ERB::Util.html_escape(params[:comment]).split("\n").join("<br/>")
     set_template_values(text: render_to_string('mails/note_to_concept_board'))

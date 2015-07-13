@@ -28,7 +28,7 @@ class ContestRequestEditing
 
   def update_image
     if contest_request_params[:image_id]
-      details = request.current_lookbook_item
+      details = request.current_lookbook_items
       details.update(image_id: contest_request_params[:image_id])
     end
   end
@@ -40,7 +40,7 @@ class ContestRequestEditing
   end
 
   def update_status
-    PhaseUpdater.new(request).perform_phase_change do
+    PhaseUpdater.new(request).monitor_phase_change do
       return perform_submission if contest_request_params[:status] == 'submitted'
       perform_ready_fulfillment if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
       perform_finish if contest_request_params[:status] == 'finished' && request.fulfillment_approved?

@@ -210,15 +210,18 @@ RSpec.describe ClientsController do
         let!(:submitted) { Fabricate(:contest_request,
                                      designer: designers[0],
                                      contest: contest,
-                                     status: 'submitted') }
+                                     status: 'submitted',
+                                     lookbook: Fabricate(:lookbook)) }
         let!(:draft) { Fabricate(:contest_request,
                                  designer: designers[1],
                                  contest: contest,
-                                 status: 'draft') }
+                                 status: 'draft',
+                                 lookbook: Fabricate(:lookbook)) }
         let!(:fulfillment) { Fabricate(:contest_request,
                                        designer: designers[2],
                                        contest: contest,
-                                       status: 'fulfillment') }
+                                       status: 'fulfillment',
+                                       lookbook: Fabricate(:lookbook)) }
 
         it 'views only submitted and fulfillment requests' do
           get :entries
@@ -241,14 +244,18 @@ RSpec.describe ClientsController do
           expect(assigns(:entries_page).won_contest_request).to eq(submitted)
         end
 
-        context 'has finished concept board' do
-          before do
-            Fabricate(:contest_request, designer: designers[3], contest: contest, status: 'finished', answer: 'winner')
-          end
-
+        context 'concept board in fulfillment state' do
           it 'returns page' do
-            get :entries
-            expect(response).to render_template(:entries)
+            (ContestRequest::FULFILLMENT_STATUSES + ['finished']).each do |status|
+              contest_request = Fabricate(:contest_request,
+                        designer: designers[3],
+                        contest: contest,
+                        status: status,
+                        answer: 'winner')
+              get :entries
+              expect(response).to render_template(:entries)
+              contest_request.destroy
+            end
           end
         end
       end
@@ -257,7 +264,12 @@ RSpec.describe ClientsController do
     it 'returns page' do
       contest = client.last_contest
       client.update_attributes!(status: 'finished')
-      fulfillment = Fabricate(:contest_request, designer: Fabricate(:designer), contest: contest, status: 'finished', answer: 'winner')
+      fulfillment = Fabricate(:contest_request,
+                              designer: Fabricate(:designer),
+                              contest: contest,
+                              status: 'finished',
+                              answer: 'winner',
+                              lookbook: Fabricate(:lookbook))
       fulfillment.image_items.create!(kind: 'product_items', final: true)
       get :entries
       expect(response).to render_template(:entries)

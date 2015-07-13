@@ -1,15 +1,10 @@
-.some-text.col-md-6.no-padding-left
-.clearfix
-- path = image.try(:original_size_url) || placeholder_src
-.thumbs
-  .col-md-12.novice.no-padding-left.template.relative
-    = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
-  - if path
-    .col-md-12.novice.no-padding-left.thumb.relative{ data: { id: image.try(:id) } }
-      = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
-.clearfix
-.col-md-6.no-x-padding.marg-top20
-  %input#concept_picture.hidden{ name: 'image[image]', type: 'file' }
-  %input#concept_board_picture_id{ name: image_id_input_name,
-    type: "hidden",
-    value: image.try(:id) }
+%input#concept_picture.hidden{ name: 'image[image]', type: 'file' }
+%input#concept_board_picture_id{ name: image_id_input_name,
+  type: 'hidden',
+  value: '' }
+
+= javascript_include_tag 'contest_requests/showcase'
+
+= render partial: 'designer_center_requests/showcase', locals: { items: items,
+      editable: true,
+      placeholder_src: placeholder_src }

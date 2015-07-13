@@ -8,10 +8,13 @@ RSpec.describe PhaseUpdater do
     contest_request = Fabricate(:contest_request, contest: contest, status: 'submitted')
     lookbook = Fabricate(:lookbook, contest_request: contest_request)
     Fabricate(:lookbook_image, phase: 'initial', lookbook: lookbook)
+    initial_lookbook_detail_number = 2
     new_phase = ContestPhases.status_to_phase('fulfillment')
 
-    PhaseUpdater.new(contest_request).perform_phase_change { contest_request.winner! }
-    expect(contest_request.lookbook.lookbook_details.where(phase: new_phase).count).to eq 1
+    PhaseUpdater.new(contest_request).monitor_phase_change { contest_request.winner! }
+    items = contest_request.lookbook.lookbook_details
+    expect(items.count).to eq initial_lookbook_detail_number * 2
+    expect(items.where(phase: new_phase).count).to eq initial_lookbook_detail_number
   end
 
 end

@@ -5,7 +5,7 @@ class SelectWinner
   end
 
   def perform
-    PhaseUpdater.new(contest_request).perform_phase_change do
+    PhaseUpdater.new(contest_request).monitor_phase_change do
       contest_request.winner!
     end
     contest_request.contest.winner_selected!

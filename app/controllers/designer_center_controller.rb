@@ -1,9 +1,11 @@
 class DesignerCenterController < ApplicationController
+  include RequiresDesigner
+
   before_filter :set_designer
 
   def designer_center
     if @designer.portfolio.complete?
-      redirect_to updates_designer_center_index_path
+      redirect_to designer_center_updates_path
     else
       redirect_to edit_portfolio_path
     end
@@ -20,9 +22,4 @@ class DesignerCenterController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:training)
   end
 
-  private
-
-  def set_designer
-    @designer = Designer.find(session[:designer_id]) if check_designer
-  end
 end

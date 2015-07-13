@@ -1,10 +1,8 @@
 .moodboard
-  - if image
-    = render partial: 'shared/image_with_enlarge_button',
-        locals: { url_for_downloading: image.url_for_downloading,
-                  original_size_path: image.original_size_url,
-                  thumb_path: image.medium_size_url,
-                  image_class: 'full-width' }
+  - if items.present?
+    = javascript_include_tag 'contest_requests/showcase'
+
+    = render 'designer_center_requests/showcase', items: items, editable: false
 
 :javascript
   $(function(){

@@ -11,7 +11,8 @@
       .initialImage
         - if @request.editable?
           = render partial: 'designer_center_requests/show/image_loading',
-              locals: { image: @request.concept_board_current_image, button_title: t('designer_center.edit.upload_new') }
+              locals: { items: @request.current_lookbook_items,
+                button_title: t('designer_center.edit.upload_new') }
         - else
           = render partial: 'shared/moodboard', locals: { request: @request }
   .col-lg-4.col-md-5

@@ -576,6 +576,7 @@ en:
       upload: Upload
       update_submission: If you would like to update your concept board submission, please use the edit buttons below.
       back_to_contests: Back to My Contests
+      update_concept_board_hint: Update your concept board to reflect a more customized look for your client.
     final_upload:
       note_for_client: Write a note about your board here
       note_for_client_placeholder: >

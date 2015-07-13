@@ -96,6 +96,10 @@ class Image < ActiveRecord::Base
     }
   end
 
+  def small_size_url
+    image.url(:medium)
+  end
+
   def medium_size_url
     image.url(:large)
   end

@@ -46,6 +46,10 @@ module HomeHelper
     '/assets/icons/download.png'
   end
 
+  def remove_icon_path
+    '/assets/cross-white.png'
+  end
+
   def page_title
     content_for?(:title) ? content_for(:title) : 'InteriorCrowd'
   end
