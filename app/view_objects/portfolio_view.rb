@@ -97,7 +97,7 @@ class PortfolioView
   def exit_portfolio_path(current_user)
     return root_path unless current_user
     return client_center_index_path if current_user.client?
-    designer_center_index_path if current_user.designer?
+    designer_center_path if current_user.designer?
   end
 
   def owner?(owner)

@@ -16,8 +16,16 @@ class ConceptBoardPage < PhasesHolder
     contest_request.visible_image_items(active_phase).for_view
   end
 
-  def concept_board_image
-    contest_request.concept_board_image_by_phase(active_phase)
+  def current_lookbook_items
+    contest_request.lookbook_items_by_phase(active_phase)
+  end
+
+  def concept_board_images
+    contest_request.lookbook_items_by_phase(active_phase).map(&:image)
+  end
+
+  def editable?
+    contest_request.editable? && (active_step >= last_phase_index)
   end
 
   protected

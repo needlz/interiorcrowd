@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   before_filter :set_link_after_login, only: [:designer_login, :client_login]
 
   def designer_login
-    redirect_to designer_center_index_path if session[:designer_id].present?
+    redirect_to designer_center_path if session[:designer_id].present?
     @login_view = LoginView.designer_login
   end
   

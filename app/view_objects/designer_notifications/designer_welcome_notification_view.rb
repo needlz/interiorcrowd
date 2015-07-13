@@ -16,7 +16,7 @@ module DesignerNotifications
     end
 
     def href(spectator = nil)
-      training_designer_center_index_path
+      designer_center_training_path
     end
 
     def type

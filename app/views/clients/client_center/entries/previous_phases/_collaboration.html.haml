@@ -8,7 +8,8 @@
     %br/
     %br/
   .col-md-8.disablePadding.relative.contest-request{ data: { id: request.id } }
-    = render partial: 'shared/moodboard', locals: { image: @entries_page.entries_concept_board_page.concept_board_image }
+    = render partial: 'shared/moodboard',
+        locals: { items: @entries_page.entries_concept_board_page.current_lookbook_items }
     .image-items
       = render partial: 'clients/client_center/entries/collaboration/image_block',
           locals: { choosable: false,

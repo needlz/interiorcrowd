@@ -30,10 +30,11 @@
           .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
         - if @request.editable?
           = render partial: 'designer_center_requests/show/image_loading',
-              locals: { image: @show_page.concept_board_image,
+              locals: { items: @show_page.current_lookbook_items,
                 button_title: t('designer_center.responses.item.edit_concept_board') }
         - else
-          = render partial: 'shared/moodboard', locals: { image:  @show_page.concept_board_image }
+          = render partial: 'shared/moodboard',
+              locals: { items:  @show_page.current_lookbook_items }
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
 

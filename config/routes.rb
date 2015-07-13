@@ -90,27 +90,27 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    resources :designer_center, only: [] do
-      collection do
-        get '', to: 'designer_center#designer_center', as: ''
-        get 'updates', to: 'designer_center#updates', as: 'updates'
-        get 'training', to: 'designer_center#training', as: 'training'
-        resources :contests,
-                  controller: 'designer_center_contests',
-                  as: 'designer_center_contest',
-                  only: [:show, :index] do
-          collection do
-            get 'index'
-          end
+    scope '/designer_center' do
+      get '', to: 'designer_center#designer_center', as: 'designer_center'
+      get 'updates', to: 'designer_center#updates', as: 'designer_center_updates'
+      get 'training', to: 'designer_center#training', as: 'designer_center_training'
+      resources :contests,
+                controller: 'designer_center_contests',
+                as: 'designer_center_contest',
+                only: [:show, :index] do
+        collection do
+          get 'index'
         end
-        resources :responses,
-                  controller: 'designer_center_requests',
-                  as: 'designer_center_response',
-                  only: [:new, :create, :show, :index, :update, :edit] do
-          get 'preview', on: :member,  as: 'preview'
-        end
-        resource :portfolio, only: [:edit, :update]
       end
+      resources :responses,
+                controller: 'designer_center_requests',
+                as: 'designer_center_response',
+                only: [:new, :create, :show, :index, :update, :edit] do
+        get 'preview', on: :member,  as: 'preview'
+
+        resources :lookbook_details, only: [:create, :destroy]
+      end
+      resource :portfolio, only: [:edit, :update]
     end
 
     resources :designer_invitations, only: [:create]

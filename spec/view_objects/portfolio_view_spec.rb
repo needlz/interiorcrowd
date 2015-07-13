@@ -18,7 +18,7 @@ RSpec.describe PortfolioView do
       let(:current_user) { Fabricate(:designer) }
 
       it 'returns designer center path' do
-        expect(portfolio_view.exit_portfolio_path(current_user)).to eq designer_center_index_path
+        expect(portfolio_view.exit_portfolio_path(current_user)).to eq designer_center_path
       end
     end
 

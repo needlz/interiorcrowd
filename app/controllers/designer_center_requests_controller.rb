@@ -65,7 +65,7 @@ class DesignerCenterRequestsController < ApplicationController
 
     redirection =
       if contest_editing.submitted?
-        updates_designer_center_index_path
+        designer_center_updates_path
       else
         designer_center_response_path(id: request.id)
       end

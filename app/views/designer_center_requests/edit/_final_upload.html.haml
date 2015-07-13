@@ -9,7 +9,7 @@
                     class: 'consumerNoteTextarea',
                     placeholder: t('designer_center.final_upload.note_for_client_placeholder')
       = render 'designer_center_requests/show/image_loading',
-             { image: @request.concept_board_current_image,
+             { items: @request.current_lookbook_items,
                button_title: t('designer_center.final_upload.upload') }
       %p.pdfFile Ensure that your file is a .pdf format so that the client can download it. If you need help, contact us.
       %h5.font16.marginTop40= t('designer_center.final_upload.upload_description')

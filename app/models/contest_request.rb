@@ -22,6 +22,7 @@ class ContestRequest < ActiveRecord::Base
   self.per_page = 8
 
   STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
+  FULFILLMENT_STATUSES = %w{fulfillment fulfillment_ready fulfillment_approved}
   ANSWERS = %w{no maybe favorite winner}
 
   normalize_attributes :answer
@@ -77,7 +78,7 @@ class ContestRequest < ActiveRecord::Base
   scope :active, -> { where(status: %w(draft submitted fulfillment fulfillment_ready fulfillment_approved)) }
   scope :ever_published, -> { where(status: %w(closed submitted fulfillment fulfillment_ready fulfillment_approved finished)) }
   scope :submitted, ->{ where(status: %w(submitted)) }
-  scope :fulfillment, ->{ where(status: %w(fulfillment fulfillment_ready fulfillment_approved)) }
+  scope :fulfillment, ->{ where(status: FULFILLMENT_STATUSES) }
   scope :finished, ->{ where(status: 'finished') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
@@ -86,25 +87,25 @@ class ContestRequest < ActiveRecord::Base
     selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')
   end
 
-  def concept_board_current_image_path
-    current_image = concept_board_current_image
-    current_image.original_size_url if current_image
-  end
-
   def concept_board_current_image
-    lookbook_item = current_lookbook_item
-    return unless lookbook_item
-    lookbook_item.image if lookbook_item.uploaded?
+    current_images.first
   end
 
-  def current_lookbook_item
-    return if !lookbook || !lookbook.lookbook_details
-    item = nil
-    phases_count = ContestPhases::INDICES_TO_PHASES.keys.count
-    item_index = (phases_count - 1).downto(0).find do |i|
-      item = lookbook.lookbook_details.find_by_phase(ContestPhases.index_to_phase(i))
-    end
-    item if item_index
+  def concept_board_current_image_path
+    concept_board_current_image.try(:original_size_url)
+  end
+
+  def current_lookbook_items
+    return LookbookDetail.none if !lookbook || !lookbook.lookbook_details
+    lookbook.lookbook_details.where(phase: current_phase)
+  end
+
+  def current_phase
+    ContestPhases.status_to_phase(status)
+  end
+
+  def current_images
+    current_lookbook_items.includes(:image).map(&:image)
   end
 
   def reply(answer, client_id)
@@ -148,10 +149,14 @@ class ContestRequest < ActiveRecord::Base
     image_items.send(for_phase)
   end
 
-  def concept_board_image_by_phase(phase)
+  def concept_board_images_by_phase(phase)
     return if !lookbook || !lookbook.lookbook_details
-    lookbook_item = lookbook.lookbook_details.find_by_phase(phase)
-    lookbook_item.try(:image)
+    lookbook.lookbook_details.where(phase: phase).includes(:image).map(&:image)
+  end
+
+  def lookbook_items_by_phase(phase)
+    return if !lookbook || !lookbook.lookbook_details
+    lookbook.lookbook_details.where(phase: phase)
   end
 
   def name

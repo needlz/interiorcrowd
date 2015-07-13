@@ -6,9 +6,7 @@ class @ConceptBoardUploader
       fileinputSelector: '.concept-board #concept_picture',
       uploadButtonSelector: '.concept-board .upload-button',
       thumbs:
-        container: '.concept-board .thumbs'
         selector: @imageIdSelector
-        theme: RemovableThumbsTheme
         onRemoved: =>
           @saveChange()
           CommentsBlock.fitCommentsArea()
@@ -22,11 +20,12 @@ class @ConceptBoardUploader
     requestId = $('.response[data-id]').data('id')
     if requestId
       $.ajax(
-        data: { contest_request: { image_id: $(@imageIdSelector).val() } }
-        url: "/designer_center/responses/#{ requestId }"
-        type: 'PUT'
-        dataType: "script"
+        data: { lookbook_detail: { image_id: $(@imageIdSelector).val() } }
+        url: "/designer_center/responses/#{ requestId }/lookbook_details"
+        type: 'POST'
         success: (data)=>
           mixpanel.track('Concept board image updated', { contest_request_id: requestId })
           CommentsBlock.fitCommentsArea()
+          $('#showcase').replaceWith(data)
+          ConceptBoardShowcase.init()
       )

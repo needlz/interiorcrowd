@@ -1,6 +1,6 @@
 .designConcept#client_btns{ data: { id: contest_request.id } }
   = render partial: 'shared/moodboard',
-      locals: { image: contest_request.concept_board_image_by_phase(:initial) }
+      locals: { items: contest_request.lookbook_items_by_phase(:initial) }
   - if show_answer_options
     .bottom20
     = render partial: 'clients/moodboard_answers',

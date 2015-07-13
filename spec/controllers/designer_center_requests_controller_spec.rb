@@ -108,7 +108,7 @@ RSpec.describe DesignerCenterRequestsController do
 
       it 'redirects to Updates page' do
         patch :update, id: draft_request.id, contest_request: { status: 'submitted' }
-        expect(response).to redirect_to updates_designer_center_index_path
+        expect(response).to redirect_to designer_center_updates_path
       end
 
       it 'does not change status to any other status than "submitted"' do

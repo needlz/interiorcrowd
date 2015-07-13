@@ -1,0 +1,19 @@
+#showcase.showcase
+  - items.includes(:image).each do |item|
+    - if item.image
+      .showcase-slide
+        - image = item.image
+        .showcase-content
+          - path = image.try(:original_size_url) || placeholder_src
+          .lookbook-detail{ data: { id: item.id } }
+            = render partial: 'shared/image_with_enlarge_button',
+                    locals: { url_for_downloading: image.url_for_downloading,
+                              original_size_path: image.original_size_url,
+                              thumb_path: image.medium_size_url,
+                              enlarge_button_class: 'concept_board',
+                              image_class: 'full-width',
+                              remove_button: editable }
+        .showcase-thumbnail
+          %img{ src: image.medium_size_url }/
+  - if editable
+    %p.updateYourBoard= t('designer_center.edit.update_concept_board_hint')

@@ -26,7 +26,7 @@
         .concept-board
           .conceptMoodboardImg
             = render partial: 'designer_center_requests/concept_board_thumbnail',
-              locals: { image: @request.concept_board_current_image,
+              locals: { items: @request.current_lookbook_items,
                 placeholder_src: '/assets/img-content.png',
                 image_id_input_name: 'lookbook[picture][ids][]' }
           %a.submitMyDesign.upload-button{:href => "#"}

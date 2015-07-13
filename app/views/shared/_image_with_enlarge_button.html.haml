@@ -4,6 +4,9 @@
   - else
     %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
   .overlayExampleImg
+    - if defined?(remove_button) && remove_button
+      %a.remove{ href: '#' }
+        %img{ src: remove_icon_path }
     - if defined?(url_for_downloading)
       %a.download{ href: url_for_downloading }
         %img{ src: download_icon_path }
