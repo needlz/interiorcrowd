@@ -1,3 +1,13 @@
+updateSizes = ->
+  screenWidth = $(window).width()
+  $('.justineRight').css 'height', +$('.justineLeft').height() + 'px'
+
+  containerWidth = $('.container').width()
+  arrowsMargin = (screenWidth - containerWidth) / 2 + 20
+  $('.bottomCarouselHome .carousel-control.left').css 'margin-left', arrowsMargin + 'px'
+  $('.bottomCarouselHome .carousel-control.right').css 'margin-right', arrowsMargin + 'px'
+
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
@@ -16,20 +26,10 @@ $(document).ready ->
   $('.circleDownArrow').click ->
     $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
 
-  if screenWidth > 991
-    $('.justineRight').css 'height', +$('.justineLeft').height() + 'px'
+  updateSizes()
 
-  containerWidth = $('.container').width()
-  arrowsMargin = (screenWidth - containerWidth) / 2 + 25
-  $('.bottomCarouselHome .carousel-control.left').css 'margin-left', arrowsMargin + 'px'
-  $('.bottomCarouselHome .carousel-control.right').css 'margin-right', arrowsMargin + 'px'
+$(window).load ->
+  updateSizes()
 
 $(window).resize ->
-  screenWidth = $(window).width()
-  if screenWidth > 991
-    $('.justineRight').css 'height', +$('.justineLeft').height() + 'px'
-  screenWidth = $(window).width()
-  containerWidth = $('.container').width()
-  arrowsMargin = (screenWidth - containerWidth) / 2 + 20
-  $('.bottomCarouselHome .carousel-control.left').css 'margin-left', arrowsMargin + 'px'
-  $('.bottomCarouselHome .carousel-control.right').css 'margin-right', arrowsMargin + 'px'
+  updateSizes()
