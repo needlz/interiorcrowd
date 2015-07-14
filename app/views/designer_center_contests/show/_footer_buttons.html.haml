@@ -1,7 +1,7 @@
 .col-md-6.disablePadding.text-right.marg-bottom30
   - contest_response = contest.response_of(designer)
   - if contest_response
-    %a.submitMyDesign{ href: edit_designer_center_response_path(id: contest_response), class: tracked_link }
+    %a.updateMyDesign{ href: edit_designer_center_response_path(id: contest_response), class: tracked_link }
       = t('designer_center.responses.item.update_moodboard')
       = image_tag '/assets/gt.png'
   - elsif contest.submission?

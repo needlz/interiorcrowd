@@ -1,4 +1,8 @@
-= javascript_include_tag 'contest_requests/finished_concept_board'
+- content_for :head do
+  :javascript
+    pageI18n = #{ translations_to_json(['client_center', 'finished']) }
+
+  = javascript_include_tag 'contest_requests/finished_concept_board'
 
 %h2.newSpaceReady
   = t('client_center.entries.space.congratulations')
@@ -25,9 +29,9 @@
                 locals: { request: request }
   .row
     .col-sm-12
-      = link_to t('client_center.entries.space.download'),
-          download_contest_request_path(id: request.id),
-          class: "downloadFinalMoodboard #{ tracked_link }",
+      = link_to t('client_center.finished.download_images'),
+          'javascript:void(0)',
+          class: "downloadFinalMoodboard download-all #{ tracked_link }",
           data: { name: 'Final design - download' }
 
   .row.moodboardInstructions

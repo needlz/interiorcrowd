@@ -24,6 +24,7 @@
             locals: { contest_page: @entries_page,
               phases_stripe: PhasesStripe.new(last_step: 0) }
   - else
+    #contest-data.hidden{ data: { id: @entries_page.contest.id } }
     .concept-board{ data: { id: @entries_page.won_contest_request.id } }
       = render @entries_page.entries_concept_board_page.partial
 

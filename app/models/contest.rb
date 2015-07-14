@@ -201,6 +201,10 @@ class Contest < ActiveRecord::Base
     requests.submitted
   end
 
+  def concept_board_images
+    response_winner.try(:current_images)
+  end
+
   private
 
   def create_retailer_preferences
