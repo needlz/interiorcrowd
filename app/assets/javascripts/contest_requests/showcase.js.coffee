@@ -22,6 +22,7 @@ class @ConceptBoardShowcase
 
     $(@showcaseSelector).awShowcase
       content_width: 750
+      content_height: 664
       fit_to_parent: false
       auto: false
       interval: 3000
@@ -47,7 +48,7 @@ class @ConceptBoardShowcase
       thumbnails_position: 'outside-last'
       thumbnails_direction: 'horizontal'
       thumbnails_slidex: 0
-      dynamic_height: true
+      dynamic_height: false
       speed_change: false
       viewline: false
 
