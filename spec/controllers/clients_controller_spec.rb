@@ -192,7 +192,6 @@ RSpec.describe ClientsController do
   describe 'GET entries' do
     before do
       sign_in(client)
-      Fabricate(:contest, client: client, status: 'submission')
       Fabricate(:portfolio)
       allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
     end
@@ -201,6 +200,7 @@ RSpec.describe ClientsController do
       let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
 
       it 'returns page' do
+        Fabricate(:contest, client: client, status: 'submission')
         get :entries
         expect(response).to render_template(:entries_invitations)
       end
@@ -223,6 +223,19 @@ RSpec.describe ClientsController do
                                        status: 'fulfillment',
                                        lookbook: Fabricate(:lookbook)) }
 
+        def create_contest_request(cont)
+          Fabricate(:contest_request,
+                    designer: designers[3],
+                    contest: cont,
+                    status: 'fulfillment',
+                    answer: 'winner',
+                    lookbook: Fabricate(:lookbook))
+        end
+
+        def create_contest
+          Fabricate(:contest, client: client, status: 'submission')
+        end
+
         it 'views only submitted and fulfillment requests' do
           get :entries
           expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
@@ -244,17 +257,38 @@ RSpec.describe ClientsController do
           expect(assigns(:entries_page).won_contest_request).to eq(submitted)
         end
 
-        context 'concept board in fulfillment state' do
+        context 'contest in fulfillment state' do
+          before do
+            contest.update_attributes!(status: 'fulfillment')
+          end
+
           it 'returns page' do
-            (ContestRequest::FULFILLMENT_STATUSES + ['finished']).each do |status|
-              contest_request = Fabricate(:contest_request,
-                        designer: designers[3],
-                        contest: contest,
-                        status: status,
-                        answer: 'winner')
-              get :entries
-              expect(response).to render_template(:entries)
+            ContestRequest::FULFILLMENT_STATUSES.each do |status|
+              cont = create_contest
+              contest_request = create_contest_request(cont)
+              contest_request.update_attributes!(status: status)
+              cont.update_attributes!(status: 'fulfillment')
+              PhasesStripe::PHASES.each_index do |index|
+                get :entries, view: index
+                expect(response).to render_template(:entries)
+              end
               contest_request.destroy
+            end
+          end
+        end
+
+        context 'contest finished' do
+          it 'returns page' do
+            contest_request = Fabricate(:contest_request,
+                                        designer: designers[3],
+                                        contest: contest,
+                                        status: 'finished',
+                                        answer: 'winner',
+                                        lookbook: Fabricate(:lookbook))
+            contest.update_attributes!(status: 'finished')
+            PhasesStripe::PHASES.each_index do |index|
+              get :entries, view: index
+              expect(response).to render_template(:entries)
             end
           end
         end
@@ -262,6 +296,7 @@ RSpec.describe ClientsController do
     end
 
     it 'returns page' do
+      Fabricate(:contest, client: client, status: 'submission')
       contest = client.last_contest
       client.update_attributes!(status: 'finished')
       fulfillment = Fabricate(:contest_request,
