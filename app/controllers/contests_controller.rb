@@ -103,10 +103,10 @@ class ContestsController < ApplicationController
   end
 
   def download_all_images_url
-    @images_type = params[:type]
-    raise_404 unless @images_type
+    images_type = params[:type]
+    raise_404 unless images_type
 
-    archive_path = ImagesArchivationMonitor.request_archive(@contest, @images_type)
+    archive_path = ImagesArchivationMonitor.request_archive(@contest, images_type)
     return render(json: archive_path.to_json) if archive_path
     render nothing: true
   end

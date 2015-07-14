@@ -409,7 +409,6 @@ en:
           twitter: Share to Tweeter
           facebook: Share to Facebook
           pinterest: Share to Pintrest
-        download: Download
         complete_lock: Get the items to complete your look
         pull_together: Instructions to pull your look together
       notes_title: Want to send a note to all the designers?
@@ -536,6 +535,9 @@ en:
           Let your designer know what you're going to do with their design and if you enjoyed the process of
           working with them.
         button: Send
+
+      download_images: Download
+      generating_archive: Generating archive...
   designer_center:
     milestones:
       winner_selection:

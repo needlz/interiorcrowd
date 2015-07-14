@@ -8,13 +8,13 @@ class ImagesArchiveGeneration
 
   attr_reader :archive_path
 
-  def initialize(contest, type)
+  def initialize(images_source, type)
     begin
-      @images = contest.send(type)
+      @images = images_source.send(type)
     rescue NoMethodError
       raise ArgumentError, 'Wrong image type'
     end
-    @archive_path = fetch_archive_path(contest, type)
+    @archive_path = fetch_archive_path(images_source, type)
   end
 
   def completed?
@@ -61,12 +61,14 @@ class ImagesArchiveGeneration
 
   def local_files
     return @files if @files
+    base_names = []
     @files = images.map do |image|
-      name = image.image_file_name
-      path = in_tmp_folder(name)
-
-      image.image.copy_to_local_file(nil, path)
-      { name: name, path: path }
+      unique_name_base = UniquePathGenerator.generate(File.basename(image.image_file_name, '.*'), base_names)
+      unique_name = unique_name_base + File.extname(image.image_file_name)
+      base_names << unique_name_base
+      unique_path = in_tmp_folder(unique_name)
+      image.image.copy_to_local_file(nil, unique_path)
+      { name: unique_name, path: unique_path }
     end
   end
 
@@ -85,8 +87,8 @@ class ImagesArchiveGeneration
     "#{ Settings.root_folder }/#{ IMAGES_ARCHIVES_LOCAL_FOLDER }"
   end
 
-  def fetch_archive_path(contest, type)
-    name = "contest_#{ contest.id }_#{ type }.zip"
+  def fetch_archive_path(images_source, type)
+    name = "#{ images_source.class.name }_#{ images_source.id }_#{ type }.zip"
     in_tmp_folder(name)
   end
 
