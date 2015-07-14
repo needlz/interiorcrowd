@@ -12,7 +12,9 @@
                               thumb_path: image.medium_size_url,
                               enlarge_button_class: 'concept_board',
                               image_class: 'full-width',
-                              remove_button: editable }
+                              remove_button: editable,
+                              container_class: 'fullHeight',
+                              use_div: true }
         .showcase-thumbnail
           %img{ src: image.medium_size_url }/
   - if editable

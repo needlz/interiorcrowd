@@ -10,7 +10,6 @@
  *
  *= require_self
  *= require_tree ./bootstrap
- *= require compiled/index.css
  *= require lib/animate.css
  *= require jquery-ui/slider
  *= require lib/select2-3.5.2/select2-bootstrap
