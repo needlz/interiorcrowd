@@ -5,6 +5,6 @@
 
 = javascript_include_tag 'contest_requests/showcase'
 
-= render partial: 'designer_center_requests/showcase', locals: { items: items,
+= render 'designer_center_requests/showcase', showcase: Showcase.new(items: items,
       editable: true,
-      placeholder_src: placeholder_src }
+      placeholder_src: placeholder_src)

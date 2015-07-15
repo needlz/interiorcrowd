@@ -140,6 +140,12 @@ InteriorC::Application.routes.draw do
       end
     end
 
+    resources :lookbook_details, only: [] do
+      collection do
+        get '/preview', to: 'lookbook_details#preview', as: 'preview'
+      end
+    end
+
     resources :final_note_to_designer,
               controller: 'final_note_to_designer',
               as: 'final_note_to_designer',

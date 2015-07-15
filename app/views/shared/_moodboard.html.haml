@@ -2,7 +2,7 @@
   - if items.present?
     = javascript_include_tag 'contest_requests/showcase'
 
-    = render 'designer_center_requests/showcase', items: items, editable: false
+    = render 'designer_center_requests/showcase', showcase: Showcase.new(items: items, editable: false)
 
 :javascript
   $(function(){

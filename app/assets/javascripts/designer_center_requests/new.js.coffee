@@ -39,8 +39,12 @@ class @ResponseEditor
          $comment.val('')
      )
 
+preventBrowserAutofill = (input)->
+  $(input).val('')
+
 $ ->
   responseEditor = new ResponseEditor()
   responseEditor.init()
-  ConceptBoardUploader.init(window.conceptBoardUploaderI18n)
+  ConceptBoardUploader.init(i18n: window.conceptBoardUploaderI18n)
+  preventBrowserAutofill(ConceptBoardUploader.imageIdSelector)
   Colors.set()
