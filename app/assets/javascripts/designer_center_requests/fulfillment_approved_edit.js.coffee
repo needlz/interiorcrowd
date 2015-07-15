@@ -19,7 +19,14 @@ class ProductItemsEditor extends InlineEditor
   bindEvents: ->
     super()
     @bindSaveClick()
+    @bindDeleteImageClick()
     ProductItemImageUploader.init(@imageIdInput)
+
+  bindDeleteImageClick: ->
+    $(document).on 'click', "#{@attributeSelector} .productListDeleteImage", (e)=>
+      $container = $(e.target).parents(@attributeSelector)
+      $container.find('.edit-form').find(@imageIdInput).val('')
+      $container.find('.edit-form').find('.image-container').css('background-image', '')
 
   bindSaveClick: ->
     $(document).on 'click', "#{@attributeSelector} .save-button", (e)=>
@@ -46,15 +53,15 @@ class ProductItemsEditor extends InlineEditor
       @updateTextFields($container, true)
 
   updateImage: ($container, undo)->
-    $viewImage = $container.find('.view img')
-    $editFormImage = $container.find('.edit-form img')
+    $viewImage = $container.find('.view .image-container')
+    $editFormImage = $container.find('.edit-form .image-container')
     $editFormImageIdInput = $container.find('.edit-form').find(@imageIdInput)
     $viewImageIdInput = $container.find('.view').find(@imageIdInput)
     if undo
-      $editFormImage.attr('src', $viewImage.attr('src'))
+      $editFormImage.css('background-image', $viewImage.css('background-image'))
       $editFormImageIdInput.val($viewImageIdInput.val())
     else
-      $viewImage.attr('src', $editFormImage.attr('src'))
+      $viewImage.css('background-image', $editFormImage.css('background-image'))
       $viewImageIdInput.val($editFormImageIdInput.val())
 
   updateTextFields: ($container, undo)->
@@ -95,9 +102,9 @@ class ProductItemImageUploader
       fileinputSelector: $(element).find('input[type="file"]')
       uploadButtonSelector: $(element).find('.btnChangeImage')
       thumbs:
-        container: $(element).find('.edit-form')
+        container: $(element).find('.edit-form .imageWithOverlay')
         selector: $(element).find('.edit-form').find(@imageIdInput)
-        theme: DefaultThumbsTheme
+        theme: DivContainerThumbsTheme
       I18n: I18n
       single: true
 

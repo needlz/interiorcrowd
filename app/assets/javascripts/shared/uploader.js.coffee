@@ -72,6 +72,12 @@ class @DefaultThumbsTheme extends ThumbsTheme
   thumbForMultipleImageUploader: (imageUrl, imageId) ->
     @$container.append "<img src='#{ imageUrl }' />"
 
+class @DivContainerThumbsTheme extends ThumbsTheme
+
+  thumbForSingleImageUploader: (imageUrl, imageId) ->
+    $img = @$container.find('.image-container')
+    $img.css('background-image', "url('#{ encodeURI(imageUrl) }')")
+
 class @RemovableThumbsTheme extends ThumbsTheme
 
   init: ->

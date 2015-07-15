@@ -1,14 +1,18 @@
 .row.dcUploadDesgin.product-item{ data: { id: image_item.id } }
   .edit-form.hidden
     .col-sm-3
-      .row
-        .relative
-          = button_tag 'Change image', class: 'btn btnChangeImage', type: 'button'
-          = image_tag image_item.medium_size_image_url, class: 'productListIMG'
+      .row.image-block
+        .relative.image-block-height
+          .imageWithOverlay
+            .permanentOverlayExampleImg
+            .full-size-image-container.image-container{ style: "background-image: url('#{ j(image_item.medium_size_image_url) }')" }
+            = button_tag t('designer_center.product_items.change_image'), class: 'btn btnChangeImage', type: 'button'
+            = button_tag t('designer_center.product_items.delete'), class: 'productListDeleteImage', type: 'button'
           = file_field_tag 'image[image]', class: 'hidden'
           = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
         %a.cancelSaveLinks.save-button{ href: '#' }= t('designer_center.final_upload.save')
         %a.cancelSaveLinks.cancel-button{ href: '#' }= t('designer_center.final_upload.cancel')
+        .clearfix
     .col-sm-9
       = hidden_field_tag "contest_request[#{ image_item.kind }][ids][]", image_item.id
       - [:name, :brand, :dimensions, :price, :link].each do |attribute|
@@ -23,8 +27,8 @@
   .view
     .col-sm-6
       .row
-        .col-sm-7.relative
-          = image_tag image_item.medium_size_image_url, class: 'productListIMG'
+        .col-sm-7.relative.image-block-height
+          .full-size-image-container.image-container{ style: "background-image: url('#{ j(image_item.medium_size_image_url) }')" }
           = link_to t('designer_center.final_upload.edit'), '#', class: 'dcEditDesign edit-button'
           = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
         .col-sm-5.dcLabels
