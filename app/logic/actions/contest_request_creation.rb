@@ -29,7 +29,7 @@ class ContestRequestCreation
     request.update_attributes(lookbook_id: Lookbook.create!.id)
 
     if lookbook_params.try(:[], :picture).try(:[], :ids).present?
-      document_ids = lookbook_params[:picture][:ids]
+      document_ids = lookbook_params[:picture][:ids].split(',')
       document_ids.each do |doc|
         LookbookDetail.create!({lookbook_id: request.lookbook.id,
                                 image_id: doc,

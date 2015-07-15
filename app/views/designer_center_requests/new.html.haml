@@ -6,31 +6,32 @@
   = render partial: 'shared/setup_colors_table'
   :javascript
     I18n = #{ translations_to_json(['designer_center', 'respond']) }
-    conceptBoardUploaderI18n = #{ translations_to_json('designer_center.my_contests.concept_board_upload'.split('.')) }
+    conceptBoardUploaderI18n = #{ translations_to_json('designer_center.responses.new'.split('.')) }
 
 - content_for :designer_center_content do
-  .bottom60.contest{ data: { id: @contest.id } }
+  #new-contest-request.contest.row{ data: { id: @contest.id } }
     = render partial: 'clients/client_center/entries/phases',
              locals: { stripe: PhasesStripe.new(active_step: 0, view_context: self, status: @request.status) }
     = render partial: 'contests/preview/current_contest_infobox',
         locals: { contest: ContestShortDetails.new(@contest) }
-    = link_to t("designer_center.my_contests.design_profile"),
-        designer_center_contest_path(@contest.id),
-        class: "italicLink #{ tracked_link }"
-
     = form_for @request,
         html: { class: "response" },
         url: designer_center_response_index_path(contest_id: @contest.id) do |f|
+      .clearfix
+      = link_to t("designer_center.my_contests.design_profile"),
+              designer_center_contest_path(@contest.id),
+              class: "seeBrief italicLink #{ tracked_link }"
+      .clearfix
 
       .col-md-8.disablePadding
         .concept-board
-          .conceptMoodboardImg
-            = render partial: 'designer_center_requests/concept_board_thumbnail',
-              locals: { items: @request.current_lookbook_items,
-                placeholder_src: '/assets/img-content.png',
-                image_id_input_name: 'lookbook[picture][ids][]' }
-          %a.submitMyDesign.upload-button{:href => "#"}
-            =t('designer_center.my_contests.concept_board_upload.upload_button')
+          = render partial: 'designer_center_requests/concept_board_thumbnail',
+            locals: { items: @request.current_lookbook_items,
+              placeholder_src: '/assets/img-content.png',
+              image_id_input_name: 'lookbook[picture][ids]' }
+          .clearfix
+          %a.upload-button.black-bordered-button.font16.marginTop20{:href => "#"}
+            = t('designer_center.responses.new.upload_button')
       .col-md-4
         .row.designerTitle
           .col-md-3
@@ -43,7 +44,7 @@
               %textarea{ style: '',
                 name: 'contest_request[feedback]',
                 placeholder: t('designer_center.my_contests.say_about_design'),
-                 }
+              }
         .hLine
         .sidebarComments
           %p.comments-title= t('designer_center.responses.new.any_comments')
@@ -54,7 +55,19 @@
               %button.pull-right.send-button= t('designer_center.my_contests.send')
               .clearfix
       = f.hidden_field :status, value: 'draft'
+      = f.hidden_field :lookbook_id
       = hidden_mixpanel_submit_tag
-      = render partial: 'designer_center_requests/footer',  locals: { request: @request }
+      .footer
+        .col-md-12.disablePadding.marg-top10
+          .hLine
+        .col-md-6.disablePadding
+          = link_to designer_center_response_index_path, class: tracked_link do
+            .backToEntries
+              %img{:src => "/assets/lt.png"}/
+              = t('designer_center.responses.new.exit_without_saving')
+        .col-md-6.disablePadding.text-right
+          %a.submitMyDesign{:href => "#"}
+            = t('designer_center.my_contests.save_and_preview')
+            %img{:src => "/assets/gt.png"}/
 
 = render partial: 'designer_center/layout'

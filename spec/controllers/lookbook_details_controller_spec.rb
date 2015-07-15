@@ -18,11 +18,11 @@ RSpec.describe LookbookDetailsController do
       designer_center_response_id: contest_request.id }
   end
 
-  describe 'POST create' do
-    before do
-      allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
-    end
+  before do
+    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+  end
 
+  describe 'POST create' do
     context 'logged as client' do
       before do
         sign_in(client)
@@ -55,7 +55,19 @@ RSpec.describe LookbookDetailsController do
         expect(lookbook.lookbook_details.order(:created_at).last.image).to eq image
       end
     end
+  end
 
+  describe 'GET preview' do
+    before do
+      sign_in(designer)
+    end
+
+    let(:image_ids) { [Fabricate(:image).id, Fabricate(:image).id].join(',') }
+
+    it 'returns preview' do
+      get :preview, image_ids: image_ids
+      expect(response).to render_template('designer_center_requests/_showcase')
+    end
   end
 
 end

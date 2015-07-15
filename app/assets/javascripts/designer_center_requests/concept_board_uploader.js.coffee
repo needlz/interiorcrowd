@@ -1,7 +1,7 @@
 class @ConceptBoardUploader
   @imageIdSelector: '#concept_board_picture_id'
 
-  @init: (i18n)=>
+  @init: (options = {})=>
     PicturesUploadButton.init
       fileinputSelector: '.concept-board #concept_picture',
       uploadButtonSelector: '.concept-board .upload-button',
@@ -10,21 +10,31 @@ class @ConceptBoardUploader
         onRemoved: =>
           @saveChange()
           CommentsBlock.fitCommentsArea()
-      I18n: i18n
-      single: true
+        theme: DefaultThumbsTheme
+      I18n: options.i18n
+      single: options.contestRequestId
       uploading:
         onUploaded: (event)=>
-          @saveChange()
+          @saveChange(options.contestRequestId)
 
-  @saveChange: ()=>
-    requestId = $('.response[data-id]').data('id')
-    if requestId
+  @saveChange: (contestRequestId)=>
+    if contestRequestId
       $.ajax(
         data: { lookbook_detail: { image_id: $(@imageIdSelector).val() } }
-        url: "/designer_center/responses/#{ requestId }/lookbook_details"
+        url: "/designer_center/responses/#{ contestRequestId }/lookbook_details"
         type: 'POST'
         success: (data)=>
-          mixpanel.track('Concept board image updated', { contest_request_id: requestId })
+          mixpanel.track('Concept board image updated', { contest_request_id: contestRequestId })
+          CommentsBlock.fitCommentsArea()
+          $('#showcase').replaceWith(data)
+          ConceptBoardShowcase.init()
+      )
+    else
+      $.ajax(
+        data: { image_ids: $(@imageIdSelector).val() }
+        url: "/lookbook_details/preview"
+        type: 'GET'
+        success: (data)=>
           CommentsBlock.fitCommentsArea()
           $('#showcase').replaceWith(data)
           ConceptBoardShowcase.init()

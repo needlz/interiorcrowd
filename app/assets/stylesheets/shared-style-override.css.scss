@@ -238,3 +238,24 @@
     }
   }
 }
+
+.seeBrief{
+  margin-top: 10px;
+  margin-bottom: 30px;
+  display: block;
+}
+
+.black-bordered-button{
+  color: #000;
+  line-height: 45px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#new-contest-request{
+  padding-bottom: 25px;
+}

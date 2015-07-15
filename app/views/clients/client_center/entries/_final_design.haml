@@ -6,5 +6,4 @@
 = javascript_include_tag 'contest_requests/showcase'
 
 = render 'designer_center_requests/showcase',
-    items: request.current_lookbook_items,
-    editable: false
+    showcase: Showcase.new(items: request.current_lookbook_items, editable: false)

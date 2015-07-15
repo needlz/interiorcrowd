@@ -1,6 +1,4 @@
 = content_for :head do
-  = stylesheet_link_tag 'compiled/sign-in'
-
   = javascript_include_tag 'sessions/login'
 
 = render partial: 'sessions/login_box', locals: { login_view: @login_view }
