@@ -5,9 +5,16 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
 
+  before_filter :beta_redirect
   before_filter :set_return_to_link, :setup_event_tracker
 
   PAGE_404_PATH = 'public/404.html'
+
+  def beta_redirect
+    if (request.subdomain == 'beta')
+      redirect_to subdomain: 'www', controller: controller_name, action: action_name, status: :moved_permanently
+    end
+  end
 
   def check_designer
     redirect_to designer_login_sessions_path if session[:designer_id].blank?
