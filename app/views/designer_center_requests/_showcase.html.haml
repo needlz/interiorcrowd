@@ -1,8 +1,8 @@
-#showcase.showcase
+#showcase.showcase{ data: { single: showcase.single.to_s } }
   - if showcase.items.present?
     - showcase.items.each do |item|
       - if item.image
-        .showcase-slide
+        .showcase-slide{ style: ('width: 750px; height: 664px' if showcase.single) }
           - image = item.image
           .showcase-content
             - path = image.try(:original_size_url) || showcase.placeholder_src
@@ -16,8 +16,9 @@
                                 remove_button: showcase.editable,
                                 container_class: 'fullHeight',
                                 use_div: true }
-          .showcase-thumbnail
-            %img{ src: image.medium_size_url }/
+          - unless showcase.single
+            .showcase-thumbnail
+              %img{ src: image.medium_size_url }/
   - else
     .image-container{ style: "height: 664px; background-image: url(#{ j(showcase.placeholder_src) })" }
   - if showcase.editable

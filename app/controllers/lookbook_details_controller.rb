@@ -25,7 +25,18 @@ class LookbookDetailsController < ApplicationController
     images = Image.where(id: image_ids)
     render partial: 'designer_center_requests/showcase',
            locals: { showcase: Showcase.new(images: images,
-                     editable: true) }
+                     editable: true,
+                     single: true) }
+  end
+
+  def remove_preview
+    image_ids = params[:image_ids].split(',')
+    images = Image.where(id: image_ids)
+    images.destroy_all
+    render partial: 'designer_center_requests/showcase',
+           locals: { showcase: Showcase.new(images: [],
+                                            editable: true,
+                                            single: true) }
   end
 
   private

@@ -45,6 +45,6 @@ preventBrowserAutofill = (input)->
 $ ->
   responseEditor = new ResponseEditor()
   responseEditor.init()
-  ConceptBoardUploader.init(i18n: window.conceptBoardUploaderI18n)
+  ConceptBoardUploader.init(i18n: window.conceptBoardUploaderI18n, single: true)
   preventBrowserAutofill(ConceptBoardUploader.imageIdSelector)
   Colors.set()

@@ -12,7 +12,7 @@ class @ConceptBoardUploader
           CommentsBlock.fitCommentsArea()
         theme: DefaultThumbsTheme
       I18n: options.i18n
-      single: options.contestRequestId
+      single: options.single
       uploading:
         onUploaded: (event)=>
           @saveChange(options.contestRequestId)
