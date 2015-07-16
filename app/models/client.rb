@@ -48,6 +48,7 @@ class Client < ActiveRecord::Base
   has_many :designer_invite_notifications, through: :contests
   has_and_belongs_to_many :promocodes
   has_many :contest_requests, through: :contests, source: :requests
+  has_many :client_payments
 
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')

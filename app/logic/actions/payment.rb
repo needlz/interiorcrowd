@@ -12,7 +12,7 @@ class Payment
     unless charge_already_in_queue?
       price = calculate_price_in_cents
       return if price <= 0
-      payment = ClientPayment.create!(payment_status: 'pending', client_id: client.id)
+      payment = ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
       begin
         amount = Money.new(price, DEFAULT_CURRENCY)
         description = "charge client with id #{ client.id }"
