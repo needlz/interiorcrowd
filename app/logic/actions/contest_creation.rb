@@ -12,7 +12,17 @@ class ContestCreation
   def perform
     contest_options = ContestOptions.new(params.to_hash.merge(client_id: client_id))
     raise ArgumentError unless contest_options.required_present?
-    contest = Contest.create_from_options(contest_options)
+    contest = Contest.new(contest_options.contest)
+    contest.transaction do
+      contest.save!
+      options_updater = ContestUpdater.new(contest, contest_options)
+      options_updater.update_options
+      unless options_updater.contest_submission.performed?
+        if options_updater.contest_submission.only_brief_pending?
+          Jobs::Mailer.schedule(:contest_not_live_yet, [contest])
+        end
+      end
+    end
     after_created_callback.call(contest) if after_created_callback.present?
     contest
   end

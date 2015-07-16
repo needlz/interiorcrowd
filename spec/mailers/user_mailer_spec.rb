@@ -105,6 +105,10 @@ RSpec.describe UserMailer do
     it 'to designers: 4 days left to submit concept board' do
       expect(UserMailer.four_days_left_to_submit_concept_board(contest)).to be_present
     end
+
+    it 'to client: contest noy live yet' do
+      expect(UserMailer.contest_not_live_yet(contest)).to be_present
+    end
   end
 
 end

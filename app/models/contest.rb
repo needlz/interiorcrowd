@@ -107,16 +107,6 @@ class Contest < ActiveRecord::Base
     end
   end
 
-  def self.create_from_options(options)
-    contest = new(options.contest)
-    contest.transaction do
-      contest.save!
-      options_updater = ContestUpdater.new(contest, options)
-      options_updater.update_options
-    end
-    contest
-  end
-
   def days_left
     (submission? || winner_selection?) ? ((phase_end - Time.current) / 1.day).ceil : 0
   end

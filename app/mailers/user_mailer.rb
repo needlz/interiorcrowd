@@ -223,6 +223,16 @@ class UserMailer < ActionMailer::Base
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') })
   end
 
+  def contest_not_live_yet(contest)
+    template 'Contest-not-live-yet'
+    set_template_values(
+        ENTRIES_URL: renderer.entries_client_center_index_url,
+        PICTURES_EMAIL: 'pictures@interiorcrowd.com'
+    )
+    client = contest.client
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
   private
 
   def set_user_params(user)
