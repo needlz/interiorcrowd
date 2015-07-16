@@ -70,4 +70,18 @@ RSpec.describe LookbookDetailsController do
     end
   end
 
+  describe 'DELETE remove_preview' do
+    before do
+      sign_in(designer)
+    end
+
+    let(:image_ids) { [Fabricate(:image).id, Fabricate(:image).id].join(',') }
+
+    it 'returns preview' do
+      get :remove_preview, image_ids: image_ids
+      expect(response).to render_template('designer_center_requests/_showcase')
+      expect(Image.count).to eq 0
+    end
+  end
+
 end

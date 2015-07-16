@@ -28,7 +28,8 @@
           = render partial: 'designer_center_requests/concept_board_thumbnail',
             locals: { items: @request.current_lookbook_items,
               placeholder_src: '/assets/img-content.png',
-              image_id_input_name: 'lookbook[picture][ids]' }
+              image_id_input_name: 'lookbook[picture][ids]',
+              single: true }
           .clearfix
           %a.upload-button.black-bordered-button.font16.marginTop20{:href => "#"}
             = t('designer_center.responses.new.upload_button')

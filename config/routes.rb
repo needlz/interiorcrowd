@@ -143,6 +143,7 @@ InteriorC::Application.routes.draw do
     resources :lookbook_details, only: [] do
       collection do
         get '/preview', to: 'lookbook_details#preview', as: 'preview'
+        delete '/remove_preview', to: 'lookbook_details#remove_preview', as: 'remove_preview'
       end
     end
 

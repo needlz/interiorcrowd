@@ -14,7 +14,7 @@ class Showcase
 
   end
 
-  attr_reader :items, :editable, :placeholder_src
+  attr_reader :items, :editable, :placeholder_src, :single
 
   def initialize(options)
     @items = options[:items]
@@ -25,7 +25,8 @@ class Showcase
       @items = @images.map { |image| DummyLookbookItem.new(image) } unless @items
     end
     @editable = options[:editable]
-    @placeholder_src = options[:placeholder_src]
+    @placeholder_src = options[:placeholder_src] || '/assets/img-content.png'
+    @single = options[:single]
   end
 
 end
