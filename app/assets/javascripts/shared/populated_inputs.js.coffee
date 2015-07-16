@@ -34,7 +34,7 @@ class @PopulatedInputs
       @refreshLinkButtons('removed')
 
   @populateExamplesInputs: ->
-    if $(@container).find('.lnk_container .plus_wrapper').length > 1
+    if $(@container).find('.lnk_container').length > 1
       @refreshLinkButtons('added')
     else
       @refreshLinkButtons('removed')
@@ -43,14 +43,15 @@ class @PopulatedInputs
     $container = $(@container)
     if change is 'added'
       $container.find('.lnk_container .plus_wrapper').hide()
-      $container.find('.lnk_container .examplelabel label').hide().first().show()
-      $container.find('.lnk_container .minus_wrapper').show() if $container.find('.lnk_container .plus_wrapper').length > 1
-      $container.find('.lnk_container .plus_wrapper:last').last().show()
-    else if change is 'removed'
-      $container.find('.lnk_container .minus_wrapper').hide() if $container.find('.lnk_container .plus_wrapper').length is 1
-      $container.find('.lnk_container .plus_wrapper:last').last().show()
       $container.find('.lnk_container .examplelabel label').hide()
-      $container.find('.lnk_container .examplelabel label').first().show()
+      $container.find('.lnk_container').first().find('.examplelabel label').show()
+      $container.find('.lnk_container .minus_wrapper').show() if $container.find('.lnk_container').length > 1
+      $container.find('.lnk_container').last().find('.plus_wrapper').show()
+    else if change is 'removed'
+      $container.find('.lnk_container .minus_wrapper').hide() if $container.find('.lnk_container').length is 1
+      $container.find('.lnk_container').last().find('.plus_wrapper').show()
+      $container.find('.lnk_container .examplelabel label').hide()
+      $container.find('.lnk_container').first().find('.examplelabel label').show()
 
 class @InspirationLinksEditor extends PopulatedInputs
   @container: '.links-options'

@@ -1,23 +1,23 @@
 - readonly = defined?(readonly) ? readonly : false
 .row
   - if contest_page.timeline_hint
-    = render partial: 'clients/client_center/entries/timeline_hint',
-        locals: { text: contest_page.timeline_hint }
+    = render 'clients/client_center/entries/timeline_hint',
+        { text: contest_page.timeline_hint }
   .col-md-9
-    = render partial: 'clients/client_center/entries/phases',
-        locals: { stripe: phases_stripe }
+    = render 'clients/client_center/entries/phases',
+        { stripe: phases_stripe }
+  .col-md-3.filter-container
+    .hidden-xs
+      = render 'clients/client_center/entries/responses_filter',
+          { selected_answer: contest_page.answer }
+  .col-md-12.description-container
     - if contest_page.requests_present?
       %p.favDesignConcept.hidden-xs= t('client_center.entries.choose_concept')
-  .col-md-3
-    .hidden-xs
-      = render partial: 'clients/client_center/entries/responses_filter',
-          locals: { selected_answer: contest_page.answer }
 .row.marginTop40Mobile.setTopMarginTimeLeftToSubmit
   .col-md-12.concept-board-items
-    = render partial: 'clients/client_center/entries/feedback/feedback_items_with_pagination',
-        locals: { contest_page: contest_page }
+    = render 'clients/client_center/entries/feedback/feedback_items_with_pagination',
+        { contest_page: contest_page }
 - if @client
   .fullWidthLine.marginTop40.marginBottom40.hidden-xs
-  = render partial: 'clients/client_center/entries/notes',
-      locals: { readonly: readonly, notes: contest_page.notes }
-  = render partial: 'clients/client_center/entries/user_invitations', locals: { readonly: readonly }
+  = render 'clients/client_center/entries/notes', { readonly: readonly, notes: contest_page.notes }
+  = render 'clients/client_center/entries/user_invitations', { readonly: readonly }

@@ -377,7 +377,8 @@ en:
         feedback_time_format: '%b %d at %I %P'
         title: Feedback
         want_feedback: You don’t have to make this decision alone. Invite friends and family to help you out.
-        invite: Invite
+        invite: Send
+        add_more_people: Add more people
         sending: Creating invitation...
         feedback_link: 'Feedback link:'
         name: 'Name:'

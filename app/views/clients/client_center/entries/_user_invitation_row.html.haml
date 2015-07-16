@@ -1,13 +1,19 @@
 .row.invitation-row.lnk_container
-  .col-sm-5
-    %label{:for => "nameInvite"}= t('client_center.entries.reviewer_invitations.name')
-    %input.nameInvite{:type => "text" }/
-  .col-sm-6
-    %label{:for => "emailInvite"}= t('client_center.entries.reviewer_invitations.email')
-    %input.emailInvite{:type => "text" }/
-  .col-sm-1.disablePadding.buttons
-    %button.btnInvite
-      %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
-      %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}
+  %div
+    .col-sm-4
+      %label{:for => "nameInvite"}= t('client_center.entries.reviewer_invitations.name')
+      %input.nameInvite{:type => "text" }/
+    .col-sm-6
+      %label{:for => "emailInvite"}= t('client_center.entries.reviewer_invitations.email')
+      %input.emailInvite{:type => "text" }/
+    .col-sm-2.disablePadding.buttons.hidden-xs
+      %button.btnInvite
+        %span.glyphicon.glyphicon-plus.plus_wrapper{"aria-hidden" => "true"}
+        %span.glyphicon.glyphicon-minus.minus_wrapper{"aria-hidden" => "true"}
+  .visible-xs
+    .col-sm-12.invitePeopleBlock.plus_wrapper
+      %button.btnInviteMobile
+        %span.glyphicon.glyphicon-plus{"aria-hidden" => "true"}
+        %span.addMorePeople= t('client_center.entries.reviewer_invitations.add_more_people')
   .col-sm-12
     %button.btn.perform-invite= t('client_center.entries.reviewer_invitations.invite')

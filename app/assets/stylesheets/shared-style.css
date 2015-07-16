@@ -947,7 +947,6 @@ button.btnInvite span{
         line-height: 43px;
         font-size: 30px;
         margin: 0px;
-        /*margin-top: 24px;*/
     }
     button.btnInviteMobile span {
         font-size: 14px;
@@ -960,7 +959,7 @@ button.btnInvite span{
         color: #a9a9a9;
         margin-left: 10px;
     }
-    .sendDesignerFeedback input[type=submit]{
+    .sendDesignerFeedback .perform-invite{
         width: 100%;
         line-height: 43px;
     }
