@@ -1,8 +1,11 @@
 class ContestUpdater
 
+  attr_reader :contest_submission
+
   def initialize(contest, contest_options)
     @contest = contest
     @contest_options = contest_options
+    @contest_submission = SubmitContest.new(@contest)
   end
 
   def perform
@@ -18,10 +21,7 @@ class ContestUpdater
     update_space_images(contest_options.space_image_ids) if contest_options.space_image_ids
     update_example_images(contest_options.liked_example_ids) if contest_options.liked_example_ids
     update_preferred_retailers(contest_options.preferred_retailers) if contest_options.preferred_retailers.present?
-    if contest.brief_pending? && contest.space_images.exists?
-      submit_contest = SubmitContest.new(contest)
-      submit_contest.perform
-    end
+    contest_submission.try_perform
   end
 
   private
