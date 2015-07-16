@@ -318,3 +318,29 @@
     height: 250px;
   }
 }
+
+.description-container{
+  margin-top: 35px;
+}
+
+.entries-container{
+  .description-container{
+    margin-top: 35px;
+  }
+}
+
+@media (max-width: 992px){
+  .entries-container {
+    .filter-container {
+      margin-top: 50px;
+
+      .responses-filter-dropdown{
+        margin-top: 35px;
+      }
+    }
+
+    .description-container{
+      margin-top: 30px;
+    }
+  }
+}
