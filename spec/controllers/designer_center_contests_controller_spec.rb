@@ -52,7 +52,7 @@ RSpec.describe DesignerCenterContestsController do
   describe 'GET index' do
     before do
       contest.requests << Fabricate(:contest_request, designer: designer)
-      contest.requests << Fabricate(:contest_request, designer: designer, status: 'fulfillment')
+      contest.requests << Fabricate(:contest_request, designer: designer, status: 'fulfillment_ready')
     end
 
     it 'returns page' do

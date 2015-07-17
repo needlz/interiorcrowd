@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150707162847) do
+ActiveRecord::Schema.define(version: 20150717125601) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,9 +66,11 @@ ActiveRecord::Schema.define(version: 20150707162847) do
     t.string  "payment_status",   default: "pending"
     t.text    "last_error"
     t.string  "stripe_charge_id"
+    t.integer "contest_id"
   end
 
   add_index "client_payments", ["client_id"], name: "index_client_payments_on_client_id", using: :btree
+  add_index "client_payments", ["contest_id"], name: "index_client_payments_on_contest_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.text     "first_name"
@@ -282,9 +284,13 @@ ActiveRecord::Schema.define(version: 20150707162847) do
     t.datetime "updated_at"
     t.string   "kind"
     t.text     "dimensions"
-    t.boolean  "final",              default: false
     t.text     "price"
+    t.string   "status",               default: "temporary"
+    t.boolean  "final",                default: false
+    t.integer  "temporary_version_id"
   end
+
+  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: true do |t|
     t.integer "contest_id"

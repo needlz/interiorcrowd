@@ -220,14 +220,14 @@ RSpec.describe ClientsController do
         let!(:fulfillment) { Fabricate(:contest_request,
                                        designer: designers[2],
                                        contest: contest,
-                                       status: 'fulfillment',
+                                       status: 'fulfillment_ready',
                                        lookbook: Fabricate(:lookbook)) }
 
         def create_contest_request(cont)
           Fabricate(:contest_request,
                     designer: designers[3],
                     contest: cont,
-                    status: 'fulfillment',
+                    status: 'submitted',
                     answer: 'winner',
                     lookbook: Fabricate(:lookbook))
         end

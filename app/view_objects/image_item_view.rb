@@ -1,7 +1,10 @@
 class ImageItemView
   include ContestsHelper
 
-  delegate :image_id, :text, :id, :mark, :medium_size_image_url, :name, :brand, :dimensions, :price, :link, :kind, to: :image_item
+  delegate :image_id, :text, :id, :medium_size_image_url, :name,
+           :brand, :dimensions, :price, :link, :kind, :published_version, to: :image_item
+
+  attr_reader :mark
 
   def self.for_image_items(image_items)
     image_items.map{ |image_item| new(image_item) }
@@ -9,6 +12,9 @@ class ImageItemView
 
   def initialize(image_item)
     @image_item = image_item
+    published_item = published_version
+    return unless published_item
+    @mark = published_item.mark
   end
 
   def thumb_url

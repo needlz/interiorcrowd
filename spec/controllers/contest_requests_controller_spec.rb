@@ -66,7 +66,7 @@ RSpec.describe ContestRequestsController do
 
       it 'changes status if answer is winner' do
         post :answer, id: request.id, answer: 'winner'
-        expect(request.reload.status).to eq('fulfillment')
+        expect(request.reload.status).to eq('fulfillment_ready')
       end
 
       it 'creates winner notification if answer is winner' do
@@ -85,7 +85,7 @@ RSpec.describe ContestRequestsController do
       request
       contest.start_winner_selection!
       contest.winner_selected!
-      request.update_attributes!(status: 'fulfillment')
+      request.update_attributes!(status: 'fulfillment_ready')
       post :answer, id: request.id, answer: 'favorite'
       expect(answered).to be_falsey
     end

@@ -1,21 +1,26 @@
 class ImageItemUpdater
 
-  def initialize(product_item, image_item_attributes)
+  def initialize(product_item, image_item_attributes, current_user)
     @product_item = product_item
     @contest_request = product_item.contest_request
     @designer = @contest_request.designer
     @image_item_attributes = image_item_attributes
+    @current_user = current_user
   end
 
   def perform
-    update_params
-    delayed_job = delayed_job_for_email
-    delayed_job ? delay_sending_time(delayed_job) : send_email
+    ActiveRecord::Base.transaction do
+      update_params
+      if current_user.client?
+        delayed_job = delayed_job_for_email
+        delayed_job ? delay_sending_time(delayed_job) : send_email
+      end
+    end
   end
 
   private
 
-  attr_reader :image_item_attributes, :contest_request, :product_item
+  attr_reader :image_item_attributes, :contest_request, :product_item, :current_user
 
   def send_email
     Jobs::Mailer.schedule(:product_list_feedback,
@@ -36,7 +41,11 @@ class ImageItemUpdater
   end
 
   def update_params
-    product_item.update_attributes!(image_item_attributes)
+    product_item.assign_attributes(image_item_attributes)
+    if product_item.image_id_changed? && product_item.published_version
+      product_item.published_version.update_attributes!(temporary_version: nil)
+    end
+    product_item.save!
   end
 
 end

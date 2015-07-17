@@ -110,7 +110,7 @@ RSpec.describe Contest do
 
   describe '#has_other_winners?' do
     let(:request){ Fabricate(:contest_request,
-                             status: 'fulfillment',
+                             status: 'fulfillment_ready',
                              designer_id: 2,
                              answer: 'winner',
                              contest_id: contest.id) }

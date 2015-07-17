@@ -549,9 +549,6 @@ en:
       fulfillment_approved:
         time_left: '%{time_left} left to submit instructions'
         expired: Please get in touch if you need assistance
-      fulfillment:
-        time_left: '%{time_left} left in this phase'
-        expired: Deadline extended
       draft:
         time_left: '%{time_left} left to submit your board'
     welcome_message: >

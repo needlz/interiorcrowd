@@ -77,7 +77,7 @@ class EntriesPage < ContestPage
   end
 
   def funfillment_phase?
-    won_contest_request.fulfillment? || won_contest_request.fulfillment_ready? || won_contest_request.fulfillment_approved?
+    won_contest_request.fulfillment_ready? || won_contest_request.fulfillment_approved?
   end
 
   def select_winner_hint

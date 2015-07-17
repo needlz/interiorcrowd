@@ -10,7 +10,7 @@ RSpec.describe LookbookDetailsController do
   let(:lookbook) { Fabricate(:lookbook) }
   let(:contest_request) { Fabricate(:contest_request,
                                     designer: designer,
-                                    status: 'fulfillment',
+                                    status: 'fulfillment_ready',
                                     lookbook: lookbook) }
   let(:image) { Fabricate(:image) }
   let(:lookbook_detail_params) do

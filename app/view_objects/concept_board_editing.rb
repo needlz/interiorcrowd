@@ -8,6 +8,10 @@ class ConceptBoardEditing < ConceptBoardPage
     phase_dependent_partial
   end
 
+  def image_items
+    super.temporary
+  end
+
   private
 
   def initial

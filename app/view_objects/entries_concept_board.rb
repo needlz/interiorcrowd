@@ -8,6 +8,10 @@ class EntriesConceptBoard < ConceptBoardPage
     phase_dependent_partial
   end
 
+  def image_items
+    super.published
+  end
+
   protected
 
   def create_phases_stripe
@@ -29,25 +33,25 @@ class EntriesConceptBoard < ConceptBoardPage
 
   def initial
     { partial: "clients/client_center/entries/previous_phases/initial",
-      locals: { request: contest_request }
+      locals: { request: contest_request, entries_page: self }
     }
   end
 
   def collaboration
     if collaboration_phase_in_process?
       { partial: "clients/client_center/entries/#{contest_request.status}",
-        locals: { request: contest_request }
+        locals: { request: contest_request, entries_page: self }
       }
     else
       { partial: "clients/client_center/entries/previous_phases/collaboration",
-        locals: { request: contest_request }
+        locals: { request: contest_request, entries_page: self }
       }
     end
   end
 
   def final_design
     { partial: "clients/client_center/entries/#{contest_request.status}",
-      locals: { request: contest_request }
+      locals: { request: contest_request, entries_page: self }
     }
   end
 
