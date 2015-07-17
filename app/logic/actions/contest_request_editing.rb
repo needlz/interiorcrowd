@@ -42,7 +42,6 @@ class ContestRequestEditing
   def update_status
     PhaseUpdater.new(request).monitor_phase_change do
       return perform_submission if contest_request_params[:status] == 'submitted'
-      perform_ready_fulfillment if contest_request_params[:status] == 'fulfillment_ready' && request.fulfillment?
       perform_finish if contest_request_params[:status] == 'finished' && request.fulfillment_approved?
     end
   end
@@ -75,15 +74,6 @@ class ContestRequestEditing
     finish_contest_request = FinishContestRequest.new(request)
     finish_contest_request.perform
     event_tracker.final_design_submitted(request)
-  end
-
-  def perform_ready_fulfillment
-    request.ready_fulfillment!
-    destroy_empty_image_items
-  end
-
-  def destroy_empty_image_items
-    request.image_items.where(image_id: nil).destroy_all
   end
 
 end

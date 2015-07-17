@@ -34,8 +34,14 @@ RSpec.describe ContestRequest do
   end
 
   describe 'winner count validation' do
-    let!(:request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
-    let!(:other_request) { Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest) }
+    let!(:request) { Fabricate(:contest_request,
+                               status: 'submitted',
+                               designer: Fabricate(:designer),
+                               contest: contest) }
+    let!(:other_request) { Fabricate(:contest_request,
+                                     status: 'submitted',
+                                     designer: Fabricate(:designer),
+                                     contest: contest) }
 
     before do
       contest.update_attributes!(status: 'winner_selection')
@@ -74,10 +80,20 @@ RSpec.describe ContestRequest do
   end
 
   describe '#reply' do
-    let(:request){ Fabricate(:contest_request, designer: designer, status: 'fulfillment', answer: 'winner', contest_id: contest.id) }
-    let(:submitted_request){ Fabricate(:contest_request, designer: designer, status: 'submitted', answer: 'maybe', contest_id: contest.id) }
+    let(:request){ Fabricate(:contest_request,
+                             designer: designer,
+                             status: 'fulfillment_ready',
+                             answer: 'winner',
+                             contest_id: contest.id) }
+    let(:submitted_request){ Fabricate(:contest_request,
+                                       designer: designer,
+                                       status: 'submitted',
+                                       answer: 'maybe',
+                                       contest_id: contest.id) }
     let(:client) { Fabricate(:client) }
-    let(:contest) { Fabricate(:contest, client_id: client.id, status: 'submission') }
+    let(:contest) { Fabricate(:contest,
+                              client_id: client.id,
+                              status: 'submission') }
 
     it 'does not change answer for fullfillment request' do
       request.reply('maybe', client.id)
@@ -91,33 +107,50 @@ RSpec.describe ContestRequest do
   end
 
   it 'sets unique token after creation' do
-    request = Fabricate(:contest_request, designer: designer, contest_id: contest.id)
+    request = Fabricate(:contest_request,
+                        designer: designer,
+                        contest_id: contest.id)
     expect(request.token).to be_present
   end
 
   it 'can be edited if not closed' do
-    request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
+    request = Fabricate(:contest_request,
+                        status: 'submitted',
+                        designer: Fabricate(:designer),
+                        contest: contest)
     expect(request.editable?).to be_truthy
   end
 
   it 'can not be edited if closed' do
-    request = Fabricate(:contest_request, status: 'closed', designer: Fabricate(:designer), contest: contest)
+    request = Fabricate(:contest_request,
+                        status: 'closed',
+                        designer: Fabricate(:designer),
+                        contest: contest)
     expect(request.editable?).to be_falsy
   end
 
   it 'can not be edited if finished' do
-    request = Fabricate(:contest_request, status: 'finished', designer: Fabricate(:designer), contest: contest)
+    request = Fabricate(:contest_request,
+                        status: 'finished',
+                        designer: Fabricate(:designer),
+                        contest: contest)
     expect(request.editable?).to be_falsy
   end
 
   it 'can not be edited if contest closed' do
-    request = Fabricate(:contest_request, status: 'submitted', designer: Fabricate(:designer), contest: contest)
+    request = Fabricate(:contest_request,
+                        status: 'submitted',
+                        designer: Fabricate(:designer),
+                        contest: contest)
     contest.update_attributes!(status: 'closed')
     expect(request.editable?).to be_falsy
   end
 
   describe 'winner selection' do
-    let(:request){ Fabricate(:contest_request, designer: designer, status: 'submitted', contest_id: contest.id) }
+    let(:request){ Fabricate(:contest_request,
+                             designer: designer,
+                             status: 'submitted',
+                             contest_id: contest.id) }
 
     it 'creates default product item' do
       request.update_attributes!(answer: 'winner')

@@ -106,7 +106,10 @@ InteriorC::Application.routes.draw do
                 controller: 'designer_center_requests',
                 as: 'designer_center_response',
                 only: [:new, :create, :show, :index, :update, :edit] do
-        get 'preview', on: :member,  as: 'preview'
+        member do
+          get 'preview', as: 'preview'
+          patch 'publish', as: 'publish'
+        end
 
         resources :lookbook_details, only: [:create, :destroy]
       end

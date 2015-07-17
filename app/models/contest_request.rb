@@ -21,8 +21,8 @@ class ContestRequest < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   self.per_page = 8
 
-  STATUSES = %w{draft submitted closed fulfillment fulfillment_ready fulfillment_approved failed finished}
-  FULFILLMENT_STATUSES = %w{fulfillment fulfillment_ready fulfillment_approved}
+  STATUSES = %w{draft submitted closed fulfillment_ready fulfillment_approved failed finished}
+  FULFILLMENT_STATUSES = %w{fulfillment_ready fulfillment_approved}
   ANSWERS = %w{no maybe favorite winner}
 
   normalize_attributes :answer
@@ -45,15 +45,11 @@ class ContestRequest < ActiveRecord::Base
     end
 
     event :winner do
-      transition submitted: :fulfillment
-    end
-
-    event :ready_fulfillment do
-      transition fulfillment: :fulfillment_ready
+      transition submitted: :fulfillment_ready
     end
 
     event :fail_fulfillment do
-      transition fulfillment: :failed
+      transition fulfillment_ready: :failed
     end
 
     event :approve_fulfillment do
@@ -75,8 +71,8 @@ class ContestRequest < ActiveRecord::Base
   has_one :sound, dependent: :destroy
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
-  scope :active, -> { where(status: %w(draft submitted fulfillment fulfillment_ready fulfillment_approved)) }
-  scope :ever_published, -> { where(status: %w(closed submitted fulfillment fulfillment_ready fulfillment_approved finished)) }
+  scope :active, -> { where(status: %w(draft submitted fulfillment_ready fulfillment_approved)) }
+  scope :ever_published, -> { where(status: %w(closed submitted fulfillment_ready fulfillment_approved finished)) }
   scope :submitted, ->{ where(status: %w(submitted)) }
   scope :fulfillment, ->{ where(status: FULFILLMENT_STATUSES) }
   scope :finished, ->{ where(status: 'finished') }
@@ -109,7 +105,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def reply(answer, client_id)
-    return if status == 'fulfillment'
+    return if status == 'fulfillment_ready'
     (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
@@ -118,7 +114,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def fulfillment_editing?
-    fulfillment? || fulfillment_ready? || fulfillment_approved?
+    fulfillment_ready? || fulfillment_approved?
   end
 
   def commenting_enabled?

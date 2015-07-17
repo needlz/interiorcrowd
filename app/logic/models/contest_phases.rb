@@ -25,7 +25,6 @@ class ContestPhases
   STATUSES_TO_INDICES = {
       'draft' => 0,
       'submitted' => 0,
-      'fulfillment' => 1,
       'fulfillment_ready' => 1,
       'fulfillment_approved' => 2,
       'finished' => 2,

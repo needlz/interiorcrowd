@@ -4,7 +4,7 @@
     .col-md-5
       %img.fullWidth{ src: item.thumb_url, data: { id: item.image_id }}/
       - if markable
-        = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH' do
+        = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH', autocomplete: 'off' do
           .productRadio
             - ImageItem::MARKS.each do |key, value|
               %input{ type: 'radio',

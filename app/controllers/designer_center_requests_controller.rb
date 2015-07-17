@@ -14,7 +14,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def show
     @request = @designer.contest_requests.find(params[:id])
-    return redirect_to edit_designer_center_response_path(id: @request.id) if @request.fulfillment? || @request.fulfillment_ready?
+    return redirect_to edit_designer_center_response_path(id: @request.id) if @request.fulfillment_ready?
     @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
@@ -105,6 +105,13 @@ class DesignerCenterRequestsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to designer_center_response_path(id: request.id) }
     end
+  end
+
+  def publish
+    contest_request = @designer.contest_requests.find(params[:id])
+    publish = PublishProductList.new(contest_request)
+    publish.perform
+    redirect_to designer_center_response_path(id: contest_request.id)
   end
 
   private

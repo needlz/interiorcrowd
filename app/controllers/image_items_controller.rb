@@ -11,14 +11,14 @@ class ImageItemsController < ApplicationController
 
   def update
     return raise_404 unless @item.contest_request.designer == @designer
-    @item.update_attributes!(product_item_params)
+    ImageItemUpdater.new(@item, product_item_params, current_user).perform
     render partial: 'designer_center_requests/edit/image_content',
            locals: { item: ImageItemView.new(@item), editable: true, mode: :view }
   end
 
   def mark
     return raise_404 unless @item.contest_request.contest.client == @client
-    ImageItemUpdater.new(@item, params[:image_item]).perform
+    ImageItemUpdater.new(@item, params[:image_item], current_user).perform
     render json: { updated: @item }
   end
 
@@ -42,7 +42,9 @@ class ImageItemsController < ApplicationController
     item_view = ImageItemView.new(ImageItem.create!(kind: params[:kind],
                                                     contest_request_id: contest_request.id,
                                                     image_id: params[:image_id] ))
-    render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view, editable: true, mode: :edit }
+    render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view,
+                                                                             editable: true,
+                                                                             mode: :edit }
   end
 
   private

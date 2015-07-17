@@ -145,7 +145,7 @@ RSpec.describe DesignerCenterRequestsController do
       let(:request){ Fabricate(:contest_request,
                                designer: designer,
                                contest: contest,
-                               status: 'fulfillment') }
+                               status: 'fulfillment_ready') }
 
       before do
         request.image_items.create!(kind: 'product_items')
@@ -161,18 +161,6 @@ RSpec.describe DesignerCenterRequestsController do
       it 'redirects to Updates page' do
         patch :update, id: request.id
         expect(response).to redirect_to designer_center_response_path(id: request.id)
-      end
-
-      it 'clears empty image items if status changed to fulfillment_ready' do
-        request.image_items.create!(kind: 'product_items')
-        request.image_items.create!(kind: 'similar_styles')
-        request.product_items.each{ |item| item.update_attributes!(image_id: Fabricate(:image).id) }
-        patch :update,
-              id: request.id,
-              contest_request: { status: 'fulfillment_ready' }
-        expect(request.reload.status).to eq 'fulfillment_ready'
-        expect(request.product_items.reload.count).to eq 2
-        expect(request.similar_styles.reload.count).to eq 0
       end
     end
 
@@ -301,10 +289,6 @@ RSpec.describe DesignerCenterRequestsController do
         expect(response).to redirect_to designer_center_response_path(id: request.id)
 
         request.winner!
-        get :edit, id: request.id
-        expect(response).to render_template(:edit)
-
-        request.ready_fulfillment!
         get :edit, id: request.id
         expect(response).to render_template(:edit)
 
