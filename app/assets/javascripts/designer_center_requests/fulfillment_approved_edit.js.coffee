@@ -24,9 +24,15 @@ class ProductItemsEditor extends InlineEditor
 
   bindDeleteImageClick: ->
     $(document).on 'click', "#{@attributeSelector} .productListDeleteImage", (e)=>
+      e.preventDefault()
       $container = $(e.target).parents(@attributeSelector)
-      $container.find('.edit-form').find(@imageIdInput).val('')
-      $container.find('.edit-form').find('.image-container').css('background-image', '')
+      imageItemId = $container.data('id')
+      $.ajax
+        url: "/image_items/#{ imageItemId }"
+        method: 'DELETE'
+        success: (response)=>
+          if response.destroyed
+            @attributeElement(imageItemId).remove()
 
   bindSaveClick: ->
     $(document).on 'click', "#{@attributeSelector} .save-button", (e)=>
