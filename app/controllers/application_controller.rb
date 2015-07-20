@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_return_to_link, :setup_event_tracker
 
   PAGE_404_PATH = 'public/404.html'
+  BLOG_URL = 'http://blog.interiorcrowd.com/'
 
   def beta_redirect
     if (request.subdomain == 'beta')
