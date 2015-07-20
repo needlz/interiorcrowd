@@ -17,11 +17,10 @@ class DesignerMenu < Menu
   private
 
   def common_menu(specific_items)
-    menu = MenuBuilder.new(I18n.t('header.get_inspired') => view_context.coming_soon_path)
-    if current_user.portfolio_path
-      menu.append(I18n.t('header.portfolio') => view_context.show_portfolio_path(current_user.portfolio_path))
-    end
-    menu.append(I18n.t('header.how_it_works') => view_context.coming_soon_path)
+    menu = MenuBuilder.new
+    menu.append(I18n.t('header.for_designers') => view_context.coming_soon_path)
+    menu.append(I18n.t('header.get_inspired') => view_context.coming_soon_path)
+    menu.append(I18n.t('header.blog') => ApplicationController::BLOG_URL)
     menu.append(specific_items)
     menu
   end

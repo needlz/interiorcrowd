@@ -24,9 +24,9 @@ class MenuBuilder
 
   end
 
-  def initialize(links)
+  def initialize(links = nil)
     @items = []
-    append(links)
+    append(links) if links
   end
 
   def append(links)
