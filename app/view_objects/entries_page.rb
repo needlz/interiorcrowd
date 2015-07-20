@@ -21,6 +21,10 @@ class EntriesPage < ContestPage
     @show_submissions
   end
 
+  def show_winner_chosen_congratulations?
+    won_contest_request && won_contest_request.image_items.published.blank?
+  end
+
   def show_answer_options?
     contest.winner_selection? || contest.submission?
   end
