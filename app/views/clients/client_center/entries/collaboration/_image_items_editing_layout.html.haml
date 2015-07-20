@@ -2,12 +2,23 @@
 
 .container.briefEditing.collaborationScreen.row
   .row.marginTop40
+    - if @entries_page.show_winner_chosen_congratulations?
+      .col-md-12
+        .congratulationsBox.hidden-ss
+          %h4= t('client_center.entries.congratulations')
+          %p= t('client_center.entries.customized_board')
     .col-lg-8
       = render 'clients/client_center/entries/phases',
                { stripe: @entries_page.entries_concept_board_page.phases_stripe }
     .col-lg-4.visible-lg
       - if @entries_page.timeline_hint
         %p.daysLeft= @entries_page.timeline_hint
+    - if @entries_page.show_winner_chosen_congratulations?
+      .col-md-12
+        .congratulationsBox.visible-ss
+          %h4= t('client_center.entries.congratulations')
+          %p= t('client_center.entries.customized_board')
+
     .col-lg-8.col-md-7
       %p.giveDesignerFeedback= t('client_center.entries.collaboration.this_is_a_preview')
     .col-lg-4.col-md-5.hidden-lg
