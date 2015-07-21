@@ -608,7 +608,7 @@ div.form-selector {
     font-family: 'AvenirLTStd-LightOblique';
     font-size: 18px;
     color: #a9a9a9;
-    margin: 20px 0px 40px;
+    margin: 20px 0px 0px;
 }
 .entriesPage{
     padding-bottom: 60px;
@@ -844,16 +844,16 @@ div.form-selector {
 .bottom60{
     padding-bottom: 60px;
 }
-button.btnInvite{
+.btnInvite{
     outline: none;
     background: transparent;
     border: none;
-    /*line-height: 40px;*/
     font-size: 30px;
     margin: 0px;
     margin-top: 24px;
 }
-button.btnInvite span{
+.btnInvite span{
+    cursor: pointer;
     top: 10px;
 }
 .disablePadding {
@@ -896,10 +896,10 @@ button.btnInvite span{
     .designBox .voteBtn{
         font-size: 16px;
     }
-    button.btnInvite{
+    .btnInvite{
         font-size: 25px;
     }
-    button.btnInvite span{
+    .btnInvite span{
         top: 14px;
     }
 }
