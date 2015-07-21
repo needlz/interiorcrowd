@@ -41,6 +41,21 @@ RSpec.describe PublishProductList do
         items_with_old_published_ids = contest_request.image_items.where(id: published_items.map(&:id))
         expect(items_with_old_published_ids.count).to eq 0
       end
+
+      context 'when marks present' do
+        before do
+          temporary_items.each_with_index do |temporary_item, index|
+            published_items[index].update_attributes!(temporary_version_id: temporary_item.id,
+                                                      mark: ImageItem::MARKS[:LIKE])
+          end
+        end
+
+        it 'preserves marks' do
+          publish.perform
+          published_items = contest_request.image_items.published
+          expect(published_items.where.not(temporary_version_id: nil).pluck(:mark)).to match_array([ImageItem::MARKS[:LIKE], ImageItem::MARKS[:LIKE]])
+        end
+      end
     end
   end
 

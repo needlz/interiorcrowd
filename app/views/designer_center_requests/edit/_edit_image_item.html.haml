@@ -12,17 +12,17 @@
           = hidden_field_tag 'image_item[image_id]', item.image_id
         .row
           .col-sm-6
-            %a.dcEditProduct.save.rightGrayBorder{:href => "#"} Save
+            %a.dcEditProduct.save.rightGrayBorder{:href => "#"}= t('designer_center.product_items.save')
           .col-sm-6
-            %a.dcEditProduct.cancel{:href => "#"} Cancel
+            %a.dcEditProduct.cancel{:href => "#"}= t('designer_center.product_items.cancel')
       .col-sm-8.dcProductMiddle
         .row
           .col-sm-4
-            %label{:for => "productName"} Product Name
-            %label{:for => "productBrand"} Brand
-            %label{:for => "productDimensions"} Dimensions
-            %label{:for => "productPrice"} Price
-            %label{:for => "productLink"} Link
+            %label{:for => "productName"}= t('designer_center.product_items.product_name')
+            %label{:for => "productBrand"}= t('designer_center.product_items.brand')
+            %label{:for => "productDimensions"}= t('designer_center.product_items.dimensions')
+            %label{:for => "productPrice"}= t('designer_center.product_items.price')
+            %label{:for => "productLink"}= t('designer_center.product_items.link')
           .col-sm-8
             %input#productName{ name: 'image_item[name]', :type => "text", :value => item.name }/
             %input#productBrand{ name: 'image_item[brand]', :type => "text", :value => item.brand }/
@@ -30,5 +30,7 @@
             %input#productPrice{ name: 'image_item[price]', :type => "text", :value => item.price }/
             %input#productLink{ name: 'image_item[link]', :type => "text", :value =>  item.link }/
   .col-sm-5.dcProductRight
-    %textarea.dcProductDesc{ name: 'image_item[text]', :tabindex => "0"}
+    %textarea.dcProductDesc{ name: 'image_item[text]',
+        tabindex: '0',
+        placeholder: t('designer_center.product_items.text_placeholder') }
       = item.text
