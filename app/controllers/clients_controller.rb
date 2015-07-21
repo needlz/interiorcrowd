@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
 
-  before_filter :set_client, except: [:create]
+  before_filter :set_client, except: [:create, :validate_card]
 
   def client_center
     redirect_to entries_client_center_index_path
@@ -98,6 +98,22 @@ class ClientsController < ApplicationController
     @contest_view = ContestView.new(contest_attributes: @contest)
     @navigation = Navigation::ClientCenter.new(:entries)
     render 'clients/client_center/pictures_dimension'
+  end
+
+  def validate_card
+    card_attributes = { number: params[:card_number],
+      exp_month: params[:card_ex_month],
+      exp_year: params[:card_ex_year],
+      cvc: params[:card_cvc],
+      name: "#{ params[:first_name] } #{ params[:last_name] }",
+      address_line1: params[:billing_address],
+      address_city: params[:billing_city],
+      address_state: params[:billing_state],
+      address_zip: params[:billing_zip],
+      address_country: StripeCustomer::DEFAULT_COUNTRY }
+    card_validation = CardValidation.new(card_attributes)
+    card_validation.perform
+    render json: { valid: card_validation.valid, error: card_validation.error_message }
   end
 
   private

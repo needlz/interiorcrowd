@@ -68,7 +68,11 @@ InteriorC::Application.routes.draw do
 
     resources :images, only: [:show, :create]
 
-    resources :clients, only: [:create, :update]
+    resources :clients, only: [:create, :update] do
+      collection do
+        get 'validate_card'
+      end
+    end
 
     resources :client_center, only: [] do
       collection do

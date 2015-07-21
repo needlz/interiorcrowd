@@ -27,6 +27,7 @@ development:
   APP_URL: 'http://local.home:3000'
   GOOGLE_ANALYTICS_PROPERTY_ID: '0'
   STRIPE_API_KEY: sk_test_iKogRUxGem219WsRGVGPhBw4
+  STRIPE_PUBLISHABLE_API_KEY: pk_test_rKCduto40j9ipbJSDaAR3waH
 
 test:
   APP_HOST: 'local.home:3000'

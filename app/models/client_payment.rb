@@ -13,6 +13,9 @@
 class ClientPayment < ActiveRecord::Base
 
   belongs_to :client
+  belongs_to :contest
   normalize_attributes :last_error
+
+  validates_uniqueness_of :contest_id
 
 end

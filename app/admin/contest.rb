@@ -20,4 +20,26 @@ ActiveAdmin.register Contest do
   scope 'Active', :active
   scope 'Inactive', :inactive
 
+  member_action :charge, method: :put do
+    contest = Contest.find(params[:id])
+    begin
+      payment = Payment.new(contest)
+      payment.perform
+      if payment.client_payment.try(:payment_status) == 'completed'
+        SubmitContest.new(contest).try_perform if contest.brief_pending?
+        redirect_to({:action => :show}, notice: 'Charged!')
+      else
+        redirect_to({:action => :show}, notice: payment.client_payment.last_error)
+      end
+    rescue StandardError => e
+      redirect_to({:action => :show}, notice: e.message)
+    end
+  end
+
+  action_item :charge, only: :show do
+    if contest.client_payment.blank?
+      link_to('Charge', charge_admin_contest_path(contest), method: :put)
+    end
+  end
+
 end
