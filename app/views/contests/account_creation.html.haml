@@ -2,10 +2,11 @@
   = javascript_include_tag 'jquery.creditCardValidator.js'
   = javascript_include_tag 'contests/account_creation'
   = javascript_include_tag 'i18n'
+  = render 'shared/setup_stripe_js'
   :javascript
     signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
 
-.container.animated.fadeInDown.client-signup.creditCardForm
+.container.animated.fadeInDown.client-signup.creditCardForm.lightFont
   %h3.main-title= t('client_center.sign_up.title').html_safe
   = render partial: 'home/msg'
   = form_for @client, { id: 'create', method: 'post' } do |f|

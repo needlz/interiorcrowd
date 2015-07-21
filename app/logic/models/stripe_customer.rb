@@ -12,20 +12,22 @@ class StripeCustomer
     stripe_customer.try_add_default_card
   end
 
+  def self.card_attributes(client)
+    { number: client.card_number,
+      exp_month: client.card_ex_month,
+      exp_year: client.card_ex_year,
+      cvc: client.card_cvc,
+      name: client.name_on_card,
+      address_line1: client.address,
+      address_city: client.city,
+      address_state: client.state,
+      address_zip: client.zip,
+      address_country: DEFAULT_COUNTRY
+    }
+  end
+
   def self.card_token_from_client(client)
-    Stripe::Token.create({ card:
-                             { number: client.card_number,
-                               exp_month: client.card_ex_month,
-                               exp_year: client.card_ex_year,
-                               cvc: client.card_cvc,
-                               name: client.name_on_card,
-                               address_line1: client.address,
-                               address_city: client.city,
-                               address_state: client.state,
-                               address_zip: client.zip,
-                               address_country: DEFAULT_COUNTRY
-                             }
-                         }).id
+    Stripe::Token.create({ card: card_attributes(client) }).id
   end
 
   def register

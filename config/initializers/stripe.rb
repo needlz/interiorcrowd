@@ -1,1 +1,1 @@
-Stripe.api_key = Settings.stripe_api_key
+Stripe.api_key = Settings.stripe.api_key

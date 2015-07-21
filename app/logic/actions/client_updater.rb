@@ -8,16 +8,24 @@ class ClientUpdater
 
   def perform
     if client_attributes
+      do_register = false
       client.assign_attributes(client_attributes)
-      if billing_info_changed?(client) && client.stripe_customer?
-        stripe_customer = StripeCustomer.new(client)
-        if client.card_number_changed?
-          stripe_customer.try_add_default_card
+      if billing_info_changed?(client)
+        if client.stripe_customer?
+          stripe_customer = StripeCustomer.new(client)
+          if client.card_number_changed?
+            stripe_customer.try_add_default_card
+          else
+            stripe_customer.update_default_card
+          end
         else
-          stripe_customer.update_default_card
+          do_register = true
         end
       end
       client.save!
+      if do_register
+        Jobs::StripeCustomerRegistration.schedule(client)
+      end
     end
     update_password if password_options
   end

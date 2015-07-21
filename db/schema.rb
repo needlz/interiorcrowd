@@ -290,8 +290,6 @@ ActiveRecord::Schema.define(version: 20150717125601) do
     t.integer  "temporary_version_id"
   end
 
-  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
-
   create_table "image_links", force: true do |t|
     t.integer "contest_id"
     t.text    "url"

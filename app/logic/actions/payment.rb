@@ -2,17 +2,20 @@ class Payment
 
   DEFAULT_CURRENCY = 'USD'
 
+  attr_reader :client_payment
+
   def initialize(contest)
     @contest = contest
     @client = contest.client
   end
 
   def perform
+    @client_payment = nil
     customer = StripeCustomer.new(client)
-    unless charge_already_in_queue?
+    unless charge_already_performed?
       price = calculate_price_in_cents
-      return if price <= 0
       payment = ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
+      @client_payment = payment
       begin
         amount = Money.new(price, DEFAULT_CURRENCY)
         description = "charge client with id #{ client.id }"
@@ -31,13 +34,13 @@ class Payment
   def calculate_price_in_cents
     result = contest.package.price_in_cents
     client.promocodes.each do |code|
-      result =- code.discount_cents
+      result = result - code.discount_cents
     end
     result
   end
 
-  def charge_already_in_queue?
-    ClientPayment.where(client_id: client.id).exists?
+  def charge_already_performed?
+    ClientPayment.where(contest_id: contest.id).exists?
   end
 
 end

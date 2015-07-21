@@ -20,6 +20,9 @@ common: &defaults
   mixpanel_token: <%= ENV['MIXPANEL_TOKEN'] %>
   google_analytics_property_id: <%= ENV['GOOGLE_ANALYTICS_PROPERTY_ID'] %>
   stripe_api_key: <%= ENV['STRIPE_API_KEY'] %>
+  stripe:
+    api_key: <%= ENV['STRIPE_API_KEY'] %>
+    publishable_api_key: <%= ENV['STRIPE_PUBLISHABLE_API_KEY'] %>
 
 development:
 

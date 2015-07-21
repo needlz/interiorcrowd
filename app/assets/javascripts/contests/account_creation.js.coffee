@@ -44,7 +44,32 @@ class Promocode
       error: =>
         $(@messagesSelector).hide()
         $(@requestErrorMsgSelector).show()
-#        @bindApplyPromocodeButton()
+    )
+
+class CardValidation
+
+
+  @init: ->
+    @error = null
+    @valid = false
+    $('#card_number, #card_cvc, #client_card_ex_month, #client_card_ex_year').change (event)=>
+      $("#err_card_number").text('')
+      @validate()
+
+  @validate: ->
+    Stripe.card.createToken(
+      {
+        number: $('#card_number').val(),
+        cvc: $('#card_cvc').val(),
+        exp_month: $('#client_card_ex_month').val(),
+        exp_year: $('#client_card_ex_year').val()
+      }, (status, response) =>
+        if response.error
+          @error = response.error.message
+          @valid = false
+          $("#err_card_number").text(response.error.message)
+        else
+          @valid = true
     )
 
 class AccountCreation
@@ -52,6 +77,7 @@ class AccountCreation
   @init: ->
     @validator = new ValidationMessages()
     Promocode.init()
+    CardValidation.init()
     @bindSubmitButton()
     @bindAgreementCheckbox()
     @styleDropdowns()
@@ -116,19 +142,16 @@ class AccountCreation
       else
         @validator.addMessage $("#err_zip"), "Please enter zip.", $zip
     ->
-      $cardNumber = $("#card_number")
-      if trimedVal($cardNumber).length < 1
-        @validator.addMessage $("#err_card_number"), "Please enter card number.", $cardNumber
-    ->
-      $cvc = $("#card_cvc")
-      cvc = trimedVal($cvc)
-      if cvc.length > 1
-        if not ($.isNumeric(cvc) and cvc.length in [3..4])
-          @validator.addMessage $("#err_cvc"), "Please enter valid CVC, must have 3 or 4 digits.", $cvc
-      else
-        @validator.addMessage $("#err_cvc"), "Please enter CVC.", $cvc
-    ->
       unless $('#client_agree').is(':checked')
+        @validator.valid = false
+    ->
+      unless CardValidation.valid
+        if CardValidation.error
+          @validator.addMessage $("#err_card_number"), CardValidation.error, $cardNumber
+        else
+          $cardNumber = $("#card_number")
+          if (trimedVal($cardNumber).length < 1) && $("#err_card_number").text().length < 1
+            @validator.addMessage $("#err_card_number"), "Please enter card number.", $cardNumber
         @validator.valid = false
   ]
 
