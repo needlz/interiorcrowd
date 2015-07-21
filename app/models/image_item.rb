@@ -63,13 +63,4 @@ class ImageItem < ActiveRecord::Base
     image.try(:id)
   end
 
-  def self.publish
-    all.each do |item|
-      new_item = item.dup
-      new_item.status = 'published'
-      new_item.temporary_version = item
-      new_item.save!
-    end
-  end
-
 end

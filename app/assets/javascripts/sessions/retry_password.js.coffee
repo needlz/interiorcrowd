@@ -13,4 +13,4 @@ $(document).ready ->
       bool = false
     false  unless bool
 
-  mixpanel.tracke_forms '#reset-password', 'Password reset'
+  mixpanel.track_forms '#reset-password', 'Password reset'

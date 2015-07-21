@@ -858,6 +858,13 @@ en:
       add_item: + Add more product
       change_image: Change image
       delete: Delete
+      save: Save
+      cancel: Cancel
+      product_name: Product Name
+      brand: Brand
+      dimensions: Dimensions
+      price: Price
+      link: Link
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'
