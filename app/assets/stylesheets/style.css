@@ -1078,18 +1078,7 @@ p.stepActive .number{
 .bottom60{
 padding-bottom: 60px;
 }
-button.btnInvite{
-	outline: none;
-	background: transparent;
-	border: none;
-	/*line-height: 40px;*/
-	font-size: 24px;
-	margin: 0px;
-	margin-top: 24px;
-}
-button.btnInvite span{
-	top: 12px;
-}
+
 .feedbackFromOthers{
 	background: #F8F8F8;
 	padding: 20px;
