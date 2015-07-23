@@ -61,7 +61,8 @@ class ClientsController < ApplicationController
   def create
     client_creation = ClientCreation.new(client_attributes: prepare_creation_params,
                                          promocode: params[:client][:promocode])
-    @client = client_creation.perform.client
+    client_creation.perform
+    @client = client_creation.client
     respond_to do |format|
       if client_creation.saved
         session[:client_id] = @client.id

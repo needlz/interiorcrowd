@@ -85,6 +85,19 @@ RSpec.describe ClientsController do
       post :create, { client: client_options }, contest_options_source
       expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1
     end
+
+    context 'when not unique email' do
+      let(:initial_client_count) { 1 }
+
+      before do
+        Fabricate(:client, email: client_options[:email])
+      end
+
+      it 'does not create client' do
+        post :create, { client: client_options }, contest_options_source
+        expect(Client.count).to eq initial_client_count
+      end
+    end
   end
 
   describe 'PATCH update' do
