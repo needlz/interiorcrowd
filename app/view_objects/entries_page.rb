@@ -35,7 +35,7 @@ class EntriesPage < ContestPage
         time_left: time_till_milestone_end)
     elsif contest.winner_selection?
       select_winner_hint
-    elsif funfillment_phase?
+    elsif fulfillment_phase?
       I18n.t('client_center.entries.fullfilment.time_left',
         time_left: time_till_milestone_end)
     end
@@ -80,7 +80,7 @@ class EntriesPage < ContestPage
                                            highest_measure_only: true)
   end
 
-  def funfillment_phase?
+  def fulfillment_phase?
     won_contest_request.fulfillment_ready? || won_contest_request.fulfillment_approved?
   end
 

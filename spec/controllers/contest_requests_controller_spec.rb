@@ -276,7 +276,6 @@ RSpec.describe ContestRequestsController do
 
       it 'renders page' do
         get :design, token: token
-        expect(request.image_items.count).to eq 1
         expect(response).to render_template('contest_requests/public_design')
       end
     end
