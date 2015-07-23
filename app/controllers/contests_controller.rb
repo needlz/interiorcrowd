@@ -42,6 +42,7 @@ class ContestsController < ApplicationController
   end
 
   def save_preview
+    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
     @client = current_client
     if params[:preview].present?
       session[:preview] = params[:preview]

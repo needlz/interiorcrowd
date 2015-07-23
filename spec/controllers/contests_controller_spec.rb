@@ -134,13 +134,25 @@ RSpec.describe ContestsController do
       before do
         sign_in(client)
         contest
-        prepare_params
       end
 
-      it 'creates contest' do
-        post :save_preview, contest_options_source
-        expect(client.contests.count).to eq 2
-        expect(response).to redirect_to(entries_client_center_index_path)
+      context 'with all steps completed' do
+        before do
+          prepare_params
+        end
+
+        it 'creates contest' do
+          post :save_preview, contest_options_source
+          expect(client.contests.count).to eq 2
+          expect(response).to redirect_to(entries_client_center_index_path)
+        end
+      end
+
+      context 'when required steps not stored in session' do
+        it 'redirects to uncompleted step' do
+          post :save_preview, preview: { contest_name: 'any name' }
+          expect(response).to redirect_to(ContestCreationWizard.creation_steps_paths[:design_brief])
+        end
       end
     end
   end
