@@ -152,16 +152,6 @@ RSpec.describe ContestRequest do
                              status: 'submitted',
                              contest_id: contest.id) }
 
-    it 'creates default product item' do
-      request.update_attributes!(answer: 'winner')
-      expect(request.product_items.count).to eq 1
-    end
-
-    it 'creates default similar style item' do
-      request.update_attributes!(answer: 'winner')
-      expect(request.similar_styles.count).to eq 1
-    end
-
     it 'does not create default items if an item already present' do
       request.product_items.create!(kind: 'product_items')
       expect(request.product_items.count).to eq 1
