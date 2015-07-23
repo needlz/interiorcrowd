@@ -6,6 +6,7 @@ RSpec.describe ContestRequestsController do
   before do
     allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
   end
+
   render_views
 
   let(:client) { Fabricate(:client) }
@@ -257,7 +258,7 @@ RSpec.describe ContestRequestsController do
     end
   end
 
-  describe 'GET public_design' do
+  describe 'GET design' do
     context 'unexisting contest response token' do
       it 'renders 404' do
         get :design, token: '1111'
@@ -267,12 +268,16 @@ RSpec.describe ContestRequestsController do
 
     context 'existing contest response token' do
       let(:token){ TokenGenerator.generate }
+
       before do
         request.update_attributes!(token: token)
+        Fabricate(:product_item, contest_request: request, image: Fabricate(:image))
       end
 
       it 'renders page' do
         get :design, token: token
+        expect(request.image_items.count).to eq 1
+        expect(response).to render_template('contest_requests/public_design')
       end
     end
   end
