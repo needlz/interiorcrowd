@@ -1,6 +1,7 @@
 .imageWithOverlay{ class: (container_class if defined?(container_class)) }
   - if defined?(use_div) && use_div
-    .image-container{ style: "background-image: url(#{ j(thumb_path) })", class: (image_class if defined?(image_class)) }
+    .image-container{ style: "background-image: #{ css_url(thumb_path) }",
+        class: (image_class if defined?(image_class)) }
   - else
     %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
   .overlayExampleImg

@@ -5,7 +5,7 @@
         .relative.image-block-height
           .imageWithOverlay
             .permanentOverlayExampleImg
-            .full-size-image-container.image-container{ style: "background-image: url('#{ j(image_item.medium_size_image_url) }')" }
+            .full-size-image-container.image-container{ style: "background-image: #{ css_url(image_item.medium_size_image_url) }" }
             = button_tag t('designer_center.product_items.change_image'), class: 'btn btnChangeImage', type: 'button'
             = button_tag t('designer_center.product_items.delete'), class: 'productListDeleteImage', type: 'button'
           = file_field_tag 'image[image]', class: 'hidden'
@@ -28,7 +28,7 @@
     .col-sm-12
       .row
         .col-sm-3.relative.image-block-height
-          .full-size-image-container.image-container{ style: "background-image: url('#{ j(image_item.medium_size_image_url) }')" }
+          .full-size-image-container.image-container{ style: "background-image: #{ css_url(image_item.medium_size_image_url) }" }
           = link_to t('designer_center.final_upload.edit'), '#', class: 'dcEditDesign edit-button'
           = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
         .col-sm-9.dcLabels

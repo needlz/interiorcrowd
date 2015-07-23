@@ -2,7 +2,7 @@
     class: ('default' if item.thumb_url == '/assets/portfolio_example.png') }
   .row
     .col-md-5
-      .full-size-image-container{ style: "background-image: url('#{ j(item.thumb_url) }');",
+      .full-size-image-container{ style: "background-image: #{ css_url(item.thumb_url) };",
           data: { id: item.image_id } }
       - if markable
         = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH', autocomplete: 'off' do
