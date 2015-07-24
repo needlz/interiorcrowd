@@ -11,7 +11,8 @@
               %input{ type: 'radio',
                   name: "image_item[mark]",
                   id: "p_#{ item.id }_#{ key }",
-                  value: value }
+                  value: value,
+                  checked: value == item.mark }
               %label{ for: "p_#{ item.id }_#{ key }" }
                 %span
             .clearfix
