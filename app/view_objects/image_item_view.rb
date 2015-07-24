@@ -1,7 +1,6 @@
 class ImageItemView
   include ContestsHelper
 
-
   delegate :image_id, :text, :id, :mark, :medium_size_image_url, :name,
            :brand, :dimensions, :price, :link, :kind, :published_version, to: :image_item
 
