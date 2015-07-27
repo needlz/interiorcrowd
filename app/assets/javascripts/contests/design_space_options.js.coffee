@@ -17,15 +17,8 @@ class @DesignSpaceOptions
 
   @setupFeedbackPlaceholder: ->
     $textarea = $(@feedbackTextareaSelector)
-
     placeholder = @feedbackPlaceholder
-    $textarea.val(placeholder)
-    $textarea.focus ->
-      if $(this).val() == placeholder
-        $(this).val ''
-    $textarea.blur ->
-      if $(this).val() == ''
-        $(this).val placeholder
+    $textarea.emulatePlaceholder(placeholder)
 
   @mobileInputsPlaceholder: ->
     @toggleMobileInputsPlaceholder()
