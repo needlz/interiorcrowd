@@ -1,5 +1,6 @@
 Fabricator(:image_item) do
   text 'description'
+  phase 'collaboration'
   name { sequence { |i| "product item #{ i }" } }
 end
 

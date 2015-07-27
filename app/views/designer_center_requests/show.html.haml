@@ -25,6 +25,9 @@
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding
       .initialImage
+        - if @show_page.finished?
+          %p.font18= @request.final_note
+          %p.font18= @request.pull_together_note
         - if @request.lost?
           .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
           .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
@@ -41,7 +44,7 @@
       = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
       - if @request.sound
         .designer-voice
-          = render partial: 'contest_requests/listen', locals: { request: @request } if @request.sound
+          = render partial: 'contest_requests/listen', locals: { request: @request }
         .hLine
       - if @request.commenting_enabled?
         = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,

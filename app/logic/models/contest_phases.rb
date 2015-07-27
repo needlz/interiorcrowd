@@ -1,5 +1,9 @@
 class ContestPhases
 
+  def self.phases
+    INDICES_TO_PHASES.values
+  end
+
   def self.status_to_index(status)
     STATUSES_TO_INDICES[status]
   end

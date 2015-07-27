@@ -8,6 +8,15 @@ class ConceptBoardPreview < ConceptBoardPage
     phase_dependent_partial
   end
 
+  def image_items
+    return super.temporary if contest_request.fulfillment_ready?
+    super.published
+  end
+
+  def finished?
+    active_phase == :final_design
+  end
+
   private
 
   def initial; end

@@ -48,11 +48,10 @@ class ContestRequestEditing
 
   def update_image_items
     phase = ContestPhases.status_to_phase(request.status)
-    new_item_attributes = { final: true } if finalize_image_items?(phase)
     items_editing = ImageItemsEditing.new(
       contest_request_options: contest_request_params,
-      items_scope: request.visible_image_items(phase),
-      new_items_attributes: new_item_attributes,
+      items_scope: request.image_items.of_phase(phase),
+      new_items_attributes: new_image_item_attributes(phase),
       image_items_updater: image_items_updater
     )
     items_editing.perform
@@ -74,6 +73,10 @@ class ContestRequestEditing
     finish_contest_request = FinishContestRequest.new(request)
     finish_contest_request.perform
     event_tracker.final_design_submitted(request)
+  end
+
+  def new_image_item_attributes(phase)
+    { final: true, status: 'published' } if finalize_image_items?(phase)
   end
 
 end

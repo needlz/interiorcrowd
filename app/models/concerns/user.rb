@@ -31,7 +31,7 @@ module User
   end
 
   def anonymous?
-    self.class == Object
+    kind_of?(Anonym)
   end
 
   def beta?

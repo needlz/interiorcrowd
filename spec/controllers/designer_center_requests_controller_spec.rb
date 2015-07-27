@@ -183,13 +183,24 @@ RSpec.describe DesignerCenterRequestsController do
       end
 
       it 'clears image items if no params passed' do
-        request.image_items.create!(kind: 'product_items', mark: ImageItem::MARKS[:DISLIKE])
-        request.image_items.create!(kind: 'similar_styles', mark: ImageItem::MARKS[:DISLIKE])
-        request.image_items.create!(kind: 'product_items')
-        request.image_items.create!(kind: 'similar_styles', mark: ImageItem::MARKS[:LIKE])
+        request.image_items.create!(kind: 'product_items',
+                                    mark: ImageItem::MARKS[:DISLIKE],
+                                    status: 'published',
+                                    phase: 'final_design')
+        request.image_items.create!(kind: 'similar_styles',
+                                    mark: ImageItem::MARKS[:DISLIKE],
+                                    status: 'published',
+                                    phase: 'final_design')
+        request.image_items.create!(kind: 'product_items',
+                                    status: 'published',
+                                    phase: 'final_design')
+        request.image_items.create!(kind: 'similar_styles',
+                                    mark: ImageItem::MARKS[:LIKE],
+                                    status: 'published',
+                                    phase: 'final_design')
         expect(request.image_items.count).to eq 4
         patch :update, id: request.id
-        expect(request.reload.image_items.count).to eq 2
+        expect(request.reload.image_items.count).to eq 0
       end
 
       it 'finishes contest and contest request' do

@@ -13,7 +13,7 @@ class ConceptBoardPage < PhasesHolder
   end
 
   def image_items
-    contest_request.visible_image_items(active_phase).for_view
+    contest_request.image_items.of_phase(active_phase).for_view
   end
 
   def current_lookbook_items

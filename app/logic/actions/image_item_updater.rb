@@ -43,7 +43,7 @@ class ImageItemUpdater
   def update_params
     product_item.assign_attributes(image_item_attributes)
     if product_item.image_id_changed? && product_item.published_version
-      product_item.published_version.update_attributes!(temporary_version: nil)
+      product_item.published_version = nil
     end
     product_item.save!
   end
