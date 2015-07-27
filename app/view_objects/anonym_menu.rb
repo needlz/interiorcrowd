@@ -1,11 +1,11 @@
 class AnonymMenu < Menu
 
   def main_items
-    common_menu role_specific_items
+    common_menu_for role_specific_items
   end
 
   def mobile_items
-    common_menu role_specific_items
+    common_menu_for role_specific_items
   end
 
   private
