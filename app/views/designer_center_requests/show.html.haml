@@ -27,7 +27,6 @@
       .initialImage
         - if @show_page.finished?
           %p.font18= @request.final_note
-          %p.font18= @request.pull_together_note
         - if @request.lost?
           .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
           .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
@@ -49,7 +48,11 @@
       - if @request.commenting_enabled?
         = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
             comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board? }
-    = render @show_page.image_items_partial if @show_page.image_items_partial
+    .clearfix
+    - if @show_page.image_items_partial
+      - if @show_page.finished?
+        %p.font18.marginTop20= @request.pull_together_note
+      = render @show_page.image_items_partial
     = render partial: 'designer_center_requests/footer_buttons'
 
 = render partial: 'designer_center/layout'

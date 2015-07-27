@@ -3446,8 +3446,6 @@ input[type="radio"].smallRadio:checked + label span {
     }
     .collaborationScreen .commentContainer .row div:nth-child(2) p.comment-text {
         position: relative;
-        left: -30%;
-        width: 130%;
     }
     .btnGroupComments li.btn {
         line-height: 38px;
