@@ -4,25 +4,14 @@ class DesignerMenu < Menu
     specific_items =
         { I18n.t('header.designer_center') => view_context.designer_center_path,
           I18n.t('header.sign_out') => view_context.logout_sessions_path }
-    common_menu(specific_items)
+    common_menu_with specific_items
   end
 
   def mobile_items
     specific_items =
         { I18n.t('header.designer_center') => Navigation::DesignerCenter.new.to_mobile_menu,
           I18n.t('header.sign_out') => view_context.logout_sessions_path }
-    common_menu(specific_items)
-  end
-
-  private
-
-  def common_menu(specific_items)
-    menu = MenuBuilder.new
-    menu.append(I18n.t('header.for_designers') => view_context.coming_soon_path)
-    menu.append(I18n.t('header.get_inspired') => view_context.coming_soon_path)
-    menu.append(I18n.t('header.blog') => ApplicationController::BLOG_URL)
-    menu.append(specific_items)
-    menu
+    common_menu_with specific_items
   end
 
 end
