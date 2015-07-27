@@ -47,4 +47,9 @@ module ApplicationHelper
               title: 'my design',
               url: url } }
   end
+
+  def css_url(url)
+    "url('#{ j(url) }')"
+  end
+
 end

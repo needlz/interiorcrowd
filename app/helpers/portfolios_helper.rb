@@ -9,7 +9,7 @@ module PortfoliosHelper
   end
 
   def cover_image_options
-    { style: ("background-image: url('#{ j(@portfolio_view.cover_picture_url) }');" if @portfolio_view.cover_picture_url),
+    { style: ("background-image: #{ css_url(@portfolio_view.cover_picture_url) };" if @portfolio_view.cover_picture_url),
       data: {
         x: @portfolio_view.cover_x_percents_offset,
         y: @portfolio_view.cover_y_percents_offset

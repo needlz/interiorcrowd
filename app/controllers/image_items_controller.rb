@@ -5,7 +5,9 @@ class ImageItemsController < ApplicationController
   before_filter :set_item, only: [:update, :mark, :edit, :destroy]
 
   def create
-    product_item = ImageItem.create!(product_item_params)
+    contest_request = @designer.contest_requests.find(product_item_params[:contest_request_id])
+    phase = ContestPhases.status_to_phase(contest_request.status)
+    product_item = contest_request.image_items.of_phase(phase).create!(product_item_params)
     render json: product_item.to_json
   end
 
@@ -13,7 +15,9 @@ class ImageItemsController < ApplicationController
     return raise_404 unless @item.contest_request.designer == @designer
     ImageItemUpdater.new(@item, product_item_params, current_user).perform
     render partial: 'designer_center_requests/edit/image_content',
-           locals: { item: ImageItemView.new(@item), editable: true, mode: :view }
+           locals: { item: ImageItemView.new(@item),
+                     editable: true,
+                     mode: :view }
   end
 
   def mark
@@ -23,8 +27,9 @@ class ImageItemsController < ApplicationController
   end
 
   def new
+    new_item = ImageItem.new(kind: 'product_items', phase: 'final_design')
     render partial: 'designer_center_requests/edit/image_item',
-           locals: { image_item: ImageItemView.new(ImageItem.new(kind: 'product_items')) }
+           locals: { image_item: ImageItemView.new(new_item) }
   end
 
   def edit
@@ -39,10 +44,10 @@ class ImageItemsController < ApplicationController
 
   def default
     contest_request = @designer.contest_requests.find(params[:contest_request_id])
-    item_view = ImageItemView.new(ImageItem.create!(kind: params[:kind],
-                                                    contest_request_id: contest_request.id,
-                                                    image_id: params[:image_id] ))
-    render partial: 'designer_center_requests/edit/image_content', locals: { item: item_view,
+    phase = ContestPhases.status_to_phase(contest_request.status)
+    new_image_item = contest_request.image_items.of_phase(phase).create!(kind: params[:kind],
+                                                                         image_id: params[:image_id])
+    render partial: 'designer_center_requests/edit/image_content', locals: { item: ImageItemView.new(new_image_item),
                                                                              editable: true,
                                                                              mode: :edit }
   end

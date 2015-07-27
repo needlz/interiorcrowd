@@ -74,12 +74,7 @@ class ApplicationController < ActionController::Base
   def fetch_current_user
     return Client.find(session[:client_id]) if session[:client_id]
     return Designer.find(session[:designer_id]) if session[:designer_id]
-    anonym = Object.new
-    def anonym.role
-      'Anonym'
-    end
-    anonym.extend(User)
-    anonym
+    Anonym.new
   end
 
   def setup_event_tracker

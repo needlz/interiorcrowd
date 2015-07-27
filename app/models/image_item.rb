@@ -33,6 +33,7 @@ class ImageItem < ActiveRecord::Base
   validates_inclusion_of :mark, in: MARKS.values, allow_nil: true
   validates_inclusion_of :kind, in: KINDS.map(&:to_s)
   validates_inclusion_of :status, in: STATUSES
+  validates_inclusion_of :phase, in: ContestPhases.phases.map(&:to_s)
   validates_presence_of :contest_request
 
   belongs_to :image
@@ -49,8 +50,10 @@ class ImageItem < ActiveRecord::Base
   scope :liked, ->{ where(mark: MARKS[:LIKE]) }
 
   scope :initial, ->{ none }
-  scope :collaboration, ->{ all }
-  scope :final_design, ->{ where('final = ? OR mark = ? OR mark IS NULL', true, MARKS[:LIKE]) }
+  scope :collaboration, ->{ where(phase: 'collaboration') }
+  scope :final_design, ->{ where(phase: 'final_design') }
+  scope :non_disliked, ->{ where('mark = ? OR mark IS NULL',  MARKS[:LIKE]) }
+  scope :of_phase, ->(phase){ send(phase) }
 
   scope :published, ->{ where(status: 'published') }
   scope :temporary, ->{ where(status: 'temporary') }

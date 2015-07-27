@@ -30,9 +30,9 @@
     .designImg
       %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
         - if contest_request.concept_board_images_by_phase('initial').first
-          .image-container{ style: "background-image: url('#{ j(contest_request.concept_board_images_by_phase('initial').first.medium_size_url) }')" }
+          .image-container{ style: "background-image: #{ css_url(contest_request.concept_board_images_by_phase('initial').first.medium_size_url) }" }
         - else
-          .image-container{ style: "background-image: url('#{ j('/assets/portfolio_example.png') }')" }
+          .image-container{ style: "background-image: #{ css_url('/assets/portfolio_example.png') }" }
     .fullWidthLine
     - if show_answer_options && @client
       = render partial: 'clients/moodboard_answers',

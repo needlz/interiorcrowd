@@ -318,7 +318,10 @@ RSpec.describe ClientsController do
                               status: 'finished',
                               answer: 'winner',
                               lookbook: Fabricate(:lookbook))
-      fulfillment.image_items.create!(kind: 'product_items', final: true)
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
       get :entries
       expect(response).to render_template(:entries)
       ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|

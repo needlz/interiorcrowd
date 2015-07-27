@@ -9,6 +9,7 @@ class ConceptBoardEditing < ConceptBoardPage
   end
 
   def image_items
+    return super.published if contest_request.fulfillment_approved?
     super.temporary
   end
 
@@ -22,7 +23,7 @@ class ConceptBoardEditing < ConceptBoardPage
 
   def collaboration
     { partial: 'designer_center_requests/edit/image_items_editing_layout',
-      locals: { request: contest_request, editable: true }
+      locals: { request: contest_request, editable: editable? }
     }
   end
 
