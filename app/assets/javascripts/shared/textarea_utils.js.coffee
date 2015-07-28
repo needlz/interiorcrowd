@@ -13,7 +13,7 @@ $.fn.selectRange = (start, end) ->
       range.select()
 
 $.fn.emulatePlaceholder = (placeholder) ->
-  @val(placeholder)
+  @val placeholder
   @mousedown (event) =>
     if @val() == placeholder
       event.preventDefault()
