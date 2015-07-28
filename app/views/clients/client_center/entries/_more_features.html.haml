@@ -1,10 +1,10 @@
 .more-features
   %h3.exploreMore= t('client_center.entries.more_features.title')
   .text-center.circleLinks
-    %a{ href: 'http://blog.interiorcrowd.com/category/get-ideas', class: tracked_link }
+    %a{ href: Settings.external_urls.blog_get_ideas, class: tracked_link }
       %span= t('client_center.entries.more_features.get_inspired')
-    %a{ href: 'http://blog.interiorcrowd.com/category/client-stories', class: tracked_link }
+    %a{ href: Settings.external_urls.blog_client_stories, class: tracked_link }
       %span= t('client_center.entries.more_features.see_example')
-    %a{ href: coming_soon_path, class: tracked_link }
-      %span= t('client_center.entries.more_features.share_brief').html_safe
+    %a{ href: Settings.external_urls.blog_design_styles, class: tracked_link }
+      %span= t('client_center.entries.more_features.styles_explained').html_safe
     .clearfix

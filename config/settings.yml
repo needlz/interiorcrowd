@@ -23,6 +23,22 @@ common: &defaults
   stripe:
     api_key: <%= ENV['STRIPE_API_KEY'] %>
     publishable_api_key: <%= ENV['STRIPE_PUBLISHABLE_API_KEY'] %>
+  external_urls:
+    blog_url: http://blog.interiorcrowd.com
+    blog_get_ideas: http://blog.interiorcrowd.com/category/get-ideas
+    blog_client_stories: http://blog.interiorcrowd.com/category/client-stories
+    blog_design_styles: http://blog.interiorcrowd.com/category/get-ideas/design-styles
+    blog_about_us: http://blog.interiorcrowd.com/category/about-us
+    twitter_account: https://twitter.com/InteriorCrowd
+    facebook_account: https://www.facebook.com/interiorcrowd
+    instagram_account: https://instagram.com/interiorcrowd
+    pinterest_account: https://www.pinterest.com/interiorcrowd
+    stripe_js: https://js.stripe.com/v2/
+    privacy_policy_twitter_tailored_ads: https://support.twitter.com/articles/20170405
+    privacy_policy_google_opt_out_addon: https://tools.google.com/dlpage/gaoptout
+    privacy_policy_google_ads_settings: http://www.google.com/settings/ads
+    privacy_policy_google_analytics_terms: http://www.google.com/analytics/terms/us.html
+    privacy_policy_about_ads_choices: http://www.aboutads.info/choices
 
 development:
 
