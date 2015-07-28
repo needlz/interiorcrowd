@@ -23,7 +23,7 @@ class @DesignSpaceOptions
     $textarea.emulatePlaceholder(placeholder)
 
   @initFeedbackPopup: ->
-    $('[data-toggle="popover"]').popover(viewport: '.feedback', container: '.feedback')
+    $('.feedback [data-toggle="popover"]').popover(viewport: '.feedback', container: '.feedback')
 
   @mobileInputsPlaceholder: ->
     @toggleMobileInputsPlaceholder()
