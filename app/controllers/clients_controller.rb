@@ -59,8 +59,7 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client_creation = ClientCreation.new(client_attributes: prepare_creation_params,
-                                         promocode: params[:client][:promocode])
+    client_creation = ClientCreation.new(client_attributes: prepare_creation_params)
     client_creation.perform
     @client = client_creation.client
     respond_to do |format|
@@ -146,7 +145,9 @@ class ClientsController < ApplicationController
   end
 
   def create_contest
-    contest_creation = ContestCreation.new(@client.id, session)
+    contest_creation = ContestCreation.new(client_id: @client.id,
+                                           contest_params: session,
+                                           promocode: params[:client][:promocode])
     contest_creation.on_success do
       clear_creation_storage
     end

@@ -1,8 +1,9 @@
 class ContestCreation
 
-  def initialize(client_id, params)
-    @client_id = client_id
-    @params = params
+  def initialize(options)
+    @promocode = options[:promocode]
+    @client_id = options[:client_id]
+    @params = options[:contest_params]
   end
 
   def on_success(&block)
@@ -15,6 +16,7 @@ class ContestCreation
     contest = Contest.new(contest_options.contest)
     contest.transaction do
       contest.save!
+      apply_promocode(contest)
       options_updater = ContestUpdater.new(contest, contest_options)
       options_updater.update_options
       unless options_updater.contest_submission.performed?
@@ -29,6 +31,11 @@ class ContestCreation
 
   private
 
-  attr_reader :client_id, :params, :after_created_callback
+  attr_reader :client_id, :params, :after_created_callback, :promocode
+
+  def apply_promocode(contest)
+    code = Promocode.active.find_by_promocode(promocode)
+    contest.promocodes << code if code
+  end
 
 end

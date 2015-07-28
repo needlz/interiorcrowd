@@ -10,7 +10,6 @@ class ClientCreation
 
   def perform
     return unless create_client
-    apply_promocode
     check_card
     send_notifications
     self
@@ -23,11 +22,6 @@ class ClientCreation
   def create_client
     @client = Client.new(client_attributes)
     @saved = @client.save
-  end
-
-  def apply_promocode
-    code = Promocode.active.find_by_promocode(promocode)
-    client.promocodes << code if code
   end
 
   def send_notifications

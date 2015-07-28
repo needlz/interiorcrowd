@@ -5,7 +5,7 @@ RSpec.describe ContestCreation do
   let(:client) { Fabricate(:client) }
 
   def create_with_params
-    contest_creation = ContestCreation.new(client.id, params)
+    contest_creation = ContestCreation.new(client_id: client.id, contest_params: params)
     contest_creation.perform
   end
 

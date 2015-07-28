@@ -4,7 +4,7 @@ RSpec.describe SubmitContest do
 
   let(:client) { Fabricate(:client) }
   let(:contest) do
-    contest_creation = ContestCreation.new(client.id, contest_options_source)
+    contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options_source)
     contest_creation.perform
   end
 

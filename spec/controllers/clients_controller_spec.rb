@@ -77,8 +77,8 @@ RSpec.describe ClientsController do
 
     it 'applies promocode' do
       post :create, { client: client_options }, contest_options_source
-      client = Client.last
-      expect(client.promocodes).to be_exists
+      contest = Contest.last
+      expect(contest.promocodes).to be_exists
     end
 
     it 'schedules checking of billing info' do
