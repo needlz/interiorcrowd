@@ -1,5 +1,14 @@
 .space-options
   .feedback
     %h3.marginTop60.title= t('contests.space.other_feedback.title')
+    %p.designStyle.text-right
+      %a{ href: 'javascript:void(0)',
+              data: { container: 'body',
+              toggle: 'popover',
+              placement: 'bottom',
+              html: 'true',
+              content: render('contests/options/feedback_default_text_popup'),
+              viewport: 'body' } }
+        ?
     %textarea{ type: 'text', name: 'design_space[feedback]', class: 'feedbackInstructions' }
       = @contest_view.feedback

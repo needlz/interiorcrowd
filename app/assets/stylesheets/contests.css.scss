@@ -555,6 +555,23 @@
       border-top: 0px;
       border-radius: 0px 0px 10px 10px;
     }
+
+    p {
+      margin-top: -34px;
+      font-size: 16px;
+      font-family: "AvenirLTStd-Light";
+
+      a {
+        color: black;
+        text-decoration: underline;
+      }
+
+    }
+
+    .popover.bottom {
+      width: 97.4%;
+    }
+
   }
 
   .feedback {
