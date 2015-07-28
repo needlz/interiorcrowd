@@ -7,6 +7,7 @@ class @DesignSpaceOptions
   @init: (options = {})->
     @feedbackPlaceholder = options.feedbackPlaceholder
     @setupFeedbackPlaceholder()
+    @initFeedbackPopup()
 
     @bindInchesInputs()
     @mobileInputsPlaceholder()
@@ -18,7 +19,11 @@ class @DesignSpaceOptions
   @setupFeedbackPlaceholder: ->
     $textarea = $(@feedbackTextareaSelector)
     placeholder = @feedbackPlaceholder
+
     $textarea.emulatePlaceholder(placeholder)
+
+  @initFeedbackPopup: ->
+    $('[data-toggle="popover"]').popover(viewport: '.feedback', container: '.feedback')
 
   @mobileInputsPlaceholder: ->
     @toggleMobileInputsPlaceholder()
