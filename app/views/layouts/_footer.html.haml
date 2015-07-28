@@ -3,26 +3,26 @@
 %footer.container
   .row
     .col-md-6.footerLinks
-      %a{ href: 'http://blog.interiorcrowd.com/category/about-us', class: tracked_link } About
+      %a{ href: Settings.external_urls.blog_about_us, class: tracked_link } About
       %a{ href: terms_of_service_path, class: tracked_link } Terms
       %a{ href: privacy_policy_path, class: tracked_link } Privacy Policy
     .col-md-6.footerSocial
-      %a{ href: 'https://twitter.com/InteriorCrowd',
+      %a{ href: Settings.external_urls.ic_twitter,
           class: tracked_link,
           data: { name: 'Twitter' },
           target: '_blank' }
         %img{:src => '/assets/icons/twitter.png' }/
-      %a{ href: 'https://www.facebook.com/interiorcrowd',
+      %a{ href: Settings.external_urls.ic_facebook,
           class: tracked_link + " right-side",
           data: { name: 'Facebook' },
           target: '_blank' }
         %img{:src => '/assets/icons/facebook.png' }/
-      %a{ href: 'https://instagram.com/interiorcrowd',
+      %a{ href: Settings.external_urls.ic_instagram,
           class: tracked_link,
           data: { name: 'Instagram' },
           target: '_blank'  }
         %img{:src => '/assets/icons/instagram.png' }/
-      %a{ href: 'https://www.pinterest.com/interiorcrowd',
+      %a{ href: Settings.external_urls.ic_pinterest,
           class: tracked_link + " right-side",
           data: { name: 'Pinterest' },
           target: '_blank' }
