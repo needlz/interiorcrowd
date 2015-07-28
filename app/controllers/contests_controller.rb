@@ -145,7 +145,7 @@ class ContestsController < ApplicationController
   def on_previewed
     return redirect_to account_creation_contests_path unless current_user.client?
 
-    contest_creation = ContestCreation.new(@client.id, session)
+    contest_creation = ContestCreation.new(client_id: @client.id, contest_params: session)
     contest_creation.on_success do
       clear_creation_storage
     end

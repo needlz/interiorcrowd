@@ -64,6 +64,7 @@ class Contest < ActiveRecord::Base
   has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
   belongs_to :preferred_retailers, class_name: 'PreferredRetailers', foreign_key: :preferred_retailers_id
   has_one :client_payment
+  has_and_belongs_to_many :promocodes
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }

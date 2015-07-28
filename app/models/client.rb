@@ -46,7 +46,6 @@ class Client < ActiveRecord::Base
   has_many :contests
   belongs_to :designer_level
   has_many :designer_invite_notifications, through: :contests
-  has_and_belongs_to_many :promocodes
   has_many :contest_requests, through: :contests, source: :requests
   has_many :client_payments
 

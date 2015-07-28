@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150724133652) do
+ActiveRecord::Schema.define(version: 20150728081806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -137,11 +137,11 @@ ActiveRecord::Schema.define(version: 20150724133652) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
+    t.string   "status",             default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer"
-    t.string   "status",             default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token"
@@ -190,11 +190,13 @@ ActiveRecord::Schema.define(version: 20150724133652) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
-  create_table "contests_images", force: true do |t|
-    t.integer "contest_id"
-    t.integer "image_id"
-    t.integer "kind"
+  create_table "contests_promocodes", id: false, force: true do |t|
+    t.integer "contest_id",   null: false
+    t.integer "promocode_id", null: false
   end
+
+  add_index "contests_promocodes", ["contest_id", "promocode_id"], name: "index_contests_promocodes_on_contest_id_and_promocode_id", using: :btree
+  add_index "contests_promocodes", ["promocode_id", "contest_id"], name: "index_contests_promocodes_on_promocode_id_and_contest_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",           default: 0, null: false
@@ -211,7 +213,6 @@ ActiveRecord::Schema.define(version: 20150724133652) do
     t.integer  "contest_id"
     t.string   "image_type"
     t.integer  "contest_request_id"
-    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -284,12 +285,16 @@ ActiveRecord::Schema.define(version: 20150724133652) do
     t.datetime "updated_at"
     t.string   "kind"
     t.text     "dimensions"
-    t.text     "price"
-    t.string   "status",               default: "temporary"
     t.boolean  "final",                default: false
+    t.integer  "price_cents"
+    t.string   "price_currency",       default: "USD",           null: false
+    t.text     "price"
     t.integer  "temporary_version_id"
+    t.string   "status",               default: "temporary"
     t.string   "phase",                default: "collaboration"
   end
+
+  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: true do |t|
     t.integer "contest_id"
@@ -346,6 +351,7 @@ ActiveRecord::Schema.define(version: 20150724133652) do
   end
 
   create_table "portfolios", force: true do |t|
+    t.integer "background_id"
     t.integer "designer_id",                             null: false
     t.integer "years_of_experience"
     t.boolean "education_gifted"
@@ -369,8 +375,6 @@ ActiveRecord::Schema.define(version: 20150724133652) do
     t.boolean "transitional_style",      default: false
     t.boolean "rustic_elegance_style",   default: false
     t.boolean "color_pop_style",         default: false
-    t.integer "background_id"
-    t.integer "cover_width"
     t.float   "cover_x_percents_offset"
     t.float   "cover_y_percents_offset"
   end
