@@ -57,6 +57,11 @@ RSpec.describe PublishProductList do
         end
       end
     end
+
+    it 'sends email when product list published' do
+      publish.perform
+      expect(jobs_with_handler_like('new_product_list_item')).to be_exists
+    end
   end
 
 end
