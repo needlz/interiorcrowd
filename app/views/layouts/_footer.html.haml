@@ -3,26 +3,26 @@
 %footer.container
   .row
     .col-md-6.footerLinks
-      %a{ href: Settings.external_urls.blog_about_us, class: tracked_link } About
+      %a{ href: about_us_path, class: tracked_link } About
       %a{ href: terms_of_service_path, class: tracked_link } Terms
       %a{ href: privacy_policy_path, class: tracked_link } Privacy Policy
     .col-md-6.footerSocial
-      %a{ href: Settings.external_urls.twitter_account,
+      %a{ href: Settings.external_urls.social.twitter,
           class: tracked_link,
           data: { name: 'Twitter' },
           target: '_blank' }
         %img{:src => '/assets/icons/twitter.png' }/
-      %a{ href: Settings.external_urls.facebook_account,
+      %a{ href: Settings.external_urls.social.facebook,
           class: tracked_link + " right-side",
           data: { name: 'Facebook' },
           target: '_blank' }
         %img{:src => '/assets/icons/facebook.png' }/
-      %a{ href: Settings.external_urls.instagram_account,
+      %a{ href: Settings.external_urls.social.instagram,
           class: tracked_link,
           data: { name: 'Instagram' },
           target: '_blank'  }
         %img{:src => '/assets/icons/instagram.png' }/
-      %a{ href: Settings.external_urls.pinterest_account,
+      %a{ href: Settings.external_urls.social.pinterest,
           class: tracked_link + " right-side",
           data: { name: 'Pinterest' },
           target: '_blank' }
