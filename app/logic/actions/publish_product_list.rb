@@ -7,6 +7,7 @@ class PublishProductList
   def perform
     ActiveRecord::Base.transaction do
       rewrite_published_copy_of_temporary_items
+      NewProductListItemNotifier.new(contest_request).perform
     end
   end
 
