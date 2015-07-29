@@ -1,0 +1,8 @@
+%iframe#frame{ src: iframe_src, width: '100%', scrolling: 'no', style: 'border: none;' }
+  Can't load content
+
+:javascript
+  $('#frame').load(function(){
+    var isOldIE = (navigator.userAgent.indexOf("MSIE") !== -1);
+    $('#frame').iFrameResize({ log: true, heightCalculationMethod: isOldIE ? 'max' : 'lowestElement' });
+  })

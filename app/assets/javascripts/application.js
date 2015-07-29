@@ -29,4 +29,5 @@
 //= require lib/select2-3.5.2/select2
 //= require lib/draggable_background
 //= require lib/jquery.aw-showcase.min
+//= require_tree ./lib/iframeResizer
 //= require_tree ./shared
