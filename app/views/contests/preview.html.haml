@@ -8,6 +8,8 @@
   :javascript
     I18n = #{ translations_to_json(['contests', 'creation', 'preview']) }
 
+= render partial: 'shared/have_unfinished_project'
+
 - content_for :page_content do
   .newDesignContest.step4Review
     = render :partial => 'home/msg'

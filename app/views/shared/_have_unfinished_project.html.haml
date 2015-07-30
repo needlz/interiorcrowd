@@ -1,0 +1,15 @@
+:javascript
+  $(window).load(function(){
+    $('#thanksModal').modal('show');
+  });
+
+-if @creation_wizard.pending_content_exist?
+  #thanksModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
+      role: 'dialog',
+      style: 'display: block; padding-right: 15px; display: none;',
+      tabindex: '-1' }
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %h4= 'You already have an active project underway.'
+          %p= link_to('Click here', entries_client_center_index_url) + " to go back to your existing project.".html_safe

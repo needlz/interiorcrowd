@@ -14,12 +14,15 @@ class ReviewPage
   @bindContinueButton: ->
     $(@continuButtonSelector).click (e) =>
       e.preventDefault()
-      @validate()
-      if @validator.valid
-        $('#account_creation [type=submit]').click()
+      if 1
+        $('#thanksModal').modal('show');
       else
-        @validator.focusOnMessage()
-        false
+        @validate()
+        if @validator.valid
+          $('#account_creation [type=submit]').click()
+        else
+          @validator.focusOnMessage()
+          false
 
   @validate: ->
     @validator.reset()

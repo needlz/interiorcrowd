@@ -4,6 +4,8 @@
   :javascript
     window.I18n = #{ translations_to_json(['contests', 'creation']) }
 
+= render partial: 'shared/have_unfinished_project'
+
 - content_for :page_content do
   #choose-room
     = render partial: 'home/msg'
