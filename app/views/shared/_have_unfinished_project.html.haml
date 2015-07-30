@@ -3,7 +3,7 @@
     $('#unfinishedProjectModal').modal('show');
   });
 
--if @creation_wizard.pending_content_exist?
+-if @creation_wizard.pending_contest_exists?
   #unfinishedProjectModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
       role: 'dialog',
       style: 'display: block; padding-right: 15px; display: none;',

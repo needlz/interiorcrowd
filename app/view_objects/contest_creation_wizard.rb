@@ -73,7 +73,7 @@ class ContestCreationWizard
     APPEAL_FEEDBACK
   end
 
-  def pending_content_exist?
+  def pending_contest_exists?
     if current_user && current_user.last_contest
       Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
     else
