@@ -70,14 +70,6 @@ class Client < ActiveRecord::Base
     contest_request.contest_owner?(self)
   end
 
-  def can_create_next_contest?
-    if last_contest
-      Contest::FINISHED_STATUSES.include? last_contest.try(:status)
-    else
-      true
-    end
-  end
-
   def can_comment_contest?(contest)
     contest.client == self
   end
