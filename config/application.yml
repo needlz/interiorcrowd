@@ -31,3 +31,4 @@ development:
 
 test:
   APP_HOST: 'local.home:3000'
+  STRIPE_API_KEY: sk_test_iKogRUxGem219WsRGVGPhBw4
