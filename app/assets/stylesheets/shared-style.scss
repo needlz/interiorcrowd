@@ -4365,3 +4365,34 @@ a.uploadNewConceptBoard{
     margin-bottom: 20px;
 }
 /* end privacy policy */
+
+#unfinishedProjectModal{
+  @extend #thanksModal;
+
+  .modal-content{
+    color: #666666;
+  }
+
+  .modal-content h4{
+    font-size: 24px;
+  }
+
+  .modal-content p{
+    font-size: 18px;
+    font-family: "AvenirLTStd-Medium";
+  }
+
+  .modal-content a{
+    color: #409863;
+    font-size: 21px;
+  }
+
+  .modal-dialog{
+    width: 37.5%;
+    height: 23%;
+  }
+
+  .modal-content{
+    padding: 60px;
+  }
+}

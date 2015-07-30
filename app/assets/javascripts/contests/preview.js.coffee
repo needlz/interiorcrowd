@@ -12,10 +12,11 @@ class ReviewPage
       { data: $form.serializeArray() }
 
   @bindContinueButton: ->
+    $modal = $('#unfinishedProjectModal')
     $(@continuButtonSelector).click (e) =>
       e.preventDefault()
-      if 1
-        $('#thanksModal').modal('show');
+      if $modal.length
+        $modal.modal('show');
       else
         @validate()
         if @validator.valid

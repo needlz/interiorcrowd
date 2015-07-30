@@ -125,7 +125,7 @@ class ContestsController < ApplicationController
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
                                                  step: params[:action].to_sym,
-                                                 current_user: current_user)
+                                                 current_user: current_client)
     @contest_view = ContestView.new(contest_attributes: session.to_hash)
   end
 

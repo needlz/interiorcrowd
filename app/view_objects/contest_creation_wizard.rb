@@ -74,7 +74,11 @@ class ContestCreationWizard
   end
 
   def pending_content_exist?
-    Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
+    if current_user && current_user.last_contest
+      Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
+    else
+      false
+    end
   end
 
   private

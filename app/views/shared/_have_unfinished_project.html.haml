@@ -1,10 +1,10 @@
 :javascript
   $(window).load(function(){
-    $('#thanksModal').modal('show');
+    $('#unfinishedProjectModal').modal('show');
   });
 
 -if @creation_wizard.pending_content_exist?
-  #thanksModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
+  #unfinishedProjectModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
       role: 'dialog',
       style: 'display: block; padding-right: 15px; display: none;',
       tabindex: '-1' }
