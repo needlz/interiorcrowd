@@ -141,11 +141,26 @@ RSpec.describe ContestsController do
           prepare_params
         end
 
-        it 'creates contest' do
-          post :save_preview, contest_options_source
-          expect(client.contests.count).to eq 2
-          expect(response).to redirect_to(entries_client_center_index_path)
+        context 'and active contest status' do
+          it 'raises an exception' do
+            expect do
+              post :save_preview, contest_options_source
+            end.to raise_error(ArgumentError)
+            expect(client.contests.count).to eq 1
+          end
         end
+
+        context 'and inactive contest status' do
+          it 'creates contest' do
+            contest.status = 'finished'
+            contest.save!
+            post :save_preview, contest_options_source
+            expect(client.contests.count).to eq 2
+            expect(response).to redirect_to(entries_client_center_index_path)
+          end
+        end
+
+
       end
 
       context 'when required steps not stored in session' do
