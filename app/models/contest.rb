@@ -39,7 +39,7 @@ class Contest < ActiveRecord::Base
 
   self.per_page = 10
 
-  STATUSES = %w[brief_pending submission winner_selection closed fulfillment finished]
+  STATUSES = %w[brief_pending submission winner_selection closed fulfillment final_fulfillment finished]
   COLLABORATION_STATUSES = %w[submission winner_selection fulfillment]
   NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES
 
@@ -104,8 +104,12 @@ class Contest < ActiveRecord::Base
       transition winner_selection: :fulfillment, submission: :fulfillment
     end
 
+    event :final do
+      transition fulfillment: :final_fulfillment
+    end
+
     event :finish do
-      transition fulfillment: :finished
+      transition final_fulfillment: :finished
     end
   end
 
@@ -195,6 +199,10 @@ class Contest < ActiveRecord::Base
 
   def concept_board_images
     response_winner.try(:current_images)
+  end
+
+  def winner_collaboration?
+    fulfillment? || final_fulfillment?
   end
 
   private

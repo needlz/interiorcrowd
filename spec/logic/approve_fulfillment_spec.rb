@@ -5,23 +5,26 @@ RSpec.describe ApproveFulfillment do
   let(:client){ Fabricate(:client) }
   let(:designer){ Fabricate(:designer) }
   let(:contest){ Fabricate(:contest, client: client, status: 'submission') }
-  let(:request){ Fabricate(:contest_request,
-                           designer: designer,
-                           status: 'fulfillment_ready',
-                           answer: 'winner',
-                           contest_id: contest.id) }
-  let(:approved_request){ Fabricate(:contest_request,
-                                    designer: designer,
-                                    status: 'fulfillment_approved',
-                                    answer: 'winner',
-                                    contest_id: contest.id) }
+  let(:request)do
+    request = Fabricate(:contest_request,
+              designer: designer,
+              status: 'submitted',
+              answer: 'winner',
+              contest_id: contest.id)
+    SelectWinner.new(request).perform
+    request
+  end
+  let(:approved_request)do
+    request = Fabricate(:contest_request,
+              designer: designer,
+              status: 'fulfillment_approved',
+              answer: 'winner',
+              contest_id: contest.id)
+  end
 
-  it 'does not create notification for fulfillment_approved request' do
+  it 'raises error if applied to non "fulfillment_ready" contest request' do
     approve_fulfillment = ApproveFulfillment.new(approved_request)
-    approve_fulfillment.perform
-    expect(UserNotification.exists?(user_id: approved_request.designer_id,
-                                    contest_id: approved_request.contest_id,
-                                    type: 'DesignerInfoNotification')).to eq(false)
+    expect{ approve_fulfillment.perform }.to raise_error(ArgumentError)
   end
 
   it 'creates notification for fulfillment_ready request' do
@@ -38,7 +41,7 @@ RSpec.describe ApproveFulfillment do
     expect(request.status).to eq('fulfillment_approved')
   end
 
-  it 'approves fulfillment_ready request' do
+  it 'creates email for the designer' do
     approve_fulfillment = ApproveFulfillment.new(request)
     approve_fulfillment.perform
     expect(jobs_with_handler_like('client_ready_for_final_design').count).to eq 1
@@ -71,6 +74,12 @@ RSpec.describe ApproveFulfillment do
         match_array ['published_item_without_mark', 'liked_published_item']
       )
     end
+  end
+
+  it 'moves the contest to the final_fulfillment status' do
+    approve_fulfillment = ApproveFulfillment.new(request)
+    approve_fulfillment.perform
+    expect(contest.reload).to be_final_fulfillment
   end
 
 end

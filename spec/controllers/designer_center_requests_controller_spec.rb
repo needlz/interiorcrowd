@@ -16,6 +16,7 @@ RSpec.describe DesignerCenterRequestsController do
                             undesirable_colors: 'EEE',
                             status: 'submission') }
   let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
+  let(:final_fulfillment_contest) { Fabricate(:contest, client: client, status: 'final_fulfillment') }
   let(:other_contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
@@ -167,7 +168,7 @@ RSpec.describe DesignerCenterRequestsController do
     context 'request with fulfillment approved status' do
       let(:request){ Fabricate(:contest_request,
                                designer: designer,
-                               contest: fulfillment_contest,
+                               contest: final_fulfillment_contest,
                                status: 'fulfillment_approved') }
 
       it 'updates final note' do
@@ -206,7 +207,7 @@ RSpec.describe DesignerCenterRequestsController do
       it 'finishes contest and contest request' do
         patch :update, id: request.id, contest_request: { status: 'finished' }
         expect(request.reload).to be_finished
-        expect(fulfillment_contest.reload).to be_finished
+        expect(request.contest.reload).to be_finished
       end
 
       it 'logs finish event to Mixpanel' do
@@ -214,7 +215,6 @@ RSpec.describe DesignerCenterRequestsController do
         expect(jobs_with_handler_like('MixpanelLogRecord').count).to eq 1
       end
     end
-
   end
 
   describe 'GET new' do

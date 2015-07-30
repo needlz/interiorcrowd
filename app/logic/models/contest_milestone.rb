@@ -3,7 +3,8 @@ class ContestMilestone
   DAYS = {
     'submission' => 7,
     'winner_selection' => 7,
-    'fulfillment' => 14
+    'fulfillment' => 14,
+    'final_fulfillment' => 7
   }
 
   def self.end_milestone_performer(contest_status)

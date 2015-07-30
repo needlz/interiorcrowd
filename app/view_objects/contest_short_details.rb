@@ -11,7 +11,7 @@ class ContestShortDetails
     @design_space = contest.design_space.name
     @days_count = contest.days_left
     @days_till_end = get_days_till_end(contest)
-    @days_left = "#{ days_till_end}#{ ' days' if contest.fulfillment? }"
+    @days_left = "#{ days_till_end}#{ ' days' if contest.winner_collaboration? }"
     @price = I18n.t('designer_center.responses.item.price',
                     price: BudgetPlan.find(contest.budget_plan).price)
     @status = contest.status
@@ -19,7 +19,7 @@ class ContestShortDetails
   end
 
   def get_days_till_end(contest)
-    contest.fulfillment? ?  '—' : days_count.to_s
+    contest.winner_collaboration? ?  '—' : days_count.to_s
   end
 
 end
