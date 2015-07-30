@@ -1,13 +1,12 @@
 .commentContainer
   .row
-    .col-md-2
-      %img{:height => "40", :src => "/assets/profile-img.png", :width => "40"}/
-    .col-md-10
+    .col-md-2.col-sm-1.col-xs-2
+      %img{ width: '40', height: '40', src: comment_view.avatar_url }/
+    .col-md-10.col-sm-11.col-xs-10
       .row
-        .col-md-3
-          %p.comment-username= message_name(user, comment)
-        .col-md-3
-          .comment-text= message_to_name(user, comment)
-        .col-md-6
-          %p.comment-time= distance_of_time_in_words(Time.current, comment.created_at.in_time_zone, false, highest_measure_only: true) + t('board_comments.ago')
-      %p.comment-text= message_body(comment)
+        .col-xs-6.authorName
+          %p.comment-username= comment_view.name
+          %p= comment_view.sub_name
+        .col-xs-6
+          %p.comment-time= comment_view.ago_text
+      %p.comment-text= comment_view.text
