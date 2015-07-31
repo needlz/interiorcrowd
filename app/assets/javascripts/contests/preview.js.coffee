@@ -12,14 +12,18 @@ class ReviewPage
       { data: $form.serializeArray() }
 
   @bindContinueButton: ->
+    $modal = $('#unfinishedProjectModal')
     $(@continuButtonSelector).click (e) =>
       e.preventDefault()
-      @validate()
-      if @validator.valid
-        $('#account_creation [type=submit]').click()
+      if $modal.length
+        $modal.modal('show');
       else
-        @validator.focusOnMessage()
-        false
+        @validate()
+        if @validator.valid
+          $('#account_creation [type=submit]').click()
+        else
+          @validator.focusOnMessage()
+          false
 
   @validate: ->
     @validator.reset()

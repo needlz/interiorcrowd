@@ -26,6 +26,7 @@ class ContestCreationWizard
   end
 
   def initialize(options)
+    @current_user = options[:current_user]
     @contest_attributes = options[:contest_attributes]
     @active_step_index = self.class.creation_steps.index(options[:step]) if options[:step]
   end
@@ -72,8 +73,17 @@ class ContestCreationWizard
     APPEAL_FEEDBACK
   end
 
+  def pending_contest_exists?
+    if current_user && current_user.last_contest
+      Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
+    else
+      false
+    end
+  end
+
   private
 
   attr_reader :contest_attributes
+  attr_reader :current_user
 
 end

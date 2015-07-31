@@ -1129,3 +1129,8 @@ en:
 
   will_paginate:
     next_label: Next
+
+  modals:
+    have_unfinished_project:
+      title: You already have an active project underway.
+      click_here:  to go back to your existing project.

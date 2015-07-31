@@ -42,6 +42,7 @@ class Contest < ActiveRecord::Base
   STATUSES = %w[brief_pending submission winner_selection closed fulfillment finished]
   COLLABORATION_STATUSES = %w[submission winner_selection fulfillment]
   NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES
+  FINISHED_STATUSES = %w[closed finished]
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -69,7 +70,7 @@ class Contest < ActiveRecord::Base
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
   scope :active, ->{ where(status: COLLABORATION_STATUSES) }
-  scope :inactive, ->{ where(status: ['closed', 'finished']) }
+  scope :inactive, ->{ where(status: FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false

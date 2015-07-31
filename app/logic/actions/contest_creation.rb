@@ -11,6 +11,8 @@ class ContestCreation
   end
 
   def perform
+    raise ArgumentError unless ClientNextContestPolicy.new(Client.find(client_id)).can_create_next_contest?
+
     contest_options = ContestOptions.new(params.to_hash.merge(client_id: client_id))
     raise ArgumentError unless contest_options.required_present?
     contest = Contest.new(contest_options.contest)

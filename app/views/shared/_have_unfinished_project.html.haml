@@ -1,0 +1,16 @@
+:javascript
+  $(window).load(function(){
+    $('#unfinishedProjectModal').modal('show');
+  });
+
+-if @creation_wizard.pending_contest_exists?
+  #unfinishedProjectModal.modal.fade.in{ aria: { hidden: true, labelledby: 'myModalLabel' },
+      role: 'dialog',
+      tabindex: '-1' }
+    .modal-dialog
+      .modal-content
+        .modal-body
+          %h4= t('modals.have_unfinished_project.title')
+          %p
+            = link_to('Click here', entries_client_center_index_url)
+            = t('modals.have_unfinished_project.click_here').html_safe
