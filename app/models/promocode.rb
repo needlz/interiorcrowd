@@ -12,7 +12,8 @@
 
 class Promocode < ActiveRecord::Base
 
-  has_and_belongs_to_many :contests
+  has_many :contest_promocodes
+  has_and_belongs_to_many :contests, through: :contest_promocodes
 
   monetize :discount_cents
 
@@ -20,6 +21,10 @@ class Promocode < ActiveRecord::Base
 
   def self.generate_promocode
     SecureRandom.hex[0, 10]
+  end
+
+  def name
+    promocode
   end
 
 end
