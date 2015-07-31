@@ -11,6 +11,7 @@ RSpec.describe ContestRequestsController do
 
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
   let(:designer) { Fabricate(:designer) }
   let(:request) { Fabricate(:contest_request, contest: contest,
                             lookbook: Fabricate(:lookbook),
@@ -127,7 +128,10 @@ RSpec.describe ContestRequestsController do
       sign_in(client)
     end
 
-    let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'fulfillment_ready') }
+    let(:contest_request) { Fabricate(:contest_request,
+                                      contest: fulfillment_contest,
+                                      designer: designer,
+                                      status: 'fulfillment_ready') }
 
     it 'changes status to fulfillment_approved' do
       post :approve_fulfillment, id: contest_request.id

@@ -8,7 +8,7 @@ class ApproveFulfillment
   end
 
   def perform
-    return false if contest_request.fulfillment_approved?
+    raise ArgumentError unless contest_request.fulfillment_ready?
     ActiveRecord::Base.transaction do
       DesignerInfoNotification.create(user_id: contest_request.designer_id,
                                       contest_id: contest_request.contest_id,
@@ -16,6 +16,7 @@ class ApproveFulfillment
 
       PhaseUpdater.new(contest_request).monitor_phase_change do
         contest_request.approve_fulfillment!
+        contest_request.contest.final!
       end
 
       finalize_image_items

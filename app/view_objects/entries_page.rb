@@ -76,8 +76,7 @@ class EntriesPage < ContestPage
   def time_till_milestone_end
     view_context.distance_of_time_in_words(Time.current,
                                            contest.phase_end,
-                                           false,
-                                           highest_measure_only: true)
+                                           vague: true)
   end
 
   def fulfillment_phase?
