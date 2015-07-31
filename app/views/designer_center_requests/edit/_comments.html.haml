@@ -19,15 +19,18 @@
     #scrollBoxComments.tab-content.notes.questionBox
       #allComents.tab-pane.active{:role => "tabpanel"}
         - comments.each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
+          = render 'designer_center_requests/edit/comment',
+              {user: current_user, comment_view: CommentView.create(comment, current_user) }
 
       #meComments.tab-pane{:role => "tabpanel"}
         - comments.where(role: current_user.role).each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
+          = render 'designer_center_requests/edit/comment',
+              { user: current_user, comment_view: CommentView.create(comment, current_user) }
 
       #designerComments.tab-pane{:role => "tabpanel"}
         - comments.where.not(role: current_user.role).each do |comment|
-          = render partial: 'designer_center_requests/edit/comment', locals: {user: current_user, comment: comment}
+          = render 'designer_center_requests/edit/comment',
+              { user: current_user, comment_view: CommentView.create(comment, current_user) }
 
     .message-template{style: 'display: none'}
       .commentContainer

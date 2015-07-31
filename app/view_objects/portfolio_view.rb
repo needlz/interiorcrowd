@@ -53,8 +53,8 @@ class PortfolioView
     end
   end
 
-  def personal_picture_url
-    portfolio.personal_picture ? portfolio.personal_picture.medium_size_url : '/assets/portfolio_profile_image.png'
+  def personal_picture_url(default = nil)
+    portfolio.personal_picture ? portfolio.personal_picture.medium_size_url : (default || '/assets/portfolio_profile_image.png')
   end
 
   def cover_picture_url

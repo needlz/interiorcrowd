@@ -324,5 +324,21 @@ RSpec.describe DesignerCenterRequestsController do
         expect(response).to render_template(:edit)
       end
     end
+
+    context 'when there are contest comments' do
+      before do
+        contest_comment = fulfillment_ready_request.contest.notes.create!(text: 'a comment',
+                                                                          client_id: client.id)
+        fulfillment_ready_request.comments.create!(
+            contest_note_id: contest_comment.id,
+            role: 'Client',
+            user_id: client.id)
+      end
+
+      it 'returns page' do
+        get :edit, id: fulfillment_ready_request.id
+        expect(response).to render_template(:edit)
+      end
+    end
   end
 end
