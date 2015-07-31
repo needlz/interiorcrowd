@@ -33,7 +33,7 @@ class Payment
 
   def calculate_price_in_cents
     result = contest.package.price_in_cents
-    client.promocodes.each do |code|
+    contest.promocodes.each do |code|
       result = result - code.discount_cents
     end
     result
