@@ -31,7 +31,7 @@ common: &defaults
       design_styles: http://blog.interiorcrowd.com/category/get-ideas/design-styles
       about_us: http://blog.interiorcrowd.com/about-us
       justines_story: http://blog.interiorcrowd.com/justines-story
-      designer_acquisition: http://blog.interiorcrowd.com/designer-acquisition
+      designer_submission: http://blog.interiorcrowd.com/designer-acquisition
     social:
       twitter: https://twitter.com/InteriorCrowd
       facebook: https://www.facebook.com/interiorcrowd

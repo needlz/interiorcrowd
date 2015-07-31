@@ -2,7 +2,7 @@ class HomeController < ApplicationController
 
   attr_accessor :incoming_url
 
-  EMBEDDED_PAGES = [:designer_acquisition, :justines_story, :about_us]
+  EMBEDDED_PAGES = [:designer_submission, :justines_story, :about_us]
   before_filter :render_blog_page, only: EMBEDDED_PAGES
 
   def index
@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     render
   end
 
-  def designer_acquisition; end
+  def designer_submission; end
 
   def justines_story; end
 
