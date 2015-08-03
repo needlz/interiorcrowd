@@ -209,6 +209,10 @@
       width: 100%;
     }
   }
+
+  .dcProduct .row{
+    margin: 0px;
+  }
 }
 
 @media(min-width: 1200px){
@@ -357,4 +361,8 @@
 
 .commentContainer .authorName p{
   display: inline;
+}
+
+.comment-text.visible-xs{
+  margin-top: 1em;
 }
