@@ -58,6 +58,12 @@ GEM
       json (~> 1.4)
       nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
+    better_errors (2.1.1)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
+      rack (>= 0.9.0)
+    binding_of_caller (0.7.2)
+      debug_inspector (>= 0.0.1)
     bourbon (4.2.3)
       sass (~> 3.4)
       thor
@@ -81,6 +87,7 @@ GEM
     coffee-script-source (1.9.1.1)
     colored (1.2)
     daemons (1.2.3)
+    debug_inspector (0.0.2)
     delayed_job (4.0.6)
       activesupport (>= 3.0, < 5.0)
     delayed_job_active_record (4.0.3)
@@ -336,6 +343,8 @@ DEPENDENCIES
   attribute_normalizer
   awesome_print
   aws-sdk (< 2.0)
+  better_errors
+  binding_of_caller
   bullet
   coffee-rails (~> 4.0.0)
   daemons
