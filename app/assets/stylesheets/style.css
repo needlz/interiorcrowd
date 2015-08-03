@@ -388,8 +388,8 @@ font-weight: bold;
 	font-size:18px;
 }
 
-.novice:hover, .enthusiast:hover, .savvy:hover{
-	opacity: 0.5;
+.interiorDesignLevel label:hover{
+    opacity: 0.5;
 }
 
 .all-under-block{
