@@ -18,6 +18,7 @@
 #  status               :string(255)      default("temporary")
 #  final                :boolean          default(FALSE)
 #  temporary_version_id :integer
+#  phase                :string(255)      default("collaboration")
 #
 
 class ImageItem < ActiveRecord::Base
