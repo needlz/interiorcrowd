@@ -13,7 +13,7 @@
 class Promocode < ActiveRecord::Base
 
   has_many :contest_promocodes
-  has_and_belongs_to_many :contests, through: :contest_promocodes
+  has_many :contests, through: :contest_promocodes
 
   monetize :discount_cents
 

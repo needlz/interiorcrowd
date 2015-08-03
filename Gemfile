@@ -61,6 +61,8 @@ group :development do
   gem 'lol_dba'  #https://github.com/plentz/lol_dba
   gem 'parallel_tests'
   gem 'pry'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
