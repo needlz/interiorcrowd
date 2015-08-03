@@ -14,7 +14,7 @@ class Menu
 
   def common_menu_with(specific_items)
     menu = MenuBuilder.new
-    menu.append(I18n.t('header.for_designers') => view_context.designer_acquisition_path)
+    menu.append(I18n.t('header.for_designers') => view_context.designer_submission_path)
     menu.append(I18n.t('header.get_inspired') => Settings.external_urls.blog.get_ideas)
     menu.append(I18n.t('header.blog') => Settings.external_urls.blog.url)
     menu.append(specific_items)

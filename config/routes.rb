@@ -161,7 +161,7 @@ InteriorC::Application.routes.draw do
 
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
-    get '/designer_acquisition', to: 'home#designer_acquisition', as: 'designer_acquisition'
+    get '/designer_submission', to: 'home#designer_submission', as: 'designer_submission'
     get '/justines_story', to: 'home#justines_story', as: 'justines_story'
     get '/about_us', to: 'home#about_us', as: 'about_us'
     get '/:url', to: 'portfolios#show', as: 'show_portfolio' #this row should be at the end
