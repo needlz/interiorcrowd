@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150728081806) do
+ActiveRecord::Schema.define(version: 20150731135350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "adminpack"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -190,13 +191,10 @@ ActiveRecord::Schema.define(version: 20150728081806) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
-  create_table "contests_promocodes", id: false, force: true do |t|
+  create_table "contests_promocodes", force: true do |t|
     t.integer "contest_id",   null: false
     t.integer "promocode_id", null: false
   end
-
-  add_index "contests_promocodes", ["contest_id", "promocode_id"], name: "index_contests_promocodes_on_contest_id_and_promocode_id", using: :btree
-  add_index "contests_promocodes", ["promocode_id", "contest_id"], name: "index_contests_promocodes_on_promocode_id_and_contest_id", using: :btree
 
   create_table "delayed_jobs", force: true do |t|
     t.integer  "priority",           default: 0, null: false
