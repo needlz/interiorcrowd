@@ -67,6 +67,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec_junit_formatter', '0.2.2'
 end
 
 gem 'mandrill-rails'

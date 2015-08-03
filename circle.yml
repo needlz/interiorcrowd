@@ -1,3 +1,9 @@
 database:
   override:
     - bundle exec rake db:create db:schema:load db:migrate --trace
+
+deployment:
+  staging:
+    branch: staging
+    heroku:
+      appname: dev-intc
