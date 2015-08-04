@@ -23,3 +23,5 @@
 
 # Ignore precompiled asset holder
 /public/assets
+# Ignore application configuration
+/config/database_credentials.yml

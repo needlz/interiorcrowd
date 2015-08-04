@@ -6,6 +6,17 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+rails_root = File.expand_path('../..', __FILE__)
+settings_files = Dir.glob("#{ rails_root }/config/settings/**/*.yml")
+settings_files.each do |filename|
+  erb_preprocessed = ERB.new(File.read(filename)).result
+  yaml = YAML.load(erb_preprocessed)
+
+  yaml[Rails.env].try(:each) do |key, value|
+    ENV[key] = value
+  end
+end
+
 module InteriorC
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
