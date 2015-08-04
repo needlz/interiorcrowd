@@ -12,6 +12,7 @@ class ImageItemsEditor extends InlineEditor
   bindEvents: ->
     super()
     @bindDeleteClick()
+    @subscribeToUpdates()
 
   bindDeleteClick: ->
     $(document).on 'click', "#{@attributeSelector} #{@deleteButtonSelector}", @, (event)=>
@@ -24,6 +25,14 @@ class ImageItemsEditor extends InlineEditor
           if response.destroyed
             @attributeElement(imageItemId).remove()
       )
+
+  subscribeToUpdates: ->
+    $ ->
+      channel.subscribe 'product_item_feedback', (message) =>
+        parsedMessage = JSON.parse(message.data)
+        $productHead = $("[data-id=" + parsedMessage.id + "].row.dcProduct.item").find('.dcProductHead')
+        $productHead.toggleClass('greenHead redHead')
+        $productHead.find('.col-sm-8').text(parsedMessage.text)
 
   getForm: (id, $button)->
     @requestEditForm(id)
@@ -132,3 +141,6 @@ $ ->
           kind = $addButton.data('kind')
           imageId = $addButton.find('#image_item_image_id').val()
           itemsEditor.append(kind, imageId)
+
+  ably = new Ably.Realtime('CRyt2w.7HSMCw:PI3GpWgTHK8KBZ67');
+  window.channel = ably.channels.get('product_item_feedback');
