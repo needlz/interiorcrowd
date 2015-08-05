@@ -1,7 +1,7 @@
 class InstantFeedbackPublisher
   def initialize
     @client = Ably::Rest.new(key: Settings.ably.api_key)
-    @channel_name = 'product_item_feedback'
+    @channel_name = Settings.ably.feedback_channel
     @channel = @client.channel(@channel_name)
   end
 
