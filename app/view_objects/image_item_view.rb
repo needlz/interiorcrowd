@@ -33,9 +33,9 @@ class ImageItemView
 
   def mark_text
     if mark == ImageItem::MARKS[:LIKE]
-      'Client likes'
+      I18n.t('designer_center.product_items.client_likes')
     elsif mark == ImageItem::MARKS[:DISLIKE]
-      'Client dislikes'
+      I18n.t('designer_center.product_items.client_dislikes')
     end
   end
 
