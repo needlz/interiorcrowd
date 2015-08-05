@@ -275,6 +275,9 @@ en:
           * Are there any particular items in the room you’d like to keep?
         send: Send
     creation:
+      sign_up_suggestion:
+        text: Create an account now so you can save your design details.
+        button_text: Sign up
       errors:
         required_data_missing: Please fill the required info.
         select_category: Please select at least one category.
