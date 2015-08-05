@@ -36,7 +36,6 @@ InteriorC::Application.routes.draw do
 
     resources :contests, only: [:show, :update, :index] do
       member do
-        get 'respond'
         get 'option'
         get 'show', as: 'show'
         get 'download_all_images_url'
@@ -62,7 +61,6 @@ InteriorC::Application.routes.draw do
         post 'save_preview'
         post 'upload'
         get 'account_creation'
-        get 'thank_you'
       end
     end
 
@@ -85,14 +83,7 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    resources :designers, only: [:create, :update] do
-      member do
-        get 'thank_you'
-        get 'welcome'
-        match 'lookbook', via: [:get, :post]
-        get 'preview_lookbook'
-      end
-    end
+    resources :designers, only: [:create, :update]
 
     scope '/designer_center' do
       get '', to: 'designer_center#designer_center', as: 'designer_center'
