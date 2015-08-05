@@ -1,5 +1,5 @@
 .image-items
-  = render partial: 'designer_center_requests/edit/image_block',
+  = render partial: 'designer_center_requests/edit/image_block_designer_view',
            locals: { editable: false,
                      title: t('designer_center.edit.products_list'),
                      subtitle: '',
@@ -7,7 +7,7 @@
                      contest_request: @request,
                      image_items: @product_items,
                      wrap_row_with_block: true }
-  = render partial: 'designer_center_requests/edit/image_block',
+  = render partial: 'designer_center_requests/edit/image_block_designer_view',
            locals: { editable: false,
                      title: t('designer_center.edit.similar_styles'),
                      subtitle: '',
