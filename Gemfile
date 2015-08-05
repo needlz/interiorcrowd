@@ -87,3 +87,4 @@ gem 'awesome_print', require: 'ap'
 gem 'dotiw' # better distance of time in words
 gem 'stripe'
 gem 'ably-rest'
+gem 'pgbackups-archive'
