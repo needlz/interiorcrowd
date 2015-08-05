@@ -9,6 +9,12 @@ class ImageItemsEditor extends InlineEditor
   saveButtonSelector: '.dcEditProduct.save'
   deleteButtonSelector: '.dcProductTrash'
 
+  subscriptionChannelName: 'product_item_feedback'
+  productItemSelector: '.row.dcProduct.item'
+  itemHeadSelector: '.dcProductHead'
+  itemTextSelector: '.col-sm-8'
+  headStyleVariants: 'greenHead redHead'
+
   bindEvents: ->
     super()
     @bindDeleteClick()
@@ -28,7 +34,7 @@ class ImageItemsEditor extends InlineEditor
 
   subscribeToUpdates: ->
     $ =>
-      channel.subscribe 'product_item_feedback', (message) =>
+      channel.subscribe @subscriptionChannelName, (message) =>
         @displayFeedback(message.data)
 
   displayFeedback: (rawMessage)->
@@ -40,14 +46,14 @@ class ImageItemsEditor extends InlineEditor
     @setText($productHead, feedbackParams.text)
 
   findProductHead: (id)->
-    return $("[data-id=" + id + "].row.dcProduct.item").find('.dcProductHead')
+    $("[data-id=" + id + "]" + @productItemSelector).find(@itemHeadSelector)
 
   changeStyle: ($element, css_class)->
-    $element.removeClass('greenHead redHead')
+    $element.removeClass(@headStyleVariants)
     $element.addClass(css_class)
 
   setText: ($element, text)->
-    $element.find('.col-sm-8').text(text)
+    $element.find(@itemTextSelector).text(text)
 
   getForm: (id, $button)->
     @requestEditForm(id)
