@@ -1,6 +1,10 @@
 - content_for :head do
   = javascript_include_tag 'http://cdn.ably.io/lib/ably.min.js'
 
+:javascript
+  ably = new Ably.Realtime(#{ Settings.ably.api_key.to_json });
+  window.channel = ably.channels.get(#{ Settings.ably.feedback_channel.to_json });
+
 .row.collaborationScreen.marg-top10.response{ data: { id: @request.id } }
   .col-lg-8.col-md-7
     %p.giveDesignerFeedback= @request_view.header_text

@@ -141,6 +141,3 @@ $ ->
           kind = $addButton.data('kind')
           imageId = $addButton.find('#image_item_image_id').val()
           itemsEditor.append(kind, imageId)
-
-  ably = new Ably.Realtime('CRyt2w.7HSMCw:PI3GpWgTHK8KBZ67');
-  window.channel = ably.channels.get('product_item_feedback');
