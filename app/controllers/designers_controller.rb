@@ -2,10 +2,6 @@ class DesignersController < ApplicationController
   before_filter :check_designer, only: [:welcome]
   before_action :set_designer, only: [:show, :edit, :update, :destroy]
 
-  def thank_you
-    render
-  end 
-
   def new
     session[:external_links] = nil
     @designer = Designer.new
@@ -50,10 +46,6 @@ class DesignersController < ApplicationController
         format.json { render json: @designer.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def welcome
-    render
   end
 
   private
