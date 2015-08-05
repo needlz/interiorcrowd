@@ -27,12 +27,27 @@ class ImageItemsEditor extends InlineEditor
       )
 
   subscribeToUpdates: ->
-    $ ->
+    $ =>
       channel.subscribe 'product_item_feedback', (message) =>
-        parsedMessage = JSON.parse(message.data)
-        $productHead = $("[data-id=" + parsedMessage.id + "].row.dcProduct.item").find('.dcProductHead')
-        $productHead.toggleClass('greenHead redHead')
-        $productHead.find('.col-sm-8').text(parsedMessage.text)
+        @displayFeedback(message.data)
+
+  displayFeedback: (rawMessage)->
+    feedbackParams = JSON.parse(rawMessage)
+    $productHead = @findProductHead(feedbackParams.id)
+
+    @changeStyle($productHead, feedbackParams.css_class)
+
+    @setText($productHead, feedbackParams.text)
+
+  findProductHead: (id)->
+    return $("[data-id=" + id + "].row.dcProduct.item").find('.dcProductHead')
+
+  changeStyle: ($element, css_class)->
+    $element.removeClass('greenHead redHead')
+    $element.addClass(css_class)
+
+  setText: ($element, text)->
+    $element.find('.col-sm-8').text(text)
 
   getForm: (id, $button)->
     @requestEditForm(id)
