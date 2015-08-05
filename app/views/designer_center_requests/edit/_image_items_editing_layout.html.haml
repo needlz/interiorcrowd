@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_include_tag 'http://cdn.ably.io/lib/ably.min.js'
+  = javascript_include_tag Settings.ably.script_url
 
 :javascript
   ably = new Ably.Realtime(#{ Settings.ably.api_key.to_json });
