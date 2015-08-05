@@ -16,7 +16,7 @@ class ImageItemUpdater
         delayed_job ? delay_sending_time(delayed_job) : send_email
       end
     end
-    instant_feedback = InstantFeedBackPublisher.new
+    instant_feedback = InstantFeedbackPublisher.new
     instant_feedback.publish({id: @product_item.temporary_version_id, text: ImageItemView.new(@product_item).mark_text}.to_json)
   end
 
