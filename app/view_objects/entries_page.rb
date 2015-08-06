@@ -61,7 +61,7 @@ class EntriesPage < ContestPage
   def onload_popups
     result = []
     if won_contest_request
-      result << ['clients/client_center/entries/collaboration/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
+      result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
       result << ['clients/client_center/entries/popups/wait_for_final_design',
                  contest: contest,
                  time_left: time_till_milestone_end] if won_contest_request.fulfillment_approved?

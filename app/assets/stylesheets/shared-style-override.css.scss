@@ -171,17 +171,6 @@
   }
 }
 
-.submitMyDesign{
-  font-size: 20px;
-  color: #000;
-  line-height: 45px;
-  width: 200px;
-  text-align: center;
-  border: 1px solid #000;
-  border-radius: 5px;
-  display: inline-block;
-}
-
 .nav-tabs a {
   cursor: pointer;
 }
@@ -376,7 +365,7 @@
   cursor: pointer;
 }
 
-.signUpSuggestion{
+.signUpSuggestion {
   background-color: #FAFAFA;
   padding: 15px 15px;
   width: 100%;
@@ -384,11 +373,11 @@
   font-size: 16px;
   color: #ADADAD;
 
-  .divider{
+  .divider {
     margin-top: 15px;
   }
 
-  .signUpButton{
+  .signUpButton {
     border: 1px #65AC81 solid;
     padding: 7px 20px;
     margin-left: 7px;
@@ -396,4 +385,21 @@
     border-radius: 2px;
     cursor: pointer;
   }
+}
+
+.submitMyDesign{
+  font-size: 20px;
+  color: #000;
+  line-height: 45px;
+  width: 200px;
+  text-align: center;
+  border: 1px solid #000;
+  border-radius: 5px;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.moveToFinal{
+  @extend .submitMyDesign;
+  width: 340px;
 }
