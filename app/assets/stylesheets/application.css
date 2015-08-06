@@ -17,6 +17,7 @@
  *= require style
  *= require style-override
  *= require lib/showcase
+ *= require layout
  *= require new-style
  *= require shared-style
  *= require home

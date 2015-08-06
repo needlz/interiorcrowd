@@ -44,6 +44,7 @@ common: &defaults
       google_ads_settings: http://www.google.com/settings/ads
       google_analytics_terms: http://www.google.com/analytics/terms/us.html
       about_ads_choices: http://www.aboutads.info/choices
+    font_awesome_css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
   designer_level_pictures:
     novice: '/assets/design_levels/novice.jpg'
     enthusiast: '/assets/design_levels/enthusiast.jpg'
