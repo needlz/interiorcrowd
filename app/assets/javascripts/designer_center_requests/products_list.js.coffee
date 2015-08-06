@@ -9,7 +9,6 @@ class ImageItemsEditor extends InlineEditor
   saveButtonSelector: '.dcEditProduct.save'
   deleteButtonSelector: '.dcProductTrash'
 
-  subscriptionChannelName: 'product_item_feedback'
   productItemSelector: '.row.dcProduct.item'
   itemHeadSelector: '.dcProductHead'
   itemTextSelector: '.col-sm-8'
@@ -34,7 +33,7 @@ class ImageItemsEditor extends InlineEditor
 
   subscribeToUpdates: ->
     $ =>
-      channel.subscribe @subscriptionChannelName, (message) =>
+      subscriptionChannel.subscribe subscriptionChannelName, (message) =>
         @displayFeedback(message.data)
 
   displayFeedback: (rawMessage)->

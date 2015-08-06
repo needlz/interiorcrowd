@@ -37,6 +37,10 @@ class ContestResponseView
     I18n.t('designer_center.responses.statuses.' + status)
   end
 
+  def channel_name
+    InstantFeedbackPublisher.channel_name(response.id)
+  end
+
   private
 
   attr_reader :response

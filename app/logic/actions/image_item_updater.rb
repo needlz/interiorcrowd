@@ -56,7 +56,7 @@ class ImageItemUpdater
     text = item_view.mark_text
     css_class = item_view.mark_css_class
 
-    instant_feedback = InstantFeedbackPublisher.new
+    instant_feedback = InstantFeedbackPublisher.new(contest_request.id)
     instant_feedback.publish({ id: id, text: text, css_class: css_class }.to_json)
   end
 
