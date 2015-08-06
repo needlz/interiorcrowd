@@ -33,10 +33,16 @@ class ImageItemView
 
   def mark_text
     if mark == ImageItem::MARKS[:LIKE]
-      'Client likes'
+      I18n.t('designer_center.product_items.client_likes')
     elsif mark == ImageItem::MARKS[:DISLIKE]
-      'Client dislikes'
+      I18n.t('designer_center.product_items.client_dislikes')
     end
+  end
+
+  def mark_details
+    id = image_item.temporary_version_id
+
+    { id: id, text: mark_text, css_class: mark_css_class }
   end
 
   private

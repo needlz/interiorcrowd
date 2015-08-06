@@ -16,6 +16,7 @@ class ImageItemUpdater
         delayed_job ? delay_sending_time(delayed_job) : send_email
       end
     end
+    publish_feedback
   end
 
   private
@@ -46,6 +47,13 @@ class ImageItemUpdater
       product_item.published_version = nil
     end
     product_item.save!
+  end
+
+  def publish_feedback
+    item_view = ImageItemView.new(@product_item)
+
+    instant_feedback = InstantFeedbackPublisher.new(contest_request.id)
+    instant_feedback.publish(item_view.mark_details.to_json)
   end
 
 end

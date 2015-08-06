@@ -9,9 +9,15 @@ class ImageItemsEditor extends InlineEditor
   saveButtonSelector: '.dcEditProduct.save'
   deleteButtonSelector: '.dcProductTrash'
 
+  productItemSelector: '.row.dcProduct.item'
+  itemHeadSelector: '.dcProductHead'
+  itemTextSelector: '.col-sm-8'
+  headStyleVariants: 'greenHead redHead'
+
   bindEvents: ->
     super()
     @bindDeleteClick()
+    @subscribeToUpdates()
 
   bindDeleteClick: ->
     $(document).on 'click', "#{@attributeSelector} #{@deleteButtonSelector}", @, (event)=>
@@ -24,6 +30,29 @@ class ImageItemsEditor extends InlineEditor
           if response.destroyed
             @attributeElement(imageItemId).remove()
       )
+
+  subscribeToUpdates: ->
+    $ =>
+      subscriptionChannel.subscribe subscriptionChannelName, (message) =>
+        @displayProductItemFeedback(message.data)
+
+  displayProductItemFeedback: (rawMessage)->
+    feedbackParams = JSON.parse(rawMessage)
+    $productHead = @findProductItemHead(feedbackParams.id)
+
+    @changeProductItemHeadStyle($productHead, feedbackParams.css_class)
+
+    @setProductItemHeadText($productHead, feedbackParams.text)
+
+  findProductItemHead: (id)->
+    $("[data-id=" + id + "]" + @productItemSelector).find(@itemHeadSelector)
+
+  changeProductItemHeadStyle: ($element, css_class)->
+    $element.removeClass(@headStyleVariants)
+    $element.addClass(css_class)
+
+  setProductItemHeadText: ($element, text)->
+    $element.find(@itemTextSelector).text(text)
 
   getForm: (id, $button)->
     @requestEditForm(id)

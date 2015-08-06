@@ -1,3 +1,11 @@
+- content_for :head do
+  = javascript_include_tag Settings.ably.script_url
+
+:javascript
+  ably = new Ably.Realtime(#{ Settings.ably.api_key.to_json });
+  subscriptionChannelName = #{ @request_view.channel_name.to_json }
+  subscriptionChannel = ably.channels.get(subscriptionChannelName);
+
 .row.collaborationScreen.marg-top10.response{ data: { id: @request.id } }
   .col-lg-8.col-md-7
     %p.giveDesignerFeedback= @request_view.header_text
@@ -25,7 +33,7 @@
 = form_for @request, url: designer_center_response_path(id: @request.id) do |f|
   .image-items
     .list-kind{ data: { kind: :product_items } }
-      = render partial: 'designer_center_requests/edit/image_block',
+      = render partial: 'designer_center_requests/edit/image_block_designer_view',
           locals: { editable: editable,
             title: t('designer_center.edit.products_list'),
             subtitle: t('designer_center.product_items.product_list_title'),
@@ -35,7 +43,7 @@
             wrap_row_with_block: false }
     .fullWidthLine.marginBottom40.marginTop20
     .list-kind{ data: { kind: :similar_styles } }
-      = render partial: 'designer_center_requests/edit/image_block',
+      = render partial: 'designer_center_requests/edit/image_block_designer_view',
           locals: { editable: editable,
             title: t('designer_center.edit.similar_styles'),
             subtitle: t('designer_center.product_items.similar_styles_title'),
