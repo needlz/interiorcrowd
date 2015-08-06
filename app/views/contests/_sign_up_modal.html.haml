@@ -1,0 +1,25 @@
+#signUpModal.modal.fade{ aria: { hidden: 'true', labelledby: 'signUpLabel' }, role: 'dialog', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %h3.text-center
+          = t('contests.creation.sign_up_suggestion.dialog.title').upcase
+
+        .content
+          .signUpWithFacebookBtn.facebookColor.button.clickable
+            %img{:src => '/assets/facebook_icon.png' }/
+            = t('contests.creation.sign_up_suggestion.dialog.sign_up_with_facebook')
+
+          .orText
+            .hLine
+            %span
+              = t('contests.creation.sign_up_suggestion.dialog.or')
+          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.email_address') }
+          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.create_password') }
+          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.confirm_password') }
+
+          .signUpWithEmailBtn.button.clickable
+            = t('contests.creation.sign_up_suggestion.dialog.sign_up_with_email')
+          .signUpWithEmailBtnSubtitle.text-center
+            = t('contests.creation.sign_up_suggestion.dialog.already_member')
+            = link_to t('contests.creation.sign_up_suggestion.dialog.sign_in'), client_login_sessions_path

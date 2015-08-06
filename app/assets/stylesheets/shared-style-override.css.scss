@@ -407,3 +407,84 @@
 .designerSubmit{
   @extend .submitMyDesign
 }
+
+#signUpModal{
+  .modal-dialog{
+    max-width: 560px;
+  }
+
+  .content{
+    padding: 20px 75px;
+  }
+
+  h3{
+    padding: 0px 10px;
+    color: #666666;
+  }
+
+  .modal-body{
+    padding: 20px;
+  }
+
+  input{
+    width: 100%;
+    margin-bottom: 20px;
+    line-height: 40px;
+    padding: 0px 15px;
+    font-size: 16px;
+  }
+
+  .button{
+    padding: 15px 20px;
+    text-align: center;
+    color: white;
+    height: 60px;
+  }
+
+  .signUpWithFacebookBtn{
+    font-size: 16px;
+  }
+
+  .signUpWithFacebookBtn img{
+    margin-right: 9px;
+    margin-bottom: 3px;
+  }
+
+  .orText{
+    text-align: center;
+    padding: 20px 0px;
+
+    span{
+      position: relative;
+      background-color: white;
+      padding: 0px 10px;
+      color: #a6a6a6;
+    }
+
+    .hLine{
+      margin: 0px;
+      bottom: -0.75em;
+      position: relative;
+    }
+  }
+
+  .signUpWithEmailBtn{
+    background-color: #409863;
+    font-size: 18px;
+  }
+
+  .signUpWithEmailBtnSubtitle{
+    color: #a6a6a6;
+    margin-top: 5px;
+
+    a{
+      color: #409863;
+    }
+  }
+}
+
+@media(max-width: 767px){
+  #signUpModal .content{
+    padding: 20px 10px;
+  }
+}

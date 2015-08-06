@@ -278,6 +278,17 @@ en:
       sign_up_suggestion:
         text: Create an account now so you can save your design details.
         button_text: Sign up
+        dialog:
+          title: Let's start by creating an account
+          sign_up_with_facebook: Sign up with Facebook
+          or: Or sign up by e-mail
+          email_address: Email address
+          create_password: Create password
+          confirm_password: Confirm password
+          sign_up_with_email: Sign Up
+          already_member: Already a member?
+          sign_in: Sign In
+
       errors:
         required_data_missing: Please fill the required info.
         select_category: Please select at least one category.

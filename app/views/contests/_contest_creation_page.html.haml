@@ -1,4 +1,14 @@
 .container.animated.fadeInDown
   = render partial: 'contest_top_panel'
   = yield :page_content
-= render 'contests/sign_up_suggestion'
+
+- if !current_user.client? && show_beta_functionality?
+  :javascript
+    $(function(){
+      $('.signUpSuggestion .signUpButton').click(function(){
+        $('#signUpModal').modal('show');
+      })
+    })
+
+  = render 'contests/sign_up_suggestion'
+  = render 'contests/sign_up_modal'
