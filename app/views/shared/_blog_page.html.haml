@@ -1,0 +1,9 @@
+- content_for :head do
+  = head.html_safe
+  %link{:href => Settings.external_urls.font_awesome_css, rel: 'stylesheet' }/
+
+%header#header.rst-header-layout-2{ style: 'display: block' }
+  .rst-bottom-header
+    = header.html_safe
+#content
+  = body.html_safe
