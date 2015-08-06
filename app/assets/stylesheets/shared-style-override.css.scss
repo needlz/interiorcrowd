@@ -403,3 +403,7 @@
   @extend .submitMyDesign;
   width: 340px;
 }
+
+.designerSubmit{
+  @extend .submitMyDesign
+}

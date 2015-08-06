@@ -1,6 +1,6 @@
 class @FulfillmentDesign
   @submit: ->
-    id = $('.submitMyDesign').attr('request_id')
+    id = $('.submitMyDesign').attr('request_id') || $('.moveToFinal').attr('request_id')
     $.ajax(
       data: { id: id }
       url: "/contest_requests/#{id}/approve_fulfillment"
@@ -20,4 +20,7 @@ $(document).ready ->
   )
 
   $('.submitMyDesign').on 'click', ->
+    $('#finalizeConfirmation').modal('show')
+
+  $('.moveToFinal').on 'click', ->
     $('#finalizeConfirmation').modal('show')

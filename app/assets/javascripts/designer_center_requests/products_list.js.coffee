@@ -132,14 +132,3 @@ $ ->
           kind = $addButton.data('kind')
           imageId = $addButton.find('#image_item_image_id').val()
           itemsEditor.append(kind, imageId)
-
-  $('.moveToFinal').on 'click', ->
-    $('#finalizeConfirmation').modal('show')
-
-  $('#finalizeConfirmation').on('click', '.no-button', (event)->
-    event.preventDefault()
-    $('#finalizeConfirmation').modal('hide');
-  ).on('click', '.yes-button', (event)->
-    event.preventDefault()
-    FulfillmentDesign.submit()
-  )
