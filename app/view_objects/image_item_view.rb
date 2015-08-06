@@ -39,6 +39,12 @@ class ImageItemView
     end
   end
 
+  def mark_details
+    id = image_item.temporary_version_id
+
+    { id: id, text: mark_text, css_class: mark_css_class }
+  end
+
   private
 
   attr_reader :image_item
