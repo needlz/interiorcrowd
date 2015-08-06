@@ -358,3 +358,116 @@
 .comment-text.visible-xs{
   margin-top: 1em;
 }
+
+.areas-row{
+  line-height: 50px;
+  font-size: 20px;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+.signUpSuggestion{
+  background-color: #FAFAFA;
+  padding: 15px 15px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ADADAD;
+
+  .divider{
+    margin-top: 15px;
+  }
+
+  .signUpButton{
+    border: 1px #65AC81 solid;
+    padding: 7px 20px;
+    margin-left: 7px;
+    color: #65AC81;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+}
+
+#signUpModal{
+  .modal-dialog{
+    max-width: 560px;
+  }
+
+  .content{
+    padding: 20px 75px;
+  }
+
+  h3{
+    padding: 0px 10px;
+    color: #666666;
+  }
+
+  .modal-body{
+    padding: 20px;
+  }
+
+  input{
+    width: 100%;
+    margin-bottom: 20px;
+    line-height: 40px;
+    padding: 0px 15px;
+    font-size: 16px;
+  }
+
+  .button{
+    padding: 15px 20px;
+    text-align: center;
+    color: white;
+    height: 60px;
+  }
+
+  .signUpWithFacebookBtn{
+    font-size: 16px;
+  }
+
+  .signUpWithFacebookBtn img{
+    margin-right: 9px;
+    margin-bottom: 3px;
+  }
+
+  .orText{
+    text-align: center;
+    padding: 20px 0px;
+
+    span{
+      position: relative;
+      background-color: white;
+      padding: 0px 10px;
+      color: #a6a6a6;
+    }
+
+    .hLine{
+      margin: 0px;
+      bottom: -0.75em;
+      position: relative;
+    }
+  }
+
+  .signUpWithEmailBtn{
+    background-color: #409863;
+    font-size: 18px;
+  }
+
+  .signUpWithEmailBtnSubtitle{
+    color: #a6a6a6;
+    margin-top: 5px;
+
+    a{
+      color: #409863;
+    }
+  }
+}
+
+@media(max-width: 767px){
+  #signUpModal .content{
+    padding: 20px 10px;
+  }
+}
+
