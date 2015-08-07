@@ -52,6 +52,6 @@
   .row
     .col-sm-12.doneAndMove
       - if request.fulfillment_ready?
-        = link_to '#', class: 'submit submitMyDesign', request_id: request.id do
+        = link_to '#', class: 'submit moveToFinal', request_id: request.id do
           =t('client_center.entries.collaboration.done_btn')
           %img{:src => "/assets/gt.png"}/

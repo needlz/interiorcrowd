@@ -54,7 +54,7 @@
           html: { class: 'edit_contest_request',
             data: { name: 'Submit products list' } } do |f|
         = hidden_mixpanel_submit_tag
-        = link_to '#', class: 'submit designerSubmit high-button' do
+        = link_to '#', class: 'submit submitMyDesign high-button' do
           = t('designer_center.respond.submit')
         = link_to '#', class: 'moveToFinal', request_id: request.id do
           =t('client_center.entries.collaboration.done_btn')
