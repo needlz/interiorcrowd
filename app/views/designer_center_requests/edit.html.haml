@@ -4,6 +4,7 @@
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   - if @request.fulfillment_approved?
     = javascript_include_tag 'designer_center_requests/fulfillment_approved_edit'
+  = render 'shared/finalize_design_confirmation'
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
