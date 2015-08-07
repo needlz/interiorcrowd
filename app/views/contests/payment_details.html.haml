@@ -1,0 +1,39 @@
+= content_for :head do
+  = javascript_include_tag 'jquery.creditCardValidator.js'
+  = javascript_include_tag 'contests/account_creation'
+  = javascript_include_tag 'i18n'
+  = render 'shared/setup_stripe_js'
+  :javascript
+    signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
+
+.container.animated.fadeInDown.client-signup.creditCardForm.lightFont
+  -#%h3.main-title= t('client_center.sign_up.title').html_safe
+  %h3.main-title= 'PAYMENT DETAILS'.html_safe
+  = render partial: 'home/msg'
+  = form_for @client, { id: 'create', method: 'post' } do |f|
+    .fullWidthLine
+
+    =render partial: 'payment_information', locals: { f: f }
+
+    .order-total-info.marginTop40 Order total
+    - a = 299.00
+    .order-total-price.marginTop40= '$' + a.to_s
+    %br
+    .order-total-info Promotion code
+    .order-total-price $ xxx.xx
+    %br
+    .order-total-info.marginBottom40 Total price
+    .big-total-price.marginBottom40= '$ ' + (a - 15).to_s
+    %br
+    .fullWidthLine
+    %p.iAgreeTerms
+      %span.customCheckbox
+        = check_box_tag 'client_agree', 'yes', false, name: '', class: 'hidden'
+        %label{ for: 'client_agree' }
+      = t('client_center.sign_up.i_agree')
+      %span.terms-of-use= t('client_center.sign_up.terms_of_use')
+    %button.btn.btn1-confirm.submit-button{ type: 'button', tabindex: 17 }
+      = t('client_center.sign_up.submit')
+    = hidden_mixpanel_submit_tag
+
+= render partial: 'home/terms_of_service_modal'

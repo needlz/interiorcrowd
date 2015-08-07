@@ -58,6 +58,10 @@ class ContestsController < ApplicationController
     @client = Client.new
   end
 
+  def payment_details
+    @client = current_client
+  end
+
   def upload
     params[:image] = {}
     params[:image][:image] = params[:photo]

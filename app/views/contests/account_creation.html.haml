@@ -36,90 +36,9 @@
           = f.password_field :password_confirmation, class: 'form-control', tabindex: 5
           %span#err_cpassword.text-error
     .fullWidthLine.marginTop20
-    %h4.marginTop40= t('client_center.sign_up.payment_information')
-    .row
-      .col-sm-6
-        %label
-          %p= t('client_center.sign_up.name_on_card')
-          = f.text_field :name_on_card, class: 'form-control', tabindex: 6
-          %span#err_name_on_card.text-error
-        %label
-          %p= t('client_center.profile.labels.address')
-          = f.text_field :billing_address, class: 'form-control', tabindex: 7
-          %span#err_address.text-error
-        %label
-          %p= t('client_center.profile.labels.city')
-          = f.text_field :billing_city, class: 'form-control', tabindex: 8
-        .row
-          .col-xs-8.col-ss-6
-            %label
-              %p= t('client_center.profile.labels.state')
-              = select('client',
-                  'billing_state',
-                  options_for_select(PersonalData.state_options, 0),
-                  {},
-                  { class: 'selectpicker form-selector', tabindex: 9 })
-              %span#err_state.text-error
-          .col-xs-4.col-ss-6
-            %label
-              %p= t('client_center.profile.labels.zip')
-              = f.text_field :billing_zip,
-                  class: 'form-control left-control',
-                  tabindex: 10
-              %span#err_zip.text-error
-      .col-sm-6
-        %label
-          %p= t('client_center.sign_up.card_type')
-          = select('client',
-              'card_type',
-              options_for_select(PersonalData.card_type_options, 0),
-              {},
-              { class: 'selectpicker form-selector', tabindex: 11 })
-          .clearfix
-        .row
-          .col-xs-8
-            %label
-              %p= t('client_center.profile.labels.card_number')
-              %input#card_number.form-control{ maxlength: 19,
-                name: 'client[card_number]',
-                type: 'text', tabindex: 12}/
-              %span#err_card_number.text-error
-          .col-xs-4
-            %label
-              %p= t('client_center.profile.labels.card_cvc')
-              %input#card_cvc.form-control.left-control{ name: 'client[card_cvc]',
-                type: 'text', tabindex: 13}/
-              %span#err_cvc.text-error
-        .row
-          .col-xs-6
-            %label.expiration-label
-              %p= t('client_center.profile.labels.card_exp_date')
-              = select_month(0,
-                  { field_name: 'card_ex_month',
-                    prefix: 'client',
-                    prompt: t('client_center.sign_up.select_month') },
-                  class: 'selectpicker form-selector card-exp', tabindex: 14)
-          .col-xs-6
-            %label
-              %p &nbsp;
-              = select_year(0,
-                  { :start_year => Time.now.year,
-                    :end_year => Time.now.year + 10,
-                    :field_name => :card_ex_year,
-                    prefix: 'client',
-                    prompt: t('client_center.sign_up.select_year')},
-                  class: 'selectpicker form-selector card-exp', tabindex: 15)
-        .row.promotionCodeApply
-          %p= t('client_center.sign_up.add_promocode')
-          .col-xs-12
-            %label
-              = text_field_tag 'client[promocode]', '', class: 'form-control', tabindex: 8
-              %button.apply-promocode-button.clickable= t('client_center.sign_up.apply_promocode')
-              .clearfix
-              #promocode-error.text-error.promocode-message.soft-hide= t('client_center.sign_up.promocode_invalid')
-              #promocode-valid.promocode-message.soft-hide
-              #promocode-request-error.promocode-message.soft-hide= t('client_center.sign_up.promocode_server_error')
-    .fullWidthLine
+
+    =render partial: 'payment_information', locals: { f: f }
+
     %p.iAgreeTerms
       %span.customCheckbox
         = check_box_tag 'client_agree', 'yes', false, name: '', class: 'hidden'
