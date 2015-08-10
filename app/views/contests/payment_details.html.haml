@@ -13,17 +13,16 @@
   = form_for @client, { id: 'create', method: 'post' } do |f|
     .fullWidthLine
 
-    =render partial: 'payment_information', locals: { f: f }
+    =render partial: 'shared/payment_information', locals: { f: f }
 
     .order-total-info.marginTop40 Order total
-    - a = 299.00
-    .order-total-price.marginTop40= '$' + a.to_s
+    .order-total-price.marginTop40= @contest_view.order_total
     %br
     .order-total-info Promotion code
-    .order-total-price $ xxx.xx
+    .order-total-price.promotion-code-discount $ 00.0
     %br
     .order-total-info.marginBottom40 Total price
-    .big-total-price.marginBottom40= '$ ' + (a - 15).to_s
+    .big-total-price.marginBottom40= @contest_view.order_total
     %br
     .fullWidthLine
     %p.iAgreeTerms

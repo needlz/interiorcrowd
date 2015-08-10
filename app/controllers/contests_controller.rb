@@ -1,7 +1,7 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
-  before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview]
+  before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview, :payment_details]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
 
   def show

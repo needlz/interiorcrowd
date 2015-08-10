@@ -9,6 +9,9 @@ class Promocode
   @requestErrorMsgSelector: '#promocode-request-error'
   @validMsgSelector: '#promocode-valid'
   @messagesSelector: '#promocode-valid, #promocode-error, #promocode-request-error'
+  @orderTotalValueSelector: '.order-total-price.marginTop40'
+  @promotionValueSelector: '.promotion-code-discount'
+  @totalPriceValueSelector: '.big-total-price'
 
   @init: =>
     @bindApplyPromocodeButton()
@@ -34,20 +37,47 @@ class Promocode
       type: 'GET'
       dataType: 'json'
       success: (response)=>
-        $(@messagesSelector).hide()
-        if response.valid
-          I18n.translations = { en: signupI18n }
-          $(@validMsgSelector).show().text(I18n.t('promocode_valid', { profit: response.profit }))
-        else
-          $(@errorMsgSelector).show().text(signupI18n.promocode_invalid)
-        @bindApplyPromocodeButton()
+        @processPromocodeResponse(response)
       error: =>
         $(@messagesSelector).hide()
         $(@requestErrorMsgSelector).show()
     )
 
-class CardValidation
+  @processPromocodeResponse: (response)->
+    @hidePreviousMessages()
+    if response.valid
+      @notifyPromocodeValid(response.profit)
+      @applyPromocodeToPrice(response.discount)
+    else
+      @notifyPromocodeInvalid()
+    @bindApplyPromocodeButton()
 
+  @hidePreviousMessages: ->
+    $(@messagesSelector).hide()
+
+  @notifyPromocodeValid: (profit)->
+    I18n.translations = { en: signupI18n }
+    $(@validMsgSelector).show().text(I18n.t('promocode_valid', { profit: profit }))
+
+  @applyPromocodeToPrice: (responseDiscount)->
+    @displayDiscountValue(responseDiscount)
+    @displayTotalValue()
+
+  @notifyPromocodeInvalid: ->
+    $(@errorMsgSelector).show().text(signupI18n.promocode_invalid)
+
+  @displayDiscountValue: (discount)->
+    $('.promotion-code-discount').text('$ ' + discount.toFixed(1))
+
+  @displayTotalValue: ->
+    discount = @extractNumber($(@promotionValueSelector))
+    price = @extractNumber($(@orderTotalValueSelector))
+    $(@totalPriceValueSelector).text('$ ' + (price - discount).toFixed(1))
+
+  @extractNumber: ($element)->
+    $element.text().replace(/[^\d\.]/g, '')
+
+class CardValidation
 
   @init: ->
     @error = null

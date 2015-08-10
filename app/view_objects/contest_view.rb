@@ -92,6 +92,11 @@ class ContestView
     allow_download_all_photo && space_pictures.present?
   end
 
+  def order_total
+    total = @package.try(:price) || 299.00
+    '$ ' + total.to_s
+  end
+
   private
 
   def initialize_from_options(options)
