@@ -14,8 +14,9 @@ InteriorC::Application.routes.draw do
         get 'designer_login'
         get 'client_login'
         post 'client_authenticate'
+        get 'client_fb_authenticate'
         post 'authenticate'
-        match 'retry_password', via: [:post, :get]
+        match 'designer_retry_password', via: [:post, :get]
         match 'client_retry_password', via: [:post, :get]
       end
     end
@@ -70,6 +71,8 @@ InteriorC::Application.routes.draw do
     resources :clients, only: [:create, :update] do
       collection do
         get 'validate_card'
+        post 'sign_up_with_facebook'
+        post 'sign_up_with_email'
       end
     end
 

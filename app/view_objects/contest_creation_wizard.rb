@@ -74,11 +74,15 @@ class ContestCreationWizard
   end
 
   def pending_contest_exists?
-    if current_user && current_user.last_contest
+    if current_user && current_user.client? && current_user.last_contest
       Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
     else
       false
     end
+  end
+
+  def show_sign_up_suggestion?
+    !current_user.client? && Settings.show_beta_functionality
   end
 
   private

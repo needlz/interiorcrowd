@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
 
-  before_filter :set_client, except: [:create, :validate_card]
+  before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email]
 
   def client_center
     redirect_to entries_client_center_index_path
@@ -59,22 +59,11 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client_creation = ClientCreation.new(client_attributes: prepare_creation_params)
+    client_sign_up = ClientIntakeFormSignUp.new(params, session)
+    client_creation = ClientCreation.new(client_attributes: client_sign_up.client_attributes)
     client_creation.perform
-    @client = client_creation.client
-    respond_to do |format|
-      if client_creation.saved
-        session[:client_id] = @client.id
-        create_contest
-
-        format.html { redirect_to entries_client_center_index_path({ signed_up: true }) }
-        format.json { render json: @client, status: :created, location: @client }
-      else
-        flash[:error] = @client.errors.full_messages.join('</br>')
-        format.html { render template: 'contests/account_creation' }
-        format.json { render json: @client.errors, status: :unprocessable_entity }
-      end
-    end
+    create_contest(client_creation.client) if client_creation.saved
+    respond_to_signup(client_creation)
   end
 
   def update
@@ -116,25 +105,25 @@ class ClientsController < ApplicationController
     render json: { valid: card_validation.valid, error: card_validation.error_message }
   end
 
+  def sign_up_with_email
+    email_sign_up = ClientEmailSignUp.new(params)
+    client_creation = ClientCreation.new(client_attributes: email_sign_up.client_attributes)
+    client_creation.perform
+    respond_to_signup(client_creation)
+  end
+
+  def sign_up_with_facebook
+    facebook_sign_up = ClientFacebookSignUp.new(params)
+    client_creation = ClientCreation.new(client_attributes: facebook_sign_up.client_attributes)
+    client_creation.perform
+    respond_to_signup(client_creation)
+  end
+
   private
 
   def set_client
     check_client
     @client = Client.find_by_id(session[:client_id])
-  end
-
-  def prepare_creation_params
-    @user_password = params[:client][:password]
-    params[:client][:password] = Client.encrypt(@user_password)
-    params[:client][:plain_password] = @user_password
-    params[:client][:password_confirmation] = Client.encrypt(params[:client][:password_confirmation])
-    params[:client][:designer_level_id] = session[:design_style][:designer_level]
-    params.require(:client).permit(
-        :first_name, :last_name, :address, :state, :zip, :card_number, :card_ex_month,
-        :card_ex_year, :card_cvc, :email, :city, :card_type, :phone_number, :billing_address,
-        :billing_state, :billing_zip, :billing_city, :password, :plain_password, :password_confirmation,
-        :designer_level_id, :name_on_card
-    )
   end
 
   def client_update_params
@@ -144,8 +133,8 @@ class ClientsController < ApplicationController
         :billing_state, :billing_zip, :billing_city, :name_on_card)
   end
 
-  def create_contest
-    contest_creation = ContestCreation.new(client_id: @client.id,
+  def create_contest(client)
+    contest_creation = ContestCreation.new(client_id: client.id,
                                            contest_params: session,
                                            promocode: params[:client][:promocode])
     contest_creation.on_success do
@@ -156,6 +145,21 @@ class ClientsController < ApplicationController
 
   def contest_active?
     @contest && !@contest.closed?
+  end
+
+  def respond_to_signup(client_creation)
+    @client = client_creation.client
+    respond_to do |format|
+      if client_creation.saved
+        session[:client_id] = @client.id
+        format.html { redirect_to entries_client_center_index_path({ signed_up: true }) }
+        format.json { render json: @client, status: :created, location: @client }
+      else
+        flash[:error] = @client.errors.full_messages.join('</br>')
+        format.html { render template: 'contests/account_creation' }
+        format.json { render json: @client.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 end

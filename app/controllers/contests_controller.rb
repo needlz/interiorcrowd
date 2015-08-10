@@ -43,7 +43,6 @@ class ContestsController < ApplicationController
 
   def save_preview
     return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
-    @client = current_client
     if params[:preview].present?
       session[:preview] = params[:preview]
       on_previewed
@@ -120,8 +119,12 @@ class ContestsController < ApplicationController
   def set_creation_wizard
     @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
                                                  step: params[:action].to_sym,
-                                                 current_user: current_client)
+                                                 current_user: current_user)
     @contest_view = ContestView.new(contest_attributes: session.to_hash)
+    if current_user.client?
+      @navigation = Navigation::ClientCenter.new(:entries)
+      @client = current_user
+    end
   end
 
   def set_contest
@@ -133,14 +136,10 @@ class ContestsController < ApplicationController
     ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
   end
 
-  def current_client
-    return current_user if current_user.client?
-    Client.new
-  end
-
   def on_previewed
     return redirect_to account_creation_contests_path unless current_user.client?
 
+    @client = current_user
     contest_creation = ContestCreation.new(client_id: @client.id, contest_params: session)
     contest_creation.on_success do
       clear_creation_storage

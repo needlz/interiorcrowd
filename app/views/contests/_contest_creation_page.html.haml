@@ -1,14 +1,7 @@
 .container.animated.fadeInDown
+  = render 'clients/client_center/header' if current_user.client?
   = render partial: 'contest_top_panel'
   = yield :page_content
 
-- if !current_user.client? && show_beta_functionality?
-  :javascript
-    $(function(){
-      $('.signUpSuggestion .signUpButton').click(function(){
-        $('#signUpModal').modal('show');
-      })
-    })
-
-  = render 'contests/sign_up_suggestion'
+- if @creation_wizard.show_sign_up_suggestion?
   = render 'contests/sign_up_modal'

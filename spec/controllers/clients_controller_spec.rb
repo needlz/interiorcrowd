@@ -28,6 +28,7 @@ RSpec.describe ClientsController do
       card_ex_month: '12',
       card_ex_year: Time.current.year + 5,
       card_cvc: '123',
+      card_number: '123',
       zip: '81100',
       promocode: promocode.promocode
     }
@@ -96,6 +97,60 @@ RSpec.describe ClientsController do
       it 'does not create client' do
         post :create, { client: client_options }, contest_options_source
         expect(Client.count).to eq initial_client_count
+      end
+    end
+  end
+
+  describe 'POST sign_up_with_facebook' do
+    it 'creates client' do
+      email = 'email'
+      post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
+      client = Client.first
+      expect(client.email).to eq email
+      expect(Contest.count).to eq 0
+    end
+  end
+
+  describe 'POST sign_up_with_facebook' do
+    context 'when valid access_token passed' do
+      let(:first_name) { 'first name' }
+      let(:last_name) { 'last name' }
+      let(:email) { 'email' }
+      let(:id) { '1' }
+
+      it 'creates client' do
+        allow_any_instance_of(Koala::Facebook::API).to receive(:api) do |action, params_hash|
+          { 'id' => id,
+            'name' => 'name',
+            'email' => email,
+            'first_name' => first_name,
+            'last_name' => last_name }
+        end
+
+        post :sign_up_with_facebook, token: 'token'
+        client = Client.first
+        expect(client.email).to eq email
+        expect(client.first_name).to eq first_name
+        expect(client.last_name).to eq last_name
+        expect(Contest.count).to eq 0
+      end
+    end
+
+    context 'when invalid access_token passed' do
+      it 'does not create client' do
+        allow_any_instance_of(Koala::Facebook::API).to receive(:api) do |action, params_hash|
+          {
+              'error' => {
+                  'message' => 'Invalid OAuth access token.',
+                  'type' => 'OAuthException',
+                  'code' => 190
+              }
+          }
+        end
+
+        post :sign_up_with_facebook
+        expect(Client.count).to eq 0
+        expect(Contest.count).to eq 0
       end
     end
   end

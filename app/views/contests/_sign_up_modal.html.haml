@@ -1,3 +1,5 @@
+= javascript_include_tag 'shared/sign_up'
+
 #signUpModal.modal.fade{ aria: { hidden: 'true', labelledby: 'signUpLabel' }, role: 'dialog', tabindex: '-1' }
   .modal-dialog
     .modal-content
@@ -14,9 +16,11 @@
             .hLine
             %span
               = t('contests.creation.sign_up_suggestion.dialog.or')
-          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.email_address') }
-          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.create_password') }
-          %input{ name: 'email', placeholder: t('contests.creation.sign_up_suggestion.dialog.confirm_password') }
+          #email-sign-up
+            %input{ name: 'client[email]', placeholder: t('contests.creation.sign_up_suggestion.dialog.email_address') }
+            %input{ name: 'client[password]', placeholder: t('contests.creation.sign_up_suggestion.dialog.create_password') }
+            %input{ name: 'client[password_confirmation]',
+              placeholder: t('contests.creation.sign_up_suggestion.dialog.confirm_password') }
 
           .signUpWithEmailBtn.button.clickable
             = t('contests.creation.sign_up_suggestion.dialog.sign_up_with_email')
