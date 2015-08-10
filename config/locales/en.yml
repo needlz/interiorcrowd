@@ -532,6 +532,11 @@ en:
       password: Password
       confirm_password: Confirm Password
       payment_information: Payment Information
+      payment_details: PAYMENT DETAILS
+      order_total: Order total
+      promotion_code: Promotion code
+      total_price: Total price
+      initial_discount: $ 00.0
       name_on_card: Name on card
       card_type: Card type
       select_year: Select Year

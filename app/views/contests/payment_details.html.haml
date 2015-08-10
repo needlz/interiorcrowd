@@ -7,21 +7,20 @@
     signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
 
 .container.animated.fadeInDown.client-signup.creditCardForm.lightFont
-  -#%h3.main-title= t('client_center.sign_up.title').html_safe
-  %h3.main-title= 'PAYMENT DETAILS'.html_safe
+  %h3.main-title= t('client_center.sign_up.payment_details').html_safe
   = render partial: 'home/msg'
   = form_for @client, { id: 'create', method: 'post' } do |f|
     .fullWidthLine
 
     =render partial: 'shared/payment_information', locals: { f: f }
 
-    .order-total-info.marginTop40 Order total
-    .order-total-price.marginTop40= @contest_view.order_total
+    .order-total-info.marginTop40= t('client_center.sign_up.order_total')
+    .order-total-price.order-total-value.marginTop40= @contest_view.order_total
     %br
-    .order-total-info Promotion code
-    .order-total-price.promotion-code-discount $ 00.0
+    .order-total-info= t('client_center.sign_up.promotion_code')
+    .order-total-price.promotion-code-discount= t('client_center.sign_up.initial_discount')
     %br
-    .order-total-info.marginBottom40 Total price
+    .order-total-info.marginBottom40= t('client_center.sign_up.total_price')
     .big-total-price.marginBottom40= @contest_view.order_total
     %br
     .fullWidthLine

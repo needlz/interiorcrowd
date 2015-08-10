@@ -9,8 +9,7 @@ class Promocode
   @requestErrorMsgSelector: '#promocode-request-error'
   @validMsgSelector: '#promocode-valid'
   @messagesSelector: '#promocode-valid, #promocode-error, #promocode-request-error'
-  @orderTotalValueSelector: '.order-total-price.marginTop40'
-  @promotionValueSelector: '.promotion-code-discount'
+  @orderTotalValueSelector: '.order-total-value'
   @totalPriceValueSelector: '.big-total-price'
 
   @init: =>
