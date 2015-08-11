@@ -8,11 +8,15 @@ module ContestRequestMilestones
       @view_context = options[:view_context]
     end
 
+    def expired?
+      !in_progress?
+    end
+
     private
 
     attr_reader :contest, :contest_request, :view_context
 
-    def expired?
+    def in_progress?
       Time.current < contest.phase_end
     end
 

@@ -3,7 +3,7 @@ module ContestRequestMilestones
   class WinnerSelection < Base
 
     def designer_hint
-      if expired?
+      if in_progress?
         time_left = view_context.distance_of_time_in_words(Time.current,
                                               contest.phase_end,
                                               false,
