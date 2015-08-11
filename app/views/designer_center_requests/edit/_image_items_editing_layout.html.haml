@@ -64,7 +64,8 @@
         = hidden_mixpanel_submit_tag
         = link_to '#', class: 'submit submitMyDesign high-button' do
           = t('designer_center.respond.submit')
-        = link_to '#', class: 'moveToFinal', request_id: request.id do
-          =t('client_center.entries.collaboration.done_btn')
-          %img{:src => "/assets/gt.png"}/
+        - if @contest_request_milestone.expired?
+          = link_to '#', class: 'moveToFinal', request_id: request.id do
+            =t('client_center.entries.collaboration.done_btn')
+            %img{:src => "/assets/gt.png"}/
           
