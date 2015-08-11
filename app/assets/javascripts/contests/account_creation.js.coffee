@@ -11,6 +11,7 @@ class Promocode
   @messagesSelector: '#promocode-valid, #promocode-error, #promocode-request-error'
   @orderTotalValueSelector: '.order-total-value'
   @totalPriceValueSelector: '.big-total-price'
+  @promotionValueSelector: '.promotion-code-discount'
 
   @init: =>
     @bindApplyPromocodeButton()
