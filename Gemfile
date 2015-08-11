@@ -88,3 +88,5 @@ gem 'dotiw' # better distance of time in words
 gem 'stripe'
 gem 'ably-rest'
 gem 'pgbackups-archive'
+gem 'omniauth-facebook'
+gem 'koala', '~> 2.0'

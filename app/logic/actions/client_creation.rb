@@ -4,20 +4,19 @@ class ClientCreation
 
   def initialize(options)
     @client_attributes = options[:client_attributes]
-    @promocode = options[:promocode]
     @saved = false
   end
 
   def perform
     return unless create_client
-    check_card
+    check_card if client.card_number
     send_notifications
     self
   end
 
   private
 
-  attr_reader :client_attributes, :promocode
+  attr_reader :client_attributes
 
   def create_client
     @client = Client.new(client_attributes)

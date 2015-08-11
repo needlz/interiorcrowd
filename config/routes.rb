@@ -14,8 +14,9 @@ InteriorC::Application.routes.draw do
         get 'designer_login'
         get 'client_login'
         post 'client_authenticate'
+        get 'client_fb_authenticate'
         post 'authenticate'
-        match 'retry_password', via: [:post, :get]
+        match 'designer_retry_password', via: [:post, :get]
         match 'client_retry_password', via: [:post, :get]
       end
     end
@@ -70,18 +71,18 @@ InteriorC::Application.routes.draw do
     resources :clients, only: [:create, :update] do
       collection do
         get 'validate_card'
+        post 'sign_up_with_facebook'
+        post 'sign_up_with_email'
       end
     end
 
-    resources :client_center, only: [] do
-      collection do
-        get '', to: 'clients#client_center', as: ''
-        get 'entries', to: 'clients#entries', as: 'entries'
-        get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'concept_boards_page'
-        get 'brief', to: 'clients#brief', as: 'brief'
-        get 'profile', to: 'clients#profile', as: 'profile'
-        get 'pictures_dimension', to: 'clients#pictures_dimension'
-      end
+    scope '/client_center' do
+      get '', to: 'clients#client_center', as: 'client_center'
+      get 'entries', to: 'clients#entries', as: 'client_center_entries'
+      get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'client_center_concept_boards_page'
+      get 'brief', to: 'clients#brief', as: 'client_center_brief'
+      get 'profile', to: 'clients#profile', as: 'client_center_profile'
+      get 'pictures_dimension', to: 'clients#pictures_dimension', as: 'client_center_pictures_dimension'
     end
 
     resources :designers, only: [:create, :update]

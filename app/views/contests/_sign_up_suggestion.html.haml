@@ -1,5 +1,23 @@
-.signUpSuggestion
-  = t('contests.creation.sign_up_suggestion.text')
-  .divider.visible-xs
-  %span.signUpButton.clickable
-    = t('contests.creation.sign_up_suggestion.button_text')
+- if @creation_wizard.show_sign_up_suggestion?
+  - content_for :head do
+    :javascript
+      $(function(){
+        $('.signUpSuggestion .signUpButton').click(function(){
+          $('#signUpModal').modal('show');
+        })
+
+        $('.signUpWithFacebookBtn').click(function(){
+          SignUp.facebookLogin()
+        })
+
+        $('.signUpWithEmailBtn').click(function(){
+          SignUp.quick()
+        })
+
+      })
+
+  .signUpSuggestion
+    = t('contests.creation.sign_up_suggestion.text')
+    .divider.visible-xs
+    %span.signUpButton.clickable
+      = t('contests.creation.sign_up_suggestion.button_text')

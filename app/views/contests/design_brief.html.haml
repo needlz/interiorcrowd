@@ -14,6 +14,7 @@
       = render partial: 'contests/options/category_options'
       = render partial: 'contests/options/area_options'
       = hidden_mixpanel_submit_tag
+    = render 'contests/sign_up_suggestion'
     .text-center
       %button.btn1.btn1-confirm.lightFont{ type: 'button' }= t('contests.creation.continue')
 

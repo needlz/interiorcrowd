@@ -16,7 +16,7 @@ class ContestNoteView < CommentView
 
   def href
     return designer_center_contest_path(id: comment.contest.id) if spectator.designer?
-    entries_client_center_index_path if spectator.client?
+    client_center_entries_path if spectator.client?
   end
 
   def name

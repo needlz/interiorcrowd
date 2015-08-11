@@ -53,6 +53,10 @@ common: &defaults
     api_key: CRyt2w.7HSMCw:PI3GpWgTHK8KBZ67
     script_url: http://cdn.ably.io/lib/ably.min.js
     product_item_feedback: product_item_feedback_for_contest_request_with_id_
+  facebook:
+    app_id: '<%= ENV['FACEBOOK_APP_ID'] %>'
+    secret: <%= ENV['FACEBOOK_APP_SECRET'] %>
+  show_beta_functionality: <%= !Rails.env.production? %>
 
 development:
 

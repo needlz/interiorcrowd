@@ -8,36 +8,38 @@
   = stylesheet_link_tag 'lib/slider'
   = stylesheet_link_tag 'contests/design_style'
 
-  = render partial: 'shared/setup_uploadify'
-  = render partial: 'shared/setup_colors_table'
+  = render 'shared/setup_uploadify'
+  = render 'shared/setup_colors_table'
   :javascript
     window.appealsCount = #{ Appeal.count }
     window.I18n = #{ translations_to_json(['contests', 'design_style']) }
 
-= render partial: 'shared/have_unfinished_project'
+= render 'shared/have_unfinished_project'
 
 - content_for :page_content do
   #design-style.briefEditing
     .newDesignContest
       .row.marginTop60
         .col-md-12
-          = render partial: 'home/msg'
+          = render 'home/msg'
           %h4= t('contests.design_style.title')
           %p.lightFont.marginTop20= t('contests.design_style.description')
           = form_tag save_design_style_contests_path,
               { id: 'design_style', method: 'post' } do
-            = render partial: 'contests/options/designer_level_options'
+            = render 'contests/options/designer_level_options'
             .fullWidthLine.marginTop40
-            = render partial: 'contests/options/appeals_options'
-            = render partial: 'contests/options/desirable_colors_options'
+            = render 'contests/options/appeals_options'
+            = render 'contests/options/desirable_colors_options'
             .hLine
-            = render partial: 'contests/options/undesirable_colors_options'
+            = render 'contests/options/undesirable_colors_options'
 
             .fullWidthLine.marginTop40
             %h3.marginTop40= t('contests.titles.example')
-            = render partial: 'contests/options/example_pictures_options'
+            = render 'contests/options/example_pictures_options'
             .clearfix
-            = render partial: 'contests/options/example_links_options'
+            = render 'contests/options/example_links_options'
+            .marginBottom40
+            = render 'contests/sign_up_suggestion'
             .text-center.footer-buttons
               %a.backBtn{ href: design_brief_contests_path,
                   class: tracked_link,
@@ -51,4 +53,4 @@
                 = t('contests.creation.go_back')
             = hidden_mixpanel_submit_tag
 
-= render partial: 'contests/contest_creation_page'
+= render 'contests/contest_creation_page'

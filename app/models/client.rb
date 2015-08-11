@@ -37,7 +37,7 @@ class Client < ActiveRecord::Base
   ACTIVE_STATUS = 1
   INACTIVE_STATUS = 0
   
-  validates :first_name, :last_name, presence: true
+  # validates :first_name, :last_name, presence: true
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, presence: true, uniqueness: true
