@@ -89,7 +89,7 @@ class ContestsController < ApplicationController
     contest_updater.perform
 
     if params[:pictures_dimension]
-      redirect_to entries_client_center_index_path
+      redirect_to client_center_entries_path
     else
       @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
       @contest_view = ContestView.new(contest_attributes: @contest)
@@ -146,7 +146,7 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    redirect_to entries_client_center_index_path
+    redirect_to client_center_entries_path
   end
 
 end

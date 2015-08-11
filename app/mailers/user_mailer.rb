@@ -106,7 +106,7 @@ class UserMailer < ActionMailer::Base
 
   def new_product_list_item(params)
     template "new_product_list_item"
-    @url = entries_client_center_index_url
+    @url = client_center_entries_url
     set_template_values(text: render_to_string("mails/new_product_list_item"))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
          subject: I18n.t("mails.new_product_list_item.subject")
@@ -131,7 +131,7 @@ class UserMailer < ActionMailer::Base
     client = contest.client
     set_template_values(
         DAYS_TO_PICK_WINNER: ContestMilestone::DAYS['winner_selection'],
-        ENTRIES_URL: renderer.entries_client_center_index_url,
+        ENTRIES_URL: renderer.client_center_entries_url,
         CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client'),
         HELLO_ADDRESS: contact_email
     )
@@ -142,7 +142,7 @@ class UserMailer < ActionMailer::Base
     template 'client_hasnt_picked_a_winner'
     client = contest.client
     set_template_values(
-        ENTRIES_URL: renderer.entries_client_center_index_url,
+        ENTRIES_URL: renderer.client_center_entries_url,
         HELLO_ADDRESS: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
@@ -197,7 +197,7 @@ class UserMailer < ActionMailer::Base
     set_template_values(
         HELLO_ADDRESS: contact_email,
         CLIENT_NAME: client.name,
-        ENTRIES_URL: renderer.entries_client_center_index_url,
+        ENTRIES_URL: renderer.client_center_entries_url,
         CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client')
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
@@ -226,7 +226,7 @@ class UserMailer < ActionMailer::Base
   def contest_not_live_yet(contest)
     template 'Contest-not-live-yet'
     set_template_values(
-        ENTRIES_URL: renderer.entries_client_center_index_url,
+        ENTRIES_URL: renderer.client_center_entries_url,
         PICTURES_EMAIL: 'pictures@interiorcrowd.com'
     )
     client = contest.client
@@ -270,7 +270,7 @@ class UserMailer < ActionMailer::Base
 
   def url_for_comment_on_board(user_role, contest_request_id)
     return designer_center_response_url(contest_request_id) if user_role == 'client'
-    entries_client_center_index_url
+    client_center_entries_url
   end
 
   def contact_email

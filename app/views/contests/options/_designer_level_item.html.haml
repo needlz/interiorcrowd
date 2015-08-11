@@ -6,7 +6,7 @@
   = label_tag 'design_style[designer_level]',
       '',
       for: "design_style_designer_level_#{ designer_level.id }",
-      style: "background-image: #{ css_url(Settings.designer_level_pictures[designer_level.name]) }; background-size: cover;",
+      style: "background-image: #{ css_url(Settings.designer_level_pictures[designer_level.name]) };",
       class: designer_level.name do
     %span
     %p.hide= t("contests.design_style.level_info.#{ designer_level.name }")

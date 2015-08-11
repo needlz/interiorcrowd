@@ -88,4 +88,48 @@ RSpec.describe SessionsController do
     end
   end
 
+  describe 'GET designer_login' do
+    let(:designer){ Fabricate(:designer) }
+
+    context 'logged in' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'redirects to designer center' do
+        get :designer_login
+        expect(response).to redirect_to(designer_center_path)
+      end
+    end
+
+    context 'not logged in' do
+      it 'returns page' do
+        get :designer_login
+        expect(response).to render_template(:designer_login)
+      end
+    end
+  end
+
+  describe 'GET client_login' do
+    let(:client){ Fabricate(:client) }
+
+    context 'logged in' do
+      before do
+        sign_in(client)
+      end
+
+      it 'redirects to client center' do
+        get :client_login
+        expect(response).to redirect_to(client_center_path)
+      end
+    end
+
+    context 'not logged in' do
+      it 'returns page' do
+        get :client_login
+        expect(response).to render_template(:client_login)
+      end
+    end
+  end
+
 end

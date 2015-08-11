@@ -54,7 +54,7 @@ RSpec.describe ClientsController do
 
     it 'redirects to entries page' do
       post :create, { client: client_options }, contest_options_source
-      expect(response).to redirect_to(entries_client_center_index_path({signed_up: true}) )
+      expect(response).to redirect_to(client_center_entries_path({signed_up: true}) )
     end
 
     it 'saves attributes' do
@@ -248,12 +248,12 @@ RSpec.describe ClientsController do
       client_contest =  Fabricate(:contest, client: client, status: 'submission')
       Fabricate(:contest_request, contest: client_contest)
       get :client_center
-      expect(response).to redirect_to entries_client_center_index_path
+      expect(response).to redirect_to client_center_entries_path
     end
 
     it 'redirects to Entries page if no responses present' do
       get :client_center
-      expect(response).to redirect_to entries_client_center_index_path
+      expect(response).to redirect_to client_center_entries_path
     end
   end
 

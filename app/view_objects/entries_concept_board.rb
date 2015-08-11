@@ -1,7 +1,7 @@
 class EntriesConceptBoard < ConceptBoardPage
 
   def phase_url(index)
-    view_context.entries_client_center_index_path(phase_url_params(index))
+    view_context.client_center_entries_path(phase_url_params(index))
   end
 
   def partial

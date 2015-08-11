@@ -51,7 +51,7 @@ RSpec.describe ContestsController do
 
     it 'redirects to Entries page after pictures dimension edited' do
       patch :update, option: 'space_dimensions', id: contest.id, pictures_dimension: true
-      expect(response).to redirect_to(entries_client_center_index_path)
+      expect(response).to redirect_to(client_center_entries_path)
     end
   end
 
@@ -156,7 +156,7 @@ RSpec.describe ContestsController do
             contest.save!
             post :save_preview, contest_options_source
             expect(client.contests.count).to eq 2
-            expect(response).to redirect_to(entries_client_center_index_path)
+            expect(response).to redirect_to(client_center_entries_path)
           end
         end
 

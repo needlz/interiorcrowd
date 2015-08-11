@@ -4,7 +4,7 @@ class ClientsController < ApplicationController
   before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email]
 
   def client_center
-    redirect_to entries_client_center_index_path
+    redirect_to client_center_entries_path
   end
 
   def entries
@@ -152,7 +152,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if client_creation.saved
         session[:client_id] = @client.id
-        format.html { redirect_to entries_client_center_index_path({ signed_up: true }) }
+        format.html { redirect_to client_center_entries_path({ signed_up: true }) }
         format.json { render json: @client, status: :created, location: @client }
       else
         flash[:error] = @client.errors.full_messages.join('</br>')

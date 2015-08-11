@@ -22,7 +22,6 @@ class @SignUp
       url: '/clients/sign_up_with_email'
 
   @signUpRequest: (requestOptions) ->
-    console.log  requestOptions
     defaultOptions =
       method: 'POST'
       dataType: 'json'
@@ -33,5 +32,4 @@ class @SignUp
 
     ajaxRequestOptions = $.extend({}, defaultOptions, requestOptions)
 
-    console.log ajaxRequestOptions
     $.ajax(ajaxRequestOptions)

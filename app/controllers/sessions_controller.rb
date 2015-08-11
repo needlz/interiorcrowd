@@ -73,7 +73,7 @@ class SessionsController < ApplicationController
   end
 
   def user_login(user_role)
-    redirect_to send("#{ user_role }_center_index_path") if session["#{ user_role }_id".to_sym].present?
+    redirect_to send("#{ user_role }_center_path") if session["#{ user_role }_id".to_sym].present?
     @login_view = LoginView.send("#{ user_role }_login")
   end
 

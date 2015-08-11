@@ -10,7 +10,7 @@ RSpec.describe PortfolioView do
       let(:current_user) { Fabricate(:client) }
 
       it 'returns client center path' do
-        expect(portfolio_view.exit_portfolio_path(current_user)).to eq client_center_index_path
+        expect(portfolio_view.exit_portfolio_path(current_user)).to eq client_center_path
       end
     end
 
