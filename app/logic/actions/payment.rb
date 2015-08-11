@@ -13,7 +13,8 @@ class Payment
     @client_payment = nil
     customer = StripeCustomer.new(client)
     unless charge_already_performed?
-      price = calculate_price_in_cents
+      calculator = PriceCalculator.new(contest: contest)
+      price = calculator.price_in_cents
       payment = ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
       @client_payment = payment
       begin
@@ -30,14 +31,6 @@ class Payment
   private
 
   attr_reader :contest, :client
-
-  def calculate_price_in_cents
-    result = contest.package.price_in_cents
-    contest.promocodes.each do |code|
-      result = result - code.discount_cents
-    end
-    result
-  end
 
   def charge_already_performed?
     ClientPayment.where(contest_id: contest.id).exists?

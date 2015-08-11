@@ -1,0 +1,37 @@
+= content_for :head do
+  = javascript_include_tag 'jquery.creditCardValidator.js'
+  = javascript_include_tag 'contests/account_creation'
+  = javascript_include_tag 'i18n'
+  = render 'shared/setup_stripe_js'
+  :javascript
+    signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
+
+.container.animated.fadeInDown.client-signup.creditCardForm.lightFont
+  %h3.main-title= t('client_center.sign_up.payment_details').html_safe
+  = render partial: 'home/msg'
+  = form_for @client, { id: 'create', method: 'post' } do |f|
+    .fullWidthLine
+
+    =render partial: 'shared/payment_information', locals: { f: f }
+
+    .order-total-info.marginTop40= t('client_center.sign_up.order_total')
+    .order-total-price.order-total-value.marginTop40= @contest_view.order_total
+    %br
+    .order-total-info= t('client_center.sign_up.promotion_code')
+    .order-total-price.promotion-code-discount= t('client_center.sign_up.initial_discount')
+    %br
+    .order-total-info.marginBottom40= t('client_center.sign_up.total_price')
+    .big-total-price.marginBottom40= @contest_view.order_total
+    %br
+    .fullWidthLine
+    %p.iAgreeTerms
+      %span.customCheckbox
+        = check_box_tag 'client_agree', 'yes', false, name: '', class: 'hidden'
+        %label{ for: 'client_agree' }
+      = t('client_center.sign_up.i_agree')
+      %span.terms-of-use= t('client_center.sign_up.terms_of_use')
+    %button.btn.btn1-confirm.submit-button{ type: 'button', tabindex: 17 }
+      = t('client_center.sign_up.submit')
+    = hidden_mixpanel_submit_tag
+
+= render partial: 'home/terms_of_service_modal'

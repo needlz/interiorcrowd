@@ -92,6 +92,11 @@ class ContestView
     allow_download_all_photo && space_pictures.present?
   end
 
+  def order_total
+    total = @package.try(:price) || BudgetPlan.all.last.price
+    '$ ' + total.to_s + '.0'
+  end
+
   private
 
   def initialize_from_options(options)

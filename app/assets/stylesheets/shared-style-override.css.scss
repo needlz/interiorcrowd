@@ -485,3 +485,58 @@
   }
 }
 
+.order-totals{
+  font-family: "AvenirLTStd-Medium";
+  text-align: right;
+  display: inline-table;
+  font-size: 22px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+}
+
+.order-total-info{
+  @extend .order-totals;
+  width: 80%;
+}
+
+.order-total-price{
+  @extend .order-totals;
+  width: 20%;
+  float: right;
+}
+
+.big-total-price{
+  @extend .order-total-price;
+  font-size: 26px;
+  color: #409863;
+}
+
+@media(max-width: 768px) {
+  .order-total-info{
+    width: 65%;
+  }
+
+  .order-total-price{
+    width: 35%;
+  }
+}
+
+@media(max-width: 414px) {
+  .order-total-info{
+    width: 50%;
+  }
+
+  .order-total-price{
+    width: 50%;
+  }
+}
+
+@media(max-width: 320px) {
+  .order-total-info{
+    width: 60%;
+  }
+
+  .order-total-price{
+    width: 40%;
+  }
+}
