@@ -58,7 +58,8 @@ class ContestsController < ApplicationController
   end
 
   def payment_details
-    @client = current_client
+    redirect_to client_login_sessions_path unless current_user.client?
+    @client = current_user
   end
 
   def upload
