@@ -2,9 +2,11 @@ class ContestShortDetails
   include ActionView::Helpers::DateHelper
 
   attr_reader :id, :name, :package_name, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
-              :client_name
+              :client_name, :status_name
+  delegate :response_winner, to: :contest
 
   def initialize(contest)
+    @contest = contest
     @id = contest.id
     @name = contest.project_name
     @package_name = PackageView.new(contest.package).name
@@ -16,10 +18,15 @@ class ContestShortDetails
                     price: BudgetPlan.find(contest.budget_plan).price)
     @status = contest.status
     @client_name = contest.client.name
+    @status_name = I18n.t('client_center.statuses.' + status)
   end
 
   def get_days_till_end(contest)
     contest.winner_collaboration? ?  '—' : days_count.to_s
   end
+
+  private
+
+  attr_reader :contest
 
 end

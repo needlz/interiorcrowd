@@ -120,10 +120,6 @@ class DesignerCenterRequestsController < ApplicationController
     params.permit(contest_request: [:feedback, :final_note, :pull_together_note])[:contest_request]
   end
 
-  def set_designer
-    @designer = Designer.find(session[:designer_id]) if check_designer
-  end
-
   def format_changed_attributes(changed_params)
     result = {}
     changed_params.each do |attribute, value|

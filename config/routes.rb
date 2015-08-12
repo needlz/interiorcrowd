@@ -35,7 +35,7 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    resources :contests, only: [:show, :update, :index] do
+    resources :contests, only: [:show, :update] do
       member do
         get 'option'
         get 'show', as: 'show'
@@ -77,8 +77,8 @@ InteriorC::Application.routes.draw do
     end
 
     scope '/client_center' do
+      resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries'
       get '', to: 'clients#client_center', as: 'client_center'
-      get 'entries', to: 'clients#entries', as: 'client_center_entries'
       get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'client_center_concept_boards_page'
       get 'brief', to: 'clients#brief', as: 'client_center_brief'
       get 'profile', to: 'clients#profile', as: 'client_center_profile'

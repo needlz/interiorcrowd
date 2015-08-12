@@ -1,7 +1,7 @@
 class EntriesConceptBoard < ConceptBoardPage
 
   def phase_url(index)
-    view_context.client_center_entries_path(phase_url_params(index))
+    view_context.client_center_entry_path(phase_url_params(index))
   end
 
   def partial
@@ -26,7 +26,7 @@ class EntriesConceptBoard < ConceptBoardPage
   private
 
   def phase_url_params(index)
-    path_params = {}
+    path_params = { id: contest_request.contest }
     path_params.merge!(view: index) if index != last_phase_index
     path_params
   end

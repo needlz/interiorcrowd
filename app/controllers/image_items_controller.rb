@@ -68,14 +68,6 @@ class ImageItemsController < ApplicationController
     raise_404 unless @contest_request
   end
 
-  def set_designer
-    @designer = Designer.find(session[:designer_id]) if check_designer
-  end
-
-  def set_client
-    @client = Client.find_by_id(check_client)
-  end
-
   def set_item
     @item = ImageItem.find(params[:id])
   end

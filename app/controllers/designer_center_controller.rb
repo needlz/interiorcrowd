@@ -1,6 +1,4 @@
 class DesignerCenterController < ApplicationController
-  include RequiresDesigner
-
   before_filter :set_designer
 
   def designer_center

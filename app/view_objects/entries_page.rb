@@ -8,10 +8,10 @@ class EntriesPage < ContestPage
 
     if won_contest_request
       @entries_concept_board_page = EntriesConceptBoard.new({
-                                                                contest_request: @won_contest_request,
-                                                                view_context: view_context,
-                                                                preferred_view: options[:view]
-                                                            })
+        contest_request: @won_contest_request,
+        view_context: view_context,
+        preferred_view: options[:view]
+      })
       @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 10, page: options[:page])
       @share_url = view_context.public_designs_url(token: won_contest_request.token)
     end
@@ -48,7 +48,7 @@ class EntriesPage < ContestPage
         result << 'clients/product_list_marks'
       end
       if won_contest_request.fulfillment_ready?
-        result << 'clients/final_design_dialog'
+        result << 'shared/final_design_dialog'
       end
     end
     result
@@ -75,7 +75,7 @@ class EntriesPage < ContestPage
 
   def time_till_milestone_end
     view_context.distance_of_time_in_words(Time.current,
-                                           contest.phase_end,
+                                           contest.phase_end || Time.current,
                                            vague: true)
   end
 

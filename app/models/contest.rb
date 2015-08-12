@@ -72,6 +72,7 @@ class Contest < ActiveRecord::Base
   scope :current, ->{ where(status: 'submission') }
   scope :active, ->{ where(status: COLLABORATION_STATUSES) }
   scope :inactive, ->{ where(status: FINISHED_STATUSES) }
+  scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
