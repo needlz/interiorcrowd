@@ -12,10 +12,6 @@ class FinalNoteToDesignerController < ApplicationController
 
   private
 
-  def set_client
-    @client = Client.find_by_id(check_client)
-  end
-
   def final_note_params
     params.require(:final_note).permit(:text)
   end

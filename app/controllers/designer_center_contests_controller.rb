@@ -16,9 +16,4 @@ class DesignerCenterContestsController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
-  private
-
-  def set_designer
-    @designer = Designer.find(session[:designer_id]) if check_designer
-  end
 end

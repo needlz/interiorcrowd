@@ -5,4 +5,8 @@ module UserPolicies
     user_notification.recipient == self
   end
 
+  def see_contest?(contest)
+    contest.client == self
+  end
+
 end

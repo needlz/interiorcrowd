@@ -542,9 +542,75 @@
   }
 }
 
-
 .interiorDesignLevel {
   label {
     background-size: cover;
   }
+}
+
+#client-center-contests{
+  .contestTable > .row, .contestDesigner.header-row > .row{
+    padding-left: 35px;
+    font-size: 17px;
+  }
+
+  .contestDesignerBtn{
+    text-align: center;
+  }
+
+  @media(max-width: 768px) {
+    .contestDesignerBtn .goBtn{
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    .contestTableRow2{
+      padding-bottom: 20px;
+    }
+
+    .contestTable > .row, .contestDesigner.header-row > .row{
+      padding-left: 15px;
+    }
+
+    .contestUnderway{
+      text-align: center;
+    }
+  }
+
+  .contestTableRow2{
+    height: inherit;
+    padding-bottom: 30px;
+  }
+  .contestTableRow2 .title{
+    font-weight: 700;
+    margin-right: 2%;
+  }
+
+  .contestDesignerBtn .btn{
+    margin-right: 0px;
+  }
+
+  .contestDesignerBtn .goBtn{
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .contestDesignerBtn .goBtn img{
+    position: relative;
+    top: -2px;
+    margin-left: 5px;
+  }
+
+  .contestDesignerBtn .goBtn{
+    background: #409863;
+    color: #FFF;
+    font-weight: 700;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .contestDesignerBtn .goBtn img{
+    position: relative;
+    top: -2px;
+    margin-left: 5px;
+  }
+
 }

@@ -1,6 +1,4 @@
 class LookbookDetailsController < ApplicationController
-  include RequiresDesigner
-
   before_filter :set_designer
   before_filter :set_contest_request, only: [:create, :destroy]
   before_filter :set_lookbook_detail, only: [:destroy]

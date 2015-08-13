@@ -560,6 +560,14 @@ en:
 
       download_images: Download
       generating_archive: Generating archive...
+    statuses:
+      submission: Submission
+      winner_selection: Pick winner
+
+      fulfillment: Custom Board and Product List Collaboration
+      final_fulfillment: Wait for Create Final Design
+      closed: Closed
+      finished: Finished
   designer_center:
     milestones:
       winner_selection:
@@ -759,7 +767,7 @@ en:
       client_name: Client name
       days_left: '%{days} left to enter'
       contest_id: Contest ID#
-      contest_name: Contest Name
+      contest_name: Project name
       type: Type
       room: Room
       price: Price
@@ -814,7 +822,7 @@ en:
         listed_as: 'Currently listed as: %{answer}'
         view_brief: View brief
         comments: Comments
-        go: GO
+        go: VIEW
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
