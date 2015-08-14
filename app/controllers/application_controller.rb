@@ -56,6 +56,14 @@ class ApplicationController < ActionController::Base
     current_user
   end
 
+  def set_client
+    @client = Client.find_by_id(check_client)
+  end
+
+  def set_designer
+    @designer = Designer.find_by_id(check_designer)
+  end
+
   private
 
   def set_return_to_link

@@ -1,12 +1,37 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
+  before_filter :check_client, only: [:index]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview, :payment_details]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
+  before_filter :set_client, only: [:index, :show]
 
   def show
-    @request = ContestRequest.find_by_designer_id_and_contest_id(session[:designer_id], @contest.id)
-    @contest_view = ContestView.new(contest_attributes: @contest)
+    return raise_404 unless current_user.see_contest?(@contest)
+
+    @navigation = Navigation::ClientCenter.new(:entries)
+    @current_user = current_user
+
+    @entries_page = EntriesPage.new(
+      contest: @contest,
+      view: params[:view],
+      answer: params[:answer],
+      page: params[:page],
+      current_user: current_user,
+      view_context: view_context
+    )
+
+    if @entries_page.show_submissions? || @entries_page.won_contest_request
+      render 'clients/client_center/entries'
+    else
+      render 'clients/client_center/entries_invitations'
+    end
+  end
+
+  def index
+    @navigation = Navigation::ClientCenter.new(:entries)
+    @current_contests = @client.contests.in_progress
+    @completed_contests = @client.contests.inactive
   end
   
   def design_brief
@@ -129,7 +154,8 @@ class ContestsController < ApplicationController
   end
 
   def set_contest
-    @contest = Contest.find(params[:id])
+    @contest = Contest.find_by_id(params[:id])
+    return raise_404 unless @contest
   end
 
   def uncomplete_step_path(validated_steps)

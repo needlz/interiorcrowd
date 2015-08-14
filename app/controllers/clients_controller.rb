@@ -7,28 +7,6 @@ class ClientsController < ApplicationController
     redirect_to client_center_entries_path
   end
 
-  def entries
-    @contest = @client.last_contest
-    return redirect_to design_brief_contests_path unless contest_active?
-    @navigation = Navigation::ClientCenter.new(:entries)
-    @current_user = current_user
-
-    @entries_page = EntriesPage.new(
-      contest: @contest,
-      view: params[:view],
-      answer: params[:answer],
-      page: params[:page],
-      current_user: current_user,
-      view_context: view_context
-    )
-
-    if @entries_page.show_submissions? || @entries_page.won_contest_request
-      render 'clients/client_center/entries'
-    else
-      render 'clients/client_center/entries_invitations'
-    end
-  end
-
   def concept_boards_page
     @contest = @client.last_contest
     entries_page = EntriesPage.new(
@@ -120,11 +98,6 @@ class ClientsController < ApplicationController
   end
 
   private
-
-  def set_client
-    check_client
-    @client = Client.find_by_id(session[:client_id])
-  end
 
   def client_update_params
     params.require(:client).permit(

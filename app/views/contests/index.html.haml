@@ -1,0 +1,26 @@
+- content_for :head do
+  = javascript_include_tag 'designer_center_requests/index'
+
+- content_for :client_center_content do
+  #client-center-contests.lightFont.marginTop20
+    .row.no-x-padding
+      .col-md-12.contestUnderway.no-x-padding
+        .row
+          .col-md-8
+            %h3= t('designer_center.responses.title')
+            %p= t('designer_center.responses.list_title')
+        .contestDesigner.noBorderRadius.header-row
+          .row.contestTableHeader
+            .col-sm-10
+              .row
+                .col-xs-4= t('designer_center.contests_preview.contest_name')
+                .col-xs-4= t('designer_center.contests_preview.room')
+                .col-xs-4= t('designer_center.contests_preview.days')
+        = render 'contests/index/items', { contests: @current_contests }
+
+        - if @completed_contests.present?
+          %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
+          #completedContestsBox
+            = render 'contests/index/items', { contests: @completed_contests }
+
+= render 'clients/client_center/layout', { container_class: 'bottom60' }

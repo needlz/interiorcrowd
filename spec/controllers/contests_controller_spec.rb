@@ -262,4 +262,156 @@ RSpec.describe ContestsController do
       expect(response).to render_template(:design_brief)
     end
   end
+
+  describe 'GET show' do
+    before do
+      sign_in(client)
+      Fabricate(:portfolio)
+      allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+    end
+
+    context 'designers present' do
+      let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
+
+      it 'returns page' do
+        Fabricate(:contest, client: client, status: 'submission')
+        get :show, id: Fabricate(:contest, client: client).id
+        expect(response).to render_template(:entries_invitations)
+      end
+
+      context 'responses present' do
+        let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+        let!(:submitted) { Fabricate(:contest_request,
+                                     designer: designers[0],
+                                     contest: contest,
+                                     status: 'submitted',
+                                     lookbook: Fabricate(:lookbook)) }
+        let!(:draft) { Fabricate(:contest_request,
+                                 designer: designers[1],
+                                 contest: contest,
+                                 status: 'draft',
+                                 lookbook: Fabricate(:lookbook)) }
+        let!(:fulfillment) { Fabricate(:contest_request,
+                                       designer: designers[2],
+                                       contest: contest,
+                                       status: 'fulfillment_ready',
+                                       lookbook: Fabricate(:lookbook)) }
+
+        def create_contest_request(cont)
+          Fabricate(:contest_request,
+                    designer: designers[3],
+                    contest: cont,
+                    status: 'submitted',
+                    answer: 'winner',
+                    lookbook: Fabricate(:lookbook))
+        end
+
+        def create_contest
+          Fabricate(:contest, client: client, status: 'submission')
+        end
+
+        it 'views only submitted and fulfillment requests' do
+          get :show, id: contest.id
+          expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
+        end
+
+        it 'filters responses by answer' do
+          contest.start_winner_selection!
+          draft.update_attributes!(answer: 'no')
+          fulfillment.update_attributes!(answer: 'favorite')
+          submitted.update_attributes!(answer: 'winner')
+          get :show, answer: 'winner', id: contest.id
+          expect(assigns(:entries_page).contest_requests).to match_array([submitted])
+        end
+
+        it 'returns winner contest request' do
+          contest.start_winner_selection!
+          submitted.update_attributes!(answer: 'winner')
+          get :show, answer: 'winner', id: contest.id
+          expect(assigns(:entries_page).won_contest_request).to eq(submitted)
+        end
+
+        context 'contest in fulfillment state' do
+          before do
+            contest.update_attributes!(status: 'fulfillment')
+          end
+
+          it 'returns page' do
+            ContestRequest::FULFILLMENT_STATUSES.each do |status|
+              cont = create_contest
+              contest_request = create_contest_request(cont)
+              contest_request.update_attributes!(status: status)
+              cont.update_attributes!(status: 'fulfillment')
+              PhasesStripe::PHASES.each_index do |index|
+                get :show, view: index, id: cont.id
+                expect(response).to render_template('clients/client_center/entries')
+              end
+              contest_request.destroy
+            end
+          end
+        end
+
+        context 'contest finished' do
+          it 'returns page' do
+            contest_request = Fabricate(:contest_request,
+                                        designer: designers[3],
+                                        contest: contest,
+                                        status: 'finished',
+                                        answer: 'winner',
+                                        lookbook: Fabricate(:lookbook))
+            contest.update_attributes!(status: 'finished')
+            PhasesStripe::PHASES.each_index do |index|
+              get :show, view: index, id: contest.id
+              expect(response).to render_template('clients/client_center/entries')
+            end
+          end
+        end
+      end
+    end
+
+    it 'returns page' do
+      Fabricate(:contest, client: client, status: 'submission')
+      contest = client.last_contest
+      client.update_attributes!(status: 'finished')
+      fulfillment = Fabricate(:contest_request,
+                              designer: Fabricate(:designer),
+                              contest: contest,
+                              status: 'finished',
+                              answer: 'winner',
+                              lookbook: Fabricate(:lookbook))
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+      get :show, id: contest.id
+      expect(response).to render_template('clients/client_center/entries')
+      ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
+        get :show, view: phase_index, id: contest.id
+        expect(response).to render_template('clients/client_center/entries')
+      end
+    end
+
+    context 'client has no contest' do
+      before do
+        client.contests.destroy_all
+      end
+
+      it 'redirects to contest creation' do
+        get :show, id: 0
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
+  describe 'GET index' do
+    before do
+      sign_in(client)
+    end
+
+    it 'returns page' do
+      get :index
+      expect(response).to render_template(:index)
+    end
+  end
+
 end
