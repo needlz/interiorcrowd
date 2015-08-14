@@ -544,7 +544,7 @@ en:
       i_agree: I agree with the InteriorCrowd
       terms_of_use: terms of use
       submit: Submit
-      add_promocode: Add promotions code if applicable
+      add_promocode: Add promotion code if applicable
       apply_promocode: Apply
       promocode_invalid: The code you entered is invalid.
       promocode_valid: The code you entered has been applied. You %{profit}.

@@ -112,9 +112,15 @@ class AccountCreation
     @bindAgreementCheckbox()
     @styleDropdowns()
     @bindNumericInputs()
+    @bindCardChoosing()
 
   @bindNumericInputs: ->
-    $('#card_number, #card_cvc, #client_zip').ForceNumericOnly();
+    $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
+
+  @bindCardChoosing: ->
+    $('.credit-card-params').on 'click', (event)->
+      $('.credit-card-params').css('border-color': '#e1e1e1', 'border-width': '1px')
+      $(@).css('border-color': '#409863', 'border-width': '2px')
 
   @validations: [
     ->

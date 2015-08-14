@@ -614,3 +614,74 @@
   }
 
 }
+
+.credit-card-hint{
+  margin-top: 17px;
+  color: #a9a9a9;
+  font-size: 18px;
+  font-family: 'AvenirLTStd-Medium';
+  display: inline-block;
+}
+
+.add-new-credit-card{
+  margin-top: 0px;
+  background: #67b285 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 2px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  color: #fff;
+  font-family: "AvenirLTStd-Heavy";
+  font-size: 20px;
+  text-align: center;
+  width: 20%;
+  display: block;
+}
+
+.credit-card-params{
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 0 10px 15px;
+
+  .card-actions{
+    margin-top: 6px;
+  }
+
+  a{
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: "AvenirLTStd-Medium";
+    color: #a9a9a9;
+    font-size: 18px;
+    margin-right: 3%;
+  }
+}
+
+.payment-info-container{
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.params{
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.card-param{
+  @extend .params;
+  font-weight: bold;
+  font-family: "AvenirLTStd-Light";
+}
+
+.card-param-value{
+  @extend .params;
+  font-family: "AvenirLTStd-Medium";
+}
+
+#marginBottom0{
+  margin-bottom: 10px;
+}

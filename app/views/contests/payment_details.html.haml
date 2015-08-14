@@ -12,23 +12,25 @@
   = form_for @client, { id: 'create', method: 'post' } do |f|
     .fullWidthLine
 
-    %h4.marginTop40= t('client_center.sign_up.payment_information')
+    .payment-info-container
+      %h4.marginTop40#marginBottom0= t('client_center.sign_up.payment_information')
 
-    Choose the card on file you wish to use
-    .pull-right Add new credit card
+      .credit-card-hint Choose the card on file you wish to use.
+      .add-new-credit-card.clickable.pull-right Add new credit card
+      .clearfix
 
-    - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|
-      .params.col-xs-11
-        - card.params.each do |p, v|
-          .col-xs-4= p
-          .col-xs-6= v
-      .col-xs-1
-        %span Edit
-        %span Remove
+      - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|
+        .credit-card-params.col-xs-11
+          - card.params.each do |parameter, value|
+            %p.card-param.col-xs-4= parameter
+            %p.card-param-value.col-xs-6= value
+          .card-actions
+            %a Edit
+            %a Remove
 
     .clearfix
     .col-sm-7.promotionCodeApply
-      %p= t('client_center.sign_up.add_promocode')
+      %p.marginTop20= t('client_center.sign_up.add_promocode')
       .col-xs-12
         %label
           = text_field_tag 'client[promocode]', '', class: 'form-control', tabindex: 8
