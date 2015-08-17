@@ -25,7 +25,7 @@ class ContestPage
 
   def invitable_designer_views
     return @invitable_designer_views if @invitable_designer_views
-    invitable_designers = Designer.includes(portfolio: [:personal_picture]).all
+    invitable_designers = Designer.active.includes(portfolio: [:personal_picture]).all
     @invitable_designer_views = invitable_designers.map { |designer| DesignerView.new(designer) }
   end
 

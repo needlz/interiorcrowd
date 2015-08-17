@@ -36,6 +36,8 @@ class Designer < ActiveRecord::Base
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
 
+  scope :active, -> { where(active: true) }
+
   def has_active_requests?
     contest_requests.active.exists?
   end
