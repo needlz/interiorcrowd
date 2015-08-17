@@ -26,7 +26,7 @@ class EntriesConceptBoard < ConceptBoardPage
   private
 
   def phase_url_params(index)
-    path_params = { id: contest_request.contest }
+    path_params = { id: contest_request.contest.id }
     path_params.merge!(view: index) if index != last_phase_index
     path_params
   end

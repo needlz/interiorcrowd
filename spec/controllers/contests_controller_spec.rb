@@ -5,6 +5,7 @@ RSpec.describe ContestsController do
   render_views
 
   let(:client) { Fabricate(:client) }
+  let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
@@ -111,6 +112,28 @@ RSpec.describe ContestsController do
         expect(response).to redirect_to ContestCreationWizard.creation_steps_paths[:preview]
       end
     end
+  end
+
+  describe 'GET payment_details' do
+
+    context 'user is not logged in' do
+      it 'redirects to client sign in page' do
+        get :payment_details
+        expect(response).to redirect_to client_login_sessions_path
+      end
+    end
+
+    context 'user is not a client' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'redirects to client sign in page' do
+        get :payment_details
+        expect(response).to redirect_to client_login_sessions_path
+      end
+    end
+
   end
 
   describe 'POST save_preview' do
