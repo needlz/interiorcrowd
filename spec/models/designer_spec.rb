@@ -62,4 +62,16 @@ RSpec.describe Designer do
     end
   end
 
+  context 'can be active or inactive' do
+    let(:active_designer) { Fabricate(:designer, active: true) }
+    let(:inactive_designer) { Fabricate(:designer, active: false) }
+
+    it 'returns only active designers when using corresponding scope' do
+      inactive_designer
+      active_designer
+      expect(Designer.active.count).to eq(1)
+      expect(Designer.active.first.active?).to be_truthy
+    end
+  end
+
 end
