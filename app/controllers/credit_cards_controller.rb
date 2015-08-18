@@ -16,6 +16,15 @@ class CreditCardsController < ApplicationController
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
+  def set_as_primary
+    current_user.primary_card = CreditCard.find params[:id]
+    if current_user.save
+      render json: nil, status: :ok
+    else
+      render json: current_user.errors.full_messages, status: :not_found
+    end
+  end
+
   private
 
   def set_designer

@@ -119,8 +119,14 @@ class AccountCreation
 
   @bindCardChoosing: ->
     $('.credit-card-params').on 'click', (event)->
-      $('.credit-card-params').removeClass('primary-card-params')
-      $(@).addClass('primary-card-params')
+      cardId = $(@).data('id')
+      $.ajax(
+        url: '/credit_cards/' + cardId + '/set_as_primary',
+        method: 'PATCH',
+        success: =>
+          $('.credit-card-params').removeClass('primary-card-params')
+          $(@).addClass('primary-card-params')
+      )
 
   @validations: [
     ->

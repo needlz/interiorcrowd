@@ -1,6 +1,7 @@
 class CreditCardView
 
-  delegate :name_on_card, :card_type, :last_4_digits, :ex_month, :ex_year, :address, :city, :state, :zip, to: :credit_card
+  delegate :name_on_card, :card_type, :last_4_digits, :ex_month, :ex_year,
+           :address, :city, :state, :zip, :id, to: :credit_card
 
   def initialize(credit_card)
     @credit_card = credit_card
