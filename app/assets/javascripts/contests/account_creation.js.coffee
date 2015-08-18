@@ -119,8 +119,8 @@ class AccountCreation
 
   @bindCardChoosing: ->
     $('.credit-card-params').on 'click', (event)->
-      $('.credit-card-params').css('border-color': '#e1e1e1', 'border-width': '1px')
-      $(@).css('border-color': '#409863', 'border-width': '2px')
+      $('.credit-card-params').removeClass('primary-card-params')
+      $(@).addClass('primary-card-params')
 
   @validations: [
     ->

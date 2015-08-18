@@ -28,7 +28,7 @@ class CreditCardView
   end
 
   def css_class
-    primary? ? 'primary-card-params' : 'credit-card-params'
+    primary? ? 'primary-card-params' : nil
   end
 
   private
