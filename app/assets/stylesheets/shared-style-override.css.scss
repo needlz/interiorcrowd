@@ -660,6 +660,11 @@
   }
 }
 
+.primary-card-params{
+  @extend .credit-card-params;
+  border: 2px solid #409863;
+}
+
 .payment-info-container{
   width: 95%;
   margin-left: 2.5%;

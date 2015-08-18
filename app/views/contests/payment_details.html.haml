@@ -20,7 +20,7 @@
       .clearfix
 
       - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|
-        .credit-card-params.col-xs-11
+        %div.col-xs-11{ class: card.css_class }
           - card.params.each do |parameter, value|
             %p.card-param.col-xs-4= parameter
             %p.card-param-value.col-xs-6= value

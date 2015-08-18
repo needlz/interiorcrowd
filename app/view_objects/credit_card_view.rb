@@ -27,8 +27,16 @@ class CreditCardView
     "#{ ex_month } / #{ ex_year }"
   end
 
+  def css_class
+    primary? ? 'primary-card-params' : 'credit-card-params'
+  end
+
   private
 
   attr_reader :credit_card
+
+  def primary?
+    credit_card == credit_card.client.primary_card
+  end
 
 end
