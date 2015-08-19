@@ -15,8 +15,8 @@
     .payment-info-container
       %h4.marginTop40#marginBottom10= t('client_center.sign_up.payment_information')
 
-      .credit-card-hint Choose the card on file you wish to use.
-      .add-new-credit-card.clickable Add new credit card
+      .credit-card-hint= t('client_center.sign_up.choose_credit_card')
+      .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
       .clearfix
 
       - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|
@@ -26,8 +26,8 @@
               %p.card-param.col-xs-4= parameter
               %p.card-param-value.col-xs-6= value
           .card-actions
-            %a Edit
-            %a Remove
+            %a= t('client_center.sign_up.edit_credit_card')
+            %a= t('client_center.sign_up.remove_credit_card')
             %a#card-type{ "data-id" => card.id }= card.link_caption
 
     .clearfix

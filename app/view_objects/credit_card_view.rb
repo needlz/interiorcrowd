@@ -33,7 +33,7 @@ class CreditCardView
   end
 
   def link_caption
-    primary? ? 'Primary card' : 'Make this as primary card'
+    primary? ? I18n.t('client_center.sign_up.primary_card') : I18n.t('client_center.sign_up.make_card_primary')
   end
 
   private

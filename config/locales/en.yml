@@ -549,6 +549,13 @@ en:
       promocode_invalid: The code you entered is invalid.
       promocode_valid: The code you entered has been applied. You %{profit}.
       promocode_server_error: Server error
+      make_card_primary: Make this as primary card
+      primary_card: Primary card
+      choose_credit_card: Choose the card on file you wish to use.
+      add_credit_card: Add new credit card
+      edit_credit_card: Edit
+      remove_credit_card: Remove
+
     finished:
       final_note:
         title: Want to send a final note to your designer?

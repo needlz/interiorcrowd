@@ -104,6 +104,10 @@ class CardValidation
 
 class AccountCreation
 
+  @creditCardAreaSelector: '.credit-card-params'
+  @primaryCreditCardAreaClassName: 'primary-card-params'
+  @creditCardTypeTextSelector: '#card-type'
+
   @init: ->
     @validator = new ValidationMessages()
     Promocode.init()
@@ -118,7 +122,7 @@ class AccountCreation
     $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
 
   @bindCardChoosing: ->
-    $('a#card-type').on 'click', (event)=>
+    $('a' + @creditCardTypeTextSelector).on 'click', (event)=>
       cardId = $(event.target).data('id')
       $.ajax(
         url: '/credit_cards/' + cardId + '/set_as_primary',
@@ -128,10 +132,10 @@ class AccountCreation
       )
 
   @setPrimaryCard: (link)->
-    $('.credit-card-params').removeClass('primary-card-params')
-    $(link).closest('.credit-card-params').addClass('primary-card-params')
-    $('.credit-card-params').find('#card-type').text('Make this as primary card')
-    $('.primary-card-params').find('#card-type').text('Primary card')
+    $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
+    $(link).closest(@creditCardAreaSelector).addClass(@primaryCreditCardAreaClassName)
+    $(@creditCardAreaSelector).find(@creditCardTypeTextSelector).text(signupI18n.make_card_primary)
+    $('.' + @primaryCreditCardAreaClassName).find(@creditCardTypeTextSelector).text(signupI18n.primary_card)
 
   @validations: [
     ->

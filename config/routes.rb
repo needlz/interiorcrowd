@@ -154,7 +154,7 @@ InteriorC::Application.routes.draw do
 
     resources :credit_cards do
       member do
-        patch '/set_as_primary', to: 'credit_cards#set_as_primary'
+        patch 'set_as_primary'
       end
     end
 
