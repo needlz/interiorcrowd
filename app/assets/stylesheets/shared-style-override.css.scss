@@ -705,7 +705,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .add-new-credit-card{
     width: 25%;
   }
@@ -742,6 +742,20 @@
 
 }
 
+@media (max-width: 960px) {
+  .add-new-credit-card{
+    width: 30%;
+  }
+
+  .card-details{
+    width: 60%;
+  }
+
+  .params{
+    font-size: 16px;
+  }
+}
+
 @media (max-width: 768px) {
   .add-new-credit-card{
     width: 30%;
@@ -754,6 +768,45 @@
   #card-type{
     display: block;
     margin-top: 15px;
+  }
+
+  .card-details{
+    width: 80%;
+  }
+}
+
+@media (max-width: 414px) {
+  .add-new-credit-card{
+    margin-top: 10px;
+    width: 60%;
+    float: left;
+  }
+
+  .promotionCodeApply{
+    width: 116%;
+    p{
+      font-size: 19px;
+    }
+  }
+
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .params{
+    display: inline;
+    width: 50%;
+    font-size: 17px;
+    padding-left: 0;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
   }
 }
 
@@ -780,18 +833,11 @@
     }
   }
 
-  .creditCardForm h4{
-    font-size: 24px;
-  }
-
   .params{
     display: inline-block;
     width: 50%;
     font-size: 18px;
     padding-left: 0;
-  }
-
-  .card-param{
   }
 
   .card-actions{
