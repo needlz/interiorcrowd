@@ -16,7 +16,7 @@
       %h4.marginTop40#marginBottom10= t('client_center.sign_up.payment_information')
 
       .credit-card-hint Choose the card on file you wish to use.
-      .add-new-credit-card.clickable.pull-right Add new credit card
+      .add-new-credit-card.clickable Add new credit card
       .clearfix
 
       - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|

@@ -636,6 +636,7 @@
   text-align: center;
   width: 20%;
   display: block;
+  float: right;
 }
 
 .credit-card-params{
@@ -704,6 +705,16 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .add-new-credit-card{
+    width: 25%;
+  }
+
+  .card-details{
+    width: 70%;
+  }
+}
+
 @media (max-width: 992px) {
   .payment-info-container{
     width: 100%;
@@ -744,4 +755,89 @@
     display: block;
     margin-top: 15px;
   }
+}
+
+@media (max-width: 375px) {
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .credit-card-hint{
+    margin-top: 0;
+  }
+
+  .add-new-credit-card{
+    margin-top: 10px;
+    width: 70%;
+    float: left;
+  }
+
+  .promotionCodeApply{
+    width: 117%;
+    p{
+      font-size: 18.5px;
+    }
+  }
+
+  .creditCardForm h4{
+    font-size: 24px;
+  }
+
+  .params{
+    display: inline-block;
+    width: 50%;
+    font-size: 18px;
+    padding-left: 0;
+  }
+
+  .card-param{
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
+  }
+
+}
+
+@media (max-width: 320px) {
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
+  }
+
+  .params{
+    display: inline;
+    width: 50%;
+    font-size: 16px;
+  }
+
+  .card-param{
+    padding-left: 0;
+  }
+
+  .credit-card-hint{
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .promotionCodeApply{
+    width: 120.5%;
+    p{
+      font-size: 18.5px;
+    }
+  }
+
 }
