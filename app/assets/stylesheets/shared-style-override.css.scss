@@ -648,6 +648,7 @@
 
   .card-actions{
     margin-top: 6px;
+    text-align: right;
   }
 
   a{
@@ -655,8 +656,8 @@
     cursor: pointer;
     font-family: "AvenirLTStd-Medium";
     color: #a9a9a9;
-    font-size: 18px;
-    margin-right: 3%;
+    font-size: 17px;
+    margin-right: 1.5%;
   }
 }
 
@@ -679,14 +680,16 @@
 .card-param{
   @extend .params;
   font-weight: bold;
+  width: 33.5%;
   font-family: "AvenirLTStd-Light";
 }
 
 .card-param-value{
   @extend .params;
+  width: 33.5%;
   font-family: "AvenirLTStd-Medium";
 }
 
-#marginBottom0{
+#marginBottom10{
   margin-bottom: 10px;
 }

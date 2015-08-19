@@ -32,6 +32,10 @@ class CreditCardView
     primary? ? 'primary-card-params' : nil
   end
 
+  def link_caption
+    primary? ? 'Primary card' : 'Make this as primary card'
+  end
+
   private
 
   attr_reader :credit_card
