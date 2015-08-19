@@ -697,6 +697,13 @@
   width: 80%;
 }
 
+.primary-card-params{
+  #card-type{
+    color: #409863;
+    text-decoration: none;
+  }
+}
+
 @media (max-width: 992px) {
   .payment-info-container{
     width: 100%;
@@ -722,4 +729,19 @@
     width: 75%;
   }
 
+}
+
+@media (max-width: 768px) {
+  .add-new-credit-card{
+    width: 30%;
+  }
+
+  .card-actions a{
+    margin-right: 3.5%;
+  }
+
+  #card-type{
+    display: block;
+    margin-top: 15px;
+  }
 }
