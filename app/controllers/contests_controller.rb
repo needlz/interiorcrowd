@@ -85,7 +85,9 @@ class ContestsController < ApplicationController
   def payment_details
     redirect_to client_login_sessions_path unless current_user.client?
     @card_view = CreditCardView.new(nil)
-    @client = Client.includes(:credit_cards).includes(:primary_card).find(current_user.id)
+    if current_user.client?
+      @client = Client.includes(:credit_cards).includes(:primary_card).find(current_user.id)
+    end
   end
 
   def upload
