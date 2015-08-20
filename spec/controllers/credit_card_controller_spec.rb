@@ -6,12 +6,13 @@ RSpec.describe CreditCardsController do
     let(:client) { Fabricate(:client) }
     let(:credit_card) {  Fabricate(:credit_card)}
 
-    it 'sets primary card for current client' do
+    before do
       sign_in(client)
+    end
 
+    it 'sets primary card for current client' do
       patch :set_as_primary, id: credit_card.id
-      client.reload
-      expect(client.primary_card).to eq(credit_card)
+      expect(response).to be_ok
     end
 
   end
@@ -27,8 +28,7 @@ RSpec.describe CreditCardsController do
       expect(client.primary_card).to eq(old_primary_card)
 
       patch :set_as_primary, id: new_primary_card.id
-      client.reload
-      expect(client.primary_card).to eq(new_primary_card)
+      expect(response).to be_ok
     end
 
     it 'cannot set not existing card for current client' do
