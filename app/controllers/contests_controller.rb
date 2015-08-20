@@ -84,6 +84,7 @@ class ContestsController < ApplicationController
 
   def payment_details
     redirect_to client_login_sessions_path unless current_user.client?
+    @card_view = CreditCardView.new(nil)
     @client = current_user
   end
 

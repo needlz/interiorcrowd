@@ -112,11 +112,7 @@
               %label
                 %p &nbsp;
                 = select_year(0,
-                      { :start_year => Time.now.year,
-                        :end_year => Time.now.year + 10,
-                        :field_name => :card_ex_year,
-                        prefix: 'client',
-                        prompt: t('client_center.sign_up.select_year')},
+                      @card_view.year_select,
                       class: 'selectpicker form-selector card-exp', tabindex: 15)
           .row.promotionCodeApply
             %p= t('client_center.sign_up.add_promocode')

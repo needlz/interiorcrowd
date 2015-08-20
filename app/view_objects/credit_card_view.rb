@@ -9,10 +9,10 @@ class CreditCardView
 
   def params
     {
-      'Name on card' => name_on_card,
-      'Credit card' => card_number,
-      'Expiration date' => expiration_date,
-      'Address' => full_address
+      I18n.t('client_center.sign_up.credit_card.name') => name_on_card,
+      I18n.t('client_center.sign_up.credit_card.number') => card_number,
+      I18n.t('client_center.sign_up.credit_card.exp_date') => expiration_date,
+      I18n.t('client_center.sign_up.credit_card.address') => full_address
     }
   end
 
@@ -34,6 +34,14 @@ class CreditCardView
 
   def link_caption
     primary? ? I18n.t('client_center.sign_up.primary_card') : I18n.t('client_center.sign_up.make_card_primary')
+  end
+
+  def year_select
+    { :start_year => Time.now.year,
+      :end_year => Time.now.year + 10,
+      :field_name => :card_ex_year,
+      prefix: 'client',
+      prompt: I18n.t('client_center.sign_up.select_year')}
   end
 
   private
