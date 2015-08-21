@@ -195,7 +195,7 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    redirect_to client_center_entries_path
+    redirect_to  client_center_entry_path(id: contest_creation.contest)
   end
 
 end
