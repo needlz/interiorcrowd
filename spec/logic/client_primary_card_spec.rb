@@ -21,7 +21,7 @@ RSpec.describe ClientPrimaryCard do
     it 'doesn\'t set new primary card for client' do
       client_primary_card = ClientPrimaryCard.new(client)
 
-      expect{client_primary_card.set(295)}.to raise_exception(ActiveRecord::RecordNotFound)
+      expect{client_primary_card.set(0)}.to raise_exception(ActiveRecord::RecordNotFound)
       expect(client.primary_card).to be_nil
     end
   end

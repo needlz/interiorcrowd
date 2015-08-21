@@ -35,7 +35,7 @@ RSpec.describe CreditCardsController do
     it 'cannot set not existing card for current client' do
       sign_in(client)
 
-      expect{patch :set_as_primary, id: 263}.to raise_exception(ActiveRecord::RecordNotFound)
+      expect{patch :set_as_primary, id: 0}.to raise_exception(ActiveRecord::RecordNotFound)
     end
 
   end
