@@ -20,11 +20,11 @@ development:
   MANDRILL_API_TOKEN: 'IqRBhcv59Pu64Z1UVXg7pg'
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
   BETA_PASSWORD: 'beta'
-  APP_HOST: 'local.home:3000'
+  APP_HOST: 'localhost:3000'
   MARKS_DIGEST_MINUTES_INTERVAL: '1'
   COMMENT_BOARD_DIGEST_MINUTES_INTERVAL: '1'
   MIXPANEL_TOKEN: 44f85b93d0a057277bc70151571c80a0
-  APP_URL: 'http://local.home:3000'
+  APP_URL: 'http://localhost:3000'
   GOOGLE_ANALYTICS_PROPERTY_ID: '0'
   STRIPE_API_KEY: sk_test_iKogRUxGem219WsRGVGPhBw4
   STRIPE_PUBLISHABLE_API_KEY: pk_test_rKCduto40j9ipbJSDaAR3waH
@@ -32,7 +32,7 @@ development:
   FACEBOOK_APP_SECRET: '7084b1a31a9c4e42189ab8abbc9102bc'
 
 test:
-  APP_HOST: 'local.home:3000'
+  APP_HOST: 'localhost:3000'
   STRIPE_API_KEY: sk_test_iKogRUxGem219WsRGVGPhBw4
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
