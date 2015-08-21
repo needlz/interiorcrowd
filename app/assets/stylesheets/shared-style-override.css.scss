@@ -695,7 +695,7 @@
 }
 
 .card-details{
-  width: 80%;
+  width: 75%;
 }
 
 .primary-card-params{
@@ -899,4 +899,41 @@
   a{
     color: #30a7fc;
   }
+}
+
+.credit-card-form{
+  padding: 30px;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  padding-bottom: 0;
+  margin-top: 15px;
+  margin-bottom: 13px;
+}
+
+#credit-card-form-controls{
+  @extend .credit-card-params;
+  position: relative;
+  margin-top: -10px;
+  margin-right: -18px;
+  padding-top: 0px;
+  float: right;
+  border: none;
+  text-align: right;
+  background-color: #ffffff;
+}
+
+#card-type{
+  margin-right: 2.7%;
+}
+
+.creditCardForm label input {
+  border-color: #a9a9a9;
+}
+
+.selectpicker{
+  border-color: #a9a9a9;
+}
+
+.bootstrap-select.btn-group .btn .caret{
+  border-left: 1px solid #a9a9a9;
 }

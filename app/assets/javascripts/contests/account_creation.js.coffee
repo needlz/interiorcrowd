@@ -117,6 +117,8 @@ class AccountCreation
     @styleDropdowns()
     @bindNumericInputs()
     @bindCardChoosing()
+    @bindAddNewCardButton()
+    @bindCancelCardAdding()
 
   @bindNumericInputs: ->
     $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
@@ -130,6 +132,14 @@ class AccountCreation
         success: =>
           @setPrimaryCard(event.target)
       )
+
+  @bindCancelCardAdding: ->
+    $('#cancel-card-adding').on 'click', (event)->
+      $('.credit-card-form').toggleClass('hidden')
+
+  @bindAddNewCardButton: ->
+    $('.add-new-credit-card').on 'click', (event)->
+      $('.credit-card-form').toggleClass('hidden')
 
   @setPrimaryCard: (link)->
     $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
