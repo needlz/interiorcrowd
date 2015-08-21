@@ -8,6 +8,8 @@
 #  active            :boolean          default(TRUE)
 #  discount_cents    :integer          default(0), not null
 #  discount_currency :string(255)      default("USD"), not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class Promocode < ActiveRecord::Base

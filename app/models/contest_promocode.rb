@@ -5,6 +5,8 @@
 #  contest_id   :integer          not null
 #  promocode_id :integer          not null
 #  id           :integer          not null, primary key
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 
 class ContestPromocode < ActiveRecord::Base

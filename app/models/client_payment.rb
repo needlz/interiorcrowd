@@ -8,6 +8,11 @@
 #  last_error       :text
 #  stripe_charge_id :string(255)
 #  contest_id       :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#  credit_card_id   :integer
+#  amount_cents     :integer
+#  promotion_cents  :integer
 #
 
 class ClientPayment < ActiveRecord::Base
