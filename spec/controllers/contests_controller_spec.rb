@@ -116,6 +116,17 @@ RSpec.describe ContestsController do
 
   describe 'GET payment_details' do
 
+    context 'user is logged in' do
+      before do
+        sign_in(client)
+      end
+
+      it 'renders page' do
+        get :payment_details
+        expect(response).to render_template(:payment_details)
+      end
+    end
+
     context 'user is not logged in' do
       it 'redirects to client sign in page' do
         get :payment_details

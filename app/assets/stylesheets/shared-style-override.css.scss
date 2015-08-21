@@ -615,6 +615,279 @@
 
 }
 
+.credit-card-hint{
+  margin-top: 17px;
+  color: #a9a9a9;
+  font-size: 18px;
+  font-family: 'AvenirLTStd-Medium';
+  display: inline-block;
+}
+
+.add-new-credit-card{
+  margin-top: 0px;
+  background: #67b285 none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 2px;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  color: #fff;
+  font-family: "AvenirLTStd-Heavy";
+  font-size: 20px;
+  text-align: center;
+  width: 20%;
+  display: block;
+  float: right;
+}
+
+.credit-card-params{
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 0 10px 15px;
+
+  .card-actions{
+    margin-top: 6px;
+    text-align: right;
+  }
+
+  a{
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: "AvenirLTStd-Medium";
+    color: #a9a9a9;
+    font-size: 17px;
+    margin-right: 1.5%;
+  }
+}
+
+.primary-card-params{
+  @extend .credit-card-params;
+  border: 2px solid #409863;
+}
+
+.payment-info-container{
+  width: 95%;
+  margin-left: 2.5%;
+}
+
+.params{
+  display: inline;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  font-size: 18px;
+}
+
+.card-param{
+  @extend .params;
+  font-weight: bold;
+  font-family: "AvenirLTStd-Light";
+}
+
+.card-param-value{
+  @extend .params;
+  font-family: "AvenirLTStd-Medium";
+}
+
+#marginBottom10{
+  margin-bottom: 10px;
+}
+
+.card-details{
+  width: 80%;
+}
+
+.primary-card-params{
+  #card-type{
+    color: #409863;
+    text-decoration: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .add-new-credit-card{
+    width: 25%;
+  }
+
+  .card-details{
+    width: 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .payment-info-container{
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .add-new-credit-card{
+    width: 25%;
+  }
+
+  .promotionCodeApply{
+    p{
+      margin-left: -15px;
+      padding-left: 0;
+    }
+    label{
+      margin-left: -30px;
+      padding-left: 0;
+    }
+  }
+
+  .card-details{
+    width: 75%;
+  }
+
+}
+
+@media (max-width: 960px) {
+  .add-new-credit-card{
+    width: 30%;
+  }
+
+  .card-details{
+    width: 60%;
+  }
+
+  .params{
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .add-new-credit-card{
+    width: 30%;
+  }
+
+  .card-actions a{
+    margin-right: 3.5%;
+  }
+
+  #card-type{
+    display: block;
+    margin-top: 15px;
+  }
+
+  .card-details{
+    width: 80%;
+  }
+}
+
+@media (max-width: 414px) {
+  .add-new-credit-card{
+    margin-top: 10px;
+    width: 60%;
+    float: left;
+  }
+
+  .promotionCodeApply{
+    width: 116%;
+    p{
+      font-size: 19px;
+    }
+  }
+
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .params{
+    display: inline;
+    width: 50%;
+    font-size: 17px;
+    padding-left: 0;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 375px) {
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .credit-card-hint{
+    margin-top: 0;
+  }
+
+  .add-new-credit-card{
+    margin-top: 10px;
+    width: 70%;
+    float: left;
+  }
+
+  .promotionCodeApply{
+    width: 117%;
+    p{
+      font-size: 18.5px;
+    }
+  }
+
+  .params{
+    display: inline-block;
+    width: 50%;
+    font-size: 18px;
+    padding-left: 0;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
+  }
+
+}
+
+@media (max-width: 320px) {
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
+  }
+
+  .params{
+    display: inline;
+    width: 50%;
+    font-size: 16px;
+  }
+
+  .card-param{
+    padding-left: 0;
+  }
+
+  .credit-card-hint{
+    margin-top: 0;
+    font-size: 16px;
+  }
+
+  .promotionCodeApply{
+    width: 120.5%;
+    p{
+      font-size: 18.5px;
+    }
+  }
+
+}
+
 .update-style-package-hint{
   text-align: center;
   width: 60%;

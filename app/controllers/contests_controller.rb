@@ -83,8 +83,11 @@ class ContestsController < ApplicationController
   end
 
   def payment_details
-    redirect_to client_login_sessions_path unless current_user.client?
+    return redirect_to client_login_sessions_path unless current_user.client?
+    @shared_card_view = CreditCardView.new(nil)
     @client = current_user
+    ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
+    @card_views = @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }
   end
 
   def upload

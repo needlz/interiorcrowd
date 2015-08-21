@@ -549,11 +549,23 @@ en:
       i_agree: I agree with the InteriorCrowd
       terms_of_use: terms of use
       submit: Submit
-      add_promocode: Add promotions code if applicable
+      add_promocode: Add promotion code if applicable
       apply_promocode: Apply
       promocode_invalid: The code you entered is invalid.
       promocode_valid: The code you entered has been applied. You %{profit}.
       promocode_server_error: Server error
+      make_card_primary: Make this as primary card
+      primary_card: Primary card
+      choose_credit_card: Choose the card on file you wish to use.
+      add_credit_card: Add new credit card
+      edit_credit_card: Edit
+      remove_credit_card: Remove
+      credit_card:
+        name: Name on card
+        number: Credit card
+        exp_date: Expiration date
+        address: Address
+
     finished:
       final_note:
         title: Want to send a final note to your designer?
