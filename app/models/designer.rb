@@ -19,6 +19,8 @@
 #  state                   :string(255)
 #  address                 :text
 #  city                    :text
+#  linkedin_profile        :string(255)
+#  active                  :boolean          default(TRUE)
 #
 
 class Designer < ActiveRecord::Base

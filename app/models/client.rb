@@ -29,6 +29,8 @@
 #  plain_password     :string(255)
 #  stripe_customer_id :string(255)
 #  stripe_card_status :text             default("pending")
+#  facebook_user_id   :integer
+#  primary_card_id    :integer
 #
 
 class Client < ActiveRecord::Base

@@ -8,6 +8,8 @@
 #  audio_content_type :string(255)
 #  audio_file_size    :integer
 #  audio_updated_at   :datetime
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 class Sound < ActiveRecord::Base
