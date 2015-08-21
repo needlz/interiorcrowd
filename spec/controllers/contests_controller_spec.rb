@@ -190,11 +190,9 @@ RSpec.describe ContestsController do
             contest.save!
             post :save_preview, contest_options_source
             expect(client.contests.count).to eq 2
-            expect(response).to redirect_to(client_center_entries_path)
+            expect(response).to redirect_to(client_center_entry_path(id: client.contests.order(:id).last.id))
           end
         end
-
-
       end
 
       context 'when required steps not stored in session' do
