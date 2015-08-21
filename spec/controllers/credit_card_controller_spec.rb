@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe CreditCardsController do
 
   context 'if client hasn\'t already set primary card' do
-    let(:client) { Fabricate(:client) }
     let(:credit_card) {  Fabricate(:credit_card)}
+    let(:client) { Fabricate(:client, credit_cards: [credit_card]) }
 
     before do
       sign_in(client)
@@ -19,9 +19,10 @@ RSpec.describe CreditCardsController do
 
   context 'if client has already set primary card' do
     let(:old_primary_card) {  Fabricate(:credit_card)}
-    let(:client) { Fabricate(:client, primary_card: old_primary_card) }
     let(:new_primary_card) {  Fabricate(:credit_card)}
-
+    let(:client) { Fabricate(:client,
+                             credit_cards: [old_primary_card, new_primary_card],
+                             primary_card: old_primary_card) }
 
     it 'sets primary card for current client' do
       sign_in(client)

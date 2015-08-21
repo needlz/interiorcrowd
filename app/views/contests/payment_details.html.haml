@@ -19,7 +19,7 @@
       .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
       .clearfix
 
-      - @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }.each do |card|
+      - @card_views.each do |card|
         %div.credit-card-params.col-xs-11{ class: card.css_class }
           .card-details
             - card.params.each do |parameter, value|
