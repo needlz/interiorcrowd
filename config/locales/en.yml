@@ -298,6 +298,11 @@ en:
         name_placeholder: My Dream Loft
         name_error: Please enter project name
         plan_error: Please choose package
+        style_update_package_hint: >
+          It looks like your room needs a bit of help. Let's start with our Style Update
+          package which is great introduction to a professional interior designer. For more
+          information about how this works,
+        link_caption: see here
       go_back: Back
       continue: Continue
       create: Create

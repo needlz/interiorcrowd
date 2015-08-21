@@ -32,7 +32,7 @@ class @DesignerBlocks
         $rowCards.css 'height', "#{ maxProfileCardHeight }px"
 
   @setupEllipsis: ->
-    $('.profile-card .attribute-value.about').dotdotdot({ height: 50 });
+    $('.designerBox .designerDesc').dotdotdot({ height: 50 });
 
 class ScrollBars
 
