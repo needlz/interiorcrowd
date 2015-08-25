@@ -3,7 +3,6 @@
     .hLine
     %span
       = t('login.or')
-  %a.signUpWithFacebookBtn.facebookColor.button.btn.clickable{ href: Koala::Facebook::OAuth.new.url_for_oauth_code(callback: designer_fb_authenticate_sessions_url) }
+  %a.signUpWithFacebookBtn.facebookColor.button.btn.clickable{ href: Koala::Facebook::OAuth.new.url_for_oauth_code(callback: send("#{user}_fb_authenticate_sessions_url")) }
     %img{:src => '/assets/facebook_icon.png' }/
     = t('login.facebook_sign_in')
-    
