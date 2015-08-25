@@ -21,6 +21,17 @@ class SessionsController < ApplicationController
     authenticate_user(client, client_login_sessions_url)
   end
 
+  def designer_fb_authenticate
+    return return_with_error(designer_login_sessions_url, 'OAuth code not provided') unless params[:code]
+    session[:access_token] = Koala::Facebook::OAuth.new(designer_fb_authenticate_sessions_url).get_access_token(params[:code])
+    return return_with_error(designer_login_sessions_url, 'No access') unless session[:access_token]
+    fb_user = Koala::Facebook::API.new(session[:access_token])
+    fb_user_info = fb_user.api('me', { fields: ['id', 'name', 'email', 'first_name', 'last_name' ]})
+    designer = Designer.find_by_facebook_user_id(fb_user_info['id'])
+    return return_with_error(designer_login_sessions_url, 'Not registered') unless designer
+    authenticate_user(designer, designer_login_sessions_url)
+  end
+
   def client_authenticate
     user_authenticate('client')
   end

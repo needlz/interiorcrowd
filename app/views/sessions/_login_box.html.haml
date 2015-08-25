@@ -1,7 +1,12 @@
 .container.animated.fadeInDown.bottom60
   .col-xs-8.col-xs-offset-2.clientLoginBox
     %h3= login_view[:title]
-    = render partial: 'home/msg'
+    .row
+      .col-sm-12
+        - if flash[:error].present?
+          .signin-errors= flash[:error].html_safe
+        - if flash[:notice].present?
+          .signin-errors= flash[:notice].html_safe
     = form_tag login_view[:auth_path], { id: :login } do
       %span#err_u.text-error
       %input#username{ placeholder: t('login.email'), type: 'text', name: 'username' }/

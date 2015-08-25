@@ -440,6 +440,9 @@
 
   .signUpWithFacebookBtn{
     font-size: 16px;
+    a{
+      color: white;
+    }
   }
 
   .signUpWithFacebookBtn img{
@@ -899,4 +902,32 @@
   a{
     color: #30a7fc;
   }
+}
+
+#login p{
+  margin: 5px 0 -25px;
+}
+
+#signInFooter{
+  @extend #signUpModal;
+  .button {
+    border-radius: 2px;
+    width: 100%;
+  }
+}
+
+#signInHint{
+  text-align: center;
+  color: #a9a9a9;
+  a{
+    color: #a9a9a9;
+    font-family: "AvenirLTStd-Heavy";
+  }
+}
+
+.signin-errors{
+  color: #F23B3F;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: -70px;
 }
