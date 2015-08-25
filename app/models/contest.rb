@@ -59,7 +59,6 @@ class Contest < ActiveRecord::Base
   belongs_to :design_space
   has_many :requests, class_name: 'ContestRequest'
   has_many :participants, class_name: 'Designer', through: :requests, source: :designer
-  has_many :designer_invite_notifications
   has_many :notes, class_name: 'ContestNote'
   has_many :reviewer_invitations
   has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
@@ -67,6 +66,8 @@ class Contest < ActiveRecord::Base
   has_one :client_payment
   has_many :contest_promocodes
   has_many :promocodes, through: :contest_promocodes
+  has_many :designer_invite_notifications
+  has_many :invited_designers, through: :designer_invite_notifications, source: :designer, class_name: 'Designer'
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
