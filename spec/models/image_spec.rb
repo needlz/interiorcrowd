@@ -14,6 +14,20 @@ RSpec.describe Image do
       expect(Image.exists?(image.id)).to be_falsey
     end
 
+    it 'destroys personal image if user deletes personal image on frontend' do
+      image = portfolio.personal_picture
+      Image.update_portfolio_image(portfolio, Image::PORTFOLIO_PERSONAL, '')
+      expect(portfolio.reload.personal_picture).to eq nil
+      expect(Image.exists?(image.id)).to be_falsey
+    end
+
+    it 'deletes portfolio images' do
+      images = portfolio.pictures
+      Image.update_portfolio(portfolio, nil, [])
+      expect(portfolio.reload.pictures).to eq []
+      expect(Image.exists?(images.first)).to be_falsey
+    end
+
     context 'image_id is integer' do
       let(:new_image_id){ Fabricate(:image).id }
 
