@@ -1,0 +1,38 @@
+:css
+
+#paymentSummaryPage
+  %h3.title= t('contests.payment.summary.transaction_confirmed').upcase
+  .subtitle= t('contests.payment.summary.thanks')
+
+  .paymentSummary
+    .header.clearfix.part
+      .col-sm-7.disablePadding
+        = t('contests.payment.summary.your_payment')
+      .col-sm-5.disablePadding.priceTitle
+        = t('contests.payment.summary.price')
+    .content.row.part
+      .payerDetails.col-xs-7
+        %p= @payment_view.payer_name
+        %p= @payment_view.payer_card
+        %p= @payment_view.payer_address
+      .orderDetails.col-xs-5
+        .row
+          .col-xs-7.key.disablePadding
+            = t('client_center.sign_up.order_total')
+          .col-xs-5.price
+            $#{ @payment_view.order_total }
+
+        .row
+          .col-xs-7.key.disablePadding
+            = t('client_center.sign_up.promotion_code')
+          .col-xs-5.price
+            $#{ @payment_view.promotion }
+
+        .row
+          .col-xs-7.key.disablePadding
+            = t('client_center.sign_up.total_price')
+          .col-xs-5.totalPrice.price
+            $#{ @payment_view.total_price }
+
+  .clearfix
+  %a.continueBtn.clickable{ href: client_center_entry_path(id: @contest.id) }= t('contests.payment.summary.continue')

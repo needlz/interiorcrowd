@@ -63,6 +63,7 @@ InteriorC::Application.routes.draw do
         post 'upload'
         get 'account_creation'
         get 'payment_details'
+        get 'payment_summary'
       end
     end
 
