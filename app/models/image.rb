@@ -56,13 +56,11 @@ class Image < ActiveRecord::Base
   end
 
   def self.update_portfolio(portfolio, personal_picture_id, image_ids)
-    return if image_ids.nil? && personal_picture_id.nil?
+    image_ids ||= []
     transaction do
-      if image_ids.present?
-        update_ids(portfolio.pictures,
-                   image_ids,
-                   { portfolio_id: portfolio.id, kind: PORTFOLIO_ITEM })
-      end
+      update_ids(portfolio.pictures,
+                 image_ids,
+                 { portfolio_id: portfolio.id, kind: PORTFOLIO_ITEM })
       update_portfolio_image(portfolio, PORTFOLIO_PERSONAL, personal_picture_id)
     end
   end
@@ -82,6 +80,7 @@ class Image < ActiveRecord::Base
     if portfolio_image && portfolio_image.id != image_id.to_i
       portfolio_image.destroy
     end
+    return if image_id.nil?
     if picture = Image.find_by_id(image_id)
       picture.update_attributes!(kind: kind, portfolio_id: portfolio.id)
     end
@@ -113,7 +112,7 @@ class Image < ActiveRecord::Base
   end
 
   def uploader
-    return if !uploader_id || !uploader_role
+    return unless uploader_id && uploader_role
     uploader_class = uploader_role.constantize
     uploader_class.find(uploader_id)
   end

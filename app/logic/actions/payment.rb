@@ -15,7 +15,11 @@ class Payment
     unless charge_already_performed?
       calculator = PriceCalculator.new(contest: contest)
       price = calculator.price_in_cents
-      payment = ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
+      payment = ClientPayment.create!(payment_status: 'pending',
+                                      client_id: client.id,
+                                      contest_id: contest.id,
+                                      amount_cents: price,
+                                      promotion_cents: calculator.promotion_in_cents)
       @client_payment = payment
       begin
         amount = Money.new(price, DEFAULT_CURRENCY)

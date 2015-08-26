@@ -17,7 +17,10 @@ class CommentView
   end
 
   def updated_at_text
-    distance_of_time_in_words(Time.current, comment.updated_at.in_time_zone, false, highest_measure_only: true) + I18n.t('board_comments.ago')
+    distance_of_time_in_words(Time.current,
+                              comment.updated_at.in_time_zone,
+                              false,
+                              highest_measure_only: true) + I18n.t('board_comments.ago')
   end
 
   private

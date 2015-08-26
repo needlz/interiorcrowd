@@ -29,6 +29,8 @@
 #  plain_password     :string(255)
 #  stripe_customer_id :string(255)
 #  stripe_card_status :text             default("pending")
+#  facebook_user_id   :integer
+#  primary_card_id    :integer
 #
 
 class Client < ActiveRecord::Base
@@ -48,6 +50,8 @@ class Client < ActiveRecord::Base
   has_many :designer_invite_notifications, through: :contests
   has_many :contest_requests, through: :contests, source: :requests
   has_many :client_payments
+  has_many :credit_cards
+  belongs_to :primary_card, class_name: 'CreditCard'
 
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')

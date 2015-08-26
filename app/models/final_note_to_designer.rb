@@ -5,6 +5,8 @@
 #  id                       :integer          not null, primary key
 #  text                     :text
 #  designer_notification_id :integer
+#  created_at               :datetime
+#  updated_at               :datetime
 #
 
 class FinalNoteToDesigner < ActiveRecord::Base

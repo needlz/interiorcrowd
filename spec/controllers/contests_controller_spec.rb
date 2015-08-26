@@ -116,6 +116,17 @@ RSpec.describe ContestsController do
 
   describe 'GET payment_details' do
 
+    context 'user is logged in' do
+      before do
+        sign_in(client)
+      end
+
+      it 'renders page' do
+        get :payment_details
+        expect(response).to render_template(:payment_details)
+      end
+    end
+
     context 'user is not logged in' do
       it 'redirects to client sign in page' do
         get :payment_details
@@ -434,6 +445,25 @@ RSpec.describe ContestsController do
     it 'returns page' do
       get :index
       expect(response).to render_template(:index)
+    end
+  end
+
+  describe 'GET payment_summary' do
+    context 'when the contest is payed' do
+      before do
+        Fabricate(:client_payment, contest: contest, client: client, amount_cents: 30000, promotion_cents: 0)
+      end
+
+      context 'when signed in as client' do
+        before do
+          sign_in(client)
+        end
+
+        it 'returns page' do
+          get :payment_summary, id: contest.id
+          expect(response).to render_template(:payment_summary)
+        end
+      end
     end
   end
 

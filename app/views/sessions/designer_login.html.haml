@@ -2,9 +2,10 @@
   = javascript_include_tag 'sessions/login'
 
 - login_box_footer = capture do
-  %p
-    = t('login.designer.dont_have_account')
-    %a{ href: designer_submission_path, class: tracked_link }= t('login.designer.sign_up')
+  #signInHint
+    %p
+      = t('login.designer.dont_have_account')
+      %a{ href: designer_submission_path, class: tracked_link }= t('login.designer.sign_up')
 
 = render partial: 'sessions/login_box',
     locals: { footer: login_box_footer, login_view: @login_view }
