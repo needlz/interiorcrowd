@@ -15,7 +15,6 @@ InteriorC::Application.routes.draw do
         get 'client_login'
         post 'client_authenticate'
         get 'client_fb_authenticate'
-        get 'designer_fb_authenticate'
         post 'authenticate'
         match 'designer_retry_password', via: [:post, :get]
         match 'client_retry_password', via: [:post, :get]

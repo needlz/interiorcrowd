@@ -2,7 +2,7 @@
   = javascript_include_tag 'sessions/login'
 
 - login_box_footer = capture do
-  = render partial: 'sessions/signin_footer', locals: { user: 'client' }
+  = render partial: 'sessions/signin_footer'
 
 = render partial: 'sessions/login_box', locals: { login_view: @login_view, footer: login_box_footer }
 
