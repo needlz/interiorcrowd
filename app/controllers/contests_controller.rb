@@ -83,8 +83,13 @@ class ContestsController < ApplicationController
 
   def payment_details
     return redirect_to client_login_sessions_path unless current_user.client?
-    @shared_card_view = CreditCardView.new(nil)
     @client = current_user
+    begin
+      @contest = @client.contests.not_payed.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      return raise_404(e)
+    end
+    @shared_card_view = CreditCardView.new(nil)
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }
     @credit_card = @client.credit_cards.new
@@ -176,8 +181,9 @@ class ContestsController < ApplicationController
   end
 
   def set_contest
-    @contest = Contest.find_by_id(params[:id])
-    return raise_404 unless @contest
+    @contest = Contest.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    raise_404(e)
   end
 
   def uncomplete_step_path(validated_steps)
@@ -195,7 +201,7 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    redirect_to  client_center_entry_path(id: contest_creation.contest)
+    redirect_to  payment_details_contests_path(id: contest_creation.contest)
   end
 
 end
