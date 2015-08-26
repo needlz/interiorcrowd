@@ -11,7 +11,7 @@
     .col-md-3.novice.no-padding-left.template.relative
       = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
     - if path
-      .col-md-3.novice.no-padding-left.thumb.relative
+      .col-md-3.novice.no-padding-left.thumb.relative{ data: { id: portfolio.personal_picture.id } }
         = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
   .clearfix
   .col-md-6.no-x-padding.marg-top20
