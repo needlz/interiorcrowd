@@ -56,7 +56,7 @@ class Image < ActiveRecord::Base
   end
 
   def self.update_portfolio(portfolio, personal_picture_id, image_ids)
-    image_ids = image_ids.to_a if image_ids.nil?
+    image_ids ||= []
     transaction do
       update_ids(portfolio.pictures,
                  image_ids,
@@ -112,7 +112,7 @@ class Image < ActiveRecord::Base
   end
 
   def uploader
-    return if !uploader_id || !uploader_role
+    return unless uploader_id && uploader_role
     uploader_class = uploader_role.constantize
     uploader_class.find(uploader_id)
   end
