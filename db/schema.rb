@@ -69,10 +69,14 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.integer  "contest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "credit_card_id"
+    t.integer  "amount_cents"
+    t.integer  "promotion_cents"
   end
 
   add_index "client_payments", ["client_id"], name: "index_client_payments_on_client_id", using: :btree
   add_index "client_payments", ["contest_id"], name: "index_client_payments_on_contest_id", using: :btree
+  add_index "client_payments", ["credit_card_id"], name: "index_client_payments_on_credit_card_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.text     "first_name"

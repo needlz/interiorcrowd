@@ -615,7 +615,106 @@
     top: -2px;
     margin-left: 5px;
   }
+}
 
+#paymentSummaryPage{
+  text-align: center;
+  margin: 0px 5px;
+
+  .title{
+    color: green;
+    margin-top: 60px;
+    font-size: 28px;
+  }
+
+  .subtitle{
+    font-size: 16px;
+  }
+
+  .paymentSummary{
+    border-radius: 2px;
+    color: #666666;
+    text-align: left;
+    max-width: 520px;
+    margin: 35px auto;
+    border: 1px #ccc solid;
+    line-height: 24px;
+    font-size: 16px;
+
+    .part{
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+
+    .header{
+
+      background-color: #F0F0F0;
+      border-bottom: 1px #ccc solid;
+      line-height: 40px;
+    }
+
+    .content{
+      padding-top: 20px;
+      padding-bottom: 30px;
+
+      .payerDetails{
+        font-size: 15px;
+      }
+
+      .orderDetails{
+        .price{
+          font-size: 15px;
+        }
+
+        .totalPrice{
+          color: green;
+        }
+      }
+    }
+  }
+
+  .continueBtn{
+    color: black;
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #000;
+    border-radius: 0;
+    font-size: 22px;
+    padding: 10px 30px;
+    margin: 30px 0px 55px;
+    display: inline-block;
+  }
+}
+
+@media(max-width: 414px) {
+  #paymentSummaryPage{
+    .paymentSummary{
+      .part{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+
+      .priceTitle{
+        display: none;
+      }
+
+      .content{
+        .payerDetails{
+          width: 100%;
+        }
+
+        .orderDetails{
+          width: 100%;
+          padding: 10px 30px 0px;
+          border-top: 1px #ccc solid;
+        }
+      }
+    }
+
+    .continueBtn{
+      width: 100%;
+      margin-top: 0px;
+    }
+  }
 }
 
 .credit-card-hint{
