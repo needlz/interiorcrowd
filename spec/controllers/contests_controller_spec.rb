@@ -119,11 +119,25 @@ RSpec.describe ContestsController do
     context 'user is logged in' do
       before do
         sign_in(client)
+        contest
       end
 
-      it 'renders page' do
-        get :payment_details
-        expect(response).to render_template(:payment_details)
+      context 'when valid id passed' do
+        let(:id) { contest.id }
+
+        it 'renders page' do
+          get :payment_details, id: id
+          expect(response).to render_template(:payment_details)
+        end
+      end
+
+      context 'invalid id passed' do
+        let(:id) { Fabricate(:contest).id }
+
+        it 'returns 404' do
+          get :payment_details, id: id
+          expect(response).to have_http_status(:not_found)
+        end
       end
     end
 
@@ -185,12 +199,19 @@ RSpec.describe ContestsController do
         end
 
         context 'and inactive contest status' do
-          it 'creates contest' do
+          before do
             contest.status = 'finished'
             contest.save!
+          end
+
+          it 'creates contest' do
             post :save_preview, contest_options_source
             expect(client.contests.count).to eq 2
-            expect(response).to redirect_to(client_center_entry_path(id: client.contests.order(:id).last.id))
+          end
+
+          it 'redirect to credit cards page' do
+            post :save_preview, contest_options_source
+            expect(response).to redirect_to(payment_details_contests_path(id: client.contests.last.id))
           end
         end
       end
