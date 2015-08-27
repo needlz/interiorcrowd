@@ -153,7 +153,7 @@ InteriorC::Application.routes.draw do
               as: 'final_note_to_designer',
               only: [:create]
 
-    resources :credit_cards do
+    resources :credit_cards, only: [:create] do
       member do
         patch 'set_as_primary'
       end
