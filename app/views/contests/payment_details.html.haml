@@ -91,6 +91,10 @@
                   = select_year(0,
                         @shared_card_view.year_select,
                         class: 'selectpicker form-selector card-exp', tabindex: 15)
+        .row
+          #credit-card-form-controls-mobile
+            %a= t('client_center.sign_up.save')
+            %a#cancel-card-adding= t('client_center.sign_up.cancel')
 
       - @card_views.each do |card|
         %div.credit-card-params.col-xs-11{ class: card.css_class }
