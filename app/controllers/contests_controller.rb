@@ -4,7 +4,7 @@ class ContestsController < ApplicationController
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview, :payment_details]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
-  before_filter :set_client, only: [:index, :show]
+  before_filter :set_client, only: [:index, :show, :payment_summary]
 
   def show
     return raise_404 unless current_user.see_contest?(@contest)
@@ -88,6 +88,17 @@ class ContestsController < ApplicationController
     @client = current_user
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }
+  end
+
+  def payment_summary
+    begin
+      @contest = @client.contests.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      return raise_404(e)
+    end
+    payment = @contest.client_payment
+    return raise_404 ArgumentError.new('contest not payed') unless payment
+    @payment_view = PaymentView.new(payment)
   end
 
   def upload

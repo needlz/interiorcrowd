@@ -2,34 +2,40 @@
 #
 # Table name: portfolios
 #
-#  id                      :integer          not null, primary key
-#  designer_id             :integer          not null
-#  years_of_experience     :integer
-#  education_gifted        :boolean
-#  education_school        :boolean
-#  education_apprenticed   :boolean
-#  school_name             :text
-#  degree                  :text
-#  awards                  :text
-#  style_description       :text
-#  about                   :text
-#  path                    :text
-#  modern_style            :boolean          default(FALSE)
-#  vintage_style           :boolean          default(FALSE)
-#  traditional_style       :boolean          default(FALSE)
-#  contemporary_style      :boolean          default(FALSE)
-#  coastal_style           :boolean          default(FALSE)
-#  global_style            :boolean          default(FALSE)
-#  eclectic_style          :boolean          default(FALSE)
-#  hollywood_glam_style    :boolean          default(FALSE)
-#  midcentury_modern_style :boolean          default(FALSE)
-#  transitional_style      :boolean          default(FALSE)
-#  rustic_elegance_style   :boolean          default(FALSE)
-#  color_pop_style         :boolean          default(FALSE)
-#  background_id           :integer
-#  cover_width             :integer
-#  cover_x_percents_offset :float
-#  cover_y_percents_offset :float
+#  id                             :integer          not null, primary key
+#  designer_id                    :integer          not null
+#  years_of_experience            :integer
+#  education_gifted               :boolean
+#  education_school               :boolean
+#  education_apprenticed          :boolean
+#  school_name                    :text
+#  degree                         :text
+#  awards                         :text
+#  style_description              :text
+#  about                          :text
+#  path                           :text
+#  modern_style                   :boolean          default(FALSE)
+#  vintage_style                  :boolean          default(FALSE)
+#  traditional_style              :boolean          default(FALSE)
+#  contemporary_style             :boolean          default(FALSE)
+#  coastal_style                  :boolean          default(FALSE)
+#  global_style                   :boolean          default(FALSE)
+#  eclectic_style                 :boolean          default(FALSE)
+#  hollywood_glam_style           :boolean          default(FALSE)
+#  midcentury_modern_style        :boolean          default(FALSE)
+#  transitional_style             :boolean          default(FALSE)
+#  rustic_elegance_style          :boolean          default(FALSE)
+#  color_pop_style                :boolean          default(FALSE)
+#  background_id                  :integer
+#  cover_width                    :integer
+#  cover_x_percents_offset        :float
+#  cover_y_percents_offset        :float
+#  website                        :text
+#  why_interested_in_app          :text
+#  example_concept_board_image_id :integer
+#  how_hear_about_app             :text
+#  created_at                     :datetime
+#  updated_at                     :datetime
 #
 
 class Portfolio < ActiveRecord::Base

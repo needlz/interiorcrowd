@@ -2,6 +2,7 @@
   = javascript_include_tag 'sessions/login'
 
 - login_box_footer = capture do
-  %a#facebook_login{ href: Koala::Facebook::OAuth.new.url_for_oauth_code(callback: client_fb_authenticate_sessions_url) }  Facebook login
+  = render partial: 'sessions/signin_footer'
 
 = render partial: 'sessions/login_box', locals: { login_view: @login_view, footer: login_box_footer }
+

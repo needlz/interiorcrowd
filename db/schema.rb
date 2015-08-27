@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731135350) do
+ActiveRecord::Schema.define(version: 20150825165644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "adminpack"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -63,15 +62,21 @@ ActiveRecord::Schema.define(version: 20150731135350) do
   end
 
   create_table "client_payments", force: true do |t|
-    t.integer "client_id"
-    t.string  "payment_status",   default: "pending"
-    t.text    "last_error"
-    t.string  "stripe_charge_id"
-    t.integer "contest_id"
+    t.integer  "client_id"
+    t.string   "payment_status",   default: "pending"
+    t.text     "last_error"
+    t.string   "stripe_charge_id"
+    t.integer  "contest_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "credit_card_id"
+    t.integer  "amount_cents"
+    t.integer  "promotion_cents"
   end
 
   add_index "client_payments", ["client_id"], name: "index_client_payments_on_client_id", using: :btree
   add_index "client_payments", ["contest_id"], name: "index_client_payments_on_contest_id", using: :btree
+  add_index "client_payments", ["credit_card_id"], name: "index_client_payments_on_credit_card_id", using: :btree
 
   create_table "clients", force: true do |t|
     t.text     "first_name"
@@ -87,7 +92,7 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.integer  "card_ex_month"
     t.integer  "card_ex_year"
     t.integer  "card_cvc"
-    t.integer  "status",             default: 1
+    t.integer  "status",                       default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
@@ -99,7 +104,9 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.text     "billing_city"
     t.string   "plain_password"
     t.string   "stripe_customer_id"
-    t.text     "stripe_card_status", default: "pending"
+    t.text     "stripe_card_status",           default: "pending"
+    t.integer  "facebook_user_id",   limit: 8
+    t.integer  "primary_card_id"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -138,11 +145,11 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
-    t.string   "status",             default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer"
+    t.string   "status",             default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token"
@@ -191,9 +198,35 @@ ActiveRecord::Schema.define(version: 20150731135350) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
+  create_table "contests_images", force: true do |t|
+    t.integer "contest_id"
+    t.integer "image_id"
+    t.integer "kind"
+  end
+
   create_table "contests_promocodes", force: true do |t|
-    t.integer "contest_id",   null: false
-    t.integer "promocode_id", null: false
+    t.integer  "contest_id",   null: false
+    t.integer  "promocode_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "credit_cards", force: true do |t|
+    t.integer  "client_id"
+    t.text     "name_on_card"
+    t.string   "card_type"
+    t.text     "address"
+    t.string   "state"
+    t.string   "zip"
+    t.string   "number"
+    t.text     "city"
+    t.integer  "cvc"
+    t.integer  "ex_month"
+    t.integer  "ex_year"
+    t.integer  "last_4_digits"
+    t.string   "stripe_card_status", default: "pending"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -211,6 +244,7 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.integer  "contest_id"
     t.string   "image_type"
     t.integer  "contest_request_id"
+    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -255,6 +289,8 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.string   "state"
     t.text     "address"
     t.text     "city"
+    t.boolean  "active",                            default: true
+    t.integer  "facebook_user_id",        limit: 8
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree
@@ -267,8 +303,10 @@ ActiveRecord::Schema.define(version: 20150731135350) do
   end
 
   create_table "final_note_to_designers", force: true do |t|
-    t.text    "text"
-    t.integer "designer_notification_id"
+    t.text     "text"
+    t.integer  "designer_notification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "image_items", force: true do |t|
@@ -283,16 +321,12 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.datetime "updated_at"
     t.string   "kind"
     t.text     "dimensions"
-    t.boolean  "final",                default: false
-    t.integer  "price_cents"
-    t.string   "price_currency",       default: "USD",           null: false
     t.text     "price"
-    t.integer  "temporary_version_id"
     t.string   "status",               default: "temporary"
+    t.boolean  "final",                default: false
+    t.integer  "temporary_version_id"
     t.string   "phase",                default: "collaboration"
   end
-
-  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: true do |t|
     t.integer "contest_id"
@@ -349,32 +383,35 @@ ActiveRecord::Schema.define(version: 20150731135350) do
   end
 
   create_table "portfolios", force: true do |t|
-    t.integer "background_id"
-    t.integer "designer_id",                             null: false
-    t.integer "years_of_experience"
-    t.boolean "education_gifted"
-    t.boolean "education_school"
-    t.boolean "education_apprenticed"
-    t.text    "school_name"
-    t.text    "degree"
-    t.text    "awards"
-    t.text    "style_description"
-    t.text    "about"
-    t.text    "path"
-    t.boolean "modern_style",            default: false
-    t.boolean "vintage_style",           default: false
-    t.boolean "traditional_style",       default: false
-    t.boolean "contemporary_style",      default: false
-    t.boolean "coastal_style",           default: false
-    t.boolean "global_style",            default: false
-    t.boolean "eclectic_style",          default: false
-    t.boolean "hollywood_glam_style",    default: false
-    t.boolean "midcentury_modern_style", default: false
-    t.boolean "transitional_style",      default: false
-    t.boolean "rustic_elegance_style",   default: false
-    t.boolean "color_pop_style",         default: false
-    t.float   "cover_x_percents_offset"
-    t.float   "cover_y_percents_offset"
+    t.integer  "designer_id",                             null: false
+    t.integer  "years_of_experience"
+    t.boolean  "education_gifted"
+    t.boolean  "education_school"
+    t.boolean  "education_apprenticed"
+    t.text     "school_name"
+    t.text     "degree"
+    t.text     "awards"
+    t.text     "style_description"
+    t.text     "about"
+    t.text     "path"
+    t.boolean  "modern_style",            default: false
+    t.boolean  "vintage_style",           default: false
+    t.boolean  "traditional_style",       default: false
+    t.boolean  "contemporary_style",      default: false
+    t.boolean  "coastal_style",           default: false
+    t.boolean  "global_style",            default: false
+    t.boolean  "eclectic_style",          default: false
+    t.boolean  "hollywood_glam_style",    default: false
+    t.boolean  "midcentury_modern_style", default: false
+    t.boolean  "transitional_style",      default: false
+    t.boolean  "rustic_elegance_style",   default: false
+    t.boolean  "color_pop_style",         default: false
+    t.integer  "background_id"
+    t.integer  "cover_width"
+    t.float    "cover_x_percents_offset"
+    t.float    "cover_y_percents_offset"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "preferred_retailers", force: true do |t|
@@ -399,11 +436,13 @@ ActiveRecord::Schema.define(version: 20150731135350) do
   end
 
   create_table "promocodes", force: true do |t|
-    t.text    "promocode"
-    t.text    "display_message"
-    t.boolean "active",            default: true
-    t.integer "discount_cents",    default: 0,     null: false
-    t.string  "discount_currency", default: "USD", null: false
+    t.text     "promocode"
+    t.text     "display_message"
+    t.boolean  "active",            default: true
+    t.integer  "discount_cents",    default: 0,     null: false
+    t.string   "discount_currency", default: "USD", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "reviewer_feedbacks", force: true do |t|
@@ -442,6 +481,25 @@ ActiveRecord::Schema.define(version: 20150731135350) do
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
     t.datetime "audio_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
   end
 
   create_table "user_notifications", force: true do |t|

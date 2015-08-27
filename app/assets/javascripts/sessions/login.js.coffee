@@ -6,7 +6,7 @@ $(document).ready ->
     bool = false
     if password.length < 1
       $("#err_p").text "Please enter password."
-      bool = "passowrd"
+      bool = "password"
     if username.length > 1
       rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
       unless rege.test(username)

@@ -274,6 +274,13 @@ en:
           * If there are particular items of furniture you need, let the designer know what they are.
           * Are there any particular items in the room you’d like to keep?
         send: Send
+    payment:
+      summary:
+        transaction_confirmed: Your transaction has been confirmed
+        thanks: Thanks so much for your order. We're excited for you and your new space
+        your_payment: Your payment
+        price: Price
+        continue: Continue
     creation:
       sign_up_suggestion:
         text: Create an account now so you can save your design details.
@@ -1072,13 +1079,15 @@ en:
   login:
     email: Email address
     password: Password
-    forgot_password: Forgot password
-    log_in: Log in
+    forgot_password: Forgot password?
+    log_in: Sign In
+    facebook_sign_in: Sign in with Facebook
     remember_me: Remember me
+    or: or
     client:
-      title: CLIENT LOGIN
+      title: CLIENT SIGN IN
     designer:
-      title: DESIGNER LOGIN
+      title: DESIGNER SIGN IN
       sign_up: Sign up
       dont_have_account: Don't have an account?
 

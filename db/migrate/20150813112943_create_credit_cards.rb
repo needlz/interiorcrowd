@@ -1,5 +1,5 @@
 class CreateCreditCards < ActiveRecord::Migration
-  def change
+  def up
     create_table :credit_cards do |t|
       t.integer :client_id
       t.text :name_on_card
@@ -34,8 +34,16 @@ class CreateCreditCards < ActiveRecord::Migration
         city: client.billing_city,
         last_4_digits: client.last_four_card_digits.to_i
       )
+      unless card.save
+        card.zip = '00000'
+      end
       client.credit_cards << card
       client.update_attributes!(primary_card_id: card.id)
     end
+  end
+
+  def down
+    remove_column :clients, :primary_card_id
+    drop_table :credit_cards
   end
 end

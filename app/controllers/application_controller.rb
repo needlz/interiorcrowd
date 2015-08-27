@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
-  rescue_from StandardError, with: :log_error unless Rails.env.development?
+  rescue_from StandardError, with: :handle_error unless Rails.env.development?
 
   helper_method :current_user
 
@@ -26,7 +26,8 @@ class ApplicationController < ActionController::Base
     session[:client_id]
   end
 
-  def raise_404
+  def raise_404(e = nil)
+    log_error(e) if e
     raise ActionController::RoutingError.new(t('page_not_found'))
   end
 
@@ -71,11 +72,15 @@ class ApplicationController < ActionController::Base
     session[:return_to] = request.url unless session[:return_to].present?
   end
 
+  def handle_error(exception)
+    log_error(exception)
+    return render_404 if exception.kind_of?(ActionController::RoutingError)
+    raise exception
+  end
+
   def log_error(exception)
     extra_data = { session: session.to_hash }
     Rollbar.error(exception, extra_data)
-    return render_404 if exception.kind_of?(ActionController::RoutingError)
-    raise exception
   end
 
   def fetch_current_user
