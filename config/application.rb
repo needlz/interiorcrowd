@@ -70,5 +70,7 @@ module InteriorC
     end
 
     config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+
+    config.action_controller.default_url_options = { trailing_slash: true }
   end
 end

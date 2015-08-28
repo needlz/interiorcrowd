@@ -119,6 +119,11 @@ GEM
     fabrication (2.13.2)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    faraday-cookie_jar (0.0.6)
+      faraday (>= 0.7.4)
+      http-cookie (~> 1.0.0)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     figaro (1.1.1)
       thor (~> 0.14)
     fog-aws (0.7.4)
@@ -419,12 +424,15 @@ DEPENDENCIES
   dotiw
   erb2haml
   fabrication
+  faraday-cookie_jar
+  faraday_middleware
   figaro
   haml
   haml-rails
   handy (= 0.0.28)
   hashie
   heroku-api
+  http-cookie
   i18n-js (>= 3.0.0.rc8)
   jbuilder (~> 1.2)
   jquery-fileupload-rails
