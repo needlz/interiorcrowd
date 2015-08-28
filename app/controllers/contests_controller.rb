@@ -29,7 +29,6 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @navigation = Navigation::ClientCenter.new(:entries)
     @current_contests = @client.contests.in_progress
     @completed_contests = @client.contests.inactive
   end
