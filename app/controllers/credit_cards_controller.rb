@@ -1,10 +1,12 @@
 class CreditCardsController < ApplicationController
 
   def create
-    if current_user.credit_cards.create(create_credit_card)
-      render nothing: true
+    new_credit_card = current_user.credit_cards.new(new_credit_card_params)
+    if new_credit_card.save
+      card_view = CreditCardView.new(new_credit_card)
+      render partial: 'contests/card_view', locals: { card: card_view }
     else
-      render json: current_user.credit_cards.errors.last.full_messages, status: :unprocessable_entity
+      render json: current_user.credit_cards.last.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -24,8 +26,9 @@ class CreditCardsController < ApplicationController
     params.require(:id)
   end
 
-  def create_credit_card
-    params.require(:credit_card).permit(:name_on_card, :ex_year, :ex_month, :zip, :number)
+  def new_credit_card_params
+    params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
+                                        :card_type, :number, :cvc, :ex_month, :ex_year)
   end
 
 end

@@ -9,7 +9,8 @@ RSpec.describe CreditCardsController do
     let(:credit_card) { Fabricate(:credit_card) }
 
     def create_params
-      { credit_card: credit_card.to_param }
+      { credit_card: { zip: credit_card.zip,
+                       number: credit_card.number } }
     end
 
     before do
@@ -17,10 +18,9 @@ RSpec.describe CreditCardsController do
     end
 
     it 'creates new credit card' do
-      post :create, create_params
-
+      expect{post :create, create_params}.to change{client.credit_cards.count}.by(1)
       expect(response).to be_ok
-      expect(client.credit_cards).to eq([credit_card])
+      expect(client.credit_cards.first.number).to eq(credit_card.number.to_s)
     end
 
     context 'if client hasn\'t already set primary card' do

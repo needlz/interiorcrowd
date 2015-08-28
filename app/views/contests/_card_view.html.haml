@@ -1,0 +1,9 @@
+%div.credit-card-params.col-xs-11{ class: card.css_class }
+  .card-details
+    - card.params.each do |parameter, value|
+      %p.card-param.col-xs-4= parameter
+      %p.card-param-value.col-xs-6= value
+  .card-actions
+    %a= t('client_center.sign_up.edit_credit_card')
+    %a= t('client_center.sign_up.remove_credit_card')
+    %a#card-type{ "data-id" => card.id }= card.link_caption

@@ -107,6 +107,7 @@ class AccountCreation
   @creditCardAreaSelector: '.credit-card-params'
   @primaryCreditCardAreaClassName: 'primary-card-params'
   @creditCardTypeTextSelector: '#card-type'
+  @saveCreditCardLinkSelector: 'a#save-credit-card'
 
   @init: ->
     @validator = new ValidationMessages()
@@ -119,19 +120,34 @@ class AccountCreation
     @bindCardChoosing()
     @bindAddNewCardButton()
     @bindCancelCardAdding()
+    @bindCreditCardSaving()
 
   @bindNumericInputs: ->
     $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
 
   @bindCardChoosing: ->
     $('a' + @creditCardTypeTextSelector).on 'click', (event)=>
+
       cardId = $(event.target).data('id')
       $.ajax(
         url: '/credit_cards/' + cardId + '/set_as_primary',
         method: 'PATCH',
         success: =>
           @setPrimaryCard(event.target)
+
       )
+
+  @bindCreditCardSaving: ->
+    $(@saveCreditCardLinkSelector).on 'click', (event)=>
+      $.ajax(
+        url: '/credit_cards/',
+        method: 'POST',
+        data: $('.new_credit_card').serializeArray()
+        success: (data)=>
+          $('.credit-card-form').toggleClass('hidden')
+          $(data).insertBefore('.credit-card-params:first')
+  )
+
 
   @bindCancelCardAdding: ->
     $('#cancel-card-adding').on 'click', (event)->

@@ -21,7 +21,7 @@
 
       .hidden.credit-card-form
         #credit-card-form-controls
-          %a= t('client_center.sign_up.save')
+          %a#save-credit-card= t('client_center.sign_up.save')
           %a#cancel-card-adding= t('client_center.sign_up.cancel')
         .row
           .col-sm-6
@@ -40,7 +40,7 @@
               .col-xs-8.col-ss-6
                 %label
                   %p= t('client_center.profile.labels.state')
-                  = select('client',
+                  = select('credit_card',
                         'state',
                         options_for_select(PersonalData.state_options, 0),
                         {},
@@ -56,7 +56,7 @@
           .col-sm-6
             %label
               %p= t('client_center.sign_up.card_type')
-              = select('client',
+              = select('credit_card',
                     'card_type',
                     options_for_select(PersonalData.card_type_options, 0),
                     {},
@@ -93,19 +93,11 @@
                         class: 'selectpicker form-selector card-exp', tabindex: 15)
         .row
           #credit-card-form-controls-mobile
-            %a= t('client_center.sign_up.save')
+            %a#save-credit-card= t('client_center.sign_up.save')
             %a#cancel-card-adding= t('client_center.sign_up.cancel')
 
       - @card_views.each do |card|
-        %div.credit-card-params.col-xs-11{ class: card.css_class }
-          .card-details
-            - card.params.each do |parameter, value|
-              %p.card-param.col-xs-4= parameter
-              %p.card-param-value.col-xs-6= value
-          .card-actions
-            %a= t('client_center.sign_up.edit_credit_card')
-            %a= t('client_center.sign_up.remove_credit_card')
-            %a#card-type{ "data-id" => card.id }= card.link_caption
+        = render partial: 'card_view', locals: { card: card }
 
     .clearfix
     .col-sm-7.promotionCodeApply
