@@ -12,14 +12,6 @@ RSpec.describe BlogController do
         expect(response).to have_http_status(:success)
       end
     end
-
-    context 'non existing blog page' do
-      it 'returns 404' do
-        get :blog_page, blog_page_path: 'not_existing_page'
-        expect(response).to have_http_status(:missing)
-      end
-    end
-
   end
 
 end

@@ -166,7 +166,10 @@ InteriorC::Application.routes.draw do
     get '/about_us', to: 'blog#about_us', as: 'about_us'
 
     scope '/blog' do
-      get '/*blog_page_path', to: 'blog#blog_page', as: 'blog_page'
+      get '/:blog_page_path',
+          to: 'blog#blog_page',
+          as: 'blog_page',
+          constraints: { blog_page_path: /.*/ }
       post '/:blog_page_post_path',
            to: 'blog#blog_page_post',
            as: 'blog_page_post',
