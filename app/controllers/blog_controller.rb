@@ -114,7 +114,7 @@ class BlogController < ApplicationController
   end
 
   def get_params
-    return if env['QUERY_STRING'].blank?
+    return params if env['QUERY_STRING'].blank?
     p = CGI::parse(env['QUERY_STRING'])
     params.merge!( Hash[p.map{ |k,v| [k, v[0]] }])
   end
