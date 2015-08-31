@@ -133,7 +133,6 @@ class AccountCreation
         method: 'PATCH',
         success: =>
           @setPrimaryCard(event.target)
-
       )
 
   @bindCreditCardSaving: ->

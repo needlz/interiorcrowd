@@ -9,8 +9,11 @@ RSpec.describe CreditCardsController do
     let(:credit_card) { Fabricate(:credit_card) }
 
     def create_params
-      { credit_card: { zip: credit_card.zip,
-                       number: credit_card.number } }
+      { credit_card: {zip: credit_card.zip,
+                     number: credit_card.number,
+                     cvc: credit_card.cvc,
+                     ex_month: credit_card.ex_month,
+                     ex_year: credit_card.ex_year} }
     end
 
     before do
