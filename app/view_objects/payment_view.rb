@@ -2,20 +2,11 @@ class PaymentView
 
   attr_reader :payer_name, :payer_card, :payer_address
 
+  delegate :name_on_card, :card_number, :full_address, to: :payer_card
+
   def initialize(payment)
     @payment = payment
-  end
-
-  def payer_name
-    @payment.client.name
-  end
-
-  def payer_card
-    @payment.client.card_number
-  end
-
-  def payer_address
-    @payment.client.billing_address
+    @payer_card = CreditCardView.new(payment.credit_card)
   end
 
   def order_total

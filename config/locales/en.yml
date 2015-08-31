@@ -539,7 +539,7 @@ en:
       brief: Brief
       profile: Profile
     sign_up:
-      title: Create your account <span></span> and <span></span> payment detail
+      title: Create your account
       create_account: Create your account
       password: Password
       confirm_password: Confirm Password

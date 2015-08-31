@@ -18,6 +18,7 @@
 #  stripe_card_status :string(255)      default("pending")
 #  created_at         :datetime
 #  updated_at         :datetime
+#  stripe_id          :string(255)
 #
 
 class CreditCard < ActiveRecord::Base
@@ -31,8 +32,8 @@ class CreditCard < ActiveRecord::Base
   validates :number, uniqueness: { scope: :client_id }
 
   validates_length_of  :zip,
-                       :is => 5,
-                       :message => 'should be 5 digits'
+                       is: 5,
+                       message: 'should be 5 digits'
 
   scope :from_newer_to_older, -> { order(created_at: :desc) }
 

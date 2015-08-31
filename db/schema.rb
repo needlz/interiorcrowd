@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "stripe_card_status", default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
