@@ -567,6 +567,8 @@ en:
       add_credit_card: Add new credit card
       edit_credit_card: Edit
       remove_credit_card: Remove
+      save: Save
+      cancel: Cancel
       credit_card:
         name: Name on card
         number: Credit card

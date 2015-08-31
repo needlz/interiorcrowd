@@ -86,7 +86,8 @@ class ContestsController < ApplicationController
     @shared_card_view = CreditCardView.new(nil)
     @client = current_user
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
-    @card_views = @client.credit_cards.map{ |credit_card| CreditCardView.new(credit_card) }
+    @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }
+    @credit_card = @client.credit_cards.new
   end
 
   def payment_summary
