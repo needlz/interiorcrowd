@@ -145,6 +145,8 @@ class AccountCreation
         success: (data)=>
           $('.credit-card-form').toggleClass('hidden')
           $(data).insertBefore('.credit-card-params:first')
+          $('input').val('')
+          $('select').prop('selectedIndex', 0).change()
   )
 
 
