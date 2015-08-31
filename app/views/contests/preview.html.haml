@@ -15,7 +15,8 @@
     = render :partial => 'home/msg'
     = form_tag save_preview_contests_path,
         { id: 'account_creation',
-          method: 'post' } do
+          method: 'post',
+          ukclass: 'intake-form' } do
       = render partial: 'contests/review/project_name'
       .fullWidthLine.marginTop40
       .update-style-package-hint
