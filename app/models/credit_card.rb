@@ -34,6 +34,8 @@ class CreditCard < ActiveRecord::Base
                        :is => 5,
                        :message => 'should be 5 digits'
 
+  scope :from_newer_to_older, -> { order(created_at: :desc) }
+
   def set_last_4_digits
     self.last_4_digits= number.length < 4 ? number : number[-4..-1]
   end
