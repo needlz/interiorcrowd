@@ -9,7 +9,7 @@
           %span= feedback_page.contest_view.name
         %p
           = t('designer_center.contests_preview.room')
-          %span= feedback_page.contest.design_space.name
+          %span= feedback_page.contest.design_space.full_name
   %hr
 = render partial: 'clients/client_center/entries/feedback/feedback_items_with_pagination',
     locals: { contest_page: feedback_page }

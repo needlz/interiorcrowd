@@ -43,6 +43,8 @@ RSpec.describe DesignerCenterContestsController do
       allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
       Fabricate(:example_image, contest: contest)
       Fabricate(:space_image, contest: contest)
+      contest.update_attribute(ContestAdditionalPreference::PREFERENCES.first[0],
+                               ContestAdditionalPreference::PREFERENCES.first[1])
       contest.contests_appeals.create!(appeal_id: Appeal.create!(name: 'vintage').id)
       get :show, id: contest.id
       expect(response).to render_template(:show)

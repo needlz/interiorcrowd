@@ -25,7 +25,11 @@ class ClientsController < ApplicationController
   end
 
   def brief
-    @contest = @client.last_contest
+    begin
+      @contest = @client.contests.find(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      return raise_404(e)
+    end
     @contest_view = ContestView.new(contest_attributes: @contest)
     @navigation = Navigation::ClientCenter.new(:brief)
     render 'clients/client_center/brief'

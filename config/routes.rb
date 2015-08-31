@@ -39,6 +39,7 @@ InteriorC::Application.routes.draw do
       member do
         get 'option'
         get 'show', as: 'show'
+        get 'brief', to: 'clients#brief', as: 'brief'
         get 'download_all_images_url'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
@@ -82,7 +83,6 @@ InteriorC::Application.routes.draw do
       resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries'
       get '', to: 'clients#client_center', as: 'client_center'
       get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'client_center_concept_boards_page'
-      get 'brief', to: 'clients#brief', as: 'client_center_brief'
       get 'profile', to: 'clients#profile', as: 'client_center_profile'
       get 'pictures_dimension', to: 'clients#pictures_dimension', as: 'client_center_pictures_dimension'
     end
