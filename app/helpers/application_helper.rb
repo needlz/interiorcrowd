@@ -52,8 +52,4 @@ module ApplicationHelper
     "url('#{ j(url) }')"
   end
 
-  def show_beta_functionality?
-    !Rails.env.production?
-  end
-
 end

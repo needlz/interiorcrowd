@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe CreditCardsController do
 
-
-
   context 'user is signed in' do
     let(:client) { Fabricate(:client) }
     let(:credit_card) { Fabricate(:credit_card) }
@@ -21,6 +19,9 @@ RSpec.describe CreditCardsController do
     end
 
     it 'creates new credit card' do
+      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
+        Hashie::Mash.new(id: 'id')
+      end
       expect{post :create, create_params}.to change{client.credit_cards.count}.by(1)
       expect(response).to be_ok
       expect(client.credit_cards.first.number).to eq(credit_card.number.to_s)

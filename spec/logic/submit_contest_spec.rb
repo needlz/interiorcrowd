@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe SubmitContest do
 
-  let(:client) { Fabricate(:client) }
+  let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:contest) do
     contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options_source)
-    contest_creation.perform
+    contest = contest_creation.perform
+    pay_contest(contest)
+    contest
   end
 
   it 'delays client notification about concept boards not received' do
