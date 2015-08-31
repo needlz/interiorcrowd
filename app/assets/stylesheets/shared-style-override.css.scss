@@ -775,7 +775,7 @@
 }
 
 .params{
-  display: inline;
+  display: block;
   margin-top: 7px;
   margin-bottom: 7px;
   font-size: 18px;
@@ -797,7 +797,7 @@
 }
 
 .card-details{
-  width: 75%;
+  width: 65%;
 }
 
 .primary-card-params{
@@ -839,7 +839,11 @@
   }
 
   .card-details{
-    width: 70%;
+    width: 60%;
+  }
+
+  .card-actions{
+    width: 40%;
   }
 
 }
@@ -863,8 +867,11 @@
     width: 30%;
   }
 
-  .card-actions a{
-    margin-right: 3.5%;
+  .card-actions {
+    width: 35%;
+    a {
+      margin-right: 2%;
+    }
   }
 
   #card-type{
@@ -873,7 +880,7 @@
   }
 
   .card-details{
-    width: 80%;
+    width: 65%;
   }
 }
 
@@ -1090,10 +1097,6 @@
     margin-right: 3.5%;
   }
   padding: 15px 15px;
-}
-
-#card-type{
-  margin-right: 2.7%;
 }
 
 .creditCardForm label input {
