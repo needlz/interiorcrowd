@@ -126,8 +126,7 @@ class AccountCreation
     $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
 
   @bindCardChoosing: ->
-    $('a' + @creditCardTypeTextSelector).on 'click', (event)=>
-
+    $(document).on 'click', 'a' + @creditCardTypeTextSelector, (event)=>
       cardId = $(event.target).data('id')
       $.ajax(
         url: '/credit_cards/' + cardId + '/set_as_primary',
