@@ -64,6 +64,7 @@ InteriorC::Application.routes.draw do
         get 'account_creation'
         get 'payment_details'
         get 'payment_summary'
+        put 'save_intake_form'
       end
     end
 

@@ -17,7 +17,7 @@ class @DesignArea
       @parentAreas.removeClass('active').find('.option-selected').hide()
       $button.addClass('active').find('.option-selected').show()
 
-      @currentIdInput.val($button.data('id'))
+      @currentIdInput.val($button.data('id')).trigger('change')
       @update()
     )
 
@@ -25,7 +25,7 @@ class @DesignArea
       @childrenAreas.find('.option-item').removeClass('active')
       $button = $(event.target)
       $button.addClass('active')
-      @currentIdInput.val($button.data('id'))
+      @currentIdInput.val($button.data('id')).trigger('change')
 
   update: ->
     $("#err_design_area").html('')

@@ -118,8 +118,9 @@ class ContestsController < ApplicationController
     @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
     @contest_view = ContestView.new(contest_attributes: @contest)
     option = params[:option]
-    render partial: 'contests/options/attribute_form', locals: { fields_partial: "contests/options/#{ option }_options",
-                                                                 option: option }
+    render partial: 'contests/options/attribute_form',
+           locals: { fields_partial: "contests/options/#{ option }_options",
+                     option: option }
   end
 
   def update
@@ -142,6 +143,13 @@ class ContestsController < ApplicationController
 
     archive_path = ImagesArchivationMonitor.request_archive(@contest, images_type)
     return render(json: archive_path.to_json) if archive_path
+    render nothing: true
+  end
+
+  def save_intake_form
+    ContestCreationWizard.creation_steps.each do |creation_step|
+      session[creation_step] = params[creation_step] if params[creation_step]
+    end
     render nothing: true
   end
 
