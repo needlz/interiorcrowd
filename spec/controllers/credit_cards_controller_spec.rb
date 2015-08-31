@@ -37,8 +37,8 @@ RSpec.describe CreditCardsController do
     end
 
     context 'if client has already set primary card' do
-      let(:old_primary_card) {  Fabricate(:credit_card)}
-      let(:new_primary_card) {  Fabricate(:credit_card)}
+      let(:old_primary_card) { Fabricate(:credit_card) }
+      let(:new_primary_card) { Fabricate(:credit_card) }
       let(:client) { Fabricate(:client,
                                credit_cards: [old_primary_card, new_primary_card],
                                primary_card: old_primary_card) }

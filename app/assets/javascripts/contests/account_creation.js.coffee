@@ -106,8 +106,12 @@ class AccountCreation
 
   @creditCardAreaSelector: '.credit-card-params'
   @primaryCreditCardAreaClassName: 'primary-card-params'
-  @creditCardTypeTextSelector: '#card-type'
+  @setPrimaryCardLinkSelector: 'a#card-type'
   @saveCreditCardLinkSelector: 'a#save-credit-card'
+  @newCreditCardFormSelector: '.new_credit_card'
+  @creditCardFromDivSelector: '.credit-card-form'
+  @addNewCreditCardButtonSelector: '.add-new-credit-card'
+  @cancelCardAddingButtonSelector: '#cancel-card-adding'
 
   @init: ->
     @validator = new ValidationMessages()
@@ -126,7 +130,7 @@ class AccountCreation
     $('#card_number, #card_cvc, #client_zip').ForceNumericOnly()
 
   @bindCardChoosing: ->
-    $(document).on 'click', 'a' + @creditCardTypeTextSelector, (event)=>
+    $(document).on 'click', @setPrimaryCardLinkSelector, (event)=>
       cardId = $(event.target).data('id')
       $.ajax(
         url: '/credit_cards/' + cardId + '/set_as_primary',
@@ -137,31 +141,37 @@ class AccountCreation
 
   @bindCreditCardSaving: ->
     $(@saveCreditCardLinkSelector).on 'click', (event)=>
+      $form = $(@newCreditCardFormSelector)
       $.ajax(
-        url: '/credit_cards/',
-        method: 'POST',
-        data: $('.new_credit_card').serializeArray()
+        url: $form.attr('action'),
+        method: $form.attr('method'),
+        data: $form.serializeArray()
         success: (data)=>
-          $('.credit-card-form').toggleClass('hidden')
-          $(data).insertBefore('.credit-card-params:first')
-          $('input').val('')
-          $('select').prop('selectedIndex', 0).change()
+          @toggleCardFormVisibility()
+          $(data).insertBefore(@creditCardAreaSelector + ':first')
+          @setDefaultInputValues()
   )
 
+  @setDefaultInputValues: ->
+    $('input').val('')
+    $('select').prop('selectedIndex', 0).change()
 
   @bindCancelCardAdding: ->
-    $('#cancel-card-adding').on 'click', (event)->
-      $('.credit-card-form').toggleClass('hidden')
+    $(@cancelCardAddingButtonSelector).on 'click', (event)=>
+      @toggleCardFormVisibility()
 
   @bindAddNewCardButton: ->
-    $('.add-new-credit-card').on 'click', (event)->
-      $('.credit-card-form').toggleClass('hidden')
+    $(@addNewCreditCardButtonSelector).on 'click', (event)=>
+      @toggleCardFormVisibility()
+
+  @toggleCardFormVisibility: ->
+    $(@creditCardFromDivSelector).toggleClass('hidden')
 
   @setPrimaryCard: (link)->
     $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
     $(link).closest(@creditCardAreaSelector).addClass(@primaryCreditCardAreaClassName)
-    $(@creditCardAreaSelector).find(@creditCardTypeTextSelector).text(signupI18n.make_card_primary)
-    $('.' + @primaryCreditCardAreaClassName).find(@creditCardTypeTextSelector).text(signupI18n.primary_card)
+    $(@creditCardAreaSelector).find(@setPrimaryCardLinkSelector).text(signupI18n.make_card_primary)
+    $('.' + @primaryCreditCardAreaClassName).find(@setPrimaryCardLinkSelector).text(signupI18n.primary_card)
 
   @validations: [
     ->
