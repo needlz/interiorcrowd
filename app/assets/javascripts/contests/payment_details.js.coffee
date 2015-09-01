@@ -12,8 +12,8 @@ class CardValidation
       {
         number: $('#card_number').val(),
         cvc: $('#card_cvc').val(),
-        exp_month: $('#client_card_ex_month').val(),
-        exp_year: $('#client_card_ex_year').val()
+        exp_month: $('#credit_card_ex_month').val(),
+        exp_year: $('#credit_card_ex_year').val()
       }, (status, response) =>
         if response.error
           @error = response.error.message
