@@ -42,6 +42,7 @@ class @CreditCards
   @creditCardAreaSelector: '.credit-card-params'
   @primaryCreditCardAreaClassName: 'primary-card-params'
   @setPrimaryCardLinkSelector: 'a#card-type'
+  @deleteCardLinkSelector: 'a#remove-card'
   @saveCreditCardLinkSelector: 'a#save-credit-card'
   @newCreditCardFormSelector: '.new_credit_card'
   @creditCardFromDivSelector: '.credit-card-form'
@@ -54,6 +55,7 @@ class @CreditCards
     @bindAddNewCardButton()
     @bindCancelCardAdding()
     @bindCreditCardSaving()
+    @bindCardDeleting()
     @styleDropdowns()
 
 
@@ -82,6 +84,16 @@ class @CreditCards
           else
             $(data).appendTo($(@cardsContainerSelector))
           @setDefaultInputValues()
+      )
+
+  @bindCardDeleting: ->
+    $(document).on 'click', @deleteCardLinkSelector, (event)=>
+      cardId = $(event.target).data('id')
+      $.ajax(
+        url: '/credit_cards/' + cardId,
+        method: 'DELETE',
+        success: =>
+          $(event.target).closest('.credit-card-params').remove()
       )
 
   @setDefaultInputValues: ->
