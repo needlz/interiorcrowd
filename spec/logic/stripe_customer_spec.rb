@@ -27,6 +27,10 @@ RSpec.describe StripeCustomer do
   let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
 
   describe 'register client' do
+    before do
+      mock_stripe_customer_registration
+    end
+
     it 'registers customer' do
       StripeCustomer.fill_client_info(client)
       expect(client.stripe_customer_id).to be_present

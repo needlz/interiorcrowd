@@ -33,6 +33,7 @@ RSpec.describe CreditCardsController do
       allow_any_instance_of(StripeCustomer).to receive(:import_card) do
         Hashie::Mash.new(id: 'id')
       end
+
       expect{ post :create, create_params }.to change{ client.credit_cards.count }.by(1)
       expect(response).to render_template('contests/_card_view')
       expect(client.credit_cards.first.number).to eq(credit_card.number.to_s)
