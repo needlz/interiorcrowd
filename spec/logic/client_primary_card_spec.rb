@@ -20,8 +20,9 @@ RSpec.describe ClientPrimaryCard do
   context 'passing bad credit card id' do
     it 'doesn\'t set new primary card for client' do
       client_primary_card = ClientPrimaryCard.new(client)
+      client_primary_card.set(0)
 
-      expect{client_primary_card.set(0)}.to raise_exception(ActiveRecord::RecordNotFound)
+      expect(client_primary_card.saved?).to be_falsey
       expect(client.primary_card).to be_nil
     end
   end

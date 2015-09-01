@@ -18,16 +18,27 @@ RSpec.describe CreditCardsController do
       sign_in(client)
     end
 
+    it 'doesn\'t create new credit card when passing bad card info' do
+      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
+        Hashie::Mash.new(id: 'id')
+      end
+      card_params = create_params
+      card_params[:credit_card].merge!(zip: 111)
+      expect{ post :create, card_params }.to change{ client.credit_cards.count }.by(0)
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(client.credit_cards.empty?).to be_truthy
+    end
+
     it 'creates new credit card' do
       allow_any_instance_of(StripeCustomer).to receive(:import_card) do
         Hashie::Mash.new(id: 'id')
       end
-      expect{post :create, create_params}.to change{client.credit_cards.count}.by(1)
-      expect(response).to be_ok
+      expect{ post :create, create_params }.to change{ client.credit_cards.count }.by(1)
+      expect(response).to render_template('contests/_card_view')
       expect(client.credit_cards.first.number).to eq(credit_card.number.to_s)
     end
 
-    context 'if client hasn\'t already set primary card' do
+    context 'if current client hasn\'t already set primary card' do
       let(:credit_card) { Fabricate(:credit_card) }
       let(:client) { Fabricate(:client, credit_cards: [credit_card]) }
 
@@ -52,7 +63,8 @@ RSpec.describe CreditCardsController do
       end
 
       it 'cannot set not existing card for current client' do
-        expect{patch :set_as_primary, id: 0}.to raise_exception(ActiveRecord::RecordNotFound)
+        patch :set_as_primary, id: 0
+        expect(response).to have_http_status(:not_found)
       end
     end
 

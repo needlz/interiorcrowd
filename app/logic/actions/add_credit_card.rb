@@ -1,6 +1,6 @@
 class AddCreditCard
 
-  attr_reader :card
+  attr_reader :card, :error_message
 
   def initialize(options)
     @client = options[:client]
