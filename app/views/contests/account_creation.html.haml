@@ -1,6 +1,7 @@
 = content_for :head do
   = javascript_include_tag 'jquery.creditCardValidator.js'
   = javascript_include_tag 'contests/account_creation'
+  = javascript_include_tag 'contests/promocode'
   = javascript_include_tag 'i18n'
   = render 'shared/setup_stripe_js'
   :javascript
@@ -36,8 +37,6 @@
           = f.password_field :password_confirmation, class: 'form-control', tabindex: 5
           %span#err_cpassword.text-error
     .fullWidthLine.marginTop20
-
-    =render partial: 'shared/payment_information', locals: { f: f }
 
     %p.iAgreeTerms
       %span.customCheckbox

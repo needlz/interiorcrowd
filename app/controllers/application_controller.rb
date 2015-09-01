@@ -66,8 +66,7 @@ class ApplicationController < ActionController::Base
   end
 
   def log_error(exception)
-    extra_data = { session: session.to_hash }
-    Rollbar.error(exception, extra_data)
+    ErrorsLogger.log(exception, session.to_hash)
   end
 
   private

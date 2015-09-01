@@ -160,6 +160,8 @@ InteriorC::Application.routes.draw do
       end
     end
 
+    resources :client_payments, only: [:create]
+
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
     get '/designer_submission', to: 'blog#designer_submission', as: 'designer_submission'

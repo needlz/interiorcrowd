@@ -96,4 +96,30 @@ RSpec.configure do |config|
   def test_card_number
     '4242424242424242'
   end
+
+  def mock_stripe_successful_charge
+    allow_any_instance_of(StripeCustomer).to receive(:charge) do
+      Hashie::Mash.new(id: 'charge_id')
+    end
+  end
+
+  def mock_stripe_unsuccessful_charge
+    allow_any_instance_of(StripeCustomer).to receive(:charge) do
+      raise Stripe::StripeError.new('error!')
+    end
+  end
+
+  def mock_stripe_customer_registration
+    allow(Stripe::Customer).to receive(:create) do
+      Hashie::Mash.new(id: 'customer id')
+    end
+  end
+
+  def pay_contest(contest)
+    payment = Payment.new(contest)
+    mock_stripe_customer_registration
+    mock_stripe_successful_charge
+    payment.perform
+  end
+
 end

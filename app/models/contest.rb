@@ -210,6 +210,10 @@ class Contest < ActiveRecord::Base
     fulfillment? || final_fulfillment?
   end
 
+  def payed?
+    client_payment && client_payment.last_error.nil?
+  end
+
   private
 
   def create_retailer_preferences
