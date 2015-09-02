@@ -45,7 +45,7 @@ class @CreditCards
   @deleteCardLinkSelector: 'a#remove-card'
   @saveCreditCardLinkSelector: 'a#save-credit-card'
   @newCreditCardFormSelector: '.new_credit_card'
-  @creditCardFromDivSelector: '.credit-card-form'
+  @creditCardFormDivSelector: '.credit-card-form'
   @addNewCreditCardButtonSelector: '.add-new-credit-card'
   @cancelCardAddingButtonSelector: '#cancel-card-adding'
   @cardsContainerSelector: '.payment-info-container'
@@ -55,6 +55,7 @@ class @CreditCards
     @bindAddNewCardButton()
     @bindCancelCardAdding()
     @bindCreditCardSaving()
+    @bindCardEditing()
     @bindCardDeleting()
     @styleDropdowns()
 
@@ -69,9 +70,17 @@ class @CreditCards
           @setPrimaryCard(event.target)
       )
 
+  @bindAddNewCardButton: ->
+    $(@addNewCreditCardButtonSelector).on 'click', (event)=>
+      @toggleCardFormVisibility()
+
+  @bindCancelCardAdding: ->
+    $(document).on 'click', @cancelCardAddingButtonSelector, (event)=>
+      @toggleCardFormVisibility(event.target)
+
   @bindCreditCardSaving: ->
-    $(@saveCreditCardLinkSelector).on 'click', (event)=>
-      $form = $(@newCreditCardFormSelector)
+    $(document).on 'click', @saveCreditCardLinkSelector, (event)=>
+      $form = $(event.target).closest(@newCreditCardFormSelector)
       $.ajax(
         url: $form.attr('action'),
         method: $form.attr('method'),
@@ -86,6 +95,18 @@ class @CreditCards
           @setDefaultInputValues()
       )
 
+  @bindCardEditing: ->
+    $(document).on 'click', 'a#edit-card', (event)=>
+      cardId = $(event.target).data('id')
+      $.ajax(
+        url: '/credit_cards/' + cardId + '/edit',
+        method: 'GET',
+        success: (data)=>
+          $cardContainer = $(event.target).closest('.credit-card-params')
+          $cardContainer.replaceWith(data)
+          @styleDropdowns()
+      )
+
   @bindCardDeleting: ->
     $(document).on 'click', @deleteCardLinkSelector, (event)=>
       cardId = $(event.target).data('id')
@@ -96,30 +117,27 @@ class @CreditCards
           $(event.target).closest('.credit-card-params').remove()
       )
 
+  @styleDropdowns: ->
+    $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
+
   @setDefaultInputValues: ->
-    $form = $(@creditCardFromDivSelector)
+    $form = $(@creditCardFormDivSelector)
     $form.find('input').val('')
     $form.find('select').prop('selectedIndex', 0).change()
 
-  @bindCancelCardAdding: ->
-    $(@cancelCardAddingButtonSelector).on 'click', (event)=>
-      @toggleCardFormVisibility()
-
-  @bindAddNewCardButton: ->
-    $(@addNewCreditCardButtonSelector).on 'click', (event)=>
-      @toggleCardFormVisibility()
-
-  @toggleCardFormVisibility: ->
-    $(@creditCardFromDivSelector).toggleClass('hidden')
+  @toggleCardFormVisibility: (editLink)->
+    $form = $(editLink).closest(@creditCardFormDivSelector)
+    if $form.length
+      $form.remove()
+    else
+      $form = $(@creditCardFormDivSelector + ':first')
+      $form.toggleClass('hidden')
 
   @setPrimaryCard: (link)->
     $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
     $(link).closest(@creditCardAreaSelector).addClass(@primaryCreditCardAreaClassName)
     $(@creditCardAreaSelector).find(@setPrimaryCardLinkSelector).text(signupI18n.make_card_primary)
     $('.' + @primaryCreditCardAreaClassName).find(@setPrimaryCardLinkSelector).text(signupI18n.primary_card)
-
-  @styleDropdowns: ->
-    $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
 
 $(document).ready ->
   CreditCards.init()

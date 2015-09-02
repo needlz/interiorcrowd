@@ -1,0 +1,77 @@
+.clearfix
+.credit-card-form{ class: "#{css_class}" }
+  = form_for @credit_card, { id: 'create', method: "#{method}" } do |f|
+    #credit-card-form-controls
+      %a#save-credit-card= t('client_center.sign_up.save')
+      %a#cancel-card-adding= t('client_center.sign_up.cancel')
+    .row
+      .col-sm-6
+        %label
+          %p= t('client_center.sign_up.name_on_card')
+          = f.text_field :name_on_card, class: 'form-control', tabindex: 6
+          %span#err_name_on_card.text-error
+        %label
+          %p= t('client_center.profile.labels.address')
+          = f.text_field :address, class: 'form-control', tabindex: 7
+          %span#err_address.text-error
+        %label
+          %p= t('client_center.profile.labels.city')
+          = f.text_field :city, class: 'form-control', tabindex: 8
+        .row
+          .col-xs-8.col-ss-6
+            %label
+              %p= t('client_center.profile.labels.state')
+              = f.select :state,
+                    options_for_select(PersonalData.state_options, f.object.state),
+                    {},
+                    { class: 'selectpicker form-selector', tabindex: 9 }
+              %span#err_state.text-error
+          .col-xs-4.col-ss-6
+            %label
+              %p= t('client_center.profile.labels.zip')
+              = f.text_field :zip,
+                    class: 'form-control left-control',
+                    tabindex: 10
+              %span#err_zip.text-error
+      .col-sm-6
+        %label
+          %p= t('client_center.sign_up.card_type')
+          = select('credit_card',
+                'card_type',
+                options_for_select(PersonalData.card_type_options, 0),
+                {},
+                { class: 'selectpicker form-selector', tabindex: 11 })
+          .clearfix
+        .row
+          .col-xs-8
+            %label
+              %p= t('client_center.profile.labels.card_number')
+              = f.text_field :number, id: 'card_number', class: 'form-control',  maxlength: 19,
+                  name: 'credit_card[number]',
+                  type: 'text', tabindex: 12
+              %span#err_card_number.text-error
+          .col-xs-4
+            %label
+              %p= t('client_center.profile.labels.card_cvc')
+              = f.text_field :cvc, id: 'card_cvc', class: 'form-control left-control', name: 'credit_card[cvc]',
+                  type: 'text', tabindex: 13
+              %span#err_cvc.text-error
+        .row
+          .col-xs-6
+            %label.expiration-label
+              %p= t('client_center.profile.labels.card_exp_date')
+              = select_month(0,
+                    { field_name: 'ex_month',
+                      prefix: 'credit_card',
+                      prompt: t('client_center.sign_up.select_month') },
+                    class: 'selectpicker form-selector card-exp', tabindex: 14)
+          .col-xs-6
+            %label
+              %p &nbsp;
+              = select_year(0,
+                    @shared_card_view.year_select,
+                    class: 'selectpicker form-selector card-exp', tabindex: 15)
+    .row
+      #credit-card-form-controls-mobile
+        %a#save-credit-card= t('client_center.sign_up.save')
+        %a#cancel-card-adding= t('client_center.sign_up.cancel')
