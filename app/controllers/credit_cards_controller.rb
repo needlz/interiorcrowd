@@ -23,9 +23,21 @@ class CreditCardsController < ApplicationController
     end
   end
 
+  def edit
+    @credit_card = current_user.credit_cards.find card_id
+    @shared_card_view = CreditCardView.new(nil)
+    render partial: 'contests/card_form', locals: { css_class: nil, method: 'patch' }
+  end
+
+  def update
+    @credit_card = current_user.credit_cards.find params[:id]
+    card_view = CreditCardView.new(@credit_card)
+    render partial: 'contests/card_view', locals: { card: card_view }
+  end
+
   def destroy
-    card = current_user.credit_cards.find card_id
-    card.destroy
+    credit_card = current_user.credit_cards.find card_id
+    credit_card.destroy
     render nothing: true
   rescue ActiveRecord::RecordNotFound
     render text: 'There is no credit card with such id for this client', status: :not_found

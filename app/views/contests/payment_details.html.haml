@@ -13,96 +13,17 @@
 .container.animated.fadeInDown.client-signup.creditCardForm.lightFont
   %h3.main-title= t('client_center.sign_up.payment_details').html_safe
   = render partial: 'home/msg'
-  = form_for @credit_card, { id: 'create', method: 'post' } do |f|
-    .fullWidthLine
+  .fullWidthLine
+  .payment-info-container
+    %h4.marginTop40#marginBottom10= t('client_center.sign_up.payment_information')
+    .credit-card-hint= t('client_center.sign_up.choose_credit_card')
+    .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
+    .clearfix
 
+    = render partial: 'card_form', locals: { css_class: 'hidden', method: 'post' }
 
-    .payment-info-container
-      %h4.marginTop40#marginBottom10= t('client_center.sign_up.payment_information')
-
-      .credit-card-hint= t('client_center.sign_up.choose_credit_card')
-      .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
-      .clearfix
-
-      .hidden.credit-card-form
-        #credit-card-form-controls
-          %a#save-credit-card= t('client_center.sign_up.save')
-          %a#cancel-card-adding= t('client_center.sign_up.cancel')
-        .row
-          .col-sm-6
-            %label
-              %p= t('client_center.sign_up.name_on_card')
-              = f.text_field :name_on_card, class: 'form-control', tabindex: 6
-              %span#err_name_on_card.text-error
-            %label
-              %p= t('client_center.profile.labels.address')
-              = f.text_field :address, class: 'form-control', tabindex: 7
-              %span#err_address.text-error
-            %label
-              %p= t('client_center.profile.labels.city')
-              = f.text_field :city, class: 'form-control', tabindex: 8
-            .row
-              .col-xs-8.col-ss-6
-                %label
-                  %p= t('client_center.profile.labels.state')
-                  = select('credit_card',
-                        'state',
-                        options_for_select(PersonalData.state_options, 0),
-                        {},
-                        { class: 'selectpicker form-selector', tabindex: 9 })
-                  %span#err_state.text-error
-              .col-xs-4.col-ss-6
-                %label
-                  %p= t('client_center.profile.labels.zip')
-                  = f.text_field :zip,
-                        class: 'form-control left-control',
-                        tabindex: 10
-                  %span#err_zip.text-error
-          .col-sm-6
-            %label
-              %p= t('client_center.sign_up.card_type')
-              = select('credit_card',
-                    'card_type',
-                    options_for_select(PersonalData.card_type_options, 0),
-                    {},
-                    { class: 'selectpicker form-selector', tabindex: 11 })
-              .clearfix
-            .row
-              .col-xs-8
-                %label
-                  %p= t('client_center.profile.labels.card_number')
-                  %input#card_number.form-control{ maxlength: 19,
-                      name: 'credit_card[number]',
-                      type: 'text', tabindex: 12}/
-                  %span#err_card_number.text-error
-              .col-xs-4
-                %label
-                  %p= t('client_center.profile.labels.card_cvc')
-                  %input#card_cvc.form-control.left-control{ name: 'credit_card[cvc]',
-                      type: 'text', tabindex: 13}/
-                  %span#err_cvc.text-error
-            .row
-              .col-xs-6
-                %label.expiration-label
-                  %p= t('client_center.profile.labels.card_exp_date')
-                  = select_month(0,
-                        { field_name: 'ex_month',
-                          prefix: 'credit_card',
-                          prompt: t('client_center.sign_up.select_month') },
-                        class: 'selectpicker form-selector card-exp', tabindex: 14)
-              .col-xs-6
-                %label
-                  %p &nbsp;
-                  = select_year(0,
-                        @shared_card_view.year_select,
-                        class: 'selectpicker form-selector card-exp', tabindex: 15)
-        .row
-          #credit-card-form-controls-mobile
-            %a#save-credit-card= t('client_center.sign_up.save')
-            %a#cancel-card-adding= t('client_center.sign_up.cancel')
-
-      - @card_views.each do |card|
-        = render partial: 'card_view', locals: { card: card }
+    - @card_views.each do |card|
+      = render partial: 'card_view', locals: { card: card }
 
   = form_for @client_payment, { method: 'post' } do |f|
     .clearfix
