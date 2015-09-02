@@ -69,6 +69,22 @@ RSpec.describe CreditCardsController do
       end
     end
 
+    it 'deletes the credit card' do
+      client.credit_cards << credit_card
+
+      delete :destroy, id: credit_card.id
+      expect(response).to be_ok
+
+      client.reload
+
+      expect(client.credit_cards.empty?).to be_truthy
+    end
+
+    it 'returns error when client wants to delete credit card with bad id' do
+      delete :destroy, id: 0
+      expect(response).to have_http_status(:not_found)
+    end
+
   end
 
 end
