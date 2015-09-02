@@ -27,6 +27,8 @@ class CreditCardsController < ApplicationController
     card = current_user.credit_cards.find card_id
     card.destroy
     render nothing: true
+  rescue ActiveRecord::RecordNotFound
+    render text: 'There is no credit card with such id for this client', status: :not_found
   end
 
   private
