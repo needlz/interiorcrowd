@@ -37,6 +37,7 @@ class BlogPageProxy
   end
 
   def parse_dom
+    response_body.gsub!(%r['/wp-admin/admin-ajax.php'], '\'/blog/wp-admin/admin-ajax.php\'')
     @blog_page_dom = Nokogiri::HTML(response_body)
   end
 
@@ -50,7 +51,7 @@ class BlogPageProxy
       end
       if part_dom.present?
         replace_links(part_dom)
-        part_content = part_dom.first.children.to_s
+        part_content = part_dom.first.to_s
       else
         part_content = ''
       end
@@ -59,7 +60,6 @@ class BlogPageProxy
   end
 
   def load_head_content?
-    # @blog_page_dom.css('#content').present?
     true
   end
 
@@ -67,6 +67,7 @@ class BlogPageProxy
     dom_element.css('a').each { |link| replace_link(link, 'href') }
     dom_element.css('form').each { |form| replace_link(form, 'action'); append_authenticity_token(form) }
     dom_element.css('input').each { |input| replace_link(input, 'value') }
+    dom_element.css('link').each { |link| replace_link(link, 'href') if link['rel'] == 'canonical' }
   end
 
   def replace_link(element, attribute)
