@@ -36,11 +36,10 @@
       .col-sm-6
         %label
           %p= t('client_center.sign_up.card_type')
-          = select('credit_card',
-                'card_type',
-                options_for_select(PersonalData.card_type_options, 0),
+          = f.select :card_type,
+                options_for_select(PersonalData.card_type_options, f.object.card_type),
                 {},
-                { class: 'selectpicker form-selector', tabindex: 11 })
+                { class: 'selectpicker form-selector', tabindex: 11 }
           .clearfix
         .row
           .col-xs-8
@@ -60,7 +59,7 @@
           .col-xs-6
             %label.expiration-label
               %p= t('client_center.profile.labels.card_exp_date')
-              = select_month(0,
+              = select_month(f.object.ex_month,
                     { field_name: 'ex_month',
                       prefix: 'credit_card',
                       prompt: t('client_center.sign_up.select_month') },
@@ -68,7 +67,7 @@
           .col-xs-6
             %label
               %p &nbsp;
-              = select_year(0,
+              = select_year(f.object.ex_year,
                     @shared_card_view.year_select,
                     class: 'selectpicker form-selector card-exp', tabindex: 15)
     .row
