@@ -1,14 +1,16 @@
-class AddCreditCard
+class SetCreditCard
 
   attr_reader :card, :error_message
 
   def initialize(options)
     @client = options[:client]
     @card_attributes = options[:card_attributes]
+    @id = options[:id]
   end
 
   def perform
-    @card = client.credit_cards.new(card_attributes)
+    @card = client.credit_cards.find_or_initialize_by(id: @id)
+    @card.attributes = card_attributes
     ActiveRecord::Base.transaction do
       register_in_stripe
       save_in_db
