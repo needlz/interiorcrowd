@@ -122,4 +122,17 @@ RSpec.configure do |config|
     end
   end
 
+  def mock_stripe_customer_registration
+    allow(Stripe::Customer).to receive(:create) do
+      Hashie::Mash.new(id: 'customer id')
+    end
+  end
+
+  def pay_contest(contest)
+    payment = Payment.new(contest)
+    mock_stripe_customer_registration
+    mock_stripe_successful_charge
+    payment.perform
+  end
+
 end

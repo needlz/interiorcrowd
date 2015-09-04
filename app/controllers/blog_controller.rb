@@ -63,25 +63,32 @@ class BlogController < ApplicationController
   end
 
   def render_blog_page(content)
+    @admin_page = @url.match %r[/wp-admin($|/)]
     locals = BlogPageProxy.new(content, form_authenticity_token).rendering_params
     @no_global_css = true
-    render 'shared/_blog_page', locals: locals, layout: 'application'
+    if @admin_page
+      AdminBlogPage.render(locals, self)
+    else
+      DefaultBlogPage.render(locals, self)
+    end
   end
 
   def set_url
     @url = Settings.external_urls.blog[action_name]
   end
 
-  def get_response(url, method, params)
+  def get_response(url, method, request_params)
+    request_params.except!(:utf8, :authenticity_token)
     conn = Faraday.new(url) do |f|
       f.use FaradayMiddleware::FaradayCookies, session: session
       f.response :logger if Rails.env.development?
       f.request :url_encoded
+      forward_headers(f)
       f.adapter Faraday.default_adapter
     end
 
     if method == :post
-      conn.post('', params)
+      conn.post('', request_params)
     else
       conn.get
     end
@@ -117,6 +124,12 @@ class BlogController < ApplicationController
     return params if env['QUERY_STRING'].blank?
     p = CGI::parse(env['QUERY_STRING'])
     params.merge!( Hash[p.map{ |k,v| [k, v[0]] }])
+  end
+
+  def forward_headers(r)
+    ['ACCEPT', 'ACCEPT_LANGUAGE', 'USER_AGENT'].each do |header|
+      r.headers[header.dasherize] = env["HTTP_#{ header }"] if env["HTTP_#{ header }"]
+    end
   end
 
 end

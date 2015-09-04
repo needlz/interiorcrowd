@@ -18,7 +18,7 @@ RSpec.describe ClientPaymentsController do
       client.update_attributes!(primary_card_id: credit_card.id)
     end
 
-    context 'valid contest id' do
+    context 'when client has primary card' do
       context 'successful charge' do
         before do
           mock_stripe_successful_charge
@@ -44,7 +44,7 @@ RSpec.describe ClientPaymentsController do
       end
     end
 
-    context 'invalid context id' do
+    context 'when client has no primary card' do
       before do
         client.update_attributes!(primary_card_id: nil)
         mock_stripe_successful_charge
