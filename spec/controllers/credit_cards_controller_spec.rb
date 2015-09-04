@@ -85,6 +85,40 @@ RSpec.describe CreditCardsController do
       expect(response).to have_http_status(:not_found)
     end
 
+    it 'can be edited' do
+      client.credit_cards << credit_card
+      get :edit, id: credit_card.id
+      expect(response).to render_template('contests/_card_form')
+    end
+
+    it 'cannot be edited when user specified wrong id' do
+      client.credit_cards << credit_card
+      get :edit, id: 0
+      expect(response).to have_http_status(:not_found)
+    end
+
+    it 'can be updated' do
+      client.credit_cards << credit_card
+
+      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
+        Hashie::Mash.new(id: 'id')
+      end
+
+      patch :update, create_params.merge(id: credit_card.id)
+      expect(response).to render_template('contests/_card_view')
+    end
+
+    it 'cannot be updated when specified wrong card details' do
+      client.credit_cards << credit_card
+
+      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
+        Hashie::Mash.new(id: 'id')
+      end
+
+      patch :update, create_params.merge(id: credit_card.id, credit_card: { zip: 4444 })
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
   end
 
 end
