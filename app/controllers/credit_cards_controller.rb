@@ -26,13 +26,18 @@ class CreditCardsController < ApplicationController
   def edit
     @credit_card = current_user.credit_cards.find card_id
     @shared_card_view = CreditCardView.new(nil)
-    render partial: 'contests/card_form', locals: { css_class: nil, method: 'patch' }
+    render partial: 'contests/card_form', locals: { css_class: nil, form_method: :patch }
   end
 
   def update
     @credit_card = current_user.credit_cards.find params[:id]
+    @credit_card.update_attributes!(new_credit_card_params)
     card_view = CreditCardView.new(@credit_card)
     render partial: 'contests/card_view', locals: { card: card_view }
+  rescue ActiveRecord::RecordInvalid
+    render text: @credit_card.errors.full_messages, status: :unprocessable_entity
+  rescue ActiveRecord::RecordNotFound
+    render text: 'There is no credit card with such id for this client.', status: :not_found
   end
 
   def destroy
@@ -40,7 +45,7 @@ class CreditCardsController < ApplicationController
     credit_card.destroy
     render nothing: true
   rescue ActiveRecord::RecordNotFound
-    render text: 'There is no credit card with such id for this client', status: :not_found
+    render text: 'There is no credit card with such id for this client.', status: :not_found
   end
 
   private

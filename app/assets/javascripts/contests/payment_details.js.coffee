@@ -45,6 +45,7 @@ class @CreditCards
   @deleteCardLinkSelector: 'a#remove-card'
   @saveCreditCardLinkSelector: 'a#save-credit-card'
   @newCreditCardFormSelector: '.new_credit_card'
+  @editCreditCardFormSelector: '.edit_credit_card'
   @creditCardFormDivSelector: '.credit-card-form'
   @addNewCreditCardButtonSelector: '.add-new-credit-card'
   @cancelCardAddingButtonSelector: '#cancel-card-adding'
@@ -81,19 +82,12 @@ class @CreditCards
   @bindCreditCardSaving: ->
     $(document).on 'click', @saveCreditCardLinkSelector, (event)=>
       $form = $(event.target).closest(@newCreditCardFormSelector)
-      $.ajax(
-        url: $form.attr('action'),
-        method: $form.attr('method'),
-        data: $form.serializeArray()
-        success: (data)=>
-          @toggleCardFormVisibility()
-          $firstCard = $(@creditCardAreaSelector + ':first')
-          if $firstCard.length
-            $(data).insertBefore($firstCard)
-          else
-            $(data).appendTo($(@cardsContainerSelector))
-          @setDefaultInputValues()
-      )
+      unless $form.length
+        $form = $(event.target).closest(@editCreditCardFormSelector)
+        $form.attr('method', $('[name=_method]').val())
+        @performRequest $form, @displayUpdatedCardInfo, event.target
+      else
+        @performRequest $form, @displayNewlyAddedCard
 
   @bindCardEditing: ->
     $(document).on 'click', 'a#edit-card', (event)=>
@@ -103,7 +97,8 @@ class @CreditCards
         method: 'GET',
         success: (data)=>
           $cardContainer = $(event.target).closest('.credit-card-params')
-          $cardContainer.replaceWith(data)
+          $cardContainer.hide()
+          $(data).insertBefore($cardContainer)
           @styleDropdowns()
       )
 
@@ -117,6 +112,29 @@ class @CreditCards
           $(event.target).closest('.credit-card-params').remove()
       )
 
+  @performRequest: ($form, callback, clickedLinkSelector)->
+    $.ajax(
+      url: $form.attr('action'),
+      method: $form.attr('method'),
+      data: $form.serializeArray()
+      success: (data)=>
+        callback.call @, data, clickedLinkSelector
+    )
+
+  @displayUpdatedCardInfo: (updatedCardHtml, clickedLinkSelector)->
+    $cardContainer = $(clickedLinkSelector).closest('.credit-card-form')
+    $cardContainer.next('.credit-card-params').remove()
+    $cardContainer.replaceWith(updatedCardHtml)
+
+  @displayNewlyAddedCard: (cardInfoHtml)->
+    @toggleCardFormVisibility()
+    $firstCard = $(@creditCardAreaSelector + ':first')
+    if $firstCard.length
+      $(cardInfoHtml).insertBefore($firstCard)
+    else
+      $(cardInfoHtml).appendTo($(@cardsContainerSelector))
+    @setDefaultInputValues()
+
   @styleDropdowns: ->
     $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
 
@@ -127,7 +145,8 @@ class @CreditCards
 
   @toggleCardFormVisibility: (editLink)->
     $form = $(editLink).closest(@creditCardFormDivSelector)
-    if $form.length
+    if $form.find('form').hasClass('edit_credit_card')
+      $form.next('.credit-card-params').show()
       $form.remove()
     else
       $form = $(@creditCardFormDivSelector + ':first')
