@@ -28,6 +28,8 @@ module FaradayMiddleware
     end
 
     def get_cookies(env)
+      p 'request headers', env.request_headers if Settings.log_requests_to_blog
+      p 'reuqest body', env.body if Settings.log_requests_to_blog
       response = @app.call(env)
 
       response.on_complete do |response_env|
