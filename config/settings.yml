@@ -57,6 +57,7 @@ common: &defaults
     app_id: '<%= ENV['FACEBOOK_APP_ID'] %>'
     secret: <%= ENV['FACEBOOK_APP_SECRET'] %>
   show_beta_functionality: <%= !Rails.env.production? %>
+  log_requests_to_blog: <%= Rails.env.development? %>
 
 development:
 

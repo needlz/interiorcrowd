@@ -41,14 +41,18 @@ class BlogController < ApplicationController
     do_request(:post, get_params)
   end
 
-  def do_request(method, params = nil)
+  def do_request(method, request_params = nil)
     begin
       @url = URI.decode(@url.to_s)
-      @url = @url+ '?' + env['QUERY_STRING'] if env['QUERY_STRING'].present?
+      @url = @url + '?' + env['QUERY_STRING'] if env['QUERY_STRING'].present?
+      blog_page_fetcher = Blog::PageFetcher.new(url: @url,
+                                              params: request_params,
+                                              env: env,
+                                              method: method,
+                                              session: session,
+                                              blog_path: blog_page_url(blog_page_path: ''))
 
-      response = get_response(@url, method, params)
-
-      response = check_redirect(response, method, params)
+      response = blog_page_fetcher.get_response
 
       if response.kind_of? Faraday::Response
         response_body = response.body
@@ -57,14 +61,13 @@ class BlogController < ApplicationController
       end
     rescue OpenURI::HTTPError
       return raise_404
-    else
-      render_blog_page(response_body)
     end
+    render_blog_page(response_body)
   end
 
   def render_blog_page(content)
     @admin_page = @url.match %r[/wp-admin($|/)]
-    locals = BlogPageProxy.new(content, form_authenticity_token).rendering_params
+    locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
     @no_global_css = true
     if @admin_page
       AdminBlogPage.render(locals, self)
@@ -77,59 +80,17 @@ class BlogController < ApplicationController
     @url = Settings.external_urls.blog[action_name]
   end
 
-  def get_response(url, method, request_params)
-    request_params.except!(:utf8, :authenticity_token)
-    conn = Faraday.new(url) do |f|
-      f.use FaradayMiddleware::FaradayCookies, session: session
-      f.response :logger if Rails.env.development?
-      f.request :url_encoded
-      forward_headers(f)
-      f.adapter Faraday.default_adapter
-    end
-
-    if method == :post
-      conn.post('', request_params)
-    else
-      conn.get
-    end
-  end
-
-  def check_redirect(response, method, params)
-    if responded_with_redirect?(response)
-      redirect = response.headers[:location]
-      if !redirect.match(/^http(s?):/)
-        redirect = URI(Settings.external_urls.blog.url).host + '/' + redirect
-      end
-      if equal_to_request_url_with_slash?(redirect)
-        response = get_response(redirect, method, params)
-        return check_redirect(response, method, params)
-      end
-      redirect_matches = redirect.match(/(#{ Regexp.escape(URI(Settings.external_urls.blog.url).host) })\/(.+)/)
-      redirect = blog_page_url(blog_page_path: '') + URI.decode(redirect_matches[2]) if redirect_matches
-      return redirect
-    else
-      response
-    end
-  end
-
-  def responded_with_redirect?(response)
-    response.status / 100 == 3
-  end
-
-  def equal_to_request_url_with_slash?(url)
-    url.match(/^#{ Regexp.escape(@url.to_s) }\/$/)
-  end
-
   def get_params
-    return params if env['QUERY_STRING'].blank?
-    p = CGI::parse(env['QUERY_STRING'])
-    params.merge!( Hash[p.map{ |k,v| [k, v[0]] }])
-  end
-
-  def forward_headers(r)
-    ['ACCEPT', 'ACCEPT_LANGUAGE', 'USER_AGENT'].each do |header|
-      r.headers[header.dasherize] = env["HTTP_#{ header }"] if env["HTTP_#{ header }"]
+    raw_params = params.except(:action, :controller, :blog_page_post_path, :blog_page_path, :utf8, :authenticity_token)
+    return raw_params if env['QUERY_STRING'].blank? && env['rack.request.form_vars'].blank?
+    if env['QUERY_STRING'].present?
+      uri_params = CGI::parse(env['QUERY_STRING'])
+    else
+      uri_params = CGI::parse(env['rack.request.form_vars'])
     end
+    p 'uri params', Hash[uri_params.map{ |k,v| [k, v[0]] }] if Settings.log_requests_to_blog
+    raw_params.merge!(Hash[uri_params.map{ |k,v| [k, v[0]] }])
+    raw_params
   end
 
 end
