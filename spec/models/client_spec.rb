@@ -71,7 +71,7 @@ RSpec.describe Client do
     sample_client.credit_cards << credit_card2
     sample_client.reload
 
-    expect(sample_client.credit_cards).to eq([credit_card1, credit_card2])
+    expect(sample_client.credit_cards).to match_array([credit_card1, credit_card2])
   end
 
   it 'can have primary card' do

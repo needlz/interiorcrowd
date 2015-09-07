@@ -44,8 +44,8 @@ class ClientsController < ApplicationController
     client_sign_up = ClientIntakeFormSignUp.new(params, session)
     client_creation = ClientCreation.new(client_attributes: client_sign_up.client_attributes)
     client_creation.perform
-    create_contest(client_creation.client) if client_creation.saved
-    respond_to_signup(client_creation)
+    contest = create_contest(client_creation.client) if client_creation.saved
+    respond_to_signup(client_creation, contest)
   end
 
   def update
@@ -118,18 +118,21 @@ class ClientsController < ApplicationController
       clear_creation_storage
     end
     contest_creation.perform
+    contest_creation.contest
   end
 
   def contest_active?
     @contest && !@contest.closed?
   end
 
-  def respond_to_signup(client_creation)
+  def respond_to_signup(client_creation, contest = nil)
     @client = client_creation.client
     respond_to do |format|
       if client_creation.saved
         session[:client_id] = @client.id
-        format.html { redirect_to client_center_entries_path({ signed_up: true }) }
+        redirect_path = contest ? payment_details_contests_path(id: contest.id) :
+            client_center_entries_path(signed_up: true)
+        format.html { redirect_to redirect_path }
         format.json { render json: @client, status: :created, location: @client }
       else
         flash[:error] = @client.errors.full_messages.join('</br>')

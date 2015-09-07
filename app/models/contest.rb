@@ -75,6 +75,7 @@ class Contest < ActiveRecord::Base
   scope :inactive, ->{ where(status: FINISHED_STATUSES) }
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
+  scope :not_payed, ->{ where(status: 'brief_pending') }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category
@@ -207,6 +208,10 @@ class Contest < ActiveRecord::Base
 
   def winner_collaboration?
     fulfillment? || final_fulfillment?
+  end
+
+  def payed?
+    client_payment && client_payment.last_error.nil?
   end
 
   private

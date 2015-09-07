@@ -1,3 +1,6 @@
+window.trimedVal = ($input)->
+  $.trim($input.val())
+
 $.fn.selectRange = (start, end) ->
   if !end
     end = start

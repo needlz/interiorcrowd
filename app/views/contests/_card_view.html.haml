@@ -5,6 +5,6 @@
         %p.card-param.col-xs-4= parameter
         %p.card-param-value.col-xs-6= value
   .card-actions.col-lg-4.col-sm-4
-    %a= t('client_center.sign_up.edit_credit_card')
-    %a= t('client_center.sign_up.remove_credit_card')
+    %a#edit-card{ "data-id" => card.id }= t('client_center.sign_up.edit_credit_card')
+    %a#remove-card{ "data-id" => card.id }= t('client_center.sign_up.remove_credit_card')
     %a#card-type{ "data-id" => card.id }= card.link_caption

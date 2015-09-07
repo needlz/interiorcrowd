@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
-  before_filter :check_client, only: [:index]
+  before_filter :check_client, only: [:index, :payment_details]
 
   before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview, :payment_details]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
@@ -10,8 +10,6 @@ class ContestsController < ApplicationController
     return raise_404 unless current_user.see_contest?(@contest)
 
     @navigation = Navigation::ClientCenter.new(:entries)
-    @current_user = current_user
-
     @entries_page = EntriesPage.new(
       contest: @contest,
       view: params[:view],
@@ -82,9 +80,15 @@ class ContestsController < ApplicationController
   end
 
   def payment_details
-    return redirect_to client_login_sessions_path unless current_user.client?
-    @shared_card_view = CreditCardView.new(nil)
     @client = current_user
+    begin
+      @contest = @client.contests.find(params[:id])
+      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed?
+    rescue ActiveRecord::RecordNotFound => e
+      return raise_404(e)
+    end
+    @client_payment = ClientPayment.new
+    @shared_card_view = CreditCardView.new(nil)
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }
     @credit_card = @client.credit_cards.new
@@ -130,7 +134,7 @@ class ContestsController < ApplicationController
     contest_updater.perform
 
     if params[:pictures_dimension]
-      redirect_to client_center_entries_path
+      redirect_to client_center_entry_path(id: @contest.id)
     else
       @creation_wizard = ContestCreationWizard.new(contest_attributes: @contest)
       @contest_view = ContestView.new(contest_attributes: @contest)
@@ -176,8 +180,9 @@ class ContestsController < ApplicationController
   end
 
   def set_contest
-    @contest = Contest.find_by_id(params[:id])
-    return raise_404 unless @contest
+    @contest = Contest.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => e
+    raise_404(e)
   end
 
   def uncomplete_step_path(validated_steps)
@@ -195,7 +200,7 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    redirect_to client_center_entries_path
+    redirect_to  payment_details_contests_path(id: contest_creation.contest)
   end
 
 end

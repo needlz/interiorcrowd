@@ -154,11 +154,13 @@ InteriorC::Application.routes.draw do
               as: 'final_note_to_designer',
               only: [:create]
 
-    resources :credit_cards, only: [:create] do
+    resources :credit_cards, only: [:create, :edit, :update, :destroy] do
       member do
         patch 'set_as_primary'
       end
     end
+
+    resources :client_payments, only: [:create]
 
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'

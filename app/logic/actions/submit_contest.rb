@@ -6,7 +6,7 @@ class SubmitContest
   end
 
   def payed?
-    true
+    contest.payed?
   end
 
   def brief_completed?
@@ -27,10 +27,19 @@ class SubmitContest
       Jobs::CheckIfBoardsReceived.schedule(contest.id, { run_at: Time.current + 3.days })
       @performed = true
     end
+    after_tried
   end
 
   private
 
   attr_reader :contest
+
+  def after_tried
+    notify_about_contest_not_live if !performed? && only_brief_pending?
+  end
+
+  def notify_about_contest_not_live
+    Jobs::Mailer.schedule(:contest_not_live_yet, [@contest])
+  end
 
 end
