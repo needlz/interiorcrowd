@@ -86,6 +86,10 @@ class StripeCustomer
     card.save
   end
 
+  def delete_card(credit_card)
+    stripe_customer.sources.retrieve(credit_card.stripe_id).delete
+  end
+
   private
 
   attr_reader :user
