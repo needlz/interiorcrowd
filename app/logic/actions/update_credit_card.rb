@@ -9,7 +9,7 @@ class UpdateCreditCard
   end
 
   def perform
-    @card = client.credit_cards.find card_id
+    @card = client.credit_cards.find @card_id
     ActiveRecord::Base.transaction do
       update_on_stripe
       save_in_db
