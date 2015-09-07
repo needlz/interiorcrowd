@@ -47,13 +47,13 @@
               %p= t('client_center.profile.labels.card_number')
               = f.text_field :number, id: 'card_number', class: 'form-control',  maxlength: 19,
                   name: 'credit_card[number]',
-                  type: 'text', tabindex: 12
+                  type: 'text', tabindex: 12, disabled: number_and_cvc_disabled
               %span#err_card_number.text-error
           .col-xs-4
             %label
               %p= t('client_center.profile.labels.card_cvc')
               = f.text_field :cvc, id: 'card_cvc', class: 'form-control left-control', name: 'credit_card[cvc]',
-                  type: 'text', tabindex: 13
+                  type: 'text', tabindex: 13, disabled: number_and_cvc_disabled
               %span#err_cvc.text-error
         .row
           .col-xs-6
