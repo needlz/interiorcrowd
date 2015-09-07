@@ -3,7 +3,7 @@ class CreditCardsController < ApplicationController
   before_filter :set_client
 
   def create
-    add_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
+    add_card = AddCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
     add_card.perform
     if add_card.saved?
       card_view = CreditCardView.new(add_card.card)
@@ -32,7 +32,7 @@ class CreditCardsController < ApplicationController
   end
 
   def update
-    update_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params, id: params[:id])
+    update_card = UpdateCreditCard.new(client: current_user, card_attributes: new_credit_card_params, card_id: params[:id])
     update_card.perform
     if update_card.saved?
       card_view = CreditCardView.new(update_card.card)
