@@ -14,9 +14,9 @@ class CreditCardsController < ApplicationController
   end
 
   def set_as_primary
-    client_card = ClientPrimaryCard.new(current_user)
-    client_card.set(card_id)
-    if client_card.saved?
+    set_primary_card = ClientPrimaryCard.new(current_user)
+    set_primary_card.set(card_id)
+    if set_primary_card.saved?
       render nothing: true
     else
       render json: nil, status: :not_found
@@ -32,19 +32,19 @@ class CreditCardsController < ApplicationController
   end
 
   def update
-    add_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params, id: params[:id])
-    add_card.perform
-    if add_card.saved?
-      card_view = CreditCardView.new(add_card.card)
+    update_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params, id: params[:id])
+    update_card.perform
+    if update_card.saved?
+      card_view = CreditCardView.new(update_card.card)
       render partial: 'contests/card_view', locals: { card: card_view }
     else
-      render json: add_card.error_message, status: :unprocessable_entity
+      render json: update_card.error_message, status: :unprocessable_entity
     end
   end
 
   def destroy
-    credit_card = current_user.credit_cards.find card_id
-    credit_card.destroy
+    delete_card = current_user.credit_cards.find card_id
+    delete_card.destroy
     render nothing: true
   rescue ActiveRecord::RecordNotFound
     render text: 'There is no credit card with such id for this client.', status: :not_found
