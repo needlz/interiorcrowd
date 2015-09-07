@@ -11,18 +11,8 @@ class StripeCustomer
     stripe_customer.register if client.stripe_customer_id.blank?
   end
 
-  def self.card_attributes(card)
-    { number: card.number,
-      exp_month: card.ex_month,
-      exp_year: card.ex_year,
-      cvc: card.cvc,
-      name: card.name_on_card,
-      address_line1: card.address,
-      address_city: card.city,
-      address_state: card.state,
-      address_zip: card.zip,
-      address_country: DEFAULT_COUNTRY
-    }
+  def self.create_card_attributes(card)
+    StripeCustomer.update_card_attributes(card).merge({ number: card.number, cvc: card.cvc })
   end
 
   def self.update_card_attributes(card)
@@ -38,7 +28,7 @@ class StripeCustomer
   end
 
   def self.card_token_from_client(client)
-    Stripe::Token.create({ card: card_attributes(client) }).id
+    Stripe::Token.create({ card: create_card_attributes(client) }).id
   end
 
   def register

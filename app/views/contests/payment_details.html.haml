@@ -20,7 +20,7 @@
     .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
     .clearfix
 
-    = render partial: 'card_form', locals: { css_class: 'hidden', form_method: :post }
+    = render partial: 'card_form', locals: { css_class: 'hidden', form_method: :post, number_and_cvc_disabled: false }
 
     - @card_views.each do |card|
       = render partial: 'card_view', locals: { card: card }
