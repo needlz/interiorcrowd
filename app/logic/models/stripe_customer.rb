@@ -76,19 +76,10 @@ class StripeCustomer
     )
   end
 
-  def update_default_card
-    attributes =
-      { exp_month: user.card_ex_month,
-        exp_year: user.card_ex_year,
-        name: user.name_on_card,
-        address_line1: user.billing_address,
-        address_city: user.billing_city,
-        address_state: user.billing_state,
-        address_zip: user.billing_zip,
-        address_country: DEFAULT_COUNTRY
-      }
-    card = default_card
+  def update_card(credit_card)
+    card = stripe_customer.sources.retrieve(credit_card.stripe_id)
     fail(user.stripe_card_status) unless card
+    attributes = StripeCustomer.card_attributes(credit_card)
     attributes.each { |key, value| card.send("#{ key }=", value) }
     card.save
   end
