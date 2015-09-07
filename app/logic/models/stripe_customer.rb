@@ -49,7 +49,7 @@ class StripeCustomer
 
   def import_card(credit_card)
     StripeCustomer.fill_client_info(user)
-    card_options = StripeCustomer.card_attributes(credit_card)
+    card_options = StripeCustomer.create_card_attributes(credit_card)
     add_card(card_options)
   end
 
