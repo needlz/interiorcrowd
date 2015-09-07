@@ -84,6 +84,7 @@ class Contest < ActiveRecord::Base
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
     validates_inclusion_of preference, in: options.map(&:to_s), allow_nil: true
   end
+  validates_inclusion_of :accommodate_children, :accommodate_pets, in: %w[true false], allow_nil: true
 
   after_update :create_phase_end_job, on: :create
   after_update :update_phase_end_job

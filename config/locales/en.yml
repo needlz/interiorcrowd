@@ -363,8 +363,8 @@ en:
       space_needs_accommodate:
         accommodate_children: Does this space need to accommodate children?
         accommodate_pets: Does this space need to accommodate pets?
-        'yes': 'Yes'
-        'no': 'No'
+        'true': 'Yes'
+        'false': 'No'
       done_button: Done!
       thank_you: Thank you!
   client_center:
