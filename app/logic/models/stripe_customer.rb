@@ -25,6 +25,18 @@ class StripeCustomer
     }
   end
 
+  def self.update_card_attributes(card)
+    { exp_month: card.ex_month,
+      exp_year: card.ex_year,
+      name: card.name_on_card,
+      address_line1: card.address,
+      address_city: card.city,
+      address_state: card.state,
+      address_zip: card.zip,
+      address_country: DEFAULT_COUNTRY
+    }
+  end
+
   def self.card_token_from_client(client)
     Stripe::Token.create({ card: card_attributes(client) }).id
   end
@@ -79,7 +91,7 @@ class StripeCustomer
   def update_card(credit_card)
     card = stripe_customer.sources.retrieve(credit_card.stripe_id)
     fail(user.stripe_card_status) unless card
-    attributes = StripeCustomer.card_attributes(credit_card)
+    attributes = StripeCustomer.update_card_attributes(credit_card)
     attributes.each { |key, value| card.send("#{ key }=", value) }
     card.save
   end
