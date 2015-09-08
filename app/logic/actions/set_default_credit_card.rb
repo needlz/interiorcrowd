@@ -1,6 +1,7 @@
 class SetDefaultCreditCard
-
   attr_reader :saved
+
+  alias_method :saved?, :saved
 
   def initialize(options)
     @client = options[:client]
@@ -21,7 +22,7 @@ class SetDefaultCreditCard
 
   def save_in_db
     client.primary_card = client.credit_cards.find card_id
-    @saved = @user.save
+    @saved = client.save
   rescue ActiveRecord::RecordNotFound
     @saved = false
   end

@@ -128,6 +128,7 @@ class @CreditCards
 
   @displayNewlyAddedCard: (cardInfoHtml)->
     @toggleCardFormVisibility()
+    @unMarkPrimaryCard()
     $firstCard = $(@creditCardAreaSelector + ':first')
     if $firstCard.length
       $(cardInfoHtml).insertBefore($firstCard)
@@ -137,6 +138,10 @@ class @CreditCards
 
   @styleDropdowns: ->
     $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
+
+  @unMarkPrimaryCard: ->
+    $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
+    $(@creditCardAreaSelector).find(@setPrimaryCardLinkSelector).text(signupI18n.make_card_primary)
 
   @setDefaultInputValues: ->
     $form = $(@creditCardFormDivSelector)
