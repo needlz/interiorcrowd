@@ -33,11 +33,11 @@ RSpec.describe Payment do
       mock_stripe_unsuccessful_charge
     end
 
-    it 'creates client payment and set last_error attribute' do
+    it 'does not create client payment and does not change contest status' do
       payment = Payment.new(contest)
-      payment.perform
-      expect(payment.client_payment.last_error).to be_present
-      expect(payment.client_payment.payment_status).to eq 'pending'
+      expect{payment.perform}.to raise_error(Stripe::StripeError)
+      expect(contest.client_payment.present?).to be_falsey
+      expect(contest.status).to eq 'brief_pending'
     end
   end
 
@@ -46,11 +46,11 @@ RSpec.describe Payment do
       client.update_attributes!(primary_card_id: nil)
     end
 
-    it 'does not create client payment' do
+    it 'does not create client payment and does not change contest status' do
       payment = Payment.new(contest)
-      payment.perform
+      expect{payment.perform}.to raise_error(ArgumentError)
       expect(contest.client_payment).to be_nil
-      expect(payment.exception).to be_kind_of(ArgumentError)
+      expect(contest.status).to eq 'brief_pending'
     end
   end
 
