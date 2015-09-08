@@ -90,6 +90,11 @@ class StripeCustomer
     stripe_customer.sources.retrieve(credit_card.stripe_id).delete
   end
 
+  def set_default(credit_card)
+    stripe_customer.default_card = credit_card.stripe_id
+    stripe_customer.save
+  end
+
   private
 
   attr_reader :user
