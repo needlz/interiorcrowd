@@ -79,7 +79,8 @@ class ContestView
   end
 
   def options_level(level)
-    I18n.t("client_center.entries.option_levels.#{ LEVELS[level.to_i] }")
+    return '' unless level
+    '(' + I18n.t("client_center.entries.option_levels.#{ LEVELS[level.to_i] }") + ')'
   end
 
   def entertaining

@@ -1,4 +1,5 @@
-= form.radio_button(attribute, true)
-= form.label(attribute, t('contests.additional_details.space_needs_accommodate.yes'), value: true)
-= form.radio_button(attribute, false)
-= form.label(attribute, t('contests.additional_details.space_needs_accommodate.no'), value: false)
+- Contest::ACCOMMODATION_VALUES.each do |value|
+  = form.radio_button(attribute, value)
+  = form.label(attribute, 
+      t("contests.additional_details.space_needs_accommodate.#{ value }"),
+      value: value)
