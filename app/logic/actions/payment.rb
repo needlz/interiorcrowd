@@ -19,11 +19,7 @@ class Payment
       price = calculator.price_in_cents
       payment = contest.client_payment
       card = client.primary_card
-      unless card
-        @error_message = 'Primary card not set'
-        @exception = ArgumentError.new(@error_message)
-        return
-      end
+      raise ArgumentError.new('Primary card not set') unless card
 
       if payment
         payment.update_attributes!(payment_status: 'pending',
@@ -53,9 +49,9 @@ class Payment
         submit_contest = SubmitContest.new(contest.reload)
         submit_contest.try_perform
       rescue StandardError => e
-        @exception = e
         @error_message = e.message + "\n" + e.backtrace.join("\n")
         payment.update_attributes!(last_error: @error_message)
+        raise
       end
     end
   end

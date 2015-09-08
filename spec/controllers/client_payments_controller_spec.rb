@@ -7,6 +7,7 @@ RSpec.describe ClientPaymentsController do
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client) }
   let(:credit_card) { Fabricate(:credit_card, client: client) }
+  let(:promocode) { Fabricate(:promocode) }
 
   before do
     mock_stripe_customer_registration
@@ -37,9 +38,14 @@ RSpec.describe ClientPaymentsController do
         end
 
         it 'does not create payment' do
-          post :create, contest_id: contest.id
+          expect(contest.promocodes.count).to eq(0)
+
+          post :create, contest_id: contest.id, client: { promocode: promocode.promocode}
+
           expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
-          expect(contest.client_payment.last_error).to be_present
+          expect(contest.client_payment.present?).to be_falsey
+          expect(contest.promocodes.count).to eq(0)
+          expect(contest.status).to eq('brief_pending')
         end
       end
     end
@@ -51,9 +57,12 @@ RSpec.describe ClientPaymentsController do
       end
 
       it 'does not create payment' do
-        post :create, contest_id: contest.id
+        post :create, contest_id: contest.id, client: { promocode: promocode.promocode}
+
         expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
-        expect(contest.client_payment).to be_nil
+        expect(contest.client_payment.present?).to be_falsey
+        expect(contest.promocodes.count).to eq(0)
+        expect(contest.status).to eq('brief_pending')
       end
     end
   end

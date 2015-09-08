@@ -82,6 +82,13 @@ RSpec.describe ClientsController do
       expect(contest.promocodes).to be_exists
     end
 
+    it 'doesn\'t apply the same promocode again' do
+      post :create, { client: client_options }, contest_options_source
+
+      contest = Contest.last
+      expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
+    end
+
     it 'schedules checking of billing info' do
       post :create, { client: client_options }, contest_options_source
       expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1

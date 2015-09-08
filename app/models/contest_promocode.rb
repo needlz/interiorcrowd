@@ -15,4 +15,6 @@ class ContestPromocode < ActiveRecord::Base
   belongs_to :contest
   belongs_to :promocode
 
+  validates :promocode_id, uniqueness: {scope: :contest_id}
+
 end

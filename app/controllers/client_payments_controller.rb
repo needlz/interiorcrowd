@@ -8,8 +8,17 @@ class ClientPaymentsController < ApplicationController
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
-    apply_promocode(contest)
-    do_payment(contest)
+    begin
+      ActiveRecord::Base.transaction do
+        apply_promocode(contest)
+        do_payment(contest)
+      end
+    rescue Exception => e
+      flash[:error] = e.message
+      redirect_to payment_details_contests_path(id: contest.id)
+    else
+      redirect_to payment_summary_contests_path(id: contest.id)
+    end
   end
 
   private
@@ -21,15 +30,7 @@ class ClientPaymentsController < ApplicationController
 
   def do_payment(contest)
     payment = Payment.new(contest)
-    begin
-      payment.perform
-    rescue ArgumentError; end
-    if payment.error_message.present?
-      flash[:error] = payment.error_message
-      redirect_to payment_details_contests_path(id: contest.id)
-    else
-      redirect_to payment_summary_contests_path(id: contest.id)
-    end
+    payment.perform
   end
 
 end
