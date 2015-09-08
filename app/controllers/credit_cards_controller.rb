@@ -5,7 +5,9 @@ class CreditCardsController < ApplicationController
   def create
     add_card = AddCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
     add_card.perform
-    if add_card.saved?
+    set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: add_card.card.id)
+    set_primary_card.perform
+    if add_card.saved? && set_primary_card.saved?
       card_view = CreditCardView.new(add_card.card)
       render partial: 'contests/card_view', locals: { card: card_view }
     else
@@ -14,8 +16,8 @@ class CreditCardsController < ApplicationController
   end
 
   def set_as_primary
-    set_primary_card = ClientPrimaryCard.new(current_user)
-    set_primary_card.set(card_id)
+    set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: card_id)
+    set_primary_card.perform
     if set_primary_card.saved?
       render nothing: true
     else
