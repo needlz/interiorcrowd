@@ -13,7 +13,8 @@ class ClientPaymentsController < ApplicationController
         apply_promocode(contest)
         do_payment(contest)
       end
-    rescue Exception => e
+    rescue StandardError => e
+      log_error(e)
       flash[:error] = e.message
       redirect_to payment_details_contests_path(id: contest.id)
     else
