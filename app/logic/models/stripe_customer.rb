@@ -12,21 +12,17 @@ class StripeCustomer
   end
 
   def self.card_attributes(card)
-    { number: card.number,
-      exp_month: card.ex_month,
-      exp_year: card.ex_year,
-      cvc: card.cvc,
-      name: card.name_on_card,
-      address_line1: card.address,
-      address_city: card.city,
-      address_state: card.state,
-      address_zip: card.zip,
+    { number: card[:number],
+      exp_month: card[:ex_month],
+      exp_year: card[:ex_year],
+      cvc: card[:cvc],
+      name: card[:name_on_card],
+      address_line1: card[:address],
+      address_city: card[:city],
+      address_state: card[:state],
+      address_zip: card[:zip],
       address_country: DEFAULT_COUNTRY
     }
-  end
-
-  def self.card_token_from_client(client)
-    Stripe::Token.create({ card: card_attributes(client) }).id
   end
 
   def register
@@ -45,9 +41,9 @@ class StripeCustomer
     @stripe_customer ||= Stripe::Customer.retrieve(user.stripe_customer_id)
   end
 
-  def import_card(credit_card)
+  def import_card(credit_card_attributes)
     StripeCustomer.fill_client_info(user)
-    card_options = StripeCustomer.card_attributes(credit_card)
+    card_options = StripeCustomer.card_attributes(credit_card_attributes)
     add_card(card_options)
   end
 

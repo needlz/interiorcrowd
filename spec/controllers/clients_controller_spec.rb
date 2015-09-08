@@ -89,11 +89,6 @@ RSpec.describe ClientsController do
       expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
     end
 
-    it 'schedules checking of billing info' do
-      post :create, { client: client_options }, contest_options_source
-      expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1
-    end
-
     context 'when not unique email' do
       let(:initial_client_count) { 1 }
 

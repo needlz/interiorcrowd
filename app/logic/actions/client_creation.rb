@@ -9,7 +9,6 @@ class ClientCreation
 
   def perform
     return unless create_client
-    check_card if client.card_number
     send_notifications
     self
   end
@@ -26,10 +25,6 @@ class ClientCreation
   def send_notifications
     Jobs::Mailer.schedule(:client_registered, [client])
     Jobs::Mailer.schedule(:user_registration_info, [client])
-  end
-
-  def check_card
-    Jobs::StripeCustomerRegistration.schedule(client)
   end
 
 end

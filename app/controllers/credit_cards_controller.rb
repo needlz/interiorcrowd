@@ -3,7 +3,8 @@ class CreditCardsController < ApplicationController
   before_filter :set_client
 
   def create
-    add_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
+    add_card = SetCreditCard.new(client: current_user,
+                                 card_attributes: new_credit_card_params)
     add_card.perform
     if add_card.saved?
       card_view = CreditCardView.new(add_card.card)
@@ -28,11 +29,14 @@ class CreditCardsController < ApplicationController
     @shared_card_view = CreditCardView.new(nil)
     render partial: 'contests/card_form', locals: { css_class: nil, form_method: :patch }
   rescue ActiveRecord::RecordNotFound
-    render text: 'There is no credit card with such id for this client.', status: :not_found
+    render text: 'There is no credit card with such id for this client.',
+           status: :not_found
   end
 
   def update
-    update_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params, id: params[:id])
+    update_card = SetCreditCard.new(client: current_user,
+                                    card_attributes: new_credit_card_params,
+                                    id: params[:id])
     update_card.perform
     if update_card.saved?
       card_view = CreditCardView.new(update_card.card)
@@ -47,7 +51,8 @@ class CreditCardsController < ApplicationController
     delete_card.destroy
     render nothing: true
   rescue ActiveRecord::RecordNotFound
-    render text: 'There is no credit card with such id for this client.', status: :not_found
+    render text: 'There is no credit card with such id for this client.',
+           status: :not_found
   end
 
   private

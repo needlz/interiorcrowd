@@ -22,14 +22,13 @@
 #
 
 class CreditCard < ActiveRecord::Base
-  before_save :set_last_4_digits
 
   belongs_to :client
 
   normalize_attributes  :name_on_card, :address, :state, :city
 
-  validates_presence_of :number, :ex_month, :ex_year, :cvc
-  validates :number, uniqueness: { scope: :client_id }
+  validates_presence_of :last_4_digits, :ex_month, :ex_year, :cvc
+  validates :stripe_id, uniqueness: { scope: :client_id }
 
   validates_length_of  :zip,
                        is: 5,
@@ -38,9 +37,5 @@ class CreditCard < ActiveRecord::Base
   validates_numericality_of :cvc, :on => [:create, :update, :save]
 
   scope :from_newer_to_older, -> { order(created_at: :desc) }
-
-  def set_last_4_digits
-    self.last_4_digits= number.length < 4 ? number : number[-4..-1]
-  end
 
 end

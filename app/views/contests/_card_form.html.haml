@@ -45,9 +45,13 @@
           .col-xs-8
             %label
               %p= t('client_center.profile.labels.card_number')
-              = f.text_field :number, id: 'card_number', class: 'form-control',  maxlength: 19,
-                  name: 'credit_card[number]',
-                  type: 'text', tabindex: 12
+              = text_field_tag 'credit_card[number]',
+                  "ending with #{ f.object.last_4_digits }",
+                  id: 'card_number',
+                  class: 'form-control',
+                  maxlength: 19,
+                  type: 'text',
+                  tabindex: 12
               %span#err_card_number.text-error
           .col-xs-4
             %label

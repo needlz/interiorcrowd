@@ -2,11 +2,16 @@ require "rails_helper"
 
 RSpec.describe CreditCard do
   let(:client) { Fabricate(:client) }
-  let(:credit_card) { Fabricate(:credit_card) }
-  let(:duplicate_credit_card) { Fabricate(:credit_card, number: credit_card.number) }
-
-  it 'stores the last 4 digits of a card number' do
-    expect(credit_card.last_4_digits.to_s).to eq(credit_card.number[-4..-1])
+  let(:card_number) { '4242424242424242' }
+  let(:credit_card) do
+    Fabricate(:credit_card,
+              last_4_digits: card_number.last(4),
+              stripe_id: '1')
+  end
+  let(:duplicate_credit_card) do
+    Fabricate(:credit_card,
+              last_4_digits: card_number.last(4),
+              stripe_id: '1')
   end
 
   it 'stores field filled with spaces as nil value' do
@@ -20,11 +25,6 @@ RSpec.describe CreditCard do
     expect(credit_card.address).to eq(nil)
     expect(credit_card.state).to eq(nil)
     expect(credit_card.city).to eq(nil)
-  end
-
-  it 'must have number' do
-    credit_card.number = nil
-    expect(credit_card.invalid?).to be_truthy
   end
 
   it 'must have expiration month and year specified' do
@@ -47,7 +47,7 @@ RSpec.describe CreditCard do
     expect(credit_card.invalid?).to be_truthy
   end
 
-  it 'disallows user to have more than one card with the same number' do
+  it 'disallows user to have more than one card with the same stripe_id' do
     client.credit_cards << credit_card
     client.credit_cards << duplicate_credit_card
     saved_client = Client.find(client)
