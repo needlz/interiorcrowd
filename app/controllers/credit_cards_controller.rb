@@ -5,13 +5,14 @@ class CreditCardsController < ApplicationController
   def create
     add_card = AddCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
     add_card.perform
+    render json: add_card.error_message, status: :unprocessable_entity and return unless add_card.saved?
     set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: add_card.card.id)
     set_primary_card.perform
-    if add_card.saved? && set_primary_card.saved?
+    if set_primary_card.saved?
       card_view = CreditCardView.new(add_card.card)
       render partial: 'contests/card_view', locals: { card: card_view }
     else
-      render json: add_card.error_message, status: :unprocessable_entity
+      render json: set_primary_card.error_message, status: :unprocessable_entity
     end
   end
 

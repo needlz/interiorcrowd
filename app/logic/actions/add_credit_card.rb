@@ -17,7 +17,7 @@ class AddCreditCard
 
   def register_in_stripe
     stripe_customer = StripeCustomer.new(client)
-      @stripe_id = stripe_customer.import_card(@card).id
+    @stripe_id = stripe_customer.import_card(@card).id
   rescue Stripe::StripeError => e
     @error_message = e.message
     raise e
