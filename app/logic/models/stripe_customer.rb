@@ -11,7 +11,7 @@ class StripeCustomer
     stripe_customer.register if client.stripe_customer_id.blank?
   end
 
-  def self.card_attributes(card)
+  def self.create_card_attributes(credit_card_attributes)
     { number: card[:number],
       exp_month: card[:ex_month],
       exp_year: card[:ex_year],
@@ -21,6 +21,18 @@ class StripeCustomer
       address_city: card[:city],
       address_state: card[:state],
       address_zip: card[:zip],
+      address_country: DEFAULT_COUNTRY
+    }
+  end
+
+  def self.update_card_attributes(card)
+    { exp_month: card.ex_month,
+      exp_year: card.ex_year,
+      name: card.name_on_card,
+      address_line1: card.address,
+      address_city: card.city,
+      address_state: card.state,
+      address_zip: card.zip,
       address_country: DEFAULT_COUNTRY
     }
   end
@@ -43,7 +55,7 @@ class StripeCustomer
 
   def import_card(credit_card_attributes)
     StripeCustomer.fill_client_info(user)
-    card_options = StripeCustomer.card_attributes(credit_card_attributes)
+    card_options = StripeCustomer.create_card_attributes(credit_card_attributes)
     add_card(card_options)
   end
 
@@ -72,21 +84,21 @@ class StripeCustomer
     )
   end
 
-  def update_default_card
-    attributes =
-      { exp_month: user.card_ex_month,
-        exp_year: user.card_ex_year,
-        name: user.name_on_card,
-        address_line1: user.billing_address,
-        address_city: user.billing_city,
-        address_state: user.billing_state,
-        address_zip: user.billing_zip,
-        address_country: DEFAULT_COUNTRY
-      }
-    card = default_card
+  def update_card(credit_card)
+    card = stripe_customer.sources.retrieve(credit_card.stripe_id)
     fail(user.stripe_card_status) unless card
+    attributes = StripeCustomer.update_card_attributes(credit_card)
     attributes.each { |key, value| card.send("#{ key }=", value) }
     card.save
+  end
+
+  def delete_card(credit_card)
+    stripe_customer.sources.retrieve(credit_card.stripe_id).delete
+  end
+
+  def set_default(credit_card)
+    stripe_customer.default_card = credit_card.stripe_id
+    stripe_customer.save
   end
 
   private
