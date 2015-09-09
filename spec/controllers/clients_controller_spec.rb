@@ -54,7 +54,7 @@ RSpec.describe ClientsController do
 
     it 'redirects to entries page' do
       post :create, { client: client_options }, contest_options_source
-      expect(response).to redirect_to(client_center_entries_path({signed_up: true}) )
+      expect(response).to redirect_to(payment_details_contests_path(id: Contest.last.id))
     end
 
     it 'saves attributes' do
@@ -82,9 +82,11 @@ RSpec.describe ClientsController do
       expect(contest.promocodes).to be_exists
     end
 
-    it 'schedules checking of billing info' do
+    it 'doesn\'t apply the same promocode again' do
       post :create, { client: client_options }, contest_options_source
-      expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1
+
+      contest = Contest.last
+      expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
     end
 
     context 'when not unique email' do

@@ -40,9 +40,10 @@ class Contest < ActiveRecord::Base
   self.per_page = 10
 
   STATUSES = %w[brief_pending submission winner_selection closed fulfillment final_fulfillment finished]
-  COLLABORATION_STATUSES = %w[submission winner_selection fulfillment]
+  COLLABORATION_STATUSES = %w[submission winner_selection fulfillment final_fulfillment]
   NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES
   FINISHED_STATUSES = %w[closed finished]
+  ACCOMMODATION_VALUES = %w[true false]
 
   has_many :contests_appeals
   has_many :appeals, through: :contests_appeals
@@ -75,14 +76,21 @@ class Contest < ActiveRecord::Base
   scope :inactive, ->{ where(status: FINISHED_STATUSES) }
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
+  scope :not_payed, ->{ where(status: 'brief_pending') }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category
   validates_presence_of :design_space
   normalize_attributes *ContestAdditionalPreference::PREFERENCES.keys
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
-    validates_inclusion_of preference, in: options.map(&:to_s), allow_nil: true
+    validates_inclusion_of preference,
+                           in: options.map(&:to_s),
+                           allow_nil: true
   end
+  validates_inclusion_of :accommodate_children,
+                         :accommodate_pets,
+                         in: ACCOMMODATION_VALUES,
+                         allow_nil: true
 
   after_update :create_phase_end_job, on: :create
   after_update :update_phase_end_job
@@ -207,6 +215,10 @@ class Contest < ActiveRecord::Base
 
   def winner_collaboration?
     fulfillment? || final_fulfillment?
+  end
+
+  def payed?
+    client_payment && client_payment.last_error.nil?
   end
 
   private

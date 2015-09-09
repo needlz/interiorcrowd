@@ -363,8 +363,8 @@ en:
       space_needs_accommodate:
         accommodate_children: Does this space need to accommodate children?
         accommodate_pets: Does this space need to accommodate pets?
-        'yes': 'Yes'
-        'no': 'No'
+        'true': 'Yes'
+        'false': 'No'
       done_button: Done!
       thank_you: Thank you!
   client_center:
@@ -539,7 +539,7 @@ en:
       brief: Brief
       profile: Profile
     sign_up:
-      title: Create your account <span></span> and <span></span> payment detail
+      title: Create your account
       create_account: Create your account
       password: Password
       confirm_password: Confirm Password
@@ -567,6 +567,8 @@ en:
       add_credit_card: Add new credit card
       edit_credit_card: Edit
       remove_credit_card: Remove
+      save: Save
+      cancel: Cancel
       credit_card:
         name: Name on card
         number: Credit card
@@ -585,9 +587,9 @@ en:
       download_images: Download
       generating_archive: Generating archive...
     statuses:
+      brief_pending: 'Brief pending: upload pictures of your space'
       submission: Submission
       winner_selection: Pick winner
-
       fulfillment: Custom Board and Product List Collaboration
       final_fulfillment: Wait for Create Final Design
       closed: Closed

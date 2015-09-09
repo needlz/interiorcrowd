@@ -10,7 +10,7 @@
   #choose-room
     = render partial: 'home/msg'
     = form_tag save_design_brief_contests_path,
-        { id: 'design_categories', method: 'post' } do
+        { id: 'design_categories', method: 'post', class: 'intake-form' } do
       = render partial: 'contests/options/category_options'
       = render partial: 'contests/options/area_options'
       = hidden_mixpanel_submit_tag

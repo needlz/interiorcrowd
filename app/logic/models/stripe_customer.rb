@@ -9,25 +9,20 @@ class StripeCustomer
   def self.fill_client_info(client)
     stripe_customer = new(client)
     stripe_customer.register if client.stripe_customer_id.blank?
-    stripe_customer.try_add_default_card
   end
 
-  def self.card_attributes(client)
-    { number: client.card_number,
-      exp_month: client.card_ex_month,
-      exp_year: client.card_ex_year,
-      cvc: client.card_cvc,
-      name: client.name_on_card,
-      address_line1: client.address,
-      address_city: client.city,
-      address_state: client.state,
-      address_zip: client.zip,
+  def self.card_attributes(card)
+    { number: card[:number],
+      exp_month: card[:ex_month],
+      exp_year: card[:ex_year],
+      cvc: card[:cvc],
+      name: card[:name_on_card],
+      address_line1: card[:address],
+      address_city: card[:city],
+      address_state: card[:state],
+      address_zip: card[:zip],
       address_country: DEFAULT_COUNTRY
     }
-  end
-
-  def self.card_token_from_client(client)
-    Stripe::Token.create({ card: card_attributes(client) }).id
   end
 
   def register
@@ -46,9 +41,14 @@ class StripeCustomer
     @stripe_customer ||= Stripe::Customer.retrieve(user.stripe_customer_id)
   end
 
+  def import_card(credit_card_attributes)
+    StripeCustomer.fill_client_info(user)
+    card_options = StripeCustomer.card_attributes(credit_card_attributes)
+    add_card(card_options)
+  end
+
   def add_card(card_options_or_token)
-    card = stripe_customer.sources.create({ source: card_options_or_token })
-    user.update_attributes!(stripe_card_status: 'saved')
+    card = stripe_customer.sources.create({ source: card_options_or_token.merge(object: 'card') })
     card
   end
 
@@ -57,8 +57,6 @@ class StripeCustomer
   end
 
   def default_card
-    data = cards.data
-    try_add_default_card if data.empty?
     data = cards.data
     data.last
   end
@@ -69,6 +67,7 @@ class StripeCustomer
       amount: money.cents,
       currency: money.currency,
       customer: stripe_customer.id,
+      source: options[:card_id],
       description: options[:description]
     )
   end
@@ -90,20 +89,8 @@ class StripeCustomer
     card.save
   end
 
-  def try_add_default_card
-    begin
-      add_default_card
-    rescue Stripe::StripeError => e
-      user.update_attributes!(stripe_card_status: e.message)
-    end
-  end
-
   private
 
   attr_reader :user
-
-  def add_default_card
-    add_card(StripeCustomer.card_token_from_client(user))
-  end
 
 end

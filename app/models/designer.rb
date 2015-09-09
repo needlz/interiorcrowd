@@ -21,6 +21,7 @@
 #  city                    :text
 #  linkedin_profile        :string(255)
 #  active                  :boolean          default(TRUE)
+#  facebook_user_id        :integer
 #
 
 class Designer < ActiveRecord::Base

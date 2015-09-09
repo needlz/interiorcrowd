@@ -249,6 +249,7 @@ class @ColorsEditor
 
   setCurrentColors: (newColors)->
     @$colorTags.select2('data', newColors)
+    @$colorInput.trigger('change')
 
   checkMark: ->
     @$colorsTable.find('> .check')

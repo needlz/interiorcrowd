@@ -1,5 +1,5 @@
 .animated.fadeInDown
   %h2.displayTitle= title.upcase
 .content.container.animated.fadeInDown{ class: (container_class if defined?(container_class)) }
-  = render partial: header
+  = render partial: header if @navigation
   = content

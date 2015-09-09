@@ -6,4 +6,9 @@ RSpec.describe CreditCardsController do
                                                                controller: 'credit_cards',
                                                                id: '3')
   end
+
+  it 'routes POST request to create new card' do
+    expect(post: 'credit_cards').to route_to(action: 'create',
+                                             controller: 'credit_cards')
+  end
 end

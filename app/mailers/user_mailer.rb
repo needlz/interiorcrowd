@@ -168,7 +168,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def client_hasnt_picked_a_winner_to_designers(contest)
-    template 'client_ready_for_final_design'
+    template 'client_hasnt_picked_a_winner_to_designers'
     designers = Designer.joins(:contest_requests).where(contest_requests: { id: contest.requests.submitted.pluck(:id) })
     set_template_values(
         CONTEST_NAME: contest.name

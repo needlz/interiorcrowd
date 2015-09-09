@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825165644) do
+ActiveRecord::Schema.define(version: 20150908195045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -177,8 +177,8 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "accessories"
     t.string   "space_changes"
     t.string   "shop"
-    t.boolean  "accommodate_children"
-    t.boolean  "accommodate_pets"
+    t.string   "accommodate_children"
+    t.string   "accommodate_pets"
     t.text     "retailer"
     t.text     "elements_to_avoid"
     t.integer  "entertaining"
@@ -218,7 +218,6 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.text     "address"
     t.string   "state"
     t.string   "zip"
-    t.string   "number"
     t.text     "city"
     t.integer  "cvc"
     t.integer  "ex_month"
@@ -227,6 +226,7 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "stripe_card_status", default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_id"
   end
 
   create_table "delayed_jobs", force: true do |t|
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "state"
     t.text     "address"
     t.text     "city"
-    t.boolean  "active",                            default: true
+    t.boolean  "active"
     t.integer  "facebook_user_id",        limit: 8
   end
 
@@ -483,23 +483,6 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.datetime "audio_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "taggings", force: true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context"
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-
-  create_table "tags", force: true do |t|
-    t.string "name"
   end
 
   create_table "user_notifications", force: true do |t|

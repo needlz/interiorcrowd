@@ -17,7 +17,7 @@ class CreditCardView
   end
 
   def card_number
-    "#{ card_type } ending in #{ last_4_digits }"
+    "#{ card_type.capitalize } ending in #{ last_4_digits }"
   end
 
   def full_address
@@ -39,8 +39,8 @@ class CreditCardView
   def year_select
     { :start_year => Time.now.year,
       :end_year => Time.now.year + 10,
-      :field_name => :card_ex_year,
-      prefix: 'client',
+      :field_name => :ex_year,
+      prefix: 'credit_card',
       prompt: I18n.t('client_center.sign_up.select_year')}
   end
 

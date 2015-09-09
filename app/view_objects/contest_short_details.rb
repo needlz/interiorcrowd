@@ -10,7 +10,7 @@ class ContestShortDetails
     @id = contest.id
     @name = contest.project_name
     @package_name = PackageView.new(contest.package).name
-    @design_space = contest.design_space.name
+    @design_space = contest.design_space.full_name
     @days_count = contest.days_left
     @days_till_end = get_days_till_end(contest)
     @days_left = "#{ days_till_end}#{ ' days' if contest.winner_collaboration? }"

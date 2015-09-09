@@ -1,4 +1,4 @@
 - value_html = capture do
-  %p= t("contests.additional_details.space_needs_accommodate.#{ @contest.accommodate_children ? 'yes' : 'no'}")
+  %p= t("contests.additional_details.space_needs_accommodate.#{ @contest.accommodate_children }") if @contest.accommodate_children.present?
 = render(partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.accommodate_children'),
                                                     value: value_html })
