@@ -19,9 +19,7 @@ RSpec.describe CreditCardsController do
     end
 
     it 'doesn\'t create new credit card when passing bad card info' do
-      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_card_adding
 
       card_params = create_params
       card_params[:credit_card].merge!(zip: 111)
@@ -31,12 +29,8 @@ RSpec.describe CreditCardsController do
     end
 
     it 'creates new credit card' do
-      allow_any_instance_of(StripeCustomer).to receive(:stripe_customer) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
-      allow_any_instance_of(StripeCustomer).to receive(:import_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_customer_authentication
+      mock_stripe_card_adding
 
       expect{ post :create, create_params }.to change{ client.credit_cards.count }.by(1)
       expect(response).to render_template('contests/_card_view')
@@ -48,9 +42,7 @@ RSpec.describe CreditCardsController do
       let(:client) { Fabricate(:client, credit_cards: [credit_card]) }
 
       it 'sets primary card for current client' do
-        allow_any_instance_of(StripeCustomer).to receive(:set_default) do
-          Hashie::Mash.new(stripe_customer_id: 'id')
-        end
+        mock_stripe_setting_default_card
 
         patch :set_as_primary, id: credit_card.id
         expect(response).to be_ok
@@ -67,18 +59,14 @@ RSpec.describe CreditCardsController do
       it 'sets primary card for current client' do
         expect(client.primary_card).to eq(old_primary_card)
 
-        allow_any_instance_of(StripeCustomer).to receive(:set_default) do
-          Hashie::Mash.new(stripe_customer_id: 'id')
-        end
+        mock_stripe_setting_default_card
 
         patch :set_as_primary, id: new_primary_card.id
         expect(response).to be_ok
       end
 
       it 'cannot set not existing card for current client' do
-        allow_any_instance_of(StripeCustomer).to receive(:set_default) do
-          Hashie::Mash.new(stripe_customer_id: 'id')
-        end
+        mock_stripe_setting_default_card
 
         patch :set_as_primary, id: 0
         expect(response).to have_http_status(:not_found)
@@ -86,9 +74,7 @@ RSpec.describe CreditCardsController do
     end
 
     it 'deletes the credit card' do
-      allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_card_deleting
 
       client.credit_cards << credit_card
 
@@ -101,9 +87,7 @@ RSpec.describe CreditCardsController do
     end
 
     it 'returns error when client wants to delete credit card with bad id' do
-      allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_card_deleting
 
       delete :destroy, id: 0
       expect(response).to have_http_status(:not_found)
@@ -124,9 +108,7 @@ RSpec.describe CreditCardsController do
     it 'can be updated' do
       client.credit_cards << credit_card
 
-      allow_any_instance_of(StripeCustomer).to receive(:update_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_card_updating
 
       patch :update, create_params.merge(id: credit_card.id)
       expect(response).to render_template('contests/_card_view')
@@ -135,9 +117,7 @@ RSpec.describe CreditCardsController do
     it 'cannot be updated when specified wrong card details' do
       client.credit_cards << credit_card
 
-      allow_any_instance_of(StripeCustomer).to receive(:update_card) do
-        Hashie::Mash.new(stripe_customer_id: 'id')
-      end
+      mock_stripe_card_updating
 
       patch :update, create_params.merge(id: credit_card.id, credit_card: { zip: 4444 })
       expect(response).to have_http_status(:unprocessable_entity)
