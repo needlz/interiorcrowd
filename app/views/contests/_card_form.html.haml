@@ -2,6 +2,7 @@
 .credit-card-form{ class: "#{css_class}" }
   = form_for @credit_card, { id: 'create', method: form_method } do |f|
     #credit-card-form-controls
+      %span.pull-left.text-error#credit-card-editing-error
       %a#save-credit-card= t('client_center.sign_up.save')
       %a#cancel-card-adding= t('client_center.sign_up.cancel')
     .row
@@ -45,15 +46,25 @@
           .col-xs-8
             %label
               %p= t('client_center.profile.labels.card_number')
-              = f.text_field :number, id: 'card_number', class: 'form-control',  maxlength: 19,
-                  name: 'credit_card[number]',
-                  type: 'text', tabindex: 12
+              = text_field_tag 'credit_card[number]',
+                  "#{ placeholder }#{ f.object.last_4_digits }",
+                  id: 'card_number',
+                  class: 'form-control',
+                  maxlength: 19,
+                  type: 'text',
+                  tabindex: 12,
+                  disabled: @credit_card.persisted?
               %span#err_card_number.text-error
           .col-xs-4
             %label
               %p= t('client_center.profile.labels.card_cvc')
-              = f.text_field :cvc, id: 'card_cvc', class: 'form-control left-control', name: 'credit_card[cvc]',
-                  type: 'text', tabindex: 13
+              = f.text_field :cvc,
+                  id: 'card_cvc',
+                  class: 'form-control left-control',
+                  name: 'credit_card[cvc]',
+                  type: 'text',
+                  tabindex: 13,
+                  disabled: @credit_card.persisted?
               %span#err_cvc.text-error
         .row
           .col-xs-6

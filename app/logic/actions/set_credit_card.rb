@@ -1,6 +1,6 @@
 class SetCreditCard
 
-  attr_reader :card, :error_message
+  attr_reader :card
 
   def initialize(options)
     @client = options[:client]
@@ -9,8 +9,6 @@ class SetCreditCard
   end
 
   def perform
-    @card = client.credit_cards.find_or_initialize_by(id: @id)
-    @card.attributes = card_attributes
     ActiveRecord::Base.transaction do
       register_in_stripe
       save_in_db
@@ -19,16 +17,17 @@ class SetCreditCard
 
   def register_in_stripe
     stripe_customer = StripeCustomer.new(client)
-      @stripe_id = stripe_customer.import_card(@card).id
-  rescue Stripe::StripeError => e
-    @error_message = e.message
-    raise e
+    @stripe_id = stripe_customer.import_card(card_attributes).id
   end
 
   def save_in_db
+    @card = client.credit_cards.find_or_initialize_by(id: @id)
+    last_4_digits = card_attributes[:number].last(4) if card_attributes[:number]
+    card_attributes_to_be_saved = card_attributes.merge(last_4_digits: last_4_digits)
+    card_attributes_to_be_saved.except!(:number)
+    @card.attributes = card_attributes_to_be_saved
     @card.stripe_id = @stripe_id
-    @saved = @card.save
-    @error_message = @card.errors.full_messages if @card.errors.present?
+    @saved = @card.save!
   end
 
   def saved?

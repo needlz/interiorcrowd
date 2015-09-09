@@ -50,6 +50,7 @@ class @CreditCards
   @addNewCreditCardButtonSelector: '.add-new-credit-card'
   @cancelCardAddingButtonSelector: '#cancel-card-adding'
   @cardsContainerSelector: '.payment-info-container'
+  @errorMessageContainer: '#credit-card-editing-error'
 
   @init: ->
     @bindCardChoosing()
@@ -119,6 +120,8 @@ class @CreditCards
       data: $form.serializeArray()
       success: (data)=>
         callback.call @, data, clickedLinkSelector
+      error: (response)=>
+        $(@errorMessageContainer).text(response.responseText)
     )
 
   @displayUpdatedCardInfo: (updatedCardHtml, clickedLinkSelector)->
