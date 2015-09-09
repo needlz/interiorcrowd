@@ -66,6 +66,7 @@ RSpec.describe CreditCardsController do
       end
 
       it 'cannot set not existing card for current client' do
+
         mock_stripe_setting_default_card
 
         patch :set_as_primary, id: 0
@@ -74,6 +75,7 @@ RSpec.describe CreditCardsController do
     end
 
     it 'deletes the credit card' do
+
       mock_stripe_card_deleting
 
       client.credit_cards << credit_card
