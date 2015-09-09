@@ -47,18 +47,24 @@
             %label
               %p= t('client_center.profile.labels.card_number')
               = text_field_tag 'credit_card[number]',
-                  ("ending with #{ f.object.last_4_digits }" if f.object.last_4_digits),
+                  "#{ placeholder }#{ f.object.last_4_digits }",
                   id: 'card_number',
                   class: 'form-control',
                   maxlength: 19,
                   type: 'text',
-                  tabindex: 12
+                  tabindex: 12,
+                  disabled: @credit_card.persisted?
               %span#err_card_number.text-error
           .col-xs-4
             %label
               %p= t('client_center.profile.labels.card_cvc')
-              = f.text_field :cvc, id: 'card_cvc', class: 'form-control left-control', name: 'credit_card[cvc]',
-                  type: 'text', tabindex: 13
+              = f.text_field :cvc,
+                  id: 'card_cvc',
+                  class: 'form-control left-control',
+                  name: 'credit_card[cvc]',
+                  type: 'text',
+                  tabindex: 13,
+                  disabled: @credit_card.persisted?
               %span#err_cvc.text-error
         .row
           .col-xs-6
