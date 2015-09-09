@@ -218,7 +218,6 @@ ActiveRecord::Schema.define(version: 20150907174957) do
     t.text     "address"
     t.string   "state"
     t.string   "zip"
-    t.string   "number"
     t.text     "city"
     t.integer  "cvc"
     t.integer  "ex_month"

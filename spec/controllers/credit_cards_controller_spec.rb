@@ -5,10 +5,11 @@ RSpec.describe CreditCardsController do
   context 'user is signed in' do
     let(:client) { Fabricate(:client) }
     let(:credit_card) { Fabricate(:credit_card) }
+    let(:card_number) { '4242424242424242' }
 
     def create_params
       { credit_card: {zip: credit_card.zip,
-                     number: credit_card.number,
+                     number: card_number,
                      cvc: credit_card.cvc,
                      ex_month: credit_card.ex_month,
                      ex_year: credit_card.ex_year} }
@@ -36,7 +37,7 @@ RSpec.describe CreditCardsController do
 
       expect{ post :create, create_params }.to change{ client.credit_cards.count }.by(1)
       expect(response).to render_template('contests/_card_view')
-      expect(client.credit_cards.first.number).to eq(credit_card.number.to_s)
+      expect(client.credit_cards.first.last_4_digits.to_s).to eq(card_number.last(4))
     end
 
     context 'if current client hasn\'t already set primary card' do
