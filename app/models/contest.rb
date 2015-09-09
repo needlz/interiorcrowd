@@ -24,8 +24,8 @@
 #  accessories                     :string(255)
 #  space_changes                   :string(255)
 #  shop                            :string(255)
-#  accommodate_children            :boolean
-#  accommodate_pets                :boolean
+#  accommodate_children            :string(255)
+#  accommodate_pets                :string(255)
 #  retailer                        :text
 #  elements_to_avoid               :text
 #  entertaining                    :integer
@@ -81,7 +81,6 @@ class Contest < ActiveRecord::Base
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category
   validates_presence_of :design_space
-  normalize_attributes *ContestAdditionalPreference::PREFERENCES.keys
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
     validates_inclusion_of preference,
                            in: options.map(&:to_s),
@@ -91,6 +90,12 @@ class Contest < ActiveRecord::Base
                          :accommodate_pets,
                          in: ACCOMMODATION_VALUES,
                          allow_nil: true
+
+  normalize_attributes *ContestAdditionalPreference::PREFERENCES.keys,
+                       :accommodate_pets,
+                       :accommodate_children,
+                       :durability,
+                       :entertaining
 
   after_update :create_phase_end_job, on: :create
   after_update :update_phase_end_job
