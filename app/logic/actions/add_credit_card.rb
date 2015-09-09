@@ -1,11 +1,10 @@
-class SetCreditCard
+class AddCreditCard
 
   attr_reader :card
 
   def initialize(options)
     @client = options[:client]
     @card_attributes = options[:card_attributes]
-    @id = options[:id]
   end
 
   def perform

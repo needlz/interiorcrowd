@@ -3,24 +3,27 @@ class CreditCardsController < ApplicationController
   before_filter :set_client
 
   def create
-    add_card = SetCreditCard.new(client: current_user,
-                                 card_attributes: new_credit_card_params)
+    add_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
     begin
       add_card.perform
     rescue StandardError => e
-      error_message = e.message
+      return render json: e.message, status: :unprocessable_entity
     end
-    if add_card.saved?
-      card_view = CreditCardView.new(add_card.card)
-      render partial: 'contests/card_view', locals: { card: card_view }
-    else
-      render json: error_message, status: :unprocessable_entity
+
+    set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: add_card.card.id)
+    begin
+      set_primary_card.perform
+    rescue StandardError => e
+      return render json: e.message, status: :unprocessable_entity
     end
+
+    card_view = CreditCardView.new(add_card.card)
+    render partial: 'contests/card_view', locals: { card: card_view }
   end
 
   def set_as_primary
-    set_primary_card = ClientPrimaryCard.new(current_user)
-    set_primary_card.set(card_id)
+    set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: card_id)
+    set_primary_card.perform
     if set_primary_card.saved?
       render nothing: true
     else
@@ -41,13 +44,14 @@ class CreditCardsController < ApplicationController
 
   def update
     update_card = SetCreditCard.new(client: current_user,
-                                    card_attributes: new_credit_card_params,
-                                    id: params[:id])
+                                    card_attributes: update_credit_card_params,
+                                    card_id: params[:id])
     begin
       update_card.perform
     rescue StandardError => e
       error_message = e.message
     end
+
     if update_card.saved?
       card_view = CreditCardView.new(update_card.card)
       render partial: 'contests/card_view', locals: { card: card_view }
@@ -57,8 +61,8 @@ class CreditCardsController < ApplicationController
   end
 
   def destroy
-    delete_card = current_user.credit_cards.find card_id
-    delete_card.destroy
+    delete_card = DeleteCreditCard.new(client: current_user, card_id: params[:id])
+    delete_card.perform
     render nothing: true
   rescue ActiveRecord::RecordNotFound
     render text: 'There is no credit card with such id for this client.',
@@ -74,6 +78,11 @@ class CreditCardsController < ApplicationController
   def new_credit_card_params
     params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
                                         :card_type, :number, :cvc, :ex_month, :ex_year)
+  end
+
+  def update_credit_card_params
+    params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
+                                        :card_type, :ex_month, :ex_year)
   end
 
 end
