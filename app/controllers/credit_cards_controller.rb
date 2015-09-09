@@ -3,7 +3,8 @@ class CreditCardsController < ApplicationController
   before_filter :set_client
 
   def create
-    add_card = SetCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
+    add_card = AddCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
+
     begin
       add_card.perform
     rescue StandardError => e
@@ -43,21 +44,17 @@ class CreditCardsController < ApplicationController
   end
 
   def update
-    update_card = SetCreditCard.new(client: current_user,
+    update_card = UpdateCreditCard.new(client: current_user,
                                     card_attributes: update_credit_card_params,
                                     card_id: params[:id])
     begin
       update_card.perform
     rescue StandardError => e
-      error_message = e.message
+      return render json: e.message, status: :unprocessable_entity
     end
 
-    if update_card.saved?
-      card_view = CreditCardView.new(update_card.card)
-      render partial: 'contests/card_view', locals: { card: card_view }
-    else
-      render json: error_message, status: :unprocessable_entity
-    end
+    card_view = CreditCardView.new(update_card.card)
+    render partial: 'contests/card_view', locals: { card: card_view }
   end
 
   def destroy

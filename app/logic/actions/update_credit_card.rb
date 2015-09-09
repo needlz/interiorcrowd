@@ -19,14 +19,10 @@ class UpdateCreditCard
   def update_on_stripe
     stripe_customer = StripeCustomer.new(client)
     stripe_customer.update_card(@card)
-  rescue Stripe::StripeError => e
-    @error_message = e.message
-    raise e
   end
 
   def save_in_db
-    @saved = @card.update_attributes card_attributes
-    @error_message = @card.errors.full_messages if @card.errors.present?
+    @saved = @card.update_attributes!(card_attributes)
   end
 
   def saved?
