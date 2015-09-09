@@ -12,15 +12,15 @@ class StripeCustomer
   end
 
   def self.create_card_attributes(credit_card_attributes)
-    { number: card[:number],
-      exp_month: card[:ex_month],
-      exp_year: card[:ex_year],
-      cvc: card[:cvc],
-      name: card[:name_on_card],
-      address_line1: card[:address],
-      address_city: card[:city],
-      address_state: card[:state],
-      address_zip: card[:zip],
+    { number: credit_card_attributes[:number],
+      exp_month: credit_card_attributes[:ex_month],
+      exp_year: credit_card_attributes[:ex_year],
+      cvc: credit_card_attributes[:cvc],
+      name: credit_card_attributes[:name_on_card],
+      address_line1: credit_card_attributes[:address],
+      address_city: credit_card_attributes[:city],
+      address_state: credit_card_attributes[:state],
+      address_zip: credit_card_attributes[:zip],
       address_country: DEFAULT_COUNTRY
     }
   end
