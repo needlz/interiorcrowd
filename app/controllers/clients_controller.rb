@@ -130,7 +130,7 @@ class ClientsController < ApplicationController
     respond_to do |format|
       if client_creation.saved
         session[:client_id] = @client.id
-        redirect_path = contest ? payment_details_contests_path(id: contest.id) :
+        redirect_path = (contest && Settings.payment_enabled) ? payment_details_contests_path(id: contest.id) :
             client_center_entries_path(signed_up: true)
         format.html { redirect_to redirect_path }
         format.json { render json: @client, status: :created, location: @client }
