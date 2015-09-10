@@ -5,7 +5,7 @@ class CreditCardsController < ApplicationController
   def create
     add_card = AddCreditCard.new(client: @client,
                                  card_attributes: new_credit_card_params,
-                                 set_as_primary: @client.credit_cards.blank?
+                                 set_as_primary: true
     )
     begin
       add_card.perform

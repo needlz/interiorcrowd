@@ -7,6 +7,7 @@
       form_method: :post,
       placeholder: nil,
       show_promocode_input: false }
+.first-card-container
 
 - card_views.each do |card|
   = render partial: 'card_view', locals: { card: card }
