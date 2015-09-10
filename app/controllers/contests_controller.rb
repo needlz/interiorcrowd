@@ -96,7 +96,7 @@ class ContestsController < ApplicationController
   end
 
   def payment_summary
-    redirect_to client_center_entry_path(id: params[:id]) unless Settings.payment_enabled
+    return redirect_to client_center_entry_path(id: params[:id]) unless Settings.payment_enabled
     begin
       @contest = @client.contests.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
