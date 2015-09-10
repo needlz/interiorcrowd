@@ -83,7 +83,7 @@ class ContestsController < ApplicationController
     @client = current_user
     begin
       @contest = @client.contests.find(params[:id])
-      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed?
+      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed? && Settings.payment_enabled
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end

@@ -4,14 +4,20 @@ class ClientPaymentsController < ApplicationController
 
   def create
     begin
-      contest = @client.contests.not_payed.find(params[:contest_id])
+      @contest = @client.contests.not_payed.find(params[:contest_id])
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
+    charge
+  end
+
+  private
+
+  def charge
     begin
       ActiveRecord::Base.transaction do
-        apply_promocode(contest)
-        do_payment(contest)
+        apply_promocode
+        do_payment
       end
     rescue StandardError => e
       log_error(e)
@@ -22,22 +28,24 @@ class ClientPaymentsController < ApplicationController
     end
   end
 
-  private
-
-  def apply_promocode(contest)
+  def apply_promocode
     code = params[:client].try(:[], :promocode)
     ApplyPromocode.new(contest, code).perform
   end
 
-  def do_payment(contest)
+  def do_payment
     if params[:credit_card]
       raise('The client already has credit cards') if @client.credit_cards.present?
       add_card = AddCreditCard.new(client: @client, card_attributes: new_credit_card_params, set_as_primary: true)
       add_card.perform
     end
 
-    payment = Payment.new(contest)
-    payment.perform
+    if Settings.payment_enabled
+      payment = Payment.new(contest)
+      payment.perform
+    end
   end
+
+  attr_reader :contest
 
 end
