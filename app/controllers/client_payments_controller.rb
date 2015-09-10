@@ -30,6 +30,12 @@ class ClientPaymentsController < ApplicationController
   end
 
   def do_payment(contest)
+    if params[:credit_card]
+      raise('The client already has credit cards') if @client.credit_cards.present?
+      add_card = AddCreditCard.new(client: @client, card_attributes: new_credit_card_params, set_as_primary: true)
+      add_card.perform
+    end
+
     payment = Payment.new(contest)
     payment.perform
   end

@@ -152,4 +152,17 @@ RSpec.configure do |config|
     payment.perform
   end
 
+  def credit_card_attributes
+    { number: '4012 8888 8888 1881',
+      ex_month: '12',
+      ex_year: (Time.current.year + 5).to_s,
+      cvc: '123',
+      name_on_card: 'John Dou',
+      address: 'Address',
+      city: 'City',
+      state: 'State',
+      zip: '12345',
+    }
+  end
+
 end

@@ -5,12 +5,17 @@ class AddCreditCard
   def initialize(options)
     @client = options[:client]
     @card_attributes = options[:card_attributes]
+    @set_as_primary = options[:set_as_primary]
   end
 
   def perform
     ActiveRecord::Base.transaction do
       register_in_stripe
       save_in_db
+      if @set_as_primary
+        set_primary_card = SetDefaultCreditCard.new(client: client, card_id: card.id)
+        set_primary_card.perform
+      end
     end
   end
 

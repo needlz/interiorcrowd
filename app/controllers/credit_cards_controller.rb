@@ -3,17 +3,12 @@ class CreditCardsController < ApplicationController
   before_filter :set_client
 
   def create
-    add_card = AddCreditCard.new(client: current_user, card_attributes: new_credit_card_params)
-
+    add_card = AddCreditCard.new(client: @client,
+                                 card_attributes: new_credit_card_params,
+                                 set_as_primary: @client.credit_cards.blank?
+    )
     begin
       add_card.perform
-    rescue StandardError => e
-      return render json: e.message, status: :unprocessable_entity
-    end
-
-    set_primary_card = SetDefaultCreditCard.new(client: current_user, card_id: add_card.card.id)
-    begin
-      set_primary_card.perform
     rescue StandardError => e
       return render json: e.message, status: :unprocessable_entity
     end
@@ -37,7 +32,8 @@ class CreditCardsController < ApplicationController
     @shared_card_view = CreditCardView.new(nil)
     render partial: 'contests/card_form', locals: { css_class: nil,
                                                     form_method: :patch,
-                                                    placeholder: '**** **** **** ' }
+                                                    placeholder: '**** **** **** ',
+                                                    show_promocode_input: false }
   rescue ActiveRecord::RecordNotFound
     render text: 'There is no credit card with such id for this client.',
            status: :not_found
@@ -70,11 +66,6 @@ class CreditCardsController < ApplicationController
 
   def card_id
     params.require(:id)
-  end
-
-  def new_credit_card_params
-    params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
-                                        :card_type, :number, :cvc, :ex_month, :ex_year)
   end
 
   def update_credit_card_params

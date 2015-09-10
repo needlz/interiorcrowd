@@ -1,0 +1,12 @@
+.credit-card-hint= t('client_center.sign_up.choose_credit_card')
+.add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
+.clearfix
+
+= render 'card_form',
+    { css_class: 'hidden',
+      form_method: :post,
+      placeholder: nil,
+      show_promocode_input: false }
+
+- card_views.each do |card|
+  = render partial: 'card_view', locals: { card: card }
