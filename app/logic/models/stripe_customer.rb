@@ -86,7 +86,6 @@ class StripeCustomer
 
   def update_card(credit_card)
     card = stripe_customer.sources.retrieve(credit_card.stripe_id)
-    fail(user.stripe_card_status) unless card
     attributes = StripeCustomer.update_card_attributes(credit_card)
     attributes.each { |key, value| card.send("#{ key }=", value) }
     card.save

@@ -43,7 +43,7 @@ class Client < ActiveRecord::Base
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, presence: true, uniqueness: true
-  normalize_attributes :email, :stripe_customer_id, :billing_address, :billing_state, :billing_zip, :billing_city
+  normalize_attributes :email, :stripe_customer_id
 
   has_many :contests
   belongs_to :designer_level
@@ -57,13 +57,6 @@ class Client < ActiveRecord::Base
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')
     contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 2 ELSE CASE WHEN contests.status = \'finished\' THEN 1 ELSE 0 END END DESC"
     contests.order(contests_order_query).order(created_at: :desc).first
-  end
-
-  def last_four_card_digits
-    return unless card_number
-    card_number if card_number.length < 4
-    four_digits = card_number[-4..-1]
-    four_digits.presence || card_number
   end
 
   def can_comment_contest_request?(contest_request)
