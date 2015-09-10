@@ -36,6 +36,18 @@ RSpec.describe CreditCardsController do
       expect{ post :create, create_params }.to change{ client.credit_cards.count }.by(1)
       expect(response).to render_template('contests/_card_view')
       expect(client.credit_cards.first.last_4_digits.to_s).to eq(card_number.last(4))
+      expect(client.reload.primary_card.last_4_digits.to_s).to eq(card_number.last(4))
+    end
+
+    it 'set newly created card as primary' do
+      mock_stripe_customer_authentication
+      mock_stripe_card_adding
+
+      client.credit_cards << credit_card
+      client.primary_card = client.credit_cards.first
+      client.save!
+      post :create, create_params
+      expect(client.reload.primary_card.last_4_digits.to_s).to eq(card_number.last(4))
     end
 
     context 'if current client hasn\'t already set primary card' do

@@ -69,6 +69,11 @@ class ApplicationController < ActionController::Base
     ErrorsLogger.log(exception, session.to_hash)
   end
 
+  def new_credit_card_params
+    params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
+                                        :card_type, :number, :cvc, :ex_month, :ex_year)
+  end
+
   private
 
   def set_return_to_link

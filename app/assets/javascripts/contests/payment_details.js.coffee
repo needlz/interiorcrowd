@@ -49,7 +49,7 @@ class @CreditCards
   @creditCardFormDivSelector: '.credit-card-form'
   @addNewCreditCardButtonSelector: '.add-new-credit-card'
   @cancelCardAddingButtonSelector: '#cancel-card-adding'
-  @cardsContainerSelector: '.payment-info-container'
+  @cardsContainerSelector: '.first-card-container'
   @errorMessageContainer: '#credit-card-editing-error'
 
   @init: ->
