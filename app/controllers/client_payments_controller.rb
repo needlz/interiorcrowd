@@ -8,7 +8,7 @@ class ClientPaymentsController < ApplicationController
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
-    charge if Settings.payment_enabled
+    charge
   end
 
   private
@@ -40,8 +40,10 @@ class ClientPaymentsController < ApplicationController
       add_card.perform
     end
 
-    payment = Payment.new(contest)
-    payment.perform
+    if Settings.payment_enabled
+      payment = Payment.new(contest)
+      payment.perform
+    end
   end
 
   attr_reader :contest
