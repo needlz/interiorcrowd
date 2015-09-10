@@ -80,7 +80,6 @@ class ContestsController < ApplicationController
   end
 
   def payment_details
-    return render_404 unless Settings.payment_enabled
     @client = current_user
     begin
       @contest = @client.contests.find(params[:id])
@@ -97,7 +96,6 @@ class ContestsController < ApplicationController
   end
 
   def payment_summary
-    return render_404 unless Settings.payment_enabled
     begin
       @contest = @client.contests.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
@@ -203,11 +201,8 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    if Settings.payment_enabled
-      redirect_to payment_details_contests_path(id: contest_creation.contest.id)
-    else
-      redirect_to client_center_entry_path(id: contest_creation.contest.id)
-    end
+    redirect_to payment_details_contests_path(id: contest_creation.contest.id)
+
   end
 
   private
