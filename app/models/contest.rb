@@ -223,8 +223,7 @@ class Contest < ActiveRecord::Base
   end
 
   def payed?
-    return client_payment && client_payment.last_error.nil? if Settings.payment_enabled
-    true
+    client_payment && client_payment.last_error.nil?
   end
 
   private
