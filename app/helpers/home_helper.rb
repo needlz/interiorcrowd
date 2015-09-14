@@ -11,6 +11,7 @@ module HomeHelper
      :contests,
      :how_many_designs,
      :how_to_collaborate_with_designer,
+     :how_to_upload_additional_pictures,
      :how_long,
      { forgot_password: hello_link }]
   end
