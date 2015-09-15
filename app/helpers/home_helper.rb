@@ -2,6 +2,7 @@ module HomeHelper
 
   def faq_client_questions
     hello_link = { hello_email: mail_to(t('feedback_email')) }
+    pictures_link = { pictures_email: mail_to(Settings.pictures_email) }
     [{ get_in_touch: hello_link },
      :what_is,
      :who_are_designers,
@@ -11,7 +12,7 @@ module HomeHelper
      :contests,
      :how_many_designs,
      :how_to_collaborate_with_designer,
-     :how_to_upload_additional_pictures,
+     { how_to_upload_additional_pictures: pictures_link },
      :how_long,
      { forgot_password: hello_link }]
   end

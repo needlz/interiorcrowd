@@ -997,9 +997,9 @@ en:
           Your designer might ask you for additional pictures of your space once you've selected a winner.
           You can upload pictures three different ways:
           You can text them to us at (415) 254-9089 (please include your name)
-          or email them to us at <a href='mailto:pictures@interiorcrowd.com'>pictures@interiorcrowd.com</a>
+          or email them to us at %{pictures_email}
           (again, please add your name), or you can upload them yourself in your brief.
-          Login and click on 'Brief" in the top right navigation of the client center.
+          Login and click on 'Brief' in the top right navigation of the client center.
           Here you can see all of the details of the intake form as well as the images you uploaded.
           If you click on the pencil icon in the Pictures of your Space section, you can upload new images.
       how_long:
