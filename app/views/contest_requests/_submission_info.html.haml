@@ -1,17 +1,7 @@
-.row
-  .col-xs-3
-    = image_tag '/assets/profile-img.png', class: 'fullWidth'
-  .col-xs-9.submission-info
-    %h4.nameOfDesigner
-      - designer_view = DesignerView.new(designer)
-      - if designer_view.portfolio_path.present?
-        %a{ style: 'color: black', href: show_portfolio_path(designer_view.portfolio_path) }
-          = designer.name
-      - else
-        = designer.name
-    %p.submitted-on
-      = t('client_center.moodboard_details.submitted_on')
-      = submitted_at.strftime('%m/%d/%Y')
+= render 'shared/designer_contest_request_info',
+  designer: designer,
+  display_submission_date: true,
+  submitted_at: submitted_at
 .fullWidthLine.marginTop20
 .designer-voice
   = render partial: 'contest_requests/listen', locals: { request: request } if request.sound
