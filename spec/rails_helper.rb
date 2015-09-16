@@ -165,4 +165,8 @@ RSpec.configure do |config|
     }
   end
 
+  def mock_pubsub
+    allow_any_instance_of(Ably::Rest::Channel).to receive(:publish)
+  end
+
 end

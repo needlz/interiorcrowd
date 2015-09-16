@@ -22,7 +22,7 @@ class SubmitContest
   end
 
   def try_perform
-    if contest.brief_pending? && brief_completed? && payed?
+    if contest.brief_pending? && brief_completed? && (payed? || !Settings.payment_enabled)
       contest.submit!
       Jobs::CheckIfBoardsReceived.schedule(contest.id, { run_at: Time.current + 3.days })
       @performed = true

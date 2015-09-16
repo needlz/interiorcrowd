@@ -8,6 +8,7 @@ class ContestsController < ApplicationController
 
   def show
     return raise_404 unless current_user.see_contest?(@contest)
+    return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
     @navigation = Navigation::ClientCenter.new(:entries)
     @entries_page = EntriesPage.new(
@@ -207,5 +208,10 @@ class ContestsController < ApplicationController
   end
 
   private
+
+  def payment_performed?(contest)
+    return contest.payed? if Settings.payment_enabled
+    contest.client.credit_cards.present?
+  end
 
 end

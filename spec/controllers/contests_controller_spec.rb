@@ -13,6 +13,10 @@ RSpec.describe ContestsController do
     session.merge!(contest_options_source)
   end
 
+  def set_primary_card(client)
+    client.update_attributes!(primary_card_id: Fabricate(:credit_card, client: client).id)
+  end
+
   describe 'GET option' do
     before do
       sign_in(client)
@@ -343,7 +347,9 @@ RSpec.describe ContestsController do
 
       it 'returns page' do
         Fabricate(:contest, client: client, status: 'submission')
-        get :show, id: Fabricate(:contest, client: client).id
+        contest = Fabricate(:contest, client: client)
+        pay_contest(contest)
+        get :show, id: contest.id
         expect(response).to render_template(:entries_invitations)
       end
 
@@ -411,6 +417,7 @@ RSpec.describe ContestsController do
           it 'returns page' do
             ContestRequest::FULFILLMENT_STATUSES.each do |status|
               cont = create_contest
+              pay_contest(cont)
               contest_request = create_contest_request(cont)
               contest_request.update_attributes!(status: status)
               cont.update_attributes!(status: 'fulfillment')
@@ -441,9 +448,71 @@ RSpec.describe ContestsController do
       end
     end
 
+    context 'when real payments disabled' do
+      context 'when contest payed' do
+        it 'returns entries page' do
+          pay_contest(contest)
+          get :show, id: contest.id
+          expect(response).to render_template(:entries_invitations)
+        end
+      end
+
+      context 'when contest not payed' do
+        context 'when credit cards saved' do
+          before do
+            set_primary_card(client)
+          end
+
+          it 'returns entries page' do
+            pay_contest(contest)
+            get :show, id: contest.id
+            expect(response).to render_template(:entries_invitations)
+          end
+        end
+
+        context 'when credit cards not saved' do
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+      end
+    end
+
+    context 'when real payments enabled' do
+      context 'when contest payed' do
+        it 'returns entries page' do
+          pay_contest(contest)
+          get :show, id: contest.id
+          expect(response).to render_template(:entries_invitations)
+        end
+      end
+
+      context 'when contest not payed' do
+        context 'when credit cards saved' do
+          before do
+            set_primary_card(client)
+          end
+
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+
+        context 'when credit cards not saved' do
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+      end
+    end
+
     it 'returns page' do
       Fabricate(:contest, client: client, status: 'submission')
       contest = client.last_contest
+      pay_contest(contest)
       client.update_attributes!(status: 'finished')
       fulfillment = Fabricate(:contest_request,
                               designer: Fabricate(:designer),

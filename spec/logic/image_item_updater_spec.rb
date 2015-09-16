@@ -6,6 +6,10 @@ RSpec.describe ImageItemUpdater do
   let(:image_item) { Fabricate(:product_item, contest_request: contest_request) }
   let(:published_version) { Fabricate(:product_item, temporary_version: image_item, contest_request: contest_request) }
 
+  before do
+    mock_pubsub
+  end
+
   describe 'updating image of an item' do
     context 'when published version exists' do
       before do
