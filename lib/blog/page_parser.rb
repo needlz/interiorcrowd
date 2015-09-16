@@ -9,7 +9,7 @@ module Blog
 
     BLOG_PAGE_PARTS_SELECTORS = {
         head: ['head'],
-        body: ['div#content', 'body'],
+        body: ['body'],
         header: ['.rst-bottom-header']
     }
 
@@ -23,7 +23,8 @@ module Blog
       BLOG_PAGE_PARTS_SELECTORS.keys.each do |part|
         locals.merge!(part => read_blog[part])
       end
-      locals.merge!(page_html_attributes: read_blog['page_html_attributes'])
+      locals.merge!(page_html_attributes: read_blog['page_html_attributes'],
+                    page_body_attributes: read_blog['page_body_attributes'])
       locals
     end
 
@@ -62,6 +63,7 @@ module Blog
         @blog_params.merge!(part => part_content)
       end
       @blog_params['page_html_attributes'] = @blog_page_dom.css('html').first.attributes if @blog_page_dom.css('html')
+      @blog_params['page_body_attributes'] = @blog_page_dom.css('body').first.attributes if @blog_page_dom.css('body')
     end
 
     def load_head_content?

@@ -9,7 +9,6 @@
 #  address            :text
 #  state              :string(255)
 #  zip                :string(255)
-#  number             :string(255)
 #  city               :text
 #  cvc                :integer
 #  ex_month           :integer

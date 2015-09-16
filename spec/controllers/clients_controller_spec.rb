@@ -21,19 +21,13 @@ RSpec.describe ClientsController do
       last_name: 'lastname',
       email: 'email@example.com',
       address: 'address',
-      name_on_card: 'name_on_card',
-      card_type: 'Visa',
       city: 'City',
       state: 'state',
-      card_ex_month: '12',
-      card_ex_year: Time.current.year + 5,
-      card_cvc: '123',
-      card_number: '123',
       zip: '81100',
       promocode: promocode.promocode
     }
   }
-  let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
+  let(:integer_attributes) { [:zip] }
 
   describe 'POST create' do
     it 'creates contest and client' do
@@ -164,12 +158,7 @@ RSpec.describe ClientsController do
         address: 'new address',
         city: 'new city',
         state: 'new state',
-        zip: '123456',
-        card_number: test_card_number,
-        card_type: 'new type',
-        card_ex_month: '12',
-        card_ex_year: Time.current.year + 5,
-        card_cvc: '444'
+        zip: '123456'
       }
     end
 
