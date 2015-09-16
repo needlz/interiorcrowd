@@ -74,9 +74,18 @@ class EntriesPage < ContestPage
   private
 
   def time_till_milestone_end
+    phase_end_time = contest.phase_end || Time.current
+    distance = phase_end_time - Time.current
+    display_options =
+      if distance > 2.days
+        phase_end_time = Time.current + (distance / 1.day).ceil.days
+        { vague: true }
+      elsif distance > 1.day
+        { highest_measures: 2 }
+      end
     view_context.distance_of_time_in_words(Time.current,
-                                           contest.phase_end || Time.current,
-                                           vague: true)
+                                           phase_end_time,
+                                           display_options)
   end
 
   def fulfillment_phase?
