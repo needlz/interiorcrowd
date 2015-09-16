@@ -12,6 +12,14 @@ class DesignerView
     designer.portfolio.try(:path)
   end
 
+  def designer_personal_picture
+    if portfolio_path.present?
+      personal_picture_url('/assets/profile-img.png')
+    else
+      '/assets/profile-img.png'
+    end
+  end
+
   private
 
   attr_reader :designer, :portfolio_view

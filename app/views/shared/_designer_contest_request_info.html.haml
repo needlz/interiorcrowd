@@ -1,7 +1,7 @@
 - designer_view = DesignerView.new(designer)
 .row
   .col-xs-3
-    = image_tag designer_view.personal_picture_url('/assets/profile-img.png'), class: 'fullWidth'
+    = image_tag designer_view.designer_personal_picture, class: 'fullWidth'
   .col-xs-9.submission-info
     %h4.nameOfDesigner
       - if designer_view.portfolio_path.present?
