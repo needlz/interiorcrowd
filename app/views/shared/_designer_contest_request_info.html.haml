@@ -1,0 +1,16 @@
+- designer_view = DesignerView.new(designer)
+.row
+  .col-xs-3
+    = image_tag designer_view.personal_picture_url('/assets/profile-img.png'), class: 'fullWidth'
+  .col-xs-9.submission-info
+    %h4.nameOfDesigner
+      - if designer_view.portfolio_path.present?
+        %a{ style: 'color: black', href: show_portfolio_path(designer_view.portfolio_path) }
+          = designer.name
+      - else
+        = designer.name
+    - if display_submission_date
+      %p.submitted-on
+        = t('client_center.moodboard_details.submitted_on')
+        = submitted_at.strftime('%m/%d/%Y')
+        

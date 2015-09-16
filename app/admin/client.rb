@@ -8,4 +8,10 @@ ActiveAdmin.register Client do
     f.actions
   end
 
+  controller do
+
+    include ActiveAdminExtensions::UserController
+
+  end
+
 end

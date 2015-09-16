@@ -17,7 +17,11 @@ class CreditCardView
   end
 
   def card_number
-    "#{ card_type.capitalize } ending in #{ last_4_digits }"
+    if card_type.present?
+      "#{ card_type.capitalize } ending in #{ last_4_digits }"
+    else
+      "Ending in #{ last_4_digits }"
+    end
   end
 
   def full_address
