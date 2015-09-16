@@ -16,6 +16,10 @@ class ContestMilestone
     end
   end
 
+  def self.finite_milestone?(contest_status)
+    DAYS[contest_status]
+  end
+
   def initialize(contest)
     @contest = contest
   end

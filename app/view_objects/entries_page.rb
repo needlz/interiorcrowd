@@ -30,14 +30,13 @@ class EntriesPage < ContestPage
   end
 
   def timeline_hint
-    if contest.submission?
-      I18n.t('client_center.entries.submission.day_left_to_submit',
-        time_left: time_till_milestone_end)
-    elsif contest.winner_selection?
-      select_winner_hint
-    elsif fulfillment_phase?
-      I18n.t('client_center.entries.fullfilment.time_left',
-        time_left: time_till_milestone_end)
+    if ContestMilestone.finite_milestone?(contest.status)
+      if contest.phase_end < Time.current
+        I18n.t("client_center.entries.timelines.#{ contest.status }.expired")
+      else
+        I18n.t("client_center.entries.timelines.#{ contest.status }.time_left",
+               time_left: time_till_milestone_end)
+      end
     end
   end
 
@@ -86,22 +85,6 @@ class EntriesPage < ContestPage
     view_context.distance_of_time_in_words(Time.current,
                                            phase_end_time,
                                            display_options)
-  end
-
-  def fulfillment_phase?
-    won_contest_request.fulfillment_ready? || won_contest_request.fulfillment_approved?
-  end
-
-  def select_winner_hint
-    if contest.phase_end < Time.current
-      I18n.t('client_center.entries.winner_selection.hint')
-    else
-      I18n.t('client_center.entries.winner_selection.day_left',
-             time_left: view_context.distance_of_time_in_words(Time.current,
-                                                               contest.phase_end,
-                                                               false,
-                                                               highest_measure_only: true))
-    end
   end
 
 end
