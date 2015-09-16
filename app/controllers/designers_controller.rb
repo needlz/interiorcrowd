@@ -29,8 +29,10 @@ class DesignersController < ApplicationController
         format.json { render action: 'show', status: :created, location: @designer }
       else
         @designer_images = params[:designer_image]
-        flash[:error] = @designer.errors.full_messages.join("</br>") 
-        format.html { render action: 'new' }
+        format.html do
+          flash[:error] = @designer.errors.full_messages.join("</br>")
+          render action: 'new'
+        end
         format.json { render json: @designer.errors, status: :unprocessable_entity }
       end
     end
