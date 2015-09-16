@@ -49,7 +49,7 @@ class @CreditCards
   @creditCardFormDivSelector: '.credit-card-form'
   @addNewCreditCardButtonSelector: '.add-new-credit-card'
   @cancelCardAddingButtonSelector: '#cancel-card-adding'
-  @cardsContainerSelector: '.payment-info-container'
+  @cardsContainerSelector: '.first-card-container'
   @errorMessageContainer: '#credit-card-editing-error'
 
   @init: ->
@@ -131,6 +131,7 @@ class @CreditCards
 
   @displayNewlyAddedCard: (cardInfoHtml)->
     @toggleCardFormVisibility()
+    @unMarkPrimaryCard()
     $firstCard = $(@creditCardAreaSelector + ':first')
     if $firstCard.length
       $(cardInfoHtml).insertBefore($firstCard)
@@ -140,6 +141,10 @@ class @CreditCards
 
   @styleDropdowns: ->
     $('.selectpicker').selectpicker { style: 'btn-selector-medium font15' }
+
+  @unMarkPrimaryCard: ->
+    $(@creditCardAreaSelector).removeClass(@primaryCreditCardAreaClassName)
+    $(@creditCardAreaSelector).find(@setPrimaryCardLinkSelector).text(signupI18n.make_card_primary)
 
   @setDefaultInputValues: ->
     $form = $(@creditCardFormDivSelector)

@@ -6,7 +6,7 @@
 
 - content_for :client_center_content do
   .profile
-    = render partial: 'home/msg'
+    = render 'home/msg'
     .profileEditingBox.hidden-xs
-      = render partial: 'clients/client_center/profile/profile_preview'
-= render partial: 'clients/client_center/layout', locals: { container_class: 'container-edit-profile'}
+      = render 'clients/client_center/profile/profile_preview'
+= render 'clients/client_center/layout', container_class: 'container-edit-profile'

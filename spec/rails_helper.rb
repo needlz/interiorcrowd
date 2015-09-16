@@ -97,16 +97,9 @@ RSpec.configure do |config|
     '4242424242424242'
   end
 
-  def pay_contest(contest)
-    payment = Payment.new(contest)
-    mock_stripe_customer_registration
-    mock_stripe_successful_charge
-    payment.perform
-  end
-
-  def mock_stripe_customer_registration
-    allow(Stripe::Customer).to receive(:create) do
-      Hashie::Mash.new(id: 'customer id')
+  def mock_stripe_customer_authentication
+    allow_any_instance_of(StripeCustomer).to receive(:stripe_customer) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
     end
   end
 
@@ -128,11 +121,52 @@ RSpec.configure do |config|
     end
   end
 
+  def mock_stripe_card_adding
+    allow_any_instance_of(StripeCustomer).to receive(:import_card) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
+  def mock_stripe_setting_default_card
+    allow_any_instance_of(StripeCustomer).to receive(:set_default) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
+  def mock_stripe_card_updating
+    allow_any_instance_of(StripeCustomer).to receive(:update_card) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
+  def mock_stripe_card_deleting
+    allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
   def pay_contest(contest)
     payment = Payment.new(contest)
     mock_stripe_customer_registration
     mock_stripe_successful_charge
     payment.perform
+  end
+
+  def credit_card_attributes
+    { number: '4012 8888 8888 1881',
+      ex_month: '12',
+      ex_year: (Time.current.year + 5).to_s,
+      cvc: '123',
+      name_on_card: 'John Dou',
+      address: 'Address',
+      city: 'City',
+      state: 'State',
+      zip: '12345',
+    }
+  end
+
+  def mock_pubsub
+    allow_any_instance_of(Ably::Rest::Channel).to receive(:publish)
   end
 
 end

@@ -14,5 +14,10 @@ ActiveAdmin.register Designer do
   #   permitted
   # end
 
+  controller do
+
+    include ActiveAdminExtensions::UserController
+
+  end
 
 end

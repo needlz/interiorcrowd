@@ -24,6 +24,11 @@
     .col-lg-4.col-md-5.hidden-lg
       - if @entries_page.timeline_hint
         %p.daysLeft= @entries_page.timeline_hint
+    .col-lg-4.col-md-5
+      = render 'shared/designer_contest_request_info',
+        designer: request.designer,
+        display_submission_date: false
+      .marginTop30
 
   .row.viewingMoodboard.winningMoodboard
     .col-lg-8.col-md-7

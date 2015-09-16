@@ -8,6 +8,7 @@ class ContestsController < ApplicationController
 
   def show
     return raise_404 unless current_user.see_contest?(@contest)
+    return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
     @navigation = Navigation::ClientCenter.new(:entries)
     @entries_page = EntriesPage.new(
@@ -83,18 +84,20 @@ class ContestsController < ApplicationController
     @client = current_user
     begin
       @contest = @client.contests.find(params[:id])
-      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed?
+      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed? && Settings.payment_enabled
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
     @client_payment = ClientPayment.new
     @shared_card_view = CreditCardView.new(nil)
+    @show_cards_manager = @client.credit_cards.present?
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }
     @credit_card = @client.credit_cards.new
   end
 
   def payment_summary
+    return redirect_to client_center_entry_path(id: params[:id]) unless Settings.payment_enabled
     begin
       @contest = @client.contests.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
@@ -200,7 +203,15 @@ class ContestsController < ApplicationController
     end
     contest_creation.perform
 
-    redirect_to  payment_details_contests_path(id: contest_creation.contest)
+    redirect_to payment_details_contests_path(id: contest_creation.contest.id)
+
+  end
+
+  private
+
+  def payment_performed?(contest)
+    return contest.payed? if Settings.payment_enabled
+    contest.client.credit_cards.present?
   end
 
 end

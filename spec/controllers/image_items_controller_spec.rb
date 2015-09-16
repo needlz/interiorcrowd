@@ -82,6 +82,7 @@ RSpec.describe ImageItemsController do
     context 'logged in as designer' do
       before do
         sign_in(designer)
+        mock_pubsub
       end
 
       it 'updates attributes' do
@@ -118,6 +119,7 @@ RSpec.describe ImageItemsController do
 
     before do
       sign_in(client)
+      mock_pubsub
     end
 
     it 'updates mark' do

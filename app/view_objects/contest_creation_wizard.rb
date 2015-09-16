@@ -82,7 +82,7 @@ class ContestCreationWizard
   end
 
   def show_sign_up_suggestion?
-    !current_user.client? && Settings.show_beta_functionality
+    !current_user.client?
   end
 
   private

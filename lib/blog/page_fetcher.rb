@@ -8,7 +8,7 @@ module Blog
       @env = options[:env]
       @url = options[:url]
       @method = options[:method]
-      @params = options[:params]
+      @params = options[:params].merge(icrowd_app: 'yes')
       @session = options[:session]
       @blog_path = options[:blog_path]
     end
@@ -34,7 +34,7 @@ module Blog
       if method == :post
         conn.post('', params)
       else
-        conn.get
+        conn.get('', params)
       end
     end
 
@@ -43,7 +43,18 @@ module Blog
     end
 
     def equal_to_request_url_with_slash?(url)
-      url.match(/^#{ Regexp.escape(@url.to_s) }\/$/)
+      uri = URI(url)
+      original_uri = URI(@url)
+      request_path = url.split('?').first
+      request_params = CGI::parse(uri.query) if uri.query
+      request_fragment = uri.fragment
+      original_request_path = @url.to_s.split('?').first
+      original_request_params = CGI::parse(original_uri.query) if original_uri.query
+      original_request_fragment = original_uri.fragment
+
+      request_path.match(/^#{ Regexp.escape(original_request_path) }\/$/) &&
+          (request_params == original_request_params) &&
+          (request_fragment == original_request_fragment)
     end
 
     def forward_headers(r)
@@ -58,6 +69,7 @@ module Blog
     def check_redirect(response)
       if responded_with_redirect?(response)
         redirect = response.headers[:location]
+        redirect = redirect.gsub(/\??icrowd_app=yes/, '')
         if !redirect.match(/^http(s?):/)
           if redirect[0] == '/'
             referer = Settings.external_urls.blog.url
