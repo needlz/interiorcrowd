@@ -101,10 +101,24 @@ RSpec.describe ClientPaymentsController do
       end
 
       context 'when client has no other cards' do
-        it 'creates payment' do
-          post :create, contest_id: contest.id, credit_card: credit_card_attributes
-          expect(contest.client_payment.last_error).to be_nil
-          expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+        context 'when contest not submitted yet' do
+          it 'creates payment' do
+            post :create, contest_id: contest.id, credit_card: credit_card_attributes
+            expect(contest.client_payment.last_error).to be_nil
+            expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+          end
+        end
+
+        context 'when contest submitted' do
+          before do
+            contest.update_attributes!(status: 'submission')
+          end
+
+          it 'creates payment' do
+            post :create, contest_id: contest.id, credit_card: credit_card_attributes
+            expect(contest.client_payment.last_error).to be_nil
+            expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+          end
         end
       end
     end

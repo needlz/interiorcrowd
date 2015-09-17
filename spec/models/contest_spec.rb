@@ -11,6 +11,16 @@ RSpec.describe Contest do
     )
   end
 
+  describe 'not payed scope' do
+    it 'returns contests without client payments' do
+      brief_pending_contest = Fabricate(:contest, status: 'brief_pending')
+      submission_contest = Fabricate(:contest, status: 'submission')
+      payed_contest = Fabricate(:contest, status: 'submission')
+      Fabricate(:client_payment, contest: payed_contest)
+      expect(Contest.not_payed).to match_array([brief_pending_contest, submission_contest])
+    end
+  end
+
   it 'delays submission time by 7 days' do
     expect(contest.days_left).to eq 7
   end
