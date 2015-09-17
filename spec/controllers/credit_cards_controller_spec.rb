@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CreditCardsController do
+  render_views
 
   context 'user is signed in' do
     let(:client) { Fabricate(:client) }

@@ -16,14 +16,14 @@ $.fn.selectRange = (start, end) ->
       range.select()
 
 $.fn.emulatePlaceholder = (placeholder) ->
-  @val placeholder
+  @val(placeholder) if @val() == ''
   @mousedown (event) =>
     if @val() == placeholder
       event.preventDefault()
       @selectRange(0)
   @keydown =>
     if @val() == placeholder
-      @val ''
+      @val('')
   @blur =>
     if @val() == ''
-      @val placeholder
+      @val(placeholder)
