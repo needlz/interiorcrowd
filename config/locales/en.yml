@@ -482,13 +482,18 @@ en:
         about_title: Design Mindset
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
-      winner_selection:
-        hint: Please pick a winner!
-        day_left: '%{time_left} left to pick a winner'
-      submission:
-        day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
-      fullfilment:
-        time_left: '%{time_left} left in this phase'
+      timelines:
+        winner_selection:
+          expired: Please pick a winner!
+          time_left: '%{time_left} left to pick a winner'
+        submission:
+          time_left: '%{time_left} left for designers to submit their concept boards'
+        fulfillment:
+          expired: Deadline extended
+          time_left: '%{time_left} left in this phase'
+        fulfillment_approved:
+          expired: Deadline extended
+          time_left: '%{time_left} left in this phase'
       fulfillment_approved:
         modal:
           thanks: Thanks!
@@ -604,6 +609,9 @@ en:
       fulfillment_approved:
         time_left: '%{time_left} left to submit instructions'
         expired: Please get in touch if you need assistance
+      fulfillment_ready:
+        time_left: '%{time_left} left in this phase'
+        expired: Deadline extended
       draft:
         time_left: '%{time_left} left to submit your board'
     welcome_message: >

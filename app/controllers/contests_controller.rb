@@ -204,7 +204,6 @@ class ContestsController < ApplicationController
     contest_creation.perform
 
     redirect_to payment_details_contests_path(id: contest_creation.contest.id)
-
   end
 
   private
