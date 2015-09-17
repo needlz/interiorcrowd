@@ -3,17 +3,17 @@ class CardValidation
   @init: ->
     @error = null
     @valid = false
-    $('#card_number, #card_cvc, #client_card_ex_month, #client_card_ex_year').change (event)=>
+    $('#card_number, #card_cvc, #credit_card_ex_month, #credit_card_ex_year').change (event)=>
       $("#err_card_number").text('')
-      @validate()
+      @validate() if @allInputsFilled()
 
   @validate: ->
     Stripe.card.createToken(
       {
         number: $('#card_number').val(),
         cvc: $('#card_cvc').val(),
-        exp_month: $('#credit_card_ex_month').val(),
         exp_year: $('#credit_card_ex_year').val()
+        exp_month: $('#credit_card_ex_month').val(),
       }, (status, response) =>
         if response.error
           @error = response.error.message
@@ -22,6 +22,11 @@ class CardValidation
         else
           @valid = true
     )
+
+  @allInputsFilled: ->
+    for inputSelector in ['#card_number', '#card_cvc', '#credit_card_ex_month', '#credit_card_ex_year']
+      return false unless $(inputSelector).val()
+    true
 
 class @PaymentPage
 
