@@ -15,9 +15,7 @@ module ContestRequestMilestones
     protected
 
     def time_left
-      view_context.distance_of_time_in_words(Time.current,
-                                             contest.phase_end,
-                                             vague: true)
+      DurationHumanizer.to_string(view_context, Time.current, contest.phase_end)
     end
 
     private

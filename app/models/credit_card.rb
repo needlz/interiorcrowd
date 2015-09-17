@@ -26,7 +26,7 @@ class CreditCard < ActiveRecord::Base
 
   normalize_attributes  :name_on_card, :address, :state, :city
 
-  validates_presence_of :last_4_digits, :ex_month, :ex_year, :cvc
+  validates_presence_of :last_4_digits, :ex_month, :ex_year
   validates :stripe_id, uniqueness: { scope: :client_id }
 
   validates_length_of  :zip,

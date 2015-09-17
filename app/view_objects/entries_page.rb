@@ -74,9 +74,7 @@ class EntriesPage < ContestPage
   private
 
   def time_till_milestone_end
-    view_context.distance_of_time_in_words(Time.current,
-                                           contest.phase_end || Time.current,
-                                           vague: true)
+    DurationHumanizer.to_string(view_context, Time.current, contest.phase_end)
   end
 
   def fulfillment_phase?

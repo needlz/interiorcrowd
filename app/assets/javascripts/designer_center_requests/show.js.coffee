@@ -14,6 +14,7 @@ class @MoodboardEditor extends InlineEditor
 
   onSaveSuccess: (attribute) ->
     (result)=>
+      $response = $('.response')
       mixpanel.track('Concept board notes edited', { contest_request_id: $response.data('id') })
       $optionsRow = $(".response .attribute[data-#{ @attributeIdentifierData }=#{ attribute }]")
       $optionsRow.find('.error').hide()
