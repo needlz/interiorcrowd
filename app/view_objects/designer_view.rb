@@ -14,9 +14,9 @@ class DesignerView
 
   def designer_personal_picture
     if portfolio_path.present?
-      personal_picture_url('/assets/profile-img.png')
+      personal_picture_url(Settings.designer_note_profile_image)
     else
-      '/assets/profile-img.png'
+      Settings.designer_note_profile_image
     end
   end
 
