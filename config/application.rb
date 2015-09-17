@@ -31,8 +31,11 @@ module InteriorC
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.action_controller.permit_all_parameters = true
-    %w(mailers view_objects admin logic/actions logic/models controllers/concerns).each do |dir|
-      config.autoload_paths << "#{config.root}/app/#{dir}"
+    %w[mailers view_objects admin logic/actions logic/models controllers/concerns].each do |app_dir|
+      config.autoload_paths << "#{ config.root }/app/#{ app_dir }"
+    end
+    %w[lib].each do |dir|
+      config.autoload_paths << "#{ config.root }/#{ dir }"
     end
 
     # Version of your assets, change this if you want to expire all your assets
@@ -70,5 +73,7 @@ module InteriorC
     end
 
     config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
+
+    config.action_controller.default_url_options = { trailing_slash: true }
   end
 end

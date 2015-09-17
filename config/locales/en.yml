@@ -363,8 +363,8 @@ en:
       space_needs_accommodate:
         accommodate_children: Does this space need to accommodate children?
         accommodate_pets: Does this space need to accommodate pets?
-        'yes': 'Yes'
-        'no': 'No'
+        'true': 'Yes'
+        'false': 'No'
       done_button: Done!
       thank_you: Thank you!
   client_center:
@@ -482,13 +482,18 @@ en:
         about_title: Design Mindset
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
-      winner_selection:
-        hint: Please pick a winner!
-        day_left: '%{time_left} left to pick a winner'
-      submission:
-        day_left_to_submit: '%{time_left} left for designers to submit their concept boards'
-      fullfilment:
-        time_left: '%{time_left} left in this phase'
+      timelines:
+        winner_selection:
+          expired: Please pick a winner!
+          time_left: '%{time_left} left to pick a winner'
+        submission:
+          time_left: '%{time_left} left for designers to submit their concept boards'
+        fulfillment:
+          expired: Deadline extended
+          time_left: '%{time_left} left in this phase'
+        fulfillment_approved:
+          expired: Deadline extended
+          time_left: '%{time_left} left in this phase'
       fulfillment_approved:
         modal:
           thanks: Thanks!
@@ -539,7 +544,7 @@ en:
       brief: Brief
       profile: Profile
     sign_up:
-      title: Create your account <span></span> and <span></span> payment detail
+      title: Create your account
       create_account: Create your account
       password: Password
       confirm_password: Confirm Password
@@ -567,6 +572,8 @@ en:
       add_credit_card: Add new credit card
       edit_credit_card: Edit
       remove_credit_card: Remove
+      save: Save
+      cancel: Cancel
       credit_card:
         name: Name on card
         number: Credit card
@@ -585,9 +592,9 @@ en:
       download_images: Download
       generating_archive: Generating archive...
     statuses:
+      brief_pending: 'Brief pending: upload pictures of your space'
       submission: Submission
       winner_selection: Pick winner
-
       fulfillment: Custom Board and Product List Collaboration
       final_fulfillment: Wait for Create Final Design
       closed: Closed
@@ -602,6 +609,9 @@ en:
       fulfillment_approved:
         time_left: '%{time_left} left to submit instructions'
         expired: Please get in touch if you need assistance
+      fulfillment_ready:
+        time_left: '%{time_left} left in this phase'
+        expired: Deadline extended
       draft:
         time_left: '%{time_left} left to submit your board'
     welcome_message: >
@@ -989,6 +999,17 @@ en:
           Every time your designer sends you a question you’ll receive an email notification with a link
           that will take you directly to the Client Center where you and your designer can communicate.
           Alternatively, just log in and go directly to your Client Center to send your designer a question.
+      how_to_upload_additional_pictures:
+        question: How do I upload additional pictures for my designer?
+        answer: >
+          Your designer might ask you for additional pictures of your space once you've selected a winner.
+          You can upload pictures three different ways:
+          You can text them to us at (415) 254-9089 (please include your name)
+          or email them to us at %{pictures_email}
+          (again, please add your name), or you can upload them yourself in your brief.
+          Login and click on 'Brief' in the top right navigation of the client center.
+          Here you can see all of the details of the intake form as well as the images you uploaded.
+          If you click on the pencil icon in the Pictures of your Space section, you can upload new images.
       how_long:
         question: How long does the process take?
         answer: >

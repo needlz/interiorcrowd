@@ -19,12 +19,14 @@ class ContestView
   EDITABLE_ATTRIBUTES = [
     :design_package, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
-    :additional_preferences, :preferences_retailers, :element_to_avoid,
-    :entertaining, :durability] + ACCOMMODATION_ATTRIBUTES
+    :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability
+  ] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
-    :name, :design_knowledge, :design_profile, :desirable_colors, :undesirable_colors, :example_pictures,
-    :example_links, :space_pictures, :space_dimensions, :floorplan, :budget, :feedback]
+    :name, :design_knowledge, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
+    :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
+    :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability
+  ] + ACCOMMODATION_ATTRIBUTES
 
   LEVELS = {
     2 => :very,
@@ -77,7 +79,8 @@ class ContestView
   end
 
   def options_level(level)
-    I18n.t("client_center.entries.option_levels.#{ LEVELS[level.to_i] }")
+    return '' unless level
+    '(' + I18n.t("client_center.entries.option_levels.#{ LEVELS[level.to_i] }") + ')'
   end
 
   def entertaining
@@ -168,7 +171,10 @@ class ContestView
       value = options[preference]
       [ContestAdditionalPreference.new(preference), value] if value
     end
-    @additional_preferences = additional_preferences.compact
+    @additional_preferences = additional_preferences.compact.map do |preference, value|
+      I18n.t("contests.additional_details.#{ preference.name }.#{ value }")
+    end.join(', ')
+    @additional_preferences = "(#{ @additional_preferences })" if @additional_preferences.present?
   end
 
   def set_have_space_views_details

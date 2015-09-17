@@ -4,13 +4,17 @@ require 'spec_helper'
 RSpec.describe ContestsController do
   render_views
 
-  let(:client) { Fabricate(:client) }
+  let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client) }
   let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
   def prepare_contest_data
     session.merge!(contest_options_source)
+  end
+
+  def set_primary_card(client)
+    client.update_attributes!(primary_card_id: Fabricate(:credit_card, client: client).id)
   end
 
   describe 'GET option' do
@@ -52,7 +56,7 @@ RSpec.describe ContestsController do
 
     it 'redirects to Entries page after pictures dimension edited' do
       patch :update, option: 'space_dimensions', id: contest.id, pictures_dimension: true
-      expect(response).to redirect_to(client_center_entries_path)
+      expect(response).to redirect_to(client_center_entry_path(id: contest.id))
     end
   end
 
@@ -119,12 +123,41 @@ RSpec.describe ContestsController do
     context 'user is logged in' do
       before do
         sign_in(client)
+        contest
       end
 
-      it 'renders page' do
-        get :payment_details
-        expect(response).to render_template(:payment_details)
+      context 'when contest not payed' do
+        context 'when valid id passed' do
+          let(:id) { contest.id }
+
+          it 'renders page' do
+            get :payment_details, id: id
+            expect(response).to render_template(:payment_details)
+          end
+        end
+
+        context 'invalid id passed' do
+          let(:id) { Fabricate(:contest).id }
+
+          it 'returns 404' do
+            get :payment_details, id: id
+            expect(response).to have_http_status(:not_found)
+          end
+        end
       end
+
+      context 'when contest payed' do
+        before do
+          Fabricate(:client_payment, contest: contest)
+        end
+
+        it 'redirects to payment summary' do
+          get :payment_details, id: contest.id
+          expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+        end
+      end
+
+
     end
 
     context 'user is not logged in' do
@@ -185,16 +218,21 @@ RSpec.describe ContestsController do
         end
 
         context 'and inactive contest status' do
-          it 'creates contest' do
+          before do
             contest.status = 'finished'
             contest.save!
+          end
+
+          it 'creates contest' do
             post :save_preview, contest_options_source
             expect(client.contests.count).to eq 2
-            expect(response).to redirect_to(client_center_entries_path)
+          end
+
+          it 'redirect to credit cards page' do
+            post :save_preview, contest_options_source
+            expect(response).to redirect_to(payment_details_contests_path(id: client.contests.last.id))
           end
         end
-
-
       end
 
       context 'when required steps not stored in session' do
@@ -309,7 +347,9 @@ RSpec.describe ContestsController do
 
       it 'returns page' do
         Fabricate(:contest, client: client, status: 'submission')
-        get :show, id: Fabricate(:contest, client: client).id
+        contest = Fabricate(:contest, client: client)
+        pay_contest(contest)
+        get :show, id: contest.id
         expect(response).to render_template(:entries_invitations)
       end
 
@@ -330,6 +370,10 @@ RSpec.describe ContestsController do
                                        contest: contest,
                                        status: 'fulfillment_ready',
                                        lookbook: Fabricate(:lookbook)) }
+
+        before do
+          pay_contest(contest)
+        end
 
         def create_contest_request(cont)
           Fabricate(:contest_request,
@@ -373,6 +417,7 @@ RSpec.describe ContestsController do
           it 'returns page' do
             ContestRequest::FULFILLMENT_STATUSES.each do |status|
               cont = create_contest
+              pay_contest(cont)
               contest_request = create_contest_request(cont)
               contest_request.update_attributes!(status: status)
               cont.update_attributes!(status: 'fulfillment')
@@ -403,9 +448,71 @@ RSpec.describe ContestsController do
       end
     end
 
+    context 'when real payments disabled' do
+      context 'when contest payed' do
+        it 'returns entries page' do
+          pay_contest(contest)
+          get :show, id: contest.id
+          expect(response).to render_template(:entries_invitations)
+        end
+      end
+
+      context 'when contest not payed' do
+        context 'when credit cards saved' do
+          before do
+            set_primary_card(client)
+          end
+
+          it 'returns entries page' do
+            pay_contest(contest)
+            get :show, id: contest.id
+            expect(response).to render_template(:entries_invitations)
+          end
+        end
+
+        context 'when credit cards not saved' do
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+      end
+    end
+
+    context 'when real payments enabled' do
+      context 'when contest payed' do
+        it 'returns entries page' do
+          pay_contest(contest)
+          get :show, id: contest.id
+          expect(response).to render_template(:entries_invitations)
+        end
+      end
+
+      context 'when contest not payed' do
+        context 'when credit cards saved' do
+          before do
+            set_primary_card(client)
+          end
+
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+
+        context 'when credit cards not saved' do
+          it 'redirects to payment details page' do
+            get :show, id: contest.id
+            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+          end
+        end
+      end
+    end
+
     it 'returns page' do
       Fabricate(:contest, client: client, status: 'submission')
       contest = client.last_contest
+      pay_contest(contest)
       client.update_attributes!(status: 'finished')
       fulfillment = Fabricate(:contest_request,
                               designer: Fabricate(:designer),
@@ -451,7 +558,12 @@ RSpec.describe ContestsController do
   describe 'GET payment_summary' do
     context 'when the contest is payed' do
       before do
-        Fabricate(:client_payment, contest: contest, client: client, amount_cents: 30000, promotion_cents: 0)
+        Fabricate(:client_payment,
+                  contest: contest,
+                  client: client,
+                  amount_cents: 30000,
+                  promotion_cents: 0,
+                  credit_card: Fabricate(:credit_card))
       end
 
       context 'when signed in as client' do

@@ -13,7 +13,8 @@
     = render partial: 'home/msg'
     = form_tag save_design_space_contests_path,
         { id: 'design_space',
-          method: 'post' } do
+          method: 'post',
+          class: 'intake-form' } do
       .packages.text-package.title
         %h3= t('contests.space.title')
         %p.lightFont= t('contests.space.description')

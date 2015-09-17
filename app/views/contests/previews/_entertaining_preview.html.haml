@@ -1,3 +1,3 @@
 - value_html = capture do
-  %p (#{ @contest_view.entertaining })
+  %p #{ @contest_view.entertaining }
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.entertaining'), value: value_html }

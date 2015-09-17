@@ -10,7 +10,8 @@ module User
 
     def self.authenticate(username, password)
       encrypted_password = encrypt(password)
-      username.present? && encrypted_password.present? ? self.find_by_email_and_password(username, encrypted_password) : nil
+      username.present? && encrypted_password.present? ?
+          self.find_by_email_and_password(username.downcase, encrypted_password) : nil
     end
   end
 

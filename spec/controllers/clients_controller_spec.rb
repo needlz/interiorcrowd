@@ -21,19 +21,13 @@ RSpec.describe ClientsController do
       last_name: 'lastname',
       email: 'email@example.com',
       address: 'address',
-      name_on_card: 'name_on_card',
-      card_type: 'Visa',
       city: 'City',
       state: 'state',
-      card_ex_month: '12',
-      card_ex_year: Time.current.year + 5,
-      card_cvc: '123',
-      card_number: '123',
       zip: '81100',
       promocode: promocode.promocode
     }
   }
-  let(:integer_attributes) { [:zip, :card_ex_month, :card_ex_year, :card_cvc] }
+  let(:integer_attributes) { [:zip] }
 
   describe 'POST create' do
     it 'creates contest and client' do
@@ -54,7 +48,7 @@ RSpec.describe ClientsController do
 
     it 'redirects to entries page' do
       post :create, { client: client_options }, contest_options_source
-      expect(response).to redirect_to(client_center_entries_path({signed_up: true}) )
+      expect(response).to redirect_to(payment_details_contests_path(id: Contest.last.id))
     end
 
     it 'saves attributes' do
@@ -82,9 +76,11 @@ RSpec.describe ClientsController do
       expect(contest.promocodes).to be_exists
     end
 
-    it 'schedules checking of billing info' do
+    it 'doesn\'t apply the same promocode again' do
       post :create, { client: client_options }, contest_options_source
-      expect(jobs_with_handler_like('StripeCustomerRegistration').count).to eq 1
+
+      contest = Contest.last
+      expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
     end
 
     context 'when not unique email' do
@@ -162,12 +158,7 @@ RSpec.describe ClientsController do
         address: 'new address',
         city: 'new city',
         state: 'new state',
-        zip: '123456',
-        card_number: test_card_number,
-        card_type: 'new type',
-        card_ex_month: '12',
-        card_ex_year: Time.current.year + 5,
-        card_cvc: '444'
+        zip: '123456'
       }
     end
 

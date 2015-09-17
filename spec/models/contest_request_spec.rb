@@ -95,12 +95,12 @@ RSpec.describe ContestRequest do
                               client_id: client.id,
                               status: 'submission') }
 
-    it 'does not change answer for fullfillment request' do
+    it 'does not change answer for fulfillment request' do
       request.reply('maybe', client.id)
       expect(request.answer).to eq('winner')
     end
 
-    it 'changes answer for fullfillment request' do
+    it 'changes answer for fulfillment request' do
       submitted_request.reply('favorite', client.id)
       expect(submitted_request.answer).to eq('favorite')
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825165644) do
+ActiveRecord::Schema.define(version: 20150909201641) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,28 +83,17 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.text     "last_name"
     t.text     "email"
     t.string   "password"
-    t.text     "name_on_card"
-    t.text     "card_type"
     t.text     "address"
     t.text     "state"
     t.integer  "zip"
-    t.text     "card_number"
-    t.integer  "card_ex_month"
-    t.integer  "card_ex_year"
-    t.integer  "card_cvc"
     t.integer  "status",                       default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
     t.text     "city"
     t.text     "phone_number"
-    t.text     "billing_address"
-    t.text     "billing_state"
-    t.integer  "billing_zip"
-    t.text     "billing_city"
     t.string   "plain_password"
     t.string   "stripe_customer_id"
-    t.text     "stripe_card_status",           default: "pending"
     t.integer  "facebook_user_id",   limit: 8
     t.integer  "primary_card_id"
   end
@@ -177,8 +166,8 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "accessories"
     t.string   "space_changes"
     t.string   "shop"
-    t.boolean  "accommodate_children"
-    t.boolean  "accommodate_pets"
+    t.string   "accommodate_children"
+    t.string   "accommodate_pets"
     t.text     "retailer"
     t.text     "elements_to_avoid"
     t.integer  "entertaining"
@@ -218,7 +207,6 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.text     "address"
     t.string   "state"
     t.string   "zip"
-    t.string   "number"
     t.text     "city"
     t.integer  "cvc"
     t.integer  "ex_month"
@@ -227,6 +215,7 @@ ActiveRecord::Schema.define(version: 20150825165644) do
     t.string   "stripe_card_status", default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_id"
   end
 
   create_table "delayed_jobs", force: true do |t|

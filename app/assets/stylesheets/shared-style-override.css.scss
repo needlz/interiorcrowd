@@ -775,7 +775,7 @@
 }
 
 .params{
-  display: inline;
+  display: block;
   margin-top: 7px;
   margin-bottom: 7px;
   font-size: 18px;
@@ -797,7 +797,7 @@
 }
 
 .card-details{
-  width: 80%;
+  width: 65%;
 }
 
 .primary-card-params{
@@ -839,7 +839,11 @@
   }
 
   .card-details{
-    width: 75%;
+    width: 60%;
+  }
+
+  .card-actions{
+    width: 40%;
   }
 
 }
@@ -863,8 +867,11 @@
     width: 30%;
   }
 
-  .card-actions a{
-    margin-right: 3.5%;
+  .card-actions {
+    width: 35%;
+    a {
+      margin-right: 2%;
+    }
   }
 
   #card-type{
@@ -873,7 +880,43 @@
   }
 
   .card-details{
-    width: 80%;
+    width: 65%;
+  }
+}
+
+@media (max-width: 460px) {
+  .add-new-credit-card{
+    margin-top: 10px;
+    width: 50%;
+    float: left;
+  }
+
+
+  .promotionCodeApply{
+    width: 116%;
+    p{
+      font-size: 19px;
+    }
+  }
+
+  .card-details{
+    width: 100%;
+    display: inline;
+  }
+
+  .params{
+    display: inline;
+    width: 50%;
+    font-size: 17px;
+    padding-left: 0;
+  }
+
+  .card-actions{
+    display: inline;
+    margin: 0 35% 0 35%;
+    a {
+      text-align: center;
+    }
   }
 }
 
@@ -1001,6 +1044,71 @@
   a{
     color: #30a7fc;
   }
+}
+
+.credit-card-form{
+  padding: 30px;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  padding-bottom: 0;
+  margin-top: 15px;
+  margin-bottom: 13px;
+}
+
+@media (max-width: 460px){
+  .credit-card-form {
+    padding: 10px;
+  }
+
+  .bootstrap-select.btn-group .btn .filter-option {
+    font-size: 14px;
+  }
+
+  #credit-card-form-controls-mobile{
+    display: block !important;
+  }
+
+  #credit-card-form-controls{
+    display: none;
+  }
+}
+
+#credit-card-form-controls{
+  @extend .credit-card-params;
+  position: relative;
+  margin-top: -10px;
+  margin-right: -18px;
+  padding-top: 0px;
+  float: right;
+  border: none;
+  text-align: right;
+  background-color: #ffffff;
+}
+
+#credit-card-form-controls-mobile{
+  display: none;
+  text-align: center;
+  a{
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: "AvenirLTStd-Medium";
+    color: #a9a9a9;
+    font-size: 17px;
+    margin-right: 3.5%;
+  }
+  padding: 15px 15px;
+}
+
+.creditCardForm label input {
+  border-color: #a9a9a9;
+}
+
+.selectpicker{
+  border-color: #a9a9a9;
+}
+
+.bootstrap-select.btn-group .btn .caret {
+  border-left: 1px solid #a9a9a9;
 }
 
 #login p{

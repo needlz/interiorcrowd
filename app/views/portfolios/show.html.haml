@@ -23,7 +23,7 @@
   .container.animated.fadeInDown.bottom60
     .row.marg-top40
       .col-md-4.relative.under_portfolio_profile
-        .image-container.portfolio_profile_image{ style: "background-image: #{ css_url(@portfolio_view.personal_picture_url) }; background-size: 150px 150px;" }
+        .image-container.portfolio_profile_image{ style: "background-image: #{ css_url(@portfolio_view.personal_picture_url) };" }
         %p
           %span= @portfolio_view.years_of_experience
           = @portfolio_view.experience_level

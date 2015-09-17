@@ -65,6 +65,15 @@ class ApplicationController < ActionController::Base
     @designer = Designer.find_by_id(check_designer)
   end
 
+  def log_error(exception)
+    ErrorsLogger.log(exception, session.to_hash)
+  end
+
+  def new_credit_card_params
+    params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
+                                        :card_type, :number, :cvc, :ex_month, :ex_year)
+  end
+
   private
 
   def set_return_to_link
@@ -76,11 +85,6 @@ class ApplicationController < ActionController::Base
     log_error(exception)
     return render_404 if exception.kind_of?(ActionController::RoutingError)
     raise exception
-  end
-
-  def log_error(exception)
-    extra_data = { session: session.to_hash }
-    Rollbar.error(exception, extra_data)
   end
 
   def fetch_current_user

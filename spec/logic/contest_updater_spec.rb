@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContestUpdater do
 
-  let(:client) { Fabricate(:client) }
+  let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:contest_with_space_images) do
     Fabricate(:contest,
               client: client,
@@ -23,12 +23,18 @@ RSpec.describe ContestUpdater do
   end
 
   describe 'upload space images' do
-    it 'changes status to "submission"' do
-      params = { design_space: { document_id: [Fabricate(:image).id].join(',') } }
-      options = ContestOptions.new(params)
-      updater = ContestUpdater.new(contest_without_space_images, options)
-      updater.update_options
-      expect(contest_without_space_images.status).to eq 'submission'
+    context 'when contest is payed' do
+      before do
+        pay_contest(contest_without_space_images)
+      end
+
+      it 'changes status to "submission"' do
+        params = { design_space: { document_id: [Fabricate(:image).id].join(',') } }
+        options = ContestOptions.new(params)
+        updater = ContestUpdater.new(contest_without_space_images, options)
+        updater.update_options
+        expect(contest_without_space_images.status).to eq 'submission'
+      end
     end
   end
 

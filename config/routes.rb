@@ -39,6 +39,7 @@ InteriorC::Application.routes.draw do
       member do
         get 'option'
         get 'show', as: 'show'
+        get 'brief', to: 'clients#brief', as: 'brief'
         get 'download_all_images_url'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
@@ -64,6 +65,7 @@ InteriorC::Application.routes.draw do
         get 'account_creation'
         get 'payment_details'
         get 'payment_summary'
+        put 'save_intake_form'
       end
     end
 
@@ -81,7 +83,6 @@ InteriorC::Application.routes.draw do
       resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries'
       get '', to: 'clients#client_center', as: 'client_center'
       get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'client_center_concept_boards_page'
-      get 'brief', to: 'clients#brief', as: 'client_center_brief'
       get 'profile', to: 'clients#profile', as: 'client_center_profile'
       get 'pictures_dimension', to: 'clients#pictures_dimension', as: 'client_center_pictures_dimension'
     end
@@ -153,11 +154,13 @@ InteriorC::Application.routes.draw do
               as: 'final_note_to_designer',
               only: [:create]
 
-    resources :credit_cards do
+    resources :credit_cards, only: [:create, :edit, :update, :destroy] do
       member do
         patch 'set_as_primary'
       end
     end
+
+    resources :client_payments, only: [:create]
 
     get '/coming_soon', to: 'home#coming_soon', as: 'coming_soon'
     get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
@@ -166,7 +169,10 @@ InteriorC::Application.routes.draw do
     get '/about_us', to: 'blog#about_us', as: 'about_us'
 
     scope '/blog' do
-      get '/*blog_page_path', to: 'blog#blog_page', as: 'blog_page'
+      get '/:blog_page_path',
+          to: 'blog#blog_page',
+          as: 'blog_page',
+          constraints: { blog_page_path: /.*/ }
       post '/:blog_page_post_path',
            to: 'blog#blog_page_post',
            as: 'blog_page_post',
