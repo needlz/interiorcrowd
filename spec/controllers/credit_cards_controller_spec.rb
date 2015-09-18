@@ -11,7 +11,7 @@ RSpec.describe CreditCardsController do
     def create_params
       { credit_card: {zip: credit_card.zip,
                      number: card_number,
-                     cvc: nil,
+                     cvc: '',
                      ex_month: credit_card.ex_month,
                      ex_year: credit_card.ex_year} }
     end
