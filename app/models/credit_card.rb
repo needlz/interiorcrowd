@@ -33,8 +33,6 @@ class CreditCard < ActiveRecord::Base
                        is: 5,
                        message: 'should be 5 digits'
 
-  validates_numericality_of :cvc, :on => [:create, :update, :save]
-
   scope :from_newer_to_older, -> { order(created_at: :desc) }
 
 end
