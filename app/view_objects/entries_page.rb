@@ -1,5 +1,7 @@
 class EntriesPage < ContestPage
 
+  attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
+
   def initialize(options)
     super
 
@@ -59,7 +61,7 @@ class EntriesPage < ContestPage
 
   def onload_popups
     result = []
-    if won_contest_request
+    if won_contest_request && entries_concept_board_page.actual_phase_view?
       result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
       result << ['clients/client_center/entries/popups/wait_for_final_design',
                  contest: contest,
@@ -68,7 +70,20 @@ class EntriesPage < ContestPage
     result
   end
 
-  attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
+  def breadcrumbs
+    return @breadcrumbs if @breadcrumbs
+    @breadcrumbs = Breadcrumbs::Client.new(view_context)
+    if show_particular_request?
+      @breadcrumbs.my_contests.contest(contest, true).contest_request(won_contest_request)
+    else
+      @breadcrumbs.my_contests.contest(contest)
+    end
+    @breadcrumbs
+  end
+
+  def show_particular_request?
+    won_contest_request && entries_concept_board_page.active_step != ContestPhases.phase_to_index(:initial)
+  end
 
   private
 

@@ -14,6 +14,8 @@
     I18n = #{ translations_to_json('') }
 
 - content_for :client_center_content do
+  = render 'shared/breadcrumbs', { breadcrumbs: @breadcrumbs } if @breadcrumbs
+
   .contest.brief.briefEditingBox.hidden-xs{ data: { id: @contest.id } }
     - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/brief_option', locals: { option: attribute }

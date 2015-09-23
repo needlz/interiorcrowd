@@ -12,6 +12,7 @@
 
 = render partial: 'clients/client_center/moodboard_winner_dialog' if @entries_page.contest_requests.present?
 - content_for :client_center_content do
+  = render 'shared/breadcrumbs', breadcrumbs: @entries_page.breadcrumbs
   .entries-container
     - if @contest
       .entries-initial

@@ -14,6 +14,7 @@
 
 = render partial: 'clients/client_center/moodboard_winner_dialog' if @entries_page.contest_requests.present?
 - content_for :client_center_content do
+  = render 'shared/breadcrumbs', breadcrumbs: @entries_page.breadcrumbs
   - unless @entries_page.won_contest_request
     .entries-container.entriesPage.entries-initial
       %input.hidden.contest{ type: 'hidden', data: { id: @entries_page.contest.id } }

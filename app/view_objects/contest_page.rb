@@ -1,5 +1,8 @@
 class ContestPage
 
+  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
+              :answer, :view_context
+
   def initialize(options)
     @contest = options[:contest]
 
@@ -40,8 +43,5 @@ class ContestPage
   def timeline_hint
     nil
   end
-
-  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
-              :answer, :view_context
 
 end

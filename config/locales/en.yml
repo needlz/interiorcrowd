@@ -546,6 +546,9 @@ en:
       entries: Entries
       brief: Brief
       profile: Profile
+    contests:
+      index:
+        title: My Contests
     sign_up:
       title: Create your account
       create_account: Create your account

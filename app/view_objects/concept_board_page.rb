@@ -28,6 +28,14 @@ class ConceptBoardPage < PhasesHolder
     contest_request.editable? && (active_step >= last_phase_index)
   end
 
+  def active_step
+    selected_step || last_phase_index
+  end
+
+  def actual_phase_view?
+    active_step == last_phase_index
+  end
+
   protected
 
   def create_phases_stripe
@@ -42,10 +50,6 @@ class ConceptBoardPage < PhasesHolder
   private
 
   attr_reader :contest_request, :preferred_view_index, :contest_request_view, :view_context
-
-  def active_step
-    selected_step || last_phase_index
-  end
 
   def active_phase
     ContestPhases.index_to_phase(active_step)

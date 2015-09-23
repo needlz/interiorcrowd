@@ -1,0 +1,6 @@
+- if breadcrumbs
+  .breadcrumbs
+    - breadcrumbs[0...-1].each do |item|
+      = link_to item[:name], item[:href]
+      \/
+    %span= breadcrumbs.last[:name]

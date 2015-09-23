@@ -219,9 +219,22 @@ RSpec.describe ContestRequestsController do
       expect(response).to redirect_to client_login_sessions_path
     end
 
-    it 'returns page' do
-      get :show, id: request.id
-      expect(response).to render_template(:show)
+    context 'clients contest' do
+      let(:request_id) { request.id }
+
+      it 'returns page' do
+        get :show, id: request_id
+        expect(response).to render_template(:show)
+      end
+    end
+
+    context 'not clients contest' do
+      let(:request_id) { Fabricate(:contest_request).id }
+
+      it 'does not find page' do
+        get :show, id: request_id
+        expect(response).to have_http_status(:not_found)
+      end
     end
 
     it 'renders answers if contest is in submission state' do

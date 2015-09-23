@@ -31,6 +31,7 @@ class ClientsController < ApplicationController
       return raise_404(e)
     end
     @contest_view = ContestView.new(contest_attributes: @contest)
+    @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@contest).brief(@contest)
     @navigation = Navigation::ClientCenter.new(:brief)
     render 'clients/client_center/brief'
   end

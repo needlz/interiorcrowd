@@ -1,6 +1,6 @@
 class ContestRequestsController < ApplicationController
   before_filter :check_designer, only: [:create, :save_lookbook]
-  before_filter :check_client, only: [:answer, :download]
+  before_filter :set_client, only: [:answer, :download, :show]
   before_filter :check_contest_owner, only: [:answer, :download]
   before_filter :set_request, only: [:answer, :approve_fulfillment, :add_comment, :download]
 
@@ -34,11 +34,14 @@ class ContestRequestsController < ApplicationController
   end
 
   def show
-    return unless check_client
-    @client = Client.find(session[:client_id])
-    @request = ContestRequest.find(params[:id])
+    begin
+      @request = @client.contest_requests.find_by_id!(params[:id])
+    rescue ActiveRecord::RecordNotFound => e
+      return raise_404(e)
+    end
     @show_answer_options = @request.answerable?
     @navigation = Navigation::ClientCenter.new(:entries)
+    @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@request.contest, true).contest_request(@request)
   end
 
   def download
