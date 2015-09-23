@@ -41,6 +41,10 @@ class ContestResponseView
     InstantFeedbackPublisher.channel_name(response.id)
   end
 
+  def design_name
+    response.contest.project_name
+   end
+
   private
 
   attr_reader :response
