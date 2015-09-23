@@ -2,6 +2,8 @@
   .col-sm-12
     %h4= title
     %p.light14Gray= subtitle
+    - if defined?(reminder)
+      %p.product-list-reminder= reminder
 
 .items
   - image_items.each do |item|

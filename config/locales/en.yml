@@ -912,6 +912,8 @@ en:
       product_list_title: >
         This is where you upload pictures of products you've included in your board.
         You can include why they would work for the client in the box below.
+      product_list_reminder: >
+        ( Don't forget to hit the submit button below to send your work to the client. )
       similar_styles_title: >
         'Similar styles' can be additional items that you'd also like the client to see,
         but have not included in the board. They might also be out of the client's budget.
