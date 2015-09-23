@@ -1,5 +1,5 @@
 %title= page_title
-= favicon_link_tag '/assets/favicon.ico'
+= render 'layouts/favicon'
 - if @no_global_css
   - unless @admin_page
     = stylesheet_link_tag 'layout'
