@@ -44,13 +44,15 @@ RSpec.describe ContestsController do
     let(:appeal_values){ Hash[appeals.map{ |appeal| [appeal.identifier, { value: Random.rand(0..100).to_s, reason: random_string }] }] }
 
     it 'updates appeals of contest' do
-      allow_any_instance_of(AppealScale).to receive(:name) { |key| 'string' }
-      patch :update, option: 'design_profile', id: contest.id, design_style: { appeals: appeal_values }
-      appeal_values.each do |identifier, value|
-        appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }
-        contest_appeal = contest.contests_appeals.where(appeal_id: appeal.id).first
-        expect(contest_appeal.value).to eq value[:value].to_i
-        expect(contest_appeal.reason).to eq value[:reason]
+      dont_raise_i18n_exceptions do
+        allow_any_instance_of(AppealScale).to receive(:name) { |key| 'string' }
+        patch :update, option: 'design_profile', id: contest.id, design_style: { appeals: appeal_values }
+        appeal_values.each do |identifier, value|
+          appeal = Appeal.all.detect { |appeal| appeal.identifier == identifier }
+          contest_appeal = contest.contests_appeals.where(appeal_id: appeal.id).first
+          expect(contest_appeal.value).to eq value[:value].to_i
+          expect(contest_appeal.reason).to eq value[:reason]
+        end
       end
     end
 
@@ -509,25 +511,69 @@ RSpec.describe ContestsController do
       end
     end
 
-    it 'returns page' do
-      Fabricate(:contest, client: client, status: 'submission')
-      contest = client.last_contest
-      pay_contest(contest)
-      client.update_attributes!(status: 'finished')
-      fulfillment = Fabricate(:contest_request,
-                              designer: Fabricate(:designer),
-                              contest: contest,
-                              status: 'finished',
-                              answer: 'winner',
-                              lookbook: Fabricate(:lookbook))
-      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
-      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
-      fulfillment.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
-      fulfillment.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
-      get :show, id: contest.id
-      expect(response).to render_template('clients/client_center/entries')
-      ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
-        get :show, view: phase_index, id: contest.id
+    def create_request(options)
+      contest_options = { client: client, status: 'submission' }
+      contest_options.merge!(options[:contest].try(:except, :status)) if options[:contest]
+      @contest = Fabricate(:contest, contest_options)
+      pay_contest(@contest)
+      @contest_request = Fabricate(:contest_request,
+                                   { designer: Fabricate(:designer),
+                                     contest: @contest,
+                                     lookbook: Fabricate(:lookbook)
+                                   }.merge(options[:contest_request])
+      )
+      @contest.update_attributes!(status: options[:contest][:status]) if options[:contest].try(:[], :status)
+    end
+
+    context 'when contest in "submission" state' do
+      it 'returns page' do
+        create_request(contest_request: { status: 'finished',
+                                          answer: 'winner', })
+        client.update_attributes!(status: 'finished')
+        @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+        @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+        @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+        @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+        get :show, id: @contest.id
+        expect(response).to render_template('clients/client_center/entries')
+        ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
+          get :show, view: phase_index, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
+      end
+    end
+
+    context 'when contest in "winner_selection" state' do
+      it 'returns page' do
+        create_request(contest: { status: 'winner_selection' }, contest_request: { status: 'submitted' })
+        get :show, id: @contest.id
+        expect(response).to render_template('clients/client_center/entries')
+      end
+    end
+
+    context 'when contest in "fulfillment" state' do
+      it 'returns page' do
+        create_request(contest: { status: 'fulfillment' },
+                       contest_request: { status: 'fulfillment_ready', answer: 'winner' })
+        get :show, id: @contest.id
+        expect(response).to render_template('clients/client_center/entries')
+      end
+    end
+
+    context 'when contest in "final_fulfillment" state' do
+      it 'returns page' do
+        create_request(contest: { status: 'final_fulfillment' },
+                       contest_request: { status: 'fulfillment_ready', answer: 'winner' })
+        get :show, id: @contest.id
+        expect(response).to render_template('clients/client_center/entries')
+      end
+    end
+
+    context 'when contest in "finished" state' do
+      it 'returns page' do
+        create_request(contest: { status: 'finished' },
+                       contest_request: { status: 'finished', answer: 'winner' })
+        get :show, id: @contest.id
         expect(response).to render_template('clients/client_center/entries')
       end
     end
