@@ -491,7 +491,7 @@ en:
         fulfillment:
           expired: Deadline extended
           time_left: '%{time_left} left in this phase'
-        fulfillment_approved:
+        final_fulfillment:
           expired: Deadline extended
           time_left: '%{time_left} left in this phase'
       fulfillment_approved:
