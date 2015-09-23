@@ -389,6 +389,7 @@
 }
 
 .submitMyDesign{
+  display: block;
   font-size: 20px;
   color: #000;
   line-height: 45px;
@@ -401,8 +402,8 @@
 }
 
 .moveToFinal{
-  @extend .submitMyDesign;
-  width: 340px;
+  color: #AFAFAF;
+  font-size: 16px;
 }
 
 #signUpModal{
@@ -1142,4 +1143,22 @@
 #linkToBrief{
   font-size: 17px;
   color: #30A7FC;
+}
+
+#submit_to_client{
+  color: #ffffff;
+  background-color: #409863;
+  border-color: darken(#409863, 2);
+}
+
+.submit-to-client{
+  margin-right: 1.3%;
+}
+
+.ready-for-final-design{
+  margin-top: 15px;
+  margin-right: 1.3%;
+  a:hover{
+    color: darken(#AFAFAF, 20);
+  }
 }

@@ -393,7 +393,7 @@ en:
         check_message: >
           Please click "check" if you like it or the "x" if you do not.
           Doing this will help the designer make the best design for you.
-        done_btn: Done and move to final design
+        done_btn: Client is ready for final design? >
         finalize_design_modal:
           title: Ready for the final design?
           body: If you still have feedback or want more options, please click no.
@@ -875,7 +875,7 @@ en:
       back: Back
       done: Done
       save_and_preview: Save my work & preview
-      submit: Submit
+      submit: Submit to client
       submit_design: Submit My Design
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept board

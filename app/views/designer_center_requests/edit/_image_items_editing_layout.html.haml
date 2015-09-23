@@ -43,6 +43,9 @@
             contest_request: @request,
             image_items: @product_items,
             wrap_row_with_block: false }
+      = render 'designer_center_requests/edit/product_items_list_buttons',
+        request: @request,
+        contest_request_milestone: @contest_request_milestone
     .fullWidthLine.marginBottom40.marginTop20
     .list-kind{ data: { kind: :similar_styles } }
       = render partial: 'designer_center_requests/edit/image_block_designer_view',
@@ -53,21 +56,15 @@
             contest_request: @request,
             image_items: @similar_styles,
             wrap_row_with_block: false }
-
-- if @request.fulfillment_ready?
+- if request.fulfillment_ready?
   .fullWidthLine.marginTop20
-  .row
-    .pull-right.marginTop20.marginBottom20
-      = form_for @request,
-          url: publish_designer_center_response_path(id: @request.id),
-          method: :patch,
-          html: { class: 'edit_contest_request',
-            data: { name: 'Submit products list' } } do |f|
-        = hidden_mixpanel_submit_tag
-        = link_to '#', class: 'submit submitMyDesign high-button' do
-          = t('designer_center.respond.submit')
-        - if @contest_request_milestone.expired?
-          = link_to '#', class: 'moveToFinal', request_id: request.id do
-            = t('client_center.entries.collaboration.done_btn')
-            %img{:src => "/assets/gt.png"}/
-          
+
+.marginTop40
+
+= render 'designer_center_requests/edit/product_items_list_buttons',
+  request: @request,
+  contest_request_milestone: @contest_request_milestone
+
+.marginTop40
+.clearfix
+.marginTop30
