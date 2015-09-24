@@ -42,8 +42,14 @@ class ContestResponseView
   end
 
   def design_name
-    response.contest.project_name
-   end
+    if response.contest.client.first_name.present?
+      response.contest.client.first_name + "'s " + response.contest.design_space.full_name
+    elsif response.contest.client.last_name.present?
+      response.contest.client.last_name + "'s " + response.contest.design_space.full_name
+    else
+      response.contest.client.email + "'s " + response.contest.design_space.full_name
+    end
+  end
 
   private
 

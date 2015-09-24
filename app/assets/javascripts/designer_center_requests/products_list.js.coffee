@@ -18,6 +18,8 @@ class ImageItemsEditor extends InlineEditor
     super()
     @bindDeleteClick()
     @subscribeToUpdates()
+    @bindPriceValidation()
+    @bindAutoSaving()
 
   bindDeleteClick: ->
     $(document).on 'click', "#{@attributeSelector} #{@deleteButtonSelector}", @, (event)=>
@@ -35,6 +37,28 @@ class ImageItemsEditor extends InlineEditor
     $ =>
       subscriptionChannel.subscribe subscriptionChannelName, (message) =>
         @displayProductItemFeedback(message.data)
+
+  bindAutoSaving: ->
+    $(document).on 'change', '.edit input, textarea', (event)=>
+      $form = $(event.target).closest('form')
+      imageItemId = @optionsRow($(event.target)).data('id')
+      $('.autosaving').show()
+      $.ajax(
+        url: "/image_items/#{ imageItemId }"
+        method: 'POST'
+        data: $form.serializeArray()
+        success: =>
+          $('.autosaving').hide()
+      )
+
+  bindPriceValidation: ->
+    $(document).on 'change', '#productPrice', (event)->
+      rawPrice = $(event.target).val()
+      trimmedPrice = $.trim(rawPrice)
+      if /^\d+$/.test($.trim(trimmedPrice))
+        $(event.target).val('$' + trimmedPrice)
+      else
+        $(event.target).val(trimmedPrice)
 
   displayProductItemFeedback: (rawMessage)->
     feedbackParams = JSON.parse(rawMessage)

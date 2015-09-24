@@ -930,6 +930,7 @@ en:
       link: Link
       client_likes: Client likes
       client_dislikes: Client dislikes
+      autosaving: autosaving...
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'

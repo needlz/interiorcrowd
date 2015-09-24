@@ -1,6 +1,3 @@
 .row.dcProduct.item{ data: { id: item.id }, class: ('default' if item.thumb_url == '/assets/portfolio_example.png') }
-  .view{ style: ('display: none' if mode == :edit) }
-    = render 'designer_center_requests/edit/view_image_item', { item: item, editable: editable }
   .edit
-    - if mode == :edit
-      = render 'designer_center_requests/edit/edit_image_item', { item: item }
+    = render 'designer_center_requests/edit/edit_image_item', { item: item }

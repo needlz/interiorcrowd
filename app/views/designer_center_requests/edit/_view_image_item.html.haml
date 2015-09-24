@@ -9,8 +9,6 @@
             %a.dcProductTrash{ href: '#' }
       .dcProductImage
         %img.fullWidth{ src: item.thumb_url, data: { id: item.image_id }}/
-      - if editable
-        %a.dcEditProduct.edit{ href: '#' } Edit
     .col-sm-8.dcProductMiddle
       %p= item.name
       %p= item.brand
