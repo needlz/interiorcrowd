@@ -260,7 +260,7 @@ RSpec.describe DesignerCenterRequestsController do
       image = Fabricate(:image)
       post :create,
            contest_id: contest.id,
-           lookbook: { picture: { ids: [image.id] } },
+           lookbook: { picture: { ids: image.id } },
            contest_request: { feedback: '' }
       expect(contest.requests[0].lookbook.lookbook_details).to be_present
     end
