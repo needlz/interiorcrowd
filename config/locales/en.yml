@@ -535,8 +535,10 @@ en:
         card_exp_date: Expiration date
         card_cvc: CVC
         card_types:
-          visa: Visa
+          american_express: American Express
+          discover: Discover
           mastercard: Mastercard
+          visa: Visa
         ending_in: 'ending in'
 
     navigation:
