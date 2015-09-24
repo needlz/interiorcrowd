@@ -74,4 +74,9 @@ RSpec.describe Designer do
     end
   end
 
+  it 'capitalizes name' do
+    designer.update_attributes!(first_name: 'wolfgang', last_name: 'von strucker')
+    expect(designer.name).to eq('Wolfgang Von Strucker')
+  end
+
 end

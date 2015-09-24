@@ -41,6 +41,14 @@ class Designer < ActiveRecord::Base
 
   scope :active, -> { where(active: true) }
 
+  def first_name
+    read_attribute(:first_name).try(:titleize)
+  end
+
+  def last_name
+    read_attribute(:last_name).try(:titleize)
+  end
+
   def has_active_requests?
     contest_requests.active.exists?
   end
