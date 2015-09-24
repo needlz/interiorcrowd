@@ -40,7 +40,7 @@ class CreditCardView
     primary? ? I18n.t('client_center.sign_up.primary_card') : I18n.t('client_center.sign_up.make_card_primary')
   end
 
-  def year_select
+  def self.year_select
     { :start_year => Time.now.year,
       :end_year => Time.now.year + 10,
       :field_name => :ex_year,
@@ -48,12 +48,12 @@ class CreditCardView
       prompt: I18n.t('client_center.sign_up.select_year')}
   end
 
-  private
-
-  attr_reader :credit_card
-
   def primary?
     credit_card == credit_card.client.primary_card
   end
+
+  private
+
+  attr_reader :credit_card
 
 end

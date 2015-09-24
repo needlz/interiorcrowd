@@ -1,0 +1,4 @@
+.lightFont
+  = render 'contests/card_manager',
+      { card_views: client.credit_cards.map{ |cc| CreditCardView.new(cc) },
+      new_card: client.credit_cards.new }

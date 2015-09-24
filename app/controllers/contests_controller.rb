@@ -89,7 +89,6 @@ class ContestsController < ApplicationController
       return raise_404(e)
     end
     @client_payment = ClientPayment.new
-    @shared_card_view = CreditCardView.new(nil)
     @show_cards_manager = @client.credit_cards.present?
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }

@@ -46,19 +46,19 @@
                 maxlength: 19,
                 type: 'text',
                 tabindex: 12,
-                disabled: @credit_card.persisted?
+                disabled: f.object.persisted?
           %span#err_card_number.text-error
       .col-xs-4
         %label
           %p= t('client_center.profile.labels.card_cvc')
           = text_field_tag 'credit_card[cvc]',
-              '',
+              ('***' if f.object.persisted?),
               id: 'card_cvc',
               class: 'form-control left-control',
               name: 'credit_card[cvc]',
               type: 'text',
               tabindex: 13,
-              disabled: @credit_card.persisted?
+              disabled: f.object.persisted?
           %span#err_cvc.text-error
     .row
       .col-xs-6
@@ -73,7 +73,7 @@
         %label
           %p &nbsp;
           = select_year(f.object.ex_year,
-                  @shared_card_view.year_select,
+                  CreditCardView.year_select,
                   class: 'selectpicker form-selector card-exp', tabindex: 15)
     .row
       - if show_promocode_input

@@ -28,12 +28,12 @@ class CreditCardsController < ApplicationController
   end
 
   def edit
-    @credit_card = current_user.credit_cards.find card_id
-    @shared_card_view = CreditCardView.new(nil)
+    credit_card = current_user.credit_cards.find card_id
     render partial: 'contests/card_form', locals: { css_class: nil,
                                                     form_method: :patch,
                                                     placeholder: '**** **** **** ',
-                                                    show_promocode_input: false }
+                                                    show_promocode_input: false,
+                                                    credit_card: credit_card }
   rescue ActiveRecord::RecordNotFound
     render text: 'There is no credit card with such id for this client.',
            status: :not_found

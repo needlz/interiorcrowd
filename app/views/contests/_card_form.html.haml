@@ -1,6 +1,6 @@
 .clearfix
-.credit-card-form{ class: "#{css_class}" }
-  = form_for @credit_card, { id: 'create', method: form_method } do |f|
+.creditCardForm.credit-card-form{ class: "#{css_class}" }
+  = form_for credit_card, { id: 'create', method: form_method } do |f|
     #credit-card-form-controls
       %span.pull-left.text-error#credit-card-editing-error
       %a#save-credit-card= t('client_center.sign_up.save')

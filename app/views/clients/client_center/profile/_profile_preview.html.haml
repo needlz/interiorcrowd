@@ -2,7 +2,9 @@
   = render 'clients/client_center/profile/profile_attribute_preview',
            title: I18n.t("client_center.profile.labels.#{ attribute }"),
            attribute: attribute,
-           client: @client
+           client: @client,
+           fullwidth: ['credit_cards'].include?(attribute),
+           show_edit_button: !['credit_cards'].include?(attribute)
 
 .edit-button.template
   = render 'clients/client_center/profile/edit_button_image'

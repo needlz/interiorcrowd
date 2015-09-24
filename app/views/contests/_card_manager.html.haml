@@ -1,13 +1,16 @@
-.credit-card-hint= t('client_center.sign_up.choose_credit_card')
+:javascript
+  signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
+
 .add-new-credit-card.clickable= t('client_center.sign_up.add_credit_card')
 .clearfix
 
-= render 'card_form',
+= render 'contests/card_form',
     { css_class: 'hidden',
       form_method: :post,
       placeholder: nil,
-      show_promocode_input: false }
+      show_promocode_input: false,
+      credit_card: new_card }
 .first-card-container
 
 - card_views.each do |card|
-  = render partial: 'card_view', locals: { card: card }
+  = render partial: 'contests/card_view', locals: { card: card }

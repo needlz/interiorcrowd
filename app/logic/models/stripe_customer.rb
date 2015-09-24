@@ -92,7 +92,7 @@ class StripeCustomer
   end
 
   def delete_card(credit_card)
-    stripe_customer.sources.retrieve(credit_card.stripe_id).delete
+    stripe_customer.sources.retrieve(credit_card.stripe_id).delete if credit_card.stripe_id
   end
 
   def set_default(credit_card)
