@@ -17,16 +17,26 @@ class CommentNotifier
   attr_reader :user_role, :contest_request, :author, :comment
 
   def send_email
-    Jobs::Mailer.schedule(:comment_on_board,
-                          [{ username: author.name,
-                             email: user.email,
-                             role: user_role,
-                             search_by: "#{user_role}s_comment_on_board",
-                             comment: comment.text
-                           },
-                           contest_request.id
-                          ],
-                          { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
+    if contest_request.contest.submission? && user_role == 'designer'
+      Jobs::Mailer.schedule(:designer_asks_client_a_question_submission_phase,
+                            [{ contest_request: contest_request,
+                               comment_text: comment.text,
+                               client: recipient
+                             },
+                            ],
+                            { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
+    else
+      Jobs::Mailer.schedule(:comment_on_board,
+                            [{ username: author.name,
+                               email: recipient.email,
+                               role: user_role,
+                               search_by: "#{user_role}s_comment_on_board",
+                               comment: comment.text
+                             },
+                             contest_request.id
+                            ],
+                            { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
+    end
   end
 
   def delayed_job_for_email
@@ -41,7 +51,7 @@ class CommentNotifier
     Settings.comment_board_digest_minutes_interval.to_i.minutes.from_now.utc
   end
 
-  def user
+  def recipient
     return contest_request.designer if user_role == 'client'
     contest_request.contest.client
   end
