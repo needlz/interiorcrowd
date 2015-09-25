@@ -30,13 +30,5 @@
         placeholder: t('designer_center.product_items.text_placeholder') }
       = item.text
     .pull-right.autosaving
-      #circularG
-        #circularG_1.circularG
-        #circularG_2.circularG
-        #circularG_3.circularG
-        #circularG_4.circularG
-        #circularG_5.circularG
-        #circularG_6.circularG
-        #circularG_7.circularG
-        #circularG_8.circularG
+      = render ('shared/saving_spinner')
       %span= t('designer_center.product_items.autosaving')
