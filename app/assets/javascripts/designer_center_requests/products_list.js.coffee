@@ -42,13 +42,13 @@ class ImageItemsEditor extends InlineEditor
     $(document).on 'change', '.edit input, textarea', (event)=>
       $form = $(event.target).closest('form')
       imageItemId = @optionsRow($(event.target)).data('id')
-      $('.autosaving').show()
+      $(event.target).parents('.edit').find('.autosaving').show()
       $.ajax(
         url: "/image_items/#{ imageItemId }"
         method: 'POST'
         data: $form.serializeArray()
         success: =>
-          $('.autosaving').hide()
+          $(event.target).parents('.edit').find('.autosaving').hide()
       )
 
   bindPriceValidation: ->
