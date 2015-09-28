@@ -393,7 +393,7 @@ en:
         check_message: >
           Please click "check" if you like it or the "x" if you do not.
           Doing this will help the designer make the best design for you.
-        done_btn: Done and move to final design
+        done_btn: Client is ready for final design? >
         finalize_design_modal:
           title: Ready for the final design?
           body: If you still have feedback or want more options, please click no.
@@ -623,7 +623,7 @@ en:
     save_button: Save
     cancel_button: Cancel
     edit:
-      upload_new: Upload a new concept board
+      upload_new: Upload
       above_image: >
         Now that you have been chosen, the fun really begins. Please give the details on your design as well
         as comments about why you have chosen certain items. You can also upload a new concept board as well.
@@ -641,7 +641,7 @@ en:
       upload: Upload
       update_submission: If you would like to update your concept board submission, please use the edit buttons below.
       back_to_contests: Back to My Contests
-      update_concept_board_hint: Update your concept board to reflect a more customized look for your client.
+      update_concept_board_hint: Add floor plans, update your concept board, or present new renderings.
     final_upload:
       note_for_client: Write a note about your board here
       note_for_client_placeholder: >
@@ -877,7 +877,7 @@ en:
       back: Back
       done: Done
       save_and_preview: Save my work & preview
-      submit: Submit
+      submit: Submit to client
       submit_design: Submit My Design
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept board
@@ -914,6 +914,8 @@ en:
       product_list_title: >
         This is where you upload pictures of products you've included in your board.
         You can include why they would work for the client in the box below.
+      product_list_reminder: >
+        ( Don't forget to hit the submit button below to send your work to the client. )
       similar_styles_title: >
         'Similar styles' can be additional items that you'd also like the client to see,
         but have not included in the board. They might also be out of the client's budget.
@@ -930,6 +932,7 @@ en:
       link: Link
       client_likes: Client likes
       client_dislikes: Client dislikes
+      autosaving: autosaving...
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'
