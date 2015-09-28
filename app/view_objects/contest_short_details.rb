@@ -22,7 +22,12 @@ class ContestShortDetails
   end
 
   def get_days_till_end(contest)
-    contest.winner_collaboration? ?  '—' : days_count.to_s
+    return '—' if contest.winner_collaboration?
+    if days_count > 0
+      days_count.to_s
+    else
+      '< 1'
+    end
   end
 
   private

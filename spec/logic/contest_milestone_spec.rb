@@ -21,6 +21,11 @@ RSpec.describe ContestMilestone do
       it 'returns class of performer of milestone end' do
         expect(milestone.end_milestone_performer_class).to be_present
       end
+
+      it 'delays phase end to the end of day' do
+        expected_next_phase_end = (contest.phase_end + ContestMilestone::DAYS[contest.status].days).end_of_day
+        expect(milestone.phase_end(contest.phase_end)).to eq expected_next_phase_end
+      end
     end
 
     context 'contest in fulfillment status' do

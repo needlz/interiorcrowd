@@ -131,7 +131,7 @@ class Contest < ActiveRecord::Base
   end
 
   def days_left
-    (submission? || winner_selection?) ? ((phase_end - Time.current) / 1.day).ceil : 0
+    (submission? || winner_selection?) ? ((phase_end - Time.current) / 1.day).floor : 0
   end
 
   def response_of(designer)
