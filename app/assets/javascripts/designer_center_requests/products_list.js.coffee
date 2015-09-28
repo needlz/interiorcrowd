@@ -45,45 +45,45 @@ class ImageItemsEditor extends InlineEditor
       @saveChanges(event)
 
   validatePrice: (event)->
-    $caller = $(event.target)
-    trimmedPrice = @getTrimmedPrice($caller)
-    @prependWithDollarSignIfNeeded($caller, trimmedPrice)
+    $input = $(event.target)
+    trimmedPrice = @getTrimmedPrice($input)
+    @prependWithDollarSignIfNeeded($input, trimmedPrice)
 
-  getTrimmedPrice: ($caller)->
-    $.trim($caller.val())
+  getTrimmedPrice: ($input)->
+    $.trim($input.val())
 
-  prependWithDollarSignIfNeeded: ($caller, price)->
+  prependWithDollarSignIfNeeded: ($input, price)->
     if /^\d+$/.test(price)
-      $caller.val('$' + price)
+      $input.val('$' + price)
     else
-      $caller.val(price)
+      $input.val(price)
 
-  getAutoSavingNotice: ($caller)->
-    $caller.parents(@editImageItemContainerSelector).find(@autoSavingNoticeSelector)
+  getAutoSavingNotice: ($input)->
+    $input.parents(@editImageItemContainerSelector).find(@autoSavingNoticeSelector)
 
   saveChanges: (event)->
-    $caller = $(event.target)
-    @showAutoSavingNotice($caller)
-    @saveOnServer($caller)
+    $input = $(event.target)
+    @showAutoSavingNotice($input)
+    @saveOnServer($input)
 
-  showAutoSavingNotice: ($caller)->
-    @getAutoSavingNotice($caller).show()
+  showAutoSavingNotice: ($input)->
+    @getAutoSavingNotice($input).show()
 
-  hideAutoSavingNotice: ($caller)->
-    @getAutoSavingNotice($caller).hide()
+  hideAutoSavingNotice: ($input)->
+    @getAutoSavingNotice($input).hide()
 
-  saveOnServer: ($caller)->
-    $form = $caller.closest('form')
-    imageItemId = @optionsRow($caller).data('id')
-    @performUpdateRequest($caller, $form, imageItemId)
+  saveOnServer: ($input)->
+    $form = $input.closest('form')
+    imageItemId = @optionsRow($input).data('id')
+    @performUpdateRequest($input, $form, imageItemId)
 
-  performUpdateRequest: ($caller, $form, imageItemId)->
+  performUpdateRequest: ($input, $form, imageItemId)->
     $.ajax(
       url: "/image_items/#{ imageItemId }"
       method: 'POST'
       data: $form.serializeArray()
       success: =>
-        @hideAutoSavingNotice($caller)
+        @hideAutoSavingNotice($input)
     )
 
   displayProductItemFeedback: (rawMessage)->
