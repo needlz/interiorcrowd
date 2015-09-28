@@ -3,21 +3,21 @@ class ImageItemsEditor extends InlineEditor
   attributeIdentifierData: 'id'
   attributeSelector: '.dcProduct'
   sameEditCancelbutton: false
-  editButtonSelector: '.dcEditProduct.edit'
-
-  cancelButtonSelector: '.dcEditProduct.cancel'
-  saveButtonSelector: '.dcEditProduct.save'
   deleteButtonSelector: '.dcProductTrash'
 
   productItemSelector: '.row.dcProduct.item'
   itemHeadSelector: '.dcProductHead'
   itemTextSelector: '.col-sm-8'
   headStyleVariants: 'greenHead redHead'
+  editImageItemContainerSelector: '.edit'
+  autoSavingNoticeSelector: '.autosaving'
 
   bindEvents: ->
     super()
     @bindDeleteClick()
     @subscribeToUpdates()
+    @bindPriceValidation()
+    @bindAutoSaving()
 
   bindDeleteClick: ->
     $(document).on 'click', "#{@attributeSelector} #{@deleteButtonSelector}", @, (event)=>
@@ -35,6 +35,56 @@ class ImageItemsEditor extends InlineEditor
     $ =>
       subscriptionChannel.subscribe subscriptionChannelName, (message) =>
         @displayProductItemFeedback(message.data)
+
+  bindPriceValidation: ->
+    $(document).on 'change', '#productPrice', (event)=>
+      @validatePrice(event)
+
+  bindAutoSaving: ->
+    $(document).on 'change', '.edit input, textarea', (event)=>
+      @saveChanges(event)
+
+  validatePrice: (event)->
+    $input = $(event.target)
+    trimmedPrice = @getTrimmedPrice($input)
+    @prependWithDollarSignIfNeeded($input, trimmedPrice)
+
+  getTrimmedPrice: ($input)->
+    $.trim($input.val())
+
+  prependWithDollarSignIfNeeded: ($input, price)->
+    if /^\d+$/.test(price)
+      $input.val('$' + price)
+    else
+      $input.val(price)
+
+  getAutoSavingNotice: ($input)->
+    $input.parents(@editImageItemContainerSelector).find(@autoSavingNoticeSelector)
+
+  saveChanges: (event)->
+    $input = $(event.target)
+    @showAutoSavingNotice($input)
+    @saveOnServer($input)
+
+  showAutoSavingNotice: ($input)->
+    @getAutoSavingNotice($input).show()
+
+  hideAutoSavingNotice: ($input)->
+    @getAutoSavingNotice($input).hide()
+
+  saveOnServer: ($input)->
+    $form = $input.closest('form')
+    imageItemId = @optionsRow($input).data('id')
+    @performUpdateRequest($input, $form, imageItemId)
+
+  performUpdateRequest: ($input, $form, imageItemId)->
+    $.ajax(
+      url: "/image_items/#{ imageItemId }"
+      method: 'POST'
+      data: $form.serializeArray()
+      success: =>
+        @hideAutoSavingNotice($input)
+    )
 
   displayProductItemFeedback: (rawMessage)->
     feedbackParams = JSON.parse(rawMessage)
@@ -97,15 +147,6 @@ class ImageItemsEditor extends InlineEditor
     $view.html(data)
 
     ImageItemsView.init()
-
-  save: (imageItemId)->
-    $.ajax(
-      url: "/image_items/#{ imageItemId }"
-      method: 'PATCH'
-      data: {}
-      success: (response)=>
-        @cancelEditing(imageItemId)
-    )
 
   append: (kind, imageId)->
     $.ajax(

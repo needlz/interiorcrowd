@@ -10,11 +10,6 @@
           %img.fullWidth{:src => item.thumb_url }/
           = file_field_tag 'image[image]', class: 'hidden'
           = hidden_field_tag 'image_item[image_id]', item.image_id
-        .row
-          .col-sm-6
-            %a.dcEditProduct.save.rightGrayBorder{:href => "#"}= t('designer_center.product_items.save')
-          .col-sm-6
-            %a.dcEditProduct.cancel{:href => "#"}= t('designer_center.product_items.cancel')
       .col-sm-8.dcProductMiddle
         .row
           .col-sm-4
@@ -34,3 +29,6 @@
         tabindex: '0',
         placeholder: t('designer_center.product_items.text_placeholder') }
       = item.text
+    .pull-right.autosaving
+      = render ('shared/saving_spinner')
+      %span= t('designer_center.product_items.autosaving')
