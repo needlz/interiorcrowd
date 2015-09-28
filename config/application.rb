@@ -12,8 +12,10 @@ settings_files.each do |filename|
   erb_preprocessed = ERB.new(File.read(filename)).result
   yaml = YAML.load(erb_preprocessed)
 
-  yaml[Rails.env].try(:each) do |key, value|
-    ENV[key] = value
+  ['common', Rails.env].each do |env|
+    yaml[env].try(:each) do |key, value|
+      ENV[key] = value
+    end
   end
 end
 
@@ -75,5 +77,7 @@ module InteriorC
     config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
 
     config.action_controller.default_url_options = { trailing_slash: true }
+
+    config.time_zone = ENV['TIMEZONE']
   end
 end
