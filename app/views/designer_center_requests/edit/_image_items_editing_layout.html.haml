@@ -16,7 +16,10 @@
 .row.viewingMoodboard.winningMoodboard
   .col-lg-8.col-md-7
     .relative
-      = link_to @request_view.design_name, designer_center_contest_path(id: @request.contest.id), id: 'linkToBrief'
+      = link_to @request_view.design_name,
+        designer_center_contest_path(id: @request.contest.id),
+        id: 'linkToBrief',
+        target: '_blank'
       .initialImage
         - if @request.editable?
           = render partial: 'designer_center_requests/show/image_loading',
