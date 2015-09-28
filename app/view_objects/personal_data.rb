@@ -54,12 +54,8 @@ class PersonalData
       'WY' => 'Wyoming'
   }
 
-  CARD_TYPES = ['visa', 'mastercard']
-
   def self.card_type_options
-    CARD_TYPES.map do |type|
-      [I18n.t("client_center.profile.labels.card_types.#{ type }"), type]
-    end
+    I18n.t('client_center.profile.labels.card_types').invert
   end
 
   def self.state_options

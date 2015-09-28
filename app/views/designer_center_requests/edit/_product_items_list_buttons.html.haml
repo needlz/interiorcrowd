@@ -1,0 +1,16 @@
+- if request.fulfillment_ready?
+  .row
+    .pull-right.submit-to-client
+      = form_for request,
+          url: publish_designer_center_response_path(id: request.id),
+          method: :patch,
+          html: { class: 'edit_contest_request',
+            data: { name: 'Submit products list' } } do |f|
+        = hidden_mixpanel_submit_tag
+        = link_to '#', class: 'submit submitMyDesign high-button', id: 'submit_to_client' do
+          = t('designer_center.respond.submit')
+  .row
+    .pull-right.ready-for-final-design
+      - if contest_request_milestone.expired?
+        = link_to '#', class: 'moveToFinal', request_id: request.id do
+          = t('client_center.entries.collaboration.done_btn')

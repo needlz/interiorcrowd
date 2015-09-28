@@ -16,6 +16,10 @@
 .row.viewingMoodboard.winningMoodboard
   .col-lg-8.col-md-7
     .relative
+      = link_to @request_view.design_name,
+        designer_center_contest_path(id: @request.contest.id),
+        id: 'linkToBrief',
+        target: '_blank'
       .initialImage
         - if @request.editable?
           = render partial: 'designer_center_requests/show/image_loading',
@@ -30,42 +34,39 @@
                     comments: @request.comments,
                     show_comment_switcher: !@request_view.initial_concept_board? }
 .fullWidthLine.marginBottom40
-= form_for @request, url: designer_center_response_path(id: @request.id) do |f|
-  .image-items
-    .list-kind{ data: { kind: :product_items } }
-      = render partial: 'designer_center_requests/edit/image_block_designer_view',
-          locals: { editable: editable,
-            title: t('designer_center.edit.products_list'),
-            subtitle: t('designer_center.product_items.product_list_title'),
-            image_list_name: :product_items,
-            contest_request: @request,
-            image_items: @product_items,
-            wrap_row_with_block: false }
-    .fullWidthLine.marginBottom40.marginTop20
-    .list-kind{ data: { kind: :similar_styles } }
-      = render partial: 'designer_center_requests/edit/image_block_designer_view',
-          locals: { editable: editable,
-            title: t('designer_center.edit.similar_styles'),
-            subtitle: t('designer_center.product_items.similar_styles_title'),
-            image_list_name: :similar_styles,
-            contest_request: @request,
-            image_items: @similar_styles,
-            wrap_row_with_block: false }
-
-- if @request.fulfillment_ready?
+.image-items
+  .list-kind{ data: { kind: :product_items } }
+    = render partial: 'designer_center_requests/edit/image_block_designer_view',
+        locals: { editable: editable,
+          title: t('designer_center.edit.products_list'),
+          subtitle: t('designer_center.product_items.product_list_title'),
+          reminder: t('designer_center.product_items.product_list_reminder'),
+          image_list_name: :product_items,
+          contest_request: @request,
+          image_items: @product_items,
+          wrap_row_with_block: false }
+    = render 'designer_center_requests/edit/product_items_list_buttons',
+      request: @request,
+      contest_request_milestone: @contest_request_milestone
+  .fullWidthLine.marginBottom40.marginTop20
+  .list-kind{ data: { kind: :similar_styles } }
+    = render partial: 'designer_center_requests/edit/image_block_designer_view',
+        locals: { editable: editable,
+          title: t('designer_center.edit.similar_styles'),
+          subtitle: t('designer_center.product_items.similar_styles_title'),
+          image_list_name: :similar_styles,
+          contest_request: @request,
+          image_items: @similar_styles,
+          wrap_row_with_block: false }
+- if request.fulfillment_ready?
   .fullWidthLine.marginTop20
-  .row
-    .pull-right.marginTop20.marginBottom20
-      = form_for @request,
-          url: publish_designer_center_response_path(id: @request.id),
-          method: :patch,
-          html: { class: 'edit_contest_request',
-            data: { name: 'Submit products list' } } do |f|
-        = hidden_mixpanel_submit_tag
-        = link_to '#', class: 'submit submitMyDesign high-button' do
-          = t('designer_center.respond.submit')
-        - if @contest_request_milestone.expired?
-          = link_to '#', class: 'moveToFinal', request_id: request.id do
-            =t('client_center.entries.collaboration.done_btn')
-            %img{:src => "/assets/gt.png"}/
-          
+
+.marginTop40
+
+= render 'designer_center_requests/edit/product_items_list_buttons',
+  request: @request,
+  contest_request_milestone: @contest_request_milestone
+
+.marginTop40
+.clearfix
+.marginTop30

@@ -3626,6 +3626,12 @@ a.uploadNewConceptBoard{
     font-family: "AvenirLTStd-Light";
     color: #333333;
 }
+
+p.product-list-reminder{
+  font-size: 14px;
+  font-family: "AvenirLTStd-Heavy";
+  color: #333333;
+}
 /* end Designer-center-fulfillment-screen */
 
 /* start CC-waiting-final-design */
@@ -3729,7 +3735,7 @@ a.uploadNewConceptBoard{
 .uploadFinalDesignBtn,.uploadFinalDesignBtn:hover{
     color: #000;
     font-size: 20px;
-    width: 290px;
+    padding: 0 35px 0 35px;
     text-align: center;
     line-height: 49px;
     border: 1px solid #000;

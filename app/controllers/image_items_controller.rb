@@ -15,9 +15,7 @@ class ImageItemsController < ApplicationController
     return raise_404 unless @item.contest_request.designer == @designer
     ImageItemUpdater.new(@item, product_item_params, current_user).perform
     render partial: 'designer_center_requests/edit/image_content',
-           locals: { item: ImageItemView.new(@item),
-                     editable: true,
-                     mode: :view }
+           locals: { item: ImageItemView.new(@item) }
   end
 
   def mark
@@ -47,9 +45,7 @@ class ImageItemsController < ApplicationController
     phase = ContestPhases.status_to_phase(contest_request.status)
     new_image_item = contest_request.image_items.of_phase(phase).create!(kind: params[:kind],
                                                                          image_id: params[:image_id])
-    render partial: 'designer_center_requests/edit/image_content', locals: { item: ImageItemView.new(new_image_item),
-                                                                             editable: true,
-                                                                             mode: :edit }
+    render partial: 'designer_center_requests/edit/image_content', locals: { item: ImageItemView.new(new_image_item) }
   end
 
   private

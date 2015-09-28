@@ -169,4 +169,22 @@ RSpec.configure do |config|
     allow_any_instance_of(Ably::Rest::Channel).to receive(:publish)
   end
 
+  def dont_raise_i18n_exceptions(&block)
+    I18n.exception_handler = lambda { |exception, locale, key, options| }
+    if block
+      block.call
+      raise_i18n_exceptions
+    end
+  end
+
+  def raise_i18n_exceptions
+    I18n.exception_handler = lambda do |exception, locale, key, options|
+      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
+        raise exception.to_exception
+      end
+    end
+  end
+
+  raise_i18n_exceptions
+
 end

@@ -33,7 +33,6 @@ class ContestRequestCreation
       document_ids.each do |doc|
         LookbookDetail.create!({lookbook_id: request.lookbook.id,
                                 image_id: doc,
-                                doc_type: LookbookDetail::UPLOADED_PICTURE_TYPE,
                                 phase: 'initial'})
       end
     end

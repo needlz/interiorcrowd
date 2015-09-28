@@ -341,8 +341,6 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.integer  "lookbook_id"
     t.integer  "image_id"
     t.text     "description"
-    t.text     "url"
-    t.integer  "doc_type"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "phase"
