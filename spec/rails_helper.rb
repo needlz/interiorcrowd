@@ -41,7 +41,7 @@ RSpec.configure do |config|
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
-  Rails.application.routes.default_url_options = { trailing_slash: true }
+  Rails.application.routes.default_url_options = { trailing_slash: true, host: 'test.host' }
 
   config.infer_spec_type_from_file_location!
 
