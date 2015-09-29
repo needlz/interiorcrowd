@@ -605,6 +605,12 @@ en:
       final_fulfillment: Waiting for Final Design and Product List
       closed: Closed
       finished: Contest is Finished
+    breadcrumbs:
+      my_contests: My contests
+      contest: Entries
+      profile: Profile
+      brief: Brief
+      contest_request: '%{possessive} concept board'
   designer_center:
     milestones:
       winner_selection:
