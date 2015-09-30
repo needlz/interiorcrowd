@@ -21,10 +21,6 @@ RSpec.describe Contest do
     end
   end
 
-  it 'delays submission time by 7 days' do
-    expect(contest.days_left).to eq 7
-  end
-
   it 'sets submission end time' do
     expect(contest.phase_end).to be_present
   end
