@@ -79,5 +79,7 @@ module InteriorC
     config.action_controller.default_url_options = { trailing_slash: true }
 
     config.time_zone = ENV['TIMEZONE']
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
