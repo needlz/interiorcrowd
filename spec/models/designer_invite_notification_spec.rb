@@ -8,7 +8,7 @@ RSpec.describe DesignerInviteNotification do
       contest = Fabricate(:contest)
       Fabricate(:designer_invite_notification, designer: designer, contest: contest)
       expect(designer.designer_invite_notifications.count).to eq 1
-      expect { Fabricate(:designer_invitation, designer: designer, contest: contest) }.to raise_error
+      expect { Fabricate(:designer_invite_notification, designer: designer, contest: contest) }.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 

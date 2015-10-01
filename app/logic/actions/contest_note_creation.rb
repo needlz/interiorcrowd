@@ -7,17 +7,17 @@ class ContestNoteCreation
       @client = Client.find(current_user.id)
     end
     @designer_id = current_user.id if current_user.designer?
-    @text = text.strip
+    @text = text
   end
 
   def perform
-    comment = contest.notes.create!(text: text, client_id: client_id, designer_id: designer_id)
+    @comment = contest.notes.create!(text: text, client_id: client_id, designer_id: designer_id)
     notify_designers(comment) if client_id
   end
 
   private
 
-  attr_reader :client_id, :designer_id, :contest, :text, :client
+  attr_reader :client_id, :designer_id, :contest, :client, :comment, :text
 
   def notify_designers(comment)
     subscribed_designers_ids.each do |designer|
@@ -41,7 +41,7 @@ class ContestNoteCreation
                           [{ username: designer.name,
                              email: designer.email,
                              client_name: client.name,
-                             comment: text }],
+                             comment: comment.text }],
                           { run_at: digest_minutes_interval, contest_id: contest.id })
   end
 

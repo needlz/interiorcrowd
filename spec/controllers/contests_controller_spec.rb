@@ -32,7 +32,7 @@ RSpec.describe ContestsController do
     end
 
     it 'throws exception if unknown option was passed' do
-      expect { get :option, id: contest.id, option: '' }.to raise_error
+      expect { get :option, id: contest.id, option: '' }.to raise_error(ActionView::MissingTemplate)
     end
   end
 

@@ -33,13 +33,13 @@ RSpec.describe DesignerInvitationsController do
 
       context 'unexisting designer id' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, designer_id: 0, contest_id: contest.id }.to raise_error
+          expect { post :create, designer_id: 0, contest_id: contest.id }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 
       context 'unexisting contest id' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, designer_id: designer.id, contest_id: 0 }.to raise_error
+          expect { post :create, designer_id: designer.id, contest_id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 
@@ -49,7 +49,7 @@ RSpec.describe DesignerInvitationsController do
         end
 
         it 'doesn\'t create an invitation' do
-          expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error
+          expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error(RuntimeError)
         end
       end
 
@@ -68,7 +68,7 @@ RSpec.describe DesignerInvitationsController do
 
         it 'doesn\'t create an invitation if already invited' do
           Fabricate(:designer_invite_notification, user_id: designer.id, contest_id: contest.id)
-          expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error
+          expect { post :create, designer_id: designer.id, contest_id: contest.id }.to raise_error(ActiveRecord::RecordInvalid)
         end
       end
     end

@@ -67,7 +67,7 @@ RSpec.describe Client do
     sample_client.primary_card = credit_card1
     sample_client.save
 
-    saved_client = Client.find(sample_client)
+    saved_client = Client.find(sample_client.id)
 
     expect(saved_client.primary_card).to eq(credit_card1)
   end

@@ -44,7 +44,7 @@ RSpec.describe CreditCard do
   it 'disallows user to have more than one card with the same stripe_id' do
     client.credit_cards << credit_card
     client.credit_cards << duplicate_credit_card
-    saved_client = Client.find(client)
+    saved_client = Client.find(client.id)
 
     expect(saved_client.credit_cards).to eq([credit_card])
   end

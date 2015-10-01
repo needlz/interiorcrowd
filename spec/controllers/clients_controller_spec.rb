@@ -41,7 +41,7 @@ RSpec.describe ClientsController do
     it 'does not create contest if some of required options were not set' do
       expect(Contest.count).to eq 0
       expect(Client.count).to eq 0
-      expect { post :create, { client: client_options }, contest_options_source.except(:design_brief) }.to raise_error
+      expect { post :create, { client: client_options }, contest_options_source.except(:design_brief) }.to raise_error(ArgumentError)
       expect(Contest.count).to eq 0
       expect(Client.count).to eq 1
     end

@@ -15,6 +15,8 @@ class ContestNote < ActiveRecord::Base
 
   validates_presence_of :text
 
+  normalize_attributes :text
+
   belongs_to :contest
   belongs_to :designer
   belongs_to :client

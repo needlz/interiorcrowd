@@ -14,7 +14,7 @@ RSpec.describe Portfolio do
 
   describe 'degree validation' do
     it 'raises error for unknown value' do
-      expect { portfolio.update_attributes!(degree: 'kkk') }.to raise_error
+      expect { portfolio.update_attributes!(degree: 'kkk') }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'allows known value' do

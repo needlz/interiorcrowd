@@ -49,7 +49,7 @@ RSpec.describe ContestRequest do
 
     it 'does not allow to select more than one winner' do
       request.update_attributes!(answer: 'winner')
-      expect { other_request.update_attributes!(answer: 'winner') }.to raise_error
+      expect { other_request.update_attributes!(answer: 'winner') }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'allows to select more than one winner' do
