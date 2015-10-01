@@ -1,6 +1,7 @@
+- designer_view = DesignerView.new(@request.designer)
 .row
   .col-md-3
-    %img{:src => "/assets/profile-img.png"}/
+    = image_tag designer_view.designer_personal_picture, class: 'fullWidth'
   .col-md-9.disablePadding.submission-info
     %input.designer-notes-value{ type: 'hidden', value: request.feedback }
     %p.designerName{ style: 'margin: 8px 0px 0px 0px' }
