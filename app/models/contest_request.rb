@@ -141,9 +141,9 @@ class ContestRequest < ActiveRecord::Base
     !(closed? || finished?) && contest.editable?
   end
 
-  def concept_board_images_by_phase(phase)
+  def cover_image(phase)
     return if !lookbook || !lookbook.lookbook_details
-    lookbook.lookbook_details.where(phase: phase).includes(:image).map(&:image)
+    lookbook.lookbook_details.where(phase: phase).order(:created_at).last.try(:image)
   end
 
   def lookbook_items_by_phase(phase)

@@ -2,7 +2,7 @@ class @ConceptBoardShowcase
 
   @showcaseSelector: '#showcase'
 
-  @init: ->
+  @init: (slideIndex = null)->
     $(@showcaseSelector).on 'click', '.remove', (event)=>
       event.preventDefault()
       requestId = $('.response[data-id]').data('id')
@@ -65,6 +65,9 @@ class @ConceptBoardShowcase
         dynamic_height: false
         speed_change: false
         viewline: false
+
+      slideIndex = slideIndex || ($(@showcaseSelector).find('.showcase-thumbnail-wrapper .showcase-thumbnail').length - 1)
+      $(@showcaseSelector).find('.showcase-thumbnail-wrapper .showcase-thumbnail').eq(slideIndex).click()
 
 $ ->
   ConceptBoardShowcase.init()
