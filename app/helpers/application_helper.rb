@@ -52,4 +52,8 @@ module ApplicationHelper
     "url('#{ j(url) }')"
   end
 
+  def the_only_package
+    BudgetPlan::PLANS[0]
+  end
+
 end

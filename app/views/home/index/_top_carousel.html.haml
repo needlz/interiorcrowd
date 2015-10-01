@@ -8,29 +8,17 @@
   / Wrapper for slides
   .carousel-inner{:role => "listbox"}
     .item
-      %img{:src => "/assets/entertain.jpg"}/
-      .carousel-caption
-        %span Let's design
-        your place to entertain.
-        %a.getStartedBtn{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase
+      .image-container{ style: 'background-image: url("/assets/entertain.jpg")' }
+      = render 'home/index/carousel_shared_content'
     .item.active
-      %img{:src => "/assets/come_home.jpg"}/
-      .carousel-caption
-        %span Let's design
-        your place to come home.
-        %a.getStartedBtn{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase
+      .image-container{ style: 'background-image: url("/assets/come_home.jpg")' }
+      = render 'home/index/carousel_shared_content'
     .item
-      %img{:src => "/assets/be_together.jpg"}/
-      .carousel-caption
-        %span Let's design
-        your place to be together.
-        %a.getStartedBtn{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase
+      .image-container{ style: 'background-image: url("/assets/be_together.jpg")' }
+      = render 'home/index/carousel_shared_content'
     .item
-      %img{:src => "/assets/start_the_day.jpg"}/
-      .carousel-caption
-        %span Let's design
-        your place to start the day.
-        %a.getStartedBtn{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase
+      .image-container{ style: 'background-image: url("/assets/start_the_day.jpg")' }
+      = render 'home/index/carousel_shared_content'
   / Controls
   %a.left.carousel-control{"data-slide" => "prev", :href => "#topCarouselHome", :role => "button"}
     %span.glyphicon.glyphicon-chevron-left{"aria-hidden" => "true"}
@@ -38,5 +26,9 @@
   %a.right.carousel-control{"data-slide" => "next", :href => "#topCarouselHome", :role => "button"}
     %span.glyphicon.glyphicon-chevron-right{"aria-hidden" => "true"}
     %span.sr-only Next
-%a.getStartedTop{ href: design_brief_contests_path, class: tracked_link }
-  = t('home.get_started').upcase
+.bottom-details
+  %span.detail= t('home.carousel.price', price: the_only_package.price).upcase
+  %br
+  %span.detail= t('home.carousel.choose_designer').upcase
+  %br
+  %span.detail= t('home.carousel.fun_and_easy').upcase

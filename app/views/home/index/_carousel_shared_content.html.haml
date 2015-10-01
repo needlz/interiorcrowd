@@ -1,0 +1,14 @@
+.carousel-shared-content.carousel-caption
+  .content{ style: 'margin: 0px 40px;' }
+    .main-title= t('home.carousel.main_title')
+    .sub-title= t('home.carousel.sub_title')
+    %a.getStartedBtn{ href: design_brief_contests_path, class: tracked_link }
+      %span= t('home.get_started').upcase
+      %img.arrow{ src: '/assets/go_right.png' }
+  .detailsContainer
+    .details
+      %span.detail= t('home.carousel.price', price: the_only_package.price).upcase
+      %span|
+      %span.detail= t('home.carousel.choose_designer').upcase
+      %span|
+      %span.detail= t('home.carousel.fun_and_easy').upcase

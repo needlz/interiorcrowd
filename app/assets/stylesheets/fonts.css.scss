@@ -223,3 +223,21 @@
   url('/assets/2E8E58_8_0.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Austin Web';
+  src: url('Austin-Roman-Web.eot');
+  src: url('Austin-Roman-Web.eot?#iefix') format('embedded-opentype'),
+  url('Austin-Roman-Web.woff') format('woff'),
+  url('Austin-Roman-Web.ttf') format('truetype'),
+  url('Austin-Roman-Web.svg#Austin-Roman') format('svg');
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+.Austin-Roman-Web {
+  font-family: 'Austin Web';
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}

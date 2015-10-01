@@ -1143,6 +1143,12 @@ en:
           Your designer will work with you to ensure the final design meets your specific needs.
           You will also receive a shopping list, discount codes and instructions.
     get_started: Get started
+    carousel:
+      price: '$%{price} per room'
+      choose_designer: Choose your designer
+      fun_and_easy: Fun and easy
+      main_title: 'Start living in a more inspiring space.'
+      sub_title: 'Find a fantastic interior designer to makeover your space today.'
     example_moodboards:
       Example Concept Boards
     success_stories:
