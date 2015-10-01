@@ -189,6 +189,12 @@ RSpec.configure do |config|
     end
   end
 
+  def mock_stripe_cards_retrievement
+    allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
   raise_i18n_exceptions
 
 end
