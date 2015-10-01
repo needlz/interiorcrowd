@@ -20,7 +20,7 @@ RSpec.describe ReviewerFeedbacksController do
 
     context 'empty feedback' do
       it 'doesn\'t create a feedback' do
-        expect { post :create, params(reviewer_feedback: { text: '  ' }) }.to raise_error
+        expect { post :create, params(reviewer_feedback: { text: '  ' }) }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 

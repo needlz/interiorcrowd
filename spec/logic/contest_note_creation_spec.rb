@@ -16,9 +16,10 @@ RSpec.describe ContestNoteCreation do
       end
 
       it 'creates contest comment and concept board comment' do
-        creation = ContestNoteCreation.new(contest, 'text', current_user)
+        comment_text = 'text  '
+        creation = ContestNoteCreation.new(contest, comment_text, current_user)
         creation.perform
-        expect(contest.notes).to be_present
+        expect(contest.notes[0].text).to eq comment_text.strip
         expect(contest_request.comments).to be_present
       end
     end

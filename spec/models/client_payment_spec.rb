@@ -14,7 +14,7 @@ RSpec.describe ClientPayment do
       ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
       expect do
         ClientPayment.create!(payment_status: 'pending', client_id: client.id, contest_id: contest.id)
-      end.to raise_error
+      end.to raise_error(ActiveRecord::RecordInvalid)
     end
   end
 

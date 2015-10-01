@@ -40,19 +40,19 @@ RSpec.describe ReviewerInvitationsController do
 
       context 'empty username passed' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, params(reviewer_invitation: { username: '' }) }.to raise_error
+          expect { post :create, params(reviewer_invitation: { username: '' }) }.to raise_error(NoMethodError)
         end
       end
 
       context 'empty email passed' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, params(reviewer_invitation: { email: '' }) }.to raise_error
+          expect { post :create, params(reviewer_invitation: { email: '' }) }.to raise_error(NoMethodError)
         end
       end
 
       context 'wrong contest id passed' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, params(contest_id: 0) }.to raise_error
+          expect { post :create, params(contest_id: 0) }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 
