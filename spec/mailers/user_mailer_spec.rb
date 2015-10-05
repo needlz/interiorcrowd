@@ -122,8 +122,8 @@ RSpec.describe UserMailer do
 
     it 'sends email to client about designer asked question in contest request' do
       mail_options = { comment_text: 'comment',
-                       client: client,
-                       contest_request: contest_request }
+                  client_id: client.id,
+                  contest_request_id: contest_request.id }
       expect(UserMailer.designer_asks_client_a_question_submission_phase(mail_options)).to be_present
     end
 
