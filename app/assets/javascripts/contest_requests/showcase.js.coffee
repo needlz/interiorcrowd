@@ -1,6 +1,7 @@
 class @ConceptBoardShowcase
 
   @showcaseSelector: '#showcase'
+  @showcaseThumbsSelector: '#showcase .showcase-thumbnail-wrapper .showcase-thumbnail'
 
   @init: (slideIndex = null)->
     $(@showcaseSelector).on 'click', '.remove', (event)=>
@@ -66,8 +67,8 @@ class @ConceptBoardShowcase
         speed_change: false
         viewline: false
 
-      slideIndex = slideIndex || ($(@showcaseSelector).find('.showcase-thumbnail-wrapper .showcase-thumbnail').length - 1)
-      $(@showcaseSelector).find('.showcase-thumbnail-wrapper .showcase-thumbnail').eq(slideIndex).click()
+      slideIndex = slideIndex || ($(@showcaseThumbsSelector).length - 1)
+      $(@showcaseThumbsSelector).eq(slideIndex).click()
 
 $ ->
   ConceptBoardShowcase.init()
