@@ -53,7 +53,11 @@
             .commentTextArea.comment-textarea
               %br
               %textarea{ name: 'text' }
-              %button.pull-right.send-button= t('designer_center.my_contests.send')
+              .pull-right
+                .question-sent-notice
+                  %span.glyphicon.glyphicon-ok{"aria-hidden" => "true"}
+                  Question sent!
+                %button.send-button= t('designer_center.my_contests.send')
               .clearfix
       = f.hidden_field :status, value: 'draft'
       = f.hidden_field :lookbook_id

@@ -37,6 +37,8 @@ class @ResponseEditor
        type: 'POST'
        success: (data)->
          $comment.val('')
+         $('.question-sent-notice').css('display', 'inline-block').delay(1000)
+         $('.question-sent-notice').fadeOut()
      )
 
 preventBrowserAutofill = (input)->
