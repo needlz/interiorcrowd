@@ -393,7 +393,7 @@ en:
         check_message: >
           Please click "check" if you like it or the "x" if you do not.
           Doing this will help the designer make the best design for you.
-        done_btn: Client is ready for final design? >
+        done_btn: Done and move to final design
         finalize_design_modal:
           title: Ready for the final design?
           body: If you still have feedback or want more options, please click no.
@@ -933,6 +933,7 @@ en:
       client_likes: Client likes
       client_dislikes: Client dislikes
       autosaving: autosaving...
+    done_btn: Client is ready for final design? >
   supported_image_extensions: (.jpg, .tif, .png)
   page_not_found: Page not found
   time_ago: '%{time} ago'
