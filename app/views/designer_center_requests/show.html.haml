@@ -24,6 +24,7 @@
 
   .row.marg-top30.response{ data: { id: @request.id } }
     .col-md-8.disablePadding
+      = render 'design_brief_link'
       .initialImage
         - if @show_page.finished?
           %p.font18= @request.final_note
