@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
 
-  before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email]
+  before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email, :unsubscribe]
 
   def client_center
     redirect_to client_center_entries_path
@@ -89,16 +89,27 @@ class ClientsController < ApplicationController
 
   def sign_up_with_email
     email_sign_up = ClientEmailSignUp.new(params)
-    client_creation = ClientCreation.new(client_attributes: email_sign_up.client_attributes)
+    client_creation = ClientCreation.new(client_attributes: email_sign_up.client_attributes,
+                                         send_welcome_email: true)
     client_creation.perform
     respond_to_signup(client_creation)
   end
 
   def sign_up_with_facebook
     facebook_sign_up = ClientFacebookSignUp.new(params)
-    client_creation = ClientCreation.new(client_attributes: facebook_sign_up.client_attributes)
+    client_creation = ClientCreation.new(client_attributes: facebook_sign_up.client_attributes,
+                                         send_welcome_email: true)
     client_creation.perform
     respond_to_signup(client_creation)
+  end
+
+  def unsubscribe
+    if client = Client.find_by_access_token(params[:signature])
+      client.update_attributes!(email_opt_in: false)
+      render text: "You have been unsubscribed"
+    else
+      raise_404
+    end
   end
 
   private

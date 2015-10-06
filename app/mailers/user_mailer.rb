@@ -233,7 +233,43 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')])
   end
 
+  def designer_asks_client_a_question_submission_phase(options)
+    template 'Designer-asks-client-a-question-submission-phase'
+    set_template_values(
+        ENTRY_URL: renderer.client_center_entry_url(id: options[:contest_request].id),
+        COMMENT_TEXT: options[:comment_text]
+    )
+    client = options[:client]
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
+  def account_creation(client)
+    template 'account_creation'
+    set_template_values(
+        TWITTER_URL: Settings.external_urls.social.twitter,
+        TWITTER_ICON_URL: asset_url('/icons/twitter.png'),
+        FACEBOOK_URL: Settings.external_urls.social.facebook,
+        FACEBOOK_ICON_URL: asset_url('/icons/facebook.png'),
+        PINTEREST_URL: Settings.external_urls.social.pinterest,
+        PINTEREST_ICON_URL: asset_url('/icons/pinterest.png'),
+        INSTAGRAM_URL: Settings.external_urls.social.instagram,
+        INSTAGRAM_ICON_URL: asset_url('/icons/instagram.png'),
+        PARAGRAPH_1_BACKGROUND_URL: asset_url('/emails/entertain_background.jpg'),
+        LOGO_URL: asset_url('/logo.png'),
+        FINISH_URL: renderer.design_brief_contests_url,
+        TERMS_OF_SERVICE_URL: renderer.terms_of_service_url,
+        PRIVACY_POLICY_URL: renderer.privacy_policy_url,
+        UNSUBSCRIBE_URL: renderer.unsubscribe_clients_url(signature: client.access_token),
+        PROMOCODE_BACKGROUND_URL: asset_url('/emails/back.png')
+    )
+    mail(to: [wrap_recipient(client.email, client.name, 'to')])
+  end
+
   private
+
+  def asset_url(asset_path)
+    Settings.app_host + '/assets' + asset_path
+  end
 
   def set_user_params(user)
     {

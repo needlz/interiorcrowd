@@ -109,6 +109,17 @@ RSpec.describe UserMailer do
     it 'to client: contest noy live yet' do
       expect(UserMailer.contest_not_live_yet(contest)).to be_present
     end
+
+    it 'to client: designer asked question in contest request' do
+      mail_options = { comment_text: 'comment',
+                  client: client,
+                  contest_request: contest_request }
+      expect(UserMailer.designer_asks_client_a_question_submission_phase(mail_options)).to be_present
+    end
+
+    it 'to client: account creation' do
+      expect(UserMailer.account_creation(client)).to be_present
+    end
   end
 
 end

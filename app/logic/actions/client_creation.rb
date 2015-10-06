@@ -4,13 +4,16 @@ class ClientCreation
 
   def initialize(options)
     @client_attributes = options[:client_attributes]
+    @send_welcome_email = options[:send_welcome_email]
     @saved = false
   end
 
   def perform
-    return unless create_client
-    send_notifications
-    self
+    ActiveRecord::Base.transaction do
+      return unless create_client
+      send_notifications
+      self
+    end
   end
 
   private
@@ -23,8 +26,9 @@ class ClientCreation
   end
 
   def send_notifications
-    Jobs::Mailer.schedule(:client_registered, [client])
     Jobs::Mailer.schedule(:user_registration_info, [client])
+    email = @send_welcome_email ? :account_creation : :client_registered
+    Jobs::Mailer.schedule(email, [client])
   end
 
 end

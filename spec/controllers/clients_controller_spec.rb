@@ -83,6 +83,11 @@ RSpec.describe ClientsController do
       expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
     end
 
+    it 'does not send email with explanations how to finish intake form' do
+      post :create, { client: client_options }, contest_options_source
+      expect(jobs_with_handler_like('account_creation').count).to eq 0
+    end
+
     context 'when not unique email' do
       let(:initial_client_count) { 1 }
 
@@ -97,13 +102,20 @@ RSpec.describe ClientsController do
     end
   end
 
-  describe 'POST sign_up_with_facebook' do
+  describe 'POST sign_up_with_email' do
+
     it 'creates client' do
       email = 'email'
       post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
       client = Client.first
       expect(client.email).to eq email
       expect(Contest.count).to eq 0
+    end
+
+    it 'sends only an email with explanations how to finish intake form' do
+      post :sign_up_with_email, client: { email: 'email', password: 'pw', password_confirmation: 'pw' }
+      expect(jobs_with_handler_like('account_creation').count).to eq 1
+      expect(jobs_with_handler_like('client_registered').count).to eq 0
     end
   end
 
@@ -114,7 +126,7 @@ RSpec.describe ClientsController do
       let(:email) { 'email' }
       let(:id) { '1' }
 
-      it 'creates client' do
+      before do
         allow_any_instance_of(Koala::Facebook::API).to receive(:api) do |action, params_hash|
           { 'id' => id,
             'name' => 'name',
@@ -122,13 +134,21 @@ RSpec.describe ClientsController do
             'first_name' => first_name,
             'last_name' => last_name }
         end
+      end
 
-        post :sign_up_with_facebook, token: 'token'
+      it 'creates client' do
+        post :sign_up_with_facebook, token: 'oauth_token'
         client = Client.first
         expect(client.email).to eq email
         expect(client.first_name).to eq first_name
         expect(client.last_name).to eq last_name
         expect(Contest.count).to eq 0
+      end
+
+      it 'sends only an email with explanations how to finish intake form to client' do
+        post :sign_up_with_facebook, token: 'oauth_token'
+        expect(jobs_with_handler_like('account_creation').count).to eq 1
+        expect(jobs_with_handler_like('client_registered').count).to eq 0
       end
     end
 
@@ -270,6 +290,29 @@ RSpec.describe ClientsController do
       get :concept_boards_page
       json = JSON.parse(response.body)
       expect(json).to include('new_items_html', 'show_mobile_pagination', 'next_page')
+    end
+  end
+
+  describe 'GET unsubscribe' do
+    context 'valid url' do
+      let(:valid_signature) { client.access_token }
+
+      it 'unsubscribes a client' do
+        get :unsubscribe, signature: valid_signature
+        expect(response).to have_http_status(:ok)
+        expect(response.body).to eq 'You have been unsubscribed'
+        expect(client.reload.email_opt_in).to be_falsey
+      end
+    end
+
+    context 'invalid url' do
+      let(:invalid_signature) { 'invalid_signature' }
+
+      it 'returns 404' do
+        get :unsubscribe, signature: invalid_signature
+        expect(response).to have_http_status(:not_found)
+        expect(client.email_opt_in).to be_truthy
+      end
     end
   end
 end
