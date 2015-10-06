@@ -1,12 +1,13 @@
-.field
-  %span=  t('client_center.profile.labels.address')
-  = form.text_field :address
-.field
-  %span=  t('client_center.profile.labels.city')
-  = form.text_field :city
-.field
-  %span= t('client_center.profile.labels.state')
-  = form.text_field :state
-.field
-  %span= t('client_center.profile.labels.zip')
-  = form.text_field :zip
+.commonFormStyle
+  .field
+    %span=  t('client_center.profile.labels.address')
+    = form.text_field :address
+  .field
+    %span=  t('client_center.profile.labels.city')
+    = form.text_field :city
+  .field
+    %span= t('client_center.profile.labels.state')
+    = form.text_field :state
+  .field
+    %span= t('client_center.profile.labels.zip')
+    = form.text_field :zip

@@ -68,6 +68,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3.1'
+  gem 'stripe-ruby-mock', '~> 2.2.0', require: 'stripe_mock'
 end
 
 gem 'mandrill-rails'

@@ -46,7 +46,7 @@ class @CreditCards
 
   @creditCardAreaSelector: '.credit-card-params'
   @primaryCreditCardAreaClassName: 'primary-card-params'
-  @setPrimaryCardLinkSelector: 'a#card-type'
+  @setPrimaryCardLinkSelector: 'a.set-primary'
   @deleteCardLinkSelector: 'a#remove-card'
   @saveCreditCardLinkSelector: 'a#save-credit-card'
   @newCreditCardFormSelector: '.new_credit_card'

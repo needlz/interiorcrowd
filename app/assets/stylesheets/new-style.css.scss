@@ -100,20 +100,20 @@ body{
   border-radius: 10px;
   margin: 0px 50px;
 }
-.profileEditingBox .row{
+.profileEditingBox .row.attribute{
   padding: 30px 0px;
 }
-.profileEditingBox .row .title p{
+.profileEditingBox .row.attribute .title p{
   margin: 0px;
   font-size: 18px;
   padding-left: 20px;
 }
-.profileEditingBox .row .placeholder p{
+.profileEditingBox .row .placeholder .commonViewStyle p{
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
 }
-.profileEditingBox .row .placeholder a{
+.profileEditingBox .row .placeholder .commonViewStyle a{
   color: #000;
   text-decoration: underline;
   margin: 0px;
@@ -124,27 +124,28 @@ body{
   display: inline-block;
   /*margin-right: 15px;*/
 }
-.profileEditingBox label{
+.profileEditingBox .commonFormStyle label{
   display: block;
 }
-.profileEditingBox span{
+.profileEditingBox .commonFormStyle span{
   color: #a9a9a9;
   font-size: 14px;
   line-height: 40px;
   font-family: 'AvenirLTStd-Light';
 }
-.profileEditingBox input[type=text], .profileEditingBox input[type=password]{
+.profileEditingBox .commonFormStyle input[type=text], .profileEditingBox .commonFormStyle input[type=password]{
   display: block;
   height: 38px;
   width: 367px;
 }
-.profileEditingBox input[type=text], .profileEditingBox input[type=password], .profileEditingBox .bootstrap-select .selectpicker{
+.profileEditingBox .commonFormStyle input[type=text], .profileEditingBox .commonFormStyle input[type=password], .profileEditingBox .bootstrap-select .selectpicker{
   border-radius: 3px;
   border: 1px solid #a9a9a9;
 }
-.savePassBtn,.cancelPassBtn{
+.savePassBtn, .savePassBtn:hover, .cancelPassBtn, .cancelPassBtn:hover{
   display: inline-block;
   border: 1px solid #000;
+  color: black;
   border-radius: 3px;
   line-height: 38px;
   width: 98px;
