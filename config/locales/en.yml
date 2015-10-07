@@ -1041,6 +1041,11 @@ en:
           upload it to the other photo’s of your space. Your designer can guide you if they need more
           detailed measurements, but for now, just measure the length and width of the room,
           indicating important details like door openings and indentations/nooks.
+      how_to_take_pictures:
+        question: How do I take pictures of my room?
+        answer: >
+          Take as many pictures as possible but please take at least 4 with your back to each wall.
+          Images must be smaller than 10M.
     designer:
       what_is_beta:
         question: What is beta mode?
