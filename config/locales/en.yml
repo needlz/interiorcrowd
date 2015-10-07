@@ -911,6 +911,7 @@ en:
         room within your allocated budget. If you pick me as a winner we can look into
         some options for paint as I think a lighter color will really brighten this room up.
       send: Send
+      question_sent: Question sent!
     product_items:
       text_placeholder: >
         Add text here explaining why this product would be great for their space.

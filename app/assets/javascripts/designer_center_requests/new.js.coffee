@@ -30,16 +30,23 @@ class @ResponseEditor
       contestId = $button.parents('.contest').data('id')
       @sendComment(contestId, $comment)
 
-   sendComment: (contestId, $comment)->
-     $.ajax(
-       data: { contest_note: { text: $comment.val(), contest_id: contestId } }
-       url: '/contest_notes'
-       type: 'POST'
-       success: (data)->
-         $comment.val('')
-         $('.question-sent-notice').css('display', 'inline-block').delay(1000)
-         $('.question-sent-notice').fadeOut()
-     )
+  sendComment: (contestId, $comment)->
+    $.ajax(
+      data: { contest_note: { text: $comment.val(), contest_id: contestId } }
+      url: '/contest_notes'
+      type: 'POST'
+      success: ()=>
+        @clearLastComment($comment)
+        @showSentNotice()
+    )
+
+  clearLastComment: ($input)->
+    $input.val('')
+
+  showSentNotice: ->
+    $noticeContainer = $('.question-sent-notice')
+    $noticeContainer.css('display', 'inline-block').delay(1000)
+    $noticeContainer.fadeOut()
 
 preventBrowserAutofill = (input)->
   $(input).val('')

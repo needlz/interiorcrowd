@@ -56,7 +56,7 @@
               .pull-right
                 .question-sent-notice
                   %span.glyphicon.glyphicon-ok{"aria-hidden" => "true"}
-                  Question sent!
+                  = t('designer_center.my_contests.question_sent')
                 %button.send-button= t('designer_center.my_contests.send')
               .clearfix
       = f.hidden_field :status, value: 'draft'
