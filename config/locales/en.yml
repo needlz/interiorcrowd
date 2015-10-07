@@ -887,7 +887,6 @@ en:
       how_to_communicate: How do I communicate with the client?
       vendors: Which vendors can I use?
     my_contests:
-      design_profile: See the client's brief here
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
       hint: 'Hint: Remember to review the %{link} first'
