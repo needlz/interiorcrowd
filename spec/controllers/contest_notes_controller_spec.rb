@@ -33,18 +33,18 @@ RSpec.describe ContestNotesController do
 
       context 'without text' do
         it 'doesn\'t create an invitation if text is not passed' do
-          expect { post :create, contest_note: { contest_id: contest.id } }.to raise_error
+          expect { post :create, contest_note: { contest_id: contest.id } }.to raise_error(ActiveRecord::RecordInvalid)
           expect(contest.notes.count).to eq 0
         end
 
         it 'doesn\'t create an invitation if text is empty' do
-          expect { post :create, contest_note: { contest_id: contest.id, text: '  ' } }.to raise_error
+          expect { post :create, contest_note: { contest_id: contest.id, text: '  ' } }.to raise_error(ActiveRecord::RecordInvalid)
         end
       end
 
       context 'unexisting contest id' do
         it 'doesn\'t create an invitation' do
-          expect { post :create, contest_note: { contest_id: 0, text: 'text' } }.to raise_error
+          expect { post :create, contest_note: { contest_id: 0, text: 'text' } }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
 

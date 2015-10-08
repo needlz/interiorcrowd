@@ -23,7 +23,7 @@ module ContestRequestMilestones
     attr_reader :contest, :contest_request, :view_context
 
     def in_progress?
-      Time.current < contest.phase_end
+      contest.phase_end? && Time.current < contest.phase_end
     end
 
   end

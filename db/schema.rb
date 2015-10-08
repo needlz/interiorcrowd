@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.string   "stripe_customer_id"
     t.integer  "facebook_user_id",   limit: 8
     t.integer  "primary_card_id"
+    t.boolean  "email_opt_in",                   default: true
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree

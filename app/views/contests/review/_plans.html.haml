@@ -1,5 +1,5 @@
 %input#plan_id{ name: 'preview[b_plan]',
                 type: 'hidden',
-                value: @contest_view.budget_plan || BudgetPlan::PLANS[0].id }
+                value: @contest_view.budget_plan || the_only_package.id }
 
 = render partial: 'contests/options/plan_options'

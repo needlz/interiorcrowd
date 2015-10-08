@@ -1,7 +1,7 @@
 module ClientsHelper
 
   def profile_rows
-    %w[username password first_name last_name address phone_number]
+    %w[username password first_name last_name address phone_number credit_cards]
   end
 
   def collocutor(user)

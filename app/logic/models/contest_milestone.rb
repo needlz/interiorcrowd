@@ -26,7 +26,7 @@ class ContestMilestone
 
   def phase_end(phase_start_time)
     duration = DAYS[contest.status]
-    (phase_start_time + duration.days) if duration
+    (phase_start_time + duration.days).end_of_day if duration
   end
 
   def end_milestone_performer_class

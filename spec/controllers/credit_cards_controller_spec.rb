@@ -7,11 +7,12 @@ RSpec.describe CreditCardsController do
     let(:client) { Fabricate(:client) }
     let(:credit_card) { Fabricate(:credit_card) }
     let(:card_number) { '4242424242424242' }
+    let(:security_code) { '123' }
 
     def create_params
       { credit_card: {zip: credit_card.zip,
                      number: card_number,
-                     cvc: '',
+                     cvc: security_code,
                      ex_month: credit_card.ex_month,
                      ex_year: credit_card.ex_year} }
     end

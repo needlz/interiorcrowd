@@ -1,23 +1,40 @@
 .row.edit-profile.attribute{ data: { id: attribute } }
   .preview
-    .col-sm-5.title
+    - title_row = capture do
       %p= title
-    .col-sm-6.placeholder
+    - edit_button = capture do
+      %a.edit-button{href: '#'}
+        = render partial: 'clients/client_center/profile/edit_button_image'
+    - content_row = capture do
       .view
         = render partial: "clients/client_center/profile/preview/#{ attribute }", locals: { client: client }
       .edit
         = form_for @client,
-            url: client_path(id: @client.id),
-            method: 'patch',
-            remote: true,
-            html: { class: 'client-profile-form' },
-            data: { client: { id: @client.id } } do |form|
+                  url: client_path(id: @client.id),
+                  method: 'patch',
+                  remote: true,
+                  html: { class: 'client-profile-form' },
+                  data: { client: { id: @client.id } } do |form|
           = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: { form: form }
           = hidden_field_tag :attribute, attribute
           .menu-buttons
             = form.submit class: 'savePassBtn', value: t('client_center.attribute_save_button')
             %a.cancelPassBtn= t('client_center.attribute_cancel_button')
-    .col-sm-1.text-right
-      %a.edit-button{href: '#'}
-        = render partial: 'clients/client_center/profile/edit_button_image'
+
+    - if defined?(fullwidth) && fullwidth
+      .col-sm-11.title
+        = title_row
+      - if show_edit_button
+        .col-sm-1.text-right
+          = edit_button
+      .col-sm-12.placeholder
+        = content_row
+    - else
+      .col-sm-5.title
+        = title_row
+      .col-sm-6.placeholder
+        = content_row
+      - if show_edit_button
+        .col-sm-1.text-right
+          = edit_button
 .fullWidthLine

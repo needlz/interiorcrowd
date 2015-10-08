@@ -5,14 +5,13 @@ class @PicturesZoom
   @smallScreen: ->
     window.matchMedia('(max-width: 768px)').matches
 
-  @getOptionsUpdater: (selector, options)->
+  @getOptionsUpdater: ($element, options)->
     =>
       fitToScreen = !@smallScreen()
       newOptions = $.extend({}, options)
       if fitToScreen
         $.extend(newOptions, @fitToScreenOptions)
-      $(selector).colorbox.remove()
-      $(selector).colorbox(newOptions)
+      $element.colorbox(newOptions)
 
   @init: (enlargeButtonSelector)->
     @setWithOptionsUpdater(enlargeButtonSelector, {})
@@ -22,9 +21,5 @@ class @PicturesZoom
 
   @setWithOptionsUpdater: (selector, options)->
     $element = $(selector)
-    $element.colorbox(options)
-
-    optionsUpdater = @getOptionsUpdater(selector, options)
+    optionsUpdater = @getOptionsUpdater($element, options)
     optionsUpdater()
-    $(window).resize ->
-      optionsUpdater()

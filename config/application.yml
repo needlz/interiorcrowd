@@ -33,6 +33,5 @@ development:
 
 test:
   APP_HOST: 'localhost:3000'
-  STRIPE_API_KEY: sk_test_iKogRUxGem219WsRGVGPhBw4
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'

@@ -1,6 +1,7 @@
-.row.paddTop20
-  .col-sm-4
-    %p.welcomeP= t('client_center.welcome_user', username: @client.first_name)
-  .col-sm-8
-    = render partial: 'shared/navigation'
+- if @navigation
+  .row.paddTop20
+    .col-sm-4
+      %p.welcomeP= t('client_center.welcome_user', username: @client.first_name)
+    .col-sm-8
+      = render partial: 'shared/navigation'
 .fullWidthLine.hidden-xs

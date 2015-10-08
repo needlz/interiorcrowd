@@ -206,7 +206,6 @@
 
 @media(min-width: 1200px){
   .topCarouselHome .carousel-inner>.item .carousel-caption{
-    font-size: 60px;
     padding-top: 130px;
   }
 }
@@ -802,7 +801,7 @@
 }
 
 .primary-card-params{
-  #card-type{
+  .set-primary{
     color: #409863;
     text-decoration: none;
   }
@@ -875,7 +874,7 @@
     }
   }
 
-  #card-type{
+  .set-primary{
     display: block;
     margin-top: 15px;
   }
@@ -1349,4 +1348,3 @@
     vertical-align: top;
   }
 }
-

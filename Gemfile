@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.4'
+
 gem 'activerecord-session_store'
 
 # Use sqlite3 as the database for Active Record
@@ -66,7 +67,8 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.1'
+  gem 'stripe-ruby-mock', '~> 2.2.0', require: 'stripe_mock'
 end
 
 gem 'mandrill-rails'
@@ -93,3 +95,4 @@ gem 'koala', '~> 2.0'
 gem 'faraday_middleware'
 gem 'faraday-cookie_jar'
 gem 'http-cookie'
+gem 'puma'

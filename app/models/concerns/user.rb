@@ -13,6 +13,21 @@ module User
       username.present? && encrypted_password.present? ?
           self.find_by_email_and_password(username.downcase, encrypted_password) : nil
     end
+
+    def self.find_by_access_token(signature)
+      id = verifier.verify(signature)
+      find(id)
+    rescue ActiveSupport::MessageVerifier::InvalidSignature
+      nil
+    end
+
+    def self.verifier
+      ActiveSupport::MessageVerifier.new(Rails.application.secrets[:secret_key_base])
+    end
+
+    def self.create_access_token(user)
+      verifier.generate(user.id)
+    end
   end
 
   def name
@@ -56,4 +71,7 @@ module User
     self.plain_password = new_plain_password
   end
 
+  def access_token
+    self.class.create_access_token(self)
+  end
 end

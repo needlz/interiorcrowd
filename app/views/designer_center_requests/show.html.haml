@@ -2,22 +2,22 @@
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   = javascript_include_tag 'designer_center_requests/show'
   = javascript_include_tag 'designers/lookbook'
-  = render partial: 'shared/setup_uploadify'
+  = render 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
     $(document).ready(function() {
       сonceptBoardUploaderI18n = #{ translations_to_json(['contests', 'space', 'uploading_image']) }
-      ConceptBoardUploader.init({ i18n: сonceptBoardUploaderI18n, contestRequestId: #{ @request.id.to_json } })
+      ConceptBoardUploader.init({ i18n: сonceptBoardUploaderI18n, contestRequestId: #{ @request.id.to_json }, single: true })
     })
 
 - content_for :designer_center_content do
   .row.marginTop40
     .col-lg-8
-      = render partial: 'clients/client_center/entries/phases',
-               locals: { stripe: @show_page.phases_stripe,
-                         css_class: 'marginBottom40' }
+      = render 'clients/client_center/entries/phases',
+               stripe: @show_page.phases_stripe,
+               css_class: 'marginBottom40'
     .col-lg-4.marginBottom40
       - if @contest_request_milestone.designer_hint
         %p.daysLeft= @contest_request_milestone.designer_hint
@@ -31,28 +31,28 @@
           .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
           .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
         - if @request.editable?
-          = render partial: 'designer_center_requests/show/image_loading',
-              locals: { items: @show_page.current_lookbook_items,
-                button_title: t('designer_center.responses.item.edit_concept_board') }
+          = render 'designer_center_requests/show/image_loading',
+              items: @show_page.current_lookbook_items,
+              button_title: t('designer_center.responses.item.edit_concept_board')
         - else
-          = render partial: 'shared/moodboard',
-              locals: { items:  @show_page.current_lookbook_items }
+          = render 'shared/moodboard',
+              items:  @show_page.current_lookbook_items
 
     .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
 
-      = render partial: 'designer_center_requests/show/notes', locals: { request: @request }
+      = render 'designer_center_requests/show/notes', request: @request, designer_view: @designer_view
       - if @request.sound
         .designer-voice
-          = render partial: 'contest_requests/listen', locals: { request: @request }
+          = render 'contest_requests/listen', request: @request
         .hLine
       - if @request.commenting_enabled?
-        = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
-            comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board? }
+        = render 'designer_center_requests/edit/comments', request: @request,
+            comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board?
     .clearfix
     - if @show_page.image_items_partial
       - if @show_page.finished?
         %p.font18.marginTop20= @request.pull_together_note
       = render @show_page.image_items_partial
-    = render partial: 'designer_center_requests/footer_buttons'
+    = render 'designer_center_requests/footer_buttons'
 
-= render partial: 'designer_center/layout'
+= render 'designer_center/layout'

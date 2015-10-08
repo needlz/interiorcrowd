@@ -57,7 +57,7 @@ RSpec.describe ContestRequestsController do
       end
 
       it 'does not save if request id is wrong' do
-        expect { post :answer, id: 0, answer: 'no' }.to raise_exception
+        expect { post :answer, id: 0, answer: 'no' }.to raise_exception(ActiveRecord::RecordNotFound)
       end
 
       it 'does not save if user is not logged as contest creator' do
@@ -232,11 +232,11 @@ RSpec.describe ContestRequestsController do
 
     it 'raises error if client is not logged in' do
       session[:client_id] = 0
-      expect { get :show, id: request.id }.to raise_error
+      expect { get :show, id: request.id }.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'raises error if request id is wrong' do
-      expect { get :show, id: 0 }.to raise_error
+      expect { get :show, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 

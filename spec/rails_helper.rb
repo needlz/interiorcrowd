@@ -18,6 +18,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
+  config.include Rails.application.routes.url_helpers
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -39,6 +41,8 @@ RSpec.configure do |config|
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
+  Rails.application.routes.default_url_options = { trailing_slash: true, host: 'test.host' }
+
   config.infer_spec_type_from_file_location!
 
   def sign_in(user)
@@ -182,6 +186,12 @@ RSpec.configure do |config|
       if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
         raise exception.to_exception
       end
+    end
+  end
+
+  def mock_stripe_cards_retrievement
+    allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
+      Hashie::Mash.new(stripe_customer_id: 'id')
     end
   end
 

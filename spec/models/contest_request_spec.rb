@@ -49,7 +49,7 @@ RSpec.describe ContestRequest do
 
     it 'does not allow to select more than one winner' do
       request.update_attributes!(answer: 'winner')
-      expect { other_request.update_attributes!(answer: 'winner') }.to raise_error
+      expect { other_request.update_attributes!(answer: 'winner') }.to raise_error(ActiveRecord::RecordInvalid)
     end
 
     it 'allows to select more than one winner' do
@@ -159,4 +159,43 @@ RSpec.describe ContestRequest do
       expect(request.product_items.count).to eq 1
     end
   end
+
+  describe '#cover_image' do
+    let(:request) do
+      Fabricate(:contest_request,
+                designer: designer,
+                status: 'submitted',
+                contest_id: contest.id,
+      lookbook: Fabricate(:lookbook))
+    end
+    let(:phase) { 'collaboration' }
+
+
+    context 'when no images in selected phase' do
+      before do
+        Fabricate(:lookbook_image, phase: 'initial', lookbook: request.lookbook)
+      end
+
+      it 'returns nil' do
+        expect(request.cover_image(phase)).to be_nil
+      end
+    end
+
+    context 'when there are images in selected phase' do
+      before do
+        Fabricate.times(2, :lookbook_image, lookbook: request.lookbook, phase: 'initial')
+        Fabricate.times(2, :lookbook_image, lookbook: request.lookbook, phase: phase)
+      end
+
+      let(:last_image) { Fabricate(:image) }
+
+      it 'returns last image' do
+        expect(request.cover_image(phase)).to be_present
+        Fabricate(:lookbook_detail, phase: 'collaboration', image: last_image, lookbook: request.lookbook)
+        expect(request.cover_image(phase)).to eq last_image
+      end
+    end
+
+  end
+
 end

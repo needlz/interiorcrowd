@@ -28,7 +28,7 @@ class AddCreditCard
     @card = client.credit_cards.find_or_initialize_by(id: @id)
     last_4_digits = card_attributes[:number].last(4) if card_attributes[:number]
     card_attributes_to_be_saved = card_attributes.merge(last_4_digits: last_4_digits)
-    card_attributes_to_be_saved.except!(:number)
+    card_attributes_to_be_saved.except!(:number, :cvc)
     @card.attributes = card_attributes_to_be_saved
     @card.stripe_id = @stripe_id
     @saved = @card.save!

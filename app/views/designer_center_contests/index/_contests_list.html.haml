@@ -6,5 +6,5 @@
     .col-xs-2= contest.design_space
     .col-xs-2= contest.price
     .col-xs-2
-      = contest.days_count
+      = contest.days_count.to_i
       %span= t('designer_center.contests_preview.few_days')

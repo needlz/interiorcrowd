@@ -15,6 +15,7 @@ class DesignerCenterRequestsController < ApplicationController
   def show
     @request = @designer.contest_requests.find(params[:id])
     return redirect_to edit_designer_center_response_path(id: @request.id) if @request.fulfillment_ready?
+    @designer_view = DesignerView.new(@designer)
     @request_view = ContestResponseView.new(@request)
     @contest = ContestShortDetails.new(@request.contest)
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
@@ -35,6 +36,7 @@ class DesignerCenterRequestsController < ApplicationController
     return redirect_to designer_center_response_path(id: @request.id) if !@request.details_editable? || @request.draft? || @request.submitted?
     @navigation = Navigation::DesignerCenter.new(:requests)
     @current_user = current_user
+    @designer_view = DesignerView.new(@designer)
     @request_view = ContestResponseView.new(@request)
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
                                                                          contest_request: @request,
