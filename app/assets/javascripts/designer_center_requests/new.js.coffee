@@ -36,14 +36,11 @@ class @ResponseEditor
       url: '/contest_notes'
       type: 'POST'
       success: ()=>
-        @clearLastComment($comment)
-        @showSentNotice()
+        $comment.val('')
+        @showNoticeQuestionSent()
     )
 
-  clearLastComment: ($input)->
-    $input.val('')
-
-  showSentNotice: ->
+  showNoticeQuestionSent: ->
     $noticeContainer = $('.question-sent-notice')
     $noticeContainer.css('display', 'inline-block').delay(1000)
     $noticeContainer.fadeOut()
