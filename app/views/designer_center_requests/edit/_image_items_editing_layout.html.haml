@@ -16,7 +16,7 @@
 .row.viewingMoodboard.winningMoodboard
   .col-lg-8.col-md-7
     .relative
-      = render 'design_brief_link'
+      = render 'design_brief_link', request: @request, request_view: @request_view
       .initialImage
         - if @request.editable?
           = render partial: 'designer_center_requests/show/image_loading',

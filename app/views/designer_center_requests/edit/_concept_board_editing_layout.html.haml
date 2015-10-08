@@ -7,7 +7,7 @@
     %p.thisIsAPreview= @request_view.header_text
   .col-md-4
   .col-md-8.disablePadding
-    = render 'design_brief_link'
+    = render 'design_brief_link', request: @request, request_view: @request_view
     .initialImage
       - if @editing_page.editable?
         = render 'designer_center_requests/show/image_loading',
