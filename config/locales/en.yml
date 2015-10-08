@@ -1149,6 +1149,28 @@ en:
         description: >
           Your designer will work with you to ensure the final design meets your specific needs.
           You will also receive a shopping list, discount codes and instructions.
+    what_to_expect:
+      header: what to expect
+      multiple_concepts:
+        title: Concepts from multiple designers
+        description: >
+          You choose who you want to work with
+      collaborate_with_professionals:
+        title: Collaborate with your professional designer
+        description: >
+          Work together to get a design you love
+      customized_design:
+        title: Customized design just for you
+        description: >
+          According to your budget & specifications
+      easy_instructions:
+        title: Easy-to-follow instructions & floorplan
+        description: >
+          Your designer will show you how to get your new space
+      shopping_list:
+        title: Shopping list
+        description: >
+          Get your new items right away
     get_started: Get started
     carousel:
       price: '$%{price} per room'
