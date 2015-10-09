@@ -596,12 +596,12 @@ en:
       generating_archive: Generating archive...
     statuses:
       brief_pending: 'Brief pending: upload pictures of your space'
-      submission: Submission
-      winner_selection: Pick winner
+      submission: Designers adding their submissions
+      winner_selection: Pick winning designer
       fulfillment: Custom Board and Product List Collaboration
-      final_fulfillment: Wait for Create Final Design
+      final_fulfillment: Waiting for Final Design and Product List
       closed: Closed
-      finished: Finished
+      finished: Contest is Finished
   designer_center:
     milestones:
       winner_selection:
