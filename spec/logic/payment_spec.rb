@@ -14,11 +14,11 @@ RSpec.describe Payment do
   context 'when successful charge' do
     before do
       mock_stripe_successful_charge
+      Payment.new(contest).perform
+      contest.reload
     end
 
     it 'creates client_payment' do
-      Payment.new(contest).perform
-      contest.reload
       expect(contest.client_payment.client_id).to eq(client.id)
       expect(contest.client_payment.amount_cents).to eq(contest.package.price_in_cents - promocode.discount_cents)
       expect(contest.client_payment.promotion_cents).to eq(promocode.discount_cents)
@@ -35,7 +35,7 @@ RSpec.describe Payment do
 
     it 'does not create client payment and does not change contest status' do
       payment = Payment.new(contest)
-      expect{payment.perform}.to raise_error(Stripe::StripeError)
+      expect { payment.perform }.to raise_error(Stripe::StripeError)
       expect(contest.client_payment.present?).to be_falsey
       expect(contest.status).to eq 'brief_pending'
     end
