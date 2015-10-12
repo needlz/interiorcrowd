@@ -16,20 +16,21 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     column 'Designers' do |contest|
       contest.requests.ever_published.map do |request|
         designer = request.designer
-        link_to(designer.first_name.to_s + ' ' + designer.last_name.to_s, admin_designer_path(designer)) +
-            ', submitted at ' + request.created_at
+        statement = link_to(designer.first_name.to_s + ' ' + designer.last_name.to_s, admin_designer_path(designer))
+        statement = statement + ', submitted at ' + request.submitted_at.to_s if request.submitted_at
+        statement
       end.join('<br />').html_safe
     end
     column 'Winner' do |contest|
       if contest.response_winner
         designer = contest.response_winner.designer
-        statement = link_to(designer.first_name.to_s + ' ' + designer.last_name.to_s, admin_designer_path(designer)) +
-            ', won at ' + contest.response_winner.created_at
+        statement = link_to(designer.first_name.to_s + ' ' + designer.last_name.to_s, admin_designer_path(designer))
+        statement = statement + ', won at ' + contest.response_winner.won_at.to_s if contest.response_winner.won_at
         statement.html_safe
       end
     end
     column 'End Date' do |contest|
-      contest.updated_at
+      contest.finished_at
     end
     actions
   end

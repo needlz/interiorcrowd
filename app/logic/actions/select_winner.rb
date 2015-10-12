@@ -8,6 +8,7 @@ class SelectWinner
     PhaseUpdater.new(contest_request).monitor_phase_change do
       contest_request.winner!
     end
+    contest_request.update_attributes(won_at: Time.now)
     contest_request.contest.winner_selected!
     notify_designer_about_win
     notify_client
