@@ -1,11 +1,13 @@
 ActiveAdmin.register Contest, as: "Detailed Contest" do
+  actions :all, :except => [:new, :destroy, :edit]
+
   index do
     selectable_column
     id_column
     column 'Contest' do |contest|
       client = contest.client
-      full_contest_name = link_to(client.first_name.to_s + ' ' + client.last_name.to_s, admin_client_path(client)) +
-          "'s " + contest.project_name
+      full_contest_name = link_to(client.first_name.to_s + ' ' + client.last_name.to_s.possessive,
+                                  admin_client_path(client)) + ' ' + contest.project_name
       full_contest_name.html_safe
     end
     column 'Date' do |contest|
@@ -22,7 +24,7 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       if contest.response_winner
         designer = contest.response_winner.designer
         statement = link_to(designer.first_name.to_s + ' ' + designer.last_name.to_s, admin_designer_path(designer)) +
-            ', submitted at ' + contest.response_winner.created_at
+            ', won at ' + contest.response_winner.created_at
         statement.html_safe
       end
     end
