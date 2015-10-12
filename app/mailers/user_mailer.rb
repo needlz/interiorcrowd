@@ -63,11 +63,11 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t('mails.product_list_feedback.subject')
   end
 
-  def invitation_to_leave_a_feedback(params, url, client, beta_url)
+  def invitation_to_leave_a_feedback(params, url, client, root_url)
     template 'invitation_to_leave_a_feedback'
     @client_name = client.name
     @page_url = url
-    @beta_url = beta_url
+    @root_url = root_url
     set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))
     mail to: [wrap_recipient(params['email'], params['username'], 'to')],
          subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name)
