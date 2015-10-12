@@ -1,17 +1,18 @@
 - content_for :head do
   = javascript_include_tag 'home/main'
 
-.container-fluid.topCarouselHome
-  = render 'home/index/top_carousel'
+.homepage
+  .container-fluid.topCarouselHome
+    = render 'home/index/top_carousel'
 
-.container-fluid.whatWeDoBox
-  = render 'home/index/what_we_do'
+  .container-fluid.whatWeDoBox
+    = render 'home/index/what_we_do'
 
-.container-fluid.justineStory
-  = render 'home/index/story'
+  .container-fluid.justineStory
+    = render 'home/index/story'
 
-.container-fluid.whatToExpect
-  = render 'home/index/what_to_expect'
+  .container-fluid.whatToExpect
+    = render 'home/index/what_to_expect'
 
-.container-fluid.bottomCarouselHome
-  = render 'home/index/bottom_carousel'
+  .container-fluid.bottomCarouselHome
+    = render 'home/index/bottom_carousel'
