@@ -97,6 +97,8 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.integer  "facebook_user_id",   limit: 8
     t.integer  "primary_card_id"
     t.boolean  "email_opt_in",                   default: true
+    t.datetime "first_contest_created_at"
+    t.datetime "latest_contest_created_at"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree

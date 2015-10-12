@@ -39,6 +39,11 @@ RSpec.describe ClientPaymentsController do
             expect(ErrorsLogger).to_not receive(:log)
             post :create, contest_id: contest.id
           end
+
+          it 'sets last_contest_created_at for client' do
+            post :create, contest_id: contest.id
+            expect(client.reload.latest_contest_created_at).to be_within(5.seconds).of(Time.current)
+          end
         end
 
         context 'unsuccessful charge' do
@@ -49,7 +54,7 @@ RSpec.describe ClientPaymentsController do
           it 'does not create payment' do
             expect(contest.promocodes.count).to eq(0)
 
-            post :create, contest_id: contest.id, client: { promocode: promocode.promocode}
+            post :create, contest_id: contest.id, client: { promocode: promocode.promocode }
 
             expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
             expect(contest.client_payment.present?).to be_falsey
@@ -61,6 +66,11 @@ RSpec.describe ClientPaymentsController do
             expect(ErrorsLogger).to receive(:log)
             post :create, contest_id: contest.id
           end
+
+          it 'does not set contest_created_at for contests' do
+            post :create, contest_id: contest.id
+            expect(client.reload.latest_contest_created_at).to be_nil
+          end
         end
       end
 
@@ -70,7 +80,7 @@ RSpec.describe ClientPaymentsController do
         end
 
         it 'does not create payment' do
-          post :create, contest_id: contest.id, client: { promocode: promocode.promocode}
+          post :create, contest_id: contest.id, client: { promocode: promocode.promocode }
 
           expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
           expect(contest.client_payment.present?).to be_falsey

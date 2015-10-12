@@ -13,6 +13,8 @@ class ClientPaymentsController < ApplicationController
 
   private
 
+  attr_reader :contest
+
   def charge
     begin
       ActiveRecord::Base.transaction do
@@ -44,8 +46,10 @@ class ClientPaymentsController < ApplicationController
       payment = Payment.new(contest)
       payment.perform
     end
-  end
 
-  attr_reader :contest
+    client_contest_created_at = { latest_contest_created_at: Time.current }
+    client_contest_created_at.merge!(first_contest_created_at: Time.current) if @client.contests.count == 1
+    @client.update_attributes!(client_contest_created_at)
+  end
 
 end
