@@ -180,6 +180,8 @@ InteriorC::Application.routes.draw do
            constraints: { blog_page_post_path: /.*/ }
       get '/', to: 'blog#blog_root', as: 'blog_root'
     end
+
+    resource :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
   end
 
   def consider_rest_of_routes_as_portfolios
