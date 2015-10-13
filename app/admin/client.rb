@@ -15,10 +15,6 @@ ActiveAdmin.register Client do
     column :email
     column :plain_password
     column :status
-    column :zip
-    column :state
-    column :city
-    column :address
     column :phone_number
     column 'Billing Zip' do |client|
       client.primary_card.zip if client.primary_card.present?
