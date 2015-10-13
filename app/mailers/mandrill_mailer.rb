@@ -1,7 +1,12 @@
 require 'mandrill'
 
 module MandrillMailer
+  extend ActiveSupport::Concern
   @attachments = []
+
+  included do
+    self.delivery_method = :send_to_mandrill
+  end
 
   def template(name)
     @template_name = name
@@ -17,10 +22,12 @@ module MandrillMailer
     return if recipients.map { |recipient| recipient[:email] }.any?(&:blank?)
     message = {
         to: recipients,
-        global_merge_vars: global_merge_vars
+        global_merge_vars: global_merge_vars,
+        metadata: {
+            email_id: options[:email_id]
+        }
     }
     message.merge!(subject: options[:subject]) if options[:subject]
-
     api.messages.send_template(@template_name, [], message)
   end
 
