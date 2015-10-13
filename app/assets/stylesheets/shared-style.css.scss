@@ -3555,7 +3555,6 @@ input[type="radio"].smallRadio:checked + label span {
 }
 
 .productVoteRight p {
-  /*margin-bottom: 5px;*/
   font-size: 16px;
   font-family: "AvenirLTStd-Light";
 }
@@ -3597,7 +3596,6 @@ input[type="radio"].smallRadio:checked + label span {
   border: 1px solid #000;
   border-radius: 5px;
   display: inline-block;
-  /* margin: 0 auto 40px; */
 }
 
 .collaborationScreen .doneAndMove a img {
@@ -4251,7 +4249,7 @@ p.product-list-reminder {
 /*start homepage*/
 
 .topCarouselHome {
-  .carousel-shared-content{
+  .carousel-shared-content {
     top: 0%;
     text-shadow: none;
     left: 0%;
@@ -4260,21 +4258,27 @@ p.product-list-reminder {
     background: rgba(0, 0, 0, 0.4);
     padding-top: 100px;
 
-    .main-title{
+    .content{
+      margin: 0px 40px;
+    }
+
+    .main-title {
       font-family: 'Austin Web';
       font-size: 50px;
+      letter-spacing: 1px;
     }
 
-    .sub-title{
+    .sub-title {
       font-size: 20px;
+      letter-spacing: 0.5px;
     }
 
-    .detailsContainer{
+    .detailsContainer {
       position: absolute;
       width: 100%;
       bottom: 40px;
 
-      .details{
+      .details {
         background-color: rgba(0, 0, 0, 0.3);
         line-height: 2em;
         border-radius: 10px;
@@ -4284,30 +4288,30 @@ p.product-list-reminder {
         margin-right: auto;
         font-size: 13px;
 
-        .detail{
+        .detail {
           display: inline;
           margin: 0px 7px;
         }
       }
     }
 
-    .getStartedBtn .arrow{
+    .getStartedBtn .arrow {
       padding-left: 7px;
       vertical-align: top;
       height: 17px;
     }
   }
 
-  .carousel-indicators{
+  .carousel-indicators {
     bottom: 0px;
   }
 
-  .bottom-details{
+  .bottom-details {
     display: none;
     text-align: center;
     margin: 5px 0px;
 
-    .detail{
+    .detail {
       display: inline-block;
       margin: 5px 0px;
     }
@@ -4323,7 +4327,7 @@ p.product-list-reminder {
   min-height: 500px;
 }
 
-.topCarouselHome .image-container{
+.topCarouselHome .image-container {
   height: 100%;
   background-position: center;
   background-size: cover;
@@ -4368,7 +4372,6 @@ p.product-list-reminder {
 }
 
 .whatWeDoBox h2 {
-  font-family: 'BodoniSevITC-BookOS';
   font-size: 30px;
   margin-top: 70px;
   margin-bottom: 20px;
@@ -4395,7 +4398,6 @@ p.product-list-reminder {
 
 .justineStory h2 {
   text-align: center;
-  font-family: 'BodoniSevITC-BookOS';
   font-size: 30px;
   margin-top: 85px;
   margin-bottom: 20px;
@@ -4475,7 +4477,6 @@ p.product-list-reminder {
 
 .whatToExpect h2 {
   text-align: center;
-  font-family: 'BodoniSevITC-BookOS';
   font-size: 30px;
   margin-bottom: 20px;
   color: #333333;
@@ -4578,16 +4579,6 @@ p.product-list-reminder {
   width: 195px;
   margin: 60px auto;
   text-align: center;
-}
-
-@media (min-width: 991px) {
-  .topCarouselHome .carousel-inner > .item {
-    /*height: 30vw;*/
-  }
-  .topCarouselHome .carousel-inner > .item > img {
-    /*position: absolute;*/
-    /*top: -32%;*/
-  }
 }
 
 @media (max-width: 1200px) {
@@ -4767,7 +4758,6 @@ p.product-list-reminder {
   .bottomCarouselHome a.getStartedBottom {
     font-size: 22px;
     width: 90%;
-    /*margin: 60px 20px;*/
   }
 }
 
@@ -4778,13 +4768,22 @@ p.product-list-reminder {
 }
 
 @media (max-width: 420px) {
-  .topCarouselHome .carousel-inner > .item {
-    height: 105vw;
-    padding-top: 110px;
-  }
 
   .topCarouselHome .carousel-shared-content {
     padding-top: 70px;
+
+    .content{
+      margin: 0px 30px;
+    }
+
+    .main-title {
+      font-size: 28px;
+      line-height: 1.3em;
+    }
+
+    .sub-title {
+      margin-top: 15px 10px 0px;
+    }
   }
 
   .topCarouselHome .carousel-inner > .item > img {
@@ -4792,9 +4791,7 @@ p.product-list-reminder {
     position: relative;
     left: -15%;
   }
-  .topCarouselHome .carousel-inner > .item .carousel-caption {
-    top: 5%;
-  }
+
   .topCarouselHome a.getStartedTop {
     margin: 15px auto;
   }
@@ -4909,4 +4906,12 @@ p.product-list-reminder {
   .modal-content {
     padding: 60px;
   }
+}
+
+.homepage {
+
+  h2 {
+    font-family: 'Austin Web';
+  }
+
 }
