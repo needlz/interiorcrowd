@@ -86,7 +86,7 @@ class UserMailer < ActionMailer::Base
     @comment = ERB::Util.html_escape(params[:comment]).split("\n").join("<br/>")
     set_template_values(text: render_to_string("mails/#{params[:role]}s_comment_on_board"))
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject", email_id: email_id)
+         subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject"), email_id: email_id
   end
 
 
