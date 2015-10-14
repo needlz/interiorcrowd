@@ -14,11 +14,7 @@ module Jobs
     end
 
     def perform
-      UserMailer.send(mailer_method, *mail_args)
-      if outbound_email_id
-        email = OutboundEmail.find_by_id(outbound_email_id)
-        email.sent if email
-      end
+      UserMailer.send(mailer_method, *mail_args, outbound_email_id).deliver_now
     end
 
     def queue_name
