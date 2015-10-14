@@ -41,6 +41,14 @@ InteriorC::Application.routes.draw do
         get 'show', as: 'show'
         get 'brief', to: 'clients#brief', as: 'brief'
         get 'download_all_images_url'
+        get 'design_brief'
+        post 'save_design_brief'
+        get 'design_style'
+        post 'save_design_style'
+        get 'design_space'
+        post 'save_design_space'
+        get 'preview'
+        post 'save_preview'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
                   as: 'reviewer_feedbacks',

@@ -13,7 +13,7 @@
 - content_for :page_content do
   .newDesignContest.step4Review
     = render :partial => 'home/msg'
-    = form_tag save_preview_contests_path,
+    = form_tag @save_path,
         { id: 'account_creation',
           method: 'post',
           ukclass: 'intake-form' } do

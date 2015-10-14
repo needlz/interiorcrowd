@@ -24,7 +24,7 @@
           = render 'home/msg'
           %h4= t('contests.design_style.title')
           %p.lightFont.marginTop20= t('contests.design_style.description')
-          = form_tag save_design_style_contests_path,
+          = form_tag @save_path,
               { id: 'design_style', method: 'post', class: 'intake-form' } do
             = render 'contests/options/designer_level_options'
             .fullWidthLine.marginTop40

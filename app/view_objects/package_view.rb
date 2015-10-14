@@ -32,6 +32,7 @@ class PackageView
   end
 
   def name
+    return unless plan
     I18n.t("contests.creation.plans.#{ plan.name }").html_safe
   end
 
