@@ -104,18 +104,28 @@ RSpec.describe ClientsController do
 
   describe 'POST sign_up_with_email' do
 
-    it 'creates client' do
-      email = 'email'
-      post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
-      client = Client.first
-      expect(client.email).to eq email
-      expect(Contest.count).to eq 0
-    end
+    context 'when valid email and password' do
+      let(:email) { 'email' }
 
-    it 'sends only an email with explanations how to finish intake form' do
-      post :sign_up_with_email, client: { email: 'email', password: 'pw', password_confirmation: 'pw' }
-      expect(jobs_with_handler_like('account_creation').count).to eq 1
-      expect(jobs_with_handler_like('client_registered').count).to eq 0
+      before do
+        post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
+      end
+
+      it 'creates client and incomplete contest' do
+        client = Client.first
+        expect(client.email).to eq email
+        expect(client.contests.first).to be_incomplete
+      end
+
+      it 'sends only an email with explanations how to finish intake form' do
+        expect(jobs_with_handler_like('account_creation').count).to eq 1
+        expect(jobs_with_handler_like('client_registered').count).to eq 0
+      end
+
+      it 'redirects to incomplete step of contest' do
+        client = Client.first
+        expect(response).to redirect_to ContestCreationWizard.incomplete_step_path(client.reload.contests.first)
+      end
     end
   end
 
@@ -134,19 +144,24 @@ RSpec.describe ClientsController do
             'first_name' => first_name,
             'last_name' => last_name }
         end
+
+        post :sign_up_with_facebook, token: 'oauth_token'
       end
 
-      it 'creates client' do
-        post :sign_up_with_facebook, token: 'oauth_token'
+      it 'creates client and incomplete contest' do
         client = Client.first
         expect(client.email).to eq email
         expect(client.first_name).to eq first_name
         expect(client.last_name).to eq last_name
-        expect(Contest.count).to eq 0
+        expect(client.contests.first).to be_incomplete
+      end
+
+      it 'redirects to incomplete step of contest' do
+        client = Client.first
+        expect(response).to redirect_to ContestCreationWizard.incomplete_step_path(client.reload.contests.first)
       end
 
       it 'sends only an email with explanations how to finish intake form to client' do
-        post :sign_up_with_facebook, token: 'oauth_token'
         expect(jobs_with_handler_like('account_creation').count).to eq 1
         expect(jobs_with_handler_like('client_registered').count).to eq 0
       end
@@ -315,4 +330,38 @@ RSpec.describe ClientsController do
       end
     end
   end
+
+  describe 'GET brief' do
+    before do
+      sign_in(client)
+    end
+
+    context 'when contest is unknown' do
+      it 'returns 404' do
+        get :brief, id: 0
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when contest is complete' do
+      let(:contest) { Fabricate(:contest, client: client, status: Contest::COMPLETED_NON_FINISHED_STATUSES[0]) }
+
+      it 'returns brief page' do
+        dont_raise_i18n_exceptions do
+          get :brief, id: contest.id
+          expect(response).to render_template(:brief)
+        end
+      end
+    end
+
+    context 'when contest is incomplete' do
+      let(:contest) { Fabricate(:contest, client: client, status: Contest::INCOMPLETE_STATUSES[0]) }
+
+      it 'returns brief page' do
+        get :brief, id: contest.id
+        expect(response).to redirect_to ContestCreationWizard.incomplete_step_path(contest)
+      end
+    end
+  end
+
 end

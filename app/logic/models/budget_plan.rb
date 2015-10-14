@@ -22,8 +22,14 @@ class BudgetPlan
   attr_reader :id, :price, :designer_count, :product_count, :services, :name
 
   def self.find(id)
+    find_by_id(id) do |plan|
+      raise ArgumentError unless plan
+    end
+  end
+
+  def self.find_by_id(id, &after_search)
     plan = PLANS.find { |plan| plan.id == id.to_i }
-    raise ArgumentError unless plan
+    after_search.call(plan) if after_search
     plan
   end
 

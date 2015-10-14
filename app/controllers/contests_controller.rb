@@ -2,9 +2,19 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
   before_filter :check_client, only: [:index, :payment_details]
 
-  before_filter :set_creation_wizard, only: [:design_brief, :design_style, :design_space, :preview, :payment_details]
-  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
   before_filter :set_client, only: [:index, :show, :payment_summary]
+  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
+  before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
+
+  [:design_brief, :design_style, :design_space].each do |action|
+    define_method action do
+      render
+    end
+
+    define_method "save_#{ action }" do
+      save_intake_form_step(action)
+    end
+  end
 
   def show
     return raise_404 unless current_user.see_contest?(@contest)
@@ -31,49 +41,76 @@ class ContestsController < ApplicationController
     @current_contests = @client.contests.in_progress
     @completed_contests = @client.contests.inactive
   end
-  
-  def design_brief
-    render
-  end
-
-  def save_design_brief
-    session[:design_brief] = params[:design_brief] if params[:design_brief].present?
-    redirect_to design_style_contests_path
-  end
-
-  def design_style
-    render
-  end
-
-  def save_design_style
-    session[:design_style] = params[:design_style] if params[:design_style].present?
-    redirect_to design_space_contests_path
-  end
-
-  def design_space
-    @budget_option = session[:design_space].present? ? session[:design_space][:f_budget] : ''
-  end
-
-  def save_design_space
-    session[:design_space] = params[:design_space] if params[:design_space].present?
-    redirect_to preview_contests_path
-  end
 
   def preview
-    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
+    unless @contest
+      return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
+    end
     @contest_view = ContestView.new(contest_attributes: session.to_hash)
   end
 
   def save_preview
-    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
+    if params[:id]
+      return unless set_client
+      begin
+        @contest = Contest.find(params[:id])
+        return redirect_to brief_contest_path(id: @contest.id) if @contest.completed?
+        @contest
+      rescue ActiveRecord::RecordNotFound => e
+        return raise_404(e)
+      end
+    end
+    unless @contest
+      return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
+    end
     if params[:preview].present?
-      session[:preview] = params[:preview]
+      if @contest
+        incompleted_contest_options = ContestOptions.new(params.with_indifferent_access)
+        incompleted_contest_updater = ContestUpdater.new(@contest, incompleted_contest_options)
+        incompleted_contest_updater.perform
+      else
+        session[:preview] = params[:preview]
+      end
       on_previewed
     else
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
       redirect_to preview_contests_path and return
     end
   end
+
+
+  def save_intake_form_step(action)
+    next_step_index = ContestCreationWizard.creation_steps.find_index(action) + 1
+    next_step = ContestCreationWizard.creation_steps[next_step_index]
+
+    if params[:id]
+      incompleted_contest = fetch_incompleted_contest(params[:id])
+      return render_404 unless incompleted_contest
+      incompleted_contest_options = ContestOptions.new(params.with_indifferent_access)
+      incompleted_contest_updater = ContestUpdater.new(incompleted_contest, incompleted_contest_options)
+      incompleted_contest_updater.perform
+      return redirect_to(controller: 'contests', action: next_step, id: incompleted_contest.id)
+    else
+      session[action] = params[action] if params[action].present?
+    end
+
+    if incompleted_contest = fetch_incompleted_contest
+      redirect_to(controller: 'contests', action: action, id: incompleted_contest.id)
+    else
+      if current_user.client?
+        contest_creation = ContestCreation.new(client_id: current_user.id, contest_params: session, make_complete: false)
+        contest_creation.on_success do
+          clear_creation_storage
+        end
+        contest_creation.perform
+        contest = contest_creation.contest
+        redirect_to(controller: 'contests', action: next_step, id: contest.id)
+      else
+        redirect_to(controller: 'contests', action: next_step)
+      end
+    end
+  end
+
 
   def account_creation
     return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps)
@@ -93,6 +130,7 @@ class ContestsController < ApplicationController
     ActiveRecord::Associations::Preloader.new.preload(@client, :primary_card)
     @card_views = @client.credit_cards.from_newer_to_older.map{ |credit_card| CreditCardView.new(credit_card) }
     @credit_card = @client.credit_cards.new
+    create_creation_wizard(@contest)
   end
 
   def payment_summary
@@ -171,14 +209,43 @@ class ContestsController < ApplicationController
   end
 
   def set_creation_wizard
-    @creation_wizard = ContestCreationWizard.new(contest_attributes: ContestOptions.new(session.to_hash).contest,
-                                                 step: params[:action].to_sym,
-                                                 current_user: current_user)
-    @contest_view = ContestView.new(contest_attributes: session.to_hash)
+    set_client_navigation
+    return unless set_creation_wizard_source
+    create_creation_wizard(@contest_attributes)
+  end
+
+  def set_creation_wizard_source
+    @contest_attributes =
+      if params[:id]
+        raise_404 and return false unless @client
+        begin
+          @contest = Contest.find(params[:id])
+          redirect_to brief_contest_path(id: @contest.id) and return false if @contest.completed?
+          @contest
+        rescue ActiveRecord::RecordNotFound => e
+          raise_404(e) and return false
+        end
+      else
+        incompleted_contest = fetch_incompleted_contest
+        if incompleted_contest
+          redirect_to(controller: 'contests', action: action_name, id: incompleted_contest.id) and return false
+        end
+        session.to_hash
+      end
+  end
+
+  def set_client_navigation
     if current_user.client?
       @navigation = Navigation::ClientCenter.new(:entries)
       @client = current_user
     end
+  end
+
+  def create_creation_wizard(source)
+    @creation_wizard = ContestCreationWizard.new(contest_attributes: to_contest_options(source),
+                                                 step: params[:action].to_sym,
+                                                 current_user: current_user)
+    @contest_view = ContestView.new(contest_attributes: source)
   end
 
   def set_contest
@@ -187,29 +254,54 @@ class ContestsController < ApplicationController
     raise_404(e)
   end
 
+  def to_contest_options(contest_attributes)
+    if contest_attributes.kind_of?(Hash)
+      ContestOptions.new(contest_attributes).contest
+    else
+      contest_attributes
+    end
+  end
+
   def uncomplete_step_path(validated_steps)
-    uncomplete_step = validated_steps.detect { |step| ContestOptions.new(session.to_hash).uncompleted_chapter == step }
-    ContestCreationWizard.creation_steps_paths[uncomplete_step] if uncomplete_step
+    ContestCreationWizard.uncomplete_step_path(ContestOptions.new(session.to_hash), validated_steps)
   end
 
   def on_previewed
     return redirect_to account_creation_contests_path unless current_user.client?
 
     @client = current_user
-    contest_creation = ContestCreation.new(client_id: @client.id, contest_params: session)
-    contest_creation.on_success do
-      clear_creation_storage
-    end
-    contest_creation.perform
+    contest =
+      if @contest
+        complete_contest = CompleteContest.new(@contest)
+        complete_contest.perform
+        @contest
+      else
+        contest_creation = ContestCreation.new(client_id: @client.id, contest_params: session, make_complete: true)
+        contest_creation.on_success do
+          clear_creation_storage
+        end
+        contest_creation.perform
+        contest_creation.contest
+      end
 
-    redirect_to payment_details_contests_path(id: contest_creation.contest.id)
+    redirect_to payment_details_contests_path(id: contest.id)
   end
-
-  private
 
   def payment_performed?(contest)
     return contest.payed? if Settings.payment_enabled
     contest.client.credit_cards.present?
+  end
+
+  def fetch_incompleted_contest(contest_id = nil)
+    if contest_id
+      current_user.contests.incompleted.find_by_id(contest_id)
+    else
+      current_user.client? && current_user.contests.incompleted.first
+    end
+  end
+
+  def set_save_path
+    @save_path = @contest ? send("save_#{ action_name }_contest_path", id: @contest.id) : send("save_#{ action_name }_contests_path")
   end
 
 end

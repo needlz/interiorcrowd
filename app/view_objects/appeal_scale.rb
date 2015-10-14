@@ -84,16 +84,19 @@ class AppealScale
   end
 
   def self.initialize_from_appeals(contests_appeals)
-    contests_appeals.ordered_by_appeal.map do |contest_appeal|
-      appeal_scale = new(contest_appeal.appeal)
-      appeal_scale.value = contest_appeal.value
-      appeal_scale.reason = contest_appeal.reason
+    Appeal.all.order(:id).map do |appeal|
+      appeal_scale = new(appeal)
+      contest_appeal = contests_appeals.find_by_appeal_id(appeal.id)
+      if contest_appeal
+        appeal_scale.value = contest_appeal.value
+        appeal_scale.reason = contest_appeal.reason
+      end
       appeal_scale
     end
   end
 
   def default_value
-    0
+    nil
   end
 
   def localized_name(key)

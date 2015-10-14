@@ -6,7 +6,7 @@ RSpec.describe ContestsController do
 
   let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
   let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
   def prepare_contest_data
@@ -26,7 +26,7 @@ RSpec.describe ContestsController do
       allow_any_instance_of(DesignCategory).to receive(:name).and_return('quick_fix')
       ContestView::EDITABLE_ATTRIBUTES.each do |option|
         get :option, id: contest.id, option: option
-        expect(response).to be_ok
+        expect(response).to have_http_status(:ok)
         expect(response).to render_template(partial: "contests/options/_#{ option }_options")
       end
     end
@@ -139,10 +139,8 @@ RSpec.describe ContestsController do
         end
 
         context 'invalid id passed' do
-          let(:id) { Fabricate(:contest).id }
-
           it 'returns 404' do
-            get :payment_details, id: id
+            get :payment_details, id: 0
             expect(response).to have_http_status(:not_found)
           end
         end
@@ -158,8 +156,6 @@ RSpec.describe ContestsController do
           expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
         end
       end
-
-
     end
 
     context 'user is not logged in' do
@@ -623,6 +619,159 @@ RSpec.describe ContestsController do
         end
       end
     end
+  end
+
+  describe 'GET intake form steps for a new contest' do
+    context 'when logged as client' do
+      before do
+        sign_in(client)
+      end
+
+      context 'when there is an incomplete contest' do
+        let!(:incomplete_contest) { Fabricate(:contest, client: client) }
+
+        it 'redirects to contest editing' do
+          get :design_brief
+          expect(response).to redirect_to design_brief_contest_path(id: incomplete_contest.id )
+        end
+      end
+
+      context 'when there is no incomplete contest' do
+        it 'returns page' do
+          dont_raise_i18n_exceptions do
+            get :design_brief
+            expect(response).to be_ok
+          end
+        end
+      end
+    end
+
+    context 'when not logged as client' do
+      it 'returns page' do
+        dont_raise_i18n_exceptions do
+          get :design_brief
+          expect(response).to be_ok
+        end
+      end
+    end
+  end
+
+  describe 'GET intake form steps for incomplete contest' do
+    let(:submitted_contest) { Fabricate(:contest, status: 'submission') }
+
+    context 'when logged as client' do
+      before do
+        sign_in(client)
+      end
+
+      context 'when an incomplete contest exists' do
+        let!(:incomplete_contest) { Fabricate(:contest, client: client) }
+
+        before do
+          Fabricate(:contest, client: client)
+        end
+
+        it 'renders page' do
+          dont_raise_i18n_exceptions do
+            get :design_brief, id: incomplete_contest.id
+            expect(response).to be_ok
+          end
+        end
+      end
+
+      context 'when a contest is completed' do
+        let!(:completed_contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+
+        it 'redirects to contest brief page' do
+          get :design_brief, id: submitted_contest.id
+          expect(response).to redirect_to brief_contest_path(id: submitted_contest.id)
+        end
+      end
+
+      context 'when there is no incomplete contest' do
+        it 'returns 404' do
+          get :design_brief, id: 0
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context 'when not logged as client' do
+      it 'returns 404' do
+        get :design_brief, id: submitted_contest.id
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
+  describe 'POST intake form step for a new contest' do
+    context 'when logged as client' do
+      before do
+        sign_in(client)
+      end
+
+      context 'when there is an incomplete contest' do
+        let!(:incomplete_contest) { Fabricate(:contest, client: client) }
+
+        it 'reloads page in context of the incomplete contest' do
+          post :save_design_brief
+          expect(response).to redirect_to design_brief_contest_path(id: incomplete_contest.id)
+        end
+      end
+
+      context 'when there is no incomplete contest' do
+
+        it 'redirects to next step in context of the incomplete contest' do
+          post :save_design_brief
+          new_contest = client.contests.first
+          expect(response).to redirect_to design_style_contest_path(id: new_contest.id)
+        end
+
+        it 'creates incomplete contest' do
+          expect { post :save_design_brief }.to change{ client.reload.contests.count }.from(0).to(1)
+        end
+      end
+    end
+
+    context 'when not logged as client' do
+      it 'returns next step' do
+        post :save_design_brief
+        expect(response).to redirect_to design_style_contests_path
+      end
+    end
+  end
+
+  describe 'POST intake form step for incompleted contest' do
+    before do
+      sign_in(client)
+    end
+
+    context 'when there is an incomplete contest' do
+      let!(:incomplete_contest) { Fabricate(:contest, client: client) }
+
+      it 'saves changes' do
+        post :save_design_brief, contest_options_source.merge(id: incomplete_contest.id)
+        expect(response).to redirect_to design_style_contest_path(id: incomplete_contest.id)
+        expect(incomplete_contest.reload.design_space_id).to eq contest_options_source[:design_brief][:design_area]
+      end
+    end
+
+    context 'when a wrong contest id specified' do
+      it 'returns 404' do
+        post :save_design_brief, id: 0
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when specified contest is completed' do
+      let(:completed_contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+
+      it 'returns 404' do
+        post :save_design_brief, contest_options_source.merge(id: completed_contest.id)
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
   end
 
 end

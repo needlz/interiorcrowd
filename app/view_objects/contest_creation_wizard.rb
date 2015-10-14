@@ -25,6 +25,40 @@ class ContestCreationWizard
     BudgetPlan.all.map { |plan| PackageView.new(plan) }
   end
 
+  def self.uncomplete_step_path(contest_options, validated_steps)
+    uncomplete_step = validated_steps.detect { |step| contest_options.uncompleted_chapter == step }
+    creation_steps_paths[uncomplete_step] if uncomplete_step
+  end
+
+  def self.finished_step?(contest, index)
+    case index
+      when 0
+        contest.design_category_id.present? && contest.design_space_id.present?
+      when 1
+        contest.desirable_colors.present? && contest.contests_appeals.count == Appeal.count
+      when 2
+        contest.space_budget.present?
+      when 3
+        contest.project_name.present? && contest.budget_plan.present?
+    end
+  end
+
+  def self.unfinished_step(contest)
+    (0..(steps_count - 1)).each do |step|
+      return step unless finished_step?(contest, step)
+    end
+    nil
+  end
+
+  def self.incomplete_step_path(contest)
+    incomplete_step = creation_steps[unfinished_step(contest).to_i]
+    RenderingHelper.new.send("#{ incomplete_step }_contest_path", id: contest.id)
+  end
+
+  def self.steps_count
+    4
+  end
+
   def initialize(options)
     @current_user = options[:current_user]
     @contest_attributes = options[:contest_attributes]
@@ -74,11 +108,8 @@ class ContestCreationWizard
   end
 
   def pending_contest_exists?
-    if current_user && current_user.client? && current_user.last_contest
-      Contest::NON_FINISHED_STATUSES.include? current_user.last_contest.status
-    else
-      false
-    end
+    return false unless current_user && current_user.client? && current_user.contests.exists?
+    current_user.contests.where(status: Contest::COMPLETED_NON_FINISHED_STATUSES).exists?
   end
 
   def show_sign_up_suggestion?

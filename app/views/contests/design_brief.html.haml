@@ -9,7 +9,7 @@
 - content_for :page_content do
   #choose-room
     = render partial: 'home/msg'
-    = form_tag save_design_brief_contests_path,
+    = form_tag @save_path,
         { id: 'design_categories', method: 'post', class: 'intake-form' } do
       = render partial: 'contests/options/category_options'
       = render partial: 'contests/options/area_options'

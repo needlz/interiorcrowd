@@ -39,9 +39,11 @@ class Contest < ActiveRecord::Base
 
   self.per_page = 10
 
-  STATUSES = %w[brief_pending submission winner_selection closed fulfillment final_fulfillment finished]
+  STATUSES = %w[incomplete brief_pending submission winner_selection closed fulfillment final_fulfillment finished]
   COLLABORATION_STATUSES = %w[submission winner_selection fulfillment final_fulfillment]
-  NON_FINISHED_STATUSES = ['brief_pending'] + COLLABORATION_STATUSES
+  COMPLETED_NON_FINISHED_STATUSES = %w[brief_pending] + COLLABORATION_STATUSES
+  INCOMPLETE_STATUSES = %w[incomplete]
+  NON_FINISHED_STATUSES = INCOMPLETE_STATUSES + COMPLETED_NON_FINISHED_STATUSES
   FINISHED_STATUSES = %w[closed finished]
   ACCOMMODATION_VALUES = %w[true false]
 
@@ -77,10 +79,11 @@ class Contest < ActiveRecord::Base
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
   scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
+  scope :incompleted, ->{ where(status: 'incomplete') }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
-  validates_presence_of :design_category
-  validates_presence_of :design_space
+  validates_presence_of :design_category, if: -> { completed? }
+  validates_presence_of :design_space, if: -> { completed? }
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
     validates_inclusion_of preference,
                            in: options.map(&:to_s),
@@ -101,12 +104,16 @@ class Contest < ActiveRecord::Base
   after_update :update_phase_end_job
   after_create :create_retailer_preferences, on: :create
 
-  state_machine :status, initial: :brief_pending do
+  state_machine :status, initial: :incomplete do
     after_transition on: :close, do: :close_requests
     after_transition on: :winner_selected, do: :close_losers_requests
 
+    event :complete do
+      transition incomplete: :brief_pending
+    end
+
     event :submit do
-      transition brief_pending: :submission
+      transition brief_pending: :submission, incomplete: :submission
     end
 
     event :start_winner_selection do
@@ -199,7 +206,7 @@ class Contest < ActiveRecord::Base
   end
 
   def package
-    BudgetPlan.find(budget_plan)
+    BudgetPlan.find_by_id(budget_plan)
   end
 
   def name
@@ -220,6 +227,10 @@ class Contest < ActiveRecord::Base
 
   def payed?
     client_payment && client_payment.last_error.nil?
+  end
+
+  def completed?
+    !incomplete?
   end
 
   private

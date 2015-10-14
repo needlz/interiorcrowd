@@ -4,12 +4,13 @@ class ClientNextContestPolicy
     @client = client
   end
 
-  def can_create_next_contest?
-    return true unless client.last_contest
-    Contest::FINISHED_STATUSES.include? client.last_contest.status
+  def can_complete_next_contest?
+    return true unless client.contests.exists?
+    !client.contests.where(status: Contest::COMPLETED_NON_FINISHED_STATUSES).exists?
   end
 
   private
 
   attr_reader :client
+
 end
