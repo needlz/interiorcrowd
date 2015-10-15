@@ -33,7 +33,7 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     end
     column 'End Date' do |contest|
       if %w[finished closed].include? contest.status
-        contest.status.to_s.capitalize + ' at ' + contest.finished_at.to_s
+        contest.status.to_s.capitalize + ' at ' + contest.finished_at.to_s if contest.finished_at
       end
     end
   end
