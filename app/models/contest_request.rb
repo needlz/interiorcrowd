@@ -15,6 +15,8 @@
 #  final_note         :text
 #  pull_together_note :text
 #  token              :string(255)
+#  submitted_at       :datetime
+#  won_at             :datetime
 #
 
 class ContestRequest < ActiveRecord::Base

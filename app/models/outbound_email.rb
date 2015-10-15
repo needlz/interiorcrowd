@@ -9,6 +9,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  sent_to_mail_server_at :datetime
+#  api_response           :text
 #
 
 class OutboundEmail < ActiveRecord::Base
