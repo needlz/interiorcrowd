@@ -97,3 +97,4 @@ gem 'faraday-cookie_jar'
 gem 'http-cookie'
 gem 'puma'
 gem 'newrelic_rpm'
+gem 'puma_worker_killer' #https://github.com/schneems/puma_worker_killer
