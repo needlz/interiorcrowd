@@ -36,3 +36,4 @@ test:
   APP_HOST: 'localhost:3000'
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
+  INFO_EMAIL: 'romans@softwareplanet.uk.com'

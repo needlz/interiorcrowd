@@ -65,7 +65,7 @@ class UserMailer < ActionMailer::Base
     @page_url = url
     @root_url = root_url
     set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))
-    mail to: [wrap_recipient(params['email'], params['username'], 'to')],
+    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
          subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name), email_id: email_id
   end
 
