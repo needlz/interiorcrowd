@@ -1141,7 +1141,9 @@
 
 #linkToBrief{
   font-size: 17px;
+  display: block;
   color: #30A7FC;
+  margin-bottom: 15px;
 }
 
 #submit_to_client{
@@ -1347,4 +1349,13 @@
     display: inline-block;
     vertical-align: top;
   }
+}
+
+.question-sent-notice{
+  color: #409863;
+  display: none;
+  margin-right: 11px;
+  margin-bottom: -35px;
+  vertical-align: middle;
+  position: relative;
 }
