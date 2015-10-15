@@ -96,7 +96,7 @@ ActiveRecord::Schema.define(version: 20151015145432) do
     t.string   "stripe_customer_id",        limit: 255
     t.integer  "facebook_user_id",          limit: 8
     t.integer  "primary_card_id"
-    t.boolean  "email_opt_in",                   default: true
+    t.boolean  "email_opt_in",                          default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
   end

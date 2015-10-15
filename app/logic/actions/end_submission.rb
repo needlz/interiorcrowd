@@ -1,7 +1,13 @@
 class EndSubmission < EndMilestone
 
   def perform
-    return contest.close! if contest.requests.submitted.count < 3
+    if contest.requests.submitted.count < 3
+      Contest.transaction do
+        contest.close!
+        contest.update_attributes(finished_at: Time.now)
+      end
+      return
+    end
     ActiveRecord::Base.transaction do
       contest.start_winner_selection!
       Jobs::Mailer.schedule(:please_pick_winner, [contest])
