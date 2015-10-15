@@ -25,6 +25,7 @@ class SubmitContest
     if contest.brief_pending? && brief_completed? && (payed? || !Settings.payment_enabled)
       ActiveRecord::Base.transaction do
         contest.submit!
+        contest.update_attributes(submission_started_at: Time.now)
         Jobs::CheckIfBoardsReceived.schedule(contest.id, { run_at: Time.current + 3.days })
         @performed = true
       end

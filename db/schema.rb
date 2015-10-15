@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012140204) do
+ActiveRecord::Schema.define(version: 20151015145432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(version: 20151012140204) do
     t.decimal  "space_height",                                precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
-    t.string   "status",                          limit: 255,                          default: "brief_pending"
+    t.string   "status",                                                               default: "incomplete"
     t.datetime "phase_end"
     t.string   "theme",                           limit: 255
     t.string   "space",                           limit: 255
@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20151012140204) do
     t.boolean  "designers_explore_other_colors",                                       default: false
     t.boolean  "designers_only_use_these_colors",                                      default: false
     t.datetime "finished_at"
+    t.datetime "submission_started_at"
   end
 
   create_table "contests_appeals", force: :cascade do |t|
@@ -284,7 +285,7 @@ ActiveRecord::Schema.define(version: 20151012140204) do
     t.string   "state",                   limit: 255
     t.text     "address"
     t.text     "city"
-    t.boolean  "active",                              default: true
+    t.boolean  "active"
     t.integer  "facebook_user_id",        limit: 8
   end
 
@@ -476,23 +477,6 @@ ActiveRecord::Schema.define(version: 20151012140204) do
     t.datetime "audio_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "taggings", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type", limit: 255
-    t.integer  "tagger_id"
-    t.string   "tagger_type",   limit: 255
-    t.string   "context",       limit: 255
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-
-  create_table "tags", force: :cascade do |t|
-    t.string "name", limit: 255
   end
 
   create_table "user_notifications", force: :cascade do |t|
