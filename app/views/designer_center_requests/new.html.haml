@@ -18,9 +18,7 @@
         html: { class: "response" },
         url: designer_center_response_index_path(contest_id: @contest.id) do |f|
       .clearfix
-      = link_to t("designer_center.my_contests.design_profile"),
-              designer_center_contest_path(@contest.id),
-              class: "seeBrief italicLink #{ tracked_link }"
+      = render 'design_brief_link', request: @request, request_view: @request_view
       .clearfix
 
       .col-md-8.disablePadding
