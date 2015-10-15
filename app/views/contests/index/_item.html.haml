@@ -3,12 +3,20 @@
   .row.text-left.contestTableRow1{ data: { id: contest.id } }
     .col-sm-10
       .row
-        .col-xs-4.makeMeBold= contest.name
+        .col-xs-4.makeMeBold
+          - if contest.completed?
+            %a{ href: brief_contest_path(id: contest.id) }
+              = contest.name
+          - else
+            = contest.name
         .col-xs-4= contest.design_space
-        .col-xs-4.greenDay= contest.days_till_end
+        - if contest.completed?
+          .col-xs-4.greenDay= contest.days_till_end
+        - else
+          .col-xs-4= contest.progress
     .col-sm-2.contestDesignerBtn.hidden-xs
-      %a.goBtn.btn{ href: client_center_entry_path(id: contest.id) }
-        = t('designer_center.responses.item.go')
+      %a.goBtn.btn{ href: contest.continue_path }
+        = contest.continue_label
         %img{:src => "/assets/go_right.png"}/
 
   .row.contestTableRow2
@@ -16,7 +24,7 @@
       %span.title= "#{t('designer_center.responses.item.status')}:"
       = contest.status_name
     .col-xs-12.visible-xs.contestDesignerBtn
-      %a.goBtn.btn{ href: client_center_entry_path(id: contest.id) }
-        = t('designer_center.responses.item.go')
+      %a.goBtn.btn{ href: contest.continue_path }
+        = contest.continue_label
         %img{ src: '/assets/go_right.png' }/
     .clearfix

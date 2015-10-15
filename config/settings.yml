@@ -9,6 +9,7 @@ common: &defaults
   mandrill:
     email: <%= ENV['MANDRILL_EMAIL'] %>
     api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
+    webhook_key: <%= ENV['MANDRILL_WEBHOOK_KEY'] %>
   pictures_email: pictures@interiorcrowd.com
   info_email: <%= ENV['INFO_EMAIL'] %>
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>

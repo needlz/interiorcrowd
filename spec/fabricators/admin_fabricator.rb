@@ -1,5 +1,5 @@
 Fabricator(:admin_user) do
-  email { 'admin@example.com' }
+  email { sequence { |i|  "client#{ i }@example.com" } }
   password 'password'
   password_confirmation 'password'
 end

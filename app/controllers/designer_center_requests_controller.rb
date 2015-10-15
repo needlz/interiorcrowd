@@ -90,6 +90,7 @@ class DesignerCenterRequestsController < ApplicationController
     @contest_view = ContestView.new(contest_attributes: @contest)
     @contest_short_details = ContestShortDetails.new(@contest)
     @request = ContestRequest.new(contest_id: @contest.id)
+    @request_view = ContestResponseView.new(@request)
   end
 
   def create

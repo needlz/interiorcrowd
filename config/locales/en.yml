@@ -596,12 +596,13 @@ en:
       generating_archive: Generating archive...
     statuses:
       brief_pending: 'Brief pending: upload pictures of your space'
-      submission: Submission
-      winner_selection: Pick winner
+      submission: Designers adding their submissions
+      winner_selection: Pick winning designer
       fulfillment: Custom Board and Product List Collaboration
-      final_fulfillment: Wait for Create Final Design
+      final_fulfillment: Waiting for Final Design and Product List
       closed: Closed
-      finished: Finished
+      finished: Contest is Finished
+      incomplete: Brief pending
   designer_center:
     milestones:
       winner_selection:
@@ -860,6 +861,7 @@ en:
         view_brief: View brief
         comments: Comments
         go: VIEW
+        finish: FINISH
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
@@ -888,7 +890,6 @@ en:
       how_to_communicate: How do I communicate with the client?
       vendors: Which vendors can I use?
     my_contests:
-      design_profile: See the client's brief here
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
       hint: 'Hint: Remember to review the %{link} first'
@@ -905,8 +906,14 @@ en:
       design_textarea_placeholder: Tell the Client Something about your design.
       need_to_ask_question: Need to ask a question?
       save_and_preview: Save & Preview
-      say_about_design: Say something about your design.
+      say_about_design: >
+        This room has a lot of potential! I saw from your style profile that you
+        love mid-century modern and eclectic styles, so I've added a few pieces
+        that I think will go really well with your existing furniture in your living
+        room within your allocated budget. If you pick me as a winner we can look into
+        some options for paint as I think a lighter color will really brighten this room up.
       send: Send
+      question_sent: Question sent!
     product_items:
       text_placeholder: >
         Add text here explaining why this product would be great for their space.

@@ -7,7 +7,7 @@ RSpec.describe SubmitContest do
 
   context 'when contest created with space pictures' do
     let(:contest) do
-      contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options_source)
+      contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options_source, make_complete: true)
       contest = contest_creation.perform
       contest
     end
@@ -42,7 +42,7 @@ RSpec.describe SubmitContest do
       options
     end
     let(:contest) do
-      contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options)
+      contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options, make_complete: true)
       contest = contest_creation.perform
       contest
     end

@@ -1,8 +1,8 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe ContestResponseView do
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client) }
+  let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
   let(:contest_request) { Fabricate(:contest_request, status: 'fulfillment_ready', contest: contest) }
 
   it 'returns name of the design' do
