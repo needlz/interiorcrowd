@@ -32,7 +32,7 @@ class UserMailer < ActionMailer::Base
     template 'reset_password'
     subject = I18n.t('mails.password_reset.subject')
     set_template_values(set_reset_password_params(user, password))
-    mail to: [wrap_recipient(user.email, user.name, 'to')], subject:subject, email_id: email_id
+    mail({to: [wrap_recipient(user.email, user.name, 'to')], subject:subject, email_id: email_id})
   end
 
   def sign_up_beta_autoresponder(email, email_id = nil)

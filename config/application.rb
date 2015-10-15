@@ -42,16 +42,8 @@ module InteriorC
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-    config.action_mailer.delivery_method = :smtp
-    config.action_mailer.smtp_settings = {
-        :address => "smtp.gmail.com",
-        :port => 587,
-        :domain => "gmail.com",
-        :user_name => ENV['mailer_address'], #Your user name
-        :password => ENV['mailer_password'], # Your password
-        :authentication => "plain",
-        :enable_starttls_auto => true
-    }
+
+    config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
 
     s3_settings = { bucket: ENV['S3_BUCKET_NAME'],
                     access_key_id: ENV['AWS_ACCESS_KEY'],
@@ -73,8 +65,6 @@ module InteriorC
     config.generators do |g|
       g.test_framework :rspec
     end
-
-    config.action_mailer.default_url_options = { host: ENV['APP_HOST'] }
 
     config.action_controller.default_url_options = { trailing_slash: true }
 
