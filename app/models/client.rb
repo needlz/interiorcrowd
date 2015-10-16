@@ -27,8 +27,7 @@ class Client < ActiveRecord::Base
 
   ACTIVE_STATUS = 1
   INACTIVE_STATUS = 0
-  
-  # validates :first_name, :last_name, presence: true
+
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, presence: true, uniqueness: true
@@ -41,6 +40,8 @@ class Client < ActiveRecord::Base
   has_many :client_payments
   has_many :credit_cards
   belongs_to :primary_card, class_name: 'CreditCard'
+
+  before_save :downcase_email
 
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')

@@ -79,4 +79,17 @@ RSpec.describe Designer do
     expect(designer.name).to eq('Wolfgang Von Strucker')
   end
 
+  describe 'saving' do
+
+    context 'when email has uppercase characters' do
+      let(:email) { 'UPPER.email@example.com' }
+
+      it 'saves email in lower case' do
+        designer.update_attributes!(email: email)
+        expect(designer.reload.email).to eq email.downcase
+      end
+    end
+
+  end
+
 end

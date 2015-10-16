@@ -72,4 +72,17 @@ RSpec.describe Client do
     expect(saved_client.primary_card).to eq(credit_card1)
   end
 
+  describe 'saving' do
+
+    context 'when email has uppercase characters' do
+      let(:email) { 'UPPER.email@example.com' }
+
+      it 'saves email in lower case' do
+        client.update_attributes!(email: email)
+        expect(client.reload.email).to eq email.downcase
+      end
+    end
+
+  end
+
 end
