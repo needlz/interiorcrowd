@@ -34,6 +34,8 @@ ActiveAdmin.register Client do
         link_to 'Credit card #' + credit_card.id.to_s, admin_credit_card_path(credit_card)
       }.join("<br />").html_safe
     end
+    column :first_contest_created_at
+    column :latest_contest_created_at
     column :created_at
     column :email_opt_in
     actions
