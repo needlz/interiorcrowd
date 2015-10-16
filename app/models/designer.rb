@@ -26,7 +26,7 @@
 
 class Designer < ActiveRecord::Base
   include User
-  validates  :email, :first_name, :last_name, presence: true
+  validates :email, :first_name, :last_name, presence: true
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
   validates :email, uniqueness: true
@@ -38,6 +38,8 @@ class Designer < ActiveRecord::Base
   has_many :designer_invite_notifications, foreign_key: :user_id
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
+
+  before_save :downcase_email
 
   scope :active, -> { where(active: true) }
 

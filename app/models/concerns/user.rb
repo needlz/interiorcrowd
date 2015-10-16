@@ -30,6 +30,10 @@ module User
     end
   end
 
+  def downcase_email
+    self.email = self.email.downcase if self.email
+  end
+
   def name
     "#{ first_name } #{ last_name }"
   end
