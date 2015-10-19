@@ -12,7 +12,7 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
                                   admin_client_path(client)) + ' ' + contest.project_name + " (##{contest.id})"
       full_contest_name.html_safe
     end
-    column 'Date' do |contest|
+    column 'Start Date' do |contest|
       contest.submission_started_at
     end
     column 'Designers' do |contest|
@@ -37,4 +37,10 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       end
     end
   end
+
+  filter :id, label: 'Contest ID'
+  filter :client
+  filter :project_name
+  filter :submission_started_at, label: 'Start Date'
+  filter :finished_at, label: 'End Date'
 end
