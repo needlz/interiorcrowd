@@ -3,5 +3,11 @@
 
 .clearfix
 %br
-%span.save-button.button.btn.btn-primary
-  = t('client_center.attribute_save_button')
+.hidden-xs
+  %span.save-button.button.btn.btn-primary
+    = t('client_center.attribute_save_button')
+.clearfix.mobileButtons.visible-xs
+  .save-button.button.btn.greenButton
+    = t('client_center.attribute_save_button')
+  .cancel-button.button.btn.greyButton
+    = t('client_center.attribute_cancel_button')

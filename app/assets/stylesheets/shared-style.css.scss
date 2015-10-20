@@ -1150,6 +1150,26 @@ div.form-selector {
   border: 1px solid #e1e1e1;
   border-radius: 10px;
   margin: 40px 50px 60px;
+
+  .mobileButtons {
+    .button{
+      width: 45%;
+    }
+
+    .cancel-button{
+      float: right;
+    }
+  }
+
+  .preview{
+    position: relative;
+
+    > .edit-button, > .cancel-button{
+      position: absolute;
+      right: 20px;
+      z-index: 1;
+    }
+  }
 }
 
 .briefEditingBox .row {
@@ -1159,7 +1179,6 @@ div.form-selector {
 .briefEditingBox .row .title p {
   margin: 0px;
   font-size: 18px;
-  padding-left: 20px;
 }
 
 .briefEditingBox .row .attribute-form p {
@@ -1174,10 +1193,6 @@ div.form-selector {
   margin: 0px;
   font-family: 'AvenirLTStd-Light';
   font-size: 16px;
-}
-
-.briefEditingBox .row .edit-button, .briefEditingBox .row .cancel-button {
-  margin-right: 15px;
 }
 
 @media(max-width: 1200px) {
@@ -4914,4 +4929,14 @@ p.product-list-reminder {
     font-family: 'Austin Web';
   }
 
+}
+
+.greenButton{
+  color: white;
+  background-color: #409863;
+}
+
+.greyButton{
+  color: white;
+  background-color: #A9A9A9;
 }
