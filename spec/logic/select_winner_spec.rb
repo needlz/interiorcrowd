@@ -31,7 +31,7 @@ RSpec.describe SelectWinner do
     end.to change{ DesignerWinnerNotification.count }.by(1)
   end
 
-  it 'rollbacks the transaction when error occured during performing' do
+  it 'rollbacks the transaction when error occurred during performing' do
     contest.update_attributes(status: 'closed')
     expect do
       select_winner = SelectWinner.new(contest_request)

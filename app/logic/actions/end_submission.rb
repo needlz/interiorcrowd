@@ -1,7 +1,7 @@
 class EndSubmission < EndMilestone
 
   def perform
-    if contest.requests.submitted.count < 3
+    if contest.requests.submitted.count < 1
       Contest.transaction do
         contest.close!
         contest.update_attributes(finished_at: Time.now)
