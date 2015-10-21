@@ -41,10 +41,8 @@ ActiveAdmin.register Client do
     actions
   end
 
-  controller do
+  extend ActiveAdminExtensions::User
 
-    include ActiveAdminExtensions::UserController
-
-  end
+  extend_user
 
 end
