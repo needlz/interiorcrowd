@@ -11,6 +11,7 @@ class @ConceptBoardUploader
           @saveChange()
           CommentsBlock.fitCommentsArea()
         theme: DefaultThumbsTheme
+        dropZone: $('.concept-board.dropZone')
       I18n: options.i18n
       single: options.single
       uploading:

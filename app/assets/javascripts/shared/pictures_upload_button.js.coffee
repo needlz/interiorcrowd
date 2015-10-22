@@ -1,5 +1,7 @@
 class @PicturesUploadButton
   @init: (options)->
+    $fileInput = $(options.fileinputSelector)
+
     $(options.uploadButtonSelector).click (event)=>
       event.preventDefault()
       $(options.fileinputSelector).focus().click()
@@ -14,6 +16,7 @@ class @PicturesUploadButton
           $(options.uploadButtonSelector).text(options.I18n.upload_button)
           options.uploading.onUploaded(event) if options.uploading
       single: options.single
+      fileInput: $fileInput
     )
 
 class @ExamplesUploader
@@ -25,6 +28,7 @@ class @ExamplesUploader
         container: '#image_display'
         selector: '#design_style_image_id'
         theme: RemovableThumbsTheme
+        dropZone: $('.design-style-options .example-pictures')
       I18n: I18n
 
 class @SpacePicturesUploader
@@ -36,4 +40,5 @@ class @SpacePicturesUploader
         container: '#image_display'
         selector: '#design_space_image_id'
         theme: RemovableThumbsTheme
+        dropZone: $('.space-pictures .thumbs')
       I18n: i18n
