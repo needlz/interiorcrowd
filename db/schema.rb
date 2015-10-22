@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150909201641) do
+ActiveRecord::Schema.define(version: 20151015145432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "active_admin_comments", force: true do |t|
-    t.string   "namespace"
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace",     limit: 255
     t.text     "body"
-    t.string   "resource_id",   null: false
-    t.string   "resource_type", null: false
+    t.string   "resource_id",   limit: 255, null: false
+    t.string   "resource_type", limit: 255, null: false
     t.integer  "author_id"
-    t.string   "author_type"
+    t.string   "author_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -31,13 +31,13 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
-  create_table "admin_users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                      default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
@@ -49,23 +49,23 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
-  create_table "appeals", force: true do |t|
-    t.string "name"
+  create_table "appeals", force: :cascade do |t|
+    t.string "name", limit: 255
   end
 
-  create_table "beta_subscribers", force: true do |t|
+  create_table "beta_subscribers", force: :cascade do |t|
     t.text     "email"
-    t.string   "role"
+    t.string   "role",       limit: 255
     t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "client_payments", force: true do |t|
+  create_table "client_payments", force: :cascade do |t|
     t.integer  "client_id"
-    t.string   "payment_status",   default: "pending"
+    t.string   "payment_status",   limit: 255, default: "pending"
     t.text     "last_error"
-    t.string   "stripe_charge_id"
+    t.string   "stripe_charge_id", limit: 255
     t.integer  "contest_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -78,32 +78,32 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "client_payments", ["contest_id"], name: "index_client_payments_on_contest_id", using: :btree
   add_index "client_payments", ["credit_card_id"], name: "index_client_payments_on_credit_card_id", using: :btree
 
-  create_table "clients", force: true do |t|
+  create_table "clients", force: :cascade do |t|
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.string   "password"
+    t.string   "password",                  limit: 255
     t.text     "address"
     t.text     "state"
     t.integer  "zip"
-    t.integer  "status",                       default: 1
+    t.integer  "status",                                default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
     t.text     "city"
     t.text     "phone_number"
-    t.string   "plain_password"
-    t.string   "stripe_customer_id"
-    t.integer  "facebook_user_id",   limit: 8
+    t.string   "plain_password",            limit: 255
+    t.string   "stripe_customer_id",        limit: 255
+    t.integer  "facebook_user_id",          limit: 8
     t.integer  "primary_card_id"
-    t.boolean  "email_opt_in",                   default: true
+    t.boolean  "email_opt_in",                          default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
 
-  create_table "clients_promocodes", id: false, force: true do |t|
+  create_table "clients_promocodes", id: false, force: :cascade do |t|
     t.integer "promocode_id", null: false
     t.integer "client_id",    null: false
   end
@@ -111,17 +111,17 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "clients_promocodes", ["client_id", "promocode_id"], name: "index_clients_promocodes_on_client_id_and_promocode_id", using: :btree
   add_index "clients_promocodes", ["promocode_id", "client_id"], name: "index_clients_promocodes_on_promocode_id_and_client_id", using: :btree
 
-  create_table "concept_board_comments", force: true do |t|
+  create_table "concept_board_comments", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "text"
     t.integer  "contest_request_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
+    t.string   "role",               limit: 255
     t.integer  "contest_note_id"
   end
 
-  create_table "contest_notes", force: true do |t|
+  create_table "contest_notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "contest_id"
     t.datetime "created_at"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 20150909201641) do
 
   add_index "contest_notes", ["contest_id"], name: "index_contest_notes_on_contest_id", using: :btree
 
-  create_table "contest_requests", force: true do |t|
+  create_table "contest_requests", force: :cascade do |t|
     t.integer  "designer_id"
     t.integer  "contest_id"
     t.text     "designs"
@@ -140,47 +140,51 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
-    t.string   "answer"
-    t.string   "status",             default: "draft"
+    t.string   "answer",             limit: 255
+    t.string   "status",             limit: 255, default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
-    t.string   "token"
+    t.string   "token",              limit: 255
+    t.datetime "submitted_at"
+    t.datetime "won_at"
   end
 
-  create_table "contests", force: true do |t|
+  create_table "contests", force: :cascade do |t|
     t.text     "desirable_colors"
     t.text     "undesirable_colors"
-    t.string   "space_budget"
+    t.string   "space_budget",                    limit: 255
     t.text     "feedback"
     t.text     "project_name"
     t.integer  "budget_plan"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "space_length",                    precision: 10, scale: 2, default: 0.0
-    t.decimal  "space_width",                     precision: 10, scale: 2, default: 0.0
-    t.decimal  "space_height",                    precision: 10, scale: 2
+    t.decimal  "space_length",                                precision: 10, scale: 2, default: 0.0
+    t.decimal  "space_width",                                 precision: 10, scale: 2, default: 0.0
+    t.decimal  "space_height",                                precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
-    t.string   "status",                                                   default: "brief_pending"
+    t.string   "status",                                                               default: "incomplete"
     t.datetime "phase_end"
-    t.string   "theme"
-    t.string   "space"
-    t.string   "accessories"
-    t.string   "space_changes"
-    t.string   "shop"
-    t.string   "accommodate_children"
-    t.string   "accommodate_pets"
+    t.string   "theme",                           limit: 255
+    t.string   "space",                           limit: 255
+    t.string   "accessories",                     limit: 255
+    t.string   "space_changes",                   limit: 255
+    t.string   "shop",                            limit: 255
+    t.string   "accommodate_children",            limit: 255
+    t.string   "accommodate_pets",                limit: 255
     t.text     "retailer"
     t.text     "elements_to_avoid"
     t.integer  "entertaining"
     t.integer  "durability"
     t.integer  "preferred_retailers_id"
-    t.boolean  "designers_explore_other_colors",                           default: false
-    t.boolean  "designers_only_use_these_colors",                          default: false
+    t.boolean  "designers_explore_other_colors",                                       default: false
+    t.boolean  "designers_only_use_these_colors",                                      default: false
+    t.datetime "finished_at"
+    t.datetime "submission_started_at"
   end
 
-  create_table "contests_appeals", force: true do |t|
+  create_table "contests_appeals", force: :cascade do |t|
     t.integer "contest_id"
     t.integer "appeal_id"
     t.text    "reason"
@@ -190,58 +194,58 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
-  create_table "contests_images", force: true do |t|
+  create_table "contests_images", force: :cascade do |t|
     t.integer "contest_id"
     t.integer "image_id"
     t.integer "kind"
   end
 
-  create_table "contests_promocodes", force: true do |t|
+  create_table "contests_promocodes", force: :cascade do |t|
     t.integer  "contest_id",   null: false
     t.integer  "promocode_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "credit_cards", force: true do |t|
+  create_table "credit_cards", force: :cascade do |t|
     t.integer  "client_id"
     t.text     "name_on_card"
-    t.string   "card_type"
+    t.string   "card_type",          limit: 255
     t.text     "address"
-    t.string   "state"
-    t.string   "zip"
+    t.string   "state",              limit: 255
+    t.string   "zip",                limit: 255
     t.text     "city"
     t.integer  "cvc"
     t.integer  "ex_month"
     t.integer  "ex_year"
     t.integer  "last_4_digits"
-    t.string   "stripe_card_status", default: "pending"
+    t.string   "stripe_card_status", limit: 255, default: "pending"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "stripe_id"
+    t.string   "stripe_id",          limit: 255
   end
 
-  create_table "delayed_jobs", force: true do |t|
-    t.integer  "priority",           default: 0, null: false
-    t.integer  "attempts",           default: 0, null: false
-    t.text     "handler",                        null: false
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",                       default: 0, null: false
+    t.integer  "attempts",                       default: 0, null: false
+    t.text     "handler",                                    null: false
     t.text     "last_error"
     t.datetime "run_at"
     t.datetime "locked_at"
     t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
+    t.string   "locked_by",          limit: 255
+    t.string   "queue",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "contest_id"
-    t.string   "image_type"
+    t.string   "image_type",         limit: 255
     t.integer  "contest_request_id"
     t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
-  create_table "design_categories", force: true do |t|
+  create_table "design_categories", force: :cascade do |t|
     t.text     "name"
     t.integer  "pos"
     t.integer  "price"
@@ -250,7 +254,7 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.datetime "updated_at"
   end
 
-  create_table "design_spaces", force: true do |t|
+  create_table "design_spaces", force: :cascade do |t|
     t.text     "name"
     t.integer  "pos"
     t.integer  "parent_id"
@@ -259,16 +263,16 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.datetime "updated_at"
   end
 
-  create_table "designer_levels", force: true do |t|
+  create_table "designer_levels", force: :cascade do |t|
     t.integer "level"
     t.text    "name"
   end
 
-  create_table "designers", force: true do |t|
+  create_table "designers", force: :cascade do |t|
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.string   "password"
+    t.string   "password",                limit: 255
     t.text     "zip"
     t.text     "ex_links"
     t.text     "ex_document_ids"
@@ -278,101 +282,101 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.text     "portfolio_path"
     t.text     "phone_number"
     t.text     "plain_password"
-    t.string   "state"
+    t.string   "state",                   limit: 255
     t.text     "address"
     t.text     "city"
-    t.boolean  "active",                            default: true
+    t.boolean  "active"
     t.integer  "facebook_user_id",        limit: 8
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree
 
-  create_table "example_links", force: true do |t|
+  create_table "example_links", force: :cascade do |t|
     t.text     "url"
     t.integer  "portfolio_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "final_note_to_designers", force: true do |t|
+  create_table "final_note_to_designers", force: :cascade do |t|
     t.text     "text"
     t.integer  "designer_notification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "image_items", force: true do |t|
+  create_table "image_items", force: :cascade do |t|
     t.text     "name"
     t.integer  "contest_request_id"
     t.integer  "image_id"
     t.text     "text"
     t.text     "brand"
     t.text     "link"
-    t.string   "mark"
+    t.string   "mark",                 limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "kind"
+    t.string   "kind",                 limit: 255
     t.text     "dimensions"
     t.text     "price"
-    t.string   "status",               default: "temporary"
-    t.boolean  "final",                default: false
+    t.string   "status",               limit: 255, default: "temporary"
+    t.boolean  "final",                            default: false
     t.integer  "temporary_version_id"
-    t.string   "phase",                default: "collaboration"
+    t.string   "phase",                limit: 255, default: "collaboration"
   end
 
-  create_table "image_links", force: true do |t|
+  create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
     t.text    "url"
   end
 
-  create_table "images", force: true do |t|
-    t.string   "image"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.string   "image_file_size"
+  create_table "images", force: :cascade do |t|
+    t.string   "image",              limit: 255
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.string   "image_file_size",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "contest_id"
-    t.string   "kind"
+    t.string   "kind",               limit: 255
     t.integer  "designer_id"
     t.integer  "portfolio_id"
-    t.string   "uploader_role"
+    t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
   end
 
-  create_table "lookbook_details", force: true do |t|
+  create_table "lookbook_details", force: :cascade do |t|
     t.integer  "lookbook_id"
     t.integer  "image_id"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phase"
+    t.string   "phase",       limit: 255
   end
 
-  create_table "lookbooks", force: true do |t|
+  create_table "lookbooks", force: :cascade do |t|
     t.integer  "contest_id"
     t.text     "feedback"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "outbound_emails", force: true do |t|
-    t.string   "mailer_method"
+  create_table "outbound_emails", force: :cascade do |t|
+    t.string   "mailer_method",          limit: 255
     t.text     "mail_args"
-    t.string   "status",                 default: "not yet sent"
+    t.string   "status",                 limit: 255, default: "not yet sent"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "sent_to_mail_server_at"
   end
 
-  create_table "portfolio_awards", force: true do |t|
+  create_table "portfolio_awards", force: :cascade do |t|
     t.integer  "portfolio_id"
     t.text     "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "portfolios", force: true do |t|
+  create_table "portfolios", force: :cascade do |t|
     t.integer  "designer_id",                             null: false
     t.integer  "years_of_experience"
     t.boolean  "education_gifted"
@@ -404,7 +408,7 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.datetime "updated_at"
   end
 
-  create_table "preferred_retailers", force: true do |t|
+  create_table "preferred_retailers", force: :cascade do |t|
     t.boolean  "anthropologie_home",   default: false
     t.boolean  "ballard_designs",      default: false
     t.boolean  "crate_and_barrel",     default: false
@@ -425,17 +429,17 @@ ActiveRecord::Schema.define(version: 20150909201641) do
     t.datetime "updated_at"
   end
 
-  create_table "promocodes", force: true do |t|
+  create_table "promocodes", force: :cascade do |t|
     t.text     "promocode"
     t.text     "display_message"
-    t.boolean  "active",            default: true
-    t.integer  "discount_cents",    default: 0,     null: false
-    t.string   "discount_currency", default: "USD", null: false
+    t.boolean  "active",                        default: true
+    t.integer  "discount_cents",                default: 0,     null: false
+    t.string   "discount_currency", limit: 255, default: "USD", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "reviewer_feedbacks", force: true do |t|
+  create_table "reviewer_feedbacks", force: :cascade do |t|
     t.text     "text"
     t.integer  "invitation_id"
     t.datetime "created_at"
@@ -444,7 +448,7 @@ ActiveRecord::Schema.define(version: 20150909201641) do
 
   add_index "reviewer_feedbacks", ["invitation_id"], name: "index_reviewer_feedbacks_on_invitation_id", using: :btree
 
-  create_table "reviewer_invitations", force: true do |t|
+  create_table "reviewer_invitations", force: :cascade do |t|
     t.text     "username"
     t.text     "email"
     t.integer  "contest_id"
@@ -455,8 +459,8 @@ ActiveRecord::Schema.define(version: 20150909201641) do
 
   add_index "reviewer_invitations", ["contest_id"], name: "index_reviewer_invitations_on_contest_id", using: :btree
 
-  create_table "sessions", force: true do |t|
-    t.string   "session_id", null: false
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", limit: 255, null: false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -465,41 +469,24 @@ ActiveRecord::Schema.define(version: 20150909201641) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
-  create_table "sounds", force: true do |t|
+  create_table "sounds", force: :cascade do |t|
     t.integer  "contest_request_id"
-    t.string   "audio_file_name"
-    t.string   "audio_content_type"
+    t.string   "audio_file_name",    limit: 255
+    t.string   "audio_content_type", limit: 255
     t.integer  "audio_file_size"
     t.datetime "audio_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "taggings", force: true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context"
-    t.datetime "created_at"
-  end
-
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
-
-  create_table "tags", force: true do |t|
-    t.string "name"
-  end
-
-  create_table "user_notifications", force: true do |t|
+  create_table "user_notifications", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "type"
+    t.string   "type",                     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "contest_id"
     t.integer  "contest_request_id"
-    t.boolean  "read",                     default: false
+    t.boolean  "read",                                 default: false
     t.integer  "contest_comment_id"
     t.integer  "concept_board_comment_id"
   end

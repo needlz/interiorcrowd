@@ -8,6 +8,7 @@ class FinishContestRequest
     ActiveRecord::Base.transaction do
       contest_request.finish!
       contest_request.contest.finish!
+      contest_request.contest.update_attributes(finished_at: Time.now)
 
       notify_client
     end
