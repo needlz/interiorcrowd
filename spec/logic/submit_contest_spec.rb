@@ -26,11 +26,36 @@ RSpec.describe SubmitContest do
     context 'on staging server' do
       before do
         allow(Settings).to receive(:payment_enabled){ true }
+        contest
       end
 
       it 'does not submit contest on creation' do
-        contest
         expect(contest.status).to eq 'brief_pending'
+      end
+
+      context 'contest was payed' do
+        before do
+          allow(contest).to receive(:payed?){ true }
+        end
+
+        it 'submits contest' do
+          submit_contest.try_perform
+          expect(submit_contest.performed?).to be_truthy
+          contest.reload
+          expect(contest.status).to eq 'submission'
+        end
+
+        it 'saves date of submission start' do
+          submit_contest.try_perform
+          expect(contest.reload.submission_started_at).to be_within(5.seconds).of(Time.current)
+        end
+
+        it 'discards the transaction when contest has incorrect status' do
+          contest.update_attributes(status: 'submission')
+          submit_contest.try_perform
+          expect(submit_contest.performed?).to be_falsey
+          expect(contest.reload.submission_started_at).to be_nil
+        end
       end
     end
   end
