@@ -9,6 +9,7 @@
           %p= comment_view.sub_name
         .col-xs-6
           %p.comment-time= comment_view.ago_text
-      %p.comment-text.hidden-xs= comment_view.text
+      %div.comment-text.hidden-xs= auto_link(simple_format(comment_view.text), html: { target: '_blank' }).html_safe
     .col-xs-12
-      %p.comment-text.visible-xs= comment_view.text
+      %div.comment-text.visible-xs= auto_link(simple_format(comment_view.text), html: { target: '_blank' }).html_safe
+      

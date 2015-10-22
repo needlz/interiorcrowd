@@ -3,6 +3,6 @@
     %p
       = note.name
     %p
-      = note.text.html_safe
+      = auto_link(note.text, html: { target: '_blank' }).html_safe
       %span= note.ago_text
   %li.delimiter
