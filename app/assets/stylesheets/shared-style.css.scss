@@ -1735,6 +1735,7 @@ h3.exploreMore {
   color: #231f20;
   padding-left: 15px;
   font-weight: 700;
+
 }
 
 .promotionCodeApply input[type=text] {
@@ -1743,7 +1744,7 @@ h3.exploreMore {
   margin-right: 5%;
 }
 
-.promotionCodeApply button {
+.promotionCodeApply a {
   width: 30%;
   float: left;
   color: #FFF;
@@ -1752,6 +1753,7 @@ h3.exploreMore {
   background: #a9a9a9;
   font-family: 'AvenirLTStd-Medium';
   font-size: 18px;
+  text-align: center;
 }
 
 @media(max-width: 1200px) {
@@ -1842,9 +1844,8 @@ h3.exploreMore {
     float: none;
     margin-right: 0%;
   }
-  .promotionCodeApply button {
+  .promotionCodeApply a {
     width: 100%;
-    float: none;
     margin-top: 20px;
   }
 }

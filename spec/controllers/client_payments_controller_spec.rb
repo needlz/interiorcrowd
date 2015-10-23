@@ -30,18 +30,18 @@ RSpec.describe ClientPaymentsController do
           end
 
           it 'creates payment' do
-            post :create, contest_id: contest.id
+            post :create, contest_id: contest.id, client_agree: 'yes'
             expect(contest.client_payment.last_error).to be_nil
             expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
           end
 
           it 'does not log any error' do
             expect(ErrorsLogger).to_not receive(:log)
-            post :create, contest_id: contest.id
+            post :create, contest_id: contest.id, client_agree: 'yes'
           end
 
           it 'sets last_contest_created_at for client' do
-            post :create, contest_id: contest.id
+            post :create, contest_id: contest.id, client_agree: 'yes'
             expect(client.reload.latest_contest_created_at).to be_within(5.seconds).of(Time.current)
           end
         end
@@ -54,7 +54,7 @@ RSpec.describe ClientPaymentsController do
           it 'does not create payment' do
             expect(contest.promocodes.count).to eq(0)
 
-            post :create, contest_id: contest.id, client: { promocode: promocode.promocode }
+            post :create, contest_id: contest.id, client: { promocode: promocode.promocode }, client_agree: 'yes'
 
             expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
             expect(contest.client_payment.present?).to be_falsey
@@ -64,11 +64,11 @@ RSpec.describe ClientPaymentsController do
 
           it 'logs error' do
             expect(ErrorsLogger).to receive(:log)
-            post :create, contest_id: contest.id
+            post :create, contest_id: contest.id, client_agree: 'yes'
           end
 
           it 'does not set contest_created_at for contests' do
-            post :create, contest_id: contest.id
+            post :create, contest_id: contest.id, client_agree: 'yes'
             expect(client.reload.latest_contest_created_at).to be_nil
           end
         end
@@ -80,7 +80,7 @@ RSpec.describe ClientPaymentsController do
         end
 
         it 'does not create payment' do
-          post :create, contest_id: contest.id, client: { promocode: promocode.promocode }
+          post :create, contest_id: contest.id, client: { promocode: promocode.promocode }, client_agree: 'yes'
 
           expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
           expect(contest.client_payment.present?).to be_falsey
@@ -91,6 +91,8 @@ RSpec.describe ClientPaymentsController do
     end
 
     context 'when credit card passed' do
+      let(:params) { { contest_id: contest.id, credit_card: credit_card_attributes } }
+
       before do
         mock_stripe_successful_charge
         mock_stripe_customer_registration
@@ -104,7 +106,7 @@ RSpec.describe ClientPaymentsController do
         end
 
         it 'does not create payment' do
-          post :create, contest_id: contest.id, credit_card: credit_card_attributes
+          post :create, params.merge(client_agree: 'yes')
           expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
           expect(contest.reload.client_payment).to be_nil
         end
@@ -113,7 +115,7 @@ RSpec.describe ClientPaymentsController do
       context 'when client has no other cards' do
         context 'when contest not submitted yet' do
           it 'creates payment' do
-            post :create, contest_id: contest.id, credit_card: credit_card_attributes
+            post :create, params.merge(client_agree: 'yes')
             expect(contest.client_payment.last_error).to be_nil
             expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
           end
@@ -124,11 +126,26 @@ RSpec.describe ClientPaymentsController do
             contest.update_attributes!(status: 'submission')
           end
 
-          it 'creates payment' do
-            post :create, contest_id: contest.id, credit_card: credit_card_attributes
-            expect(contest.client_payment.last_error).to be_nil
-            expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+          context 'when client has agreed with terms of use' do
+            before do
+              params.merge!(client_agree: 'yes')
+            end
+
+            it 'creates payment' do
+              post :create, params
+              expect(contest.client_payment.last_error).to be_nil
+              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+            end
           end
+
+          context 'when client has not agreed with terms of use' do
+            it 'does not create payment' do
+              post :create, params
+              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+              expect(contest.reload.client_payment).to be_nil
+            end
+          end
+
         end
       end
     end
