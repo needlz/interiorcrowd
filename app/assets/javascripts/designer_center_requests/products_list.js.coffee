@@ -194,6 +194,7 @@ $ ->
       fileinputSelector: $addButton.find('input[type="file"]')
       uploadButtonSelector: $addButton.find('a')
       thumbs:
+        dropZone: $addButton
         selector: $addButton.find('#image_item_image_id')
       I18n: I18n
       single: true

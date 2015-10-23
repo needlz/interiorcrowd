@@ -1,18 +1,20 @@
+$(document).bind('drop dragover', (e)->
+  e.preventDefault()
+)
+
 $.fn.initUploader = (options)->
+  $inputWithoutForm = @.clone()
   $.extend(
     options,
     dataType: 'json'
     url: uploadifyUploader
     type: 'POST'
+    formData: (form)->
+      []
+    replaceFileInput: false # the plugin recreates the input element after each upload, and so events bound to the original input will be lost.
   )
-  @.fileupload
-    replaceFileInput: false
-    add: (event, data)=>
-      # by default, script uses native form of input by default, this causes side effects
-      $inputWithoutForm = $(@).clone()
-      $inputWithoutForm.fileupload(options)
-      $inputWithoutForm.fileupload('add', { files: data.files })
-      $(@).val('')
+  @.fileupload(options)
+  @.val('')
 
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
@@ -26,10 +28,11 @@ class Uploader
   init: ()->
     @$container = $(@options.thumbs.container)
     @$imageIds = $(@options.thumbs.selector)
-    themeClass = @options.thumbs.theme || DefaultThumbsTheme
-    @thumbsTheme = new themeClass(@$container, @$imageIds)
-    @thumbsTheme.onRemoved = @options.thumbs.onRemoved
-    @thumbsTheme.init()
+    themeClass = @options.thumbs.theme
+    if themeClass
+      @thumbsTheme = new themeClass(@$container, @$imageIds)
+      @thumbsTheme.onRemoved = @options.thumbs.onRemoved
+      @thumbsTheme.init()
 
     @bindUploadScript()
 
@@ -37,7 +40,11 @@ class Uploader
     uploadOptions = {}
     $.extend(
       uploadOptions
-      done: @onUploaded
+      {
+        done: @onUploaded
+        dropZone: @options.thumbs.dropZone || null
+        fileInput: @options.fileInput
+      }
       @options.uploadify
     )
 
@@ -48,13 +55,21 @@ class Uploader
       imageUrl = file.url
       imageId = file.id
       if @options.single
-        @thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
-        @$imageIds.val(imageId)
+        @onSingleFileUploaded(imageUrl, imageId)
       else
-        @thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
-        previousIds = ''
-        previousIds = @$imageIds.val() + ',' if @$imageIds.val()
-        @$imageIds.val(previousIds + imageId)
+        @onMultipleFilesUploaded(imageUrl, imageId)
+
+  onSingleFileUploaded: (imageUrl, imageId)->
+    if @thumbsTheme
+      @thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
+    @$imageIds.val(imageId)
+
+  onMultipleFilesUploaded: (imageUrl, imageId)->
+    if @thumbsTheme
+      @thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
+    previousIds = ''
+    previousIds = @$imageIds.val() + ',' if @$imageIds.val()
+    @$imageIds.val(previousIds + imageId)
 
 class @ThumbsTheme
 

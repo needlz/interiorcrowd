@@ -13,6 +13,7 @@
     - if path
       .col-md-3.novice.no-padding-left.thumb.relative{ data: { id: portfolio.personal_picture.id } }
         = render partial: 'contests/options/example_picture_thumb', locals: { src: path }
+    .clearfix
   .clearfix
   .col-md-6.no-x-padding.marg-top20
     %input#personal_picture.hidden{ name: 'image[image]', type: 'file' }
