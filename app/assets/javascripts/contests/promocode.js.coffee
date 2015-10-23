@@ -22,6 +22,7 @@ class @Promocode
       if code
         @requestPromocode(code)
       else
+        @applyPromocodeToPrice(0)
         @bindApplyPromocodeButton()
 
   @bindPromocodeInput: ->
