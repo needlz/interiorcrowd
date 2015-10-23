@@ -18,14 +18,20 @@ class @Promocode
     $applyButton = $(@applyButtonSelector)
     $applyButton.one 'click', (event)=>
       event.preventDefault()
-      @requestPromocode()
+      code = @code()
+      if code
+        @requestPromocode(code)
+      else
+        @bindApplyPromocodeButton()
 
   @bindPromocodeInput: ->
     $(@inputSelector).change =>
       $(@messagesSelector).hide()
 
-  @requestPromocode: ->
-    code = trimedVal($(@inputSelector))
+  @code: ->
+    trimedVal($(@inputSelector))
+
+  @requestPromocode: (code)->
     $.ajax(
       data: {
         code: code
@@ -35,9 +41,11 @@ class @Promocode
       dataType: 'json'
       success: (response)=>
         @processPromocodeResponse(response)
+        @bindApplyPromocodeButton()
       error: =>
         $(@messagesSelector).hide()
         $(@requestErrorMsgSelector).show()
+        @bindApplyPromocodeButton()
     )
 
   @processPromocodeResponse: (response)->
@@ -47,7 +55,7 @@ class @Promocode
       @applyPromocodeToPrice(response.discount)
     else
       @notifyPromocodeInvalid()
-    @bindApplyPromocodeButton()
+      @applyPromocodeToPrice(0)
 
   @hidePreviousMessages: ->
     $(@messagesSelector).hide()

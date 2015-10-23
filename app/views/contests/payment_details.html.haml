@@ -5,6 +5,8 @@
   = javascript_include_tag 'i18n'
   = render 'shared/setup_stripe_js'
   :javascript
+    signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
+
     $(function(){
       PaymentPage.init()
     })

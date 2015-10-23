@@ -37,8 +37,6 @@ class ClientPaymentsController < ApplicationController
   end
 
   def do_payment
-
-
     if params[:credit_card]
       raise('The client already has credit cards') if @client.credit_cards.present?
       add_card = AddCreditCard.new(client: @client, card_attributes: new_credit_card_params, set_as_primary: true)
