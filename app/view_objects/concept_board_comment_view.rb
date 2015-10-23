@@ -19,6 +19,10 @@ class ConceptBoardCommentView < CommentView
         I18n.t('board_comments.ago')
   end
 
+  def date
+    comment.created_at.in_time_zone.strftime('%b %d at %I:%M %P')
+  end
+
   def name
     if comment.role == spectator.role
       I18n.t('board_comments.me')

@@ -21,7 +21,7 @@ class DesignerCenterRequestsController < ApplicationController
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
                                                                          contest_request: @request,
                                                                          view_context: view_context)
-    @show_page = ConceptBoardPreview.new({
+    @show_page = ConceptBoardAuthorView.new({
       contest_request: @request,
       preferred_view: params[:view],
       view_context: view_context

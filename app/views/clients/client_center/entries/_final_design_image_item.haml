@@ -4,12 +4,13 @@
       .col-lg-6.col-sm-7.itemBoxLeft{ style: 'height: 264px;' }
         .image-container{ style: "background-image: #{ css_url(image_item.thumb_url) }; height: 100%; background-size: contain; background-repeat: no-repeat; background-position: center;" }
       .col-lg-6.col-sm-5.itemBoxRight{ style: 'height: 264px;' }
-        %h4= image_item.name
-        %p= image_item.brand
-        %p= image_item.dimensions
-        %p= image_item.price
-        = link_to 'SHOP NOW', image_item.link_href,
-          target: '_blank',
-          class: "#{ tracked_link }",
-          data: { name: 'Final design - product item link' }
+        %h4.name= image_item.name
+        %p.brand= image_item.brand
+        %p.dimensions= image_item.dimensions
+        %p.price= image_item.price
+        - if image_item.link_href.present?
+          = link_to 'SHOP NOW', image_item.link_href,
+            target: '_blank',
+            class: "#{ tracked_link } link",
+            data: { name: 'Final design - product item link' }
         .clearfix
