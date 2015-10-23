@@ -4,7 +4,12 @@ class ClientPaymentsController < ApplicationController
 
   def create
     begin
-      @contest = @client.contests.not_payed.find(params[:contest_id])
+      @contest = @client.contests.not_payed.find_by_id(params[:contest_id])
+      unless @contest
+        if @already_charged_contest = @client.contests.find(params[:contest_id])
+          return redirect_to payment_summary_contests_path(id: @already_charged_contest.id)
+        end
+      end
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
