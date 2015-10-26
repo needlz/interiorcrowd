@@ -9,6 +9,6 @@
           %p= comment_view.sub_name
         .col-xs-6
           %p.comment-time= comment_view.ago_text
-      %p.comment-text.hidden-xs= comment_view.text
+      %div.comment-text.hidden-xs= format_comment(comment_view.text)
     .col-xs-12
-      %p.comment-text.visible-xs= comment_view.text
+      %div.comment-text.visible-xs= format_comment(comment_view.text)

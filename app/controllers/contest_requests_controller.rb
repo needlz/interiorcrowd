@@ -1,4 +1,5 @@
 class ContestRequestsController < ApplicationController
+  include TextFormatHelper
   before_filter :check_designer, only: [:create, :save_lookbook]
   before_filter :check_client, only: [:answer, :download]
   before_filter :check_contest_owner, only: [:answer, :download]
@@ -19,7 +20,7 @@ class ContestRequestsController < ApplicationController
     return raise_404 unless current_user.can_comment_contest_request?(@request)
     comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
     comment = comment_creation.perform
-    render json: { comment: comment, user_name: current_user.name }
+    render json: { text: format_comment(comment.text), user_name: current_user.name }
   end
 
   def answer
