@@ -76,6 +76,7 @@ class @PortfolioEditor
       uploadButtonSelector: '.uploaded-images .upload-button'
       thumbs:
         container: '#portfolio_pictures_preview .container'
+        dropZone: $('#portfolio_pictures_preview')
         selector: '#portfolio_pictures_ids'
         theme: RemovableThumbsTheme
         onRemoved: @onPictureRemoved
@@ -87,6 +88,7 @@ class @PortfolioEditor
       single: true
       thumbs:
         container: '.personal-picture .thumbs'
+        dropZone: $('.personal-picture .thumbs')
         selector: '.personal-picture #personal_picture_id'
         theme: RemovableThumbsTheme
 

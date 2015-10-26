@@ -2,8 +2,8 @@
   %p= t('client_center.sign_up.add_promocode')
   .col-xs-12
     %label
-      =  text_field_tag 'client[promocode]', '', class: 'form-control', tabindex: 8
-      %button.apply-promocode-button.clickable= t('client_center.sign_up.apply_promocode')
+      = text_field_tag 'client[promocode]', '', class: 'form-control', tabindex: 8
+      %a.apply-promocode-button.clickable= t('client_center.sign_up.apply_promocode')
       .clearfix
       #promocode-error.text-error.promocode-message.soft-hide= t('client_center.sign_up.promocode_invalid')
       #promocode-valid.promocode-message.soft-hide

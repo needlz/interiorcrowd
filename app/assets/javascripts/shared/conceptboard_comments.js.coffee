@@ -33,7 +33,7 @@ class @ConceptboardComment
     @buttonSend.text(@i18n.send)
 
   @newComment: (category, data) ->
-    $('.message-template .comment-text').text(data.comment.text)
+    $('.message-template .comment-text').html(data.text)
     $('.message-template .comment-time').text(@i18n.now)
     $('.message-template .comment-username').text(@i18n.me)
     $category =  $("##{category}")

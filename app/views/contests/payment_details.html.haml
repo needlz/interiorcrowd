@@ -5,6 +5,8 @@
   = javascript_include_tag 'i18n'
   = render 'shared/setup_stripe_js'
   :javascript
+    signupI18n = #{ translations_to_json(['client_center', 'sign_up']) }
+
     $(function(){
       PaymentPage.init()
     })
@@ -47,7 +49,7 @@
       = hidden_field_tag 'contest_id', @contest.id
       %p.iAgreeTerms
         %span.customCheckbox
-          = check_box_tag 'client_agree', 'yes', false, name: '', class: 'hidden'
+          = check_box_tag 'client_agree', 'yes', false, name: 'client_agree', class: 'hidden'
           %label{ for: 'client_agree' }
         = t('client_center.sign_up.i_agree')
         %span.terms-of-use= t('client_center.sign_up.terms_of_use')

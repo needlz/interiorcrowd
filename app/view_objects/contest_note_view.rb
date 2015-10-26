@@ -1,5 +1,6 @@
 class ContestNoteView < CommentView
   include ActionView::Helpers::DateHelper
+  include TextFormatHelper
 
   def attributes
     { text: text,
@@ -7,7 +8,7 @@ class ContestNoteView < CommentView
   end
 
   def text
-    ERB::Util.html_escape(comment.text).split("\n").join("<br/>")
+    format_comment(comment.text)
   end
 
   def ago_text
