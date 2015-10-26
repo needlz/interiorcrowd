@@ -2,7 +2,7 @@
   %li{ class: note.author_role }
     %p
       = note.name
+    = note.text
     %p
-      = auto_link(note.text, html: { target: '_blank' }).html_safe
       %span= note.ago_text
   %li.delimiter

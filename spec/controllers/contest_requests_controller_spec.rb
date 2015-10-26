@@ -159,13 +159,13 @@ RSpec.describe ContestRequestsController do
         expect(response).to be_ok
       end
 
-      it 'asd' do
-        post :add_comment, comment: {text: 'text\nsome_another_text', contest_request_id: request.id}, id: request.id
+      it 'displays the line breaks' do
+        post :add_comment, comment: {text: "text\nsome_another_text", contest_request_id: request.id}, id: request.id
         json = JSON.parse(response.body)
-        expect(json['text']).to include('<p>text\\nsome_another_text</p>')
+        expect(json['text']).to include("<p>text\n<br>some_another_text</p>")
       end
 
-      it 'asdf' do
+      it 'makes links clickable' do
         post :add_comment, comment: {text: 'http://google.com', contest_request_id: request.id}, id: request.id
         json = JSON.parse(response.body)
         expect(json['text']).to include('<p><a target="_blank" href="http://google.com">http://google.com</a></p>')
