@@ -1,5 +1,5 @@
 class ContestRequestsController < ApplicationController
-  include ActionView::Helpers::TextHelper
+  include DesignerCenterHelper
   before_filter :check_designer, only: [:create, :save_lookbook]
   before_filter :check_client, only: [:answer, :download]
   before_filter :check_contest_owner, only: [:answer, :download]
@@ -20,7 +20,7 @@ class ContestRequestsController < ApplicationController
     return raise_404 unless current_user.can_comment_contest_request?(@request)
     comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
     comment = comment_creation.perform
-    render json: { text: extract_formatted_comment(comment), user_name: current_user.name }
+    render json: { text: format_comment(comment.text), user_name: current_user.name }
   end
 
   def answer
@@ -55,10 +55,6 @@ class ContestRequestsController < ApplicationController
   end
 
   private
-
-  def extract_formatted_comment(comment)
-    auto_link(simple_format(comment.text), html: { target: '_blank' }).html_safe
-  end
 
   def check_contest_owner
     @client = Client.find(session[:client_id])

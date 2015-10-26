@@ -1,6 +1,6 @@
 class ContestNoteView < CommentView
   include ActionView::Helpers::DateHelper
-  include ActionView::Helpers::TextHelper
+  include DesignerCenterHelper
 
   def attributes
     { text: text,
@@ -8,7 +8,7 @@ class ContestNoteView < CommentView
   end
 
   def text
-    auto_link(simple_format(comment.text), html: { target: '_blank' }).html_safe
+    format_comment(comment.text)
   end
 
   def ago_text
