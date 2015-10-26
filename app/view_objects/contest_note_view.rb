@@ -1,6 +1,6 @@
 class ContestNoteView < CommentView
   include ActionView::Helpers::DateHelper
-  include DesignerCenterHelper
+  include TextFormatHelper
 
   def attributes
     { text: text,

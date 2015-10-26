@@ -1,5 +1,5 @@
 class ContestRequestsController < ApplicationController
-  include DesignerCenterHelper
+  include TextFormatHelper
   before_filter :check_designer, only: [:create, :save_lookbook]
   before_filter :check_client, only: [:answer, :download]
   before_filter :check_contest_owner, only: [:answer, :download]

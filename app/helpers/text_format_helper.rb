@@ -1,4 +1,4 @@
-module DesignerCenterHelper
+module TextFormatHelper
   extend ActiveSupport::Concern
   include ActionView::Helpers::TextHelper
 
