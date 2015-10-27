@@ -261,6 +261,17 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
+  def new_project_on_the_platform(designers, email_id = nil)
+    template 'New-project-on-the-platform'
+    set_template_values(
+        LOGIN_URL: designer_login_sessions_url
+    )
+    recipients = designers.map do |designer|
+      wrap_recipient(designer.email, designer.name, 'to')
+    end
+    mail to: recipients, email_id: email_id
+  end
+
   private
 
   def asset_url(asset_path)
