@@ -127,20 +127,13 @@ class ImageItemsEditor extends InlineEditor
         container: $thumb
         selector: $thumb.find('#image_item_image_id')
         theme: DefaultThumbsTheme
+        dropZone: $thumb.find('img')
       I18n: I18n
       single: true
 
     $form.find(@cancelButtonSelector).one 'click', (e)=>
       e.preventDefault()
       @cancelEditing(imageItemId)
-
-    $form.find(@saveButtonSelector).one 'click', (e)=>
-      e.preventDefault()
-      $form = $(e.target).closest('form')
-      $form.on 'ajax:success', (event, data)=>
-        @cancelEditing(imageItemId)
-        @updateView($form, data)
-      $form.trigger('submit.rails')
 
   updateView: ($child, data)->
     $view = @optionsRow($child).find('div.view')
