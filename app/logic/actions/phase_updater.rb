@@ -22,8 +22,7 @@ class PhaseUpdater
 
   def copy_lookbook_items(old_phase, phase)
     contest_request.lookbook_items_by_phase(old_phase).each do |item|
-      attributes = { image_id: item.image_id,
-          description: item.description }
+      attributes = { image_id: item.image_id, description: item.description }
       contest_request.lookbook.lookbook_details.create!(attributes.merge(phase: phase.to_s))
     end
   end
