@@ -327,7 +327,6 @@ ActiveRecord::Schema.define(version: 20151028143204) do
   end
 
   add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
-  add_index "image_items", ["phase", "temporary_version_id"], name: "index_image_items_on_phase_and_temporary_version_id", unique: true, using: :btree
 
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
