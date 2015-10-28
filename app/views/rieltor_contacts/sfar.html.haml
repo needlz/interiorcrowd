@@ -1,0 +1,165 @@
+:sass
+
+  $dimmedBackground: #F0F0F0
+  $orangeFontColor: #FF8838
+  $backgroundLetterColor: #FFE9DF
+  $defaultTextColor: #666666
+
+  @mixin backgroundLetter
+    position: absolute
+    top: -128px
+    font-size: 492px
+    z-index: -1
+    font-family: 'Austin Web'
+    height: 100%
+    color: $backgroundLetterColor
+
+  .sfarPage
+    color: $defaultTextColor
+
+    header
+      padding: 50px 0px
+      text-align: center
+      background-color: $dimmedBackground
+      font-size: 18px
+
+      h2
+        font-family: 'Austin Web'
+        margin: 0px
+        font-size: 38px
+        margin-bottom: 10px
+
+    .pageDescription
+      text-align: center
+
+      .goal
+        font-size: 16px
+        max-width: 600px
+        margin: 40px auto
+
+      .explanationTitle
+        font-size: 30px
+        font-family: 'Austin Web' !important
+        margin: 50px 0px
+
+    .contactForm
+      background-color: $dimmedBackground
+
+    .step
+      margin: 20px 8% 94px
+      height: 500px
+
+      .image
+        min-height: 520px
+
+      .description
+        .number
+          color: $orangeFontColor
+          font-size: 20px
+          font-weight: bold
+          text-transform: uppercase
+          margin-top: 30px
+
+        .text
+          margin-top: 15px
+          font-size: 20px
+
+      .bgtextRight
+        @include backgroundLetter
+        right: 14px
+
+      .bgtextLeft
+        @include backgroundLetter
+        left: 14px
+
+.sfarPage
+
+  %header
+    %h2 Help your clients move into a more inspiring space.
+    %p InteriorCrowd makes the perfect housewarming gift.
+
+  .container
+    .pageDescription
+      .goal
+        Our network of hundreds oj interior designers will help your clients establish a room-specific creative
+        vision and plan of action to keep them delighted as they settle into their beautiful new home.
+
+      .explanationTitle How it works
+
+    .step.clearfix
+      .col-sm-6
+        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-1-img.png') }" }
+
+      .description.col-sm-6
+        .bgtextRight 1
+        .number Step one
+        .text Clients create a fun and easy style brief on interiorcrowd.com.
+
+    .step.clearfix
+      .description.col-sm-6
+        .bgtextLeft 2
+        .number Step two
+        .text They receive multiple concept boards based on their personal style
+
+      .col-sm-6
+        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-2-img.png') }" }
+
+    .step.clearfix
+      .col-sm-6
+        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-3-img.png') }" }
+
+      .description.col-sm-6
+        .bgtextRight 3
+        .number Step three
+        .text The winning designer and the client collaborate on furniture and layout.
+
+    .step.clearfix
+      .description.col-sm-6
+        .bgtextLeft 4
+        .number Step four
+        .text The designer provides the client with a final list of product.
+
+      .col-sm-6
+        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-4-img.png') }" }
+
+    .step.clearfix
+      .col-sm-6
+        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-3-img.png') }" }
+
+      .description.col-sm-6
+        .bgtextRight 5
+        .number Step five
+        .text The client uses the designer's room layout, shopping list and assembly plan to bring their room to life.
+
+  .contactForm
+    .container
+
+      .col-sm-5
+        %h2 Interested in helping your clients redesign their home with InteriorCrowd?
+
+        %p Send us your contact info and we'll be in touch!
+
+      .col-sm-7
+        .formTitle Contact info
+
+        = form_for rieltor_contacts_path do |f|
+
+          = f.label :first_name, 'Name'
+          = f.text_field :first_name, placeholder: 'First Name'
+          = f.text_field :last_name, placeholder: 'Last Name'
+
+          = f.label :brokerage, 'Brokerage'
+          = f.text_field :brokerage, placeholder: 'Brokerage name'
+
+          = f.label :email, 'E-mail'
+          = f.text_field :email, placeholder: 'example.@address.com'
+
+          = f.label :email, 'Phone number'
+          = f.text_field :phone1, placeholder: '123'
+          = f.text_field :phone2, placeholder: '456'
+          = f.text_field :phone3, placeholder: '7890'
+
+          = f.label :choice, 'Select a choice'
+          = f.select :choice, [['call me', 1]]
+
+          = f.submit 'Submit', class: 'submitbutton '
