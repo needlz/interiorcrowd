@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   before_filter :beta_redirect
   before_filter :set_return_to_link, :setup_event_tracker
 
+  add_flash_types :error
+
   PAGE_404_PATH = 'public/404.html'
 
   def beta_redirect

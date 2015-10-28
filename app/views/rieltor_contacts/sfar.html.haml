@@ -4,6 +4,7 @@
   $orangeFontColor: #FF8838
   $backgroundLetterColor: #FFE9DF
   $defaultTextColor: #666666
+  $formBorder: 1px solid gray
 
   @mixin backgroundLetter
     position: absolute
@@ -44,6 +45,54 @@
 
     .contactForm
       background-color: $dimmedBackground
+      padding: 50px 0px
+
+      .description
+        font-size: 17px
+        margin-top: 32px
+        width: 35%
+
+        h2
+          font-size: 30px
+          line-height: 45px
+
+      .form
+        border-left: $formBorder
+        width: 65%
+
+        .row
+          margin: 20px 0px 20px 20px
+
+        .title
+          font-size: 19px
+
+        .inputsGroup
+          padding: 5px 0px
+
+        .inputs
+          border-top: $formBorder
+          padding: 12px 0px
+
+          label
+            font-size: 18px
+            font-weight: normal
+
+          input
+            background-color: $dimmedBackground
+
+          .bootstrap-select
+            width: 100%
+
+            .dropdown-toggle
+              border-color: black
+
+          input[type=submit]
+            background-color: #FF7D26
+            color: white
+            width: 100%
+            max-width: 200px
+            height: 55px
+            font-size: 22px
 
     .step
       margin: 20px 8% 94px
@@ -77,6 +126,9 @@
   %header
     %h2 Help your clients move into a more inspiring space.
     %p InteriorCrowd makes the perfect housewarming gift.
+
+  .text-center
+    = render 'home/msg'
 
   .container
     .pageDescription
@@ -131,33 +183,67 @@
         .number Step five
         .text The client uses the designer's room layout, shopping list and assembly plan to bring their room to life.
 
+  :coffee
+    $ ->
+      $('.contactForm select').selectpicker(style: 'btn-selector-medium')
+
   .contactForm
     .container
 
-      .col-sm-5
+      .col-sm-4.description.disablePadding
         %h2 Interested in helping your clients redesign their home with InteriorCrowd?
 
         %p Send us your contact info and we'll be in touch!
 
-      .col-sm-7
-        .formTitle Contact info
+      .col-sm-8.form.disablePadding
+        .row
+          .col-xs-12
+            .title Contact info
 
-        = form_for RieltorContact.new do |f|
+        .inputs
+          = form_for RieltorContact.new do |f|
 
-          = f.label :first_name, 'Name'
-          = f.text_field :first_name, placeholder: 'First Name'
-          = f.text_field :last_name, placeholder: 'Last Name'
+            .row
+              .col-xs-4
+                = f.label :first_name, 'Name'
+              .col-xs-8
+                = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
+            .clearfix
 
-          = f.label :brokerage, 'Brokerage'
-          = f.text_field :brokerage, placeholder: 'Brokerage name'
+            .row
+              .col-xs-4
+              .col-xs-8
+                = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
+            .clearfix
 
-          = f.label :email, 'E-mail'
-          = f.text_field :email, placeholder: 'example.@address.com'
+            .row
+              .col-xs-4
+                = f.label :brokerage, 'Brokerage'
+              .col-xs-8
+                = f.text_field :brokerage, placeholder: 'Brokerage name', class: 'form-control'
+            .clearfix
 
-          = f.label :email, 'Phone number'
-          = f.text_field :phone, placeholder: '123'
+            .row
+              .col-xs-4
+                = f.label :email, 'E-mail'
+              .col-xs-8
+                = f.text_field :email, placeholder: 'example@address.com', class: 'form-control'
+            .clearfix
 
-          = f.label :choice, 'Select a choice'
-          = f.select :choice, [['call me', 1]]
+            .row
+              .col-xs-4
+                = f.label :email, 'Phone number'
+              .col-xs-8
+                = f.text_field :phone, placeholder: '123', class: 'form-control'
+            .clearfix
 
-          = f.submit 'Submit', class: 'submitbutton '
+            .row
+              .col-xs-4
+                = f.label :choice, 'Select a choice'
+              .col-xs-8
+                = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
+            .clearfix
+
+            .row
+              .col-xs-8.col-xs-offset-4
+                = f.submit 'Submit', class: 'btn btn-default'
