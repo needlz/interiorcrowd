@@ -11,6 +11,5 @@
           = t('designer_center.respond.submit')
   .row
     .pull-right.ready-for-final-design
-      - if contest_request_milestone.expired?
-        = link_to '#', class: 'moveToFinal', request_id: request.id do
-          = t('designer_center.done_btn')
+      = link_to '#', class: 'moveToFinal', request_id: request.id do
+        = t('designer_center.done_btn')
