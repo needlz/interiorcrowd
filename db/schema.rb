@@ -459,6 +459,17 @@ ActiveRecord::Schema.define(version: 20151015145432) do
 
   add_index "reviewer_invitations", ["contest_id"], name: "index_reviewer_invitations_on_contest_id", using: :btree
 
+  create_table "rieltor_contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "brokerage"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "choice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
     t.text     "data"

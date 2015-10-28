@@ -189,9 +189,11 @@ InteriorC::Application.routes.draw do
       get '/', to: 'blog#blog_root', as: 'blog_root'
     end
 
-    resource :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
+    resources :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
 
     get '/sfar', to: 'rieltor_contacts#sfar', as: 'sfar'
+
+    resources :rieltor_contacts, only: [:create]
   end
 
   def consider_rest_of_routes_as_portfolios

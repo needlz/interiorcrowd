@@ -142,7 +142,7 @@
       .col-sm-7
         .formTitle Contact info
 
-        = form_for rieltor_contacts_path do |f|
+        = form_for RieltorContact.new do |f|
 
           = f.label :first_name, 'Name'
           = f.text_field :first_name, placeholder: 'First Name'
@@ -155,9 +155,7 @@
           = f.text_field :email, placeholder: 'example.@address.com'
 
           = f.label :email, 'Phone number'
-          = f.text_field :phone1, placeholder: '123'
-          = f.text_field :phone2, placeholder: '456'
-          = f.text_field :phone3, placeholder: '7890'
+          = f.text_field :phone, placeholder: '123'
 
           = f.label :choice, 'Select a choice'
           = f.select :choice, [['call me', 1]]
