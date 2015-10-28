@@ -120,6 +120,11 @@ RSpec.describe UserMailer do
     it 'to client: account creation' do
       expect(UserMailer.account_creation(client)).to be_present
     end
+
+    it 'sends email to all designers when new contest has been added' do
+      designer
+      expect(UserMailer.new_project_on_the_platform(Designer.active)).to be_present
+    end
   end
 
 end
