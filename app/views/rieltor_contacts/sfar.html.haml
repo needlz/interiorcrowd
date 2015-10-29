@@ -19,9 +19,13 @@
       .explanationTitle How it works
 
     - steps = t('sfar.steps')
+    - steps_with_large_images = [2]
     - steps.each_with_index do |step_i18n, index|
       .step
-        = render 'rieltor_contacts/sfar_step', step_i18n: step_i18n, index: index + 1
+        = render 'rieltor_contacts/sfar_step',
+          step_i18n: step_i18n,
+          index: index + 1,
+          image_class: steps_with_large_images.include?(index + 1) ? 'largeImage' : 'image'
 
   .contactForm
     .container

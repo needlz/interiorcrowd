@@ -1,7 +1,13 @@
-.col-sm-6{ class: cycle('', 'col-sm-push-6', name: :sfar_left_block_of_step) }
-  .image.full-size-image-container{ style: "background-image: #{ css_url("/assets/SFAR/Step-#{ index }-img.png") }" }
-.description.col-sm-6{ class: cycle('', 'col-sm-pull-6', name: :sfar_right_block_of_step) }
-  .bgtextRight= index
-  .number= step_i18n[:title]
-  .text= step_i18n[:description]
+.col-sm-6{ class: cycle('', 'col-sm-push-6', name: :sfar_push_offest) }
+  .full-size-image-container{ style: "background-image: #{ css_url("/assets/SFAR/Step-#{ index }-img.png") }", class: image_class }
+.description.col-sm-6{ class: cycle('', 'col-sm-pull-6', name: :sfar_pull_offest) }
+  - background_side = cycle('right', 'left', name: :sfar_background_side)
+  .hidden-xs
+    .bgtext{ class: background_side }= index
+    .number= step_i18n[:title]
+    .text= step_i18n[:description]
+  .visible-xs.text-center
+    .bgtext{ class: background_side }= index
+    .number= step_i18n[:title]
+    .text= step_i18n[:description]
 .clearfix
