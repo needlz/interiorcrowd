@@ -15,7 +15,8 @@ $formBorder: 1px solid #E1E1E1
 
 @mixin placeholderStyle
   color: #A9A9A9
-  
+  font-style: normal
+  font-size: 17px
 
 .sfarPage
   color: $defaultTextColor
@@ -91,6 +92,12 @@ $formBorder: 1px solid #E1E1E1
 
           .dropdown-toggle
             border-color: #8C8C8C
+
+            .filter-option
+              @include placeholderStyle
+
+        .bootstrap-select.btn-group .btn .caret
+          border-left: 1px solid #F0F0F0
 
         input[type=submit]
           background-color: #FF7D26
