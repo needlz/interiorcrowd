@@ -1,82 +1,14 @@
-:sass
-
-  $dimmedBackground: #F0F0F0
-  $orangeFontColor: #FF8838
-  $backgroundLetterColor: #FFE9DF
-  $defaultTextColor: #666666
-
-  @mixin backgroundLetter
-    position: absolute
-    top: -128px
-    font-size: 492px
-    z-index: -1
-    font-family: 'Austin Web'
-    height: 100%
-    color: $backgroundLetterColor
-
-  .sfarPage
-    color: $defaultTextColor
-
-    header
-      padding: 50px 0px
-      text-align: center
-      background-color: $dimmedBackground
-      font-size: 18px
-
-      h2
-        font-family: 'Austin Web'
-        margin: 0px
-        font-size: 38px
-        margin-bottom: 10px
-
-    .pageDescription
-      text-align: center
-
-      .goal
-        font-size: 16px
-        max-width: 600px
-        margin: 40px auto
-
-      .explanationTitle
-        font-size: 30px
-        font-family: 'Austin Web' !important
-        margin: 50px 0px
-
-    .contactForm
-      background-color: $dimmedBackground
-
-    .step
-      margin: 20px 8% 94px
-      height: 500px
-
-      .image
-        min-height: 520px
-
-      .description
-        .number
-          color: $orangeFontColor
-          font-size: 20px
-          font-weight: bold
-          text-transform: uppercase
-          margin-top: 30px
-
-        .text
-          margin-top: 15px
-          font-size: 20px
-
-      .bgtextRight
-        @include backgroundLetter
-        right: 14px
-
-      .bgtextLeft
-        @include backgroundLetter
-        left: 14px
+- content_for :head do
+  = javascript_include_tag 'home/sfar'
 
 .sfarPage
 
   %header
     %h2 Help your clients move into a more inspiring space.
     %p InteriorCrowd makes the perfect housewarming gift.
+
+  .text-center
+    = render 'home/msg'
 
   .container
     .pageDescription
@@ -86,78 +18,68 @@
 
       .explanationTitle How it works
 
-    .step.clearfix
-      .col-sm-6
-        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-1-img.png') }" }
-
-      .description.col-sm-6
-        .bgtextRight 1
-        .number Step one
-        .text Clients create a fun and easy style brief on interiorcrowd.com.
-
-    .step.clearfix
-      .description.col-sm-6
-        .bgtextLeft 2
-        .number Step two
-        .text They receive multiple concept boards based on their personal style
-
-      .col-sm-6
-        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-2-img.png') }" }
-
-    .step.clearfix
-      .col-sm-6
-        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-3-img.png') }" }
-
-      .description.col-sm-6
-        .bgtextRight 3
-        .number Step three
-        .text The winning designer and the client collaborate on furniture and layout.
-
-    .step.clearfix
-      .description.col-sm-6
-        .bgtextLeft 4
-        .number Step four
-        .text The designer provides the client with a final list of product.
-
-      .col-sm-6
-        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-4-img.png') }" }
-
-    .step.clearfix
-      .col-sm-6
-        .image.full-size-image-container{ style: "background-image: #{ css_url('/assets/SFAR/Step-3-img.png') }" }
-
-      .description.col-sm-6
-        .bgtextRight 5
-        .number Step five
-        .text The client uses the designer's room layout, shopping list and assembly plan to bring their room to life.
+    - steps = t('sfar.steps')
+    - steps.each_with_index do |step_i18n, index|
+      .step
+        = render 'rieltor_contacts/sfar_step', step_i18n: step_i18n, index: index + 1
 
   .contactForm
     .container
 
-      .col-sm-5
+      .col-md-4.description.disablePadding
         %h2 Interested in helping your clients redesign their home with InteriorCrowd?
 
         %p Send us your contact info and we'll be in touch!
 
-      .col-sm-7
-        .formTitle Contact info
+      .col-md-8.form.disablePadding
+        .row
+          .col-xs-12
+            .title Contact info
 
-        = form_for RieltorContact.new do |f|
+        .inputs
+          = form_for RieltorContact.new do |f|
 
-          = f.label :first_name, 'Name'
-          = f.text_field :first_name, placeholder: 'First Name'
-          = f.text_field :last_name, placeholder: 'Last Name'
+            .row
+              .col-lg-4.col-sm-3
+                = f.label :first_name, 'Name'
+              .col-lg-8.col-sm-9
+                = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
+            .clearfix
 
-          = f.label :brokerage, 'Brokerage'
-          = f.text_field :brokerage, placeholder: 'Brokerage name'
+            .row
+              .col-lg-4.col-sm-3
+              .col-lg-8.col-sm-9
+                = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
+            .clearfix
 
-          = f.label :email, 'E-mail'
-          = f.text_field :email, placeholder: 'example.@address.com'
+            .row
+              .col-lg-4.col-sm-3
+                = f.label :brokerage, 'Brokerage'
+              .col-lg-8.col-sm-9
+                = f.text_field :brokerage, placeholder: 'Brokerage name', class: 'form-control'
+            .clearfix
 
-          = f.label :email, 'Phone number'
-          = f.text_field :phone, placeholder: '123'
+            .row
+              .col-lg-4.col-sm-3
+                = f.label :email, 'E-mail'
+              .col-lg-8.col-sm-9
+                = f.text_field :email, placeholder: 'example@address.com', class: 'form-control'
+            .clearfix
 
-          = f.label :choice, 'Select a choice'
-          = f.select :choice, [['call me', 1]]
+            .row
+              .col-lg-4.col-sm-3
+                = f.label :email, 'Phone number'
+              .col-lg-8.col-sm-9
+                = f.text_field :phone, placeholder: '123', class: 'form-control'
+            .clearfix
 
-          = f.submit 'Submit', class: 'submitbutton '
+            .row
+              .col-lg-4.col-sm-3
+                = f.label :choice, 'Select a choice'
+              .col-lg-8.col-sm-9
+                = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
+            .clearfix
+
+            .row
+              .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
+                = f.submit 'Submit', class: 'btn btn-default'

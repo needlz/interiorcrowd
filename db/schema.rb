@@ -470,6 +470,8 @@ ActiveRecord::Schema.define(version: 20151015145432) do
     t.datetime "updated_at"
   end
 
+  add_index "rieltor_contacts", ["email"], name: "index_rieltor_contacts_on_email", unique: true, using: :btree
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false
     t.text     "data"

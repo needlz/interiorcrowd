@@ -1,0 +1,143 @@
+$dimmedBackground: #F0F0F0
+$orangeFontColor: #FF8838
+$backgroundLetterColor: #FFE9DF
+$defaultTextColor: #666666
+$formBorder: 1px solid gray
+
+@mixin backgroundLetter
+  position: absolute
+  top: -128px
+  font-size: 492px
+  z-index: -1
+  font-family: 'Austin Web'
+  height: 100%
+  color: $backgroundLetterColor
+
+.sfarPage
+  color: $defaultTextColor
+
+  header
+    padding: 50px 0px
+    text-align: center
+    background-color: $dimmedBackground
+    font-size: 18px
+
+    h2
+      font-family: 'Austin Web'
+      margin: 0px
+      font-size: 38px
+      margin-bottom: 10px
+
+  .pageDescription
+    text-align: center
+
+    .goal
+      font-size: 16px
+      max-width: 600px
+      margin: 40px auto
+
+    .explanationTitle
+      font-size: 30px
+      font-family: 'Austin Web' !important
+      margin: 50px 0px
+
+  .contactForm
+    background-color: $dimmedBackground
+    padding: 50px 0px
+
+    .description
+      font-size: 17px
+      margin-top: 32px
+      width: 35%
+
+      h2
+        font-size: 30px
+        line-height: 45px
+
+    .form
+      border-left: $formBorder
+      width: 65%
+
+      .row
+        margin: 20px 0px 20px 20px
+
+      .title
+        font-size: 19px
+
+      .inputsGroup
+        padding: 5px 0px
+
+      .inputs
+        border-top: $formBorder
+        padding: 12px 0px
+
+        label
+          font-size: 18px
+          font-weight: normal
+
+        input
+          background-color: $dimmedBackground
+
+        .bootstrap-select
+          width: 100%
+
+          .dropdown-toggle
+            border-color: black
+
+        input[type=submit]
+          background-color: #FF7D26
+          color: white
+          width: 100%
+          max-width: 200px
+          height: 55px
+          font-size: 22px
+
+  .step
+    margin: 20px 8% 94px
+    min-height: 500px
+
+    .image
+      min-height: 520px
+
+    .description
+      .number
+        color: $orangeFontColor
+        font-size: 20px
+        font-weight: bold
+        text-transform: uppercase
+        margin-top: 30px
+
+      .text
+        margin-top: 15px
+        font-size: 20px
+
+    .bgtextRight
+      @include backgroundLetter
+      right: 14px
+
+    .bgtextLeft
+      @include backgroundLetter
+      left: 14px
+
+@media (max-width: 992px)
+  .sfarPage
+    .container
+      width: 100%
+
+    .contactForm
+      .description
+        width: 100%
+
+      .form
+        width: 100%
+        border-left: none
+
+        .submitContainer
+          text-align: center
+
+@media (max-width: 768px)
+  .sfarPage
+    .form
+      .submitContainer
+        input
+          max-width: 100% !important
