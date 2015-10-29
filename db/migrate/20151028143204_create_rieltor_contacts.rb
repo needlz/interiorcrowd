@@ -8,6 +8,8 @@
       t.string :phone
       t.string :choice
       t.timestamps
+
+      t.index :email, unique: true
     end
   end
 end
