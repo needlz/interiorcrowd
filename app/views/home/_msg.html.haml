@@ -1,8 +1,7 @@
-.row
-  .col-sm-12
-    - if flash[:error].present?
-      .alert.alert-danger= flash[:error].html_safe
-    - if flash[:alert].present?
-      .alert.alert-danger= flash[:alert].html_safe
-    - if flash[:notice].present?
-      .alert.alert-success= flash[:notice].html_safe
+%div
+  - if flash[:error].present?
+    .alert.alert-danger= flash[:error].html_safe
+  - if flash[:alert].present?
+    .alert.alert-danger= flash[:alert].html_safe
+  - if flash[:notice].present?
+    .alert.alert-success= flash[:notice].html_safe

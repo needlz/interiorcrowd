@@ -15,7 +15,7 @@ class RieltorContactsController < ApplicationController
     respond_to do |format|
       format.html do
         result.each { |key, value| flash[key] = value }
-        redirect_to sfar_path
+        redirect_to sfar_path(anchor: 'sfarSubmitButton')
       end
 
       format.json do

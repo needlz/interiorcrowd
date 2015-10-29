@@ -7,9 +7,6 @@
     %h2 Help your clients move into a more inspiring space.
     %p InteriorCrowd makes the perfect housewarming gift.
 
-  .text-center
-    = render 'home/msg'
-
   .container
     .pageDescription
       .goal
@@ -83,6 +80,9 @@
                 = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
             .clearfix
 
-            .row
+            .row#sfarSubmitButton
               .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
                 = f.submit 'Submit', class: 'btn btn-default'
+            .clearfix
+              .marginTop30
+                = render 'home/msg'
