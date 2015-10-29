@@ -43,6 +43,7 @@ gem 'delayed_job_active_record'
 gem 'daemons'
 gem 'jquery-fileupload-rails'
 gem 'rails_autolink'
+gem 'email_validator'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
