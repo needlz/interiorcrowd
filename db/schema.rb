@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015145432) do
+ActiveRecord::Schema.define(version: 20151028143204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,8 @@ ActiveRecord::Schema.define(version: 20151015145432) do
     t.datetime "updated_at"
   end
 
+  add_index "contests_promocodes", ["contest_id", "promocode_id"], name: "index_contests_promocodes_on_contest_id_and_promocode_id", unique: true, using: :btree
+
   create_table "credit_cards", force: :cascade do |t|
     t.integer  "client_id"
     t.text     "name_on_card"
@@ -324,6 +326,9 @@ ActiveRecord::Schema.define(version: 20151015145432) do
     t.string   "phase",                limit: 255, default: "collaboration"
   end
 
+  add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
+  add_index "image_items", ["phase", "temporary_version_id"], name: "index_image_items_on_phase_and_temporary_version_id", unique: true, using: :btree
+
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
     t.text    "url"
@@ -367,6 +372,7 @@ ActiveRecord::Schema.define(version: 20151015145432) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "sent_to_mail_server_at"
+    t.text     "api_response"
   end
 
   create_table "portfolio_awards", force: :cascade do |t|
