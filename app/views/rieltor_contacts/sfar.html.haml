@@ -1,3 +1,6 @@
+- content_for :head do
+  = javascript_include_tag 'home/sfar'
+
 .sfarPage
 
   %header
@@ -20,19 +23,14 @@
       .step
         = render 'rieltor_contacts/sfar_step', step_i18n: step_i18n, index: index + 1
 
-  :coffee
-    $ ->
-      $('.contactForm select').selectpicker(style: 'btn-selector-medium')
-
   .contactForm
     .container
-
-      .col-sm-4.description.disablePadding
+      .col-md-4.description.disablePadding
         %h2 Interested in helping your clients redesign their home with InteriorCrowd?
 
         %p Send us your contact info and we'll be in touch!
 
-      .col-sm-8.form.disablePadding
+      .col-md-8.form.disablePadding
         .row
           .col-xs-12
             .title Contact info
@@ -41,46 +39,46 @@
           = form_for RieltorContact.new do |f|
 
             .row
-              .col-xs-4
+              .col-lg-4.col-sm-3
                 = f.label :first_name, 'Name'
-              .col-xs-8
+              .col-lg-8.col-sm-9
                 = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-4
-              .col-xs-8
+              .col-lg-4.col-sm-3
+              .col-lg-8.col-sm-9
                 = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-4
+              .col-lg-4.col-sm-3
                 = f.label :brokerage, 'Brokerage'
-              .col-xs-8
+              .col-lg-8.col-sm-9
                 = f.text_field :brokerage, placeholder: 'Brokerage name', class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-4
+              .col-lg-4.col-sm-3
                 = f.label :email, 'E-mail'
-              .col-xs-8
+              .col-lg-8.col-sm-9
                 = f.text_field :email, placeholder: 'example@address.com', class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-4
+              .col-lg-4.col-sm-3
                 = f.label :email, 'Phone number'
-              .col-xs-8
+              .col-lg-8.col-sm-9
                 = f.text_field :phone, placeholder: '123', class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-4
+              .col-lg-4.col-sm-3
                 = f.label :choice, 'Select a choice'
-              .col-xs-8
+              .col-lg-8.col-sm-9
                 = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
             .clearfix
 
             .row
-              .col-xs-8.col-xs-offset-4
+              .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
                 = f.submit 'Submit', class: 'btn btn-default'

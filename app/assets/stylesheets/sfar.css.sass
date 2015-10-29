@@ -146,3 +146,26 @@ $formBorder: 1px solid #E1E1E1
     .bgtextLeft
       @include backgroundLetter
       left: 14px
+
+@media (max-width: 992px)
+  .sfarPage
+    .container
+      width: 100%
+
+    .contactForm
+      .description
+        width: 100%
+
+      .form
+        width: 100%
+        border-left: none
+
+        .submitContainer
+          text-align: center
+
+@media (max-width: 768px)
+  .sfarPage
+    .form
+      .submitContainer
+        input
+          max-width: 100% !important
