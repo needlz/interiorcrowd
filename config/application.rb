@@ -71,5 +71,12 @@ module InteriorC
     config.time_zone = ENV['TIMEZONE']
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.assets.prefix = '/assets'
+    config.action_controller.asset_host = "//#{ ENV['S3_BUCKET_NAME'] }.s3.amazonaws.com"
+    config.assets.initialize_on_precompile = true
+    config.assets.enabled = true
+    config.assets.digest = true
+    # config.assets.compile = false
   end
 end

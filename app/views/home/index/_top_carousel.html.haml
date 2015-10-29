@@ -8,7 +8,7 @@
   / Wrapper for slides
   .carousel-inner{:role => "listbox"}
     .item
-      .image-container{ style: 'background-image: url("/assets/entertain.jpg")' }
+      .image-container{ style: "background-image: #{ css_url(asset_url('entertain.jpg')) }" }
       = render 'home/index/carousel_shared_content'
     .item.active
       .image-container{ style: 'background-image: url("/assets/come_home.jpg")' }
