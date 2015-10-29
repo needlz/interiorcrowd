@@ -123,10 +123,10 @@ $formBorder: 1px solid #E1E1E1
 
   .step
     margin: 20px 8% 94px
-    min-height: 500px
+    max-height: 500px
 
     .image
-      min-height: 520px
+      height: 520px
 
     .description
       .number
@@ -148,10 +148,18 @@ $formBorder: 1px solid #E1E1E1
       @include backgroundLetter
       left: 14px
 
-@media (max-width: 992px)
-  .sfarPage
+  @media (max-width: 992px)
     .container
       width: 100%
+
+    .step
+      margin: 20px 8% 0px
+
+      .image
+        max-height: 400px
+
+      .bgtextRight, .bgtextLeft
+        font-size: 420px
 
     .contactForm
       .description
@@ -164,9 +172,25 @@ $formBorder: 1px solid #E1E1E1
         .submitContainer
           text-align: center
 
-@media (max-width: 768px)
-  .sfarPage
+  @media (max-width: 768px)
     .form
       .submitContainer
         input
           max-width: 100% !important
+
+      .row
+        margin: 20px 0px 20px 0px !important
+
+    .step
+      margin: 0px 5% 20px
+      max-height: 800px
+
+      .description
+        margin: 30% 0px
+
+        .bgtextRight
+          top: -190px
+          font-size: 370px
+          text-align: center
+          width: 100%
+          right: auto
