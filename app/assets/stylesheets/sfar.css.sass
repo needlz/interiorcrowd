@@ -13,6 +13,10 @@ $formBorder: 1px solid #E1E1E1
   height: 100%
   color: $backgroundLetterColor
 
+@mixin placeholderStyle
+  color: #A9A9A9
+  
+
 .sfarPage
   color: $defaultTextColor
 
@@ -95,6 +99,19 @@ $formBorder: 1px solid #E1E1E1
           max-width: 200px
           height: 55px
           font-size: 22px
+          border-radius: 2px
+
+        ::-webkit-input-placeholder
+          @include placeholderStyle
+
+        :-moz-placeholder
+          @include placeholderStyle
+
+        ::-moz-placeholder
+          @include placeholderStyle
+
+        :-ms-input-placeholder
+          @include placeholderStyle
 
   .step
     margin: 20px 8% 94px
