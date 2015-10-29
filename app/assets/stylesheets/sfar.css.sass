@@ -2,7 +2,7 @@ $dimmedBackground: #F0F0F0
 $orangeFontColor: #FF8838
 $backgroundLetterColor: #FFE9DF
 $defaultTextColor: #666666
-$formBorder: 1px solid gray
+$formBorder: 1px solid #E1E1E1
 
 @mixin backgroundLetter
   position: absolute
@@ -13,6 +13,9 @@ $formBorder: 1px solid gray
   height: 100%
   color: $backgroundLetterColor
 
+@mixin placeholderStyle
+  color: #A9A9A9
+  
 .sfarPage
   color: $defaultTextColor
 
@@ -54,6 +57,9 @@ $formBorder: 1px solid gray
         font-size: 30px
         line-height: 45px
 
+      p
+        color: #A8A8A8
+
     .form
       border-left: $formBorder
       width: 65%
@@ -77,12 +83,13 @@ $formBorder: 1px solid gray
 
         input
           background-color: $dimmedBackground
+          border-color: #8C8C8C
 
         .bootstrap-select
           width: 100%
 
           .dropdown-toggle
-            border-color: black
+            border-color: #8C8C8C
 
         input[type=submit]
           background-color: #FF7D26
@@ -91,6 +98,19 @@ $formBorder: 1px solid gray
           max-width: 200px
           height: 55px
           font-size: 22px
+          border-radius: 2px
+
+        ::-webkit-input-placeholder
+          @include placeholderStyle
+
+        :-moz-placeholder
+          @include placeholderStyle
+
+        ::-moz-placeholder
+          @include placeholderStyle
+
+        :-ms-input-placeholder
+          @include placeholderStyle
 
   .step
     margin: 20px 8% 94px
