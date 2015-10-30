@@ -122,6 +122,8 @@ GEM
     dotiw (3.0.1)
       actionpack (>= 3)
       i18n
+    email_validator (1.6.0)
+      activemodel
     erb2haml (0.1.5)
       html2haml
     erubis (2.7.0)
@@ -461,6 +463,7 @@ DEPENDENCIES
   delayed_job_active_record
   devise
   dotiw
+  email_validator
   erb2haml
   fabrication
   faraday-cookie_jar
