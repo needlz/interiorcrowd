@@ -1381,6 +1381,35 @@ en:
       click_here:  to go back to your existing project.
 
   sfar:
+    header:
+      title: Help your clients move into a more inspiring space.
+      description: InteriorCrowd makes the perfect housewarming gift.
+    content:
+      title: How it works
+      goal: >
+        Our network of hundreds of interior designers will help your clients establish a room-specific creative
+        vision and plan of action to keep them delighted as they settle into their beautiful new home.
+    footer:
+      title: Interested in helping your clients redesign their home with InteriorCrowd?
+      description: Send us your contact info and we'll be in touch!
+    form:
+      title: Contact info
+      name:
+        label: Name
+        first_placeholder: First Name
+        second_placeholder: Last Name
+      brokerage:
+        label: Brokerage
+        placeholder: Brokerage name
+      email:
+        label: E-mail
+        placeholder: example@address.com
+      phone:
+        label: Phone number
+        tooltip_three_digits: 3 digits
+        tooltip_four_digits: 4 digits
+      choice: Select a choice
+      submit: Submit
     steps:
       -
         title: Step one

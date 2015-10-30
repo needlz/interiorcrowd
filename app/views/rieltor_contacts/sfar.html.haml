@@ -4,16 +4,14 @@
 .sfarPage
 
   %header
-    %h2 Help your clients move into a more inspiring space.
-    %p InteriorCrowd makes the perfect housewarming gift.
+    %h2= t('sfar.header.title')
+    %p= t('sfar.header.description')
 
   .container
     .pageDescription
-      .goal
-        Our network of hundreds of interior designers will help your clients establish a room-specific creative
-        vision and plan of action to keep them delighted as they settle into their beautiful new home.
+      .goal= t('sfar.content.goal')
 
-      .explanationTitle How it works
+      .explanationTitle= t('sfar.content.title')
 
     - steps = t('sfar.steps')
     - steps_with_large_images = [2]
@@ -27,48 +25,47 @@
   .contactForm
     .container
       .col-md-4.description.disablePadding
-        %h2 Interested in helping your clients redesign their home with InteriorCrowd?
-
-        %p Send us your contact info and we'll be in touch!
+        %h2= t('sfar.footer.title')
+        %p= t('sfar.footer.description')
 
       .col-md-8.form.disablePadding
         .row
           .col-xs-12
-            .title Contact info
+            .title= t('sfar.form.title')
 
         .inputs
           = form_for RieltorContact.new do |f|
 
             .row
               .col-lg-4.col-sm-3
-                = f.label :first_name, 'Name'
+                = f.label :first_name, t('sfar.form.name.label')
               .col-lg-8.col-sm-9
-                = f.text_field :first_name, placeholder: 'First Name', class: 'form-control'
+                = f.text_field :first_name, placeholder: t('sfar.form.name.first_placeholder'), class: 'form-control'
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
               .col-lg-8.col-sm-9
-                = f.text_field :last_name, placeholder: 'Last Name', class: 'form-control'
+                = f.text_field :last_name, placeholder: t('sfar.form.name.second_placeholder'), class: 'form-control'
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
-                = f.label :brokerage, 'Brokerage'
+                = f.label :brokerage, t('sfar.form.brokerage.label')
               .col-lg-8.col-sm-9
-                = f.text_field :brokerage, placeholder: 'Brokerage name', class: 'form-control'
+                = f.text_field :brokerage, placeholder: t('sfar.form.brokerage.placeholder'), class: 'form-control'
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
-                = f.label :email, 'E-mail'
+                = f.label :email, t('sfar.form.email.label')
               .col-lg-8.col-sm-9
-                = f.text_field :email, placeholder: 'example@address.com', class: 'form-control', type: 'email'
+                = f.text_field :email, placeholder: t('sfar.form.email.placeholder'), class: 'form-control', type: 'email'
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
-                = f.label :email, 'Phone number'
+                = f.label :email, t('sfar.form.phone.label')
               .col-lg-8.col-sm-9#phoneParts
                 = f.text_field :phone,
                   name: "rieltor_contact[phone][]",
@@ -76,7 +73,7 @@
                   class: 'form-control',
                   maxlength: 3,
                   pattern: ".{3}",
-                  title: '3 digits'
+                  title: t('sfar.form.phone.tooltip_three_digits')
                 %span &#8212;
                 = f.text_field :phone,
                   name: "rieltor_contact[phone][]",
@@ -84,7 +81,7 @@
                   class: 'form-control',
                   maxlength: 3,
                   pattern: ".{3}",
-                  title: '3 digits'
+                  title: t('sfar.form.phone.tooltip_three_digits')
                 %span &#8212;
                 = f.text_field :phone,
                   name: "rieltor_contact[phone][]",
@@ -92,19 +89,19 @@
                   class: 'form-control',
                   maxlength: 4,
                   pattern: ".{4}",
-                  title: '4 digits'
+                  title: t('sfar.form.phone.tooltip_four_digits')
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
-                = f.label :choice, 'Select a choice'
+                = f.label :choice, t('sfar.form.choice')
               .col-lg-8.col-sm-9
                 = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
             .clearfix
 
             .row#sfarSubmitButton
               .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
-                = f.submit 'Submit', class: 'btn btn-default'
+                = f.submit t('sfar.form.submit'), class: 'btn btn-default'
             .clearfix
               .marginTop30
                 = render 'home/msg'
