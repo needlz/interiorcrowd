@@ -1,0 +1,234 @@
+$dimmedBackground: #F0F0F0
+$orangeFontColor: #FF8838
+$backgroundLetterColor: #FFE9DF
+$defaultTextColor: #666666
+$formBorder: 1px solid #E1E1E1
+
+@mixin backgroundLetter
+  position: absolute
+  top: -128px
+  font-size: 492px
+  z-index: -1
+  font-family: 'Austin Web'
+  height: 100%
+  color: $backgroundLetterColor
+
+@mixin placeholderStyle
+  color: #A9A9A9
+  font-style: normal
+  font-size: 17px
+
+.sfarPage
+  color: $defaultTextColor
+
+  header
+    padding: 50px 0px
+    text-align: center
+    background-color: $dimmedBackground
+    font-size: 18px
+
+    h2
+      font-family: 'Austin Web'
+      margin: 0px
+      font-size: 38px
+      margin-bottom: 10px
+
+  .pageDescription
+    text-align: center
+    font-family: "AvenirLTStd-Light"
+
+    .goal
+      font-size: 16px
+      max-width: 600px
+      margin: 40px auto
+
+    .explanationTitle
+      font-size: 30px
+      font-family: 'Austin Web' !important
+      margin: 50px 0px
+
+  .contactForm
+    background-color: $dimmedBackground
+    padding: 50px 0px
+
+    .description
+      font-size: 17px
+      margin-top: 32px
+      width: 35%
+
+      h2
+        font-size: 30px
+        line-height: 45px
+
+      p
+        color: #A8A8A8
+
+    .form
+      border-left: $formBorder
+      width: 65%
+
+      .row
+        margin: 20px 0px 20px 20px
+
+      .title
+        font-size: 19px
+
+      .inputsGroup
+        padding: 5px 0px
+
+      .inputs
+        border-top: $formBorder
+        padding: 12px 0px
+
+        label
+          font-size: 18px
+          font-weight: normal
+
+        input
+          background-color: $dimmedBackground
+          border-color: #8C8C8C
+
+        #phoneParts
+          input
+            display: inline
+            width: 25.5%
+          span
+            font-size: 15px
+            color: #8c8c8c
+            margin: auto 3.3% auto 3.3%
+
+        @media(max-width: 1200px)
+          #phoneParts
+            input
+              width: 24.8%
+
+        @media(max-width: 992px)
+          #phoneParts
+            input
+              width: 26.3%
+
+        @media(max-width: 768px)
+          #phoneParts
+            input
+              width: 25.8%
+
+        @media(max-width: 502px)
+          #phoneParts
+            input
+              width: 24.8%
+            span
+              margin: auto 2% auto 2%
+
+        .bootstrap-select
+          width: 100%
+
+          .dropdown-toggle
+            border-color: #8C8C8C
+
+            .filter-option
+              @include placeholderStyle
+
+        .bootstrap-select.btn-group .btn .caret
+          border-left: 1px solid #F0F0F0
+
+        input[type=submit]
+          background-color: #FF7D26
+          color: white
+          width: 100%
+          max-width: 200px
+          height: 55px
+          font-size: 22px
+          border-radius: 2px
+
+        ::-webkit-input-placeholder
+          @include placeholderStyle
+
+        :-moz-placeholder
+          @include placeholderStyle
+
+        ::-moz-placeholder
+          @include placeholderStyle
+
+        :-ms-input-placeholder
+          @include placeholderStyle
+
+  .step
+    margin: 20px 8% 94px
+    max-height: 500px
+
+    .image
+      height: 520px
+
+    .largeImage
+      height: 585px
+
+    .description
+      .number
+        color: $orangeFontColor
+        font-size: 20px
+        font-weight: bold
+        text-transform: uppercase
+        margin-top: 30px
+
+      .text
+        margin-top: 15px
+        font-size: 20px
+
+    .bgtext
+      @include backgroundLetter
+
+    .bgtext.right
+      right: 14px
+
+    .bgtext.left
+      left: 14px
+
+  @media (max-width: 992px)
+    .container
+      width: 100%
+
+    .step
+      margin: 20px 8% 0px
+
+      .image
+        max-height: 400px
+
+      .largeImage
+        max-height: 480px
+
+      .bgtext
+        font-size: 420px
+
+    .contactForm
+      .description
+        width: 100%
+
+      .form
+        width: 100%
+        border-left: none
+
+        .submitContainer
+          text-align: center
+
+  @media (max-width: 768px)
+    .form
+      .submitContainer
+        input
+          max-width: 100% !important
+
+      .row
+        margin: 20px 0px 20px 0px !important
+
+    .step
+      margin: 0px 5% 20px
+      max-height: 940px
+
+      .description
+        margin: 30% 0px
+
+        .bgtext
+          top: -190px
+          font-size: 370px
+          text-align: center
+          width: 100%
+          right: auto

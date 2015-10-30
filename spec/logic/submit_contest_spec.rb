@@ -55,6 +55,12 @@ RSpec.describe SubmitContest do
           submit_contest.try_perform
           expect(submit_contest.performed?).to be_falsey
           expect(contest.reload.submission_started_at).to be_nil
+          expect(jobs_with_handler_like('new_project_on_the_platform').count).to eq 0
+        end
+
+        it 'sends the email notification' do
+          submit_contest.try_perform
+          expect(jobs_with_handler_like('new_project_on_the_platform').count).to eq 1
         end
       end
     end

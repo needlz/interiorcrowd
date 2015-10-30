@@ -14,7 +14,7 @@
     I18n = #{ translations_to_json('') }
 
 - content_for :client_center_content do
-  .contest.brief.briefEditingBox.hidden-xs{ data: { id: @contest.id } }
+  .contest.brief.briefEditingBox{ data: { id: @contest.id } }
     - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/brief_option', locals: { option: attribute }
       .fullWidthLine

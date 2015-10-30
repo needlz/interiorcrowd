@@ -17,7 +17,7 @@
 #  space_height                    :decimal(10, 2)
 #  design_category_id              :integer
 #  design_space_id                 :integer
-#  status                          :string(255)      default("brief_pending")
+#  status                          :string           default("incomplete")
 #  phase_end                       :datetime
 #  theme                           :string(255)
 #  space                           :string(255)
@@ -33,6 +33,7 @@
 #  preferred_retailers_id          :integer
 #  designers_explore_other_colors  :boolean          default(FALSE)
 #  designers_only_use_these_colors :boolean          default(FALSE)
+#  finished_at                     :datetime
 #
 
 class Contest < ActiveRecord::Base

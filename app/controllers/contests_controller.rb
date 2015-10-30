@@ -20,7 +20,7 @@ class ContestsController < ApplicationController
     return raise_404 unless current_user.see_contest?(@contest)
     return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
-    @navigation = Navigation::ClientCenter.new(:entries)
+    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
     @entries_page = EntriesPage.new(
       contest: @contest,
       view: params[:view],
@@ -77,7 +77,6 @@ class ContestsController < ApplicationController
       redirect_to preview_contests_path and return
     end
   end
-
 
   def save_intake_form_step(action)
     next_step_index = ContestCreationWizard.creation_steps.find_index(action) + 1
