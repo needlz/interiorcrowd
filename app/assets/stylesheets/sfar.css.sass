@@ -88,6 +88,37 @@ $formBorder: 1px solid #E1E1E1
           background-color: $dimmedBackground
           border-color: #8C8C8C
 
+        #phoneParts
+          input
+            display: inline
+            width: 25.5%
+          span
+            font-size: 15px
+            color: #8c8c8c
+            margin: auto 3.3% auto 3.3%
+
+        @media(max-width: 1200px)
+          #phoneParts
+            input
+              width: 24.8%
+
+        @media(max-width: 992px)
+          #phoneParts
+            input
+              width: 26.3%
+
+        @media(max-width: 768px)
+          #phoneParts
+            input
+              width: 25.8%
+
+        @media(max-width: 502px)
+          #phoneParts
+            input
+              width: 24.8%
+            span
+              margin: auto 2% auto 2%
+
         .bootstrap-select
           width: 100%
 

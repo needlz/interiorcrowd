@@ -27,7 +27,10 @@ class RieltorContactsController < ApplicationController
   private
 
   def retailer_contact_params
-    params.require(:rieltor_contact).permit(:first_name, :last_name, :email, :brokerage, :choice, :phone)
+    contact_params = params.require(:rieltor_contact)
+    phone_string = contact_params[:phone].join
+    contact_params.merge!(phone: phone_string)
+    contact_params.permit(:first_name, :last_name, :email, :brokerage, :choice, :phone)
   end
 
 end

@@ -10,7 +10,7 @@
   .container
     .pageDescription
       .goal
-        Our network of hundreds oj interior designers will help your clients establish a room-specific creative
+        Our network of hundreds of interior designers will help your clients establish a room-specific creative
         vision and plan of action to keep them delighted as they settle into their beautiful new home.
 
       .explanationTitle How it works
@@ -69,8 +69,12 @@
             .row
               .col-lg-4.col-sm-3
                 = f.label :email, 'Phone number'
-              .col-lg-8.col-sm-9
-                = f.text_field :phone, placeholder: '123', class: 'form-control'
+              .col-lg-8.col-sm-9#phoneParts
+                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '123', class: 'form-control'
+                %span &#8212;
+                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '456', class: 'form-control'
+                %span &#8212;
+                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '7890', class: 'form-control'
             .clearfix
 
             .row
