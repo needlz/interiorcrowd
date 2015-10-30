@@ -30,14 +30,18 @@ module ApplicationHelper
     content.html_safe
   end
 
-  def main_menu
+  def main_menu(user_center_navigation)
     return @main_menu if @main_menu
-    @main_menu = Menu.get(current_user, self).main_items
+    @main_menu = Menu.get(current_user: current_user,
+                          view_context: self,
+                          user_center_navigation: user_center_navigation).main_items
   end
 
-  def mobile_menu
+  def mobile_menu(user_center_navigation)
     return @mobile_menu if @mobile_menu
-    @mobile_menu = Menu.get(current_user, self).mobile_items
+    @mobile_menu = Menu.get(current_user: current_user,
+                            view_context: self,
+                            user_center_navigation: user_center_navigation).mobile_items
   end
 
   def share_button_parent_data(request, url)
