@@ -1,13 +1,11 @@
+.edit-button{ style: 'float: right' }
+  %a{ href: '#' }
+    = image_tag '/assets/edit.png'
 .col-sm-4.title
   %p #{ title }:
 .col-sm-7.attribute-form
   .view
     = value
-.col-sm-1.text-right
-  .edit-button
-    %a{ href: '#' }
-      = image_tag '/assets/edit.png'
 
 .col-sm-12
-  .col-sm-12
-    .edit{ style: 'display: none;' }
+  .edit{ style: 'display: none;' }

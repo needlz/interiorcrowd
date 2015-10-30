@@ -34,7 +34,7 @@ class ClientsController < ApplicationController
       return redirect_to ContestCreationWizard.incomplete_step_path(@contest)
     end
     @contest_view = ContestView.new(contest_attributes: @contest)
-    @navigation = Navigation::ClientCenter.new(:brief)
+    @navigation = Navigation::ClientCenter.new(:brief, contest: @contest)
     render 'clients/client_center/brief'
   end
 
