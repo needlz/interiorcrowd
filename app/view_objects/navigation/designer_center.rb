@@ -1,7 +1,7 @@
 module Navigation
 
   class DesignerCenter < Base
-    def tabs(contest = nil)
+    def tabs
       {
         requests: { name: I18n.t('designer_center.navigation.respond'),
                       href: designer_center_response_index_path},
