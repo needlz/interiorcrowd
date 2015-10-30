@@ -63,18 +63,36 @@
               .col-lg-4.col-sm-3
                 = f.label :email, 'E-mail'
               .col-lg-8.col-sm-9
-                = f.text_field :email, placeholder: 'example@address.com', class: 'form-control'
+                = f.text_field :email, placeholder: 'example@address.com', class: 'form-control', type: 'email'
             .clearfix
 
             .row
               .col-lg-4.col-sm-3
                 = f.label :email, 'Phone number'
               .col-lg-8.col-sm-9#phoneParts
-                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '123', class: 'form-control'
+                = f.text_field :phone,
+                  name: "rieltor_contact[phone][]",
+                  placeholder: '123',
+                  class: 'form-control',
+                  maxlength: 3,
+                  pattern: ".{3}",
+                  title: '3 digits'
                 %span &#8212;
-                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '456', class: 'form-control'
+                = f.text_field :phone,
+                  name: "rieltor_contact[phone][]",
+                  placeholder: '456',
+                  class: 'form-control',
+                  maxlength: 3,
+                  pattern: ".{3}",
+                  title: '3 digits'
                 %span &#8212;
-                = f.text_field :phone, name: "rieltor_contact[phone][]", placeholder: '7890', class: 'form-control'
+                = f.text_field :phone,
+                  name: "rieltor_contact[phone][]",
+                  placeholder: '7890',
+                  class: 'form-control',
+                  maxlength: 4,
+                  pattern: ".{4}",
+                  title: '4 digits'
             .clearfix
 
             .row
