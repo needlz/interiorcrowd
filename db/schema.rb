@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028143204) do
+ActiveRecord::Schema.define(version: 20151102125323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,8 @@ ActiveRecord::Schema.define(version: 20151028143204) do
     t.datetime "submitted_at"
     t.datetime "won_at"
   end
+
+  add_index "contest_requests", ["contest_id", "designer_id"], name: "index_contest_requests_on_contest_id_and_designer_id", unique: true, using: :btree
 
   create_table "contests", force: :cascade do |t|
     t.text     "desirable_colors"
