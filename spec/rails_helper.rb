@@ -217,8 +217,6 @@ RSpec.configure do |config|
 
   class Object
     def concurrent_calls(stubbed_methods, called_method, options={}, &block)
-      Fork::DefaultFlags.merge(exceptions: true) # raise original exception instead of Fork wrapper
-
       ActiveRecord::Base.connection.disconnect!
       options.reverse_merge!(count: 2)
       processes = options[:count].times.map do |i|

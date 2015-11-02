@@ -19,9 +19,7 @@ RSpec.describe ContestRequestCreation do
           processes[0].finish.wait
           processes[1].finish.wait
         end
-      end.to raise_error do |error|
-        expect(error)
-      end
+      end.to raise_error(Fork::UndumpableException, /ActiveRecord::RecordNotUnique/)
       expect(ContestRequest.count).to eq 1
     end
   end
