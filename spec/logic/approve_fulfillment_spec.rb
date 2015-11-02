@@ -74,6 +74,27 @@ RSpec.describe ApproveFulfillment do
         match_array ['published_item_without_mark', 'liked_published_item']
       )
     end
+
+    context 'on concurrent calls', concurrent: true do
+      let!(:approve_fulfillment) { ApproveFulfillment.new(request) }
+
+      it 'finalizes image items only once' do
+        expect do
+          approve_fulfillment.concurrent_calls([:ensure_correct_status, :update_status], :perform) do |processes|
+            processes[0].run_until(:ensure_correct_status).wait
+            processes[0].run_until(:update_status).wait
+            processes[1].run_until(:ensure_correct_status) && sleep(0.5) # waiting would cause deadlock
+            processes[1].run_until(:update_status) && sleep(0.5)
+            processes[0].finish.wait
+            processes[1].finish.wait
+          end
+        end.to raise_exception(ArgumentError)
+
+        expect(request.reload.image_items.final_design.pluck(:name)).to(
+            match_array ['published_item_without_mark', 'liked_published_item']
+        )
+      end
+    end
   end
 
   it 'moves the contest to the final_fulfillment status' do
