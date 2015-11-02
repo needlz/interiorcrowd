@@ -26,7 +26,27 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:transaction)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, concurrent: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -192,6 +212,33 @@ RSpec.configure do |config|
   def mock_stripe_cards_retrievement
     allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
       Hashie::Mash.new(stripe_customer_id: 'id')
+    end
+  end
+
+  class Object
+    def concurrent_calls(stubbed_methods, called_method, options={}, &block)
+      ActiveRecord::Base.connection.disconnect!
+
+      options.reverse_merge!(count: 2)
+      processes = options[:count].times.map do |i|
+        ForkBreak::Process.new do |breakpoints|
+          ActiveRecord::Base.establish_connection
+
+          # Add a breakpoint after invoking the method
+          stubbed_methods.each do |stubbed_method|
+            original_method = self.method(stubbed_method)
+            self.stub(stubbed_method) do |*args|
+              original_method.call(*args)
+              breakpoints << stubbed_method
+            end
+          end
+
+          self.send(called_method)
+        end
+      end
+      block.call(processes)
+    ensure
+      ActiveRecord::Base.establish_connection
     end
   end
 

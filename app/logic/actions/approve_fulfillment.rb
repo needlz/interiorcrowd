@@ -8,16 +8,12 @@ class ApproveFulfillment
   end
 
   def perform
-    raise ArgumentError unless contest_request.fulfillment_ready?
-    ActiveRecord::Base.transaction do
+    contest_request.with_lock do
+      ensure_correct_status
       DesignerInfoNotification.create(user_id: contest_request.designer_id,
                                       contest_id: contest_request.contest_id,
                                       contest_request_id: contest_request.id)
-
-      PhaseUpdater.new(contest_request).monitor_phase_change do
-        contest_request.approve_fulfillment!
-        contest_request.contest.final!
-      end
+      update_status
 
       finalize_image_items
 
@@ -29,6 +25,17 @@ class ApproveFulfillment
   private
 
   attr_reader :contest_request
+
+  def ensure_correct_status
+    raise ArgumentError.new('expected contest request to be "fulfillment_ready"') unless contest_request.fulfillment_ready?
+  end
+
+  def update_status
+    PhaseUpdater.new(contest_request).monitor_phase_change do
+      contest_request.approve_fulfillment!
+      contest_request.contest.final!
+    end
+  end
 
   def finalize_image_items
     copyist = ActiveRecordStampCreator.new(
