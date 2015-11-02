@@ -218,7 +218,6 @@ RSpec.configure do |config|
   class Object
     def concurrent_calls(stubbed_methods, called_method, options={}, &block)
       ActiveRecord::Base.connection.disconnect!
-
       options.reverse_merge!(count: 2)
       processes = options[:count].times.map do |i|
         ForkBreak::Process.new do |breakpoints|
