@@ -4,5 +4,5 @@
       role: "tab", id: "heading#{number}" }
     %h4.panel-title
       %a= faq_item[:question]
-  .panel-collapse.collapse{"aria-labelledby" => "heading#{number}", :role => "tabpanel", id: "collapse#{number}"}
+  .panel-collapse.collapse{"aria-labelledby" => "heading#{number}", id: "collapse#{number}"}
     .panel-body= simple_format(faq_item[:answer])

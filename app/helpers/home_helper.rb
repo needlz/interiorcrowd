@@ -3,19 +3,42 @@ module HomeHelper
   def faq_client_questions
     hello_link = { hello_email: mail_to(t('feedback_email')) }
     pictures_link = { pictures_email: mail_to(Settings.pictures_email) }
+    what_does_it_cost_link = { what_does_it_cost: link_to(t('faq.captions.see_here'),
+                                                          '#collapse19',
+                                                          data: { collapse: true }) }
+    additional_time_with_designer_link = { additional_time_with_designer:
+                                               link_to(t('faq.captions.see_here'),
+                                                       '#collapse11',
+                                                       data: { collapse: true }) }
+    what_does_cost_meeting_with_designer_link = { what_does_cost_meeting_with_designer:
+                                                      link_to(t('faq.captions.see_here'),
+                                                              '#collapse10',
+                                                              data: { collapse: true }) }
+    what_do_I_get_link = { what_do_I_get: link_to(t('faq.captions.what_exactly_do_I_get_quote'),
+                                                  '#collapse8',
+                                                  data: { collapse: true }) }
     [{ get_in_touch: hello_link },
-     :what_is,
+     :what_is_interiorcrowd,
+     :what_is_crowdsourcing,
      :who_are_designers,
+     :how_many_designers,
+     { want_to_meet_designer: what_does_it_cost_link },
      :style_profile,
-     :measuring,
-     :packages,
-     :contests,
-     :how_many_designs,
+     { what_do_I_get: additional_time_with_designer_link },
+     :I_want_two_things,
+     :what_does_cost_meeting_with_designer,
+     :additional_time_with_designer,
+     { designer_can_help_me_with: what_does_cost_meeting_with_designer_link },
+     :what_if_I_dont_like_the_products,
+     { which_package_should_I_choose: what_do_I_get_link },
+     :how_do_I_measure,
+     :how_do_contests_work,
      :how_to_collaborate_with_designer,
-     :how_to_take_pictures,
+     :how_long_everything_takes,
+     :what_does_it_cost,
+     { forgot_password: hello_link },
      { how_to_upload_additional_pictures: pictures_link },
-     :how_long,
-     { forgot_password: hello_link }]
+     :how_to_take_pictures]
   end
 
   def faq_designer_questions
