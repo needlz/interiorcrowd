@@ -62,8 +62,9 @@ module Blog
         end
         @blog_params.merge!(part => part_content)
       end
-      @blog_params['page_html_attributes'] = @blog_page_dom.css('html').first.attributes if @blog_page_dom.css('html')
-      @blog_params['page_body_attributes'] = @blog_page_dom.css('body').first.attributes if @blog_page_dom.css('body')
+      %w[html body].each do |outer_part|
+        @blog_params["page_#{ outer_part }_attributes"] = @blog_page_dom.css(outer_part).first.attributes if @blog_page_dom.try(:css, outer_part)
+      end
     end
 
     def load_head_content?
