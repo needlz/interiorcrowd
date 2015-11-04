@@ -1360,3 +1360,17 @@
   vertical-align: middle;
   position: relative;
 }
+
+.messaging-over-default-board{
+  text-align: center;
+  font-size: 17px;
+  height: 30%;
+  background-color: #fdfdfd;
+  color: #8b8b8b;
+  top: 35%;
+  position: relative;
+}
+
+.messaging-info{
+  transform: translateY(50%);
+}

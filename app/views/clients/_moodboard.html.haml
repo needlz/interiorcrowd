@@ -4,7 +4,7 @@
       - if contest_request.cover_image('initial')
         %img.mobileBoard{ src: contest_request.cover_image('initial').medium_size_url }
       - else
-        %img.mobileBoard{ src: '/assets/portfolio_example.png' }
+        %img.mobileBoard{ src: '/assets/default_concept_board.png' }
     .row.title
       - if contest_request.sound
         .col-xs-3.designerName
@@ -32,7 +32,10 @@
         - if contest_request.cover_image('initial')
           .image-container{ style: "background-image: #{ css_url(contest_request.cover_image('initial').medium_size_url) }" }
         - else
-          .image-container{ style: "background-image: #{ css_url('/assets/portfolio_example.png') }" }
+          .image-container{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }; opacity: 0.75" }
+            .messaging-over-default-board
+              .messaging-info
+                = t('client_center.entries.board_will_be_soon')
     .fullWidthLine
     - if show_answer_options && @client
       = render partial: 'clients/moodboard_answers',
