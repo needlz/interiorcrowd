@@ -26,10 +26,6 @@
   }
 }
 
-.pageNumber a, .pageNumber span{
-  width: initial;
-}
-
 .pageNumber{
   display: inline-block;
   width: auto;
@@ -1363,7 +1359,6 @@
 
 .messaging-over-default-board{
   text-align: center;
-  font-size: 17px;
   height: 30%;
   background-color: #fdfdfd;
   color: #8b8b8b;
@@ -1373,6 +1368,7 @@
 
 .messaging-info{
   transform: translateY(50%);
+  font-size: 18px;
 }
 
 .comments-count{
@@ -1387,5 +1383,13 @@
 
   span{
     margin-right: 12px;
+  }
+}
+
+.invite-more-designers{
+  a{
+    color: #666666;
+    text-decoration: none;
+    font-size: 20px;
   }
 }

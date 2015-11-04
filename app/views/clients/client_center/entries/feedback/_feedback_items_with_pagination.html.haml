@@ -21,5 +21,12 @@
         = t('client_center.entries.reviewer_invitations.more_boards')
 .pagination-row.text-center.hidden-xs
   = will_paginate(contest_page.contest_requests,
-      class: 'pageNumber center-block',
-      renderer: SubmissionsPaginationRenderer)
+      class: 'pageNumber center-block pull-right',
+      renderer: SubmissionsPaginationRenderer,
+      previous_label: t('client_center.entries.pagination.previous'),
+      next_label: t('client_center.entries.pagination.next'))
+  .pull-left.invite-more-designers
+    %a{ href: '#' }
+      +
+      = t('client_center.entries.reviewer_invitations.invite_more_designers')
+

@@ -415,6 +415,10 @@ en:
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
         more_boards: More concept boards
+        invite_more_designers: Invite more designers
+      pagination:
+        previous: <span class="glyphicon glyphicon-menu-left" style="padding:0px;"></span>
+        next: <span class="glyphicon glyphicon-menu-right" style="padding:0px;"></span>
       choose_concept: >
         During the Initial Concept stage, designers will submit boards which reflect your aesthetic and needs.
         You can rate the designers for reference, request feedback from friends and family,
@@ -435,9 +439,9 @@ en:
           facebook: Share
           pinterest: Pin it
         share_to:
-          twitter: Share to Tweeter
+          twitter: Share to Twitter
           facebook: Share to Facebook
-          pinterest: Share to Pintrest
+          pinterest: Share to Pinterest
         complete_lock: Get the items to complete your look
         pull_together: Instructions to pull your look together
       notes_title: Want to send a note to all the designers?

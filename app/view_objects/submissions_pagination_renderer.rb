@@ -13,6 +13,8 @@ class SubmissionsPaginationRenderer < WillPaginate::ActionView::LinkRenderer
   def previous_or_next_page(page, text, classname)
     if page
       link(text, page, class: classname)
+    else
+      tag(:span, text, class: classname)
     end
   end
 
