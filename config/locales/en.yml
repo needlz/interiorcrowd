@@ -483,6 +483,7 @@ en:
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
       board_will_be_soon: Designer has joined your project! Concept board will be submitted soon.
+      comments: comments
       timelines:
         winner_selection:
           expired: Please pick a winner!
