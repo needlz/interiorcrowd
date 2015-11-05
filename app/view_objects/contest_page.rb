@@ -11,7 +11,7 @@ class ContestPage
     @answer = options[:answer]
     shown_requests = all_requests.by_answer(answer)
     @contest_requests = shown_requests.by_page(options[:page])
-    @notes = contest.notes.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
+    @notes = contest.notes.by_client.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)
   end
 
