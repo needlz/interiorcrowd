@@ -27,7 +27,7 @@ class @ProfileEditor extends InlineEditor
     formHtml.parents(@attributeSelector).find('.edit-button').hide()
 
   bindDoneButton: ->
-    $('body').on('click', '.edit .savePassBtn', @, (event)->
+    $('body').on('click', '.edit .save-button', @, (event)->
       editor = event.data
       $attributeRow = $(event.target).parents(editor.attributeSelector)
       attribute = $attributeRow.data(editor.attributeIdentifierData)

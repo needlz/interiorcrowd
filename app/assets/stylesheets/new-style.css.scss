@@ -99,6 +99,28 @@ body{
 .profileEditingBox{
   border-radius: 10px;
   margin: 0px 50px;
+
+
+  .mobileButtons{
+    margin-top: 20px;
+
+    .button{
+      width: 100px;
+      font-size: 20px;
+    }
+  }
+
+  @media(max-width: 767px){
+    .mobileButtons{
+      .button{
+        width: 45%;
+      }
+
+      .cancel-button{
+        float: right;
+      }
+    }
+  }
 }
 .profileEditingBox .row.attribute{
   padding: 30px 0px;
@@ -106,7 +128,6 @@ body{
 .profileEditingBox .row.attribute .title p{
   margin: 0px;
   font-size: 18px;
-  padding-left: 20px;
 }
 .profileEditingBox .row .placeholder .commonViewStyle p{
   margin: 0px;
@@ -137,6 +158,10 @@ body{
   display: block;
   height: 38px;
   width: 367px;
+
+  @media(max-width: 767px) {
+    width: 100%;
+  }
 }
 .profileEditingBox .commonFormStyle input[type=text], .profileEditingBox .commonFormStyle input[type=password], .profileEditingBox .bootstrap-select .selectpicker{
   border-radius: 3px;
