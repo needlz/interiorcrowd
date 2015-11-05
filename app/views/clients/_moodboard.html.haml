@@ -28,7 +28,7 @@
           %h3= contest_request.designer.name
       .comments-count.pull-right
         %span= t('client_center.entries.comments')
-        %b= '0'
+        %b= contest_request.comments.by_designer.count
     .fullWidthLine
     .designImg
       %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
