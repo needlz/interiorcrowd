@@ -26,10 +26,19 @@ class @SignUp
       method: 'POST'
       dataType: 'json'
       success: (json)=>
-        location.reload() if json.id
+        if json.id
+          @logFacebookPixelEvent(json.id)
+          setTimeout(
+            ->
+              location.reload()
+            200
+          )
       error: (response)=>
         alert(response.responseText)
 
     ajaxRequestOptions = $.extend({}, defaultOptions, requestOptions)
 
     $.ajax(ajaxRequestOptions)
+
+  @logFacebookPixelEvent: (clientId)->
+    fbq('track', 'CompleteRegistration', { client_id: clientId })

@@ -60,6 +60,7 @@ common: &defaults
   facebook:
     app_id: '<%= ENV['FACEBOOK_APP_ID'] %>'
     secret: <%= ENV['FACEBOOK_APP_SECRET'] %>
+    pixel_id: <%= ENV['FACEBOOK_PIXEL_ID'] %>
   show_beta_functionality: <%= !Rails.env.production? %>
   log_requests_to_blog: <%= Rails.env.development? %>
   payment_enabled: <%= !Rails.env.production? %>
