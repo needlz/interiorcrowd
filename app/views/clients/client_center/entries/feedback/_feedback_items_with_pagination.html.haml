@@ -26,7 +26,7 @@
       previous_label: t('client_center.entries.pagination.previous'),
       next_label: t('client_center.entries.pagination.next'))
   .pull-left.invite-more-designers
-    %a{ href: '#' }
+    = link_to invite_designers_contests_path(id: contest_page.contest.id) do
       +
       = t('client_center.entries.reviewer_invitations.invite_more_designers')
 

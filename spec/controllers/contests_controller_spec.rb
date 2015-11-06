@@ -774,4 +774,30 @@ RSpec.describe ContestsController do
 
   end
 
+  describe 'GET invite_designers' do
+    before do
+      sign_in(client)
+    end
+
+    context 'when contest is in \'Submission\' Phase' do
+      let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+
+      it 'renders page' do
+        get :invite_designers, id: contest.id
+        expect(response).to render_template(:invite_designers)
+      end
+    end
+
+    context 'when contest is not in \'Submission\' Phase' do
+      let(:contest) { Fabricate(:contest, client: client) }
+
+      it 'returns 404' do
+        get :invite_designers, id: contest.id
+        expect(contest.status).not_to eq('submission')
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+  end
+
 end

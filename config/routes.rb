@@ -70,6 +70,7 @@ InteriorC::Application.routes.draw do
         get 'preview'
         post 'save_preview'
         post 'upload'
+        get 'invite_designers'
         get 'account_creation'
         get 'payment_details'
         get 'payment_summary'
