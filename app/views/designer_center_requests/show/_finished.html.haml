@@ -1,32 +1,41 @@
-:javascript
-
-  var fitHeight = function(){
-    $('.finalNoteToDesigner .comments').enscroll({
-          verticalTrackClass: 'scrollBoxCommentsTrack',
-          verticalHandleClass: 'scrollBoxCommentsHandle',
+:coffee
+  fitHeight = ->
+    $('.finalNoteToDesigner .comments').enscroll(
+          verticalTrackClass: 'scrollBoxCommentsTrack'
+          verticalHandleClass: 'scrollBoxCommentsHandle'
           minScrollbarLength: 28
-    });
+    )
 
-    var oneInRow = window.matchMedia('(max-width: 768px)').matches
+    oneInRow = window.matchMedia('(max-width: 768px)').matches
 
-    $('.comment').each(function(i, row){
-      var maxHeight = 0
-      var parts = $(row).find('> div')
+    $('.comment').each((i, row)->
+      maxHeight = 0
+      parts = $(row).find('> div')
       parts.css('height', '')
-      if(!oneInRow){
-        parts.each(function(){
-          if (maxHeight < $(this).height()){
+      unless oneInRow
+        parts.each(->
+          if maxHeight < $(this).height()
             maxHeight = $(this).height()
-          }
-        })
-      }
+
+        )
+
       parts.css('height', maxHeight + 'px')
-    })
-  }
+    )
 
   $(document).resize(fitHeight)
   $(fitHeight)
 
+  $ ->
+    $('#final-note-to-client').on 'ajax:success', (e, data)->
+      $container = $(e.target).closest('.finalNoteToDesigner')
+      $scrolledComments = $container.find('.comments')
+      $scrolledComments.html(data.comments_html)
+      $scrolledComments.scrollTop($scrolledComments[0].scrollHeight)
+      $container.find('[name="final_note[text]"]').val('')
+      $container.find('.commentsCount').text(data.comments_count_text)
+    .on 'ajax:before', (e)->
+      console.log trimedVal($(e.target).find('[name=text]'))
+      return false if trimedVal($(e.target).find('[name="final_note[text]"]')) == ''
 
 .finishedRequest.ccFinalPage
   .clearfix.designerDetail
@@ -59,8 +68,13 @@
     .col-sm-12.finalNoteToDesigner
       .titleRow
         %span.header= t('designer_center.finished.final_note.title')
-        - if show_page.request_comments.present?
-          %span.commentsCount #{ show_page.request_comments.length } comments
-      - if show_page.request_comments.present?
+        - if show_page.final_notes.present?
+          %span.commentsCount= t('designer_center.finished.final_note.comments_count', count: show_page.final_notes.length)
         .comments
-          = render 'designer_center_requests/show/request_comments_read_only', comments: show_page.request_comments
+          = render 'designer_center_requests/show/request_comments_read_only',
+            comments: show_page.final_notes
+      = form_tag final_note_index_path, remote: true, id: 'final-note-to-client' do
+        = hidden_field_tag 'contest_request_id', show_page.contest_request.id
+        %textarea{ name: 'final_note[text]' }
+        %button.send-button.greenButton{ data: {disable_with: "Saving..."} }
+          = t('designer_center.finished.final_note.send_button')

@@ -158,9 +158,9 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    resources :final_note_to_designer,
-              controller: 'final_note_to_designer',
-              as: 'final_note_to_designer',
+    resources :final_notes,
+              controller: 'final_notes',
+              as: 'final_note',
               only: [:create]
 
     resources :credit_cards, only: [:create, :edit, :update, :destroy] do

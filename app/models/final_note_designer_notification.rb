@@ -12,11 +12,12 @@
 #  read                     :boolean          default(FALSE)
 #  contest_comment_id       :integer
 #  concept_board_comment_id :integer
+#  final_note_id            :integer
 #
 
-class FinalNoteDesignerNotification < DesignerNotification;
+class FinalNoteDesignerNotification < DesignerNotification
 
   belongs_to :contest_request
-  has_one :final_note_to_designer, foreign_key: :designer_notification_id
+  belongs_to :final_note
 
 end

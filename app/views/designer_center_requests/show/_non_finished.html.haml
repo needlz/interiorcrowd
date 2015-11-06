@@ -2,8 +2,6 @@
   .col-md-8.disablePadding
     = render 'design_brief_link', request: request, request_view: request_view
     .initialImage
-      - if show_page.finished?
-        %p.font18= request.final_note
       - if request.lost?
         .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
         .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
@@ -12,8 +10,7 @@
               items: show_page.current_lookbook_items,
               button_title: t('designer_center.responses.item.edit_concept_board')
       - else
-        = render 'shared/moodboard',
-              items:  show_page.current_lookbook_items
+        = render 'shared/moodboard', items:  show_page.current_lookbook_items
 
   .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(request.id) } }
 
@@ -22,12 +19,13 @@
       .designer-voice
         = render 'contest_requests/listen', request: request
       .hLine
-    - if request.commenting_enabled?
-      = render 'designer_center_requests/edit/comments', request: request,
-            comments: request.comments, show_comment_switcher: !request_view.initial_concept_board?
+    - if request.comments.present?
+      = render 'designer_center_requests/edit/comments',
+        request: request,
+        comments: request.comments,
+        show_comment_switcher: !request_view.initial_concept_board?,
+        readonly: !show_page.editable?
   .clearfix
   - if show_page.image_items_partial
-    - if show_page.finished?
-      %p.font18.marginTop20= request.pull_together_note
     = render show_page.image_items_partial
   = render 'designer_center_requests/footer_buttons'

@@ -12,6 +12,7 @@
 #  read                     :boolean          default(FALSE)
 #  contest_comment_id       :integer
 #  concept_board_comment_id :integer
+#  final_note_id            :integer
 #
 
 class ClientNotification < UserNotification

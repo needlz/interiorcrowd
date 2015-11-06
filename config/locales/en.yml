@@ -607,8 +607,9 @@ en:
     finished:
       final_note:
         title: Want to send a final note to your client?
-        placeholder: >
-
+        comments_count:
+          one: 1 comment
+          other: '%{count} comments'
         send_button: Send
 
     milestones:

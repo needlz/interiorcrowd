@@ -21,7 +21,7 @@ class ContestResponseView
     @answer = I18n.t("client_center.entries.answers.#{ response.answer }") if response.submitted? && response.answer
     @contest = ContestShortDetails.new(response.contest)
     @header_text = HEADER_TEXTS[response.status]
-    @comments_count = response.comments.count
+    @comments_count = response.comments_count
     @image_items = response.image_items.for_view
   end
 

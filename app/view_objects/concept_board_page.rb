@@ -42,6 +42,10 @@ class ConceptBoardPage < PhasesHolder
     @request_comments ||= contest_request.comments.map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
   end
 
+  def final_notes
+    @final_notes ||= (contest_request.comments + contest_request.final_notes).sort_by(&:created_at).map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
+  end
+
   protected
 
   def create_phases_stripe
