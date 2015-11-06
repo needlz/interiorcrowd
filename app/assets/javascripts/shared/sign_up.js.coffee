@@ -27,7 +27,7 @@ class @SignUp
       dataType: 'json'
       success: (json)=>
         if json.id
-          @logFacebookPixelEvent(json.id)
+          fbq('track', 'CompleteRegistration')
           setTimeout(
             ->
               location.reload()
@@ -39,6 +39,3 @@ class @SignUp
     ajaxRequestOptions = $.extend({}, defaultOptions, requestOptions)
 
     $.ajax(ajaxRequestOptions)
-
-  @logFacebookPixelEvent: (clientId)->
-    fbq('track', 'CompleteRegistration', { client_id: clientId })
