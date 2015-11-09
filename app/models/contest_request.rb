@@ -75,12 +75,14 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: %w(draft submitted fulfillment_ready fulfillment_approved)) }
+  scope :has_designer_comments, -> { joins(:comments).where('concept_board_comments.role = ?', 'Designer') }
   scope :ever_published, -> { where(status: %w(closed submitted fulfillment_ready fulfillment_approved finished)) }
+  scope :client_sees_in_entries, -> { has_designer_comments.union(ever_published) }
   scope :submitted, ->{ where(status: %w(submitted)) }
   scope :fulfillment, ->{ where(status: FULFILLMENT_STATUSES) }
   scope :finished, ->{ where(status: 'finished') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
-  scope :with_design_properties, -> {includes(contest: [:design_category, :design_space])}
+  scope :with_design_properties, -> { includes(contest: [:design_category, :design_space]) }
 
   def change_status
     selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')

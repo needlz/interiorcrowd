@@ -5,7 +5,7 @@ class ContestPage
 
     @view_context = options[:view_context]
     @contest_view = ContestView.new(contest_attributes: contest) if contest
-    all_requests = contest.requests.ever_published.includes(:designer, :lookbook, :sound)
+    all_requests = contest.requests.ever_published.union(contest.requests.has_designer_comments).includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
     @comments_present = contest.notes.present?
     @answer = options[:answer]
