@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102125323) do
+ActiveRecord::Schema.define(version: 20151104085724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -302,11 +302,14 @@ ActiveRecord::Schema.define(version: 20151102125323) do
     t.datetime "updated_at"
   end
 
-  create_table "final_note_to_designers", force: :cascade do |t|
+  create_table "final_notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "designer_notification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "contest_request_id",       null: false
+    t.integer  "author_id",                null: false
+    t.string   "author_role",              null: false
   end
 
   create_table "image_items", force: :cascade do |t|
@@ -509,6 +512,7 @@ ActiveRecord::Schema.define(version: 20151102125323) do
     t.boolean  "read",                                 default: false
     t.integer  "contest_comment_id"
     t.integer  "concept_board_comment_id"
+    t.integer  "final_note_id"
   end
 
   add_index "user_notifications", ["contest_id"], name: "index_user_notifications_on_contest_id", using: :btree

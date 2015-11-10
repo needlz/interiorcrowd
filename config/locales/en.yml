@@ -1275,3 +1275,21 @@ en:
       -
         title: Step five
         description: 'The client uses the designer''s room layout, shopping list and assembly plan to bring their room to life.'
+
+  page_titles:
+    client_center:
+      entries: 'Entries'
+
+    designer_center:
+      contest_request: 'Design for "%{contest_name}" contest'
+
+  designer_center_requests:
+    show:
+      finished:
+        final_note:
+          title: Want to send a final note to your client?
+          comments_count:
+            one: 1 comment
+            other: '%{count} comments'
+          send_button: Send
+          saving: Saving...

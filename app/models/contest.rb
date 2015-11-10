@@ -34,6 +34,7 @@
 #  designers_explore_other_colors  :boolean          default(FALSE)
 #  designers_only_use_these_colors :boolean          default(FALSE)
 #  finished_at                     :datetime
+#  submission_started_at           :datetime
 #
 
 class Contest < ActiveRecord::Base

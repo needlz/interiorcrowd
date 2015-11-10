@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: rieltor_contacts
+#
+#  id         :integer          not null, primary key
+#  first_name :string
+#  last_name  :string
+#  brokerage  :string
+#  email      :string
+#  phone      :string
+#  choice     :string
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class RieltorContact < ActiveRecord::Base
 
   CHOICES = {call: 'call_me', email: 'email_me'}

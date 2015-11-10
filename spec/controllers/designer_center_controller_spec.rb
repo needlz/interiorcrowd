@@ -66,9 +66,13 @@ RSpec.describe DesignerCenterController do
     let!(:loser_notification) { DesignerLoserInfoNotification.create!(user_id: designer.id,
                                                                       contest_id: contest.id) }
     let!(:final_note) do
+      final_note = FinalNote.create!(author_id: client.id,
+                                     author_role: client.role,
+                                     contest_request: request,
+                                     text: 'text')
       notification = FinalNoteDesignerNotification.create!(user_id: designer.id,
-                                                           contest_request: request)
-      FinalNoteToDesigner.create!(designer_notification_id: notification.id)
+                                                           contest_request: request,
+                                                           final_note: final_note)
       notification
     end
 

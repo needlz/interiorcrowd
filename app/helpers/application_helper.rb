@@ -60,4 +60,9 @@ module ApplicationHelper
     BudgetPlan::PLANS[0]
   end
 
+  def title(pagename)
+    result = "#{ pagename } - InteriorCrowd"
+    content_for(:title) { result }
+  end
+
 end

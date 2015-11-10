@@ -71,6 +71,7 @@ class ContestRequest < ActiveRecord::Base
   has_many :product_items, ->{ product_items }, class_name: 'ImageItem'
   has_many :similar_styles, ->{ similar_styles }, class_name: 'ImageItem'
   has_one :sound, dependent: :destroy
+  has_many :final_notes
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: %w(draft submitted fulfillment_ready fulfillment_approved)) }
@@ -155,6 +156,10 @@ class ContestRequest < ActiveRecord::Base
 
   def name
     "Concept board #{ id }"
+  end
+
+  def collaboration_and_final_comments_count
+    comments.count + final_notes.count
   end
 
   private

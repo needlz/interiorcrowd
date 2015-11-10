@@ -5,7 +5,7 @@ class ProductListMarks
   @init: ()->
     $imageMarks = $(@imageMarksSelector)
     $imageMarks.change(@onMarkClick)
-    $imageMarks.on 'ajax.success', (e, data)->
+    $imageMarks.on 'ajax:success', (e, data)->
       mixpanel.track 'Product item or Similar style marked',
         { mark: mark, contest_request_id: $('.concept-board').data('id') }
 
