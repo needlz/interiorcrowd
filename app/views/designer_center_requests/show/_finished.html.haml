@@ -1,41 +1,6 @@
 :coffee
-  fitHeight = ->
-    $('.finalNoteToDesigner .comments').enscroll(
-          verticalTrackClass: 'scrollBoxCommentsTrack'
-          verticalHandleClass: 'scrollBoxCommentsHandle'
-          minScrollbarLength: 28
-    )
-
-    oneInRow = window.matchMedia('(max-width: 768px)').matches
-
-    $('.comment').each((i, row)->
-      maxHeight = 0
-      parts = $(row).find('> div')
-      parts.css('height', '')
-      unless oneInRow
-        parts.each(->
-          if maxHeight < $(this).height()
-            maxHeight = $(this).height()
-
-        )
-
-      parts.css('height', maxHeight + 'px')
-    )
-
-  $(document).resize(fitHeight)
-  $(fitHeight)
-
   $ ->
-    $('#final-note-to-client').on 'ajax:success', (e, data)->
-      $container = $(e.target).closest('.finalNoteToDesigner')
-      $scrolledComments = $container.find('.comments')
-      $scrolledComments.html(data.comments_html)
-      $scrolledComments.scrollTop($scrolledComments[0].scrollHeight)
-      $container.find('[name="final_note[text]"]').val('')
-      $container.find('.commentsCount').text(data.comments_count_text)
-    .on 'ajax:before', (e)->
-      console.log trimedVal($(e.target).find('[name=text]'))
-      return false if trimedVal($(e.target).find('[name="final_note[text]"]')) == ''
+    DesignerFinishedContestRequestPage.init()
 
 .finishedRequest.ccFinalPage
   .clearfix.designerDetail
@@ -67,14 +32,14 @@
   .row
     .col-sm-12.finalNoteToDesigner
       .titleRow
-        %span.header= t('designer_center.finished.final_note.title')
+        %span.header= t('.final_note.title')
         - if show_page.final_notes.present?
-          %span.commentsCount= t('designer_center.finished.final_note.comments_count', count: show_page.final_notes.length)
+          %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
         .comments
           = render 'designer_center_requests/show/request_comments_read_only',
             comments: show_page.final_notes
       = form_tag final_note_index_path, remote: true, id: 'final-note-to-client' do
         = hidden_field_tag 'contest_request_id', show_page.contest_request.id
         %textarea{ name: 'final_note[text]' }
-        %button.send-button.greenButton{ data: {disable_with: "Saving..."} }
-          = t('designer_center.finished.final_note.send_button')
+        %button.send-button.greenButton{ data: {disable_with: t('.final_note.saving')} }
+          = t('.final_note.send_button')

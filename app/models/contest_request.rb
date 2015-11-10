@@ -158,7 +158,7 @@ class ContestRequest < ActiveRecord::Base
     "Concept board #{ id }"
   end
 
-  def comments_count
+  def collaboration_and_final_comments_count
     comments.count + final_notes.count
   end
 

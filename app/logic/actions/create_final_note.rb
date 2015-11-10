@@ -6,7 +6,7 @@ class CreateFinalNote
     @contest_request = options[:contest_request]
     @author = options[:author]
     @custom_final_note_attributes = options[:final_note_attributes]
-    raise ArgumentError.new('user not allowe to leave a final note') unless user_allowed?
+    raise ArgumentError.new('user is not allowed to leave a final note') unless user_allowed?
   end
 
   def perform

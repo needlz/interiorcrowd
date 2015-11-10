@@ -1,6 +1,6 @@
 class ContestResponseView
 
-  attr_reader :contest, :status, :status_name, :answer, :id, :header_text, :comments_count, :image_items
+  attr_reader :contest, :status, :status_name, :answer, :id, :header_text, :collaboration_and_final_comments_count, :image_items
 
   HEADER_TEXTS = {
     'fulfillment_ready' => I18n.t('designer_center.edit.above_image'),
@@ -21,7 +21,7 @@ class ContestResponseView
     @answer = I18n.t("client_center.entries.answers.#{ response.answer }") if response.submitted? && response.answer
     @contest = ContestShortDetails.new(response.contest)
     @header_text = HEADER_TEXTS[response.status]
-    @comments_count = response.comments_count
+    @comments_count = response.collaboration_and_final_comments_count
     @image_items = response.image_items.for_view
   end
 

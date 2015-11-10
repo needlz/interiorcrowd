@@ -16,6 +16,14 @@ RSpec.describe FinalNote do
                                          contest_request: contest_request) }
 
   describe 'validations' do
+    it 'allows correct attributes' do
+      expect do
+        final_note_by_client.update_attributes!(author_role: designer.role,
+                                                author_id: designer.id,
+                                                contest_request_id: Fabricate(:contest_request).id)
+      end.to_not raise_error
+    end
+
     it 'require contest_request_id' do
       expect do
         final_note_by_client.update_attributes!(contest_request_id: nil)
@@ -32,14 +40,6 @@ RSpec.describe FinalNote do
       expect do
         final_note_by_client.update_attributes!(author_role: 'unknown')
       end.to raise_error(ActiveRecord::RecordInvalid)
-    end
-
-    it 'allows correct attributes' do
-      expect do
-        final_note_by_client.update_attributes!(author_role: designer.role,
-                                              author_id: designer.id,
-                                              contest_request_id: Fabricate(:contest_request).id)
-      end.to_not raise_error
     end
 
     it 'requires text' do
