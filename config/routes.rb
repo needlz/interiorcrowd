@@ -33,6 +33,9 @@ InteriorC::Application.routes.draw do
         post 'approve_fulfillment'
         get 'download'
       end
+      collection do
+        post 'add_comment'
+      end
     end
 
     resources :contests, only: [:show, :update] do
