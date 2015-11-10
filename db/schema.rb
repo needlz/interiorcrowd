@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20151102125323) do
     t.string   "state",                   limit: 255
     t.text     "address"
     t.text     "city"
-    t.boolean  "active"
+    t.boolean  "active",                  default: true
     t.integer  "facebook_user_id",        limit: 8
   end
 

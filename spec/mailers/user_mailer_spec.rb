@@ -125,6 +125,14 @@ RSpec.describe UserMailer do
       designer
       expect(UserMailer.new_project_on_the_platform(Designer.active)).to be_present
     end
+
+    it 'to designers: no submissions for client' do
+      expect(UserMailer.to_designers_client_no_submissions(contest)).to be_present
+    end
+
+    it 'to designers: only one submission for client' do
+      expect(UserMailer.to_designers_one_submission_only(contest)).to be_present
+    end
   end
 
 end

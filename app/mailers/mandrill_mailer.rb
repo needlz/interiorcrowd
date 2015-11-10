@@ -36,7 +36,8 @@ module MandrillMailer
       metadata: {
         email_id: options[:email_id],
         environment: Rails.env
-      }
+      },
+      auto_text: true
     }
     message.merge!(subject: options[:subject]) if options[:subject]
     api_response = api.messages.send_template(@template_name, [], message)

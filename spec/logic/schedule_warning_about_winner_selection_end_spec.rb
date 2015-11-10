@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe ScheduleWarningAboutWinnerSelectionEnd do
+RSpec.describe ScheduledNotifications::WarningAboutWinnerSelectionEnd do
 
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client, status: 'winner_selection') }
-  let(:scheduler) { ScheduleWarningAboutWinnerSelectionEnd }
+  let(:scheduler) { ScheduledNotifications::WarningAboutWinnerSelectionEnd }
 
   context 'one day left' do
     before do

@@ -136,4 +136,28 @@ RSpec.describe Contest do
     end
   end
 
+  describe '#not_submitted_designers' do
+    let!(:not_submitted_designer){ Fabricate(:designer) }
+    let!(:inactive_designer){ Fabricate(:designer, active: false) }
+    let!(:invited_only_designer) do
+      designer = Fabricate(:designer)
+      Fabricate(:designer_invite_notification, user_id: designer.id, contest: contest)
+      designer
+    end
+    let!(:designer_draft) do
+      designer = Fabricate(:designer)
+      Fabricate(:contest_request, designer: designer, contest: contest, status: 'draft')
+      designer
+    end
+    let!(:designer_submitted) do
+      designer = Fabricate(:designer)
+      Fabricate(:contest_request, designer: designer, contest: contest, status: 'submitted')
+      designer
+    end
+
+    it 'returns designers who have not submitted a response' do
+      expect(contest.not_submitted_designers).to match_array([not_submitted_designer, invited_only_designer])
+    end
+  end
+
 end

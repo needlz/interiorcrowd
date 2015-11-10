@@ -272,6 +272,16 @@ class UserMailer < ActionMailer::Base
     mail to: recipients, email_id: email_id
   end
 
+  def to_designers_one_submission_only(contest, email_id = nil)
+    template 'to_designers_one_submission_only'
+    mail_about_contest_submissions(contest, email_id)
+  end
+
+  def to_designers_client_no_submissions(contest, email_id = nil)
+    template 'To_designers_Client_no_submissions'
+    mail_about_contest_submissions(contest, email_id)
+  end
+
   private
 
   def asset_url(asset_path)
@@ -322,6 +332,20 @@ class UserMailer < ActionMailer::Base
 
   def renderer
     @renderer ||= RenderingHelper.new
+  end
+
+  def mail_about_contest_submissions(contest, email_id)
+    client = contest.client
+    designers = contest.not_submitted_designers
+    set_template_values(
+        CLIENT_NAME: client.name,
+        CONTEST_NAME: contest.name,
+        CONTEST_URL: designer_center_contest_url(id: contest.id)
+    )
+    recipients = designers.map do |designer|
+      wrap_recipient(designer.email, designer.name, 'to')
+    end
+    mail to: recipients, email_id: email_id
   end
 
 end
