@@ -507,6 +507,7 @@ en:
           time_left: '%{time_left} left'
           get_in_touch: Please get in touch if <span></span> you need assistance
       invite_designers:
+        page_title: Client Center - Invite more designers
         back_to_entries: < Back to Entries
     winner_selected:
       the_winner: The winner

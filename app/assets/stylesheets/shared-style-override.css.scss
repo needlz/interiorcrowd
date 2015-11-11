@@ -1386,6 +1386,26 @@
   }
 }
 
+@media (max-width: 992px) {
+  .comments-count{
+    margin-top: -10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .comments-count{
+    margin-top: -13%;
+    margin-right: 5%;
+  }
+}
+
+@media (max-width: 375px) {
+  .comments-count{
+    margin-top: -14%;
+    margin-right: 7%;
+  }
+}
+
 .invite-more-designers{
   margin-top: 1.5%;
   a{
