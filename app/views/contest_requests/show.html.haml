@@ -16,9 +16,8 @@
     .col-md-4
       = render partial: 'contest_requests/submission_info',
           locals: { designer: @request.designer, submitted_at: @request.created_at, request: @request }
-      - if @request.commenting_enabled?
-        = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
-            comments: @request.comments, show_comment_switcher: false }
+      = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
+          comments: @request.comments, show_comment_switcher: false }
 
 = render partial: 'clients/client_center/layout'
 = render partial: 'clients/client_center/moodboard_winner_dialog'

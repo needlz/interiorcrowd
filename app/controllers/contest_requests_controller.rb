@@ -23,7 +23,7 @@ class ContestRequestsController < ApplicationController
   end
 
   def answer
-    replied = @request.reply(params[:answer], session[:client_id])
+    replied = @request.reply(params[:answer], current_user.id)
     render json: { answered: replied }
   end
 
