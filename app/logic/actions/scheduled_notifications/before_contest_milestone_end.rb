@@ -16,8 +16,8 @@ module ScheduledNotifications
 
     def self.future_range
       range_start = Time.current + period_before_milestone_end
-      range_emd = range_start + scheduler_interval
-      range_start..range_emd
+      range_end = range_start + scheduler_interval
+      range_start..range_end
     end
 
     def self.perform

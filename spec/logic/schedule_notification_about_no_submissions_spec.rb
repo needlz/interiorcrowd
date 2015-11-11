@@ -8,7 +8,9 @@ RSpec.describe ScheduledNotifications::NoSubmissions do
 
   context 'four days left' do
     before do
-      contest.update_attributes!(phase_end: Time.current + 4.days + 1.minute)
+      contest.update_attributes!(phase_end: Time.current +
+                                     ScheduledNotifications::NoSubmissions.period_before_milestone_end +
+                                     Jobs::TimeConditionalNotifications::INTERVAL/2)
     end
     it 'schedules mail' do
       scheduler.perform

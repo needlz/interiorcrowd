@@ -9,7 +9,9 @@ RSpec.describe Jobs::TimeConditionalNotifications do
 
   context 'when 4 days to the end of submission milestone' do
     before do
-      contest.update_attributes!(phase_end: Time.current + 4.days + 20.minutes)
+      contest.update_attributes!(phase_end: Time.current +
+                                     ScheduledNotifications::NoSubmissions.period_before_milestone_end +
+                                     Jobs::TimeConditionalNotifications::INTERVAL/2)
     end
 
     context 'when no concept boards submitted' do
