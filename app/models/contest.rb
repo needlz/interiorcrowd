@@ -235,6 +235,17 @@ class Contest < ActiveRecord::Base
     !incomplete?
   end
 
+  def not_submitted_designers
+    designers = Designer.arel_table
+    contest_requests = ContestRequest.arel_table
+
+    contest_requests_by_designer = contest_requests.project(Arel.sql('id')).
+        where(contest_requests[:contest_id].eq(id).
+                  and(contest_requests[:designer_id].eq(designers[:id])))
+
+    Designer.active.includes(:contest_requests).where(contest_requests_by_designer.exists.not)
+  end
+
   private
 
   def create_retailer_preferences

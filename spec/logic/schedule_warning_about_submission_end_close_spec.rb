@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe ScheduleWarningAboutSubmissionEndClose do
+RSpec.describe ScheduledNotifications::WarningAboutSubmissionEndClose do
 
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:contest_request) { Fabricate(:contest_request, contest: contest) }
-  let(:scheduler) { ScheduleWarningAboutSubmissionEndClose }
+  let(:scheduler) { ScheduledNotifications::WarningAboutSubmissionEndClose }
 
   context 'one day left' do
     before do
