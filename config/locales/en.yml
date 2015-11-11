@@ -506,6 +506,8 @@ en:
           designer_will_put_together: You designer will put <span></span> together your final design.
           time_left: '%{time_left} left'
           get_in_touch: Please get in touch if <span></span> you need assistance
+      invite_designers:
+        back_to_entries: Back to Entries
     winner_selected:
       the_winner: The winner
     moodboard_details:

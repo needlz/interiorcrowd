@@ -11,7 +11,9 @@
   .entries-container
     .entries-initial
       %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
-      = link_to('Back to Entries', client_center_entry_path(id: @contest.id), class: 'backToEntries')
+      = link_to(t('client_center.entries.invite_designers.back_to_entries'),
+                client_center_entry_path(id: @contest.id),
+                class: 'back-to-entries')
       = render(partial: 'clients/client_center/entries/designers_to_invite',
           locals: { designers: Designer.active.includes(portfolio: [:personal_picture]).all.map { |designer| DesignerView.new(designer) } })
       .fullWidthLine
