@@ -4,8 +4,14 @@
       - if contest_request.cover_image('initial')
         %img.mobileBoard{ src: contest_request.cover_image('initial').medium_size_url }
       - else
-        %img.mobileBoard{ src: '/assets/default_concept_board.png' }
+        .image-container.default-concept-board{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }" }
+          .messaging-over-default-board
+            .messaging-info
+              = t('client_center.entries.board_will_be_soon')
     .row.title
+      .comments-count.pull-right
+        %span= t('client_center.entries.comments')
+        %b= contest_request.comments.by_designer.count
       - if contest_request.sound
         .col-xs-3.designerName
           %h3= contest_request.designer.name
@@ -24,18 +30,15 @@
               %img.playback-icon{ src: '/assets/listen_icon.png' }
             %span.text.pull-right
       - else
-        .designerName
+        .designerName#entriesPage
           %h3= contest_request.designer.name
-      .comments-count.pull-right
-        %span= t('client_center.entries.comments')
-        %b= contest_request.comments.by_designer.count
     .fullWidthLine
     .designImg
       %a{ href: contest_request_path(id: contest_request.id), class: tracked_link, data: { name: 'Concept board' } }
         - if contest_request.cover_image('initial')
           .image-container{ style: "background-image: #{ css_url(contest_request.cover_image('initial').medium_size_url) }" }
         - else
-          .image-container{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }; opacity: 0.75" }
+          .image-container.default-concept-board{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }" }
             .messaging-over-default-board
               .messaging-info
                 = t('client_center.entries.board_will_be_soon')
