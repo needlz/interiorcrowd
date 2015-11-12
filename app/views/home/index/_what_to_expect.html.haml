@@ -1,5 +1,7 @@
 .container
   %h2= t('home.what_to_expect.header').upcase
+  - what_to_expect_link = link_to(t('home.what_to_expect.see_here'), faq_path(anchor: 'client'))
+  .subtitle= t('home.what_to_expect.more_info', see_here: what_to_expect_link).html_safe
   .shortUnderline.marginBottom40
   .row.text-center
     .col-sm-6.col-lg-4

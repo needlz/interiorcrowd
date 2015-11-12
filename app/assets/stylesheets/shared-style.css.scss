@@ -4482,6 +4482,17 @@ p.product-list-reminder {
 .whatToExpect {
   background: #f4f4f4;
   padding: 180px 0px 160px;
+
+  .subtitle {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 14px;
+    font-family: 'Avenir Light';
+
+    a {
+      color: #30a7fc;
+    }
+  }
 }
 
 .whatToExpect .row {
