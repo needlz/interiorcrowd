@@ -29,7 +29,7 @@ class @SignUp
         if json.id
           fbq('track', 'CompleteRegistration')
           setTimeout(
-            ->
+            =>
               location.reload()
             200
           )

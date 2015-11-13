@@ -5,7 +5,7 @@ class @ContestPreview
 
   @initStyleCollagesZooming: ->
     setTimeout(
-      ->
+      =>
         PicturesZoom.init('.designStyleParent .imageWithOverlay a')
       0
     )
