@@ -58,7 +58,7 @@ class AccountCreation
       if @validator.valid
         fbq('track', 'CompleteRegistration')
         setTimeout(
-          ->
+          =>
             $('#new_client [type=submit]').click()
           200
         )

@@ -40,7 +40,7 @@ class @PaymentPage
         amount = parseFloat($(Promocode.totalPriceValueSelector).text().replace(/[^0-9\.]+/g,""))
         fbq('track', 'Purchase', { value: amount, currency: 'USD' })
         setTimeout(
-          ->
+          =>
             @form().submit()
           200
         )

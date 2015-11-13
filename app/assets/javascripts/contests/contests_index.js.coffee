@@ -5,7 +5,7 @@ class @ContestsList
       url = "/designer_center/contests/#{ $row.data('id') }"
       mixpanel.track 'Link clicked', { url: url, link_name: 'Available contest' }
       setTimeout(
-        ->
+        =>
           document.location = url
         , 300)
 
