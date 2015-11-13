@@ -1158,6 +1158,8 @@ en:
           You will also receive a shopping list, discount codes and instructions.
     what_to_expect:
       header: what to expect
+      more_info: 'For more info, %{see_here}'
+      see_here: see here
       multiple_concepts:
         title: Concepts from multiple designers
         description: >
