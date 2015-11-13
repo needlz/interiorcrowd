@@ -68,13 +68,19 @@
   }
 }
 
+@media (max-width: 450px) {
+  .steps123{
+    margin-bottom: -80px;
+  }
+}
+
 .timeLeftToSubmitParent{
   top: 140px;
 }
 
 @media(max-width: 480px){
   .timeLeftToSubmitParent{
-    top: 220px;
+    top: 240px;
   }
 }
 
@@ -1447,8 +1453,14 @@
   .comments-count{
     margin-right: 7%;
     border: none;
-    font-size: 13px;
+    font-size: 12px;
     z-index: 9000;
+  }
+
+  .designerName{
+    h3{
+      font-size: 13px;
+    }
   }
 }
 

@@ -1087,7 +1087,6 @@ div.form-selector {
   .designBox .mobileBoard {
     display: block;
     width: 100%;
-    margin-bottom: 20px;
   }
   .designBox .fullWidthLine, .designBox .designImg {
     display: none;
@@ -1101,7 +1100,8 @@ div.form-selector {
     background: #FFF;
   }
   .designBox h3 {
-    padding-left: 9%;
+    padding-left: 11%;
+    padding-top: 3%;
   }
   .designBox p {
     padding-right: 10px;
@@ -1915,12 +1915,13 @@ h3.exploreMore {
   .timeLeftToSubmit {
     line-height: 25px;
     padding: 10px 0px;
+    margin-right: 15px;
   }
   .timeLeftToSubmit span {
     display: block;
   }
   .timeLeftToSubmitParent {
-    top: 130px;
+    top: 240px;
   }
   .setTopMarginTimeLeftToSubmit {
     margin-top: 110px;

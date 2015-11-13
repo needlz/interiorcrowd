@@ -4,14 +4,15 @@
       - if contest_request.cover_image('initial')
         %img.mobileBoard{ src: contest_request.cover_image('initial').medium_size_url }
       - else
-        .image-container.default-concept-board{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }" }
+        .image-container.default-concept-board.visible-ss{ style: "background-image: #{ css_url('/assets/default_concept_board.png') }" }
           .messaging-over-default-board
             .messaging-info
               = t('client_center.entries.board_will_be_soon')
     .row.title
-      .comments-count.pull-right
-        %span= t('client_center.entries.comments')
-        %b= contest_request.comments.by_designer.count
+      - if contest_request.comments.by_designer.present?
+        .comments-count.pull-right
+          %span= t('client_center.entries.comments')
+          %b= contest_request.comments.by_designer.count
       - if contest_request.sound
         .col-xs-3.designerName
           %h3= contest_request.designer.name
