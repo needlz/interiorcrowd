@@ -7,7 +7,8 @@ class ContestRequestsController < ApplicationController
 
   def add_comment
     @request = ContestRequest.find_by_id(params[:id])
-    if current_user.designer? && !@request
+    if @request.nil?
+      return raise_404 unless current_user.designer?
       contest = Contest.find params['comment'][:contest_id]
       @request = ContestRequestCreation.new({ designer: current_user,
                                               contest: contest,
@@ -15,8 +16,9 @@ class ContestRequestsController < ApplicationController
                                               lookbook_params: nil,
                                               need_submit: false }).perform
       params['comment'].delete('contest_id')
+    else
+      return raise_404 unless current_user.can_comment_contest_request?(@request)
     end
-    return raise_404 unless current_user.can_comment_contest_request?(@request)
     comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
     comment = comment_creation.perform
     render json: { text: format_comment(comment.text), user_name: current_user.name }

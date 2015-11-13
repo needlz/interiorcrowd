@@ -234,6 +234,33 @@ RSpec.describe ContestRequestsController do
         expect(response).to be_ok
       end
     end
+
+    context 'designer has already created one contest request' do
+      before do
+        sign_in(designer)
+        request
+      end
+
+      it "doesn't create new contest request and concept board comment" do
+        expect do
+          post :add_comment, comment: { text: 'text', contest_id: contest.id}
+        end.to raise_error(ActiveRecord::RecordInvalid)
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(ContestRequest.all).to match_array([request])
+      end
+    end
+
+    context 'logged as client' do
+      before do
+        sign_in(Fabricate(:client))
+      end
+
+      it 'renders 404' do
+        post :add_comment, comment: {text: 'text', contest_id: contest.id}
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(response).to have_http_status(:not_found)
+      end
+    end
   end
 
   describe 'GET show' do
