@@ -79,6 +79,10 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
   gem 'simplecov', require: false
   gem 'webmock'
+
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 gem 'faker' # generating fake data
