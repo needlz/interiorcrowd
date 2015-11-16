@@ -235,6 +235,17 @@
   font-stretch: normal;
 }
 
+@font-face {
+  font-family: 'Austin-Roman';
+  src: url('webfonts/Austin-Roman-Web.eot?#iefix') format('embedded-opentype'),
+  url('webfonts/Austin-Roman.otf') format('opentype'),
+  url('webfonts/Austin-Roman-Web.woff') format('woff'),
+  url('webfonts/Austin-Roman-Web.ttf') format('truetype'),
+  url('webfonts/Austin-Roman-Web.svg#Austin-Roman-Web') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .Austin-Roman-Web {
   font-family: 'Austin Web';
   font-weight:  300;
