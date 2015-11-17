@@ -1,6 +1,3 @@
-//wp
-@import "wpheader";
-
 //helpers
 @import "variables";
 @import "mixins";
@@ -12,18 +9,7 @@
 //layout
 @import "grid";
 @import "forms";
-@import "slider";
-@import "gallery";
-@import "header";
-@import "footer";
 @import "content";
-@import "sidebar";
-
-//pages
-@import "home";
 
 //components
 @import "responsive";
-@import "retina";
-@import "animation";
-@import "print";

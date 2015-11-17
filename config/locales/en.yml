@@ -1282,6 +1282,15 @@ en:
           impressed with the level of detail our designer was
           able to plan for us - from the sofa right down to room
           accessories like bowls for the table. It’s a perfect room.
+    how_it_works:
+      title: How it works
+      get_started_text: get started designing your perfect room now
+      get_started_link: Get started
+      lead_wrapper: >
+        We connect you with a network of interior designers who will develop custom design ideas, layout plans,
+        shopping lists, and assembly instructions for $299, so you can bring to life the beautiful room
+        you’ve always wanted. Join us!
+      faq_title: 'FREQUENTLY ASKED QUESTIONS:'
   mails:
     designer_registration:
       subject: Congrats! You're now a designer on InteriorCrowd.

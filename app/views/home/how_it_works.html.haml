@@ -4,15 +4,15 @@
     .how-it-works-hero{:style => "background-image: url('/assets/how_it_works/how_it_works_hero.jpg');"}
       .how-it-works-hero-gradient
         .wrap
-          .how-it-works-hero-title How it works
+          .how-it-works-hero-title= t('.title')
     .get-started-navigation
       .wrap
-        %p get started designing your perfect room now
-        = link_to 'Get started', design_brief_contests_path, class: 'button-get-started'
+        %p= t('.get_started_text')
+        = link_to t('.get_started_link'), design_brief_contests_path, class: 'button-get-started'
     .how-it-works-lead
       .wrap
         .how-it-works-lead-wrapper
-          %p We connect you with a network of interior designers who will develop custom design ideas, layout plans, shopping lists, and assembly instructions for $299, so you can bring to life the beautiful room you’ve always wanted. Join us!
+          %p= t('.lead_wrapper')
     .how-step{:style => "background-image: url('/assets/how_it_works/how1-bg.jpg');"}
       .how-step-background
         .wrap
@@ -104,21 +104,22 @@
                     %li Purchase all items recommended by your designer in your own time based on your favorite design submission
     .faq-block
       .wrap
-        .faq-title FREQUENTLY ASKED QUESTIONS:
+        .faq-title= t('.faq_title')
         .faq-columns.clearfix
           .faq-column
             .faq-panel
               %a.faq-panel-title{:href => "#"} Who are the designers?
               .faq-panel-drop
-                %p Our designers are talented professionals from anywhere in the world. They are chosen to design for InteriorCrowd based on a combination of factors like portfolio, awards and raw talent.
+                %p>
+                  Our designers are talented professionals from anywhere in the world. They are chosen to design
+                  for InteriorCrowd based on a combination of factors like portfolio, awards and raw talent.
             .faq-panel
               %a.faq-panel-title{:href => "#"} How long does a project take?
               .faq-panel-drop
                 %p>
-                Generally, the process takes between 1 to 2 weeks. We have a few deadlines in place to keep the process
-                moving along swiftly. A huge benefit of InteriorCrowd is how quickly you can go from frustration with
-                your room - to inspired for your new space! So, we ask that you respond to your designer within
-                the time frame given to you. All details are on the platform, and you will be notified along the way too.
+                  It depends on the project, but on average, the whole process takes​
+                  %b
+                    less than a month from beginning to end.
             .faq-panel
               %a.faq-panel-title{:href => "#"} I only want one or two new things, is this for me?
               .faq-panel-drop
@@ -128,29 +129,28 @@
               %a.faq-panel-title{:href => "#"} How many designers will i get to choose from?
               .faq-panel-drop
                 %p>
-                Each project usually receives 3-5 concept boards from designers, but some projects do get more.
-                The more information you put in your brief, the more likely you are to get a lot of interest from
-                our network of designers.
+                  Each project usually receives 3-5 concept boards from designers, but some projects do get more.
+                  The more information you put in your brief, the more likely you are to get a lot of interest from
+                  our network of designers.
             .faq-panel
               %a.faq-panel-title{:href => "#"} Can I meet my designer in-person?
               .faq-panel-drop
                 %p>
-                If you’d like to meet your designer in-person you should add this to your brief so that only designers
-                in your area will submit boards to your project. An in-person meeting operates on an hourly fee
-                structure and is not included in the $299 price point. For more about pricing,
-                = link_to '​see here', faq_path, anchor: 'collapse19'
+                  If you’d like to meet your designer in-person you should add this to your brief so that only designers
+                  in your area will submit boards to your project. An in-person meeting operates on an hourly fee
+                  structure and is not included in the $299 price point.
             .faq-panel
               %a.faq-panel-title{:href => "#"} What can my designer source for me?
               .faq-panel-drop
                 %p>
-                Your designer will look at your brief and assess what you should get rid of and what you need
-                to purchase. They can help you with paint color, furniture pieces, rearranging your room (spatial
-                design), flooring, floor coverings, window treatments, light fixtures, decor, wallpaper - you name it.
-                %br
-                Additionally, they can also take a look at your project before you do a renovation and give you
-                a consultation on what to focus on and how to spend your budget. For the latter, we’d recommend
-                an in-person consultation. For more info,
-                =link_to 'see here', faq_path, anchor: 'collapse10'
+                  Your designer will look at your brief and assess what you should get rid of and what you need
+                  to purchase. They can help you with paint color, furniture pieces, rearranging your room (spatial
+                  design), flooring, floor coverings, window treatments, light fixtures, decor, wallpaper - you name it.
+                  %br
+                  Additionally, they can also take a look at your project before you do a renovation and give you
+                  a consultation on what to focus on and how to spend your budget. For the latter, we’d recommend
+                  an in-person consultation. For more info,
+                  = link_to 'see here', faq_path(anchor: 'collapse12')
         .faq-navigation.clearfix
           = link_to "For more FAQ's please see here", faq_path, class: 'faq-more'
 %footer
