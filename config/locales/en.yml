@@ -1004,8 +1004,7 @@ en:
         answer: >
           If you’d like to meet your designer in-person you should add this to your brief so that
           only designers in your area will submit boards to your project. An in-person meeting
-          operates on an hourly fee structure and is not included in the $299 price point. For more
-          about pricing, ​%{what_does_it_cost}
+          operates on an hourly fee structure and is not included in the $299 price point.
       style_profile:
         question: How does the style profile work?
         answer: >
@@ -1024,9 +1023,7 @@ en:
           rendering or a pdf with prompts)<br/><br/>
           If you’d like additional time with your designer, please %{additional_time_with_designer}
       I_want_two_things:
-        question: >
-          I only want one or two new things, I really just need help making my room look
-          awesome. Can the designers work around this?
+        question: I only want one or two things. Is this for me?
         answer: >
           Yes! This is their specialty. They will work around your room’s unique needs and within
           your budget.
@@ -1037,7 +1034,7 @@ en:
           combines in-person hourly fees with a standard set of assets (layout plans, furniture &
           accessory shopping list, assembly plan) delivered via our online platform. An initial
           in-person meeting with your designer is an additional $100/hour but you can also
-          purchase further in&#45;person hours if necessary.
+          purchase further in-person hours if necessary.
       additional_time_with_designer:
         question: What if I want additional time with my designer?
         answer: >
@@ -1099,13 +1096,6 @@ en:
         answer: >
           It depends on the project, but on average, the whole process takes​
           <b>less than a month from beginning to end.</b>
-      what_does_it_cost:
-        question: What does it cost?
-        answer: >
-          $299 per room. This includes multiple concept boards from interior designers so that you can choose
-          which designer you want to work with. Once you pick a winner, you get one-on-one time with your
-          designer and a product list with instructions and a floor plan that you can make all your purchases
-          in your own time.
       forgot_password:
         question: >
           I forgot my password - how do I log in?
@@ -1115,21 +1105,16 @@ en:
           area to reset the password. If you have any issues, you can always contact us at
           %{hello_email}.
       how_to_upload_additional_pictures:
-        question: How do I upload additional pictures for my designer?
+        question: How do I upload pictures of my room to my brief?
         answer: >
-          Your designer might ask you for additional pictures of your space once you've selected a winner.
-          You can upload pictures three different ways:
-          You can text them to us at (415) 254-9089 (please include your name)
-          or email them to us at %{pictures_email}
-          (again, please add your name), or you can upload them yourself in your brief.
-          Login and click on 'Brief' in the top right navigation of the client center.
-          Here you can see all of the details of the intake form as well as the images you uploaded.
-          If you click on the pencil icon in the Pictures of your Space section, you can upload new images.
-      how_to_take_pictures:
-        question: How do I take pictures of my room?
-        answer: >
-          Take as many pictures as possible but please take at least 4 with your back to each wall.
-          Images must be smaller than 10M.
+          Take as many pictures as possible but please take at least 4 with your back to each wall. Images must
+          be smaller than 10M. You can upload pictures three different ways: You can text them to us at (415) 254-9089
+          (please include your name) or email them to us at %{pictures_email}
+          (again, please add your name), or you can upload them yourself in your brief. Login and click on 'Brief'
+          in the top right navigation of the client center. Here you can see all of the details of the intake form
+          as well as the images you uploaded. If you click on the pencil icon in the Pictures of your Space section,
+          you can upload new images. If your designer asks you for additional pictures once you're in the collaboration
+          period, you can upload them the same way by editing your brief.
     designer:
       what_is_beta:
         question: What is beta mode?

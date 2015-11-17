@@ -3,9 +3,6 @@ module HomeHelper
   def faq_client_questions
     hello_link = { hello_email: mail_to(t('feedback_email')) }
     pictures_link = { pictures_email: mail_to(Settings.pictures_email) }
-    what_does_it_cost_link = { what_does_it_cost: link_to(t('faq.captions.see_here'),
-                                                          '#collapse19',
-                                                          data: { collapse: true }) }
     additional_time_with_designer_link = { additional_time_with_designer:
                                                link_to(t('faq.captions.see_here'),
                                                        '#collapse11',
@@ -22,7 +19,7 @@ module HomeHelper
      :what_is_crowdsourcing,
      :who_are_designers,
      :how_many_designers,
-     { want_to_meet_designer: what_does_it_cost_link },
+     :want_to_meet_designer,
      :style_profile,
      { what_do_I_get: additional_time_with_designer_link },
      :I_want_two_things,
@@ -35,10 +32,8 @@ module HomeHelper
      :how_do_contests_work,
      :how_to_collaborate_with_designer,
      :how_long_everything_takes,
-     :what_does_it_cost,
      { forgot_password: hello_link },
-     { how_to_upload_additional_pictures: pictures_link },
-     :how_to_take_pictures]
+     { how_to_upload_additional_pictures: pictures_link }]
   end
 
   def faq_designer_questions
