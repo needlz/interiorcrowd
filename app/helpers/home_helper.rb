@@ -33,7 +33,8 @@ module HomeHelper
      :how_to_collaborate_with_designer,
      :how_long_everything_takes,
      { forgot_password: hello_link },
-     { how_to_upload_additional_pictures: pictures_link }]
+     { how_to_upload_additional_pictures: pictures_link },
+     { full_money_back_guarantee: hello_link }]
   end
 
   def faq_designer_questions

@@ -1115,6 +1115,12 @@ en:
           as well as the images you uploaded. If you click on the pencil icon in the Pictures of your Space section,
           you can upload new images. If your designer asks you for additional pictures once you're in the collaboration
           period, you can upload them the same way by editing your brief.
+      full_money_back_guarantee:
+        question: Do you offer a 100% money-back guarantee?
+        answer: >
+          Yes! We are very confident that you'll love your design and working with our interior designers, so
+          we are offering a 100% money-back guarantee. If you're unhappy with anything at all,
+          please email us at %{hello_email}
     designer:
       what_is_beta:
         question: What is beta mode?
