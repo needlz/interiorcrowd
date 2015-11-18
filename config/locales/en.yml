@@ -886,9 +886,12 @@ en:
       upload_moodboard: Upload your concept board
     training:
       check_out: Check out our latest training materials here
-      how_contests_work: How do contests work?
-      how_to_communicate: How do I communicate with the client?
-      vendors: Which vendors can I use?
+      view_winning_submissions: View winning submission boards here
+
+      video_tutorial:
+       product_list_phase: 'Video Tutorial: How to upload products in Product List Phase'
+       initial_phase: 'Video Tutorial: How to submit boards in the Initial Phase'
+       final_design_phase: 'Video Tutorial: How to wrap up in the Final Design Phase'
     my_contests:
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
