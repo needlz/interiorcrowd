@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028143204) do
+ActiveRecord::Schema.define(version: 20151104085724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,8 @@ ActiveRecord::Schema.define(version: 20151028143204) do
     t.datetime "submitted_at"
     t.datetime "won_at"
   end
+
+  add_index "contest_requests", ["contest_id", "designer_id"], name: "index_contest_requests_on_contest_id_and_designer_id", unique: true, using: :btree
 
   create_table "contests", force: :cascade do |t|
     t.text     "desirable_colors"
@@ -287,7 +289,7 @@ ActiveRecord::Schema.define(version: 20151028143204) do
     t.string   "state",                   limit: 255
     t.text     "address"
     t.text     "city"
-    t.boolean  "active"
+    t.boolean  "active",                  default: true
     t.integer  "facebook_user_id",        limit: 8
   end
 
@@ -300,11 +302,14 @@ ActiveRecord::Schema.define(version: 20151028143204) do
     t.datetime "updated_at"
   end
 
-  create_table "final_note_to_designers", force: :cascade do |t|
+  create_table "final_notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "designer_notification_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "contest_request_id",       null: false
+    t.integer  "author_id",                null: false
+    t.string   "author_role",              null: false
   end
 
   create_table "image_items", force: :cascade do |t|
@@ -327,7 +332,6 @@ ActiveRecord::Schema.define(version: 20151028143204) do
   end
 
   add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
-  add_index "image_items", ["phase", "temporary_version_id"], name: "index_image_items_on_phase_and_temporary_version_id", unique: true, using: :btree
 
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
@@ -508,6 +512,7 @@ ActiveRecord::Schema.define(version: 20151028143204) do
     t.boolean  "read",                                 default: false
     t.integer  "contest_comment_id"
     t.integer  "concept_board_comment_id"
+    t.integer  "final_note_id"
   end
 
   add_index "user_notifications", ["contest_id"], name: "index_user_notifications_on_contest_id", using: :btree

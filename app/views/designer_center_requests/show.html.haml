@@ -1,3 +1,5 @@
+- title(t('page_titles.designer_center.contest_request', contest_name: @show_page.contest_name))
+
 - content_for :head do
   = javascript_include_tag 'designer_center_requests/concept_board_uploader'
   = javascript_include_tag 'designer_center_requests/show'
@@ -22,38 +24,7 @@
       - if @contest_request_milestone.designer_hint
         %p.daysLeft= @contest_request_milestone.designer_hint
 
-  .row.marg-top30.response{ data: { id: @request.id } }
-    .col-md-8.disablePadding
-      = render 'design_brief_link', request: @request, request_view: @request_view
-      .initialImage
-        - if @show_page.finished?
-          %p.font18= @request.final_note
-        - if @request.lost?
-          .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
-          .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
-        - if @request.editable?
-          = render 'designer_center_requests/show/image_loading',
-              items: @show_page.current_lookbook_items,
-              button_title: t('designer_center.responses.item.edit_concept_board')
-        - else
-          = render 'shared/moodboard',
-              items:  @show_page.current_lookbook_items
-
-    .col-md-4.attribute{ data: {attribute: 'feedback', url: designer_center_response_path(@request.id) } }
-
-      = render 'designer_center_requests/show/notes', request: @request, designer_view: @designer_view
-      - if @request.sound
-        .designer-voice
-          = render 'contest_requests/listen', request: @request
-        .hLine
-      - if @request.commenting_enabled?
-        = render 'designer_center_requests/edit/comments', request: @request,
-            comments: @request.comments, show_comment_switcher: !@request_view.initial_concept_board?
-    .clearfix
-    - if @show_page.image_items_partial
-      - if @show_page.finished?
-        %p.font18.marginTop20= @request.pull_together_note
-      = render @show_page.image_items_partial
-    = render 'designer_center_requests/footer_buttons'
+  = render @show_page.content_partial,
+      { request: @request, request_view: @request_view, show_page: @show_page, designer_view: @designer_view }
 
 = render 'designer_center/layout'

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CreateFinalNoteToDesigner do
+RSpec.describe CreateFinalNote do
 
   let(:client){ Fabricate(:client) }
   let(:designer){ Fabricate(:designer) }
@@ -9,13 +9,12 @@ RSpec.describe CreateFinalNoteToDesigner do
   let(:text) { 'final note' }
 
   it 'creates notification to designer' do
-    creation = CreateFinalNoteToDesigner.new(contest_request: contest_request,
-                                             client: client,
-                                             final_note_attributes: { text: text } )
+    creation = CreateFinalNote.new(contest_request: contest_request,
+                                   author: client,
+                                   final_note_attributes: { text: text } )
     creation.perform
-    final_note = FinalNoteToDesigner.first
+    final_note = FinalNote.first
     expect(final_note.text).to eq text
-    expect(final_note.designer_notification.contest_request).to eq contest_request
   end
 
 end

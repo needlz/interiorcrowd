@@ -32,6 +32,12 @@
                     show_comment_switcher: !@request_view.initial_concept_board? }
 .fullWidthLine.marginBottom40
 .image-items
+  = form_for request,
+          url: publish_designer_center_response_path(id: request.id),
+          method: :patch,
+          html: { class: 'edit_contest_request',
+            data: { name: 'Submit products list' } } do |f|
+    = hidden_mixpanel_submit_tag
   .list-kind{ data: { kind: :product_items } }
     = render partial: 'designer_center_requests/edit/image_block_designer_view',
         locals: { editable: editable,

@@ -30,7 +30,7 @@ jQuery.fn.ForceNumericOnly = ->
       $input = $(e.target)
       oldText = $input.val()
       setTimeout(
-        ->
+        =>
           text = $input.val()
           unless text.match(/^[0-9\.\-]+$/)
             $input.val(oldText)

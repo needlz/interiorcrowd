@@ -37,7 +37,13 @@ class @PaymentPage
     $('.submit-button').click (event)=>
       event.preventDefault()
       if $('#client_agree').is(':checked')
-        @form().submit()
+        amount = parseFloat($(Promocode.totalPriceValueSelector).text().replace(/[^0-9\.]+/g,""))
+        fbq('track', 'Purchase', { value: amount, currency: 'USD' })
+        setTimeout(
+          =>
+            @form().submit()
+          200
+        )
 
   @form: ->
     $('#new_client_payment')

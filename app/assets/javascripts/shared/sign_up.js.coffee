@@ -26,7 +26,13 @@ class @SignUp
       method: 'POST'
       dataType: 'json'
       success: (json)=>
-        location.reload() if json.id
+        if json.id
+          fbq('track', 'CompleteRegistration')
+          setTimeout(
+            =>
+              location.reload()
+            200
+          )
       error: (response)=>
         alert(response.responseText)
 

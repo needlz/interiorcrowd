@@ -1,4 +1,4 @@
-class ConceptBoardPreview < ConceptBoardPage
+class ConceptBoardAuthorView < ConceptBoardPage
 
   def phase_url(index)
     view_context.designer_center_response_path(phase_url_params(index))
@@ -15,6 +15,14 @@ class ConceptBoardPreview < ConceptBoardPage
 
   def finished?
     active_phase == :final_design
+  end
+
+  def content_partial
+    if contest_request.finished? && active_phase == :final_design
+      'designer_center_requests/show/finished'
+    else
+      'designer_center_requests/show/non_finished'
+    end
   end
 
   private

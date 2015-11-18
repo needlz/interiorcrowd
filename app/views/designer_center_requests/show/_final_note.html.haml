@@ -1,0 +1,12 @@
+.comment.clearfix{ class: item_class }
+  .col-sm-3.info
+    .row.row-container
+      .col-xs-4.avatar.disablePadding
+        = image_tag comment.avatar_url, class: 'fullWidth'
+      .col-xs-8.details
+        .name= comment.name
+        .date= comment.date
+    .clearfix
+  .col-sm-9.text
+    .row-container
+      = comment.text

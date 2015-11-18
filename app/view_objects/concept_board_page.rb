@@ -1,5 +1,7 @@
 class ConceptBoardPage < PhasesHolder
 
+  attr_reader :contest_request
+
   def initialize(options)
     @contest_request = options[:contest_request]
     @preferred_view_index = options[:preferred_view].to_i if options[:preferred_view]
@@ -28,6 +30,22 @@ class ConceptBoardPage < PhasesHolder
     contest_request.editable? && (active_step >= last_phase_index)
   end
 
+  def contest_name
+    contest_request.contest.name
+  end
+
+  def designer_name
+    contest_request.designer.name
+  end
+
+  def request_comments
+    @request_comments ||= contest_request.comments.map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
+  end
+
+  def final_notes
+    @final_notes ||= (contest_request.comments + contest_request.final_notes).sort_by(&:created_at).map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
+  end
+
   protected
 
   def create_phases_stripe
@@ -41,7 +59,7 @@ class ConceptBoardPage < PhasesHolder
 
   private
 
-  attr_reader :contest_request, :preferred_view_index, :contest_request_view, :view_context
+  attr_reader :preferred_view_index, :contest_request_view, :view_context
 
   def active_step
     selected_step || last_phase_index

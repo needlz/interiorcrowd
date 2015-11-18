@@ -1,0 +1,45 @@
+:coffee
+  $ ->
+    DesignerFinishedContestRequestPage.init()
+
+.finishedRequest.ccFinalPage
+  .clearfix.designerDetail
+    .col-sm-2.text-center
+      = image_tag '/assets/profile-img1.png', width: 90, height: 90, class: 'img-circle'
+    .col-sm-10
+      .header= show_page.designer_name
+      %p= show_page.contest_request.final_note
+
+  .row.finalMoodboard
+    .col-sm-12
+      = render 'shared/moodboard', items: show_page.current_lookbook_items
+
+  .row.moodboardInstructions
+    .col-sm-12
+      - if show_page.contest_request.pull_together_note.present?
+        .header= t('client_center.entries.space.pull_together')
+        %p= show_page.contest_request.pull_together_note
+  - if show_page.image_items.present?
+    .header= t('client_center.entries.space.complete_lock')
+    .fullWidthLine.marginBottom40.marginTop20
+    .row.itemRow
+      - show_page.image_items.each do |product_item|
+        - unless product_item.image_id.nil?
+          = render partial: 'clients/client_center/entries/final_design_image_item',
+            locals: { image_item: ImageItemView.new(product_item) }
+
+  .fullWidthLine.marginBottom40.marginTop20
+  .row
+    .col-sm-12.finalNoteToDesigner
+      .titleRow
+        %span.header= t('.final_note.title')
+        - if show_page.final_notes.present?
+          %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
+        .comments
+          = render 'designer_center_requests/show/request_comments_read_only',
+            comments: show_page.final_notes
+      = form_tag final_note_index_path, remote: true, id: 'final-note-to-client' do
+        = hidden_field_tag 'contest_request_id', show_page.contest_request.id
+        %textarea{ name: 'final_note[text]' }
+        %button.send-button.greenButton{ data: {disable_with: t('.final_note.saving')} }
+          = t('.final_note.send_button')

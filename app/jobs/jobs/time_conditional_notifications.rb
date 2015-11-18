@@ -13,9 +13,11 @@ module Jobs
     end
 
     def perform
-      ScheduleWarningAboutWinnerSelectionEnd.perform
-      ScheduleWarningAboutSubmissionEnd.perform
-      ScheduleWarningAboutSubmissionEndClose.perform
+      ScheduledNotifications::WarningAboutWinnerSelectionEnd.perform
+      ScheduledNotifications::WarningAboutSubmissionEnd.perform
+      ScheduledNotifications::WarningAboutSubmissionEndClose.perform
+      ScheduledNotifications::NoSubmissions.perform
+      ScheduledNotifications::OneSubmission.perform
       delay_next_call
     end
 

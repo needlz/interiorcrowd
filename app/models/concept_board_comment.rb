@@ -29,10 +29,6 @@ class ConceptBoardComment < ActiveRecord::Base
     author.name
   end
 
-  def author_role
-    role
-  end
-
   def author
     role.constantize.find(user_id)
   end

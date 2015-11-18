@@ -56,7 +56,12 @@ class AccountCreation
       $('.text-error').html('')
       @validate()
       if @validator.valid
-        $('#new_client [type=submit]').click()
+        fbq('track', 'CompleteRegistration')
+        setTimeout(
+          =>
+            $('#new_client [type=submit]').click()
+          200
+        )
       else
         @validator.focusOnMessage()
         false

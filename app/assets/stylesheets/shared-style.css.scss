@@ -4482,6 +4482,17 @@ p.product-list-reminder {
 .whatToExpect {
   background: #f4f4f4;
   padding: 180px 0px 160px;
+
+  .subtitle {
+    text-align: center;
+    margin: 20px 0px;
+    font-size: 14px;
+    font-family: 'Avenir Light';
+
+    a {
+      color: #30a7fc;
+    }
+  }
 }
 
 .whatToExpect .row {
@@ -4939,4 +4950,92 @@ p.product-list-reminder {
 .greyButton{
   color: white;
   background-color: #A9A9A9;
+}
+
+.designer-center{
+  .finishedRequest{
+    .designerDetail{
+      border: 1px solid #bbb;
+      border-radius: 4px;
+      padding: 30px 0px;
+      margin-bottom: 30px;
+    }
+
+    .moodboardInstructions{
+      margin-top: 30px;
+    }
+
+    .itemRow .itemBox {
+      border: 1px solid #ccc;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+$final-designer-center-comment-border-color: #ccc;
+
+.designer-center .finishedRequest .header {
+  font-size: 20px;
+  margin: 10px 0px;
+}
+
+.designer-center {
+  .finishedRequest {
+    .finalNoteToDesigner{
+      margin-bottom: 50px;
+
+      .titleRow {
+        margin-bottom: 20px;
+
+        .commentsCount {
+          font-size: 18px;
+          float: right;
+        }
+      }
+
+      .comments {
+        margin-bottom: 30px;
+        overflow: auto;
+        max-height: 500px;
+      }
+
+      @media(max-width: 768px) {
+        .comment {
+          .info {
+            border-bottom: 1px solid $final-designer-center-comment-border-color;
+          }
+        }
+      }
+
+      .comment {
+        border-top: 1px solid $final-designer-center-comment-border-color;
+        border-right: 1px solid $final-designer-center-comment-border-color;
+        border-left: 1px solid $final-designer-center-comment-border-color;
+
+        .info {
+          border-right: 1px solid $final-designer-center-comment-border-color;
+
+          .name {
+            font-size: 20px;
+          }
+
+          .date {
+            font-style: italic;
+          }
+        }
+
+        .row-container {
+          padding: 20px 30px;
+        }
+      }
+
+      .comment.last {
+        border-bottom: 1px solid $final-designer-center-comment-border-color;
+      }
+
+      .comment.odd {
+        background-color: #F8F8F8;
+      }
+    }
+  }
 }
