@@ -1,0 +1,24 @@
+.modal.bs-example-modal-lg{ role: 'dialog', id: id }
+  - padding = 30
+  .modal-dialog{ style: "width: #{ width / 2 + padding }px; height: #{ height / 2 + padding }px;" }
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        %object#scPlayer{:data => "#{ video_base_path }jingswfplayer.swf",
+                height: height / 2,
+                type: "application/x-shockwave-flash",
+                width: width / 2 }
+          %param{:name => "movie",
+                :value => "#{ video_base_path }jingswfplayer.swf"}/
+          %param{:name => "quality", :value => "high"}/
+          %param{:name => "bgcolor", :value => "#FFFFFF"}/
+          %param{:name => "flashVars",
+                :value => "thumb=#{ video_base_path }FirstFrame.jpg&containerwidth=#{ width }&containerheight=#{ height }&content=#{ video_base_path }#{ version }.swf&blurover=false"}/
+          %param{:name => "allowFullScreen", :value => "true"}/
+          %param{:name => "scale", :value => "showall"}/
+          %param{:name => "allowScriptAccess", :value => "always"}/
+          %param{:name => "base",
+                :value => "#{ video_base_path }"}/
+          Unable to display content. Adobe Flash is required.
