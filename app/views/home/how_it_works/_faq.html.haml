@@ -4,48 +4,30 @@
     .faq-columns.clearfix
       .faq-column
         .faq-panel
-          %a.faq-panel-title{:href => "#"} Who are the designers?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers')
           .faq-panel-drop
-            %p>
-              Our designers are talented professionals from anywhere in the world. They are chosen to design
-              for InteriorCrowd based on a combination of factors like portfolio, awards and raw talent.
+            %p= t('faq.customer.who_are_designers.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"} How long does a project take?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_long_everything_takes')
           .faq-panel-drop
-            %p>
-              It depends on the project, but on average, the whole process takes​
-              %b
-                less than a month from beginning to end.
+            %p= t('faq.customer.how_long_everything_takes.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"} I only want one or two new things, is this for me?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.I_want_two_things')
           .faq-panel-drop
-            %p Yes! This is their specialty. They will work around your room’s unique needs and within your budget.
+            %p= t('faq.customer.I_want_two_things.answer').html_safe
       .faq-column
         .faq-panel
-          %a.faq-panel-title{:href => "#"} How many designers will i get to choose from?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_many_designers')
           .faq-panel-drop
-            %p>
-              Each project usually receives 3-5 concept boards from designers, but some projects do get more.
-              The more information you put in your brief, the more likely you are to get a lot of interest from
-              our network of designers.
+            %p= t('faq.customer.how_many_designers.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"} Can I meet my designer in-person?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.want_to_meet_designer')
           .faq-panel-drop
-            %p>
-              If you’d like to meet your designer in-person you should add this to your brief so that only designers
-              in your area will submit boards to your project. An in-person meeting operates on an hourly fee
-              structure and is not included in the $299 price point.
+            %p= t('faq.customer.want_to_meet_designer.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"} What can my designer source for me?
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers')
           .faq-panel-drop
-            %p>
-              Your designer will look at your brief and assess what you should get rid of and what you need
-              to purchase. They can help you with paint color, furniture pieces, rearranging your room (spatial
-              design), flooring, floor coverings, window treatments, light fixtures, decor, wallpaper - you name it.
-              %br
-              Additionally, they can also take a look at your project before you do a renovation and give you
-              a consultation on what to focus on and how to spend your budget. For the latter, we’d recommend
-              an in-person consultation. For more info,
-              = link_to 'see here', faq_path(anchor: 'collapse12')
+            %p= t('faq.customer.designer_can_help_me_with.answer',
+              what_does_cost_meeting_with_designer: link_to('see here', faq_path(anchor: 'collapse12'))).html_safe
     .faq-navigation.clearfix
-      = link_to "For more FAQ's please see here", faq_path, class: 'faq-more'
+      = link_to t('.more_faq'), faq_path, class: 'faq-more'
