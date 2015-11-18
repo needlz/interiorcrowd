@@ -9,6 +9,7 @@ module Blog
       @url = options[:url]
       @method = options[:method]
       @params = options[:params].merge(icrowd_app: 'yes')
+      @request = options[:request]
       @session = options[:session]
       @blog_path = options[:blog_path]
     end

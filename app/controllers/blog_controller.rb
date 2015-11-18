@@ -50,7 +50,8 @@ class BlogController < ApplicationController
                                               env: env,
                                               method: method,
                                               session: session,
-                                              blog_path: blog_page_url(blog_page_path: ''))
+                                              blog_path: blog_page_url(blog_page_path: ''),
+                                              request: request)
 
       response = blog_page_fetcher.get_response
 
@@ -69,10 +70,14 @@ class BlogController < ApplicationController
     @admin_page = @url.match %r[/wp-admin($|/)]
     locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
     @no_global_css = true
-    if @admin_page
-      AdminBlogPage.render(locals, self)
+    if request.xhr?
+      render text: locals[:text]
     else
-      DefaultBlogPage.render(locals, self)
+      if @admin_page
+        AdminBlogPage.render(locals, self)
+      else
+        DefaultBlogPage.render(locals, self)
+      end
     end
   end
 
