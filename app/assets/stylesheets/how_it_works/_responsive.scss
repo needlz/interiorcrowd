@@ -1,0 +1,171 @@
+/* responsive */
+@media (max-width: 1299px) {
+    .wrap {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .how-it-works-hero {
+        .wrap {
+            height: 467px;
+        }
+    }
+    .get-started-navigation {
+        font-size: 16px;
+    }
+    .how-it-works-lead {
+        padding-top: 102px;
+        padding-bottom: 103px;
+    }
+    .how-step-img {
+        width: 422px;
+        margin-left: 42px;
+        margin-right: 10px;
+    }
+    .how-step-reverse {
+        .how-step-img {
+            margin-left: 10px;
+            margin-right: 42px;
+        }
+    }
+    .how-step-background {
+        padding-top: 92px;
+        padding-bottom: 92px;
+    }
+    .how-step-content {
+        padding-left: 80px;
+    }
+    .how-step-cell {
+        height: 422px;
+        h3 {
+            font-size: 28px;
+            line-height: 28px;
+        }
+    }
+    .how-step-num {
+        left: -50px;
+    }
+}
+@media (max-width: 991px) {
+    .how-it-works-hero {
+        .wrap {
+            height: 500px;
+        }
+    }
+    .how-it-works-hero-title {
+        font-size: 45px;
+        line-height: 50px;
+        bottom: 47px;
+    }
+    .how-it-works-lead-wrapper {
+        width: 93%;
+    }
+    .how-step-img {
+        width: 325px;
+        margin-left: 17px;
+        margin-right: 10px;
+    }
+    .how-step-reverse {
+        .how-step-img {
+            margin-left: 10px;
+            margin-right: 17px;
+        }
+    }
+    .how-step-background {
+        padding-top: 73px;
+        padding-bottom: 73px;
+    }
+    .how-step-content {
+        padding-left: 65px;
+    }
+    .how-step-cell {
+        height: 325px;
+        h3 {
+            font-size: 22px;
+            line-height: 26px;
+        }
+    }
+    .how-step-num {
+        left: -40px;
+    }
+    .faq-columns {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .faq-column {
+        padding-left: 0;
+        padding-right: 0;
+        width: auto;
+        float: none;
+    }
+}
+@media (max-width: 767px) {
+    .wrap {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .how-it-works-hero {
+        .wrap {
+            height: 392px;
+        }
+    }
+    .get-started-navigation {
+        padding-top: 10px;
+        padding-bottom: 18px;
+        p {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 5px;
+            max-width: 240px;
+            font-size: 14px;
+            line-height: 26px;
+        }
+    }
+    .how-it-works-lead {
+        font-size: 18px;
+        line-height: 23px;
+        padding-top: 74px;
+        padding-bottom: 80px;
+    }
+    .how-step-img {
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .how-step-reverse {
+        .how-step-img {
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .how-step-background {
+        padding-top: 37px;
+        padding-bottom: 37px;
+    }
+    .how-step-cell {
+        vertical-align: top;
+        padding-top: 40px;
+        @include sizing();
+    }
+}
+@media (max-width: 479px) {
+    .wrap {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .how-it-works-lead {
+        padding-top: 50px;
+        padding-bottom: 56px;
+    }
+    .how-step-img {
+        width: 260px;
+    }
+    .how-step-cell {
+        font-size: 18px;
+        h3 {
+            font-size: 18px;
+            line-height: 18px;
+        }
+    }
+}

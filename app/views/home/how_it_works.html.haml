@@ -1,0 +1,18 @@
+.container.main
+  %header
+  .spanning.clearfix
+    .how-it-works-hero{:style => "background-image: url('/assets/how_it_works/how_it_works_hero.jpg');"}
+      .how-it-works-hero-gradient
+        .wrap
+          .how-it-works-hero-title= t('.title')
+    .get-started-navigation
+      .wrap
+        %p= t('.get_started_text')
+        = link_to t('.get_started_link'), design_brief_contests_path, class: 'button-get-started'
+    .how-it-works-lead
+      .wrap
+        .how-it-works-lead-wrapper
+          %p= t('.lead_wrapper')
+    = render 'home/how_it_works/steps'
+    = render 'home/how_it_works/faq'
+%footer

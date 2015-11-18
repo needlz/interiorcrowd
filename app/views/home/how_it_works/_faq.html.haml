@@ -1,0 +1,33 @@
+.faq-block
+  .wrap
+    .faq-title= t('.faq_title')
+    .faq-columns.clearfix
+      .faq-column
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers')
+          .faq-panel-drop
+            %p= t('faq.customer.who_are_designers.answer').html_safe
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_long_everything_takes')
+          .faq-panel-drop
+            %p= t('faq.customer.how_long_everything_takes.answer').html_safe
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.I_want_two_things')
+          .faq-panel-drop
+            %p= t('faq.customer.I_want_two_things.answer').html_safe
+      .faq-column
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_many_designers')
+          .faq-panel-drop
+            %p= t('faq.customer.how_many_designers.answer').html_safe
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.want_to_meet_designer')
+          .faq-panel-drop
+            %p= t('faq.customer.want_to_meet_designer.answer').html_safe
+        .faq-panel
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers')
+          .faq-panel-drop
+            %p= t('faq.customer.designer_can_help_me_with.answer',
+              what_does_cost_meeting_with_designer: link_to('see here', faq_path(anchor: 'collapse12'))).html_safe
+    .faq-navigation.clearfix
+      = link_to t('.more_faq'), faq_path, class: 'faq-more'
