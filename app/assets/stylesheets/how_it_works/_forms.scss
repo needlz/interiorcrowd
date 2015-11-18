@@ -1,0 +1,28 @@
+/* forms */
+.error {
+    color: $red !important;
+    border-color: $red !important;
+}
+.success {
+    color: $green !important;
+    border-color: $green !important;
+}
+.disabled {
+    color: $gray !important;
+    border-color: $gray !important;
+    cursor: default !important;
+}
+.input-text {
+    width: 100%;
+    float: left;
+    @include sizing();
+}
+.textarea {
+    @extend .input-text;
+    font-family: $AvenirLTStd;
+    overflow: auto;
+    height: auto;
+}
+.button {
+    @include sizing();
+}

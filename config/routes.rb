@@ -24,6 +24,7 @@ InteriorC::Application.routes.draw do
     get 'terms_of_service', to: 'home#terms_of_service'
     get 'faq', to: 'home#faq'
     get 'sign_up_beta', to: 'home#sign_up_beta'
+    get 'how_it_works', to: 'home#how_it_works'
 
     resources :contest_requests, only: [:show, :create] do
       member do

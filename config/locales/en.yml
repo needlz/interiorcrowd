@@ -1,10 +1,8 @@
 en:
   header:
     need_help: Need help?
-    get_inspired: Get ideas
     portfolio: Portfolio
     how_it_works: How it works
-    for_designers: For designers
     designer_center: Designer center
     client_center: Client center
     sign_out: Sign Out
@@ -1282,6 +1280,55 @@ en:
           impressed with the level of detail our designer was
           able to plan for us - from the sofa right down to room
           accessories like bowls for the table. It’s a perfect room.
+    how_it_works:
+      title: How it works
+      get_started_text: get started designing your perfect room now
+      get_started_link: Get started
+      lead_wrapper: >
+        We connect you with a network of interior designers who will develop custom design ideas, layout plans,
+        shopping lists, and assembly instructions for $299, so you can bring to life the beautiful room
+        you’ve always wanted. Join us!
+      faq:
+        faq_title: 'FREQUENTLY ASKED QUESTIONS:'
+        who_are_designers: Who are the designers?
+        how_long_everything_takes: How long does a project take?
+        I_want_two_things: I only want one or two new things, is this for me?
+        how_many_designers: How many designers will i get to choose from?
+        want_to_meet_designer: Can I meet my designer in-person?
+        designer_can_help_me_with: What can my designer source for me?
+        more_faq: For more FAQ's please see here
+      steps:
+        first:
+          title: Go through our style brief
+          description:
+            - Let us know what your style preferences are, your design experience, and what exactly you want for your room
+        second:
+          title: Receive concept boards from multiple designers
+          description:
+            - Over the course of seven days, you will receive between 3 and 5 (sometimes more) concept boards
+              from our designers
+            - You can view designer portfolios, invite specific designers to your contest - and ask friends
+              to help you pick a winner
+        third:
+          title: Choose a designer
+          description:
+            - Continue the discussion with your designer about what you need and want in your space
+            - Receive updated product lists based on your budget, and updated concept boards based on your design needs
+        forth:
+          title: One-on-one time with your designer
+          description:
+            - Hop on a quick call to answer any questions your designer might have
+            - Receive a product list from your  designer based on what you liked and disliked about their concept board
+        fifth:
+          title: Collaborate
+          description:
+            - Continue the discussion with your designer about what you need and want in your space
+            - Receive updated product lists based on your budget, and updated concept boards based on your design needs
+        sixth:
+          title: Final design
+          description:
+            - Receive a floorplan and instructions from your designer on how to pull your new look together
+            - Purchase all items recommended by your designer in your own time based on your favorite design submission
   mails:
     designer_registration:
       subject: Congrats! You're now a designer on InteriorCrowd.

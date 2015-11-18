@@ -9,6 +9,7 @@ module Blog
       @url = options[:url]
       @method = options[:method]
       @params = options[:params].merge(icrowd_app: 'yes')
+      @request = options[:request]
       @session = options[:session]
       @blog_path = options[:blog_path]
     end
@@ -34,6 +35,7 @@ module Blog
     def make_request(url)
       conn = Faraday.new(url) do |f|
         f.use FaradayMiddleware::FaradayCookies, session: session
+        f.use FaradayMiddleware::Gzip
         f.response :logger if Settings.log_requests_to_blog
         f.request :url_encoded
         forward_headers(f)
@@ -49,12 +51,16 @@ module Blog
     end
 
     def forward_headers(r)
-      ['ACCEPT', 'ACCEPT_LANGUAGE', 'USER_AGENT'].each do |header|
+      ['ACCEPT', 'ACCEPT_LANGUAGE', 'USER_AGENT', 'CACHE_CONTROL', 'CONNECTION', 'ACCEPT_ENCODING', 'REFERER'].each do |header|
         r.headers[header.dasherize] = env["HTTP_#{ header }"] if env["HTTP_#{ header }"]
       end
+
+      r.headers['REFERER'] = 'http://' + URI(Settings.external_urls.blog.url).host if r.headers['REFERER'].blank?
+      r.headers['REFERER'].gsub!(Regexp.new("[^/]+" + Regexp.escape("/#{ Blog::PageParser::BLOG_NAMESPACE }")), URI(Settings.external_urls.blog.url).host)
       ['CONTENT_TYPE'].each do |header|
         r.headers[header.dasherize] = env["#{ header }"] if env["#{ header }"]
       end
+
     end
   end
 
