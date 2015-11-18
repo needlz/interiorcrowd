@@ -7,7 +7,12 @@ class ApplyPromocode
 
   def perform
     code = Promocode.active.find_by_promocode(@promocode)
-    @contest.promocodes << code if code
+    if code
+      ActiveRecord::Base.transaction do
+        @contest.promocodes << code
+        code.update_attributes!(active: false) if code.one_time
+      end
+    end
   end
 
 end
