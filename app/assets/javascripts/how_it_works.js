@@ -3,7 +3,6 @@ $(document).ready(function(){
     $('.faq-panel-title').on('click', function(event) {
         event.preventDefault();
     });
-    //drop
     activePop = null;
     dropClass = $('.faq-panel');
     function closeInactivePop() {
@@ -27,10 +26,4 @@ $(document).ready(function(){
         $(this).parent(dropClass).toggleClass("active");
     });
 
-});//document ready
-
-$(window).load(function() {
-
-    //load
-
-});//window load
+});
