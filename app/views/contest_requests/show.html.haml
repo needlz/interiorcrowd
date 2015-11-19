@@ -7,7 +7,7 @@
 - content_for :client_center_content do
   .col-md-12.disablePadding.marginTop40
     = link_to t('client_center.moodboard_details.back'),
-        client_center_entries_path,
+        client_center_entry_path(id: @request.contest.id),
         class: "backToEntries #{ tracked_link }"
   .viewingMoodboard
     .col-md-8.disablePadding
