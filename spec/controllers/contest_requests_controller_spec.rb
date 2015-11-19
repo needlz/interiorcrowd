@@ -226,7 +226,7 @@ RSpec.describe ContestRequestsController do
         sign_in(designer)
       end
 
-      it 'creates first comment and contest request of there is no request for this designer yet' do
+      it 'creates first comment and contest request if there is no request for this designer yet' do
         expect do
           post :add_comment, comment: { text: 'text', contest_id: contest.id }
         end.to change{ContestRequest.count}.by(1).and change{ConceptBoardComment.count}.by(1)
@@ -235,7 +235,7 @@ RSpec.describe ContestRequestsController do
       end
     end
 
-    context 'designer has already created one contest request' do
+    context 'designer has already created contest request' do
       before do
         sign_in(designer)
         request

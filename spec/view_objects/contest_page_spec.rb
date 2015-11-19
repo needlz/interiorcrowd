@@ -6,10 +6,6 @@ RSpec.describe ContestPage do
   let(:contest){ Fabricate(:contest, client: client, status: 'submission') }
   let(:contest_page){ ContestPage.new(
     contest: contest,
-    view: nil,
-    answer: nil,
-    page: nil,
-    current_user: nil,
     view_context: RenderingHelper.new
   ) }
 
