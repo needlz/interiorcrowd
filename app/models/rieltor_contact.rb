@@ -15,7 +15,7 @@
 
 class RieltorContact < ActiveRecord::Base
 
-  CHOICES = {call: 'call_me', email: 'email_me'}
+  CHOICES = { call: 'call_me', email: 'email_me' }
 
   normalize_attributes :email, :first_name, :last_name, :brokerage, :choice, :phone
 
