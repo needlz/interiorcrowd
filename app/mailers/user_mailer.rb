@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
   def user_registration_info(user, email_id = nil)
     template "#{ user.role.downcase }_registration_info"
     set_template_values(set_user_params(user))
-    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+    mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
 
   def invite_to_contest(designer, client, email_id = nil)
@@ -282,6 +282,19 @@ class UserMailer < ActionMailer::Base
     mail_about_contest_submissions(contest, email_id)
   end
 
+  def client_moved_to_final_design(contest_id, email_id = nil)
+    template 'client-ready-for-final-design-1'
+    contest = Contest.find(contest_id)
+    client = contest.client
+    set_template_values(
+        CLIENT_NAME: client.name,
+        CLIENT_ADMIN_URL: renderer.admin_client_url(client.id),
+        CLIENT_ID: client.id,
+        CLIENT_EMAIL: client.email
+    )
+    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+  end
+
   private
 
   def asset_url(asset_path)
@@ -327,7 +340,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def contact_email
-    I18n.t('registration.mail_to')
+    Settings.info_email
   end
 
   def renderer
