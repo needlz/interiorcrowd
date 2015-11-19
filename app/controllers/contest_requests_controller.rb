@@ -8,14 +8,13 @@ class ContestRequestsController < ApplicationController
   def add_comment
     @request = ContestRequest.find_by_id(params[:id])
     if @request.nil?
-      return raise_404 unless current_user.designer?
-      contest = Contest.find params['comment'][:contest_id]
+      contest = Contest.find params[:contest_id]
+      return raise_404 unless current_user.can_create_request_for_contest?(contest)
       @request = ContestRequestCreation.new({ designer: current_user,
                                               contest: contest,
                                               request_params: nil,
                                               lookbook_params: nil,
                                               need_submit: false }).perform
-      params['comment'].delete('contest_id')
     else
       return raise_404 unless current_user.can_comment_contest_request?(@request)
     end

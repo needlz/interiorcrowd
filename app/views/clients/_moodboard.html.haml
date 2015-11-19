@@ -9,12 +9,10 @@
             .messaging-info
               = t('client_center.entries.board_will_be_soon')
     .row.title
-      - if contest_request.comments.by_designer.present? || contest_request.feedback
+      - if contest_request.designers_submission_comments_present?
         .comments-count.pull-right
           %span= t('client_center.entries.comments')
-          - comments_count = contest_request.comments.by_designer.count
-          - comments_count += 1 if contest_request.feedback
-          %b= comments_count
+          %b= contest_request.designers_submission_comments_count
       - if contest_request.sound
         .col-xs-3.designerName
           %h3= contest_request.designer.name

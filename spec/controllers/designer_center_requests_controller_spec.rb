@@ -281,6 +281,17 @@ RSpec.describe DesignerCenterRequestsController do
         expect(contest.requests).to be_empty
       end
     end
+
+    context 'response already created' do
+      before do
+        post :create, contest_id: contest.id, contest_request: { feedback: '' }
+      end
+
+      it 'redirects to response page' do
+        post :create, contest_id: contest.id, contest_request: { feedback: '' }
+        expect(response).to redirect_to designer_center_response_path(id: ContestRequest.last.id)
+      end
+    end
   end
 
   describe 'GET edit' do

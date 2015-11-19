@@ -198,8 +198,8 @@ class ContestsController < ApplicationController
   end
 
   def invite_designers
-    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
     return raise_404 unless @contest.submission?
+    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
   end
 
   private

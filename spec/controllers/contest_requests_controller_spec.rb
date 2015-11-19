@@ -228,7 +228,7 @@ RSpec.describe ContestRequestsController do
 
       it 'creates first comment and contest request if there is no request for this designer yet' do
         expect do
-          post :add_comment, comment: { text: 'text', contest_id: contest.id }
+          post :add_comment, comment: { text: 'text' }, contest_id: contest.id
         end.to change{ContestRequest.count}.by(1).and change{ConceptBoardComment.count}.by(1)
         expect(ContestRequest.last.comments).to be_present
         expect(response).to be_ok
@@ -242,9 +242,7 @@ RSpec.describe ContestRequestsController do
       end
 
       it "doesn't create new contest request and concept board comment" do
-        expect do
-          post :add_comment, comment: { text: 'text', contest_id: contest.id}
-        end.to raise_error(ActiveRecord::RecordInvalid)
+        post :add_comment, comment: { text: 'text' }, contest_id: contest.id
         expect(ConceptBoardComment.exists?).to be_falsey
         expect(ContestRequest.all).to match_array([request])
       end
@@ -256,7 +254,7 @@ RSpec.describe ContestRequestsController do
       end
 
       it 'renders 404' do
-        post :add_comment, comment: {text: 'text', contest_id: contest.id}
+        post :add_comment, comment: {text: 'text'}, contest_id: contest.id
         expect(ConceptBoardComment.exists?).to be_falsey
         expect(response).to have_http_status(:not_found)
       end

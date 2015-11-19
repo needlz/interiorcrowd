@@ -32,7 +32,7 @@ class @ResponseEditor
 
   sendComment: (contestId, $comment)->
     $.ajax(
-      data: { comment: { text: $comment.val(), contest_id: contestId } }
+      data: { comment: { text: $comment.val() }, contest_id: contestId }
       url: '/contest_requests/add_comment'
       type: 'POST'
       success: ()=>

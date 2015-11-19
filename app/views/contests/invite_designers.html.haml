@@ -1,5 +1,4 @@
-- content_for :title do
-  = t('client_center.entries.invite_designers.page_title')
+- title t('client_center.entries.invite_designers.page_title')
 - content_for :head do
   = javascript_include_tag 'clients/entries'
 
@@ -20,4 +19,4 @@
       = render partial: 'clients/client_center/entries/more_features'
 
 = render partial: 'clients/client_center/layout',
-    locals: { container_class: ('entries-page' unless @contest == 'finished') }
+    locals: { container_class: 'entries-page' }

@@ -9,7 +9,7 @@ RSpec.describe ContestPage do
     view_context: RenderingHelper.new
   ) }
 
-  context 'retrieving contest notes' do
+  describe 'retrieving contest notes' do
     let(:client_note){ ContestNote.create(client: client, contest: contest, text: 'test') }
     let(:designer_note){ ContestNote.create(designer: designer, contest: contest, text: 'test') }
 
@@ -21,7 +21,7 @@ RSpec.describe ContestPage do
     end
   end
 
-  context 'retrieving contest requests' do
+  describe 'retrieving contest requests' do
     let(:draft_contest_request) { Fabricate(:contest_request, contest: contest, status: 'draft') }
     let(:commenting_designer) { Fabricate(:designer) }
     let(:commented_contest_request) { Fabricate(:contest_request, contest: contest, designer: commenting_designer) }

@@ -164,6 +164,14 @@ class ContestRequest < ActiveRecord::Base
     comments.count + final_notes.count
   end
 
+  def designers_submission_comments_count
+    comments.by_designer.count + (feedback.present? ? 1 : 0)
+  end
+
+  def designers_submission_comments_present?
+    comments.by_designer.present? || feedback.present?
+  end
+
   private
 
   def contest_status
