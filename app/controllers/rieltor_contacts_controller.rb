@@ -5,7 +5,7 @@ class RieltorContactsController < ApplicationController
   end
 
   def create
-    new_rieltor = RieltorContact.new(retailer_contact_params)
+    new_rieltor = RieltorContact.new(rieltor_contact_params)
     result =
       if new_rieltor.save
         { notice: 'Contact saved!' }
@@ -26,7 +26,7 @@ class RieltorContactsController < ApplicationController
 
   private
 
-  def retailer_contact_params
+  def rieltor_contact_params
     contact_params = params.require(:rieltor_contact)
     phone_string = contact_params[:phone].join
     contact_params.merge!(phone: phone_string)
