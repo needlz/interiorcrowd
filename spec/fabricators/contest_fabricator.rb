@@ -7,3 +7,7 @@ Fabricator(:contest) do
   end
   preferred_retailers
 end
+
+Fabricator(:contest_in_submission, from: :contest) do
+  status 'submission'
+end

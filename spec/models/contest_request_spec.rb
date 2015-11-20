@@ -236,9 +236,9 @@ RSpec.describe ContestRequest do
     let(:contest_request) { Fabricate(:contest_request) }
     let(:designer_comment) { Fabricate(:concept_board_designer_comment, contest_request: contest_request) }
     let(:designer) { Fabricate(:designer) }
-    let(:closed_request) { Fabricate(:contest_request, designer: designer, status: 'closed') }
+    let(:closed_request) { Fabricate(:closed_request, designer: designer) }
     let(:another_designer) { Fabricate(:designer) }
-    let(:another_request) { Fabricate(:contest_request, designer: another_designer, status: 'draft') }
+    let(:another_request) { Fabricate(:draft_request, designer: another_designer) }
 
     it 'returns only commented contest requests and not draft requests' do
       designer_comment

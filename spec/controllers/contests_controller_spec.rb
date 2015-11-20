@@ -780,7 +780,7 @@ RSpec.describe ContestsController do
     end
 
     context 'when contest is in "Submission" Phase' do
-      let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+      let(:contest) { Fabricate(:contest_in_submission, client: client) }
 
       it 'renders page' do
         get :invite_designers, id: contest.id
