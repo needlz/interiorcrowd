@@ -110,7 +110,6 @@ class ContestsController < ApplicationController
     end
   end
 
-
   def account_creation
     return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps)
     @client = Client.new
@@ -200,6 +199,9 @@ class ContestsController < ApplicationController
   def invite_designers
     return raise_404 unless @contest.submission?
     @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    @designers = Designer.active.includes(portfolio: [:personal_picture]).all.map do |designer|
+      DesignerView.new(designer)
+    end
   end
 
   private

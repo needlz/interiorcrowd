@@ -14,7 +14,7 @@
                 client_center_entry_path(id: @contest.id),
                 class: 'backToEntries')
       = render(partial: 'clients/client_center/entries/designers_to_invite',
-          locals: { designers: Designer.active.includes(portfolio: [:personal_picture]).all.map { |designer| DesignerView.new(designer) } })
+          locals: { designers: @designers })
       .fullWidthLine
       = render partial: 'clients/client_center/entries/more_features'
 

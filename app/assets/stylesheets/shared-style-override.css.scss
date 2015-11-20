@@ -1473,13 +1473,13 @@
   }
 }
 
-.invite-more-designers-mobile{
-  @extend .invite-more-designers;
-  text-align: center;
-  margin-top: -3%;
-  margin-bottom: 6%;
-  a{
-    font-size: 16px;
+@media (max-width: 768px) {
+  .invite-more-designers{
+    text-align: center;
+    margin-bottom: 6%;
+    a{
+      font-size: 18px;
+    }
   }
 }
 
@@ -1497,4 +1497,8 @@
 
 .default-concept-board-mobile{
   z-index: 0;
+}
+
+span.submission-pagination{
+  padding: 0;
 }
