@@ -28,7 +28,7 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about password reset' do
-      expect(UserMailer.reset_password(designer, 'password')).to be_present
+      expect(UserMailer.reset_password(designer.id, designer.role, 'password')).to be_present
     end
 
     it 'sends autorespond about beta signup' do

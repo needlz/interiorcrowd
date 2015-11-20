@@ -1169,7 +1169,6 @@ en:
     link_here: here
   invitation_to_content:
     link: here
-  reset_password_text: 'Your password was reseted, here are your new credentials:'
   feedback_email: hello@interiorcrowd.com
   reset_password:
     email_send: An email has been sent to your registered email address.
@@ -1335,8 +1334,6 @@ en:
   mails:
     designer_registration:
       subject: Congrats! You're now a designer on InteriorCrowd.
-    password_reset:
-      subject: InteriorCrowd Password Reset
     beta_autorespond:
       subject: InteriorCrowd Private Beta
     beta_subscriber:

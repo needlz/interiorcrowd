@@ -88,7 +88,8 @@ class SessionsController < ApplicationController
       user_class = user_role.capitalize.constantize
       user = user_class.find_by_email(params[:email])
       if user.present?
-        user.reset_password
+        reset_password = ResetPassword.new(user)
+        reset_password.perform
         flash[:notice] = t('reset_password.email_send')
       else
         flash[:error] = t('reset_password.email_does_not_exist')

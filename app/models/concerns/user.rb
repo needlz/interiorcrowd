@@ -58,14 +58,6 @@ module User
     cookies.signed[:beta]
   end
 
-  def reset_password
-    length_of_random_seed = 5
-    new_password = SecureRandom.urlsafe_base64(length_of_random_seed)
-    self.set_password(new_password)
-    self.save!
-    Jobs::Mailer.schedule(:reset_password, [self, new_password])
-  end
-
   def valid_password?(passed_password)
     self.class.encrypt(passed_password) == self.password
   end
