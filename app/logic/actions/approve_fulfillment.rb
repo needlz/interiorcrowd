@@ -17,7 +17,7 @@ class ApproveFulfillment
 
       finalize_image_items
 
-      Jobs::Mailer.schedule(:client_ready_for_final_design, [contest_request])
+      send_notifications
     end
     @approved = true
   end
@@ -46,6 +46,11 @@ class ApproveFulfillment
     copyist.perform do |copy|
       copy.save!
     end
+  end
+
+  def send_notifications
+    Jobs::Mailer.schedule(:client_ready_for_final_design, [contest_request])
+    Jobs::Mailer.schedule(:client_moved_to_final_design, [contest_request.contest_id])
   end
 
 end

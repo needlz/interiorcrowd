@@ -36,7 +36,11 @@ RSpec.describe UserMailer do
     end
 
     it 'sends invitation to leave a feedback' do
-      expect(UserMailer.invitation_to_leave_a_feedback({username: 'username', email: 'email'}, 'url', client, 'example.com')).to be_present
+      expect(UserMailer.invitation_to_leave_a_feedback({username: 'username',
+                                                        email: 'email'},
+                                                       'url',
+                                                       client,
+                                                       'example.com')).to be_present
     end
 
     it 'sends email about new concept board received' do
@@ -44,20 +48,26 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about product list items marked' do
-      expect(UserMailer.product_list_feedback({username: 'username', email: 'email'}, contest_request.id)).to be_present
+      expect(UserMailer.product_list_feedback({username: 'username',
+                                               email: 'email'},
+                                              contest_request.id)).to be_present
     end
 
     it 'sends email about new concept board comment' do
       %w(designer client).each do |role|
-        expect(UserMailer.comment_on_board({ username: 'John Doe', email: 'johnD@example.com', role: role, comment: 'text'}, contest_request.id)).to be_present
+        expect(UserMailer.comment_on_board({ username: 'John Doe',
+                                             email: 'johnD@example.com',
+                                             role: role,
+                                             comment: 'text'},
+                                           contest_request.id)).to be_present
       end
     end
 
     it 'sends email clients comment to designer' do
-      expect(UserMailer.note_to_concept_board({username: 'username',
-                                               email: 'email',
-                                               comment: 'text of comment',
-                                               client_name: 'client\'s name'})).to be_present
+      expect(UserMailer.note_to_concept_board({ username: 'username',
+                                                email: 'email',
+                                                comment: 'text of comment',
+                                                client_name: 'client\'s name'})).to be_present
     end
 
     it 'sends email new product list items' do
@@ -132,6 +142,10 @@ RSpec.describe UserMailer do
 
     it 'sends email to designers about only one submission for client so far' do
       expect(UserMailer.to_designers_one_submission_only(contest)).to be_present
+    end
+
+    it 'sends email to owner about a client has been moved to final design' do
+      expect(UserMailer.client_moved_to_final_design(contest.id)).to be_present
     end
 
   end
