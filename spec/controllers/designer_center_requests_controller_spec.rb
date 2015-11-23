@@ -283,13 +283,15 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     context 'response already created' do
+      let(:existing_request) { Fabricate(:contest_request, designer: designer, contest: contest) }
+
       before do
-        post :create, contest_id: contest.id, contest_request: { feedback: '' }
+        existing_request
       end
 
       it 'redirects to response page' do
         post :create, contest_id: contest.id, contest_request: { feedback: '' }
-        expect(response).to redirect_to designer_center_response_path(id: ContestRequest.last.id)
+        expect(response).to redirect_to designer_center_response_path(id: existing_request.id)
       end
     end
   end
