@@ -7,6 +7,7 @@ class ConceptBoardPage < PhasesHolder
     @preferred_view_index = options[:preferred_view].to_i if options[:preferred_view]
     @contest_request_view = options[:contest_request_view]
     @view_context = options[:view_context]
+    @image_items_page = options[:image_items_page]
     super()
   end
 
@@ -15,7 +16,7 @@ class ConceptBoardPage < PhasesHolder
   end
 
   def image_items
-    contest_request.image_items.of_phase(active_phase).for_view
+    contest_request.image_items.of_phase(active_phase).for_view.paginate(page: @image_items_page, per_page: 10)
   end
 
   def current_lookbook_items
