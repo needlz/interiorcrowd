@@ -1,0 +1,4 @@
+- address = ClientView.new(@contest.client).city_address
+- value_html = capture do
+  %span.selection= address
+= render 'contests/previews/preview_row', title: t('contests.titles.brief.location'), value: value_html if address.present?
