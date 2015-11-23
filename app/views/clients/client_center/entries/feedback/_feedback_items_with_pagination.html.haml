@@ -25,8 +25,9 @@
       renderer: SubmissionsPaginationRenderer,
       previous_label: render('clients/client_center/entries/feedback/pagination_label', direction: :left),
       next_label: render('clients/client_center/entries/feedback/pagination_label', direction: :right))
-.col-xs-12.col-sm-5.col-sm-pull-7.invite-more-designers
-  = link_to invite_designers_contests_path(id: contest_page.contest.id) do
-    +
-    = t('client_center.entries.reviewer_invitations.invite_more_designers')
+- if contest_page.contest.submission?
+  .col-xs-12.col-sm-5.col-sm-pull-7.invite-more-designers
+    = link_to invite_designers_contests_path(id: contest_page.contest.id) do
+      +
+      = t('client_center.entries.reviewer_invitations.invite_more_designers')
 
