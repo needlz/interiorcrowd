@@ -43,4 +43,36 @@ RSpec.describe EntriesPage do
     end
   end
 
+  describe '#current_user_owns_contest?' do
+    context 'logged in as contest owner' do
+      let(:entries_page){ EntriesPage.new(
+          contest: contest,
+          view: nil,
+          answer: nil,
+          page: nil,
+          current_user: client,
+          view_context: RenderingHelper.new
+      ) }
+
+      it 'returns true' do
+        expect(entries_page.current_user_owns_contest?).to be_truthy
+      end
+    end
+
+    context 'logged in as not contest owner' do
+      let(:entries_page){ EntriesPage.new(
+          contest: contest,
+          view: nil,
+          answer: nil,
+          page: nil,
+          current_user: nil,
+          view_context: RenderingHelper.new
+      ) }
+
+      it 'returns false' do
+        expect(entries_page.current_user_owns_contest?).to be_falsey
+      end
+    end
+  end
+
 end

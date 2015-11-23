@@ -59,9 +59,9 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t('mails.product_list_feedback.subject'), email_id: email_id
   end
 
-  def invitation_to_leave_a_feedback(params, url, client, root_url, email_id = nil)
+  def invitation_to_leave_a_feedback(params, url, client_name, root_url, email_id = nil)
     template 'invitation_to_leave_a_feedback'
-    @client_name = client.name
+    @client_name = client_name
     @page_url = url
     @root_url = root_url
     set_template_values(text: render_to_string('mails/invite_to_leave_feedback'))

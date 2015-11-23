@@ -10,7 +10,7 @@ class ReviewerFeedbacksController < ApplicationController
 
   def show
     @feedback = ReviewerFeedback.find_by_id(params[:feedback_id])
-    cookies[:token] = params[:token]
+    cookies[:reviewer_token] = params[:token]
     @feedback_page = FeedbackPage.new(contest: @contest)
     @feedbacks = @invitation.feedbacks
     render(layout: 'layouts/without_navigation')

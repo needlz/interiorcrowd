@@ -5,20 +5,12 @@
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
 - content_for :client_center_content do
-  .col-md-12.disablePadding.marginTop40
-    = link_to t('client_center.moodboard_details.back'),
-        client_center_entry_path(id: @request.contest.id),
-        class: "backToEntries #{ tracked_link }"
-  .viewingMoodboard
-    .col-md-8.disablePadding
-      = render partial: 'contest_requests/moodboard_with_answers',
-          locals: { contest_request: @request, show_answer_options: @show_answer_options }
-    .col-md-4
-      = render partial: 'contest_requests/submission_info',
-          locals: { designer: @request.designer, submitted_at: @request.created_at, request: @request }
-      - if @request.comments.present?
-        = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
-            comments: @request.comments, show_comment_switcher: false }
+- if @request.contest_owner?(current_user)
+  - content_for :client_center_content do
+    = render 'contest_requests/show/content', contest_request: @request, show_answer_options: @show_answer_options
 
-= render partial: 'clients/client_center/layout'
-= render partial: 'clients/client_center/moodboard_winner_dialog'
+  = render partial: 'clients/client_center/layout'
+  = render partial: 'clients/client_center/moodboard_winner_dialog'
+- else
+  .container
+    = render 'contest_requests/show/content', contest_request: @request, show_answer_options: false

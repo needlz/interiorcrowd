@@ -1,7 +1,7 @@
 .row.designerFeedback.marg-bottom20
   - @invitation.feedbacks.each do |feedback|
     = render partial: 'clients/client_center/entries/feedback_from_others',locals: {feedback: feedback}
-  .col-xs-6.no-x-padding
+  .col-sm-6.no-x-padding
     = form_for ReviewerFeedback.new, remote: true, html: { class: 'new_reviewer_feedback' } do |f|
       = hidden_field_tag :token, params[:token]
       = f.text_area :text, class: 'addCommentTextarea', placeholder: t('client_center.entries.reviewer_invitations.comment_placeholder')

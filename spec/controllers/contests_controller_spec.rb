@@ -334,133 +334,134 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET show' do
-    before do
-      sign_in(client)
-      Fabricate(:portfolio)
-      allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
-    end
-
-    context 'designers present' do
-      let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
-
-      it 'returns page' do
-        Fabricate(:contest, client: client, status: 'submission')
-        contest = Fabricate(:contest, client: client)
-        pay_contest(contest)
-        get :show, id: contest.id
-        expect(response).to render_template(:entries_invitations)
+    context 'when logged in as contest owner' do
+      before do
+        sign_in(client)
+        Fabricate(:portfolio)
+        allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
       end
 
-      context 'responses present' do
-        let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
-        let!(:submitted) { Fabricate(:contest_request,
-                                     designer: designers[0],
-                                     contest: contest,
-                                     status: 'submitted',
-                                     lookbook: Fabricate(:lookbook)) }
-        let!(:draft) { Fabricate(:contest_request,
-                                 designer: designers[1],
-                                 contest: contest,
-                                 status: 'draft',
-                                 lookbook: Fabricate(:lookbook)) }
-        let!(:fulfillment) { Fabricate(:contest_request,
-                                       designer: designers[2],
-                                       contest: contest,
-                                       status: 'fulfillment_ready',
-                                       lookbook: Fabricate(:lookbook)) }
+      let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+      let(:submitted) { Fabricate(:contest_request,
+                                  designer: designers[0],
+                                  contest: contest,
+                                  status: 'submitted',
+                                  lookbook: Fabricate(:lookbook)) }
+      let(:draft) { Fabricate(:contest_request,
+                              designer: designers[1],
+                              contest: contest,
+                              status: 'draft',
+                              lookbook: Fabricate(:lookbook)) }
+      let(:fulfillment) { Fabricate(:contest_request,
+                                    designer: designers[2],
+                                    contest: contest,
+                                    status: 'fulfillment_ready',
+                                    lookbook: Fabricate(:lookbook)) }
 
-        before do
-          pay_contest(contest)
-        end
+      context 'designers present' do
+        let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
 
-        def create_contest_request(cont)
-          Fabricate(:contest_request,
-                    designer: designers[3],
-                    contest: cont,
-                    status: 'submitted',
-                    answer: 'winner',
-                    lookbook: Fabricate(:lookbook))
-        end
-
-        def create_contest
-          Fabricate(:contest, client: client, status: 'submission')
-        end
-
-        it 'views only submitted and fulfillment requests' do
-          get :show, id: contest.id
-          expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
-        end
-
-        it 'filters responses by answer' do
-          contest.start_winner_selection!
-          draft.update_attributes!(answer: 'no')
-          fulfillment.update_attributes!(answer: 'favorite')
-          submitted.update_attributes!(answer: 'winner')
-          get :show, answer: 'winner', id: contest.id
-          expect(assigns(:entries_page).contest_requests).to match_array([submitted])
-        end
-
-        it 'returns winner contest request' do
-          contest.start_winner_selection!
-          submitted.update_attributes!(answer: 'winner')
-          get :show, answer: 'winner', id: contest.id
-          expect(assigns(:entries_page).won_contest_request).to eq(submitted)
-        end
-
-        context 'contest in fulfillment state' do
+        context 'in submission phase' do
           before do
-            contest.update_attributes!(status: 'fulfillment')
+            contest
+            draft
+            submitted
           end
 
-          it 'returns page' do
-            ContestRequest::FULFILLMENT_STATUSES.each do |status|
-              cont = create_contest
-              pay_contest(cont)
-              contest_request = create_contest_request(cont)
-              contest_request.update_attributes!(status: status)
-              cont.update_attributes!(status: 'fulfillment')
-              PhasesStripe::PHASES.each_index do |index|
-                get :show, view: index, id: cont.id
-                expect(response).to render_template('clients/client_center/entries')
-              end
-              contest_request.destroy
-            end
-          end
         end
 
-        context 'contest finished' do
-          it 'returns page' do
-            contest_request = Fabricate(:contest_request,
-                                        designer: designers[3],
-                                        contest: contest,
-                                        status: 'finished',
-                                        answer: 'winner',
-                                        lookbook: Fabricate(:lookbook))
-            contest.update_attributes!(status: 'finished')
-            PhasesStripe::PHASES.each_index do |index|
-              get :show, view: index, id: contest.id
-              expect(response).to render_template('clients/client_center/entries')
-            end
-          end
-        end
-      end
-    end
-
-    context 'when real payments disabled' do
-      context 'when contest payed' do
-        it 'returns entries page' do
+        it 'returns page' do
+          Fabricate(:contest, client: client, status: 'submission')
+          contest = Fabricate(:contest, client: client)
           pay_contest(contest)
           get :show, id: contest.id
           expect(response).to render_template(:entries_invitations)
         end
-      end
 
-      context 'when contest not payed' do
-        context 'when credit cards saved' do
-          before do
-            set_primary_card(client)
+        context 'responses present' do
+          def create_contest_request(cont)
+            Fabricate(:contest_request,
+                      designer: designers[3],
+                      contest: cont,
+                      status: 'submitted',
+                      answer: 'winner',
+                      lookbook: Fabricate(:lookbook))
           end
 
+          def create_contest
+            Fabricate(:contest, client: client, status: 'submission')
+          end
+
+          before do
+            pay_contest(contest)
+            draft
+            submitted
+            fulfillment
+          end
+
+          it 'views only submitted and fulfillment requests' do
+            get :show, id: contest.id
+            expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
+          end
+
+          it 'filters responses by answer' do
+            contest.start_winner_selection!
+            draft.update_attributes!(answer: 'no')
+            fulfillment.update_attributes!(answer: 'favorite')
+            submitted.update_attributes!(answer: 'winner')
+            get :show, answer: 'winner', id: contest.id
+            expect(assigns(:entries_page).contest_requests).to match_array([submitted])
+          end
+
+          it 'returns winner contest request' do
+            contest.start_winner_selection!
+            submitted.update_attributes!(answer: 'winner')
+            get :show, answer: 'winner', id: contest.id
+            expect(assigns(:entries_page).won_contest_request).to eq(submitted)
+          end
+
+          context 'contest in fulfillment state' do
+            before do
+              fulfillment.update_attributes!(answer: 'winner')
+              contest.update_attributes!(status: 'fulfillment')
+            end
+
+            it 'returns page' do
+              ContestRequest::FULFILLMENT_STATUSES.each do |status|
+                cont = create_contest
+                pay_contest(cont)
+                contest_request = create_contest_request(cont)
+                contest_request.update_attributes!(status: status)
+                cont.update_attributes!(status: 'fulfillment')
+                PhasesStripe::PHASES.each_index do |index|
+                  get :show, view: index, id: cont.id
+                  expect(response).to render_template('clients/client_center/entries')
+                end
+                contest_request.destroy
+              end
+            end
+          end
+
+          context 'contest finished' do
+            it 'returns page' do
+              contest_request = Fabricate(:contest_request,
+                                          designer: designers[3],
+                                          contest: contest,
+                                          status: 'finished',
+                                          answer: 'winner',
+                                          lookbook: Fabricate(:lookbook))
+              contest.update_attributes!(status: 'finished')
+              PhasesStripe::PHASES.each_index do |index|
+                get :show, view: index, id: contest.id
+                expect(response).to render_template('clients/client_center/entries')
+              end
+            end
+          end
+        end
+      end
+
+      context 'when real payments disabled' do
+        context 'when contest payed' do
           it 'returns entries page' do
             pay_contest(contest)
             get :show, id: contest.id
@@ -468,120 +469,173 @@ RSpec.describe ContestsController do
           end
         end
 
-        context 'when credit cards not saved' do
-          it 'redirects to payment details page' do
-            get :show, id: contest.id
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+        context 'when contest not payed' do
+          context 'when credit cards saved' do
+            before do
+              set_primary_card(client)
+            end
+
+            it 'returns entries page' do
+              pay_contest(contest)
+              get :show, id: contest.id
+              expect(response).to render_template(:entries_invitations)
+            end
+          end
+
+          context 'when credit cards not saved' do
+            it 'redirects to payment details page' do
+              get :show, id: contest.id
+              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            end
           end
         end
       end
-    end
 
-    context 'when real payments enabled' do
-      context 'when contest payed' do
-        it 'returns entries page' do
-          pay_contest(contest)
-          get :show, id: contest.id
-          expect(response).to render_template(:entries_invitations)
+      context 'when real payments enabled' do
+        context 'when contest payed' do
+          it 'returns entries page' do
+            pay_contest(contest)
+            get :show, id: contest.id
+            expect(response).to render_template(:entries_invitations)
+          end
+        end
+
+        context 'when contest not payed' do
+          context 'when credit cards saved' do
+            before do
+              set_primary_card(client)
+            end
+
+            it 'redirects to payment details page' do
+              get :show, id: contest.id
+              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            end
+          end
+
+          context 'when credit cards not saved' do
+            it 'redirects to payment details page' do
+              get :show, id: contest.id
+              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            end
+          end
         end
       end
 
-      context 'when contest not payed' do
-        context 'when credit cards saved' do
-          before do
-            set_primary_card(client)
-          end
+      def create_request(options)
+        contest_options = { client: client, status: 'submission' }
+        contest_options.merge!(options[:contest].try(:except, :status)) if options[:contest]
+        @contest = Fabricate(:contest, contest_options)
+        pay_contest(@contest)
+        @contest_request = Fabricate(:contest_request,
+                                     { designer: Fabricate(:designer),
+                                       contest: @contest,
+                                       lookbook: Fabricate(:lookbook)
+                                     }.merge(options[:contest_request])
+        )
+        @contest.update_attributes!(status: options[:contest][:status]) if options[:contest].try(:[], :status)
+      end
 
-          it 'redirects to payment details page' do
-            get :show, id: contest.id
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
-          end
-        end
-
-        context 'when credit cards not saved' do
-          it 'redirects to payment details page' do
-            get :show, id: contest.id
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+      context 'when contest in "submission" state' do
+        it 'returns page' do
+          create_request(contest_request: { status: 'finished',
+                                            answer: 'winner', })
+          client.update_attributes!(status: 'finished')
+          @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+          @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+          @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
+          @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
+          get :show, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+          ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
+            get :show, view: phase_index, id: @contest.id
+            expect(response).to render_template('clients/client_center/entries')
           end
         end
       end
-    end
 
-    def create_request(options)
-      contest_options = { client: client, status: 'submission' }
-      contest_options.merge!(options[:contest].try(:except, :status)) if options[:contest]
-      @contest = Fabricate(:contest, contest_options)
-      pay_contest(@contest)
-      @contest_request = Fabricate(:contest_request,
-                                   { designer: Fabricate(:designer),
-                                     contest: @contest,
-                                     lookbook: Fabricate(:lookbook)
-                                   }.merge(options[:contest_request])
-      )
-      @contest.update_attributes!(status: options[:contest][:status]) if options[:contest].try(:[], :status)
-    end
-
-    context 'when contest in "submission" state' do
-      it 'returns page' do
-        create_request(contest_request: { status: 'finished',
-                                          answer: 'winner', })
-        client.update_attributes!(status: 'finished')
-        @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
-        @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
-        @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
-        @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
-        get :show, id: @contest.id
-        expect(response).to render_template('clients/client_center/entries')
-        ContestPhases::INDICES_TO_PHASES.keys.each do |phase_index|
-          get :show, view: phase_index, id: @contest.id
+      context 'when contest in "winner_selection" state' do
+        it 'returns page' do
+          create_request(contest: { status: 'winner_selection' }, contest_request: { status: 'submitted' })
+          get :show, id: @contest.id
           expect(response).to render_template('clients/client_center/entries')
         end
       end
-    end
 
-    context 'when contest in "winner_selection" state' do
-      it 'returns page' do
-        create_request(contest: { status: 'winner_selection' }, contest_request: { status: 'submitted' })
-        get :show, id: @contest.id
-        expect(response).to render_template('clients/client_center/entries')
+      context 'when contest in "fulfillment" state' do
+        it 'returns page' do
+          create_request(contest: { status: 'fulfillment' },
+                         contest_request: { status: 'fulfillment_ready', answer: 'winner' })
+          get :show, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
+      end
+
+      context 'when contest in "final_fulfillment" state' do
+        it 'returns page' do
+          create_request(contest: { status: 'final_fulfillment' },
+                         contest_request: { status: 'fulfillment_ready', answer: 'winner' })
+          get :show, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
+      end
+
+      context 'when contest in "finished" state' do
+        it 'returns page' do
+          create_request(contest: { status: 'finished' },
+                         contest_request: { status: 'finished', answer: 'winner' })
+          get :show, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
+      end
+
+      context 'client has no contest' do
+        before do
+          client.contests.destroy_all
+        end
+
+        it 'redirects to contest creation' do
+          get :show, id: 0
+          expect(response).to have_http_status(:not_found)
+        end
       end
     end
 
-    context 'when contest in "fulfillment" state' do
-      it 'returns page' do
-        create_request(contest: { status: 'fulfillment' },
-                       contest_request: { status: 'fulfillment_ready', answer: 'winner' })
-        get :show, id: @contest.id
-        expect(response).to render_template('clients/client_center/entries')
-      end
-    end
-
-    context 'when contest in "final_fulfillment" state' do
-      it 'returns page' do
-        create_request(contest: { status: 'final_fulfillment' },
-                       contest_request: { status: 'fulfillment_ready', answer: 'winner' })
-        get :show, id: @contest.id
-        expect(response).to render_template('clients/client_center/entries')
-      end
-    end
-
-    context 'when contest in "finished" state' do
-      it 'returns page' do
-        create_request(contest: { status: 'finished' },
-                       contest_request: { status: 'finished', answer: 'winner' })
-        get :show, id: @contest.id
-        expect(response).to render_template('clients/client_center/entries')
-      end
-    end
-
-    context 'client has no contest' do
+    context 'when logged in as another client' do
       before do
-        client.contests.destroy_all
+        sign_in(Fabricate(:client))
       end
 
-      it 'redirects to contest creation' do
-        get :show, id: 0
+      it 'does npt find resource' do
+        get :show, id: contest.id
         expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when not logged in' do
+      before do
+        pay_contest(contest)
+      end
+
+      context 'when not invited to review' do
+        it 'redirect to client login page' do
+          get :show, id: contest.id
+          expect(response).to redirect_to(client_login_sessions_path)
+        end
+      end
+
+      context 'when invited to review' do
+        before do
+          invite = InviteReviewer.new(contest: contest,
+                                      view_context: RenderingHelper.new,
+                                      invitation_attributes: { username: 'username', email: 'email@example.com' })
+          invite.perform
+          cookies[:reviewer_token] = invite.invitation.url
+        end
+
+        it 'returns page' do
+          get :show, id: contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
       end
     end
   end

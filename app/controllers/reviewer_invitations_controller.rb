@@ -3,10 +3,11 @@ class ReviewerInvitationsController < ApplicationController
   before_filter :set_contest, :check_contest_owner
 
   def create
-    invitation = @contest.invite_reviewer(invite_params)
-    url = show_reviewer_feedbacks_url(id: @contest.id, token: invitation.url)
-    Jobs::Mailer.schedule(:invitation_to_leave_a_feedback, [invite_params, url, @client, ENV['APP_URL']])
-    render json: { url: url, token: invitation.url }
+    invite = InviteReviewer.new(contest: @contest, invitation_attributes: invite_params, view_context: view_context)
+    ActiveRecord::Base.transaction do
+      invite.perform
+    end
+    render json: { url: invite.signed_url, token: invite.invitation.url }
   end
 
   private
