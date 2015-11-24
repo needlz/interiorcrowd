@@ -11,3 +11,7 @@ end
 Fabricator(:contest_in_submission, from: :contest) do
   status 'submission'
 end
+
+Fabricator(:contest_during_winner_selection, from: :contest) do
+  status 'winner_selection'
+end

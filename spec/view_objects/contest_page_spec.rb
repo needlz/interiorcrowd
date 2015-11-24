@@ -42,5 +42,26 @@ RSpec.describe ContestPage do
 
   end
 
+  describe 'inviting of the designers' do
+    context 'contest in submission' do
+      it 'shows invite designers link' do
+        expect(contest_page.show_invite_designers_link?).to be_truthy
+      end
+    end
+
+    context 'contest during winner selection' do
+      let(:contest){ Fabricate(:contest_during_winner_selection, client: client) }
+      let(:contest_page){ ContestPage.new(
+          contest: contest,
+          view_context: RenderingHelper.new
+      ) }
+
+      it 'doesn\'t show invite designers link' do
+        expect(contest_page.show_invite_designers_link?).to be_falsey
+      end
+    end
+
+  end
+
 
 end

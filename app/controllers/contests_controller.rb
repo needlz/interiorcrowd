@@ -197,7 +197,7 @@ class ContestsController < ApplicationController
   end
 
   def invite_designers
-    return raise_404 unless @contest.submission?
+    return raise_404 unless ContestPolicies.new(@contest).invite_designers_page_accessible?
     @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
     @designers = Designer.active.includes(portfolio: [:personal_picture]).all.map do |designer|
       DesignerView.new(designer)

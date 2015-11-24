@@ -41,6 +41,10 @@ class ContestPage
     nil
   end
 
+  def show_invite_designers_link?
+    ContestPolicies.new(contest).invite_designers_page_accessible?
+  end
+
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
               :answer, :view_context
 
