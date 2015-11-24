@@ -34,7 +34,6 @@ common: &defaults
       about_us: http://blog.interiorcrowd.com/about-us
       justines_story: http://blog.interiorcrowd.com/justines-story
       designer_submission: http://blog.interiorcrowd.com/designer-acquisition
-      how_interiorcrowd_works: http://www.interiorcrowd.com/blog/how-interiorcrowd-works/
     social:
       twitter: https://twitter.com/InteriorCrowd
       facebook: https://www.facebook.com/interiorcrowd
