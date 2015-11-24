@@ -3,28 +3,28 @@ class ContestRequestsController < ApplicationController
   before_filter :check_designer, only: [:create, :save_lookbook]
   before_filter :check_client, only: [:answer, :download]
   before_filter :check_contest_owner, only: [:answer, :download]
-  before_filter :set_request, only: [:answer, :approve_fulfillment, :add_comment, :download]
-
-  def create
-    @crequest = ContestRequest.new(params[:contest_request])
-    if @crequest.save
-      flash[:notice] = "Respond created successfully"
-      redirect_to contests_path
-    else
-      flash[:error] = @crequest.errors.full_messages
-      render template: "contests/respond"
-    end
-  end
+  before_filter :set_request, only: [:answer, :approve_fulfillment, :download]
 
   def add_comment
-    return raise_404 unless current_user.can_comment_contest_request?(@request)
+    @request = ContestRequest.find_by_id(params[:id])
+    if @request.nil?
+      contest = Contest.find params[:contest_id]
+      return raise_404 unless current_user.can_create_request_for_contest?(contest)
+      @request = ContestRequestCreation.new({ designer: current_user,
+                                              contest: contest,
+                                              request_params: nil,
+                                              lookbook_params: nil,
+                                              need_submit: false }).perform
+    else
+      return raise_404 unless current_user.can_comment_contest_request?(@request)
+    end
     comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
     comment = comment_creation.perform
     render json: { text: format_comment(comment.text), user_name: current_user.name }
   end
 
   def answer
-    replied = @request.reply(params[:answer], session[:client_id])
+    replied = @request.reply(params[:answer], current_user.id)
     render json: { answered: replied }
   end
 

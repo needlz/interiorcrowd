@@ -1009,19 +1009,16 @@ p.stepActive .number{
 	height: 58px;
 	width: 340px;
 	margin: 0 auto;
-	/*margin-bottom: 40px;*/
 }
 .pageNumber a{
-	font-size: 22px;
-	color: #231f20;
 	display: inline-block;
 	line-height: 56px;
 	padding: 0 23px;
 }
 .pageNumber a:hover,a.activePageNumber{
 	text-decoration: none;
-	background: #231f20;
-	color: #FFF;
+	background: #e3e3e3;
+	color: #333333;
 }
 
 #scrollbox4 {

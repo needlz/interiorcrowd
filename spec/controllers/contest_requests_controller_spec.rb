@@ -145,7 +145,7 @@ RSpec.describe ContestRequestsController do
     end
   end
 
-  describe 'POST add_comment' do
+  describe 'POST /:id/add_comment' do
     context 'logged as contest owner' do
       before do
         sign_in(client)
@@ -213,7 +213,48 @@ RSpec.describe ContestRequestsController do
       end
 
       it 'renders 404' do
-        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
+        post :add_comment, comment: { text: 'text', contest_request_id: request.id }, id: request.id
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
+  describe 'POST /add_comment' do
+    context 'logged as request creator' do
+      before do
+        sign_in(designer)
+      end
+
+      it 'creates first comment and contest request if there is no request for this designer yet' do
+        expect do
+          post :add_comment, comment: { text: 'text' }, contest_id: contest.id
+        end.to change{ContestRequest.count}.by(1).and change{ConceptBoardComment.count}.by(1)
+        expect(ContestRequest.last.comments).to be_present
+        expect(response).to be_ok
+      end
+    end
+
+    context 'designer has already created contest request' do
+      before do
+        sign_in(designer)
+        request
+      end
+
+      it "doesn't create new contest request and concept board comment" do
+        post :add_comment, comment: { text: 'text' }, contest_id: contest.id
+        expect(ConceptBoardComment.exists?).to be_falsey
+        expect(ContestRequest.all).to match_array([request])
+      end
+    end
+
+    context 'logged as client' do
+      before do
+        sign_in(Fabricate(:client))
+      end
+
+      it 'renders 404' do
+        post :add_comment, comment: {text: 'text'}, contest_id: contest.id
         expect(ConceptBoardComment.exists?).to be_falsey
         expect(response).to have_http_status(:not_found)
       end

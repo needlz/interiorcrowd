@@ -2,8 +2,8 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
   before_filter :check_client, only: [:index, :payment_details]
 
-  before_filter :set_client, only: [:index, :show, :payment_summary]
-  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url]
+  before_filter :set_client, only: [:index, :show, :payment_summary, :invite_designers]
+  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
 
   [:design_brief, :design_style, :design_space].each do |action|
@@ -110,7 +110,6 @@ class ContestsController < ApplicationController
     end
   end
 
-
   def account_creation
     return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps)
     @client = Client.new
@@ -195,6 +194,14 @@ class ContestsController < ApplicationController
       session[creation_step] = params[creation_step] if params[creation_step]
     end
     render nothing: true
+  end
+
+  def invite_designers
+    return raise_404 unless ContestPolicies.new(@contest).invite_designers_page_accessible?
+    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    @designers = Designer.active.includes(portfolio: [:personal_picture]).all.map do |designer|
+      DesignerView.new(designer)
+    end
   end
 
   private

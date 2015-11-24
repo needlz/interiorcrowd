@@ -198,4 +198,55 @@ RSpec.describe ContestRequest do
 
   end
 
+  describe '#has_designer_comments scope' do
+    let(:contest_request) { Fabricate(:contest_request) }
+
+    context 'client created comment on contest request' do
+      let(:client_comment) { Fabricate(:concept_board_client_comment, contest_request: contest_request) }
+
+      it 'returns no contest requests' do
+        client_comment
+        expect(ContestRequest.last.comments.count).to eq(1)
+        expect(ContestRequest.has_designer_comments).not_to be_present
+      end
+    end
+
+    context 'designer created comment on contest request' do
+      let(:designer_comment) { Fabricate(:concept_board_designer_comment, contest_request: contest_request) }
+      let(:designer) { Fabricate(:designer) }
+      let(:request_with_client_comment) { Fabricate(:contest_request, designer: designer) }
+      let(:client_comment) { Fabricate(:concept_board_client_comment, contest_request: request_with_client_comment) }
+
+      it 'returns contest requests which have comments created on them' do
+        designer_comment
+        expect(ContestRequest.last.comments.count).to eq(1)
+        expect(ContestRequest.has_designer_comments.last.comments.count).to eq(1)
+      end
+
+      it 'return only contest requests which have designer comments' do
+        designer_comment
+        client_comment
+        expect(ContestRequest.all.count).to eq(2)
+        expect(ContestRequest.has_designer_comments.count).to eq(1)
+      end
+    end
+  end
+
+  describe '#client_sees_in_entries scope' do
+    let(:contest_request) { Fabricate(:contest_request) }
+    let(:designer_comment) { Fabricate(:concept_board_designer_comment, contest_request: contest_request) }
+    let(:designer) { Fabricate(:designer) }
+    let(:closed_request) { Fabricate(:closed_request, designer: designer) }
+    let(:another_designer) { Fabricate(:designer) }
+    let(:another_request) { Fabricate(:draft_request, designer: another_designer) }
+
+    it 'returns only commented contest requests and not draft requests' do
+      designer_comment
+      closed_request
+      another_request
+      expect(another_request.status).to eq('draft')
+      expect(ContestRequest.client_sees_in_entries).to match_array([contest_request, closed_request])
+    end
+  end
+
 end

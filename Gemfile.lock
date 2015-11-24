@@ -24,6 +24,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    active_record_union (1.1.0)
+      activerecord (>= 4.0)
     activeadmin (1.0.0.pre1)
       arbre (~> 1.0, >= 1.0.2)
       bourbon
@@ -453,6 +455,7 @@ PLATFORMS
 
 DEPENDENCIES
   ably-rest
+  active_record_union
   activeadmin (~> 1.0.0.pre1)
   activerecord-session_store
   annotate (~> 2.6.6)

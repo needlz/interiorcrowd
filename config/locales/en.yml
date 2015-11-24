@@ -414,6 +414,7 @@ en:
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
         more_boards: More concept boards
+        invite_more_designers: Invite more designers
       choose_concept: >
         During the Initial Concept stage, designers will submit boards which reflect your aesthetic and needs.
         You can rate the designers for reference, request feedback from friends and family,
@@ -434,9 +435,9 @@ en:
           facebook: Share
           pinterest: Pin it
         share_to:
-          twitter: Share to Tweeter
+          twitter: Share to Twitter
           facebook: Share to Facebook
-          pinterest: Share to Pintrest
+          pinterest: Share to Pinterest
         complete_lock: Get the items to complete your look
         pull_together: Instructions to pull your look together
       notes_title: Want to send a note to all the designers?
@@ -481,6 +482,8 @@ en:
         about_title: Design Mindset
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
+      board_will_be_soon: Designer has joined your project! Concept board will be submitted soon.
+      comments: comments
       timelines:
         winner_selection:
           expired: Please pick a winner!
@@ -499,6 +502,9 @@ en:
           designer_will_put_together: You designer will put <span></span> together your final design.
           time_left: '%{time_left} left'
           get_in_touch: Please get in touch if <span></span> you need assistance
+      invite_designers:
+        page_title: Client Center - Invite more designers
+        back_to_entries: < Back to Entries
     winner_selected:
       the_winner: The winner
     moodboard_details:

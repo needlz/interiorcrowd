@@ -1,0 +1,22 @@
+- title t('client_center.entries.invite_designers.page_title')
+- content_for :head do
+  = javascript_include_tag 'clients/entries'
+
+  :javascript
+    I18n = #{ translations_to_json(['client_center', 'entries']) }
+    MessagesI18n = #{ translations_to_json(['board_comments']) }
+
+- content_for :client_center_content do
+  .entries-container
+    .entries-initial
+      %input.hidden.contest{ type: 'hidden', data: { id: @contest.id } }
+      = link_to(t('client_center.entries.invite_designers.back_to_entries'),
+                client_center_entry_path(id: @contest.id),
+                class: 'backToEntries')
+      = render(partial: 'clients/client_center/entries/designers_to_invite',
+          locals: { designers: @designers })
+      .fullWidthLine
+      = render partial: 'clients/client_center/entries/more_features'
+
+= render partial: 'clients/client_center/layout',
+    locals: { container_class: 'entries-page' }
