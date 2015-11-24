@@ -1167,6 +1167,13 @@ en:
         answer: >
           In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
           reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
+      what_do_I_get_paid:
+        question: What do I get paid?
+        answer: >
+          Clients pay $299 for a room design and designers are paid $200.
+          Designers are paid on the 15th of every month for all projects completed in the prior month.
+          For the in-person consultation we are currently working on $100/hour fee structure
+          and designers are paid $65/hour.
     captions:
       see_here: see here
       what_exactly_do_I_get_quote: '"What exactly do I get for $299"'

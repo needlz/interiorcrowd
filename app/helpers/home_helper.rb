@@ -38,8 +38,13 @@ module HomeHelper
   end
 
   def faq_designer_questions
-    [:what_is_beta, :how_contest_work, :how_communicate_client, :specs_of_design,
-     :vendors, :can_include_work_in_portfolio]
+    [:what_is_beta,
+     :how_contest_work,
+     :how_communicate_client,
+     :specs_of_design,
+     :vendors,
+     :can_include_work_in_portfolio,
+     :what_do_I_get_paid]
   end
 
   def faq_item(faq_chapter, question)
