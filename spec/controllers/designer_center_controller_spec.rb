@@ -65,7 +65,7 @@ RSpec.describe DesignerCenterController do
                                                                     contest_id: contest.id) }
     let!(:loser_notification) { DesignerLoserInfoNotification.create!(user_id: designer.id,
                                                                       contest_id: contest.id) }
-    let!(:final_note) do
+    let!(:final_note_notification) do
       final_note = FinalNote.create!(author_id: client.id,
                                      author_role: client.role,
                                      contest_request: request,
@@ -80,6 +80,17 @@ RSpec.describe DesignerCenterController do
     it 'renders page' do
       get :updates
       expect(response).to render_template(:updates)
+    end
+
+    context 'when there is data error' do
+      before do
+        final_note_notification.final_note.destroy
+      end
+
+      it 'renders page' do
+        get :updates
+        expect(response).to render_template(:updates)
+      end
     end
   end
 end

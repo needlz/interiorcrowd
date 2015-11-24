@@ -78,4 +78,8 @@ module User
   def access_token
     self.class.create_access_token(self)
   end
+
+  def can_create_request_for_contest?(contest)
+    designer? && contest.response_of(self).blank?
+  end
 end

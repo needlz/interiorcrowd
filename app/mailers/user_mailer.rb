@@ -19,7 +19,7 @@ class UserMailer < ActionMailer::Base
   def user_registration_info(user, email_id = nil)
     template "#{ user.role.downcase }_registration_info"
     set_template_values(set_user_params(user))
-    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+    mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
 
   def invite_to_contest(designer, client, email_id = nil)
@@ -114,10 +114,10 @@ class UserMailer < ActionMailer::Base
     contest = contest_request.contest
     client = contest.client
     set_template_values(
-        HELLO_ADDRESS: contact_email,
-        CONTEST_URL: renderer.designer_center_contest_url(id: contest.id),
-        CONTEST_NAME: contest.name,
-        CLIENT_NAME: client.name
+        hello_address: contact_email,
+        contest_url: renderer.designer_center_contest_url(id: contest.id),
+        contest_name: contest.name,
+        client_name: client.name
     )
     mail to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id
   end
@@ -126,10 +126,10 @@ class UserMailer < ActionMailer::Base
     template 'client_must_pick_a_winner'
     client = contest.client
     set_template_values(
-        DAYS_TO_PICK_WINNER: ContestMilestone::DAYS['winner_selection'],
-        ENTRIES_URL: renderer.client_center_entries_url,
-        CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client'),
-        HELLO_ADDRESS: contact_email
+        days_to_pick_winner: ContestMilestone::DAYS['winner_selection'],
+        entries_url: renderer.client_center_entries_url,
+        client_faq_url: renderer.faq_url(anchor: 'client'),
+        hello_address: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -138,8 +138,8 @@ class UserMailer < ActionMailer::Base
     template 'client_hasnt_picked_a_winner'
     client = contest.client
     set_template_values(
-        ENTRIES_URL: renderer.client_center_entries_url,
-        HELLO_ADDRESS: contact_email
+        entries_url: renderer.client_center_entries_url,
+        hello_address: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -148,7 +148,7 @@ class UserMailer < ActionMailer::Base
     template 'client_has_picked_a_winner'
     client = contest_request.contest.client
     set_template_values(
-        HELLO_ADDRESS: contact_email
+        hello_address: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -158,7 +158,7 @@ class UserMailer < ActionMailer::Base
     client = contest_request.contest.client
     designer = contest_request.designer
     set_template_values(
-        CLIENT_NAME: client.name
+        client_name: client.name
     )
     mail(to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id)
   end
@@ -167,7 +167,7 @@ class UserMailer < ActionMailer::Base
     template 'client_hasnt_picked_a_winner_to_designers'
     designers = Designer.joins(:contest_requests).where(contest_requests: { id: contest.requests.submitted.pluck(:id) })
     set_template_values(
-        CONTEST_NAME: contest.name
+        contest_name: contest.name
     )
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') }, email_id: email_id)
   end
@@ -176,7 +176,7 @@ class UserMailer < ActionMailer::Base
     template 'Designer_submitted_final_design'
     client = contest_request.contest.client
     set_template_values(
-        HELLO_ADDRESS: contact_email
+        hello_address: contact_email
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -191,10 +191,10 @@ class UserMailer < ActionMailer::Base
     template 'One_day_left_to_choose_a_winner'
     client = contest.client
     set_template_values(
-        HELLO_ADDRESS: contact_email,
-        CLIENT_NAME: client.name,
-        ENTRIES_URL: renderer.client_center_entries_url,
-        CLIENT_FAQ_URL: renderer.faq_url(anchor: 'client')
+        hello_address: contact_email,
+        client_name: client.name,
+        entries_url: renderer.client_center_entries_url,
+        client_faq_url: renderer.faq_url(anchor: 'client')
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -203,8 +203,8 @@ class UserMailer < ActionMailer::Base
     template 'One_day_left_to_submit_concept_board'
     designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
-        CONTEST_NAME: contest.name,
-        NEW_CONTESTS_URL: renderer.designer_center_contest_index_url
+        contest_name: contest.name,
+        new_contests_url: renderer.designer_center_contest_index_url
     )
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') }, email_id: email_id)
   end
@@ -213,8 +213,8 @@ class UserMailer < ActionMailer::Base
     template 'four_days_left_to_submit_concept_board'
     designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
-        CONTEST_NAME: contest.name,
-        NEW_CONTESTS_URL: renderer.designer_center_contest_index_url
+        contest_name: contest.name,
+        new_contests_url: renderer.designer_center_contest_index_url
     )
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') }, email_id: email_id)
   end
@@ -222,8 +222,8 @@ class UserMailer < ActionMailer::Base
   def contest_not_live_yet(contest, email_id = nil)
     template 'Contest-not-live-yet'
     set_template_values(
-        ENTRIES_URL: renderer.client_center_entries_url,
-        PICTURES_EMAIL: 'pictures@interiorcrowd.com'
+        entries_url: renderer.client_center_entries_url,
+        pictures_email: 'pictures@interiorcrowd.com'
     )
     client = contest.client
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
@@ -232,8 +232,8 @@ class UserMailer < ActionMailer::Base
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
     template 'Designer-asks-client-a-question-submission-phase'
     set_template_values(
-        ENTRY_URL: renderer.client_center_entry_url(id: options[:contest_request].id),
-        COMMENT_TEXT: options[:comment_text]
+        entry_url: renderer.client_center_entry_url(id: options[:contest_request].id),
+        comment_text: options[:comment_text]
     )
     client = options[:client]
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
@@ -242,21 +242,21 @@ class UserMailer < ActionMailer::Base
   def account_creation(client, email_id = nil)
     template 'account_creation'
     set_template_values(
-        TWITTER_URL: Settings.external_urls.social.twitter,
-        TWITTER_ICON_URL: asset_url('/icons/twitter.png'),
-        FACEBOOK_URL: Settings.external_urls.social.facebook,
-        FACEBOOK_ICON_URL: asset_url('/icons/facebook.png'),
-        PINTEREST_URL: Settings.external_urls.social.pinterest,
-        PINTEREST_ICON_URL: asset_url('/icons/pinterest.png'),
-        INSTAGRAM_URL: Settings.external_urls.social.instagram,
-        INSTAGRAM_ICON_URL: asset_url('/icons/instagram.png'),
-        PARAGRAPH_1_BACKGROUND_URL: asset_url('/emails/entertain_background.jpg'),
-        LOGO_URL: asset_url('/logo.png'),
-        FINISH_URL: renderer.design_brief_contests_url,
-        TERMS_OF_SERVICE_URL: renderer.terms_of_service_url,
-        PRIVACY_POLICY_URL: renderer.privacy_policy_url,
-        UNSUBSCRIBE_URL: renderer.unsubscribe_clients_url(signature: client.access_token),
-        PROMOCODE_BACKGROUND_URL: asset_url('/emails/back.png')
+        twitter_url: Settings.external_urls.social.twitter,
+        twitter_icon_url: asset_url('/icons/twitter.png'),
+        facebook_url: Settings.external_urls.social.facebook,
+        facebook_icon_url: asset_url('/icons/facebook.png'),
+        pinterest_url: Settings.external_urls.social.pinterest,
+        pinterest_icon_url: asset_url('/icons/pinterest.png'),
+        instagram_url: Settings.external_urls.social.instagram,
+        instagram_icon_url: asset_url('/icons/instagram.png'),
+        paragraph_1_background_url: asset_url('/emails/entertain_background.jpg'),
+        logo_url: asset_url('/logo.png'),
+        finish_url: renderer.design_brief_contests_url,
+        terms_of_service_url: renderer.terms_of_service_url,
+        privacy_policy_url: renderer.privacy_policy_url,
+        unsubscribe_url: renderer.unsubscribe_clients_url(signature: client.access_token),
+        promocode_background_url: asset_url('/emails/back.png')
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
@@ -264,7 +264,7 @@ class UserMailer < ActionMailer::Base
   def new_project_on_the_platform(designers, email_id = nil)
     template 'New-project-on-the-platform'
     set_template_values(
-        LOGIN_URL: designer_login_sessions_url
+        login_url: designer_login_sessions_url
     )
     recipients = designers.map do |designer|
       wrap_recipient(designer.email, designer.name, 'to')
@@ -280,6 +280,19 @@ class UserMailer < ActionMailer::Base
   def to_designers_client_no_submissions(contest, email_id = nil)
     template 'To_designers_Client_no_submissions'
     mail_about_contest_submissions(contest, email_id)
+  end
+
+  def client_moved_to_final_design(contest_id, email_id = nil)
+    template 'client-ready-for-final-design-1'
+    contest = Contest.find(contest_id)
+    client = contest.client
+    set_template_values(
+        client_name: client.name,
+        client_admin_url: renderer.admin_client_url(client.id),
+        client_id: client.id,
+        client_email: client.email
+    )
+    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
   end
 
   private
@@ -327,7 +340,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def contact_email
-    I18n.t('registration.mail_to')
+    Settings.info_email
   end
 
   def renderer
@@ -338,9 +351,9 @@ class UserMailer < ActionMailer::Base
     client = contest.client
     designers = contest.not_submitted_designers
     set_template_values(
-        CLIENT_NAME: client.name,
-        CONTEST_NAME: contest.name,
-        CONTEST_URL: designer_center_contest_url(id: contest.id)
+        client_name: client.name,
+        contest_name: contest.name,
+        contest_url: designer_center_contest_url(id: contest.id)
     )
     recipients = designers.map do |designer|
       wrap_recipient(designer.email, designer.name, 'to')

@@ -34,7 +34,6 @@ common: &defaults
       about_us: http://blog.interiorcrowd.com/about-us
       justines_story: http://blog.interiorcrowd.com/justines-story
       designer_submission: http://blog.interiorcrowd.com/designer-acquisition
-      how_interiorcrowd_works: http://www.interiorcrowd.com/blog/how-interiorcrowd-works/
     social:
       twitter: https://twitter.com/InteriorCrowd
       facebook: https://www.facebook.com/interiorcrowd
@@ -64,6 +63,25 @@ common: &defaults
   show_beta_functionality: <%= !Rails.env.production? %>
   log_requests_to_blog: <%= Rails.env.development? %>
   payment_enabled: <%= !Rails.env.production? %>
+  designer_training_videos:
+    initial_phase:
+      url: 'http://www.screencast.com/t/P1CGZXKu4'
+      player_url: 'http://content.screencast.com/users/interiorcrowd5000/folders/Jing/media/6e97bb27-c6aa-48a5-98d2-90ef9b362c54/'
+      version: '00000005'
+      width: 1440
+      height: 807
+    product_list_phase:
+      url: 'http://www.screencast.com/t/ZW5KUEJ9'
+      player_url: 'http://content.screencast.com/users/interiorcrowd5000/folders/Jing/media/884d6483-17f1-474c-a62e-e3f22a52edcd/'
+      version: '00000006'
+      width: 1440
+      height: 807
+    final_design_phase:
+      url: 'http://www.screencast.com/t/00OHzHGcm'
+      player_url: 'http://content.screencast.com/users/interiorcrowd5000/folders/Jing/media/ff153cb6-cb14-4b59-8fbc-fd096353e5e8/'
+      version: '00000010'
+      width: 1440
+      height: 900
 
 development:
 

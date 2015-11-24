@@ -83,6 +83,7 @@ en:
         name: Name
         design_knowledge: Design Knowledge
         design_style: Design Style
+        location: Location
       join: Join this contest
       back: Back to all current contests
     design_style:
@@ -413,6 +414,7 @@ en:
         comment_sent: Comment sent
         comment_placeholder: Add a comment here...
         more_boards: More concept boards
+        invite_more_designers: Invite more designers
       choose_concept: >
         During the Initial Concept stage, designers will submit boards which reflect your aesthetic and needs.
         You can rate the designers for reference, request feedback from friends and family,
@@ -433,9 +435,9 @@ en:
           facebook: Share
           pinterest: Pin it
         share_to:
-          twitter: Share to Tweeter
+          twitter: Share to Twitter
           facebook: Share to Facebook
-          pinterest: Share to Pintrest
+          pinterest: Share to Pinterest
         complete_lock: Get the items to complete your look
         pull_together: Instructions to pull your look together
       notes_title: Want to send a note to all the designers?
@@ -480,6 +482,8 @@ en:
         about_title: Design Mindset
         style_specialty: Style Specialty
       listen_to_designer: Listen to designer's thoughts
+      board_will_be_soon: Designer has joined your project! Concept board will be submitted soon.
+      comments: comments
       timelines:
         winner_selection:
           expired: Please pick a winner!
@@ -498,6 +502,9 @@ en:
           designer_will_put_together: You designer will put <span></span> together your final design.
           time_left: '%{time_left} left'
           get_in_touch: Please get in touch if <span></span> you need assistance
+      invite_designers:
+        page_title: Client Center - Invite more designers
+        back_to_entries: < Back to Entries
     winner_selected:
       the_winner: The winner
     moodboard_details:
@@ -884,9 +891,12 @@ en:
       upload_moodboard: Upload your concept board
     training:
       check_out: Check out our latest training materials here
-      how_contests_work: How do contests work?
-      how_to_communicate: How do I communicate with the client?
-      vendors: Which vendors can I use?
+      view_winning_submissions: View winning submission boards here
+
+      video_tutorial:
+       product_list_phase: 'Video Tutorial: How to upload products in Product List Phase'
+       initial_phase: 'Video Tutorial: How to submit boards in the Initial Phase'
+       final_design_phase: 'Video Tutorial: How to wrap up in the Final Design Phase'
     my_contests:
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
@@ -991,10 +1001,16 @@ en:
           Our designers are talented professionals from anywhere in the world. They are chosen to
           design for InteriorCrowd based on a combination of factors like portfolio, awards and raw
           talent.
+          <br\><br\>
+          We have a large and growing network of established and up-and-coming interior designers. Each designer
+          goes through an extensive interview process for us to vet that their style, knowledge of design principles,
+          materials and trends, communication, and ease with technology is up to our standards and that they
+          can delight a diverse group of clients with different budgets, styles, geographies, and functional
+          or aesthetic needs.
       how_many_designers:
         question: How many designers will I get to choose from?
         answer: >
-          Each project usually receives 3&#45;5 concept boards from designers, but some projects do
+          Each project usually receives 3-5 concept boards from designers, but some projects do
           get more. The more information you put in your brief, the more likely you are to get a lot
           of interest from our network of designers.
       want_to_meet_designer:
@@ -1009,7 +1025,7 @@ en:
           The style profile was created in collaboration with our designers as a fun and easy way to
           figure out how best to style an amazing new space for you. Most people don’t stick to one
           style, and the profile takes this into account.
-      what_do_I_get:
+      what_do_i_get:
         question: What exactly do I get for $299?
         answer: >
           ● Multiple concept boards (choose your own designer based on their
@@ -1020,7 +1036,7 @@ en:
           ● If a floorplan isn’t necessary, an updated concept board (either a perspective
           rendering or a pdf with prompts)<br/><br/>
           If you’d like additional time with your designer, please %{additional_time_with_designer}
-      I_want_two_things:
+      i_want_two_things:
         question: I only want one or two things. Is this for me?
         answer: >
           Yes! This is their specialty. They will work around your room’s unique needs and within
@@ -1053,7 +1069,7 @@ en:
           Additionally, they can also take a look at your project before you do a renovation and
           give you a consultation on what to focus on and how to spend your budget. For the
           latter, we’d recommend an in-person consultation. For more info, %{what_does_cost_meeting_with_designer}
-      what_if_I_dont_like_the_products:
+      what_if_i_dont_like_the_products:
         question: What if I don’t like the products the designer recommends?
         answer: >
           You have the opportunity to receive 2 iterations of products from your designer. Please
@@ -1061,10 +1077,10 @@ en:
           recommended for you. It is highly unlikely that you won’t like what your designer puts
           together for you the second time around if you let them know why you didn’t like the first
           batch!
-      which_package_should_I_choose:
+      which_package_should_i_choose:
         question: Which package should I choose?
-        answer: See %{what_do_I_get}
-      how_do_I_measure:
+        answer: See %{what_do_i_get}
+      how_do_i_measure:
         question: How do I measure my room?
         answer: >
           Get your tape measure ready! We find it’s easiest to make a simple drawing of your space
@@ -1157,9 +1173,16 @@ en:
         answer: >
           In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
           reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
+      what_do_i_get_paid:
+        question: What do I get paid?
+        answer: >
+          Clients pay $299 for a room design and designers are paid $200.
+          Designers are paid on the 15th of every month for all projects completed in the prior month.
+          For the in-person consultation we are currently working on $100/hour fee structure
+          and designers are paid $65/hour.
     captions:
       see_here: see here
-      what_exactly_do_I_get_quote: '"What exactly do I get for $299"'
+      what_exactly_do_i_get_quote: '"What exactly do I get for $299"'
 
   registration:
     mail_to: hello@interiorcrowd.com
@@ -1376,31 +1399,58 @@ en:
     have_unfinished_project:
       title: You already have an active project underway.
       click_here:  to go back to your existing project.
-
-  sfar:
-    steps:
-      -
-        title: Step one
-        description: 'Clients create a fun and easy style brief on interiorcrowd.com.'
-      -
-        title: Step two
-        description: 'They receive multiple concept boards based on their personal style.'
-      -
-        title: Step three
-        description: 'The winning designer and the client collaborate on furniture and layout decisions.'
-      -
-        title: Step four
-        description: 'The designer provides the client with a final list of products.'
-      -
-        title: Step five
-        description: 'The client uses the designer''s room layout, shopping list and assembly plan to bring their room to life.'
-
   page_titles:
     client_center:
       entries: 'Entries'
-
     designer_center:
       contest_request: 'Design for "%{contest_name}" contest'
+  rieltor_contacts:
+    sfar:
+      header:
+        title: Help your clients move into a more inspiring space.
+        description: InteriorCrowd makes the perfect housewarming gift.
+      content:
+        title: How it works
+        goal: >
+          Our network of hundreds of interior designers will help your clients establish a room-specific creative
+          vision and plan of action to keep them delighted as they settle into their beautiful new home.
+      footer:
+        title: Interested in helping your clients redesign their home with InteriorCrowd?
+        description: Send us your contact info and we'll be in touch!
+      form:
+        title: Contact info
+        name:
+          label: Name
+          first_placeholder: First Name
+          second_placeholder: Last Name
+        brokerage:
+          label: Brokerage
+          placeholder: Brokerage name
+        email:
+          label: E-mail
+          placeholder: example@address.com
+        phone:
+          label: Phone number
+          tooltip_three_digits: 3 digits
+          tooltip_four_digits: 4 digits
+        choice: Select a choice
+        submit: Submit
+      steps:
+        -
+          title: Step one
+          description: 'Clients create a fun and easy style brief on interiorcrowd.com.'
+        -
+          title: Step two
+          description: 'They receive multiple concept boards based on their personal style.'
+        -
+          title: Step three
+          description: 'The winning designer and the client collaborate on furniture and layout decisions.'
+        -
+          title: Step four
+          description: 'The designer provides the client with a final list of products.'
+        -
+          title: Step five
+          description: 'The client uses the designer''s room layout, shopping list and assembly plan to bring their room to life.'
 
   designer_center_requests:
     show:

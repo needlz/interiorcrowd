@@ -26,10 +26,6 @@
   }
 }
 
-.pageNumber a, .pageNumber span{
-  width: initial;
-}
-
 .pageNumber{
   display: inline-block;
   width: auto;
@@ -72,13 +68,19 @@
   }
 }
 
+@media (max-width: 450px) {
+  .steps123{
+    margin-bottom: -80px;
+  }
+}
+
 .timeLeftToSubmitParent{
   top: 140px;
 }
 
 @media(max-width: 480px){
   .timeLeftToSubmitParent{
-    top: 220px;
+    top: 240px;
   }
 }
 
@@ -1359,4 +1361,144 @@
   margin-bottom: -35px;
   vertical-align: middle;
   position: relative;
+}
+
+.messaging-over-default-board{
+  text-align: center;
+  height: 30%;
+  background-color: #fdfdfd;
+  color: #8b8b8b;
+  top: 35%;
+  position: relative;
+}
+
+@media (max-width: 992px) {
+  .messaging-over-default-board{
+    .messaging-info{
+      font-size: 16px;
+    }
+    height: 40%;
+    top: 30%;
+  }
+}
+@media (max-width: 768px) {
+  .messaging-over-default-board{
+    .messaging-info{
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container.default-concept-board {
+    height: 210px;
+  }
+
+  .messaging-over-default-board .messaging-info {
+    font-size: 13px;
+  }
+}
+
+.messaging-info{
+  transform: translateY(50%);
+  font-size: 18px;
+}
+
+.comments-count{
+  text-transform: uppercase;
+  font-size: 15px;
+  color: #a9a9a9;
+  border: 1px solid #a9a9a9;
+  border-radius: 3px;
+  padding: 4px 13px;
+  margin-top: 0%;
+  margin-right: 3%;
+
+  span{
+    margin-right: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .comments-count{
+    font-size: 13px;
+    margin-right: 4%;
+  }
+
+  .designerName{
+    h3{
+      font-size: 17px;
+    }
+  }
+
+  #entriesPage{
+    width: 65%;
+  }
+}
+
+@media (max-width: 768px) {
+  .comments-count{
+    margin-right: 5%;
+    font-size: 11px;
+  }
+
+  .designerName{
+    h3{
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .comments-count{
+    margin-right: 7%;
+    border: none;
+    font-size: 12px;
+    z-index: 9000;
+  }
+
+  .designerName{
+    h3{
+      font-size: 13px;
+    }
+  }
+}
+
+.invite-more-designers{
+  margin-top: 1.5%;
+  a{
+    color: #666666;
+    text-decoration: none;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .invite-more-designers{
+    text-align: center;
+    margin-bottom: 6%;
+    a{
+      font-size: 18px;
+    }
+  }
+}
+
+.back-to-entries{
+  a{
+    color: black;
+    text-align: center;
+  }
+}
+
+.image-container.default-concept-board{
+  opacity: 0.75;
+  background-size: cover;
+}
+
+.default-concept-board-mobile{
+  z-index: 0;
+}
+
+span.submission-pagination{
+  padding: 0;
 }

@@ -14,6 +14,9 @@
     .row.marg-top20
       .col-md-12.no-x-padding
         - @notifications_view.each do |notification|
-          = render partial:'designer_notification', locals: { notification: notification }
+          - begin
+            = render 'designer_notification', notification: notification
+          - rescue StandardError => e
+            - ErrorsLogger.log(e, session.to_hash)
 
 = render partial: 'designer_center/layout'

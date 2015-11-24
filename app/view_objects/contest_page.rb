@@ -5,13 +5,13 @@ class ContestPage
 
     @view_context = options[:view_context]
     @contest_view = ContestView.new(contest_attributes: contest) if contest
-    all_requests = contest.requests.ever_published.includes(:designer, :lookbook, :sound)
+    all_requests = contest.requests.client_sees_in_entries.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
     @comments_present = contest.notes.present?
     @answer = options[:answer]
     shown_requests = all_requests.by_answer(answer)
     @contest_requests = shown_requests.by_page(options[:page])
-    @notes = contest.notes.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
+    @notes = contest.notes.by_client.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)
   end
 
@@ -39,6 +39,10 @@ class ContestPage
 
   def timeline_hint
     nil
+  end
+
+  def show_invite_designers_link?
+    ContestPolicies.new(contest).invite_designers_page_accessible?
   end
 
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,

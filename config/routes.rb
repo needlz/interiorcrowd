@@ -34,6 +34,9 @@ InteriorC::Application.routes.draw do
         post 'approve_fulfillment'
         get 'download'
       end
+      collection do
+        post 'add_comment'
+      end
     end
 
     resources :contests, only: [:show, :update] do
@@ -71,6 +74,7 @@ InteriorC::Application.routes.draw do
         get 'preview'
         post 'save_preview'
         post 'upload'
+        get 'invite_designers'
         get 'account_creation'
         get 'payment_details'
         get 'payment_summary'

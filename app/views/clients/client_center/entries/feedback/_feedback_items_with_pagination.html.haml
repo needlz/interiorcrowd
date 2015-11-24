@@ -14,12 +14,20 @@
                  locals: { contest_request: contest_request,
                    show_answer_options: contest_page.show_answer_options? }
 .clearfix
-- if contest_page.show_mobile_pagination?
-  .row.visible-xs
+.col-xs-12.col-sm-push-12.visible-xs
+  - if contest_page.show_mobile_pagination?
     .col-sm-12
       %a.loadMoreBoards{ href: '#', data: { page: contest_page.requests_next_page_index } }
         = t('client_center.entries.reviewer_invitations.more_boards')
-.pagination-row.text-center.hidden-xs
+.col-sm-7.col-sm-push-5.pagination-row.text-center.hidden-xs
   = will_paginate(contest_page.contest_requests,
-      class: 'pageNumber center-block',
-      renderer: SubmissionsPaginationRenderer)
+      class: 'pageNumber center-block pull-right',
+      renderer: SubmissionsPaginationRenderer,
+      previous_label: render('clients/client_center/entries/feedback/pagination_label', direction: :left),
+      next_label: render('clients/client_center/entries/feedback/pagination_label', direction: :right))
+- if contest_page.show_invite_designers_link?
+  .col-xs-12.col-sm-5.col-sm-pull-7.invite-more-designers
+    = link_to invite_designers_contests_path(id: contest_page.contest.id) do
+      +
+      = t('client_center.entries.reviewer_invitations.invite_more_designers')
+

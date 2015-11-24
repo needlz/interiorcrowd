@@ -7,7 +7,7 @@
 - content_for :client_center_content do
   .col-md-12.disablePadding.marginTop40
     = link_to t('client_center.moodboard_details.back'),
-        client_center_entries_path,
+        client_center_entry_path(id: @request.contest.id),
         class: "backToEntries #{ tracked_link }"
   .viewingMoodboard
     .col-md-8.disablePadding
@@ -16,7 +16,7 @@
     .col-md-4
       = render partial: 'contest_requests/submission_info',
           locals: { designer: @request.designer, submitted_at: @request.created_at, request: @request }
-      - if @request.commenting_enabled?
+      - if @request.comments.present?
         = render partial: 'designer_center_requests/edit/comments', locals: { request: @request,
             comments: @request.comments, show_comment_switcher: false }
 

@@ -35,17 +35,26 @@ RSpec.describe ApproveFulfillment do
                                     type: 'DesignerInfoNotification')).to eq(true)
   end
 
-  it 'approves fulfillment_ready request' do
-    approve_fulfillment = ApproveFulfillment.new(request)
-    approve_fulfillment.perform
-    expect(request.status).to eq('fulfillment_approved')
+  context 'when valid contest request' do
+    it 'approves fulfillment_ready request' do
+      approve_fulfillment = ApproveFulfillment.new(request)
+      approve_fulfillment.perform
+      expect(request.status).to eq('fulfillment_approved')
+    end
+
+    it 'creates email for the designer' do
+      approve_fulfillment = ApproveFulfillment.new(request)
+      approve_fulfillment.perform
+      expect(jobs_with_handler_like('client_ready_for_final_design').count).to eq 1
+    end
+
+    it 'creates email to product owner' do
+      approve_fulfillment = ApproveFulfillment.new(request)
+      approve_fulfillment.perform
+      expect(jobs_with_handler_like('client_moved_to_final_design').count).to eq 1
+    end
   end
 
-  it 'creates email for the designer' do
-    approve_fulfillment = ApproveFulfillment.new(request)
-    approve_fulfillment.perform
-    expect(jobs_with_handler_like('client_ready_for_final_design').count).to eq 1
-  end
 
   context 'when image items present' do
     let!(:published_item_without_mark) { Fabricate(:product_item,
