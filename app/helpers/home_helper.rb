@@ -11,7 +11,7 @@ module HomeHelper
                                                       link_to(t('faq.captions.see_here'),
                                                               '#collapse10',
                                                               data: { collapse: true }) }
-    what_do_I_get_link = { what_do_I_get: link_to(t('faq.captions.what_exactly_do_I_get_quote'),
+    what_do_i_get_link = { what_do_i_get: link_to(t('faq.captions.what_exactly_do_i_get_quote'),
                                                   '#collapse8',
                                                   data: { collapse: true }) }
     [{ get_in_touch: hello_link },
@@ -21,14 +21,14 @@ module HomeHelper
      :how_many_designers,
      :want_to_meet_designer,
      :style_profile,
-     { what_do_I_get: additional_time_with_designer_link },
-     :I_want_two_things,
+     { what_do_i_get: additional_time_with_designer_link },
+     :i_want_two_things,
      :what_does_cost_meeting_with_designer,
      :additional_time_with_designer,
      { designer_can_help_me_with: what_does_cost_meeting_with_designer_link },
-     :what_if_I_dont_like_the_products,
-     { which_package_should_I_choose: what_do_I_get_link },
-     :how_do_I_measure,
+     :what_if_i_dont_like_the_products,
+     { which_package_should_i_choose: what_do_i_get_link },
+     :how_do_i_measure,
      :how_do_contests_work,
      :how_to_collaborate_with_designer,
      :how_long_everything_takes,
@@ -44,7 +44,7 @@ module HomeHelper
      :specs_of_design,
      :vendors,
      :can_include_work_in_portfolio,
-     :what_do_I_get_paid]
+     :what_do_i_get_paid]
   end
 
   def faq_item(faq_chapter, question)
