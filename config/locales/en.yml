@@ -1001,10 +1001,16 @@ en:
           Our designers are talented professionals from anywhere in the world. They are chosen to
           design for InteriorCrowd based on a combination of factors like portfolio, awards and raw
           talent.
+          <br\><br\>
+          We have a large and growing network of established and up-and-coming interior designers. Each designer
+          goes through an extensive interview process for us to vet that their style, knowledge of design principles,
+          materials and trends, communication, and ease with technology is up to our standards and that they
+          can delight a diverse group of clients with different budgets, styles, geographies, and functional
+          or aesthetic needs.
       how_many_designers:
         question: How many designers will I get to choose from?
         answer: >
-          Each project usually receives 3&#45;5 concept boards from designers, but some projects do
+          Each project usually receives 3-5 concept boards from designers, but some projects do
           get more. The more information you put in your brief, the more likely you are to get a lot
           of interest from our network of designers.
       want_to_meet_designer:
@@ -1019,7 +1025,7 @@ en:
           The style profile was created in collaboration with our designers as a fun and easy way to
           figure out how best to style an amazing new space for you. Most people don’t stick to one
           style, and the profile takes this into account.
-      what_do_I_get:
+      what_do_i_get:
         question: What exactly do I get for $299?
         answer: >
           ● Multiple concept boards (choose your own designer based on their
@@ -1030,7 +1036,7 @@ en:
           ● If a floorplan isn’t necessary, an updated concept board (either a perspective
           rendering or a pdf with prompts)<br/><br/>
           If you’d like additional time with your designer, please %{additional_time_with_designer}
-      I_want_two_things:
+      i_want_two_things:
         question: I only want one or two things. Is this for me?
         answer: >
           Yes! This is their specialty. They will work around your room’s unique needs and within
@@ -1063,7 +1069,7 @@ en:
           Additionally, they can also take a look at your project before you do a renovation and
           give you a consultation on what to focus on and how to spend your budget. For the
           latter, we’d recommend an in-person consultation. For more info, %{what_does_cost_meeting_with_designer}
-      what_if_I_dont_like_the_products:
+      what_if_i_dont_like_the_products:
         question: What if I don’t like the products the designer recommends?
         answer: >
           You have the opportunity to receive 2 iterations of products from your designer. Please
@@ -1071,10 +1077,10 @@ en:
           recommended for you. It is highly unlikely that you won’t like what your designer puts
           together for you the second time around if you let them know why you didn’t like the first
           batch!
-      which_package_should_I_choose:
+      which_package_should_i_choose:
         question: Which package should I choose?
-        answer: See %{what_do_I_get}
-      how_do_I_measure:
+        answer: See %{what_do_i_get}
+      how_do_i_measure:
         question: How do I measure my room?
         answer: >
           Get your tape measure ready! We find it’s easiest to make a simple drawing of your space
@@ -1167,9 +1173,16 @@ en:
         answer: >
           In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
           reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
+      what_do_i_get_paid:
+        question: What do I get paid?
+        answer: >
+          Clients pay $299 for a room design and designers are paid $200.
+          Designers are paid on the 15th of every month for all projects completed in the prior month.
+          For the in-person consultation we are currently working on $100/hour fee structure
+          and designers are paid $65/hour.
     captions:
       see_here: see here
-      what_exactly_do_I_get_quote: '"What exactly do I get for $299"'
+      what_exactly_do_i_get_quote: '"What exactly do I get for $299"'
 
   registration:
     mail_to: hello@interiorcrowd.com
