@@ -23,7 +23,7 @@ class ContestView
   ] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
-    :name, :design_knowledge, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
+    :name, :location, :design_knowledge, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
     :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability
   ] + ACCOMMODATION_ATTRIBUTES

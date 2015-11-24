@@ -83,6 +83,7 @@ en:
         name: Name
         design_knowledge: Design Knowledge
         design_style: Design Style
+        location: Location
       join: Join this contest
       back: Back to all current contests
     design_style:
