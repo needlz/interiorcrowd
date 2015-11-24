@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EndWinnerSelection do
 
   let(:client){ Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, status: 'submission', client: client) }
+  let(:contest) { Fabricate(:contest, status: 'winner_selection', client: client) }
 
   it 'reminds about winner selection' do
     EndWinnerSelection.new(contest).perform
