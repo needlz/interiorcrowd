@@ -4,7 +4,7 @@ class EntriesPage < ContestPage
     super
 
     @won_contest_request = contest.response_winner
-    @show_submissions = (contest.submission? && (requests_present? || comments_present?)) || contest.winner_selection?
+    @show_submissions = (contest.submission? && requests_present?) || contest.winner_selection?
 
     if won_contest_request
       @entries_concept_board_page = EntriesConceptBoard.new({
