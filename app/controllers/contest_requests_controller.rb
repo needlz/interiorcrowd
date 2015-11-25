@@ -39,7 +39,7 @@ class ContestRequestsController < ApplicationController
     @client = Client.find(session[:client_id])
     @request = ContestRequest.find(params[:id])
     @show_answer_options = @request.answerable?
-    @navigation = Navigation::ClientCenter.new(:entries)
+    @navigation = Navigation::ClientCenter.new(:entries, contest: @request.contest)
   end
 
   def download
