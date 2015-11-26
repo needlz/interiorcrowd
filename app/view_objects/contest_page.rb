@@ -1,5 +1,8 @@
 class ContestPage
 
+  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
+              :answer, :view_context
+
   def initialize(options)
     @contest = options[:contest]
 
@@ -7,20 +10,16 @@ class ContestPage
     @contest_view = ContestView.new(contest_attributes: contest) if contest
     all_requests = contest.requests.client_sees_in_entries.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
-    @comments_present = contest.notes.present?
     @answer = options[:answer]
     shown_requests = all_requests.by_answer(answer)
     @contest_requests = shown_requests.by_page(options[:page])
     @notes = contest.notes.by_client.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)
+    @current_user = options[:current_user]
   end
 
   def requests_present?
     @requests_present
-  end
-
-  def comments_present?
-    @comments_present
   end
 
   def invitable_designer_views
@@ -45,7 +44,8 @@ class ContestPage
     ContestPolicies.new(contest).invite_designers_page_accessible?
   end
 
-  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
-              :answer, :view_context
+  private
+
+  attr_reader :current_user
 
 end

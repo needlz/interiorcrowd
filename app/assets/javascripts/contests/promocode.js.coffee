@@ -52,7 +52,7 @@ class @Promocode
   @processPromocodeResponse: (response)->
     @hidePreviousMessages()
     if response.valid
-      @notifyPromocodeValid(response.profit)
+      @notifyPromocodeValid(response.display_message)
       @applyPromocodeToPrice(response.discount)
     else
       @notifyPromocodeInvalid()
@@ -61,9 +61,8 @@ class @Promocode
   @hidePreviousMessages: ->
     $(@messagesSelector).hide()
 
-  @notifyPromocodeValid: (profit)->
-    I18n.translations = { en: signupI18n }
-    $(@validMsgSelector).show().text(I18n.t('promocode_valid', { profit: profit }))
+  @notifyPromocodeValid: (displayMessage)->
+    $(@validMsgSelector).show().text(displayMessage)
 
   @applyPromocodeToPrice: (responseDiscount)->
     @displayDiscountValue(responseDiscount)

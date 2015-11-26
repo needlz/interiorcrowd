@@ -5,8 +5,12 @@ module UserPolicies
     user_notification.recipient == self
   end
 
-  def see_contest?(contest)
-    contest.client == self
+  def can_see_contest?(contest, cookies)
+    (contest.client == self) || invited_to_review?(contest, cookies)
+  end
+
+  def invited_to_review?(contest, cookies)
+    cookies[:reviewer_token].present? && contest.reviewer_invitations.find_by_url(cookies[:reviewer_token])
   end
 
 end
