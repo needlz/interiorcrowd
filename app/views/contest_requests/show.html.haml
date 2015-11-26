@@ -4,7 +4,6 @@
     I18n = #{ translations_to_json(['client_center', 'entries']) }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
 
-- content_for :client_center_content do
 - if @request.contest_owner?(current_user)
   - content_for :client_center_content do
     = render 'contest_requests/show/content', contest_request: @request, show_answer_options: @show_answer_options

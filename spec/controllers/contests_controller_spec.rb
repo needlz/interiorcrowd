@@ -342,17 +342,17 @@ RSpec.describe ContestsController do
       end
 
       let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
-      let(:submitted) { Fabricate(:contest_request,
-                                  designer: designers[0],
-                                  contest: contest,
-                                  status: 'submitted',
-                                  lookbook: Fabricate(:lookbook)) }
-      let(:draft) { Fabricate(:contest_request,
+      let(:submitted_request) { Fabricate(:contest_request,
+                                          designer: designers[0],
+                                          contest: contest,
+                                          status: 'submitted',
+                                          lookbook: Fabricate(:lookbook)) }
+      let(:draft_request) { Fabricate(:contest_request,
                               designer: designers[1],
                               contest: contest,
                               status: 'draft',
                               lookbook: Fabricate(:lookbook)) }
-      let(:fulfillment) { Fabricate(:contest_request,
+      let(:fulfillment_request) { Fabricate(:contest_request,
                                     designer: designers[2],
                                     contest: contest,
                                     status: 'fulfillment_ready',
@@ -364,8 +364,8 @@ RSpec.describe ContestsController do
         context 'in submission phase' do
           before do
             contest
-            draft
-            submitted
+            draft_request
+            submitted_request
           end
 
         end
@@ -394,35 +394,35 @@ RSpec.describe ContestsController do
 
           before do
             pay_contest(contest)
-            draft
-            submitted
-            fulfillment
+            draft_request
+            submitted_request
+            fulfillment_request
           end
 
           it 'views only submitted and fulfillment requests' do
             get :show, id: contest.id
-            expect(assigns(:entries_page).contest_requests).to match_array([submitted, fulfillment])
+            expect(assigns(:entries_page).contest_requests).to match_array([submitted_request, fulfillment_request])
           end
 
           it 'filters responses by answer' do
             contest.start_winner_selection!
-            draft.update_attributes!(answer: 'no')
-            fulfillment.update_attributes!(answer: 'favorite')
-            submitted.update_attributes!(answer: 'winner')
+            draft_request.update_attributes!(answer: 'no')
+            fulfillment_request.update_attributes!(answer: 'favorite')
+            submitted_request.update_attributes!(answer: 'winner')
             get :show, answer: 'winner', id: contest.id
-            expect(assigns(:entries_page).contest_requests).to match_array([submitted])
+            expect(assigns(:entries_page).contest_requests).to match_array([submitted_request])
           end
 
           it 'returns winner contest request' do
             contest.start_winner_selection!
-            submitted.update_attributes!(answer: 'winner')
+            submitted_request.update_attributes!(answer: 'winner')
             get :show, answer: 'winner', id: contest.id
-            expect(assigns(:entries_page).won_contest_request).to eq(submitted)
+            expect(assigns(:entries_page).won_contest_request).to eq(submitted_request)
           end
 
           context 'contest in fulfillment state' do
             before do
-              fulfillment.update_attributes!(answer: 'winner')
+              fulfillment_request.update_attributes!(answer: 'winner')
               contest.update_attributes!(status: 'fulfillment')
             end
 
@@ -538,10 +538,8 @@ RSpec.describe ContestsController do
       context 'when contest in "submission" state' do
         it 'returns page' do
           create_request(contest_request: { status: 'finished',
-                                            answer: 'winner', })
+                                            answer: 'winner' })
           client.update_attributes!(status: 'finished')
-          @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
-          @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
           @contest_request.image_items.create!(kind: 'product_items', phase: 'collaboration', status: 'temporary')
           @contest_request.image_items.create!(kind: 'product_items', phase: 'final_design', status: 'published')
           get :show, id: @contest.id
@@ -605,7 +603,7 @@ RSpec.describe ContestsController do
         sign_in(Fabricate(:client))
       end
 
-      it 'does npt find resource' do
+      it 'does not find resource' do
         get :show, id: contest.id
         expect(response).to have_http_status(:not_found)
       end

@@ -4,5 +4,5 @@ Fabricator(:client) do
   email { sequence { |i|  "client#{ i }@example.com" } }
   plain_password 'password'
 
-  before_create { |client, transients| client.password = Client.encrypt(plain_password) }
+  before_create { |client| client.password = Client.encrypt(plain_password) }
 end

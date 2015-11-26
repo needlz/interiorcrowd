@@ -4,9 +4,7 @@ class ReviewerInvitationsController < ApplicationController
 
   def create
     invite = InviteReviewer.new(contest: @contest, invitation_attributes: invite_params, view_context: view_context)
-    ActiveRecord::Base.transaction do
-      invite.perform
-    end
+    invite.perform
     render json: { url: invite.signed_url, token: invite.invitation.url }
   end
 

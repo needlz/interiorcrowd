@@ -10,13 +10,15 @@ class InviteReviewer
   end
 
   def perform
-    @invitation = contest.reviewer_invitations.create!(invitation_attributes)
-    @signed_url = view_context.show_reviewer_feedbacks_url(id: contest.id, token: invitation.url)
-    Jobs::Mailer.schedule(:invitation_to_leave_a_feedback,
-                          [invitation_attributes,
-                           signed_url,
-                           client.name,
-                           Settings.app_url])
+    ActiveRecord::Base.transaction do
+      @invitation = contest.reviewer_invitations.create!(invitation_attributes)
+      @signed_url = view_context.show_reviewer_feedbacks_url(id: contest.id, token: invitation.url)
+      Jobs::Mailer.schedule(:invitation_to_leave_a_feedback,
+                            [invitation_attributes,
+                             signed_url,
+                             client.name,
+                             Settings.app_url])
+    end
   end
 
   private

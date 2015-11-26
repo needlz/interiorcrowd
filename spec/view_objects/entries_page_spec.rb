@@ -6,10 +6,6 @@ RSpec.describe EntriesPage do
   let(:contest){ Fabricate(:contest, client: client, status: 'submission', phase_end: Time.current) }
   let(:entries_page){ EntriesPage.new(
       contest: contest,
-      view: nil,
-      answer: nil,
-      page: nil,
-      current_user: nil,
       view_context: RenderingHelper.new
   ) }
 
@@ -44,12 +40,9 @@ RSpec.describe EntriesPage do
   end
 
   describe '#current_user_owns_contest?' do
-    context 'logged in as contest owner' do
+    context 'when logged in as contest owner' do
       let(:entries_page){ EntriesPage.new(
           contest: contest,
-          view: nil,
-          answer: nil,
-          page: nil,
           current_user: client,
           view_context: RenderingHelper.new
       ) }
@@ -59,13 +52,10 @@ RSpec.describe EntriesPage do
       end
     end
 
-    context 'logged in as not contest owner' do
+    context 'when logged in as another client' do
       let(:entries_page){ EntriesPage.new(
           contest: contest,
-          view: nil,
-          answer: nil,
-          page: nil,
-          current_user: nil,
+          current_user: Fabricate(:client),
           view_context: RenderingHelper.new
       ) }
 
