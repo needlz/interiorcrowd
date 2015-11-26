@@ -262,34 +262,66 @@ RSpec.describe ContestRequestsController do
   end
 
   describe 'GET show' do
-    before do
-      sign_in(client)
+    context 'not logged in' do
+      context 'when not invited' do
+        it 'redirects to login page if user not logged in' do
+          get :show, id: request.id
+          expect(response).to redirect_to client_login_sessions_path
+        end
+      end
+
+      context 'when invited' do
+        before do
+          invite = InviteReviewer.new(contest: contest,
+                                      view_context: RenderingHelper.new,
+                                      invitation_attributes: { username: 'username', email: 'email@example.com' })
+          invite.perform
+          cookies[:reviewer_token] = invite.invitation.url
+        end
+
+        it 'returns page' do
+          get :show, id: request.id
+          expect(response).to render_template(:show)
+        end
+      end
     end
 
-    it 'redirects to login page if user not logged in' do
-      session[:client_id] = nil
-      get :show, id: request.id
-      expect(response).to redirect_to client_login_sessions_path
+    context 'when logged in as contest owner' do
+      before do
+        sign_in(client)
+      end
+
+      it 'returns page' do
+        get :show, id: request.id
+        expect(response).to render_template(:show)
+      end
+
+      it 'renders answers if contest is in submission state' do
+        expect(contest.status).to eq 'submission'
+        get :show, id: request.id
+        expect(response).to render_template(partial: '_moodboard_answers')
+      end
+
+      it 'raises error if client is not logged in' do
+        session[:client_id] = 0
+        expect { get :show, id: request.id }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'raises error if request id is wrong' do
+        expect { get :show, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
+      end
     end
 
-    it 'returns page' do
-      get :show, id: request.id
-      expect(response).to render_template(:show)
-    end
 
-    it 'renders answers if contest is in submission state' do
-      expect(contest.status).to eq 'submission'
-      get :show, id: request.id
-      expect(response).to render_template(partial: '_moodboard_answers')
-    end
+    context 'when logged as another client' do
+      before do
+        sign_in(Fabricate(:client))
+      end
 
-    it 'raises error if client is not logged in' do
-      session[:client_id] = 0
-      expect { get :show, id: request.id }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it 'raises error if request id is wrong' do
-      expect { get :show, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
+      it 'does not find resource' do
+        get :show, id: request.id
+        expect(response).to have_http_status(:not_found)
+      end
     end
   end
 

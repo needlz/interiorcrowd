@@ -154,10 +154,6 @@ class Contest < ActiveRecord::Base
     designer_invite_notifications.create!(designer: designer)
   end
 
-  def invite_reviewer(invite_params)
-    reviewer_invitations.create!(invite_params)
-  end
-
   def responses_answerable?
     winner_selection? || submission?
   end

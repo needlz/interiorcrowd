@@ -23,5 +23,7 @@
         { contest_page: contest_page }
 - if @client
   .fullWidthLine.marginTop40.marginBottom40.hidden-xs
-  = render 'clients/client_center/entries/notes', { readonly: readonly, notes: contest_page.notes }
-  = render 'clients/client_center/entries/user_invitations', { readonly: readonly }
+  = render 'clients/client_center/entries/notes', readonly: readonly, notes: contest_page.notes
+  = render 'clients/client_center/entries/user_invitations',
+      readonly: readonly,
+      feedbacks: contest_page.reviewer_feedbacks

@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
   before_filter :check_client, only: [:index, :payment_details]
 
-  before_filter :set_client, only: [:index, :show, :payment_summary, :invite_designers]
+  before_filter :set_client, only: [:index, :payment_summary, :invite_designers]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
 
@@ -17,10 +17,19 @@ class ContestsController < ApplicationController
   end
 
   def show
-    return raise_404 unless current_user.see_contest?(@contest)
+    unless current_user.can_see_contest?(@contest, cookies)
+      if current_user.client?
+        raise_404
+      else
+        return redirect_to(client_login_sessions_path)
+      end
+    end
     return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
-    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    if current_user.client?
+      @client = current_user
+      @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    end
     @entries_page = EntriesPage.new(
       contest: @contest,
       view: params[:view],
@@ -30,7 +39,7 @@ class ContestsController < ApplicationController
       view_context: view_context
     )
 
-    if @entries_page.show_submissions? || @entries_page.won_contest_request
+    if @entries_page.show_submissions? || @entries_page.won_contest_request || !(@contest.client == current_user)
       render 'clients/client_center/entries'
     else
       render 'clients/client_center/entries_invitations'
@@ -74,7 +83,7 @@ class ContestsController < ApplicationController
       on_previewed
     else
       flash[:error] = I18n.t('contests.creation.errors.required_data_missing')
-      redirect_to preview_contests_path and return
+      redirect_to preview_contests_path
     end
   end
 
@@ -93,7 +102,8 @@ class ContestsController < ApplicationController
       session[action] = params[action] if params[action].present?
     end
 
-    if incompleted_contest = fetch_incompleted_contest
+    incompleted_contest = fetch_incompleted_contest
+    if incompleted_contest
       redirect_to(controller: 'contests', action: action, id: incompleted_contest.id)
     else
       if current_user.client?
@@ -153,7 +163,7 @@ class ContestsController < ApplicationController
     if @image.save
       render json: @image.medium_size_url
     else
-      render json: { msg: "Upload Failed", error: @image.error }
+      render json: { msg: 'Upload Failed', error: @image.error }
     end
   end
 

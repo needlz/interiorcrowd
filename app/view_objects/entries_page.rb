@@ -68,6 +68,10 @@ class EntriesPage < ContestPage
     result
   end
 
+  def current_user_owns_contest?
+    contest.client == current_user
+  end
+
   attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
 
   private

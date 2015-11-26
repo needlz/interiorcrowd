@@ -1,5 +1,8 @@
 class ContestPage
 
+  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
+              :answer, :view_context
+
   def initialize(options)
     @contest = options[:contest]
 
@@ -13,6 +16,7 @@ class ContestPage
     @contest_requests = shown_requests.by_page(options[:page])
     @notes = contest.notes.by_client.order(created_at: :desc).includes(:client, :designer).map { |note| ContestNoteView.new(note, options[:current_user]) }
     @reviewer_feedbacks = contest.reviewer_feedbacks.includes(:invitation)
+    @current_user = options[:current_user]
   end
 
   def requests_present?
@@ -45,7 +49,8 @@ class ContestPage
     ContestPolicies.new(contest).invite_designers_page_accessible?
   end
 
-  attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
-              :answer, :view_context
+  private
+
+  attr_reader :current_user
 
 end

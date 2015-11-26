@@ -6,10 +6,6 @@ RSpec.describe EntriesPage do
   let(:contest){ Fabricate(:contest, client: client, status: 'submission', phase_end: Time.current) }
   let(:entries_page){ EntriesPage.new(
       contest: contest,
-      view: nil,
-      answer: nil,
-      page: nil,
-      current_user: nil,
       view_context: RenderingHelper.new
   ) }
 
@@ -39,6 +35,32 @@ RSpec.describe EntriesPage do
 
       it 'shows submissions list' do
         expect(entries_page.show_submissions?).to be_truthy
+      end
+    end
+  end
+
+  describe '#current_user_owns_contest?' do
+    context 'when logged in as contest owner' do
+      let(:entries_page){ EntriesPage.new(
+          contest: contest,
+          current_user: client,
+          view_context: RenderingHelper.new
+      ) }
+
+      it 'returns true' do
+        expect(entries_page.current_user_owns_contest?).to be_truthy
+      end
+    end
+
+    context 'when logged in as another client' do
+      let(:entries_page){ EntriesPage.new(
+          contest: contest,
+          current_user: Fabricate(:client),
+          view_context: RenderingHelper.new
+      ) }
+
+      it 'returns false' do
+        expect(entries_page.current_user_owns_contest?).to be_falsey
       end
     end
   end
