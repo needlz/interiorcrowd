@@ -10,7 +10,6 @@ class ContestPage
     @contest_view = ContestView.new(contest_attributes: contest) if contest
     all_requests = contest.requests.client_sees_in_entries.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
-    @comments_present = contest.notes.present?
     @answer = options[:answer]
     shown_requests = all_requests.by_answer(answer)
     @contest_requests = shown_requests.by_page(options[:page])
@@ -21,10 +20,6 @@ class ContestPage
 
   def requests_present?
     @requests_present
-  end
-
-  def comments_present?
-    @comments_present
   end
 
   def invitable_designer_views
