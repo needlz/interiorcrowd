@@ -1,15 +1,17 @@
-//helpers
-@import "variables";
-@import "mixins";
+.how-it-works-container {
+  //helpers
+  @import "variables";
+  @import "mixins";
 
-//base
-@import "reboot";
-@import "typography";
+  //base
+  @import "reboot";
+  @import "typography";
 
-//layout
-@import "grid";
-@import "forms";
-@import "content";
+  //layout
+  @import "grid";
+  @import "forms";
+  @import "content";
 
-//components
-@import "responsive";
+  //components
+  @import "responsive";
+}
