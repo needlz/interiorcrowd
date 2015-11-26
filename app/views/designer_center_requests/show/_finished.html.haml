@@ -27,6 +27,10 @@
         - unless product_item.image_id.nil?
           = render partial: 'clients/client_center/entries/final_design_image_item',
             locals: { image_item: ImageItemView.new(product_item) }
+    .imageItemsPagination
+      = will_paginate(show_page.image_items,
+          container: false,
+          renderer: ProductListPaginationRenderer)
 
   .fullWidthLine.marginBottom40.marginTop20
   .row

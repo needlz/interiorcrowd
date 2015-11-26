@@ -572,7 +572,6 @@ en:
       add_promocode: Add promotion code if applicable
       apply_promocode: Apply
       promocode_invalid: The code you entered is invalid.
-      promocode_valid: The code you entered has been applied. You %{profit}.
       promocode_server_error: Server error
       make_card_primary: Make this as primary card
       primary_card: Primary card

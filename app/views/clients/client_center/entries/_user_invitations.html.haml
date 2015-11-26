@@ -1,9 +1,9 @@
 .fullWidthLine.marginTop40.marginBottom40
-- if @reviewer_feedbacks.present?
+- if feedbacks.present?
   .row.feedBackTitle
     %h3= t('client_center.entries.reviewer_invitations.title')
-  - @reviewer_feedbacks.each do |feedback|
-    = render 'clients/client_center/entries/feedback_from_others', {feedback: feedback}
+  - feedbacks.each do |feedback|
+    = render 'clients/client_center/entries/feedback_from_others', feedback: feedback
 - unless readonly
   .row.sendDesignerFeedback.reviewer-invitations
     %h4

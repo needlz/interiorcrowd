@@ -24,7 +24,8 @@ class DesignerCenterRequestsController < ApplicationController
     @show_page = ConceptBoardAuthorView.new({
       contest_request: @request,
       preferred_view: params[:view],
-      view_context: view_context
+      view_context: view_context,
+      image_items_page: params[:page]
     })
     @visible_image_items = @show_page.image_items
     @navigation = Navigation::DesignerCenter.new(:requests)

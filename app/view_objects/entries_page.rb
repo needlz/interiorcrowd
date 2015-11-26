@@ -4,7 +4,7 @@ class EntriesPage < ContestPage
     super
 
     @won_contest_request = contest.response_winner
-    @show_submissions = (contest.submission? && (requests_present? || comments_present?)) || contest.winner_selection?
+    @show_submissions = (contest.submission? && requests_present?) || contest.winner_selection?
 
     if won_contest_request
       @entries_concept_board_page = EntriesConceptBoard.new({
@@ -66,6 +66,10 @@ class EntriesPage < ContestPage
                  time_left: time_till_milestone_end] if won_contest_request.fulfillment_approved?
     end
     result
+  end
+
+  def current_user_owns_contest?
+    contest.client == current_user
   end
 
   attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
