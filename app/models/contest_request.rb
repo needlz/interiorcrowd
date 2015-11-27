@@ -152,7 +152,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def lookbook_items_by_phase(phase)
-    return if !lookbook || !lookbook.lookbook_details
+    return LookbookDetail.none if !lookbook || !lookbook.lookbook_details
     lookbook.lookbook_details.where(phase: phase)
   end
 

@@ -9,12 +9,13 @@ class ContestRequestsController < ApplicationController
     @request = ContestRequest.find_by_id(params[:id])
     if @request.nil?
       contest = Contest.find params[:contest_id]
-      return raise_404 unless current_user.can_create_request_for_contest?(contest)
+      return raise_404 unless current_user.designer?
+      @request = contest.response_of(current_user)
       @request = ContestRequestCreation.new({ designer: current_user,
-                                              contest: contest,
-                                              request_params: nil,
-                                              lookbook_params: nil,
-                                              need_submit: false }).perform
+                                                contest: contest,
+                                                request_params: nil,
+                                                lookbook_params: nil,
+                                                need_submit: false }).perform if @request.blank?
     else
       return raise_404 unless current_user.can_comment_contest_request?(@request)
     end
