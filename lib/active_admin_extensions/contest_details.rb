@@ -44,6 +44,11 @@ module ActiveAdminExtensions
         statement.html_safe
       end
     end
+
+    def promocode_details(contest, detail)
+      codes = contest.contest_promocodes
+      codes.first.promocode.send(detail) if codes.present?
+    end
   end
 
 end
