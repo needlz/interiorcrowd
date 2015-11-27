@@ -249,4 +249,14 @@ RSpec.describe ContestRequest do
     end
   end
 
+  describe '#lookbook_items_by_phase' do
+    let(:contest_request) { Fabricate(:contest_request) }
+
+    context 'when there are no lookbook items in requested phase' do
+      it 'returns mappable value' do
+        expect(contest_request.lookbook_items_by_phase(:initial).respond_to?(:map)).to be_truthy
+      end
+    end
+  end
+
 end
