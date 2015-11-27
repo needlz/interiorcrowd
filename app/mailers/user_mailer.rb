@@ -261,9 +261,11 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
-  def new_project_on_the_platform(designers, email_id = nil)
+  def new_project_on_the_platform(client_name, project_name, designers, email_id = nil)
     template 'New-project-on-the-platform'
     set_template_values(
+        client_name: client_name,
+        project_name: project_name,
         login_url: designer_login_sessions_url
     )
     recipients = designers.map do |designer|
