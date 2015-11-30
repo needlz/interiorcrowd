@@ -262,7 +262,11 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_project_on_the_platform(client_name, project_name, designers, email_id = nil)
-    template 'New-project-on-the-platform'
+    if Rails.env.staging?
+      template 'test-template'
+    else
+      template 'New-project-on-the-platform'
+    end
     set_template_values(
         client_name: client_name,
         project_name: project_name,
