@@ -11,6 +11,9 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     column 'Contest' do |contest|
       contest_name(contest)
     end
+    column 'Charged?' do |contest|
+      contest.client_payment.present?
+    end
     column 'Start Date' do |contest|
       contest.submission_started_at
     end
@@ -23,11 +26,13 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     column 'End Date' do |contest|
       end_date(contest)
     end
+    column 'Promo Code Name' do |contest|
+      promocode_details(contest, :promocode)
+    end
+    column 'Promo Code Message' do |contest|
+      promocode_details(contest, :display_message)
+    end
   end
 
-  filter :id, label: 'Contest ID'
-  filter :client
-  filter :project_name
-  filter :submission_started_at, label: 'Start Date'
-  filter :finished_at, label: 'End Date'
+  filter :status, as: :check_boxes, collection: proc { Contest::STATUSES }
 end
