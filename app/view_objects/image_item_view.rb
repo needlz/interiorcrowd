@@ -45,6 +45,10 @@ class ImageItemView
     { id: id, text: mark_text, css_class: mark_css_class }
   end
 
+  def base_url
+    get_link_base_url(link)
+  end
+
   private
 
   attr_reader :image_item

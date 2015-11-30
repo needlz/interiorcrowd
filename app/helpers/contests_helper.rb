@@ -1,3 +1,5 @@
+require 'uri'
+
 module ContestsHelper
 
   def contest_creation_category_radiobutton(category)
@@ -55,6 +57,11 @@ module ContestsHelper
   def force_link_protocol(link)
     return '' unless link.present?
     link =~ /^https?\:/ ? link : "http://#{ link }"
+  end
+
+  def get_link_base_url(link)
+    base = URI(force_link_protocol(link))
+    "#{ base.scheme }://#{ base.host }"
   end
 
 end
