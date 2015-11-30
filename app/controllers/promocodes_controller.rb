@@ -10,7 +10,7 @@ class PromocodesController < ApplicationController
     code = Promocode.active.find_by_promocode(promocode)
     result = { valid: code.present? }
     if code
-      display_message = code.display_message % { discount_dollars: view_context.humanized_money_with_symbol(code.discount) }
+      display_message = code.display_message
       result.merge!(display_message: display_message, discount: code.discount_cents / 100)
     end
     result
