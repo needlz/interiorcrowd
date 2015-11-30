@@ -22,10 +22,6 @@ RSpec.describe PromocodesController do
         expect(json['valid']).to be_truthy
       end
 
-      it 'interpolates discount price in display message' do
-        json = test_code
-        expect(json['display_message']).to eq "some profit #{ RenderingHelper.new.humanized_money_with_symbol(code.discount) }"
-      end
     end
 
     context 'invalid token' do
