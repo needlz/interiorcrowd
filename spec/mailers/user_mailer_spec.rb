@@ -134,7 +134,7 @@ RSpec.describe UserMailer do
     it 'sends email to all designers when new contest has been added' do
       designer
       contest
-      expect(UserMailer.new_project_on_the_platform(contest.client.name, contest.project_name, Designer.active)).to be_present
+      expect(UserMailer.new_project_on_the_platform(contest.client.name, contest.project_name, Designer.active.pluck(:id))).to be_present
     end
 
     it 'sends email to designers about no submissions for client so far' do

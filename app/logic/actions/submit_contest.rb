@@ -26,7 +26,7 @@ class SubmitContest
       ActiveRecord::Base.transaction do
         contest.submit!
         contest.update_attributes(submission_started_at: Time.now)
-        Jobs::Mailer.schedule(:new_project_on_the_platform, [contest.client.name, contest.project_name, Designer.active])
+        Jobs::Mailer.schedule(:new_project_on_the_platform, [contest.client.name, contest.project_name, Designer.active.pluck(:id)])
         Jobs::CheckIfBoardsReceived.schedule(contest.id, { run_at: Time.current + 3.days })
         @performed = true
       end
