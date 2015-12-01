@@ -1,13 +1,13 @@
 .col-sm-6.profile-card{ data: { id: designer.id } }
   .row.designerBox
-    .col-xs-5
-      = link_to(image_tag(designer.personal_picture_url),
-              show_portfolio_path(designer.portfolio_path),
-              class: tracked_link,
-              data: { name: 'Portfolio (designer image)' })
+    .col-xs-5.avatarSide
+      %a{ href: show_portfolio_path(designer.portfolio_path),
+          class: tracked_link,
+          data: { name: 'Portfolio (designer image)' } }
+        %div.avatar{ style: "background-image: #{ css_url(designer.personal_picture_url) }" }
       = render partial: 'clients/client_center/entries/invite_designer_button',
           locals: { css_class: 'hide480', invited: designer.invited_to_contest?(@contest) }
-    .col-xs-7
+    .col-xs-7.detailsSide
       %p.designerName
         = link_to(designer.name,
                   show_portfolio_path(designer.portfolio_path),
@@ -15,9 +15,9 @@
                   data: { name: 'Portfolio (designer name)' })
       .fullWidthLine
       %p.designMindset= t('client_center.entries.designer_profile.about_title')
-      %p.designerDesc= designer.about
+      %p.about.designerDesc= designer.about
       .fullWidthLine
       %p.designMindset= t('client_center.entries.designer_profile.style_specialty')
-      %p.designerDesc= designer.style_description_texts
+      %p.style.designerDesc= designer.style_description_texts
   = render partial: 'clients/client_center/entries/invite_designer_button',
       locals: { css_class: 'show480', invited: designer.invited_to_contest?(@contest) }

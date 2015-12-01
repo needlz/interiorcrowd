@@ -17,6 +17,10 @@ class EntriesPage
 class @DesignerBlocks
 
   @fitHeight: ->
+    $('.designerBox .avatar').each (index, element)->
+      $element = $(element)
+      $element.css('height', $element.get(0).offsetWidth)
+
     @setupEllipsis()
 
     maxProfileCardHeight = null

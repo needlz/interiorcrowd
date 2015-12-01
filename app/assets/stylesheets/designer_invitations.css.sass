@@ -1,0 +1,111 @@
+.designerBox
+  background: #f6f6f6
+  margin: 15px 0px
+  padding: 20px 0px
+  color: #000
+  height: 100%
+
+  img
+    width: 100%
+
+  .designerName
+    font-family: 'AvenirLTStd-MediumOblique'
+    font-size: 24px
+    line-height: 20px
+    margin-top: 5px
+    margin-bottom: 20px
+
+  .designerName a
+    color: inherit
+
+  .designMindset
+    font-size: 20px
+    margin: 20px 0px
+    line-height: 21px
+
+  .designerDesc
+    font-family: 'AvenirLTStd-Light'
+    font-size: 16px
+    margin: 10px 0px
+
+  .inviteToContest
+    display: block
+    font-size: 16px
+    color: #000
+    border: 1px solid #000
+    width: 100%
+    text-align: center
+    line-height: 40px
+    margin-top: 20px
+    font-family: 'AvenirLTStd-Heavy'
+
+  .inviteToContest.designer-invitation-button
+    cursor: pointer
+
+  .avatarSide
+    padding-left: 20px
+  .detailsSide
+    padding-right: 20px
+
+  .avatar
+    width: 100%
+    background-size: cover
+    background-position: center
+
+  .about
+    margin: 0px 0px 20px
+
+  .style
+    margin: 0px
+
+@media (max-width: 480px)
+  .designerBox > div
+    width: 100%
+    float: none
+  .designerBox .col-xs-5
+    padding-left: 0px
+  .hide480
+    display: none !important
+  .show480
+    display: block !important
+  .designerBox + .inviteToContest
+    line-height: 50px
+    border-color: transparent
+    background: #e1e1e1
+    text-align: center
+    color: #000
+    margin-bottom: 20px
+    font-size: 20px
+  .designerBox
+    padding: 0px
+    margin: 0px
+    padding-bottom: 15px
+  .designerBox .designerName
+    margin-top: 10px
+
+@media (max-width: 992px)
+  .designerBox
+    .designMindset
+      font-size: 16px
+      margin-bottom: 0px
+    .inviteToContest
+      line-height: 15px
+      padding: 7px 0px
+    .designerDesc
+      line-height: 18px
+      font-size: 15px
+      margin: 5px 0px
+    .col-xs-5
+      padding-right: 0px
+
+@media (max-width: 1200px)
+  .designerBox
+    .designerName
+      font-size: 18px
+      margin-bottom: 5px
+    .designMindset
+      font-size: 16px
+      margin-bottom: 5px
+    .inviteToContest
+      font-size: 15px
+      font-family: 'AvenirLTStd-Medium'
