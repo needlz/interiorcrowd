@@ -1286,55 +1286,6 @@ div.form-selector {
   padding-bottom: 30px;
 }
 
-.designerBox {
-  background: #f6f6f6;
-  margin: 15px 0px;
-  padding: 15px 0px;
-  color: #000;
-  height: 100%;
-}
-
-.designerBox img {
-  width: 100%;
-}
-
-.designerBox .designerName {
-  font-family: 'AvenirLTStd-MediumOblique';
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.designerBox .designerName a {
-  color: inherit;
-}
-
-.designerBox .designMindset {
-  font-size: 20px;
-  margin: 5px 0px;
-}
-
-.designerBox .designerDesc {
-  font-family: 'AvenirLTStd-Light';
-  font-size: 16px;
-  margin: 10px 0px;
-}
-
-.designerBox .inviteToContest {
-  display: block;
-  font-size: 16px;
-  color: #000;
-  border: 1px solid #000;
-  width: 100%;
-  text-align: center;
-  line-height: 38px;
-  margin-top: 20px;
-  font-family: 'AvenirLTStd-Heavy';
-}
-
-.designerBox .inviteToContest.designer-invitation-button {
-  cursor: pointer;
-}
-
 .seeMoreDesigners, .seeMoreDesigners:hover {
   margin: 60px 0px 40px;
   font-size: 24px;
@@ -1399,18 +1350,6 @@ h3.exploreMore {
     font-size: 22px;
     line-height: 30px;
   }
-  .designerBox .designerName {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-  .designerBox .designMindset {
-    font-size: 16px;
-    margin-bottom: 5px;
-  }
-  .designerBox .inviteToContest {
-    font-size: 15px;
-    font-family: 'AvenirLTStd-Medium';
-  }
   .seeMoreDesigners, .seeMoreDesigners:hover, h3.exploreMore {
     font-size: 22px;
   }
@@ -1426,29 +1365,12 @@ h3.exploreMore {
   }
   .topRightClose {
     top: auto;
-    /*margin-top: 10px; */
   }
   .daysAway {
     font-size: 18px;
   }
   .mdLineBreaker {
     display: none;
-  }
-  .designerBox .designMindset {
-    font-size: 16px;
-    margin-bottom: 0px;
-  }
-  .designerBox .inviteToContest {
-    line-height: 15px;
-    padding: 7px 0px;
-  }
-  .designerBox .designerDesc {
-    line-height: 18px;
-    font-size: 15px;
-    margin: 5px 0px;
-  }
-  .designerBox .col-xs-5 {
-    padding-right: 0px;
   }
 }
 
@@ -1486,36 +1408,6 @@ h3.exploreMore {
   .daysAway {
     font-size: 16px;
     line-height: 24px;
-  }
-  .designerBox > div {
-    width: 100%;
-    float: none;
-  }
-  .designerBox .col-xs-5 {
-    padding-left: 0px;
-  }
-  .hide480 {
-    display: none !important;
-  }
-  .show480 {
-    display: block !important;
-  }
-  .designerBox + .inviteToContest {
-    line-height: 50px;
-    border-color: transparent;
-    background: #e1e1e1;
-    text-align: center;
-    color: #000;
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
-  .designerBox {
-    padding: 0px;
-    margin: 0px;
-    padding-bottom: 15px;
-  }
-  .designerBox .designerName {
-    margin-top: 10px;
   }
   .seeMoreDesigners, .seeMoreDesigners:hover {
     font-size: 18px;
