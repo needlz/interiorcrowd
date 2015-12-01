@@ -19,7 +19,7 @@ RSpec.describe RieltorContact do
     expect(contact.email_me?).to be_truthy
   end
 
-  context 'rieltor provided email' do
+  context 'realtor provided email' do
     it 'doesn\'t save new contact if email is absent' do
       contact = RieltorContact.new(choice: 'email_me')
       expect(contact.invalid?).to be_truthy
@@ -57,7 +57,7 @@ RSpec.describe RieltorContact do
     end
   end
 
-  context 'rieltor provided phone' do
+  context 'realtor provided phone' do
     it 'doesn\'t save new contact if phone is absent' do
       contact = RieltorContact.new(choice: 'call_me')
       expect(contact.invalid?).to be_truthy

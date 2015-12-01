@@ -1,3 +1,3 @@
-ActiveAdmin.register RieltorContact do
+ActiveAdmin.register RieltorContact, as: 'Realtor Contact' do
 
 end
