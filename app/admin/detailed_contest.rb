@@ -18,7 +18,10 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       contest.submission_started_at
     end
     column 'Designers' do |contest|
-      designers_list(contest)
+      designers_list(contest, :ever_published)
+    end
+    column 'Designer Comments' do |contest|
+      designers_list(contest, :has_designer_comments)
     end
     column 'Winner' do |contest|
       winner_info(contest)

@@ -75,7 +75,7 @@ class ContestRequest < ActiveRecord::Base
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: %w(draft submitted fulfillment_ready fulfillment_approved)) }
-  scope :has_designer_comments, -> { joins(:comments).where('concept_board_comments.role = ?', 'Designer') }
+  scope :has_designer_comments, -> { joins(:comments).where('concept_board_comments.role = ?', 'Designer').uniq }
   scope :ever_published, -> { where(status: %w(closed submitted fulfillment_ready fulfillment_approved finished)) }
   scope :client_sees_in_entries, -> { has_designer_comments.union(ever_published) }
   scope :submitted, ->{ where(status: %w(submitted)) }
