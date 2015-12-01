@@ -105,7 +105,7 @@ RSpec.describe ClientsController do
   describe 'POST sign_up_with_email' do
 
     context 'when valid email and password' do
-      let(:email) { 'email' }
+      let(:email) { 'email@example.com' }
 
       before do
         post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
@@ -133,7 +133,7 @@ RSpec.describe ClientsController do
     context 'when valid access_token passed' do
       let(:first_name) { 'first name' }
       let(:last_name) { 'last name' }
-      let(:email) { 'email' }
+      let(:email) { 'email@example.com' }
       let(:id) { '1' }
 
       before do

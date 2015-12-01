@@ -33,7 +33,7 @@ class Client < ActiveRecord::Base
 
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, email: true
   normalize_attributes :email, :stripe_customer_id
 
   has_many :contests
