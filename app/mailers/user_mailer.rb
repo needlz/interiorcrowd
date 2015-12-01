@@ -268,7 +268,7 @@ class UserMailer < ActionMailer::Base
       template 'New-project-on-the-platform'
     end
     set_template_values(
-        client_name: client_name,
+        client_name: client_name.present? ? client_name : 'A new client',
         project_name: project_name,
         login_url: designer_login_sessions_url
     )
