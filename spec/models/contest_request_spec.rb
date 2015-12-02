@@ -213,6 +213,7 @@ RSpec.describe ContestRequest do
 
     context 'designer created comment on contest request' do
       let(:designer_comment) { Fabricate(:concept_board_designer_comment, contest_request: contest_request) }
+      let(:two_designer_comments) { Fabricate.times(2, :concept_board_designer_comment, contest_request: contest_request) }
       let(:designer) { Fabricate(:designer) }
       let(:request_with_client_comment) { Fabricate(:contest_request, designer: designer) }
       let(:client_comment) { Fabricate(:concept_board_client_comment, contest_request: request_with_client_comment) }
@@ -223,10 +224,16 @@ RSpec.describe ContestRequest do
         expect(ContestRequest.has_designer_comments.last.comments.count).to eq(1)
       end
 
-      it 'return only contest requests which have designer comments' do
+      it 'returns only contest requests which have designer comments' do
         designer_comment
         client_comment
         expect(ContestRequest.all.count).to eq(2)
+        expect(ContestRequest.has_designer_comments.count).to eq(1)
+      end
+
+      it 'returns unique contest requests' do
+        two_designer_comments
+        expect(ConceptBoardComment.count).to eq(2)
         expect(ContestRequest.has_designer_comments.count).to eq(1)
       end
     end
