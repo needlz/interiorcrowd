@@ -90,6 +90,9 @@ RSpec.describe Designer do
       end
     end
 
+    it_behaves_like 'validates email' do
+      let(:object) { designer }
+    end
   end
 
 end
