@@ -1,5 +1,3 @@
-require 'uri'
-
 module ContestsHelper
 
   def contest_creation_category_radiobutton(category)
