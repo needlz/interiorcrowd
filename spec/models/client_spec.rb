@@ -11,8 +11,8 @@ RSpec.describe Client do
   let(:credit_card1) { Fabricate(:credit_card) }
   let(:credit_card2) { Fabricate(:credit_card) }
 
-  let(:client) {Fabricate(:client)}
-  let(:client2) {Fabricate(:client)}
+  let(:client) { Fabricate(:client) }
+  let(:client2) { Fabricate(:client) }
 
   describe '#last_contest' do
     context 'active contest before inactive' do
@@ -83,6 +83,9 @@ RSpec.describe Client do
       end
     end
 
+    it_behaves_like 'validates email' do
+      let(:object) { client }
+    end
   end
 
 end
