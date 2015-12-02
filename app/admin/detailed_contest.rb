@@ -18,7 +18,12 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       contest.submission_started_at
     end
     column 'Designers' do |contest|
-      designers_list(contest)
+      designers_list(contest.requests.ever_published) do |statement, submission_date|
+        statement + formatted_date(', submitted at ', submission_date)
+      end
+    end
+    column 'Designer Comments' do |contest|
+      designers_list(contest.requests.has_designer_comments)
     end
     column 'Winner' do |contest|
       winner_info(contest)

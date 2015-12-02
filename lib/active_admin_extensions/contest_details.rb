@@ -23,11 +23,11 @@ module ActiveAdminExtensions
       ' ' + contest.project_name.to_s + " (##{contest.id})"
     end
 
-    def designers_list(contest)
-      contest.requests.ever_published.map do |request|
+    def designers_list(requests)
+      requests.map do |request|
         designer = request.designer
         statement = link_to(full_user_name(designer), admin_designer_path(designer))
-        statement = statement + formatted_date(', submitted at ', request.submitted_at)
+        statement = yield(statement, request.submitted_at) if block_given?
         statement
       end.join('<br />').html_safe
     end
