@@ -6,7 +6,7 @@
         .col-md-2= contest.name
         .col-md-2= contest.package_name
         .col-md-2= contest.design_space
-        - if contest.winner_selection? && response.draft?
+        - if contest.winner_selection? && response.draft? || response.closed?
           - days_left = 0
         - else
           - days_left = contest.days_till_end

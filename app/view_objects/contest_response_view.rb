@@ -2,7 +2,7 @@ class ContestResponseView
 
   attr_reader :contest, :status, :status_name, :answer, :id, :header_text, :collaboration_and_final_comments_count, :image_items
 
-  delegate :draft?, to: :response
+  delegate :draft?, :closed?, to: :response
 
   HEADER_TEXTS = {
     'fulfillment_ready' => I18n.t('designer_center.edit.above_image'),
