@@ -60,6 +60,8 @@ module ContestsHelper
   def get_link_base_url(link)
     base = URI(force_link_protocol(link))
     "#{ base.scheme }://#{ base.host }"
+  rescue URI::InvalidURIError
+    link
   end
 
 end
