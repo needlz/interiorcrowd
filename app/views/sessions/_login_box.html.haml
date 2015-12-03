@@ -14,7 +14,7 @@
       %input#password{ placeholder: t('login.password'), type: 'password', name: 'password' }/
       .row
         .col-xs-6
-          %input#remember-me{ type: 'checkbox'}/
+          %input#remember-me{ type: 'checkbox', name: 'remember_me' }/
           %label.rememberMe{ for: 'remember-me' }= t('login.remember_me')
         .col-xs-6.text-right
           %a.forgotPass{ href: login_view[:forgot_password_path], class: tracked_link }= t('login.forgot_password')

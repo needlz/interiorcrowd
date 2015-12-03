@@ -51,6 +51,11 @@ class SessionsController < ApplicationController
 
   def authenticate_user(user, url)
     if user.present?
+      if params[:remember_me]
+        cookies.permanent[:auth_token] = 1
+      else
+        cookies[:auth_token] = 2
+      end
       session["#{ user.class.name.downcase }_id".to_sym] = user.id
       @current_user = fetch_current_user
       track_login
