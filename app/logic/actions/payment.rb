@@ -69,6 +69,7 @@ class Payment
   def submit_contest
     submit_contest = SubmitContest.new(contest)
     submit_contest.try_perform
+    contest.update_attributes!(was_in_brief_pending_state: !submit_contest.performed?)
   end
 
 end

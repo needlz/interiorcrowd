@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126084800) do
+ActiveRecord::Schema.define(version: 20151130160357) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20151126084800) do
     t.boolean  "email_opt_in",                          default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
+    t.boolean  "notified_owner",                            default: false, null: false
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -184,6 +185,7 @@ ActiveRecord::Schema.define(version: 20151126084800) do
     t.boolean  "designers_only_use_these_colors",                                      default: false
     t.datetime "finished_at"
     t.datetime "submission_started_at"
+    t.boolean  "was_in_brief_pending_state"
   end
 
   create_table "contests_appeals", force: :cascade do |t|
@@ -244,7 +246,6 @@ ActiveRecord::Schema.define(version: 20151126084800) do
     t.integer  "contest_id"
     t.string   "image_type",         limit: 255
     t.integer  "contest_request_id"
-    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
