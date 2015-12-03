@@ -26,6 +26,10 @@ module ContestRequestMilestones
       contest.phase_end? && Time.current < contest.phase_end
     end
 
+    def expired_request_during_winner_selection?
+      contest.winner_selection? && contest_request.draft?
+    end
+
   end
 
 end

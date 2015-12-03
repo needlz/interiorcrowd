@@ -612,6 +612,7 @@ en:
       winner_selection:
         time_left: '%{time_left} left for the client to pick a winner'
         expired: Client will pick a winner soon
+        submission_closed: Submission period is closed
       submitted:
         time_left: '%{time_left} left to edit your board'
       fulfillment_approved:

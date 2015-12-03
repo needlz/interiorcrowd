@@ -4,7 +4,7 @@ class ContestShortDetails
 
   attr_reader :id, :name, :package_name, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
               :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path
-  delegate :response_winner, :completed?, to: :contest
+  delegate :response_winner, :completed?, :winner_selection?, to: :contest
 
   def initialize(contest)
     @contest = contest
