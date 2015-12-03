@@ -22,10 +22,24 @@ RSpec.describe ContestsHelper do
   end
 
   describe '#get_link_base_url' do
-    it 'returns base url' do
-      base_url = 'http://www.interiorcrowd.com'
-      test_url = 'http://www.interiorcrowd.com/designer_center/responses/36?some_param=%27test%27&test_id=28'
-      expect(get_link_base_url(test_url)).to eq(base_url)
+    context 'correct URL passed' do
+      it 'returns base URL' do
+        base_url = 'http://www.interiorcrowd.com'
+        test_url = 'http://www.interiorcrowd.com/designer_center/responses/36?some_param=%27test%27&test_id=28'
+        expect(get_link_base_url(test_url)).to eq(base_url)
+      end
+    end
+
+    context 'one word passed' do
+      it 'returns correct URL' do
+        expect(get_link_base_url('Dexter')).to eq('http://Dexter')
+      end
+    end
+
+    context 'words with spaces passed' do
+      it 'returns string without changes' do
+        expect(get_link_base_url('Dexter Arc Floor Lamp with Grey Shade')).to eq('Dexter Arc Floor Lamp with Grey Shade')
+      end
     end
   end
 
