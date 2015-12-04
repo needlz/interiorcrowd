@@ -16,11 +16,11 @@ RSpec.describe UserMailer do
     end
 
     it 'send email about designer registration to owner' do
-      expect(UserMailer.user_registration_info(designer)).to be_present
+      expect(UserMailer.user_registration_info(designer.role, designer.id)).to be_present
     end
 
     it 'sends email about client registration to owner' do
-      expect(UserMailer.user_registration_info(client)).to be_present
+      expect(UserMailer.user_registration_info(client.role, client.id)).to be_present
     end
 
     it 'sends email about invitation to contest to designer' do
@@ -147,6 +147,10 @@ RSpec.describe UserMailer do
 
     it 'sends email to owner about a client has been moved to final design' do
       expect(UserMailer.client_moved_to_final_design(contest.id)).to be_present
+    end
+
+    it 'sends email to owner about a contest of a client is now live' do
+      expect(UserMailer.new_project_to_hello(contest.id)).to be_present
     end
 
   end

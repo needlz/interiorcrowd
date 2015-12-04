@@ -67,7 +67,6 @@ RSpec.describe ClientsController do
     it 'creates mail job' do
       post :create, { client: client_options }, contest_options_source
       expect(jobs_with_handler_like('client_registered').count).to eq 1
-      expect(jobs_with_handler_like('user_registration_info').count).to eq 1
     end
 
     it 'applies promocode' do
