@@ -233,10 +233,10 @@ class UserMailer < ActionMailer::Base
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
     template 'Designer-asks-client-a-question-submission-phase'
     set_template_values(
-        entry_url: renderer.client_center_entry_url(id: options[:contest_request].id),
-        comment_text: options[:comment_text]
+      entry_url: renderer.client_center_entry_url(id: options[:contest_request_id]),
+      comment_text: options[:comment_text]
     )
-    client = options[:client]
+    client = Client.find(options[:client_id])
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
