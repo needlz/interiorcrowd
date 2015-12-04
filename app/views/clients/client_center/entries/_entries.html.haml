@@ -1,0 +1,8 @@
+.entries-container.entriesPage.entries-initial
+  %input.hidden.contest{ type: 'hidden', data: { id: entries_page.contest.id } }
+  - unless entries_page.contest_view.try(:have_space_views_details)
+    = render 'clients/client_center/entries/pictures_and_dimensions_reminder_new_style'
+  = render 'clients/client_center/entries/main_content',
+      contest_page: entries_page,
+      phases_stripe: PhasesStripe.new(last_step: 0),
+      readonly: !entries_page.show_submissions?

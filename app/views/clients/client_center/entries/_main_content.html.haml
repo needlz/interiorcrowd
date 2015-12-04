@@ -8,14 +8,18 @@
         { stripe: phases_stripe }
   .col-md-3.filter-container.hidden-sm.hidden-xs
     = render 'clients/client_center/entries/responses_filter',
-            { selected_answer: contest_page.answer }
+        selected_answer: contest_page.answer,
+        contest_id: contest_page.contest.id,
+        view: contest_page.selected_view
   .clearfix
   .col-md-12.description-container
     - if contest_page.requests_present?
       %p.favDesignConcept.hidden-xs= t('client_center.entries.choose_concept')
   .col-md-12.filter-container.hidden-xs.visible-sm.hidden-md
     = render 'clients/client_center/entries/responses_filter',
-        { selected_answer: contest_page.answer }
+        selected_answer: contest_page.answer,
+        contest_id: contest_page.contest.id,
+        view: contest_page.selected_view
 
 .row.marginTop40Mobile.setTopMarginTimeLeftToSubmit
   .col-md-12.concept-board-items

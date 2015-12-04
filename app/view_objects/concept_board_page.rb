@@ -47,6 +47,14 @@ class ConceptBoardPage < PhasesHolder
     @final_notes ||= (contest_request.comments + contest_request.final_notes).sort_by(&:created_at).map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
   end
 
+  def active_phase
+    ContestPhases.index_to_phase(active_step)
+  end
+
+  def previous_step?
+    active_step < last_phase_index
+  end
+
   protected
 
   def create_phases_stripe
@@ -64,10 +72,6 @@ class ConceptBoardPage < PhasesHolder
 
   def active_step
     selected_step || last_phase_index
-  end
-
-  def active_phase
-    ContestPhases.index_to_phase(active_step)
   end
 
   def phase_dependent_partial

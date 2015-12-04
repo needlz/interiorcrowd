@@ -100,6 +100,12 @@ RSpec.describe ContestRequest do
       expect(request.answer).to eq('winner')
     end
 
+    it 'does not change answer for draft request' do
+      request = Fabricate(:draft_request, designer: designer, contest_id: contest.id)
+      request.reply('maybe', client.id)
+      expect(request.answer).to be_nil
+    end
+
     it 'changes answer for fulfillment request' do
       submitted_request.reply('favorite', client.id)
       expect(submitted_request.answer).to eq('favorite')
