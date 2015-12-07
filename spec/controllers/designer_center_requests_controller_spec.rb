@@ -55,21 +55,34 @@ RSpec.describe DesignerCenterRequestsController do
   end
 
   describe 'GET show' do
-    it 'returns page of submitted request' do
-      get :show, id: submitted_request.id
-      expect(response).to render_template(:show)
-    end
-
-    it 'returns page of winner response' do
-      submitted_request.update_attributes!(answer: 'winner')
-      get :show, id: submitted_request.id
-      expect(response).to redirect_to edit_designer_center_response_path(id: submitted_request.id)
-    end
-
-    it 'returns page for each phase view' do
-      ContestPhases.indices.each do |index|
-        get :show, id: finished_request.id, view: index
+    context 'when concept board is submitted' do
+      it 'returns page of submitted request' do
+        get :show, id: submitted_request.id
         expect(response).to render_template(:show)
+      end
+
+      it 'returns page of winner response' do
+        submitted_request.update_attributes!(answer: 'winner')
+        get :show, id: submitted_request.id
+        expect(response).to redirect_to edit_designer_center_response_path(id: submitted_request.id)
+      end
+    end
+
+    context 'when concept board has final image items' do
+
+      before do
+        Fabricate.times(15, :product_item, contest_request: concept_board, status: 'published', phase: 'final_design')
+      end
+
+      context 'when concept board is finished' do
+        let(:concept_board) { finished_request }
+
+        it 'returns page for each phase view' do
+          ContestPhases.indices.each do |index|
+            get :show, id: concept_board.id, view: index
+            expect(response).to render_template(:show)
+          end
+        end
       end
     end
   end
