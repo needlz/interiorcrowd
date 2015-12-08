@@ -1,4 +1,4 @@
-class EntriesConceptBoard < ConceptBoardPage
+class ConceptBoardPage::ClientPerspective::Base < ConceptBoardPage::Base
 
   def phase_url(index)
     view_context.client_center_entry_path(phase_url_params(index))
@@ -10,6 +10,10 @@ class EntriesConceptBoard < ConceptBoardPage
 
   def image_items
     super.published
+  end
+
+  def image_items_partial
+    raise NotImplementedError
   end
 
   protected
@@ -34,18 +38,18 @@ class EntriesConceptBoard < ConceptBoardPage
   def collaboration
     if collaboration_phase_in_process?
       { partial: "clients/client_center/entries/#{contest_request.status}",
-        locals: { request: contest_request, concept_board_page: self }
+        locals: { request: contest_request, contest_page: @contest_page }
       }
     else
       { partial: "clients/client_center/entries/previous_phases/collaboration",
-        locals: { request: contest_request, concept_board_page: self }
+        locals: { request: contest_request, contest_page: @contest_page }
       }
     end
   end
 
   def final_design
     { partial: "clients/client_center/entries/#{contest_request.status}",
-      locals: { request: contest_request, concept_board_page: self }
+      locals: { request: contest_request, contest_page: @contest_page }
     }
   end
 

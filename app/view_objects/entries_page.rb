@@ -1,6 +1,6 @@
 class EntriesPage < ContestPage
 
-  attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url
+  attr_reader :won_contest_request, :entries_concept_board_page, :visible_image_items, :share_url, :phases_stripe
 
   def initialize(options)
     super
@@ -9,13 +9,20 @@ class EntriesPage < ContestPage
     @show_submissions = (contest.submission? && requests_present?) || contest.winner_selection?
 
     if won_contest_request
-      @entries_concept_board_page = EntriesConceptBoard.new({
+      page_class = "ConceptBoardPage::ClientPerspective::#{ won_contest_request.status.camelize }".constantize
+
+      @entries_concept_board_page = page_class.new({
         contest_request: @won_contest_request,
         view_context: view_context,
-        preferred_view: @selected_view
+        preferred_view: @selected_view,
+        contest_page: self,
+        pagination_options: options[:pagination_options]
       })
-      @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 10, page: options[:page])
+      @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 10, page: options[:image_items_page])
       @share_url = view_context.public_designs_url(token: won_contest_request.token)
+      @phases_stripe = entries_concept_board_page.phases_stripe
+    else
+      @phases_stripe = PhasesStripe.new(last_step: 0)
     end
   end
 

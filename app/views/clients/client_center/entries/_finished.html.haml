@@ -10,7 +10,7 @@
   = t('client_center.entries.space.new_space_ready')
 .container.ccFinalPage
   = render partial: 'clients/client_center/entries/phases',
-            locals: { stripe: @entries_page.entries_concept_board_page.phases_stripe }
+            locals: { stripe: contest_page.entries_concept_board_page.phases_stripe }
   .row.designerDetail
     .col-sm-2.text-center
       = image_tag '/assets/profile-img1.png', width: 90, height: 90, class: 'img-circle'
@@ -20,7 +20,7 @@
       %h4= t('client_center.entries.space.share')
       .row.shareLook.social-share-button
         - SocialShareButton.config.allow_sites.each do |site|
-          .col-xs-4{ share_button_parent_data(request, @entries_page.share_url) }
+          .col-xs-4{ share_button_parent_data(request, contest_page.share_url) }
             = render partial: 'clients/client_center/entries/share_button', locals: { site: site }
 
   .row.finalMoodboard
@@ -39,19 +39,16 @@
       - if request.pull_together_note.present?
         %h4= t('client_center.entries.space.pull_together')
         %p= request.pull_together_note
-  - if  @entries_page.visible_image_items.present?
+  - if contest_page.visible_image_items.present?
     %h4= t('client_center.entries.space.complete_lock')
     .fullWidthLine.marginBottom40.marginTop20
 
-    .row.itemRow
-      - @entries_page.visible_image_items.each do |product_item|
-        - unless product_item.image_id.nil?
-          = render partial: 'clients/client_center/entries/final_design_image_item',
-              locals: { image_item: ImageItemView.new(product_item) }
-    .imageItemsPagination
-      = will_paginate(@entries_page.visible_image_items,
-          container: false,
-          renderer: ProductListPaginationRenderer)
+    :coffee
+      $ ->
+        ImageItemsPagination.init $('.ccFinalPage .imageItems')
+
+    .imageItems{ data: { scope: 'image_items', url: "/contests/#{ contest_page.contest.id }/image_items" } }
+      = render contest_page.entries_concept_board_page.image_items_partial
 
   .fullWidthLine.marginBottom40.marginTop20
   .row

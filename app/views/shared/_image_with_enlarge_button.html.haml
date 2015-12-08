@@ -6,10 +6,12 @@
     %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
   .overlayExampleImg
     - if defined?(remove_button) && remove_button
-      %a.remove{ href: '#' }
+      %a.remove{ href: '#', title: 'Delete' }
         %img{ src: remove_icon_path }
     - if defined?(url_for_downloading)
-      %a.download{ href: url_for_downloading }
+      %a.download{ href: url_for_downloading, title: 'Download' }
         %img{ src: download_icon_path }
-    %a.enlarge{ class: (enlarge_button_class if defined?(enlarge_button_class)), href: original_size_path }
+    %a.enlarge{ class: (enlarge_button_class if defined?(enlarge_button_class)),
+        href: original_size_path,
+        title: 'Enlarge' }
       %img{ src: enlarge_icon_path }

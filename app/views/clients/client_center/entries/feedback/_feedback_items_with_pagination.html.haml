@@ -7,7 +7,7 @@
   })
 
 .items
-  - contest_page.contest_requests.in_groups_of(2, false) do |contest_requests|
+  - contest_page.contest_requests.includes(:contest).in_groups_of(2, false) do |contest_requests|
     .designConcept
       - contest_requests.each do |contest_request|
         = render partial: 'clients/moodboard',

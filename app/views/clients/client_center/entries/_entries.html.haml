@@ -4,5 +4,5 @@
     = render 'clients/client_center/entries/pictures_and_dimensions_reminder_new_style'
   = render 'clients/client_center/entries/main_content',
       contest_page: entries_page,
-      phases_stripe: PhasesStripe.new(last_step: 0),
+      phases_stripe: entries_page.phases_stripe,
       readonly: !entries_page.show_submissions?
