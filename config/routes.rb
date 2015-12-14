@@ -195,6 +195,7 @@ InteriorC::Application.routes.draw do
     end
 
     resources :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
+    get '/outbound_email', to: 'outbound_emails#verify', via: :head
 
     get '/sfar', to: 'rieltor_contacts#sfar', as: 'sfar'
 
