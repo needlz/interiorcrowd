@@ -3342,10 +3342,16 @@ input[type="radio"].smallRadio:checked + label span {
 
 .scrollBoxCommentsHandle {
   border-radius: 5px;
-  width: 9px;
+  width: 6.5px;
   background-clip: padding-box;
   background: #a9a9a9;
   margin-right: 5px;
+  margin-top: -4.5px;
+  margin-bottom: -14.5px;
+}
+
+a.scrollBoxCommentsHandle {
+  left: 1.5px;
 }
 
 .dragging .scrollBoxCommentsHandle,
@@ -4802,68 +4808,79 @@ p.product-list-reminder {
 
 $final-designer-center-comment-border-color: #ccc;
 
-.designer-center .finishedRequest .header {
+.finalNoteToDesigner .header {
   font-size: 20px;
   margin: 10px 0px;
 }
 
 .designer-center {
-  .finishedRequest {
-    .finalNoteToDesigner{
-      margin-bottom: 50px;
+  .comments{
+    width: 1117px;
+  }
+}
 
-      .titleRow {
-        margin-bottom: 20px;
+.client-center {
+  .comments{
+    width: 1147px;
+  }
+}
 
-        .commentsCount {
-          font-size: 18px;
-          float: right;
-        }
-      }
+.finalNoteToDesigner{
+  margin-bottom: 50px;
 
-      .comments {
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 500px;
-      }
+  .titleRow {
+    margin-bottom: 20px;
 
-      @media(max-width: 768px) {
-        .comment {
-          .info {
-            border-bottom: 1px solid $final-designer-center-comment-border-color;
-          }
-        }
-      }
+    .commentsCount {
+      font-size: 18px;
+      float: right;
+    }
+  }
 
-      .comment {
-        border-top: 1px solid $final-designer-center-comment-border-color;
-        border-right: 1px solid $final-designer-center-comment-border-color;
-        border-left: 1px solid $final-designer-center-comment-border-color;
+  .comments {
+    margin-bottom: 30px;
+    overflow: auto;
+    max-height: 500px;
+    border-top: 1px solid $final-designer-center-comment-border-color;
+    border-bottom: 1px solid $final-designer-center-comment-border-color;
+    padding-right: 0 !important;
+  }
 
-        .info {
-          border-right: 1px solid $final-designer-center-comment-border-color;
-
-          .name {
-            font-size: 20px;
-          }
-
-          .date {
-            font-style: italic;
-          }
-        }
-
-        .row-container {
-          padding: 20px 30px;
-        }
-      }
-
-      .comment.last {
+  @media(max-width: 768px) {
+    .comment {
+      .info {
         border-bottom: 1px solid $final-designer-center-comment-border-color;
       }
+    }
+  }
 
-      .comment.odd {
-        background-color: #F8F8F8;
+  .comment {
+    border-top: 1px solid $final-designer-center-comment-border-color;
+    border-right: 1px solid $final-designer-center-comment-border-color;
+    border-left: 1px solid $final-designer-center-comment-border-color;
+
+    .info {
+      border-right: 1px solid $final-designer-center-comment-border-color;
+
+      .name {
+        font-size: 20px;
+      }
+
+      .date {
+        font-style: italic;
       }
     }
+
+    .row-container {
+      padding: 20px 30px;
+    }
+  }
+
+  .comment.last {
+    border-bottom: 1px solid $final-designer-center-comment-border-color;
+  }
+
+  .comment.odd {
+    background-color: #F8F8F8;
   }
 }
