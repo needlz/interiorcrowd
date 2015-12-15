@@ -1,0 +1,94 @@
+.no-js.template-about.container
+  .main
+    %header
+    .spanning.clearfix
+      .about-hero
+        .about-hero-background{:style => "background-image: url('/assets/about_us/about-bg-1.jpg');"}
+          .about-hero-title
+            .wrap
+              %h1= t('.title')
+
+      .about-text
+        .wrap
+          .push
+            %h2= t('.what_we_do.title')
+            %p= t('.what_we_do.wording')
+            %h2= t('.the_story.title')
+            %p#the-story-collapsible
+              = t('.the_story.first_part')
+              %a.read-more{:href => '#'}= t('.read_more')
+              %br
+              %br
+              = t('.the_story.second_part')
+              %br
+              %br
+              = t('.the_story.third_part')
+              %br
+              %br
+              = t('.the_story.forth_part')
+              %br
+              %br
+              = t('.the_story.fifth_part')
+              %a.read-less{:href => '#'}= t('.read_less')
+
+      .about-team
+        .wrap
+          .about-team-title= t('.in_house_team')
+          .about-team-list.clearfix
+            - t('.team').each_with_index do |member, index|
+              .about-team-item
+                %a.about-team-link{href: Settings.external_urls.linkedin_accounts[index], target: '_blank'}
+                  %span.about-team-img
+                    %span.about-team-img-src{:style => "background-image: url('/assets/about_us/#{ member[:name].downcase.parameterize }.jpg');"}
+                    %span.about-team-linkedin
+                      %img{:alt => "", :height => "238", :src => "/assets/about_us/linkedin.png", :width => "238"}/
+                    %span.about-team-name{ class: member[:name].length > 17 ? 'less-team-name-font' : nil }= member[:name]
+                    %span.about-team-position{ class: member[:role].length > 27 ? 'less-team-role-font' : nil }= member[:role]
+
+      .about-designers
+        .wrap
+          .push
+            .about-designers-title= t('.our_designers.title')
+            .about-designers-lead
+              %p= t('.our_designers.wording').html_safe
+          .about-designer-wrapper
+            .about-designer-slider.about-slider.clearfix
+              - t('.designers').each do |designer|
+                .about-slide.about-designer-slide
+                  .about-designer-post
+                    .about-designer-img{:style => "background-image: url('/assets/about_us/#{ designer[:name].downcase.parameterize }-design.jpg');"}
+                    .about-designer-content
+                      .about-designer-info
+                        %span.about-designer-autor{:style => "background-image: url('/assets/about_us/#{ designer[:name].downcase.parameterize }-personal.jpg');"}
+                        %span.about-designer-autor-name= designer[:name]
+                      .about-designer-paragraph
+                        %p= designer[:wording]
+
+      .about-writers
+        .wrap
+          .push
+            .about-writers-title= t('.team_of_writers.title')
+            .about-writers-lead
+              %p= t('.team_of_writers.wording')
+          .about-writer-wrapper
+            .about-writer-slider.clearfix.about-slider
+              - t('.blog_posts').each_with_index do |post, index|
+                .about-writer-slide.about-slide
+                  %a.about-writer-post{href: "http://www.interiorcrowd.com/blog/#{ post[:url] }", target: '_blank'}
+                    .about-writer-img{:style => "background-image: url('/assets/about_us/about-team-#{ index + 1 }.jpg');"}
+                    .about-writer-content
+                      .about-writer-title= post[:title]
+                      .about-writer-date= post[:date]
+                      .about-writer-autor= post[:signature]
+
+      .about-job
+        .about-job-background{:style => "background-image: url('/assets/about_us/about-bg-2.jpg');"}
+          .wrap
+            .push
+              .about-job-title= t('.job_opportunities.title')
+              .about-job-lead
+                %p
+                  = t('.job_opportunities.wording')
+                  %br
+                    = t('.job_opportunities.email_us')
+                    %a{:href => "mailto:hello@interiorcrowd.com"}= Settings.mandrill.email

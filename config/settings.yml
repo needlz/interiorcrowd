@@ -47,6 +47,16 @@ common: &defaults
       google_analytics_terms: http://www.google.com/analytics/terms/us.html
       about_ads_choices: http://www.aboutads.info/choices
     font_awesome_css: https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css
+    linkedin_accounts:
+      - https://www.linkedin.com/in/heathernatsch
+      - https://www.linkedin.com/in/helene-de-baubigny-0a57055a
+      - https://www.linkedin.com/profile/view?id=AAkAAAAe3t4BXYLIWQPLh7ngKQ-lQdyQxGfW8n0&authType=NAME_SEARCH&authToken=yikt&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2CclickedEntityId%3A2023134%2CauthType%3ANAME_SEARCH%2Cidx%3A1-1-1%2CtarId%3A1448391047406%2Ctas%3Aerik%20ne
+      - https://www.linkedin.com/in/ruthleroux5000/
+      - https://www.linkedin.com/in/ana-maria-lopez-3470146
+      - https://www.linkedin.com/in/claireandreas
+      - https://www.linkedin.com/in/jolene-lindner-3abaa827
+      - https://www.linkedin.com/in/nat-suriyapee-769954a3
+      - https://www.linkedin.com/in/lia-aprile-18017410a
   designer_note_profile_image: '/assets/profile-img.png'
   designer_level_pictures:
     novice: '/assets/design_levels/novice.jpg'

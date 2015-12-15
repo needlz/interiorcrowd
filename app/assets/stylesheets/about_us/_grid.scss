@@ -1,0 +1,20 @@
+/* grid */
+.main {
+    min-height: 100%;
+    overflow: hidden;
+    padding-bottom: $footer;
+    clear: both;
+    @include sizing();
+}
+.wrap {
+    margin: 0 auto;
+    max-width: $wrap;
+    padding-left: $gutter;
+    padding-right: $gutter;
+    @extend .clearfix;
+}
+.push {
+    max-width: 850px;
+    margin: 0 auto;
+    @extend .clearfix;
+}
