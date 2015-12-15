@@ -9,7 +9,7 @@ class @DesignerFinishedContestRequestPage
       minScrollbarLength: 28
     )
     @fitHeight()
-    $('#final-note-to-client').on('ajax:success', @onCommentSent)
+    $('#final-note-to-client, #final-note-to-designer').on('ajax:success', @onCommentSent)
     .on 'ajax:before', (e)=>
       $commentInput = $(e.target).find('[name="final_note[text]"]')
       @beforeSendComment($commentInput)
