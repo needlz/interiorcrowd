@@ -34,3 +34,4 @@
 //= require about_us
 //= require_tree ./lib/iframeResizer
 //= require_tree ./shared
+//= require jquery.slick

@@ -3,9 +3,10 @@
 %footer.container.siteFooter
   .row
     .col-md-6.footerLinks
-      %a{ href: about_us_path, class: tracked_link } About
-      %a{ href: terms_of_service_path, class: tracked_link } Terms
-      %a{ href: privacy_policy_path, class: tracked_link } Privacy Policy
+      %a{ href: about_us_path, class: tracked_link }= t('footer.about')
+      %a{ href: terms_of_service_path, class: tracked_link }= t('footer.terms')
+      %a{ href: privacy_policy_path, class: tracked_link }= t('footer.privacy_policy')
+      %a{ href: designer_submission_path, class: tracked_link }= t('footer.for_designers')
     .col-md-6.footerSocial
       %a{ href: Settings.external_urls.social.twitter,
           class: tracked_link,

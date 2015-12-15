@@ -1,0 +1,15 @@
+.container
+  .row
+    %h2= t('home.our_network.title')
+    %p.title-border= t('home.our_network.description')
+    .shortUnderline.marginBottom40
+
+.container.designers-slider
+
+  - t('home.our_network.designers').each_with_index do |designer, index|
+    .theDesigner
+      .design-example{ style: "background-image: url('/assets/our_designers/design-#{ index + 1 }.jpg');" }
+      %h4
+        %img{ src: "/assets/our_designers/personal-#{ index + 1 }.png" }= designer[:name]
+      .clearfix
+      %p= designer[:wording]

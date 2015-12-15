@@ -45,6 +45,7 @@ gem 'jquery-fileupload-rails'
 gem 'rails_autolink'
 gem 'email_validator'
 gem 'active_record_union'
+gem 'jquery-slick-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
