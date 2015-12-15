@@ -1,0 +1,12 @@
+@import "variables";
+
+.template-about {
+  @import "mixins";
+  @import "reboot";
+  @import "typography";
+  @import "grid";
+  @import "forms";
+  @import "slider";
+  @import "content";
+  @import "responsive";
+}

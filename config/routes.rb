@@ -25,6 +25,7 @@ InteriorC::Application.routes.draw do
     get 'faq', to: 'home#faq'
     get 'sign_up_beta', to: 'home#sign_up_beta'
     get 'how_it_works', to: 'home#how_it_works'
+    get 'about_us', to: 'home#about_us'
 
     resources :contest_requests, only: [:show, :create] do
       member do
@@ -180,7 +181,6 @@ InteriorC::Application.routes.draw do
     get '/privacy_policy', to: 'home#privacy_policy', as: 'privacy_policy'
     get '/designer_submission', to: 'blog#designer_submission', as: 'designer_submission'
     get '/justines_story', to: 'blog#justines_story', as: 'justines_story'
-    get '/about_us', to: 'blog#about_us', as: 'about_us'
 
     scope '/blog' do
       get '/:blog_page_path',

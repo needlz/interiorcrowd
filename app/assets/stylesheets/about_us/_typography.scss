@@ -1,0 +1,10 @@
+/* typography */
+a {
+    color: $link;
+    text-decoration: none;
+    background-color: transparent;
+    @include transition(color 0.15s linear, background-color 0.15s linear, border-color 0.15s linear);
+    &:hover {
+        color: $link-hover;
+    }
+}
