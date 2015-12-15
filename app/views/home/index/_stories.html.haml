@@ -1,0 +1,22 @@
+%h2= t('home.client_stories.title')
+.shortUnderline.marginBottom40
+.container-fluid.client-stories
+  .client-bg-slider-wrapper
+    .client-bg-slider
+      - 3.times do |index|
+        .client-bg-slide{ style: "background: url('/assets/client_stories/client-story-#{ index + 1 }.jpeg') no-repeat center; background-size: cover;" }
+  .container
+    .row
+      .col-sm-6.col-sm-offset-6.col-md-5.col-md-offset-7.col-lg-4.col-lg-offset-8
+        .client-stories-slider
+          - t('home.client_stories.stories').each do |story|
+            %div
+              .client-stories-slider-outer
+                .client-stories-slider-inner
+                  %img{ src: "/assets/client_stories/#{ story[:name].downcase }.png" }
+                  %h4= story[:name].possessive + t('home.client_stories.story_title_constant_part')
+                  .slider-delimiter
+                  %p= story[:wording]
+                  .slider-delimiter
+                  %a{ href: "http://www.interiorcrowd.com/blog/#{ story[:name].downcase }s-story", target: '_blank' }
+                    = t('home.client_stories.read_more_about')
