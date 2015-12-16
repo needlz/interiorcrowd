@@ -75,5 +75,11 @@ module InteriorC
     config.active_job.queue_adapter = :delayed_job
 
     GC::Profiler.enable
+
+    config.lograge.enabled = true
+    config.lograge.custom_options = lambda do |event|
+      { params: event.payload[:params].except('controller', 'action', 'format', 'utf8') }
+    end
+
   end
 end
