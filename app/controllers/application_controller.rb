@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_filter :beta_redirect
-  before_filter :set_return_to_link, :setup_event_tracker
+  before_filter :set_return_to_link, :setup_event_tracker, :expire_hsts
 
   add_flash_types :error
 
@@ -98,6 +98,10 @@ class ApplicationController < ActionController::Base
   def setup_event_tracker
     @event_tracker = EventTracker.new
     @event_tracker.user = current_user
+  end
+
+  def expire_hsts
+    response.headers["Strict-Transport-Security"] = 'max-age=0'
   end
 
 end
