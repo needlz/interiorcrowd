@@ -18,14 +18,14 @@
                 .col-md-2= t('designer_center.contests_preview.type')
                 .col-md-2= t('designer_center.contests_preview.room')
                 .col-md-2= t('designer_center.contests_preview.days')
-        = render partial: 'designer_center_requests/index/items', locals: { current_responses: @current_responses }
+        = render 'designer_center_requests/index/items', current_responses: @current_responses
 
         - if @completed_responses.present?
           %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
           #completedContestsBox
-            = render partial: 'designer_center_requests/index/items', locals: { current_responses: @completed_responses }
+            = render 'designer_center_requests/index/items', current_responses: @completed_responses
     .row
       .col-md-12.no-x-padding
         .hLine.footer-line
-      = render partial: 'designer_center_requests/index/footer'
-= render partial: 'designer_center/layout', locals: { container_class: 'bottom60 marg-top20' }
+      = render 'designer_center_requests/index/footer'
+= render  'designer_center/layout', container_class: 'bottom60 marg-top20'

@@ -16,7 +16,7 @@ class ConceptBoardPage < PhasesHolder
   end
 
   def image_items
-    contest_request.image_items.of_phase(active_phase).for_view.paginate(page: @image_items_page, per_page: 10)
+    contest_request.image_items.of_phase(active_phase).for_view
   end
 
   def current_lookbook_items

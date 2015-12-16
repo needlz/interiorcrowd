@@ -1,0 +1,377 @@
+.spanning {
+    font-family: $AvenirLTStd;
+    font-size: $fontSize;
+    line-height: $lineHeight;
+}
+.about-hero-background {
+    position: relative;
+    height: 550px;
+    background-color: #333;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include bgsize();
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: -moz-linear-gradient(bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: -o-linear-gradient(bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+        background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+}
+.about-hero-title {
+    z-index: 10;
+    position: absolute;
+    bottom: 50px;
+    right: 0;
+    left: 0;
+    text-align: center;
+    h1 {
+      letter-spacing: 0.5px;
+      font-size: 60px;
+      line-height: 60px;
+      font-family: 'Austin-Roman', serif;
+      color: $white;
+    }
+}
+.about-text {
+    background-color: #f7f7f7;
+    padding: 103px 0 142px;
+    color: #666;
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    a {
+        color: #ff7d26;
+        &:hover {
+            color: darken(#ff7d26, 10%);
+        }
+    }
+    h2 {
+        letter-spacing: 1px;
+        color: #ff7d26;
+        border-top: 2px solid #ff7d26;
+        border-bottom: 2px solid #ff7d26;
+        max-width: 200px;
+        margin: 0 auto 100px;
+        text-align: center;
+        font-size: 30px;
+        line-height: 42px;
+        font-family: 'Austin-Roman', serif;
+    }
+    p {
+        margin: 0 0 100px;
+    }
+}
+.read-more {
+    margin-left: 10px;
+    white-space: nowrap;
+    display: inline-block;
+    padding: 0 25px 0 0;
+    background:  url('/assets/about_us/about-more.png') 100% 50% no-repeat;
+}
+.read-less {
+    margin-left: 40px;
+    padding-left: 20px;
+    background:  url('/assets/about_us/about-less.png') left 50% no-repeat;
+}
+.about-team {
+    background-color: #fc8181;
+    padding: 104px 0 176px;
+}
+.about-team-title {
+    text-align: center;
+    font-size: 45px;
+    line-height: 50px;
+    font-family: 'Austin-Roman', serif;
+    color: $white;
+    letter-spacing: 0.5px;
+    margin: 0 0 105px;
+}
+.about-team-list {
+    margin: 0 auto;
+    max-width: 965px;
+}
+.about-team-item {
+    float: left;
+    width: 33.33333%;
+    text-align: center;
+    min-height: 415px;
+    padding: 0 10px;
+    @include sizing();
+}
+.about-team-img {
+    max-width: 238px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    padding: 0 0 40px;
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        @include border-radius(50%);
+    }
+}
+.about-team-linkedin {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    @include transition(opacity 0.15s linear);
+    @include opacity(0);
+}
+.about-team-link {
+    display: block;
+    color: $white;
+    &:hover {
+        color: #a03737;
+        .about-team-linkedin {
+            @include opacity(0.78);
+        }
+    }
+}
+.about-team-img-src {
+    display: block;
+    width: 238px;
+    height: 238px;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    @include bgsize();
+    @include border-radius(50%);
+}
+.about-team-name {
+    margin-top: 25px;
+    display: block;
+    font-size: 30px;
+    line-height: 30px;
+    font-family: 'AvenirLTStd-Heavy', sans-serif;
+}
+.about-team-position {
+    display: block;
+    font-size: 20px;
+    line-height: 20px;
+}
+.about-designers {
+    background-color: #ad96c0;
+    padding: 110px 0 206px;
+}
+.about-designers-lead {
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    color: $white;
+    padding: 0 0 72px;
+    p {
+        margin-bottom: 30px;
+    }
+}
+.about-designers-title {
+    text-align: center;
+    font-size: 45px;
+    line-height: 50px;
+    font-family: 'Austin-Roman', serif;
+    color: $white;
+    letter-spacing: 0.5px;
+    margin: 0 0 86px;
+}
+.about-designer-post {
+    max-width: 364px;
+    max-height: 200px;
+    margin: 0 auto 206px;
+}
+.about-designer-img {
+    display: block;
+    height: 241px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include bgsize();
+}
+.about-designer-content {
+    padding: 0 20px 20px;
+    position: relative;
+    background: $white;
+    max-height: 185px;
+}
+.about-designer-paragraph {
+    font-size: 16px;
+    line-height: 22px;
+    height: 110px;
+    overflow: hidden;
+    color: #666;
+}
+.about-designer-info {
+    display: block;
+    position: relative;
+    padding: 17px 0 0 118px;
+    min-height: 44px;
+    letter-spacing: 0.3px;
+    font-size: 17px;
+    line-height: 22px;
+    text-transform: uppercase;
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    color: #ad96c0;
+    margin: 0 0 14px;
+    &:hover {
+        color: darken(#ad96c0, 10%);
+    }
+}
+.about-designer-autor {
+    display: block;
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    left: 0;
+    margin-top: -46px;
+    border: 4px solid $white;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include bgsize();
+    @include border-radius(50%);
+}
+.about-designer-wrapper {
+    margin: 0 -25px;
+}
+.about-designer-slide {
+    float: left;
+    width: 33.33333%;
+    padding: 0 25px;
+    @include sizing();
+}
+.about-writers {
+    padding: 109px 0 207px;
+    background: #a7cee5;
+}
+.about-writers-title {
+    text-align: center;
+    font-size: 45px;
+    line-height: 50px;
+    font-family: 'Austin-Roman', serif;
+    color: $white;
+    letter-spacing: 0.5px;
+    margin: 0 0 86px;
+}
+.about-writers-lead {
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    color: $white;
+    padding: 0 0 72px;
+    p {
+        margin-bottom: 30px;
+    }
+}
+.about-writer-wrapper {
+    margin: 0 -25px;
+}
+.about-writer-slide {
+    float: left;
+    width: 33.33333%;
+    padding: 0 25px;
+    @include sizing();
+}
+.about-writer-img {
+    height: 241px;
+    display: block;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    @include bgsize();
+}
+a.about-writer-post {
+    display: block;
+    max-width: 364px;
+    margin: 0 auto 50px;
+}
+a.about-writer-post:hover {
+  .about-writer-content {
+    background-color: #fbb025;
+    color: $white;
+    a {
+      color: $white;
+    }
+  }
+}
+.about-writer-content {
+    padding: 13px 25px 0;
+    background-color: $white;
+    font-size: 14px;
+    line-height: 20px;
+    color: #c0bebc;
+    a {
+        color: #c0bebc;
+        &:hover {
+            color: #666;
+        }
+    }
+}
+.about-writer-title {
+    font-size: 24px;
+    line-height: 27px;
+    margin-bottom: 5px;
+    font-family: 'AvenirLTStd-Medium', sans-serif;
+    height: 81px;
+    overflow: hidden;
+    a {
+        color: #999;
+        &:hover {
+            color: #666;
+        }
+    }
+}
+.about-writer-date {
+    height: 20px;
+    overflow: hidden;
+}
+.about-writer-autor {
+    height: 40px;
+    overflow: hidden;
+}
+.about-job {
+    margin: 0 0 255px;
+}
+.about-job-background {
+    min-height: 545px;
+    position: relative;
+    color: $white;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 123px 0 40px;
+    @include bgsize();
+    @include sizing();
+    &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(231, 38, 131, 0.5);
+    }
+    a {
+        color: $white;
+    }
+    .wrap {
+        position: relative;
+        z-index: 2;
+    }
+    .push {
+        max-width: 1000px;
+    }
+}
+.about-job-title {
+    text-align: center;
+    font-size: 45px;
+    line-height: 50px;
+    font-family: 'Austin-Roman', serif;
+    color: $white;
+    letter-spacing: 2px;
+    margin-bottom: 77px;
+}
+.about-job-lead {
+    font-size: 24px;
+    line-height: 27px;
+}

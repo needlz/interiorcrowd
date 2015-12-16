@@ -1,3 +1,7 @@
+:coffee
+  $ ->
+    DesignerFinishedContestRequestPage.init()
+
 - content_for :head do
   :javascript
     pageI18n = #{ translations_to_json(['client_center', 'finished']) }
@@ -56,7 +60,14 @@
   .fullWidthLine.marginBottom40.marginTop20
   .row
     .col-sm-12.finalNoteToDesigner
-      %h4= t('client_center.finished.final_note.title')
+      .titleRow
+        %span.header= t('client_center.finished.final_note.title')
+        - if @entries_page.entries_concept_board_page.final_notes.present?
+          %span.commentsCount= t('designer_center_requests.show.finished.final_note.comments_count',
+            count: @entries_page.entries_concept_board_page.final_notes.length)
+        .comments
+          = render 'designer_center_requests/show/request_comments_read_only',
+            comments: @entries_page.entries_concept_board_page.final_notes
       = form_tag final_note_index_path, remote: true, id: 'final-note-to-designer' do
         = hidden_field_tag 'contest_request_id', request.id
         %textarea{ placeholder: t('client_center.finished.final_note.placeholder'),

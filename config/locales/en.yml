@@ -10,6 +10,11 @@ en:
     designer_login: Designer
     client_login: Client
     blog: Blog
+  footer:
+    about: About
+    terms: Terms
+    privacy_policy: Privacy Policy
+    for_designers: For Designers
   error_during_saving:
   contest_requests:
     validations:
@@ -612,6 +617,7 @@ en:
       winner_selection:
         time_left: '%{time_left} left for the client to pick a winner'
         expired: Client will pick a winner soon
+        submission_closed: Submission period is closed
       submitted:
         time_left: '%{time_left} left to edit your board'
       fulfillment_approved:
@@ -1229,6 +1235,142 @@ en:
       to_entertain: your place to entertain.
       to_relax: your place to relax.
       to_come_home: your place to come home.
+    about_us:
+      title: About us
+      what_we_do:
+        title: What we do
+        wording: >
+          InteriorCrowd is a fun and approachable interior design service created for today’s busy lifestyle.
+          For our clients, we are harnessing the power of the crowd to create inspired and more affordable
+          interior spaces that reflect you and your best self.
+          For our designers, we are creating a platform and vibrant community where talent and creativity can shine.
+          For our team, we are building a supportive company culture that provides value to all of its stakeholders
+          and focuses on giving back to its community.
+      read_more: Read more
+      read_less: Read less
+      team:
+        -
+          name: Heather Natsch
+          role: Founder
+        -
+          name: Helene De Baubigny
+          role: Creative Director
+        -
+          name: Eric Needham
+          role: Head of Development
+        -
+          name: Ruth Le Roux
+          role: Product & Designer Community
+        -
+          name: Ana Maria Lopez
+          role: Business Development
+        -
+          name: Claire Andreas
+          role: Content Manager
+        -
+          name: Jolene Lindner
+          role: Lead Interior-designer
+        -
+          name: Natparit Suriyapee
+          role: UI designer
+        -
+          name: Lia Aprile
+          role: Executive Assistant
+      the_story:
+        title: The story
+        first_part: >
+          Like so many companies, InteriorCrowd started from a personal pain point.  Why was interior design so hard?
+          Why did it cost so much money, take so long, and cause so much friction between me and my husband?
+          When we moved into the home which we knew would be our home for the next twenty years, we wanted it
+          to be just right. However, we could not seem to agree on anything.  We were left with the choice
+          to either hire an interior designer or talk to a marriage counselor.
+        second_part: >
+          We chose to hire an interior designer. And, while she had great ideas, the process was so painful.
+          No transparency on pricing. No clarification on time-lines. A constant push to buy the most expensive,
+          custom products (that we didn't need and which were always delivered wrong). A full twelve months later,
+          we were left with an unfinished house, several beautiful pieces, and significantly less money
+          on the checkbook. Has we chosen wrong? Not done our homework? My husband and I are both entrepreneurs...
+          surely we couldn't have be duped. Then I realized that the process itself is simply broken.
+        third_part: >
+          I thought there had to be a better way.
+        forth_part: >
+          That was the genesis of InteriorCrowd, and that is our mission. Our spaces inspire our lives:
+          if we wake up in a space that feels safe, comfortable, and ours - then we feel at home.
+          And we at InteriorCrowd believe that great design does not have to be costly and inaccessible.
+        fifth_part: >
+          We are partners of the industry. We are building a platform to connect, not dis-intermediate.
+          Everywhere you look, there is inspiration - an overwhelming amount of it. Our goal is to be the bridge
+          between the inspiration that you see and the space that you need. Our designers are the lifeblood
+          of what we do. They inspire us. And, we humbly do our best to provide them with the best platform,
+          the best tools, and the best support, so that they can do their best work. For you.
+      in_house_team: In-house team
+      our_designers:
+        title: Our designers
+        wording: >
+          InteriorCrowd facilitates the design process and makes it much simpler for interior designers
+          to communicate their ideas to their clients. But InteriorCrowd would not exist without our designers,
+          who have played a key role in developing the product and brand.
+          </br></br>
+          We keep in touch with our designers on a daily basis and host get-togethers so that
+          they in turn, can meet each other.
+      designers:
+        -
+          name: Andrea Faucett
+          wording: >
+            I believe in healthy, contemporary and custom environments. The goal is to create
+            a peaceful invigorating atmosphere to meet my clients’ needs.
+        -
+          name: Jackie Mendez
+          wording: >
+            I love the mixture of textures and contrast in colors infused with a modern twist
+            a great way to create timeless design. My perfect retreat would be a Modern Farmhouse.
+        -
+          name: Jolene Lindner
+          wording: >
+            I enjoy adapting to the client’s style preferences, but have a tendency towards a transitional style;
+            finding the balance between masculine feminine, modern traditional.
+      team_of_writers:
+        title: Team of writers
+        wording: >
+          Content plays a huge role in our brand and for that we have team of freelance writers who are passionate
+          about design and contributing fresh content on a daily basis.
+      blog_posts:
+        -
+          title: Modern Eclectic Homes in Mexico
+          date: September 1, 2015
+          signature: by Claire Andreas for InteriorCrowd
+          url: modern-eclectic-homes-in-mexico
+        -
+          title: 8 Little Things That Make A Big, Beautiful Difference In Your Home
+          date: September 1, 2015
+          signature: by Claire Andreas for InteriorCrowd
+          url: 8-little-things-make-big-beautiful-difference-home
+        -
+          title: Wanderlust-Worthy Home Decor Ideas That Will Make You Feel Like Exploring
+          date: September 1, 2015
+          signature: by Claire Andreas for InteriorCrowd
+          url: wanderlust-home-decor
+        -
+          title: Ten of our Favorite Etsy Design Shops
+          date: August 3, 2015
+          signature: by InteriorCrowd Staff
+          url: ten-of-our-favorite-etsy-design-shops
+        -
+          title: Designing a Gender Neutral Nursery
+          date: October 22, 2015
+          signature: by Taylor Duvall for InteriorCrowd
+          url: designing-gender-neutral-nursery
+        -
+          title: Easy Ways to Overhaul Your Dining Room
+          date: July 20, 2015
+          signature: by Claire Pustinger for InteriorCrowd
+          url: easy-dining-room-makeover
+      job_opportunities:
+        title: Job opportunities
+        wording: >
+          We’re always interested in meeting new people who are excited about the sweet spot where
+          design and technology overlap. If you’d like to get involved, reach out!
+        email_us: Email us at
     how_it_works:
       title: How it works
       create_profile_step:
@@ -1246,6 +1388,107 @@ en:
         description: >
           Your designer will work with you to ensure the final design meets your specific needs.
           You will also receive a shopping list, discount codes and instructions.
+    client_stories:
+      title: Client stories
+      stories:
+        -
+          name: Justine
+          wording: >
+            As a busy mom, wife and business owner, Justine needed some help with her living room when
+            her family moved into a new home. She wanted to keep most of their furniture but desperately
+            needed an easy update to brighten up their favorite room.
+        -
+          name: Helene
+          wording: >
+            Gigi’s playroom redo all started with a vintage hot­air balloon light fixture.
+            When Helene, InteriorCrowd’s creative director, spotted it on Etsy, she knew she wanted to
+            design her daughter’s new space around the one central feature.
+        -
+          name: Amanda
+          wording: >
+            When blogger (Advice from a Twenty Something) moved to San Francisco, she turned to
+            InteriorCrowd to help design her studio apartment into a hip, multi­functioning space.
+      read_more_about: Read more about her story
+      story_title_constant_part: ' Story'
+    our_network:
+      title: Our network of designers
+      description: Designers from all over the world bring their unique talents to your space
+      designers:
+        -
+          name: Jackie Mendez
+          wording: >
+            I love the mixture of textures and contrast in colors infused with a modern twist ­ a great way to create
+            timeless design. My perfect retreat would be a Modern Farmhouse.
+        -
+          name: Andrea Faucett
+          wording: >
+            I believe in healthy, contemporary and custom environments. The goal is to create a peaceful yet
+            invigorating atmosphere to meet my client’s needs.
+        -
+          name: Jolene Lindner
+          wording: >
+            I enjoy adapting to the client’s style preferences, but have a tendency towards a transitional style;
+            finding the balance between masculine & feminine, modern & traditional.
+        -
+          name: Serena Zanello
+          wording: >
+            Merging the world of art, design and architecture, Serena’s work is known for its artistic glamour, creative
+            and innovative vision.
+        -
+          name: Julia Cavallaro
+          wording: >
+            "I love to create simple and livable spaces. I believe that every project and every design element is unique,
+            and should cater to your lifestyle."
+        -
+          name: Oana Boghiu
+          wording: >
+            “I would describe my design style as retro­inspired, clean, modern, chic ­ with sense of color, adapting it to
+            the client’s preferences.”
+        -
+          name: Amy Beaupre
+          wording: >
+            I have a passion for creating cheerful, inspiring interiors filled with personality and soul. Life is better when
+            you love your space!
+        -
+          name: Sandra Febres
+          wording: >
+            Design should be a fun and rewarding experience. I love working with various textures and colors to unify
+            and create excitement.
+        -
+          name: Amy Anderson
+          wording: >
+            Amy’s inventive approach to design focuses on the simple, but often overlooked notion that a home should
+            reflect the personality of the people living in it.
+        -
+          name: Gabriela Chavez
+          wording: >
+            Color will never go out of style, so we should never fear using it in design. A space should always tell a story
+            about those who dwell there.
+        -
+          name: Josie Biteng
+          wording: >
+            Passionate about modern design, Josie creates charming, functional spaces that fulfill the needs of the
+            client and complement their unique style.
+        -
+          name: Heather Brents
+          wording: >
+            Using a holistic approach that includes the five senses, Heather designs fresh, intentional spaces to fuel
+            rest, creativity, and fun.
+        -
+          name: Mercedes Maroni
+          wording: >
+            Mercedes’ design principles are based on creating interiors that are functional and aesthetically charismatic
+            and attractive.
+        -
+          name: Imani Mapp
+          wording: >
+            When designing, the objective is to create a space filled with interesting items that tells a story or starts
+            conversations.
+        -
+          name: Agustin Sanders
+          wording: >
+            Agustin's style is a merge between classic baroque style, fashion design, pop and street culture with a blast
+            of color.
     what_to_expect:
       header: what to expect
       more_info: 'For more info, %{see_here}'

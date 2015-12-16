@@ -3342,10 +3342,16 @@ input[type="radio"].smallRadio:checked + label span {
 
 .scrollBoxCommentsHandle {
   border-radius: 5px;
-  width: 9px;
+  width: 6.5px;
   background-clip: padding-box;
   background: #a9a9a9;
   margin-right: 5px;
+  margin-top: -4.5px;
+  margin-bottom: -14.5px;
+}
+
+a.scrollBoxCommentsHandle {
+  left: 1.5px;
 }
 
 .dragging .scrollBoxCommentsHandle,
@@ -4315,83 +4321,25 @@ p.product-list-reminder {
   line-height: 1.5;
 }
 
-.justineStory h2 {
+.clientStories h2 {
   text-align: center;
   font-size: 30px;
-  margin-top: 85px;
+  margin-top: 115px;
   margin-bottom: 20px;
   color: #333333;
-}
-
-.justineLeft {
-  padding: 0px;
-  position: relative;
-}
-
-.justineLeft .justineOverlay {
-  background: rgba(10, 10, 10, 0.71);
-  position: absolute;
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  display: none;
-}
-
-.justineLeft .justineOverlay .justinePlay {
-  width: 55px;
-  height: 54px;
-  display: block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -27px;
-  margin-left: -27px;
-  background: url('/assets/play-btn.png');
-}
-
-.justineRight {
-  border: 3px solid #5f5f5f;
-  border-left: 0px;
-  padding: 0px 60px;
-  display: table;
-}
-
-.justineRight > div {
-  display: table-cell;
-  vertical-align: middle;
-
-}
-
-.justineRight h3 {
-  font-size: 24px;
-  color: #333333;
-  margin-bottom: 40px;
-  margin-top: 0px;
-}
-
-.justineRight p {
-  font-size: 20px;
-  color: #666666;
-  font-family: "AvenirLTStd-Light";
-  margin-bottom: 40px;
-}
-
-.justineRight a {
-  font-size: 18px;
-  color: #409863;
-  font-family: "AvenirLTStd-Light";
+  text-transform: uppercase;
 }
 
 .whatToExpect {
-  background: #f4f4f4;
+  background: #ffffff;
   padding: 180px 0px 160px;
 
   .subtitle {
     text-align: center;
     margin: 20px 0px;
-    font-size: 14px;
-    font-family: 'Avenir Light';
+    font-size: 16px;
+    font-family: 'AvenirLTStd-Light';
+    color: #666666;
 
     a {
       color: #30a7fc;
@@ -4403,6 +4351,7 @@ p.product-list-reminder {
   background: #FFF;
   margin: 0px 20px;
   padding-bottom: 50px;
+  border: 1px solid #e1e1e1;
 }
 
 .whatToExpect h2 {
@@ -4448,10 +4397,6 @@ p.product-list-reminder {
   opacity: 1;
   text-shadow: none;
   width: 25px;
-}
-
-.bottomCarouselHome .carousel-control {
-
 }
 
 .bottomCarouselHome .carousel-control img {
@@ -4523,9 +4468,6 @@ p.product-list-reminder {
   .whatWeDoBox p {
     font-size: 24px;
     line-height: 34px;
-  }
-  .justineRight {
-    padding: 0px 15px;
   }
   .whatToExpect {
     background: #f4f4f4;
@@ -4641,15 +4583,9 @@ p.product-list-reminder {
     padding: 0px 20px;
     margin-bottom: 60px;
   }
-  .justineStory h2 {
+  .clientStories h2 {
     margin-top: 40px;
     font-size: 24px;
-  }
-  .justineRight h3 {
-    font-size: 20px;
-  }
-  .justineRight p, .justineRight a {
-    font-size: 18px;
   }
   .whatToExpect {
     padding: 40px 0px 0px;
@@ -4727,12 +4663,6 @@ p.product-list-reminder {
   }
   .whatWeDoBox p {
     margin-bottom: 40px;
-  }
-  .justineRight {
-    padding: 40px 10px;
-  }
-  .justineRight p {
-    font-size: 16px;
   }
   .bottomCarouselHome .carousel-caption h5, .bottomCarouselHome .carousel-caption p {
     font-size: 16px;
@@ -4878,68 +4808,79 @@ p.product-list-reminder {
 
 $final-designer-center-comment-border-color: #ccc;
 
-.designer-center .finishedRequest .header {
+.finalNoteToDesigner .header {
   font-size: 20px;
   margin: 10px 0px;
 }
 
 .designer-center {
-  .finishedRequest {
-    .finalNoteToDesigner{
-      margin-bottom: 50px;
+  .comments{
+    width: 1117px;
+  }
+}
 
-      .titleRow {
-        margin-bottom: 20px;
+.client-center {
+  .comments{
+    width: 1147px;
+  }
+}
 
-        .commentsCount {
-          font-size: 18px;
-          float: right;
-        }
-      }
+.finalNoteToDesigner{
+  margin-bottom: 50px;
 
-      .comments {
-        margin-bottom: 30px;
-        overflow: auto;
-        max-height: 500px;
-      }
+  .titleRow {
+    margin-bottom: 20px;
 
-      @media(max-width: 768px) {
-        .comment {
-          .info {
-            border-bottom: 1px solid $final-designer-center-comment-border-color;
-          }
-        }
-      }
+    .commentsCount {
+      font-size: 18px;
+      float: right;
+    }
+  }
 
-      .comment {
-        border-top: 1px solid $final-designer-center-comment-border-color;
-        border-right: 1px solid $final-designer-center-comment-border-color;
-        border-left: 1px solid $final-designer-center-comment-border-color;
+  .comments {
+    margin-bottom: 30px;
+    overflow: auto;
+    max-height: 500px;
+    border-top: 1px solid $final-designer-center-comment-border-color;
+    border-bottom: 1px solid $final-designer-center-comment-border-color;
+    padding-right: 0 !important;
+  }
 
-        .info {
-          border-right: 1px solid $final-designer-center-comment-border-color;
-
-          .name {
-            font-size: 20px;
-          }
-
-          .date {
-            font-style: italic;
-          }
-        }
-
-        .row-container {
-          padding: 20px 30px;
-        }
-      }
-
-      .comment.last {
+  @media(max-width: 768px) {
+    .comment {
+      .info {
         border-bottom: 1px solid $final-designer-center-comment-border-color;
       }
+    }
+  }
 
-      .comment.odd {
-        background-color: #F8F8F8;
+  .comment {
+    border-top: 1px solid $final-designer-center-comment-border-color;
+    border-right: 1px solid $final-designer-center-comment-border-color;
+    border-left: 1px solid $final-designer-center-comment-border-color;
+
+    .info {
+      border-right: 1px solid $final-designer-center-comment-border-color;
+
+      .name {
+        font-size: 20px;
+      }
+
+      .date {
+        font-style: italic;
       }
     }
+
+    .row-container {
+      padding: 20px 30px;
+    }
+  }
+
+  .comment.last {
+    border-bottom: 1px solid $final-designer-center-comment-border-color;
+  }
+
+  .comment.odd {
+    background-color: #F8F8F8;
   }
 }

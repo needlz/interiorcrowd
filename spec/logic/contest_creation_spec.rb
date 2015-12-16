@@ -28,6 +28,10 @@ RSpec.describe ContestCreation do
         it 'does not send email about brief pending' do
           expect(jobs_with_handler_like('contest_not_live_yet').count).to eq 0
         end
+
+        it 'stores information if the contest was in brief_pending state ever' do
+          expect(contest.reload.was_in_brief_pending_state).to be_falsey
+        end
       end
 
       context 'when space images empty' do
@@ -45,6 +49,10 @@ RSpec.describe ContestCreation do
 
         it 'sends email about brief pending' do
           expect(jobs_with_handler_like('contest_not_live_yet').count).to eq 1
+        end
+
+        it 'stores information if the contest was in brief_pending state ever' do
+          expect(contest.reload.was_in_brief_pending_state).to be_truthy
         end
       end
     end

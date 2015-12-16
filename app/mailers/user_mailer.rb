@@ -16,8 +16,9 @@ class UserMailer < ActionMailer::Base
     mail to: [wrap_recipient(designer.email, designer.first_name, 'to')], subject: subject, email_id: email_id
   end
 
-  def user_registration_info(user, email_id = nil)
-    template "#{ user.role.downcase }_registration_info"
+  def user_registration_info(user_role, user_id, email_id = nil)
+    template "#{ user_role.downcase }_registration_info"
+    user = user_role.constantize.find(user_id)
     set_template_values(set_user_params(user))
     mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
@@ -232,10 +233,10 @@ class UserMailer < ActionMailer::Base
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
     template 'Designer-asks-client-a-question-submission-phase'
     set_template_values(
-        entry_url: renderer.client_center_entry_url(id: options[:contest_request].id),
-        comment_text: options[:comment_text]
+      entry_url: renderer.client_center_entry_url(id: options[:contest_request_id]),
+      comment_text: options[:comment_text]
     )
-    client = options[:client]
+    client = Client.find(options[:client_id])
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
@@ -293,6 +294,17 @@ class UserMailer < ActionMailer::Base
         client_admin_url: renderer.admin_client_url(client.id),
         client_id: client.id,
         client_email: client.email
+    )
+    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+  end
+
+  def new_project_to_hello(contest_id, email_id = nil)
+    template 'new-project-to-hello'
+    contest = Contest.find(contest_id)
+    client = contest.client
+    set_template_values(
+        client_name: client.name,
+        client_id: client.id
     )
     mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
   end

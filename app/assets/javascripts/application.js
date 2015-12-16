@@ -31,5 +31,7 @@
 //= require lib/jquery.aw-showcase.min
 //= require designer_center_requests/finished
 //= require how_it_works.js
+//= require about_us
 //= require_tree ./lib/iframeResizer
 //= require_tree ./shared
+//= require jquery.slick

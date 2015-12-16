@@ -44,6 +44,25 @@ RSpec.describe ClientPaymentsController do
             post :create, contest_id: contest.id, client_agree: 'yes'
             expect(client.reload.latest_contest_created_at).to be_within(5.seconds).of(Time.current)
           end
+
+          context 'when owner already notified' do
+            before do
+              client.update_attributes!(notified_owner: true)
+            end
+
+            it 'does not notify product owner about new client' do
+              post :create, contest_id: contest.id, client_agree: 'yes'
+              expect(jobs_with_handler_like('user_registration_info').count).to eq 0
+            end
+          end
+
+          context 'when owner not notified' do
+            it 'notifies product owner about new client' do
+              post :create, contest_id: contest.id, client_agree: 'yes'
+              expect(jobs_with_handler_like('user_registration_info').count).to eq 1
+              expect(client.reload.notified_owner).to be_truthy
+            end
+          end
         end
 
         context 'unsuccessful charge' do

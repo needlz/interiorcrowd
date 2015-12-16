@@ -12,6 +12,10 @@ class OutboundEmailsController < ApplicationController
     end
   end
 
+  def verify
+    head :ok
+  end
+
   private
 
   def process_event(event_payload)

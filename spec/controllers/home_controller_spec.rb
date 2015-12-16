@@ -61,5 +61,12 @@ RSpec.describe HomeController do
     end
   end
 
+  describe 'GET about_us' do
+    it 'returns page' do
+      get :about_us
+      expect(response).to render_template(:about_us)
+    end
+  end
+
 end
 
