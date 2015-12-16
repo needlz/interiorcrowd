@@ -105,15 +105,15 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email to client about last day to choose winner' do
-      expect(UserMailer.one_day_left_to_choose_a_winner(contest)).to be_present
+      expect(UserMailer.one_day_left_to_choose_a_winner(contest.id)).to be_present
     end
 
     it 'sends email to designers about last day to submit design' do
-      expect(UserMailer.one_day_left_to_submit_concept_board(contest)).to be_present
+      expect(UserMailer.one_day_left_to_submit_concept_board(contest.id)).to be_present
     end
 
     it 'sends email to designers about 4 days left to submit concept board' do
-      expect(UserMailer.four_days_left_to_submit_concept_board(contest)).to be_present
+      expect(UserMailer.four_days_left_to_submit_concept_board(contest.id)).to be_present
     end
 
     it 'sends email to client about contest noy live yet' do
@@ -138,11 +138,11 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email to designers about no submissions for client so far' do
-      expect(UserMailer.to_designers_client_no_submissions(contest)).to be_present
+      expect(UserMailer.to_designers_client_no_submissions(contest.id)).to be_present
     end
 
     it 'sends email to designers about only one submission for client so far' do
-      expect(UserMailer.to_designers_one_submission_only(contest)).to be_present
+      expect(UserMailer.to_designers_one_submission_only(contest.id)).to be_present
     end
 
     it 'sends email to owner about a client has been moved to final design' do
@@ -153,6 +153,9 @@ RSpec.describe UserMailer do
       expect(UserMailer.new_project_to_hello(contest.id)).to be_present
     end
 
+    it 'sends email to client if designer is waiting for feedback' do
+      expect(UserMailer.designer_waiting_for_feedback_to_client(client.id, [contest.id])).to be_present
+    end
   end
 
 end

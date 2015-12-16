@@ -371,7 +371,7 @@ RSpec.describe ContestsController do
 
           it 'does not track visit time' do
             get :show, id: contest.id
-            expect(submitted.reload.last_visit_by_client_at).to be_nil
+            expect(submitted_request.reload.last_visit_by_client_at).to be_nil
           end
         end
 
@@ -449,6 +449,11 @@ RSpec.describe ContestsController do
                 end
                 contest_request.destroy
               end
+            end
+
+            it 'tracks visit time' do
+              get :show, id: contest.id
+              expect(fulfillment_request.reload.last_visit_by_client_at).to be_within(1.second).of(Time.current)
             end
           end
 
