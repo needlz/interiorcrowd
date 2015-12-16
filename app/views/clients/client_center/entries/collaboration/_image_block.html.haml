@@ -12,3 +12,9 @@
         - items.each do |item|
           = render partial: 'designer_center_requests/edit/image_content_client_view',
               locals: { item: ImageItemView.new(item), markable: choosable }
+  .imageItemsPagination
+    = will_paginate(image_items,
+        container: false,
+        renderer: ProductListPaginationRenderer,
+        params: pagination,
+        param_name: pagination_param)

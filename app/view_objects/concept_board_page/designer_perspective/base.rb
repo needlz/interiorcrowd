@@ -1,11 +1,11 @@
-class ConceptBoardAuthorView < ConceptBoardPage
+class ConceptBoardPage::DesignerPerspective::Base < ::ConceptBoardPage::Base
 
   def phase_url(index)
     view_context.designer_center_response_path(phase_url_params(index))
   end
 
   def image_items_partial
-    phase_dependent_partial
+    raise NotImplementedError
   end
 
   def image_items

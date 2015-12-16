@@ -1,4 +1,4 @@
-class ConceptBoardEditing < ConceptBoardPage
+class ConceptBoardPage::DesignerPerspective::Editing < ::ConceptBoardPage::Base
 
   def phase_url(index)
     view_context.edit_designer_center_response_path(phase_url_params(index))

@@ -3,7 +3,8 @@ class ContestsController < ApplicationController
   before_filter :check_client, only: [:index, :payment_details]
 
   before_filter :set_client, only: [:index, :payment_summary, :invite_designers]
-  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers]
+  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers,
+                                     :image_items]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
 
   [:design_brief, :design_style, :design_space].each do |action|
@@ -26,18 +27,19 @@ class ContestsController < ApplicationController
     end
     return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
-    if current_user.client?
-      @client = current_user
-      @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
-    end
     @entries_page = EntriesPage.new(
       contest: @contest,
       view: params[:view],
       answer: params[:answer],
-      page: params[:page],
+      pagination_options: params,
       current_user: current_user,
       view_context: view_context
     )
+
+    if current_user.client?
+      @client = current_user
+      @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    end
 
     if @entries_page.show_submissions? || @entries_page.won_contest_request || !(@contest.client == current_user)
       render 'clients/client_center/entries'
@@ -212,6 +214,28 @@ class ContestsController < ApplicationController
     @designers = Designer.active.includes(portfolio: [:personal_picture]).all.map do |designer|
       DesignerView.new(designer)
     end
+  end
+
+  def image_items
+    unless current_user.can_see_contest?(@contest, cookies)
+      if current_user.client?
+        raise_404
+      else
+        return redirect_to(client_login_sessions_path)
+      end
+    end
+    return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
+
+    @entries_page = EntriesPage.new(
+      contest: @contest,
+      view: params[:view],
+      answer: params[:answer],
+      pagination_options: params,
+      current_user: current_user,
+      view_context: view_context
+    )
+
+    render @entries_page.entries_concept_board_page.paginated_image_items_partial
   end
 
   private

@@ -1,8 +1,9 @@
 .responses-filter-dropdown.sortBySelect
-  = form_tag client_center_entries_path,
+  = form_tag client_center_entry_path(id: contest_id),
       id: 'responses-filter-form',
       method: 'get' do
     = hidden_field_tag 'answer', ''
+    = hidden_field_tag 'view', view
     = hidden_mixpanel_submit_tag
   %select.selectpicker.form-selector.sortBySelect
     %option{ disabled: "disabled" }= t('client_center.entries.filter_by')
