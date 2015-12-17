@@ -22,11 +22,13 @@
   - if show_page.image_items.present?
     .header= t('client_center.entries.space.complete_lock')
     .fullWidthLine.marginBottom40.marginTop20
-    .row.itemRow
-      - show_page.image_items.each do |product_item|
-        - unless product_item.image_id.nil?
-          = render partial: 'clients/client_center/entries/final_design_image_item',
-            locals: { image_item: ImageItemView.new(product_item) }
+
+    :coffee
+      $ ->
+        ImageItemsPagination.init $('.ccFinalPage .imageItems')
+
+    .imageItems{ data: { scope: 'image_items' } }
+      = render show_page.image_items_partial
 
   .fullWidthLine.marginBottom40.marginTop20
   .row

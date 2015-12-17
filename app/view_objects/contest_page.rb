@@ -1,10 +1,11 @@
 class ContestPage
 
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
-              :answer, :view_context
+              :answer, :view_context, :selected_view
 
   def initialize(options)
     @contest = options[:contest]
+    @selected_view = options[:view]
 
     @view_context = options[:view_context]
     @contest_view = ContestView.new(contest_attributes: contest) if contest

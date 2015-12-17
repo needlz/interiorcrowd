@@ -15,7 +15,7 @@
 - if @entries_page.current_user_owns_contest?
   = render 'clients/client_center/moodboard_winner_dialog' if @entries_page.contest_requests.present?
   - content_for :client_center_content do
-    = render 'clients/client_center/entries/content', entries_page: @entries_page
+    = render @entries_page.partial
 
   - if params[:signed_up].present?
     = render 'shared/congratulations_layout',
@@ -28,4 +28,4 @@
     = render(*partial_options)
 - else
   .container
-    = render 'clients/client_center/entries/content', entries_page: @entries_page
+    = render @entries_page.partial

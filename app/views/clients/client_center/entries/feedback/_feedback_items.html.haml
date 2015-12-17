@@ -3,4 +3,4 @@
     - contest_requests.each do |contest_request|
       = render partial: 'clients/moodboard',
                locals: { contest_request: contest_request,
-                 show_answer_options: contest_page.show_answer_options? }
+                 show_answer_options: contest_request.answerable? }
