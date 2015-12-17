@@ -1,6 +1,11 @@
 InteriorC::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.middleware.use Rack::SslEnforcer,
+                        :redirect_to => 'https://www.interiorcrowd.com',
+                        :only => [],
+                        :strict => true
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 

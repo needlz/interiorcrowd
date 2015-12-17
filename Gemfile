@@ -54,6 +54,7 @@ end
 
 group :production, :staging do
   gem 'rails_12factor'
+  gem 'rack-ssl-enforcer'
 end
 
 group :development do
@@ -103,3 +104,4 @@ gem 'puma'
 gem 'newrelic_rpm'
 gem 'fork_break'
 gem 'database_cleaner'
+
