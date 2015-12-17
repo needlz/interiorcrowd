@@ -104,4 +104,4 @@ gem 'puma'
 gem 'newrelic_rpm'
 gem 'fork_break'
 gem 'database_cleaner'
-
+gem 'foreman'
