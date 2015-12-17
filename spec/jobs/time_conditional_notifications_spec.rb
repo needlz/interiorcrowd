@@ -48,4 +48,68 @@ RSpec.describe Jobs::TimeConditionalNotifications do
     end
   end
 
+  context 'when there is contest request' do
+    let!(:client) { Fabricate(:client) }
+    let!(:designer) { Fabricate(:designer) }
+    let!(:contest) { Fabricate(:contest, status: 'submission', client: client) }
+    let!(:contest_request) { Fabricate(:contest_request, contest: contest, last_visit_by_client_at: Time.current - 5.days, designer: designer) }
+
+    context 'without designer comment 3 days ago after client visited contest' do
+      let!(:comment_4_days_ago_by_client) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 4.days }, client).perform }
+      let!(:comment_2_days_ago_by_designer) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 2.days }, client).perform }
+
+      it 'does not remind client about designer awaiting feedback' do
+        expect(ScheduledNotifications::DesignerWaitingFeedback.scope).to match_array([])
+        job.perform
+        expect(jobs_with_handler_like(ScheduledNotifications::DesignerWaitingFeedback.notification).count).to eq 0
+      end
+    end
+
+    context 'with designer comment 3 days ago after client visited contest' do
+      let!(:comment_4_days_ago_by_client) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 4.days }, client).perform }
+      let!(:comment_2_days_ago_by_designer) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 2.days }, client).perform }
+      let!(:comment_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 3.days }, designer).perform }
+      let!(:client_2) { Fabricate(:client) }
+      let!(:client_3) { Fabricate(:client) }
+      let!(:client_4) { Fabricate(:client) }
+      let!(:contest_2) { Fabricate(:contest, client: client_2, status: 'submission') }
+      let!(:contest_3) { Fabricate(:contest, client: client_3, status: 'submission') }
+      let!(:contest_4) { Fabricate(:contest, client: client_3, status: 'submission') }
+      let!(:request_2) { Fabricate(:contest_request, contest: contest_2, last_visit_by_client_at: Time.current - 5.days, designer: designer) }
+      let!(:request_3) { Fabricate(:contest_request, contest: contest_3, last_visit_by_client_at: Time.current - 5.days, designer: designer) }
+      let!(:request_4) do
+        request = Fabricate(:contest_request, contest: contest_4,
+                  last_visit_by_client_at: Time.current - 5.days,
+                  designer: designer,
+                  answer: 'winner',
+                  status: 'fulfillment_ready')
+        contest_4.update_attributes!(status: 'fulfillment')
+        request
+      end
+      let!(:comment_4_days_ago_by_designer) { ConceptBoardCommentCreation.new(contest_request, { text: 'text', created_at: Time.current - 4.days }, designer).perform }
+      let!(:comment_more_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_2, { text: 'text', created_at: Time.current - 3.days - (Jobs::TimeConditionalNotifications::INTERVAL / 2) }, designer).perform }
+      let!(:comment_less_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_3, { text: 'text', created_at: Time.current - 3.days + (Jobs::TimeConditionalNotifications::INTERVAL / 2) }, designer).perform }
+      let!(:comment_6_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_4, { text: 'text', created_at: Time.current - 6.days }, designer).perform }
+
+      def notification_params_by_comment(comment)
+        contest = comment.contest_request.contest
+        client = contest.client
+        [client, [contest.id]]
+      end
+
+      it 'reminds client about designer awaiting feedback' do
+        expected_notifications_params =
+          [comment_3_days_ago_by_designer,
+           comment_more_than_3_days_ago_by_designer,
+           comment_4_days_ago_by_designer,
+           comment_4_days_ago_by_designer].map(&:contest_request).map(&:contest).uniq.group_by(&:client).map do |client, contests|
+            [client, contests.map(&:id)]
+          end
+        expect(ScheduledNotifications::DesignerWaitingFeedback.scope).to match_array(expected_notifications_params)
+        job.perform
+        expect(jobs_with_handler_like(ScheduledNotifications::DesignerWaitingFeedback.notification).count).to eq 2
+      end
+    end
+  end
+
 end

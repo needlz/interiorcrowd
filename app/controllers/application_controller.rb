@@ -6,7 +6,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   before_filter :beta_redirect
-  before_filter :set_return_to_link, :setup_event_tracker, :expire_hsts
+  before_filter :setup_event_tracker
+  before_filter :expire_hsts
+  before_filter :on_page_visit
 
   add_flash_types :error
 
@@ -78,8 +80,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_return_to_link
+  def on_page_visit
     return if request.method != 'GET' || controller_name == 'sessions'
+    store_return_to_link
+  end
+
+  def store_return_to_link
     session[:return_to] = request.url unless session[:return_to].present?
   end
 
