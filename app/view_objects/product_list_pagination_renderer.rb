@@ -4,7 +4,7 @@ class ProductListPaginationRenderer < WillPaginate::ActionView::LinkRenderer
 
   def page_number(page)
     unless page == current_page
-      link(page, page, rel: rel_value(page), class: 'pageLink')
+      link(page, page, rel: rel_value(page), class: 'pageLink', 'data-page' => page)
     else
       tag(:em, page, class: 'current makeMeBold pageLink')
     end
@@ -12,7 +12,7 @@ class ProductListPaginationRenderer < WillPaginate::ActionView::LinkRenderer
 
   def previous_or_next_page(page, text, classname)
     if page
-      link(text, page, class: classname + ' makeMeBold pageLink')
+      link(text, page, class: classname + ' makeMeBold pageLink', 'data-page' => page)
     end
   end
 

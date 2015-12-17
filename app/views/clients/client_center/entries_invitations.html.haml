@@ -21,7 +21,7 @@
         - if @entries_page.contest.designers_invitation_period?
           = render(partial: 'clients/client_center/entries/designers_to_invite',
               locals: { designers: @entries_page.invitable_designer_views })
-        .fullWidthLine
+          .fullWidthLine
         = render partial: 'clients/client_center/entries/more_features'
 
 - if params[:signed_up].present?

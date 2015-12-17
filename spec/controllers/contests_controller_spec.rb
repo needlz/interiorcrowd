@@ -361,21 +361,13 @@ RSpec.describe ContestsController do
       context 'designers present' do
         let!(:designers) { Fabricate.times(4, :portfolio).map(&:designer) }
 
-        context 'in submission phase' do
-          before do
-            contest
-            draft_request
-            submitted_request
+        context 'when no contest requests submitted' do
+          it 'shows designers invitation page' do
+            contest = Fabricate(:contest, client: client)
+            pay_contest(contest)
+            get :show, id: contest.id
+            expect(response).to render_template(:entries_invitations)
           end
-
-        end
-
-        it 'returns page' do
-          Fabricate(:contest, client: client, status: 'submission')
-          contest = Fabricate(:contest, client: client)
-          pay_contest(contest)
-          get :show, id: contest.id
-          expect(response).to render_template(:entries_invitations)
         end
 
         context 'responses present' do
@@ -435,7 +427,12 @@ RSpec.describe ContestsController do
                 cont.update_attributes!(status: 'fulfillment')
                 PhasesStripe::PHASES.each_index do |index|
                   get :show, view: index, id: cont.id
-                  expect(response).to render_template('clients/client_center/entries')
+                  if index == ContestPhases.phase_to_index(:initial)
+                    expect(response).to render_template(partial: 'clients/client_center/entries/_entries')
+                  else
+                    expect(response).to render_template(partial: 'clients/client_center/entries/_entry')
+                  end
+
                 end
                 contest_request.destroy
               end

@@ -54,6 +54,7 @@ InteriorC::Application.routes.draw do
         post 'save_design_space'
         get 'preview'
         post 'save_preview'
+        get 'image_items'
         resources :feedback,
                   controller: 'reviewer_feedbacks',
                   as: 'reviewer_feedbacks',

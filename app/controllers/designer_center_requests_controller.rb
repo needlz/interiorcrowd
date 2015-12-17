@@ -21,11 +21,12 @@ class DesignerCenterRequestsController < ApplicationController
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
                                                                          contest_request: @request,
                                                                          view_context: view_context)
-    @show_page = ConceptBoardAuthorView.new({
+    page_class = "ConceptBoardPage::DesignerPerspective::#{ @request.status.camelize }".constantize
+    @show_page = page_class.new({
       contest_request: @request,
       preferred_view: params[:view],
       view_context: view_context,
-      image_items_page: params[:page]
+      pagination_options: params
     })
     @visible_image_items = @show_page.image_items
     @navigation = Navigation::DesignerCenter.new(:requests)
@@ -42,10 +43,11 @@ class DesignerCenterRequestsController < ApplicationController
     @contest_request_milestone = ContestRequestMilestones::Generator.get(contest: @request.contest,
                                                                          contest_request: @request,
                                                                          view_context: view_context)
-    @editing_page = ConceptBoardEditing.new({
+    @editing_page = ConceptBoardPage::DesignerPerspective::Editing.new({
       contest_request: @request,
       preferred_view: params[:view],
-      view_context: view_context
+      view_context: view_context,
+      pagination_options: params
     })
     @visible_image_items = @editing_page.image_items
     set_image_item_views
@@ -118,6 +120,18 @@ class DesignerCenterRequestsController < ApplicationController
     publish = PublishProductList.new(contest_request)
     publish.perform
     redirect_to designer_center_response_path(id: contest_request.id)
+  end
+
+  def image_items
+    contest_request = @designer.contest_requests.find(params[:id])
+    editing_page = ConceptBoardPage::DesignerPerspective::Editing.new({
+      contest_request: contest_request,
+      preferred_view: params[:view],
+      view_context: view_context,
+      pagination_options: params
+    })
+
+    render editing_page.paginated_image_items_partial
   end
 
   private

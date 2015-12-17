@@ -110,12 +110,12 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def reply(answer, client_id)
-    return if status == 'fulfillment_ready'
+    return unless status == 'submitted'
     (contest.client_id == client_id) && update_attributes(answer: answer)
   end
 
   def answerable?
-    contest.responses_answerable?
+    contest.responses_answerable? && submitted?
   end
 
   def fulfillment_editing?
@@ -181,7 +181,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def allowed_answer
-    if !answerable? && answer.present? && answer_changed?
+    if !contest.responses_answerable? && answer.present? && answer_changed?
       errors.add(:answer, I18n.t('contest_requests.validations.not_answerable'))
     end
   end
