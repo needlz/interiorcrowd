@@ -65,6 +65,8 @@ class SessionsController < ApplicationController
   def track_login
     @event_tracker.user = current_user
     @event_tracker.login
+
+    current_user.update_attributes!(last_log_in_ip: request.remote_ip, last_log_in_at: Time.current)
   end
 
   def return_with_error(url, error)

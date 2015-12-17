@@ -368,6 +368,19 @@ RSpec.describe ContestsController do
             get :show, id: contest.id
             expect(response).to render_template(:entries_invitations)
           end
+
+          it 'does not track visit time' do
+            get :show, id: contest.id
+            expect(submitted_request.reload.last_visit_by_client_at).to be_nil
+          end
+        end
+
+        it 'returns page' do
+          Fabricate(:contest, client: client, status: 'submission')
+          contest = Fabricate(:contest, client: client)
+          pay_contest(contest)
+          get :show, id: contest.id
+          expect(response).to render_template(:entries_invitations)
         end
 
         context 'responses present' do
@@ -436,6 +449,11 @@ RSpec.describe ContestsController do
                 end
                 contest_request.destroy
               end
+            end
+
+            it 'tracks visit time' do
+              get :show, id: contest.id
+              expect(fulfillment_request.reload.last_visit_by_client_at).to be_within(1.second).of(Time.current)
             end
           end
 

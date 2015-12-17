@@ -1,8 +1,7 @@
 class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
-  before_filter :check_client, only: [:index, :payment_details]
 
-  before_filter :set_client, only: [:index, :payment_summary, :invite_designers]
+  before_filter :set_client, only: [:index, :payment_summary, :invite_designers, :payment_details]
   before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers,
                                      :image_items]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
@@ -39,6 +38,7 @@ class ContestsController < ApplicationController
     if current_user.client?
       @client = current_user
       @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+      TrackContestRequestVisit.perform(@entries_page.won_contest_request) if @entries_page.won_contest_request
     end
 
     if @entries_page.show_submissions? || @entries_page.won_contest_request || !(@contest.client == current_user)
