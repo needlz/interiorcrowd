@@ -248,7 +248,7 @@ RSpec.describe ContestRequestsController do
       end
 
       it 'renders 404' do
-        post :add_comment, comment: {text: 'text'}, contest_id: contest.id
+        post :add_comment, comment: { text: 'text' }, contest_id: contest.id
         expect(ConceptBoardComment.exists?).to be_falsey
         expect(response).to have_http_status(:not_found)
       end
@@ -303,6 +303,11 @@ RSpec.describe ContestRequestsController do
 
       it 'raises error if request id is wrong' do
         expect { get :show, id: 0 }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it 'tracks visit time' do
+        get :show, id: request.id
+        expect(request.reload.last_visit_by_client_at).to be_within(1.second).of(Time.current)
       end
     end
 

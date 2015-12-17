@@ -40,6 +40,7 @@ class ContestRequestsController < ApplicationController
       @client = current_user
       @show_answer_options = @request.answerable?
       @navigation = Navigation::ClientCenter.new(:entries, contest: @request.contest)
+      TrackContestRequestVisit.perform(@request)
     elsif !current_user.can_see_contest?(@request.contest, cookies)
       if current_user.client?
         render_404

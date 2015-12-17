@@ -2,10 +2,6 @@ module ScheduledNotifications
 
   class OneSubmission < BeforeContestMilestoneEnd
 
-    def self.scheduler_interval
-      Jobs::TimeConditionalNotifications::INTERVAL
-    end
-
     def self.period_before_milestone_end
       4.days
     end
