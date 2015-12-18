@@ -68,6 +68,7 @@ group :development do
   gem 'pry'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'foreman'
 end
 
 group :test do
@@ -103,5 +104,5 @@ gem 'puma'
 gem 'newrelic_rpm'
 gem 'fork_break'
 gem 'database_cleaner'
-gem 'foreman'
 gem 'rack-ssl-enforcer'
+
