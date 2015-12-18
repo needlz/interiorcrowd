@@ -25,7 +25,7 @@ module ScheduledNotifications
     private
 
     def self.comment_created_after_last_visit
-      '(contest_requests.last_visit_by_client_at IS NULL) OR (concept_board_comments.created_at > contest_requests.last_visit_by_client_at)'
+      '(contest_requests.last_visit_by_client_at IS NOT NULL) AND (concept_board_comments.created_at > contest_requests.last_visit_by_client_at)'
     end
 
     def self.waiting_period_passed_since_comment_created
