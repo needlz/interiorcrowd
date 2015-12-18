@@ -69,6 +69,14 @@ RSpec.describe SessionsController do
         get :client_fb_authenticate, code: valid_oauth_code
         expect(session[:client_id]).to eq client.id
       end
+
+      it 'tracks login time and ip' do
+        client
+        get :client_fb_authenticate, code: valid_oauth_code
+        client.reload
+        expect(client.last_log_in_at).to be_within(1.second).of(Time.current)
+        expect(client.last_log_in_ip).to eq request.remote_ip
+      end
     end
 
     context 'when no oauth code passed' do
@@ -76,6 +84,14 @@ RSpec.describe SessionsController do
         client
         get :client_fb_authenticate
         expect(session[:client_id]).to be_nil
+      end
+
+      it 'does not track login time and ip' do
+        client
+        get :client_fb_authenticate
+        client.reload
+        expect(client.last_log_in_at).to be_nil
+        expect(client.last_log_in_ip).to be_nil
       end
     end
 
@@ -129,6 +145,28 @@ RSpec.describe SessionsController do
         get :client_login
         expect(response).to render_template(:client_login)
       end
+    end
+  end
+
+  describe 'POST client_authenticate' do
+    let(:client) { Fabricate(:client, plain_password: 'password') }
+
+    it 'tracks login time and ip' do
+      get :client_authenticate, username: client.email, password: client.plain_password
+      client.reload
+      expect(client.last_log_in_at).to be_within(1.second).of(Time.current)
+      expect(client.last_log_in_ip).to eq request.remote_ip
+    end
+  end
+
+  describe 'POST authenticate' do
+    let(:designer) { Fabricate(:designer, plain_password: 'password') }
+
+    it 'tracks login time and ip' do
+      get :authenticate, username: designer.email, password: designer.plain_password
+      designer.reload
+      expect(designer.last_log_in_at).to be_within(1.second).of(Time.current)
+      expect(designer.last_log_in_ip).to eq request.remote_ip
     end
   end
 

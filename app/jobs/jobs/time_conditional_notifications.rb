@@ -18,6 +18,7 @@ module Jobs
       ScheduledNotifications::WarningAboutSubmissionEndClose.perform
       ScheduledNotifications::NoSubmissions.perform
       ScheduledNotifications::OneSubmission.perform
+      ScheduledNotifications::DesignerWaitingFeedback.perform
       delay_next_call
     end
 

@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(version: 20151130160357) do
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
     t.boolean  "notified_owner",                            default: false, null: false
+    t.datetime "last_log_in_at"
+    t.string   "last_log_in_ip"
+    t.datetime "last_remind_about_feedback_at"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -148,6 +151,7 @@ ActiveRecord::Schema.define(version: 20151130160357) do
     t.string   "token",              limit: 255
     t.datetime "submitted_at"
     t.datetime "won_at"
+    t.datetime "last_visit_by_client_at"
   end
 
   add_index "contest_requests", ["contest_id", "designer_id"], name: "index_contest_requests_on_contest_id_and_designer_id", unique: true, using: :btree
@@ -292,6 +296,8 @@ ActiveRecord::Schema.define(version: 20151130160357) do
     t.text     "city"
     t.boolean  "active",                              default: true
     t.integer  "facebook_user_id",        limit: 8
+    t.datetime "last_log_in_at"
+    t.string   "last_log_in_ip"
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree

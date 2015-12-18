@@ -1639,15 +1639,27 @@ span.submission-pagination{
   margin-top: -43px;
   width: 8px;
   height: 15px;
-  background: url('/assets/left_white_arrow.png') no-repeat center;
   text-indent: -9999px;
-  left: 120px;
   z-index: 9999;
 }
+
+.client-stories-slider .slick-prev {
+  background: url('/assets/left_white_arrow.png') no-repeat center;
+  left: 120px;
+}
+
 .client-stories-slider .slick-next {
   background: url('/assets/right_white_arrow.png') no-repeat center;
   left: auto;
   right: 120px;
+}
+
+.client-stories-slider .slick-next:hover, .client-stories-slider .slick-next:focus {
+  background: url('/assets/right_white_arrow.png') no-repeat center !important;
+}
+
+.client-stories-slider .slick-prev:hover, .client-stories-slider .slick-prev:focus {
+  background: url('/assets/left_white_arrow.png') no-repeat center !important;
 }
 
 @media (max-width: 1025px) {
@@ -1897,6 +1909,14 @@ span.submission-pagination{
   right: 42%;
 }
 
+.designers-slider .slick-next:hover, .designers-slider .slick-next:focus {
+  background: url('right_arrowb.png') no-repeat center !important;
+}
+
+.designers-slider .slick-prev:hover, .designers-slider .slick-prev:focus {
+  background: url('left_arrowb.png') no-repeat center !important;
+}
+
 @media (max-width: 992px) {
   .designers-slider .slick-prev {
     left: 35%;
@@ -2085,3 +2105,4 @@ span.submission-pagination{
 .bottomCarouselHome .carousel-caption {
   width: 100%;
 }
+

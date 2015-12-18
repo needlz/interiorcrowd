@@ -54,6 +54,7 @@ end
 
 group :production, :staging do
   gem 'rails_12factor'
+  gem 'rack-ssl-enforcer'
 end
 
 group :development do
