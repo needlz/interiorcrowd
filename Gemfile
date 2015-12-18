@@ -54,7 +54,6 @@ end
 
 group :production, :staging do
   gem 'rails_12factor'
-  gem 'rack-ssl-enforcer'
 end
 
 group :development do
@@ -105,3 +104,4 @@ gem 'newrelic_rpm'
 gem 'fork_break'
 gem 'database_cleaner'
 gem 'foreman'
+gem 'rack-ssl-enforcer'
