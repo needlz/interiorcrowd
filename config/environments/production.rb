@@ -1,6 +1,17 @@
 InteriorC::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  class Rack::SslEnforcer
+    def redirect_to(location)
+      body = []
+      body << "<html><body>You are being <a href=\"#{location}\">redirected</a>.</body></html>" if @options[:redirect_html].nil?
+      body << @options[:redirect_html] if @options[:redirect_html].is_a?(String)
+      body = @options[:redirect_html] if @options[:redirect_html].respond_to?('each')
+
+      [@options[:redirect_code] || 301, { 'Content-Type' => 'text/html', 'Location' => location, 'Strict-Transport-Security' => 'max-age=0' }, body]
+    end
+  end
+
   config.middleware.use Rack::SslEnforcer,
                         :redirect_to => 'https://www.interiorcrowd.com',
                         :except => ['/blog', '/designer_submission'],
