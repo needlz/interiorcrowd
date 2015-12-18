@@ -26,7 +26,6 @@ class ContestNote < ActiveRecord::Base
   scope :by_client, ->{ where.not(client_id: nil) }
 
   def author_name
-    # contest.client_name
     author.name
   end
 
@@ -36,6 +35,10 @@ class ContestNote < ActiveRecord::Base
 
   def author_role
     author.class.to_s
+  end
+
+  def role
+    author_role
   end
 
   def type
