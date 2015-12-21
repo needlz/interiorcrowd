@@ -380,6 +380,11 @@ en:
     welcome_user: Welcome, %{username}
     no_images: No images
     entries:
+      finished:
+        final_note:
+          comments_count:
+            one: 1 comment
+            other: '%{count} comments'
       answers:
         'no': 'No'
         maybe: Maybe

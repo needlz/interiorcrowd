@@ -1,5 +1,5 @@
 class @DesignerFinishedContestRequestPage
-  @commentsSelector: '.finalNoteToDesigner .comments'
+  @commentsSelector: '.finalNote .comments'
 
   @init: ->
     $(window).resize(@fitHeight)
@@ -13,7 +13,7 @@ class @DesignerFinishedContestRequestPage
       @beforeSendComment($commentInput)
 
   @onCommentSent: (e, data) =>
-    $container = $(e.target).closest('.finalNoteToDesigner')
+    $container = $(e.target).closest('.finalNote')
     @updateComments($container, data.comments_html)
     @emptyInput($container)
     @updateCommentsCount($container, data.comments_count_text)
@@ -45,4 +45,4 @@ class @DesignerFinishedContestRequestPage
           if maxHeight < $(this).height()
             maxHeight = $(this).height()
 
-      parts.css('height', maxHeight + 'px')
+        parts.css('height', maxHeight + 'px')

@@ -68,12 +68,6 @@
   }
 }
 
-@media (max-width: 450px) {
-  .steps123{
-    margin-bottom: -80px;
-  }
-}
-
 .timeLeftToSubmitParent{
   top: 140px;
 }
@@ -154,7 +148,7 @@
   cursor: pointer;
 }
 
-.finalNoteToDesigner{
+.finalNote{
   textarea{
     color: inherit;
   }
@@ -196,7 +190,7 @@
 }
 
 @media(max-width: 767px){
-  .finalNoteToDesigner{
+  .finalNote{
     .send-button{
       width: 100%;
     }
@@ -2384,6 +2378,16 @@ span.submission-pagination{
   }
 }
 
+@media (max-width: 992px) {
+  .client-center {
+    .finalNote {
+      .comments {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media (max-width: 991px) {
   .whatWeDoBox p {
     line-height: 2;
@@ -2393,6 +2397,18 @@ span.submission-pagination{
   .bottomBar {
     hr {
       width: 120px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .client-center {
+    .finalNote {
+      .comments {
+        .info {
+          width: 45%;
+        }
+      }
     }
   }
 }
@@ -2492,6 +2508,21 @@ span.submission-pagination{
   }
   .yes-button:hover, .no-button:hover {
     cursor: pointer;
+  }
+}
+
+@media (max-width: 460px) {
+  .client-center {
+    .finalNote {
+      .comments {
+        a{
+          word-wrap: break-word;
+        }
+        .info {
+          width: 100%;
+        }
+      }
+    }
   }
 }
 

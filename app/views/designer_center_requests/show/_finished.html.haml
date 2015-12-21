@@ -32,13 +32,12 @@
 
   .fullWidthLine.marginBottom40.marginTop20
   .row
-    .col-sm-12.finalNoteToDesigner
+    .col-sm-12.finalNote
       .titleRow
         %span.header= t('.final_note.title')
-        - if show_page.final_notes.present?
-          %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
+        %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
         .comments
-          = render 'designer_center_requests/show/request_comments_read_only',
+          = render 'shared/request_comments_read_only',
             comments: show_page.final_notes
       = form_tag final_note_index_path, remote: true, id: 'final-note-to-client' do
         = hidden_field_tag 'contest_request_id', show_page.contest_request.id

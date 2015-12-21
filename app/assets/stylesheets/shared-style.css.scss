@@ -3016,14 +3016,14 @@ input[type="radio"].smallRadio:checked + label span {
   bottom: 15px;
 }
 
-.finalNoteToDesigner h4 {
+.finalNote h4 {
   font-size: 20px;
   color: #333333;
   margin-top: 0px;
   margin-bottom: 30px;
 }
 
-.finalNoteToDesigner textarea {
+.finalNote textarea {
   font-family: 'AvenirLTStd-Light';
   color: #c4c4c4;
   font-size: 16px;
@@ -3172,7 +3172,7 @@ input[type="radio"].smallRadio:checked + label span {
   .newSpaceReady span {
     display: block;
   }
-  .finalNoteToDesigner textarea {
+  .finalNote textarea {
     height: 160px;
   }
 }
@@ -4812,7 +4812,7 @@ p.product-list-reminder {
 
 $final-designer-center-comment-border-color: #ccc;
 
-.finalNoteToDesigner .header {
+.finalNote .header {
   font-size: 20px;
   margin: 10px 0px;
 }
@@ -4829,7 +4829,7 @@ $final-designer-center-comment-border-color: #ccc;
   }
 }
 
-.finalNoteToDesigner{
+.finalNote{
   margin-bottom: 50px;
 
   .titleRow {
@@ -4853,7 +4853,7 @@ $final-designer-center-comment-border-color: #ccc;
   @media(max-width: 768px) {
     .comment {
       .info {
-        border-bottom: 1px solid $final-designer-center-comment-border-color;
+        border-right-width: 0 !important;
       }
     }
   }
