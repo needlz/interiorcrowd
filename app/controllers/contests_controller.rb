@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   before_filter :check_designer, only: [:respond]
 
   before_filter :set_client, only: [:index, :payment_summary, :invite_designers, :payment_details]
-  before_filter :set_contest, only: [:show, :respond, :option, :update, :download_all_images_url, :invite_designers,
+  before_filter :set_contest, only: [:respond, :option, :update, :download_all_images_url, :invite_designers,
                                      :image_items]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
 
@@ -17,6 +17,12 @@ class ContestsController < ApplicationController
   end
 
   def show
+    @contest = Contest.find_by_id(params[:id])
+    unless @contest
+      @contest = ContestRequest.find_by_id(params[:id]).try(:contest)
+      return redirect_to client_center_entry_path(@contest.id) if @contest
+    end
+    raise_404 unless @contest
     unless current_user.can_see_contest?(@contest, cookies)
       if current_user.client?
         raise_404
