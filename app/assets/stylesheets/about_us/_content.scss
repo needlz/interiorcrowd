@@ -160,6 +160,12 @@
     background-color: #ad96c0;
     padding: 110px 0 206px;
 }
+
+@media (max-width: 992px) {
+  .about-designers {
+    padding: 110px 0 406px !important;
+  }
+}
 .about-designers-lead {
     font-size: 24px;
     line-height: 30px;
@@ -203,6 +209,15 @@
     height: 110px;
     overflow: hidden;
     color: #666;
+}
+@media (max-width: 992px) {
+    .about-designer-paragraph{
+        height: 150px;
+    }
+
+    .about-designer-content{
+        max-height: 210px;
+    }
 }
 .about-designer-info {
     display: block;

@@ -3,7 +3,7 @@ require 'faraday_middleware'
 class BlogController < ApplicationController
 
   PAGES_WITH_IFRAME = [:designer_submission]
-  EMBEDDED_PAGES = [:justines_story, :about_us]
+  EMBEDDED_PAGES = [:justines_story]
 
   before_filter :set_url, only: EMBEDDED_PAGES + PAGES_WITH_IFRAME
   before_filter :render_get_response, only: EMBEDDED_PAGES
@@ -13,8 +13,6 @@ class BlogController < ApplicationController
   end
 
   def justines_story; end
-
-  def about_us; end
 
   def blog_page
     @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_path])

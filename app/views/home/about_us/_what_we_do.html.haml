@@ -1,0 +1,24 @@
+.about-text
+  .wrap
+    .push
+      %h2= t('home.about_us.what_we_do.title')
+      %p= t('home.about_us.what_we_do.wording')
+      %h2#the-story= t('home.about_us.the_story.title')
+      #the-story-collapsible
+        %span#first-part
+          = t('home.about_us.the_story.first_part')
+          %a.read-more{:href => '#'}= t('home.about_us.read_more')
+          %br
+          %br
+        = t('home.about_us.the_story.second_part')
+        %span#last-part
+          %br
+          %br
+          = t('home.about_us.the_story.third_part')
+          %br
+          %br
+          = t('home.about_us.the_story.forth_part')
+          %br
+          %br
+          = t('home.about_us.the_story.fifth_part')
+          %a.read-less{:href => '#'}= t('home.about_us.read_less')
