@@ -1,0 +1,11 @@
+.about-job
+  .about-job-background{:style => "background-image: url('/assets/about_us/about-bg-2.jpg');"}
+    .wrap
+      .push
+        .about-job-title= t('home.about_us.job_opportunities.title')
+        .about-job-lead
+          %p
+            = t('home.about_us.job_opportunities.wording')
+            %br
+              = t('home.about_us.job_opportunities.email_us')
+              %a{:href => "mailto:hello@interiorcrowd.com"}= Settings.mandrill.email

@@ -1,0 +1,18 @@
+.about-designers
+  .wrap
+    .push
+      .about-designers-title= t('home.about_us.our_designers.title')
+      .about-designers-lead
+        %p= t('home.about_us.our_designers.wording').html_safe
+    .about-designer-wrapper
+      .about-designer-slider.about-slider.clearfix
+        - t('home.about_us.designers').each do |designer|
+          .about-slide.about-designer-slide
+            .about-designer-post
+              .about-designer-img{:style => "background-image: url('/assets/about_us/#{ designer[:name].downcase.parameterize }-design.jpg');"}
+              .about-designer-content
+                .about-designer-info
+                  %span.about-designer-autor{:style => "background-image: url('/assets/about_us/#{ designer[:name].downcase.parameterize }-personal.jpg');"}
+                  %span.about-designer-autor-name= designer[:name]
+                .about-designer-paragraph
+                  %p= designer[:wording]

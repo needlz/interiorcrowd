@@ -1,0 +1,16 @@
+.about-writers
+  .wrap
+    .push
+      .about-writers-title= t('home.about_us.team_of_writers.title')
+      .about-writers-lead
+        %p= t('home.about_us.team_of_writers.wording')
+    .about-writer-wrapper
+      .about-writer-slider.clearfix.about-slider
+        - t('home.about_us.blog_posts').each_with_index do |post, index|
+          .about-writer-slide.about-slide
+            %a.about-writer-post{href: "http://www.interiorcrowd.com/blog/#{ post[:url] }", target: '_blank'}
+              .about-writer-img{:style => "background-image: url('/assets/about_us/about-team-#{ index + 1 }.jpg');"}
+              .about-writer-content
+                .about-writer-title= post[:title]
+                .about-writer-date= post[:date]
+                .about-writer-autor= post[:signature]

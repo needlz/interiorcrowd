@@ -1,0 +1,13 @@
+.about-team
+  .wrap
+    .about-team-title= t('home.about_us.in_house_team')
+    .about-team-list.clearfix
+      - t('home.about_us.team').each_with_index do |member, index|
+        .about-team-item
+          %a.about-team-link{href: Settings.external_urls.linkedin_accounts[index], target: '_blank'}
+            %span.about-team-img
+              %span.about-team-img-src{:style => "background-image: url('/assets/about_us/#{ member[:name].downcase.parameterize }.jpg');"}
+              %span.about-team-linkedin
+                %img{:alt => "", :height => "238", :src => "/assets/about_us/linkedin.png", :width => "238"}/
+              %span.about-team-name{ class: member[:name].length > 17 ? 'less-team-name-font' : nil }= member[:name]
+              %span.about-team-position{ class: member[:role].length > 27 ? 'less-team-role-font' : nil }= member[:role]

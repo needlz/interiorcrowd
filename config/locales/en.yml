@@ -1251,28 +1251,28 @@ en:
       team:
         -
           name: Heather Natsch
-          role: Founder
+          role: Founder & CEO
         -
           name: Helene De Baubigny
           role: Creative Director
         -
-          name: Eric Needham
-          role: Head of Development
+          name: Erik Needham
+          role: CTO
         -
           name: Ruth Le Roux
-          role: Product & Designer Community
+          role: VP, Product & Designer Community
         -
           name: Ana Maria Lopez
-          role: Business Development
+          role: VP, Business Development
         -
           name: Claire Andreas
           role: Content Manager
         -
           name: Jolene Lindner
-          role: Lead Interior-designer
+          role: Lead Designer
         -
           name: Natparit Suriyapee
-          role: UI designer
+          role: UI/UX designer
         -
           name: Lia Aprile
           role: Executive Assistant
@@ -1328,7 +1328,7 @@ en:
           name: Jolene Lindner
           wording: >
             I enjoy adapting to the client’s style preferences, but have a tendency towards a transitional style;
-            finding the balance between masculine feminine, modern traditional.
+            finding the balance between masculine & feminine, modern & traditional.
       team_of_writers:
         title: Team of writers
         wording: >
@@ -1341,19 +1341,19 @@ en:
           signature: by Claire Andreas for InteriorCrowd
           url: modern-eclectic-homes-in-mexico
         -
-          title: 8 Little Things That Make A Big, Beautiful Difference In Your Home
-          date: September 1, 2015
-          signature: by Claire Andreas for InteriorCrowd
-          url: 8-little-things-make-big-beautiful-difference-home
+          title: Monochrome Do's and Don'ts
+          date: November 10, 2015
+          signature: by Carly Zinderman for InteriorCrowd
+          url: monochrome-dos-donts
         -
           title: Wanderlust-Worthy Home Decor Ideas That Will Make You Feel Like Exploring
           date: September 1, 2015
-          signature: by Claire Andreas for InteriorCrowd
+          signature: by Eva Avery for InteriorCrowd
           url: wanderlust-home-decor
         -
           title: Ten of our Favorite Etsy Design Shops
           date: August 3, 2015
-          signature: by InteriorCrowd Staff
+          signature: by Caitlin Mullen for InteriorCrowd
           url: ten-of-our-favorite-etsy-design-shops
         -
           title: Designing a Gender Neutral Nursery

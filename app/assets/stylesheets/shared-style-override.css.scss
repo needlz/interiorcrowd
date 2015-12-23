@@ -1507,8 +1507,44 @@ span.submission-pagination{
   font-size: 25px !important;
 }
 
+@media (max-width: 992px) {
+  .less-team-name-font{
+    font-size: 21px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .less-team-name-font{
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .less-team-name-font{
+    font-size: 13px !important;
+  }
+}
+
 .less-team-role-font{
-  font-size: 17px !important;
+  font-size: 15px !important;
+}
+
+@media (max-width: 768px) {
+  .less-team-role-font{
+    font-size: 13px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .less-team-role-font{
+    font-size: 11px !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .less-team-role-font{
+    font-size: 8px !important;
+  }
 }
 
 .clientStories.container-fluid {
@@ -2105,4 +2141,5 @@ span.submission-pagination{
 .bottomCarouselHome .carousel-caption {
   width: 100%;
 }
+
 
