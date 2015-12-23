@@ -35,6 +35,7 @@
 #  designers_only_use_these_colors :boolean          default(FALSE)
 #  finished_at                     :datetime
 #  submission_started_at           :datetime
+#  was_in_brief_pending_state      :boolean
 #
 
 class Contest < ActiveRecord::Base

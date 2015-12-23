@@ -1,0 +1,99 @@
+:coffee
+  window.stripe_publishable_api_key = #{ Settings.stripe.publishable_api_key.to_json }
+
+  $ ->
+    NewGiftcardPayment.init()
+
+%script{ src: 'https://checkout.stripe.com/checkout.js' }
+
+.contactForm.giftcardPayment
+  .container.form
+    .col-md-offset-4.col-md-8
+      .row
+        .title= t('.form.title')
+
+    .col-md-4.disablePadding
+      %h2= t('.sidebar.title')
+
+      .pricingInfo
+        = format_comment(t('.sidebar.pricing'))
+
+    .col-md-8.form.disablePadding
+      .inputs
+        = form_for @giftcard_payment_form do |f|
+          = f.hidden_field :token
+          .row
+            .col-lg-4.col-sm-3
+              = f.label :first_name, t('.form.name.label')
+            .col-lg-8.col-sm-9
+              = f.text_field :first_name, placeholder: t('.form.name.first_placeholder'), class: 'form-control'
+          .clearfix
+
+          .row
+            .col-lg-4.col-sm-3
+            .col-lg-8.col-sm-9
+              = f.text_field :last_name, placeholder: t('.form.name.second_placeholder'), class: 'form-control'
+          .clearfix
+
+          .row
+            .col-lg-4.col-sm-3
+              = f.label :brokerage, t('.form.brokerage.label')
+            .col-lg-8.col-sm-9
+              = f.text_field :brokerage, placeholder: t('.form.brokerage.placeholder'), class: 'form-control'
+          .clearfix
+
+          .row
+            .col-lg-4.col-sm-3
+              = f.label :email, t('.form.email.label')
+            .col-lg-8.col-sm-9
+              = f.text_field :email, placeholder: t('.form.email.placeholder'), class: 'form-control', type: 'email'
+          .clearfix
+
+          .row
+            .col-lg-4.col-sm-3
+              = f.label :email, t('.form.phone.label')
+            .col-lg-8.col-sm-9#phoneParts
+              = f.text_field :phone,
+                name: "giftcard_payment[phone][]",
+                placeholder: '123',
+                class: 'form-control',
+                maxlength: 3,
+                pattern: ".{3}",
+                title: t('.form.phone.tooltip_three_digits')
+              %span &#8212;
+              = f.text_field :phone,
+                name: "giftcard_payment[phone][]",
+                placeholder: '456',
+                class: 'form-control',
+                maxlength: 3,
+                pattern: ".{3}",
+                title: t('.form.phone.tooltip_three_digits')
+              %span &#8212;
+              = f.text_field :phone,
+                name: "giftcard_payment[phone][]",
+                placeholder: '7890',
+                class: 'form-control',
+                maxlength: 4,
+                pattern: ".{4}",
+                title: t('.form.phone.tooltip_four_digits')
+          .clearfix
+
+          .row
+            .col-lg-4.col-sm-3
+              = f.label :quantity, t('.form.choice')
+            .col-lg-8.col-sm-9
+              = f.select(:quantity,
+                  options_for_select(@quantity_options))
+          .clearfix
+
+          .row.amount
+            .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
+              Total:
+              %span.dollars
+
+          .row#sfarSubmitButton
+            .col-lg-8.col-lg-offset-4.col-md-9.col-md-offset-3.submitContainer
+              = f.submit t('.form.submit'), class: 'btn btn-default'
+          .clearfix
+            = render 'home/msg'
+
