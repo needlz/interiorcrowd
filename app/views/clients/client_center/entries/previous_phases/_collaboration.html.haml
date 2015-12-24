@@ -11,17 +11,16 @@
     = render partial: 'shared/moodboard',
         locals: { items: @entries_page.entries_concept_board_page.current_lookbook_items }
     .image-items
-      = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: false,
-          title: t('designer_center.edit.products_list'),
-          image_items: request.product_items.collaboration.published.for_view }
-      = render partial: 'clients/client_center/entries/collaboration/image_block',
-          locals: { choosable: false,
-          title: t('designer_center.edit.similar_styles'),
-          image_items: request.similar_styles.collaboration.published.for_view }
+      = render @entries_page.entries_concept_board_page.paginated_image_items_partial('product_items')
+      = render @entries_page.entries_concept_board_page.paginated_image_items_partial('similar_styles')
 
   .col-md-4
     = render partial: 'contest_requests/submission_info',
-        locals: { designer: request.designer, submitted_at: request.created_at, request: request  }
+        locals: { designer: request.designer,
+            submitted_at: request.created_at,
+            request: request  }
     = render partial: 'designer_center_requests/edit/comments',
-        locals: { request: request, comments: request.comments, show_comment_switcher: true, readonly: true }
+        locals: { request: request,
+            comments: request.comments,
+            show_comment_switcher: true,
+            readonly: true }

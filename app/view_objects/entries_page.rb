@@ -9,20 +9,28 @@ class EntriesPage < ContestPage
     @show_submissions = (contest.submission? && requests_present?) || contest.winner_selection?
 
     if won_contest_request
-      page_class = "ConceptBoardPage::ClientPerspective::#{ won_contest_request.status.camelize }".constantize
+      @phases_stripe = create_phases_stripe
+    else
+      @phases_stripe = PhasesStripe.new(last_step: 0)
+    end
 
-      @entries_concept_board_page = page_class.new({
+    if won_contest_request && phases_stripe.winner_step?
+      page_class =
+        if @phases_stripe.previous_step?
+          "ConceptBoardPage::ClientPerspective::#{ phases_stripe.active_phase.to_s.camelize }".constantize
+        else
+          "ConceptBoardPage::ClientPerspective::#{ won_contest_request.status.camelize }".constantize
+        end
+
+      @entries_concept_board_page = page_class.new(
         contest_request: @won_contest_request,
         view_context: view_context,
         preferred_view: @selected_view,
         contest_page: self,
         pagination_options: options[:pagination_options]
-      })
+      )
       @visible_image_items = entries_concept_board_page.image_items.paginate(per_page: 10, page: options[:image_items_page])
       @share_url = view_context.public_designs_url(token: won_contest_request.token)
-      @phases_stripe = entries_concept_board_page.phases_stripe
-    else
-      @phases_stripe = PhasesStripe.new(last_step: 0)
     end
   end
 
@@ -80,14 +88,34 @@ class EntriesPage < ContestPage
   end
 
   def partial
-    if won_contest_request && !(entries_concept_board_page.active_phase == :initial)
-      { partial: 'clients/client_center/entries/entry', locals: { entries_page: self } }
+    if won_contest_request && !(phases_stripe.active_phase == :initial)
+      { partial: 'clients/client_center/entries/entry',
+        locals: { entries_page: self } }
     else
-      { partial: 'clients/client_center/entries/entries', locals: { entries_page: self } }
+      { partial: 'clients/client_center/entries/entries',
+        locals: { entries_page: self } }
     end
   end
 
+  def phase_url(index)
+    view_context.client_center_entry_path(phase_url_params(index))
+  end
+
   private
+
+  def create_phases_stripe
+    PhasesStripe.new(selected_step: @selected_view,
+                     last_step: ContestPhases.status_to_index(won_contest_request.status),
+                     view_context: view_context,
+                     contest_request_status: won_contest_request.status,
+                     step_url_renderer: self)
+  end
+
+  def phase_url_params(index)
+    path_params = { id: contest.id }
+    path_params.merge!(view: index) if index != phases_stripe.last_phase_index
+    path_params
+  end
 
   def time_till_milestone_end
     DurationHumanizer.to_string(view_context, Time.current, contest.phase_end)
