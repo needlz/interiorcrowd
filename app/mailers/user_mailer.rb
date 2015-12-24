@@ -236,7 +236,7 @@ class UserMailer < ActionMailer::Base
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
     template 'Designer-asks-client-a-question-submission-phase'
     set_template_values(
-      entry_url: renderer.client_center_entry_url(id: options[:contest_request_id]),
+      entry_url: renderer.contest_request_url(id: options[:contest_request_id]),
       comment_text: options[:comment_text]
     )
     client = Client.find(options[:client_id])

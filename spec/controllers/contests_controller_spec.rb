@@ -383,6 +383,16 @@ RSpec.describe ContestsController do
           expect(response).to render_template(:entries_invitations)
         end
 
+        context 'when contest request id passed instead' do
+          let(:id) { submitted_request.id }
+
+          it 'returns page' do
+            pay_contest(contest)
+            get :show, id: id
+            expect(response).to redirect_to(client_center_entry_path(contest.id))
+          end
+        end
+
         context 'responses present' do
           def create_contest_request(cont)
             Fabricate(:contest_request,
