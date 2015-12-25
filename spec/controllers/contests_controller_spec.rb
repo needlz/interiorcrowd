@@ -455,7 +455,6 @@ RSpec.describe ContestsController do
                   else
                     expect(response).to render_template(partial: 'clients/client_center/entries/_entry')
                   end
-
                 end
                 contest_request.destroy
               end
@@ -603,10 +602,19 @@ RSpec.describe ContestsController do
       end
 
       context 'when contest in "finished" state' do
-        it 'returns page' do
+        before do
           create_request(contest: { status: 'finished' },
                          contest_request: { status: 'finished', answer: 'winner' })
+          Fabricate(:product_item, contest_request: @contest_request, phase: 'collaboration')
+        end
+
+        it 'returns page' do
           get :show, id: @contest.id
+          expect(response).to render_template('clients/client_center/entries')
+        end
+
+        it 'renders view of collaboration phase' do
+          get :show, id: @contest.id, view: ContestPhases.phase_to_index(:collaboration)
           expect(response).to render_template('clients/client_center/entries')
         end
       end

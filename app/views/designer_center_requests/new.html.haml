@@ -11,7 +11,9 @@
 - content_for :designer_center_content do
   #new-contest-request.contest.row{ data: { id: @contest.id } }
     = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: PhasesStripe.new(active_step: 0, view_context: self, status: @request.status) }
+             locals: { stripe: PhasesStripe.new(selected_step: 0,
+                view_context: self,
+                contest_request_status: @request.status) }
     = render partial: 'contests/preview/current_contest_infobox',
         locals: { contest: ContestShortDetails.new(@contest) }
     = form_for @request,

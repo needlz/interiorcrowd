@@ -35,7 +35,7 @@ class ImageItem < ActiveRecord::Base
   validates_inclusion_of :kind, in: KINDS.map(&:to_s)
   validates_inclusion_of :status, in: STATUSES
   validates_inclusion_of :phase, in: ContestPhases.phases.map(&:to_s)
-  validates_presence_of :contest_request
+  validates_presence_of :contest_request, :phase
 
   belongs_to :image
   belongs_to :contest_request

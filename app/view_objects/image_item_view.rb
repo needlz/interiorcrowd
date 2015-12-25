@@ -46,6 +46,7 @@ class ImageItemView
   end
 
   def link_text
+    return '' if link.blank?
     get_link_base_url(link)
   end
 

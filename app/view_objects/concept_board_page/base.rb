@@ -21,27 +21,27 @@ class ConceptBoardPage::Base < PhasesHolder
   end
 
   def image_items
-    contest_request.image_items.of_phase(active_phase).for_view
+    contest_request.image_items.of_phase(phases_stripe.active_phase).for_view
   end
 
   def product_items
-    contest_request.image_items.product_items.of_phase(active_phase).for_view
+    contest_request.image_items.product_items.of_phase(phases_stripe.active_phase).for_view
   end
 
   def similar_styles
-    contest_request.image_items.similar_styles.of_phase(active_phase).for_view
+    contest_request.image_items.similar_styles.of_phase(phases_stripe.active_phase).for_view
   end
 
   def current_lookbook_items
-    contest_request.lookbook_items_by_phase(active_phase)
+    contest_request.lookbook_items_by_phase(phases_stripe.active_phase)
   end
 
   def concept_board_images
-    contest_request.lookbook_items_by_phase(active_phase).map(&:image)
+    contest_request.lookbook_items_by_phase(phases_stripe.active_phase).map(&:image)
   end
 
   def editable?
-    contest_request.editable? && (active_step >= last_phase_index)
+    contest_request.editable? && (phases_stripe.active_step >= phases_stripe.last_phase_index)
   end
 
   def contest_name
@@ -60,26 +60,22 @@ class ConceptBoardPage::Base < PhasesHolder
     @final_notes ||= (contest_request.comments + contest_request.final_notes).sort_by(&:created_at).map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
   end
 
-  def active_phase
-    ContestPhases.index_to_phase(active_step)
+  def image_items_partial
+    raise NotImplementedError
   end
 
   def previous_step?
-    active_step < last_phase_index
-  end
-
-  def image_items_partial
-    raise NotImplementedError
+    return @contest_page.phases_stripe.previous_step? if @contest_page
+    phases_stripe.previous_step?
   end
 
   protected
 
   def create_phases_stripe
-    PhasesStripe.new(active_step: active_step,
-                     last_step: last_phase_index,
+    PhasesStripe.new(selected_step: @preferred_view_index,
+                     last_step: ContestPhases.status_to_index(@contest_request.status),
                      view_context: @view_context,
-                     status: @contest_request.status,
-                     contest_request: @contest_request,
+                     contest_request_status: @contest_request.status,
                      step_url_renderer: self)
   end
 
@@ -87,21 +83,13 @@ class ConceptBoardPage::Base < PhasesHolder
 
   attr_reader :preferred_view_index, :contest_request_view, :view_context
 
-  def active_step
-    selected_step || last_phase_index
-  end
-
   def phase_dependent_partial
-    send(active_phase)
-  end
-
-  def last_phase_index
-    @last_index ||= ContestPhases.status_to_index(contest_request.status)
+    send(phases_stripe.active_phase)
   end
 
   def phase_url_params(index)
     path_params = { id: contest_request.id }
-    path_params.merge!(view: index) if index != last_phase_index
+    path_params.merge!(view: index) if index != phases_stripe.last_phase_index
     path_params
   end
 

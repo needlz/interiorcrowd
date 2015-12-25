@@ -1,4 +1,4 @@
-class ContestPage
+class ContestPage < PhasesHolder
 
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
               :answer, :view_context, :selected_view

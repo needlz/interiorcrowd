@@ -32,7 +32,7 @@ RSpec.describe ContestRequestSubmission do
     contest_request.update_attributes(status: 'submitted')
     expect do
       ContestRequestSubmission.new(contest_request).perform
-    end.to raise_error(StateMachine::InvalidTransition), change{BoardSubmittedDesignerNotification.count}.by(0)
+    end.to raise_error(StateMachine::InvalidTransition).and change{BoardSubmittedDesignerNotification.count}.by(0)
     expect(contest_request.reload.submitted_at).to be_nil
     expect(jobs_with_handler_like('concept_board_received').count).to eq 0
   end

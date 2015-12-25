@@ -34,7 +34,7 @@ class ContestsController < ApplicationController
 
     @entries_page = EntriesPage.new(
       contest: @contest,
-      view: params[:view],
+      view: (params[:view].to_i if params[:view]),
       answer: params[:answer],
       pagination_options: params,
       current_user: current_user,

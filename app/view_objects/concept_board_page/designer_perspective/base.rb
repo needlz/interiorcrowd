@@ -18,7 +18,7 @@ class ConceptBoardPage::DesignerPerspective::Base < ::ConceptBoardPage::Base
   end
 
   def content_partial
-    if contest_request.finished? && active_phase == :final_design
+    if contest_request.finished? && phases_stripe.active_phase == :final_design
       'designer_center_requests/show/finished'
     else
       'designer_center_requests/show/non_finished'

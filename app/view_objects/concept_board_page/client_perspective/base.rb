@@ -16,22 +16,11 @@ class ConceptBoardPage::ClientPerspective::Base < ConceptBoardPage::Base
     raise NotImplementedError
   end
 
-  protected
-
-  def create_phases_stripe
-    PhasesStripe.new(active_step: active_step,
-                     last_step: last_phase_index,
-                     view_context: view_context,
-                     status: contest_request.status,
-                     contest_request: contest_request,
-                     step_url_renderer: self)
-  end
-
   private
 
   def phase_url_params(index)
     path_params = { id: contest_request.contest.id }
-    path_params.merge!(view: index) if index != last_phase_index
+    path_params.merge!(view: index) if index != phases_stripe.last_phase_index
     path_params
   end
 
@@ -54,7 +43,7 @@ class ConceptBoardPage::ClientPerspective::Base < ConceptBoardPage::Base
   end
 
   def collaboration_phase_in_process?
-    ContestPhases.index_to_phase(last_phase_index) == :collaboration
+    ContestPhases.index_to_phase(phases_stripe.last_phase_index) == :collaboration
   end
 
 end
