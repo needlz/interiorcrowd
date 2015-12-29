@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151218131044) do
+ActiveRecord::Schema.define(version: 20151225105435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,15 @@ ActiveRecord::Schema.define(version: 20151218131044) do
 
   add_index "clients_promocodes", ["client_id", "promocode_id"], name: "index_clients_promocodes_on_client_id_and_promocode_id", using: :btree
   add_index "clients_promocodes", ["promocode_id", "client_id"], name: "index_clients_promocodes_on_promocode_id_and_client_id", using: :btree
+
+  create_table "concept_board_comment_attachments", force: :cascade do |t|
+    t.integer  "comment_id"
+    t.integer  "attachment_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "concept_board_comment_attachments", ["comment_id", "attachment_id"], name: "comments_and_attachments", unique: true, using: :btree
 
   create_table "concept_board_comments", force: :cascade do |t|
     t.integer  "user_id"

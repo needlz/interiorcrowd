@@ -91,6 +91,8 @@ class Image < ActiveRecord::Base
       name: image_file_name,
       size: image_file_size,
       url: medium_size_url,
+      original_size_url: original_size_url,
+      download_url: url_for_downloading,
       id: id
     }
   end

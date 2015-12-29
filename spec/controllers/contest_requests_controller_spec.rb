@@ -12,7 +12,7 @@ RSpec.describe ContestRequestsController do
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
-  let(:designer) { Fabricate(:designer) }
+  let(:designer) { Fabricate(:portfolio).designer }
   let(:request) { Fabricate(:contest_request, contest: contest,
                             lookbook: Fabricate(:lookbook),
                             designer: designer) }
@@ -159,16 +159,10 @@ RSpec.describe ContestRequestsController do
         expect(response).to be_ok
       end
 
-      it 'displays the line breaks' do
-        post :add_comment, comment: {text: "text\nsome_another_text", contest_request_id: request.id}, id: request.id
-        json = JSON.parse(response.body)
-        expect(json['text']).to include("<p>text\n<br>some_another_text</p>")
-      end
-
-      it 'makes links clickable' do
+      it 'returns html of new comment' do
         post :add_comment, comment: {text: 'http://google.com', contest_request_id: request.id}, id: request.id
         json = JSON.parse(response.body)
-        expect(json['text']).to include('<p><a target="_blank" href="http://google.com">http://google.com</a></p>')
+        expect(json['comment_html']).to be_present
       end
 
       it 'notifies designer' do
@@ -224,6 +218,15 @@ RSpec.describe ContestRequestsController do
     context 'logged as request creator' do
       before do
         sign_in(designer)
+      end
+
+      context 'when files attached' do
+        let(:params) { { comment: { text: 'text', attachments_ids: [Fabricate(:image).id] }, contest_id: contest.id } }
+
+        it 'creates concept_board_comment_attachment' do
+          post :add_comment, params
+          expect(ContestRequest.last.comments.last.attachments.count).to eq 1
+        end
       end
 
       it 'creates first comment and contest request if there is no request for this designer yet' do

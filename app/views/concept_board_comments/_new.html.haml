@@ -1,0 +1,20 @@
+.topText
+  = t('.new_comment')
+  .glyphicon.glyphicon-paperclip.uploadButton
+  %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+  %input.fileIds{ type: 'hidden' }
+.editArea
+  .thumbs
+    .template
+      = render 'concept_board_comment_attachments/edit', attachment: Hashie::Mash.new
+    .uploadingTemplate
+      %img.preview
+      %span.filename
+      %span.size
+      .progressbar
+        .pointer
+      .menuButtons
+        = render 'concept_board_comment_attachments/remove_button'
+
+  %textarea{ request: contest_request.id }
+%button.comment-create= t('.send')

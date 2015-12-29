@@ -15,6 +15,8 @@
 class ConceptBoardComment < ActiveRecord::Base
   belongs_to :contest_request
   belongs_to :contest_note
+  has_many :comment_attachments, foreign_key: 'comment_id', class_name: 'ConceptBoardCommentAttachment'
+  has_many :attachments, through: :comment_attachments, class_name: 'Image'
 
   default_scope { order(created_at: :desc) }
 

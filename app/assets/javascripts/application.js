@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require loader
 //= require jquery_ujs
 //= require jquery-ui/widget
 //= require bootstrap.min
 //= require bootstrap-select.min
 //= require jquery.mmenu.min.all
 //= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/load-image.all.min
+//= require jquery-fileupload/jquery.fileupload-process
+//= require jquery-fileupload/jquery.fileupload-image
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
 //= require jquery-ui/slider
@@ -36,3 +40,5 @@
 //= require_tree ./lib/iframeResizer
 //= require_tree ./shared
 //= require jquery.slick
+
+defined()

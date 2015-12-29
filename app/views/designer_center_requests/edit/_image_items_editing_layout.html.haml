@@ -26,7 +26,7 @@
           = render partial: 'shared/moodboard', locals: { request: @request }
   .col-lg-4.col-md-5
     - if @request.commenting_enabled?
-      = render partial: 'designer_center_requests/edit/comments',
+      = render partial: 'shared/comments',
           locals: { request: @request,
                     comments: @request.comments,
                     show_comment_switcher: !@request_view.initial_concept_board? }

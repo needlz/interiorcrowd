@@ -1,3 +1,34 @@
+window.humanFileSize = (bytes, si) ->
+  thresh = if si then 1000 else 1024
+  if Math.abs(bytes) < thresh
+    return bytes + ' B'
+  units = if si then [
+    'kB'
+    'MB'
+    'GB'
+    'TB'
+    'PB'
+    'EB'
+    'ZB'
+    'YB'
+  ] else [
+    'KiB'
+    'MiB'
+    'GiB'
+    'TiB'
+    'PiB'
+    'EiB'
+    'ZiB'
+    'YiB'
+  ]
+  u = -1
+  loop
+    bytes /= thresh
+    ++u
+    unless Math.abs(bytes) >= thresh and u < units.length - 1
+      break
+  bytes.toFixed(1) + ' ' + units[u]
+
 $(document).bind('drop dragover', (e)->
   e.preventDefault()
 )
@@ -44,6 +75,10 @@ class Uploader
         done: @onUploaded
         dropZone: @options.thumbs.dropZone || null
         fileInput: @options.fileInput
+        progress: @onProgress
+        submit: @onSend
+        processalways: @onProcessalways
+
       }
       @options.uploadify
     )
@@ -51,25 +86,35 @@ class Uploader
     @$input.initUploader(uploadOptions)
 
   onUploaded: (event, data) =>
-    $.each data.result.files, (index, file) =>
-      imageUrl = file.url
-      imageId = file.id
+    $.each data.result.files, (index, fileInfo) =>
       if @options.single
-        @onSingleFileUploaded(imageUrl, imageId)
+        @onSingleFileUploaded(fileInfo)
       else
-        @onMultipleFilesUploaded(imageUrl, imageId)
+        @onMultipleFilesUploaded(fileInfo)
+    @options.uploadify.onUploaded?(data.result) if @options.uploadify
 
-  onSingleFileUploaded: (imageUrl, imageId)->
-    if @thumbsTheme
-      @thumbsTheme.thumbForSingleImageUploader(imageUrl, imageId)
-    @$imageIds.val(imageId)
+  onProgress: (event, data)=>
+    progress = parseInt(data.loaded / data.total * 100, 10);
+    file = data.files[0]
+    @thumbsTheme.onProgress?(file, progress) if @thumbsTheme
 
-  onMultipleFilesUploaded: (imageUrl, imageId)->
-    if @thumbsTheme
-      @thumbsTheme.thumbForMultipleImageUploader(imageUrl, imageId)
+  onSingleFileUploaded: (fileInfo)->
+    @thumbsTheme.thumbForSingleImageUploader(fileInfo) if @thumbsTheme
+    @$imageIds.val(fileInfo.id)
+
+  onMultipleFilesUploaded: (fileInfo)->
+    @thumbsTheme.thumbForMultipleImageUploader(fileInfo) if @thumbsTheme
     previousIds = ''
     previousIds = @$imageIds.val() + ',' if @$imageIds.val()
-    @$imageIds.val(previousIds + imageId)
+    @$imageIds.val(previousIds + fileInfo.id)
+
+  onSend: (e, data)=>
+    file = data.files[0]
+    @thumbsTheme.onSend?(file) if @thumbsTheme
+
+  onProcessalways: (e, data)=>
+    file = data.files[0]
+    @thumbsTheme.onProcessalways?(file) if @thumbsTheme
 
 class @ThumbsTheme
 
@@ -79,19 +124,19 @@ class @ThumbsTheme
 
 class @DefaultThumbsTheme extends ThumbsTheme
 
-  thumbForSingleImageUploader: (imageUrl, imageId) ->
+  thumbForSingleImageUploader: (fileInfo) ->
     $img = @$container.find('img')
     $img = $('<img>').appendTo(@$container) unless $img.length
-    $img.attr('src', imageUrl)
+    $img.attr('src', fileInfo.url)
 
-  thumbForMultipleImageUploader: (imageUrl, imageId) ->
-    @$container.append "<img src='#{ imageUrl }' />"
+  thumbForMultipleImageUploader: (fileInfo) ->
+    @$container.append "<img src='#{ fileInfo.url }' />"
 
 class @DivContainerThumbsTheme extends ThumbsTheme
 
-  thumbForSingleImageUploader: (imageUrl, imageId) ->
+  thumbForSingleImageUploader: (fileInfo) ->
     $img = @$container.find('.image-container')
-    $img.css('background-image', "url('#{ encodeURI(imageUrl) }')")
+    $img.css('background-image', "url('#{ encodeURI(fileInfo.url) }')")
 
 class @RemovableThumbsTheme extends ThumbsTheme
 
@@ -118,25 +163,25 @@ class @RemovableThumbsTheme extends ThumbsTheme
       $thumb.remove()
       @onRemoved?(imageId)
 
-  thumbForSingleImageUploader: (imageUrl, imageId) ->
+  thumbForSingleImageUploader: (fileInfo) ->
     $img = @$container.find('.thumb img:first')
     if $img.length
-      $img.attr('src', imageUrl)
+      $img.attr('src', fileInfo.url)
     else
       $template = @$container.find('.template')
-      $thumb = @createThumb(imageUrl, imageId)
+      $thumb = @createThumb(fileInfo)
       @insertThumb($thumb)
 
-  thumbForMultipleImageUploader: (imageUrl, imageId) ->
-    $thumb = @createThumb(imageUrl, imageId)
+  thumbForMultipleImageUploader: (fileInfo) ->
+    $thumb = @createThumb(fileInfo)
     @insertThumb($thumb)
 
-  createThumb: (imageUrl, imageId)->
+  createThumb: (fileInfo)->
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
-    $container.data('id', imageId)
-    $container.find('img:first').attr('src', imageUrl)
+    $container.data('id', fileInfo.id)
+    $container.find('img:first').attr('src', fileInfo.url)
     $container
 
   insertThumb: (thumb) ->
