@@ -18,6 +18,111 @@ $formBorder: 1px solid #E1E1E1
   font-style: normal
   font-size: 17px
 
+.contactForm
+  background-color: $dimmedBackground
+  padding: 50px 0px
+
+  .description
+    font-size: 17px
+    margin-top: 32px
+    width: 35%
+
+    h2
+      font-size: 30px
+      line-height: 45px
+
+    p
+      color: #A8A8A8
+
+  .form
+    border-left: $formBorder
+    width: 65%
+
+    .row
+      margin: 20px 0px 20px 20px
+
+    .title
+      font-size: 19px
+
+    .inputsGroup
+      padding: 5px 0px
+
+    .inputs
+      border-top: $formBorder
+      padding: 12px 0px
+
+      label
+        font-size: 18px
+        font-weight: normal
+
+      input
+        background-color: $dimmedBackground
+        border-color: #8C8C8C
+
+      #phoneParts
+        input
+          display: inline
+          width: 25.5%
+        span
+          font-size: 15px
+          color: #8c8c8c
+          margin: auto 3.3% auto 3.3%
+
+      @media(max-width: 1200px)
+        #phoneParts
+          input
+            width: 24.8%
+
+      @media(max-width: 992px)
+        #phoneParts
+          input
+            width: 26.3%
+
+      @media(max-width: 768px)
+        #phoneParts
+          input
+            width: 25.8%
+
+      @media(max-width: 502px)
+        #phoneParts
+          input
+            width: 24.8%
+          span
+            margin: auto 2% auto 2%
+
+      .bootstrap-select
+        width: 100%
+
+        .dropdown-toggle
+          border-color: #8C8C8C
+
+          .filter-option
+            @include placeholderStyle
+
+      .bootstrap-select.btn-group .btn .caret
+        border-left: 1px solid #F0F0F0
+
+      input[type=submit]
+        background-color: #FF7D26
+        color: white
+        width: 100%
+        max-width: 200px
+        height: 55px
+        font-size: 22px
+        border-radius: 2px
+
+      ::-webkit-input-placeholder
+        @include placeholderStyle
+
+      :-moz-placeholder
+        @include placeholderStyle
+
+      ::-moz-placeholder
+        @include placeholderStyle
+
+      :-ms-input-placeholder
+        @include placeholderStyle
+
 .sfarPage
   color: $defaultTextColor
 
@@ -46,111 +151,6 @@ $formBorder: 1px solid #E1E1E1
       font-size: 30px
       font-family: 'Austin Web' !important
       margin: 50px 0px
-
-  .contactForm
-    background-color: $dimmedBackground
-    padding: 50px 0px
-
-    .description
-      font-size: 17px
-      margin-top: 32px
-      width: 35%
-
-      h2
-        font-size: 30px
-        line-height: 45px
-
-      p
-        color: #A8A8A8
-
-    .form
-      border-left: $formBorder
-      width: 65%
-
-      .row
-        margin: 20px 0px 20px 20px
-
-      .title
-        font-size: 19px
-
-      .inputsGroup
-        padding: 5px 0px
-
-      .inputs
-        border-top: $formBorder
-        padding: 12px 0px
-
-        label
-          font-size: 18px
-          font-weight: normal
-
-        input
-          background-color: $dimmedBackground
-          border-color: #8C8C8C
-
-        #phoneParts
-          input
-            display: inline
-            width: 25.5%
-          span
-            font-size: 15px
-            color: #8c8c8c
-            margin: auto 3.3% auto 3.3%
-
-        @media(max-width: 1200px)
-          #phoneParts
-            input
-              width: 24.8%
-
-        @media(max-width: 992px)
-          #phoneParts
-            input
-              width: 26.3%
-
-        @media(max-width: 768px)
-          #phoneParts
-            input
-              width: 25.8%
-
-        @media(max-width: 502px)
-          #phoneParts
-            input
-              width: 24.8%
-            span
-              margin: auto 2% auto 2%
-
-        .bootstrap-select
-          width: 100%
-
-          .dropdown-toggle
-            border-color: #8C8C8C
-
-            .filter-option
-              @include placeholderStyle
-
-        .bootstrap-select.btn-group .btn .caret
-          border-left: 1px solid #F0F0F0
-
-        input[type=submit]
-          background-color: #FF7D26
-          color: white
-          width: 100%
-          max-width: 200px
-          height: 55px
-          font-size: 22px
-          border-radius: 2px
-
-        ::-webkit-input-placeholder
-          @include placeholderStyle
-
-        :-moz-placeholder
-          @include placeholderStyle
-
-        ::-moz-placeholder
-          @include placeholderStyle
-
-        :-ms-input-placeholder
-          @include placeholderStyle
 
   .step
     margin: 20px 8% 94px

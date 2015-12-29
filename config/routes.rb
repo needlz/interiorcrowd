@@ -198,7 +198,10 @@ InteriorC::Application.routes.draw do
     resources :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
     get '/outbound_email', to: 'outbound_emails#verify', via: :head
 
+    resources :giftcard_payments, controller: 'giftcard_payments', only: [:create, :index]
+
     get '/sfar', to: 'rieltor_contacts#sfar', as: 'sfar'
+    get '/giftcards', to: 'giftcard_payments#new', as: 'new_giftcard_payment'
 
     resources :rieltor_contacts, only: [:create]
   end

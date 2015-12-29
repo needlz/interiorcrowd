@@ -10,6 +10,7 @@
 #  discount_currency :string(255)      default("USD"), not null
 #  created_at        :datetime
 #  updated_at        :datetime
+#  one_time          :boolean          default(TRUE)
 #
 
 class Promocode < ActiveRecord::Base

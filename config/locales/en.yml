@@ -1704,3 +1704,39 @@ en:
             other: '%{count} comments'
           send_button: Send
           saving: Saving...
+
+  giftcard_payments:
+    new:
+      sidebar:
+        title: Interested in helping your clients redesign their home with InteriorCrowd?
+        pricing: |
+          Pricing info:
+          1 single room - $299
+
+          Packages:
+          5 for $1375
+          10 for $2500
+          20 for $3980
+
+      form:
+        title: Contact info
+        name:
+          label: Name
+          first_placeholder: First Name
+          second_placeholder: Last Name
+        brokerage:
+          label: Brokerage
+          placeholder: Brokerage name
+        email:
+          label: E-mail
+          placeholder: example@address.com
+        phone:
+          label: Phone number
+          tooltip_three_digits: 3 digits
+          tooltip_four_digits: 4 digits
+        choice: Select a quantity
+        submit: Submit
+    index:
+      thank_you: >
+        Thank you for your order! We will begin processing your gift cards immediately.
+        Please allow one business day for e-gift cards and three business days for traditional gift cards.

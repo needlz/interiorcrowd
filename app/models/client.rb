@@ -23,6 +23,7 @@
 #  email_opt_in              :boolean          default(TRUE)
 #  first_contest_created_at  :datetime
 #  latest_contest_created_at :datetime
+#  notified_owner            :boolean          default(FALSE), not null
 #
 
 class Client < ActiveRecord::Base
