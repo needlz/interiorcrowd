@@ -1,3 +1,4 @@
+
 $dimmedBackground: #F0F0F0
 $orangeFontColor: #FF8838
 $backgroundLetterColor: #FFE9DF
@@ -36,7 +37,6 @@ $formBorder: 1px solid #E1E1E1
 
   .form
     border-left: $formBorder
-    width: 65%
 
     .row
       margin: 20px 0px 20px 20px
@@ -62,11 +62,15 @@ $formBorder: 1px solid #E1E1E1
       #phoneParts
         input
           display: inline
-          width: 25.5%
-        span
+          width: 25%
+        input:last-of-type
+          float: right
+        .delimiter
           font-size: 15px
           color: #8c8c8c
-          margin: auto 3.3% auto 3.3%
+          width: 10%
+          display: inline-block
+          text-align: center
 
       @media(max-width: 1200px)
         #phoneParts
@@ -76,7 +80,7 @@ $formBorder: 1px solid #E1E1E1
       @media(max-width: 992px)
         #phoneParts
           input
-            width: 26.3%
+            width: 25%
 
       @media(max-width: 768px)
         #phoneParts
@@ -87,8 +91,8 @@ $formBorder: 1px solid #E1E1E1
         #phoneParts
           input
             width: 24.8%
-          span
-            margin: auto 2% auto 2%
+          .delimiter
+            width: 7%
 
       .bootstrap-select
         width: 100%
@@ -125,6 +129,10 @@ $formBorder: 1px solid #E1E1E1
 
 .sfarPage
   color: $defaultTextColor
+
+  .contactForm
+    .form
+      width: 65%
 
   header
     padding: 50px 0px
