@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151225105435) do
+ActiveRecord::Schema.define(version: 20160104144608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -401,6 +401,7 @@ ActiveRecord::Schema.define(version: 20151225105435) do
     t.integer  "portfolio_id"
     t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
+    t.string   "file_type",                      default: "image"
   end
 
   create_table "inbound_emails", force: :cascade do |t|
