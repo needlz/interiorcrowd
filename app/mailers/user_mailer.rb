@@ -29,11 +29,13 @@ class UserMailer < ActionMailer::Base
     mail to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id
   end
 
-  def reset_password(user, password, email_id = nil)
+  def reset_password(user_id, user_role, password, email_id = nil)
     template 'reset_password'
-    subject = I18n.t('mails.password_reset.subject')
-    set_template_values(set_reset_password_params(user, password))
-    mail({to: [wrap_recipient(user.email, user.name, 'to')], subject:subject, email_id: email_id})
+    user = user_role.constantize.find(user_id)
+    set_template_values(name: user.name,
+                        email: user.email,
+                        password: password)
+    mail({to: [wrap_recipient(user.email, user.name, 'to')], email_id: email_id})
   end
 
   def sign_up_beta_autoresponder(email, email_id = nil)
@@ -340,15 +342,6 @@ class UserMailer < ActionMailer::Base
     @days = ContestMilestone::DAYS['submission']
     {
       text: render_to_string('mails/invite_to_contest')
-    }
-  end
-
-  def set_reset_password_params(user, password)
-    {
-      name: user.name,
-      email: user.email,
-      password: password,
-      text: I18n.t('reset_password_text')
     }
   end
 
