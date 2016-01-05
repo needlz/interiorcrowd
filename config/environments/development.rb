@@ -1,13 +1,6 @@
 InteriorC::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  config.middleware.use Rack::SslEnforcer,
-                        :redirect_to => 'https://localhost',
-                        :https_port => 9292,
-                        :http_port => 3000,
-                        :except => ['/blog', '/designer_submission'],
-                        :strict => true
-
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
