@@ -1716,7 +1716,6 @@ en:
           20 for $3980
 
       form:
-        title: Contact info
         name:
           label: Name
           first_placeholder: First Name
