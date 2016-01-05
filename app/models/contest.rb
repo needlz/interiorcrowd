@@ -82,7 +82,7 @@ class Contest < ActiveRecord::Base
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
   scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
-  scope :incompleted, ->{ where(status: 'incomplete') }
+  scope :incompleted, ->{ where(status: INCOMPLETE_STATUSES) }
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category, if: -> { completed? }
