@@ -16,7 +16,7 @@ module ActiveAdminExtensions
     def full_user_name(user)
       return user.first_name.to_s unless user.last_name
       return user.last_name.to_s unless user.first_name
-      user.first_name + ' ' + user.last_name
+      user.name
     end
 
     def append_project_name(contest)
