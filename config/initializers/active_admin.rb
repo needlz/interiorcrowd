@@ -230,4 +230,6 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
+
+  config.skip_before_filter :setup_event_tracker # the before filter causes "A copy of ApplicationController has been removed from the module tree but is still active"
 end
