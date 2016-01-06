@@ -820,7 +820,9 @@ en:
       room: Room
       price: Price
       days: Days left
+      submissions: Submissions
       days_left_to_enter: Days left to enter
+      submissions: Submissions
       qualifying_round: Qualifying Round
       fulfillment_period: Fulfillment Period
       invite: Congratulations! You have been invited to join the %{contest_name} contest! Join now!

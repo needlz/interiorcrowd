@@ -3,12 +3,14 @@ class ContestShortDetails
   include Rails.application.routes.url_helpers
 
   attr_reader :id, :name, :package_name, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
-              :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path
+              :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path,
+              :submissions_count
   delegate :response_winner, :completed?, :winner_selection?, to: :contest
 
   def initialize(contest)
     @contest = contest
     @id = contest.id
+    @submissions_count = contest.requests.submitted.count
     @name = contest.project_name || 'My New Project'
     package = PackageView.new(contest.package)
     @package_name = package.name if package
