@@ -2,7 +2,7 @@ ActiveAdmin.register Contest do
 
   controller do
     def scoped_collection
-      super.includes :client
+      super.where.not(status: Contest::INCOMPLETE_STATUSES).includes :client
     end
   end
 
@@ -14,7 +14,7 @@ ActiveAdmin.register Contest do
     actions
   end
 
-  filter :status, as: :check_boxes, collection: proc { Contest::STATUSES }
+  filter :status, as: :check_boxes, collection: proc { Contest::STATUSES - Contest::INCOMPLETE_STATUSES }
 
   scope 'All', :all
   scope 'Active', :active
