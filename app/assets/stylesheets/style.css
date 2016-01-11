@@ -3153,13 +3153,16 @@ padding-bottom: 40px;
     color: #409863;
     font-size: 20px;
     font-weight: 700;
-    width: 70px !important;
-    text-align:center;
+    width: 100px !important;
+    text-align: center;
 }
 .greenDay span{
     font-size: 14px;
     font-weight: 400;
     display: block;
+}
+.days-left{
+    width: 15% !important;
 }
 .noBorderRadius{
     border-radius: 0px;
