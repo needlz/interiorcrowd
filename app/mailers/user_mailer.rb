@@ -2,8 +2,9 @@ class UserMailer < ActionMailer::Base
   include MandrillMailer
   include Rails.application.routes.url_helpers
 
-  def client_registered(client, email_id = nil)
+  def client_registered(client_id, email_id = nil)
     template 'client_welcome_mail'
+    client = Client.find client_id
     set_template_values(login_link: renderer.client_login_sessions_url,
                         submission_days: ContestMilestone::DAYS['submission'])
     mail to: [wrap_recipient(client.email, client.first_name, 'to')], email_id: email_id
@@ -243,8 +244,9 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
-  def account_creation(client, email_id = nil)
+  def account_creation(client_id, email_id = nil)
     template 'account_creation'
+    client = Client.find client_id
     set_template_values(
         twitter_url: Settings.external_urls.social.twitter,
         twitter_icon_url: asset_url('/icons/twitter.png'),
@@ -254,13 +256,15 @@ class UserMailer < ActionMailer::Base
         pinterest_icon_url: asset_url('/icons/pinterest.png'),
         instagram_url: Settings.external_urls.social.instagram,
         instagram_icon_url: asset_url('/icons/instagram.png'),
-        paragraph_1_background_url: asset_url('/emails/entertain_background.jpg'),
         logo_url: asset_url('/logo.png'),
-        finish_url: renderer.design_brief_contests_url,
+        brief_url: renderer.design_brief_contests_url,
         terms_of_service_url: renderer.terms_of_service_url,
         privacy_policy_url: renderer.privacy_policy_url,
         unsubscribe_url: renderer.unsubscribe_clients_url(signature: client.access_token),
-        promocode_background_url: asset_url('/emails/back.png')
+        promocode_background_url: asset_url('/emails/back.png'),
+        step_one_icon_url: asset_url('/emails/step_one.png'),
+        step_two_icon_url: asset_url('/emails/step_two.png'),
+        step_three_icon_url: asset_url('/emails/step_three.png')
     )
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end

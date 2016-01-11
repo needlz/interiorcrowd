@@ -27,7 +27,7 @@ class ClientCreation
 
   def send_notifications
     email = @send_welcome_email ? :account_creation : :client_registered
-    Jobs::Mailer.schedule(email, [client])
+    Jobs::Mailer.schedule(email, [client.id])
   end
 
 end
