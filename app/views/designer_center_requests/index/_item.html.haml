@@ -5,12 +5,13 @@
         .col-md-2.makeMeBold= contest.client_name
         .col-md-2= contest.name
         .col-md-2= contest.package_name
-        .col-md-2= contest.design_space
+        .col-md-1= contest.design_space
         - if contest.winner_selection? && response.draft? || response.closed?
           - days_left = 0
         - else
           - days_left = contest.days_till_end
         .col-md-2.greenDay= days_left
+        .col-md-1.greenDay= contest.submissions_count
     .col-md-4.contestDesignerBtn
       %a.btn{ href: designer_center_contest_path(id: contest.id) }= t('designer_center.responses.item.view_brief')
       %a.btn{ href: edit_designer_center_response_path(id: response.id) }

@@ -16,8 +16,9 @@
                 .col-md-2= t('designer_center.contests_preview.client_name')
                 .col-md-2= t('designer_center.contests_preview.contest_name')
                 .col-md-2= t('designer_center.contests_preview.type')
-                .col-md-2= t('designer_center.contests_preview.room')
-                .col-md-2= t('designer_center.contests_preview.days')
+                .col-md-1= t('designer_center.contests_preview.room')
+                .col-md-2.days-left= t('designer_center.contests_preview.days')
+                .col-md-1= t('designer_center.contests_preview.submissions')
         = render 'designer_center_requests/index/items', current_responses: @current_responses
 
         - if @completed_responses.present?
