@@ -1,4 +1,5 @@
 ActiveAdmin.register OutboundEmail do
+  menu priority: 15
 
   action_item :become, only: :show do
     resource_name = resource.class.model_name.element

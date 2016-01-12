@@ -1,4 +1,5 @@
 ActiveAdmin.register Portfolio do
+  menu priority: 16
 
 
   # See permitted parameters documentation:

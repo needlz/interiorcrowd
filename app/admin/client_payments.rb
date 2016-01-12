@@ -1,4 +1,5 @@
 ActiveAdmin.register ClientPayment do
+  menu priority: 6
 
   index do
     column :id
@@ -10,7 +11,8 @@ ActiveAdmin.register ClientPayment do
       link_to client_payment.stripe_charge_id, "https://dashboard.stripe.com/payments/#{ client_payment.stripe_charge_id }"
     end
     column :promocodes do |client_payment|
-      client_payment.contest.promocodes.map { |code| link_to(code.promocode, admin_promocode_path(code)) }.join(',').html_safe
+      contest = client_payment.contest
+      contest.promocodes.map { |code| link_to(code.promocode, admin_promocode_path(code)) }.join(',').html_safe if contest
     end
     actions
   end

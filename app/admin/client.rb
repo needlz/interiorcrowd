@@ -1,4 +1,11 @@
 ActiveAdmin.register Client do
+  menu priority: 4
+
+  controller do
+    def scoped_collection
+      super.joins(:credit_cards).uniq
+    end
+  end
 
   form do |f|
     f.inputs
