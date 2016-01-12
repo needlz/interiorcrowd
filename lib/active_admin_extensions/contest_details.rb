@@ -47,7 +47,7 @@ module ActiveAdminExtensions
 
     def promocode_details(contest, detail)
       codes = contest.contest_promocodes
-      codes.first.promocode.send(detail) if codes.present?
+      codes.first.promocode.try(detail) if codes.present?
     end
   end
 
