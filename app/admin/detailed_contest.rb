@@ -1,6 +1,8 @@
 include ActiveAdminExtensions::ContestDetails
 
 ActiveAdmin.register Contest, as: "Detailed Contest" do
+  menu priority: 13
+
   actions :all, :except => [:new, :destroy, :edit, :show]
 
   index do

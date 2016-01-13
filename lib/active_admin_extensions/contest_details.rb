@@ -1,6 +1,16 @@
 module ActiveAdminExtensions
 
   module ContestDetails
+    def last_contest_status(user)
+      contest = user.last_contest
+      return '' unless contest
+      if contest.status == 'incomplete'
+        ContestShortDetails.new(contest).progress
+      else
+        contest.status
+      end
+    end
+
     def end_date(contest)
       if %w[finished closed].include? contest.status
         formatted_date(contest.status.to_s.capitalize + ' at ', contest.finished_at)
@@ -47,7 +57,7 @@ module ActiveAdminExtensions
 
     def promocode_details(contest, detail)
       codes = contest.contest_promocodes
-      codes.first.promocode.send(detail) if codes.present?
+      codes.first.promocode.try(detail) if codes.present?
     end
   end
 

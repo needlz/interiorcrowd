@@ -1,4 +1,5 @@
 ActiveAdmin.register Sound do
+  menu priority: 19
 
   form do |f|
     f.inputs
