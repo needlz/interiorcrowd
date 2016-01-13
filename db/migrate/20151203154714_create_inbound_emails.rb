@@ -5,6 +5,6 @@ class CreateInboundEmails < ActiveRecord::Migration
       t.boolean :processed
 
       t.timestamps null: false
-    end
+    end unless table_exists? :inbound_emails
   end
 end

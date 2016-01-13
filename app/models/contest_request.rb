@@ -2,21 +2,23 @@
 #
 # Table name: contest_requests
 #
-#  id                 :integer          not null, primary key
-#  designer_id        :integer
-#  contest_id         :integer
-#  designs            :text
-#  feedback           :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  lookbook_id        :integer
-#  answer             :string(255)
-#  status             :string(255)      default("draft")
-#  final_note         :text
-#  pull_together_note :text
-#  token              :string(255)
-#  submitted_at       :datetime
-#  won_at             :datetime
+#  id                      :integer          not null, primary key
+#  designer_id             :integer
+#  contest_id              :integer
+#  designs                 :text
+#  feedback                :text
+#  status                  :string(255)      default("draft")
+#  created_at              :datetime
+#  updated_at              :datetime
+#  lookbook_id             :integer
+#  answer                  :string(255)
+#  final_note              :text
+#  pull_together_note      :text
+#  token                   :string(255)
+#  submitted_at            :datetime
+#  won_at                  :datetime
+#  last_visit_by_client_at :datetime
+#  email_thread_id         :string           not null
 #
 
 class ContestRequest < ActiveRecord::Base

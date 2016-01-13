@@ -31,10 +31,10 @@ class CommentNotifier
                             { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
     else
       Jobs::Mailer.schedule(:comment_on_board,
-                            [{ recipient: recipient.id,
+                            [{ recipient_id: recipient.id,
                                recipient_role: recipient.role,
-                               author: author.id,
-                               author_role: author_role,
+                               author_id: author.id,
+                               author_role: author.role,
                                search_by: "#{ author_role }s_comment_on_board",
                                comment_id: comment.id
                              },

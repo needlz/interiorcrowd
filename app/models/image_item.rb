@@ -14,10 +14,12 @@
 #  updated_at           :datetime
 #  kind                 :string(255)
 #  dimensions           :text
-#  price                :text
-#  status               :string(255)      default("temporary")
 #  final                :boolean          default(FALSE)
+#  price_cents          :integer
+#  price_currency       :string(255)      default("USD"), not null
+#  price                :text
 #  temporary_version_id :integer
+#  status               :string(255)      default("temporary")
 #  phase                :string(255)      default("collaboration")
 #
 
