@@ -2,21 +2,23 @@
 #
 # Table name: contest_requests
 #
-#  id                 :integer          not null, primary key
-#  designer_id        :integer
-#  contest_id         :integer
-#  designs            :text
-#  feedback           :text
-#  created_at         :datetime
-#  updated_at         :datetime
-#  lookbook_id        :integer
-#  answer             :string(255)
-#  status             :string(255)      default("draft")
-#  final_note         :text
-#  pull_together_note :text
-#  token              :string(255)
-#  submitted_at       :datetime
-#  won_at             :datetime
+#  id                      :integer          not null, primary key
+#  designer_id             :integer
+#  contest_id              :integer
+#  designs                 :text
+#  feedback                :text
+#  status                  :string(255)      default("draft")
+#  created_at              :datetime
+#  updated_at              :datetime
+#  lookbook_id             :integer
+#  answer                  :string(255)
+#  final_note              :text
+#  pull_together_note      :text
+#  token                   :string(255)
+#  submitted_at            :datetime
+#  won_at                  :datetime
+#  last_visit_by_client_at :datetime
+#  email_thread_id         :string           not null
 #
 
 class ContestRequest < ActiveRecord::Base
@@ -35,7 +37,7 @@ class ContestRequest < ActiveRecord::Base
   validate :contest_status, :one_winner, :allowed_answer, if: ->(request){ request.contest }
 
   after_update :change_status
-  after_initialize :set_token, if: :new_record?
+  after_initialize :set_tokens, if: :new_record?
 
   state_machine :status, initial: :draft do
     event :submit do
@@ -83,6 +85,10 @@ class ContestRequest < ActiveRecord::Base
   scope :finished, ->{ where(status: 'finished') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> { includes(contest: [:design_category, :design_space]) }
+
+  def self.generate_email_thread_id
+    TokenGenerator.generate(20)
+  end
 
   def change_status
     selected_as_winner if (changed_to?(:answer, 'winner') && status == 'submitted')
@@ -172,6 +178,10 @@ class ContestRequest < ActiveRecord::Base
     comments.by_designer.present? || feedback.present?
   end
 
+  def parent_comment(comment)
+    comments.where('created_at < ?', comment.created_at).order(:created_at).first
+  end
+
   private
 
   def contest_status
@@ -192,8 +202,9 @@ class ContestRequest < ActiveRecord::Base
     end
   end
 
-  def set_token
+  def set_tokens
     self.token = TokenGenerator.generate
+    self.email_thread_id = ContestRequest.generate_email_thread_id
   end
 
   def selected_as_winner

@@ -2,28 +2,31 @@
 #
 # Table name: clients
 #
-#  id                        :integer          not null, primary key
-#  first_name                :text
-#  last_name                 :text
-#  email                     :text
-#  password                  :string(255)
-#  address                   :text
-#  state                     :text
-#  zip                       :integer
-#  status                    :integer          default(1)
-#  created_at                :datetime
-#  updated_at                :datetime
-#  designer_level_id         :integer
-#  city                      :text
-#  phone_number              :text
-#  plain_password            :string(255)
-#  stripe_customer_id        :string(255)
-#  facebook_user_id          :integer
-#  primary_card_id           :integer
-#  email_opt_in              :boolean          default(TRUE)
-#  first_contest_created_at  :datetime
-#  latest_contest_created_at :datetime
-#  notified_owner            :boolean          default(FALSE), not null
+#  id                            :integer          not null, primary key
+#  first_name                    :text
+#  last_name                     :text
+#  email                         :text
+#  password                      :string(255)
+#  address                       :text
+#  state                         :text
+#  zip                           :integer
+#  status                        :integer          default(1)
+#  created_at                    :datetime
+#  updated_at                    :datetime
+#  designer_level_id             :integer
+#  city                          :text
+#  phone_number                  :text
+#  plain_password                :string(255)
+#  stripe_customer_id            :string(255)
+#  facebook_user_id              :integer
+#  primary_card_id               :integer
+#  email_opt_in                  :boolean          default(TRUE)
+#  first_contest_created_at      :datetime
+#  latest_contest_created_at     :datetime
+#  notified_owner                :boolean          default(FALSE), not null
+#  last_log_in_at                :datetime
+#  last_log_in_ip                :string
+#  last_remind_about_feedback_at :datetime
 #
 
 class Client < ActiveRecord::Base

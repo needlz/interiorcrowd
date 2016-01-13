@@ -45,4 +45,8 @@ class ConceptBoardComment < ActiveRecord::Base
     update_attributes!(read: true)
   end
 
+  def parent
+    contest_request.parent_comment(self)
+  end
+
 end

@@ -3,14 +3,16 @@
 # Table name: giftcard_payments
 #
 #  id               :integer          not null, primary key
-#  payment_status   :text
-#  last_error       :text
 #  stripe_charge_id :string
 #  price_cents      :integer
-#  amount           :integer
+#  quantity         :integer
 #  email            :text
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  first_name       :string
+#  last_name        :string
+#  brokerage        :string
+#  phone            :string
 #
 
 class GiftcardPayment < ActiveRecord::Base

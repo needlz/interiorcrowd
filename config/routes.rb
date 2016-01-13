@@ -195,8 +195,8 @@ InteriorC::Application.routes.draw do
       get '/', to: 'blog#blog_root', as: 'blog_root'
     end
 
-    resources :outbound_email, :controller => 'outbound_emails', :only => [:show, :create]
-    get '/outbound_email', to: 'outbound_emails#verify', via: :head
+    resources :outbound_emails, :controller => 'email_webhooks', :only => [:show, :create]
+    get '/outbound_emails', to: 'email_webhooks#verify', via: :head
 
     resources :giftcard_payments, controller: 'giftcard_payments', only: [:create, :index]
 

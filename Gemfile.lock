@@ -171,6 +171,9 @@ GEM
     formtastic_i18n (0.4.1)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    griddler (1.2.1)
+      htmlentities
+      rails (>= 3.2.0)
     haml (4.0.7)
       tilt
     haml-rails (0.9.0)
@@ -202,6 +205,7 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    htmlentities (4.3.4)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
@@ -484,6 +488,7 @@ DEPENDENCIES
   figaro
   foreman
   fork_break
+  griddler
   haml
   haml-rails
   handy (= 0.0.28)

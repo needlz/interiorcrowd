@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212101305) do
+ActiveRecord::Schema.define(version: 20151218131044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -82,21 +83,21 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.text     "first_name"
     t.text     "last_name"
     t.text     "email"
-    t.string   "password",                  limit: 255
+    t.string   "password",                      limit: 255
     t.text     "address"
     t.text     "state"
     t.integer  "zip"
-    t.integer  "status",                                default: 1
+    t.integer  "status",                                    default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "designer_level_id"
     t.text     "city"
     t.text     "phone_number"
-    t.string   "plain_password",            limit: 255
-    t.string   "stripe_customer_id",        limit: 255
-    t.integer  "facebook_user_id",          limit: 8
+    t.string   "plain_password",                limit: 255
+    t.string   "stripe_customer_id",            limit: 255
+    t.integer  "facebook_user_id",              limit: 8
     t.integer  "primary_card_id"
-    t.boolean  "email_opt_in",                          default: true
+    t.boolean  "email_opt_in",                              default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
     t.boolean  "notified_owner",                            default: false, null: false
@@ -141,17 +142,18 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
+    t.string   "status",                  limit: 255, default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
-    t.string   "answer",             limit: 255
-    t.string   "status",             limit: 255, default: "draft"
+    t.string   "answer",                  limit: 255
     t.text     "final_note"
     t.text     "pull_together_note"
-    t.string   "token",              limit: 255
+    t.string   "token",                   limit: 255
     t.datetime "submitted_at"
     t.datetime "won_at"
     t.datetime "last_visit_by_client_at"
+    t.string   "email_thread_id",                                       null: false
   end
 
   add_index "contest_requests", ["contest_id", "designer_id"], name: "index_contest_requests_on_contest_id_and_designer_id", unique: true, using: :btree
@@ -309,6 +311,13 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.datetime "updated_at"
   end
 
+  create_table "final_note_to_designers", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "designer_notification_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "final_notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "designer_notification_id"
@@ -332,6 +341,15 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.string   "phone"
   end
 
+  create_table "giftcards", force: :cascade do |t|
+    t.integer  "giftcard_payment_id"
+    t.string   "code"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "giftcards", ["giftcard_payment_id"], name: "index_giftcards_on_giftcard_payment_id", using: :btree
+
   create_table "image_items", force: :cascade do |t|
     t.text     "name"
     t.integer  "contest_request_id"
@@ -344,14 +362,17 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.datetime "updated_at"
     t.string   "kind",                 limit: 255
     t.text     "dimensions"
-    t.text     "price"
-    t.string   "status",               limit: 255, default: "temporary"
     t.boolean  "final",                            default: false
+    t.integer  "price_cents"
+    t.string   "price_currency",       limit: 255, default: "USD",           null: false
+    t.text     "price"
     t.integer  "temporary_version_id"
+    t.string   "status",               limit: 255, default: "temporary"
     t.string   "phase",                limit: 255, default: "collaboration"
   end
 
   add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
+  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
@@ -371,6 +392,13 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.integer  "portfolio_id"
     t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
+  end
+
+  create_table "inbound_emails", force: :cascade do |t|
+    t.text     "json_content"
+    t.boolean  "processed"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "lookbook_details", force: :cascade do |t|
@@ -407,6 +435,7 @@ ActiveRecord::Schema.define(version: 20151212101305) do
   end
 
   create_table "portfolios", force: :cascade do |t|
+    t.integer  "background_id"
     t.integer  "designer_id",                             null: false
     t.integer  "years_of_experience"
     t.boolean  "education_gifted"
@@ -430,8 +459,6 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.boolean  "transitional_style",      default: false
     t.boolean  "rustic_elegance_style",   default: false
     t.boolean  "color_pop_style",         default: false
-    t.integer  "background_id"
-    t.integer  "cover_width"
     t.float    "cover_x_percents_offset"
     t.float    "cover_y_percents_offset"
     t.datetime "created_at"

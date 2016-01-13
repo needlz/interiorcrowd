@@ -25,7 +25,7 @@ class DesignerInitialization
   end
 
   def send_mails
-    Jobs::Mailer.schedule(:designer_registered, [designer])
+    Jobs::Mailer.schedule(:designer_registered, [designer.id])
     Jobs::Mailer.schedule(:user_registration_info, [designer.role, designer.id])
   end
 

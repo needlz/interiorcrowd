@@ -64,4 +64,24 @@ RSpec.configure do |config|
   def random_string
     ('a'..'z').to_a.shuffle[0, 8].join
   end
+
+  def webhook_examples_path
+    Pathname.new(File.dirname(__FILE__)).join('fixtures')
+  end
+
+  # Returns the JSON representation of an array of +sample_name+ events
+  def webhook_example_events(sample_name)
+    sample_path = webhook_examples_path.join("#{sample_name}.json")
+    JSON.parse(sample_path.read)
+  end
+
+  # Returns the JSON representation of an +sample_name+ event
+  def webhook_example_event(sample_name)
+    data = webhook_example_events(sample_name).first
+    if data['raw_params'] && (mandrill_events_data = data['raw_params']['mandrill_events'])
+      data['raw_params']['mandrill_events'] = URI.decode_www_form_component(mandrill_events_data)
+    end
+    data
+  end
+
 end

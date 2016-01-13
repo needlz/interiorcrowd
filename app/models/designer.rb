@@ -19,9 +19,10 @@
 #  state                   :string(255)
 #  address                 :text
 #  city                    :text
-#  linkedin_profile        :string(255)
 #  active                  :boolean          default(TRUE)
 #  facebook_user_id        :integer
+#  last_log_in_at          :datetime
+#  last_log_in_ip          :string
 #
 
 class Designer < ActiveRecord::Base

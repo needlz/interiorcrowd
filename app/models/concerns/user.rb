@@ -74,4 +74,9 @@ module User
   def can_create_request_for_contest?(contest)
     designer? && contest.response_of(self).blank?
   end
+
+  def owns_email?(email)
+    return false if anonymous?
+    self.email == email.downcase
+  end
 end

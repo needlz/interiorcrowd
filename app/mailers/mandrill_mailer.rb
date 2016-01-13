@@ -15,7 +15,7 @@ module MandrillMailer
   def mail(options = {})
     if Rails.env.development?
       mandrill_rendered = api.templates.render(@template_name, [], global_merge_vars)['html']
-      options[:to] = options[:to].map { |to_hash| to_hash[:email] }
+      options[:to] = options[:to].map { |to_hash| "#{ to_hash[:name] } <#{ to_hash[:email] }>" }
       options[:from] = 'development'
       super(options) do |format|
         format.html { render text: mandrill_rendered.html_safe }
@@ -39,6 +39,7 @@ module MandrillMailer
       },
       auto_text: true
     }
+    message.merge!(@message) if @message
     message.merge!(subject: options[:subject]) if options[:subject]
     api_response = api.messages.send_template(@template_name, [], message)
     if options[:email_id]
@@ -62,6 +63,11 @@ module MandrillMailer
 
   def set_template_values(template_params)
     @merge_vars = template_params
+  end
+
+  def message_options(options)
+    @message ||= {}
+    @message.deep_merge!(options)
   end
 
 end
