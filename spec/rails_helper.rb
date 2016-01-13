@@ -65,6 +65,50 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  class Object
+    def concurrent_calls(stubbed_methods, called_method, options={}, &block)
+      ActiveRecord::Base.connection.disconnect!
+      options.reverse_merge!(count: 2)
+      processes = options[:count].times.map do |i|
+        ForkBreak::Process.new do |breakpoints|
+          ActiveRecord::Base.establish_connection
+
+          # Add a breakpoint after invoking the method
+          stubbed_methods.each do |stubbed_method|
+            original_method = self.method(stubbed_method)
+            self.stub(stubbed_method) do |*args|
+              original_method.call(*args)
+              breakpoints << stubbed_method
+            end
+          end
+
+          self.send(called_method)
+        end
+      end
+      block.call(processes)
+    ensure
+      ActiveRecord::Base.establish_connection
+    end
+  end
+
+  def dont_raise_i18n_exceptions(&block)
+    I18n.exception_handler = lambda { |exception, locale, key, options| }
+    if block
+      block.call
+      raise_i18n_exceptions
+    end
+  end
+
+  def raise_i18n_exceptions
+    I18n.exception_handler = lambda do |exception, locale, key, options|
+      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
+        raise exception.to_exception
+      end
+    end
+  end
+
+  raise_i18n_exceptions
+
   def sign_in(user)
     if user.kind_of?(Client)
       session[:client_id] = user.id
@@ -193,54 +237,10 @@ RSpec.configure do |config|
     allow_any_instance_of(Ably::Rest::Channel).to receive(:publish)
   end
 
-  def dont_raise_i18n_exceptions(&block)
-    I18n.exception_handler = lambda { |exception, locale, key, options| }
-    if block
-      block.call
-      raise_i18n_exceptions
-    end
-  end
-
-  def raise_i18n_exceptions
-    I18n.exception_handler = lambda do |exception, locale, key, options|
-      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
-        raise exception.to_exception
-      end
-    end
-  end
-
   def mock_stripe_cards_retrievement
     allow_any_instance_of(StripeCustomer).to receive(:delete_card) do
       Hashie::Mash.new(stripe_customer_id: 'id')
     end
   end
-
-  class Object
-    def concurrent_calls(stubbed_methods, called_method, options={}, &block)
-      ActiveRecord::Base.connection.disconnect!
-      options.reverse_merge!(count: 2)
-      processes = options[:count].times.map do |i|
-        ForkBreak::Process.new do |breakpoints|
-          ActiveRecord::Base.establish_connection
-
-          # Add a breakpoint after invoking the method
-          stubbed_methods.each do |stubbed_method|
-            original_method = self.method(stubbed_method)
-            self.stub(stubbed_method) do |*args|
-              original_method.call(*args)
-              breakpoints << stubbed_method
-            end
-          end
-
-          self.send(called_method)
-        end
-      end
-      block.call(processes)
-    ensure
-      ActiveRecord::Base.establish_connection
-    end
-  end
-
-  raise_i18n_exceptions
 
 end

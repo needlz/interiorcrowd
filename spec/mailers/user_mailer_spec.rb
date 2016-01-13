@@ -5,14 +5,15 @@ RSpec.describe UserMailer do
   let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'submitted') }
+  let(:concept_board_comment) { Fabricate(:concept_board_comment, contest_request: contest_request, text: 'text') }
 
   describe 'mailer' do
     it 'send email with welcoming to client' do
-      expect(UserMailer.client_registered(client)).to be_present
+      expect(UserMailer.client_registered(client.id)).to be_present
     end
 
     it 'sends email with welcoming to designer' do
-      expect(UserMailer.designer_registered(designer)).to be_present
+      expect(UserMailer.designer_registered(designer.id)).to be_present
     end
 
     it 'send email about designer registration to owner' do
@@ -54,13 +55,10 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about new concept board comment' do
-      %w(designer client).each do |role|
-        expect(UserMailer.comment_on_board({ username: 'John Doe',
-                                             email: 'johnD@example.com',
-                                             role: role,
-                                             comment: 'text'},
-                                           contest_request.id)).to be_present
-      end
+      expect(UserMailer.comment_on_board({ recipient: designer,
+                                           author: client,
+                                           comment_id: concept_board_comment.id },
+                                         contest_request.id)).to be_present
     end
 
     it 'sends email clients comment to designer' do
@@ -121,14 +119,13 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email to client about designer asked question in contest request' do
-      mail_options = { comment_text: 'comment',
-                  client_id: client.id,
-                  contest_request_id: contest_request.id }
+      mail_options = { comment_id: concept_board_comment.id,
+                  client_id: client.id }
       expect(UserMailer.designer_asks_client_a_question_submission_phase(mail_options)).to be_present
     end
 
     it 'sends email to client about account creation' do
-      expect(UserMailer.account_creation(client)).to be_present
+      expect(UserMailer.account_creation(client.id)).to be_present
     end
 
     it 'sends email to all designers when new contest has been added' do

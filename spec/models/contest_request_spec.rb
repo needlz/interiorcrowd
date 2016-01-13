@@ -5,6 +5,11 @@ RSpec.describe ContestRequest do
   let(:designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest, status: 'submission') }
 
+  it 'autogenerates email_thread_id on creation' do
+    contest_request = ContestRequest.create!(contest_id: contest.id)
+    expect(contest_request.email_thread_id).to be_present
+  end
+
   it 'validates uniqueness of designer response per contest' do
     contest.requests << Fabricate(:contest_request, designer: designer)
     expect(contest.requests.count).to eq 1

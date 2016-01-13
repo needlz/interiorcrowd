@@ -4,13 +4,14 @@ class UserMailer < ActionMailer::Base
 
   def client_registered(client_id, email_id = nil)
     template 'client_welcome_mail'
-    client = Client.find client_id
+    client = Client.find(client_id)
     set_template_values(login_link: renderer.client_login_sessions_url,
                         submission_days: ContestMilestone::DAYS['submission'])
     mail to: [wrap_recipient(client.email, client.first_name, 'to')], email_id: email_id
   end
 
-  def designer_registered(designer, email_id = nil)
+  def designer_registered(designer_id, email_id = nil)
+    designer = Designer.find(designer_id)
     template 'user_registration'
     subject = I18n.t('mails.designer_registration.subject')
     set_template_values(text: render_to_string('mails/designer_registration'))
@@ -84,15 +85,21 @@ class UserMailer < ActionMailer::Base
   end
 
   def comment_on_board(params, contest_request_id, email_id = nil)
-    template 'comment_on_board'
-    @url = url_for_comment_on_board(params[:role], contest_request_id)
-    @author_name = params[:username]
-    @comment = ERB::Util.html_escape(params[:comment]).split("\n").join("<br/>")
-    set_template_values(text: render_to_string("mails/#{params[:role]}s_comment_on_board"))
-    mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t("mails.#{params[:role]}s_comment_on_board.subject"), email_id: email_id
+    template 'test-template'
+    recipient = params[:recipient]
+    author = params[:author]
+    comment = ConceptBoardComment.find(params[:comment_id])
+    comment_text = ERB::Util.html_escape(comment.text).split("\n").join("<br/>")
+    set_template_values(reply_delimiter: Griddler.configuration.reply_delimiter,
+                        comment_text: comment_text,
+                        comment_author_role: author.role.downcase,
+                        project_url: url_for_comment_on_board(params[:role], contest_request_id)
+    )
+    concept_board_comment_email = ConceptBoardCommentEmail.new(comment)
+    message_options(headers: concept_board_comment_email.headers)
+    mail to: [wrap_recipient(recipient.email, recipient.name, 'to')],
+         email_id: email_id
   end
-
 
   def note_to_concept_board(params, email_id = nil)
     template 'note_to_concept_board'
@@ -237,18 +244,24 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
-    template 'Designer-asks-client-a-question-submission-phase'
+    template 'test-template-2'
+    comment = ConceptBoardComment.find(options[:comment_id])
     set_template_values(
-      entry_url: renderer.contest_request_url(id: options[:contest_request_id]),
-      comment_text: options[:comment_text]
+      entry_url: renderer.contest_request_url(id: comment.contest_request.id),
+      comment_text: comment.text,
+      reply_delimiter: Griddler.configuration.reply_delimiter
     )
+    concept_board_comment_email = ConceptBoardCommentEmail.new(comment)
+    message_options(headers: concept_board_comment_email.headers)
     client = Client.find(options[:client_id])
-    mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
+    mail(to: [wrap_recipient(client.email, client.name, 'to')],
+         email_id: email_id,
+         subject: concept_board_comment_email.subject)
   end
 
   def account_creation(client_id, email_id = nil)
     template 'account_creation'
-    client = Client.find client_id
+    client = Client.find(client_id)
     set_template_values(
         twitter_url: Settings.external_urls.social.twitter,
         twitter_icon_url: asset_url('/icons/twitter.png'),

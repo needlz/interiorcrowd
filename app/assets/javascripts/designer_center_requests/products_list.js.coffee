@@ -41,7 +41,7 @@ class ImageItemsEditor extends InlineEditor
       @validatePrice(event)
 
   bindAutoSaving: ->
-    $(document).on 'change', '.edit input, textarea', (event)=>
+    $(document).on 'change', '.dcProduct .edit input, textarea', (event)=>
       @saveChanges(event)
 
   validatePrice: (event)->

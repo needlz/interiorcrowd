@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212101305) do
+ActiveRecord::Schema.define(version: 20151218131044) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.datetime "submitted_at"
     t.datetime "won_at"
     t.datetime "last_visit_by_client_at"
+    t.string   "email_thread_id",                                       null: false
   end
 
   add_index "contest_requests", ["contest_id", "designer_id"], name: "index_contest_requests_on_contest_id_and_designer_id", unique: true, using: :btree
@@ -371,6 +372,13 @@ ActiveRecord::Schema.define(version: 20151212101305) do
     t.integer  "portfolio_id"
     t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
+  end
+
+  create_table "inbound_emails", force: :cascade do |t|
+    t.text     "json_content"
+    t.boolean  "processed"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "lookbook_details", force: :cascade do |t|
