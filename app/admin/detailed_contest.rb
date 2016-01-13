@@ -19,6 +19,9 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     column 'Start Date' do |contest|
       contest.submission_started_at
     end
+    column 'Submission Deadline Date' do |contest|
+      contest.phase_end if contest.submission?
+    end
     column 'Designers' do |contest|
       designers_list(contest.requests.ever_published) do |statement, submission_date|
         statement + formatted_date(', submitted at ', submission_date)
