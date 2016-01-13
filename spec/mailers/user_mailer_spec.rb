@@ -55,8 +55,10 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about new concept board comment' do
-      expect(UserMailer.comment_on_board({ recipient: designer,
-                                           author: client,
+      expect(UserMailer.comment_on_board({ recipient_id: designer.id,
+                                           recipient_role: designer.role,
+                                           author_id: client.id,
+                                           author_role: client.role,
                                            comment_id: concept_board_comment.id },
                                          contest_request.id)).to be_present
     end

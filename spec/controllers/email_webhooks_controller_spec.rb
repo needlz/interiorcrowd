@@ -8,7 +8,7 @@ RSpec.describe EmailWebhooksController do
   describe 'inbound webhook' do
     it 'saves email in db' do
       expect do
-        post :create, params, { 'X-Mandrill-Signature' => 'ioWt0t8EDpJLBC3qH3cC6cqSTgw=' }
+        post :create, params
       end.to change { InboundEmail.count }.from(0).to(1)
     end
   end

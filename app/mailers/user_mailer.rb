@@ -86,14 +86,14 @@ class UserMailer < ActionMailer::Base
 
   def comment_on_board(params, contest_request_id, email_id = nil)
     template 'test-template'
-    recipient = params[:recipient]
-    author = params[:author]
+    recipient = params[:recipient_role].constantize.find(params[:recipient_id])
+    author = params[:author_role].constantize.find(params[:author_id])
     comment = ConceptBoardComment.find(params[:comment_id])
     comment_text = ERB::Util.html_escape(comment.text).split("\n").join("<br/>")
     set_template_values(reply_delimiter: Griddler.configuration.reply_delimiter,
                         comment_text: comment_text,
-                        comment_author_role: author.role.downcase,
-                        project_url: url_for_comment_on_board(params[:role], contest_request_id)
+                        comment_author_role: params[:author_role].downcase,
+                        project_url: url_for_comment_on_board(params[:author_role].downcase, contest_request_id)
     )
     concept_board_comment_email = ConceptBoardCommentEmail.new(comment)
     message_options(headers: concept_board_comment_email.headers)

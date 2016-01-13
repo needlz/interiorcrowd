@@ -2,7 +2,7 @@ class CommentNotifier
 
   def initialize(contest_request, user, comment)
     @contest_request = contest_request
-    @user_role = user.class.name.downcase
+    @author_role = user.role.downcase
     @author = user
     @comment = comment
   end
@@ -13,16 +13,16 @@ class CommentNotifier
   end
 
   def recipient
-    return contest_request.designer if user_role == 'client'
+    return contest_request.designer if author_role == 'client'
     contest_request.contest.client
   end
 
   private
 
-  attr_reader :user_role, :contest_request, :author, :comment
+  attr_reader :author_role, :contest_request, :author, :comment
 
   def send_email
-    if contest_request.contest.submission? && user_role == 'designer'
+    if contest_request.contest.submission? && author_role == 'designer'
       Jobs::Mailer.schedule(:designer_asks_client_a_question_submission_phase,
                             [{ comment_id: comment.id,
                                client_id: recipient.id
@@ -31,10 +31,11 @@ class CommentNotifier
                             { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
     else
       Jobs::Mailer.schedule(:comment_on_board,
-                            [{ recipient: recipient,
-                               author: author,
-                               role: user_role,
-                               search_by: "#{user_role}s_comment_on_board",
+                            [{ recipient: recipient.id,
+                               recipient_role: recipient.role,
+                               author: author.id,
+                               author_role: author_role,
+                               search_by: "#{ author_role }s_comment_on_board",
                                comment_id: comment.id
                              },
                              contest_request.id
@@ -44,7 +45,7 @@ class CommentNotifier
   end
 
   def delayed_job_for_email
-    Delayed::Job.where('handler LIKE ? and contest_request_id = ?', "%#{user_role}s_comment_on_board%", contest_request.id).first
+    Delayed::Job.where('handler LIKE ? and contest_request_id = ?', "%#{ author_role }s_comment_on_board%", contest_request.id).first
   end
 
   def delay_sending_time(delayed_job)
