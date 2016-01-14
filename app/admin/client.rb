@@ -16,7 +16,7 @@ ActiveAdmin.register Client do
   end
 
   index do
-    column :id
+    id_column
     column :first_name
     column :last_name
     column :email
