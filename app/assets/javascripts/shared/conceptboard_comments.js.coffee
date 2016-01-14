@@ -7,14 +7,14 @@ class @ConceptboardComment
     @attachmentThumbsSelector = '.commentTextArea .thumbs .thumb'
     @buttonSend = $('.comment-create')
     @buttonSend.on 'click', =>
-      @.create()
+      @create()
 
   @create: (path) ->
     text = @textarea.val()
-    return if text == ''
     requestId = @textarea.attr('request')
     attachmentsIds = @$attachmentsInput.val().split(',')
-    @.makeRequest(text, requestId, attachmentsIds)
+    return if text == '' && !attachmentsIds[0]
+    @makeRequest(text, requestId, attachmentsIds)
 
   @makeRequest: (text, requestId, attachmentsIds) ->
     $.ajax(
@@ -25,9 +25,9 @@ class @ConceptboardComment
         @buttonSend.text(@i18n.sending)
       success: (data)=>
         mixpanel.track 'Concept board commented'
-        @.newComment('allComents', data)
-        @.newComment('meComments', data)
-        @.prepareSection()
+        @newComment('allComents', data)
+        @newComment('meComments', data)
+        @prepareSection()
       error: ->
     )
 

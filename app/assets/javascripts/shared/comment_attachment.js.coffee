@@ -7,16 +7,15 @@ require ['RemovableThumbsTheme'], ->
       $enlargeButton = $container.find('.enlarge')
       $enlargeButton.attr('href', fileInfo.original_size_url)
       $container.find('.downloadButton').attr('href', fileInfo.download_url)
+      $container.find('.size').text(humanFileSize(fileInfo.file_size))
+      $container.find('.filename').text(fileInfo.name)
       PicturesZoom.init($enlargeButton)
-      @removeUploadItem(fileInfo.name)
+      @removeUploadItem(fileInfo.original_name)
       $container
 
     onProgress: (file, progressPercents)->
       $container = @uploadThumb(file.name)
       $container.find('.progressbar .pointer').width("#{ progressPercents }%")
-
-    onSend: (file)->
-
 
     addUploadItem: (file)->
       $template = @$container.find('.uploadingTemplate')
@@ -35,12 +34,27 @@ require ['RemovableThumbsTheme'], ->
     uploadThumb: (filename)->
       @$container.find(".uploadingThumb[data-filename='#{ filename }']")
 
-    onProcessalways: (file)->
+    onProcess: (file)->
       @addUploadItem(file)
+
+    onProcessDone: (file)->
       canvas = file.preview
       return unless canvas
       dataUrl = canvas.toDataURL()
       @uploadThumb(file.name).find('.preview').attr('src', dataUrl)
+
+    onUploaded: (file)->
+      $container = @uploadThumb(file.name)
+      $container.find('.progressbar').hide()
+      $container.find('.processing').show()
+
+    onFail: (file)->
+      $container = @uploadThumb(file.name)
+      $container.find('.progressbar').hide()
+      $container.find('.processing').show().text('Uploading error')
+
+    isUploadHalted: (fileInfo)->
+      !@uploadThumb(fileInfo.original_name).length
 
   class @CommentAttachmentUploader
 

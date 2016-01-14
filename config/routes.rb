@@ -1,6 +1,5 @@
 InteriorC::Application.routes.draw do
 
-  resources :concept_board_comment_attachments
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

@@ -1,8 +1,8 @@
 window.humanFileSize = (bytes, si) ->
-  thresh = if si then 1000 else 1024
-  if Math.abs(bytes) < thresh
+  multiple = if si then 1000 else 1024
+  if Math.abs(bytes) < multiple
     return bytes + ' B'
-  units = if si then [
+  unitNames = if si then [
     'kB'
     'MB'
     'GB'
@@ -21,13 +21,13 @@ window.humanFileSize = (bytes, si) ->
     'ZiB'
     'YiB'
   ]
-  u = -1
+  units = -1
   loop
-    bytes /= thresh
-    ++u
-    unless Math.abs(bytes) >= thresh and u < units.length - 1
+    bytes /= multiple
+    ++units
+    unless Math.abs(bytes) >= multiple and units < unitNames.length - 1
       break
-  bytes.toFixed(1) + ' ' + units[u]
+  bytes.toFixed(1) + ' ' + unitNames[u]
 
 $(document).bind('drop dragover', (e)->
   e.preventDefault()
@@ -77,8 +77,10 @@ class Uploader
         fileInput: @options.fileInput
         progress: @onProgress
         submit: @onSend
-        processalways: @onProcessalways
-
+        process: @onProcess
+        fail: @onFail
+        chunkfail: @onFail
+        processdone: @onProcessDone
       }
       @options.uploadify
     )
@@ -87,16 +89,20 @@ class Uploader
 
   onUploaded: (event, data) =>
     $.each data.result.files, (index, fileInfo) =>
+      return if @thumbsTheme && @thumbsTheme.isUploadHalted?(fileInfo)
       if @options.single
         @onSingleFileUploaded(fileInfo)
       else
         @onMultipleFilesUploaded(fileInfo)
-    @options.uploadify.onUploaded?(data.result) if @options.uploadify
+      @options.uploadify.onUploaded?(data.result) if @options.uploadify
 
   onProgress: (event, data)=>
-    progress = parseInt(data.loaded / data.total * 100, 10);
+    progress = parseInt(data.loaded / data.total * 100)
     file = data.files[0]
-    @thumbsTheme.onProgress?(file, progress) if @thumbsTheme
+    if progress >= 100
+      @thumbsTheme.onUploaded?(file) if @thumbsTheme
+    else
+      @thumbsTheme.onProgress?(file, progress) if @thumbsTheme
 
   onSingleFileUploaded: (fileInfo)->
     @thumbsTheme.thumbForSingleImageUploader(fileInfo) if @thumbsTheme
@@ -112,9 +118,17 @@ class Uploader
     file = data.files[0]
     @thumbsTheme.onSend?(file) if @thumbsTheme
 
-  onProcessalways: (e, data)=>
+  onProcess: (e, data)=>
     file = data.files[0]
-    @thumbsTheme.onProcessalways?(file) if @thumbsTheme
+    @thumbsTheme.onProcess?(file) if @thumbsTheme
+
+  onProcessDone: (e, data)=>
+    file = data.files[0]
+    @thumbsTheme.onProcessDone?(file) if @thumbsTheme
+
+  onFail: (e, data)=>
+    file = data.files[0]
+    @thumbsTheme.onFail?(file) if @thumbsTheme
 
 class @ThumbsTheme
 

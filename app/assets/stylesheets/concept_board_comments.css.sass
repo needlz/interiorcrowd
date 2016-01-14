@@ -1,0 +1,116 @@
+$borderColor: #a9a9a9
+
+.uploadingTemplate
+  display: none
+
+.sidebarComments
+  .thumbs
+    margin-bottom: 10px
+
+    .thumb
+      padding: 4px 10px
+      border: 1px solid $borderColor
+      font-size: 20px
+      margin: -1px 0 0 -1px
+
+      .preview
+        max-height: 30px
+
+      .menuButtons
+        float: right
+        display: inline
+
+        .downloadButton, .remove-thumb-button
+          float: right
+          color: $borderColor
+          line-height: 25px
+          padding-left: 10px
+  .commentTextArea
+    .topText
+      padding: 13px
+      font-size: 17px
+
+      .uploadButton
+        float: right
+        color: $borderColor
+        cursor: pointer
+
+    .editArea
+      border: 1px solid $borderColor
+      border-radius: 5px
+
+      textarea
+        border: none
+
+      .thumbs
+        .filename
+          font-size: 14px
+          max-width: 25%
+          display: inline-block
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+          vertical-align: middle
+
+        .size
+          color: $borderColor
+          max-width: 15%
+          display: inline-block
+          white-space: nowrap
+          font-size: 12px
+
+        .thumb
+          padding: 10px
+          border: none
+          border-bottom: 1px solid $borderColor
+
+          .preview
+            max-height: 30px
+
+          .menuButtons
+            line-height: 25px
+
+            .downloadButton, .remove-thumb-button
+              float: right
+              color: $borderColor
+              cursor: pointer
+
+        .uploadingThumb
+          padding: 10px
+          border: none
+          border-bottom: 1px solid $borderColor
+
+          .preview
+            max-height: 30px
+            max-width: 10%
+
+          .menuButtons
+            display: inline-block
+            float: right
+
+            .retryButton, .remove-thumb-button
+              float: right
+              color: $borderColor
+              cursor: pointer
+
+          .progressbar
+            background-color: $borderColor
+            width: 35%
+            display: inline-block
+            margin-bottom: 2px
+
+            .pointer
+              background-color: #409863
+              width: 0%
+              height: 3px
+
+          .processing
+            text-align: center
+            display: inline-block
+            width: 40%
+
+            .spinner
+              display: inline
+              width: 20px
+              vertical-align: middle
+              margin-right: 5px
