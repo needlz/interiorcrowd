@@ -1645,7 +1645,7 @@ en:
       entries: 'Entries'
     designer_center:
       contest_request: 'Design for "%{contest_name}" contest'
-  rieltor_contacts:
+  realtor_contacts:
     sfar:
       header:
         title: Help your clients move into a more inspiring space.

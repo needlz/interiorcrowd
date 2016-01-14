@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe RieltorContactsController do
+RSpec.describe RealtorContactsController do
   render_views
 
-  def rieltor_contact_params(options = {})
-    { rieltor_contact: { first_name: '',
+  def realtor_contact_params(options = {})
+    { realtor_contact: { first_name: '',
                          last_name: '',
                          brokerage: '',
                          email: '',
@@ -25,14 +25,14 @@ RSpec.describe RieltorContactsController do
   describe 'POST create' do
 
     it 'saves new contact' do
-      expect{post :create, rieltor_contact_params({ choice: 'email_me',
-                                                    email: 'test@example.com'})}.to change{RieltorContact.count}.by(1)
+      expect{post :create, realtor_contact_params({choice: 'email_me',
+                                                   email: 'test@example.com'})}.to change{RealtorContact.count}.by(1)
       expect(response).to redirect_to sfar_path(anchor: 'sfarSubmitButton')
     end
 
     it "doesn't save contact with non valid details" do
-      expect{post :create, rieltor_contact_params({ choice: 'email_me',
-                                                    email: 'fail@'})}.not_to change{RieltorContact.count}
+      expect{post :create, realtor_contact_params({choice: 'email_me',
+                                                   email: 'fail@'})}.not_to change{RealtorContact.count}
       expect(response).to redirect_to sfar_path(anchor: 'sfarSubmitButton')
     end
 

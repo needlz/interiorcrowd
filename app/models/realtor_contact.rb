@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: rieltor_contacts
+# Table name: raeltor_contacts
 #
 #  id         :integer          not null, primary key
 #  first_name :string
@@ -13,7 +13,7 @@
 #  updated_at :datetime
 #
 
-class RieltorContact < ActiveRecord::Base
+class RealtorContact < ActiveRecord::Base
 
   CHOICES = { call: 'call_me', email: 'email_me' }
 
@@ -29,6 +29,10 @@ class RieltorContact < ActiveRecord::Base
 
   def email_me?
     choice == CHOICES[:email]
+  end
+
+  def name
+    [first_name, last_name].join(' ')
   end
 
 end
