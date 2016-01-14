@@ -5,12 +5,13 @@ class RealtorContactsController < ApplicationController
   end
 
   def create
-    new_realtor = RealtorContact.new(realtor_contact_params)
+    create_contact = CreateRealtorContact.new(realtor_contact_params)
+    create_contact.perform
     result =
-      if new_realtor.save
+      if create_contact.saved
         { notice: 'Contact saved!' }
       else
-        { alert: new_realtor.errors.full_messages.join(', ') }
+        { alert: create_contact.realtor_contact.errors.full_messages.join(', ') }
       end
     respond_to do |format|
       format.html do

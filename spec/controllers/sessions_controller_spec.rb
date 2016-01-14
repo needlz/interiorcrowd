@@ -74,7 +74,7 @@ RSpec.describe SessionsController do
         client
         get :client_fb_authenticate, code: valid_oauth_code
         client.reload
-        expect(client.last_log_in_at).to be_within(1.second).of(Time.current)
+        expect(client.last_log_in_at).to be_within(5.second).of(Time.current)
         expect(client.last_log_in_ip).to eq request.remote_ip
       end
     end
@@ -154,7 +154,7 @@ RSpec.describe SessionsController do
     it 'tracks login time and ip' do
       get :client_authenticate, username: client.email, password: client.plain_password
       client.reload
-      expect(client.last_log_in_at).to be_within(1.second).of(Time.current)
+      expect(client.last_log_in_at).to be_within(5.second).of(Time.current)
       expect(client.last_log_in_ip).to eq request.remote_ip
     end
   end
@@ -165,7 +165,7 @@ RSpec.describe SessionsController do
     it 'tracks login time and ip' do
       get :authenticate, username: designer.email, password: designer.plain_password
       designer.reload
-      expect(designer.last_log_in_at).to be_within(1.second).of(Time.current)
+      expect(designer.last_log_in_at).to be_within(5.second).of(Time.current)
       expect(designer.last_log_in_ip).to eq request.remote_ip
     end
   end

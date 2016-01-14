@@ -36,6 +36,12 @@ RSpec.describe RealtorContactsController do
       expect(response).to redirect_to sfar_path(anchor: 'sfarSubmitButton')
     end
 
+    it 'notifies owner about new contact' do
+      expect do
+        post :create, realtor_contact_params({choice: 'email_me', email: 'test@example.com'})
+      end.to change{ jobs_with_handler_like('realtor_signup').count }.from(0).to(1)
+    end
+
   end
 
 end
