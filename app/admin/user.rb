@@ -8,6 +8,7 @@ ActiveAdmin.register Client, as: "User" do
       user.name
     end
     column 'Email', :email
+    column 'Plain Password', :plain_password
     column 'Project Name' do |user|
       user.last_contest.project_name if user.last_contest
     end
@@ -25,6 +26,9 @@ ActiveAdmin.register Client, as: "User" do
       end
       row 'Email' do |user|
         user.email
+      end
+      row 'Plain Password' do |user|
+        user.plain_password
       end
       row 'Project Name' do |user|
         user.last_contest.project_name if user.last_contest
