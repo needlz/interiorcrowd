@@ -192,7 +192,7 @@ $ ->
       I18n: I18n
       single: true
       uploading:
-        onUploaded: (event)=>
+        onStop: (event)=>
           kind = $addButton.data('kind')
           imageId = $addButton.find('#image_item_image_id').val()
           itemsEditor.append(kind, imageId)

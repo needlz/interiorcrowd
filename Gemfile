@@ -74,6 +74,7 @@ end
 group :test do
   gem 'rspec-rails', '~> 3.1'
   gem 'stripe-ruby-mock', '~> 2.2.0', require: 'stripe_mock'
+  gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
 end
 
 gem 'mandrill-rails'

@@ -11,10 +11,10 @@ class @PicturesUploadButton
         options.thumbs
       uploadify:
         start: (event)=>
-          $(options.uploadButtonSelector).text(options.I18n.uploading)
+          $(options.uploadButtonSelector).text(options.I18n.uploading) if options.I18n
         stop: (event)=>
-          $(options.uploadButtonSelector).text(options.I18n.upload_button)
-          options.uploading.onUploaded(event) if options.uploading
+          $(options.uploadButtonSelector).text(options.I18n.upload_button) if options.I18n
+          options.uploading.onStop?(event) if options.uploading
       single: options.single
       fileInput: $fileInput
     )

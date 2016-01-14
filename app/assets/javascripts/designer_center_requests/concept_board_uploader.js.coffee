@@ -15,7 +15,7 @@ class @ConceptBoardUploader
       I18n: options.i18n
       single: options.single
       uploading:
-        onUploaded: (event)=>
+        onStop: (event)=>
           @saveChange(options.contestRequestId)
 
   @saveChange: (contestRequestId)=>

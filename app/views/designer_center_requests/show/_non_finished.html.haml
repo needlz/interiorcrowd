@@ -20,7 +20,7 @@
         = render 'contest_requests/listen', request: request
       .hLine
     - if request.comments.present? || request.commenting_enabled?
-      = render 'designer_center_requests/edit/comments',
+      = render 'shared/comments',
         request: request,
         comments: request.comments,
         show_comment_switcher: !request_view.initial_concept_board?,

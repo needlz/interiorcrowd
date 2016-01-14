@@ -3,42 +3,46 @@ class @ConceptboardComment
   @init: =>
     @i18n = MessagesI18n
     @textarea = $('.commentTextArea textarea')
+    @$attachmentsInput = $('.commentTextArea input.fileIds')
+    @attachmentThumbsSelector = '.commentTextArea .thumbs .thumb'
     @buttonSend = $('.comment-create')
     @buttonSend.on 'click', =>
-      @.create()
+      @create()
 
   @create: (path) ->
     text = @textarea.val()
-    return if text == ''
     requestId = @textarea.attr('request')
-    @.makeRequest(text, requestId)
+    attachmentsIds = @$attachmentsInput.val().split(',')
+    return if text == '' && !attachmentsIds[0]
+    @makeRequest(text, requestId, attachmentsIds)
 
-  @makeRequest: (text, requestId) ->
+  @makeRequest: (text, requestId, attachmentsIds) ->
     $.ajax(
-      data: { comment: {text: text, contest_request_id: requestId} }
+      data: { comment: { text: text, contest_request_id: requestId, attachments_ids: attachmentsIds } }
       url: "/contest_requests/#{requestId}/add_comment"
       type: 'POST'
       beforeSend: =>
         @buttonSend.text(@i18n.sending)
       success: (data)=>
         mixpanel.track 'Concept board commented'
-        @.newComment('allComents', data)
-        @.newComment('meComments', data)
-        @.prepareSection()
+        @newComment('allComents', data)
+        @newComment('meComments', data)
+        @prepareSection()
       error: ->
     )
 
   @prepareSection: ->
     @textarea.val('')
     @buttonSend.text(@i18n.send)
+    @$attachmentsInput.val('')
+    $(@attachmentThumbsSelector).remove()
 
   @newComment: (category, data) ->
-    $('.message-template .comment-text').html(data.text)
-    $('.message-template .comment-time').text(@i18n.now)
-    $('.message-template .comment-username').text(@i18n.me)
     $category =  $("##{category}")
     hasComments = $category.find('.commentContainer:last').length > 0
+    $newComment = $(data.comment_html)
     if hasComments
-      $($('.message-template').html()).insertBefore($category.find(".commentContainer:first"))
+      $newComment.insertBefore($category.find('.commentContainer:first'))
     else
       $category.html($('.message-template').html())
+    PicturesZoom.init($newComment.find('.enlarge'))

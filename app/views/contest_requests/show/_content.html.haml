@@ -10,5 +10,5 @@
     = render 'contest_requests/submission_info',
         designer: contest_request.designer, submitted_at: contest_request.created_at, request: contest_request
     - if contest_request.commenting_enabled? || contest_request.comments.present?
-      = render 'designer_center_requests/edit/comments',
+      = render 'shared/comments',
           request: contest_request, comments: contest_request.comments, show_comment_switcher: false

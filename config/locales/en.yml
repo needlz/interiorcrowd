@@ -1738,3 +1738,9 @@ en:
       thank_you: >
         Thank you for your order! We will begin processing your gift cards immediately.
         Please allow one business day for e-gift cards and three business days for traditional gift cards.
+
+  concept_board_comments:
+    new:
+      new_comment: New comment
+      send: Send
+      sending: Sending

@@ -1376,9 +1376,7 @@ textarea.productsMoodboardAbove{
 	color: #a9a9a9;
 	text-align: right;
 }
-.commentContainer .comment-text{
-	margin: 0px;
-}
+
 #scrollBoxComments{
 	overflow: auto;
 	padding-right: 0px !important;

@@ -28,15 +28,25 @@ class Image < ActiveRecord::Base
   UNIQUE_PORTFOLIO_ITEMS = [PORTFOLIO_PERSONAL]
 
   has_attached_file :image,
-                    styles: lambda { |im|
+                    styles: lambda { |image|
+                      if image.queued_for_write[:original]
+                        begin
+                          Paperclip::GeometryDetector.new(image.queued_for_write[:original].instance_variable_get(:@tempfile)).make
+                          image.instance.file_type = 'image'
+                        rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+                          image.instance.file_type = 'file'
+                          return {}
+                        end
+                      end
                       { medium: ['300x300>', :jpg],
                         large: ['600x600>', :jpg],
-                        original_size: ['#{a.instance.width}x#{a.instance.height}>', :jpg] }
+                        original_size: ['', :jpg] }
                     },
                     convert_options: {
-                        all: '-background white -flatten +matte'
+                      all: '-background white -flatten +matte'
                     },
                     path: ':class/:id/:style:filename'
+
   has_one :lookbook_details
 
   belongs_to :contest
@@ -91,20 +101,22 @@ class Image < ActiveRecord::Base
       name: image_file_name,
       size: image_file_size,
       url: medium_size_url,
+      original_size_url: original_size_url,
+      download_url: url_for_downloading,
       id: id
     }
   end
 
   def small_size_url
-    image.url(:medium)
+    thumb_url_for(:medium)
   end
 
   def medium_size_url
-    image.url(:large)
+    thumb_url_for(:large)
   end
 
   def original_size_url
-    image.url(:original_size)
+    thumb_url_for(:original_size)
   end
 
   def likes_count
@@ -117,10 +129,18 @@ class Image < ActiveRecord::Base
     uploader_class.find(uploader_id)
   end
 
+  def viewable?
+    file_type == 'image'
+  end
+
   private
 
   def attachment
     image
+  end
+
+  def thumb_url_for(style)
+    image.url(style) if viewable?
   end
 
 end

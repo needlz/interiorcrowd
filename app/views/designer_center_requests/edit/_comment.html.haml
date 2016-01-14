@@ -9,6 +9,11 @@
           %p= comment_view.sub_name
         .col-xs-6
           %p.comment-time= comment_view.ago_text
+      - if comment_view.attachments.present?
+        .thumbs
+          - comment_view.attachments.each do |attachment|
+            .thumb
+              = render 'concept_board_comment_attachments/show', attachment: attachment
       %div.comment-text.hidden-xs= format_comment(comment_view.text)
     .col-xs-12
       %div.comment-text.visible-xs= format_comment(comment_view.text)

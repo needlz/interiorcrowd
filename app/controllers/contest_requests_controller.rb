@@ -19,9 +19,11 @@ class ContestRequestsController < ApplicationController
     else
       return raise_404 unless current_user.can_comment_contest_request?(@request)
     end
-    comment_creation = ConceptBoardCommentCreation.new(@request, params['comment'], current_user)
+    comment_creation = ConceptBoardCommentCreation.new(@request, comment_attributes, current_user)
     comment = comment_creation.perform
-    render json: { text: format_comment(comment.text), user_name: current_user.name }
+    comment_html = render_to_string partial: 'designer_center_requests/edit/comment',
+                       locals: { user: current_user, comment_view: CommentView.create(comment, current_user) }
+    render json: { comment_html: comment_html }
   end
 
   def answer
@@ -71,6 +73,10 @@ class ContestRequestsController < ApplicationController
 
   def set_request
     @request = ContestRequest.find(params[:id])
+  end
+
+  def comment_attributes
+    params.require(:comment).permit([:text, attachments_ids: []])
   end
 
 end
