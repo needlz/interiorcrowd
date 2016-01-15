@@ -30,61 +30,117 @@ RSpec.describe ClientsController do
   let(:integer_attributes) { [:zip] }
 
   describe 'POST create' do
-    it 'creates contest and client' do
-      expect(Contest.count).to eq 0
-      expect(Client.count).to eq 0
-      post :create, { client: client_options }, contest_options_source
-      expect(Contest.count).to eq 1
-      expect(Client.count).to eq 1
-    end
-
-    it 'does not create contest if some of required options were not set' do
-      expect(Contest.count).to eq 0
-      expect(Client.count).to eq 0
-      expect { post :create, { client: client_options }, contest_options_source.except(:design_brief) }.to raise_error(ArgumentError)
-      expect(Contest.count).to eq 0
-      expect(Client.count).to eq 1
-    end
-
-    it 'redirects to entries page' do
-      post :create, { client: client_options }, contest_options_source
-      expect(response).to redirect_to(payment_details_contests_path(id: Contest.last.id))
-    end
-
-    it 'saves attributes' do
-      post :create, { client: client_options }, contest_options_source
-      client = Client.order(:created_at).last
-      client_options.except(:password, :password_confirmation, :promocode, *integer_attributes).each do |attribute, value|
-        expect(client.send(attribute)).to eq value
+    context 'when all required options are set' do
+      it 'creates contest and client' do
+        expect(Contest.count).to eq 0
+        expect(Client.count).to eq 0
+        post :create, { client: client_options }, contest_options_source
+        expect(Contest.count).to eq 1
+        expect(Client.count).to eq 1
       end
-      integer_attributes.each do |attribute|
-        expect(client.send(attribute)).to eq client_options[attribute].to_i
+
+      it 'redirects to entries page' do
+        post :create, { client: client_options }, contest_options_source
+        expect(response).to redirect_to(payment_details_contests_path(id: Contest.last.id))
       end
-      expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level]
-      expect(client.plain_password).to eq client_options[:password]
+
+      it 'saves attributes' do
+        post :create, { client: client_options }, contest_options_source
+        client = Client.order(:created_at).last
+        client_options.except(:password, :password_confirmation, :promocode, *integer_attributes).each do |attribute, value|
+          expect(client.send(attribute)).to eq value
+        end
+        integer_attributes.each do |attribute|
+          expect(client.send(attribute)).to eq client_options[attribute].to_i
+        end
+        expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level]
+        expect(client.plain_password).to eq client_options[:password]
+      end
+
+      it 'creates mail job' do
+        post :create, { client: client_options }, contest_options_source
+        expect(jobs_with_handler_like('client_registered').count).to eq 1
+      end
+
+      it 'applies promocode' do
+        post :create, { client: client_options }, contest_options_source
+        contest = Contest.last
+        expect(contest.promocodes).to be_exists
+      end
+
+      it 'doesn\'t apply the same promocode again' do
+        post :create, { client: client_options }, contest_options_source
+
+        contest = Contest.last
+        expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
+      end
+
+      it 'does not send email with explanations how to finish intake form' do
+        post :create, { client: client_options }, contest_options_source
+        expect(jobs_with_handler_like('account_creation').count).to eq 0
+      end
+
+      context 'when automatic payment enabled' do
+        before do
+          allow(Settings).to receive(:payment_enabled) { true }
+        end
+
+        context 'when brief completed' do
+          let(:params) { contest_options_source }
+
+          it 'creates contest in brief_pending status' do
+            post :create, { client: client_options }, params
+            contest = Contest.last
+            expect(contest).to be_brief_pending
+          end
+        end
+
+        context 'when brief not completed' do
+          let(:params) { contest_options_source.deep_merge(design_space: { document_id: nil }) }
+
+          it 'creates contest in brief_pending status' do
+            post :create, { client: client_options }, params
+            contest = Contest.last
+            expect(contest).to be_brief_pending
+          end
+        end
+      end
+
+      context 'when automatic payment disabled' do
+        before do
+          allow(Settings).to receive(:payment_enabled) { false }
+        end
+
+        context 'when brief completed' do
+          let(:params) { contest_options_source }
+
+          it 'creates contest in brief_pending status' do
+            post :create, { client: client_options }, params
+            contest = Contest.last
+            expect(contest).to be_brief_pending
+          end
+        end
+
+        context 'when brief not completed' do
+          let(:params) { contest_options_source.deep_merge(design_space: { document_id: nil }) }
+
+          it 'creates contest in brief_pending status' do
+            post :create, { client: client_options }, params
+            contest = Contest.last
+            expect(contest).to be_brief_pending
+          end
+        end
+      end
     end
 
-    it 'creates mail job' do
-      post :create, { client: client_options }, contest_options_source
-      expect(jobs_with_handler_like('client_registered').count).to eq 1
-    end
-
-    it 'applies promocode' do
-      post :create, { client: client_options }, contest_options_source
-      contest = Contest.last
-      expect(contest.promocodes).to be_exists
-    end
-
-    it 'doesn\'t apply the same promocode again' do
-      post :create, { client: client_options }, contest_options_source
-
-      contest = Contest.last
-      expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
-    end
-
-    it 'does not send email with explanations how to finish intake form' do
-      post :create, { client: client_options }, contest_options_source
-      expect(jobs_with_handler_like('account_creation').count).to eq 0
+    context 'when some of required options are not set' do
+      it 'does not create contest if some of required options were not set' do
+        expect(Contest.count).to eq 0
+        expect(Client.count).to eq 0
+        expect { post :create, { client: client_options }, contest_options_source.except(:design_brief) }.to raise_error(ArgumentError)
+        expect(Contest.count).to eq 0
+        expect(Client.count).to eq 1
+      end
     end
 
     context 'when not unique email' do

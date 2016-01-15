@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SubmitContest do
 
-  let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
+  let(:client) { Fabricate(:client) }
   let(:submit_contest) { SubmitContest.new(contest) }
 
   context 'when contest created with space pictures' do
@@ -12,18 +12,37 @@ RSpec.describe SubmitContest do
       contest
     end
 
-    context 'when real payments disabled' do
+    context 'when automatic payments disabled' do
       before do
         allow(Settings).to receive(:payment_enabled){ false }
       end
 
-      it 'submits contest on creation' do
-        contest
-        expect(contest.status).to eq 'submission'
+      context 'when the client has no primary card' do
+        before do
+          contest
+          submit_contest.try_perform
+        end
+
+        it 'does not submit contest' do
+          expect(contest).to be_brief_pending
+        end
+      end
+
+      context 'when the client has primary card' do
+        before do
+          contest
+          client.primary_card = Fabricate(:credit_card)
+          client.save!
+          submit_contest.try_perform
+        end
+
+        it 'submits contest' do
+          expect(contest).to be_submission
+        end
       end
     end
 
-    context 'on staging server' do
+    context 'when automatic payments enabled' do
       before do
         allow(Settings).to receive(:payment_enabled){ true }
         contest
@@ -85,6 +104,8 @@ RSpec.describe SubmitContest do
 
       context 'when contest payed' do
         before do
+          client.primary_card = Fabricate(:credit_card)
+          client.save!
           pay_contest(contest)
         end
 
