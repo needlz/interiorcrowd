@@ -27,7 +27,7 @@ window.humanFileSize = (bytes, si) ->
     ++units
     unless Math.abs(bytes) >= multiple and units < unitNames.length - 1
       break
-  bytes.toFixed(1) + ' ' + unitNames[u]
+  bytes.toFixed(1) + ' ' + unitNames[units]
 
 $(document).bind('drop dragover', (e)->
   e.preventDefault()
