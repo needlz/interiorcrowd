@@ -1,6 +1,7 @@
 module ActiveAdminExtensions
 
   module ContestDetails
+
     BEGINNING_YEAR = 2015
 
     def last_contest_status(user)
