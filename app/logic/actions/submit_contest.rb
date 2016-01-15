@@ -6,7 +6,7 @@ class SubmitContest
   end
 
   def payed?
-    contest.payed?
+    contest.payed? || manual_checkout?
   end
 
   def brief_completed?
@@ -22,7 +22,7 @@ class SubmitContest
   end
 
   def try_perform
-    if contest.brief_pending? && brief_completed? && (payed? || !Settings.payment_enabled)
+    if contest.brief_pending? && brief_completed? && payed?
       ActiveRecord::Base.transaction do
         contest.submit!
         contest.update_attributes(submission_started_at: Time.now)
@@ -38,6 +38,10 @@ class SubmitContest
   private
 
   attr_reader :contest
+
+  def manual_checkout?
+    !Settings.payment_enabled && contest.client.reload.primary_card_id
+  end
 
   def after_tried
     notify_about_contest_not_live if !performed? && only_brief_pending?
