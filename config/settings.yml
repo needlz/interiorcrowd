@@ -93,6 +93,7 @@ common: &defaults
       version: '00000010'
       width: 1440
       height: 900
+  viglink_key: '<%= ENV['VIGLINK_KEY'] %>'
 
 development:
 

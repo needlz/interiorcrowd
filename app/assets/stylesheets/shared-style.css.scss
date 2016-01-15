@@ -2993,7 +2993,7 @@ input[type="radio"].smallRadio:checked + label span {
   position: relative;
 }
 
-.ccFinalPage .itemRow .itemBox .itemBoxRight a {
+.ccFinalPage .itemRow .itemBox .itemBoxRight a.link {
   font-size: 20px;
   color: #FFF;
   display: block;
@@ -3063,7 +3063,7 @@ input[type="radio"].smallRadio:checked + label span {
   .ccFinalPage .itemRow .itemBox .itemBoxRight p:nth-child(2) {
     font-size: 18px;
   }
-  .ccFinalPage .itemRow .itemBox .itemBoxRight a {
+  .ccFinalPage .itemRow .itemBox .itemBoxRight a.link {
     width: 165px;
     font-size: 16px;
   }
@@ -3090,7 +3090,7 @@ input[type="radio"].smallRadio:checked + label span {
   .ccFinalPage .itemRow .itemBox .itemBoxRight p:nth-child(4) {
     font-size: 15px;
   }
-  .ccFinalPage .itemRow .itemBox .itemBoxRight a {
+  .ccFinalPage .itemRow .itemBox .itemBoxRight a.link {
     width: 130px;
     font-size: 16px;
   }
@@ -3126,7 +3126,7 @@ input[type="radio"].smallRadio:checked + label span {
     height: 160px;
     margin-right: 30px;
   }
-  .ccFinalPage .itemRow .itemBox .itemBoxRight a {
+  .ccFinalPage .itemRow .itemBox .itemBoxRight a.link {
     bottom: 0px;
     width: 100%;
     border-radius: 0px;
