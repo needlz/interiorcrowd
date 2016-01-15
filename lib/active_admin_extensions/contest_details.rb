@@ -19,7 +19,12 @@ module ActiveAdminExtensions
 
     def contest_name(contest)
       client = contest.client
-      full_contest_name = link_to(full_user_name(client).possessive, admin_client_path(client)) + append_project_name(contest)
+      full_contest_name =
+        if controller.plain
+          full_user_name(client).possessive + append_project_name(contest)
+        else
+          link_to(full_user_name(client).possessive, admin_client_path(client)) + append_project_name(contest)
+        end
       full_contest_name.html_safe
     end
 
@@ -34,22 +39,38 @@ module ActiveAdminExtensions
     end
 
     def designers_list(requests)
-      requests.map do |request|
-        designer = request.designer
-        statement = link_to(full_user_name(designer), admin_designer_path(designer))
-        statement = yield(statement, request.submitted_at) if block_given?
-        statement
-      end.join('<br />').html_safe
+     designers =
+         requests.map do |request|
+          designer = request.designer
+          statement =
+            if controller.plain
+              full_user_name(designer)
+            else
+              link_to(full_user_name(designer), admin_designer_path(designer))
+            end
+          statement = yield(statement, request.submitted_at) if block_given?
+          statement
+        end
+      if controller.plain
+        designers.join("\n")
+      else
+        designers.join('<br />').html_safe
+      end
     end
 
     def formatted_date(status_prefix, date)
-      status_prefix + date.to_s if date
+      status_prefix + date.to_s
     end
 
     def winner_info(contest)
       if contest.response_winner
         designer = contest.response_winner.designer
-        statement = link_to(full_user_name(designer), admin_designer_path(designer))
+        statement =
+            if controller.plain
+              full_user_name(designer)
+            else
+              link_to(full_user_name(designer), admin_designer_path(designer))
+            end
         statement = statement + formatted_date(', won at ', contest.response_winner.won_at)
         statement.html_safe
       end

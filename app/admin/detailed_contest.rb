@@ -5,10 +5,17 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
 
   actions :all, :except => [:new, :destroy, :edit, :show]
 
-  index do
-    selectable_column
+  controller do
+    attr_accessor :plain
+  end
+
+  columns = Proc.new do
     column 'Contest id' do |contest|
-      link_to contest.id, admin_contest_path(contest)
+      if controller.plain
+        contest.id
+      else
+        link_to contest.id, admin_contest_path(contest)
+      end
     end
     column 'Contest' do |contest|
       contest_name(contest)
@@ -42,6 +49,17 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     column 'Promo Code Message' do |contest|
       promocode_details(contest, :display_message)
     end
+  end
+
+  index do
+    selectable_column
+    controller.plain = false
+    instance_exec(&columns)
+  end
+
+  csv do
+    controller.plain = true
+    instance_exec(&columns)
   end
 
   filter :status, as: :check_boxes, collection: proc { Contest::STATUSES }
