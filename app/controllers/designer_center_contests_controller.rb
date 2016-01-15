@@ -4,8 +4,8 @@ class DesignerCenterContestsController < ApplicationController
   def index
     available_contests = AvailableContestsQuery.new(@designer)
     @invited_contests = available_contests.invited.with_associations.map { |contest| ContestShortDetails.new(contest) }
-    @current_contests = available_contests.all.includes(:design_space, :client).map { |contest| ContestShortDetails.new(contest) }
-    @suggested_contests = @current_contests
+    @current_contests = available_contests.all.with_associations.map { |contest| ContestShortDetails.new(contest) }
+    @suggested_contests = available_contests.suggested.with_associations.uniq.map { |contest| ContestShortDetails.new(contest) }
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
