@@ -17,7 +17,7 @@
     - steps_with_large_images = [2]
     - steps.each_with_index do |step_i18n, index|
       .step
-        = render 'rieltor_contacts/sfar_step',
+        = render 'realtor_contacts/sfar_step',
           step_i18n: step_i18n,
           index: index + 1,
           image_class: steps_with_large_images.include?(index + 1) ? 'largeImage' : 'image'
@@ -34,7 +34,7 @@
             .title= t('.form.title')
 
         .inputs
-          = form_for RieltorContact.new do |f|
+          = form_for RealtorContact.new do |f|
 
             .row
               .col-lg-4.col-sm-3
@@ -68,7 +68,7 @@
                 = f.label :email, t('.form.phone.label')
               .col-lg-8.col-sm-9#phoneParts
                 = f.text_field :phone,
-                  name: "rieltor_contact[phone][]",
+                  name: "realtor_contact[phone][]",
                   placeholder: '123',
                   class: 'form-control',
                   maxlength: 3,
@@ -76,7 +76,7 @@
                   title: t('.form.phone.tooltip_three_digits')
                 %span.delimiter &#8212;
                 = f.text_field :phone,
-                  name: "rieltor_contact[phone][]",
+                  name: "realtor_contact[phone][]",
                   placeholder: '456',
                   class: 'form-control',
                   maxlength: 3,
@@ -84,7 +84,7 @@
                   title: t('.form.phone.tooltip_three_digits')
                 %span.delimiter &#8212;
                 = f.text_field :phone,
-                  name: "rieltor_contact[phone][]",
+                  name: "realtor_contact[phone][]",
                   placeholder: '7890',
                   class: 'form-control',
                   maxlength: 4,
@@ -96,7 +96,7 @@
               .col-lg-4.col-sm-3
                 = f.label :choice, t('.form.choice')
               .col-lg-8.col-sm-9
-                = f.select :choice, RieltorContact::CHOICES, class: 'form-control'
+                = f.select :choice, RealtorContact::CHOICES, class: 'form-control'
             .clearfix
 
             .row#sfarSubmitButton

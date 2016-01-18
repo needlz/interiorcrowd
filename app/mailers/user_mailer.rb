@@ -340,6 +340,19 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
+  def realtor_signup(realtor_contact_id, email_id = nil)
+    realtor_contact = RealtorContact.find(realtor_contact_id)
+    template 'realtor-signup'
+    set_template_values(
+      name: realtor_contact.name,
+      brokerage: realtor_contact.brokerage,
+      email: realtor_contact.email,
+      phone: realtor_contact.phone,
+      choice: realtor_contact.choice
+    )
+    mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+  end
+
   private
 
   def asset_url(asset_path)

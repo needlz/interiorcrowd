@@ -200,10 +200,10 @@ InteriorC::Application.routes.draw do
 
     resources :giftcard_payments, controller: 'giftcard_payments', only: [:create, :index]
 
-    get '/sfar', to: 'rieltor_contacts#sfar', as: 'sfar'
+    get '/sfar', to: 'realtor_contacts#sfar', as: 'sfar'
     get '/giftcards', to: 'giftcard_payments#new', as: 'new_giftcard_payment'
 
-    resources :rieltor_contacts, only: [:create]
+    resources :realtor_contacts, only: [:create]
   end
 
   def consider_rest_of_routes_as_portfolios

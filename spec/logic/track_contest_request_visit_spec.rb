@@ -10,7 +10,7 @@ RSpec.describe TrackContestRequestVisit do
 
     it 'saves current time' do
       TrackContestRequestVisit.perform(contest_request)
-      expect(contest_request.last_visit_by_client_at).to be_within(1.second).of(Time.current)
+      expect(contest_request.last_visit_by_client_at).to be_within(5.second).of(Time.current)
     end
   end
 

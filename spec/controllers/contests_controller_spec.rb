@@ -462,7 +462,7 @@ RSpec.describe ContestsController do
 
             it 'tracks visit time' do
               get :show, id: contest.id
-              expect(fulfillment_request.reload.last_visit_by_client_at).to be_within(1.second).of(Time.current)
+              expect(fulfillment_request.reload.last_visit_by_client_at).to be_within(5.second).of(Time.current)
             end
           end
 

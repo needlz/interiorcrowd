@@ -6,6 +6,7 @@ RSpec.describe UserMailer do
   let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'submitted') }
   let(:concept_board_comment) { Fabricate(:concept_board_comment, contest_request: contest_request, text: 'text') }
+  let(:realtor_contact) { Fabricate(:realtor_contact) }
 
   describe 'mailer' do
     it 'send email with welcoming to client' do
@@ -154,6 +155,10 @@ RSpec.describe UserMailer do
 
     it 'sends email to client if designer is waiting for feedback' do
       expect(UserMailer.designer_waiting_for_feedback_to_client(client.id, [contest.id])).to be_present
+    end
+
+    it 'sends email to owner about new realtor contact' do
+      expect(UserMailer.realtor_signup(realtor_contact.id)).to be_present
     end
   end
 
