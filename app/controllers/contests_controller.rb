@@ -137,7 +137,7 @@ class ContestsController < ApplicationController
     @client = current_user
     begin
       @contest = @client.contests.find(params[:id])
-      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed? && Settings.payment_enabled
+      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed? && Settings.automatic_checkout_enabled
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
@@ -150,7 +150,7 @@ class ContestsController < ApplicationController
   end
 
   def payment_summary
-    return redirect_to client_center_entry_path(id: params[:id]) unless Settings.payment_enabled
+    return redirect_to client_center_entry_path(id: params[:id]) unless Settings.automatic_checkout_enabled
     begin
       @contest = @client.contests.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
@@ -334,7 +334,7 @@ class ContestsController < ApplicationController
   end
 
   def payment_performed?(contest)
-    return contest.payed? if Settings.payment_enabled
+    return contest.payed? if Settings.automatic_checkout_enabled
     contest.client.credit_cards.present?
   end
 

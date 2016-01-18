@@ -24,7 +24,7 @@ ActiveAdmin.register Contest do
   member_action :charge, method: :put do
     contest = Contest.find(params[:id])
     begin
-      payment = Payment.new(contest)
+      payment = CreateClientPayment.new(contest)
       payment.perform
       if payment.client_payment.try(:payment_status) == 'completed'
         SubmitContest.new(contest).try_perform if contest.brief_pending?

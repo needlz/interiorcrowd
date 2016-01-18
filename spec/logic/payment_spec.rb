@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Payment do
+RSpec.describe CreateClientPayment do
 
   let(:credit_card) { Fabricate(:credit_card) }
   let(:client) { Fabricate(:client, primary_card_id: credit_card.id) }
@@ -14,7 +14,7 @@ RSpec.describe Payment do
   context 'when successful charge' do
     before do
       mock_stripe_successful_charge
-      Payment.new(contest).perform
+      CreateClientPayment.new(contest).perform
       contest.reload
     end
 
@@ -34,7 +34,7 @@ RSpec.describe Payment do
     end
 
     it 'does not create client payment and does not change contest status' do
-      payment = Payment.new(contest)
+      payment = CreateClientPayment.new(contest)
       expect { payment.perform }.to raise_error(Stripe::StripeError)
       expect(contest.client_payment.present?).to be_falsey
       expect(contest.status).to eq 'brief_pending'
@@ -47,8 +47,8 @@ RSpec.describe Payment do
     end
 
     it 'does not create client payment and does not change contest status' do
-      payment = Payment.new(contest)
-      expect{payment.perform}.to raise_error(ArgumentError)
+      payment = CreateClientPayment.new(contest)
+      expect{payment.perform}.to raise_error(ClientCheckout::CheckoutError)
       expect(contest.client_payment).to be_nil
       expect(contest.status).to eq 'brief_pending'
     end

@@ -1,4 +1,4 @@
-class Payment
+class CreateClientPayment
 
   DEFAULT_CURRENCY = 'USD'
 
@@ -18,7 +18,7 @@ class Payment
       price = calculator.price_in_cents
       @client_payment = contest.client_payment
       card = client.primary_card
-      raise ArgumentError.new('Primary card not set') unless card
+      raise ClientCheckout::CheckoutError.new('Primary card not set') unless card
 
       if client_payment
         client_payment.update_attributes!(payment_status: 'pending',

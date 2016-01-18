@@ -214,7 +214,7 @@ RSpec.configure do |config|
   end
 
   def pay_contest(contest)
-    payment = Payment.new(contest)
+    payment = CreateClientPayment.new(contest)
     mock_stripe_customer_registration
     mock_stripe_successful_charge
     payment.perform

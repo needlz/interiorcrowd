@@ -40,7 +40,7 @@ class SubmitContest
   attr_reader :contest
 
   def manual_checkout?
-    !Settings.payment_enabled && contest.client.reload.primary_card_id
+    !Settings.automatic_checkout_enabled && contest.client.reload.primary_card_id
   end
 
   def after_tried

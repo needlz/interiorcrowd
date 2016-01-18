@@ -9,6 +9,10 @@ RSpec.describe ClientPaymentsController do
   let(:credit_card) { Fabricate(:credit_card, client: client) }
   let(:promocode) { Fabricate(:promocode) }
 
+  def complete_brief(contest)
+    contest.space_images << Fabricate(:space_image)
+  end
+
   before do
     mock_stripe_customer_registration
   end
@@ -33,6 +37,24 @@ RSpec.describe ClientPaymentsController do
             post :create, contest_id: contest.id, client_agree: 'yes'
             expect(contest.client_payment.last_error).to be_nil
             expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+          end
+
+          context 'when contest brief is completed' do
+            before do
+              complete_brief(contest)
+            end
+
+            it 'moves the contest to "submission" state' do
+              post :create, contest_id: contest.id, client_agree: 'yes'
+              expect(contest.reload.status).to eq 'submission'
+            end
+          end
+
+          context 'when contest brief is not completed' do
+            it %{doesn't move the contest to "submission" state'} do
+              post :create, contest_id: contest.id, client_agree: 'yes'
+              expect(contest.reload.status).to eq 'brief_pending'
+            end
           end
 
           it 'does not log any error' do

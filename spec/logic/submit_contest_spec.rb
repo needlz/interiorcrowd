@@ -14,7 +14,7 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments disabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ false }
+        allow(Settings).to receive(:automatic_checkout_enabled){ false }
       end
 
       context 'when the client has no primary card' do
@@ -44,7 +44,7 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments enabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ true }
+        allow(Settings).to receive(:automatic_checkout_enabled){ true }
         contest
       end
 
@@ -99,7 +99,7 @@ RSpec.describe SubmitContest do
 
     context 'when real payments enabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ true }
+        allow(Settings).to receive(:automatic_checkout_enabled){ true }
       end
 
       context 'when contest payed' do
