@@ -275,7 +275,8 @@ class UserMailer < ActionMailer::Base
          subject: I18n.t("mails.new_product_list_item.subject"), email_id: email_id
   end
 
-  def notify_designer_about_win(contest_request, email_id = nil)
+  def notify_designer_about_win(request_id, email_id = nil)
+    contest_request = ContestRequest.find request_id
     designer = contest_request.designer
     contest = contest_request.contest
     client = contest.client
@@ -283,7 +284,8 @@ class UserMailer < ActionMailer::Base
         hello_address: contact_email,
         contest_url: renderer.designer_center_contest_url(id: contest.id),
         contest_name: contest.name,
-        client_name: client.name
+        client_name: client.name,
+        training_videos_url: designer_center_training_url
     )
     mail to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id
   end
