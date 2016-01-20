@@ -1,6 +1,8 @@
 module ActiveAdminExtensions
 
   module ContestDetails
+    BEGINNING_YEAR = 2015
+
     def last_contest_status(user)
       contest = user.last_contest
       return '' unless contest
@@ -58,6 +60,23 @@ module ActiveAdminExtensions
     def promocode_details(contest, detail)
       codes = contest.contest_promocodes
       codes.first.promocode.try(detail) if codes.present?
+    end
+
+    def self.months_for_years
+      return @months if @months
+      @months = { }
+      (BEGINNING_YEAR..Date.current.year).each { |year|
+        Date::MONTHNAMES.drop(1).each { |month|
+          menu_tab_name = month + ' ' + year.to_s
+          @months[menu_tab_name] = Date.parse(menu_tab_name).strftime("%Y%m%d")
+        }
+      }
+      @months
+    end
+
+    def self.ranges_for_month(month)
+      months_hash = months_for_years
+      Date.parse(months_hash[month])
     end
   end
 

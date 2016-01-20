@@ -84,6 +84,14 @@ class Contest < ActiveRecord::Base
   scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
   scope :incompleted, ->{ where(status: INCOMPLETE_STATUSES) }
 
+  ransacker :finished_at_month, formatter: proc { |month|
+    date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)
+    contests = Contest.where(finished_at: date..date.next_month).map(&:id)
+    contests.present? ? contests : nil
+  } do |parent|
+    parent.table[:id]
+  end
+
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category, if: -> { completed? }
   validates_presence_of :design_space, if: -> { completed? }
