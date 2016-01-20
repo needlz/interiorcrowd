@@ -44,5 +44,5 @@ class @ConceptboardComment
     if hasComments
       $newComment.insertBefore($category.find('.commentContainer:first'))
     else
-      $category.html($('.message-template').html())
+      $category.html($newComment)
     PicturesZoom.init($newComment.find('.enlarge'))
