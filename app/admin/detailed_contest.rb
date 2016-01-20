@@ -45,4 +45,5 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
   end
 
   filter :status, as: :check_boxes, collection: proc { Contest::STATUSES }
+  filter :finished_at_month_in_any, label: 'Month', as: :select, collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys, multiple: true
 end
