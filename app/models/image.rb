@@ -140,7 +140,11 @@ class Image < ActiveRecord::Base
   end
 
   def thumb_url_for(style)
-    image.url(style) if viewable?
+    if viewable?
+      image.url(style)
+    else
+      '/assets/file-icon.png'
+    end
   end
 
 end
