@@ -30,6 +30,7 @@ class DesignerCenterRequestsController < ApplicationController
     })
     @visible_image_items = @show_page.image_items
     @navigation = Navigation::DesignerCenter.new(:requests)
+    @setup_viglink = @show_page.phases_stripe.active_phase == :final_design
     set_image_item_views
   end
 
