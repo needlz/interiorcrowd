@@ -14,4 +14,22 @@
 
 class OutboundEmail < ActiveRecord::Base
 
+  ransacker :by_user_name, formatter: proc { |names|
+    emails = []
+
+    names.split(' ').each do |name|
+      parsed_name = name.strip
+      emails += FindUserEmailsWithNameLike.new(parsed_name).perform
+    end
+
+    result = []
+    emails.each do |email|
+      result += OutboundEmail.where("api_response ILIKE '%#{email}%'").map(&:id)
+    end
+
+    result.present? ? result : nil
+  } do |parent|
+    parent.table[:id]
+  end
+
 end

@@ -435,6 +435,8 @@ ActiveRecord::Schema.define(version: 20160104144608) do
     t.datetime "updated_at"
     t.datetime "sent_to_mail_server_at"
     t.text     "api_response"
+    t.text     "plain_message"
+    t.string   "template_name"
   end
 
   create_table "portfolio_awards", force: :cascade do |t|
@@ -445,7 +447,6 @@ ActiveRecord::Schema.define(version: 20160104144608) do
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer  "background_id"
     t.integer  "designer_id",                             null: false
     t.integer  "years_of_experience"
     t.boolean  "education_gifted"

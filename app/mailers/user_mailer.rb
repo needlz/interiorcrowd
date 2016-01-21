@@ -1,9 +1,49 @@
 class UserMailer < ActionMailer::Base
+  include AbstractController::Callbacks
+
   include MandrillMailer
   include Rails.application.routes.url_helpers
+  MANDRILL_TEMPLATES = {
+      client_registered: 'new-client-welcome-mail',
+      designer_registered: 'user-registration',
+      client_registration_info: 'client-registration-info',
+      designer_registration_info: 'designer-registration-info',
+      invite_to_contest: 'invite-to-contest',
+      reset_password: 'reset-password',
+      sign_up_beta_autoresponder: 'sign-up-beta-autoresponder',
+      notify_about_new_subscriber: 'new-beta-subscriber',
+      product_list_feedback: 'product-list-feedback',
+      invitation_to_leave_a_feedback: 'invitation-to-leave-a-feedback',
+      concept_board_received: 'generic-notification',
+      comment_on_board: 'comment-on-board',
+      note_to_concept_board: 'note-to-concept-board',
+      new_product_list_item: 'new-product-list-item',
+      notify_designer_about_win: 'Winner_designer',
+      please_pick_winner: 'client-must-pick-a-winner',
+      remind_about_picking_winner: 'client-hasn-t-picked-a-winner',
+      client_has_picked_a_winner: 'client-has-picked-a-winner',
+      client_ready_for_final_design: 'client-ready-for-final-design',
+      client_hasnt_picked_a_winner_to_designers: 'client-hasn-t-picked-a-winner-to-designers',
+      designer_submitted_final_design: 'designer-submitted-final-design',
+      no_concept_boards_received_after_three_days: 'no-concept-boards-received-after-three-days',
+      one_day_left_to_choose_a_winner: 'one-day-left-to-choose-a-winner',
+      one_day_left_to_submit_concept_board: 'one-day-left-to-submit-concept-board',
+      four_days_left_to_submit_concept_board: 'four-days-left-to-submit-concept-board',
+      contest_not_live_yet: 'contest-not-live-yet',
+      designer_asks_client_a_question_submission_phase: 'designer-asks-client-a-question-submission-phase',
+      account_creation: 'account-creation',
+      new_project_on_the_platform: 'new-project-on-the-platform',
+      to_designers_one_submission_only: 'to-designers-one-submission-only',
+      to_designers_client_no_submissions: 'to-designers-client-no-submissions-1',
+      client_moved_to_final_design: 'client-ready-for-final-design-1',
+      new_project_to_hello: 'new-project-to-hello',
+      designer_waiting_for_feedback_to_client: 'designer-waiting-for-feedback-to-client',
+      realtor_signup: 'realtor-signup'
+  }
+
 
   def client_registered(client_id, email_id = nil)
-    template 'new-client-welcome-mail'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = Client.find(client_id)
     set_template_values(login_link: renderer.client_login_sessions_url,
                         submission_days: ContestMilestone::DAYS['submission'])
@@ -11,7 +51,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_registered(designer_id, email_id = nil)
-    template 'user-registration'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     designer = Designer.find(designer_id)
     subject = I18n.t('mails.designer_registration.subject')
     set_template_values(mail_link: renderer.mail_to(I18n.t('registration.mail_to')))
@@ -19,21 +59,21 @@ class UserMailer < ActionMailer::Base
   end
 
   def client_registration_info(client_id, email_id = nil)
-    template 'client-registration-info'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = Client.find(client_id)
     set_template_values(set_user_params(client))
     mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
 
   def designer_registration_info(designer_id, email_id = nil)
-    template 'designer-registration-info'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     designer = Designer.find(designer_id)
     set_template_values(set_user_params(designer))
     mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
 
   def invite_to_contest(designer, client, email_id = nil)
-    template 'invite-to-contest'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
       client_name: client.name,
       designer_login_url: renderer.designer_login_sessions_url
@@ -42,7 +82,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def reset_password(user_id, user_role, password, email_id = nil)
-    template 'reset-password'
     user = user_role.constantize.find(user_id)
     set_template_values(name: user.name,
                         email: user.email,
@@ -51,14 +90,14 @@ class UserMailer < ActionMailer::Base
   end
 
   def sign_up_beta_autoresponder(email, email_id = nil)
-    template 'sign-up-beta-autoresponder'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     subject = I18n.t('mails.beta_autorespond.subject')
     mail to: [wrap_recipient(email, '', "to")], subject:subject, email_id: email_id
   end
 
   def notify_about_new_subscriber(beta_subscriber, email_id = nil)
     return unless Rails.env.production?
-    template 'new-beta-subscriber'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(new_subscriber_params(beta_subscriber))
     recipients = Settings.beta_notification_emails.map do |email|
       wrap_recipient(email, 'InteriorCrowd', 'to')
@@ -67,7 +106,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def product_list_feedback(params, contest_request_id, email_id = nil)
-    template 'product-list-feedback'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
       edit_response_url: renderer.edit_designer_center_response_url(contest_request_id),
       faq_url: renderer.faq_url(anchor: 'designer'),
@@ -78,7 +117,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def invitation_to_leave_a_feedback(params, url, client_name, root_url, email_id = nil)
-    template 'invitation-to-leave-a-feedback'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
       client_name: client_name,
       root_url: root_url,
@@ -89,7 +128,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def concept_board_received(contest_request, email_id = nil)
-    template 'generic-notification'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest_request.contest.client
     email = client.email
     username = client.name
@@ -103,7 +142,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def comment_on_board(params, contest_request_id, email_id = nil)
-    template 'comment-on-board'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     recipient = params[:recipient_role].constantize.find(params[:recipient_id])
     author = params[:author_role].constantize.find(params[:author_id])
     comment = ConceptBoardComment.find(params[:comment_id])
@@ -120,7 +159,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def note_to_concept_board(params, email_id = nil)
-    template 'note-to-concept-board'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
         client_name: params[:client_name],
         comment: ERB::Util.html_escape(params[:comment]).split("\n").join("<br/>").html_safe,
@@ -131,7 +170,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_product_list_item(params, email_id = nil)
-    template 'new-product-list-item'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
       client_center_entries_url: renderer.client_center_entries_url,
       faq_url: renderer.faq_url(anchor: 'client'),
@@ -142,7 +181,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def notify_designer_about_win(contest_request, email_id = nil)
-    template 'Winner_designer'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     designer = contest_request.designer
     contest = contest_request.contest
     client = contest.client
@@ -156,7 +195,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def please_pick_winner(contest, email_id = nil)
-    template 'client-must-pick-a-winner'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest.client
     set_template_values(
         days_to_pick_winner: ContestMilestone::DAYS['winner_selection'],
@@ -168,7 +207,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def remind_about_picking_winner(contest, email_id = nil)
-    template 'client-hasn-t-picked-a-winner'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest.client
     set_template_values(
         entries_url: renderer.client_center_entries_url,
@@ -178,7 +217,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def client_has_picked_a_winner(contest_request, email_id = nil)
-    template 'client-has-picked-a-winner'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest_request.contest.client
     set_template_values(
         hello_address: contact_email
@@ -187,7 +226,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def client_ready_for_final_design(contest_request, email_id = nil)
-    template 'client-ready-for-final-design'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest_request.contest.client
     designer = contest_request.designer
     set_template_values(
@@ -197,7 +236,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def client_hasnt_picked_a_winner_to_designers(contest, email_id = nil)
-    template 'client-hasn-t-picked-a-winner-to-designers'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     designers = Designer.joins(:contest_requests).where(contest_requests: { id: contest.requests.submitted.pluck(:id) })
     set_template_values(
         contest_name: contest.name
@@ -206,7 +245,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_submitted_final_design(contest_request, email_id = nil)
-    template 'designer-submitted-final-design'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest_request.contest.client
     set_template_values(
         hello_address: contact_email
@@ -215,13 +254,13 @@ class UserMailer < ActionMailer::Base
   end
 
   def no_concept_boards_received_after_three_days(contest, email_id = nil)
-    template 'no-concept-boards-received-after-three-days'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = contest.client
     mail(to: [wrap_recipient(client.email, client.name, 'to'), wrap_recipient(contact_email, 'InteriorCrowd', 'to')], email_id: email_id)
   end
 
   def one_day_left_to_choose_a_winner(contest_id, email_id = nil)
-    template 'one-day-left-to-choose-a-winner'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     contest = Contest.find(contest_id)
     client = contest.client
     set_template_values(
@@ -234,7 +273,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def one_day_left_to_submit_concept_board(contest_id, email_id = nil)
-    template 'one-day-left-to-submit-concept-board'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     contest = Contest.find(contest_id)
     designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
@@ -245,7 +284,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def four_days_left_to_submit_concept_board(contest_id, email_id = nil)
-    template 'four-days-left-to-submit-concept-board'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     contest = Contest.find(contest_id)
     designers = SubscribedDesignersQueryNotSubmitted.new(contest).designers
     set_template_values(
@@ -256,7 +295,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def contest_not_live_yet(contest, email_id = nil)
-    template 'contest-not-live-yet'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
         entries_url: renderer.client_center_entries_url,
         pictures_email: 'pictures@interiorcrowd.com'
@@ -266,7 +305,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
-    template 'designer-asks-client-a-question-submission-phase'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     comment = ConceptBoardComment.find(options[:comment_id])
     set_template_values(
       entry_url: renderer.contest_request_url(id: comment.contest_request.id),
@@ -282,7 +321,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def account_creation(client_id, email_id = nil)
-    template 'account-creation'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = Client.find(client_id)
     set_template_values(
         twitter_url: Settings.external_urls.social.twitter,
@@ -307,7 +346,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_project_on_the_platform(client_name, project_name, designer_ids, email_id = nil)
-    template 'new-project-on-the-platform'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
         client_name: client_name.present? ? client_name : 'A new client',
         project_name: project_name,
@@ -320,17 +359,17 @@ class UserMailer < ActionMailer::Base
   end
 
   def to_designers_one_submission_only(contest_id, email_id = nil)
-    template 'to-designers-one-submission-only'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     mail_about_contest_submissions(contest_id, email_id)
   end
 
   def to_designers_client_no_submissions(contest_id, email_id = nil)
-    template 'to-designers-client-no-submissions-1'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     mail_about_contest_submissions(contest_id, email_id)
   end
 
   def client_moved_to_final_design(contest_id, email_id = nil)
-    template 'client-ready-for-final-design-1'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     contest = Contest.find(contest_id)
     client = contest.client
     set_template_values(
@@ -343,7 +382,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_project_to_hello(contest_id, email_id = nil)
-    template 'new-project-to-hello'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     contest = Contest.find(contest_id)
     client = contest.client
     set_template_values(
@@ -354,7 +393,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_waiting_for_feedback_to_client(client_id, contest_ids, email_id = nil)
-    template 'designer-waiting-for-feedback-to-client'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     client = Client.find(client_id)
     set_template_values(
       contest_url: renderer.client_center_entry_url(id: contest_ids[0])
@@ -364,7 +403,7 @@ class UserMailer < ActionMailer::Base
 
   def realtor_signup(realtor_contact_id, email_id = nil)
     realtor_contact = RealtorContact.find(realtor_contact_id)
-    template 'realtor-signup'
+    template MANDRILL_TEMPLATES[__method__.to_sym]
     set_template_values(
       name: realtor_contact.name,
       brokerage: realtor_contact.brokerage,
@@ -383,6 +422,7 @@ class UserMailer < ActionMailer::Base
 
   def set_user_params(user)
     {
+      role: user.role.downcase,
       name: user.name,
       email: user.email,
       phone: user.phone_number || ''
@@ -419,7 +459,7 @@ class UserMailer < ActionMailer::Base
     client = contest.client
     designers = contest.not_submitted_designers
     set_template_values(
-        client_name: client.name,
+    client_name: client.name,
         contest_name: contest.name,
         contest_url: designer_center_contest_url(id: contest.id)
     )
@@ -430,3 +470,6 @@ class UserMailer < ActionMailer::Base
   end
 
 end
+
+
+

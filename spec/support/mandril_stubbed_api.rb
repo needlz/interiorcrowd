@@ -17,6 +17,16 @@ module Mandrill
       requests.last
     end
 
+    def templates
+      self
+    end
+
+    def render(template_name, template_content, merge_vars=nil)
+      {
+          html: '<div>test</div>'
+      }
+    end
+
     def call(_, params = {})
       @@requests << params
       response_to_return
