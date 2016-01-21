@@ -41,7 +41,7 @@ RSpec.describe DesignerCenterContestsController do
   describe 'GET show' do
     it 'returns page' do
       dont_raise_i18n_exceptions do
-        allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+        mock_file_download_url
         Fabricate(:example_image, contest: contest)
         Fabricate(:space_image, contest: contest)
         preference_name = ContestAdditionalPreference::PREFERENCES.first[0]

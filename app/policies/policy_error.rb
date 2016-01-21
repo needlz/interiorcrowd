@@ -1,0 +1,1 @@
+class PolicyError < StandardError; end

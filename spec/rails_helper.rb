@@ -243,4 +243,8 @@ RSpec.configure do |config|
     end
   end
 
+  def mock_file_download_url
+    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+  end
+
 end

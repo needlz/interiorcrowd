@@ -15,7 +15,8 @@ class ConceptBoardCommentView < CommentView
     distance_of_time_in_words(Time.current,
                               comment.created_at.in_time_zone,
                               false,
-                              highest_measure_only: true) +
+                              highest_measure_only: true,
+                              scope: 'datetime.short') +
         I18n.t('board_comments.ago')
   end
 
@@ -38,6 +39,10 @@ class ConceptBoardCommentView < CommentView
 
   def sub_name
     to_who
+  end
+
+  def editable?
+    UserCommentPolicy.for_user(spectator).edit_comment(comment).can?
   end
 
   private

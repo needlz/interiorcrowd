@@ -16,8 +16,8 @@ class @InlineEditor
     @bindEditClick()
 
   bindEditClick: ->
-    $(document).on 'click', "#{@attributeSelector} #{@editButtonSelector}", @, @onEditClick
-    $(document).on 'click', "#{@attributeSelector} #{@cancelButtonSelector}", @, @onCancelClick
+    $(document).on 'click', "#{@attributeSelector} #{@editButtonSelector}:not(.disabled)", @, @onEditClick
+    $(document).on 'click', "#{@attributeSelector} #{@cancelButtonSelector}:not(.disabled)", @, @onCancelClick
 
   editAll: ->
     $("#{@attributeSelector} #{@editButtonSelector}").click()

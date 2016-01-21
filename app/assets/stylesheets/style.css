@@ -1368,9 +1368,7 @@ textarea.productsMoodboardAbove{
 .commentContainer:nth-child(even){
 	background: #F8F8F8;
 }
-.commentContainer .comment-username{
-	font-weight: 700;
-}
+
 .commentContainer .comment-time{
 	font-style: italic;
 	color: #a9a9a9;

@@ -28,15 +28,12 @@ InteriorC::Application.routes.draw do
     get 'about_us', to: 'home#about_us'
 
     resources :contest_requests, only: [:show, :create] do
+      resources :comments, controller: :concept_board_comments, only: [:create, :update]
       member do
-        post 'add_comment'
         get 'save_lookbook'
         post 'answer'
         post 'approve_fulfillment'
         get 'download'
-      end
-      collection do
-        post 'add_comment'
       end
     end
 
@@ -113,6 +110,7 @@ InteriorC::Application.routes.draw do
                 controller: 'designer_center_contests',
                 as: 'designer_center_contest',
                 only: [:show, :index] do
+        resources :comments, controller: :concept_board_comments, only: [:create]
         collection do
           get 'index'
         end

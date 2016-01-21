@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require loader
 //= require jquery_ujs
 //= require jquery-ui/widget
 //= require bootstrap.min
@@ -40,5 +39,5 @@
 //= require_tree ./lib/iframeResizer
 //= require_tree ./shared
 //= require jquery.slick
-
-defined()
+//= require comment_attachment
+//= require concept_board_comment_editor

@@ -20,6 +20,30 @@
         %p.commentTabs.text-left= comments_title
   %div{role: 'tabpanel'}
     #scrollBoxComments.tab-content.notes.questionBox
+      .template.editComment
+        .editForm
+          .uploadRow
+            .glyphicon.glyphicon-paperclip.uploadButton{ title: 'Upload attachment' }
+        %span.editControls
+          %span.save{ title: 'Save changes' } Save
+          %span.cancel Cancel
+        .editAttachments.editArea
+          %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+          %input.fileIds{ type: 'hidden' }
+          .thumbs
+            .template
+              = render 'concept_board_comment_attachments/edit', attachment: Hashie::Mash.new
+            .uploadingTemplate
+              %img.preview
+              %span.filename
+              %span.size
+              .progressbar
+                .pointer
+              .menuButtons
+                = render 'concept_board_comment_attachments/remove_button'
+          %textarea.text
+
+
       #allComents.tab-pane.active{role: 'tabpanel'}
         - comments.each do |comment|
           = render 'designer_center_requests/edit/comment',
@@ -54,7 +78,7 @@
         minScrollbarLength: 28
       });
 
-      ConceptboardComment.init()
+      ConceptBoardComment.init()
       CommentsBlock.fitCommentsArea()
 
       $('.btnGroupComments a').click(function(){

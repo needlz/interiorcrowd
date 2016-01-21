@@ -5,27 +5,6 @@ class ContestRequestsController < ApplicationController
   before_filter :set_request, only: [:answer, :approve_fulfillment, :download, :show]
   before_filter :check_contest_owner, only: [:answer, :download]
 
-  def add_comment
-    @request = ContestRequest.find_by_id(params[:id])
-    if @request.nil?
-      contest = Contest.find params[:contest_id]
-      return raise_404 unless current_user.designer?
-      @request = contest.response_of(current_user)
-      @request = ContestRequestCreation.new({ designer: current_user,
-                                                contest: contest,
-                                                request_params: nil,
-                                                lookbook_params: nil,
-                                                need_submit: false }).perform if @request.blank?
-    else
-      return raise_404 unless current_user.can_comment_contest_request?(@request)
-    end
-    comment_creation = ConceptBoardCommentCreation.new(@request, comment_attributes, current_user)
-    comment = comment_creation.perform
-    comment_html = render_to_string partial: 'designer_center_requests/edit/comment',
-                       locals: { user: current_user, comment_view: CommentView.create(comment, current_user) }
-    render json: { comment_html: comment_html }
-  end
-
   def answer
     replied = @request.reply(params[:answer], current_user.id)
     render json: { answered: replied }
@@ -73,10 +52,6 @@ class ContestRequestsController < ApplicationController
 
   def set_request
     @request = ContestRequest.find(params[:id])
-  end
-
-  def comment_attributes
-    params.require(:comment).permit([:text, attachments_ids: []])
   end
 
 end

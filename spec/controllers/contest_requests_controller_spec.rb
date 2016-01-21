@@ -4,7 +4,7 @@ require 'spec_helper'
 RSpec.describe ContestRequestsController do
 
   before do
-    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+    mock_file_download_url
   end
 
   render_views
@@ -142,119 +142,6 @@ RSpec.describe ContestRequestsController do
     it 'sends notification' do
       post :approve_fulfillment, id: contest_request.id
       expect(UserNotification.exists?(user_id: contest_request.designer_id, contest_id: contest_request.contest_id, type: 'DesignerInfoNotification')).to eq(true)
-    end
-  end
-
-  describe 'POST /:id/add_comment' do
-    context 'logged as contest owner' do
-      before do
-        sign_in(client)
-      end
-
-      it 'creates comment' do
-        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
-        expect(ConceptBoardComment.exists?(text: 'text',
-                                           contest_request_id: request.id,
-                                           user_id: client.id)).to be_truthy
-        expect(response).to be_ok
-      end
-
-      it 'returns html of new comment' do
-        post :add_comment, comment: {text: 'http://google.com', contest_request_id: request.id}, id: request.id
-        json = JSON.parse(response.body)
-        expect(json['comment_html']).to be_present
-      end
-
-      it 'notifies designer' do
-        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
-        expect(designer.reload.user_notifications[0]).to be_kind_of(ConceptBoardCommentNotification)
-      end
-    end
-
-    context 'logged as other client' do
-      before do
-        sign_in(Fabricate(:client))
-      end
-
-      it 'renders 404' do
-        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
-        expect(ConceptBoardComment.exists?).to be_falsey
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-
-    context 'logged as request creator' do
-      before do
-        sign_in(designer)
-      end
-
-      it 'creates comment' do
-        post :add_comment, comment: {text: 'text', contest_request_id: request.id}, id: request.id
-        expect(ConceptBoardComment.exists?(text: 'text',
-                                           contest_request_id: request.id,
-                                           user_id: designer.id)).to be_truthy
-        expect(response).to be_ok
-      end
-
-      it 'does not notify designer' do
-        expect(designer.user_notifications).to be_empty
-      end
-    end
-
-    context 'not creator of request' do
-      before do
-        sign_in(Fabricate(:designer))
-      end
-
-      it 'renders 404' do
-        post :add_comment, comment: { text: 'text', contest_request_id: request.id }, id: request.id
-        expect(ConceptBoardComment.exists?).to be_falsey
-        expect(response).to have_http_status(:not_found)
-      end
-    end
-  end
-
-  describe 'POST /add_comment' do
-    context 'logged as request creator' do
-      before do
-        sign_in(designer)
-      end
-
-      context 'when files attached' do
-        let(:params) { { comment: { text: 'text', attachments_ids: [Fabricate(:image).id] }, contest_id: contest.id } }
-
-        it 'creates concept_board_comment_attachment' do
-          post :add_comment, params
-          expect(ContestRequest.last.comments.last.attachments.count).to eq 1
-        end
-      end
-
-      it 'creates first comment and contest request if there is no request for this designer yet' do
-        expect do
-          post :add_comment, comment: { text: 'text' }, contest_id: contest.id
-        end.to change{ContestRequest.count}.by(1).and change{ConceptBoardComment.count}.by(1)
-        expect(ContestRequest.last.comments).to be_present
-        expect(response).to be_ok
-      end
-
-      it 'creates new comment right after first comment creation' do
-        post :add_comment, comment: { text: 'text' }, contest_id: contest.id
-        expect do
-          post :add_comment, comment: { text: 'text' }, contest_id: contest.id
-        end.to change{ConceptBoardComment.count}.by(1)
-      end
-    end
-
-    context 'logged as client' do
-      before do
-        sign_in(Fabricate(:client))
-      end
-
-      it 'renders 404' do
-        post :add_comment, comment: { text: 'text' }, contest_id: contest.id
-        expect(ConceptBoardComment.exists?).to be_falsey
-        expect(response).to have_http_status(:not_found)
-      end
     end
   end
 

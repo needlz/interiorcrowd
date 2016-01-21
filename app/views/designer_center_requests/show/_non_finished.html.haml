@@ -22,7 +22,7 @@
     - if request.comments.present? || request.commenting_enabled?
       = render 'shared/comments',
         request: request,
-        comments: request.comments,
+        comments: request.comments.order(:created_at),
         show_comment_switcher: !request_view.initial_concept_board?,
         readonly: !show_page.editable?
   .clearfix
