@@ -8,7 +8,7 @@
   - if @show_winner_selected_warning
     = render partial: 'designer_center_contests/show/winner_selected_warning'
 
-  = render partial: 'designer_center_contests/show/preview'
+  = render 'designer_center_contests/show/preview', contest_short_details: @contest_short_details
 
   .col-md-12.disablePadding.marg-top30
 
