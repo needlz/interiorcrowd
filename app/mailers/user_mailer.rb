@@ -85,7 +85,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def comment_on_board(params, contest_request_id, email_id = nil)
-    template 'test-template'
+    template 'comment_on_board'
     recipient = params[:recipient_role].constantize.find(params[:recipient_id])
     author = params[:author_role].constantize.find(params[:author_id])
     comment = ConceptBoardComment.find(params[:comment_id])
@@ -244,7 +244,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def designer_asks_client_a_question_submission_phase(options, email_id = nil)
-    template 'test-template-2'
+    template 'designer-asks-client-a-question-submission-phase'
     comment = ConceptBoardComment.find(options[:comment_id])
     set_template_values(
       entry_url: renderer.contest_request_url(id: comment.contest_request.id),
