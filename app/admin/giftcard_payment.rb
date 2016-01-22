@@ -1,5 +1,4 @@
 ActiveAdmin.register GiftcardPayment do
-  menu priority: 14
 
   index do
     column :id

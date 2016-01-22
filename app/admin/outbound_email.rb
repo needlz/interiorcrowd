@@ -1,7 +1,6 @@
 include ActiveAdminExtensions::EmailDetails
 
 ActiveAdmin.register OutboundEmail do
-  menu priority: 15
 
   index do
     selectable_column

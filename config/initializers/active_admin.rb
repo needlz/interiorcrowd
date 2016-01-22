@@ -233,3 +233,27 @@ ActiveAdmin.setup do |config|
 
   config.skip_before_filter :setup_event_tracker # the before filter causes "A copy of ApplicationController has been removed from the module tree but is still active"
 end
+
+class ActiveAdmin::DSL
+
+  def run_registration_block_with_automenu(&block)
+    run_registration_block_without_automenu(&block)
+    set_default_menu
+  end
+
+  alias_method :run_registration_block_without_automenu, :run_registration_block
+  alias_method :run_registration_block, :run_registration_block_with_automenu
+
+  def set_default_menu
+    menu priority: get_menu_priority
+  end
+
+  def get_menu_priority
+    id = (config.menu_item_options[:id].try(:singular) || config.menu_item_options[:id]).parameterize.underscore.to_sym
+    [:dashboard, :admin_users, :beta_subscribers, :contest_requests, :clients, :users, :client_payments, :contests,
+     :contest_promocodes, :comments, :credit_cards, :inbound_emails, :designers, :designer_activity,
+     :detailed_contests, :giftcard_payments, :outbound_emails, :portfolios, :promocodes, :realtor_contacts,
+     :sounds].index(id) + 1
+  end
+
+end

@@ -1,5 +1,4 @@
 ActiveAdmin.register CreditCard do
-  menu priority: 10
 
   form do |f|
     f.inputs
