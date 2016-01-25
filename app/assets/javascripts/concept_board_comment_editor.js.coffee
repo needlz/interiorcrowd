@@ -19,6 +19,17 @@ class @ConceptBoardCommentEditor extends InlineEditor
     @onEditFormRetrieved(id, $editForm.html())
     @initUploadTheme($comment, $attachmentsTemplate.clone(), $editForm)
 
+    $comment.find('.controls .delete').confirm(
+      text: 'Are you sure you want to delete that comment?'
+      confirm: (button)=>
+        @delete($comment)
+      confirmButton: 'Yes I am'
+      cancelButton: 'No'
+      confirmButtonClass: 'btn-danger'
+      cancelButtonClass: 'btn-default'
+      dialogClass: 'modal-dialog modal-sm'
+    )
+
   initUploadTheme: ($comment, $attachmentsTemplate, $editForm)->
     commentText = $comment.attr('data-text')
     $attachmentsTemplate.find('.text').val(commentText)
@@ -69,6 +80,25 @@ class @ConceptBoardCommentEditor extends InlineEditor
       $saveButton = $(event.target)
       $comment = $saveButton.parents(@attributeSelector)
       @update($comment)
+
+  delete: ($comment)->
+    requestId = $('.response[data-id]').attr('data-id') || $('.concept-board[data-id]').attr('data-id')
+    commentId = $comment.attr('data-id')
+    $.ajax(
+      url: "/contest_requests/#{ requestId }/comments/#{ commentId }"
+      type: 'DELETE'
+      beforeSend: =>
+        $comment.find('.controls .delete').addClass('disabled')
+        $comment.find('.controls .delete').text('Deleting...')
+        $comment.find('.controls .save').hide()
+        $comment.find('.controls .cancel').hide()
+        $comment.removeAttr('data-halted')
+      success: (data)=>
+        if data.destroyed_comment_id
+          $comment.closest(".commentContainer[data-id=#{ data.destroyed_comment_id }]").remove()
+      error: ->
+        console.log('Server error when deleting comment')
+    )
 
   onCancelClick: (event)=>
     super(event)

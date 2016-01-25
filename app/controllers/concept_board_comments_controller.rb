@@ -22,6 +22,16 @@ class ConceptBoardCommentsController < ApplicationController
     end
   end
 
+  def destroy
+    validate_params_of_update
+
+    if comment.destroy
+      render json: { destroyed_comment_id: comment.id }
+    else
+      render json: { error: comment.errors.full_messages }
+    end
+  end
+
   private
 
   attr_reader :concept_board, :comment

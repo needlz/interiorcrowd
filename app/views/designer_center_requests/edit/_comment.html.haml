@@ -8,9 +8,9 @@
           %p.comment-username= comment_view.name
           %p= comment_view.sub_name
         .col-xs-6.controls
-          %span.comment-time= comment_view.ago_text
           - if comment_view.editable?
-            .editButton.glyphicon.glyphicon-pencil{ title: 'Edit comment' }
+            .editButton.glyphicon.glyphicon-pencil{ title: t('.hint') }
+          %span.comment-time= comment_view.ago_text
       .content
         .view
           - if comment_view.attachments.present?

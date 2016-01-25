@@ -28,7 +28,7 @@ InteriorC::Application.routes.draw do
     get 'about_us', to: 'home#about_us'
 
     resources :contest_requests, only: [:show, :create] do
-      resources :comments, controller: :concept_board_comments, only: [:create, :update]
+      resources :comments, controller: :concept_board_comments, only: [:create, :update, :destroy]
       member do
         get 'save_lookbook'
         post 'answer'

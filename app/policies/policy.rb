@@ -21,10 +21,6 @@ class Policy
 
   attr_reader :user, :permissions
 
-  def any_not_permitted?
-    permissions.any? { |permitted| !permitted }
-  end
-
   def create_error
     @error = PolicyError.new
   end

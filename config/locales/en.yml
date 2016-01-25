@@ -1704,6 +1704,10 @@ en:
           send_button: Send
           saving: Saving...
 
+    edit:
+      comment:
+        hint: Edit comment
+
   giftcard_payments:
     new:
       sidebar:
@@ -1769,3 +1773,16 @@ en:
         one: 1 year
         other: "%{count} years"
       less_than_x: "less than %{distance}"
+
+  shared:
+    comments:
+      save_comment: Save
+      save_comment_hint: Save changes
+      cancel_comment: Cancel
+      delete_comment: Delete
+
+  concept_board_comment_attachments:
+    show:
+      download_hint: Download file
+    remove_button:
+      hint: Remove attachment

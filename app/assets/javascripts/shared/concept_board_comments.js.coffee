@@ -49,6 +49,5 @@ class @ConceptBoardComment
     PicturesZoom.init($newComment.find('.enlarge'))
 
   @bindEdit: ->
-    console.log 'bindEdit'
     editor = new ConceptBoardCommentEditor()
     editor.init()

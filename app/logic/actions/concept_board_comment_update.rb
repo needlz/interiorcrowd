@@ -1,34 +1,21 @@
 class ConceptBoardCommentUpdate < Action
 
-  attr_reader :saved, :errors
+  attr_reader :saved
 
-  def initialize(comment, comment_options)
+  def initialize(comment, comment_attributes)
     @comment = comment
-    @comment_options = comment_options
+    @comment_attributes = comment_attributes
   end
 
   def perform
     ActiveRecord::Base.transaction do
-      comment.update_attributes!(comment_attributes)
-      attach_files
+      @saved = comment.update_attributes!(comment_attributes)
     end
-    @saved = true
     @comment
   end
 
   private
 
-  attr_reader :comment, :comment_options
-
-  def comment_attributes
-    comment_options.except(:attachments_ids)
-  end
-
-  def attach_files
-    if comment_options[:attachments_ids]
-      comment.attachments = Image.where(id: comment_options[:attachments_ids] - comment.attachment_ids)
-      comment.save!
-    end
-  end
+  attr_reader :comment, :comment_attributes
 
 end

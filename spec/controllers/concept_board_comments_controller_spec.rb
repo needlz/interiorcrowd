@@ -171,4 +171,43 @@ RSpec.describe ConceptBoardCommentsController, type: :controller do
     end
   end
 
+  describe 'DELETE destroy' do
+    let(:clients_comment) do
+      Fabricate(:concept_board_comment, user_id: client.id, role: client.role, contest_request: request)
+    end
+
+    context 'when logged as comment author' do
+      before do
+        sign_in(client)
+      end
+
+      it 'deletes comment' do
+        delete :destroy, contest_request_id: request.id, id: clients_comment.id
+        expect(JSON.parse(response.body)['destroyed_comment_id']).to eq clients_comment.id
+      end
+    end
+
+    context 'when not logged as another client' do
+      before do
+        sign_in(Fabricate(:client))
+      end
+
+      it 'does not allow to destroy comment' do
+        delete :destroy, contest_request_id: request.id, id: clients_comment.id
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when not logged as collocutor' do
+      before do
+        sign_in(request.designer)
+      end
+
+      it 'does not allow to destroy comment' do
+        delete :destroy, contest_request_id: request.id, id: clients_comment.id
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+  end
+
 end
