@@ -4,7 +4,7 @@ RSpec.describe DesignerCenterRequestsController do
   render_views
 
   before do
-    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+    mock_file_download_url
   end
 
   let(:designer) { Fabricate(:designer) }

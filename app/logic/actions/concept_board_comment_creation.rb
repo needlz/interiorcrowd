@@ -1,4 +1,4 @@
-class ConceptBoardCommentCreation
+class ConceptBoardCommentCreation < Action
 
   attr_reader :comment
 

@@ -2,7 +2,7 @@ class CommentView
   include Rails.application.routes.url_helpers
   include ActionView::Helpers::DateHelper
 
-  delegate :updated_at, :created_at, :text, :author_name, :author_role, :author, :attachments, to: :comment
+  delegate :updated_at, :created_at, :text, :author_name, :author_role, :author, :attachments, :id, to: :comment
 
   def self.create(comment, spectator)
     comment_view_class = "#{ comment.class.name }View".constantize

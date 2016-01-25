@@ -19,7 +19,7 @@ RSpec.describe LookbookDetailsController do
   end
 
   before do
-    allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+    mock_file_download_url
   end
 
   describe 'POST create' do

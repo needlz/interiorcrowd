@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require loader
 //= require jquery_ujs
 //= require jquery-ui/widget
 //= require bootstrap.min
@@ -33,6 +32,7 @@
 //= require lib/select2-3.5.2/select2
 //= require lib/draggable_background
 //= require lib/jquery.aw-showcase.min
+//= require lib/jquery.confirm
 //= require designer_center_requests/finished
 //= require about_us
 //= require how_it_works
@@ -40,5 +40,5 @@
 //= require_tree ./lib/iframeResizer
 //= require_tree ./shared
 //= require jquery.slick
-
-defined()
+//= require comment_attachment
+//= require concept_board_comment_editor

@@ -1,4 +1,4 @@
-class @ConceptboardComment
+class @ConceptBoardComment
 
   @init: =>
     @i18n = MessagesI18n
@@ -8,6 +8,7 @@ class @ConceptboardComment
     @buttonSend = $('.comment-create')
     @buttonSend.on 'click', =>
       @create()
+    @bindEdit()
 
   @create: (path) ->
     text = @textarea.val()
@@ -18,8 +19,8 @@ class @ConceptboardComment
 
   @makeRequest: (text, requestId, attachmentsIds) ->
     $.ajax(
-      data: { comment: { text: text, contest_request_id: requestId, attachments_ids: attachmentsIds } }
-      url: "/contest_requests/#{requestId}/add_comment"
+      data: { comment: { text: text, attachments_ids: attachmentsIds } }
+      url: "/contest_requests/#{ requestId }/comments"
       type: 'POST'
       beforeSend: =>
         @buttonSend.text(@i18n.sending)
@@ -46,3 +47,7 @@ class @ConceptboardComment
     else
       $category.html($newComment)
     PicturesZoom.init($newComment.find('.enlarge'))
+
+  @bindEdit: ->
+    editor = new ConceptBoardCommentEditor()
+    editor.init()

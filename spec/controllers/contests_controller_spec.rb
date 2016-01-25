@@ -338,7 +338,7 @@ RSpec.describe ContestsController do
       before do
         sign_in(client)
         Fabricate(:portfolio)
-        allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+        mock_file_download_url
       end
 
       let(:contest) { Fabricate(:contest, client: client, status: 'submission') }

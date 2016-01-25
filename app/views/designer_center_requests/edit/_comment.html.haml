@@ -1,4 +1,4 @@
-.commentContainer
+.commentContainer{ data: { id: comment_view.id, text: comment_view.text } }
   .row
     .col-md-2.col-sm-1.col-xs-2
       %img{ width: '40', height: '40', src: comment_view.avatar_url }/
@@ -7,13 +7,17 @@
         .col-xs-6.authorName
           %p.comment-username= comment_view.name
           %p= comment_view.sub_name
-        .col-xs-6
-          %p.comment-time= comment_view.ago_text
-      - if comment_view.attachments.present?
-        .thumbs
-          - comment_view.attachments.each do |attachment|
-            .thumb
-              = render 'concept_board_comment_attachments/show', attachment: attachment
-      %div.comment-text.hidden-xs= format_comment(comment_view.text)
+        .col-xs-6.controls
+          - if comment_view.editable?
+            .editButton.glyphicon.glyphicon-pencil{ title: t('.hint') }
+          %span.comment-time= comment_view.ago_text
+      .content
+        .view
+          - if comment_view.attachments.present?
+            .thumbs
+              - comment_view.attachments.each do |attachment|
+                .thumb{ data: { id: attachment.id, size: attachment.image_file_size, filename: attachment.image_file_name } }
+                  = render 'concept_board_comment_attachments/show', attachment: attachment
+          %div.comment-text.hidden-xs= format_comment(comment_view.text)
     .col-xs-12
       %div.comment-text.visible-xs= format_comment(comment_view.text)

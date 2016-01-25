@@ -32,8 +32,8 @@ class @ResponseEditor
 
   sendComment: (contestId, $comment)->
     $.ajax(
-      data: { comment: { text: $comment.val() }, contest_id: contestId }
-      url: '/contest_requests/add_comment'
+      data: { comment: { text: $comment.val() } }
+      url: "/designer_center/contests/#{ contestId }/comments"
       type: 'POST'
       success: ()=>
         $comment.val('')
