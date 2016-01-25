@@ -15,6 +15,7 @@ class BlogController < ApplicationController
   def justines_story; end
 
   def blog_page
+    @setup_viglink = true
     @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_path])
     render_get_response
   end

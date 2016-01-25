@@ -36,6 +36,12 @@ RSpec.describe DesignerCenterRequestsController do
                                       status: 'fulfillment_ready',
                                       lookbook: Fabricate(:lookbook))
   end
+  let(:fulfillment_approved_request) do Fabricate(:contest_request,
+                                               designer: designer,
+                                               contest: final_fulfillment_contest,
+                                               status: 'fulfillment_approved',
+                                               lookbook: Fabricate(:lookbook))
+  end
   let(:closed_request) do Fabricate(:contest_request,
                                       designer: designer,
                                       contest: contest,
@@ -81,6 +87,17 @@ RSpec.describe DesignerCenterRequestsController do
           ContestPhases.indices.each do |index|
             get :show, id: concept_board.id, view: index
             expect(response).to render_template(:show)
+          end
+        end
+      end
+
+      context 'when concept board is fulfillment_approved' do
+        let(:concept_board) { fulfillment_approved_request }
+
+        it 'enables VigLink for the page' do
+          ContestPhases.indices.each do |index|
+            get :show, id: concept_board.id, view: index
+            expect(assigns(:setup_viglink)).to eq (ContestPhases.index_to_phase(index) == :final_design)
           end
         end
       end
