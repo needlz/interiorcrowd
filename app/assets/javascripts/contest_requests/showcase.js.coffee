@@ -67,7 +67,6 @@ class @ConceptBoardShowcase
         speed_change: false
         viewline: false
 
-      slideIndex = slideIndex || ($(@showcaseThumbsSelector).length - 1)
       $(@showcaseThumbsSelector).eq(slideIndex).click()
 
 $ ->

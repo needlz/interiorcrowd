@@ -19,11 +19,7 @@ class Showcase
   def initialize(options)
     @items = options[:items]
     @images = options[:images]
-    if @items
-      @items = @items.includes(:image)
-    else
-      @items = @images.map { |image| DummyLookbookItem.new(image) } unless @items
-    end
+    @items = @items ? @items.includes(:image).order(created_at: :desc) : @images.map{ |image| DummyLookbookItem.new(image) }
     @editable = options[:editable]
     @placeholder_src = options[:placeholder_src] || '/assets/img-content.png'
     @single = options[:single]
