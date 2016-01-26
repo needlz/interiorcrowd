@@ -12,7 +12,6 @@
         %img{:src => "/assets/kirsten-room1.jpg"}/
         .carousel-caption
           %div
-            %img{:src => "/assets/kirsten-profile.jpg"}/
             %h5 Kirsten
             %p
               %span “
@@ -22,7 +21,6 @@
         %img{:src => "/assets/cathy-room1.jpg"}/
         .carousel-caption
           %div
-            %img{:src => "/assets/cathy-profile.jpg"}/
             %h5 Cathy
             %p
               %span “
@@ -32,7 +30,6 @@
         %img{:src => "/assets/kevin-room1.jpg"}/
         .carousel-caption
           %div
-            %img{:src => "/assets/kevin-profile.jpg"}/
             %h5 Kevin
             %p
               %span “
@@ -42,7 +39,6 @@
         %img{:src => "/assets/melanie-room1.jpg"}/
         .carousel-caption
           %div
-            %img{:src => "/assets/melanie-profile.jpg"}/
             %h5 Melanie
             %p
               %span “
@@ -59,4 +55,6 @@
         :role => "button",
         :style => "margin-right: 375px;"}
       %img{:src => "/assets/carouselNext.png"}/
-  %a.getStartedBottom{ href: design_brief_contests_path, class: tracked_link }= t('home.get_started').upcase
+  %a.getStartedBottom{ href: design_brief_contests_path, class: tracked_link }
+    %span= t('home.get_started').upcase
+    %img.arrow{ src: '/assets/go_right.png' }

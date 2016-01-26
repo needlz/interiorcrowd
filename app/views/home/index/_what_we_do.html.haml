@@ -1,7 +1,21 @@
 .container
   %a.circleDownArrow.hidden-sm.hidden-xs{ href: 'javascript:void(0)' }
-  %h2 WHAT WE DO
+  %h2= t('home.what_we_do.title')
   .shortUnderline
-  %p
-    Created for your busy lifestyle, InteriorCrowd is the fun and approachable online interior
-    design service that helps you create the space you have always wanted.
+  %p= t('home.what_we_do.wording')
+  .clearfix
+  .bottomBar.hidden-xs
+    %hr#left-line
+    .rounded-box
+      = t('home.what_we_do.home')
+      %span.what-we-do-separator= '|'
+      = t('home.what_we_do.office')
+      %span.what-we-do-separator= '|'
+      = t('home.what_we_do.person')
+    %hr#right-line
+  .bottomBarMobile.visible-xs
+    = t('home.what_we_do.home')
+    %hr
+    = t('home.what_we_do.office')
+    %hr
+    = t('home.what_we_do.person')

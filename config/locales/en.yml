@@ -11,6 +11,7 @@ en:
     client_login: Client
     blog: Blog
   footer:
+    contact_us: contact us
     about: About
     terms: Terms
     privacy_policy: Privacy Policy
@@ -1499,28 +1500,37 @@ en:
         description: >
           You choose who you want to work with
       collaborate_with_professionals:
-        title: Collaborate with your professional designer
+        title: Meet your designer in-person
         description: >
-          Work together to get a design you love
+          Discuss timelines and priorities
       customized_design:
         title: Customized design just for you
         description: >
           According to your budget & specifications
       easy_instructions:
-        title: Easy-to-follow instructions & floorplan
+        title: Real-time updates
         description: >
-          Your designer will show you how to get your new space
+          On your client dashboard
       shopping_list:
         title: Shopping list
         description: >
-          Get your new items right away
+          Shop yourself, or get your designer to shop for you
     get_started: Get started
     carousel:
-      price: '$%{price} per room'
+      price: 'starts at $99'
       choose_designer: Choose your designer
       fun_and_easy: Fun and easy
       main_title: 'Start living in a more inspiring space.'
       sub_title: 'Find a fantastic interior designer to make over your space today.'
+    what_we_do:
+      title: What we do
+      wording: >
+        Created for your busy lifestyle, InteriorCrowd is the fun and approachable interior design service
+        that helps you create the space you have always wanted. Our network of talented designers will compete
+        for your business, and our industry-leading platform makes the process simple, quick and easy.
+      home: home
+      office: office
+      person: online & in-person
     example_moodboards:
       Example Concept Boards
     success_stories:
@@ -1551,9 +1561,9 @@ en:
       get_started_text: get started designing your perfect room now
       get_started_link: Get started
       lead_wrapper: >
-        We connect you with a network of interior designers who will develop custom design ideas, layout plans,
-        shopping lists, and assembly instructions for $299, so you can bring to life the beautiful room
-        you’ve always wanted. Join us!
+        With InteriorCrowd, your new space is now within reach. It's easy, simple and affordable.
+        Whether you need decorating, styling, staging or full-scale renovations, our professional interior designers
+        are prepared to deliver.<br/>From hourly rates as low as $99.
       faq:
         faq_title: 'FREQUENTLY ASKED QUESTIONS:'
         who_are_designers: Who are the designers?
