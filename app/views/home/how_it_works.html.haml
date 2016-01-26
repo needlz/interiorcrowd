@@ -12,7 +12,7 @@
     .how-it-works-lead
       .wrap
         .how-it-works-lead-wrapper
-          %p= t('.lead_wrapper')
+          %p= t('.lead_wrapper').html_safe
     = render 'home/how_it_works/steps'
     = render 'home/how_it_works/faq'
 %footer

@@ -12,6 +12,7 @@ common: &defaults
     webhook_key: <%= ENV['MANDRILL_WEBHOOK_KEY'] %>
   pictures_email: pictures@interiorcrowd.com
   info_email: <%= ENV['INFO_EMAIL'] %>
+  contact_phone: '+1 (256) 515-4863'
   rollbar_access_token: <%= ENV['ROLLBAR_ACCESS_TOKEN'] %>
   rollbar_js_access_token: <%= ENV['ROLLBAR_JS_ACCESS_TOKEN'] %>
   root_folder: <%= Rails.root %>

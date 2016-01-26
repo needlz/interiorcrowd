@@ -4204,7 +4204,7 @@ p.product-list-reminder {
         line-height: 2em;
         border-radius: 10px;
         bottom: 0px;
-        width: 435px;
+        width: 430px;
         margin-left: auto;
         margin-right: auto;
         font-size: 13px;
@@ -4293,6 +4293,7 @@ p.product-list-reminder {
 }
 
 .whatWeDoBox h2 {
+  text-transform: uppercase;
   font-size: 30px;
   margin-top: 70px;
   margin-bottom: 20px;
@@ -4307,14 +4308,14 @@ p.product-list-reminder {
 }
 
 .whatWeDoBox p {
-  font-family: 'AvenirLTStd-Medium';
-  font-size: 24px;
+  font-family: 'AvenirLTStd-Light';
+  font-size: 19px;
   margin-top: 40px;
   margin-bottom: 135px;
-  /*line-height: 32px;*/
   color: #666;
   padding: 0 4%;
-  line-height: 1.5;
+  line-height: 2;
+  letter-spacing: 0.6px;
 }
 
 .clientStories h2 {
@@ -4441,14 +4442,21 @@ p.product-list-reminder {
 }
 
 .bottomCarouselHome a.getStartedBottom {
+  span {
+    margin-right: 10px;
+  }
+  img {
+    margin-top: -5px;
+  }
+  border-radius: 3px;
   display: block;
   background: #409863;
   font-family: "AvenirLTStd-Medium";
   color: #fefffe;
   font-size: 22px;
   line-height: 50px;
-  width: 195px;
-  margin: 60px auto;
+  width: 210px;
+  margin: 60px auto 80px;
   text-align: center;
 }
 
@@ -4878,5 +4886,110 @@ $final-designer-center-comment-border-color: #ccc;
 
   .comment.odd {
     background-color: #F8F8F8;
+  }
+}
+
+.footerContacts{
+  h4 {
+    color: #666666;
+    margin-top: 30px;
+    margin-bottom: 25px;
+  }
+  p {
+    color: lighten(#666666, 10);
+  }
+}
+
+.footerLinks {
+  text-align : center;
+  padding-right: 0;
+  margin-right: 0;
+  padding-left: 0;
+}
+
+.footerSocial {
+  img {
+    opacity: 0.45;
+    width: 85%;
+  }
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 992px) {
+  .footerLinks {
+    text-align: right;
+    float: right !important;
+  }
+
+  .footerSocial {
+    text-align: right;
+    float: right !important;
+  }
+
+  .copyright {
+    float: right !important;
+    padding-right: 35px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .copyright {
+    float: right;
+    margin-right: 7px !important;
+  }
+}
+
+@media (max-width: 460px) {
+  .siteFooter {
+    text-align: center !important;
+  }
+
+  .footerContacts{
+    text-align: center !important;
+    margin-left: auto;
+  }
+
+  .footerLinks{
+    a{
+      font-size: 18px;
+      padding-right: 40px;
+      padding-left: 40px;
+    }
+    text-align: center;
+    float: none;
+  }
+
+  .footerSocial {
+    text-align: center !important;
+    float: left !important;
+    img {
+      width: 40% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    a {
+      text-align: center !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 25% !important;
+    }
+    .copyright {
+      float: none !important;
+      text-align: center !important;
+      margin: auto !important;
+      padding: 0 !important;
+
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .footerLinks a {
+    font-size: 16px;
+    display: inline-block;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 }

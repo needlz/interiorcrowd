@@ -13,12 +13,13 @@
 }
 
 .copyright {
-  padding-top: 40px;
+  padding-top: 0;
+  padding-right: 11px;
   padding-bottom: 40px;
-  font-size: 18px;
+  font-size: 14px;
 
   .copyright-sign {
-    font-size: 27px;
+    font-size: 21px;
     margin-right: 7px;
     position: relative;
     top: 3px;
@@ -173,7 +174,7 @@ body {
 }
 
 #body-content {
-  padding-bottom: 210px; /* Height of the footer */
+  padding-bottom: 205px; /* Height of the footer */
 }
 
 #body-footer {
