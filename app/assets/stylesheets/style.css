@@ -3363,8 +3363,6 @@ padding-bottom: 40px;
 @media(max-width:480px){
     .footerSocial a{
         padding: 0px;
-        float: left;
-        width: 30%;
         padding: 0px 12px;
     }
 }

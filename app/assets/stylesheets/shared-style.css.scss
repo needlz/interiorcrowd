@@ -4900,7 +4900,7 @@ $final-designer-center-comment-border-color: #ccc;
 .footerContacts{
   h4 {
     color: #666666;
-    margin-top: 30px;
+    margin-top: 25px;
     margin-bottom: 25px;
   }
   p {
@@ -4928,24 +4928,29 @@ $final-designer-center-comment-border-color: #ccc;
 @media (max-width: 992px) {
   .footerLinks {
     text-align: right;
-    float: right !important;
+    float: right
+  }
+
+  .footerContacts h4{
+    margin-top: 0px;
   }
 
   .footerSocial {
     text-align: right;
-    float: right !important;
+    float: right;
   }
 
   .copyright {
-    float: right !important;
-    padding-right: 35px !important;
+    float: right;
+    padding-right: 35px;
   }
 }
 
 @media (max-width: 768px) {
   .copyright {
     float: right;
-    margin-right: 7px !important;
+    margin-right: 0px;
+    padding-right: 0px !important;
   }
 }
 
@@ -4962,8 +4967,8 @@ $final-designer-center-comment-border-color: #ccc;
   .footerLinks{
     a{
       font-size: 18px;
-      padding-right: 40px;
-      padding-left: 40px;
+      padding-right: 25px;
+      padding-left: 25px;
     }
     text-align: center;
     float: none;
@@ -4971,7 +4976,7 @@ $final-designer-center-comment-border-color: #ccc;
 
   .footerSocial {
     text-align: center !important;
-    float: left !important;
+    float: left;
     img {
       width: 40% !important;
       padding: 0 !important;
@@ -4981,7 +4986,7 @@ $final-designer-center-comment-border-color: #ccc;
       text-align: center !important;
       padding: 0 !important;
       margin: 0 !important;
-      width: 25% !important;
+      width: 23% !important;
     }
     .copyright {
       float: none !important;
