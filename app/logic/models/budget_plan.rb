@@ -14,7 +14,7 @@ class BudgetPlan
   end
 
   PLANS = [new(id: 1,
-               price: 299,
+               price: 99,
                name: 'first',
                services: [:multiple_desings, :collaboration, :concept_board, :product_list, :floor_plan])
   ]
