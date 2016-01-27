@@ -986,208 +986,104 @@ en:
     customer:
       get_in_touch:
         question: How do I get in touch with InteriorCrowd?
-        answer: We love any feedback! Please email us at %{hello_email}
+        answer: Email us at %{hello_email} or call us at +1 (256) 515-4863
       what_is_interiorcrowd:
-        question: What is InteriorCrowd?
+        question: What is Interior Crowd?
         answer: >
-          InteriorCrowd is a fun and affordable way for busy people to get an inspiring home design
-          from a professional designer online. We connect designers with new clients, while our
-          software allows designers to focus on what they love - design.
+          Created for your busy lifestyle, InteriorCrowd is the fun and approachable interior design
+          service that helps you create the space you’ve always wanted. Our network of talented designers
+          will compete for your business, and our industry-leading platform makes the process simple, quick and easy.
+      how_does_it_work:
+        question: How does it work?
+        answer: >
+          We connect you with a network of interior designers who will work with you in-person on any type
+          of home design project, from styling to staging, renovations to decorations.<br/><br/>
+
+          For $99 you receive multiple moodboards from designers interested in your project. They will outline their
+          process and basic recommendations for your space. Choose who you’d like to work with and have one in-person
+          meeting with them to discuss the project in more detail.<br/><br/>
+
+          From there, get a recommended plan of action from your designer and continue working with them on an hourly
+          basis ($100/hour) to take care of all your design, shopping, and implementation needs.
       what_is_crowdsourcing:
         question: What does 'crowdsourcing' mean?
         answer: >
-          Crowdsourcing is a great way to get ideas from multiple people for one project. Our
-          crowdsourcing model starts with the client (you!) developing a personal style brief and
-          sharing pictures of your space. That brief goes out to a network of talented designers (a
-          mix of local, national and international talent) who will send you a number of different
-          concept boards that take into account your individual taste, budget, and functional
-          needs (i.e. relaxing, entertaining, working from home, pets, etc.). This way, you are able
-          to see lots of different viewpoints before picking who you want to work with.
+          Crowdsourcing is a great way to get ideas from multiple people for one project so that you’re better
+          equipped to choose the right person for your project.<br/><br/>
+
+          Our crowdsourcing model starts with the client (you) developing a personal style brief and sharing pictures
+          of your space. That brief goes out to a network of talented designers who will respond with a concept board
+          that outlines their vision for your space, along with a note that describes their process.
+          See how different designers work before picking who is the best fit for you.
       who_are_designers:
         question: Who are our designers?
         answer: >
-          Our designers are talented professionals from anywhere in the world. They are chosen to
-          design for InteriorCrowd based on a combination of factors like portfolio, awards and raw
-          talent.
-          <br\><br\>
+          Our designers are talented professionals from anywhere in the country. They are chosen to design
+          for InteriorCrowd based on a combination of factors like portfolio, awards and raw talent.<br/><br/>
+
           We have a large and growing network of established and up-and-coming interior designers. Each designer
           goes through an extensive interview process for us to vet that their style, knowledge of design principles,
-          materials and trends, communication, and ease with technology is up to our standards and that they
-          can delight a diverse group of clients with different budgets, styles, geographies, and functional
-          or aesthetic needs.
+          materials and trends, communication, and ease with technology is up to our standards and that they can delight
+          a diverse group of clients with different budgets, styles, geographies, and functional or aesthetic needs.
       how_many_designers:
         question: How many designers will I get to choose from?
         answer: >
-          Each project usually receives 3-5 concept boards from designers, but some projects do
-          get more. The more information you put in your brief, the more likely you are to get a lot
-          of interest from our network of designers.
-      want_to_meet_designer:
-        question: What if I want to meet my designer in-person?
-        answer: >
-          If you’d like to meet your designer in-person you should add this to your brief so that
-          only designers in your area will submit boards to your project. An in-person meeting
-          operates on an hourly fee structure and is not included in the $299 price point.
+          Each project usually receives 3-5 concept boards from designers, but many projects do get more.
+          The more information you put in your brief, the more likely you are to get a lot of interest
+          from our network of designers.
       style_profile:
         question: How does the style profile work?
         answer: >
-          The style profile was created in collaboration with our designers as a fun and easy way to
-          figure out how best to style an amazing new space for you. Most people don’t stick to one
-          style, and the profile takes this into account.
+          The style profile was created in collaboration with our designers as a fun and easy way to figure out
+          how best to style an amazing new space for you. Most people don’t stick to one style,
+          and the profile takes this into account.
       what_do_i_get:
-        question: What exactly do I get for $299?
+        question: What exactly do I get for $99?
         answer: >
-          ● Multiple concept boards (choose your own designer based on their
-          recommendations for your space/project)<br\>
-          ● 10-15 minute Facetime or Call with your designer<br/>
-          ● Floorplan (spatial planning)<br/>
-          ● Suggestions for new items (furniture, decor etc) with 2 iterations<br/>
-          ● If a floorplan isn’t necessary, an updated concept board (either a perspective
-          rendering or a pdf with prompts)<br/><br/>
-          If you’d like additional time with your designer, please %{additional_time_with_designer}
+          ● Multiple concept boards from designers interested in your project so that
+          you can choose who you’d like to work with<br/>
+          ● One in-person meeting with your favorite designer to discuss project in more detail<br/><br/>
+
+          From then on, you pay your designer an hourly rate of $100/hour.
       i_want_two_things:
         question: I only want one or two things. Is this for me?
         answer: >
-          Yes! This is their specialty. They will work around your room’s unique needs and within
-          your budget.
-      what_does_cost_meeting_with_designer:
-        question: What does it cost for an in-person meeting?
+          Yes! Put all this information in your brief and designers will be able to help you regardless
+          of how big or small your project is.
+      im_too_busy:
+        question: I’m too busy to meet with my designer. Can I Skype or Facetime with them instead?
         answer: >
-          If you want to explore the in-person model, we would recommend a package that
-          combines in-person hourly fees with a standard set of assets (layout plans, furniture &
-          accessory shopping list, assembly plan) delivered via our online platform. An initial
-          in-person meeting with your designer is an additional $100/hour but you can also
-          purchase further in-person hours if necessary.
-      additional_time_with_designer:
-        question: What if I want additional time with my designer?
-        answer: >
-          If you’ve already had two iterations of products and a 15 minute call and would still like
-          more time with your designer, you may request additional Add-on’s. These could be the
-          following:
-          <br/><br/>
-          ● In-person time ($100/hour)<br/>
-          ● Additional Facetime/Call time (to be determined by designer)<br/>
-          ● Another round of products (to be determined by designer)<br/>
+          Yes. If you’d prefer to videochat over Skype or Facetime with your designer to go over project
+          details and scope, that is an option.
       designer_can_help_me_with:
         question: What can my designer help me with?
         answer: >
-          Your designer will look at your brief and assess what you should get rid of and what you
-          need to purchase. They can help you with paint color, furniture pieces, rearranging your
-          room (spatial design), flooring, floor coverings, window treatments, light fixtures, decor,
-          wallpaper - you name it.<br/><br/>
-          Additionally, they can also take a look at your project before you do a renovation and
-          give you a consultation on what to focus on and how to spend your budget. For the
-          latter, we’d recommend an in-person consultation. For more info, %{what_does_cost_meeting_with_designer}
-      what_if_i_dont_like_the_products:
-        question: What if I don’t like the products the designer recommends?
-        answer: >
-          You have the opportunity to receive 2 iterations of products from your designer. Please
-          give them as much feedback as possible if you don’t like the items they have
-          recommended for you. It is highly unlikely that you won’t like what your designer puts
-          together for you the second time around if you let them know why you didn’t like the first
-          batch!
-      which_package_should_i_choose:
-        question: Which package should I choose?
-        answer: See %{what_do_i_get}
-      how_do_i_measure:
-        question: How do I measure my room?
-        answer: >
-          Get your tape measure ready! We find it’s easiest to make a simple drawing of your space
-          first and then fill in the measurements as you go. You can also take a photo of this drawing and
-          upload it to the other photo’s of your space. Your designer can guide you if they need more
-          detailed measurements, but for now, just measure the length and width of the room,
-          indicating important details like door openings and indentations/nooks.
-      how_do_contests_work:
-        question: How do contests work?
-        answer: >
-          First you fill out the style profile, then give us as much detailed information about your specific
-          room’s needs as possible. All our designers then receive your brief and those who want to
-          take on the project will send you a concept board reflecting their suggested direction for your
-          room. You pick which concept board you like the most (the winning design) and continue to
-          the next collaborative phase of designing your room with that specific designer.
-      how_to_collaborate_with_designer:
-        question: How do I collaborate with my designer?
-        answer: >
-          Once you’ve picked your designer, you’ll hop on a quick call to confirm everything in
-          your brief and get to know each other a bit better. From then on you’ll use the platform
-          for communicate. Every time your designer sends you a question you’ll receive an email
-          notification that will have a link that will take you directly to the Client Center where you
-          and your designer can communicate. Alternatively, just log in and go directly to your
-          Client Center to send your designer a question.
-      how_long_everything_takes:
-        question: How long does everything take?
-        answer: >
-          It depends on the project, but on average, the whole process takes​
-          <b>less than a month from beginning to end.</b>
+          Your designer will look at your brief and assess what needs to be done in your space.
+          They can help you with anything from decor updates (e.g. helping you choose color palettes/paint selections,
+          furniture, lighting, window treatments, accessories/art) to larger renovations
+          (e.g. demolition and/or construction, flooring, etc).
       forgot_password:
         question: >
           I forgot my password - how do I log in?
         answer: >
-          Please click on the forgot password link and enter your username. A link to reset your
-          password will be sent to the email address on file. Click on that link, and you will be led to an
-          area to reset the password. If you have any issues, you can always contact us at
-          %{hello_email}.
+          Please click on the “forgot password” link and enter your username. A link to reset your password will be sent
+          to the email address on file. Click on that link, and you will be led to an area to reset the password.
+          If you have any issues, you can always contact us at %{hello_email}.
       how_to_upload_additional_pictures:
         question: How do I upload pictures of my room to my brief?
         answer: >
-          Take as many pictures as possible but please take at least 4 with your back to each wall. Images must
-          be smaller than 10M. You can upload pictures three different ways: You can text them to us at (415) 254-9089
-          (please include your name) or email them to us at %{pictures_email}
-          (again, please add your name), or you can upload them yourself in your brief. Login and click on 'Brief'
-          in the top right navigation of the client center. Here you can see all of the details of the intake form
-          as well as the images you uploaded. If you click on the pencil icon in the Pictures of your Space section,
-          you can upload new images. If your designer asks you for additional pictures once you're in the collaboration
-          period, you can upload them the same way by editing your brief.
-      full_money_back_guarantee:
-        question: Do you offer a 100% money-back guarantee?
-        answer: >
-          Yes! We are very confident that you'll love your design and working with our interior designers, so
-          we are offering a 100% money-back guarantee. If you're unhappy with anything at all,
-          please email us at %{hello_email}
+          Take as many pictures as possible but please take at least 4 with your back to each wall.
+          Images must be smaller than 10M.You can upload pictures three different ways:
+          You can text them to us at (415) 254-9089 (please include your name) or email them to us at %{pictures_email}
+          (again, please add your name), or you can upload them yourself in your brief.
+          Login and click on 'Brief' in the top right navigation of the client center.
+          Here you can see all of the details of the intake form as well as the images you uploaded.
+          If you click on the pencil icon in the Pictures of your Space section, you can upload new images.
+          If your designer asks you for additional pictures once you're in the collaboration period,
+          you can upload them the same way by editing your brief.
     designer:
-      what_is_beta:
-        question: What is beta mode?
-        answer: >
-          This means we are still testing the product and learning from both the client and designer’s
-          experience. It also means that not all elements of the final product are available yet. The final
-          product will look quite different to how it looks right now. There will be bugs too, so please be
-          patient - and let us know of any issues you’re experiencing.
-      how_contest_work:
-        question: How do contests work?
-        answer: >
-          First, a client fills out the style profile, giving us as much detailed information about their
-          specific room’s needs as possible. All the designers will receive the brief and those who want
-          to take on the project will send the client a concept board reflecting their suggested direction
-          for the room. The client then picks which concept board they like the most (the winning
-          design) and continue to the next collaborative phase of designing their room with that specific
-          designer.
-      how_communicate_client:
-        question: How do I communicate with the client?
-        answer: >
-          All communication will take place in the Client Center on the platform. You will always be
-          notified via email if the client has added any feedback to your designs.
-      specs_of_design:
-        question: What are the specs of the designs I upload for the client?
-        answer: |
-          Concept board: w: 752px h: 664px
-          Final Design: w: 851px h: 751px
-      vendors:
-        question: Which vendors can I source from?
-        answer: >
-          You are welcome to choose from vendors that meet your client’s aesthetic, budget, and
-          quality requirements. But please choose reputable vendors that you know you can rely on.
-          We want clients to have a positive experience when they order the goods.
-      can_include_work_in_portfolio:
-        question: Can I include the work I do for InteriorCrowd in my portfolio?
-        answer: >
-          In most instances we’d love you to add your InteriorCrowd to your portfolio. But please
-          reference InteriorCrowd, and don’t add the client’s details, for privacy reasons.
-      what_do_i_get_paid:
-        question: What do I get paid?
-        answer: >
-          Clients pay $299 for a room design and designers are paid $200.
-          Designers are paid on the 15th of every month for all projects completed in the prior month.
-          For the in-person consultation we are currently working on $100/hour fee structure
-          and designers are paid $65/hour.
+      If you’re interested in joining InteriorCrowd, or have any questions for us about our pricing model or process
+      please email us at %{hello_email}
     captions:
       see_here: see here
       what_exactly_do_i_get_quote: '"What exactly do I get for $299"'

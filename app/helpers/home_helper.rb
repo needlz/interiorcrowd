@@ -3,48 +3,23 @@ module HomeHelper
   def faq_client_questions
     hello_link = { hello_email: mail_to(t('feedback_email')) }
     pictures_link = { pictures_email: mail_to(Settings.pictures_email) }
-    additional_time_with_designer_link = { additional_time_with_designer:
-                                               link_to(t('faq.captions.see_here'),
-                                                       '#collapse11',
-                                                       data: { collapse: true }) }
-    what_does_cost_meeting_with_designer_link = { what_does_cost_meeting_with_designer:
-                                                      link_to(t('faq.captions.see_here'),
-                                                              '#collapse10',
-                                                              data: { collapse: true }) }
-    what_do_i_get_link = { what_do_i_get: link_to(t('faq.captions.what_exactly_do_i_get_quote'),
-                                                  '#collapse8',
-                                                  data: { collapse: true }) }
     [{ get_in_touch: hello_link },
      :what_is_interiorcrowd,
+     :how_does_it_work,
      :what_is_crowdsourcing,
      :who_are_designers,
      :how_many_designers,
-     :want_to_meet_designer,
      :style_profile,
-     { what_do_i_get: additional_time_with_designer_link },
+     :what_do_i_get,
      :i_want_two_things,
-     :what_does_cost_meeting_with_designer,
-     :additional_time_with_designer,
-     { designer_can_help_me_with: what_does_cost_meeting_with_designer_link },
-     :what_if_i_dont_like_the_products,
-     { which_package_should_i_choose: what_do_i_get_link },
-     :how_do_i_measure,
-     :how_do_contests_work,
-     :how_to_collaborate_with_designer,
-     :how_long_everything_takes,
+     :im_too_busy,
+     :designer_can_help_me_with,
      { forgot_password: hello_link },
-     { how_to_upload_additional_pictures: pictures_link },
-     { full_money_back_guarantee: hello_link }]
+     { how_to_upload_additional_pictures: pictures_link }]
   end
 
   def faq_designer_questions
-    [:what_is_beta,
-     :how_contest_work,
-     :how_communicate_client,
-     :specs_of_design,
-     :vendors,
-     :can_include_work_in_portfolio,
-     :what_do_i_get_paid]
+    []
   end
 
   def faq_item(faq_chapter, question)

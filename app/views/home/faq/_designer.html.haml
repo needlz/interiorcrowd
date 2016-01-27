@@ -1,5 +1,3 @@
 #designer.tab-pane{:role => "tabpanel"}
   #accordion1.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
-    - faq_designer_questions.each_with_index do |question, index|
-      = render partial: 'home/faq/spoiler_item', locals: { number: index + 1 + faq_client_questions.length,
-          faq_item: faq_item('designer', question) }
+    %span.font20= t('faq.designer', hello_email: mail_to(t('feedback_email'))).html_safe
