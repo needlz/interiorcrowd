@@ -72,12 +72,12 @@ class @Promocode
     $(@errorMsgSelector).show().text(signupI18n.promocode_invalid)
 
   @displayDiscountValue: (discount)->
-    $('.promotion-code-discount').text('$ ' + discount.toFixed(1))
+    $('.promotion-code-discount').text('$ ' + discount.toFixed(2))
 
   @displayTotalValue: ->
     discount = @extractNumber($(@promotionValueSelector))
     price = @extractNumber($(@orderTotalValueSelector))
-    $(@totalPriceValueSelector).text('$ ' + (price - discount).toFixed(1))
+    $(@totalPriceValueSelector).text('$ ' + (price - discount).toFixed(2))
 
   @extractNumber: ($element)->
     $element.text().replace(/[^\d\.]/g, '')
