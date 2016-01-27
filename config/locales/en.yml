@@ -236,7 +236,7 @@ en:
     space:
       title: Project Details
       description: |
-        Please share a little more information about your room. The more information you can
+        Please share a little more information about your space. The more information you can
         provide, the better your final design will be.
       details_toggle:
         title: Do you have pictures and dimensions of your space?
@@ -244,7 +244,7 @@ en:
         'yes': 'Yes'
         'no': 'No'
       photos:
-        title: Please take photos of your room so that the designers can see your space.
+        title: Please take as many photos of your space as you can so that the designers can understand your project better.
         image_requirements: >
           Take at least 4 images - with your back to each corner in the room. Images must be smaller than 10M.
         see_more: See more guideline
@@ -260,7 +260,7 @@ en:
         upload_button: Edit your final design
         uploading: Uploading...
       dimensions:
-        title: Add dimensions of your space.
+        title: Add dimensions of your space (optional).
         hint: Please see our %{faqs_link} for measuring your space if you need help.
         faqs: FAQ's
         feet: Feet
@@ -273,11 +273,8 @@ en:
       other_feedback:
         title: Other feedback or instructions?
         placeholder: |
-          Please provide additional details to the designers about your project. Some useful things to add could be:
-          * Does this room need to accommodate kids or pets?
-          * Do you know exactly what the room needs (but need help sourcing) or are you looking for inspiration?
-          * If there are particular items of furniture you need, let the designer know what they are.
-          * Are there any particular items in the room you’d like to keep?
+          A good place to start, is to tell the designers why you need an interior designer for this project.
+          Give them as much information as you can think of.
         send: Send
     payment:
       summary:
