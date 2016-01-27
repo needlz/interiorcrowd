@@ -97,7 +97,7 @@ class ContestView
 
   def order_total
     total = @package.try(:price) || BudgetPlan.all.last.price
-    '$ ' + total.to_s + '.0'
+    '$ ' + total.to_s + '.00'
   end
 
   private
