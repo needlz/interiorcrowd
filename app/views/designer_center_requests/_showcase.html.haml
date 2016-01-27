@@ -5,17 +5,16 @@
         .showcase-slide{ style: ('width: 750px; height: 664px' if showcase.single) }
           - image = item.image
           .showcase-content
-            - path = image.try(:original_size_url) || showcase.placeholder_src
             .lookbook-detail{ data: { id: item.id } }
-              = render partial: 'shared/image_with_enlarge_button',
-                      locals: { url_for_downloading: image.url_for_downloading,
-                                original_size_path: image.original_size_url,
-                                thumb_path: image.medium_size_url,
-                                enlarge_button_class: 'concept_board',
-                                image_class: 'full-width',
-                                remove_button: showcase.editable,
-                                container_class: 'fullHeight',
-                                use_div: true }
+              = render 'shared/image_with_enlarge_button',
+                      settings: EnlargeablePicture.new(url_for_downloading: image.url_for_downloading,
+                        original_size_path: image.original_size_url || showcase.placeholder_src,
+                        thumb_path: image.medium_size_url,
+                        enlarge_button_class: 'concept_board',
+                        image_class: 'full-width',
+                        remove_button: showcase.editable,
+                        container_class: 'fullHeight',
+                        use_div: true)
           - unless showcase.single
             .showcase-thumbnail
               %img{ src: image.medium_size_url }/

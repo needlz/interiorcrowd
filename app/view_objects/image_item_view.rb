@@ -19,6 +19,14 @@ class ImageItemView
     image_item.medium_size_image_url || '/assets/portfolio_example.png'
   end
 
+  def original_size_url
+    image_item.image.try(:original_size_url) if image_item.image.try(:viewable?)
+  end
+
+  def download_url
+    image_item.image.try(:url_for_downloading)
+  end
+
   def link_href
     force_link_protocol(image_item.link)
   end

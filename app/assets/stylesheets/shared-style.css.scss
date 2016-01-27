@@ -4810,6 +4810,14 @@ p.product-list-reminder {
   }
 }
 
+.imageItems{
+  .itemBox{
+    .imageWithOverlay{
+      height: 100%;
+    }
+  }
+}
+
 $final-designer-center-comment-border-color: #ccc;
 
 .finalNoteToDesigner .header {

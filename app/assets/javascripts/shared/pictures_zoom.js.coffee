@@ -6,20 +6,25 @@ class @PicturesZoom
     window.matchMedia('(max-width: 768px)').matches
 
   @getOptionsUpdater: ($element, options)->
-    =>
-      fitToScreen = !@smallScreen()
-      newOptions = $.extend({}, options)
-      if fitToScreen
-        $.extend(newOptions, @fitToScreenOptions)
-      $element.colorbox(newOptions)
+    fitToScreen = @smallScreen()
+    newColorboxOptions = $.extend({ title: false }, options)
+    if fitToScreen
+      $.extend(newColorboxOptions, @fitToScreenOptions)
+    if newColorboxOptions.pictureSelector && fitToScreen
+      newColorboxOptions.href = $element.attr('href')
+      console.log newColorboxOptions.href
+      $element.closest(newColorboxOptions.pictureSelector).colorbox(newColorboxOptions) if newColorboxOptions.href
+    else
+      $element.colorbox(newColorboxOptions)
 
-  @init: (enlargeButtonSelector)->
-    @setWithOptionsUpdater(enlargeButtonSelector, {})
+  @init: (enlargeButtonSelector, options)->
+    @setWithOptionsUpdater(enlargeButtonSelector, options)
 
   @initGallery: (options)->
     @setWithOptionsUpdater(options.enlargeButtonSelector, { rel: options.galleryName })
 
   @setWithOptionsUpdater: (selector, options)->
-    $element = $(selector)
-    optionsUpdater = @getOptionsUpdater($element, options)
-    optionsUpdater()
+    $elements = $(selector)
+    $elements.each (index, element)=>
+      $element = $(element)
+      @getOptionsUpdater($element, options)

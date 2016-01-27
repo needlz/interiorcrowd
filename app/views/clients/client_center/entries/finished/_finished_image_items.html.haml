@@ -1,9 +1,12 @@
+:coffee
+  $ ->
+    PicturesZoom.init('.imageItems .items .imageWithOverlay .enlarge', pictureSelector: '.imageItems .items .imageWithOverlay')
+
 .items
   .row.itemRow
     - image_items.each do |product_item|
       - unless product_item.image_id.nil?
-        = render partial: 'clients/client_center/entries/final_design_image_item',
-                locals: { image_item: ImageItemView.new(product_item) }
+        = render 'clients/client_center/entries/final_design_image_item', image_item: ImageItemView.new(product_item)
 .imageItemsPagination
   = will_paginate(image_items,
         container: false,

@@ -2,7 +2,13 @@
   .itemBox
     .row
       .col-lg-6.col-sm-7.itemBoxLeft{ style: 'height: 264px;' }
-        .image-container{ style: "background-image: #{ css_url(image_item.thumb_url) }; height: 100%; background-size: contain; background-repeat: no-repeat; background-position: center;" }
+        = render 'shared/image_with_enlarge_button',
+            settings: EnlargeablePicture.new(image_class: 'full-size-image-container',
+              use_div: true,
+              thumb_path: image_item.thumb_url,
+              original_size_path: image_item.original_size_url,
+              url_for_downloading: image_item.download_url,
+              no_mobile_overlay: true)
       .col-lg-6.col-sm-5.itemBoxRight{ style: 'height: 264px;' }
         %h4.name= image_item.name
         %p.brand= image_item.brand

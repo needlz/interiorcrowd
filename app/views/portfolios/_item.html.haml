@@ -1,5 +1,7 @@
 .col-md-4.portfolio_example.disablePadding
-  = render partial: 'shared/image_with_enlarge_button',
-      locals: { thumb_path: picture.medium_size_url, original_size_path: picture.original_size_url, use_div: true }
+  = render 'shared/image_with_enlarge_button',
+      settings: EnlargeablePicture.new(thumb_path: picture.medium_size_url,
+        original_size_path: picture.original_size_url,
+        use_div: true)
   - if picture.likes_count > 0
     %span.numOfLikesPortfolio (#{ picture.likes_count })

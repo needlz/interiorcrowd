@@ -1,11 +1,11 @@
 - value_html = capture do
   - @contest_view.examples.try(:each) do |example_image|
-    = render partial: 'shared/image_with_enlarge_button',
-        locals: { container_class: 'pull-left gallery-item',
-                  image_class: 'fullWidth',
-                  thumb_path: example_image.medium_size_url,
-                  original_size_path: example_image.original_size_url,
-                  url_for_downloading: example_image.url_for_downloading,
-                  enlarge_button_class: 'examples' }
+    = render 'shared/image_with_enlarge_button',
+         settings: EnlargeablePicture.new(container_class: 'pull-left gallery-item',
+           image_class: 'fullWidth',
+           thumb_path: example_image.medium_size_url,
+           original_size_path: example_image.original_size_url,
+           url_for_downloading: example_image.url_for_downloading,
+           enlarge_button_class: 'examples')
 
 = render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.example'), value: value_html }
