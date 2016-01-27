@@ -1,11 +1,9 @@
 class PackageView
 
   SERVICE_TEXT_TEMPLATES = {
-      multiple_desings: [{ message: 'contests.creation.packages.multiple_desings' }],
+      multiple_designs: [{ message: 'contests.creation.packages.multiple_designs' }],
       collaboration: [{ message: 'contests.creation.packages.collaboration'}],
-      concept_board: [{ message: 'contests.creation.packages.concept_board' }],
-      product_list: [{ message: 'contests.creation.packages.product_list' }],
-      floor_plan: [{ message: 'contests.creation.packages.floor_plan' }]
+      in_person_meeting: [{ message: 'contests.creation.packages.in_person_meeting'}],
   }
 
   delegate :id, :price, to: :plan

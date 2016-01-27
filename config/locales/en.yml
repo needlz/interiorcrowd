@@ -308,7 +308,7 @@ en:
         name_error: Please enter project name
         plan_error: Please choose package
         style_update_package_hint: >
-          It looks like your room needs a bit of help. Let's start with our Style Update
+          It looks like your space needs some expert help. Let's start with our basic
           package which is great introduction to a professional interior designer. For more
           information about how this works,
         link_caption: see here
@@ -318,18 +318,15 @@ en:
       packages:
         title: Our design packages
         description: Pick a package - 100% money back guarantee
-
-        multiple_desings: Multiple designs from a range of interior designers
-        collaboration: One-on-one collaboration time with chosen designer
-        concept_board: Customized moodboard for your new space
-        product_list: Product list with links to purchase immediately
-        floor_plan: Floor plan & detailed instructions
+        multiple_designs: Multiple designs from a range of interior designers
+        collaboration: Choose who you'd like to work with
+        in_person_meeting: One hour in-person meeting with your chosen designer to discuss project, process and scope
         select: Select
       plans:
         budget: Quick Fix
         premier: Update My Style
         premium: Room Overhaul
-        first: One low flat fee of <span>$299</span>
+        first: One low flat fee of <span>$99</span>
         includes: includes
       pages:
         design_brief: Choose Room

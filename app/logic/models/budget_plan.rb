@@ -16,7 +16,7 @@ class BudgetPlan
   PLANS = [new(id: 1,
                price: 99,
                name: 'first',
-               services: [:multiple_desings, :collaboration, :concept_board, :product_list, :floor_plan])
+               services: [:multiple_designs, :collaboration, :in_person_meeting])
   ]
 
   attr_reader :id, :price, :designer_count, :product_count, :services, :name
