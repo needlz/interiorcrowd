@@ -6,7 +6,7 @@
 .how-it-works-hero {
     @include bgsize();
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 0 25%;
     .wrap {
         height: 550px;
         position: relative;
@@ -74,17 +74,19 @@ a.button-get-started {
 .how-it-works-lead {
     background-color: $background;
     font-family: 'AvenirLTStd-Medium', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 30px;
     padding: 97px 0 101px;
     color: #666;
 }
 .how-it-works-lead-wrapper {
-    margin: 0 auto;
-    width: 74%;
+    margin: 60px auto;
+    width: 100%;
 }
 .how-step {
     color: $white;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .how-step-reverse {
     .how-step-img {
