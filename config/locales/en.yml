@@ -266,8 +266,8 @@ en:
         feet: Feet
         inches: Inches
       budget:
-        title: What is your design budget for materials?
-        hint: 'Note: This does not include any design fees'
+        title: What is a rough budget you have in mind for this project?
+        hint: '(Your designer will also help you to determine a more accurate budget)'
         select_error: Please enter budget.
         placeholder: '$2500'
       other_feedback:
