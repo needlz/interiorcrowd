@@ -3,42 +3,148 @@ class UserMailer < ActionMailer::Base
 
   include MandrillMailer
   include Rails.application.routes.url_helpers
+
   MANDRILL_TEMPLATES = {
-      client_registered: 'new-client-welcome-mail',
-      designer_registered: 'user-registration',
-      client_registration_info: 'client-registration-info',
-      designer_registration_info: 'designer-registration-info',
-      invite_to_contest: 'invite-to-contest',
-      reset_password: 'reset-password',
-      sign_up_beta_autoresponder: 'sign-up-beta-autoresponder',
-      notify_about_new_subscriber: 'new-beta-subscriber',
-      product_list_feedback: 'product-list-feedback',
-      invitation_to_leave_a_feedback: 'invitation-to-leave-a-feedback',
-      concept_board_received: 'generic-notification',
-      comment_on_board: 'comment-on-board',
-      note_to_concept_board: 'note-to-concept-board',
-      new_product_list_item: 'new-product-list-item',
-      notify_designer_about_win: 'Winner_designer',
-      please_pick_winner: 'client-must-pick-a-winner',
-      remind_about_picking_winner: 'client-hasn-t-picked-a-winner',
-      client_has_picked_a_winner: 'client-has-picked-a-winner',
-      client_ready_for_final_design: 'client-ready-for-final-design',
-      client_hasnt_picked_a_winner_to_designers: 'client-hasn-t-picked-a-winner-to-designers',
-      designer_submitted_final_design: 'designer-submitted-final-design',
-      no_concept_boards_received_after_three_days: 'no-concept-boards-received-after-three-days',
-      one_day_left_to_choose_a_winner: 'one-day-left-to-choose-a-winner',
-      one_day_left_to_submit_concept_board: 'one-day-left-to-submit-concept-board',
-      four_days_left_to_submit_concept_board: 'four-days-left-to-submit-concept-board',
-      contest_not_live_yet: 'contest-not-live-yet',
-      designer_asks_client_a_question_submission_phase: 'designer-asks-client-a-question-submission-phase',
-      account_creation: 'account-creation',
-      new_project_on_the_platform: 'new-project-on-the-platform',
-      to_designers_one_submission_only: 'to-designers-one-submission-only',
-      to_designers_client_no_submissions: 'to-designers-client-no-submissions-1',
-      client_moved_to_final_design: 'client-ready-for-final-design-1',
-      new_project_to_hello: 'new-project-to-hello',
-      designer_waiting_for_feedback_to_client: 'designer-waiting-for-feedback-to-client',
-      realtor_signup: 'realtor-signup'
+      client_registered: {
+          template: 'new-client-welcome-mail',
+          description: { recipients: 'client',
+            occurrence: 'registered after intake form completed (not with fast email/facebook signup)'} },
+      designer_registered: {
+          template: 'user-registration',
+          description: { recipients: 'designer',
+                         occurrence: 'at creation of designer account'} },
+      client_registration_info: {
+          template: 'client-registration-info',
+          description: { recipients: 'owner',
+                         occurrence: 'client have submitted /payment_details page'} },
+      designer_registration_info: {
+        template: 'designer-registration-info',
+        description: { recipients: 'owner',
+                       occurrence: 'at creation of designer account'} },
+      invite_to_contest: {
+        template: 'invite-to-contest',
+        description: { recipients: 'designer',
+                       occurrence: 'invited to a contest'} },
+      reset_password: {
+        template: 'reset-password',
+        description: { recipients: 'client/designer',
+                       occurrence: 'user submitted the form on retry password page'} },
+      sign_up_beta_autoresponder: {
+        template: 'sign-up-beta-autoresponder',
+        description: { recipients: '',
+                       occurrence: '[not used anymore]'} },
+      notify_about_new_subscriber: {
+        template: 'new-beta-subscriber',
+        description: { recipients: '',
+                       occurrence: '[not used anymore]'} },
+      product_list_feedback: {
+        template: 'product-list-feedback',
+        description: { recipients: 'designer',
+                       occurrence: 'one minute after last mark of a product item from client'} },
+      invitation_to_leave_a_feedback: {
+        template: 'invitation-to-leave-a-feedback',
+        description: { recipients: 'to guest',
+                      occurrence: 'client have invited a reviewer to help choose a winner'} },
+      concept_board_received: {
+        template: 'generic-notification',
+        description: { recipients: 'client',
+                       occurrence: 'designer has submitted a concept board'} },
+      comment_on_board: {
+        template: 'comment-on-board',
+        description: { recipients: 'client/designer',
+                       occurrence: 'one minute after client/designer made last comment'} },
+      note_to_concept_board: {
+        template: 'note-to-concept-board',
+        description: { recipients: 'designers (who have submitted concept board or asked a question)',
+                       occurrence: 'one minute after client has posted last comment to all designers'} },
+      new_product_list_item: {
+        template: 'new-product-list-item',
+        description: { recipients: 'client',
+                       occurrence: 'designer has published product list'} },
+      notify_designer_about_win: {
+        template: 'winner-designer',
+        description: { recipients: 'designer',
+                       occurrence: 'the designer\'s concept board won'} },
+      please_pick_winner: {
+        template: 'client-must-pick-a-winner',
+        description: { recipients: 'client',
+                       occurrence: 'winner_selection milestone has started'} },
+      remind_about_picking_winner: {
+        template: 'client-hasn-t-picked-a-winner',
+        description: { recipients: 'client',
+                       occurrence: 'winner selection milestone ended'} },
+      client_has_picked_a_winner: {
+        template: 'client-has-picked-a-winner',
+        description: { recipients: 'client',
+                       occurrence: 'the client has selected winner'} },
+      client_ready_for_final_design: {
+        template: 'client-ready-for-final-design',
+        description: { recipients: 'designer',
+                       occurrence: 'client approved product list and moved the contest to final phase'} },
+      client_hasnt_picked_a_winner_to_designers: {
+        template: 'client-hasn-t-picked-a-winner-to-designers',
+        description: { recipients: 'designers (who submitted a concept board)',
+                       occurrence: 'winner selection milestone ended'} },
+      designer_submitted_final_design: {
+        template: 'designer-submitted-final-design',
+        description: { recipients: 'client',
+                       occurrence: 'designer has finished concept board'} },
+      no_concept_boards_received_after_three_days: {
+        template: 'no-concept-boards-received-after-three-days',
+        description: { recipients: 'client',
+                       occurrence: 'no concept boards 3 days after contest went live'} },
+      one_day_left_to_choose_a_winner: {
+        template: 'one-day-left-to-choose-a-winner',
+        description: { recipients: 'client',
+                       occurrence: '1 day left before end of winner selection milestone'} },
+      one_day_left_to_submit_concept_board: {
+        template: 'one-day-left-to-submit-concept-board',
+        description: { recipients: 'designers (invited or who asked a question on contest and have not submitted a concept board yet)',
+                       occurrence: '1 day left before end of submission milestone'} },
+      four_days_left_to_submit_concept_board: {
+        template: 'four-days-left-to-submit-concept-board',
+        description: { recipients: 'designers (invited or who asked a question on contest and have not submitted a concept board yet)',
+                       occurrence: '4 day left before end of submission milestone'} },
+      contest_not_live_yet: {
+        template: 'contest-not-live-yet',
+        description: { recipients: 'client',
+                       occurrence: 'client submitted payment details but the contest brief is not yet completed'} },
+      designer_asks_client_a_question_submission_phase: {
+        template: 'designer-asks-client-a-question-submission-phase',
+        description: { recipients: 'client',
+                       occurrence: 'designer commented concept board in submission phase'} },
+      account_creation: {
+        template: 'account-creation',
+        description: { recipients: 'client',
+                       occurrence: 'registered with fast signup'} },
+      new_project_on_the_platform: {
+        template: 'new-project-on-the-platform',
+        description: { recipients: 'designers (all)',
+                       occurrence: 'a contest went live (submission started)'} },
+      to_designers_one_submission_only: {
+        template: 'to-designers-one-submission-only',
+        description: { recipients: 'designers (all who haven\'t submitted for the contest)',
+                       occurrence: '4 days before end of submission if only one designer has submitted a concept board'} },
+      to_designers_client_no_submissions: {
+        template: 'to-designers-client-no-submissions-1',
+        description: { recipients: 'designers (all who haven\'t submitted for the contest)',
+                       occurrence: '4 days before end of submission if no one has submitted a concept board'} },
+      client_moved_to_final_design: {
+        template: 'client-ready-for-final-design-1',
+        description: { recipients: 'owner',
+                       occurrence: 'client approved product list and moved the contest to final phase'} },
+      new_project_to_hello: {
+        template: 'new-project-to-hello',
+        description: { recipients: 'owner',
+                       occurrence: 'a contest went live (submission started)'} },
+      designer_waiting_for_feedback_to_client: {
+        template: 'designer-waiting-for-feedback-to-client',
+        description: { recipients: 'client',
+                       occurrence: 'designer commented concept board 3 days after the last visit of the client and if client has not been notificated with a reminder yet'} },
+      realtor_signup: {
+        template: 'realtor-signup',
+        description: { recipients: 'owner',
+                       occurrence: 'new realtor contact'} }
   }
 
   before_filter :set_template
@@ -437,7 +543,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def set_template
-    template MANDRILL_TEMPLATES[action_name.to_sym]
+    template MANDRILL_TEMPLATES[action_name.to_sym][:template]
   end
 
 end

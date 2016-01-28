@@ -253,7 +253,7 @@ class ActiveAdmin::DSL
     [:dashboard, :admin_users, :beta_subscribers, :contest_requests, :clients, :users, :client_payments, :contests,
      :contest_promocodes, :comments, :credit_cards, :inbound_emails, :designers, :designer_activity,
      :detailed_contests, :giftcard_payments, :outbound_emails, :portfolios, :promocodes, :realtor_contacts,
-     :sounds].index(id) + 1
+     :sounds, :email_templates].index(id) + 1
   end
 
 end
