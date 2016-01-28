@@ -4,30 +4,29 @@
     .faq-columns.clearfix
       .faq-column
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.who_are_designers.question')
           .faq-panel-drop
-            %p= t('faq.customer.who_are_designers.answer').html_safe
+            %p= t('home.how_it_works.faq.who_are_designers.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_long_everything_takes')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.what_do_i_get.question')
           .faq-panel-drop
-            %p= t('faq.customer.how_long_everything_takes.answer').html_safe
+            %p= t('home.how_it_works.faq.what_do_i_get.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.i_want_two_things')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.i_want_two_things.question')
           .faq-panel-drop
-            %p= t('faq.customer.i_want_two_things.answer').html_safe
+            %p= t('home.how_it_works.faq.i_want_two_things.answer').html_safe
       .faq-column
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_many_designers')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_many_designers.question')
           .faq-panel-drop
-            %p= t('faq.customer.how_many_designers.answer').html_safe
+            %p= t('home.how_it_works.faq.how_many_designers.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.want_to_meet_designer')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.how_does_style_profile_work.question')
           .faq-panel-drop
-            %p= t('faq.customer.want_to_meet_designer.answer').html_safe
+            %p= t('home.how_it_works.faq.how_does_style_profile_work.answer').html_safe
         .faq-panel
-          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.designer_can_help_me_with')
+          %a.faq-panel-title{:href => "#"}= t('home.how_it_works.faq.designer_can_help_me_with.question')
           .faq-panel-drop
-            %p= t('faq.customer.designer_can_help_me_with.answer',
-              what_does_cost_meeting_with_designer: link_to('see here', faq_path(anchor: 'collapse12'))).html_safe
+            %p= t('home.how_it_works.faq.designer_can_help_me_with.answer').html_safe
     .faq-navigation.clearfix
       = link_to t('.more_faq'), faq_path, class: 'faq-more'

@@ -1451,50 +1451,85 @@ en:
       get_started_text: get started designing your perfect room now
       get_started_link: Get started
       lead_wrapper: >
-        With InteriorCrowd, your new space is now within reach. It's easy, simple and affordable.
-        Whether you need decorating, styling, staging or full-scale renovations, our professional interior designers
-        are prepared to deliver.<br/>From hourly rates as low as $99.
+        We connect you with a network of interior designers who will work with you in-person on any type
+        of home design project, from styling to staging, renovations to decorations.<br/><br/>
+
+        For $99 you receive multiple concept boards from designers interested in your project. They will outline
+        their process and basic recommendations for your space. Choose who you'd like to work with and have one
+        in-person meeting with them to discuss the project in more detail.<br/><br/>
+
+        From there, get a recommended plan of action from your designer and continue working with them on an
+        hourly basis ($100/hour) to take care of all your design, shopping, and implementation needs.
       faq:
         faq_title: 'FREQUENTLY ASKED QUESTIONS:'
-        who_are_designers: Who are the designers?
-        how_long_everything_takes: How long does a project take?
-        i_want_two_things: I only want one or two new things, is this for me?
-        how_many_designers: How many designers will i get to choose from?
-        want_to_meet_designer: Can I meet my designer in-person?
-        designer_can_help_me_with: What can my designer help me with?
+        who_are_designers:
+          question: Who are the designers?
+          answer: >
+            Our designers are talented professionals from all over the country.
+            They are chosen to design for InteriorCrowd based on a combination of factors like portfolio,
+            awards and raw talent.
+        how_many_designers:
+          question: How many designers will I get to choose from?
+          answer: >
+            Each project usually receives 3-5 concept boards from designers but some projects do get more.
+        what_do_i_get:
+          question: What do I get for $99?
+          answer: >
+            ● Multiple concept boards from designers interested in your project so that
+            you can choose who you’d like to work with<br/><br/>
+            ● One in-person meeting with your favorite designer to discuss project in more detail
+        how_does_style_profile_work:
+          question: How does the style profile work?
+          answer: >
+            The style profile was created in collaboration with our designers as a fun and easy way
+            to figure out how best to style an amazing new space for you.
+            Most people don’t stick to one style, and the profile takes this into account.
+        i_want_two_things:
+          question: I only want one or two new things. Is this for me?
+          answer: >
+            Yes! Put all this information in your brief and designers will be able to help you
+            regardless of how big or small your project is.
+        designer_can_help_me_with:
+          question: What can my designer help me with?
+          answer: >
+            Your designer will look at your brief and assess what needs to be done in your space.
+            They can help you with anything from decor updates (e.g. helping you choose color palettes/paint selections,
+            furniture, lighting, window treatments, accessories/art) to larger renovations
+            (e.g. demolition and/or construction, flooring, etc).
         more_faq: For more FAQ's please see here
       steps:
         first:
           title: Go through our style brief
           description:
-            - Let us know what your style preferences are, your design experience, and what exactly you want for your room
+            - Let us know what your style preferences are, your design experience, and what exactly you want for your
+              project (home or office)
         second:
-          title: Receive concept boards from multiple designers
+          title: Choose who you'd like to work with
           description:
             - Over the course of seven days, you will receive between 3 and 5 (sometimes more) concept boards
-              from our designers
-            - You can view designer portfolios, invite specific designers to your contest - and ask friends
-              to help you pick a winner
+              with personal introductions from our local designers interested in your project
+            - Ask the designers questions and view their portfolios
         third:
-          title: Choose a designer
+          title: Meet with your designer in-person
           description:
-            - Continue the discussion with your designer about what you need and want in your space
-            - Receive updated product lists based on your budget, and updated concept boards based on your design needs
+            - Schedule time to meet with your designer in your home for one hour to get to know them better and
+              discuss your project in more depth
+            - If schedules don't allow for an in-person meeting we encourage a Skype or Facetime video chat instead
+            - After your in-person meeting, your designer will put together a recommended set of deliverables and
+              estimated hours required to complete your project
+            - Buy a bundle of recommended hours to take your project from theory to practice!
+            - Designer hours are priced at $100/hour
         forth:
-          title: One-on-one time with your designer
-          description:
-            - Hop on a quick call to answer any questions your designer might have
-            - Receive a product list from your  designer based on what you liked and disliked about their concept board
-        fifth:
           title: Collaborate
           description:
-            - Continue the discussion with your designer about what you need and want in your space
-            - Receive updated product lists based on your budget, and updated concept boards based on your design needs
-        sixth:
-          title: Final design
+            - Continue the discussion with your designer on the InteriorCrowd platform, share pictures and ideas,
+              and start building your shopping list for what you need and want in your space
+            - Receive updated product lists based on your feedback
+        fifth:
+          title: Implementation
           description:
-            - Receive a floorplan and instructions from your designer on how to pull your new look together
-            - Purchase all items recommended by your designer in your own time based on your favorite design submission
+            - Purchase all items recommended by your designer in your own time or, choose to have your designer purchase
+              everything and install it for you
   mails:
     designer_registration:
       subject: Congrats! You're now a designer on InteriorCrowd.
