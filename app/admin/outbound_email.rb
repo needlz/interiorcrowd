@@ -6,8 +6,12 @@ ActiveAdmin.register OutboundEmail do
     selectable_column
     id_column
     column 'Template' do |email|
-      template = email.template_name || UserMailer::MANDRILL_TEMPLATES[email.mailer_method.to_sym]
-      link_to template, 'https://mandrillapp.com/templates?q=' + template, target: '_blank'
+      template = email.template_name || UserMailer::MANDRILL_TEMPLATES[email.mailer_method.to_sym].try(:[], :template)
+      if template
+        link_to template, 'https://mandrillapp.com/code?id=' + template, target: '_blank'
+      else
+        email.mailer_method
+      end
     end
     column 'Designer Name' do |email|
       find_recipients_by_mandrill_response('Designer', email.api_response)
@@ -26,8 +30,12 @@ ActiveAdmin.register OutboundEmail do
   show do
     attributes_table do
       row 'Template' do |email|
-        template = email.template_name || UserMailer::MANDRILL_TEMPLATES[email.mailer_method.to_sym]
-        link_to template, 'https://mandrillapp.com/templates?q=' + template, target: '_blank'
+        template = email.template_name || UserMailer::MANDRILL_TEMPLATES[email.mailer_method.to_sym].try(:[], :template)
+        if template
+          link_to template, 'https://mandrillapp.com/code?id=' + template, target: '_blank'
+        else
+          email.mailer_method
+        end
       end
       row 'Designer Name' do |email|
         find_recipients_by_mandrill_response('Designer', email.api_response)
