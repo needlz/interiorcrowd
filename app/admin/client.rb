@@ -1,5 +1,4 @@
 ActiveAdmin.register Client do
-  menu priority: 4
 
   controller do
     def scoped_collection

@@ -1,5 +1,4 @@
 ActiveAdmin.register ContestRequest do
-  menu priority: 9
 
   index do
     column :id

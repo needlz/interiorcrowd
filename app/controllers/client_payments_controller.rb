@@ -65,7 +65,7 @@ class ClientPaymentsController < ApplicationController
 
   def notify_product_owner
     return if @client.notified_owner
-    Jobs::Mailer.schedule(:user_registration_info, [@client.role, @client.id])
+    Jobs::Mailer.schedule(:client_registration_info, [@client.id])
     @client.update_attributes!(notified_owner: true)
   end
 

@@ -1,5 +1,4 @@
 ActiveAdmin.register ClientPayment do
-  menu priority: 6
 
   index do
     column :id

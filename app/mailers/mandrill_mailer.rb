@@ -41,10 +41,13 @@ module MandrillMailer
     }
     message.merge!(@message) if @message
     message.merge!(subject: options[:subject]) if options[:subject]
+    plain_message = api.templates.render(@template_name, [], global_merge_vars)['html']
     api_response = api.messages.send_template(@template_name, [], message)
     if options[:email_id]
       email = OutboundEmail.find(options[:email_id])
-      email.update_attributes!(api_response: api_response)
+      email.update_attributes!(api_response: api_response,
+                               plain_message: plain_message,
+                               template_name: @template_name)
     end
     Rails.logger.info(api_response)
   end

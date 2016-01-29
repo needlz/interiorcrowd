@@ -435,6 +435,8 @@ ActiveRecord::Schema.define(version: 20160104144608) do
     t.datetime "updated_at"
     t.datetime "sent_to_mail_server_at"
     t.text     "api_response"
+    t.text     "plain_message"
+    t.string   "template_name"
   end
 
   create_table "portfolio_awards", force: :cascade do |t|

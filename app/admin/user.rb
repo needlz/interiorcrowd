@@ -1,5 +1,4 @@
 ActiveAdmin.register Client, as: "User" do
-  menu priority: 5
 
   index do
     selectable_column

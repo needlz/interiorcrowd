@@ -1,5 +1,4 @@
 ActiveAdmin.register_page 'Designer activity' do
-  menu priority: 12
 
   content do
     form_for 'activity_query', url: admin_designer_activity_download_csv_path, method: :get do |f|

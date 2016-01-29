@@ -1,5 +1,4 @@
 ActiveAdmin.register ContestPromocode do
-  menu priority: 8
 
   controller do
     def scoped_collection
