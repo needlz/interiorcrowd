@@ -10,7 +10,7 @@ RSpec.describe ScheduledNotifications::NoSubmissions do
     before do
       contest.update_attributes!(phase_end: Time.current +
                                      ScheduledNotifications::NoSubmissions.period_before_milestone_end +
-                                     Jobs::TimeConditionalNotifications::INTERVAL/2)
+                                     Jobs::TimeConditionalNotifications.interval / 2)
     end
     it 'schedules mail' do
       scheduler.perform

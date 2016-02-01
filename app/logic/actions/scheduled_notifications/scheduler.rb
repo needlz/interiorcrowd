@@ -3,7 +3,7 @@ module ScheduledNotifications
   class Scheduler
 
     def self.scheduler_interval
-      Jobs::TimeConditionalNotifications::INTERVAL
+      Jobs::TimeConditionalNotifications.interval
     end
 
     def self.scope; end

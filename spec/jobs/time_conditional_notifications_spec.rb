@@ -11,7 +11,7 @@ RSpec.describe Jobs::TimeConditionalNotifications do
     before do
       contest.update_attributes!(phase_end: Time.current +
                                      ScheduledNotifications::NoSubmissions.period_before_milestone_end +
-                                     Jobs::TimeConditionalNotifications::INTERVAL/2)
+                                     Jobs::TimeConditionalNotifications.interval/2)
     end
 
     context 'when no concept boards submitted' do
@@ -88,8 +88,8 @@ RSpec.describe Jobs::TimeConditionalNotifications do
         request
       end
       let!(:comment_4_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_visited, { text: 'text', created_at: Time.current - 4.days }, designer).perform }
-      let!(:comment_more_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_visited_2, { text: 'text', created_at: Time.current - 3.days - (Jobs::TimeConditionalNotifications::INTERVAL / 2) }, designer).perform }
-      let!(:comment_less_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_visited_2, { text: 'text', created_at: Time.current - 3.days + (Jobs::TimeConditionalNotifications::INTERVAL / 2) }, designer).perform }
+      let!(:comment_more_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_visited_2, { text: 'text', created_at: Time.current - 3.days - (Jobs::TimeConditionalNotifications.interval / 2) }, designer).perform }
+      let!(:comment_less_than_3_days_ago_by_designer) { ConceptBoardCommentCreation.new(request_visited_2, { text: 'text', created_at: Time.current - 3.days + (Jobs::TimeConditionalNotifications.interval / 2) }, designer).perform }
       let!(:comment_after_last_visit) { ConceptBoardCommentCreation.new(request_visited_fulfillment, { text: 'text', created_at: Time.current - 6.days }, designer).perform }
 
       def notification_params_by_comment(comment)

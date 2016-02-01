@@ -43,13 +43,9 @@ module Blog
 
     def parse_dom
       response_body.gsub!(%r['/wp-admin/admin-ajax.php'], '\'/blog/wp-admin/admin-ajax.php\'')
-      # response_body.gsub!(%r[http://blog.interiorcrowd.com], '/blog')
-      # response_body.gsub!(%r[(//blog.interiorcrowd.com(.+))(\.php)('|")], '\1\3?&icrowd_app=yes\4')
-      # response_body.gsub!(%r[(//blog.interiorcrowd.com/wp-content[^"]+)(")], '\1?icrowd_app=yes\2')
       response_body.gsub!(%r[(http//blog.interiorcrowd.com)(/wp-content[^"]+)([^\.]\.php)(")], '/blog/\2\3\4')
       response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.php)(")], '/blog\2\3\4')
       response_body.gsub!(%r[(")(/wp-content.+ajax-loader\.gif)], '\1http://blog.interiorcrowd.com\2')
-      # response_body.gsub!(%r[ajax-loader\.gif], 'ajax-loader.gif')
       p response_body if Settings.log_requests_to_blog
       @blog_page_dom = Nokogiri::HTML(response_body)
       replace_links(@blog_page_dom)
