@@ -1,4 +1,4 @@
-class ApproveFulfillment
+class ApproveFulfillment < Action
 
   attr_reader :approved
 

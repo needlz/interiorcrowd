@@ -208,8 +208,7 @@ class ContestRequest < ActiveRecord::Base
   end
 
   def selected_as_winner
-    select_winner = SelectWinner.new(self)
-    select_winner.perform
+    SelectWinner.perform(self)
   end
 
 end
