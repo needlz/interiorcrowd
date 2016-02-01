@@ -2755,16 +2755,18 @@ input[type="radio"].smallRadio:checked + label span {
 /* start Intake-Form-04 */
 .step4Review h3 {
   text-align: center;
-  margin-bottom: 40px;
+  font-size: 21px;
+  margin-bottom: 20px;
 }
 
 .step4Review input[type=text] {
-  width: 100%;
+  width: 70%;
+  margin-left: 15%;
   border: 1px solid #a9a9a9;
-  line-height: 48px;
-  color: #a9a9a9;
-  font-size: 20px;
-  font-family: 'AvenirLTStd-LightOblique';
+  line-height: 36px;
+  color: #666666;
+  font-size: 18px;
+  font-family: 'AvenirLTStd-Medium';
   text-align: center;
 }
 
