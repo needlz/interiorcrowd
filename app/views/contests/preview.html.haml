@@ -24,7 +24,25 @@
           = link_to t('contests.creation.preview.link_caption'),
             how_it_works_path,
             target: '_blank'
-      = render partial: 'contests/review/plans'
+      .fee-includes-outer-container
+        .fee-includes-inner-container
+          .title
+            %h1 $99
+            %h3 One low flat fee includes
+          .list
+            %ul
+              %li Multiple concept boards from a range of interior designers
+              %li
+                One hour in-person consultation with the designer who submitted your favorite boards and had
+                the most exciting ideas for your style and space
+              %li Top-line thoughts on project scope and requirements
+        %h5 Our transparent process
+        %p
+          Once you and your designer have met, they'll recommend an initial hourly bundle to get started on that space
+          of your dreams. The designer rate is set at
+        %span $100/hour
+        %p and you can easily use our dashboard to keep track of your project. It's that simple.
+      -#= render partial: 'contests/review/plans'
       .marginBottom40
       = render 'contests/sign_up_suggestion'
       .text-center
