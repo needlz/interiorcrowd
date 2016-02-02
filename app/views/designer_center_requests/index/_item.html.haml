@@ -5,7 +5,7 @@
         .col-md-2.makeMeBold= contest.client_name
         .col-md-2= contest.name
         .col-md-2= contest.package_name
-        .col-md-1= contest.design_space
+        .col-md-1{ contest.rooms_popover_attributes }= contest.design_space_name
         - if contest.winner_selection? && response.draft? || response.closed?
           - days_left = 0
         - else

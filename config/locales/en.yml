@@ -35,7 +35,7 @@ en:
         Do you have a room in your home you love? Please send us pictures. They can also be
         pictures of a friend’s home or something you’ve found online.
       designer_level: How would you describe your level of design knowledge?
-      areas: Which room needs the most help? Let's start with one and go from there.
+      areas: Which room/s need help? Pick all that apply.
       brief:
         title: Choose the packages
         description:
@@ -74,7 +74,7 @@ en:
         desirable_colors: Ideal Color for the space
         undesirable_colors: Colors to avoid
         example: Examples of Ideal Spaces
-        areas: Room
+        areas: Room/s
         design_budget: Materials Budget
         design_budget_for_materials: Design Budget for Materials
         feedback: Other Information
@@ -329,7 +329,7 @@ en:
         first: One low flat fee of <span>$99</span>
         includes: includes
       pages:
-        design_brief: Choose Room
+        design_brief: Choose Rooms
         design_style: Style Profile
         design_space: Project Details
         preview: Review
@@ -899,7 +899,7 @@ en:
       hint: 'Hint: Remember to review the %{link} first'
       hint_link: client's Style Profile
       type: 'Type :'
-      room: 'Room :'
+      room: 'Rooms :'
       preferd_colors: 'Prefered Colors :'
       colors_avoid: 'Colors Avoid :'
       see_more: See more

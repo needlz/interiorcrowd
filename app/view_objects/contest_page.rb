@@ -1,7 +1,7 @@
 class ContestPage < PhasesHolder
 
   attr_reader :contest, :contest_view, :contest_requests, :notes, :reviewer_feedbacks,
-              :answer, :view_context, :selected_view
+              :answer, :view_context, :selected_view, :contest_short_details
 
   def initialize(options)
     @contest = options[:contest]
@@ -9,6 +9,7 @@ class ContestPage < PhasesHolder
 
     @view_context = options[:view_context]
     @contest_view = ContestView.new(contest_attributes: contest) if contest
+    @contest_short_details = ContestShortDetails.new(contest) if contest
     all_requests = contest.requests.client_sees_in_entries.includes(:designer, :lookbook, :sound)
     @requests_present = all_requests.present?
     @answer = options[:answer]

@@ -192,11 +192,6 @@ padding-left:0px;
 
 .menu-room.active{visibility: visible; opacity: 1;}
 
-
-.option-item.active {
-	opacity:1;
-}
-
 .options-selector{
 	padding-top: 55px;
 }
@@ -259,20 +254,11 @@ color:#000000;
 position:relative;
 }
 
-.room-selector i, .room-selector-sub i {display: none;}
-
-.room-selector.active i, .room-selector-sub.active i {display: block;}
-
 .option-selected{
 position:absolute;
 bottom:5px;
 right:12px;
 top: inherit;
-}
-
-.room.active{
-	background-color:#000000;
-	color:#ffffff !important;
 }
 
 .m-room{

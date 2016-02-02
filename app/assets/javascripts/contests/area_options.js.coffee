@@ -1,6 +1,6 @@
 class @DesignArea
 
-  constructor: (@parentAreas, @childrenAreas, @areas, @currentIdInput)->
+  constructor: (@parentAreas, @childrenAreas, @areas)->
 
   init: ->
     @hideAllChildrenAreas()
@@ -8,34 +8,35 @@ class @DesignArea
       @showChildrenButtons()
 
     @bindRoomButtons()
+    @childrenAreas.find('input[type=checkbox]').change =>
+      @update()
+    @update()
 
   bindRoomButtons: ->
     @parentAreas.click((event)=>
-      event.preventDefault()
       $button = $(event.target).closest(@parentAreas)
       return if @selectedParentId() is parseInt($button.data('id'))
-      @parentAreas.removeClass('active').find('.option-selected').hide()
-      $button.addClass('active').find('.option-selected').show()
-
-      @currentIdInput.val($button.data('id')).trigger('change')
+      $childrenRooms = @childrenAreas.filter("[data-id='#{ $button.attr('data-id') }']")
+      hasChildren = $childrenRooms.length
+      @parentAreas.removeClass('active')
+      $button.addClass('active') if hasChildren
       @update()
     )
 
     @childrenAreas.find('.children').click (event)=>
-      @childrenAreas.find('.option-item').removeClass('active')
       $button = $(event.target)
-      $button.addClass('active')
-      @currentIdInput.val($button.data('id')).trigger('change')
+      $button.toggleClass('active', $($button.attr('for')).is(':checked'))
 
   update: ->
+    @parentAreas.each (index, element)=>
+      $parentRoom = $(element)
+      $childrenRooms = @childrenAreas.filter("[data-id='#{ $parentRoom.attr('data-id') }']")
+      console.log $childrenRooms.find('input[type=checkbox]:checked').length
+      $parentRoom.toggleClass('withSelectedChildren', !!$childrenRooms.find('input[type=checkbox]:checked').length)
     $("#err_design_area").html('')
     @hideAllChildrenAreas()
     if @parentSelectionHasChildren()
-      @currentIdInput.val('')
       @showChildrenButtons()
-
-  id: ->
-    parseInt(@currentIdInput.val())
 
   selectedParentId: ->
     parseInt(@parentAreas.filter('.active').data('id'))
@@ -77,5 +78,5 @@ class @DesignArea
 class @RoomsEditor
 
   @init: ->
-    designArea = new DesignArea($('.bedr .room-selector-sub'), $('.menu-room.row'), areas, $('[name="design_brief[design_area]"]'))
+    designArea = new DesignArea($('.bedr .room-selector-sub'), $('.menu-room.row'), areas)
     designArea.init()

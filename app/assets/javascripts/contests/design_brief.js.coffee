@@ -4,8 +4,8 @@ class ChooseRoomPage
     if $(".design_element:checked").length < 1
       @validator.addMessage $("#err_category"), I18n.errors.select_category, $('.packages')
 
-    selectedRoomId = parseInt($('[name="design_brief[design_area]"]').val())
-    if isNaN(selectedRoomId)
+    anyRoomSelected = $('[name="design_brief[design_area][]"]:checked').length
+    unless anyRoomSelected
       @validator.addMessage $("#err_design_area"), I18n.errors.select_room, $('.rooms')
 
   @init: ->

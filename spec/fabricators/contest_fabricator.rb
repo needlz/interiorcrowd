@@ -2,7 +2,7 @@ Fabricator(:contest) do
   Fabricate.sequence do |i|
     project_name "contest#{ i }"
     design_category
-    design_space
+    design_spaces { Fabricate.times(2, :design_space) }
     budget_plan 1
   end
   preferred_retailers

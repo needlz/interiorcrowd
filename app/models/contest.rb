@@ -62,7 +62,7 @@ class Contest < ActiveRecord::Base
 
   belongs_to :client
   belongs_to :design_category
-  belongs_to :design_space
+  has_and_belongs_to_many :design_spaces
   has_many :requests, class_name: 'ContestRequest'
   has_many :participants, class_name: 'Designer', through: :requests, source: :designer
   has_many :notes, class_name: 'ContestNote'
@@ -80,7 +80,7 @@ class Contest < ActiveRecord::Base
   scope :active, ->{ where(status: COLLABORATION_STATUSES) }
   scope :inactive, ->{ where(status: FINISHED_STATUSES) }
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
-  scope :with_associations, ->{ includes(:design_category, :design_space, :client) }
+  scope :with_associations, ->{ includes(:design_category, :design_spaces, :client) }
   scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
   scope :incompleted, ->{ where(status: INCOMPLETE_STATUSES) }
 
@@ -94,7 +94,7 @@ class Contest < ActiveRecord::Base
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
   validates_presence_of :design_category, if: -> { completed? }
-  validates_presence_of :design_space, if: -> { completed? }
+  validates_presence_of :design_spaces, if: -> { completed? }
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|
     validates_inclusion_of preference,
                            in: options.map(&:to_s),

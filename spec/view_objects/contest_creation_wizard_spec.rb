@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe ContestCreationWizard do
-
+  let(:room) { DesignSpace.create }
   let(:completion_procedures) do
     { 0 => {
       semicomplete: ->(contest){ contest.update_attributes!(design_category_id: 1) },
-      complete: ->(contest){ contest.update_attributes!(design_category_id: 1, design_space_id: 1) }
+      complete: ->(contest) do
+        contest.update_attributes!(design_category_id: 1)
+        contest.design_spaces << room
+      end
     },
       1 => {
         semicomplete: ->(contest) do
@@ -34,7 +37,7 @@ RSpec.describe ContestCreationWizard do
     Fabricate(:contest,
               project_name: nil,
               design_category: nil,
-              design_space: nil,
+              design_spaces: [],
               budget_plan: nil)
   end
 

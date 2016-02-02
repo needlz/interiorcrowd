@@ -124,7 +124,7 @@ RSpec.configure do |config|
   def contest_options_source
     @contest_options_source ||= { design_brief: {
         design_category: Fabricate(:design_category).id,
-        design_area: Fabricate(:design_space).id },
+        design_area: Fabricate.times(2, :design_space).map(&:id) },
       design_space: {
           length: '2',
           width: '2',

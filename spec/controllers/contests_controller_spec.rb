@@ -837,7 +837,7 @@ RSpec.describe ContestsController do
       it 'saves changes' do
         post :save_design_brief, contest_options_source.merge(id: incomplete_contest.id)
         expect(response).to redirect_to design_style_contest_path(id: incomplete_contest.id)
-        expect(incomplete_contest.reload.design_space_id).to eq contest_options_source[:design_brief][:design_area]
+        expect(incomplete_contest.reload.design_space_ids).to eq contest_options_source[:design_brief][:design_area]
       end
     end
 

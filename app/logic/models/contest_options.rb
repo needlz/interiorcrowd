@@ -2,7 +2,7 @@ class ContestOptions
 
   attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest, :preferred_retailers
 
-  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_id, :space_budget,
+  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_ids, :space_budget,
                       :budget_plan, :project_name, :desirable_colors]
 
   REQUIRED_OPTIONS_BY_CHAPTER = {
@@ -17,7 +17,7 @@ class ContestOptions
     @contest = {}
     if options[:design_brief]
       @contest[:design_category_id] = options[:design_brief][:design_category].to_i if options[:design_brief].key?(:design_category)
-      @contest[:design_space_id] = options[:design_brief][:design_area].to_i if options[:design_brief].key?(:design_area)
+      @contest[:design_space_ids] = options[:design_brief][:design_area] if options[:design_brief].key?(:design_area)
     end
     if options[:design_space]
       @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length)
