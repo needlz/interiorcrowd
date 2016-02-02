@@ -22,26 +22,17 @@ class CommentNotifier
   attr_reader :author_role, :contest_request, :author, :comment
 
   def send_email
-    if contest_request.contest.submission? && author_role == 'designer'
-      Jobs::Mailer.schedule(:designer_asks_client_a_question_submission_phase,
-                            [{ comment_id: comment.id,
-                               client_id: recipient.id
-                             },
-                            ],
-                            { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
-    else
-      Jobs::Mailer.schedule(:comment_on_board,
-                            [{ recipient_id: recipient.id,
-                               recipient_role: recipient.role,
-                               author_id: author.id,
-                               author_role: author.role,
-                               search_by: "#{ author_role }s_comment_on_board",
-                               comment_id: comment.id
-                             },
-                             contest_request.id
-                            ],
-                            { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
-    end
+    Jobs::Mailer.schedule(:comment_on_board,
+                          [{ recipient_id: recipient.id,
+                             recipient_role: recipient.role,
+                             author_id: author.id,
+                             author_role: author.role,
+                             search_by: "#{ author_role }s_comment_on_board",
+                             comment_id: comment.id
+                           },
+                           contest_request.id
+                          ],
+                          { run_at: digest_minutes_interval, contest_request_id: contest_request.id })
   end
 
   def delayed_job_for_email

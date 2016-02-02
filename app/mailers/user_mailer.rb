@@ -109,10 +109,6 @@ class UserMailer < ActionMailer::Base
         template: 'contest-not-live-yet',
         description: { recipients: 'client',
                        occurrence: 'client submitted payment details but the contest brief is not yet completed'} },
-      designer_asks_client_a_question_submission_phase: {
-        template: 'designer-asks-client-a-question-submission-phase',
-        description: { recipients: 'client',
-                       occurrence: 'designer commented concept board in submission phase'} },
       account_creation: {
         template: 'account-creation',
         description: { recipients: 'client',
@@ -384,21 +380,6 @@ class UserMailer < ActionMailer::Base
     )
     client = contest.client
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
-  end
-
-  def designer_asks_client_a_question_submission_phase(options, email_id = nil)
-    comment = ConceptBoardComment.find(options[:comment_id])
-    set_template_values(
-      entry_url: renderer.contest_request_url(id: comment.contest_request.id),
-      comment_text: comment.text,
-      reply_delimiter: Griddler.configuration.reply_delimiter
-    )
-    concept_board_comment_email = ConceptBoardCommentEmail.new(comment)
-    message_options(headers: concept_board_comment_email.headers)
-    client = Client.find(options[:client_id])
-    mail(to: [wrap_recipient(client.email, client.name, 'to')],
-         email_id: email_id,
-         subject: concept_board_comment_email.subject)
   end
 
   def account_creation(client_id, email_id = nil)

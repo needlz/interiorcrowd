@@ -28,9 +28,9 @@ RSpec.describe CommentNotifier do
     context 'when comment has been made by designer' do
       let(:author) { designer }
 
-      it 'schedules email with template "designer_asks_client_a_question_submission_phase"' do
+      it 'schedules email with template "comment_on_board"' do
         notify
-        expect(jobs_with_handler_like('designer_asks_client_a_question_submission_phase').count).to eq 1
+        expect(jobs_with_handler_like('comment_on_board').count).to eq 1
       end
     end
   end
