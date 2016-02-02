@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104144608) do
+ActiveRecord::Schema.define(version: 20160201151140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -170,37 +170,38 @@ ActiveRecord::Schema.define(version: 20160104144608) do
   create_table "contests", force: :cascade do |t|
     t.text     "desirable_colors"
     t.text     "undesirable_colors"
-    t.string   "space_budget",                    limit: 255
+    t.string   "space_budget",                          limit: 255
     t.text     "feedback"
     t.text     "project_name"
     t.integer  "budget_plan"
     t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "space_length",                                precision: 10, scale: 2, default: 0.0
-    t.decimal  "space_width",                                 precision: 10, scale: 2, default: 0.0
-    t.decimal  "space_height",                                precision: 10, scale: 2
+    t.decimal  "space_length",                                      precision: 10, scale: 2, default: 0.0
+    t.decimal  "space_width",                                       precision: 10, scale: 2, default: 0.0
+    t.decimal  "space_height",                                      precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
-    t.string   "status",                                                               default: "incomplete"
+    t.string   "status",                                                                     default: "incomplete"
     t.datetime "phase_end"
-    t.string   "theme",                           limit: 255
-    t.string   "space",                           limit: 255
-    t.string   "accessories",                     limit: 255
-    t.string   "space_changes",                   limit: 255
-    t.string   "shop",                            limit: 255
-    t.string   "accommodate_children",            limit: 255
-    t.string   "accommodate_pets",                limit: 255
+    t.string   "theme",                                 limit: 255
+    t.string   "space",                                 limit: 255
+    t.string   "accessories",                           limit: 255
+    t.string   "space_changes",                         limit: 255
+    t.string   "shop",                                  limit: 255
+    t.string   "accommodate_children",                  limit: 255
+    t.string   "accommodate_pets",                      limit: 255
     t.text     "retailer"
     t.text     "elements_to_avoid"
     t.integer  "entertaining"
     t.integer  "durability"
     t.integer  "preferred_retailers_id"
-    t.boolean  "designers_explore_other_colors",                                       default: false
-    t.boolean  "designers_only_use_these_colors",                                      default: false
+    t.boolean  "designers_explore_other_colors",                                             default: false
+    t.boolean  "designers_only_use_these_colors",                                            default: false
     t.datetime "finished_at"
     t.datetime "submission_started_at"
     t.boolean  "was_in_brief_pending_state"
+    t.boolean  "ever_received_published_product_items"
   end
 
   create_table "contests_appeals", force: :cascade do |t|
@@ -309,6 +310,7 @@ ActiveRecord::Schema.define(version: 20160104144608) do
     t.integer  "facebook_user_id",        limit: 8
     t.datetime "last_log_in_at"
     t.string   "last_log_in_ip"
+    t.boolean  "paid_for_concept_boards",             default: false
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree
@@ -509,6 +511,19 @@ ActiveRecord::Schema.define(version: 20160104144608) do
     t.boolean  "one_time",                      default: true
   end
 
+  create_table "realtor_contacts", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "brokerage"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "choice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "realtor_contacts", ["email"], name: "index_realtor_contacts_on_email", unique: true, using: :btree
+
   create_table "reviewer_feedbacks", force: :cascade do |t|
     t.text     "text"
     t.integer  "invitation_id"
@@ -528,19 +543,6 @@ ActiveRecord::Schema.define(version: 20160104144608) do
   end
 
   add_index "reviewer_invitations", ["contest_id"], name: "index_reviewer_invitations_on_contest_id", using: :btree
-
-  create_table "rieltor_contacts", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "brokerage"
-    t.string   "email"
-    t.string   "phone"
-    t.string   "choice"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "rieltor_contacts", ["email"], name: "index_rieltor_contacts_on_email", unique: true, using: :btree
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", limit: 255, null: false

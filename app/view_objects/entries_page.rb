@@ -39,7 +39,7 @@ class EntriesPage < ContestPage
   end
 
   def show_winner_chosen_congratulations?
-    won_contest_request && won_contest_request.image_items.published.blank?
+    won_contest_request && !contest.ever_received_published_product_items && entries_concept_board_page.phases_stripe.active_phase == :collaboration
   end
 
   def timeline_hint

@@ -118,8 +118,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def publish
     contest_request = @designer.contest_requests.find(params[:id])
-    publish = PublishProductList.new(contest_request)
-    publish.perform
+    PublishProductList.perform(contest_request)
     redirect_to designer_center_response_path(id: contest_request.id)
   end
 

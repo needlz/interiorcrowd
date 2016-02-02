@@ -249,6 +249,7 @@ class ActiveAdmin::DSL
   end
 
   def get_menu_priority
+    return unless config
     id = (config.menu_item_options[:id].try(:singular) || config.menu_item_options[:id]).parameterize.underscore.to_sym
     [:dashboard, :admin_users, :beta_subscribers, :contest_requests, :clients, :users, :client_payments, :contests,
      :contest_promocodes, :comments, :credit_cards, :inbound_emails, :designers, :designer_activity,
