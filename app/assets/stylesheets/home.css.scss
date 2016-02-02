@@ -17,6 +17,7 @@
   padding-right: 11px;
   padding-bottom: 40px;
   font-size: 14px;
+  float: right;
 
   .copyright-sign {
     font-size: 21px;
@@ -174,14 +175,14 @@ body {
 }
 
 #body-content {
-  padding-bottom: 205px; /* Height of the footer */
+  padding-bottom: 190px; /* Height of the footer */
 }
 
 #body-footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 205px; /* Height of the footer */
+  height: 190px; /* Height of the footer */
 }
 
 #body-footer .footer {

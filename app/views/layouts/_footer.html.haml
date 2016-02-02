@@ -6,32 +6,37 @@
       %h4= t('footer.contact_us').upcase
       %p= Settings.info_email
       %p= Settings.contact_phone
-    .col-lg-5.col-md-9.col-sm-8.col-xs-12.footerLinks
-      %a{ href: about_us_path, class: tracked_link }= t('footer.about')
-      %a{ href: terms_of_service_path, class: tracked_link }= t('footer.terms')
-      %a{ href: privacy_policy_path, class: tracked_link }= t('footer.privacy_policy')
-      %a{ href: designer_submission_path, class: tracked_link }= t('footer.for_designers')
-    .col-lg-3.col-md-5.col-sm-6.col-xs-10.col-xs-offset-1.footerSocial
-      %a{ href: Settings.external_urls.social.twitter,
-          class: tracked_link,
-          data: { name: 'Twitter' },
-          target: '_blank' }
-        %img{:src => '/assets/icons/twitter.png' }/
-      %a{ href: Settings.external_urls.social.facebook,
-          class: tracked_link + " right-side",
-          data: { name: 'Facebook' },
-          target: '_blank' }
-        %img{:src => '/assets/icons/facebook.png' }/
-      %a{ href: Settings.external_urls.social.instagram,
-          class: tracked_link,
-          data: { name: 'Instagram' },
-          target: '_blank'  }
-        %img{:src => '/assets/icons/instagram.png' }/
-      %a{ href: Settings.external_urls.social.pinterest,
-          class: tracked_link + " right-side",
-          data: { name: 'Pinterest' },
-          target: '_blank' }
-        %img{:src => '/assets/icons/pinterest.png' }/
+    .col-lg-9.col-md-9.col-sm-8.col-xs-12.footerRight
+      .col-lg-8
+        .footerLinks
+          %a{ href: about_us_path, class: tracked_link }= t('footer.about')
+          %a{ href: terms_of_service_path, class: tracked_link }= t('footer.terms')
+          %a{ href: privacy_policy_path, class: tracked_link }= t('footer.privacy_policy')
+          %a{ href: designer_submission_path, class: tracked_link }= t('footer.for_designers')
+        .clearfix
+      .footerSocialContainer.col-lg-4
+        .footerSocial
+          %a{ href: Settings.external_urls.social.twitter,
+              class: tracked_link,
+              data: { name: 'Twitter' },
+              target: '_blank' }
+            %img{:src => '/assets/icons/twitter.png' }/
+          %a{ href: Settings.external_urls.social.facebook,
+              class: tracked_link + " right-side",
+              data: { name: 'Facebook' },
+              target: '_blank' }
+            %img{:src => '/assets/icons/facebook.png' }/
+          %a{ href: Settings.external_urls.social.instagram,
+              class: tracked_link,
+              data: { name: 'Instagram' },
+              target: '_blank'  }
+            %img{:src => '/assets/icons/instagram.png' }/
+          %a{ href: Settings.external_urls.social.pinterest,
+              class: tracked_link + " right-side",
+              data: { name: 'Pinterest' },
+              target: '_blank' }
+            %img{:src => '/assets/icons/pinterest.png' }/
+      .clearfix
       %p.copyright
         = succeed "#{ Date.current.year } InteriorCrowd" do
           %span.copyright-sign ©
