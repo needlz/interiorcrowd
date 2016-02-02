@@ -6,8 +6,8 @@ class SelectWinner < Action
 
   def perform
     contest_request.with_lock do
-      prepare_for_next_phase
       ActiveRecord::Base.transaction do
+        prepare_for_next_phase
         contest_request.update_attributes(won_at: Time.now)
         contest_request.contest.winner_selected!
         notify_designer_about_win
