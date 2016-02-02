@@ -1,11 +1,12 @@
-- contests.each do |contest|
-  .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: contest.id} }
-    .col-xs-1= contest.id
-    .col-xs-2= contest.name
-    .col-xs-2= contest.package_name
-    .col-xs-2= contest.design_space
-    .col-xs-1= contest.price
+- columns.short_details.each do |short_details|
+  .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: short_details.id} }
+    .col-xs-1= short_details.id
+    .col-xs-2= short_details.name
+    .col-xs-2= short_details.package_name
+    .col-xs-2= short_details.design_space
+    .col-xs-1= short_details.price
     .col-xs-2
-      = contest.days_count.to_i
+      = short_details.days_count.to_i
       %span= t('designer_center.contests_preview.few_days')
-    .col-xs-2= contest.submissions_count
+    - if columns.show_days_left_column?
+      .col-xs-2= short_details.submissions_count

@@ -90,7 +90,7 @@ class Designer < ActiveRecord::Base
   end
 
   def portfolio_path
-    portfolio.try(:path)
+    portfolio.path
   end
 
 end

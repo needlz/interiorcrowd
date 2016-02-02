@@ -5,7 +5,7 @@ RSpec.describe ContestsController do
   render_views
 
   let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
-  let(:designer) { Fabricate(:designer) }
+  let(:designer) { Fabricate(:designer_with_portfolio) }
   let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
   let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
@@ -551,7 +551,7 @@ RSpec.describe ContestsController do
         @contest = Fabricate(:contest, contest_options)
         pay_contest(@contest)
         @contest_request = Fabricate(:contest_request,
-                                     { designer: Fabricate(:designer),
+                                     { designer: Fabricate(:designer_with_portfolio),
                                        contest: @contest,
                                        lookbook: Fabricate(:lookbook)
                                      }.merge(options[:contest_request])

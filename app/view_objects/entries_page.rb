@@ -44,7 +44,7 @@ class EntriesPage < ContestPage
 
   def timeline_hint
     return if entries_concept_board_page.try(:previous_step?)
-    if ContestMilestone.finite_milestone?(contest.status)
+    if ContestMilestone.finite_milestone?(contest.status) && ContestMilestone.show_timeline?(contest.status)
       if contest.phase_end < Time.current
         I18n.t("client_center.entries.timelines.#{ contest.status }.expired")
       else
@@ -76,9 +76,6 @@ class EntriesPage < ContestPage
     result = []
     if won_contest_request
       result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
-      result << ['clients/client_center/entries/popups/wait_for_final_design',
-                 contest: contest,
-                 time_left: time_till_milestone_end] if won_contest_request.fulfillment_approved?
     end
     result
   end

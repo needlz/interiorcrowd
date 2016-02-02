@@ -21,7 +21,7 @@ RSpec.describe DesignerCenterContestsController do
       context 'designer has no invitations' do
         it 'is empty' do
           get :index
-          expect(assigns(:invited_contests)).to be_empty
+          expect(assigns(:invited_contests).contests).to be_empty
         end
       end
 
@@ -32,7 +32,7 @@ RSpec.describe DesignerCenterContestsController do
 
         it 'returns list of invitation contests' do
           get :index
-          expect(assigns(:invited_contests).map(&:id)).to match_array [contest.id]
+          expect(assigns(:invited_contests).contests.map(&:id)).to match_array [contest.id]
         end
       end
     end

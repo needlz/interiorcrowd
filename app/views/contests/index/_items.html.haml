@@ -1,2 +1,2 @@
-- contests.each do |contest|
-  = render 'contests/index/item', { contest: ContestShortDetails.new(contest) }
+- columns.contests.each do |contest|
+  = render 'contests/index/item', contest: ContestShortDetails.new(contest), columns: columns

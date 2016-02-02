@@ -9,7 +9,7 @@ class DesignerView
   end
 
   def portfolio_path
-    designer.portfolio.try(:path)
+    designer.portfolio_path
   end
 
   def designer_personal_picture

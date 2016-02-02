@@ -6,3 +6,7 @@ Fabricator(:designer) do
 
   before_create { |designer| designer.password = Designer.encrypt(plain_password) }
 end
+
+Fabricator(:designer_with_portfolio, from: :designer) do
+  portfolio
+end

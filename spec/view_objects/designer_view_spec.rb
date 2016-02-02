@@ -35,18 +35,4 @@ RSpec.describe DesignerView do
 
   end
 
-  context 'designer have no portfolios' do
-    let(:designer) { Fabricate(:designer) }
-    let(:designer_view) { DesignerView.new(designer) }
-
-    it 'doesn\'t return portfolio' do
-      expect(designer_view.portfolio_path).to be_nil
-    end
-
-    it 'returns standard avatar stub' do
-      expect(designer_view.designer_personal_picture).to eq(Settings.designer_note_profile_image)
-    end
-
-  end
-
 end
