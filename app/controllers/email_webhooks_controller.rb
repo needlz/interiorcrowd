@@ -31,6 +31,7 @@ class EmailWebhooksController < ApplicationController
   private
 
   def process_event(event_payload)
+    return if event_payload['msg']['metadata'].blank?
     email = OutboundEmail.find_by_id(event_payload['msg']['metadata']['email_id'])
     email.update_attributes!(status: event_payload['event'], sent_to_mail_server_at: Time.at(event_payload['ts'])) if email
   end
