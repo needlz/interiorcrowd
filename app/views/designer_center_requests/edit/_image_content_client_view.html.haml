@@ -8,7 +8,8 @@
               use_div: true,
               thumb_path: item.thumb_url,
               original_size_path: item.original_size_url,
-              url_for_downloading: item.download_url)
+              url_for_downloading: item.download_url,
+              no_mobile_overlay: true)
       - if markable
         = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH', autocomplete: 'off' do
           .productRadio

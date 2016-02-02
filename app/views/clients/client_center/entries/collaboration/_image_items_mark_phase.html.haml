@@ -1,6 +1,6 @@
 :coffee
   $ ->
-    PicturesZoom.init('.imageItems .items .imageWithOverlay .enlarge')
+    PicturesZoom.init('.imageItems .items .imageWithOverlay .enlarge', pictureSelector: '.imageItems .items .imageWithOverlay')
 
 .productItems.imageItems{ data: { scope: 'product_items', url: "/contests/#{ contest_page.contest.id }/image_items" } }
   = render contest_page.entries_concept_board_page.paginated_image_items_partial('product_items')

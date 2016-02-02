@@ -8,11 +8,9 @@ class @PicturesZoom
   @getOptionsUpdater: ($element, options)->
     fitToScreen = @smallScreen()
     newColorboxOptions = $.extend({ title: false }, options)
-    if fitToScreen
-      $.extend(newColorboxOptions, @fitToScreenOptions)
+    $.extend(newColorboxOptions, @fitToScreenOptions) if fitToScreen
     if newColorboxOptions.pictureSelector && fitToScreen
       newColorboxOptions.href = $element.attr('href')
-      console.log newColorboxOptions.href
       $element.closest(newColorboxOptions.pictureSelector).colorbox(newColorboxOptions) if newColorboxOptions.href
     else
       $element.colorbox(newColorboxOptions)
