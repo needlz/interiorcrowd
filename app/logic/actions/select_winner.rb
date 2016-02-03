@@ -12,6 +12,7 @@ class SelectWinner < Action
         contest_request.contest.winner_selected!
         notify_designer_about_win
         notify_client
+        notify_product_owner
       end
     end
   end
@@ -24,11 +25,15 @@ class SelectWinner < Action
     DesignerWinnerNotification.create(user_id: contest_request.designer_id,
                                       contest_id: contest_request.contest_id,
                                       contest_request_id: contest_request.id)
-    Jobs::Mailer.schedule(:notify_designer_about_win, [contest_request])
+    Jobs::Mailer.schedule(:notify_designer_about_win, [contest_request.id])
   end
 
   def notify_client
-    Jobs::Mailer.schedule(:client_has_picked_a_winner, [contest_request])
+    Jobs::Mailer.schedule(:client_has_picked_a_winner, [contest_request.id])
+  end
+
+  def notify_product_owner
+    Jobs::Mailer.schedule(:notify_product_owner_about_designer_win, [contest_request.id])
   end
 
 

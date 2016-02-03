@@ -1531,13 +1531,13 @@ en:
             - Purchase all items recommended by your designer in your own time or, choose to have your designer purchase
               everything and install it for you
   mails:
-    designer_registration:
+    designer_registered:
       subject: Congrats! You're now a designer on InteriorCrowd.
-    beta_autorespond:
+    sign_up_beta_autoresponder:
       subject: InteriorCrowd Private Beta
-    beta_subscriber:
+    notify_about_new_subscriber:
       subject: 'InteriorCrowd: new beta subscriber'
-    invitation_to_leave_feedback:
+    invitation_to_leave_a_feedback:
       subject: '%{client_name} needs your help picking a design'
     concept_board_received:
       subject: You have a new concept board to look at!
@@ -1553,6 +1553,8 @@ en:
       subject: Your designer has added a product list for you to review
     notify_designer_about_win:
       subject: You won!
+    notify_product_owner_about_designer_win:
+      subject: '%{winner_name} won the contest!'
 
   coming_soon:
     title: NEW CONTENT COMING SOON!

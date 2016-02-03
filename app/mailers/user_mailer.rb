@@ -65,6 +65,10 @@ class UserMailer < ActionMailer::Base
         template: 'winner-designer',
         description: { recipients: 'designer',
                        occurrence: 'the designer\'s concept board won'} },
+      notify_product_owner_about_designer_win: {
+        template: 'designer-winner-send-update',
+        description: { recipients: 'owner',
+                       occurrence: 'the designer\'s concept board won'} },
       please_pick_winner: {
         template: 'client-must-pick-a-winner',
         description: { recipients: 'client',
@@ -154,7 +158,7 @@ class UserMailer < ActionMailer::Base
 
   def designer_registered(designer_id, email_id = nil)
     designer = Designer.find(designer_id)
-    subject = I18n.t('mails.designer_registration.subject')
+    subject = I18n.t("mails.#{action_name}.subject")
     set_template_values(mail_link: renderer.mail_to(I18n.t('registration.mail_to')))
     mail to: [wrap_recipient(designer.email, designer.first_name, 'to')], subject: subject, email_id: email_id
   end
@@ -188,8 +192,8 @@ class UserMailer < ActionMailer::Base
   end
 
   def sign_up_beta_autoresponder(email, email_id = nil)
-    subject = I18n.t('mails.beta_autorespond.subject')
-    mail to: [wrap_recipient(email, '', "to")], subject:subject, email_id: email_id
+    subject = I18n.t("mails.#{action_name}.subject")
+    mail to: [wrap_recipient(email, '', "to")], subject: subject, email_id: email_id
   end
 
   def notify_about_new_subscriber(beta_subscriber, email_id = nil)
@@ -198,7 +202,7 @@ class UserMailer < ActionMailer::Base
     recipients = Settings.beta_notification_emails.map do |email|
       wrap_recipient(email, 'InteriorCrowd', 'to')
     end
-    mail to: recipients, subject: I18n.t('mails.beta_subscriber.subject'), email_id: email_id
+    mail to: recipients, subject: I18n.t("mails.#{action_name}.subject"), email_id: email_id
   end
 
   def product_list_feedback(params, contest_request_id, email_id = nil)
@@ -208,7 +212,7 @@ class UserMailer < ActionMailer::Base
       email_link: renderer.mail_to(I18n.t('registration.mail_to'))
     )
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t('mails.product_list_feedback.subject'), email_id: email_id
+         subject: I18n.t("mails.#{action_name}.subject"), email_id: email_id
   end
 
   def invitation_to_leave_a_feedback(params, url, client_name, root_url, email_id = nil)
@@ -218,7 +222,7 @@ class UserMailer < ActionMailer::Base
       contest_url: url
     )
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t('mails.invitation_to_leave_feedback.subject', client_name: @client_name), email_id: email_id
+         subject: I18n.t("mails.#{action_name}.subject", client_name: @client_name), email_id: email_id
   end
 
   def concept_board_received(contest_request, email_id = nil)
@@ -231,7 +235,7 @@ class UserMailer < ActionMailer::Base
         mail_link: renderer.mail_to(I18n.t('registration.mail_to'))
     )
     mail to: [wrap_recipient(email, username, 'to')],
-         subject: I18n.t('mails.concept_board_received.subject'), email_id: email_id
+         subject: I18n.t("mails.#{action_name}.subject"), email_id: email_id
   end
 
   def comment_on_board(params, contest_request_id, email_id = nil)
@@ -257,7 +261,7 @@ class UserMailer < ActionMailer::Base
         updates_url: renderer.designer_center_updates_url
     )
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t('mails.note_to_concept_board.subject'), email_id: email_id
+         subject: I18n.t("mails.#{action_name}.subject"), email_id: email_id
   end
 
   def new_product_list_item(params, email_id = nil)
@@ -267,10 +271,11 @@ class UserMailer < ActionMailer::Base
       mail_link: renderer.mail_to(I18n.t('registration.mail_to'))
     )
     mail to: [wrap_recipient(params[:email], params[:username], 'to')],
-         subject: I18n.t("mails.new_product_list_item.subject"), email_id: email_id
+         subject: I18n.t("mails.#{action_name}.subject"), email_id: email_id
   end
 
-  def notify_designer_about_win(contest_request, email_id = nil)
+  def notify_designer_about_win(request_id, email_id = nil)
+    contest_request = ContestRequest.find request_id
     designer = contest_request.designer
     contest = contest_request.contest
     client = contest.client
@@ -281,6 +286,24 @@ class UserMailer < ActionMailer::Base
         client_name: client.name
     )
     mail to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id
+  end
+
+  def notify_product_owner_about_designer_win(request_id, email_id = nil)
+    contest_request = ContestRequest.find request_id
+    designer = contest_request.designer
+    contest = contest_request.contest
+    client = contest.client
+    set_template_values(
+        name: designer.name,
+        email: designer.email,
+        winner_id: designer.id,
+        datetime: Time.now,
+        contest_id: contest.id,
+        client_name: client.name
+    )
+    mail to: [wrap_recipient(Settings.winning_designers_notification_email, '', 'to')],
+         subject: I18n.t("mails.#{action_name}.subject", winner_name: designer.name),
+         email_id: email_id
   end
 
   def please_pick_winner(contest, email_id = nil)
@@ -303,7 +326,8 @@ class UserMailer < ActionMailer::Base
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
 
-  def client_has_picked_a_winner(contest_request, email_id = nil)
+  def client_has_picked_a_winner(contest_request_id, email_id = nil)
+    contest_request = ContestRequest.find contest_request_id
     client = contest_request.contest.client
     set_template_values(
         hello_address: contact_email
@@ -338,7 +362,9 @@ class UserMailer < ActionMailer::Base
 
   def no_concept_boards_received_after_three_days(contest, email_id = nil)
     client = contest.client
-    mail(to: [wrap_recipient(client.email, client.name, 'to'), wrap_recipient(contact_email, 'InteriorCrowd', 'to')], email_id: email_id)
+    mail(to: [wrap_recipient(client.email, client.name, 'to'),
+              wrap_recipient(contact_email, 'InteriorCrowd', 'to')],
+         email_id: email_id)
   end
 
   def one_day_left_to_choose_a_winner(contest_id, email_id = nil)
