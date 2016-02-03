@@ -118,7 +118,7 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email to client about contest noy live yet' do
-      expect(UserMailer.contest_not_live_yet(contest)).to be_present
+      expect(UserMailer.contest_not_live_yet(contest.id)).to be_present
     end
 
     it 'sends email to client about account creation' do

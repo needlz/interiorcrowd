@@ -21,8 +21,12 @@ class SubmitContest
     payed? && !brief_completed?
   end
 
+  def submittable?
+    contest.brief_pending? && brief_completed? && payed?
+  end
+
   def try_perform
-    if contest.brief_pending? && brief_completed? && payed?
+    if submittable?
       ActiveRecord::Base.transaction do
         contest.submit!
         contest.update_attributes(submission_started_at: Time.now)
@@ -44,11 +48,14 @@ class SubmitContest
   end
 
   def after_tried
-    notify_about_contest_not_live if !performed? && only_brief_pending?
+    notify_about_contest_not_live if !performed? && only_brief_pending? && !contest.notified_client_contest_not_yet_live
   end
 
   def notify_about_contest_not_live
-    Jobs::Mailer.schedule(:contest_not_live_yet, [@contest])
+    ActiveRecord::Base.transaction do
+      Jobs::Mailer.schedule(:contest_not_live_yet, [@contest.id])
+      contest.update_attributes!(notified_client_contest_not_yet_live: true)
+    end
   end
 
 end
