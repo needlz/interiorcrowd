@@ -5,7 +5,7 @@ RSpec.describe SubmitContest do
   let(:client) { Fabricate(:client) }
   let(:submit_contest) { SubmitContest.new(contest) }
 
-  context 'when contest created with space pictures' do
+  context 'when contest has space pictures' do
     let(:contest) do
       contest_creation = ContestCreation.new(client_id: client.id, contest_params: contest_options_source, make_complete: true)
       contest = contest_creation.perform
@@ -64,6 +64,12 @@ RSpec.describe SubmitContest do
           expect(contest.status).to eq 'submission'
         end
 
+        it 'delays client notification about concept boards not received' do
+          submit_contest.try_perform
+          job_delay = jobs_with_handler_like('CheckIfBoardsReceived').first.run_at - 3.days - Time.current
+          expect(job_delay.abs < 1).to be_truthy
+        end
+
         it 'saves date of submission start' do
           submit_contest.try_perform
           expect(contest.reload.submission_started_at).to be_within(5.seconds).of(Time.current)
@@ -85,10 +91,10 @@ RSpec.describe SubmitContest do
     end
   end
 
-  context 'when contest created without space pictures' do
+  context 'when has no space pictures' do
     let(:contest_options) do
       options = contest_options_source()
-      options[:design_space].merge(document_id: '')
+      options[:design_space].merge!(document_id: '')
       options
     end
     let(:contest) do
@@ -97,7 +103,7 @@ RSpec.describe SubmitContest do
       contest
     end
 
-    context 'when real payments enabled' do
+    context 'when automatic payments enabled' do
       before do
         allow(Settings).to receive(:payment_enabled){ true }
       end
@@ -109,10 +115,43 @@ RSpec.describe SubmitContest do
           pay_contest(contest)
         end
 
-        it 'delays client notification about concept boards not received' do
+        it 'does not submit contest' do
+          expect{ submit_contest.try_perform }.to_not change{ contest.status }
+          expect(submit_contest).to_not be_performed
+        end
+
+        it 'notifies client about contest not yet live' do
+          notifications_created_on_contest_creation_count = 1
+          expect(jobs_with_handler_like('contest_not_live_yet').count).to eq notifications_created_on_contest_creation_count
+          expect{ submit_contest.try_perform }.to_not(change{ jobs_with_handler_like('contest_not_live_yet').count })
+        end
+      end
+
+      context 'when contest not payed' do
+        it 'does not submit contest' do
+          expect{ submit_contest.try_perform }.to_not change{ contest.status }
+          expect(submit_contest).to_not be_performed
+        end
+      end
+    end
+
+    context 'when automatic payments disabled' do
+      before do
+        allow(Settings).to receive(:payment_enabled){ false }
+      end
+
+      context 'when contest payed' do
+        before do
+          client.primary_card = Fabricate(:credit_card)
+          client.save!
+          pay_contest(contest)
+        end
+
+        it 'does not submit contest' do
           submit_contest.try_perform
-          job_delay = jobs_with_handler_like('CheckIfBoardsReceived').first.run_at - 3.days - Time.current
-          expect(job_delay.abs < 1).to be_truthy
+          expect(submit_contest.performed?).to be_falsey
+          contest.reload
+          expect(contest.status).to eq 'brief_pending'
         end
       end
 

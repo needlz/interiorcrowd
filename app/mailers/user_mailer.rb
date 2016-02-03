@@ -373,11 +373,12 @@ class UserMailer < ActionMailer::Base
     mail(to: designers.map{ |designer| wrap_recipient(designer.email, designer.name, 'to') }, email_id: email_id)
   end
 
-  def contest_not_live_yet(contest, email_id = nil)
+  def contest_not_live_yet(contest_id, email_id = nil)
     set_template_values(
         entries_url: renderer.client_center_entries_url,
         pictures_email: 'pictures@interiorcrowd.com'
     )
+    contest = Contest.find(contest_id)
     client = contest.client
     mail(to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id)
   end
