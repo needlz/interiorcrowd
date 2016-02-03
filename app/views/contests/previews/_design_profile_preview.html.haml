@@ -16,12 +16,12 @@
                   viewport: 'body' } }
               ?
         .row
-          = render partial: 'shared/image_with_enlarge_button',
-              locals: { image_class: 'appeal-collage-image',
-                        thumb_path: style.collage_picture,
-                        original_size_path: style.collage_picture }
+          = render 'shared/image_with_enlarge_button',
+              settings: EnlargeablePicture.new(image_class: 'appeal-collage-image',
+                thumb_path: style.collage_picture,
+                original_size_path: style.collage_picture)
         %p.comment
           = style.reason
       .clearfix
       %p
-= render partial: 'contests/previews/preview_row', locals: { title: t('contests.titles.brief.design_style'), value: value_html }
+= render 'contests/previews/preview_row', title: t('contests.titles.brief.design_style'), value: value_html

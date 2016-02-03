@@ -15,7 +15,7 @@ class ImageItemsEditor extends InlineEditor
   bindEvents: ->
     super()
     @bindDeleteClick()
-    @subscribeToUpdates()
+    @subscribeToUpdates() if window.subscriptionChannel
     @bindPriceValidation()
     @bindAutoSaving()
 

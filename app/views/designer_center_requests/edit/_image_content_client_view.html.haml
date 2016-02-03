@@ -2,8 +2,14 @@
     class: ('default' if item.thumb_url == '/assets/portfolio_example.png') }
   .row
     .col-md-5
-      .full-size-image-container{ style: "background-image: #{ css_url(item.thumb_url) };",
-          data: { id: item.image_id } }
+      .full-size-image-container{ data: { id: item.image_id } }
+        = render 'shared/image_with_enlarge_button',
+            settings: EnlargeablePicture.new(image_class: 'full-size-image-container',
+              use_div: true,
+              thumb_path: item.thumb_url,
+              original_size_path: item.original_size_url,
+              url_for_downloading: item.download_url,
+              no_mobile_overlay: true)
       - if markable
         = form_tag mark_image_item_path(item.id), remote: true, method: 'PATCH', autocomplete: 'off' do
           .productRadio

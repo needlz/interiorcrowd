@@ -1,17 +1,18 @@
-.imageWithOverlay{ class: (container_class if defined?(container_class)) }
-  - if defined?(use_div) && use_div
-    .image-container{ style: "background-image: #{ css_url(thumb_path) }",
-        class: (image_class if defined?(image_class)) }
+.imageWithOverlay{ class: settings.container_class }
+  - if settings.use_div
+    .image-container{ style: "background-image: #{ css_url(settings.thumb_path) }",
+        class: settings.image_class }
   - else
-    %img{ class: (image_class if defined?(image_class)), src: thumb_path }/
-  .overlayExampleImg
-    - if defined?(remove_button) && remove_button
+    %img{ class: settings.image_class, src: settings.thumb_path }/
+  .overlayExampleImg{ class: ('hidden-xs' if settings.no_mobile_overlay) }
+    - if settings.remove_button
       %a.remove{ href: '#', title: 'Delete' }
-        %img{ src: remove_icon_path }
-    - if defined?(url_for_downloading)
-      %a.download{ href: url_for_downloading, title: 'Download' }
+        %img{ src: settings.remove_icon_path }
+    - if settings.url_for_downloading
+      %a.download{ href: settings.url_for_downloading, title: 'Download', style: ('right: 10px' if settings.original_size_path.blank?) }
         %img{ src: download_icon_path }
-    %a.enlarge{ class: (enlarge_button_class if defined?(enlarge_button_class)),
-        href: original_size_path,
-        title: 'Enlarge' }
-      %img{ src: enlarge_icon_path }
+    - if settings.original_size_path.present?
+      %a.enlarge{ class: settings.enlarge_button_class,
+          href: settings.original_size_path,
+          title: 'Enlarge' }
+        %img{ src: enlarge_icon_path }
