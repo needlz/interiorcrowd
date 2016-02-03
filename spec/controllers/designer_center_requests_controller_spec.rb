@@ -7,7 +7,7 @@ RSpec.describe DesignerCenterRequestsController do
     mock_file_download_url
   end
 
-  let(:designer) { Fabricate(:designer) }
+  let(:designer) { Fabricate(:designer_with_portfolio) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
   let(:contest) { Fabricate(:contest,

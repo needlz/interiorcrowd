@@ -17,7 +17,7 @@ class ContestShortDetails
     @design_space = contest.design_space.try(:full_name)
     @days_count = calculate_days_count
     @days_till_end = get_days_till_end
-    @days_left = "#{ days_till_end }#{ ' days' if contest.winner_collaboration? }"
+    @days_left = days_till_end ? "#{ days_till_end }#{ ' days' if contest.winner_collaboration? }" : nil
     @price = I18n.t('designer_center.responses.item.price', price: package.price) if contest.package
     @status = contest.status
     @client_name = contest.client.name
@@ -42,6 +42,7 @@ class ContestShortDetails
   end
 
   def get_days_till_end
+    return '—' unless (contest.submission? || contest.winner_selection?)
     return '—' unless days_count
     if days_count >= 1
       days_count.to_s

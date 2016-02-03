@@ -6,7 +6,8 @@
     .col-xs-2= t('designer_center.contests_preview.type')
     .col-xs-2= t('designer_center.contests_preview.room')
     .col-xs-1= t('designer_center.contests_preview.price')
-    .col-xs-2= t('designer_center.contests_preview.days_left_to_enter')
+    - if @invited_contests
+      .col-xs-2= t('designer_center.contests_preview.days_left_to_enter')
     .col-xs-2= t('designer_center.contests_preview.submissions')
   .row.joinContestBody
-    = render partial: 'designer_center_contests/index/contests_list', locals: { contests: @invited_contests }
+    = render 'designer_center_contests/index/contests_list', columns: @invited_contests

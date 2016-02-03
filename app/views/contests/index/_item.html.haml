@@ -2,17 +2,26 @@
   .row.text-left.contestTableRow1{ data: { id: contest.id } }
     .col-sm-10
       .row
-        .col-xs-4.makeMeBold
-          - if contest.completed?
-            %a{ href: brief_contest_path(id: contest.id) }
+        - if columns.show_days_left_column?
+          .col-xs-4.makeMeBold
+            - if contest.completed?
+              %a{ href: brief_contest_path(id: contest.id) }
+                = contest.name
+            - else
               = contest.name
+          .col-xs-4= contest.design_space
+          - if contest.completed?
+            .col-xs-4.greenDay= contest.days_till_end
           - else
-            = contest.name
-        .col-xs-4= contest.design_space
-        - if contest.completed?
-          .col-xs-4.greenDay= contest.days_till_end
+            .col-xs-4= contest.progress
         - else
-          .col-xs-4= contest.progress
+          .col-xs-6.makeMeBold
+            - if contest.completed?
+              %a{ href: brief_contest_path(id: contest.id) }
+                = contest.name
+            - else
+              = contest.name
+          .col-xs-6= contest.design_space
     .col-sm-2.contestDesignerBtn.hidden-xs
       %a.goBtn.btn{ href: contest.continue_path }
         = contest.continue_label

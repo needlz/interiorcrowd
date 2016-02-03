@@ -57,8 +57,8 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @current_contests = @client.contests.in_progress
-    @completed_contests = @client.contests.inactive
+    @current_contests = ContestsColumns.new(@client.contests.in_progress)
+    @completed_contests = ContestsColumns.new(@client.contests.inactive)
   end
 
   def preview

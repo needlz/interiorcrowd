@@ -2,7 +2,6 @@
 %p.grayItalic= t('designer_center.contests_preview.suggested_contests_hint')
 .suggestedContestBox
   .row.suggestedContestHeader
-    = render partial: 'designer_center_contests/index/contest_row'
-  = render partial: 'designer_center_contests/index/contests_list',
-      locals: { contests: @suggested_contests,
-                border_class: 'suggestedContestBody' }
+    = render 'designer_center_contests/index/contest_row', columns: @suggested_contests
+  = render 'designer_center_contests/index/contests_list',
+      columns: @suggested_contests, border_class: 'suggestedContestBody'

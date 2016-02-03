@@ -33,6 +33,10 @@ class ContestMilestone
     ContestMilestone.end_milestone_performer(contest.status)
   end
 
+  def self.show_timeline?(contest_status)
+    %w[submission winner_selection].include? contest_status
+  end
+
   private
 
   attr_reader :contest

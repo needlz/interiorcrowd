@@ -490,12 +490,6 @@ en:
           time_left: '%{time_left} left to pick a winner'
         submission:
           time_left: '%{time_left} left for designers to submit their concept boards'
-        fulfillment:
-          expired: Deadline extended
-          time_left: '%{time_left} left in this phase'
-        final_fulfillment:
-          expired: Deadline extended
-          time_left: '%{time_left} left in this phase'
       fulfillment_approved:
         modal:
           thanks: Thanks!

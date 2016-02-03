@@ -15,14 +15,18 @@
           .row.contestTableHeader
             .col-sm-10
               .row
-                .col-xs-4= t('designer_center.contests_preview.contest_name')
-                .col-xs-4= t('designer_center.contests_preview.room')
-                .col-xs-4= t('designer_center.contests_preview.days')
-        = render 'contests/index/items', { contests: @current_contests }
+                - if @current_contests.show_days_left_column?
+                  .col-xs-4= t('designer_center.contests_preview.contest_name')
+                  .col-xs-4= t('designer_center.contests_preview.room')
+                  .col-xs-4= t('designer_center.contests_preview.days')
+                - else
+                  .col-xs-6= t('designer_center.contests_preview.contest_name')
+                  .col-xs-6= t('designer_center.contests_preview.room')
+        = render 'contests/index/items', { columns: @current_contests }
 
-        - if @completed_contests.present?
+        - if @completed_contests.contests.present?
           %h3.seeCompletedContests= t('designer_center.contests_preview.completed_contests_title')
           #completedContestsBox.show
-            = render 'contests/index/items', { contests: @completed_contests }
+            = render 'contests/index/items', { columns: @completed_contests }
 
 = render 'clients/client_center/layout', { container_class: 'bottom60' }
