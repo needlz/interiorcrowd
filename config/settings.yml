@@ -35,7 +35,6 @@ common: &defaults
       design_styles: http://blog.interiorcrowd.com/category/get-ideas/design-styles
       about_us: http://blog.interiorcrowd.com/about-us
       justines_story: http://blog.interiorcrowd.com/justines-story
-      designer_submission: http://blog.interiorcrowd.com/designer-acquisition
     social:
       twitter: https://twitter.com/InteriorCrowd
       facebook: https://www.facebook.com/interiorcrowd
@@ -95,6 +94,7 @@ common: &defaults
       width: 1440
       height: 900
   viglink_key: '<%= ENV['VIGLINK_KEY'] %>'
+  designer_submission_iframe_source: 'https://docs.google.com/forms/d/1_vJzmTLzAc7xn9D5Z-RoQW278wF6WSim-VW37RNUzqM/viewform?embedded=true'
 
 development:
 

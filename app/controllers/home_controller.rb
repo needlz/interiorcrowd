@@ -8,4 +8,6 @@ class HomeController < ApplicationController
     render
   end
 
+  def designer_submission; end
+
 end

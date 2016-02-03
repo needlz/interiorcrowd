@@ -68,5 +68,13 @@ RSpec.describe HomeController do
     end
   end
 
+  describe 'GET designer_submission' do
+    it 'renders page' do
+      get :designer_submission
+      expect(response).to render_template(:designer_submission)
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
 end
 

@@ -2,15 +2,10 @@ require 'faraday_middleware'
 
 class BlogController < ApplicationController
 
-  PAGES_WITH_IFRAME = [:designer_submission]
   EMBEDDED_PAGES = [:justines_story]
 
-  before_filter :set_url, only: EMBEDDED_PAGES + PAGES_WITH_IFRAME
+  before_filter :set_url, only: EMBEDDED_PAGES
   before_filter :render_get_response, only: EMBEDDED_PAGES
-
-  def designer_submission
-    render 'shared/_iframe', locals: { iframe_src: @url }
-  end
 
   def justines_story; end
 
