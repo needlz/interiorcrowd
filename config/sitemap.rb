@@ -8,7 +8,7 @@ SitemapGenerator::Sitemap.adapter = SitemapGenerator::S3Adapter.new(fog_provider
                                                                     aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'])
 SitemapGenerator::Sitemap.public_path = WRITABLE_TEMP_DIR
 SitemapGenerator::Sitemap.sitemaps_path = FOG_SITEMAPS_DIR
-SitemapGenerator::Sitemap.sitemaps_host = "http://#{ENV['S3_BUCKET_NAME']}.s3.amazonaws.com/"
+SitemapGenerator::Sitemap.sitemaps_host =SitemapGenerator::Sitemap.default_host
 
 BLOG_SITEMAPS = %w[post-sitemap.xml
 page-sitemap.xml

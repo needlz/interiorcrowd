@@ -64,13 +64,20 @@ class BlogController < ApplicationController
     @admin_page = @url.match %r[/wp-admin($|/)]
     locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
     @no_global_css = true
-    if request.xhr?
-      render text: locals[:text]
+    extname = File.extname(URI(@url).path)[1..-1]
+    mime_type = Mime::Type.lookup_by_extension(extname)
+    content_type = mime_type.to_s unless mime_type.nil?
+    if content_type #file with extension
+      render text: locals[:text], content_type: content_type
     else
-      if @admin_page
-        AdminBlogPage.render(locals, self)
+      if request.xhr?
+        render text: locals[:text]
       else
-        DefaultBlogPage.render(locals, self)
+        if @admin_page
+          AdminBlogPage.render(locals, self)
+        else
+          DefaultBlogPage.render(locals, self)
+        end
       end
     end
   end

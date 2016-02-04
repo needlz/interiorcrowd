@@ -203,8 +203,8 @@ InteriorC::Application.routes.draw do
 
     resources :realtor_contacts, only: [:create]
 
-    get 'sitemap.xml.gz' => 'sitemaps#sitemap', format: :xml, as: :sitemap
-    get 'sitemap.xml', to: redirect('sitemap.xml.gz')
+    get 'sitemap.xml' => 'sitemaps#sitemap_index', format: :xml, as: :sitemap_index
+    get 'sitemaps/:sitemap_file' => 'sitemaps#sitemap', format: :xml, as: :sitemap, constraints: { sitemap_file: /.*/ }
   end
 
   def consider_rest_of_routes_as_portfolios
