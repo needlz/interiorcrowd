@@ -1,4 +1,4 @@
-class PublishProductList
+class PublishProductList < Action
 
   def initialize(contest_request)
     @contest_request = contest_request
@@ -8,6 +8,7 @@ class PublishProductList
     ActiveRecord::Base.transaction do
       rewrite_published_copy_of_temporary_items
       NewProductListItemNotifier.new(contest_request).perform
+      update_contest
     end
   end
 
@@ -31,6 +32,12 @@ class PublishProductList
     contest_request.image_items.published.destroy_all
 
     new_items.each { |item| item.save! }
+  end
+
+  def update_contest
+    if contest_request.image_items.published.present?
+      contest_request.contest.update_attributes!(ever_received_published_product_items: true)
+    end
   end
 
 end

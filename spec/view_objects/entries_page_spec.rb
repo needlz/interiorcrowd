@@ -65,4 +65,64 @@ RSpec.describe EntriesPage do
     end
   end
 
+  describe '#show_winner_chosen_congratulations?' do
+    context 'when in collaboration phase' do
+      let!(:contest_request) do
+        contest_request = Fabricate.build(:contest_request, contest: contest, status: 'fulfillment_ready', answer: 'winner')
+        contest_request.save!(validate: false)
+        contest_request
+      end
+
+      context 'when winner response has published product items' do
+        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
+
+        before do
+          Fabricate(:product_item, contest_request: contest_request)
+        end
+
+        it 'does not show "winner chosen" notification' do
+          expect(entries_page.show_winner_chosen_congratulations?).to be_falsey
+        end
+      end
+
+      context 'when winner response has no published product items' do
+        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
+
+        it 'shows "winner chosen" notification' do
+          expect(entries_page.show_winner_chosen_congratulations?).to be_truthy
+        end
+      end
+    end
+
+    context 'when contest in final design phase' do
+      let!(:contest_request) do
+        contest_request = Fabricate.build(:contest_request, contest: contest, status: 'fulfillment_approved', answer: 'winner')
+        contest_request.save!(validate: false)
+        contest_request
+      end
+
+      context 'when winner response has published product items' do
+        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
+
+        before do
+          Fabricate(:product_item, contest_request: contest_request)
+        end
+
+        it 'does not show "winner chosen" notification' do
+          expect(entries_page.show_winner_chosen_congratulations?).to be_falsey
+        end
+      end
+
+      context 'when winner response has no published product items' do
+        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
+
+        it 'does not show "winner chosen" notification' do
+          expect(entries_page.show_winner_chosen_congratulations?).to be_falsey
+        end
+      end
+
+    end
+
+  end
+
 end

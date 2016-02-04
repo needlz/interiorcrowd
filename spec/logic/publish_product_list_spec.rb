@@ -21,6 +21,11 @@ RSpec.describe PublishProductList do
         expect(contest_request.image_items.published.count).to eq 2
         expect(contest_request.image_items.temporary.find{ |item| item.published_version.blank? }).to be_nil
       end
+
+      it 'sets ever_received_published_product_items of contest to true' do
+        publish.perform
+        expect(contest.ever_received_published_product_items).to be_truthy
+      end
     end
 
     context 'when published items present' do
