@@ -202,6 +202,9 @@ InteriorC::Application.routes.draw do
     get '/giftcards', to: 'giftcard_payments#new', as: 'new_giftcard_payment'
 
     resources :realtor_contacts, only: [:create]
+
+    get 'sitemap.xml' => 'sitemaps#sitemap_index', format: :xml, as: :sitemap_index
+    get 'sitemaps/:sitemap_file' => 'sitemaps#sitemap', format: :xml, as: :sitemap, constraints: { sitemap_file: /.*/ }
   end
 
   def consider_rest_of_routes_as_portfolios
