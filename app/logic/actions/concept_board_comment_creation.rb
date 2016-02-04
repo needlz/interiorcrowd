@@ -28,12 +28,12 @@ class ConceptBoardCommentCreation < Action
   end
 
   def comment_attributes
-    comment_options.except(:attachments_ids).merge(user_id: author.id, role: author.role)
+    comment_options.except(:attachment_ids).merge(user_id: author.id, role: author.role)
   end
 
   def attach_files
-    if comment_options[:attachments_ids]
-      comment_options[:attachments_ids].each do |attachment_id|
+    if comment_options[:attachment_ids]
+      comment_options[:attachment_ids].each do |attachment_id|
         comment.attachments << Image.find(attachment_id) if attachment_id.present?
       end
     end

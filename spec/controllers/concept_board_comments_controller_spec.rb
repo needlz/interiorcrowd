@@ -90,7 +90,7 @@ RSpec.describe ConceptBoardCommentsController, type: :controller do
 
       context 'when files attached' do
         let(:params) do
-          { comment: { text: 'text', attachments_ids: [Fabricate(:image).id] },
+          { comment: { text: 'text', attachment_ids: [Fabricate(:image).id] },
             designer_center_contest_id: contest.id }
         end
 

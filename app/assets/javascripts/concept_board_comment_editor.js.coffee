@@ -115,7 +115,7 @@ class @ConceptBoardCommentEditor extends InlineEditor
     commentId = $comment.attr('data-id')
     attachmentIds = $comment.find('.fileIds').val().split(',')
     data = { comment: { text: text } }
-    data.comment.attachments_ids = attachmentIds
+    data.comment.attachment_ids = attachmentIds
     $.ajax(
       data: data
       url: "/contest_requests/#{ requestId }/comments/#{ commentId }"

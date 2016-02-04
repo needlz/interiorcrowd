@@ -19,7 +19,7 @@ class @ConceptBoardComment
 
   @makeRequest: (text, requestId, attachmentsIds) ->
     $.ajax(
-      data: { comment: { text: text, attachments_ids: attachmentsIds } }
+      data: { comment: { text: text, attachment_ids: attachmentsIds } }
       url: "/contest_requests/#{ requestId }/comments"
       type: 'POST'
       beforeSend: =>
