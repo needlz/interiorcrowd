@@ -23,8 +23,8 @@ class AccountCreation
       $email = $("#client_email")
       email = trimedVal($email)
       if email.length > 1
-        rege = /^([A-Za-z0-9_\-\.\+])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-        unless rege.test(email)
+        regex = window.emailRegex
+        unless regex.test(email)
           @validator.addMessage $("#err_email"), "Please enter valid email.", $email
       else
         @validator.addMessage $("#err_email"), "Please enter email.", $email

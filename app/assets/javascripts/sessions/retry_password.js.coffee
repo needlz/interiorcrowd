@@ -4,8 +4,8 @@ $(document).ready ->
     email = $("#email").val().trim()
     bool = true
     if email.length > 0
-      rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-      unless rege.test(email)
+      regex = window.emailRegex
+      unless regex.test(email)
         $("#err_f").text "Please enter valid email."
         bool = false
     else
