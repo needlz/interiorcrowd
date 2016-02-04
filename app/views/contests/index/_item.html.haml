@@ -9,7 +9,7 @@
                 = contest.name
             - else
               = contest.name
-          .col-xs-4= contest.rooms_short_name
+          .col-xs-4{ contest.rooms_popover_attributes }= contest.rooms_short_name
           - if contest.completed?
             .col-xs-4.greenDay= contest.days_till_end
           - else
@@ -21,7 +21,7 @@
                 = contest.name
             - else
               = contest.name
-          .col-xs-6= contest.rooms_short_name
+          .col-xs-6{ contest.rooms_popover_attributes }= contest.rooms_short_name
     .col-sm-2.contestDesignerBtn.hidden-xs
       %a.goBtn.btn{ href: contest.continue_path }
         = contest.continue_label

@@ -34,7 +34,9 @@ class ContestShortDetails
     @design_spaces_list = @design_spaces.map(&:full_name).join(', ')
     if @design_spaces.length > 1
       @rooms_popover_attributes = { class: 'clickable',
-                                    data: { toggle: 'popover', content: @design_spaces.map(&:full_name).join(', ') } }
+                                    data: { toggle: 'popover',
+                                            content: @design_spaces.map(&:full_name).join(', '),
+                                            placement: 'auto' } }
       @design_space_possesive_name = 'rooms'
       @rooms_short_name = 'Multiple'
     else
