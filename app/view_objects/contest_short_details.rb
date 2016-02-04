@@ -42,6 +42,7 @@ class ContestShortDetails
     else
       @rooms_short_name = @design_spaces.first.full_name
       @rooms_popover_attributes = {}
+      @design_space_possesive_name = @rooms_short_name
     end
   end
 
