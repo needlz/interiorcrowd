@@ -2,9 +2,9 @@ class ContestShortDetails
   include ActionView::Helpers::DateHelper
   include Rails.application.routes.url_helpers
 
-  attr_reader :id, :name, :package_name, :design_space, :days_left, :price, :days_count, :days_till_end, :status,
+  attr_reader :id, :name, :package_name, :design_spaces, :days_left, :price, :days_count, :days_till_end, :status,
               :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path,
-              :submissions_count
+              :submissions_count, :rooms_short_name, :rooms_popover_attributes, :design_spaces_list, :design_space_possesive_name
   delegate :response_winner, :completed?, :winner_selection?, to: :contest
 
   def initialize(contest)
@@ -14,7 +14,7 @@ class ContestShortDetails
     @name = contest.project_name || 'My New Project'
     package = PackageView.new(contest.package)
     @package_name = package.name if package
-    @design_space = contest.design_space.try(:full_name)
+    @design_spaces = contest.design_spaces
     @days_count = calculate_days_count
     @days_till_end = get_days_till_end
     @days_left = days_till_end ? "#{ days_till_end }#{ ' days' if contest.winner_collaboration? }" : nil
@@ -30,6 +30,16 @@ class ContestShortDetails
     else
       @continue_path = ContestCreationWizard.incomplete_step_path(contest)
       @continue_label = I18n.t('designer_center.responses.item.finish')
+    end
+    @design_spaces_list = @design_spaces.map(&:full_name).join(', ')
+    if @design_spaces.length > 1
+      @rooms_popover_attributes = { class: 'clickable',
+                                    data: { toggle: 'popover', content: @design_spaces.map(&:full_name).join(', ') } }
+      @design_space_possesive_name = 'rooms'
+      @rooms_short_name = 'Multiple'
+    else
+      @rooms_short_name = @design_spaces.first.full_name
+      @rooms_popover_attributes = {}
     end
   end
 

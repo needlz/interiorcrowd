@@ -48,7 +48,7 @@
   }
 }
 
-#choose-room {
+#choose-room, .roomOptions {
   label {
     font-weight: normal;
   }
@@ -79,6 +79,25 @@
 
     .room-selector-sub {
       padding: 20px 0px;
+      margin: 0px;
+      display: block;
+    }
+
+    .room-selector, .room-selector-sub {
+      .option-selected {
+        display: none;
+      }
+    }
+
+    input[type=checkbox]:checked + .room, .room.withSelectedChildren {
+      background-color:#000000;
+      color:#ffffff !important;
+    }
+
+    input[type=checkbox]:checked + .room, .room.withSelectedChildren {
+      .option-selected {
+        display: block;
+      }
     }
 
     .fixWrap {
@@ -92,6 +111,10 @@
 
   .option-item {
     cursor: pointer;
+  }
+
+  input[type=checkbox]:checked + .option-item {
+    opacity: 1;
   }
 }
 

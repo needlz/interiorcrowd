@@ -37,7 +37,7 @@ class ConceptBoardCommentsController < ApplicationController
   attr_reader :concept_board, :comment
 
   def comment_attributes
-    params.require(:comment).permit([:text, attachments_ids: []])
+    params.require(:comment).permit([:text, attachment_ids: []])
   end
 
   def validate_params_of_create

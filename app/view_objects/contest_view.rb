@@ -2,11 +2,11 @@ class ContestView
 
   ACCOMMODATION_ATTRIBUTES = [:accommodate_children, :accommodate_pets]
 
-  attr_reader :dimensions, :appeal_scales, :category, :design_area, :desirable_colors, :undesirable_colors, :examples,
+  attr_reader :dimensions, :appeal_scales, :category, :design_areas, :desirable_colors, :undesirable_colors, :examples,
               :links, :space_pictures, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
               :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo,
-              :designers_explore_other_colors, :designers_only_use_these_colors
+              :designers_explore_other_colors, :designers_only_use_these_colors, :design_spaces_list
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -46,8 +46,9 @@ class ContestView
   end
 
   def top_level_area_active?(area)
-    design_area == area || design_area.try(:parent) == area
+    design_areas.include?(area) || design_areas.map(&:parent).include?(area)
   end
+
 
   def conditional_block_radio_button_active?(is_block_visible, button_value)
     active_button_value = is_block_visible ? 'yes' : 'no'
@@ -107,7 +108,7 @@ class ContestView
     contest_params = contest_options.contest
     design_category = DesignCategory.find_by_id(contest_params[:design_category_id])
     @category = DesignCategoryView.new(design_category)
-    @design_area = DesignSpace.find_by_id(contest_params[:design_space_id])
+    @design_areas = DesignSpace.where(id: contest_params[:design_space_ids])
     @designer_level = DesignerLevel.find_by_id(contest_options.designer_level)
     @appeal_scales = AppealScale.from(contest_options.appeals)
     @desirable_colors = contest_params[:desirable_colors]
@@ -123,6 +124,7 @@ class ContestView
     @name = contest_params[:project_name]
     @designers_explore_other_colors = contest_params[:designers_explore_other_colors]
     @designers_only_use_these_colors = contest_params[:designers_only_use_these_colors]
+    @design_spaces_list = @design_areas.map(&:full_name).join(', ')
     set_package(contest_params)
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
@@ -130,7 +132,7 @@ class ContestView
 
   def initialize_from_contest(contest)
     @category = DesignCategoryView.new(contest.design_category)
-    @design_area = contest.design_space
+    @design_areas = contest.design_spaces
     @designer_level = contest.client.designer_level
     @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
     @desirable_colors = contest.desirable_colors
@@ -153,6 +155,7 @@ class ContestView
     @durability = contest.durability
     @designers_explore_other_colors = contest.designers_explore_other_colors
     @designers_only_use_these_colors = contest.designers_only_use_these_colors
+    @design_spaces_list = @design_areas.map(&:full_name).join(', ')
     set_package(contest.attributes.with_indifferent_access)
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)

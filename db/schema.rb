@@ -214,6 +214,15 @@ ActiveRecord::Schema.define(version: 20160201151140) do
   add_index "contests_appeals", ["appeal_id", "contest_id"], name: "index_contests_appeals_on_appeal_id_and_contest_id", using: :btree
   add_index "contests_appeals", ["contest_id", "appeal_id"], name: "index_contests_appeals_on_contest_id_and_appeal_id", using: :btree
 
+  create_table "contests_design_spaces", id: false, force: :cascade do |t|
+    t.integer "contest_id"
+    t.integer "design_space_id"
+  end
+
+  add_index "contests_design_spaces", ["contest_id", "design_space_id"], name: "contests_on_design_spaces", unique: true, using: :btree
+  add_index "contests_design_spaces", ["contest_id"], name: "index_contests_design_spaces_on_contest_id", using: :btree
+  add_index "contests_design_spaces", ["design_space_id"], name: "index_contests_design_spaces_on_design_space_id", using: :btree
+
   create_table "contests_images", force: :cascade do |t|
     t.integer "contest_id"
     t.integer "image_id"

@@ -84,7 +84,7 @@ class ContestRequest < ActiveRecord::Base
   scope :fulfillment, ->{ where(status: FULFILLMENT_STATUSES) }
   scope :finished, ->{ where(status: 'finished') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
-  scope :with_design_properties, -> { includes(contest: [:design_category, :design_space]) }
+  scope :with_design_properties, -> { includes(contest: [:design_category, :design_spaces]) }
 
   def self.generate_email_thread_id
     TokenGenerator.generate(20)

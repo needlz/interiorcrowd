@@ -8,7 +8,6 @@ RSpec.describe ContestResponseView do
   it 'returns name of the design' do
     request_view = ContestResponseView.new(contest_request)
     expect(request_view.design_name.include?(client.first_name)).to be_truthy
-    expect(request_view.design_name.include?(contest.design_space.full_name)).to be_truthy
   end
 
   it 'contains client first name in possessive form' do
@@ -20,7 +19,7 @@ RSpec.describe ContestResponseView do
   it "contains client first name ending in 's' also in its own possessive form" do
     client.update_attribute(:first_name, 'Amadeus')
     request_view = ContestResponseView.new(contest_request)
-    expect(request_view.design_name.include?('Amadeus’ ')).to be_truthy
+    expect(request_view.design_name.include?('Amadeus’ rooms')).to be_truthy
   end
 
   it 'contains client last name if there is no first name' do

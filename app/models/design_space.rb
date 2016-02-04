@@ -14,7 +14,7 @@
 class DesignSpace < ActiveRecord::Base
   ACTIVE_STATUS = 1
 
-  has_many :contests
+  has_and_belongs_to_many :contests
   belongs_to :parent, class_name: 'DesignSpace', foreign_key: :parent_id
   has_many :children, class_name: 'DesignSpace', foreign_key: :parent_id
 
