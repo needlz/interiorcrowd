@@ -108,7 +108,7 @@ class ContestView
     contest_params = contest_options.contest
     design_category = DesignCategory.find_by_id(contest_params[:design_category_id])
     @category = DesignCategoryView.new(design_category)
-    @design_areas = DesignSpace.where(id: contest_params[:design_space_ids]) #TODO tests for ids:
+    @design_areas = DesignSpace.where(id: contest_params[:design_space_ids])
     @designer_level = DesignerLevel.find_by_id(contest_options.designer_level)
     @appeal_scales = AppealScale.from(contest_options.appeals)
     @desirable_colors = contest_params[:desirable_colors]

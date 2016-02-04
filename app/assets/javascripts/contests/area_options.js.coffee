@@ -31,7 +31,6 @@ class @DesignArea
     @parentAreas.each (index, element)=>
       $parentRoom = $(element)
       $childrenRooms = @childrenAreas.filter("[data-id='#{ $parentRoom.attr('data-id') }']")
-      console.log $childrenRooms.find('input[type=checkbox]:checked').length
       $parentRoom.toggleClass('withSelectedChildren', !!$childrenRooms.find('input[type=checkbox]:checked').length)
     $("#err_design_area").html('')
     @hideAllChildrenAreas()

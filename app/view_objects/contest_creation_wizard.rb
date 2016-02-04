@@ -33,7 +33,7 @@ class ContestCreationWizard
   def self.finished_step?(contest, index)
     case index
       when 0
-        contest.design_category_id.present? && contest.design_spaces.present? #TODO tests
+        contest.design_category_id.present? && contest.design_spaces.present?
       when 1
         contest.desirable_colors.present? && contest.contests_appeals.count == Appeal.count
       when 2

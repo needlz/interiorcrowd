@@ -45,11 +45,11 @@ class ContestResponseView
 
   def design_name
     if response.contest.client.first_name.present?
-      response.contest.client.first_name.possessive + ' ' + contest.design_space_name
+      response.contest.client.first_name.possessive + ' ' + contest.design_space_possesive_name
     elsif response.contest.client.last_name.present?
-      response.contest.client.last_name.possessive + ' ' + contest.design_space_name
+      response.contest.client.last_name.possessive + ' ' + contest.design_space_possesive_name
     else
-      response.contest.client.email + "'s " + contest.design_space_name
+      response.contest.client.email + "'s " + contest.design_space_possesive_name
     end
   end
 

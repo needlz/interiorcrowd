@@ -4,7 +4,7 @@ class ContestShortDetails
 
   attr_reader :id, :name, :package_name, :design_spaces, :days_left, :price, :days_count, :days_till_end, :status,
               :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path,
-              :submissions_count, :design_space_name, :rooms_popover_attributes, :design_spaces_list
+              :submissions_count, :rooms_short_name, :rooms_popover_attributes, :design_spaces_list, :design_space_possesive_name
   delegate :response_winner, :completed?, :winner_selection?, to: :contest
 
   def initialize(contest)
@@ -36,9 +36,9 @@ class ContestShortDetails
       @rooms_popover_attributes = { class: 'clickable',
                                     data: { toggle: 'popover', content: @design_spaces.map(&:full_name).join(', ') } }
       @design_space_possesive_name = 'rooms'
-      @design_space_name = 'Multiple'
+      @rooms_short_name = 'Multiple'
     else
-      @design_space_name = @design_spaces.first.full_name
+      @rooms_short_name = @design_spaces.first.full_name
       @rooms_popover_attributes = {}
     end
   end
