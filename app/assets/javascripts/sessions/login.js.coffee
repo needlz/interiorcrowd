@@ -8,8 +8,8 @@ $(document).ready ->
       $("#err_p").text "Please enter password."
       bool = "password"
     if username.length > 1
-      rege = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
-      unless rege.test(username)
+      regex = window.emailRegex
+      unless regex.test(username)
         $("#err_u").text "Please enter valid email."
         bool = "username"
     else

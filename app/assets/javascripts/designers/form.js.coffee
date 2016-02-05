@@ -75,7 +75,7 @@ class @DesignerSignUp
     regex.test(link)
 
   validEmail: (email)->
-    regex = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+    regex = window.emailRegex
     regex.test(email)
 
   validations:
