@@ -6,6 +6,7 @@
 = render partial: 'shared/setup_facebook'
 = render partial: 'shared/setup_facebook_conversion'
 = render partial: 'shared/setup_crazy_egg'
+= render partial: 'shared/setup_zendesk' if Settings.zendesk_domain?
 :coffee
   $ ->
     $('[data-toggle=popover]').popover()
