@@ -124,7 +124,7 @@ class ContestView
     @name = contest_params[:project_name]
     @designers_explore_other_colors = contest_params[:designers_explore_other_colors]
     @designers_only_use_these_colors = contest_params[:designers_only_use_these_colors]
-    @design_spaces_list = @design_areas.map(&:full_name).join(', ')
+    @design_spaces_list = @design_areas.includes(:parent).map(&:full_name).join(', ')
     set_package(contest_params)
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
@@ -155,7 +155,7 @@ class ContestView
     @durability = contest.durability
     @designers_explore_other_colors = contest.designers_explore_other_colors
     @designers_only_use_these_colors = contest.designers_only_use_these_colors
-    @design_spaces_list = @design_areas.map(&:full_name).join(', ')
+    @design_spaces_list = @design_areas.includes(:parent).map(&:full_name).join(', ')
     set_package(contest.attributes.with_indifferent_access)
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)
