@@ -28,7 +28,7 @@ module ConceptBoardPage::ClientPerspective::CollaborationConcern
     paginated_image_items = self.send("paginated_#{ options[:kind] }", options[:page])
     { partial: 'clients/client_center/entries/collaboration/image_block',
       locals: { choosable: !previous_step?,
-                title: t('designer_center.edit.products_list'),
+                title: t("designer_center.edit.#{ options[:kind] }"),
                 block_text: t('client_center.entries.collaboration.check_message'),
                 image_items: paginated_image_items,
                 pagination_param: options[:pagination_param],
