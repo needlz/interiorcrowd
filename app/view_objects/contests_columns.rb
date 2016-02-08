@@ -4,7 +4,7 @@ class ContestsColumns
 
   def initialize(contests)
     @contests = contests
-    @show_days_left_column = contests.current.present?
+    @show_days_left_column = contests.current.present? || contests.incompleted.present?
   end
 
   def show_days_left_column?
