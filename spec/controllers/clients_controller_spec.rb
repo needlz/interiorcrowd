@@ -57,9 +57,10 @@ RSpec.describe ClientsController do
         expect(client.plain_password).to eq client_options[:password]
       end
 
-      it 'creates mail job' do
+      it 'sets last activity time to now' do
         post :create, { client: client_options }, contest_options_source
-        expect(jobs_with_handler_like('client_registered').count).to eq 1
+        client = Client.last
+        expect(client.last_activity_at).to be_within(5.seconds).of(Time.now)
       end
 
       it 'applies promocode' do
@@ -75,9 +76,19 @@ RSpec.describe ClientsController do
         expect{ contest.promocodes << promocode }.to raise_exception(ActiveRecord::RecordInvalid)
       end
 
+      it 'starts timer to send account_creation email' do
+        post :create, { client: client_options }, contest_options_source
+        expect(jobs_with_handler_like(Jobs::CheckIfClientLeftIntakeForm.name).count).to eq 1
+      end
+
       it 'does not send email with explanations how to finish intake form' do
         post :create, { client: client_options }, contest_options_source
         expect(jobs_with_handler_like('account_creation').count).to eq 0
+      end
+
+      it 'sends client_registered email to the client' do
+        post :create, { client: client_options }, contest_options_source
+        expect(jobs_with_handler_like('client_registered').count).to eq 0
       end
 
       context 'when automatic payment enabled' do
@@ -172,14 +183,13 @@ RSpec.describe ClientsController do
         expect(client.contests.first).to be_incomplete
       end
 
-      it 'sends only an email with explanations how to finish intake form' do
-        expect(jobs_with_handler_like('account_creation').count).to eq 1
-        expect(jobs_with_handler_like('client_registered').count).to eq 0
-      end
-
       it 'redirects to incomplete step of contest' do
         client = Client.first
         expect(response).to redirect_to ContestCreationWizard.incomplete_step_path(client.reload.contests.first)
+      end
+
+      it 'starts timer to send account_creation email' do
+        expect(jobs_with_handler_like(Jobs::CheckIfClientLeftIntakeForm.name).count).to eq 1
       end
     end
   end
@@ -216,9 +226,8 @@ RSpec.describe ClientsController do
         expect(response).to redirect_to ContestCreationWizard.incomplete_step_path(client.reload.contests.first)
       end
 
-      it 'sends only an email with explanations how to finish intake form to client' do
-        expect(jobs_with_handler_like('account_creation').count).to eq 1
-        expect(jobs_with_handler_like('client_registered').count).to eq 0
+      it 'starts timer to send account_creation email' do
+        expect(jobs_with_handler_like(Jobs::CheckIfClientLeftIntakeForm.name).count).to eq 1
       end
     end
 
