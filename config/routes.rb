@@ -182,6 +182,16 @@ InteriorC::Application.routes.draw do
     get '/justines_story', to: 'blog#justines_story', as: 'justines_story'
 
     scope '/blog' do
+      get '/', to: 'blog#blog_root', as: 'blog_root'
+      get '/designers', to: 'blog#designers_blog_root', as: 'designers_blog_root'
+      get '/designers/:blog_page_path',
+          to: 'blog#designers_blog_page',
+          as: 'designers_blog_page',
+          constraints: { blog_page_path: /.*/ }
+      post '/designers/:blog_page_post_path',
+           to: 'blog#designers_blog_page_post',
+           as: 'designers_blog_page_post',
+           constraints: { blog_page_post_path: /.*/ }
       get '/:blog_page_path',
           to: 'blog#blog_page',
           as: 'blog_page',
@@ -190,7 +200,6 @@ InteriorC::Application.routes.draw do
            to: 'blog#blog_page_post',
            as: 'blog_page_post',
            constraints: { blog_page_post_path: /.*/ }
-      get '/', to: 'blog#blog_root', as: 'blog_root'
     end
 
     resources :outbound_emails, :controller => 'email_webhooks', :only => [:show, :create]

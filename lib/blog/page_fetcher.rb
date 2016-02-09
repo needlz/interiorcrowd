@@ -11,11 +11,12 @@ module Blog
       @params = options[:params].merge(icrowd_app: 'yes')
       @session = options[:session]
       @blog_path = options[:blog_path]
+      @default_referer = options[:default_referer]
     end
 
     def get_response(url = nil)
       request_url = url || @url
-      redirect_follower = RedirectFollower.new(default_referer: Settings.external_urls.blog.url,
+      redirect_follower = RedirectFollower.new(default_referer: default_referer,
                                                blog_path: blog_path,
                                                original_url: request_url,
                                                params: params
@@ -27,7 +28,7 @@ module Blog
 
     private
 
-    attr_reader :method, :params, :session, :blog_path, :env
+    attr_reader :method, :params, :session, :blog_path, :env, :default_referer
 
     def make_request(url)
       conn = Faraday.new(url) do |f|

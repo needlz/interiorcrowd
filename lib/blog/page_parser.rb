@@ -2,10 +2,14 @@ module Blog
 
   class PageParser
 
+    DESIGNERS_BLOG_NAMESPACE = 'blog/designers'
     BLOG_NAMESPACE = 'blog'
 
     BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.url).host) })/
     BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ BLOG_NAMESPACE }"
+
+    DESIGNERS_BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.designers_url).host) })/
+    DESIGNERS_BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ DESIGNERS_BLOG_NAMESPACE }"
 
     BLOG_PAGE_PARTS_SELECTORS = {
         head: ['head'],
@@ -84,7 +88,10 @@ module Blog
     end
 
     def replace_link(element, attribute)
-      element[attribute] = element[attribute].gsub(BLOG_REGEX, BLOG_PATH_REPLACEMENT) if element[attribute]
+      if element[attribute]
+        element[attribute] = element[attribute].gsub(BLOG_REGEX, BLOG_PATH_REPLACEMENT)
+        element[attribute] = element[attribute].gsub(DESIGNERS_BLOG_REGEX, DESIGNERS_BLOG_PATH_REPLACEMENT)
+      end
     end
 
     def append_authenticity_token(form)

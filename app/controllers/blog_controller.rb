@@ -12,30 +12,47 @@ class BlogController < ApplicationController
   def blog_page
     @setup_viglink = true
     @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_path])
-    render_get_response
+    render_get_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_page
+    @setup_viglink = true
+    @url = URI.join(Settings.external_urls.blog.designers_url, params[:blog_page_path])
+    render_get_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   def blog_page_post
     @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_post_path])
-    render_post_response
+    render_post_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_page_post
+    @url = URI.join(Settings.external_urls.blog.designers_url, params[:blog_page_post_path])
+    render_post_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   def blog_root
     @url = Settings.external_urls.blog.url
-    render_get_response
+    render_get_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_root
+    @url = Settings.external_urls.blog.designers_url
+    @url = @url + '/designer-community' if env['QUERY_STRING'].blank?
+    render_get_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   private
 
-  def render_get_response
-    do_request(:get, get_params)
+  def render_get_response(blog_path)
+    do_request(:get, blog_path, get_params)
   end
 
-  def render_post_response
-    do_request(:post, get_params)
+  def render_post_response(blog_path)
+    do_request(:post, blog_path, get_params)
   end
 
-  def do_request(method, request_params = nil)
+  def do_request(method, blog_path, request_params = nil)
     begin
       @url = URI.decode(@url.to_s)
       @url = @url + '?' + env['QUERY_STRING'] if env['QUERY_STRING'].present?
@@ -44,8 +61,9 @@ class BlogController < ApplicationController
                                               env: env,
                                               method: method,
                                               session: session,
-                                              blog_path: blog_page_url(blog_page_path: ''),
-                                              request: request)
+                                              blog_path: blog_path,
+                                              request: request,
+                                              default_referer: @url)
 
       response = blog_page_fetcher.get_response
 
