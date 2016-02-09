@@ -114,7 +114,7 @@ class UserMailer < ActionMailer::Base
         description: { recipients: 'client',
                        occurrence: 'client submitted payment details but the contest brief is not yet completed'} },
       account_creation: {
-        template: 'account-creation',
+        template: 'test-account-creation',
         description: { recipients: 'client',
                        occurrence: 'registered with fast signup'} },
       new_project_on_the_platform: {
