@@ -40,7 +40,7 @@ class ContestShortDetails
       @design_space_possesive_name = 'rooms'
       @rooms_short_name = 'Multiple'
     else
-      @rooms_short_name = @design_spaces.first.full_name
+      @rooms_short_name = @design_spaces.first.try(:full_name)
       @rooms_popover_attributes = {}
       @design_space_possesive_name = @rooms_short_name
     end
