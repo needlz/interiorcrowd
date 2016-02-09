@@ -21,7 +21,8 @@ module ActiveAdminExtensions
 
     def contest_name(contest)
       client = contest.client
-      full_contest_name = link_to(full_user_name(client).possessive, admin_client_path(client)) + append_project_name(contest)
+      path = client.first_contest_created_at ? admin_client_path(client) : admin_user_path(client)
+      full_contest_name = link_to(full_user_name(client).possessive, path) + append_project_name(contest)
       full_contest_name.html_safe
     end
 
