@@ -33,6 +33,7 @@
 //= require lib/draggable_background
 //= require lib/jquery.aw-showcase.min
 //= require lib/jquery.confirm
+//= require lib/imagesloaded.pkgd
 //= require designer_center_requests/finished
 //= require about_us
 //= require how_it_works
