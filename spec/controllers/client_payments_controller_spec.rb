@@ -83,6 +83,7 @@ RSpec.describe ClientPaymentsController do
               end
             end
 
+
             context 'when owner already notified' do
               before do
                 client.update_attributes!(notified_owner: true)
