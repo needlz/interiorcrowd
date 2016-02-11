@@ -8,6 +8,8 @@ class @DesignerFinishedContestRequestPage
       verticalHandleClass: 'scrollBoxCommentsHandle'
       minScrollbarLength: 28
     )
+    $(@commentsSelector).imagesLoaded().done =>
+      @fitHeight()
     @fitHeight()
     $('#final-note-to-client, #final-note-to-designer').on('ajax:success', @onCommentSent)
     .on 'ajax:before', (e)=>
