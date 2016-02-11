@@ -117,10 +117,6 @@ RSpec.describe UserMailer do
       expect(UserMailer.four_days_left_to_submit_concept_board(contest.id)).to be_present
     end
 
-    it 'sends email to client about contest noy live yet' do
-      expect(UserMailer.contest_not_live_yet(contest.id)).to be_present
-    end
-
     it 'sends email to client about account creation' do
       expect(UserMailer.account_creation(client.id)).to be_present
     end
@@ -153,6 +149,10 @@ RSpec.describe UserMailer do
 
     it 'sends email to owner about new realtor contact' do
       expect(UserMailer.realtor_signup(realtor_contact.id)).to be_present
+    end
+
+    it 'sends email to client about contest not yet live' do
+      expect(UserMailer.new_client_no_photos(contest.id)).to be_present
     end
   end
 

@@ -140,7 +140,12 @@ class UserMailer < ActionMailer::Base
       realtor_signup: {
         template: 'realtor-signup',
         description: { recipients: 'owner',
-                       occurrence: 'new realtor contact'} }
+                       occurrence: 'new realtor contact'} },
+      new_client_no_photos: {
+          template: 'new-client-no-photos',
+          description: { recipients: 'client',
+                         occurrence: 'client has provided credit card details but contest brief is not yet completed' }
+      }
   }
 
   before_filter :set_template
@@ -467,6 +472,18 @@ class UserMailer < ActionMailer::Base
       choice: realtor_contact.choice
     )
     mail to: [wrap_recipient(Settings.info_email, '', 'to')], email_id: email_id
+  end
+
+  def new_client_no_photos(contest_id, email_id = nil)
+    contest = Contest.find(contest_id)
+    client = contest.client
+    set_template_values(
+      entries_url: renderer.client_center_entries_url,
+      pictures_email: Settings.pictures_email,
+      submission_days: ContestMilestone::DAYS['submission'],
+      login_link: renderer.client_center_entries_url
+    )
+    mail to: [wrap_recipient(client.email, client.name, 'to')], email_id: email_id
   end
 
   private

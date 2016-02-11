@@ -11,7 +11,10 @@ RSpec.describe ContestUpdater do
               status: 'brief_pending'
     )
   end
-  let(:contest_without_space_images) { Fabricate(:contest, client: client, status: 'brief_pending', was_in_brief_pending_state: true) }
+  let(:contest_without_space_images) { Fabricate(:contest,
+                                                 client: client,
+                                                 status: 'brief_pending',
+                                                 was_in_brief_pending_state: true) }
 
   describe 'upload space images' do
     context 'when contest is charged' do

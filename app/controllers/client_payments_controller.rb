@@ -56,6 +56,10 @@ class ClientPaymentsController < ApplicationController
       payment.perform
     end
 
+    if SubmitContest.new(contest).only_brief_pending?
+      notify_about_contest_not_live
+    end
+
     client_contest_created_at = { latest_contest_created_at: Time.current }
     client_contest_created_at.merge!(first_contest_created_at: Time.current) if @client.contests.count == 1
     @client.update_attributes!(client_contest_created_at)
@@ -74,7 +78,16 @@ class ClientPaymentsController < ApplicationController
   end
 
   def welcome_client
-    Jobs::Mailer.schedule(:client_registered, [@client.id])
+    if !contest.reload.notified_client_contest_not_yet_live
+      Jobs::Mailer.schedule(:client_registered, [@client.id])
+    end
+  end
+
+  def notify_about_contest_not_live
+    ActiveRecord::Base.transaction do
+      Jobs::Mailer.schedule(:new_client_no_photos, [contest.id])
+      contest.update_attributes!(notified_client_contest_not_yet_live: true)
+    end
   end
 
 end

@@ -50,9 +50,37 @@ RSpec.describe ClientPaymentsController do
               expect(client.reload.latest_contest_created_at).to be_within(5.seconds).of(Time.current)
             end
 
-            it 'sends welcoming email to a client' do
-              post :create, contest_id: contest.id, client_agree: 'yes'
-              expect(jobs_with_handler_like('client_registered').count).to eq 1
+            context 'when contest brief is not completed' do
+              before do
+                allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { false }
+              end
+
+              it 'does not send welcoming email to a client' do
+                post :create, contest_id: contest.id, client_agree: 'yes'
+                expect(jobs_with_handler_like('client_registered').count).to eq 0
+              end
+
+              it 'keeps in db that user was notified about a contest not yet live' do
+                post :create, contest_id: contest.id, client_agree: 'yes'
+                expect(contest.reload.notified_client_contest_not_yet_live).to be_truthy
+              end
+            end
+
+            context 'when contest brief is completed' do
+              before do
+                allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { true }
+              end
+
+              it 'sends welcoming email to a client' do
+                expect(contest.status).to eq 'brief_pending'
+                post :create, contest_id: contest.id, client_agree: 'yes'
+                expect(jobs_with_handler_like('client_registered').count).to eq 1
+              end
+
+              it 'does not keep in db that user was notified about a contest not yet live' do
+                post :create, contest_id: contest.id, client_agree: 'yes'
+                expect(contest.reload.notified_client_contest_not_yet_live).to be_falsey
+              end
             end
 
             context 'when owner already notified' do
@@ -154,38 +182,6 @@ RSpec.describe ClientPaymentsController do
               expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
             end
           end
-
-          context 'when contest submitted' do
-            before do
-              contest.update_attributes!(status: 'submission')
-            end
-
-            context 'when client has agreed with terms of use' do
-              before do
-                params.merge!(client_agree: 'yes')
-              end
-
-              it 'creates payment' do
-                post :create, params
-                expect(contest.client_payment.last_error).to be_nil
-                expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
-              end
-
-              it 'sends welcoming email to a client' do
-                post :create, params
-                expect(jobs_with_handler_like('client_registered').count).to eq 1
-              end
-            end
-
-            context 'when client has not agreed with terms of use' do
-              it 'does not create payment' do
-                post :create, params
-                expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
-                expect(contest.reload.client_payment).to be_nil
-              end
-            end
-
-          end
         end
       end
     end
@@ -197,29 +193,64 @@ RSpec.describe ClientPaymentsController do
 
       context 'when credit card not passed' do
         context 'when client has primary card' do
+          let(:params) { { contest_id: contest.id, client_agree: 'yes' } }
+
           before do
             client.update_attributes!(primary_card_id: credit_card.id)
           end
 
           it 'does not create payment' do
-            post :create, contest_id: contest.id, client_agree: 'yes'
+            post :create, params
             expect(contest.client_payment).to be_nil
             expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
           end
 
           it 'does not log any error' do
             expect(ErrorsLogger).to_not receive(:log)
-            post :create, contest_id: contest.id, client_agree: 'yes'
+            post :create, params
           end
 
           it 'sets last_contest_created_at for client' do
-            post :create, contest_id: contest.id, client_agree: 'yes'
+            post :create, params
             expect(client.reload.latest_contest_created_at).to be_within(5.seconds).of(Time.current)
           end
 
-          it 'sends welcoming email to a client' do
-            post :create, contest_id: contest.id, client_agree: 'yes'
-            expect(jobs_with_handler_like('client_registered').count).to eq 1
+          context 'when contest brief is not completed' do
+            before do
+              allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { false }
+            end
+
+            it 'does not send welcoming email to a client' do
+              post :create, params
+              expect(jobs_with_handler_like('client_registered').count).to eq 0
+            end
+
+            it 'sends email about brief pending' do
+              post :create, params
+              expect(jobs_with_handler_like('new_client_no_photos').count).to eq 1
+            end
+
+            it 'keeps in db that user was notified about a contest not yet live' do
+              post :create, params
+              expect(contest.reload.notified_client_contest_not_yet_live).to be_truthy
+            end
+          end
+
+          context 'when contest brief is completed' do
+            before do
+              allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { true }
+            end
+
+            it 'sends welcoming email to a client' do
+              expect(contest.status).to eq 'brief_pending'
+              post :create, params
+              expect(jobs_with_handler_like('client_registered').count).to eq 1
+            end
+
+            it 'does not keep in db that user was notified about a contest not yet live' do
+              post :create, params
+              expect(contest.reload.notified_client_contest_not_yet_live).to be_falsey
+            end
           end
 
           context 'when owner already notified' do
@@ -228,14 +259,14 @@ RSpec.describe ClientPaymentsController do
             end
 
             it 'does not notify product owner about new client' do
-              post :create, contest_id: contest.id, client_agree: 'yes'
+              post :create, params
               expect(jobs_with_handler_like('client_registration_info').count).to eq 0
             end
           end
 
           context 'when owner not notified' do
             it 'notifies product owner about new client' do
-              post :create, contest_id: contest.id, client_agree: 'yes'
+              post :create, params
               expect(jobs_with_handler_like('client_registration_info').count).to eq 1
               expect(client.reload.notified_owner).to be_truthy
             end
@@ -264,7 +295,7 @@ RSpec.describe ClientPaymentsController do
       end
 
       context 'when credit card passed' do
-        let(:params) { { contest_id: contest.id, credit_card: credit_card_attributes } }
+        let(:params) { { contest_id: contest.id, credit_card: credit_card_attributes, client_agree: 'yes' } }
 
         before do
           mock_stripe_successful_charge
@@ -279,7 +310,7 @@ RSpec.describe ClientPaymentsController do
           end
 
           it 'does not create payment' do
-            post :create, params.merge(client_agree: 'yes')
+            post :create, params
             expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
             expect(contest.reload.client_payment).to be_nil
           end
@@ -288,30 +319,47 @@ RSpec.describe ClientPaymentsController do
         context 'when client has no other cards' do
           context 'when contest not submitted yet' do
             it 'redirects to payment summary page' do
-              post :create, params.merge(client_agree: 'yes')
+              post :create, params
               expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
             end
           end
 
-          context 'when contest submitted' do
+          context 'when contest brief is not completed' do
             before do
-              contest.update_attributes!(status: 'submission')
+              allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { false }
             end
 
-            context 'when client has agreed with terms of use' do
-              before do
-                params.merge!(client_agree: 'yes')
-              end
+            it 'does not send welcoming email to a client' do
+              post :create, params
+              expect(jobs_with_handler_like('client_registered').count).to eq 0
             end
 
-            context 'when client has not agreed with terms of use' do
-              it 'does not create payment' do
-                post :create, params
-                expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
-                expect(contest.reload.client_payment).to be_nil
-              end
+            it 'sends email about brief pending' do
+              post :create, params
+              expect(jobs_with_handler_like('new_client_no_photos').count).to eq 1
             end
 
+            it 'keeps in db that user was notified about a contest not yet live' do
+              post :create, params
+              expect(contest.reload.notified_client_contest_not_yet_live).to be_truthy
+            end
+          end
+
+          context 'when contest brief is completed' do
+            before do
+              allow_any_instance_of(SubmitContest).to receive(:brief_completed?) { true }
+            end
+
+            it 'sends welcoming email to a client' do
+              expect(contest.status).to eq 'brief_pending'
+              post :create, params
+              expect(jobs_with_handler_like('client_registered').count).to eq 1
+            end
+
+            it 'does not keep in db that user was notified about a contest not yet live' do
+              post :create, params
+              expect(contest.reload.notified_client_contest_not_yet_live).to be_falsey
+            end
           end
         end
       end
