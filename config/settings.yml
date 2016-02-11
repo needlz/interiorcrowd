@@ -96,6 +96,7 @@ common: &defaults
       height: 900
   viglink_key: '<%= ENV['VIGLINK_KEY'] %>'
   designer_submission_iframe_source: 'https://docs.google.com/forms/d/1_vJzmTLzAc7xn9D5Z-RoQW278wF6WSim-VW37RNUzqM/viewform?embedded=true'
+  max_session_duration_secs: <%= 2.weeks.to_i %>
 
 development:
   zendesk_domain:
