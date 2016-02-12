@@ -1,3 +1,16 @@
+require 'simplecov'
+
+# save to CircleCI's artifacts directory if we're on CircleCI
+if ENV['CIRCLE_ARTIFACTS']
+  dir = File.join(ENV['CIRCLE_ARTIFACTS'], 'coverage')
+  SimpleCov.coverage_dir(dir)
+end
+
+SimpleCov.start do
+  add_filter "/spec/"
+  add_filter "/admin/"
+end
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 # The settings below are suggested to provide a good initial experience
@@ -83,5 +96,4 @@ RSpec.configure do |config|
     end
     data
   end
-
 end
