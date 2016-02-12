@@ -90,6 +90,7 @@ en:
         design_knowledge: Design Knowledge
         design_style: Design Style
         location: Location
+        location_zip: Location Zip
       join: Join this contest
       back: Back to all current contests
     design_style:
@@ -238,6 +239,12 @@ en:
       description: |
         Please share a little more information about your space. The more information you can
         provide, the better your final design will be.
+      location:
+        title: Where is your space located?
+        description: Enter the zip code here*
+        hint: non-USA based clients, please email us at hello@interiorcrowd.com
+        empty_value_error: Please enter zip code of you space location.
+        wrong_value_error: Please enter correct zip code.
       details_toggle:
         title: Do you have pictures and dimensions of your space?
         hint: You can also upload them later in the client center.
@@ -299,7 +306,7 @@ en:
           sign_in: Sign In
 
       errors:
-        required_data_missing: Please fill the required info.
+        required_data_missing: Please fill the required info correctly.
         select_category: Please select at least one category.
         select_room: Please select one.
       preview:

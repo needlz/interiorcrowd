@@ -12,6 +12,7 @@
 
   :javascript
     I18n = #{ translations_to_json('') }
+    Location = #{ translations_to_json(['contests', 'space', 'location']) }
 
 - content_for :client_center_content do
   .contest.brief.briefEditingBox{ data: { id: @contest.id } }

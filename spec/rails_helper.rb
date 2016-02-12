@@ -133,6 +133,7 @@ RSpec.configure do |config|
           width_inches: '9',
           height_inches: '3',
           f_budget: '2000',
+          zip: '00001',
           feedback: 'feedback',
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(',') },
       preview: {

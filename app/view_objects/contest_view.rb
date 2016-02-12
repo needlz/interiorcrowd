@@ -6,7 +6,7 @@ class ContestView
               :links, :space_pictures, :feedback, :budget_plan, :name, :designer_level, :example_ids,
               :space_pictures_ids, :additional_preferences, :have_space_views_details, :have_examples,
               :space_budget_value, :retailers, :other_retailers, :package_view, :package, :allow_download_all_photo,
-              :designers_explore_other_colors, :designers_only_use_these_colors, :design_spaces_list
+              :designers_explore_other_colors, :designers_only_use_these_colors, :design_spaces_list, :location_zip
 
   ContestAdditionalPreference.preferences.map do |preference|
     attr_reader preference
@@ -19,11 +19,11 @@ class ContestView
   EDITABLE_ATTRIBUTES = [
     :design_package, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
-    :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability
+    :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability, :location_zip
   ] + ACCOMMODATION_ATTRIBUTES
 
   CONTEST_PREVIEW_ATTRIBUTES = [
-    :name, :location, :design_knowledge, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
+    :name, :location, :design_knowledge, :category, :area, :location_zip, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
     :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability
   ] + ACCOMMODATION_ATTRIBUTES
@@ -125,6 +125,7 @@ class ContestView
     @designers_explore_other_colors = contest_params[:designers_explore_other_colors]
     @designers_only_use_these_colors = contest_params[:designers_only_use_these_colors]
     @design_spaces_list = @design_areas.includes(:parent).map(&:full_name).join(', ')
+    @location_zip = contest_params[:location_zip]
     set_package(contest_params)
     set_additional_preferences(contest_params)
     set_accommodation(contest_params)
@@ -156,6 +157,7 @@ class ContestView
     @designers_explore_other_colors = contest.designers_explore_other_colors
     @designers_only_use_these_colors = contest.designers_only_use_these_colors
     @design_spaces_list = @design_areas.includes(:parent).map(&:full_name).join(', ')
+    @location_zip = contest.location_zip
     set_package(contest.attributes.with_indifferent_access)
     set_additional_preferences(contest.attributes.with_indifferent_access)
     set_accommodation(contest.attributes.with_indifferent_access)

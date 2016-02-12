@@ -10,6 +10,7 @@ RSpec.describe ContestOptions do
                                         space_width: ContestOptions.calculate_inches(source[:design_space], :width),
                                         space_height: ContestOptions.calculate_inches(source[:design_space], :height),
                                         space_budget: source[:design_space][:f_budget],
+                                        location_zip: source[:design_space][:zip],
                                         feedback: source[:design_space][:feedback],
                                         budget_plan: source[:preview][:b_plan],
                                         project_name: source[:preview][:contest_name],

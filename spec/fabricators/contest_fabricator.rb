@@ -4,6 +4,7 @@ Fabricator(:contest) do
     design_category
     design_spaces { Fabricate.times(2, :design_space) }
     budget_plan 1
+    location_zip '00001'
   end
   preferred_retailers
 end

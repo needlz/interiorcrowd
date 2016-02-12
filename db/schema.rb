@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201151140) do
+ActiveRecord::Schema.define(version: 20160210140148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -100,10 +99,10 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.boolean  "email_opt_in",                              default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
-    t.boolean  "notified_owner",                            default: false, null: false
     t.datetime "last_log_in_at"
     t.string   "last_log_in_ip"
     t.datetime "last_remind_about_feedback_at"
+    t.boolean  "notified_owner",                            default: false, null: false
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -151,11 +150,11 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
-    t.string   "status",                  limit: 255, default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer",                  limit: 255
+    t.string   "status",                  limit: 255, default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token",                   limit: 255
@@ -201,7 +200,9 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.datetime "finished_at"
     t.datetime "submission_started_at"
     t.boolean  "was_in_brief_pending_state"
+    t.boolean  "notified_client_contest_not_yet_live",                                       default: false
     t.boolean  "ever_received_published_product_items"
+    t.string   "location_zip"
   end
 
   create_table "contests_appeals", force: :cascade do |t|
@@ -271,6 +272,7 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.integer  "contest_id"
     t.string   "image_type",         limit: 255
     t.integer  "contest_request_id"
+    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -331,13 +333,6 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.datetime "updated_at"
   end
 
-  create_table "final_note_to_designers", force: :cascade do |t|
-    t.text     "text"
-    t.integer  "designer_notification_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "final_notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "designer_notification_id"
@@ -361,15 +356,6 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.string   "phone"
   end
 
-  create_table "giftcards", force: :cascade do |t|
-    t.integer  "giftcard_payment_id"
-    t.string   "code"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
-  end
-
-  add_index "giftcards", ["giftcard_payment_id"], name: "index_giftcards_on_giftcard_payment_id", using: :btree
-
   create_table "image_items", force: :cascade do |t|
     t.text     "name"
     t.integer  "contest_request_id"
@@ -382,17 +368,14 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.datetime "updated_at"
     t.string   "kind",                 limit: 255
     t.text     "dimensions"
-    t.boolean  "final",                            default: false
-    t.integer  "price_cents"
-    t.string   "price_currency",       limit: 255, default: "USD",           null: false
     t.text     "price"
-    t.integer  "temporary_version_id"
     t.string   "status",               limit: 255, default: "temporary"
+    t.boolean  "final",                            default: false
+    t.integer  "temporary_version_id"
     t.string   "phase",                limit: 255, default: "collaboration"
   end
 
   add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
-  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
@@ -458,7 +441,6 @@ ActiveRecord::Schema.define(version: 20160201151140) do
   end
 
   create_table "portfolios", force: :cascade do |t|
-    t.integer  "background_id"
     t.integer  "designer_id",                             null: false
     t.integer  "years_of_experience"
     t.boolean  "education_gifted"
@@ -482,6 +464,8 @@ ActiveRecord::Schema.define(version: 20160201151140) do
     t.boolean  "transitional_style",      default: false
     t.boolean  "rustic_elegance_style",   default: false
     t.boolean  "color_pop_style",         default: false
+    t.integer  "background_id"
+    t.integer  "cover_width"
     t.float    "cover_x_percents_offset"
     t.float    "cover_y_percents_offset"
     t.datetime "created_at"
@@ -589,4 +573,6 @@ ActiveRecord::Schema.define(version: 20160201151140) do
   add_index "user_notifications", ["contest_id"], name: "index_user_notifications_on_contest_id", using: :btree
   add_index "user_notifications", ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
 
+  add_foreign_key "contests_design_spaces", "contests"
+  add_foreign_key "contests_design_spaces", "design_spaces"
 end

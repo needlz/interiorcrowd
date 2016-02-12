@@ -2,13 +2,13 @@ class ContestOptions
 
   attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest, :preferred_retailers
 
-  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_ids, :space_budget,
+  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_ids, :space_budget, :location_zip,
                       :budget_plan, :project_name, :desirable_colors]
 
   REQUIRED_OPTIONS_BY_CHAPTER = {
       design_brief: [:design_category_id, :design_space_id],
       design_style: [:designer_level, :appeals, :desirable_colors],
-      design_space: [:space_budget],
+      design_space: [:space_budget, :location_zip],
       preview: [:budget_plan, :project_name]
   }
 
@@ -25,6 +25,7 @@ class ContestOptions
       @contest[:space_height] = ContestOptions.calculate_inches(options[:design_space], :height) if options[:design_space].key?(:height)
 
       @contest[:space_budget] = options[:design_space][:f_budget] if options[:design_space].key?(:f_budget)
+      @contest[:location_zip] = options[:design_space][:zip] if options[:design_space].key?(:zip)
       @contest[:feedback] = options[:design_space][:feedback] if options[:design_space].key?(:feedback)
       @space_image_ids = options[:design_space][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_space][:document_id]
     end
@@ -84,6 +85,7 @@ class ContestOptions
     missing_options = REQUIRED_CONTEST_ATTRIBUTES.select { |option| contest[option].blank? }
     missing_options << :appeals if appeals.blank?
     missing_options << :designer_level if designer_level.blank?
+    missing_options << :location_zip unless PostOffice.validate_postcode(@contest[:location_zip], :us)
     missing_options
   end
 

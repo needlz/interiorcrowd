@@ -1,0 +1,8 @@
+.location-zip
+  %h3= t('contests.space.location.title')
+  %p.lightFont= t('contests.space.location.description')
+  .clearfix
+  %span.text-error{ id: 'err_zip' }
+  = text_field(:design_space, :zip, class: 'form-control',
+             value: @contest_view.location_zip, required: true, type: 'text', pattern: '^\d{5}(?:[-\s]\d{4})?$')
+  %p#small-note= t('contests.space.location.hint')

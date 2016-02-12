@@ -18,9 +18,9 @@
       .packages.text-package.title
         %h3= t('contests.space.title')
         %p.lightFont= t('contests.space.description')
+      = render partial: 'contests/options/space_location'
       = render partial: 'contests/options/have_pictures_or_dimension'
       .space-view-details
-
         = render partial: 'contests/options/space_pictures_options'
         = render partial: 'contests/options/space_dimensions_options'
       .fullWidthLine.marginTop40
