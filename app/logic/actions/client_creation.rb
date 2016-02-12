@@ -11,7 +11,8 @@ class ClientCreation
   def perform
     ActiveRecord::Base.transaction do
       return unless create_client
-      send_notifications
+      client.update_attributes!(last_activity_at: Time.now)
+      start_welcoming_timer
       self
     end
   end
@@ -25,9 +26,11 @@ class ClientCreation
     @saved = @client.save
   end
 
-  def send_notifications
-    email = @send_welcome_email ? :account_creation : :client_registered
-    Jobs::Mailer.schedule(email, [client.id])
+  def start_welcoming_timer
+    Jobs::CheckIfClientLeftIntakeForm.schedule(
+        client.id,
+        run_at: Time.current + Jobs::CheckIfClientLeftIntakeForm::INACTIVITY_PERIOD
+    )
   end
 
 end

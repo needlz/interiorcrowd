@@ -26,7 +26,7 @@ RSpec.describe ContestCreation do
         end
 
         it 'does not send email about brief pending' do
-          expect(jobs_with_handler_like('contest_not_live_yet').count).to eq 0
+          expect(jobs_with_handler_like('new_client_no_photos').count).to eq 0
         end
 
         it 'stores information if the contest was in brief_pending state ever' do
@@ -45,10 +45,6 @@ RSpec.describe ContestCreation do
         it 'sets contest state to brief_pending' do
           expect(contest.status).to eq 'brief_pending'
           expect(contest.phase_end).to be_blank
-        end
-
-        it 'sends email about brief pending' do
-          expect(jobs_with_handler_like('contest_not_live_yet').count).to eq 1
         end
 
         it 'stores information if the contest was in brief_pending state ever' do
@@ -75,7 +71,7 @@ RSpec.describe ContestCreation do
       end
 
       it 'does not send email about brief pending' do
-        expect(jobs_with_handler_like('contest_not_live_yet').count).to eq 0
+        expect(jobs_with_handler_like('new_client_no_photos').count).to eq 0
       end
     end
 

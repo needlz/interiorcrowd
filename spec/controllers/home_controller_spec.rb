@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe HomeController do
   render_views
 
+  let(:client) { Fabricate(:client) }
+
+  context 'when logged as client' do
+    before do
+      sign_in(client)
+    end
+
+    it 'tracks last activity time' do
+      get :index
+      expect(client.reload.last_activity_at).to be_within(2.seconds).of(Time.now)
+    end
+  end
+
   context 'main subdomain' do
     before do
       request.host = 'www.interiorcrowd.com'
@@ -11,7 +24,7 @@ RSpec.describe HomeController do
     describe 'GET index' do
       context 'logged in as client' do
         before do
-          sign_in(Fabricate(:client))
+          sign_in(client)
         end
 
         it 'renders page' do

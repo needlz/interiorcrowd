@@ -46,6 +46,9 @@ class ClientPaymentsController < ApplicationController
       raise('The client already has credit cards') if @client.credit_cards.present?
       add_card = AddCreditCard.new(client: @client, card_attributes: new_credit_card_params, set_as_primary: true)
       add_card.perform
+    else
+      card = @client.primary_card
+      raise ArgumentError.new('Primary card not set') unless card
     end
 
     if Settings.payment_enabled
@@ -53,10 +56,15 @@ class ClientPaymentsController < ApplicationController
       payment.perform
     end
 
+    if SubmitContest.new(contest).only_brief_pending?
+      notify_about_contest_not_live
+    end
+
     client_contest_created_at = { latest_contest_created_at: Time.current }
     client_contest_created_at.merge!(first_contest_created_at: Time.current) if @client.contests.count == 1
     @client.update_attributes!(client_contest_created_at)
     notify_product_owner
+    welcome_client
   end
 
   def agreed_with_terms_of_use
@@ -67,6 +75,19 @@ class ClientPaymentsController < ApplicationController
     return if @client.notified_owner
     Jobs::Mailer.schedule(:client_registration_info, [@client.id])
     @client.update_attributes!(notified_owner: true)
+  end
+
+  def welcome_client
+    if !contest.reload.notified_client_contest_not_yet_live
+      Jobs::Mailer.schedule(:client_registered, [@client.id])
+    end
+  end
+
+  def notify_about_contest_not_live
+    ActiveRecord::Base.transaction do
+      Jobs::Mailer.schedule(:new_client_no_photos, [contest.id])
+      contest.update_attributes!(notified_client_contest_not_yet_live: true)
+    end
   end
 
 end

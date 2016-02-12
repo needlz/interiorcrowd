@@ -36,7 +36,6 @@ class SubmitContest
         @performed = true
       end
     end
-    after_tried
   end
 
   private
@@ -45,17 +44,6 @@ class SubmitContest
 
   def manual_checkout?
     !Settings.payment_enabled && contest.client.reload.primary_card_id
-  end
-
-  def after_tried
-    notify_about_contest_not_live if !performed? && only_brief_pending? && !contest.notified_client_contest_not_yet_live
-  end
-
-  def notify_about_contest_not_live
-    ActiveRecord::Base.transaction do
-      Jobs::Mailer.schedule(:contest_not_live_yet, [@contest.id])
-      contest.update_attributes!(notified_client_contest_not_yet_live: true)
-    end
   end
 
 end

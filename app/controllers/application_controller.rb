@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :beta_redirect
   before_filter :setup_event_tracker
   before_filter :expire_hsts
-  before_filter :on_page_visit
+  before_filter :on_page_visit, :track_client_activity
 
   add_flash_types :error
 
@@ -108,6 +108,12 @@ class ApplicationController < ActionController::Base
 
   def expire_hsts
     response.headers["Strict-Transport-Security"] = 'max-age=0'
+  end
+
+  def track_client_activity
+    if current_user.client? && (!current_user.last_activity_at || ((Time.now - current_user.last_activity_at) / 1.second > 1.minute))
+      current_user.update_attributes!(last_activity_at: Time.now)
+    end
   end
 
 end

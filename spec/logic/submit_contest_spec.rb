@@ -120,11 +120,6 @@ RSpec.describe SubmitContest do
           expect(submit_contest).to_not be_performed
         end
 
-        it 'notifies client about contest not yet live' do
-          notifications_created_on_contest_creation_count = 1
-          expect(jobs_with_handler_like('contest_not_live_yet').count).to eq notifications_created_on_contest_creation_count
-          expect{ submit_contest.try_perform }.to_not(change{ jobs_with_handler_like('contest_not_live_yet').count })
-        end
       end
 
       context 'when contest not payed' do
