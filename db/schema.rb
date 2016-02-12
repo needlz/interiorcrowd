@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20160210140148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace",     limit: 255
@@ -99,10 +100,11 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.boolean  "email_opt_in",                              default: true
     t.datetime "first_contest_created_at"
     t.datetime "latest_contest_created_at"
+    t.boolean  "notified_owner",                            default: false, null: false
     t.datetime "last_log_in_at"
     t.string   "last_log_in_ip"
     t.datetime "last_remind_about_feedback_at"
-    t.boolean  "notified_owner",                            default: false, null: false
+    t.datetime "last_activity_at"
   end
 
   add_index "clients", ["email"], name: "index_clients_on_email", unique: true, using: :btree
@@ -150,11 +152,11 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.integer  "contest_id"
     t.text     "designs"
     t.text     "feedback"
+    t.string   "status",                  limit: 255, default: "draft"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "lookbook_id"
     t.string   "answer",                  limit: 255
-    t.string   "status",                  limit: 255, default: "draft"
     t.text     "final_note"
     t.text     "pull_together_note"
     t.string   "token",                   limit: 255
@@ -224,12 +226,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
   add_index "contests_design_spaces", ["contest_id"], name: "index_contests_design_spaces_on_contest_id", using: :btree
   add_index "contests_design_spaces", ["design_space_id"], name: "index_contests_design_spaces_on_design_space_id", using: :btree
 
-  create_table "contests_images", force: :cascade do |t|
-    t.integer "contest_id"
-    t.integer "image_id"
-    t.integer "kind"
-  end
-
   create_table "contests_promocodes", force: :cascade do |t|
     t.integer  "contest_id",   null: false
     t.integer  "promocode_id", null: false
@@ -272,7 +268,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.integer  "contest_id"
     t.string   "image_type",         limit: 255
     t.integer  "contest_request_id"
-    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -321,7 +316,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.integer  "facebook_user_id",        limit: 8
     t.datetime "last_log_in_at"
     t.string   "last_log_in_ip"
-    t.boolean  "paid_for_concept_boards",             default: false
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree
@@ -368,14 +362,17 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.datetime "updated_at"
     t.string   "kind",                 limit: 255
     t.text     "dimensions"
-    t.text     "price"
-    t.string   "status",               limit: 255, default: "temporary"
     t.boolean  "final",                            default: false
+    t.integer  "price_cents"
+    t.string   "price_currency",       limit: 255, default: "USD",           null: false
+    t.text     "price"
     t.integer  "temporary_version_id"
+    t.string   "status",               limit: 255, default: "temporary"
     t.string   "phase",                limit: 255, default: "collaboration"
   end
 
   add_index "image_items", ["final", "phase", "temporary_version_id"], name: "index_image_items_on_final_and_phase_and_temporary_version_id", unique: true, using: :btree
+  add_index "image_items", ["temporary_version_id"], name: "index_image_items_on_temporary_version_id", using: :btree
 
   create_table "image_links", force: :cascade do |t|
     t.integer "contest_id"
@@ -441,6 +438,7 @@ ActiveRecord::Schema.define(version: 20160210140148) do
   end
 
   create_table "portfolios", force: :cascade do |t|
+    t.integer  "background_id"
     t.integer  "designer_id",                             null: false
     t.integer  "years_of_experience"
     t.boolean  "education_gifted"
@@ -464,8 +462,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.boolean  "transitional_style",      default: false
     t.boolean  "rustic_elegance_style",   default: false
     t.boolean  "color_pop_style",         default: false
-    t.integer  "background_id"
-    t.integer  "cover_width"
     t.float    "cover_x_percents_offset"
     t.float    "cover_y_percents_offset"
     t.datetime "created_at"

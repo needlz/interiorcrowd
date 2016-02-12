@@ -12,24 +12,15 @@ RSpec.describe ClientsController do
       Appeal.create!(first_name: "first_name#{ index }", second_name: "second_name#{ index }")
     end
   end
-  let(:default_password) { 'password' }
   let(:promocode) { Fabricate(:promocode) }
-  let(:client_options){
-    { password: default_password,
-      password_confirmation: default_password,
-      first_name: 'firstname',
-      last_name: 'lastname',
-      email: 'email@example.com',
-      address: 'address',
-      city: 'City',
-      state: 'state',
-      zip: '81100',
-      promocode: promocode.promocode
-    }
-  }
   let(:integer_attributes) { [:zip] }
+  let(:client_options) { default_client_options.merge(promocode: promocode.promocode) }
 
   describe 'POST create' do
+    before do
+      stub_gibbon_requests
+    end
+
     context 'when all required options are set' do
       it 'creates contest and client' do
         expect(Contest.count).to eq 0
@@ -174,6 +165,7 @@ RSpec.describe ClientsController do
       let(:email) { 'email@example.com' }
 
       before do
+        stub_gibbon_requests
         post :sign_up_with_email, client: { email: email, password: 'pw', password_confirmation: 'pw' }
       end
 
@@ -202,6 +194,7 @@ RSpec.describe ClientsController do
       let(:id) { '1' }
 
       before do
+        stub_gibbon_requests
         allow_any_instance_of(Koala::Facebook::API).to receive(:api) do |action, params_hash|
           { 'id' => id,
             'name' => 'name',

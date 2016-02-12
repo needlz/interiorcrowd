@@ -77,6 +77,7 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
   gem 'faker' # generating fake data
   gem 'simplecov', require: false
+  gem 'webmock'
 end
 
 gem 'mandrill-rails'
@@ -112,3 +113,4 @@ gem 'griddler' # parses email text
 gem 'viglink-api'
 gem 'sitemap_generator'
 gem 'postoffice'
+gem 'gibbon'

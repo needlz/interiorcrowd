@@ -10,6 +10,9 @@ common: &defaults
     email: <%= ENV['MANDRILL_EMAIL'] %>
     api_token: <%= ENV['MANDRILL_API_TOKEN'] %>
     webhook_key: <%= ENV['MANDRILL_WEBHOOK_KEY'] %>
+  mailchimp:
+    api_key: <%= ENV['MAILCHIMP_API_KEY'] %>
+    list_id: <%= ENV['MAILCHIMP_LIST_ID'] %>
   zendesk_domain: interiorcrowd.zendesk.com
   pictures_email: pictures@interiorcrowd.com
   info_email: <%= ENV['INFO_EMAIL'] %>
@@ -102,6 +105,9 @@ development:
   zendesk_domain:
 
 test:
+  mailchimp:
+    api_key: '1234-us1'
+    list_id: '123'
 
 staging:
 
