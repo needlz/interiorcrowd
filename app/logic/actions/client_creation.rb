@@ -13,6 +13,7 @@ class ClientCreation
       return unless create_client
       client.update_attributes!(last_activity_at: Time.now)
       start_welcoming_timer
+      subscribe_to_newsletter
       self
     end
   end
@@ -31,6 +32,10 @@ class ClientCreation
         client.id,
         run_at: Time.current + Jobs::CheckIfClientLeftIntakeForm::INACTIVITY_PERIOD
     )
+  end
+
+  def subscribe_to_newsletter
+    SubscribeToNewsletterJob.perform_later(client.role, client.id)
   end
 
 end

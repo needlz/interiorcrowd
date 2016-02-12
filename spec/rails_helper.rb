@@ -109,6 +109,10 @@ RSpec.configure do |config|
 
   raise_i18n_exceptions
 
+  def stub_gibbon_requests
+    allow_any_instance_of(Gibbon::APIRequest).to receive(:post)
+  end
+
   def sign_in(user)
     if user.kind_of?(Client)
       session[:client_id] = user.id
@@ -246,6 +250,23 @@ RSpec.configure do |config|
 
   def mock_file_download_url
     allow_any_instance_of(Image).to receive(:url_for_downloading) { '' }
+  end
+
+  def default_client_options
+    { password: default_password,
+      password_confirmation: default_password,
+      first_name: 'firstname',
+      last_name: 'lastname',
+      email: 'email@example.com',
+      address: 'address',
+      city: 'City',
+      state: 'state',
+      zip: '81100'
+    }
+  end
+
+  def default_password
+    'password'
   end
 
 end
