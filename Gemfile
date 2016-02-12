@@ -111,3 +111,4 @@ gem 'rack-ssl-enforcer'
 gem 'griddler' # parses email text
 gem 'viglink-api'
 gem 'sitemap_generator'
+gem 'postoffice'

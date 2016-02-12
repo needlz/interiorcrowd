@@ -160,4 +160,58 @@ RSpec.describe Contest do
     end
   end
 
+  describe 'location_zip' do
+    context 'when zip is nil' do
+      let(:contest_without_location_zip) do
+        Fabricate.build(:contest, location_zip: nil)
+      end
+
+      it 'is valid' do
+        expect(contest_without_location_zip.valid?).to be_truthy
+      end
+    end
+
+    context 'when setting Australian zip' do
+      it 'is invalid' do
+        contest.location_zip = '3585' #Murray Downs, VIC
+        expect(contest.invalid?).to be_truthy
+      end
+    end
+
+    context 'when setting Japan zip' do
+      it 'is invalid' do
+        contest.location_zip = '070-0035' #Asahikawa, Hokkaido
+        expect(contest.invalid?).to be_truthy
+      end
+    end
+
+    context 'when setting USA zip without space' do
+      it 'is invalid' do
+        contest.location_zip = '897044110' #Washoe Valley, Nevada
+        expect(contest.invalid?).to be_truthy
+      end
+    end
+
+    context 'when setting USA zip with space' do
+      it 'is invalid' do
+        contest.location_zip = '89704 4110' #Washoe Valley, Nevada
+        expect(contest.invalid?).to be_truthy
+      end
+    end
+
+    context 'when setting USA zip with hyphen' do
+      it 'is valid' do
+        contest.location_zip = '89704-4110' #Washoe Valley, Nevada
+        expect(contest.valid?).to be_truthy
+      end
+    end
+
+    context 'when setting USA state zip' do
+      it 'is valid' do
+        contest.location_zip = '89704' # Nevada
+        expect(contest.valid?).to be_truthy
+      end
+    end
+  end
+
 end

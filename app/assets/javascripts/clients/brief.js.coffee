@@ -99,8 +99,12 @@ class @ContestEditing extends InlineEditor
   onSaveClick: (event)=>
     $saveButton = $(event.target)
     DesignSpaceOptions.clearFeedback()
+
     $saveButton.parents('form').find($.rails.fileInputSelector).remove()
-    $saveButton.parents('form').trigger('submit.rails');
+    if $('.location-zip').length
+      $saveButton.parents('form').trigger('submit.rails') if DesignSpaceOptions.validateLocationZip()
+    else
+      $saveButton.parents('form').trigger('submit.rails')
 
   updateEditButton: ($elem)->
     $editButton = $('.edit-button.template').html()

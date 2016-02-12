@@ -826,7 +826,7 @@ RSpec.describe ContestsController do
     end
   end
 
-  describe 'POST intake form step for incompleted contest' do
+  describe 'POST intake form step for incomplete contest' do
     before do
       sign_in(client)
     end

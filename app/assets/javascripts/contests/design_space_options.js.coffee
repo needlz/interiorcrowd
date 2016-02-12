@@ -43,3 +43,20 @@ class @DesignSpaceOptions
     $feedbackTextarea = $(@feedbackTextareaSelector)
     if $feedbackTextarea.val() == @feedbackPlaceholder
       $feedbackTextarea.val ''
+
+  @validateLocationZip: ->
+    @zipSelector = '#design_space_zip'
+    @validator = new ValidationMessages()
+
+    $('.text-error').text('')
+    @validator.reset()
+
+    zip = $.trim($(@zipSelector).val())
+    zip_regex = /^\d{5}(-\d{4})?$/
+    unless zip.match zip_regex
+      @validator.addMessage $("#err_zip"), Location.wrong_value_error, $('.location-zip')
+    unless zip.length
+      @validator.addMessage $("#err_zip"), Location.empty_value_error, $('.location-zip')
+
+    @validator.valid
+    
