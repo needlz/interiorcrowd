@@ -13,6 +13,9 @@ ActiveAdmin.register OutboundEmail do
         email.mailer_method
       end
     end
+    column 'Address' do |email|
+      OutboundEmail.arguments_from_output(email.api_response).map { |email| email['email'] }.join(', ') if email.api_response
+    end
     column 'Designer Name' do |email|
       find_recipients_by_mandrill_response('Designer', email.api_response)
     end
@@ -36,6 +39,9 @@ ActiveAdmin.register OutboundEmail do
         else
           email.mailer_method
         end
+      end
+      row 'Address' do |email|
+        OutboundEmail.arguments_from_output(email.api_response).map { |email| email['email'] }.join(', ') if email.api_response
       end
       row 'Designer Name' do |email|
         find_recipients_by_mandrill_response('Designer', email.api_response)
@@ -61,9 +67,7 @@ ActiveAdmin.register OutboundEmail do
     email = OutboundEmail.find(params[:id])
     return unless current_admin_user
 
-    args = eval(email.mail_args.gsub(/\#\<(\w+) id: (\d+)[^\>]+\>/, '\1.find(\2)'))
-
-    Jobs::Mailer.schedule(email.mailer_method, args)
+    Jobs::Mailer.schedule(email.mailer_method, email.arguments)
     redirect_to admin_outbound_emails_path
   end
 
