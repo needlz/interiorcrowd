@@ -4,6 +4,8 @@ ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 
+gem 'passenger' # webserver
+
 gem 'activerecord-session_store'
 
 # Use sqlite3 as the database for Active Record
@@ -104,7 +106,6 @@ gem 'koala', '~> 2.0'
 gem 'faraday_middleware'
 gem 'faraday-cookie_jar'
 gem 'http-cookie'
-gem 'puma'
 gem 'newrelic_rpm'
 gem 'fork_break'
 gem 'database_cleaner'
