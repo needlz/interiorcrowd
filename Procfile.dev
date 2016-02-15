@@ -1,1 +1,1 @@
-web: PORT=3000 bundle exec puma -b 'ssl://127.0.0.1:9292?key=server.key&cert=server.crt' -C config/puma.rb
+web: bundle exec passenger start --port 3000 --max-pool-size 2 --ssl --ssl-port 9292 --ssl-certificate 'server.crt' --ssl-certificate-key 'server.key'

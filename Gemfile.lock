@@ -321,6 +321,9 @@ GEM
     parallel (1.6.1)
     parallel_tests (1.7.0)
       parallel
+    passenger (5.0.24)
+      rack
+      rake (>= 0.8.1)
     pg (0.18.3)
     pgbackups-archive (1.0.3)
       fog-aws
@@ -333,8 +336,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    puma (2.11.2)
-      rack (>= 1.1, < 2.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -546,11 +547,11 @@ DEPENDENCIES
   omniauth-facebook
   paperclip (~> 3.0)
   parallel_tests
+  passenger
   pg
   pgbackups-archive
   postoffice
   pry
-  puma
   quiet_assets
   rack-ssl-enforcer
   rails (= 4.2.4)
