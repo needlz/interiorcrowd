@@ -32,4 +32,12 @@ class OutboundEmail < ActiveRecord::Base
     parent.table[:id]
   end
 
+  def self.arguments_from_output(output)
+    eval(output.gsub(/\#\<(\w+) id: (\d+)[^\>]+\>/, '\1.find(\2)'))
+  end
+
+  def arguments
+    self.class.arguments_from_output(email.mail_args)
+  end
+
 end
