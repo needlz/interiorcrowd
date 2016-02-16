@@ -21,9 +21,14 @@ module ActiveAdminExtensions
 
     def contest_name(contest)
       client = contest.client
-      path = client.first_contest_created_at ? admin_client_path(client) : admin_user_path(client)
-      full_contest_name = link_to(full_user_name(client).possessive, path) + append_project_name(contest)
-      full_contest_name.html_safe
+      if controller.try(:plain)
+        full_user_name(client).possessive + append_project_name(contest)
+      else
+        path = client.first_contest_created_at ? admin_client_path(client) : admin_user_path(client)
+        full_contest_name = link_to(full_user_name(client).possessive, path) + append_project_name(contest)
+        full_contest_name.html_safe
+      end
+
     end
 
     def full_user_name(user)

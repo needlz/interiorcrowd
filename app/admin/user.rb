@@ -1,23 +1,5 @@
 ActiveAdmin.register Client, as: "User" do
 
-  index do
-    selectable_column
-    id_column
-    column 'Client Name' do |user|
-      user.name
-    end
-    column 'Email', :email
-    column 'Plain Password', :plain_password
-    column 'Project Name' do |user|
-      user.last_contest.project_name if user.last_contest
-    end
-    column 'Project Status' do |user|
-      last_contest_status(user)
-    end
-    column 'Date Created', :created_at
-    actions
-  end
-
   show do
     attributes_table do
       row 'Client Name' do |user|
@@ -38,6 +20,32 @@ ActiveAdmin.register Client, as: "User" do
       row 'Date Created' do |user|
         user.created_at
       end
+    end
+  end
+
+  columns = [
+    ['Client Name', ->(user) { user.name }],
+    ['Email', :email],
+    ['Plain Password', :plain_password],
+    ['Project Name', ->(user) { user.last_contest.project_name if user.last_contest }],
+    ['Project Status', ->(user) { last_contest_status(user) }],
+    ['Date Created', :created_at]
+  ]
+
+  index do
+    selectable_column
+    id_column
+    columns.each do |args|
+      column *args
+    end
+    actions
+  end
+
+  csv do
+    column :id
+    columns.each do |args|
+      block = args[1]
+      column args[0], {}, &block
     end
   end
 end
