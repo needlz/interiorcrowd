@@ -6,6 +6,8 @@
   :javascript
     I18n = #{ translations_to_json(['contests', 'space']) }
 
+= render 'shared/pinterest_tracking', id: Settings.pinterest.intake_form_tracking_id
+
 = render partial: 'shared/have_unfinished_project'
 
 - content_for :page_content do

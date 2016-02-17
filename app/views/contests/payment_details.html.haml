@@ -11,6 +11,8 @@
       PaymentPage.init()
     })
 
+= render 'shared/pinterest_tracking', id: Settings.pinterest.checkout_tracking_id
+
 .container.animated.fadeInDown.client-signup.creditCardForm.lightFont
   %h3.main-title= t('client_center.sign_up.payment_details').html_safe
   = render partial: 'home/msg'
