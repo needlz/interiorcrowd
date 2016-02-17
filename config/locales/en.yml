@@ -671,6 +671,9 @@ en:
       cancel: Cancel
       save_for_later: Save for later
       submit: Submit
+      ready_to_send: Ready to send to client?<br/>You cannot edit thereafter.
+      'yes': 'Yes'
+      'no': 'No'
     preview:
       this_is_preview: This is a preview of what the client will see.
     navigation:
