@@ -24,7 +24,7 @@ class SelectWinner < Action
     DesignerWinnerNotification.create(user_id: contest_request.designer_id,
                                       contest_id: contest_request.contest_id,
                                       contest_request_id: contest_request.id)
-    Jobs::Mailer.schedule(:notify_designer_about_win, [contest_request])
+    Jobs::Mailer.schedule(:notify_designer_about_win, [contest_request.id])
   end
 
   def notify_client
