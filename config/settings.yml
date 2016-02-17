@@ -14,6 +14,7 @@ common: &defaults
     api_key: <%= ENV['MAILCHIMP_API_KEY'] %>
     list_id: <%= ENV['MAILCHIMP_LIST_ID'] %>
   zendesk_domain: interiorcrowd.zendesk.com
+  hotjar_id: <%= ENV['HOTJAR_ID'] %>
   pictures_email: pictures@interiorcrowd.com
   info_email: <%= ENV['INFO_EMAIL'] %>
   contact_phone: '+1 (256) 515-4863'
@@ -103,7 +104,7 @@ common: &defaults
 
 development:
   zendesk_domain:
-
+  hotjar_id:
 test:
   mailchimp:
     api_key: '1234-us1'
