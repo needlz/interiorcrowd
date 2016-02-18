@@ -166,7 +166,10 @@ class UserMailer < ActionMailer::Base
 
   def client_registration_info(client_id, email_id = nil)
     client = Client.find(client_id)
-    set_template_values(set_user_params(client))
+    set_template_values(client_id: client_id,
+                        name: client.name,
+                        email: client.email,
+                        phone: client.phone_number || '')
     mail to: [wrap_recipient(contact_email, '', 'to')], email_id: email_id
   end
 
