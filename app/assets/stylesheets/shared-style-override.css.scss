@@ -2298,12 +2298,10 @@ span.submission-pagination{
     font-family: 'SofiaProLight';
   }
   a {
-    background-color: #F5F5F5;
     font-size: 22px;
     text-align: center;
     line-height: 90px;
     color: #666666;
-    border-right: 1px solid #E1E1E1;
   }
   .yes-button {
     border-bottom-left-radius: 3px !important;
@@ -2325,5 +2323,14 @@ span.submission-pagination{
     background-color: #f5f5f5;
     border-bottom-right-radius: 3px !important;
     border-bottom-left-radius: 3px !important;
+  }
+}
+
+#finishContest {
+  .yes-button, .no-button{
+    text-align: center;
+  }
+  .yes-button:hover, .no-button:hover {
+    cursor: pointer;
   }
 }

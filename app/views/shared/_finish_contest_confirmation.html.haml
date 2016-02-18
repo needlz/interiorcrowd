@@ -5,5 +5,7 @@
         %p= t('designer_center.final_upload.ready_to_send').html_safe
       .modal-footer.disablePadding
         .row.disableMargin
-          %a.col-md-6.yes-button{:href => "#"}= t('designer_center.final_upload.yes')
-          %a.col-md-6.no-button{:href => "#"}= t('designer_center.final_upload.no')
+          .col-xs-6.yes-button
+            %a{:href => "#"}= t('designer_center.final_upload.yes')
+          .col-xs-6.no-button
+            %a{:href => "#"}= t('designer_center.final_upload.no')
