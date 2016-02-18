@@ -2276,14 +2276,61 @@ span.submission-pagination{
 .location-zip {
   margin-top: 30px;
 
-  input{
+  input {
     width: 130px;
   }
 
-  #small-note{
+  #small-note {
     margin-top: 10px;
     font-family: "AvenirLTStd-LightOblique";
     font-size: 14px;
     color: #666666;
+  }
+}
+
+#finishContest {
+  top: 30%;
+  p {
+    text-align: center;
+    font-size: 30px;
+    color: #333333;
+    vertical-align: middle;
+    font-family: 'SofiaProLight';
+  }
+  a {
+    font-size: 22px;
+    text-align: center;
+    line-height: 90px;
+    color: #666666;
+  }
+  .yes-button {
+    border-bottom-left-radius: 3px !important;
+  }
+  .no-button {
+    border-bottom-right-radius: 3px !important;
+  }
+  .yes-button:hover{
+    background-color: darken(#F5F5F5, 20);
+  }
+  .no-button:hover{
+    background-color: darken(#F5F5F5, 20);
+  }
+  .modal-body {
+    height: 250px;
+    padding-top: 90px;
+  }
+  .modal-footer {
+    background-color: #f5f5f5;
+    border-bottom-right-radius: 3px !important;
+    border-bottom-left-radius: 3px !important;
+  }
+}
+
+#finishContest {
+  .yes-button, .no-button{
+    text-align: center;
+  }
+  .yes-button:hover, .no-button:hover {
+    cursor: pointer;
   }
 }

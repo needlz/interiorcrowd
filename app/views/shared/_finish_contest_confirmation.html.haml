@@ -1,0 +1,11 @@
+#finishContest.modal.fade{ area: { hidden: 'true', labelledby: 'myModalLabel' }, role: 'dialog', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-body
+        %p= t('designer_center.final_upload.ready_to_send').html_safe
+      .modal-footer.disablePadding
+        .row.disableMargin
+          .col-xs-6.yes-button
+            %a{:href => "#"}= t('designer_center.final_upload.yes')
+          .col-xs-6.no-button
+            %a{:href => "#"}= t('designer_center.final_upload.no')

@@ -138,10 +138,18 @@ class @FulfillmentApprovedEdit
 
     $('.footer .submit-button').click (e)=>
       e.preventDefault()
+      $('#finishContest').modal('show')
+
+    $('#finishContest').on('click', '.no-button', (event)->
+      event.preventDefault()
+      $('#finishContest').modal('hide')
+    ).on('click', '.yes-button', (event)=>
+      event.preventDefault()
       @clearEditFormInputs($form)
       $status_input = $('<input type="hidden">').attr('name', 'contest_request[status]').val('finished')
       $status_input.appendTo($form)
       $form.submit()
+    )
 
   @bindAddProductButton: ->
     $('.add-product-button').click (e)=>
