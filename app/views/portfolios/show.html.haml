@@ -46,18 +46,17 @@
         %h4= t('designer_center.portfolio.show.design_style')
         - @portfolio_view.style_description.each do |style|
           %span.designStyleSpan= style
-      .col-md-12
-        .hLine10.marg-top30.marg-bottom30
-      .col-md-12.marg-bottom30
-        %h4.font20= t('designer_center.portfolio.show.portfolio_examples')
-      - index = 1
-      - @portfolio_view.pictures.order(:created_at).in_groups_of(3, false) do |pictures|
-        - pictures.each do |picture|
-          = render partial: 'portfolios/item',
-              locals: { picture: picture }
-          - index += 1
-      .col-md-12.marg-top30
-        %a.loadMoreLink{:href => "#"}= t('designer_center.portfolio.show.load_more')
+      - if @portfolio_view.pictures.exists?
+        .col-md-12
+          .hLine10.marg-top30.marg-bottom30
+        .col-md-12.marg-bottom30
+          %h4.font20= t('designer_center.portfolio.show.portfolio_examples')
+        - index = 1
+        - @portfolio_view.pictures.order(:created_at).in_groups_of(3, false) do |pictures|
+          - pictures.each do |picture|
+            = render partial: 'portfolios/item',
+                locals: { picture: picture }
+            - index += 1
       .col-md-12
         .hLine10.marg-top30.marg-bottom30
         .col-md-12.text-center
