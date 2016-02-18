@@ -245,16 +245,17 @@ class ActiveAdmin::DSL
   alias_method :run_registration_block, :run_registration_block_with_automenu
 
   def set_default_menu
+    return unless config
     menu priority: get_menu_priority
   end
 
   def get_menu_priority
-    return unless config
     id = (config.menu_item_options[:id].try(:singular) || config.menu_item_options[:id]).parameterize.underscore.to_sym
     [:dashboard, :admin_users, :beta_subscribers, :contest_requests, :clients, :users, :client_payments, :contests,
      :contest_promocodes, :comments, :credit_cards, :inbound_emails, :designers, :designer_activity,
      :detailed_contests, :giftcard_payments, :outbound_emails, :portfolios, :promocodes, :realtor_contacts,
      :sounds, :email_templates].index(id) + 1
+
   end
 
 end
