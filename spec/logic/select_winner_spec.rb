@@ -11,8 +11,18 @@ RSpec.describe SelectWinner do
     expect(jobs_with_handler_like('client_has_picked_a_winner').count).to eq 1
   end
 
+  it 'notifies designer' do
+    SelectWinner.perform(contest_request)
+    expect(jobs_with_handler_like('notify_designer_about_win').count).to eq 1
+  end
+
+  it 'notifies product owner' do
+    SelectWinner.perform(contest_request)
+    expect(jobs_with_handler_like('notify_product_owner_about_designer_win').count).to eq 1
+  end
+
   it 'updates date of winning' do
-     SelectWinner.perform(contest_request)
+    SelectWinner.perform(contest_request)
     expect(contest_request.reload.won_at).to be_within(5.seconds).of(Time.current)
   end
 

@@ -1531,29 +1531,6 @@ en:
           description:
             - Purchase all items recommended by your designer in your own time or, choose to have your designer purchase
               everything and install it for you
-  mails:
-    designer_registration:
-      subject: Congrats! You're now a designer on InteriorCrowd.
-    beta_autorespond:
-      subject: InteriorCrowd Private Beta
-    beta_subscriber:
-      subject: 'InteriorCrowd: new beta subscriber'
-    invitation_to_leave_feedback:
-      subject: '%{client_name} needs your help picking a design'
-    concept_board_received:
-      subject: You have a new concept board to look at!
-    product_list_feedback:
-      subject: Your client has given you feedback
-    clients_comment_on_board:
-      subject: Your client has commented on your board
-    designers_comment_on_board:
-      subject: Your designer has left a comment for you
-    note_to_concept_board:
-      subject: A client has left a comment for you
-    new_product_list_item:
-      subject: Your designer has added a product list for you to review
-    notify_designer_about_win:
-      subject: You won!
 
   coming_soon:
     title: NEW CONTENT COMING SOON!

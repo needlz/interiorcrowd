@@ -76,7 +76,11 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email designer\'s win' do
-      expect(UserMailer.notify_designer_about_win(contest_request)).to be_present
+      expect(UserMailer.notify_designer_about_win(contest_request.id)).to be_present
+    end
+
+    it 'sends email to product owner designer\'s win' do
+      expect(UserMailer.notify_product_owner_about_designer_win(contest_request.id)).to be_present
     end
 
     it 'sends email about winner selection' do
@@ -88,7 +92,7 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about winner picked' do
-      expect(UserMailer.client_has_picked_a_winner(contest_request)).to be_present
+      expect(UserMailer.client_has_picked_a_winner(contest_request.id)).to be_present
     end
 
     it 'sends email to designer about client ready for final design' do
