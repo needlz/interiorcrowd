@@ -35,8 +35,8 @@
             %img{:src => "/assets/profile-badge.png"}/
             = award.html_safe
             %br
-        %span.profileRating.fiveStar
-        %a.reviewsLink{:href => "#"} 5 reviews
+        - if Settings.show_portfolio_reviews
+          = render 'portfolios/reviews'
       .col-md-8.user_portfolio_profile
         %h3= @portfolio_view.designer_name
         %h4= t('designer_center.portfolio.show.about')
