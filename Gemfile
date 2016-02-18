@@ -115,3 +115,9 @@ gem 'viglink-api'
 gem 'sitemap_generator'
 gem 'postoffice'
 gem 'gibbon'
+
+# profiling
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof'
+gem 'memory_profiler'
