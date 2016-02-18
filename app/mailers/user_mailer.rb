@@ -290,7 +290,7 @@ class UserMailer < ActionMailer::Base
         name: designer.name,
         email: designer.email,
         winner_id: designer.id,
-        datetime: Time.now,
+        datetime: contest_request.won_at,
         contest_id: contest.id,
         client_name: client.name
     )
@@ -537,7 +537,7 @@ class UserMailer < ActionMailer::Base
   end
 
   def set_template
-    template MANDRILL_TEMPLATES[action_name.to_sym][:template] if MANDRILL_TEMPLATES[action_name.to_sym]
+    template MANDRILL_TEMPLATES[action_name.to_sym][:template]
   end
 
 end
