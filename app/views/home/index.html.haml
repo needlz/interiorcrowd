@@ -1,6 +1,8 @@
 - content_for :head do
   = javascript_include_tag 'home/main'
 
+= render 'shared/pinterest_tracking', id: Settings.pinterest.landing_tracking_id
+
 .homepage
   .container-fluid.topCarouselHome
     = render 'home/index/top_carousel'
