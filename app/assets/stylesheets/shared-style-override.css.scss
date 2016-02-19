@@ -1050,6 +1050,55 @@
   }
 }
 
+@media(max-width: 480px) {
+  .update-style-package-hint p{
+    margin-left: -37.5%;
+    margin-right: -37.5%;
+  }
+
+  .fee-includes-outer-container {
+    margin-left: -2.5% !important;
+    width: 105% !important;
+    padding: 10px !important;
+
+  }
+
+  .fee-includes-inner-container {
+    .list {
+      width: 130% !important;
+      margin-left: -20% !important;
+      float: none !important;
+    }
+
+    .title {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+  }
+  .step4Review input[type="text"] {
+      margin-left: -2.5%;
+      width: 105%;
+  }
+
+  .transparent-process {
+    padding: 0 15px 15px 15px !important;
+  }
+}
+
+@media(max-width: 320px) {
+  .update-style-package-hint p{
+    margin-left: -40%;
+    margin-right: -40%;
+  }
+
+  .fee-includes-inner-container {
+    .list {
+      width: 120% !important;
+      margin-left: -20% !important;
+    }
+  }
+}
+
 .credit-card-form{
   padding: 30px;
   border: 1px solid #e1e1e1;
