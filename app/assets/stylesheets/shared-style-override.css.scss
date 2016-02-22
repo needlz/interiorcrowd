@@ -564,7 +564,7 @@
     text-align: center;
   }
 
-  @media(max-width: 768px) {
+  @media(max-width: 767px) {
     .contestDesignerBtn .goBtn{
       width: 100%;
       margin-top: 20px;
@@ -580,6 +580,12 @@
 
     .contestUnderway{
       text-align: center;
+    }
+
+    .newContestLink{
+      text-align: center;
+      float: none !important;
+      margin-top: 15px;
     }
   }
 

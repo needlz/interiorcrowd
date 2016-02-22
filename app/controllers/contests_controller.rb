@@ -57,8 +57,9 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @current_contests = ContestsColumns.new(@client.contests.in_progress)
-    @completed_contests = ContestsColumns.new(@client.contests.inactive)
+    @show_contest_creation_button = ClientContestCreationPolicy.for_client(@client).create_contest.can?
+    @current_contests = ContestsColumns.new(@client.contests.in_progress.includes(:design_category, :preferred_retailers, :design_spaces, :contests_appeals))
+    @completed_contests = ContestsColumns.new(@client.contests.inactive.includes(:design_category, :preferred_retailers, :design_spaces, :contests_appeals))
   end
 
   def preview

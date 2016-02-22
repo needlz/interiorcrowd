@@ -135,7 +135,7 @@ class ContestView
     @category = DesignCategoryView.new(contest.design_category)
     @design_areas = contest.design_spaces
     @designer_level = contest.client.designer_level
-    @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
+    @appeal_scales = AppealScale.from(contest.contests_appeals)
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
     @example_ids = contest.liked_examples.pluck(:id)

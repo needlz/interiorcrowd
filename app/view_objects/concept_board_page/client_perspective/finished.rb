@@ -14,4 +14,8 @@ class ConceptBoardPage::ClientPerspective::Finished < ConceptBoardPage::ClientPe
     }
   end
 
+  def show_contest_creation_button?
+    ClientContestCreationPolicy.for_client(contest_request.contest.client).create_contest.can?
+  end
+
 end
