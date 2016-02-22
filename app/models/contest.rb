@@ -74,6 +74,7 @@ class Contest < ActiveRecord::Base
   has_many :promocodes, through: :contest_promocodes
   has_many :designer_invite_notifications
   has_many :invited_designers, through: :designer_invite_notifications, source: :designer, class_name: 'Designer'
+  belongs_to :designer_level
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }

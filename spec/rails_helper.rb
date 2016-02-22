@@ -101,7 +101,7 @@ RSpec.configure do |config|
 
   def raise_i18n_exceptions
     I18n.exception_handler = lambda do |exception, locale, key, options|
-      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
+      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule' && !key.to_s.include?('contests.appeals')
         raise exception.to_exception
       end
     end
@@ -126,6 +126,7 @@ RSpec.configure do |config|
   end
 
   def contest_options_source
+    appeal = Fabricate(:appeal)
     @contest_options_source ||= { design_brief: {
         design_category: Fabricate(:design_category).id,
         design_area: Fabricate.times(2, :design_space).map(&:id) },
@@ -148,9 +149,9 @@ RSpec.configure do |config|
           desirable_colors: '#bbbbbb',
           undesirable_colors: '#aaaaaa,#888888',
           appeals: {
-              some_appeal: {
+              appeal.name.to_sym => {
                   reason: 'reason',
-                  value: 100} },
+                  value: 100 } },
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
           ex_links: ['link1', 'link2'] },
       contest: {

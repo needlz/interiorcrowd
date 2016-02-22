@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ScheduledNotifications::WarningAboutWinnerSelectionEnd do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'winner_selection') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'winner_selection') }
   let(:scheduler) { ScheduledNotifications::WarningAboutWinnerSelectionEnd }
 
   context 'one day left' do

@@ -9,6 +9,11 @@ development:
   host: localhost
   username: postgres
   password: postgres
+staging:
+  adapter: postgresql
+  database: interior-crowd-staging
+  host: localhost
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,3 +31,4 @@ production:
   database: db/production.sqlite3
   pool: 5
   timeout: 5000
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>

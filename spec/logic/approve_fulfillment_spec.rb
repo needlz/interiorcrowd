@@ -4,7 +4,7 @@ RSpec.describe ApproveFulfillment do
 
   let(:client){ Fabricate(:client) }
   let(:designer){ Fabricate(:designer) }
-  let(:contest){ Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest){ Fabricate(:contest_in_submission, client: client) }
   let(:request)do
     request = Fabricate(:contest_request,
               designer: designer,

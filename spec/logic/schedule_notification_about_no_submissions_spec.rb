@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ScheduledNotifications::NoSubmissions do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:scheduler) { ScheduledNotifications::NoSubmissions }
 
   context 'four days left' do

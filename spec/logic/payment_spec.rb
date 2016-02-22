@@ -5,7 +5,7 @@ RSpec.describe Payment do
   let(:credit_card) { Fabricate(:credit_card) }
   let(:client) { Fabricate(:client, primary_card_id: credit_card.id) }
   let(:promocode) { Fabricate(:promocode, discount_cents: 2000) }
-  let(:contest) { Fabricate(:contest, client: client, promocodes: [promocode], status: 'brief_pending') }
+  let(:contest) { Fabricate(:completed_contest, client: client, promocodes: [promocode], status: 'brief_pending') }
 
   before do
     mock_stripe_customer_registration

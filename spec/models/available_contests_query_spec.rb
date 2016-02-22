@@ -5,22 +5,22 @@ RSpec.describe AvailableContestsQuery do
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
 
-  let(:closed_contest) { Fabricate(:contest, client: client, status: 'closed') }
-  let(:submission_contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:closed_contest) { Fabricate(:completed_contest, client: client, status: 'closed') }
+  let(:submission_contest) { Fabricate(:contest_in_submission, client: client) }
   let(:submission_contest_with_draft_request) do
-    contest = Fabricate(:contest, client: client, status: 'submission')
+    contest = Fabricate(:contest_in_submission, client: client)
     Fabricate(:contest_request, contest: contest, designer: designer, status: 'draft')
     contest
   end
   let(:submission_contest_with_submitted_request) do
-    contest = Fabricate(:contest, client: client, status: 'submission')
+    contest = Fabricate(:contest_in_submission, client: client)
     Fabricate(:contest_request, contest: contest, designer: designer, status: 'submitted')
     contest
   end
-  let(:invited_contest) { Fabricate(:contest, client: client, status: 'submission') }
-  let(:winner_selection_contest) { Fabricate(:contest, client: client, status: 'winner_selection') }
-  let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
-  let(:finished_contest) { Fabricate(:contest, client: client, status: 'finished') }
+  let(:invited_contest) { Fabricate(:contest_in_submission, client: client) }
+  let(:winner_selection_contest) { Fabricate(:completed_contest, client: client, status: 'winner_selection') }
+  let(:fulfillment_contest) { Fabricate(:completed_contest, client: client, status: 'fulfillment') }
+  let(:finished_contest) { Fabricate(:completed_contest, client: client, status: 'finished') }
 
   let(:contests) { [closed_contest,
                     winner_selection_contest,

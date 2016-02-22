@@ -18,7 +18,8 @@ RSpec.describe ContestOptions do
                                         undesirable_colors: source[:design_style][:undesirable_colors],
                                         elements_to_avoid: source[:contest][:elements_to_avoid],
                                         entertaining: source[:contest][:entertaining],
-                                        durability: source[:contest][:durability]
+                                        durability: source[:contest][:durability],
+                                        designer_level_id: source[:design_style][:designer_level]
                                    })
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))

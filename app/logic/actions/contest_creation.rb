@@ -16,7 +16,7 @@ class ContestCreation
   def perform
     contest_options = ContestOptions.new(params.to_hash.merge(client_id: client_id))
     raise ArgumentError.new('previous contest not finished') if @make_complete && !ClientNextContestPolicy.new(Client.find(client_id)).can_complete_next_contest?
-    raise ArgumentError.new('contest incomplete') if validate_completion? && !contest_options.required_present?
+    raise ArgumentError.new('contest incomplete') if validate_completion? && ContestValidation::Creation.new(contest_options).missing_options.present?
     @contest = Contest.new(contest_options.contest)
     @contest.transaction do
       @contest.save!
