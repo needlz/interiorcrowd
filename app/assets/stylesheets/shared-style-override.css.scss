@@ -1983,6 +1983,7 @@ span.submission-pagination{
 .designers-slider .slick-dots li.slick-active button:before {
   background: #666666;
 }
+
 .designers-slider .slick-prev,
 .designers-slider .slick-next {
   background: red;
@@ -1995,6 +1996,7 @@ span.submission-pagination{
   left: 39%;
   z-index: 99;
 }
+
 .designers-slider .slick-next {
   background: url('right_arrowb.png') no-repeat center;
   left: auto;
@@ -2024,6 +2026,15 @@ span.submission-pagination{
   }
   .designers-slider .slick-next {
     right: 28%;
+  }
+}
+
+@media (max-width: 992px) {
+  .designers-slider .slick-prev {
+    left: 30%;
+  }
+  .designers-slider .slick-next {
+    right: 30%;
   }
   .designers-slider h4 {
     text-align: center;
@@ -2259,6 +2270,14 @@ span.submission-pagination{
   }
 }
 
+@media (max-width: 1200px) {
+  .bottomBar {
+    hr {
+      width: 230px;
+    }
+  }
+}
+
 @media (max-width: 992px) {
   .whatWeDoBox p {
     line-height: 2;
@@ -2267,7 +2286,7 @@ span.submission-pagination{
 
   .bottomBar {
     hr {
-      width: 24.5%;
+      width: 120px;
     }
   }
 }
@@ -2276,12 +2295,6 @@ span.submission-pagination{
   .whatWeDoBox p {
     line-height: 2;
     font-size: 17px;
-  }
-
-  .bottomBar {
-    hr {
-      width: 21%;
-    }
   }
 
   .rounded-box {
