@@ -26,7 +26,8 @@ class ContestCreationWizard
   end
 
   def self.uncomplete_step_path(contest_options, validated_steps)
-    uncomplete_step = validated_steps.detect { |step| contest_options.uncompleted_chapter == step }
+    uncompleted_chapter = ContestValidation::Creation.new(contest_options).uncompleted_chapter
+    uncomplete_step = validated_steps.detect { |step| uncompleted_chapter == step }
     creation_steps_paths[uncomplete_step] if uncomplete_step
   end
 
@@ -35,7 +36,7 @@ class ContestCreationWizard
       when 0
         contest.design_category_id.present? && contest.design_spaces.present?
       when 1
-        contest.desirable_colors.present? && contest.contests_appeals.count == Appeal.count
+        contest.desirable_colors.present? && (contest.contests_appeals.count == Appeal.count) && contest.designer_level_id.present?
       when 2
         contest.space_budget.present?
       when 3

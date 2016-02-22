@@ -7,7 +7,7 @@ ActiveAdmin.register Contest do
   end
 
   index do
-    column :id
+    id_column
     column :project_name
     column :status
     column :client

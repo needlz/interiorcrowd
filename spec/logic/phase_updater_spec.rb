@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PhaseUpdater do
 
-  let(:contest) { Fabricate(:contest, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission) }
 
   it 'creates new stamp of product list for each contest phase' do
     contest_request = Fabricate(:contest_request,

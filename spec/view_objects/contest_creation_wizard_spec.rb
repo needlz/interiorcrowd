@@ -14,12 +14,11 @@ RSpec.describe ContestCreationWizard do
         semicomplete: ->(contest) do
           Fabricate.times(2, :appeal)
           contest.update_attributes!(desirable_colors: '#000000')
-          contest.appeals << Appeal.first
+          contest.appeals << Appeal.last
         end,
         complete: ->(contest) do
-          Fabricate.times(2, :appeal)
-          contest.update_attributes!(desirable_colors: '#000000')
-          Appeal.all.each { |style| contest.appeals << style }
+          Fabricate.times(2, :appeal).each { |style| contest.appeals << style }
+          contest.update_attributes!(desirable_colors: '#000000', designer_level_id: 1)
         end
       },
       2 => {
@@ -34,11 +33,7 @@ RSpec.describe ContestCreationWizard do
   end
 
   let(:contest) do
-    Fabricate(:contest,
-              project_name: nil,
-              design_category: nil,
-              design_spaces: [],
-              budget_plan: nil)
+    Fabricate(:contest)
   end
 
   describe '#finished_step?' do
@@ -54,10 +49,9 @@ RSpec.describe ContestCreationWizard do
     it 'returns true for complete steps' do
       (0..(ContestCreationWizard.steps_count - 1)).each do |step_index|
         completion_procedures[step_index][:complete].call(contest)
-        expect(ContestCreationWizard.finished_step?(contest, step_index)).to be_truthy
+        expect(ContestCreationWizard.finished_step?(contest.reload, step_index)).to be_truthy
       end
     end
-
   end
 
   describe '#unfinished_step' do
@@ -66,7 +60,6 @@ RSpec.describe ContestCreationWizard do
       completion_procedures[1][:complete].call(contest)
       expect(ContestCreationWizard.unfinished_step(contest)).to eq 2
     end
-
   end
 
 end

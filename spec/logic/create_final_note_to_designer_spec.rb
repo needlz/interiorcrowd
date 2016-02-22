@@ -4,7 +4,7 @@ RSpec.describe CreateFinalNote do
 
   let(:client){ Fabricate(:client) }
   let(:designer){ Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, status: 'submission', client: client) }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:contest_request) { Fabricate(:contest_request, designer: designer, contest: contest) }
   let(:text) { 'final note' }
 

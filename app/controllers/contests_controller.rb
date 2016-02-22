@@ -57,14 +57,13 @@ class ContestsController < ApplicationController
   end
 
   def index
-    @current_contests = ContestsColumns.new(@client.contests.in_progress)
-    @completed_contests = ContestsColumns.new(@client.contests.inactive)
+    @show_contest_creation_button = ClientContestCreationPolicy.for_client(@client).create_contest.can?
+    @current_contests = ContestsColumns.new(@client.contests.in_progress.includes(:design_category, :preferred_retailers, :design_spaces, :contests_appeals))
+    @completed_contests = ContestsColumns.new(@client.contests.inactive.includes(:design_category, :preferred_retailers, :design_spaces, :contests_appeals))
   end
 
   def preview
-    unless @contest
-      return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
-    end
+    return if redirect_to_uncompleted_step(ContestCreationWizard.creation_steps - [:preview])
     @contest_view = ContestView.new(contest_attributes: session.to_hash)
   end
 
@@ -104,9 +103,7 @@ class ContestsController < ApplicationController
     if params[:id]
       incompleted_contest = fetch_incompleted_contest(params[:id])
       return render_404 unless incompleted_contest
-      incompleted_contest_options = ContestOptions.new(params.with_indifferent_access)
-      incompleted_contest_updater = ContestUpdater.new(incompleted_contest, incompleted_contest_options)
-      incompleted_contest_updater.perform
+      update_contest_attributes(incompleted_contest)
       return redirect_to(controller: 'contests', action: next_step, id: incompleted_contest.id)
     else
       session[action] = params[action] if params[action].present?
@@ -210,10 +207,16 @@ class ContestsController < ApplicationController
   end
 
   def save_intake_form
-    ContestCreationWizard.creation_steps.each do |creation_step|
-      session[creation_step] = params[creation_step] if params[creation_step]
+    if params[:id]
+      incompleted_contest = fetch_incompleted_contest(params[:id])
+      return render(json: { saved: false }) unless incompleted_contest
+      update_contest_attributes(incompleted_contest)
+    else
+      ContestCreationWizard.creation_steps.each do |creation_step|
+        session[creation_step] = params[creation_step] if params[creation_step]
+      end
     end
-    render nothing: true
+    render json: { saved: true }
   end
 
   def invite_designers
@@ -311,7 +314,7 @@ class ContestsController < ApplicationController
   end
 
   def uncomplete_step_path(validated_steps)
-    ContestCreationWizard.uncomplete_step_path(ContestOptions.new(session.to_hash), validated_steps)
+    ContestCreationWizard.uncomplete_step_path(ContestOptions.new(@contest || session.to_hash), validated_steps)
   end
 
   def on_previewed
@@ -350,6 +353,12 @@ class ContestsController < ApplicationController
 
   def set_save_path
     @save_path = @contest ? send("save_#{ action_name }_contest_path", id: @contest.id) : send("save_#{ action_name }_contests_path")
+  end
+
+  def update_contest_attributes(contest)
+    contest_options = ContestOptions.new(params.with_indifferent_access)
+    incompleted_contest_updater = ContestUpdater.new(contest, contest_options)
+    incompleted_contest_updater.perform
   end
 
 end

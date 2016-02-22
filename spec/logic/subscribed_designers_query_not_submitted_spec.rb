@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe SubscribedDesignersQueryNotSubmitted do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let!(:designer_with_submitted_contest_request) { Fabricate(:designer) }
   let!(:designer_without_submitted_contest_request) { Fabricate(:designer) }
   let!(:designer_with_contest_comment) { Fabricate(:designer) }

@@ -4,14 +4,14 @@ RSpec.describe ContestUpdater do
 
   let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:contest_with_space_images) do
-    Fabricate(:contest,
+    Fabricate(:completed_contest,
               client: client,
               liked_examples: Fabricate.times(2, :example_image),
               space_images: Fabricate.times(2, :space_image),
               status: 'brief_pending'
     )
   end
-  let(:contest_without_space_images) { Fabricate(:contest,
+  let(:contest_without_space_images) { Fabricate(:completed_contest,
                                                  client: client,
                                                  status: 'brief_pending',
                                                  was_in_brief_pending_state: true) }

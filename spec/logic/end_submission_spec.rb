@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EndSubmission do
 
   context 'contest has no submitted concept boards' do
-    let(:contest) { Fabricate(:contest, status: 'submission') }
+    let(:contest) { Fabricate(:contest_in_submission) }
 
     it 'closes when submission ends' do
       EndSubmission.new(contest).perform
@@ -24,7 +24,7 @@ RSpec.describe EndSubmission do
   end
 
   context 'contest has submitted concept boards' do
-    let(:contest) { Fabricate(:contest, status: 'submission') }
+    let(:contest) { Fabricate(:contest_in_submission) }
     let(:contest_request) { Fabricate(:contest_request, contest: contest) }
 
     before do

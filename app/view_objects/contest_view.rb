@@ -109,7 +109,7 @@ class ContestView
     design_category = DesignCategory.find_by_id(contest_params[:design_category_id])
     @category = DesignCategoryView.new(design_category)
     @design_areas = DesignSpace.where(id: contest_params[:design_space_ids])
-    @designer_level = DesignerLevel.find_by_id(contest_options.designer_level)
+    @designer_level = DesignerLevel.find_by_id(contest_params[:designer_level])
     @appeal_scales = AppealScale.from(contest_options.appeals)
     @desirable_colors = contest_params[:desirable_colors]
     @undesirable_colors = contest_params[:undesirable_colors]
@@ -134,8 +134,8 @@ class ContestView
   def initialize_from_contest(contest)
     @category = DesignCategoryView.new(contest.design_category)
     @design_areas = contest.design_spaces
-    @designer_level = contest.client.designer_level
-    @appeal_scales = AppealScale.from(contest.contests_appeals.includes(:appeal))
+    @designer_level = contest.designer_level
+    @appeal_scales = AppealScale.from(contest.contests_appeals)
     @desirable_colors = contest.desirable_colors
     @undesirable_colors = contest.undesirable_colors
     @example_ids = contest.liked_examples.pluck(:id)

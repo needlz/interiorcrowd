@@ -10,7 +10,7 @@ class SubmitContest
   end
 
   def brief_completed?
-    contest.space_images.exists?
+    ContestValidation::Submission.new(ContestOptions.new(contest)).missing_options.blank?
   end
 
   def performed?

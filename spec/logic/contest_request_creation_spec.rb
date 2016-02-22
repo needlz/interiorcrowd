@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ContestRequestCreation do
 
   let(:designer){ Fabricate(:designer) }
-  let(:contest){ Fabricate(:contest, status: 'submission') }
+  let(:contest){ Fabricate(:contest_in_submission) }
   let(:creation) do
     ContestRequestCreation.new(designer: designer,
                                contest: contest,
@@ -24,4 +24,3 @@ RSpec.describe ContestRequestCreation do
     end
   end
 end
-

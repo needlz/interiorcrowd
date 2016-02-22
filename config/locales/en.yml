@@ -373,6 +373,8 @@ en:
         'false': 'No'
       done_button: Done!
       thank_you: Thank you!
+    index:
+      new_contest: + Start a new project
   client_center:
     title: Client Center
     welcome_user: Welcome, %{username}

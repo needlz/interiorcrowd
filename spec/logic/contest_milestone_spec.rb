@@ -8,7 +8,7 @@ RSpec.describe ContestMilestone do
     let(:milestone){ ContestMilestone.new(contest) }
 
     context 'contest in submission status' do
-      let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+      let(:contest) { Fabricate(:contest_in_submission, client: client) }
 
       it 'returns class of performer of milestone end' do
         expect(milestone.end_milestone_performer_class).to be_present
@@ -16,7 +16,7 @@ RSpec.describe ContestMilestone do
     end
 
     context 'contest in winner_selection status' do
-      let(:contest) { Fabricate(:contest, client: client, status: 'winner_selection') }
+      let(:contest) { Fabricate(:completed_contest, client: client, status: 'winner_selection') }
 
       it 'returns class of performer of milestone end' do
         expect(milestone.end_milestone_performer_class).to be_present
@@ -29,7 +29,7 @@ RSpec.describe ContestMilestone do
     end
 
     context 'contest in fulfillment status' do
-      let(:contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
+      let(:contest) { Fabricate(:completed_contest, client: client, status: 'fulfillment') }
 
       it 'does not return class of performer of milestone end' do
         expect(milestone.end_milestone_performer_class).to be_blank

@@ -93,6 +93,8 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
     end
   end
 
+  member_action :show, method: :get
+
   csv do
     controller.plain = true
     instance_exec(&columns)

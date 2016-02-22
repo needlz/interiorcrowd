@@ -5,7 +5,7 @@ RSpec.describe ImageItemsController do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:contest_request) { Fabricate(:contest_request, designer: designer, contest: contest) }
 
   describe 'POST create' do

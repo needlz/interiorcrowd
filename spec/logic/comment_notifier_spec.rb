@@ -14,7 +14,7 @@ RSpec.describe CommentNotifier do
   end
 
   context 'when submission milestone' do
-    let(:contest) { Fabricate(:contest, status: 'submission', client: client) }
+    let(:contest) { Fabricate(:contest_in_submission, client: client) }
 
     context 'when comment has been made by client' do
       let(:author) { client }
@@ -36,7 +36,7 @@ RSpec.describe CommentNotifier do
   end
 
   context 'winner_selection milestone' do
-    let(:contest) { Fabricate(:contest, status: 'winner_selection', client: client) }
+    let(:contest) { Fabricate(:completed_contest, status: 'winner_selection', client: client) }
 
     context 'when comment has been made by client' do
       let(:author) { client }

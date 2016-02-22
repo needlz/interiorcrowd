@@ -71,9 +71,10 @@
                    name: 'final_note[text]' }
         %button.send-button= t('client_center.finished.final_note.button')
 
-  .fullWidthLine.marginTop40
-  .row
-    .col-sm-12.startNewContest
-      = link_to 'Start a new contest',
-          design_brief_contests_path,
-          class: "create-contest-button #{ tracked_link }"
+  - if @entries_page.entries_concept_board_page.show_contest_creation_button?
+    .fullWidthLine.marginTop40
+    .row
+      .col-sm-12.startNewContest
+        = link_to t('contests.index.new_contest'),
+            new_contest_path,
+            class: "create-contest-button #{ tracked_link }"

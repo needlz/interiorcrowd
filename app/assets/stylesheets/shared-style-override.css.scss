@@ -564,7 +564,7 @@
     text-align: center;
   }
 
-  @media(max-width: 768px) {
+  @media(max-width: 767px) {
     .contestDesignerBtn .goBtn{
       width: 100%;
       margin-top: 20px;
@@ -580,6 +580,12 @@
 
     .contestUnderway{
       text-align: center;
+    }
+
+    .newContestLink{
+      text-align: center;
+      float: none !important;
+      margin-top: 15px;
     }
   }
 
@@ -1043,9 +1049,59 @@
   color: #666666;
   p{
     font-size: 18.5px;
+    color: #8c8c8c;
   }
   a{
     color: #30a7fc;
+  }
+}
+
+@media(max-width: 480px) {
+  .update-style-package-hint p{
+    margin-left: -37.5%;
+    margin-right: -37.5%;
+  }
+
+  .fee-includes-outer-container {
+    margin-left: -2.5% !important;
+    width: 105% !important;
+    padding: 10px !important;
+
+  }
+
+  .fee-includes-inner-container {
+    .list {
+      width: 130% !important;
+      margin-left: -20% !important;
+      float: none !important;
+    }
+
+    .title {
+      margin-left: 0 !important;
+      width: 100% !important;
+    }
+  }
+  .step4Review input[type="text"] {
+      margin-left: -2.5%;
+      width: 105%;
+  }
+
+  .transparent-process {
+    padding: 0 15px 15px 15px !important;
+  }
+}
+
+@media(max-width: 320px) {
+  .update-style-package-hint p{
+    margin-left: -40%;
+    margin-right: -40%;
+  }
+
+  .fee-includes-inner-container {
+    .list {
+      width: 120% !important;
+      margin-left: -20% !important;
+    }
   }
 }
 
@@ -2327,10 +2383,118 @@ span.submission-pagination{
 }
 
 #finishContest {
-  .yes-button, .no-button{
+  .yes-button, .no-button {
     text-align: center;
   }
   .yes-button:hover, .no-button:hover {
     cursor: pointer;
+  }
+}
+
+.fee-includes-outer-container {
+  margin-left: 10%;
+  width: 80%;
+  background-color: #409863;
+  margin-top: 80px;
+  padding: 45px;
+  color: #ffffff;
+  border-radius: 2px;
+  h5 {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  p {
+    display: inline;
+    font-size: 15px;
+  }
+  span {
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
+
+.fee-includes-inner-container {
+  padding: 35px;
+  border-radius: 2px;
+  background-color: #5CA679;
+  border: 1px solid #4C8964;
+  color: #ffffff;
+  margin-bottom: 25px;
+  display: inline-block;
+  vertical-align: center;
+  h1 {
+    color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+    font-size: 60px;
+    letter-spacing: 3.5px;
+  }
+  h3 {
+    text-transform: uppercase;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 27px;
+    letter-spacing: 0.6px;
+  }
+  .title {
+    display: inline-block;
+    width: 35%;
+  }
+  .list {
+    float: right;
+    width: 65%;
+    font-size: 18px;
+  }
+  li {
+    margin-bottom: 15px;
+
+    background: url("/assets/little-white-check.png") no-repeat left top;
+    background-position-y: 3px;
+    list-style-type: none;
+    font-size: 16px;
+    line-height: 28px;
+    padding-left: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .fee-includes-outer-container {
+    margin-left: 2.5%;
+    width: 95%;
+  }
+}
+
+@media (max-width: 768px) {
+  .fee-includes-inner-container {
+    .title {
+      margin-left: 30%;
+      width: 40%;
+    }
+    .list {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 460px) {
+  .fee-includes-outer-container {
+    padding: 13px;
+  }
+
+  .fee-includes-inner-container {
+    padding: 13px;
+
+    .title {
+      width: 60%;
+      margin-left: 20%;
+    }
+
+    .list {
+      margin-left: -25px;
+      float: left;
+    }
   }
 }

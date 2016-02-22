@@ -3,6 +3,7 @@ Fabricator(:client) do
   last_name { sequence { |i|  "last_name#{ i }" } }
   email { sequence { |i|  "client#{ i }@example.com" } }
   plain_password 'password'
+  designer_level
 
   before_create { |client| client.password = Client.encrypt(plain_password) }
 end

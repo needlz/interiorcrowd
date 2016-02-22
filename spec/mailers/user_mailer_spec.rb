@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe UserMailer do
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer, status: 'submitted') }
   let(:concept_board_comment) { Fabricate(:concept_board_comment, contest_request: contest_request, text: 'text') }
   let(:realtor_contact) { Fabricate(:realtor_contact) }

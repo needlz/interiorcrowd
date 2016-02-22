@@ -328,7 +328,7 @@ RSpec.describe ClientsController do
     end
 
     it 'redirects to Entries page if responses present' do
-      client_contest =  Fabricate(:contest, client: client, status: 'submission')
+      client_contest =  Fabricate(:contest_in_submission, client: client)
       Fabricate(:contest_request, contest: client_contest)
       get :client_center
       expect(response).to redirect_to client_center_entries_path
@@ -347,8 +347,10 @@ RSpec.describe ClientsController do
     end
 
     it 'returns page' do
-      get :pictures_dimension
-      expect(response).to render_template(:pictures_dimension)
+      dont_raise_i18n_exceptions do
+        get :pictures_dimension
+        expect(response).to render_template(:pictures_dimension)
+      end
     end
   end
 
@@ -359,9 +361,11 @@ RSpec.describe ClientsController do
     end
 
     it 'returns json' do
-      get :concept_boards_page
-      json = JSON.parse(response.body)
-      expect(json).to include('new_items_html', 'show_mobile_pagination', 'next_page')
+      dont_raise_i18n_exceptions do
+        get :concept_boards_page
+        json = JSON.parse(response.body)
+        expect(json).to include('new_items_html', 'show_mobile_pagination', 'next_page')
+      end
     end
   end
 
@@ -401,9 +405,10 @@ RSpec.describe ClientsController do
     end
 
     context 'when contest is complete' do
-      let(:contest) { Fabricate(:contest, client: client, status: Contest::COMPLETED_NON_FINISHED_STATUSES[0]) }
+      let(:contest) { Fabricate(:completed_contest, client: client, status: Contest::COMPLETED_NON_FINISHED_STATUSES[0]) }
 
       it 'returns brief page' do
+        mock_file_download_url
         dont_raise_i18n_exceptions do
           get :brief, id: contest.id
           expect(response).to render_template(:brief)
@@ -412,7 +417,7 @@ RSpec.describe ClientsController do
     end
 
     context 'when contest is incomplete' do
-      let(:contest) { Fabricate(:contest, client: client, status: Contest::INCOMPLETE_STATUSES[0]) }
+      let(:contest) { Fabricate(:completed_contest, client: client, status: Contest::INCOMPLETE_STATUSES[0]) }
 
       it 'returns brief page' do
         get :brief, id: contest.id

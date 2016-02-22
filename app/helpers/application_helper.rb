@@ -65,4 +65,8 @@ module ApplicationHelper
     content_for(:title) { result }
   end
 
+  def new_contest_path
+    design_brief_contests_path
+  end
+
 end

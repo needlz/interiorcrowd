@@ -6,7 +6,7 @@ RSpec.describe ConceptBoardCommentReceivedEmail do
 
   let(:designer) { Fabricate(:designer) }
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, designer: designer) }
   let(:inbound_without_comment) { webhook_example_event('inbound') }
   let(:inbound_with_comment) do

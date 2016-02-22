@@ -56,15 +56,20 @@ class ClientPaymentsController < ApplicationController
       payment.perform
     end
 
-    if SubmitContest.new(contest).only_brief_pending?
+    submission = SubmitContest.new(contest)
+    if submission.only_brief_pending?
       notify_about_contest_not_live
     end
+    submission.try_perform
 
     client_contest_created_at = { latest_contest_created_at: Time.current }
     client_contest_created_at.merge!(first_contest_created_at: Time.current) if @client.contests.count == 1
     @client.update_attributes!(client_contest_created_at)
     notify_product_owner
     welcome_client
+    if contest.brief_pending? && !contest.notified_client_contest_not_yet_live
+      contest.update_attributes!(notified_client_contest_not_yet_live: true)
+    end
   end
 
   def agreed_with_terms_of_use

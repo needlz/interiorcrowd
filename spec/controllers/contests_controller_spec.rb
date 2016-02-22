@@ -6,7 +6,7 @@ RSpec.describe ContestsController do
 
   let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
   let(:designer) { Fabricate(:designer_with_portfolio) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
   let(:appeals) { (0..2).map { |index| Appeal.create!(name: "name#{ index }") } }
 
   def prepare_contest_data
@@ -341,7 +341,7 @@ RSpec.describe ContestsController do
         mock_file_download_url
       end
 
-      let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+      let(:contest) { Fabricate(:contest_in_submission, client: client) }
       let(:submitted_request) { Fabricate(:contest_request,
                                           designer: designers[0],
                                           contest: contest,
@@ -363,7 +363,7 @@ RSpec.describe ContestsController do
 
         context 'when no contest requests submitted' do
           it 'shows designers invitation page' do
-            contest = Fabricate(:contest, client: client)
+            contest = Fabricate(:completed_contest, client: client)
             pay_contest(contest)
             get :show, id: contest.id
             expect(response).to render_template(:entries_invitations)
@@ -376,8 +376,8 @@ RSpec.describe ContestsController do
         end
 
         it 'returns page' do
-          Fabricate(:contest, client: client, status: 'submission')
-          contest = Fabricate(:contest, client: client)
+          Fabricate(:contest_in_submission, client: client)
+          contest = Fabricate(:completed_contest, client: client)
           pay_contest(contest)
           get :show, id: contest.id
           expect(response).to render_template(:entries_invitations)
@@ -404,7 +404,7 @@ RSpec.describe ContestsController do
           end
 
           def create_contest
-            Fabricate(:contest, client: client, status: 'submission')
+            Fabricate(:contest_in_submission, client: client)
           end
 
           before do
@@ -548,7 +548,7 @@ RSpec.describe ContestsController do
       def create_request(options)
         contest_options = { client: client, status: 'submission' }
         contest_options.merge!(options[:contest].try(:except, :status)) if options[:contest]
-        @contest = Fabricate(:contest, contest_options)
+        @contest = Fabricate(:completed_contest, contest_options)
         pay_contest(@contest)
         @contest_request = Fabricate(:contest_request,
                                      { designer: Fabricate(:designer_with_portfolio),
@@ -742,7 +742,7 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET intake form steps for incomplete contest' do
-    let(:submitted_contest) { Fabricate(:contest, status: 'submission') }
+    let(:submitted_contest) { Fabricate(:contest_in_submission) }
 
     context 'when logged as client' do
       before do
@@ -765,7 +765,7 @@ RSpec.describe ContestsController do
       end
 
       context 'when a contest is completed' do
-        let!(:completed_contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+        let!(:completed_contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
 
         it 'redirects to contest brief page' do
           get :design_brief, id: submitted_contest.id
@@ -849,7 +849,7 @@ RSpec.describe ContestsController do
     end
 
     context 'when specified contest is completed' do
-      let(:completed_contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+      let(:completed_contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
 
       it 'returns 404' do
         post :save_design_brief, contest_options_source.merge(id: completed_contest.id)
@@ -874,7 +874,7 @@ RSpec.describe ContestsController do
     end
 
     context 'when contest is not in "Submission" Phase' do
-      let(:contest) { Fabricate(:contest, client: client) }
+      let(:contest) { Fabricate(:completed_contest, client: client) }
 
       it 'returns 404' do
         expect(contest.status).not_to eq('submission')
