@@ -343,6 +343,11 @@ RSpec.describe ClientPaymentsController do
               post :create, params
               expect(contest.reload.notified_client_contest_not_yet_live).to be_truthy
             end
+
+            it 'does not move contest to submission state' do
+              post :create, params
+              expect(contest.status).to eq 'brief_pending'
+            end
           end
 
           context 'when contest brief is completed' do
@@ -359,6 +364,16 @@ RSpec.describe ClientPaymentsController do
             it 'does not keep in db that user was notified about a contest not yet live' do
               post :create, params
               expect(contest.reload.notified_client_contest_not_yet_live).to be_falsey
+            end
+
+            it 'submits contest' do
+              post :create, params
+              expect(contest.reload.status).to eq 'submission'
+            end
+
+            it 'does not send email about brief pending' do
+              post :create, params
+              expect(jobs_with_handler_like('new_client_no_photos').count).to eq 0
             end
           end
         end

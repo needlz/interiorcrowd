@@ -48,4 +48,16 @@ ActiveAdmin.register Client, as: "User" do
       column args[0], {}, &block
     end
   end
+
+  action_item :become, only: :show do
+    resource_name = 'user'
+    link_to('Log in', send("become_admin_#{ resource_name }_path", send(resource_name)), method: :get)
+  end
+
+  member_action :become, method: :get do
+    return unless current_admin_user
+    session["client_id".to_sym] = params[:id]
+    redirect_to send("client_center_path")
+  end
+
 end
