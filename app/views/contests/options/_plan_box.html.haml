@@ -1,8 +1,19 @@
-.row.oneLowFlatFee.plan-container{ data: { id: package.id },
-    class: ('active' if @contest_view.package_selected?(package.id)) }
-  .col-sm-12
-    %h1 #{ package.name.html_safe } #{ t('contests.creation.plans.includes') }:
-    %ul
-      - package.services.each_with_index do |service, index|
-        %li= service.html_safe
-    %p Thereafter, pay your designer a fixed rate of $100/hour.
+.fee-includes-outer-container.plan-container{ data: { id: package.id } }
+  .fee-includes-inner-container
+    .title
+      %h1= package.price
+      %h3 One low flat fee includes
+    .list
+      %ul
+        %li Multiple concept boards from a range of interior designers
+        %li
+          One hour in-person consultation with the designer who submitted your favorite boards and had
+          the most exciting ideas for your style and space
+        %li Top-line thoughts on project scope and requirements
+  .transparent-process
+    %h5 Our transparent process
+    %p
+      Once you and your designer have met, they'll recommend an initial hourly bundle to get started on that space
+      of your dreams. The designer rate is set at
+    %span $100/hour
+    %p and you can easily use our dashboard to keep track of your project. It's that simple.
