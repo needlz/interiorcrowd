@@ -86,7 +86,7 @@ class AppealScale
   def self.initialize_from_appeals(contests_appeals)
     Appeal.all.order(:id).map do |appeal|
       appeal_scale = new(appeal)
-      contest_appeal = contests_appeals.find_by_appeal_id(appeal.id)
+      contest_appeal = contests_appeals.find { |contest_appeal| contest_appeal.appeal_id == appeal.id }
       if contest_appeal
         appeal_scale.value = contest_appeal.value
         appeal_scale.reason = contest_appeal.reason

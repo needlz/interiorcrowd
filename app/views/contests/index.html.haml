@@ -8,9 +8,12 @@
     .row.no-x-padding
       .col-md-12.contestUnderway.no-x-padding
         .row
-          .col-md-8
+          .col-sm-8
             %h3= t('designer_center.responses.title')
             %p= t('designer_center.responses.list_title')
+          - if @show_contest_creation_button
+            .col-sm-4
+              %a.newContestLink{ href: new_contest_path, class: tracked_link }= t('.new_contest').upcase
         .contestDesigner.noBorderRadius.header-row
           .row.contestTableHeader
             .col-sm-10
