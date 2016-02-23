@@ -4333,6 +4333,12 @@ p.product-list-reminder {
   border: 1px solid #e1e1e1;
 }
 
+@media (max-width: 991px) {
+  .whatToExpect .row {
+    border: none;
+  }
+}
+
 .whatToExpect h2 {
   text-align: center;
   font-size: 30px;
@@ -4534,7 +4540,7 @@ p.product-list-reminder {
 }
 
 .whatToExpect {
-  background-color:  #ffffff;
+  background-color: #ffffff;
 }
 
 @media (max-width: 640px) {
