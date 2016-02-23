@@ -1747,6 +1747,18 @@ span.submission-pagination{
 .client-stories-slider .slick-dots li.slick-active button:before {
   background: #FFF;
 }
+@-moz-document url-prefix() {
+  .client-stories-slider .slick-next,
+  .client-stories-slider .slick-prev {
+    margin-top: -49.5px !important;
+  }
+
+  .designers-slider .slick-next,
+  .designers-slider .slick-prev {
+    margin-top: 33px !important;
+  }
+
+}
 .client-stories-slider .slick-prev,
 .client-stories-slider .slick-next {
   background: red;
@@ -1782,12 +1794,28 @@ span.submission-pagination{
     height: auto;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 1199px) and (min-width: 992px) {
   .client-stories-slider .slick-prev {
-    left: 60px;
+    left: 170px;
   }
   .client-stories-slider .slick-next {
-    right: 60px;
+    right: 170px;
+  }
+}
+@media (max-width: 767px) {
+  .client-stories-slider .slick-prev {
+    left: 42%;
+  }
+  .client-stories-slider .slick-next {
+    right: 42%;
+  }
+}
+@media (max-width: 480px) {
+  .client-stories-slider .slick-prev {
+    left: 38%;
+  }
+  .client-stories-slider .slick-next {
+    right: 38%;
   }
 }
 @media (max-width: 767px) {
@@ -1973,26 +2001,35 @@ span.submission-pagination{
   font-size: 18px;
   font-family: 'AvenirLTStd-Medium', sans-serif;
   line-height: 48px;
+  text-align:center;
 }
 @media(max-width: 1199px){
   .designers-slider h4 {
     text-align: center;
-
   }
 
-  .designers-slider h4 img {
-    text-align: center !important;
-    margin: 0 !important;
-    float: none !important;
+  .designers-slider{
+    .image-container{
+      img {
+        float: none !important;
+        margin: -30px auto 15px !important;
+        width: 60px !important;
+        border: 3px solid #FFF !important;
+      }
+    }
   }
 }
-.designers-slider h4 img {
-  border-radius: 50%;
-  border: 5px solid #FFF;
-  margin: -40px 20px 20px 15px;
-  position: relative;
-  z-index: 2;
-  float: left;
+.designers-slider{
+  .image-container{
+    img {
+      border-radius: 50%;
+      border: 5px solid #FFF;
+      margin: -40px 20px 20px 15px;
+      position: relative;
+      z-index: 2;
+      float: left;
+    }
+  }
 }
 .designers-slider p {
   color: #666666;
@@ -2073,16 +2110,6 @@ span.submission-pagination{
   }
   .designers-slider .slick-next {
     right: 30%;
-  }
-  .designers-slider h4 {
-    text-align: center;
-  }
-  .designers-slider h4 img {
-    float: none;
-    display: block;
-    margin: -30px auto 15px;
-    width: 60px;
-    border: 3px solid #FFF;
   }
 }
 
