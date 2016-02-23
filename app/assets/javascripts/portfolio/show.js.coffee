@@ -31,9 +31,9 @@ class @Portfolio
       $(@aboutExpandButtonSelector).hide()
 
   @initAboutEllipsis: ->
-    $(@aboutTextSelector).dotdotdot({ height: @maxAboutHeightPx })
-    if $(@aboutTextSelector).height() < 100
+    if $(@aboutTextSelector).height() < @maxAboutHeightPx
       $(@aboutExpandButtonSelector).hide()
+    $(@aboutTextSelector).dotdotdot({ height: @maxAboutHeightPx })
 
   @expandAboutBlock: ->
     $(@aboutTextSelector).dotdotdot()

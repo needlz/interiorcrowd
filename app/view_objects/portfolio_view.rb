@@ -1,8 +1,10 @@
 class PortfolioView
   include ActionView::Helpers::FormOptionsHelper
   include Rails.application.routes.url_helpers
+  include ActionView::Helpers::DateHelper
+  include TextFormatHelper
 
-  delegate :years_of_experience, :about, :personal_picture, :designer_id, :designer, :pictures,
+  delegate :years_of_experience, :personal_picture, :designer_id, :designer, :pictures,
            :cover_x_percents_offset, :cover_y_percents_offset,
            to: :portfolio,
            allow_nil: true
@@ -102,6 +104,10 @@ class PortfolioView
 
   def owner?(owner)
     designer == owner
+  end
+
+  def about
+    format_comment(portfolio.about)
   end
 
   private
