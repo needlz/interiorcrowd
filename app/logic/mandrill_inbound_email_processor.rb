@@ -25,9 +25,14 @@ class MandrillInboundEmailProcessor
   attr_reader :email, :parser, :contest_request_id, :contest_request, :author, :inbound_email, :comment_text
 
   def process_concept_board_comment
-    @contest_request = ContestRequest.find_by_id(contest_request_id)
-    @author = contest_request_participant(contest_request, parser.sender_email)
-    return raise("Unknown concept board participant: #{ parser.sender_email }") unless author
+    begin
+      @contest_request = ContestRequest.find_by_id(contest_request_id)
+      @author = contest_request_participant(contest_request, parser.sender_email)
+      raise("Unknown concept board participant: #{ parser.sender_email }") unless author
+
+    rescue StandardError => e
+      ErrorsLogger.log(e)
+    end
 
     @comment_text = parser.comment_text
     ActiveRecord::Base.transaction do
