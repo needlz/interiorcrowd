@@ -37,7 +37,7 @@ class OutboundEmail < ActiveRecord::Base
   end
 
   def arguments
-    self.class.arguments_from_output(email.mail_args)
+    self.class.arguments_from_output(mail_args)
   end
 
 end
