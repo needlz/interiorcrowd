@@ -10,12 +10,12 @@
 
 - content_for :designer_center_content do
   #new-contest-request.contest.row{ data: { id: @contest.id } }
-    = render partial: 'clients/client_center/entries/phases',
-             locals: { stripe: PhasesStripe.new(selected_step: 0,
+    = render 'clients/client_center/entries/phases',
+                stripe: PhasesStripe.new(selected_step: 0,
                 view_context: self,
-                contest_request_status: @request.status) }
-    = render partial: 'contests/preview/current_contest_infobox',
-        locals: { contest: ContestShortDetails.new(@contest) }
+                contest_request_status: @request.status)
+    = render 'contests/preview/current_contest_infobox',
+        contest: ContestShortDetails.new(@contest)
     = form_for @request,
         html: { class: "response" },
         url: designer_center_response_index_path(contest_id: @contest.id) do |f|
@@ -25,11 +25,11 @@
 
       .col-md-8.disablePadding
         .concept-board
-          = render partial: 'designer_center_requests/concept_board_thumbnail',
-            locals: { items: @request.current_lookbook_items,
+          = render 'designer_center_requests/concept_board_thumbnail',
+            items: @request.current_lookbook_items,
               placeholder_src: '/assets/img-content.png',
               image_id_input_name: 'lookbook[picture][ids]',
-              single: true }
+              single: true
           .clearfix
           %a.upload-button.black-bordered-button.font16.marginTop20{:href => "#"}
             = t('designer_center.responses.new.upload_button')
@@ -75,4 +75,4 @@
             = t('designer_center.my_contests.save_and_preview')
             %img{:src => "/assets/gt.png"}/
 
-= render partial: 'designer_center/layout'
+= render 'designer_center/layout'

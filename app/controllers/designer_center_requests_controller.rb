@@ -101,7 +101,10 @@ class DesignerCenterRequestsController < ApplicationController
     contest = Contest.current.find_by_id(params[:contest_id])
     return raise_404 unless contest
     existing_request = contest.response_of(@designer)
-    redirect_to designer_center_response_path(id: existing_request.id) and return if existing_request
+    if existing_request
+      AddLookbookItems.perform(existing_request, params[:lookbook], 'initial')
+      return redirect_to designer_center_response_path(id: existing_request.id)
+    end
     contest_creation = ContestRequestCreation.new({ designer: @designer,
                                            contest: contest,
                                            request_params: response_params,

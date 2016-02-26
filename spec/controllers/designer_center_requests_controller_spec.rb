@@ -313,15 +313,17 @@ RSpec.describe DesignerCenterRequestsController do
     end
 
     context 'response already created' do
-      let(:existing_request) { Fabricate(:contest_request, designer: designer, contest: contest) }
-
-      before do
-        existing_request
-      end
+      let!(:existing_request) { Fabricate(:contest_request, designer: designer, contest: contest) }
 
       it 'redirects to response page' do
         post :create, contest_id: contest.id, contest_request: { feedback: '' }
         expect(response).to redirect_to designer_center_response_path(id: existing_request.id)
+      end
+
+      it 'associates uploaded concept board with contest request' do
+        uploaded_image = Fabricate(:image)
+        post :create, contest_id: contest.id, contest_request: { feedback: '' }, lookbook: { picture: { ids: uploaded_image.id } }
+        expect(existing_request.reload.concept_board_current_image).to eq uploaded_image
       end
     end
   end

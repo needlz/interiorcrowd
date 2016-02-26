@@ -3,9 +3,9 @@ class DesignerCenterContestsController < ApplicationController
 
   def index
     available_contests = AvailableContestsQuery.new(@designer)
-    @invited_contests = ContestsColumns.new(available_contests.invited.with_associations)
-    @current_contests = ContestsColumns.new(available_contests.all.with_associations)
-    @suggested_contests = ContestsColumns.new(available_contests.suggested.with_associations.uniq)
+    @invited_contests = contests_list(available_contests.invited)
+    @current_contests = contests_list(available_contests.all)
+    @suggested_contests = contests_list(available_contests.suggested)
     @navigation = Navigation::DesignerCenter.new(:contests)
   end
 
@@ -22,6 +22,10 @@ class DesignerCenterContestsController < ApplicationController
   def set_contest_short_details
     short_details_class = @contest.response_winner.try(:designer) == @designer ? ContestShortDetails : ContestShortDetailsForGuest
     @contest_short_details = short_details_class.new(@contest)
+  end
+
+  def contests_list(contests)
+    ContestsColumns.new(contests.with_associations.includes([:contests_appeals, :preferred_retailers, client: :designer_level]).order(created_at: :desc).uniq)
   end
 
 end
