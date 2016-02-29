@@ -65,6 +65,12 @@ RSpec.configure do |config|
 
   config.infer_spec_type_from_file_location!
 
+  class Fork
+    def return_value
+      # causes <Errno::EPIPE: Broken pipe> exception in ForkBreak process
+    end
+  end
+
   class Object
     def concurrent_calls(stubbed_methods, called_method, options={}, &block)
       ActiveRecord::Base.connection.disconnect!

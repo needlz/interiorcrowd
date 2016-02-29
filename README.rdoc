@@ -1,4 +1,4 @@
-{<img src="https://circleci.com/gh/needlz/interiorcrowd.svg?style=svg" alt="Circle CI" />}[https://circleci.com/gh/needlz/interiorcrowd]
+{<img src="https://circleci.com/gh/needlz/interiorcrowd/tree/master.svg?style=svg&circle-token=c20a2099a5658e65d521b3769a9543c1415d770b" alt="Circle CI" />}[https://circleci.com/gh/needlz/interiorcrowd/tree/master]
 {<img src="https://gemnasium.com/8a92c2d0be74b89936323a765a33fd13.svg" alt="Dependency Status" />}[https://gemnasium.com/needlz/interiorcrowd]
 
 {Wiki}[https://github.com/needlz/interiorcrowd/wiki]
