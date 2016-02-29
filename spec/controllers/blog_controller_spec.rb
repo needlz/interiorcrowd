@@ -8,8 +8,9 @@ RSpec.describe BlogController do
     context 'existing blog page' do
       it 'returns page' do
         stub_request(:get, "http://blog.interiorcrowd.com/?icrowd_app=yes").
-           with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip,deflate', 'Cookie'=>'', 'Referer'=>'http://blog.interiorcrowd.com', 'User-Agent'=>'Faraday v0.9.1'}).
-           to_return(:status => 200, :body => "", :headers => {})
+            with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip,deflate', 'Cookie'=>'', 'Referer'=>'http://blog.interiorcrowd.com', 'User-Agent'=>'Faraday v0.9.2'}).
+            to_return(:status => 200, :body => "", :headers => {})
+
 
         blog_root = '/'
         get :blog_page, blog_page_path: blog_root

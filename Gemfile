@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 
 gem 'passenger' # webserver
 
@@ -32,14 +32,13 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'figaro'
-gem 'handy', '0.0.28'
 gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
 gem 'aws-sdk', '< 2.0' # incompatibility with SDK v2
 gem 'hashie'
 gem 'fabrication'
-gem 'sprockets', '2.11.0'
+gem 'sprockets', '~> 2.11.0'
 gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
@@ -74,7 +73,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.1'
+  gem 'rspec-rails'
   gem 'stripe-ruby-mock', '~> 2.2.0', require: 'stripe_mock'
   gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
   gem 'faker' # generating fake data

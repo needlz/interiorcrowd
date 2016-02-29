@@ -109,14 +109,18 @@ common: &defaults
   show_portfolio_reviews: <%= false %>
 
 development:
+  <<: *defaults
   zendesk_domain:
   hotjar_id:
 test:
+  <<: *defaults
   mailchimp:
     api_key: '1234-us1'
     list_id: '123'
 
 staging:
+  <<: *defaults
 
 production:
+  <<: *defaults
   beta_notification_emails: <%=  ENV['BETA_NOTIFICATION_EMAILS'] && ENV['BETA_NOTIFICATION_EMAILS'].split(',') %>

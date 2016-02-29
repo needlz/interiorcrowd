@@ -35,6 +35,7 @@ RSpec.describe ClientPaymentsController do
             end
 
             it 'creates payment' do
+              expect(Settings.payment_enabled).to be_truthy
               post :create, contest_id: contest.id, client_agree: 'yes'
               expect(contest.client_payment.last_error).to be_nil
               expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
@@ -200,8 +201,8 @@ RSpec.describe ClientPaymentsController do
           end
 
           it 'does not create payment' do
+            expect(contest.client_payment).to be_falsey
             post :create, params
-            expect(contest.client_payment).to be_nil
             expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
           end
 
