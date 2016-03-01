@@ -510,7 +510,7 @@ class UserMailer < ActionMailer::Base
   private
 
   def asset_url(asset_path)
-    Settings.app_host + '/assets' + asset_path
+    root_url + '/assets' + asset_path
   end
 
   def set_user_params(user)
