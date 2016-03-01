@@ -149,7 +149,7 @@ class DesignerCenterRequestsController < ApplicationController
   end
 
   def set_image_item_views
-    @product_items = ImageItemView.for_image_items(@visible_image_items.product_items)
-    @similar_styles = ImageItemView.for_image_items(@visible_image_items.similar_styles)
+    @product_items = ImageItemView.for_image_items(@visible_image_items.product_items.includes(:published_version))
+    @similar_styles = ImageItemView.for_image_items(@visible_image_items.similar_styles.includes(:published_version))
   end
 end

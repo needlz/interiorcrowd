@@ -7,7 +7,7 @@
   .overlayExampleImg{ class: ('hidden-xs' if settings.no_mobile_overlay) }
     - if settings.remove_button
       %a.remove{ href: '#', title: 'Delete' }
-        %img{ src: settings.remove_icon_path }
+        %img{ src: remove_icon_path }
     - if settings.url_for_downloading
       %a.download{ href: settings.url_for_downloading, title: 'Download', style: ('right: 10px' if settings.original_size_path.blank?) }
         %img{ src: download_icon_path }
