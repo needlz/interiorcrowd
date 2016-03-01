@@ -4990,11 +4990,49 @@ $final-designer-center-comment-border-color: #ccc;
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 767px) {
   .footerLinks a {
     font-size: 16px;
-    display: inline-block;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .footerLinks {
+
+    .xs-first-col {
+      float: left !important;
+      text-align: right !important;
+    }
+
+    .xs-second-col {
+      float: right !important;
+      text-align: left !important;
+    }
   }
 }
+
+@media (max-width: 479px) {
+  .footerLinks a{
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 991px) {
+  .footerLinks {
+
+    .xs-first-col {
+      float: left !important;
+    }
+
+    .xs-second-col {
+      float: left !important;
+    }
+  }
+}
+
+.footerLinks {
+  a {
+    white-space: nowrap;
+  }
+}
+
