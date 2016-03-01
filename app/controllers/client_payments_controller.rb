@@ -37,7 +37,7 @@ class ClientPaymentsController < ApplicationController
   end
 
   def apply_promocode
-    code = params[:client].try(:[], :promocode)
+    code = params.dig(:client, :promocode)
     ApplyPromocode.new(contest, code).perform
   end
 
@@ -67,9 +67,6 @@ class ClientPaymentsController < ApplicationController
     @client.update_attributes!(client_contest_created_at)
     notify_product_owner
     welcome_client
-    if contest.brief_pending? && !contest.notified_client_contest_not_yet_live
-      contest.update_attributes!(notified_client_contest_not_yet_live: true)
-    end
   end
 
   def agreed_with_terms_of_use

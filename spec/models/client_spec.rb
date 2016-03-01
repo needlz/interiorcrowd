@@ -16,9 +16,9 @@ RSpec.describe Client do
 
   describe '#last_contest' do
     context 'active contest before inactive' do
-      let!(:finished_contest) { Fabricate(:contest, status: 'finished', client: client, created_at: 2.days.ago) }
-      let!(:pending_contest) { Fabricate(:contest, status: 'brief_pending', client: client, created_at: 1.days.ago) }
-      let!(:closed_contest) { Fabricate(:contest, status: 'closed', client: client, created_at: Time.current) }
+      let!(:finished_contest) { Fabricate(:completed_contest, status: 'finished', client: client, created_at: 2.days.ago) }
+      let!(:pending_contest) { Fabricate(:completed_contest, status: 'brief_pending', client: client, created_at: 1.days.ago) }
+      let!(:closed_contest) { Fabricate(:completed_contest, status: 'closed', client: client, created_at: Time.current) }
 
       it 'returns last active contest' do
         expect(client.last_contest).to eq pending_contest
@@ -26,10 +26,10 @@ RSpec.describe Client do
     end
 
     context 'active contest is the last' do
-      let!(:finished_contest) { Fabricate(:contest, status: 'finished', client: client, created_at: 3.days.ago) }
-      let!(:fulfillment_contest) { Fabricate(:contest, status: 'fulfillment', client: client, created_at: 2.days.ago) }
-      let!(:pending_contest) { Fabricate(:contest, status: 'brief_pending', client: client, created_at: 1.days.ago) }
-      let!(:submission_contest) { Fabricate(:contest, status: 'submission', client: client, created_at: Time.current) }
+      let!(:finished_contest) { Fabricate(:completed_contest, status: 'finished', client: client, created_at: 3.days.ago) }
+      let!(:fulfillment_contest) { Fabricate(:completed_contest, status: 'fulfillment', client: client, created_at: 2.days.ago) }
+      let!(:pending_contest) { Fabricate(:completed_contest, status: 'brief_pending', client: client, created_at: 1.days.ago) }
+      let!(:submission_contest) { Fabricate(:completed_contest, status: 'submission', client: client, created_at: Time.current) }
 
       it 'returns last active contest' do
         expect(client.last_contest).to eq submission_contest
@@ -37,8 +37,8 @@ RSpec.describe Client do
     end
 
     context 'no active contests' do
-      let!(:finished_contest) { Fabricate(:contest, status: 'finished', client: client, created_at: 1.days.ago) }
-      let!(:pending_contest) { Fabricate(:contest, status: 'brief_pending', client: client, created_at: Time.current) }
+      let!(:finished_contest) { Fabricate(:completed_contest, status: 'finished', client: client, created_at: 1.days.ago) }
+      let!(:pending_contest) { Fabricate(:completed_contest, status: 'brief_pending', client: client, created_at: Time.current) }
 
       it 'returns last inactive contest' do
         expect(client.last_contest).to eq pending_contest
@@ -46,8 +46,8 @@ RSpec.describe Client do
     end
 
     context 'finished contest before closed' do
-      let!(:finished_contest) { Fabricate(:contest, status: 'finished', client: client, created_at: 1.days.ago) }
-      let!(:closed_contest) { Fabricate(:contest, status: 'closed', client: client, created_at: Time.current) }
+      let!(:finished_contest) { Fabricate(:completed_contest, status: 'finished', client: client, created_at: 1.days.ago) }
+      let!(:closed_contest) { Fabricate(:completed_contest, status: 'closed', client: client, created_at: Time.current) }
 
       it 'returns last finished contest' do
         expect(client.last_contest).to eq finished_contest

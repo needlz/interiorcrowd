@@ -29,12 +29,12 @@ class ImageItemsEditing
     ids.each_with_index.map do |id, index|
       { attributes:
             { image_id: contest_request_options[kind][:image_ids][index],
-              name: contest_request_options[kind][:names].try(:[], index),
-              brand: contest_request_options[kind][:brands].try(:[], index),
-              price: contest_request_options[kind][:prices].try(:[], index),
-              link: contest_request_options[kind][:links].try(:[], index),
-              text: contest_request_options[kind][:texts].try(:[], index),
-              dimensions: contest_request_options[kind][:dimensions].try(:[], index)
+              name: contest_request_options.dig(kind, :names, index),
+              brand: contest_request_options.dig(kind, :brands, index),
+              price: contest_request_options.dig(kind, :prices, index),
+              link: contest_request_options.dig(kind, :links, index),
+              text: contest_request_options.dig(kind, :texts, index),
+              dimensions: contest_request_options.dig(kind, :dimensions, index)
             },
         id: id
       }

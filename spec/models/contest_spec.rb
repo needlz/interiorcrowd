@@ -3,19 +3,18 @@ require 'rails_helper'
 RSpec.describe Contest do
   let(:client) { Fabricate(:client) }
   let(:contest) do
-    Fabricate(:contest,
+    Fabricate(:contest_in_submission,
               client: client,
               liked_examples: Fabricate.times(2, :example_image),
-              space_images: Fabricate.times(2, :space_image),
-              status: 'submission'
+              space_images: Fabricate.times(2, :space_image)
     )
   end
 
   describe 'not payed scope' do
     it 'returns contests without client payments' do
-      brief_pending_contest = Fabricate(:contest, status: 'brief_pending')
-      submission_contest = Fabricate(:contest, status: 'submission')
-      payed_contest = Fabricate(:contest, status: 'submission')
+      brief_pending_contest = Fabricate(:completed_contest, status: 'brief_pending')
+      submission_contest = Fabricate(:contest_in_submission)
+      payed_contest = Fabricate(:contest_in_submission)
       Fabricate(:client_payment, contest: payed_contest)
       expect(Contest.not_payed).to match_array([brief_pending_contest, submission_contest])
     end

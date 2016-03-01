@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe FinishContestRequest do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'final_fulfillment') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'final_fulfillment') }
   let(:designer) { Fabricate(:designer) }
   let(:contest_request) { Fabricate(:contest_request,
                                     contest: contest,

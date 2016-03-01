@@ -10,14 +10,13 @@ RSpec.describe DesignerCenterRequestsController do
   let(:designer) { Fabricate(:designer_with_portfolio) }
   let(:client) { Fabricate(:client) }
   let(:other_designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest,
+  let(:contest) { Fabricate(:contest_in_submission,
                             client: client,
                             desirable_colors: '955e3a,ffb81b',
-                            undesirable_colors: 'EEE',
-                            status: 'submission') }
-  let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
-  let(:final_fulfillment_contest) { Fabricate(:contest, client: client, status: 'final_fulfillment') }
-  let(:other_contest) { Fabricate(:contest, client: client, status: 'submission') }
+                            undesirable_colors: 'EEE') }
+  let(:fulfillment_contest) { Fabricate(:completed_contest, client: client, status: 'fulfillment') }
+  let(:final_fulfillment_contest) { Fabricate(:completed_contest, client: client, status: 'final_fulfillment') }
+  let(:other_contest) { Fabricate(:contest_in_submission, client: client) }
   let(:submitted_request) do Fabricate(:contest_request,
                                       designer: designer,
                                       contest: contest,

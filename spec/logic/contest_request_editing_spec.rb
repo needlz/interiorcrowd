@@ -4,9 +4,8 @@ RSpec.describe ContestRequestEditing do
 
   let(:request) { Fabricate(:contest_request,
                             designer: Fabricate(:designer),
-                            contest: Fabricate(:contest,
-                                               client: Fabricate(:client),
-                                               status: 'submission'
+                            contest: Fabricate(:contest_in_submission,
+                                               client: Fabricate(:client)
                                               )
                             )
   }

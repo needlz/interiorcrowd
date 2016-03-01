@@ -107,7 +107,7 @@ RSpec.configure do |config|
 
   def raise_i18n_exceptions
     I18n.exception_handler = lambda do |exception, locale, key, options|
-      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule'
+      if exception.is_a?(I18n::MissingTranslation) && key.to_s != 'i18n.plural.rule' && !key.to_s.include?('contests.appeals')
         raise exception.to_exception
       end
     end
@@ -132,9 +132,10 @@ RSpec.configure do |config|
   end
 
   def contest_options_source
+    appeal = Fabricate(:appeal)
     @contest_options_source ||= { design_brief: {
-        design_category: Fabricate(:design_category).id,
-        design_area: Fabricate.times(2, :design_space).map(&:id) },
+        design_category: Fabricate(:design_category).id.to_s,
+        design_area: Fabricate.times(2, :design_space).map(&:id).map(&:to_s) },
       design_space: {
           length: '2',
           width: '2',
@@ -150,20 +151,20 @@ RSpec.configure do |config|
           b_plan: '1',
           contest_name: 'contest_name' },
       design_style: {
-          designer_level: 1,
+          designer_level: '1',
           desirable_colors: '#bbbbbb',
           undesirable_colors: '#aaaaaa,#888888',
           appeals: {
-              some_appeal: {
+              appeal.name.to_sym => {
                   reason: 'reason',
-                  value: 100} },
+                  value: '100' } },
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
           ex_links: ['link1', 'link2'] },
       contest: {
           retailer_ikea: true,
           elements_to_avoid: 'Fur',
-          entertaining: 1,
-          durability: 2,
+          entertaining: '1',
+          durability: '2',
           preferred_retailers: {
             ikea: true,
             other: 'other'

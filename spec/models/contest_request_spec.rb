@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ContestRequest do
 
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission) }
 
   it 'autogenerates email_thread_id on creation' do
     contest_request = ContestRequest.create!(contest_id: contest.id)
@@ -96,9 +96,8 @@ RSpec.describe ContestRequest do
                                        answer: 'maybe',
                                        contest_id: contest.id) }
     let(:client) { Fabricate(:client) }
-    let(:contest) { Fabricate(:contest,
-                              client_id: client.id,
-                              status: 'submission') }
+    let(:contest) { Fabricate(:contest_in_submission,
+                              client_id: client.id) }
 
     it 'does not change answer for fulfillment request' do
       request.reply('maybe', client.id)

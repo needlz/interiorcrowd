@@ -18,7 +18,8 @@ RSpec.describe ContestOptions do
                                         undesirable_colors: source[:design_style][:undesirable_colors],
                                         elements_to_avoid: source[:contest][:elements_to_avoid],
                                         entertaining: source[:contest][:entertaining],
-                                        durability: source[:contest][:durability]
+                                        durability: source[:contest][:durability],
+                                        designer_level_id: source[:design_style][:designer_level].to_i
                                    })
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))
@@ -42,6 +43,16 @@ RSpec.describe ContestOptions do
     params[:design_style][:ex_links] = params[:design_style][:ex_links] + ['', nil]
     options = ContestOptions.new(params)
     test_options(options, contest_options_source)
+  end
+
+  context 'with options from a contest' do
+    let(:location_zip) { '12345' }
+    let(:contest) { Fabricate(:completed_contest, client: Fabricate(:client), location_zip: location_zip) }
+    let(:options) { ContestOptions.new(contest) }
+
+    it 'extracts location zip from a contest' do
+      expect(options.contest[:location_zip]).to eq location_zip
+    end
   end
 
 end

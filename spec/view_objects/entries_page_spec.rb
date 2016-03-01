@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe EntriesPage do
 
   let(:client){ Fabricate(:client) }
-  let(:contest){ Fabricate(:contest, client: client, status: 'submission', phase_end: Time.current) }
+  let(:contest){ Fabricate(:contest_in_submission, client: client, phase_end: Time.current) }
   let(:entries_page){ EntriesPage.new(
       contest: contest,
       view_context: RenderingHelper.new
@@ -74,7 +74,7 @@ RSpec.describe EntriesPage do
       end
 
       context 'when winner response has published product items' do
-        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
+        let(:contest){ Fabricate(:completed_contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
 
         before do
           Fabricate(:product_item, contest_request: contest_request)
@@ -86,7 +86,7 @@ RSpec.describe EntriesPage do
       end
 
       context 'when winner response has no published product items' do
-        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
+        let(:contest){ Fabricate(:completed_contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
 
         it 'shows "winner chosen" notification' do
           expect(entries_page.show_winner_chosen_congratulations?).to be_truthy
@@ -102,7 +102,7 @@ RSpec.describe EntriesPage do
       end
 
       context 'when winner response has published product items' do
-        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
+        let(:contest){ Fabricate(:completed_contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: true) }
 
         before do
           Fabricate(:product_item, contest_request: contest_request)
@@ -114,7 +114,7 @@ RSpec.describe EntriesPage do
       end
 
       context 'when winner response has no published product items' do
-        let(:contest){ Fabricate(:contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
+        let(:contest){ Fabricate(:completed_contest, client: client, status: 'fulfillment', phase_end: Time.current, ever_received_published_product_items: false) }
 
         it 'does not show "winner chosen" notification' do
           expect(entries_page.show_winner_chosen_congratulations?).to be_falsey
