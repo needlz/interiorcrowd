@@ -114,7 +114,7 @@ class UserMailer < ActionMailer::Base
         description: { recipients: 'client',
                        occurrence: 'client submitted payment details but the contest brief is not yet completed'} },
       account_creation: {
-        template: 'test-account-creation',
+        template: 'account-creation',
         description: { recipients: 'client',
                        occurrence: 'registered with fast signup'} },
       new_project_on_the_platform: {
@@ -510,7 +510,7 @@ class UserMailer < ActionMailer::Base
   private
 
   def asset_url(asset_path)
-    Settings.app_host + '/assets' + asset_path
+    root_url + '/assets' + asset_path
   end
 
   def set_user_params(user)
