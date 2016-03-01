@@ -12,7 +12,6 @@ module Jobs
       ScheduledNotifications::WarningAboutSubmissionEndClose.perform
       ScheduledNotifications::NoSubmissions.perform
       ScheduledNotifications::OneSubmission.perform
-      ScheduledNotifications::DesignerWaitingFeedback.perform
       super
     end
 

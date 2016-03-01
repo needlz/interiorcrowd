@@ -108,7 +108,7 @@ RSpec.describe Jobs::TimeConditionalNotifications do
         expect(ScheduledNotifications::DesignerWaitingFeedback.scope).to match_array(expected_notifications_params)
         clients_to_notify_count = ScheduledNotifications::DesignerWaitingFeedback.scope.length
         job.perform
-        expect(jobs_with_handler_like(ScheduledNotifications::DesignerWaitingFeedback.notification).count).to eq clients_to_notify_count
+        expect(jobs_with_handler_like(ScheduledNotifications::DesignerWaitingFeedback.notification).count).to eq 0
       end
     end
   end
