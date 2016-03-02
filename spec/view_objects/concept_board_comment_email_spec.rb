@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ConceptBoardCommentEmail do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest) }
   let!(:previous_comment_1) { Fabricate(:concept_board_comment, contest_request: contest_request) }
   let!(:previous_comment_2) { Fabricate(:concept_board_comment, contest_request: contest_request) }

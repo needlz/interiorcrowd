@@ -74,6 +74,7 @@ class Contest < ActiveRecord::Base
   has_many :promocodes, through: :contest_promocodes
   has_many :designer_invite_notifications
   has_many :invited_designers, through: :designer_invite_notifications, source: :designer, class_name: 'Designer'
+  belongs_to :designer_level
 
   scope :by_page, ->(page) { paginate(page: page).order(created_at: :desc) }
   scope :current, ->{ where(status: 'submission') }
@@ -82,7 +83,7 @@ class Contest < ActiveRecord::Base
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_spaces, :client) }
   scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
-  scope :incompleted, ->{ where(status: INCOMPLETE_STATUSES) }
+  scope :incomplete, ->{ where(status: INCOMPLETE_STATUSES) }
 
   ransacker :finished_at_month, formatter: proc { |month|
     date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)

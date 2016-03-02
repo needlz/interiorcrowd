@@ -9,8 +9,11 @@ class @IntakeFormSaver
     )
 
   @save: ($form)->
+    array = $form.serializeArray()
+    contestId = $('.contest[data-id]').attr('data-id')
+    array.push({ name: 'id', value: contestId }) if contestId
     $.ajax(
-      data: $form.serializeArray()
+      data: array
       url: '/contests/save_intake_form'
       type: 'PUT'
     )

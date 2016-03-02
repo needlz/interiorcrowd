@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ContestRequestSubmission do
 
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission) }
   let(:contest_request) { Fabricate(:contest_request, designer: designer, contest: contest, status: 'draft') }
 
   it 'submits the contest request' do

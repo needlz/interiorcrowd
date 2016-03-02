@@ -114,6 +114,7 @@ gem 'viglink-api'
 gem 'sitemap_generator'
 gem 'postoffice'
 gem 'gibbon'
+gem 'ruby_dig'
 
 # profiling
 gem 'rack-mini-profiler'

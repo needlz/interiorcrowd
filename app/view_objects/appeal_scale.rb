@@ -77,8 +77,8 @@ class AppealScale
   def self.initialize_from_options(options)
     Appeal.all.order(:id).map do |appeal|
       appeal_scale = new(appeal)
-      appeal_scale.value = options[appeal.identifier].try(:[], :value)
-      appeal_scale.reason = options[appeal.identifier].try(:[], :reason)
+      appeal_scale.value = options.dig(appeal.identifier, :value)
+      appeal_scale.reason = options.dig(appeal.identifier, :reason)
       appeal_scale
     end
   end

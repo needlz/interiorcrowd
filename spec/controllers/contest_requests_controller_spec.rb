@@ -10,8 +10,8 @@ RSpec.describe ContestRequestsController do
   render_views
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
-  let(:fulfillment_contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'submission') }
+  let(:fulfillment_contest) { Fabricate(:completed_contest, client: client, status: 'fulfillment') }
   let(:designer) { Fabricate(:portfolio).designer }
   let(:request) { Fabricate(:contest_request, contest: contest,
                             lookbook: Fabricate(:lookbook),

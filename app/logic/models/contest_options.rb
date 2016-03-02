@@ -1,18 +1,66 @@
 class ContestOptions
 
-  attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :designer_level, :contest, :preferred_retailers
+  attr_reader :appeals, :space_image_ids, :liked_example_ids, :example_links, :contest, :preferred_retailers
 
-  REQUIRED_CONTEST_ATTRIBUTES = [:design_category_id, :design_space_ids, :space_budget, :location_zip,
-                      :budget_plan, :project_name, :desirable_colors]
+  def initialize(hash_or_active_record)
+    if hash_or_active_record.kind_of?(Contest)
+      initialize_from_contest(hash_or_active_record)
+    else
+      initialize_from_hash(hash_or_active_record)
+    end
+  end
 
-  REQUIRED_OPTIONS_BY_CHAPTER = {
-      design_brief: [:design_category_id, :design_space_id],
-      design_style: [:designer_level, :appeals, :desirable_colors],
-      design_space: [:space_budget, :location_zip],
-      preview: [:budget_plan, :project_name]
-  }
+  def self.calculate_inches(options, dimension_name)
+    dimension = dimension_name.to_sym
+    sign_inches = "#{dimension}_inches".to_sym
+    feet_in_inches = options[dimension].to_f * 12 if options.try(:[], dimension).present?
+    inches = options[sign_inches] if options.try(:[], sign_inches).present?
+    feet_in_inches.to_f + inches.to_f if feet_in_inches || inches
+  end
 
-  def initialize(hash)
+  private
+
+  def initialize_from_contest(contest_record)
+    @contest = {}
+    @contest[:design_category_id] = contest_record.design_category_id
+    @contest[:design_space_ids] = contest_record.design_spaces.pluck(:id)
+    @contest[:space_length] = contest_record.space_length
+    @contest[:space_width] = contest_record.space_width
+    @contest[:space_height] = contest_record.space_height
+    @contest[:space_budget] = contest_record.space_budget
+    @contest[:feedback] = contest_record.feedback
+    @contest[:budget_plan] = contest_record.budget_plan
+    @contest[:project_name] = contest_record.project_name
+    @contest[:desirable_colors] = contest_record.desirable_colors
+    @contest[:undesirable_colors] = contest_record.undesirable_colors
+    @contest[:elements_to_avoid] = contest_record.elements_to_avoid
+    @contest[:entertaining] = contest_record.entertaining
+    @contest[:durability] = contest_record.durability
+    ContestAdditionalPreference.preferences.each do |preference|
+      @contest[preference] = contest_record.send(preference)
+    end
+    @contest[:designers_explore_other_colors] = contest_record.designers_explore_other_colors
+    @contest[:designers_only_use_these_colors] = contest_record.designers_only_use_these_colors
+    @contest[:client_id] = contest_record.client.id
+    @contest[:accommodate_children] = contest_record.accommodate_children
+    @contest[:accommodate_pets] = contest_record.accommodate_pets
+    @contest[:location_zip] = contest_record.location_zip
+
+    @space_image_ids = contest_record.space_images.pluck(:id)
+    @appeals = contest_record.contests_appeals
+    @liked_example_ids = contest_record.liked_examples.pluck(:id)
+    @example_links = contest_record.liked_external_examples.pluck(:url)
+    @contest[:designer_level_id] = contest_record.designer_level_id
+
+    @preferred_retailers = {}
+    PreferredRetailers::RETAILERS.each do |retailer|
+      attribute =  retailer.to_sym
+      @preferred_retailers[attribute] = contest_record.preferred_retailers.send(retailer)
+    end
+    @preferred_retailers[:other] = contest_record.preferred_retailers.other
+  end
+
+  def initialize_from_hash(hash)
     options = hash.with_indifferent_access
     @contest = {}
     if options[:design_brief]
@@ -39,7 +87,7 @@ class ContestOptions
       @appeals = options[:design_style][:appeals].deep_symbolize_keys if options[:design_style].key?(:appeals)
       @liked_example_ids = options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style][:document_id]
       @example_links = options[:design_style][:ex_links].delete_if(&:blank?) if options[:design_style][:ex_links]
-      @designer_level = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
+      @contest[:designer_level_id] = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
       @contest[:designers_explore_other_colors] = options[:design_style][:designers_explore_other_colors].to_bool if options[:design_style].key?(:designers_explore_other_colors)
       @contest[:designers_only_use_these_colors] = options[:design_style][:designers_only_use_these_colors].to_bool if options[:design_style].key?(:designers_only_use_these_colors)
     end
@@ -65,36 +113,6 @@ class ContestOptions
         @contest[preference] = options[:contest][preference] if options[:contest].has_key?(preference)
       end
     end
-  end
-
-  def required_present?
-    missing_options.empty?
-  end
-
-  def uncompleted_chapter
-    missing = missing_options
-    REQUIRED_OPTIONS_BY_CHAPTER.each do |chapter, options|
-      return chapter if (missing & options).present?
-    end
-    nil
-  end
-
-  private
-
-  def missing_options
-    missing_options = REQUIRED_CONTEST_ATTRIBUTES.select { |option| contest[option].blank? }
-    missing_options << :appeals if appeals.blank?
-    missing_options << :designer_level if designer_level.blank?
-    missing_options << :location_zip unless PostOffice.validate_postcode(@contest[:location_zip], :us)
-    missing_options
-  end
-
-  def self.calculate_inches(options, param)
-    sign = param.to_sym
-    sign_inches = "#{sign}_inches".to_sym
-    feet_in_inches = options[sign].to_f * 12 if options.try(:[], sign).present?
-    inches = options[sign_inches] if options.try(:[], sign_inches).present?
-    feet_in_inches.to_f + inches.to_f if feet_in_inches || inches
   end
 
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Jobs::TimeConditionalNotifications do
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission, client: client) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest) }
   let(:job) { Jobs::TimeConditionalNotifications.new }
 
@@ -51,7 +51,7 @@ RSpec.describe Jobs::TimeConditionalNotifications do
   context 'when there is contest request' do
     let!(:client) { Fabricate(:client) }
     let!(:designer) { Fabricate(:designer) }
-    let!(:contest) { Fabricate(:contest, status: 'submission', client: client) }
+    let!(:contest) { Fabricate(:contest_in_submission, client: client) }
     let!(:request_visited) { Fabricate(:contest_request, contest: contest, last_visit_by_client_at: Time.current - 5.days, designer: designer) }
 
     context 'without designer comment 3 days ago after client visited contest' do
@@ -72,9 +72,9 @@ RSpec.describe Jobs::TimeConditionalNotifications do
       let!(:client_2) { Fabricate(:client) }
       let!(:client_3) { Fabricate(:client) }
       let!(:client_4) { Fabricate(:client) }
-      let!(:contest_2) { Fabricate(:contest, client: client_2, status: 'submission') }
-      let!(:contest_3) { Fabricate(:contest, client: client_3, status: 'submission') }
-      let!(:contest_4) { Fabricate(:contest, client: client_3, status: 'submission') }
+      let!(:contest_2) { Fabricate(:contest_in_submission, client: client_2) }
+      let!(:contest_3) { Fabricate(:contest_in_submission, client: client_3) }
+      let!(:contest_4) { Fabricate(:contest_in_submission, client: client_3) }
       let!(:request_not_visited) { Fabricate(:contest_request, contest: contest_2, last_visit_by_client_at: nil, designer: designer) }
       let!(:request_visited_2) { Fabricate(:contest_request, contest: contest_3, last_visit_by_client_at: Time.current - 5.days, designer: designer) }
       let!(:request_visited_fulfillment) do

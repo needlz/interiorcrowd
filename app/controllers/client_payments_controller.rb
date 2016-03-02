@@ -37,7 +37,7 @@ class ClientPaymentsController < ApplicationController
   end
 
   def apply_promocode
-    code = params[:client].try(:[], :promocode)
+    code = params.dig(:client, :promocode)
     ApplyPromocode.new(contest, code).perform
   end
 

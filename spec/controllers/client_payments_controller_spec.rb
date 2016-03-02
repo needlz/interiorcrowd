@@ -5,7 +5,7 @@ RSpec.describe ClientPaymentsController do
   render_views
 
   let(:client) { Fabricate(:client) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'brief_pending') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
   let(:credit_card) { Fabricate(:credit_card, client: client) }
   let(:promocode) { Fabricate(:promocode) }
 
@@ -83,6 +83,7 @@ RSpec.describe ClientPaymentsController do
                 expect(contest.reload.notified_client_contest_not_yet_live).to be_falsey
               end
             end
+
 
             context 'when owner already notified' do
               before do

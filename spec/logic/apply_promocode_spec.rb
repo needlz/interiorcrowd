@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ApplyPromocode do
 
   let(:client){ Fabricate(:client) }
-  let(:contest){ Fabricate(:contest, client: client, status: 'submission') }
+  let(:contest){ Fabricate(:contest_in_submission, client: client) }
   let(:apply) { ApplyPromocode.new(contest, promocode.promocode) }
 
   context 'when promocode is one-time' do

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe ImageItemView do
-  let(:contest) { Fabricate(:contest, status: 'submission') }
+  let(:contest) { Fabricate(:contest_in_submission) }
   let(:contest_request) { Fabricate(:contest_request, contest: contest) }
   let(:image_item) { Fabricate(:product_item, mark: image_item_mark, contest_request: contest_request) }
   let(:published_image_item) { Fabricate(:product_item, temporary_version: image_item, mark: published_mark,

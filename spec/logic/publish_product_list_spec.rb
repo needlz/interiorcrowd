@@ -4,7 +4,7 @@ RSpec.describe PublishProductList do
 
   let(:client) { Fabricate(:client) }
   let(:designer) { Fabricate(:designer) }
-  let(:contest) { Fabricate(:contest, client: client, status: 'fulfillment') }
+  let(:contest) { Fabricate(:completed_contest, client: client, status: 'fulfillment') }
   let(:contest_request) { Fabricate(:contest_request, contest: contest, status: 'fulfillment_ready') }
   let(:temporary_items) { Fabricate.times(2, :product_item, contest_request: contest_request, status: 'temporary') }
   let(:published_items) { Fabricate.times(3, :product_item, contest_request: contest_request, status: 'published') }

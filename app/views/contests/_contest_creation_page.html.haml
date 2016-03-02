@@ -1,4 +1,4 @@
-.container.animated.fadeInDown
+.container.animated.fadeInDown.contest{ data: { id: @contest.try(:id) } }
   = render 'clients/client_center/header' if current_user.client?
   = render partial: 'contest_top_panel'
   = yield :page_content

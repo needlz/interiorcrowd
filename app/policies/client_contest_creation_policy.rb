@@ -10,7 +10,7 @@ class ClientContestCreationPolicy < Policy
   end
 
   def create_contest
-    permissions << !client.contests.incompleted.exists?
+    permissions << !client.contests.incomplete.exists?
     self
   end
 
