@@ -30,15 +30,15 @@ class MandrillInboundEmailProcessor
       @author = contest_request_participant(contest_request, parser.sender_email)
       raise("Unknown concept board participant: #{ parser.sender_email }") unless author
 
+      @comment_text = parser.comment_text
+      ActiveRecord::Base.transaction do
+        create_comment
+        forward_email
+        @inbound_email.update_attributes!(processed: true)
+      end
+
     rescue StandardError => e
       ErrorsLogger.log(e)
-    end
-
-    @comment_text = parser.comment_text
-    ActiveRecord::Base.transaction do
-      create_comment
-      forward_email
-      @inbound_email.update_attributes!(processed: true)
     end
   end
 
