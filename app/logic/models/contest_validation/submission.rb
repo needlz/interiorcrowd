@@ -2,8 +2,10 @@ module ContestValidation
 
   class Submission < Creation
 
-    def self.required_options_by_chapter
-      super.deep_merge(design_space: [:space_image_ids])
+    def self.required_options_by_step
+      required_options = super
+      required_options[:design_space] << :space_image_ids
+      required_options
     end
 
     def missing_options

@@ -99,17 +99,17 @@ class ContestsController < ApplicationController
     next_step = ContestCreationWizard.creation_steps[next_step_index]
 
     if params[:id]
-      incompleted_contest = fetch_incompleted_contest(params[:id])
-      return render_404 unless incompleted_contest
-      update_contest_attributes(incompleted_contest)
-      return redirect_to(controller: 'contests', action: next_step, id: incompleted_contest.id)
+      incomplete_contest = fetch_incomplete_contest(params[:id])
+      return render_404 unless incomplete_contest
+      update_contest_attributes(incomplete_contest)
+      return redirect_to(controller: 'contests', action: next_step, id: incomplete_contest.id)
     else
       session[action] = params[action] if params[action].present?
     end
 
-    incompleted_contest = fetch_incompleted_contest
-    if incompleted_contest
-      redirect_to(controller: 'contests', action: action, id: incompleted_contest.id)
+    incomplete_contest = fetch_incomplete_contest
+    if incomplete_contest
+      redirect_to(controller: 'contests', action: action, id: incomplete_contest.id)
     else
       if current_user.client?
         contest_creation = ContestCreation.new(client_id: current_user.id, contest_params: session, make_complete: false)
@@ -206,9 +206,9 @@ class ContestsController < ApplicationController
 
   def save_intake_form
     if params[:id]
-      incompleted_contest = fetch_incompleted_contest(params[:id])
-      return render(json: { saved: false }) unless incompleted_contest
-      update_contest_attributes(incompleted_contest)
+      incomplete_contest = fetch_incomplete_contest(params[:id])
+      return render(json: { saved: false }) unless incomplete_contest
+      update_contest_attributes(incomplete_contest)
     else
       ContestCreationWizard.creation_steps.each do |creation_step|
         session[creation_step] = params[creation_step] if params[creation_step]
@@ -275,9 +275,9 @@ class ContestsController < ApplicationController
           raise_404(e) and return false
         end
       else
-        incompleted_contest = fetch_incompleted_contest
-        if incompleted_contest
-          redirect_to(controller: 'contests', action: action_name, id: incompleted_contest.id) and return false
+        incomplete_contest = fetch_incomplete_contest
+        if incomplete_contest
+          redirect_to(controller: 'contests', action: action_name, id: incomplete_contest.id) and return false
         end
         session.to_hash
       end
@@ -341,11 +341,11 @@ class ContestsController < ApplicationController
     contest.client.credit_cards.present?
   end
 
-  def fetch_incompleted_contest(contest_id = nil)
+  def fetch_incomplete_contest(contest_id = nil)
     if contest_id
-      current_user.contests.incompleted.find_by_id(contest_id)
+      current_user.contests.incomplete.find_by_id(contest_id)
     else
-      current_user.client? && current_user.contests.incompleted.first
+      current_user.client? && current_user.contests.incomplete.first
     end
   end
 
@@ -355,8 +355,8 @@ class ContestsController < ApplicationController
 
   def update_contest_attributes(contest)
     contest_options = ContestOptions.new(params.with_indifferent_access)
-    incompleted_contest_updater = ContestUpdater.new(contest, contest_options)
-    incompleted_contest_updater.perform
+    incomplete_contest_updater = ContestUpdater.new(contest, contest_options)
+    incomplete_contest_updater.perform
   end
 
 end

@@ -26,9 +26,8 @@ class ContestCreationWizard
   end
 
   def self.uncomplete_step_path(contest_options, validated_steps)
-    uncompleted_chapter = ContestValidation::Creation.new(contest_options).uncompleted_step
-    uncomplete_step = validated_steps.detect { |step| uncompleted_chapter == step }
-    creation_steps_paths[uncomplete_step] if uncomplete_step
+    uncompleted_step = ContestValidation::Creation.new(contest_options).uncompleted_step(validated_steps)
+    creation_steps_paths[uncompleted_step] if uncompleted_step
   end
 
   def self.finished_step?(contest, index)

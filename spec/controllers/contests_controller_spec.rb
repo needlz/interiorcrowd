@@ -931,7 +931,7 @@ RSpec.describe ContestsController do
             patch(:save_intake_form, contest_options_source.merge(id: contest.id))
           end.to change{ contest.reload.designer_level_id }.
               from(nil).
-              to(contest_options_source.dig(:design_style, :designer_level).to_i)
+              to(contest_options_source[:design_style][:designer_level].to_i)
         end
       end
     end
@@ -942,7 +942,7 @@ RSpec.describe ContestsController do
           patch(:save_intake_form, contest_options_source)
         end.to change{ session[:design_brief].try(:[], :design_category) }.
             from(nil).
-            to(contest_options_source.dig(:design_brief, :design_category))
+            to(contest_options_source[:design_brief][:design_category])
       end
     end
   end
