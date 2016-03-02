@@ -13,8 +13,8 @@ class AnonymMenu < Menu
   def role_specific_items
     { I18n.t('header.login') =>
           {
-              I18n.t('header.client_login') => view_context.client_login_sessions_path,
-              I18n.t('header.designer_login') => view_context.designer_login_sessions_path
+              I18n.t('header.client_login') => view_context.new_client_session_path,
+              I18n.t('header.designer_login') => view_context.new_designer_session_path
           }
     }
   end

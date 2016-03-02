@@ -26,7 +26,7 @@ class ContestRequestsController < ApplicationController
       if current_user.client?
         render_404
       else
-        redirect_to client_login_sessions_path
+        redirect_to new_client_session_path
       end
     end
   end

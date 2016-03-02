@@ -185,7 +185,7 @@ class UserMailer < ActionMailer::Base
   def invite_to_contest(designer, client, email_id = nil)
     set_template_values(
       client_name: client.name,
-      designer_login_url: renderer.designer_login_sessions_url
+      designer_login_url: renderer.new_designer_session_url
     )
     mail to: [wrap_recipient(designer.email, designer.name, 'to')], email_id: email_id
   end

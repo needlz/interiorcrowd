@@ -3,21 +3,17 @@ InteriorC::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  devise_for :designers
+  devise_for :clients
+
   def draw_routes
     root 'home#index'
 
-    resources :designers, only: [:new, :create, :update]
+    # resources :designers, only: [:new, :create, :update]
 
     resources :sessions, only: [] do
       collection do
-        get 'logout'
-        get 'designer_login'
-        get 'client_login'
-        post 'client_authenticate'
         get 'client_fb_authenticate'
-        post 'authenticate'
-        match 'designer_retry_password', via: [:post, :get]
-        match 'client_retry_password', via: [:post, :get]
       end
     end
 

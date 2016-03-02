@@ -30,6 +30,7 @@
 #
 
 class Client < ActiveRecord::Base
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
   include User
 
   ACTIVE_STATUS = 1

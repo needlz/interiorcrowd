@@ -27,6 +27,9 @@
 
 class Designer < ActiveRecord::Base
   include User
+
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+
   validates :email, :first_name, :last_name, presence: true
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create

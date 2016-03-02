@@ -27,7 +27,7 @@ class ContestsController < ApplicationController
       if current_user.client?
         raise_404
       else
-        return redirect_to(client_login_sessions_path)
+        return redirect_to(new_client_session_path)
       end
     end
     return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
@@ -230,7 +230,7 @@ class ContestsController < ApplicationController
       if current_user.client?
         raise_404
       else
-        return redirect_to(client_login_sessions_path)
+        return redirect_to(new_client_session_path)
       end
     end
     return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)

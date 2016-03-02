@@ -1,7 +1,12 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
+  extend Devise::Controllers::Helpers::ClassMethods
+
   rescue_from StandardError, with: :handle_error unless Rails.env.development?
+
+  devise_group :user, contains: [:designer, :client]
+  # before_action :authenticate_user!
 
   helper_method :current_user
 
@@ -21,12 +26,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_designer
-    redirect_to designer_login_sessions_path if session[:designer_id].blank?
+    redirect_to new_designer_session_path if session[:designer_id].blank?
     session[:designer_id]
   end
 
   def check_client
-    redirect_to client_login_sessions_path if session[:client_id].blank?
+    redirect_to new_client_session_path if session[:client_id].blank?
     session[:client_id]
   end
 
