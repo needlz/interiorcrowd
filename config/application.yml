@@ -39,3 +39,4 @@ test:
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
+  INBOUND_MAIL_DOMAIN: 'inbound.test.com'

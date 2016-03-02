@@ -1,6 +1,6 @@
 class ConceptBoardCommentReceivedEmail
 
-  INBOUND_DOMAIN = 'inbound.interiorcrowd.com'
+  INBOUND_DOMAIN = ENV['INBOUND_MAIL_DOMAIN']
 
   attr_reader :message
 
