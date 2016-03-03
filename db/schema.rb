@@ -268,7 +268,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.integer  "contest_id"
     t.string   "image_type",         limit: 255
     t.integer  "contest_request_id"
-    t.integer  "outbound_email_id"
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
@@ -395,13 +394,6 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
     t.string   "file_type",                      default: "image"
-  end
-
-  create_table "inbound_emails", force: :cascade do |t|
-    t.text     "json_content"
-    t.boolean  "processed"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
   end
 
   create_table "inbound_emails", force: :cascade do |t|
