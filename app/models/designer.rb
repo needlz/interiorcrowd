@@ -94,25 +94,28 @@ class Designer < ActiveRecord::Base
   end
 
   ransacker :by_submission_date, formatter: proc { |month|
-    start_date, end_date = ActiveAdminExtensions::Designer.range_limits_for_month(month)
-    designers = Designer.joins(:contest_requests).where("contest_requests.submitted_at >= ? AND contest_requests.submitted_at < ?", start_date, end_date).map(&:id)
-    designers = designers.present? ? designers : nil
+    date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)
+    designers = Designer.joins(:contest_requests).where(contest_requests: { submitted_at: date..date.next_month }).map(&:id)
+    designers.present? ? designers : nil
   } do |parent|
     parent.table[:id]
   end
 
   ransacker :by_win_date, formatter: proc { |month|
-    start_date, end_date = ActiveAdminExtensions::Designer.range_limits_for_month(month)
-    designers = Designer.joins(:contest_requests).where("contest_requests.won_at >= ? AND contest_requests.won_at < ?", start_date, end_date).map(&:id)
-    designers = designers.present? ? designers : nil
+    date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)
+    designers = Designer.joins(:contest_requests).where(contest_requests: { won_at: date..date.next_month }).map(&:id)
+    designers.present? ? designers : nil
   } do |parent|
     parent.table[:id]
   end
 
   ransacker :by_completion_date, formatter: proc { |month|
-    start_date, end_date = ActiveAdminExtensions::Designer.range_limits_for_month(month)
-    designers = Designer.joins(contest_requests: [:contest]).where("contest_requests.answer = 'winner'").where("contest_requests.status = 'finished'").where("contests.finished_at >= ? AND contests.finished_at < ?", start_date, end_date).map(&:id)
-    designers = designers.present? ? designers : nil
+    date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)
+    designers = Designer.joins(contest_requests: [:contest]).
+        where("contest_requests.answer = 'winner'").
+        where("contest_requests.status = 'finished'").
+        where(contests: { finished_at: date..date.next_month }).map(&:id)
+    designers.present? ? designers : nil
   } do |parent|
     parent.table[:id]
   end

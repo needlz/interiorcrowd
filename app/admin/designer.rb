@@ -1,3 +1,5 @@
+include ActiveAdminExtensions::ContestDetails
+
 ActiveAdmin.register Designer do
 
   index do
@@ -10,38 +12,41 @@ ActiveAdmin.register Designer do
     column :created_at
     column :paid_for_concept_boards
     column 'Concept boards submitted' do |designer|
-      date_string = params[:q][:by_submission_date_in_any] if params[:q]
-      date_sym = date_string if date_string
-      date = Date.parse(ActiveAdminExtensions::Designer.months_for_years[date_sym]) if date_sym
-      date_range = date..date.next_month if date
-      designer.contest_requests.ever_published.where(({ submitted_at: date_range } if date_range)).map do |request|
+      scope = designer.contest_requests.ever_published
+      get_param = params[:q][:by_submission_date_in_any]
+      field_to_search = 'contest_requests.submitted_at'
+
+      requests_to_display = requests_find_by(scope, get_param, field_to_search)
+
+      requests_to_display.map do |request|
         link_to('#' + request.contest.id.to_s, admin_detailed_contest_path(request.contest))
       end.join('<br />').html_safe
-    end
+
+    end if params[:q] && params[:q][:by_submission_date_in_any]
     column 'Contests won' do |designer|
-      date_string = params[:q][:by_win_date_in_any] if params[:q]
-      date_sym = date_string if date_string
-      date = Date.parse(ActiveAdminExtensions::Designer.months_for_years[date_sym]) if date_sym
-      date_range = date..date.next_month if date
-      winning_requests = designer.contest_requests.ever_published.where(answer: 'winner')
-      winning_requests.where(({ won_at: date_range } if date_range)).map do |request|
+      scope = designer.contest_requests.ever_published
+      get_param = params[:q][:by_win_date_in_any]
+      field_to_search = 'contest_requests.won_at'
+
+      requests_to_display = requests_find_by(scope, get_param, field_to_search)
+
+      requests_to_display.map do |request|
         link_to('#' + request.contest.id.to_s, admin_detailed_contest_path(request.contest))
       end.join('<br />').html_safe
-    end
+
+    end if params[:q] && params[:q][:by_win_date_in_any]
     column 'Contests completed' do |designer|
-      date_string = params[:q][:by_completion_date_in_any] if params[:q]
-      date_sym = date_string if date_string
-      date = Date.parse(ActiveAdminExtensions::Designer.months_for_years[date_sym]) if date_sym
-      date_range = date..date.next_month if date
-      condition_hash = { finished_at: date_range } if date_range
-      designer.contest_requests.ever_published.
-          where(answer: 'winner').
-          where(status: 'finished').
-          joins(:contest).
-          where(({ contests: condition_hash } if condition_hash) ).map do |request|
+      scope = designer.contest_requests.ever_published.where(answer: 'winner').where(status: 'finished').joins(:contest)
+      get_param = params[:q][:by_completion_date_in_any]
+      field_to_search = 'contests.finished_at'
+
+      requests_to_display = requests_find_by(scope, get_param, field_to_search)
+
+      requests_to_display.map do |request|
         link_to('#' + request.contest.id.to_s, admin_detailed_contest_path(request.contest))
       end.join('<br />').html_safe
-    end
+
+    end if params[:q] && params[:q][:by_completion_date_in_any]
     column :portfolio_path
     column :phone_number
     column :address
@@ -89,20 +94,20 @@ ActiveAdmin.register Designer do
   filter :plain_password
   filter :created_at
   filter :by_submission_date_in_any,
-         label: 'Sort By Submission Date',
+         label: 'Submission Date',
          as: :select,
-         collection: ActiveAdminExtensions::Designer.months_for_years.keys
-         # multiple: true
+         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
+         multiple: true
   filter :by_win_date_in_any,
-         label: 'Sort By Win Date',
+         label: 'Win Date',
          as: :select,
-         collection: ActiveAdminExtensions::Designer.months_for_years.keys
-         # multiple: true
+         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
+         multiple: true
   filter :by_completion_date_in_any,
-         label: 'Sort By Completion Date',
+         label: 'Completion Date',
          as: :select,
-         collection: ActiveAdminExtensions::Designer.months_for_years.keys
-         # multiple: true
+         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
+         multiple: true
   filter :paid_for_concept_boards
   filter :portfolio_path
   filter :phone_number

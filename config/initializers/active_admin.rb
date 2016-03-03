@@ -231,7 +231,7 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
-  config.skip_before_filter :setup_event_tracker # the before filter causes "A copy of ApplicationController has been removed from the module tree but is still active"
+  config.skip_before_filter :setup_event_tracker, :track_client_activity # the before filter causes "A copy of ApplicationController has been removed from the module tree but is still active"
 end
 
 class ActiveAdmin::DSL
