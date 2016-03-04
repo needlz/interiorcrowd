@@ -1992,13 +1992,13 @@ span.submission-pagination{
   height: 25px;
   background: url('left_arrowb.png') no-repeat center;
   text-indent: -9999px;
-  left: 42%;
+  left: 39%;
   z-index: 99;
 }
 .designers-slider .slick-next {
   background: url('right_arrowb.png') no-repeat center;
   left: auto;
-  right: 42%;
+  right: 39%;
 }
 
 .designers-slider .slick-next:hover, .designers-slider .slick-next:focus {
@@ -2009,12 +2009,21 @@ span.submission-pagination{
   background: url('left_arrowb.png') no-repeat center !important;
 }
 
-@media (max-width: 992px) {
+@media(max-width: 1199px) {
   .designers-slider .slick-prev {
-    left: 35%;
+    left: 33%;
   }
   .designers-slider .slick-next {
-    right: 35%;
+    right: 33%;
+  }
+}
+
+@media (max-width: 991px) {
+  .designers-slider .slick-prev {
+    left: 28%;
+  }
+  .designers-slider .slick-next {
+    right: 28%;
   }
   .designers-slider h4 {
     text-align: center;
