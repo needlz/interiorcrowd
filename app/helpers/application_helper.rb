@@ -69,4 +69,12 @@ module ApplicationHelper
     design_brief_contests_path
   end
 
+  def page_title
+    content_for?(:title) ? content_for(:title) : 'InteriorCrowd'
+  end
+
+  def page_description
+    content_for?(:description) ? content_for(:description) : page_title
+  end
+
 end

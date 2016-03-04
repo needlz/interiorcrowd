@@ -6,7 +6,7 @@ gem 'rails', '4.2.5'
 
 gem 'passenger' # webserver
 
-gem 'activerecord-session_store'
+gem 'activerecord-session_store', git: 'https://github.com/rails/activerecord-session_store.git'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'

@@ -52,8 +52,4 @@ module HomeHelper
     '/assets/cross-white.png'
   end
 
-  def page_title
-    content_for?(:title) ? content_for(:title) : 'InteriorCrowd'
-  end
-
 end
