@@ -1,7 +1,8 @@
 module ActiveAdminExtensions
 
+  BEGINNING_YEAR = 2015
+
   module ContestDetails
-    BEGINNING_YEAR = 2015
 
     def last_contest_status(user)
       contest = user.last_contest
@@ -84,6 +85,30 @@ module ActiveAdminExtensions
       months_hash = months_for_years
       Date.parse(months_hash[month])
     end
+
+    def requests_find_by(scope, date_params, field_name)
+      requests_to_display = ContestRequest.none
+
+      search_params_to_dates(date_params).each do |date|
+        requests_to_display += scope.
+            where("EXTRACT(MONTH FROM #{field_name}) = ? AND EXTRACT(YEAR FROM #{field_name}) = ?",
+                  date[:month], date[:year])
+      end
+
+      requests_to_display
+    end
+
+    def search_params_to_dates (params)
+      dates = []
+
+      params.each do |param|
+        month_and_year = param.split(' ')
+        dates << { month: Date::MONTHNAMES.index(month_and_year.first), year: month_and_year.last }
+      end
+
+      dates
+    end
+
   end
 
 end
