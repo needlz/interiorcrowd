@@ -43,8 +43,8 @@ module Blog
 
     def parse_dom
       response_body.gsub!(%r['/wp-admin/admin-ajax.php'], '\'/blog/wp-admin/admin-ajax.php\'')
-      response_body.gsub!(%r[(http//blog.interiorcrowd.com)(/wp-content[^"]+)([^\.]\.php)(")], '/blog/\2\3\4')
-      response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.php)(")], '/blog\2\3\4')
+      response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog\2\3\5')
+      response_body.gsub!(%r[(//designers.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog/designers\2\3\5')
       response_body.gsub!(%r[(")(/wp-content.+ajax-loader\.gif)], '\1http://blog.interiorcrowd.com\2')
       p response_body if Settings.log_requests_to_blog
       @blog_page_dom = Nokogiri::HTML(response_body)
