@@ -18,6 +18,7 @@ post_tag-sitemap.xml
 bne-testimonials-taxonomy-sitemap.xml]
 
 SitemapGenerator::Sitemap.create_index = true
+SitemapGenerator::Sitemap.namer = SitemapGenerator::SimpleNamer.new(:sitemap, :zero => '_index')
 SitemapGenerator::Sitemap.compress = false
 
 module BlogSitemapsHelper
@@ -43,22 +44,22 @@ module BlogSitemapsHelper
 end
 
 SitemapGenerator::Sitemap.create do
-  add '/', changefreq: 'yearly', priority: 1.0
-  add '/about_us', changefreq: 'yearly', priority: 0.9
-  add '/how_it_works', changefreq: 'yearly', priority: 0.9
-  add '/terms_of_service', changefreq: 'yearly', priority: 0.8
-  add '/privacy_policy', changefreq: 'yearly', priority: 0.8
-  add '/designer_submission', changefreq: 'yearly', priority: 0.8
-  add '/contests/design_brief', changefreq: 'yearly', priority: 0.8
-  add '/blog', changefreq: 'yearly', priority: 0.8
-  add '/faq', changefreq: 'yearly', priority: 0.8
+  add '/', changefreq: 'monthly', priority: 1.0
+  add '/about_us', changefreq: 'monthly', priority: 0.9
+  add '/how_it_works', changefreq: 'monthly', priority: 0.9
+  add '/terms_of_service', changefreq: 'monthly', priority: 0.8
+  add '/privacy_policy', changefreq: 'monthly', priority: 0.8
+  add '/designer_submission', changefreq: 'monthly', priority: 0.8
+  add '/contests/design_brief', changefreq: 'monthly', priority: 0.8
+  add '/blog', changefreq: 'monthly', priority: 0.8
+  add '/faq', changefreq: 'monthly', priority: 0.8
 
-  add '/sessions/designer_login', changefreq: 'yearly', priority: 0.7
-  add '/sessions/client_login', changefreq: 'yearly', priority: 0.7
-  add '/justines_story', changefreq: 'yearly', priority: 0.7
-  add '/sfar', changefreq: 'yearly', priority: 0.9
-  add '/giftcards', changefreq: 'yearly', priority: 0.7
-  add '/realtor_contacts', changefreq: 'yearly', priority: 0.9
+  add '/sessions/designer_login', changefreq: 'monthly', priority: 0.7
+  add '/sessions/client_login', changefreq: 'monthly', priority: 0.7
+  add '/justines_story', changefreq: 'monthly', priority: 0.7
+  add '/sfar', changefreq: 'monthly', priority: 0.9
+  add '/giftcards', changefreq: 'monthly', priority: 0.7
+  add '/realtor_contacts', changefreq: 'monthly', priority: 0.9
 
   BLOG_SITEMAPS.each do |blog_sitemap_file|
     BlogSitemapsHelper.include_blog_sitemap(blog_sitemap_file)

@@ -605,7 +605,7 @@ en:
       brief_pending: 'Brief pending: upload pictures of your space'
       submission: Designers adding their submissions
       winner_selection: Pick winning designer
-      fulfillment: Custom Board and Product List Collaboration
+      fulfillment: Project Mode
       final_fulfillment: Waiting for Final Design and Product List
       closed: Closed
       finished: Contest is Finished
@@ -879,7 +879,7 @@ en:
         draft: Not submitted
         submitted: Concept board submitted
         fulfillment: Create Custom Board and Product List
-        fulfillment_ready: Custom Board and Product List Collaboration
+        fulfillment_ready: Project Mode
         fulfillment_approved: Create Final Design
         closed: Closed
         finished: Finished

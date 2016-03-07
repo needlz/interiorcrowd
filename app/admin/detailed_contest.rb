@@ -2,7 +2,7 @@ include ActiveAdminExtensions::ContestDetails
 
 ActiveAdmin.register Contest, as: "Detailed Contest" do
 
-  actions :all, :except => [:new, :destroy, :edit, :show]
+  actions :all, :except => [:new, :destroy, :edit]
 
   controller do
     attr_accessor :plain
