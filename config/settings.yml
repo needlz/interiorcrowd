@@ -17,7 +17,6 @@ common: &defaults
     landing_tracking_id: 'hRXcYaFTu2E'
     checkout_tracking_id: 'OqVkf6X2IST'
     intake_form_tracking_id: 'SquY36PB2Bn'
-  zendesk_domain: interiorcrowd.zendesk.com
   hotjar_id: <%= ENV['HOTJAR_ID'] %>
   pictures_email: pictures@interiorcrowd.com
   info_email: <%= ENV['INFO_EMAIL'] %>
@@ -110,7 +109,6 @@ common: &defaults
 
 development:
   <<: *defaults
-  zendesk_domain:
   hotjar_id:
 test:
   <<: *defaults
