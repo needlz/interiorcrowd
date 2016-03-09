@@ -1387,6 +1387,30 @@ en:
           wording: >
             Agustin's style is a merge between classic baroque style, fashion design, pop and street culture with a blast
             of color.
+        -
+          name: Sandrine Lebas
+          wording: >
+            I specialize in creative yet affordable solutions for small urban spaces; modern, efficient and smart
+            designs for your interior comfort.
+        -
+          name: Amanda Bogner
+          wording: >
+            My casual, yet chic style has my clients always coming back for more.
+            I love creating spaces that are sophisticated, but still livable.
+        -
+          name: Jacqueline Moy
+          wording: >
+            My style is whimsical and contemporary. I blend disparate elements to create unique environments.
+        -
+          name: Julianne Malnick
+          wording: >
+            Blending architecture, materiality & color, Julianne creates timeless environments
+            that are distinctive and practical.
+        -
+          name: Ashley Jenkins
+          wording: >
+            As an artist, I give my clients beauty - a space to look at and admire. As a designer,
+            I give them a place to live.
     what_to_expect:
       header: what to expect
       more_info: 'For more info, %{see_here}'
