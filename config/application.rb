@@ -75,5 +75,9 @@ module InteriorC
     config.active_job.queue_adapter = :delayed_job
 
     GC::Profiler.enable
+
+    config.action_controller.asset_host = Proc.new { |source, request|
+      "#{request.protocol}#{request.host_with_port}"
+    }
   end
 end
