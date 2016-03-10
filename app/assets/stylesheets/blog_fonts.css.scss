@@ -1,0 +1,189 @@
+/*
+Blog pages on production server always request fonts via https protocol even if a page has http protocol.
+
+This file duplicates fonts of main site to avoid cross-domain/cross-protocol requests.
+*/
+
+@import url("//hello.myfonts.net/count/2e8e58");
+
+@font-face {
+  font-family: 'SofiaProLight';
+  src: asset-data-url('webfonts/2CC7A1_0_0.eot');
+  src: asset-data-url('webfonts/2CC7A1_0_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2CC7A1_0_0.woff') format('woff'),
+  asset-data-url('webfonts/2CC7A1_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Light';
+  src: asset-data-url('webfonts/2CC7A1_1_0.eot');
+  src: asset-data-url('webfonts/2CC7A1_1_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2CC7A1_1_0.woff') format('woff'),
+  asset-data-url('webfonts/2CC7A1_1_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Black';
+  src: asset-data-url('webfonts/AvenirLTStd-Black.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-Black.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SofiaProLight';
+  src: asset-data-url('webfonts/2CC7A1_0_0.eot');
+  src: asset-data-url('webfonts/2CC7A1_0_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2CC7A1_0_0.woff') format('woff'),
+  asset-data-url('webfonts/2CC7A1_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Light';
+  src: asset-data-url('webfonts/2CC7A1_1_0.eot');
+  src: asset-data-url('webfonts/2CC7A1_1_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2CC7A1_1_0.woff') format('woff'),
+  asset-data-url('webfonts/2CC7A1_1_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Medium';
+  src: asset-data-url('webfonts/AvenirLTStd-Medium.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-Medium.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-MediumOblique';
+  src: asset-data-url('webfonts/AvenirLTStd-MediumOblique.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-MediumOblique.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-MediumOblique.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-LightOblique';
+  src: asset-data-url('webfonts/AvenirLTStd-LightOblique.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-LightOblique.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-LightOblique.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Roman';
+  src: asset-data-url('webfonts/AvenirLTStd-Roman.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-Roman.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-Roman.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AvenirLTStd-Heavy';
+  src: asset-data-url('webfonts/AvenirLTStd-Heavy.otf') format('opentype'),
+  asset-data-url('webfonts/AvenirLTStd-Heavy.woff') format('woff'),
+  asset-data-url('webfonts/AvenirLTStd-Heavy.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BookItal';
+  src: asset-data-url('webfonts/2E8E58_0_0.eot');
+  src: asset-data-url('webfonts/2E8E58_0_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_0_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-Book';
+  src: asset-data-url('webfonts/2E8E58_1_0.eot');
+  src: asset-data-url('webfonts/2E8E58_1_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_1_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_1_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BookSC';
+  src: asset-data-url('webfonts/2E8E58_2_0.eot');
+  src: asset-data-url('webfonts/2E8E58_2_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_2_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_2_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BookItalOS';
+  src: asset-data-url('webfonts/2E8E58_3_0.eot');
+  src: asset-data-url('webfonts/2E8E58_3_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_3_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_3_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BookOS';
+  src: asset-data-url('webfonts/2E8E58_4_0.eot');
+  src: asset-data-url('webfonts/2E8E58_4_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_4_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_4_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BoldItalOS';
+  src: asset-data-url('webfonts/2E8E58_5_0.eot');
+  src: asset-data-url('webfonts/2E8E58_5_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_5_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_5_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BoldItal';
+  src: asset-data-url('webfonts/2E8E58_6_0.eot');
+  src: asset-data-url('webfonts/2E8E58_6_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_6_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_6_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-Bold';
+  src: asset-data-url('webfonts/2E8E58_7_0.eot');
+  src: asset-data-url('webfonts/2E8E58_7_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_7_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_7_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BodoniSevITC-BoldOS';
+  src: asset-data-url('webfonts/2E8E58_8_0.eot');
+  src: asset-data-url('webfonts/2E8E58_8_0.woff2') format('woff2'),
+  asset-data-url('webfonts/2E8E58_8_0.woff') format('woff'),
+  asset-data-url('webfonts/2E8E58_8_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Austin Web';
+  src: asset-data-url('Austin-Roman-Web.eot');
+  src: asset-data-url('Austin-Roman-Web.woff') format('woff'),
+  asset-data-url('Austin-Roman-Web.ttf') format('truetype');
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Austin-Roman';
+  src: asset-data-url('webfonts/Austin-Roman.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.Austin-Roman-Web {
+  font-family: 'Austin Web';
+  font-weight:  300;
+  font-style:   normal;
+  font-stretch: normal;
+}
