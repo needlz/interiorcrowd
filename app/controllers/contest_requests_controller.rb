@@ -11,6 +11,7 @@ class ContestRequestsController < ApplicationController
   end
 
   def approve_fulfillment
+    # return if current_user.client?
     approve_fulfillment = ApproveFulfillment.new(@request)
     approve_fulfillment.perform
     render json: { approved: approve_fulfillment.approved }

@@ -47,11 +47,3 @@
         ImageItemsPagination.init $('.image-items')
 
     = render contest_page.entries_concept_board_page.image_items_partial
-
-  .fullWidthLine.marginTop20
-  .row
-    .col-sm-12.doneAndMove
-      - if request.fulfillment_ready?
-        = link_to '#', class: 'submit moveToFinal', request_id: request.id do
-          =t('client_center.entries.collaboration.done_btn')
-          %img{:src => "/assets/gt.png"}/
