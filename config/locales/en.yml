@@ -1291,22 +1291,62 @@ en:
       stories:
         -
           name: Justine
+          pronoun: her
+          blog_post: justines-story
           wording: >
             As a busy mom, wife and business owner, Justine needed some help with her living room when
             her family moved into a new home. She wanted to keep most of their furniture but desperately
             needed an easy update to brighten up their favorite room.
         -
           name: Helene
+          pronoun: her
+          blog_post: helenes-story
           wording: >
             Gigi’s playroom redo all started with a vintage hot­air balloon light fixture.
             When Helene, InteriorCrowd’s creative director, spotted it on Etsy, she knew she wanted to
             design her daughter’s new space around the one central feature.
         -
           name: Amanda
+          pronoun: her
+          blog_post: amandas-story
           wording: >
             When blogger (Advice from a Twenty Something) moved to San Francisco, she turned to
             InteriorCrowd to help design her studio apartment into a hip, multi­functioning space.
-      read_more_about: Read more about her story
+        -
+          name: Derek
+          pronoun: his
+          blog_post: dereks-story
+          wording: >
+            Derek was tired of his bare apartment, so he came to InteriorCrowd hoping that the designers could make
+            his bachelor pad feel more like home. Our designers jumped on the idea of getting to test the new model and
+            work with Derek in person, & soon enough, Helene and Derek became a redesign dream team.
+        -
+          name: Karsyn
+          pronoun: her
+          blog_post: 3441-2
+          wording: >
+            Karsyn Dupree is the blogger for BlissBranch, is a place to share her musical endeavors, lifestyle tips,
+            road trips, fashion tricks, and enthusiasm for sustainable living through our plant-based lifestyle.
+            She collaborated with InteriorCrowd to turn her Nashville bedroom into a bright and comfortable
+            place to relax and get creative.
+        -
+          name: Pam
+          pronoun: her
+          blog_post: pams-story
+          wording: >
+            Pam came to InteriorCrowd with a redesign project for her multi-purpose room. "This is our front room,
+            kind of like a foyer, but much larger, so I would like it to be pretty.” Because she works from home,
+            Pam needed a room that could function as an office as well as a playroom for her toddler.
+        -
+          name: Ruth
+          pronoun: her
+          blog_post: ruths-story
+          wording: >
+            When Ruth and Tommy moved to SF from South Africa, they had to be choosy about what they could bring with
+            them and what had to be left behind. Grizzle the Jack Russel obviously made the top of the list,
+            but many of their other belongings remained in Cape Town. IC designer Imani helped them find exactly
+            what they needed to pull their home together.
+      read_more_about: 'Read more about %{pronoun} story'
       story_title_constant_part: ' Story'
     our_network:
       title: Our network of designers
