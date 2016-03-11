@@ -3513,27 +3513,6 @@ a.scrollBoxCommentsHandle {
   color: #000;
 }
 
-.collaborationScreen .doneAndMove {
-  margin: 60px 0px;
-  text-align: right;
-}
-
-.collaborationScreen .doneAndMove a {
-  font-size: 20px;
-  color: #000;
-  line-height: 45px;
-  width: 340px;
-  text-align: center;
-  border: 1px solid #000;
-  border-radius: 5px;
-  display: inline-block;
-}
-
-.collaborationScreen .doneAndMove a img {
-  position: relative;
-  top: -1px;
-}
-
 .commentContainer > .row > div:nth-child(2) {
   margin-top: 10px;
 }
@@ -3628,10 +3607,6 @@ a.scrollBoxCommentsHandle {
   .commentContainer .row div:nth-child(2) p.comment-text {
     position: static;
     width: 100%;
-  }
-  .collaborationScreen .doneAndMove a {
-    width: 100%;
-    line-height: 48px;
   }
   .sidebarComments p.commentTabs {
     text-align: left;
@@ -3745,9 +3720,6 @@ a.scrollBoxCommentsHandle {
 @media (max-width: 420px) {
   .showcase-content, .showcase-content-container {
     height: 320px !important;
-  }
-  .collaborationScreen .doneAndMove a {
-    font-size: 16px;
   }
   .showcase-thumbnail-wrapper-horizontal, .showcase-thumbnail-restriction, .showcase-content-container, .showcase-thumbnail-container {
     width: 100% !important;

@@ -74,9 +74,9 @@ class EntriesPage < ContestPage
   def onload_popups
     return [] if entries_concept_board_page.try(:previous_step?)
     result = []
-    if won_contest_request
-      result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
-    end
+    # if won_contest_request
+    #   result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
+    # end
     result
   end
 
