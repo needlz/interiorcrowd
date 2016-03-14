@@ -27,9 +27,11 @@ module ActiveAdminExtensions
 
         def update
           resource_name = resource.class.model_name.element
-          if params[resource_name][:password].blank?
-            params[resource_name].delete('password')
-            params[resource_name].delete('password_confirmation')
+          if params[resource_name][:plain_password].present?
+            params[resource_name][:password] = resource.class.encrypt(params[resource_name][:plain_password])
+          else
+            params[resource_name].delete(:password)
+            params[resource_name].delete(:plain_password)
           end
           super
         end
