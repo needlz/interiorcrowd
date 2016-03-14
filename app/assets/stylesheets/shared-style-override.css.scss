@@ -1691,7 +1691,7 @@ span.submission-pagination{
   font-family: 'AvenirLTStd-Roman', sans-serif;
   font-size: 18px;
   line-height: 26px;
-  height: 200px;
+  height: 280px;
 }
 .client-stories-slider a {
   font-family: 'AvenirLTStd-Medium', sans-serif;
@@ -1737,13 +1737,13 @@ span.submission-pagination{
 
 .client-stories-slider .slick-prev {
   background: url('/assets/left_white_arrow.png') no-repeat center;
-  left: 120px;
+  left: 100px;
 }
 
 .client-stories-slider .slick-next {
   background: url('/assets/right_white_arrow.png') no-repeat center;
   left: auto;
-  right: 120px;
+  right: 100px;
 }
 
 .client-stories-slider .slick-next:hover, .client-stories-slider .slick-next:focus {
