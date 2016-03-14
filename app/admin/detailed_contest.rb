@@ -107,4 +107,5 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
          collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
          multiple: true,
          input_html: { size: ActiveAdminExtensions::ContestDetails.months_for_years.keys.length }
+  filter :client_payment_id_not_null, label: 'Charged?', as: :boolean
 end
