@@ -93,21 +93,27 @@ ActiveAdmin.register Designer do
   filter :email
   filter :plain_password
   filter :created_at
-  filter :by_submission_date_in_any,
+
+  def self.filter_select_with_full_height(name, params)
+    filter name,
+           params.merge(
+             as: :select,
+             multiple: true,
+             input_html: { size: params[:collection].length }
+           )
+  end
+
+  months = ActiveAdminExtensions::ContestDetails.months_for_years.keys
+
+  filter_select_with_full_height :by_submission_date_in_any,
          label: 'Submission Date',
-         as: :select,
-         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
-         multiple: true
-  filter :by_win_date_in_any,
+         collection: months
+  filter_select_with_full_height :by_win_date_in_any,
          label: 'Win Date',
-         as: :select,
-         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
-         multiple: true
-  filter :by_completion_date_in_any,
+         collection: months
+  filter_select_with_full_height :by_completion_date_in_any,
          label: 'Completion Date',
-         as: :select,
-         collection: ActiveAdminExtensions::ContestDetails.months_for_years.keys,
-         multiple: true
+         collection: months
   filter :paid_for_concept_boards
   filter :portfolio_path
   filter :phone_number

@@ -1,10 +1,6 @@
 ActiveAdmin.register Contest do
 
-  controller do
-    def scoped_collection
-      super.where.not(status: Contest::INCOMPLETE_STATUSES).includes :client
-    end
-  end
+  scope('Complete', default: true) { |scope| scope.where.not(status: Contest::INCOMPLETE_STATUSES).includes :client }
 
   index do
     id_column
