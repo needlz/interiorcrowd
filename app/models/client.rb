@@ -50,6 +50,8 @@ class Client < ActiveRecord::Base
 
   before_save :downcase_email
 
+  scope :with_cards, -> { where.not(primary_card: nil) }
+
   def last_contest
     non_finished_statuses = Contest::NON_FINISHED_STATUSES.map{ |s| "'#{ s }'" }.join(', ')
     contests_order_query = "CASE WHEN contests.status IN (#{ non_finished_statuses }) THEN 2 ELSE CASE WHEN contests.status = \'finished\' THEN 1 ELSE 0 END END DESC"
