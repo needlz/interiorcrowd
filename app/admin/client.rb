@@ -2,7 +2,7 @@ ActiveAdmin.register Client do
 
   controller do
     def scoped_collection
-      super.joins(:credit_cards).uniq
+      super.with_cards.includes(:primary_card, :credit_cards)
     end
   end
 

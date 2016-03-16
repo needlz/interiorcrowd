@@ -6,7 +6,7 @@ RSpec.describe Admin::ClientsController, type: :controller do
   let(:original_password) { 'password' }
   let(:encrypted_original_password) { Client.encrypt(original_password) }
   let(:credit_card) { Fabricate(:credit_card) }
-  let(:client) { Fabricate(:client, password: original_password, credit_cards: [credit_card]) }
+  let(:client) { Fabricate(:client, password: original_password, credit_cards: [credit_card], primary_card: credit_card) }
 
   describe 'PATCH update' do
     before do

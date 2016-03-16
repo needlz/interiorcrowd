@@ -2,6 +2,12 @@ include ActiveAdminExtensions::ContestDetails
 
 ActiveAdmin.register Designer do
 
+  controller do
+    def scoped_collection
+      super.includes(:portfolio)
+    end
+  end
+
   index do
     selectable_column
     id_column
