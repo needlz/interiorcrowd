@@ -1,4 +1,5 @@
-:css
+- content_for :head do
+  = render 'shared/setup_google_conversion_tracking' if Settings.enable_google_conversion_script
 
 #paymentSummaryPage
   %h3.title= t('contests.payment.summary.transaction_confirmed').upcase
