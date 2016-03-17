@@ -1,11 +1,11 @@
-class ProductListMarks
+class @ProductListMarks
 
   @imageMarksSelector: '.productRadio input[type="radio"]'
 
   @init: ()->
-    $imageMarks = $(@imageMarksSelector)
-    $imageMarks.change(@onMarkClick)
-    $imageMarks.on 'ajax:success', (e, data)->
+    $container = $('body')
+    $container.on 'change', @imageMarksSelector, @onMarkClick
+    $container.on 'ajax:success', @imageMarksSelector, (e, data)->
       mixpanel.track 'Product item or Similar style marked',
         { mark: mark, contest_request_id: $('.concept-board').data('id') }
 
