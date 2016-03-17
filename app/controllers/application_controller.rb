@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
-  rescue_from StandardError, with: :handle_error unless Rails.env.development?
+  rescue_from StandardError, with: :handle_error if Settings.handle_errors
 
   helper_method :current_user
 
@@ -76,6 +76,10 @@ class ApplicationController < ActionController::Base
   def new_credit_card_params
     params.require(:credit_card).permit(:name_on_card, :address, :city, :state, :zip,
                                         :card_type, :number, :cvc, :ex_month, :ex_year)
+  end
+
+  def development_scenarios(&get_scenarios_block)
+    @development_scenarios = get_scenarios_block.call
   end
 
   private

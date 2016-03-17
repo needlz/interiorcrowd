@@ -40,8 +40,8 @@
       %p.copyright
         = succeed "#{ Date.current.year } InteriorCrowd" do
           %span.copyright-sign ©
-:javascript
-    $( '.room-selector' ).click(function() {
-      $(this).toggleClass('active');
-      return false;
-    });
+
+  - if Settings.development_panel
+    .fullWidthLine
+      %div
+        = render 'home/development_panel'

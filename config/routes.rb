@@ -206,6 +206,8 @@ InteriorC::Application.routes.draw do
     get 'sitemap.xml' => 'sitemaps#sitemap_index', format: :xml, as: :sitemap_index
     get 'sitemap_index.xml' => 'sitemaps#sitemap_index', format: :xml
     get 'sitemaps/:sitemap_file' => 'sitemaps#sitemap', format: :xml, as: :sitemap, constraints: { sitemap_file: /.*/ }
+
+    get('/development_scenario', to: 'development_scenarios#perform') if Settings.development_panel
   end
 
   def consider_rest_of_routes_as_portfolios

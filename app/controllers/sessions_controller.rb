@@ -3,10 +3,33 @@ class SessionsController < ApplicationController
   before_filter :set_link_after_login, only: [:designer_login, :client_login]
 
   def designer_login
+    development_scenarios do
+      [
+        {
+          scenario_class: CreateDesignerHelper,
+          scenario_method: :create,
+          name: 'Create designer'
+        }
+      ]
+    end
     user_login('designer')
   end
   
   def client_login
+    development_scenarios do
+      [
+        {
+          scenario_class: CreateClientHelper,
+          scenario_method: :create_with_contest,
+          name: 'Create client with contest'
+        },
+        {
+          scenario_class: CreateClientHelper,
+          scenario_method: :create_with_live_contest,
+          name: 'Create client with live contest'
+        }
+      ]
+    end
     user_login('client')
   end
 

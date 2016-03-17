@@ -76,10 +76,11 @@ group :test do
   gem 'rspec-rails'
   gem 'stripe-ruby-mock', '~> 2.2.0', require: 'stripe_mock'
   gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
-  gem 'faker' # generating fake data
   gem 'simplecov', require: false
   gem 'webmock'
 end
+
+gem 'faker' # generating fake data
 
 gem 'mandrill-rails'
 gem 'mandrill-api'
