@@ -106,10 +106,14 @@ common: &defaults
   designer_submission_iframe_source: 'https://docs.google.com/forms/d/1_vJzmTLzAc7xn9D5Z-RoQW278wF6WSim-VW37RNUzqM/viewform?embedded=true'
   max_session_duration_secs: <%= 2.weeks.to_i %>
   show_portfolio_reviews: <%= false %>
+  send_emails: <%= !Rails.env.development? %>
+  handle_errors: <%= !Rails.env.development? %>
 
 development:
   <<: *defaults
   hotjar_id:
+  development_panel: true
+
 test:
   <<: *defaults
   mailchimp:

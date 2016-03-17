@@ -8,6 +8,16 @@ class ContestsController < ApplicationController
 
   [:design_brief, :design_style, :design_space].each do |action|
     define_method action do
+      development_scenarios do
+        [
+          { scenario_class: FillContestCreationHelper,
+            scenario_method: :create_full,
+            name: 'Fill all steps with brief completed' },
+          { scenario_class: FillContestCreationHelper,
+            scenario_method: :create_with_brief_pending,
+            name: 'Fill all steps with brief pending' }
+        ]
+      end
       render
     end
 

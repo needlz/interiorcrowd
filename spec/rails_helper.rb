@@ -120,11 +120,7 @@ RSpec.configure do |config|
   end
 
   def sign_in(user)
-    if user.kind_of?(Client)
-      session[:client_id] = user.id
-    elsif user.kind_of?(Designer)
-      session[:designer_id] = user.id
-    end
+    Authenticator.sign_in(user, session)
   end
 
   def jobs_with_handler_like(string)

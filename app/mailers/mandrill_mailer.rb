@@ -13,7 +13,9 @@ module MandrillMailer
   end
 
   def mail(options = {})
-    if Rails.env.development?
+    if Settings.send_emails
+      send_to_mandrill(options)
+    else
       mandrill_rendered = api.templates.render(@template_name, [], global_merge_vars)['html']
       options[:to] = options[:to].map { |to_hash| "#{ to_hash[:name] } <#{ to_hash[:email] }>" }
       options[:from] = 'development'
@@ -21,8 +23,6 @@ module MandrillMailer
         format.html { render text: mandrill_rendered.html_safe }
         format.text { render text: mandrill_rendered.html_safe }
       end
-    else
-      send_to_mandrill(options)
     end
   end
 
