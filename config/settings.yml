@@ -108,6 +108,7 @@ common: &defaults
   show_portfolio_reviews: <%= false %>
   send_emails: <%= !Rails.env.development? %>
   handle_errors: <%= !Rails.env.development? %>
+  enable_google_conversion_script: <%= Rails.env.production? || Rails.env.staging? %>
 
 development:
   <<: *defaults
