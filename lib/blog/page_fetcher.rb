@@ -40,6 +40,7 @@ module Blog
         forward_headers(f)
         f.options.params_encoder = Blog::FaradayParamsEncoder
         f.adapter Faraday.default_adapter
+        f.proxy ENV["FIXIE_URL"] if ENV["FIXIE_URL"].present?
       end
 
       if method == :post
