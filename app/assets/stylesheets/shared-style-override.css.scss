@@ -1120,7 +1120,7 @@
   }
 
   .bootstrap-select.btn-group .btn .filter-option {
-    font-size: 14px;
+    font-size: 22px;
   }
 
   #credit-card-form-controls-mobile{
@@ -2505,5 +2505,22 @@ span.submission-pagination{
       margin-left: -25px;
       float: left;
     }
+  }
+}
+
+.space-options .caret {
+  background: url("/assets/caret.png") no-repeat 14px 16px;
+}
+
+.space-options {
+  span.filter-option {
+    font-size: 22px;
+    line-height: 30px;
+    padding-left: 8px;
+    padding-top: 3px;
+  }
+
+  .dropdown-menu > li > a {
+    line-height: 22px;
   }
 }
