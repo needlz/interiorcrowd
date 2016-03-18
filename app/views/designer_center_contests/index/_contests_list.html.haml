@@ -1,10 +1,11 @@
 - columns.short_details.each do |short_details|
   .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: short_details.id} }
-    .col-xs-1= short_details.id
+    .col-xs-2= short_details.id
     .col-xs-2= short_details.name
-    .col-xs-2= short_details.package_name
+    - if @show_package_type
+      .col-xs-2= short_details.package_name
     .col-xs-2{ short_details.rooms_popover_attributes }= short_details.rooms_short_name
-    .col-xs-1= short_details.price
+    .col-xs-2= short_details.price
     .col-xs-2
       = short_details.days_count.to_i
       %span= t('designer_center.contests_preview.few_days')
