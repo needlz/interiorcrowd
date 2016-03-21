@@ -2,7 +2,7 @@
   .row.contest-item{ class: "#{border_class if defined? border_class}", data: {id: short_details.id} }
     .col-xs-2= short_details.id
     .col-xs-2= short_details.name
-    - if @show_package_type
+    - if columns.show_package_type?
       .col-xs-2= short_details.package_name
     .col-xs-2{ short_details.rooms_popover_attributes }= short_details.rooms_short_name
     .col-xs-2= short_details.price

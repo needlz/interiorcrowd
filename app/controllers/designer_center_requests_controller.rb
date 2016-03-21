@@ -7,6 +7,7 @@ class DesignerCenterRequestsController < ApplicationController
         responses_query = DesignerResponsesQuery.new(@designer)
         @current_responses = ContestResponseView.for_responses(responses_query.current_responses)
         @completed_responses = ContestResponseView.for_responses(responses_query.completed_responses)
+        @show_package_type = ENV['SHOW_PACKAGE_TYPE_DESC'].to_bool
       }
       @navigation = Navigation::DesignerCenter.new(:requests)
     end

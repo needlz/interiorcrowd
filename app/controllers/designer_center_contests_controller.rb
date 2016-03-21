@@ -7,7 +7,6 @@ class DesignerCenterContestsController < ApplicationController
     @current_contests = ContestsColumns.new(available_contests.all.with_associations)
     @suggested_contests = ContestsColumns.new(available_contests.suggested.with_associations.uniq)
     @navigation = Navigation::DesignerCenter.new(:contests)
-    @show_package_type = ENV['SHOW_PACKAGE_TYPE_DESC'].to_bool
   end
 
   def show
