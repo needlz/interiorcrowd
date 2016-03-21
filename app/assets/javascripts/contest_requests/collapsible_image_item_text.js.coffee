@@ -1,4 +1,4 @@
-class ImageItemsTextFolding
+class @ImageItemsTextFolding
   @textSelector: '.about-text'
 
   @init: ->

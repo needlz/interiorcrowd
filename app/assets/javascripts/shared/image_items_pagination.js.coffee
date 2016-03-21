@@ -16,3 +16,4 @@ class @ImageItemsPagination
       $.get url, params, (data)->
         $scope.html(data)
         history.pushState({}, '', $link.attr('href'))
+        ImageItemsTextFolding.init()

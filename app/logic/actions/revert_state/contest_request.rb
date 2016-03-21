@@ -5,7 +5,7 @@ module RevertState
 
     def self.available_reverts(contest_request)
       current_state_index = STATES_FLOW.index(contest_request.status)
-      return [] if current_state_index == 0
+      return [] unless current_state_index
       STATES_FLOW[0..(current_state_index - 1)]
     end
 
