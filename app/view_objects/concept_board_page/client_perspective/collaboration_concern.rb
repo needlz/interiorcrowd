@@ -25,7 +25,7 @@ module ConceptBoardPage::ClientPerspective::CollaborationConcern
   end
 
   def arguments_for_rendering(options)
-    paginated_image_items = self.send("paginated_#{ options[:kind] }", options[:page])
+    paginated_image_items = self.send("paginated_#{ options[:kind] }", options[:page]).includes(:published_version)
     { partial: 'clients/client_center/entries/collaboration/image_block',
       locals: { choosable: !previous_step?,
                 title: t("designer_center.edit.#{ options[:kind] }"),
