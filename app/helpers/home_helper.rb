@@ -52,4 +52,8 @@ module HomeHelper
     '/assets/cross-white.png'
   end
 
+  def todays_client_stories
+    @client_stories ||= I18n.t('home.client_stories.stories').rotate(Date.today.yday)
+    @client_stories
+  end
 end
