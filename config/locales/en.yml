@@ -878,7 +878,6 @@ en:
       statuses:
         draft: Not submitted
         submitted: Concept board submitted
-        fulfillment: Create Custom Board and Product List
         fulfillment_ready: Project Mode
         fulfillment_approved: Create Final Design
         closed: Closed
