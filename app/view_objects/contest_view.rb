@@ -101,6 +101,10 @@ class ContestView
     '$ ' + total.to_s + '.00'
   end
 
+  def budget_ranges
+    ['$2500 and under', '$2500-10k', '$10k+']
+  end
+
   private
 
   def initialize_from_options(options)
