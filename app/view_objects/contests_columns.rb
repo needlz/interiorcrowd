@@ -8,7 +8,7 @@ class ContestsColumns
     @show_package_type = ENV['SHOW_PACKAGE_TYPE_DESC'].to_bool
   end
 
-  def show_package_type?
+  def show_package_details?
     @show_package_type
   end
 
