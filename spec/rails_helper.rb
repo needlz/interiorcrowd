@@ -169,6 +169,16 @@ RSpec.configure do |config|
     }
   end
 
+  def mock_client_stories_locales
+    en = { home: { client_stories: { stories: [{ name: 'First' },
+                                               { name: 'Second' },
+                                               { name: 'Third' },
+                                               { name: 'Forth' },
+                                               { name: 'Fifth' },
+                                               { name: 'Sixth' },] } } }
+    I18n.backend.store_translations(:en, en)
+  end
+
   def test_card_number
     '4242424242424242'
   end

@@ -116,6 +116,7 @@ gem 'sitemap_generator'
 gem 'postoffice'
 gem 'gibbon'
 gem 'ruby_dig'
+gem 'timecop'
 
 # profiling
 gem 'rack-mini-profiler'

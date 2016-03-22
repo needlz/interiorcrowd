@@ -3,13 +3,13 @@
 .container-fluid.client-stories
   .client-bg-slider-wrapper
     .client-bg-slider
-      - t('home.client_stories.stories').each do |story|
+      - todays_client_stories.each do |story|
         .client-bg-slide{ style: "background: url('/assets/client_stories/designed-for-#{ story[:name].downcase }.jpeg') no-repeat center; background-size: cover;" }
   .container
     .row
       .col-sm-6.col-sm-offset-6.col-md-5.col-md-offset-7.col-lg-4.col-lg-offset-8
         .client-stories-slider
-          - t('home.client_stories.stories').each do |story|
+          - todays_client_stories.each do |story|
             %div
               .client-stories-slider-outer
                 .client-stories-slider-inner
