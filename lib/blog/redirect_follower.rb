@@ -3,38 +3,57 @@ module Blog
   class RedirectFollower
 
     def initialize(options)
+      @session = options[:session]
       @faraday_response = options[:faraday_response]
       @default_referer = options[:default_referer]
       @blog_path = options[:blog_path]
       @original_url = options[:original_url]
       @params = options[:params]
+      @last_url = @original_url
     end
 
     def final_response(&on_request)
-      if responded_with_redirect?(faraday_response)
-        redirect = faraday_response.headers[:location]
-        redirect = redirect.gsub(/(\?|&)?icrowd_app=yes/, '')
-        if relative_path?(redirect)
-          referer = get_referer_path(redirect)
-          redirect = referer + '/' + redirect
-        end
-        if equal_to_request_url_with_slash?(redirect)
-          @faraday_response = on_request.call(redirect)
-          return final_response(&on_request)
-        end
-        redirect_matches = redirect.match(/(#{ Regexp.escape(URI(default_referer).host) })\/(.+)/)
-        redirect_part = redirect_matches[2] if redirect_matches
-        redirect_part[0] = '' if redirect_part[0] == '/' if redirect_part
-        redirect = blog_path + redirect_part.to_s
-        redirect
-      else
-        faraday_response
-      end
+      @do_request = on_request
+      @faraday_response = on_request.call(original_url)
+      handle_response
     end
 
     private
 
-    attr_reader :faraday_response, :default_referer, :blog_path, :original_url, :params
+    attr_reader :faraday_response, :default_referer, :blog_path, :original_url, :params, :session
+
+    def handle_response
+      if responded_with_redirect?(faraday_response)
+        handle_redirect
+      else
+        if faraday_response.body.include?('If you feel this is in error please contact your hosting providers abuse department') && !session[:use_blog_proxy]
+          session[:use_blog_proxy] = true
+          @faraday_response = @do_request.call(@last_url)
+          handle_response
+        else
+          faraday_response
+        end
+      end
+    end
+
+    def handle_redirect
+      redirect = faraday_response.headers[:location]
+      redirect = redirect.gsub(/(\?|&)?icrowd_app=yes/, '')
+      if relative_path?(redirect)
+        referer = get_referer_path(redirect)
+        redirect = referer + '/' + redirect
+      end
+      if equal_to_request_url_with_slash?(redirect)
+        @last_url = redirect
+        @faraday_response = @do_request.call(redirect)
+        return final_response(&@do_request)
+      end
+      redirect_matches = redirect.match(/(#{ Regexp.escape(URI(default_referer).host) })\/(.+)/)
+      redirect_part = redirect_matches[2] if redirect_matches
+      redirect_part[0] = '' if redirect_part[0] == '/' if redirect_part
+      redirect = blog_path + redirect_part.to_s
+      redirect
+    end
 
     def responded_with_redirect?(faraday_response)
       faraday_response.status / 100 == 3

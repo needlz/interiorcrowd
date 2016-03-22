@@ -15,16 +15,16 @@ module Blog
 
     def get_response(url = nil)
       request_url = url || @url
-      response = make_request(request_url)
-      redirect_follower = RedirectFollower.new(faraday_response: response,
-                                               default_referer: Settings.external_urls.blog.url,
+      redirect_follower = RedirectFollower.new(default_referer: Settings.external_urls.blog.url,
                                                blog_path: blog_path,
                                                original_url: request_url,
-                                               params: params
+                                               params: params,
+                                               session: session
       )
       redirect_follower.final_response do |url|
         make_request(url)
       end
+
     end
 
     private
@@ -40,7 +40,7 @@ module Blog
         forward_headers(f)
         f.options.params_encoder = Blog::FaradayParamsEncoder
         f.adapter Faraday.default_adapter
-        f.proxy ENV["FIXIE_URL"] if ENV["FIXIE_URL"].present?
+        f.proxy ENV["FIXIE_URL"] if (ENV["FIXIE_URL"].present? && session[:use_blog_proxy])
       end
 
       if method == :post
