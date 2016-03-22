@@ -14,6 +14,7 @@ class DesignSpacePage
     SpacePicturesUploader.init(I18n.photos)
     @validator = new ValidationMessages()
     @bindContinueButton()
+    @hidePromptSelectOption()
 
     mixpanel.track_forms '#design_space', 'Contest creation - Step 3', (form)->
       $form = $(form)
@@ -51,6 +52,9 @@ class DesignSpacePage
 
   @clearHiddenInputs: ->
     $('.space-pictures, .dimensions').find('input').attr('name', '') unless @dimensionViewDetailsToggle.showing()
+
+  @hidePromptSelectOption: ->
+    $(@budgetSelector + ' option[value=""]').hide()
 
 $ ->
   DesignSpacePage.init()
