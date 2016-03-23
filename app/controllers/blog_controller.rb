@@ -62,14 +62,14 @@ class BlogController < ApplicationController
 
   def render_blog_page(content)
     @admin_page = @url.match %r[/wp-admin($|/)]
-    locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
     @no_global_css = true
     extname = File.extname(URI(@url).path)[1..-1]
     mime_type = Mime::Type.lookup_by_extension(extname)
     content_type = mime_type.to_s unless mime_type.nil?
     if content_type #file with extension
-      render text: locals[:text], content_type: content_type
+      render text: content, content_type: content_type
     else
+      locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
       if request.xhr?
         render text: locals[:text]
       else
