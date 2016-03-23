@@ -7,5 +7,5 @@
     = select(:design_space,
       :f_budget,
       @contest_view.budget_ranges,
-      { selected: @contest_view.space_budget_value},
+      { selected: @contest_view.space_budget_value, prompt: t('contests.space.budget.placeholder')},
       class: 'selectpicker budget-input form-selector')

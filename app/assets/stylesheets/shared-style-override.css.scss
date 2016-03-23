@@ -2524,3 +2524,9 @@ span.submission-pagination{
     line-height: 22px;
   }
 }
+
+.budget-input .dropdown-menu{
+  max-height: 200px !important;
+  min-height: 150px !important;
+  overflow: hidden !important;
+}

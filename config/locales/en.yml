@@ -276,7 +276,7 @@ en:
         title: What is a rough budget you have in mind for this project?
         hint: '(Your designer will also help you to determine a more accurate budget)'
         select_error: Please enter budget.
-        placeholder: '$2500'
+        placeholder: 'Choose from three broad buckets below:'
       other_feedback:
         title: Other feedback or instructions?
         placeholder: |
