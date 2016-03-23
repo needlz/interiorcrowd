@@ -4333,6 +4333,12 @@ p.product-list-reminder {
   border: 1px solid #e1e1e1;
 }
 
+@media (max-width: 991px) {
+  .whatToExpect .row {
+    border: none;
+  }
+}
+
 .whatToExpect h2 {
   text-align: center;
   font-size: 30px;
@@ -4531,6 +4537,10 @@ p.product-list-reminder {
   .bottomCarouselHome > .container, .whatToExpect > .container, .justineFluid {
     padding: 0px;
   }
+}
+
+.whatToExpect {
+  background-color: #ffffff;
 }
 
 @media (max-width: 640px) {
@@ -4980,11 +4990,49 @@ $final-designer-center-comment-border-color: #ccc;
   }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 767px) {
   .footerLinks a {
     font-size: 16px;
-    display: inline-block;
-    padding-right: 20px;
-    padding-left: 20px;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .footerLinks {
+
+    .xs-first-col {
+      float: left !important;
+      text-align: right !important;
+    }
+
+    .xs-second-col {
+      float: right !important;
+      text-align: left !important;
+    }
   }
 }
+
+@media (max-width: 479px) {
+  .footerLinks a{
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 991px) {
+  .footerLinks {
+
+    .xs-first-col {
+      float: left !important;
+    }
+
+    .xs-second-col {
+      float: left !important;
+    }
+  }
+}
+
+.footerLinks {
+  a {
+    white-space: nowrap;
+  }
+}
+

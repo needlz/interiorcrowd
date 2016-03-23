@@ -2,17 +2,23 @@
 .fullWidthLine
 %footer.container.siteFooter
   .row
-    .col-lg-3.col-md-3.col-sm-4.col-xs-12.footerContacts
+    .col-lg-2.col-md-3.col-sm-4.col-xs-12.footerContacts
       %h4= t('footer.contact_us').upcase
       %p= Settings.info_email
       %p= Settings.contact_phone
-    .col-lg-9.col-md-9.col-sm-8.col-xs-12.footerRight
+    .col-lg-10.col-md-9.col-sm-8.footerRight
       .col-lg-7
         .footerLinks
-          %a{ href: about_us_path, class: tracked_link }= t('footer.about')
-          %a{ href: terms_of_service_path, class: tracked_link }= t('footer.terms')
-          %a{ href: privacy_policy_path, class: tracked_link }= t('footer.privacy_policy')
-          %a{ href: designer_submission_path, class: tracked_link }= t('footer.for_designers')
+          .col-sm-4.col-md-6
+            .col-xs-6.col-sm-offset-0.col-sm-8.col-md-offset-5.col-md-4.xs-first-col
+              %a{ href: about_us_path, class: tracked_link }= t('footer.about')
+            .col-xs-6.col-sm-4.col-md-3.xs-second-col
+              %a{ href: terms_of_service_path, class: tracked_link }= t('footer.terms')
+          .col-sm-8.col-md-6
+            .col-xs-6.col-sm-offset-1.col-md-offset-0.xs-first-col
+              %a{ href: privacy_policy_path, class: tracked_link }= t('footer.privacy_policy')
+            .col-xs-6.col-sm-5.col-md-6.xs-second-col
+              %a{ href: designer_submission_path, class: tracked_link }= t('footer.for_designers')
         .clearfix
       .footerSocialContainer.col-lg-5
         .footerSocial
