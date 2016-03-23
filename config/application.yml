@@ -33,6 +33,7 @@ development:
   NEWRELIC_KEY: '2696663eb045f2a82f31ad853b7c392fc1ae9cbf'
   MAILCHIMP_API_KEY: 'eb621bf07bea7c8316bfe3477a48b981-us12'
   MAILCHIMP_LIST_ID: '854c60de30'
+  SHOW_PACKAGE_TYPE_DESC: 'false'
 
 test:
   APP_HOST: 'localhost:3000'

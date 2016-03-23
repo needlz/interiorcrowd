@@ -26,7 +26,7 @@ class ContestResponseView
     @comments_count = response.collaboration_and_final_comments_count
     @image_items = response.image_items.for_view
   end
-
+  
   def current_phase_index
     ContestPhases.status_to_index(response.status)
   end

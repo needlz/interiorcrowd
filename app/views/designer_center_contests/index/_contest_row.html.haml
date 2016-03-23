@@ -1,8 +1,10 @@
-.col-xs-1= t('designer_center.contests_preview.contest_id')
-.col-xs-2= t('designer_center.contests_preview.contest_name')
-.col-xs-2= t('designer_center.contests_preview.type')
-.col-xs-2= t('designer_center.contests_preview.room')
-.col-xs-1= t('designer_center.contests_preview.price')
+.col-xs-2= t('designer_center.contests_preview.contest_id')
+.col-xs-3= t('designer_center.contests_preview.contest_name')
+- if columns.show_package_details?
+  .col-xs-2= t('designer_center.contests_preview.type')
+.col-xs-3= t('designer_center.contests_preview.room')
+- if columns.show_package_details?
+  .col-xs-2= t('designer_center.contests_preview.price')
 - if columns.show_days_left_column?
   .col-xs-2= t('designer_center.contests_preview.days_left_to_enter')
 .col-xs-2= t('designer_center.contests_preview.submissions')
