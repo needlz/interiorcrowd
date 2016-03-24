@@ -15,9 +15,7 @@ module Blog
 
     def get_response(url = nil)
       request_url = url || @url
-      response = make_request(request_url)
-      redirect_follower = RedirectFollower.new(faraday_response: response,
-                                               default_referer: Settings.external_urls.blog.url,
+      redirect_follower = RedirectFollower.new(default_referer: Settings.external_urls.blog.url,
                                                blog_path: blog_path,
                                                original_url: request_url,
                                                params: params
