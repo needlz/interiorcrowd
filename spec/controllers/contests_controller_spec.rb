@@ -706,6 +706,10 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET payment_summary' do
+    before do
+      sign_in(client)
+    end
+
     context 'when the contest is payed' do
       before do
         Fabricate(:client_payment,
@@ -716,14 +720,53 @@ RSpec.describe ContestsController do
                   credit_card: Fabricate(:credit_card))
       end
 
-      context 'when signed in as client' do
+      context 'when automatic payment is disabled' do
         before do
-          sign_in(client)
+          allow(Settings).to receive(:payment_enabled) { false }
         end
 
         it 'returns page' do
           get :payment_summary, id: contest.id
           expect(response).to render_template(:payment_summary)
+        end
+      end
+
+      context 'when automatic payment is enabled' do
+        before do
+          allow(Settings).to receive(:payment_enabled) { true }
+        end
+
+        it 'returns page' do
+          get :payment_summary, id: contest.id
+          expect(response).to render_template(:payment_summary)
+        end
+      end
+    end
+
+    context 'when the contest is not payed' do
+      before do
+        contest
+      end
+
+      context 'when automatic payment is disabled' do
+        before do
+          allow(Settings).to receive(:payment_enabled) { false }
+        end
+
+        it 'does not find page' do
+          get :payment_summary, id: contest.id
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'when automatic payment is enabled' do
+        before do
+          allow(Settings).to receive(:payment_enabled) { true }
+        end
+
+        it 'does not find page' do
+          get :payment_summary, id: contest.id
+          expect(response).to have_http_status(:not_found)
         end
       end
     end
