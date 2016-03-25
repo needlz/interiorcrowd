@@ -50,9 +50,7 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email about product list items marked' do
-      expect(UserMailer.product_list_feedback({username: 'username',
-                                               email: 'email'},
-                                              contest_request.id)).to be_present
+      expect(UserMailer.product_list_feedback(designer.id, contest_request.id)).to be_present
     end
 
     it 'sends email about new concept board comment' do
@@ -65,14 +63,13 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email clients comment to designer' do
-      expect(UserMailer.note_to_concept_board({ username: 'username',
-                                                email: 'email',
+      expect(UserMailer.note_to_concept_board({ designer_id: designer.id,
                                                 comment: 'text of comment',
                                                 client_name: 'client\'s name'})).to be_present
     end
 
     it 'sends email new product list items' do
-      expect(UserMailer.new_product_list_item({username: 'username', email: 'email'})).to be_present
+      expect(UserMailer.new_product_list_item(client.id)).to be_present
     end
 
     it 'sends email designer\'s win' do
@@ -128,7 +125,9 @@ RSpec.describe UserMailer do
     it 'sends email to all designers when new contest has been added' do
       designer
       contest
-      expect(UserMailer.new_project_on_the_platform(contest.client.name, contest.project_name, Designer.active.pluck(:id))).to be_present
+      expect(UserMailer.new_project_on_the_platform(contest.client.name,
+                                                    contest.project_name,
+                                                    Designer.active.pluck(:id))).to be_present
     end
 
     it 'sends email to designers about no submissions for client so far' do
@@ -158,6 +157,21 @@ RSpec.describe UserMailer do
     it 'sends email to client about contest not yet live' do
       expect(UserMailer.new_client_no_photos(contest.id)).to be_present
     end
+
+    it 'sends email to designer about contest has been moved to final design' do
+      expect(UserMailer.client_ready_for_final_design(contest_request.id)).to be_present
+    end
+
+    it 'saves list of recipients' do
+      ActionMailer::Base.perform_deliveries = true
+      email = OutboundEmail.create!
+      UserMailer.client_ready_for_final_design(contest_request.id, email.id).deliver_now
+      expect(email.reload.recipients).to eq([{ email: designer.email,
+                                               name: designer.name,
+                                               type: 'to',
+                                               role: designer.role }].to_json)
+    end
+
   end
 
 end

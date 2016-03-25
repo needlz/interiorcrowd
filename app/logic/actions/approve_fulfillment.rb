@@ -49,7 +49,7 @@ class ApproveFulfillment < Action
   end
 
   def send_notifications
-    Jobs::Mailer.schedule(:client_ready_for_final_design, [contest_request])
+    Jobs::Mailer.schedule(:client_ready_for_final_design, [contest_request.id])
     Jobs::Mailer.schedule(:client_moved_to_final_design, [contest_request.contest_id])
   end
 

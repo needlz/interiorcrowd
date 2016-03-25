@@ -74,4 +74,8 @@ class Client < ActiveRecord::Base
     stripe_customer_id
   end
 
+  def active_admin_name
+    "#{ id } #{ name }"
+  end
+
 end

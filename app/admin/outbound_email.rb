@@ -17,10 +17,10 @@ ActiveAdmin.register OutboundEmail do
       OutboundEmail.arguments_from_output(email.api_response).map { |email| email['email'] }.join(', ') if email.api_response
     end
     column 'Designer Name' do |email|
-      find_recipients_by_mandrill_response('Designer', email.api_response)
+      recipients_list(Designer, email)
     end
     column 'Client Name' do |email|
-      find_recipients_by_mandrill_response('Client', email.api_response)
+      recipients_list(Client, email)
     end
     column 'Message' do |email|
       strip_tags(email.plain_message)
@@ -44,16 +44,17 @@ ActiveAdmin.register OutboundEmail do
         OutboundEmail.arguments_from_output(email.api_response).map { |email| email['email'] }.join(', ') if email.api_response
       end
       row 'Designer Name' do |email|
-        find_recipients_by_mandrill_response('Designer', email.api_response)
+        recipients_list(Designer, email)
       end
       row 'Client Name' do |email|
-        find_recipients_by_mandrill_response('Client', email.api_response)
+        recipients_list(Client, email)
       end
       row 'Message' do |email|
         strip_tags(email.plain_message)
       end
       row :status
       row 'Date sent', :sent_to_mail_server_at
+      row :recipients
     end
   end
 
@@ -63,9 +64,8 @@ ActiveAdmin.register OutboundEmail do
   end
 
   member_action :resend, method: :get do
-    resource_name = resource.class.model_name.element
-    email = OutboundEmail.find(params[:id])
     return unless current_admin_user
+    email = OutboundEmail.find(params[:id])
 
     Jobs::Mailer.schedule(email.mailer_method, email.arguments)
     redirect_to admin_outbound_emails_path

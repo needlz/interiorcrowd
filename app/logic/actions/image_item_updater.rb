@@ -25,7 +25,7 @@ class ImageItemUpdater
 
   def send_email
     Jobs::Mailer.schedule(:product_list_feedback,
-                          [{ username: @designer.name, email: @designer.email }, contest_request.id],
+                          [@designer.id, contest_request.id],
                           { run_at: marks_digest_minutes_interval, contest_request_id: contest_request.id })
   end
 

@@ -1,9 +1,15 @@
 ActiveAdmin.register ClientPayment do
 
+  controller do
+    def scoped_collection
+      super.includes(:client, contest: [:promocodes])
+    end
+  end
+
   index do
-    column :id
-    column :client_id
-    column :contest_id
+    id_column
+    column :client
+    column :contest
     column :payment_status
     column :last_error
     column(:stripe_charge_id) do |client_payment|

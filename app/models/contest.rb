@@ -253,6 +253,10 @@ class Contest < ActiveRecord::Base
     Designer.active.includes(:contest_requests).where(contest_requests_by_designer.exists.not)
   end
 
+  def active_admin_name
+    "#{ id } #{ project_name }"
+  end
+
   private
 
   def create_retailer_preferences

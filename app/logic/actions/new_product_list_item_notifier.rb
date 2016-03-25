@@ -14,7 +14,7 @@ class NewProductListItemNotifier
 
   def send_email
     Jobs::Mailer.schedule(:new_product_list_item,
-                          [{ username: client.name, email: client.email }],
+                          [client.id],
                           { contest_request_id: request.id })
   end
 

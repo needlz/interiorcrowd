@@ -429,6 +429,7 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.text     "api_response"
     t.text     "plain_message"
     t.string   "template_name"
+    t.text     "recipients"
   end
 
   create_table "portfolio_awards", force: :cascade do |t|
