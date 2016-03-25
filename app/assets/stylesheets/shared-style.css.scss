@@ -3354,8 +3354,6 @@ input[type="radio"].smallRadio:checked + label span {
   background-clip: padding-box;
   background: #a9a9a9;
   margin-right: 5px;
-  margin-top: -4.5px;
-  margin-bottom: -14.5px;
 }
 
 a.scrollBoxCommentsHandle {
@@ -3842,6 +3840,11 @@ a.uploadNewConceptBoard {
 .dcProduct .dcProductRight .scrollBoxCommentsTrack {
   /*body > div.container.briefEditing.collaborationScreen > div:nth-child(7) > div.col-sm-5.dcProductRight > div > div{*/
   left: 0px;
+}
+
+.scrollBoxCommentsTrack.test {
+  height: 503px !important;
+  margin-top: 30px;
 }
 
 .dcProduct .dcProductRight .scrollBoxCommentsHandle {
@@ -4814,7 +4817,9 @@ $final-designer-center-comment-border-color: #ccc;
 
 .finalNote .header {
   font-size: 20px;
-  margin: 10px 0px;
+  margin: 10px 0;
+  border-bottom: none !important;
+
 }
 
 .designer-center {
@@ -4842,6 +4847,7 @@ $final-designer-center-comment-border-color: #ccc;
   }
 
   .comments {
+    margin-top: 30px;
     margin-bottom: 30px;
     overflow: auto;
     max-height: 500px;
@@ -4850,24 +4856,16 @@ $final-designer-center-comment-border-color: #ccc;
     padding-right: 0 !important;
   }
 
-  @media(max-width: 768px) {
-    .comment {
-      .info {
-        border-right-width: 0 !important;
-      }
-    }
-  }
-
   .comment {
     border-top: 1px solid $final-designer-center-comment-border-color;
     border-right: 1px solid $final-designer-center-comment-border-color;
     border-left: 1px solid $final-designer-center-comment-border-color;
 
-    .info {
-      border-right: 1px solid $final-designer-center-comment-border-color;
+    .details {
 
       .name {
         font-size: 20px;
+        font-weight: bold;
       }
 
       .date {
@@ -5036,3 +5034,98 @@ $final-designer-center-comment-border-color: #ccc;
   }
 }
 
+@media (max-width: 767px) {
+
+  .finalNote {
+    .text {
+      padding: 0px;
+
+      p {
+        word-wrap: break-word;
+      }
+    }
+  }
+
+  .finalNote .comment .row-container {
+    padding-bottom: 0px;
+  }
+
+  .finalNote .titleRow .commentsCount {
+    float: left;
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 992px){
+  .finalNote {
+    .comment-container {
+      height: 100% !important;
+    }
+
+    .comment-body {
+      height: 100% !important;
+
+      .text {
+        height: 100% !important;
+        border-left: 1px solid #ccc;
+      }
+    }
+  }
+}
+
+.finalNote {
+  .comments {
+    padding-left: 0;
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 767px){
+  .finalNote {
+    .comment .details .name {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .finalNote {
+    .comment-container {
+      padding: 10px 25px !important;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .finalNote {
+    .comment .details .name {
+      font-size: 18px;
+    }
+    .comment-container {
+      .avatar {
+        padding: 10px 0px 10px 25px !important
+      }
+      .details {
+        padding-top: 10px !important;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .finalNote {
+    .comment-body {
+      padding: 0;
+    }
+  }
+}
+
+.finalNote {
+  .comment:last-child {
+    border-bottom: none;
+  }
+
+  .comment:first-child {
+    border-top: none;
+  }
+}

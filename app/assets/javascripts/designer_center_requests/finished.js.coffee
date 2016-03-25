@@ -23,6 +23,7 @@ class @DesignerFinishedContestRequestPage
     $scrolledComments = $commentsContainer.find('.comments')
     $scrolledComments.html(html)
     $scrolledComments.scrollTop($scrolledComments[0].scrollHeight)
+    @fitHeight()
 
   @emptyInput: ($container)->
     $container.find('[name="final_note[text]"]').val('')
@@ -44,5 +45,6 @@ class @DesignerFinishedContestRequestPage
         parts.each ->
           if maxHeight < $(this).height()
             maxHeight = $(this).height()
+
 
         parts.css('height', maxHeight + 'px')

@@ -2401,18 +2401,6 @@ span.submission-pagination{
   }
 }
 
-@media (max-width: 768px) {
-  .client-center {
-    .finalNote {
-      .comments {
-        .info {
-          width: 45%;
-        }
-      }
-    }
-  }
-}
-
 .bottomBarMobile{
   text-transform: uppercase;
   hr {
@@ -2508,21 +2496,6 @@ span.submission-pagination{
   }
   .yes-button:hover, .no-button:hover {
     cursor: pointer;
-  }
-}
-
-@media (max-width: 460px) {
-  .client-center {
-    .finalNote {
-      .comments {
-        a{
-          word-wrap: break-word;
-        }
-        .info {
-          width: 100%;
-        }
-      }
-    }
   }
 }
 
