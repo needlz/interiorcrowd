@@ -34,9 +34,11 @@
   .row
     .col-sm-12.finalNote
       .titleRow
-        %span.header= t('.final_note.title')
-        %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
-        .comments
+        .col-xs-12.col-sm-9
+          %span.header= t('.final_note.title')
+        .col-xs-12.col-sm-3
+          %span.commentsCount= t('.final_note.comments_count', count: show_page.final_notes.length)
+        .col-xs-12.comments
           = render 'shared/request_comments_read_only',
             comments: show_page.final_notes
       = form_tag final_note_index_path, remote: true, id: 'final-note-to-client' do
