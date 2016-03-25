@@ -42,10 +42,7 @@ class @Notifications
 class Comments
 
   @beautifyScroll: ->
-    $('#scrollBoxComments').enscroll
-      verticalTrackClass: 'scrollBoxCommentsTrack'
-      verticalHandleClass: 'scrollBoxCommentsHandle'
-      minScrollbarLength: 28
+    $('#scrollBoxComments').customScrollBar()
 
 $ ->
   Notifications.init()

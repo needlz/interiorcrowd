@@ -1,8 +1,11 @@
 ActiveAdmin.register Client do
 
+  scope('With cards', default: true) { |scope| scope.with_cards }
+  scope('Including users') { |scope| scope }
+
   controller do
     def scoped_collection
-      super.with_cards.includes(:primary_card, :credit_cards)
+      super.includes(:primary_card, :credit_cards)
     end
   end
 

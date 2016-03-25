@@ -69,10 +69,7 @@ $(document).ready ->
     if @complete
       $(this).load()
 
-  $('#scrollBoxComments,.dcProductDesc').enscroll
-    verticalTrackClass: 'scrollBoxCommentsTrack'
-    verticalHandleClass: 'scrollBoxCommentsHandle'
-    minScrollbarLength: 28
+  $('#scrollBoxComments,.dcProductDesc').customScrollBar()
 
   $('.circleDownArrow').click ->
     $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700

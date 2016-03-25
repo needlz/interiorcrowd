@@ -3,11 +3,7 @@ class @DesignerFinishedContestRequestPage
 
   @init: ->
     $(window).resize(@fitHeight)
-    $(@commentsSelector).enscroll(
-      verticalTrackClass: 'scrollBoxCommentsTrack'
-      verticalHandleClass: 'scrollBoxCommentsHandle'
-      minScrollbarLength: 28
-    )
+    $(@commentsSelector).customScrollBar()
     $(@commentsSelector).imagesLoaded().done =>
       @fitHeight()
     @fitHeight()

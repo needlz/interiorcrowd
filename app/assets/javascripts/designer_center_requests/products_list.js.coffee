@@ -167,12 +167,7 @@ class @ImageItemsView
   @init: ->
     $('.dcProductDesc').each (index, element)->
       $element = $(element)
-      unless $element.data('enscroll')
-        $element.enscroll({
-          verticalTrackClass: 'scrollBoxCommentsTrack',
-          verticalHandleClass: 'scrollBoxCommentsHandle',
-          minScrollbarLength: 28
-        });
+      $element.customScrollBar()
 
 $ ->
   itemsEditor = new ImageItemsEditor()

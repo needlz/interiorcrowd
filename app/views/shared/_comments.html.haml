@@ -52,19 +52,23 @@
 
 
       #allComents.tab-pane.active{role: 'tabpanel'}
-        - comments.each do |comment|
-          = render 'designer_center_requests/edit/comment',
-              { user: current_user, comment_view: CommentView.create(comment, current_user) }
+        .commentsContainer
+          - comments.each do |comment|
+            = render 'designer_center_requests/edit/comment',
+                { user: current_user, comment_view: CommentView.create(comment, current_user) }
 
-      #meComments.tab-pane{role: 'tabpanel'}
-        - comments.where(role: current_user.role).each do |comment|
-          = render 'designer_center_requests/edit/comment',
-              { user: current_user, comment_view: CommentView.create(comment, current_user) }
+      - if show_comment_switcher
+        #meComments.tab-pane{role: 'tabpanel'}
+          .commentsContainer
+            - comments.where(role: current_user.role).each do |comment|
+              = render 'designer_center_requests/edit/comment',
+                  { user: current_user, comment_view: CommentView.create(comment, current_user) }
 
-      #designerComments.tab-pane{role: 'tabpanel'}
-        - comments.where.not(role: current_user.role).each do |comment|
-          = render 'designer_center_requests/edit/comment',
-              { user: current_user, comment_view: CommentView.create(comment, current_user) }
+        #designerComments.tab-pane{role: 'tabpanel'}
+          .commentsContainer
+            - comments.where.not(role: current_user.role).each do |comment|
+              = render 'designer_center_requests/edit/comment',
+                  { user: current_user, comment_view: CommentView.create(comment, current_user) }
 
     = render 'shared/setup_uploadify'
 
@@ -78,13 +82,8 @@
         = render 'concept_board_comments/new', contest_request: request
 
 :javascript
-    $(document).ready(function(){
-      $('#scrollBoxComments').enscroll({
-        verticalTrackClass: 'scrollBoxCommentsTrack',
-        verticalHandleClass: 'scrollBoxCommentsHandle',
-        minScrollbarLength: 28
-      });
 
+    $(document).ready(function(){
       ConceptBoardComment.init()
       CommentsBlock.fitCommentsArea()
 
