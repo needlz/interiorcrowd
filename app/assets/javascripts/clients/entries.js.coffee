@@ -41,11 +41,7 @@ class @DesignerBlocks
 class ScrollBars
 
   @style: ->
-    $('#scrollbox4').enscroll({
-      verticalTrackClass: 'track4',
-      verticalHandleClass: 'handle4',
-      minScrollbarLength: 28
-    });
+    $('#scrollbox4').customScrollBar()
 
 class @Answers
 

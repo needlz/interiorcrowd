@@ -39,7 +39,7 @@ class @ConceptBoardComment
     $(@attachmentThumbsSelector).remove()
 
   @newComment: (category, data) ->
-    $category =  $("##{category}")
+    $category =  $("##{category} .commentsContainer")
     hasComments = $category.find('.commentContainer:last').length > 0
     $newComment = $(data.comment_html)
     if hasComments

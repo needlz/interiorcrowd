@@ -23,7 +23,9 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
 //= require jquery-ui/slider
-//= require lib/enscroll-0.6.1.min
+//= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mCustomScrollbar
+//= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mousewheel
+//= require custom_scrollbar
 //= require lib/jPlayer-2.9.2/jquery.jplayer.min
 //= require lib/jquery.colorbox
 //= require lib/jquery.dotdotdot

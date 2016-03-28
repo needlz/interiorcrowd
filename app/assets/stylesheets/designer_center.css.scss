@@ -57,6 +57,10 @@
   padding-right: 27px;
   outline: none;
   overflow: hidden;
+
+  .tab-pane {
+    overflow: hidden;
+  }
 }
 
 #searchBox {
