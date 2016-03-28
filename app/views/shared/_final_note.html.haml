@@ -1,0 +1,21 @@
+.comment.clearfix{ class: item_class }
+  .hidden-xs
+    .row.comment-container.disablePadding
+      .col-sm-1.col-md-1.avatar.disablePadding
+        = image_tag comment.avatar_url, class: 'fullWidth'
+      .col-sm-11.col-md-11.comment-body
+        .col-sm-12.col-md-3.details
+          .name= comment.name
+          .date= comment.date
+        .col-sm-12.col-md-9.text
+          %p= format_comment(comment.text)
+  .visible-xs
+    .row.row-container
+      .col-xs-3.avatar.disablePadding
+        = image_tag comment.avatar_url, class: 'fullWidth'
+      .col-xs-9.details
+        .name= comment.name
+        .date= comment.date
+      .col-xs-12.text
+        %p= format_comment(comment.text)
+

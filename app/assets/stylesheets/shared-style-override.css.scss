@@ -68,12 +68,6 @@
   }
 }
 
-@media (max-width: 450px) {
-  .steps123{
-    margin-bottom: -80px;
-  }
-}
-
 .timeLeftToSubmitParent{
   top: 140px;
 }
@@ -154,7 +148,7 @@
   cursor: pointer;
 }
 
-.finalNoteToDesigner{
+.finalNote{
   textarea{
     color: inherit;
   }
@@ -196,7 +190,7 @@
 }
 
 @media(max-width: 767px){
-  .finalNoteToDesigner{
+  .finalNote{
     .send-button{
       width: 100%;
     }
@@ -2380,6 +2374,16 @@ span.submission-pagination{
   .bottomBar {
     hr {
       width: 230px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .client-center {
+    .finalNote {
+      .comments {
+        width: 100%;
+      }
     }
   }
 }

@@ -35,7 +35,7 @@ class FinalNotesController < ApplicationController
     @note_views = (@contest_request.comments + @contest_request.final_notes).sort_by(&:created_at).map do |note|
       ConceptBoardCommentView.new(note, current_user)
     end
-    render_to_string(partial: 'designer_center_requests/show/request_comments_read_only',
+    render_to_string(partial: 'shared/request_comments_read_only',
                      locals: { comments: @note_views })
   end
 

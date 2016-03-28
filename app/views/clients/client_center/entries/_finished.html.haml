@@ -12,7 +12,7 @@
   = t('client_center.entries.space.congratulations')
   %span
   = t('client_center.entries.space.new_space_ready')
-.container.ccFinalPage
+.ccFinalPage
   = render partial: 'clients/client_center/entries/phases',
             locals: { stripe: contest_page.entries_concept_board_page.phases_stripe }
   .row.designerDetail
@@ -56,14 +56,15 @@
 
   .fullWidthLine.marginBottom40.marginTop20
   .row
-    .col-sm-12.finalNoteToDesigner
+    .col-sm-12.finalNote
       .titleRow
-        %span.header= t('client_center.finished.final_note.title')
-        - if @entries_page.entries_concept_board_page.final_notes.present?
-          %span.commentsCount= t('designer_center_requests.show.finished.final_note.comments_count',
-            count: @entries_page.entries_concept_board_page.final_notes.length)
-        .comments
-          = render 'designer_center_requests/show/request_comments_read_only',
+        .col-xs-12.col-sm-9
+          %span.header= t('client_center.finished.final_note.title')
+        .col-xs-12.col-sm-3
+          %span.commentsCount= t('client_center.entries.finished.final_note.comments_count',
+          count: @entries_page.entries_concept_board_page.final_notes.length)
+        .col-xs-12.comments
+          = render 'shared/request_comments_read_only',
             comments: @entries_page.entries_concept_board_page.final_notes
       = form_tag final_note_index_path, remote: true, id: 'final-note-to-designer' do
         = hidden_field_tag 'contest_request_id', request.id
