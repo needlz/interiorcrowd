@@ -5,7 +5,7 @@ ActiveAdmin.register InboundEmail do
       link_to(email.id, admin_inbound_email_path(email.id))
     end
     column 'json content' do |email|
-      JSON.pretty_generate(JSON.parse(email.json_content)).gsub(/\n/, '<br>').html_safe
+      JSON.pretty_generate(JSON.parse(email.json_content)).gsub(/\n/, '<br>')
     end
     column 'processed?' do |email|
       email.processed

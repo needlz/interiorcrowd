@@ -38,8 +38,7 @@ class ContestNoteCreation
 
   def schedule_email(designer)
     Jobs::Mailer.schedule(:note_to_concept_board,
-                          [{ username: designer.name,
-                             email: designer.email,
+                          [{ designer_id: designer.id,
                              client_name: client.name,
                              comment: comment.text }],
                           { run_at: digest_minutes_interval, contest_id: contest.id })

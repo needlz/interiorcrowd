@@ -47,7 +47,8 @@ module MandrillMailer
       email = OutboundEmail.find(options[:email_id])
       email.update_attributes!(api_response: api_response,
                                plain_message: plain_message,
-                               template_name: @template_name)
+                               template_name: @template_name,
+                               recipients: recipients.to_json)
     end
     Rails.logger.info(api_response)
   end

@@ -27,7 +27,8 @@ RSpec.describe SubscribedDesignersQueryNotSubmitted do
     expect(query.designers).to match_array(
       [designer_without_submitted_contest_request,
        designer_with_contest_comment,
-       invited_designer]
+       invited_designer,
+       not_invited_designer]
     )
   end
 
