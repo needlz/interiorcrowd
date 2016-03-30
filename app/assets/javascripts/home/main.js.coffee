@@ -69,7 +69,7 @@ $(document).ready ->
     if @complete
       $(this).load()
 
-  $('#scrollBoxComments,.dcProductDesc').customScrollBar()
+  $('#scrollBoxComments').customScrollBar()
 
   $('.circleDownArrow').click ->
     $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
