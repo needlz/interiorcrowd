@@ -23,9 +23,6 @@ class @DesignerFinishedContestRequestPage
     $(@commentsSelector).mCustomScrollbar("destroy")
     $scrolledComments.html(html)
     $(@commentsSelector).customScrollBar()
-    $(@commentsSelector).mCustomScrollbar("scrollTo", "bottom", {
-      scrollInertia:200
-    });
     @fitHeight()
 
   @emptyInput: ($container)->
