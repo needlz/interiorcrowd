@@ -20,8 +20,12 @@ class @DesignerFinishedContestRequestPage
 
   @updateComments: ($commentsContainer, html)->
     $scrolledComments = $commentsContainer.find('.comments')
+    $(@commentsSelector).mCustomScrollbar("destroy")
     $scrolledComments.html(html)
-    $scrolledComments.scrollTop($scrolledComments[0].scrollHeight)
+    $(@commentsSelector).customScrollBar()
+    $(@commentsSelector).mCustomScrollbar("scrollTo", "bottom", {
+      scrollInertia:200
+    });
     @fitHeight()
 
   @emptyInput: ($container)->
