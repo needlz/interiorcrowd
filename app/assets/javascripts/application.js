@@ -25,6 +25,7 @@
 //= require jquery-ui/slider
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mCustomScrollbar
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mousewheel
+//= require lib/enscroll-0.6.1.min
 //= require custom_scrollbar
 //= require lib/jPlayer-2.9.2/jquery.jplayer.min
 //= require lib/jquery.colorbox

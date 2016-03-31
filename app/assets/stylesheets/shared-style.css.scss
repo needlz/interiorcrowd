@@ -3852,7 +3852,7 @@ a.uploadNewConceptBoard {
   background: #e1e1e1;
 }
 
-.dcProduct .dcProductRight div.dcProductDesc {
+.dcProduct .dcProductRight textarea.dcProductDesc {
   width: 100%;
   resize: none;
   border: 1px solid #e1e1e1;
@@ -5128,4 +5128,8 @@ $final-designer-center-comment-border-color: #ccc;
   .comment:first-child {
     border-top: none;
   }
+}
+
+.row.comment-container.disablePadding {
+  margin-right: 0px;
 }

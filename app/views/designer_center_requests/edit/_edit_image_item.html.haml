@@ -25,8 +25,7 @@
             %input#productPrice{ name: 'image_item[price]', :type => "text", :value => item.price }/
             %input#productLink{ name: 'image_item[link]', :type => "text", :value =>  item.link }/
   .col-sm-5.dcProductRight
-    .dcProductDesc{ contenteditable: true,
-      name: 'image_item[text]',
+    %textarea.dcProductDesc{ name: 'image_item[text]',
       tabindex: '0',
       placeholder: t('designer_center.product_items.text_placeholder') }
       = item.text

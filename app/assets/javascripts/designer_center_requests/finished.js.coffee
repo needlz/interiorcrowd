@@ -18,7 +18,6 @@ class @DesignerFinishedContestRequestPage
     @emptyInput($container)
     @updateCommentsCount($container, data.comments_count_text)
 
-
   @updateComments: ($commentsContainer, html)->
     $scrolledComments = $commentsContainer.find('.comments')
     $scrolledComments.html(html)
