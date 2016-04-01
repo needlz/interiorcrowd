@@ -18,12 +18,13 @@ class @DesignerFinishedContestRequestPage
     @emptyInput($container)
     @updateCommentsCount($container, data.comments_count_text)
 
-
   @updateComments: ($commentsContainer, html)->
     $scrolledComments = $commentsContainer.find('.comments')
+    $(@commentsSelector).removeCustomScrollBar()
     $scrolledComments.html(html)
-    $scrolledComments.scrollTop($scrolledComments[0].scrollHeight)
+    $(@commentsSelector).customScrollBar()
     @fitHeight()
+    $(@commentsSelector).customScrollBarScrollBottom()
 
   @emptyInput: ($container)->
     $container.find('[name="final_note[text]"]').val('')
