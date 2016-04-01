@@ -20,10 +20,11 @@ class @DesignerFinishedContestRequestPage
 
   @updateComments: ($commentsContainer, html)->
     $scrolledComments = $commentsContainer.find('.comments')
-    $(@commentsSelector).mCustomScrollbar("destroy")
+    $(@commentsSelector).removeCustomScrollBar()
     $scrolledComments.html(html)
     $(@commentsSelector).customScrollBar()
     @fitHeight()
+    $(@commentsSelector).customScrollBarScrollBottom()
 
   @emptyInput: ($container)->
     $container.find('[name="final_note[text]"]').val('')
