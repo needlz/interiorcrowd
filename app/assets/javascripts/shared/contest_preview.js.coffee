@@ -10,4 +10,4 @@ class @ContestPreview
       0
     )
   @initStyleDetailsPopups: ->
-    $('[data-toggle="popover"]').popover(viewport: '.designStyleParent', container: '.designStyleParent')
+    $('[data-toggle="popover"]').popover()

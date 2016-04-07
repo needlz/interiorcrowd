@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def render_404
-    render file: PAGE_404_PATH, layout: 'sign_up', status: 404
+    render file: PAGE_404_PATH, layout: 'no_header', status: 404
   end
 
   def check_contest_owner

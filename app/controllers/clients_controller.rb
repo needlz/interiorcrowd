@@ -149,11 +149,12 @@ class ClientsController < ApplicationController
         format.html { redirect_to redirect_path }
         format.json { render json: @client, status: :created, location: @client }
       else
+        error_msg = @client.errors.full_messages.join('<br>')
         format.html do
-          flash[:error] = @client.errors.full_messages.join('</br>')
+          flash[:error] = error_msg
           render template: 'contests/account_creation'
         end
-        format.json { render json: @client.errors, status: :unprocessable_entity }
+        format.json { render json: { error: error_msg }, status: :unprocessable_entity }
       end
     end
   end
