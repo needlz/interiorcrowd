@@ -47,7 +47,7 @@ module Blog
 
     def make_request(url)
       conn = Faraday.new(url) do |f|
-        f.use FaradayMiddleware::FaradayCookies, session: session, cookies: @cookies
+        f.use FaradayMiddleware::FaradayCookies, session: session
         f.use FaradayMiddleware::Gzip
         f.response :logger if Settings.log_requests_to_blog
         f.request :url_encoded

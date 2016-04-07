@@ -8,7 +8,6 @@ module FaradayMiddleware
     def initialize(app, options = {})
       super(app)
       @session = options.delete(:session)
-      @cookies = options.delete(:cookies)
       @options = options
     end
 
@@ -20,44 +19,23 @@ module FaradayMiddleware
     private
 
     def set_cookies(env)
-      str = @session.try(:[], :blog_cookies) || ''
-      @url = env[:url]
-
+      s = StringIO.new(@session.try(:[], :blog_cookies) || '')
       @jar = HTTP::CookieJar.new
-      s = StringIO.new(str)
+      @url = env[:url]
       @jar.load(s, @url)
-
-      @new_jar = HTTP::CookieJar.new
-      s = StringIO.new(str)
-      @new_jar.load(s, @url)
-
       cookie = HTTP::Cookie.cookie_value(@jar.cookies(@url))
-      env[:request_headers]['Cookie'] ||= ''
-      env[:request_headers]['Cookie'] = cookie if cookie.present?
+      env[:request_headers]['cookie'] = cookie if cookie
     end
 
     def get_cookies(env)
+      p 'request headers', env.request_headers if Settings.log_requests_to_blog
+      p 'reuqest body', env.body if Settings.log_requests_to_blog
       response = @app.call(env)
 
       response.on_complete do |response_env|
-        set_cookie = response_env[:response_headers]['set-cookie']
-        @new_jar.parse(set_cookie, @url) if response_env[:response_headers]['set-cookie']
-        env[:cookies] = @jar
-
-        if @cookies
-          new_cookie_names = []
-          @new_jar.each do |cookie|
-            new_cookie_names << cookie.name
-            @cookies[cookie.name] = { value: CGI::unescape(cookie.value), expires: cookie.expires, max_age: cookie.max_age, path: '/' }
-          end
-          @jar.each do |cookie|
-            if new_cookie_names.exclude?(cookie.name)
-              @cookies.delete(cookie.name.to_sym)
-            end
-          end
-        end
+        @jar.parse(response_env[:response_headers]['set-cookie'], @url) if response_env[:response_headers]['set-cookie']
+        @jar.cleanup
         s = StringIO.new
-        @jar.parse(set_cookie, @url) if set_cookie
         @jar.save(s, session: true)
         @session[:blog_cookies] = s.string
       end
