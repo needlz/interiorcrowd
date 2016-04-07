@@ -1,5 +1,7 @@
 !!!
 %html{ page_html_attributes }
+  = csrf_meta_tags
+  = render 'layouts/hack_requests'
   = head.html_safe
   %link{:href => Settings.external_urls.font_awesome_css, rel: 'stylesheet' }/
 

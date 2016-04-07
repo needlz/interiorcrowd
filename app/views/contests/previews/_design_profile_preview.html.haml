@@ -8,12 +8,12 @@
           %p.col-sm-6.designStyle.text-right.disablePadding
             = style.name.upcase
             %a{ href: 'javascript:void(0)',
-                data: { container: 'body',
+                data: { container: '.designStyleParent',
                   toggle: 'popover',
                   placement: 'bottom',
                   html: 'true',
                   content: render('contests/previews/style_description_popup', { style: style }),
-                  viewport: 'body' } }
+                  viewport: '.designStyleParent' } }
               ?
         .row
           = render 'shared/image_with_enlarge_button',

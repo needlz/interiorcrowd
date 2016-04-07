@@ -10,44 +10,72 @@ class BlogController < ApplicationController
   def justines_story; end
 
   def blog_page
+    @host = Settings.external_urls.blog.url
+    @url = URI.join(@host, params[:blog_page_path])
     @setup_viglink = true
-    @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_path])
-    render_get_response
+    @internal_blog_namespace = '/blog'
+    render_get_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_page
+    @host = Settings.external_urls.blog.designers_url
+    @url = URI.join(@host, params[:blog_page_path])
+    @setup_viglink = true
+    @internal_blog_namespace = '/blog/designers'
+    render_get_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   def blog_page_post
-    @url = URI.join(Settings.external_urls.blog.url, params[:blog_page_post_path])
-    render_post_response
+    @host = Settings.external_urls.blog.url
+    @url = URI.join(@host, params[:blog_page_post_path])
+    @internal_blog_namespace = '/blog'
+    render_post_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_page_post
+    @host = Settings.external_urls.blog.designers_url
+    @url = URI.join(@host, params[:blog_page_post_path])
+    @internal_blog_namespace = '/blog/designers'
+    render_post_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   def blog_root
-    @url = Settings.external_urls.blog.url
-    render_get_response
+    @host = Settings.external_urls.blog.url
+    @url = @host
+    render_get_response(blog_page_url(blog_page_path: ''))
+  end
+
+  def designers_blog_root
+    @host = Settings.external_urls.blog.designers_url
+    @url = @host
+    render_get_response(designers_blog_page_url(blog_page_path: ''))
   end
 
   private
 
-  def render_get_response
-    do_request(:get, get_params)
+  def render_get_response(blog_path)
+    do_request(:get, blog_path, get_params)
   end
 
-  def render_post_response
-    do_request(:post, get_params)
+  def render_post_response(blog_path)
+    do_request(:post, blog_path, get_params)
   end
 
-  def do_request(method, request_params = nil)
+  def do_request(method, blog_path, request_params = nil)
     begin
       @url = URI.decode(@url.to_s)
       @url = @url + '?' + env['QUERY_STRING'] if env['QUERY_STRING'].present?
-      blog_page_fetcher = Blog::PageFetcher.new(url: @url,
+      @blog_page_fetcher = Blog::PageFetcher.new(url: @url,
                                               params: request_params,
                                               env: env,
                                               method: method,
                                               session: session,
-                                              blog_path: blog_page_url(blog_page_path: ''),
-                                              request: request)
+                                              blog_path: blog_path,
+                                              request: request,
+                                              default_referer: @host,
+                                              cookies: cookies)
 
-      response = blog_page_fetcher.get_response
+      response = @blog_page_fetcher.get_response
 
       if response.kind_of? Faraday::Response
         response_body = response.body
@@ -69,7 +97,9 @@ class BlogController < ApplicationController
     if content_type #file with extension
       render text: content, content_type: content_type
     else
-      locals = Blog::PageParser.new(content, form_authenticity_token).rendering_params
+      locals = Blog::PageParser.new(response_body: content,
+                                    form_authenticity_token: form_authenticity_token,
+                                    internal_blog_namespace: @internal_blog_namespace).rendering_params
       if request.xhr?
         render text: locals[:text]
       else

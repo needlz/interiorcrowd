@@ -28,6 +28,11 @@
 
           .signUpWithEmailBtn.button.clickable
             = t('contests.creation.sign_up_suggestion.dialog.sign_up_with_email')
+          .alert.alert-warning.collapse.alert-dismissible{ role: 'alert' }
+            %span.text
+            %button.close{ type: 'button', data: { aria: { label: 'Close' } } }
+              %span{ aria: { hidden: 'true' } }
+                &times;
           .signUpWithEmailBtnSubtitle.text-center
             = t('contests.creation.sign_up_suggestion.dialog.already_member')
             = link_to t('contests.creation.sign_up_suggestion.dialog.sign_in'), client_login_sessions_path

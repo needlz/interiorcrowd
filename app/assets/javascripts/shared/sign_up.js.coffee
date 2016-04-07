@@ -1,5 +1,7 @@
 class @SignUp
 
+  @alertSelector: '#signUpModal .alert-warning'
+
   @facebookLogin: ->
     FB.login(
       (response) =>
@@ -34,8 +36,16 @@ class @SignUp
             200
           )
       error: (response)=>
-        alert(response.responseText)
+        @showAlert(response.responseJSON.error)
 
     ajaxRequestOptions = $.extend({}, defaultOptions, requestOptions)
 
     $.ajax(ajaxRequestOptions)
+
+  @showAlert: (html) ->
+    $alert = $(@alertSelector)
+    $alert.show()
+    $alert.on('click', '.close', ->
+      $alert.hide()
+    )
+    $alert.find('.text').html(html)

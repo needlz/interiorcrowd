@@ -9,4 +9,4 @@
 = render partial: 'shared/setup_hotjar' if Settings.hotjar_id?
 :coffee
   $ ->
-    $('[data-toggle=popover]').popover()
+    $('[data-toggle=popover]').popover?()

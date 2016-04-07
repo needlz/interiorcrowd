@@ -11,6 +11,7 @@ module Blog
       @original_url = options[:original_url]
       @params = options[:params]
       @last_url_in_redirects_chain = @original_url
+      @plugins = options[:plugins]
     end
 
     def final_response(&on_request)
@@ -52,7 +53,10 @@ module Blog
         return do_request
       end
       replace_host
-      redirect
+      @plugins.each do |plugin|
+        self.redirect = plugin.process(URI(redirect))
+      end
+      redirect.to_s
     end
 
     def complement_redirect_location
@@ -74,6 +78,7 @@ module Blog
     def replace_host
       redirect_matches = redirect.match(/(#{ Regexp.escape(URI(default_referer).host) })\/(.+)/)
       redirect_part = redirect_matches[2] if redirect_matches
+      redirect_part[0] = '' if redirect_part && redirect_part[0] == '/'
       self.redirect = blog_path + redirect_part.to_s
     end
 

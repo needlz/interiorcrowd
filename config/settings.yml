@@ -39,6 +39,7 @@ common: &defaults
   external_urls:
     blog:
       url: http://blog.interiorcrowd.com
+      designers_url: http://designers.interiorcrowd.com
       get_ideas: http://blog.interiorcrowd.com/category/get-ideas
       client_stories: http://blog.interiorcrowd.com/category/client-stories
       design_styles: http://blog.interiorcrowd.com/category/get-ideas/design-styles

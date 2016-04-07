@@ -7,7 +7,6 @@ class @DesignSpaceOptions
   @init: (options = {})->
     @feedbackPlaceholder = options.feedbackPlaceholder
     @setupFeedbackPlaceholder()
-    @initFeedbackPopup()
 
     @bindInchesInputs()
     @mobileInputsPlaceholder()
@@ -21,9 +20,6 @@ class @DesignSpaceOptions
     placeholder = @feedbackPlaceholder
 
     $textarea.emulatePlaceholder(placeholder)
-
-  @initFeedbackPopup: ->
-    $('.feedback [data-toggle="popover"]').popover(viewport: '.feedback', container: '.feedback')
 
   @mobileInputsPlaceholder: ->
     @toggleMobileInputsPlaceholder()
@@ -59,4 +55,3 @@ class @DesignSpaceOptions
       @validator.addMessage $("#err_zip"), Location.empty_value_error, $('.location-zip')
 
     @validator.valid
-    

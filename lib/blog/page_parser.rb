@@ -2,10 +2,14 @@ module Blog
 
   class PageParser
 
+    DESIGNERS_BLOG_NAMESPACE = 'blog/designers'
     BLOG_NAMESPACE = 'blog'
 
     BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.url).host) })/
     BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ BLOG_NAMESPACE }"
+
+    DESIGNERS_BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.designers_url).host) })/
+    DESIGNERS_BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ DESIGNERS_BLOG_NAMESPACE }"
 
     BLOG_PAGE_PARTS_SELECTORS = {
         head: ['head'],
@@ -13,9 +17,10 @@ module Blog
         header: ['.rst-bottom-header']
     }
 
-    def initialize(response_body, form_authenticity_token)
-      @response_body = response_body
-      @form_authenticity_token = form_authenticity_token
+    def initialize(options)
+      @response_body = options[:response_body]
+      @form_authenticity_token = options[:form_authenticity_token]
+      @internal_blog_namespace = options[:internal_blog_namespace]
     end
 
     def rendering_params
@@ -41,8 +46,12 @@ module Blog
       @blog_params
     end
 
+    def designers_blog?
+      @designers_blog
+    end
+
     def parse_dom
-      response_body.gsub!(%r['/wp-admin/admin-ajax.php'], '\'/blog/wp-admin/admin-ajax.php\'')
+      response_body.gsub!(%r['/wp-admin/admin-ajax.php'], "\'#{ @internal_blog_namespace }/wp-admin/admin-ajax.php\'")
       response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog\2\3\5')
       response_body.gsub!(%r[(//designers.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog/designers\2\3\5')
       response_body.gsub!(%r[(")(/wp-content.+ajax-loader\.gif)], '\1http://blog.interiorcrowd.com\2')
@@ -84,7 +93,10 @@ module Blog
     end
 
     def replace_link(element, attribute)
-      element[attribute] = element[attribute].gsub(BLOG_REGEX, BLOG_PATH_REPLACEMENT) if element[attribute]
+      if element[attribute]
+        element[attribute] = element[attribute].gsub(BLOG_REGEX, BLOG_PATH_REPLACEMENT)
+        element[attribute] = element[attribute].gsub(DESIGNERS_BLOG_REGEX, DESIGNERS_BLOG_PATH_REPLACEMENT)
+      end
     end
 
     def append_authenticity_token(form)

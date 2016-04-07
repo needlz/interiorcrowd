@@ -5,7 +5,9 @@
 
     :javascript
       $(function() {
-        $('nav#menu').mmenu(); // gen mobile menu
+        if ($.fn.mmenu){
+          $('nav#menu').mmenu(); // generates menu for mobile screen
+        }
       });
   %body.pull_top
     .mm-page.mm-slideout

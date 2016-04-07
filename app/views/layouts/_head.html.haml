@@ -1,6 +1,7 @@
 %title= page_title
-= render 'layouts/favicon'
 - if @no_global_css
+  = javascript_include_tag 'jquery'
+  = render 'layouts/hack_requests'
   - unless @admin_page
     = stylesheet_link_tag 'layout'
     = stylesheet_link_tag 'jquery.mmenu.all'
@@ -26,3 +27,5 @@
 = render partial: 'shared/global_scripts'
 
 = yield :head
+
+= render 'layouts/favicon'
