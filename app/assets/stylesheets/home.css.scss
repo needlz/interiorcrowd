@@ -116,14 +116,14 @@ input[type="radio"].smallRadio + label span {
   }
 }
 
-#terms_of_service_modal {
+#terms_of_service_modal, #designer_contract_modal {
   overflow: scroll;
   .modal-dialog {
     width: 90% !important;
   }
 }
 
-.terms-of-use {
+.terms-of-use, .designer-contract {
   cursor: pointer;
   color: #428bca;
   display: inline-block;
