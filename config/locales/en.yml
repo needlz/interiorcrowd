@@ -1273,6 +1273,11 @@ en:
           We’re always interested in meeting new people who are excited about the sweet spot where
           design and technology overlap. If you’d like to get involved, reach out!
         email_us: Email us at
+      signup_form:
+        name: Name
+        email: Email
+        password: Password
+        phone: Phone
     how_it_works:
       title: How it works
       create_profile_step:
@@ -1480,11 +1485,14 @@ en:
         description: >
           Shop yourself, or get your designer to shop for you
     get_started: Get started
+    bottom:
+      header: ready to find out more?
+      description: Let's get started with your basic info and then we'll take you through our fun style quiz to learn more about you.
     carousel:
       price: 'starts at $99'
       choose_designer: Choose your designer
       fun_and_easy: Fun and easy
-      main_title: 'Start living in a more inspiring space.'
+      main_title: 'Find a fantastic interior designer today'
       sub_title: 'Find a fantastic interior designer to make over your space today.'
     what_we_do:
       title: What we do

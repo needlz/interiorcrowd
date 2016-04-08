@@ -4245,14 +4245,15 @@ p.product-list-reminder {
 
 .topCarouselHome .carousel-inner > .item .carousel-caption a.getStartedBtn {
   display: block;
-  background: #409863;
+  background: #FF7D26;
+  box-shadow: 0px 2px 0px #CC6321;
   font-family: "AvenirLTStd-Medium";
   color: #fefffe;
   font-size: 22px;
-  width: 225px;
+  width: 240px;
   margin: 15px auto 0px;
   border-radius: 3px;
-  padding: 15px 0px;
+  padding: 20px 0px;
   line-height: 20px;
 }
 
@@ -4424,7 +4425,7 @@ p.product-list-reminder {
   font-family: "AvenirLTStd-MediumOblique";
   font-size: 24px;
   color: #fefefe;
-  margin: 0px;
+  margin: 0;
   padding: 0 25%;
 }
 
@@ -4432,23 +4433,139 @@ p.product-list-reminder {
   font-family: "Times New Roman", serif;
 }
 
-.bottomCarouselHome a.getStartedBottom {
-  span {
-    margin-right: 10px;
-  }
-  img {
-    margin-top: -5px;
-  }
-  border-radius: 3px;
-  display: block;
-  background: #409863;
-  font-family: "AvenirLTStd-Medium";
-  color: #fefffe;
-  font-size: 22px;
-  line-height: 50px;
-  width: 210px;
-  margin: 60px auto 80px;
+.bottomCarouselHome .getStartedBottom {
+  max-width: 1050px;
   text-align: center;
+  margin: 120px auto;
+  padding: 0 30px;
+
+  .getStartedBottomDescription {
+    background-color: #424242;
+    color: white;
+    text-align: center;
+    padding:130px 30px;
+    font-family: "AvenirLTStd-Medium";
+    h2 {
+      text-transform: uppercase;
+      font-family: "AvenirLTStd-Medium";
+      font-size: 26px;
+      font-weight: 600;
+      margin-bottom: 25px;
+    }
+
+    h4 {
+      line-height: 1.5;
+      color: #E7E7E7;
+      font-size: 19px;
+    }
+  }
+
+  .getStartedBottomForm {
+    padding: 30px 50px;
+    text-align: center;
+    background-color: white;
+
+    label {
+      padding:0;
+      text-align: left;
+      color: #999999;
+      margin-bottom: 0;
+    }
+
+    input {
+      height: 40px;
+      border: 2px solid #ECECEC;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+  }
+  .getStartedBottomButton {
+    padding:0;
+  }
+
+  a {
+    span {
+      margin-right: 10px;
+    }
+    img {
+      margin-top: -5px;
+    }
+    border-radius: 3px;
+    display: block;
+    background: #FF7D26;
+    box-shadow: 0 2px 0 #CE733A;
+    color: #fefffe;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    padding: 3px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .bottomCarouselHome .getStartedBottom {
+    padding:0 30px;
+
+    .getStartedBottomDescription {
+      background-color: white;
+      color: #646464;
+      padding: 30px 150px 0;
+      h4{
+        color: #646464;
+      }
+    }
+
+    .getStartedBottomForm {
+      padding: 0 130px 50px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .bottomCarouselHome .getStartedBottom {
+    padding:0 30px;
+
+    .getStartedBottomDescription {
+      background-color: white;
+      color: #646464;
+      padding: 30px 150px 0;
+      h4{
+        color: #646464;
+      }
+    }
+
+    .getStartedBottomForm {
+      padding: 0 130px 50px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .bottomCarouselHome .getStartedBottom {
+    padding:0 6px;
+
+    .getStartedBottomDescription {
+      background-color: white;
+      color: #646464;
+      padding: 30px 5px 10px;
+      h4 {
+        color: #646464;
+        font-size: 16px;
+      }
+      h2 {
+        font-size: 24px;
+        padding: 0 40px;
+        margin-bottom: 15px;
+      }
+    }
+
+    .getStartedBottomForm {
+      padding: 0 5px 50px;
+      a.tracked-link {
+        width: 100%;
+      }
+    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -4457,7 +4574,7 @@ p.product-list-reminder {
   }
   .topCarouselHome .carousel-inner > .item .carousel-caption a.getStartedBtn {
     font-size: 20px;
-    width: 185px;
+    width: 220px;
     margin: 15px auto 0px;
   }
   .whatWeDoBox p {
@@ -4474,8 +4591,10 @@ p.product-list-reminder {
   .bottomCarouselHome .carousel-caption h5, .bottomCarouselHome .carousel-caption p {
     font-size: 24px;
   }
-  .bottomCarouselHome a.getStartedBottom {
-    font-size: 20px;
+  .bottomCarouselHome .getStartedBottom {
+    a {
+      font-size: 20px;
+    }
   }
   .bottomCarouselHome .carousel-caption p {
     padding: 0 18%;
@@ -4485,7 +4604,7 @@ p.product-list-reminder {
 
 @media (max-width: 992px) {
   .topCarouselHome .carousel-shared-content .main-title {
-    font-size: 45px;
+    font-size: 44px;
   }
 
   .topCarouselHome .carousel-shared-content .sub-title {
@@ -4620,9 +4739,11 @@ p.product-list-reminder {
   .bottomCarouselHome .carousel-indicators {
     bottom: 5px;
   }
-  .bottomCarouselHome a.getStartedBottom {
-    font-size: 22px;
-    width: 90%;
+  .bottomCarouselHome .getStartedBottom {
+    a {
+      font-size: 22px;
+      width: 90%;
+    }
   }
 }
 
@@ -4638,7 +4759,7 @@ p.product-list-reminder {
     padding-top: 70px;
 
     .content{
-      margin: 0px 30px;
+      margin: 0px 20px;
     }
 
     .main-title {

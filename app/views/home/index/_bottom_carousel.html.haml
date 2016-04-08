@@ -55,6 +55,20 @@
         :role => "button",
         :style => "margin-right: 375px;"}
       %img{:src => "/assets/carouselNext.png"}/
-  %a.getStartedBottom{ href: design_brief_contests_path, class: tracked_link }
-    %span= t('home.get_started').upcase
-    %img.arrow{ src: '/assets/go_right.png' }
+  .getStartedBottom.container
+    .getStartedBottomDescription.col-md-6.col-xs-12
+      %h2= t('home.bottom.header')
+      %h4= t('home.bottom.description')
+    .getStartedBottomForm.col-md-6.col-xs-12
+      %label.col-xs-12= t('home.about_us.signup_form.name')
+      = text_field_tag 'name', nil, {class: 'col-xs-12'}
+      %label.col-xs-12= t('home.about_us.signup_form.email')
+      = email_field_tag 'email', nil, {class: 'col-xs-12'}
+      %label.col-xs-12= t('home.about_us.signup_form.password')
+      = text_field_tag 'password', nil, {class: 'col-xs-12'}
+      %label.col-xs-12= t('home.about_us.signup_form.phone')
+      = text_field_tag 'phone', nil, {class: 'col-xs-12'}
+      .getStartedBottomButton.col-xs-12
+        %a{ href: design_brief_contests_path, class: tracked_link }
+          %span= t('home.get_started').upcase
+          %img.arrow{ src: '/assets/go_right.png' }
