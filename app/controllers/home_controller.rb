@@ -3,6 +3,7 @@ class HomeController < ApplicationController
   attr_accessor :incoming_url
 
   def index
+    @client = Client.new
     session[:return_to] = nil
     session[:login_after] = nil
     render

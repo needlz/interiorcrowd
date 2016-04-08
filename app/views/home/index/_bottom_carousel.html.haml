@@ -60,15 +60,18 @@
       %h2= t('home.bottom.header')
       %h4= t('home.bottom.description')
     .getStartedBottomForm.col-md-6.col-xs-12
-      %label.col-xs-12= t('home.about_us.signup_form.name')
-      = text_field_tag 'name', nil, {class: 'col-xs-12'}
-      %label.col-xs-12= t('home.about_us.signup_form.email')
-      = email_field_tag 'email', nil, {class: 'col-xs-12'}
-      %label.col-xs-12= t('home.about_us.signup_form.password')
-      = text_field_tag 'password', nil, {class: 'col-xs-12'}
-      %label.col-xs-12= t('home.about_us.signup_form.phone')
-      = text_field_tag 'phone', nil, {class: 'col-xs-12'}
-      .getStartedBottomButton.col-xs-12
-        %a{ href: design_brief_contests_path, class: tracked_link }
-          %span= t('home.get_started').upcase
-          %img.arrow{ src: '/assets/go_right.png' }
+      = form_for @client, { url: sign_up_with_email_clients_path, method: 'post' } do |f|
+        %label.col-xs-12= t('home.about_us.signup_form.name')
+        = f.text_field :name, class: 'col-xs-12'
+        %label.col-xs-12= t('home.about_us.signup_form.email')
+        = f.text_field :email, class: 'col-xs-12'
+        %label.col-xs-12= t('home.about_us.signup_form.password')
+        = f.password_field :password, class: 'col-xs-12'
+        %label.col-xs-12= t('home.about_us.signup_form.phone')
+        = f.text_field :phone_number, class: 'col-xs-12'
+        .getStartedBottomButton.col-xs-12
+          %a.sign-up-from-homepage{ href: '#' }
+            %span= t('home.get_started').upcase
+            %img.arrow{ src: '/assets/go_right.png' }
+
+

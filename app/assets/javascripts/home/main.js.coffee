@@ -74,6 +74,10 @@ $(document).ready ->
   $('.circleDownArrow').click ->
     $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
 
+  $('a.sign-up-from-homepage').click (e) ->
+    e.preventDefault()
+    $('.getStartedBottomForm form').submit()
+
   updateSizes()
 
   initClientSlider()
