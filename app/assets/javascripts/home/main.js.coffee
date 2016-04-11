@@ -157,7 +157,7 @@ detectGetStartedBtn = ->
   return $('.item.active').find('.getStartedBtn')
 
 detectGetStartedBottom= ->
-  return $('.getStartedBottom')
+  return $('.getStartedBottomButton')
 
 getStartedBtnTopPosition = ->
   detectGetStartedBtn().offset().top + detectGetStartedBtn().outerHeight(true)
