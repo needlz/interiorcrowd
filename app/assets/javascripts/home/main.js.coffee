@@ -62,6 +62,11 @@ scrollToButton = ->
     complete: ->
       $('#client_name').focus()
 
+initStickyNavigation = ->
+  displayStickyNav()
+  $(window).scroll ->
+    displayStickyNav()
+
 alignClientSliderHeight = ->
   clientHeight = $('.client-stories').innerHeight()
   $('.client-bg-slide').css
@@ -148,6 +153,27 @@ validateClientPassword = ->
 
   @validator.valid
 
+detectGetStartedBtn = ->
+  return $('.item.active').find('.getStartedBtn')
+
+detectGetStartedBottom= ->
+  return $('.getStartedBottom')
+
+getStartedBtnTopPosition = ->
+  detectGetStartedBtn().offset().top + detectGetStartedBtn().outerHeight(true)
+
+getStartedBottomTopPosition = ->
+  detectGetStartedBottom().offset().top
+
+displayStickyNav = ->
+  scrollTopPosition = $(window).scrollTop()
+  scrollBottomPosition = scrollTopPosition + $(window).height()
+
+  if scrollTopPosition > getStartedBtnTopPosition() && scrollBottomPosition < getStartedBottomTopPosition()
+    $('.sticky-nav').addClass('sticky').show()
+  else
+    $('.sticky-nav').removeClass('sticky').hide()
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
@@ -165,6 +191,9 @@ $(document).ready ->
   initClientBgSlider()
   initDesignerSlider()
   initCTAButtons()
+
+  initStickyNavigation()
+
 
 $(window).load ->
   updateSizes()

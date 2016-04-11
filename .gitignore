@@ -25,5 +25,6 @@
 /public/assets
 # Ignore application configuration
 /config/database_credentials.yml
+/config/settings/test_environment_credentials.yml
 
 coverage
