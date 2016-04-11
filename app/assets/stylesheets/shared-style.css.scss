@@ -4478,6 +4478,18 @@ p.product-list-reminder {
       margin-bottom: 18px;
       text-align: left;
     }
+
+    .error-message{
+      display: block;
+      text-align: left;
+
+      span {
+        color: red;
+        margin-top: -30px;
+        font-size: 12px;
+      }
+    }
+
   }
   .getStartedBottomButton {
     padding:0;

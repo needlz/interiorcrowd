@@ -59,30 +59,76 @@ synchronizeClientSliders = ->
   $('.client-stories-slider').on 'beforeChange', (event, slick, currentSlide, nextSlide) ->
     $('.client-bg-slider').slick 'slickGoTo', nextSlide
 
+bindScrollDownButton = ->
+  $('.circleDownArrow').click ->
+    $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
+
+bindSignUpButton = ->
+  $('a.sign-up-from-homepage').click (e) ->
+    e.preventDefault()
+
+    $("#err_email").text('')
+    $('#client_email').css('margin-bottom', 18 + 'px')
+
+    $("#err_passwd").text('')
+    $('#client_password').css('margin-bottom', 18 + 'px')
+
+
+
+    $('.getStartedBottomForm form').submit() if validateClientEmail() && validateClientPassword()
+
+validateClientEmail = ->
+  @emailSelector = '#client_email'
+  @validator = new ValidationMessages()
+
+  @validator.reset()
+
+  email = $.trim($(@emailSelector).val())
+  email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  unless email.match email_regex
+    @validator.addMessage $("#err_email"), 'Please input valid email', $('.getStartedBottomForm')
+    $('#client_email').css('margin-bottom', 0)
+    $('#client_email').focus()
+  unless email.length
+    @validator.addMessage $("#err_email"), 'Email field can not be blank', $('.getStartedBottomForm')
+    $('#client_email').css('margin-bottom', 0)
+    $('#client_email').focus()
+
+  @validator.valid
+
+validateClientPassword = ->
+  @passwdSelector = '#client_password'
+  @validator = new ValidationMessages()
+
+  @validator.reset()
+
+  passwd = $.trim($(@passwdSelector).val())
+  unless passwd.length
+    @validator.addMessage $("#err_passwd"), 'Password field can not be blank', $('.getStartedBottomForm')
+    $('#client_password').css('margin-bottom', 0)
+    $('#client_password').focus()
+
+  @validator.valid
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
     if screenWidth >= 768
       $($('.itemBoxRight')).css 'height', $('.itemBoxLeft').height() + 'px'
-
   ).each ->
     if @complete
       $(this).load()
 
   $('#scrollBoxComments').customScrollBar()
 
-  $('.circleDownArrow').click ->
-    $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
-
-  $('a.sign-up-from-homepage').click (e) ->
-    e.preventDefault()
-    $('.getStartedBottomForm form').submit()
-
+  bindScrollDownButton()
+  bindSignUpButton()
   updateSizes()
-
   initClientSlider()
   initClientBgSlider()
   initDesignerSlider()
+
+
 
 $(window).load ->
   updateSizes()
