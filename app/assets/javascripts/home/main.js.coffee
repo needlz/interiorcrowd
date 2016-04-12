@@ -67,6 +67,18 @@ initStickyNavigation = ->
   $(window).scroll ->
     displayStickyNav()
 
+initCTAButtons = ->
+  $('a.getStartedBtn, a.getStartedSticky').click (e) ->
+    e.preventDefault()
+    scrollToButton()
+
+scrollToButton = ->
+  $('#body-footer').scrollintoview
+    duration: 2500
+    direction: "y"
+    complete: ->
+      $('#client_name').focus()
+
 alignClientSliderHeight = ->
   clientHeight = $('.client-stories').innerHeight()
   $('.client-bg-slide').css
@@ -193,7 +205,7 @@ $(document).ready ->
   initCTAButtons()
 
   initStickyNavigation()
-
+  initCTAButtons()
 
 $(window).load ->
   updateSizes()
