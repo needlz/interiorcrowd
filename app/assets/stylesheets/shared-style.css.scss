@@ -4443,8 +4443,9 @@ p.product-list-reminder {
     background-color: #424242;
     color: white;
     text-align: center;
-    padding:130px 30px;
+    padding: 140px 30px;
     font-family: "AvenirLTStd-Medium";
+
     h2 {
       text-transform: uppercase;
       font-family: "AvenirLTStd-Medium";
@@ -4468,15 +4469,28 @@ p.product-list-reminder {
     label {
       padding:0;
       text-align: left;
-      color: #999999;
-      margin-bottom: 0;
+      color: #666666;
+      margin-bottom: 5px;
+      font-weight: normal;
     }
 
     input {
       height: 40px;
-      border: 2px solid #ECECEC;
+      border: 1px solid #E1E1E1;
       margin-bottom: 18px;
       text-align: left;
+
+    }
+
+    input.form-control {
+      font-family: AvenirLTStd-Roman;
+      border-radius: 2px;
+      font-size: 16px;
+      font-style: normal;
+    }
+
+    input.form-control:focus {
+      box-shadow: none;
     }
 
     .error-message{
@@ -4488,6 +4502,10 @@ p.product-list-reminder {
         margin-top: -30px;
         font-size: 12px;
       }
+    }
+
+    span {
+      font-weight: normal;
     }
 
   }
