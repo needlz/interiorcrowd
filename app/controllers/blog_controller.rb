@@ -41,12 +41,14 @@ class BlogController < ApplicationController
 
   def blog_root
     @host = Settings.external_urls.blog.url
+    @setup_viglink = true
     @url = @host
     render_get_response(blog_page_url(blog_page_path: ''))
   end
 
   def designers_blog_root
     @host = Settings.external_urls.blog.designers_url
+    @setup_viglink = true
     @url = @host
     render_get_response(designers_blog_page_url(blog_page_path: ''))
   end
