@@ -1,7 +1,7 @@
 class PromocodesController < ApplicationController
 
   def apply
-    render json: check_promocode(params[:code])
+    render json: check_promocode(params[:code].strip)
   end
 
   private

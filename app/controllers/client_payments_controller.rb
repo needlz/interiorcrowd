@@ -38,7 +38,10 @@ class ClientPaymentsController < ApplicationController
 
   def apply_promocode
     code = params.dig(:client, :promocode)
-    ApplyPromocode.new(contest, code).perform
+    if code
+      code.strip!
+      ApplyPromocode.new(contest, code).perform
+    end
   end
 
   def do_payment

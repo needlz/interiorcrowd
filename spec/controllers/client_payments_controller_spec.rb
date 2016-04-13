@@ -41,6 +41,13 @@ RSpec.describe ClientPaymentsController do
               expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
             end
 
+            it 'applies promocode' do
+              post :create, contest_id: contest.id, client_agree: 'yes', client: { promocode: " #{ promocode.promocode } " }
+              expect(contest.client_payment.last_error).to be_nil
+              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+              expect(contest.promocodes.count).to eq(1)
+            end
+
             it 'does not log any error' do
               expect(ErrorsLogger).to_not receive(:log)
               post :create, contest_id: contest.id, client_agree: 'yes'
