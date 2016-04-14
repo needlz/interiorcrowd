@@ -2,12 +2,11 @@ require 'faraday_middleware'
 
 class BlogController < ApplicationController
 
-  EMBEDDED_PAGES = [:justines_story]
-
-  before_filter :set_url, only: EMBEDDED_PAGES
-  before_filter :render_get_response, only: EMBEDDED_PAGES
-
-  def justines_story; end
+  def justines_story
+    @host = Settings.external_urls.blog.url
+    set_url
+    render_get_response(blog_page_url(blog_page_path: ''))
+  end
 
   def blog_page
     @host = Settings.external_urls.blog.url
