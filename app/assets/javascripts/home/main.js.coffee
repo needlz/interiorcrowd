@@ -182,9 +182,9 @@ displayStickyNav = ->
   scrollBottomPosition = scrollTopPosition + $(window).height()
 
   if scrollTopPosition > getStartedBtnTopPosition() && scrollBottomPosition < getStartedBottomTopPosition()
-    $('.sticky-nav').addClass('sticky').show()
+    $('.sticky-nav').addClass('sticky');
   else
-    $('.sticky-nav').removeClass('sticky').hide()
+    $('.sticky-nav').removeClass('sticky');
 
 $(document).ready ->
   screenWidth = $(window).width()
