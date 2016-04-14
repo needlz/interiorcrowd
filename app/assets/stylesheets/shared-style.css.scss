@@ -4157,11 +4157,10 @@ p.product-list-reminder {
 .topCarouselHome {
   .carousel-shared-content {
     top: 0%;
-    text-shadow: none;
+    text-shadow: 0 0 5px gray;
     left: 0%;
     right: 0%;
     bottom: 0%;
-    background: rgba(0, 0, 0, 0.4);
     padding-top: 100px;
 
     .content{
