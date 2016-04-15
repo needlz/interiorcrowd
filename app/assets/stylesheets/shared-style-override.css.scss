@@ -2664,7 +2664,7 @@ span.submission-pagination{
   border-top: 0;
   background: rgba(255, 255, 255, 0.9);
   text-align: center;
-  -webkit-transition: all 500ms ease;
+  -webkit-transition: all 500ms ease ;
   transition: all 500ms ease;
   h5 {
     font-family: "AvenirLTStd-Medium";
@@ -2689,6 +2689,8 @@ span.submission-pagination{
 
 .sticky {
   height: 60px;
+  -webkit-transition: all 300ms ease ;
+  transition: all 300ms ease;
 }
 
 
