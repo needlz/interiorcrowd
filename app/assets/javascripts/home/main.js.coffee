@@ -186,6 +186,22 @@ displayStickyNav = ->
   else
     $('.sticky-nav').removeClass('sticky');
 
+resizeClientStoriesSlider = ->
+  clientStoriesSliderSelector = '.client-stories-slider'
+  $clientStoriesSlider = $(clientStoriesSliderSelector)
+  $clientStoriesOuterSlider = $clientStoriesSlider.find(clientStoriesSliderSelector + '-outer')
+  decrement = parseInt($clientStoriesOuterSlider.css('margin-top'))
+  currentSliderHeight = $clientStoriesSlider.find('.slick-track').height() - decrement
+
+  $clientStoriesOuterSlider.css('height', currentSliderHeight)
+
+  currentSliderPaddings = parseInt($clientStoriesOuterSlider.css('padding-top')) +
+    parseInt($clientStoriesOuterSlider.css('padding-bottom'))
+  $clientStoriesSlider.find(clientStoriesSliderSelector + '-inner').css('height', currentSliderHeight - currentSliderPaddings)
+
+bindClientStoriesSliderHeight = ->
+  resizeClientStoriesSlider()
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
@@ -209,6 +225,7 @@ $(document).ready ->
 
 $(window).load ->
   updateSizes()
+  bindClientStoriesSliderHeight()
   alignClientSliderHeight()
   synchronizeClientSliders()
 

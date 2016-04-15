@@ -1720,19 +1720,19 @@ span.submission-pagination{
   font-family: 'AvenirLTStd-Roman', sans-serif;
   font-size: 18px;
   line-height: 26px;
-  height: 280px;
+  height: 300px;
   display: table-cell;
   vertical-align: middle;
 }
 @media (min-width: 992px) and (max-width: 1199px) {
   .client-stories-slider p {
-    height: 200px;
+    height: 220px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   .client-stories-slider p {
-    height: 195px;
+    height: 215px;
   }
 }
 .client-stories-slider a {
@@ -1749,7 +1749,6 @@ span.submission-pagination{
   background: #F0F0F0;
 }
 .client-stories-slider .slick-dots {
-  margin-left: 5px;
   bottom: 10px;
 }
 .client-stories-slider .slick-dots li {
@@ -1762,9 +1761,11 @@ span.submission-pagination{
   height: 9px;
   border-radius: 50%;
   opacity: 1;
+  left: 5px;
 }
 .client-stories-slider .slick-dots li.slick-active button:before {
   background: #FFF;
+  left: 5px;
 }
 @-moz-document url-prefix() {
   .client-stories-slider .slick-next,
@@ -1850,6 +1851,7 @@ span.submission-pagination{
 @media (max-width: 767px) {
   .client-stories-slider p {
     font-size: 16px;
+    height: 185px !important;
   }
   .client-stories-slider h4 {
     font-size: 18px;
@@ -2032,6 +2034,10 @@ span.submission-pagination{
   line-height: 48px;
   text-align:center;
 }
+.container.designers-slider.slick-initialized.slick-slider {
+  padding:0;
+}
+
 @media(max-width: 1199px){
   .designers-slider h4 {
     text-align: center;
@@ -2070,7 +2076,6 @@ span.submission-pagination{
 }
 @media (min-width: 482px) {
   .designers-slider .slick-dots {
-    margin-left: -10px;
   }
 }
 .designers-slider .slick-dots {
@@ -2083,6 +2088,7 @@ span.submission-pagination{
   height: 12px;
   border-radius: 50%;
   opacity: 1;
+  left: 4px;
 }
 .designers-slider .slick-dots li.slick-active button:before {
   background: #666666;
@@ -2370,10 +2376,15 @@ span.submission-pagination{
   }
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1199px) {
+  .container-fluid.whatWeDoBox {
+    .container {
+      width: 963px;
+    }
+  }
   .bottomBar {
     hr {
-      width: 230px;
+      width: 227px;
     }
   }
 }
@@ -2388,7 +2399,12 @@ span.submission-pagination{
   }
 }
 
-@media (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
+  .container-fluid.whatWeDoBox {
+    .container {
+      width: 735px;
+    }
+  }
   .whatWeDoBox p {
     line-height: 2;
     font-size: 20px;
@@ -2396,7 +2412,7 @@ span.submission-pagination{
 
   .bottomBar {
     hr {
-      width: 120px;
+      width: 113px;
     }
   }
 }
@@ -2645,7 +2661,7 @@ span.submission-pagination{
   }
 
   .client-stories-slider p {
-    height: 300px !important;
+    height: 295px !important;
   }
 
   .client-stories-slider .slider-delimiter {
