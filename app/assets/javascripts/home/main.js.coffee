@@ -75,7 +75,7 @@ bindSignUpButton = ->
 
 
 
-    $('.getStartedBottomForm form').submit() if validateClientEmail() && validateClientPassword()
+    $('.getStartedBottom form').submit() if validateClientEmail() && validateClientPassword()
 
 validateClientEmail = ->
   @emailSelector = '#client_email'
@@ -86,11 +86,11 @@ validateClientEmail = ->
   email = $.trim($(@emailSelector).val())
   email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   unless email.match email_regex
-    @validator.addMessage $("#err_email"), 'Please input valid email', $('.getStartedBottomForm')
+    @validator.addMessage $("#err_email"), 'Please input valid email', $('.getStartedBottom .form-body')
     $('#client_email').css('margin-bottom', 0)
     $('#client_email').focus()
   unless email.length
-    @validator.addMessage $("#err_email"), 'Email field can not be blank', $('.getStartedBottomForm')
+    @validator.addMessage $("#err_email"), 'Email field can not be blank', $('.getStartedBottom .form-body')
     $('#client_email').css('margin-bottom', 0)
     $('#client_email').focus()
 
@@ -104,7 +104,7 @@ validateClientPassword = ->
 
   passwd = $.trim($(@passwdSelector).val())
   unless passwd.length
-    @validator.addMessage $("#err_passwd"), 'Password field can not be blank', $('.getStartedBottomForm')
+    @validator.addMessage $("#err_passwd"), 'Password field can not be blank', $('.getStartedBottom .form-body')
     $('#client_password').css('margin-bottom', 0)
     $('#client_password').focus()
 
