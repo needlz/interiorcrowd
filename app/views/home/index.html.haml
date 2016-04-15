@@ -1,6 +1,9 @@
 - content_for :head do
   = javascript_include_tag 'home/main'
 
+  :javascript
+    Messages = #{ translations_to_json(['home', 'sign_up_form']) }
+
 = render 'shared/pinterest_tracking', id: Settings.pinterest.landing_tracking_id
 
 .homepage

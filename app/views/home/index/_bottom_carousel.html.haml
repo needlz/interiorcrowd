@@ -55,6 +55,27 @@
         :role => "button",
         :style => "margin-right: 375px;"}
       %img{:src => "/assets/carouselNext.png"}/
-  %a.getStartedBottom{ href: design_brief_contests_path, class: tracked_link }
-    %span= t('home.get_started').upcase
-    %img.arrow{ src: '/assets/go_right.png' }
+  .getStartedBottom.container
+    .form-description.col-md-6.col-xs-12
+      %h2= t('home.bottom.header')
+      %h4= t('home.bottom.description')
+    .form-body.col-md-6.col-xs-12
+      = form_for @client, { url: sign_up_with_email_clients_path, method: 'post' } do |f|
+        %label.col-xs-12= t('home.about_us.signup_form.name')
+        = f.text_field :name, class: 'col-xs-12 form-control'
+        %label.col-xs-12= t('home.about_us.signup_form.email')
+        = f.text_field :email, class: 'col-xs-12 form-control'
+        .error-message
+          %span{ id: 'err_email' }
+        %label.col-xs-12= t('home.about_us.signup_form.password')
+        = f.password_field :password, class: 'col-xs-12 form-control'
+        .error-message
+          %span{ id: 'err_passwd' }
+        %label.col-xs-12= t('home.about_us.signup_form.phone')
+        = f.text_field :phone_number, class: 'col-xs-12 form-control'
+        .form-button.col-xs-12
+          %a.sign-up-from-homepage{ href: '#' }
+            %span= t('home.get_started').upcase
+            %img.arrow{ src: '/assets/go_right.png' }
+
+

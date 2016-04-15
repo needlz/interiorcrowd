@@ -59,23 +59,96 @@ synchronizeClientSliders = ->
   $('.client-stories-slider').on 'beforeChange', (event, slick, currentSlide, nextSlide) ->
     $('.client-bg-slider').slick 'slickGoTo', nextSlide
 
+bindCustomScrollbar = ->
+  $('#scrollBoxComments').customScrollBar()
+
+bindScrollDownButton = ->
+  $('.circleDownArrow').click ->
+    $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
+
+bindSignUpButton = ->
+  $('a.sign-up-from-homepage').click (e) ->
+    e.preventDefault()
+
+    removeErrors()
+
+    ajaxParams = requestOptions('.form-body form')
+
+    $.ajax(ajaxParams) if validateClientEmail() && validateClientPassword()
+
+requestOptions = (formSelector) ->
+  $form = $(formSelector).serializeArray()
+
+  data: $form
+  url: '/clients/sign_up_with_email'
+  method: 'POST'
+  dataType: 'json'
+  success: (json) ->
+    location.href = '/contests/design_brief'
+  error: (response)=>
+    showAlert(response.responseJSON.error)
+
+removeErrors = ->
+  $("#err_email").text('')
+  $('#client_email').css('margin-bottom', 18 + 'px')
+
+  $("#err_passwd").text('')
+  $('#client_password').css('margin-bottom', 18 + 'px')
+
+showAlert = (errorMessage) ->
+  @validator.addMessage $("#err_email"), errorMessage, $('.getStartedBottom .form-body')
+  $('#client_email').css('margin-bottom', 0)
+  $('#client_email').focus()
+
+validateClientEmail = ->
+  @emailSelector = '#client_email'
+  @validator = new ValidationMessages()
+
+  @validator.reset()
+
+  email = $.trim($(@emailSelector).val())
+  email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+  unless email.match email_regex
+    @validator.addMessage $("#err_email"), Messages.input_valid_email, $('.getStartedBottom .form-body')
+    $('#client_email').css('margin-bottom', 0)
+    $('#client_email').focus()
+
+  unless email.length
+    @validator.addMessage $("#err_email"), Messages.email_blank, $('.getStartedBottom .form-body')
+    $('#client_email').css('margin-bottom', 0)
+    $('#client_email').focus()
+
+  @validator.valid
+
+validateClientPassword = ->
+  @passwdSelector = '#client_password'
+  @validator = new ValidationMessages()
+
+  @validator.reset()
+
+  passwd = $.trim($(@passwdSelector).val())
+
+  unless passwd.length
+    @validator.addMessage $("#err_passwd"), Messages.password_blank, $('.getStartedBottom .form-body')
+    $('#client_password').css('margin-bottom', 0)
+    $('#client_password').focus()
+
+  @validator.valid
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
     if screenWidth >= 768
       $($('.itemBoxRight')).css 'height', $('.itemBoxLeft').height() + 'px'
-
   ).each ->
     if @complete
       $(this).load()
 
-  $('#scrollBoxComments').customScrollBar()
-
-  $('.circleDownArrow').click ->
-    $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
-
+  bindCustomScrollbar()
+  bindScrollDownButton()
+  bindSignUpButton()
   updateSizes()
-
   initClientSlider()
   initClientBgSlider()
   initDesignerSlider()
