@@ -73,9 +73,24 @@ bindSignUpButton = ->
     $("#err_passwd").text('')
     $('#client_password').css('margin-bottom', 18 + 'px')
 
+    params = $('.form-body form').serializeArray()
 
+    requestOptions =
+      data: params
+      url: '/clients/sign_up_with_email'
+      method: 'POST'
+      dataType: 'json'
+      success: (json) ->
+        location.href = '/contests/design_brief'
+      error: (response)=>
+        showAlert(response.responseJSON.error)
 
-    $('.getStartedBottom form').submit() if validateClientEmail() && validateClientPassword()
+    $.ajax(requestOptions) if validateClientEmail() && validateClientPassword()
+
+showAlert = (errorMessage) ->
+  @validator.addMessage $("#err_email"), errorMessage, $('.getStartedBottom .form-body')
+  $('#client_email').css('margin-bottom', 0)
+  $('#client_email').focus()
 
 validateClientEmail = ->
   @emailSelector = '#client_email'
