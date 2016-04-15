@@ -83,7 +83,7 @@ common: &defaults
     pixel_id: <%= ENV['FACEBOOK_PIXEL_ID'] %>
   show_beta_functionality: <%= !Rails.env.production? %>
   log_requests_to_blog: <%= Rails.env.development? %>
-  payment_enabled: <%= !Rails.env.production? %>
+  automatic_payment: <%= ENV['AUTOMATIC_PAYMENT'] == 'true' %>
   designer_training_videos:
     initial_phase:
       url: 'http://www.screencast.com/t/P1CGZXKu4'

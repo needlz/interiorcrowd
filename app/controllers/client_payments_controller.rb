@@ -4,7 +4,7 @@ class ClientPaymentsController < ApplicationController
 
   def create
     begin
-      @contest = @client.contests.not_payed.find_by_id(params[:contest_id])
+      @contest = @client.contests.not_paid.find_by_id(params[:contest_id])
       unless @contest
         if @already_charged_contest = @client.contests.find(params[:contest_id])
           return redirect_to payment_summary_contests_path(id: @already_charged_contest.id)
@@ -54,7 +54,7 @@ class ClientPaymentsController < ApplicationController
       raise ArgumentError.new('Primary card not set') unless card
     end
 
-    if Settings.payment_enabled
+    if Settings.automatic_payment
       payment = Payment.new(contest)
       payment.perform
     end

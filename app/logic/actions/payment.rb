@@ -57,7 +57,7 @@ class Payment
   attr_reader :contest, :client, :charge
 
   def charge_already_performed?
-    contest.payed?
+    contest.paid?
   end
 
   def update_payment
@@ -67,6 +67,7 @@ class Payment
   end
 
   def submit_contest
+    return if contest.submission?
     submit_contest = SubmitContest.new(contest)
     submit_contest.try_perform
     contest.update_attributes!(was_in_brief_pending_state: !submit_contest.performed?)

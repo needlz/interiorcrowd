@@ -40,7 +40,7 @@ class ContestsController < ApplicationController
         return redirect_to(client_login_sessions_path)
       end
     end
-    return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
+    return redirect_to(payment_details_contests_path(id: @contest.id)) if payment_details_to_be_entered?
 
     @entries_page = EntriesPage.new(
       contest: @contest,
@@ -144,7 +144,7 @@ class ContestsController < ApplicationController
     @client = current_user
     begin
       @contest = @client.contests.find(params[:id])
-      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.payed? && Settings.payment_enabled
+      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.paid? && Settings.automatic_payment
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
@@ -157,14 +157,13 @@ class ContestsController < ApplicationController
   end
 
   def payment_summary
-    return redirect_to client_center_entry_path(id: params[:id]) unless Settings.payment_enabled
     begin
       @contest = @client.contests.find(params[:id])
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
     payment = @contest.client_payment
-    return raise_404 ArgumentError.new('contest not payed') unless payment
+    return raise_404 ArgumentError.new('contest not paid') unless payment
     @payment_view = PaymentView.new(payment)
   end
 
@@ -346,9 +345,16 @@ class ContestsController < ApplicationController
     redirect_to payment_details_contests_path(id: contest.id)
   end
 
-  def payment_performed?(contest)
-    return contest.payed? if Settings.payment_enabled
-    contest.client.credit_cards.present?
+  def payment_details_to_be_entered?
+    if Settings.automatic_payment
+      !(@contest.paid? || billing_details_provided? || @contest.published?)
+    else
+      !billing_details_provided?
+    end
+  end
+
+  def billing_details_provided?
+    @contest.client.primary_card.present?
   end
 
   def fetch_incomplete_contest(contest_id = nil)

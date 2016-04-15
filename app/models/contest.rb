@@ -82,7 +82,7 @@ class Contest < ActiveRecord::Base
   scope :inactive, ->{ where(status: FINISHED_STATUSES) }
   scope :in_progress, ->{ where(status: NON_FINISHED_STATUSES) }
   scope :with_associations, ->{ includes(:design_category, :design_spaces, :client) }
-  scope :not_payed, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
+  scope :not_paid, ->{ includes(:client_payment).where(client_payments: {id: nil}) }
   scope :incomplete, ->{ where(status: INCOMPLETE_STATUSES) }
 
   ransacker :finished_at_month, formatter: proc { |month|
@@ -234,7 +234,7 @@ class Contest < ActiveRecord::Base
     fulfillment? || final_fulfillment?
   end
 
-  def payed?
+  def paid?
     client_payment && client_payment.last_error.nil?
   end
 
@@ -255,6 +255,10 @@ class Contest < ActiveRecord::Base
 
   def active_admin_name
     "#{ id } #{ project_name }"
+  end
+
+  def published?
+    (COLLABORATION_STATUSES + FINISHED_STATUSES).include?(status)
   end
 
   private

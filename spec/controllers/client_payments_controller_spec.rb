@@ -20,7 +20,7 @@ RSpec.describe ClientPaymentsController do
 
     context 'when automatic payment enabled' do
       before do
-        allow(Settings).to receive(:payment_enabled) { true }
+        allow(Settings).to receive(:automatic_payment) { true }
       end
 
       context 'when credit card not passed' do
@@ -35,7 +35,7 @@ RSpec.describe ClientPaymentsController do
             end
 
             it 'creates payment' do
-              expect(Settings.payment_enabled).to be_truthy
+              expect(Settings.automatic_payment).to be_truthy
               post :create, contest_id: contest.id, client_agree: 'yes'
               expect(contest.client_payment.last_error).to be_nil
               expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
@@ -197,7 +197,7 @@ RSpec.describe ClientPaymentsController do
 
     context 'when automatic payment disabled' do
       before do
-        allow(Settings).to receive(:payment_enabled) { false }
+        allow(Settings).to receive(:automatic_payment) { false }
       end
 
       context 'when credit card not passed' do

@@ -14,7 +14,7 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments disabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ false }
+        allow(Settings).to receive(:automatic_payment){ false }
       end
 
       context 'when the client has no primary card' do
@@ -44,7 +44,7 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments enabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ true }
+        allow(Settings).to receive(:automatic_payment){ true }
         contest
       end
 
@@ -52,9 +52,9 @@ RSpec.describe SubmitContest do
         expect(contest.status).to eq 'brief_pending'
       end
 
-      context 'contest was payed' do
+      context 'contest was paid' do
         before do
-          allow(contest).to receive(:payed?){ true }
+          allow(contest).to receive(:paid?){ true }
         end
 
         it 'submits contest' do
@@ -105,10 +105,10 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments enabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ true }
+        allow(Settings).to receive(:automatic_payment){ true }
       end
 
-      context 'when contest payed' do
+      context 'when contest paid' do
         before do
           client.primary_card = Fabricate(:credit_card)
           client.save!
@@ -122,7 +122,7 @@ RSpec.describe SubmitContest do
 
       end
 
-      context 'when contest not payed' do
+      context 'when contest not paid' do
         it 'does not submit contest' do
           expect{ submit_contest.try_perform }.to_not change{ contest.status }
           expect(submit_contest).to_not be_performed
@@ -132,10 +132,10 @@ RSpec.describe SubmitContest do
 
     context 'when automatic payments disabled' do
       before do
-        allow(Settings).to receive(:payment_enabled){ false }
+        allow(Settings).to receive(:automatic_payment){ false }
       end
 
-      context 'when contest payed' do
+      context 'when contest paid' do
         before do
           client.primary_card = Fabricate(:credit_card)
           client.save!
@@ -150,7 +150,7 @@ RSpec.describe SubmitContest do
         end
       end
 
-      context 'when contest not payed' do
+      context 'when contest not paid' do
         it 'does not submit contest' do
           submit_contest.try_perform
           expect(submit_contest.performed?).to be_falsey
