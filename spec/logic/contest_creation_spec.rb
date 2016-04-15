@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe ContestCreation do
 
-  let(:client) { Fabricate(:client, primary_card: Fabricate(:credit_card)) }
+  let(:client) { Fabricate(:client_with_primary_card) }
 
   context 'when contest expected to be complete' do
     let(:contest_creation) do
@@ -11,44 +11,136 @@ RSpec.describe ContestCreation do
                           make_complete: true)
     end
 
-    context 'when contest payed' do
+    let(:contest) { contest_creation.perform }
+
+    context 'when automatic payment enabled' do
+      before do
+        allow(Settings).to receive(:automatic_payment) { true }
+      end
+
       context 'when space images set' do
         let(:params) { contest_options_source }
-        let!(:contest) { contest_creation.perform }
 
-        before do
-          pay_contest(contest)
+        context 'when contest paid' do
+          before do
+            pay_contest(contest)
+          end
+
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'submission'
+            expect(contest.phase_end).to be_present
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
         end
 
-        it 'sets contest state to submission' do
-          expect(contest.status).to eq 'submission'
-          expect(contest.phase_end).to be_present
-        end
+        context 'when contest not paid' do
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'brief_pending'
+            expect(contest.phase_end).to be_nil
+          end
 
-        it 'does not send email about brief pending' do
-          expect(jobs_with_handler_like('new_client_no_photos').count).to eq 0
-        end
-
-        it 'stores information if the contest was in brief_pending state ever' do
-          expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
         end
       end
 
       context 'when space images empty' do
         let(:params) { contest_options_source.deep_merge({design_space: { document_id: nil }}) }
-        let!(:contest) { contest_creation.perform }
 
-        before do
-          pay_contest(contest)
+        context 'when contest paid' do
+          before do
+            pay_contest(contest)
+          end
+
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'brief_pending'
+            expect(contest.phase_end).to be_nil
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_truthy
+          end
         end
 
-        it 'sets contest state to brief_pending' do
-          expect(contest.status).to eq 'brief_pending'
-          expect(contest.phase_end).to be_blank
+        context 'when contest not paid' do
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'brief_pending'
+            expect(contest.phase_end).to be_nil
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
+        end
+      end
+    end
+
+    context 'when automatic payment disabled' do
+      before do
+        allow(Settings).to receive(:automatic_payment) { false }
+      end
+
+      context 'when space images set' do
+        let(:params) { contest_options_source }
+
+        context 'when contest paid' do
+          before do
+            pay_contest(contest)
+          end
+
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'submission'
+            expect(contest.phase_end).to be_present
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
         end
 
-        it 'stores information if the contest was in brief_pending state ever' do
-          expect(contest.reload.was_in_brief_pending_state).to be_truthy
+        context 'when contest not paid' do
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'submission'
+            expect(contest.phase_end).to be_present
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
+        end
+      end
+
+      context 'when space images empty' do
+        let(:params) { contest_options_source.deep_merge({design_space: { document_id: nil }}) }
+
+        context 'when contest paid' do
+          before do
+            pay_contest(contest)
+          end
+
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'brief_pending'
+            expect(contest.phase_end).to be_nil
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_truthy
+          end
+        end
+
+        context 'when contest not paid' do
+          it 'sets contest state to submission' do
+            expect(contest.status).to eq 'brief_pending'
+            expect(contest.phase_end).to be_nil
+          end
+
+          it 'stores information if the contest was in brief_pending state ever' do
+            expect(contest.reload.was_in_brief_pending_state).to be_falsey
+          end
         end
       end
     end
@@ -68,10 +160,6 @@ RSpec.describe ContestCreation do
       it 'does not make contest brief_pending' do
         expect(contest.status).to eq 'incomplete'
         expect(contest.phase_end).to be_blank
-      end
-
-      it 'does not send email about brief pending' do
-        expect(jobs_with_handler_like('new_client_no_photos').count).to eq 0
       end
     end
 

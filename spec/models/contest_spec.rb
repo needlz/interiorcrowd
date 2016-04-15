@@ -10,13 +10,13 @@ RSpec.describe Contest do
     )
   end
 
-  describe 'not payed scope' do
+  describe 'not paid scope' do
     it 'returns contests without client payments' do
       brief_pending_contest = Fabricate(:completed_contest, status: 'brief_pending')
       submission_contest = Fabricate(:contest_in_submission)
-      payed_contest = Fabricate(:contest_in_submission)
-      Fabricate(:client_payment, contest: payed_contest)
-      expect(Contest.not_payed).to match_array([brief_pending_contest, submission_contest])
+      paid_contest = Fabricate(:contest_in_submission)
+      Fabricate(:client_payment, contest: paid_contest)
+      expect(Contest.not_paid).to match_array([brief_pending_contest, submission_contest])
     end
   end
 
@@ -209,6 +209,16 @@ RSpec.describe Contest do
       it 'is valid' do
         contest.location_zip = '89704' # Nevada
         expect(contest.valid?).to be_truthy
+      end
+    end
+  end
+
+  describe '#published?' do
+    it 'returns true for all statuses after brief_pending in contests flow' do
+      contest = Fabricate(:contest)
+      Contest::STATUSES.each do |status|
+        contest.update_column(:status, status)
+        expect(contest.published?).to eq %w[incomplete brief_pending].exclude?(status)
       end
     end
   end

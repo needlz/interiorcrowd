@@ -5,8 +5,8 @@ class SubmitContest
     @performed = false
   end
 
-  def payed?
-    contest.payed? || manual_checkout?
+  def paid?
+    contest.paid? || manual_checkout?
   end
 
   def brief_completed?
@@ -18,11 +18,11 @@ class SubmitContest
   end
 
   def only_brief_pending?
-    payed? && !brief_completed?
+    paid? && !brief_completed?
   end
 
   def submittable?
-    contest.brief_pending? && brief_completed? && payed?
+    contest.brief_pending? && brief_completed? && paid?
   end
 
   def try_perform
@@ -43,7 +43,7 @@ class SubmitContest
   attr_reader :contest
 
   def manual_checkout?
-    !Settings.payment_enabled && contest.client.reload.primary_card_id
+    !Settings.automatic_payment && contest.client.reload.primary_card_id
   end
 
 end

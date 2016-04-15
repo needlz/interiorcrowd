@@ -84,7 +84,7 @@ RSpec.describe ClientsController do
 
       context 'when automatic payment enabled' do
         before do
-          allow(Settings).to receive(:payment_enabled) { true }
+          allow(Settings).to receive(:automatic_payment) { true }
         end
 
         context 'when brief completed' do
@@ -110,7 +110,7 @@ RSpec.describe ClientsController do
 
       context 'when automatic payment disabled' do
         before do
-          allow(Settings).to receive(:payment_enabled) { false }
+          allow(Settings).to receive(:automatic_payment) { false }
         end
 
         context 'when brief completed' do

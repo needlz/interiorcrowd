@@ -7,3 +7,7 @@ Fabricator(:client) do
 
   before_create { |client| client.password = Client.encrypt(plain_password) }
 end
+
+Fabricator(:client_with_primary_card, from: :client) do
+  after_create { |client| client.update_attributes(primary_card_id: Fabricate(:credit_card, client: client).id) }
+end
