@@ -32,6 +32,16 @@ RSpec.describe PromocodesController do
         expect(json['valid']).to be_falsey
       end
     end
+
+    context 'valid token with whitespaces' do
+      let(:token) { " #{ valid_token }  " }
+
+      it 'returns true' do
+        json = test_code
+        expect(json['valid']).to be_truthy
+      end
+    end
+
   end
 
 end
