@@ -59,6 +59,9 @@ synchronizeClientSliders = ->
   $('.client-stories-slider').on 'beforeChange', (event, slick, currentSlide, nextSlide) ->
     $('.client-bg-slider').slick 'slickGoTo', nextSlide
 
+bindCustomScrollbar = ->
+  $('#scrollBoxComments').customScrollBar()
+
 bindScrollDownButton = ->
   $('.circleDownArrow').click ->
     $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
@@ -67,25 +70,30 @@ bindSignUpButton = ->
   $('a.sign-up-from-homepage').click (e) ->
     e.preventDefault()
 
-    $("#err_email").text('')
-    $('#client_email').css('margin-bottom', 18 + 'px')
+    removeErrors()
 
-    $("#err_passwd").text('')
-    $('#client_password').css('margin-bottom', 18 + 'px')
+    ajaxParams = requestOptions('.form-body form')
 
-    params = $('.form-body form').serializeArray()
+    $.ajax(ajaxParams) if validateClientEmail() && validateClientPassword()
 
-    requestOptions =
-      data: params
-      url: '/clients/sign_up_with_email'
-      method: 'POST'
-      dataType: 'json'
-      success: (json) ->
-        location.href = '/contests/design_brief'
-      error: (response)=>
-        showAlert(response.responseJSON.error)
+requestOptions = (formSelector) ->
+  $form = $(formSelector).serializeArray()
 
-    $.ajax(requestOptions) if validateClientEmail() && validateClientPassword()
+  data: $form
+  url: '/clients/sign_up_with_email'
+  method: 'POST'
+  dataType: 'json'
+  success: (json) ->
+    location.href = '/contests/design_brief'
+  error: (response)=>
+    showAlert(response.responseJSON.error)
+
+removeErrors = ->
+  $("#err_email").text('')
+  $('#client_email').css('margin-bottom', 18 + 'px')
+
+  $("#err_passwd").text('')
+  $('#client_password').css('margin-bottom', 18 + 'px')
 
 showAlert = (errorMessage) ->
   @validator.addMessage $("#err_email"), errorMessage, $('.getStartedBottom .form-body')
@@ -100,10 +108,12 @@ validateClientEmail = ->
 
   email = $.trim($(@emailSelector).val())
   email_regex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
   unless email.match email_regex
     @validator.addMessage $("#err_email"), 'Please input valid email', $('.getStartedBottom .form-body')
     $('#client_email').css('margin-bottom', 0)
     $('#client_email').focus()
+
   unless email.length
     @validator.addMessage $("#err_email"), 'Email field can not be blank', $('.getStartedBottom .form-body')
     $('#client_email').css('margin-bottom', 0)
@@ -118,6 +128,7 @@ validateClientPassword = ->
   @validator.reset()
 
   passwd = $.trim($(@passwdSelector).val())
+
   unless passwd.length
     @validator.addMessage $("#err_passwd"), 'Password field can not be blank', $('.getStartedBottom .form-body')
     $('#client_password').css('margin-bottom', 0)
@@ -134,16 +145,13 @@ $(document).ready ->
     if @complete
       $(this).load()
 
-  $('#scrollBoxComments').customScrollBar()
-
+  bindCustomScrollbar()
   bindScrollDownButton()
   bindSignUpButton()
   updateSizes()
   initClientSlider()
   initClientBgSlider()
   initDesignerSlider()
-
-
 
 $(window).load ->
   updateSizes()
