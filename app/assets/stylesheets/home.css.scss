@@ -12,21 +12,6 @@
   }
 }
 
-.copyright {
-  padding-top: 0;
-  padding-right: 11px;
-  padding-bottom: 40px;
-  font-size: 14px;
-  float: right;
-
-  .copyright-sign {
-    font-size: 21px;
-    margin-right: 7px;
-    position: relative;
-    top: 3px;
-  }
-}
-
 .optionalSignup {
   input.email[type='text'] {
     margin-top: -6px !important;
@@ -198,45 +183,11 @@ body {
   width: 100%
 }
 
-@media (max-width: 768px){
-
-  .footer  .top-nav.col-sm-5 .nav-collapse li {
-    /*width: 50%;*/
-  }
-
-}
 @media (max-width: 640px){
   .moreConceptBoards{
     display: block;
   }
 
-}
-
-@media (max-width: 991px) and (min-width: 321px) {
-  .footer .main-menu > li {
-    width: 25%;
-  }
-  .footer .main-menu.footer-menu > li {
-    width: 33.3333%;
-  }
-}
-
-@media (max-width: 320px) {
-  .footer .main-menu.footer-menu > li {
-    width: 100%;
-  }
-
-  .footer .main-menu > li > a {
-    padding: 20px 30px !important;
-  }  
-
-  .footer .main-menu > li > a.right-side {
-    text-align: left;
-  }
-
-  .footer .main-menu > li {
-    width: 50%;
-  }
 }
 
 .soft-hide {
