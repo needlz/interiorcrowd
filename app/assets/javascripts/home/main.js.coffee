@@ -50,6 +50,18 @@ initDesignerSlider = ->
       }
     ]
 
+initCTAButtons = ->
+  $('a.getStartedBtn').click (e) ->
+    e.preventDefault()
+    scrollToButton()
+
+scrollToButton = ->
+  $('#body-footer').scrollintoview
+    duration: 2500
+    direction: "y"
+    complete: ->
+      $('#client_name').focus()
+
 alignClientSliderHeight = ->
   clientHeight = $('.client-stories').innerHeight()
   $('.client-bg-slide').css
@@ -152,6 +164,7 @@ $(document).ready ->
   initClientSlider()
   initClientBgSlider()
   initDesignerSlider()
+  initCTAButtons()
 
 $(window).load ->
   updateSizes()

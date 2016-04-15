@@ -46,3 +46,4 @@
 //= require jquery.slick
 //= require comment_attachment
 //= require concept_board_comment_editor
+//= require lib/jquery.scrollintoview
