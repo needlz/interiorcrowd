@@ -1612,6 +1612,10 @@ en:
           description:
             - Purchase all items recommended by your designer in your own time or, choose to have your designer purchase
               everything and install it for you
+    sign_up_form:
+      input_valid_email: Please input valid email
+      email_blank: Email field can not be blank
+      password_blank: Password field can not be blank
 
   coming_soon:
     title: NEW CONTENT COMING SOON!
