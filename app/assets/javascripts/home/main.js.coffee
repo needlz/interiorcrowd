@@ -50,18 +50,6 @@ initDesignerSlider = ->
       }
     ]
 
-initCTAButtons = ->
-  $('a.getStartedBtn').click (e) ->
-    e.preventDefault()
-    scrollToButton()
-
-scrollToButton = ->
-  $('#body-footer').scrollintoview
-    duration: 2500
-    direction: "y"
-    complete: ->
-      $('#client_name').focus()
-
 initStickyNavigation = ->
   displayStickyNav()
   $(window).scroll ->
@@ -73,7 +61,7 @@ initCTAButtons = ->
     scrollToButton()
 
 scrollToButton = ->
-  $('#body-footer').scrollintoview
+  $('#scrollingAnchor').scrollintoview
     duration: 2500
     direction: "y"
     complete: ->
@@ -168,8 +156,8 @@ validateClientPassword = ->
 detectGetStartedBtn = ->
   return $('.item.active').find('.getStartedBtn')
 
-detectGetStartedBottom= ->
-  return $('.getStartedBottomButton')
+detectGetStartedBottom = ->
+  return $('.getStartedBottom .form-button')
 
 getStartedBtnTopPosition = ->
   detectGetStartedBtn().offset().top + detectGetStartedBtn().outerHeight(true)
