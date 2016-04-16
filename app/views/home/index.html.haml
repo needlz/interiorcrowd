@@ -4,6 +4,14 @@
   :javascript
     Messages = #{ translations_to_json(['home', 'sign_up_form']) }
 
+.sticky-nav
+  .row
+    .col.col-xs-7.col-sm-8
+      %h5= t('home.sticky_nav.description')
+    .col.col-xs-5.col-sm-4
+      %a.getStartedSticky{ href: '#', class: tracked_link }
+        %span= t('home.get_started').upcase
+
 = render 'shared/pinterest_tracking', id: Settings.pinterest.landing_tracking_id
 
 .homepage

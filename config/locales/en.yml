@@ -1488,6 +1488,8 @@ en:
     bottom:
       header: ready to find out more?
       description: Let's get started with your basic info and then we'll take you through our fun style quiz to learn more about you.
+    sticky_nav:
+      description: find an interior designer to make over your space today.
     carousel:
       price: 'starts at $99'
       choose_designer: Choose your designer

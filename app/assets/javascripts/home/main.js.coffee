@@ -50,13 +50,18 @@ initDesignerSlider = ->
       }
     ]
 
+initStickyNavigation = ->
+  displayStickyNav()
+  $(window).scroll ->
+    displayStickyNav()
+
 initCTAButtons = ->
-  $('a.getStartedBtn').click (e) ->
+  $('a.getStartedBtn, a.getStartedSticky').click (e) ->
     e.preventDefault()
     scrollToButton()
 
 scrollToButton = ->
-  $('#body-footer').scrollintoview
+  $('#scrollingAnchor').scrollintoview
     duration: 2500
     direction: "y"
     complete: ->
@@ -148,6 +153,43 @@ validateClientPassword = ->
 
   @validator.valid
 
+detectGetStartedBtn = ->
+  return $('.item.active').find('.getStartedBtn')
+
+detectGetStartedBottom = ->
+  return $('.getStartedBottom .form-button')
+
+getStartedBtnTopPosition = ->
+  detectGetStartedBtn().offset().top + detectGetStartedBtn().outerHeight(true)
+
+getStartedBottomTopPosition = ->
+  detectGetStartedBottom().offset().top
+
+displayStickyNav = ->
+  scrollTopPosition = $(window).scrollTop()
+  scrollBottomPosition = scrollTopPosition + $(window).height()
+
+  if scrollTopPosition > getStartedBtnTopPosition() && scrollBottomPosition < getStartedBottomTopPosition()
+    $('.sticky-nav').addClass('sticky');
+  else
+    $('.sticky-nav').removeClass('sticky');
+
+resizeClientStoriesSlider = ->
+  clientStoriesSliderSelector = '.client-stories-slider'
+  $clientStoriesSlider = $(clientStoriesSliderSelector)
+  $clientStoriesOuterSlider = $clientStoriesSlider.find(clientStoriesSliderSelector + '-outer')
+  decrement = parseInt($clientStoriesOuterSlider.css('margin-top'))
+  currentSliderHeight = $clientStoriesSlider.find('.slick-track').height() - decrement
+
+  $clientStoriesOuterSlider.css('height', currentSliderHeight)
+
+  currentSliderPaddings = parseInt($clientStoriesOuterSlider.css('padding-top')) +
+    parseInt($clientStoriesOuterSlider.css('padding-bottom'))
+  $clientStoriesSlider.find(clientStoriesSliderSelector + '-inner').css('height', currentSliderHeight - currentSliderPaddings)
+
+bindClientStoriesSliderHeight = ->
+  resizeClientStoriesSlider()
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
@@ -166,8 +208,12 @@ $(document).ready ->
   initDesignerSlider()
   initCTAButtons()
 
+  initStickyNavigation()
+  initCTAButtons()
+
 $(window).load ->
   updateSizes()
+  bindClientStoriesSliderHeight()
   alignClientSliderHeight()
   synchronizeClientSliders()
 
