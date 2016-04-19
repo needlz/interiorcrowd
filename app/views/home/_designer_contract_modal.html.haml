@@ -1,10 +1,9 @@
-#designer_contract_modal.modal.fade{ aria: { hidden: 'true', labelledby: 'myModalLabel' },
-  role: 'dialog', tabindex: '-1' }
+#designer_contract_modal.modal.fade{ aria: { hidden: 'true' }, role: 'dialog', tabindex: '-1' }
 
   .modal-dialog
     .modal-content
       .modal-header
-        %h4#myModalLabel.modal-title= t('terms_of_service.designer_contract')
+        %h4.modal-title= t('terms_of_service.designer_contract')
         %button.close.close-modal{"data-dismiss" => "modal", :type => "button"} ×
       .modal-body
         %p.SofiaProLight= render partial: 'home/designer_contract'
