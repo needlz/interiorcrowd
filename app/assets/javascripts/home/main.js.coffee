@@ -35,15 +35,17 @@ initDesignerSlider = ->
     slidesToScroll: 3
     responsive: [
       {
-        breakpoint: 1199
+        breakpoint: 1200
         settings:
           slidesToShow: 2
           slidesToScroll: 2
           infinite: true
       }
       {
-        breakpoint: 767
+        breakpoint: 768
         settings:
+          arrows: false
+          dots: false
           infinite: true
           slidesToShow: 1
           slidesToScroll: 1
