@@ -270,16 +270,6 @@ RSpec.describe DesignerCenterRequestsController do
       expect(contest.requests[0].status).to eq 'draft'
     end
 
-    it 'sets status of request to "submitted" if "submitted" status passed' do
-      post :create, contest_id: contest.id, contest_request: { feedback: '', status: 'submitted' }
-      expect(contest.requests[0].status).to eq 'submitted'
-    end
-
-    it 'sets status of request to "draft" if not "submitted" status passed' do
-      post :create, contest_id: contest.id, contest_request: { feedback: '', status: 'submitted' }
-      expect(contest.requests[0].status).to eq 'submitted'
-    end
-
     it 'raises error if contest not specified' do
       post :create, contest_id: 0, contest_request: { feedback: '' }
       expect(response).to have_http_status(:not_found)

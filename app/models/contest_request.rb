@@ -83,6 +83,7 @@ class ContestRequest < ActiveRecord::Base
   scope :submitted, ->{ where(status: %w(submitted)) }
   scope :fulfillment, ->{ where(status: FULFILLMENT_STATUSES) }
   scope :finished, ->{ where(status: 'finished') }
+  scope :draft, ->{ where(status: 'draft') }
   scope :by_answer, ->(answer){ answer.present? ? where(answer: answer) : all }
   scope :with_design_properties, -> { includes(contest: [:design_category, :design_spaces]) }
 

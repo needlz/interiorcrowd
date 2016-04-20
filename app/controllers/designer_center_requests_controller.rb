@@ -106,9 +106,8 @@ class DesignerCenterRequestsController < ApplicationController
     contest_creation = ContestRequestCreation.new({ designer: @designer,
                                            contest: contest,
                                            request_params: response_params,
-                                           lookbook_params: params[:lookbook],
-                                           need_submit: params[:contest_request][:status] == 'submitted' }
-    )
+                                           lookbook_params: params[:lookbook]
+    })
     request = contest_creation.perform
 
     return raise_404 unless request
