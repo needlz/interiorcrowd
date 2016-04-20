@@ -46,7 +46,7 @@ initDesignerSlider = ->
         settings:
           arrows: false
           dots: false
-          infinite: true
+          centerMode: true
           slidesToShow: 1
           slidesToScroll: 1
       }

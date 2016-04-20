@@ -1,16 +1,7 @@
-@media (max-width: 767px) {
-  .theDesigner.slick-slide.slick-current.slick-active {
-    width: 4.1% !important;
-  }
-}
-
 @media (max-width: 479px) {
   .container.designers-slider.slick-initialized.slick-slider {
-    .theDesigner.slick-slide.slick-current.slick-active {
-      width: 3.7% !important;
-    }
     .theDesigner.slick-slide {
-      height: 500px !important;
+      height: 575px !important;
     }
   }
 }
