@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160210140148) do
+ActiveRecord::Schema.define(version: 20160418073906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,6 +205,7 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.boolean  "notified_client_contest_not_yet_live",                                       default: false
     t.boolean  "ever_received_published_product_items"
     t.string   "location_zip"
+    t.integer  "designer_level_id"
   end
 
   create_table "contests_appeals", force: :cascade do |t|
@@ -317,6 +318,9 @@ ActiveRecord::Schema.define(version: 20160210140148) do
     t.datetime "last_log_in_at"
     t.string   "last_log_in_ip"
     t.boolean  "paid_for_concept_boards",             default: false
+    t.text     "blog_account_json"
+    t.string   "blog_password"
+    t.string   "blog_username"
   end
 
   add_index "designers", ["email"], name: "index_designers_on_email", unique: true, using: :btree

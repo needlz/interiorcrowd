@@ -10,6 +10,7 @@ class DesignerInitialization
     create_portfolio
     create_welcome_notification
     send_mails
+    register_in_blog if Rails.env.production?
   end
 
   private
@@ -27,6 +28,10 @@ class DesignerInitialization
   def send_mails
     Jobs::Mailer.schedule(:designer_registered, [designer.id])
     Jobs::Mailer.schedule(:designer_registration_info, [designer.id])
+  end
+
+  def register_in_blog
+    RegisterDesignerInBlog.perform_later(designer.id)
   end
 
 end

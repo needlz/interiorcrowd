@@ -38,8 +38,8 @@ common: &defaults
     publishable_api_key: <%= ENV['STRIPE_PUBLISHABLE_API_KEY'] %>
   external_urls:
     blog:
-      url: http://blog.interiorcrowd.com
-      designers_url: http://designers.interiorcrowd.com
+      blog_url: http://blog.interiorcrowd.com
+      designers_blog_url: http://designers.interiorcrowd.com
       get_ideas: http://blog.interiorcrowd.com/category/get-ideas
       client_stories: http://blog.interiorcrowd.com/category/client-stories
       design_styles: http://blog.interiorcrowd.com/category/get-ideas/design-styles
@@ -110,6 +110,11 @@ common: &defaults
   send_emails: <%= !Rails.env.development? %>
   handle_errors: <%= !Rails.env.development? %>
   enable_google_conversion_script: <%= Rails.env.production? || Rails.env.staging? %>
+  blog:
+    api:
+      path: <%= ENV['BLOG_API_PATH'] %>
+      username: <%= ENV['BLOG_API_USERNAME'] %>
+      password: <%= ENV['BLOG_API_PASSWORD'] %>
 
 development:
   <<: *defaults

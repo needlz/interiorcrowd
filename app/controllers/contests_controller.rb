@@ -242,7 +242,6 @@ class ContestsController < ApplicationController
         return redirect_to(client_login_sessions_path)
       end
     end
-    return redirect_to(payment_details_contests_path(id: @contest.id)) unless payment_performed?(@contest)
 
     @entries_page = EntriesPage.new(
       contest: @contest,

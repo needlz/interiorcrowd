@@ -6,5 +6,6 @@ module Jobs
   MIXPANEL_QUEUE ||= 'mixpanel'
   STRIPE_QUEUE ||= 'stripe'
   SITEMAP_QUEUE ||= 'sitemap'
+  BLOG_QUEUE ||= 'blog'
 
 end

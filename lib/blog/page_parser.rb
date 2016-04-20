@@ -5,10 +5,10 @@ module Blog
     DESIGNERS_BLOG_NAMESPACE = 'blog/designers'
     BLOG_NAMESPACE = 'blog'
 
-    BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.url).host) })/
+    BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.blog_url).host) })/
     BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ BLOG_NAMESPACE }"
 
-    DESIGNERS_BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.designers_url).host) })/
+    DESIGNERS_BLOG_REGEX = /\/\/(#{ Regexp.escape(URI(Settings.external_urls.blog.designers_blog_url).host) })/
     DESIGNERS_BLOG_PATH_REPLACEMENT = "//#{ Settings.app_host }/#{ DESIGNERS_BLOG_NAMESPACE }"
 
     BLOG_PAGE_PARTS_SELECTORS = {
@@ -51,7 +51,7 @@ module Blog
     end
 
     def parse_dom
-      response_body.gsub!(%r['/wp-admin/admin-ajax.php'], "\'#{ @internal_blog_namespace }/wp-admin/admin-ajax.php\'")
+      response_body.gsub!(%r['/wp-admin/admin-ajax.php'], "\'#{ @internal_blog_namespace }wp-admin/admin-ajax.php\'")
       response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog\2\3\5')
       response_body.gsub!(%r[(//designers.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog/designers\2\3\5')
       response_body.gsub!(%r[(")(/wp-content.+ajax-loader\.gif)], '\1http://blog.interiorcrowd.com\2')
