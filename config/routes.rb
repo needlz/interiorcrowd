@@ -188,18 +188,18 @@ InteriorC::Application.routes.draw do
           to: 'blog#designers_blog_page',
           as: 'designers_blog_page',
           constraints: { blog_page_path: /.*/ }
-      post '/designers/:blog_page_post_path',
+      post '/designers/:blog_page_path',
            to: 'blog#designers_blog_page_post',
            as: 'designers_blog_page_post',
-           constraints: { blog_page_post_path: /.*/ }
+           constraints: { blog_page_path: /.*/ }
       get '/:blog_page_path',
           to: 'blog#blog_page',
           as: 'blog_page',
           constraints: { blog_page_path: /.*/ }
-      post '/:blog_page_post_path',
+      post '/:blog_page_path',
            to: 'blog#blog_page_post',
            as: 'blog_page_post',
-           constraints: { blog_page_post_path: /.*/ }
+           constraints: { blog_page_path: /.*/ }
     end
 
     resources :outbound_emails, :controller => 'email_webhooks', :only => [:show, :create]

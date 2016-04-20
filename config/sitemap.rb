@@ -24,7 +24,7 @@ SitemapGenerator::Sitemap.compress = false
 module BlogSitemapsHelper
 
   def self.include_blog_sitemap(filename)
-    response = ::Blog::PageFetcher.new(url: Settings.external_urls.blog.url + '/' + filename,
+    response = ::Blog::PageFetcher.new(url: Settings.external_urls.blog.blog_url + '/' + filename,
                           params: {},
                           env: {},
                           method: 'get',

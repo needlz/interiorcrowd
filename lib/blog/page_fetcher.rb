@@ -46,7 +46,7 @@ module Blog
     attr_reader :method, :params, :session, :blog_path, :env, :default_referer
 
     def make_request(url)
-      conn = Faraday.new(url) do |f|
+      connection = Faraday.new(url) do |f|
         f.use FaradayMiddleware::FaradayCookies, session: session
         f.use FaradayMiddleware::Gzip
         f.response :logger if Settings.log_requests_to_blog
@@ -56,12 +56,7 @@ module Blog
         f.adapter Faraday.default_adapter
         f.proxy ENV["FIXIE_URL"] if (ENV["FIXIE_URL"].present? && session[:use_blog_proxy])
       end
-
-      if method == :post
-        conn.post('', params)
-      else
-        conn.get('', params)
-      end
+      connection.send(method, '', params)
     end
 
     def forward_headers(r)
@@ -70,8 +65,8 @@ module Blog
       end
 
       r.headers['REFERER'] = default_referer if r.headers['REFERER'].blank?
-      r.headers['REFERER'].gsub!(Regexp.new("[^/]+" + Regexp.escape("/#{ Blog::PageParser::DESIGNERS_BLOG_NAMESPACE }")), URI(Settings.external_urls.blog.designers_url).host)
-      r.headers['REFERER'].gsub!(Regexp.new("[^/]+" + Regexp.escape("/#{ Blog::PageParser::BLOG_NAMESPACE }")), URI(Settings.external_urls.blog.url).host)
+      r.headers['REFERER'].gsub!(Regexp.new("[^/]+" + Regexp.escape("/#{ Blog::PageParser::DESIGNERS_BLOG_NAMESPACE }")), URI(Settings.external_urls.blog.designers_blog_url).host)
+      r.headers['REFERER'].gsub!(Regexp.new("[^/]+" + Regexp.escape("/#{ Blog::PageParser::BLOG_NAMESPACE }")), URI(Settings.external_urls.blog.blog_url).host)
       ['CONTENT_TYPE'].each do |header|
         r.headers[header.dasherize] = env["#{ header }"] if env["#{ header }"]
       end
