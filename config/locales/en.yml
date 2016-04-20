@@ -724,7 +724,7 @@ en:
       do_you_love: Do you love interior design? Looking to expand your portfolio and reach new customers?
       get_started: To get started, tell us a bit more about yourself.
       i_agree: I agree with the InteriorCrowd
-      terms_of_use: terms of use
+      designer_contract: Designer contract
     title: Designer Center
     updates:
       all: All
@@ -1130,6 +1130,7 @@ en:
   terms_of_service:
     close: Close
     title: Terms of service
+    designer_contract: Designer contract
   home:
     lets_design: Let's design
     places:
