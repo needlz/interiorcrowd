@@ -7,7 +7,10 @@
           %span.clickable{ class: "designerNotification latestTraining",
               data: { toggle: 'modal',  target: "##{ key }" } }
             = t(".video_tutorial.#{ key }")
-        = link_to t('.view_winning_submissions'), blog_page_path(blog_page_path: 'winning-boards'), class: "designerNotification latestTraining #{ tracked_link }"
+        - t('.blog_articles.').each do |article|
+          = link_to article[:title],
+            URI.decode( designers_blog_page_path( blog_page_path: article[:path] ) ),
+            class: "designerNotification latestTraining #{ tracked_link }"
 
 = render partial: 'designer_center/layout'
 
