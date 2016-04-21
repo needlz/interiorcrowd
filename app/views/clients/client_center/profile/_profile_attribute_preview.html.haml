@@ -17,9 +17,10 @@
                   data: { client: { id: @client.id } } do |form|
           = render partial: "clients/client_center/profile/forms/#{ attribute }", locals: { form: form }
           = hidden_field_tag :attribute, attribute
-          .menu-buttons
-            = form.submit class: 'savePassBtn', value: t('client_center.attribute_save_button')
-            %a.cancelPassBtn= t('client_center.attribute_cancel_button')
+          .clearfix.mobileButtons
+            = form.submit class: 'save-button button btn greenButton', value: t('client_center.attribute_save_button')
+            .cancel-button.button.btn.greyButton
+              = t('client_center.attribute_cancel_button')
 
     - if defined?(fullwidth) && fullwidth
       .col-sm-11.title
@@ -30,11 +31,12 @@
       .col-sm-12.placeholder
         = content_row
     - else
-      .col-sm-5.title
+      .col-sm-5.col-xs-10.title
         = title_row
-      .col-sm-6.placeholder
-        = content_row
       - if show_edit_button
-        .col-sm-1.text-right
+        .col-sm-1.col-xs-2.col-sm-push-6.text-right
           = edit_button
+      .col-sm-6.col-xs-12.col-sm-pull-1.placeholder
+        = content_row
+
 .fullWidthLine
