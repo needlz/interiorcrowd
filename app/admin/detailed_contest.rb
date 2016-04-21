@@ -1,6 +1,11 @@
 include ActiveAdminExtensions::ContestDetails
 
 ActiveAdmin.register Contest, as: "Detailed Contest" do
+  controller do
+    def scoped_collection
+      super.joins(client: [:primary_card, :credit_cards]).uniq
+    end
+  end
 
   actions :all, :except => [:new, :destroy, :edit]
 
