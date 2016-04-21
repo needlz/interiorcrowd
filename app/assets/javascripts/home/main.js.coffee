@@ -47,6 +47,7 @@ initDesignerSlider = ->
           arrows: false
           dots: false
           centerMode: true
+          centerPadding: '18px',
           slidesToShow: 1
           slidesToScroll: 1
       }
