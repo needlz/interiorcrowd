@@ -1,0 +1,15 @@
+@media (max-width: 767px) {
+  .container.designers-slider.slick-initialized.slick-slider {
+    .theDesigner.slick-slide {
+      margin: 0 7px;
+    }
+  }
+}
+@media (max-width: 479px) {
+  .container.designers-slider.slick-initialized.slick-slider {
+    .theDesigner.slick-slide {
+      height: 535px !important;
+      margin: 0 5px;
+    }
+  }
+}
