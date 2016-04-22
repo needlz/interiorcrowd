@@ -29,13 +29,13 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       contest.phase_end if contest.submission?
     end
     column 'Designers' do |contest|
-      designers_list(contest.requests.ever_published, :submitted_at) do |statement, submission_date|
-        statement + formatted_date(', submitted at ', submission_date)
+      designers_list(contest.requests.ever_published) do |statement, request|
+        statement + formatted_date(', submitted at ', request.submitted_at)
       end
     end
     column 'Draft Concept Boards' do |contest|
-      designers_list(contest.requests.draft, :created_at) do |statement, draft_saved_at|
-        statement + formatted_date(', draft saved at ', draft_saved_at)
+      designers_list(contest.requests.draft) do |statement, request|
+        statement + formatted_date(', draft saved at ', request.created_at)
       end
     end
     column 'Designer Comments' do |contest|

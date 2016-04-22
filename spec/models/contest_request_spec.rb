@@ -276,4 +276,17 @@ RSpec.describe ContestRequest do
     end
   end
 
+  describe '#draft scope' do
+    let(:first_designer) { Fabricate(:designer) }
+    let(:second_designer) { Fabricate(:designer) }
+    let(:third_designer) { Fabricate(:designer) }
+    let!(:submitted_request) { Fabricate(:contest_request, designer: first_designer) }
+    let!(:draft_request) { Fabricate(:draft_request, designer: second_designer) }
+    let!(:closed_request) { Fabricate(:closed_request, designer: third_designer) }
+
+    it 'returns only draft contest requests' do
+      expect(ContestRequest.draft).to eq([draft_request])
+    end
+  end
+
 end
