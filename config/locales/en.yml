@@ -902,13 +902,32 @@ en:
       ready_to_go: Ready to go?
       upload_moodboard: Upload your concept board
     training:
-      check_out: Check out our latest training materials here
-      view_winning_submissions: View winning submission boards here
-
-      video_tutorial:
-       product_list_phase: 'Video Tutorial: How to upload products in Product List Phase'
-       initial_phase: 'Video Tutorial: How to submit boards in the Initial Phase'
-       final_design_phase: 'Video Tutorial: How to wrap up in the Final Design Phase'
+      check_out: Please visit our designer blog for more info about how InteriorCrowd works
+      blog_articles:
+        -
+          title: 'Figuring out what the client wants'
+          path: 'figuring-out-what-the-client-wants'
+        -
+          title: 'Guidelines for your first in-person meeting'
+          path: 'your-first-in-person-meeting-guidelines'
+        -
+          title: 'Remote projects guide'
+          path: 'online-design-tutorials'
+        -
+          title: 'How to upload a concept board'
+          path: 'online-design-tutorials'
+        -
+          title: 'How to add products to the product list'
+          path: 'online-design-tutorials'
+        -
+          title: 'Payment: How does it work?'
+          path: 'payment-how-does-it-work'
+        -
+          title: 'Need help on a project? Outsource to the network!'
+          path: 'need-help-on-a-project-outsource-to-the-network'
+        -
+          title: 'Helpful resources'
+          path: 'category/designers-blog/resources/'
     my_contests:
       step_1: Step 1 is to create a concept board that incorporates the client’s style, needs, and colors.
       examples_of_moodboards: See example of concept boards
