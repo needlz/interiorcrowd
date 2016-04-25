@@ -26,7 +26,7 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       contest.submission_started_at
     end
     column 'Submission Deadline Date' do |contest|
-      contest.phase_end if contest.submission?
+      contest.submission_started_at + ContestMilestone::DAYS['submission'].days if contest.submission_started_at
     end
     column 'Designers' do |contest|
       designers_list(contest.requests.ever_published) do |statement, submission_date|
