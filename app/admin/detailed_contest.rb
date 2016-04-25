@@ -34,8 +34,13 @@ ActiveAdmin.register Contest, as: "Detailed Contest" do
       contest.submission_started_at + ContestMilestone::DAYS['submission'].days if contest.submission_started_at
     end
     column 'Designers' do |contest|
-      designers_list(contest.requests.ever_published) do |statement, submission_date|
-        statement + formatted_date(', submitted at ', submission_date)
+      designers_list(contest.requests.ever_published) do |statement, request|
+        statement + formatted_date(', submitted at ', request.submitted_at)
+      end
+    end
+    column 'Draft Concept Boards' do |contest|
+      designers_list(contest.requests.draft) do |statement, request|
+        statement + formatted_date(', draft saved at ', request.created_at)
       end
     end
     column 'Designer Comments' do |contest|

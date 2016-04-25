@@ -57,8 +57,7 @@ class ConceptBoardCommentsController < ApplicationController
     @concept_board = ContestRequestCreation.new(designer: current_user,
                                                contest: contest,
                                                request_params: nil,
-                                               lookbook_params: nil,
-                                               need_submit: false).perform if concept_board.blank?
+                                               lookbook_params: nil).perform if concept_board.blank?
   end
 
   def validate_params_of_update

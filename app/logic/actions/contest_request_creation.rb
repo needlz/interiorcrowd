@@ -5,14 +5,12 @@ class ContestRequestCreation
     @contest = options[:contest]
     @request_params = options[:request_params]
     @lookbook_params = options[:lookbook_params]
-    @need_submit = options[:need_submit]
   end
 
   def perform
     ContestRequest.transaction do
       create_request
       create_lookbook
-      request.submit! if need_submit
       request
     end
   end

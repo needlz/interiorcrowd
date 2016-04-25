@@ -46,7 +46,7 @@ module ActiveAdminExtensions
       requests.map do |request|
         designer = request.designer
         statement = link_to(full_user_name(designer), admin_designer_path(designer))
-        statement = yield(statement, request.submitted_at) if block_given?
+        statement = yield(statement, request) if block_given?
         statement
       end.join('<br />').html_safe
     end
