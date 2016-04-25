@@ -3,21 +3,9 @@
     .row
       .col-md-10.col-md-offset-1
         %h3= t('.check_out')
-        - Settings.designer_training_videos.each do |key, video_urls|
-          %span.clickable{ class: "designerNotification latestTraining",
-              data: { toggle: 'modal',  target: "##{ key }" } }
-            = t(".video_tutorial.#{ key }")
         - t('.blog_articles.').each do |article|
           = link_to article[:title],
             URI.decode( designers_blog_page_path( blog_page_path: article[:path] ) ),
             class: "designerNotification latestTraining #{ tracked_link }"
 
 = render partial: 'designer_center/layout'
-
-- Settings.designer_training_videos.each do |key, video_urls|
-  = render 'designer_center/jing_video',
-      id: key,
-      video_base_path: video_urls[:player_url],
-      version: video_urls[:version],
-      width: video_urls[:width],
-      height: video_urls[:height]
