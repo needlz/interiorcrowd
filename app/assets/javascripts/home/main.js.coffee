@@ -35,7 +35,7 @@ initDesignerSlider = ->
     slidesToScroll: 3
     responsive: [
       {
-        breakpoint: 1200
+        breakpoint: 992
         settings:
           slidesToShow: 2
           slidesToScroll: 2
@@ -84,7 +84,9 @@ bindCustomScrollbar = ->
 
 bindScrollDownButton = ->
   $('.circleDownArrow').click ->
-    $('html, body').animate { scrollTop: $('.whatWeDoBox').offset().top }, 700
+    $('.whatWeDoBox .shortUnderline').scrollintoview
+      duration: 1000
+      direction: "y"
 
 bindSignUpButton = ->
   $('a.sign-up-from-homepage').click (e) ->
