@@ -11,13 +11,13 @@ class @FulfillmentDesign
     )
 
 $(document).ready ->
-  $('#finalizeConfirmation').on('click', '.no-button', (event)->
+  $('#finishContest').on('click', '.no-button', (event)->
     event.preventDefault()
-    $('#finalizeConfirmation').modal('hide');
+    $('#finishContest').modal('hide');
   ).on('click', '.yes-button', (event)->
     event.preventDefault()
     FulfillmentDesign.submit()
   )
 
   $('.moveToFinal').on 'click', ->
-    $('#finalizeConfirmation').modal('show')
+    $('#finishContest').modal('show')
