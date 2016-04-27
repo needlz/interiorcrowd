@@ -6,7 +6,7 @@
     = javascript_include_tag 'designer_center_requests/fulfillment_approved_edit'
     = render 'shared/finish_contest_confirmation'
   - if @request.fulfillment_ready?
-    = render 'shared/finalize_design_confirmation'
+    = render 'shared/finish_contest_confirmation'
   = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
