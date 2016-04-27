@@ -34,6 +34,7 @@ development:
   MAILCHIMP_API_KEY: 'eb621bf07bea7c8316bfe3477a48b981-us12'
   MAILCHIMP_LIST_ID: '854c60de30'
   SHOW_PACKAGE_TYPE_DESC: 'false'
+  AUTOMATIC_PAYMENT: 'true'
 
 test:
   APP_HOST: 'localhost:3000'
