@@ -27,28 +27,33 @@ class Image < ActiveRecord::Base
 
   UNIQUE_PORTFOLIO_ITEMS = [PORTFOLIO_PERSONAL]
 
-  has_attached_file :image,
-                    styles: lambda { |image|
-                      if image.queued_for_write[:original]
-                        begin
-                          Paperclip::GeometryDetector.new(image.queued_for_write[:original].instance_variable_get(:@tempfile)).make
-                          image.instance.file_type = 'image'
-                        rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
-                          image.instance.file_type = 'file'
-                          return {}
-                        end
-                      end
-                      { medium: ['300x300>', :jpg],
-                        large: ['600x600>', :jpg],
-                        original_size: ['', :jpg] }
-                    },
-                    convert_options: {
-                      all: '-background white -flatten +matte'
-                    },
-                    path: ':class/:id/:style:filename',
-                    default_url: ->(image){
-                      image.processing? ? image.options[:url] : 'missing.png'
-                    }
+  attachment_options = {
+    styles: lambda { |image|
+      if image.queued_for_write[:original]
+        begin
+          Paperclip::GeometryDetector.new(image.queued_for_write[:original].instance_variable_get(:@tempfile)).make
+          image.instance.file_type = 'image'
+        rescue Paperclip::Errors::NotIdentifiedByImageMagickError => e
+          image.instance.file_type = 'file'
+          return {}
+        end
+      end
+      { medium: ['300x300>', :jpg],
+        large: ['600x600>', :jpg],
+        original_size: ['', :jpg] }
+    },
+    convert_options: {
+      all: '-background white -flatten +matte'
+    },
+    path: Settings.uploads_stored_in_filesystem ? 'public/uploads/:class/:id/:style:basename.jpg' : ':class/:id/:style:filename',
+    default_url: ->(image){
+      image.processing? ? image.options[:url] : 'missing.png'
+    }
+  }
+  if Settings.uploads_stored_in_filesystem
+    attachment_options.merge!(url: "/uploads/:class/:id/:style:basename.:extension")
+  end
+  has_attached_file :image, attachment_options
   process_in_background :image
   do_not_validate_attachment_file_type :image
 

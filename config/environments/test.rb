@@ -39,4 +39,9 @@ InteriorC::Application.configure do
   config.before_initialize do
     InteriorC::Application.routes.default_url_options[:host] = 'beta.interiorcrowd.com'
   end
+
+  config.paperclip_defaults = {
+    storage: :filesystem
+  }
+
 end

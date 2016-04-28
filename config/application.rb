@@ -48,11 +48,7 @@ module InteriorC
     s3_settings = { bucket: ENV['S3_BUCKET_NAME'],
                     access_key_id: ENV['AWS_ACCESS_KEY'],
                     secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] }
-    config.paperclip_defaults = {
-        url: ':s3_domain_url',
-        storage: :s3,
-        s3_credentials: s3_settings
-    }
+
     AWS.config(s3_settings)
 
     config.i18n.enforce_available_locales = false

@@ -1,7 +1,8 @@
 - if Settings.rollbar_js_access_token
   = render partial: 'shared/rollbar'
 = render 'shared/mixpanel'
-= render partial: 'shared/setup_mixpanel'
+- unless Rails.env.test?
+  = render partial: 'shared/setup_mixpanel'
 = render partial: 'shared/google_analytics'
 = render partial: 'shared/setup_facebook'
 = render partial: 'shared/setup_facebook_conversion'

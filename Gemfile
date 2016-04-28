@@ -113,7 +113,6 @@ gem 'faraday-cookie_jar'
 gem 'http-cookie'
 gem 'newrelic_rpm'
 gem 'fork_break'
-gem 'database_cleaner'
 gem 'rack-ssl-enforcer'
 gem 'griddler' # parses email text
 gem 'viglink-api'

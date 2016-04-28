@@ -19,3 +19,19 @@ module Paperclip
   end
 
 end
+
+paperclip_defaults =
+  if Settings.uploads_stored_in_filesystem
+    {
+      storage: :filesystem
+    }
+  else
+    {
+      url: ':s3_domain_url',
+      storage: :s3,
+      s3_credentials: { bucket: ENV['S3_BUCKET_NAME'],
+                        access_key_id: ENV['AWS_ACCESS_KEY'],
+                        secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'] }
+    }
+  end
+Paperclip::Attachment.default_options.merge! paperclip_defaults
