@@ -1,8 +1,5 @@
 - readonly = defined?(readonly) ? readonly : false
 .row
-  - if contest_page.timeline_hint
-    = render 'clients/client_center/entries/timeline_hint',
-        { text: contest_page.timeline_hint }
   .col-md-9
     = render 'clients/client_center/entries/phases',
         { stripe: phases_stripe }
@@ -12,6 +9,9 @@
         contest_id: contest_page.contest.id,
         view: contest_page.selected_view
   .clearfix
+  - if contest_page.timeline_hint
+    = render 'clients/client_center/entries/timeline_hint',
+      { text: contest_page.timeline_hint }
   .col-md-12.description-container
     - if contest_page.requests_present?
       %p.favDesignConcept.hidden-xs= t('client_center.entries.choose_concept')

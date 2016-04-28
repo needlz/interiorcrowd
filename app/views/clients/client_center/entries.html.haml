@@ -15,6 +15,7 @@
 - if @entries_page.current_user_owns_contest?
   = render 'clients/client_center/moodboard_winner_dialog' if @entries_page.contest_requests.present?
   - content_for :client_center_content do
+    = render 'shared/breadcrumbs', breadcrumbs: @breadcrumbs
     = render @entries_page.partial
 
   - if params[:signed_up].present?
@@ -23,9 +24,6 @@
         container_class: (container_class if defined?(container_class))
   - else
     = render 'clients/client_center/layout', container_class: @entries_page.container_css_class
-
-  - @entries_page.onload_popups.each do |partial_options|
-    = render(*partial_options)
 - else
   .container
     = render @entries_page.partial

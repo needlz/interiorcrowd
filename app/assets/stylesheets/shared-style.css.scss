@@ -1781,24 +1781,12 @@ h3.exploreMore {
 }
 
 .timeLeftToSubmitParent {
-  top: 50px;
-  padding-bottom: 20px;
   width: 100%;
-}
-
-.timeLeftToSubmitParent + div > p.favDesignConcept {
-  margin-top: 90px;
 }
 
 @media(max-width: 768px) {
   .setTopMarginTimeLeftToSubmit {
     margin-top: 0px;
-  }
-}
-
-@media(max-width: 767px) {
-  .setTopMarginTimeLeftToSubmit {
-    margin-top: 80px;
   }
 }
 
@@ -1810,12 +1798,6 @@ h3.exploreMore {
   }
   .timeLeftToSubmit span {
     display: block;
-  }
-  .timeLeftToSubmitParent {
-    top: 240px;
-  }
-  .setTopMarginTimeLeftToSubmit {
-    margin-top: 110px;
   }
 }
 

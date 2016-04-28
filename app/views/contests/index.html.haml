@@ -4,6 +4,7 @@
   = javascript_include_tag 'designer_center_requests/index'
 
 - content_for :client_center_content do
+  = render 'shared/breadcrumbs', breadcrumbs: @breadcrumbs
   #client-center-contests.lightFont.marginTop20
     .row.no-x-padding
       .col-md-12.contestUnderway.no-x-padding
@@ -32,4 +33,4 @@
           #completedContestsBox.show
             = render 'contests/index/items', { columns: @completed_contests }
 
-= render 'clients/client_center/layout', { container_class: 'bottom60' }
+= render 'clients/client_center/layout', { container_class: 'bottom60', page_title: t('client_center.contests.index.title') }

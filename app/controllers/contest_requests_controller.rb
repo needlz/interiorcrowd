@@ -24,6 +24,7 @@ class ContestRequestsController < ApplicationController
       @navigation = Navigation::ClientCenter.new(:entries, contest: @request.contest)
       @setup_viglink = true
       TrackContestRequestVisit.perform(@request)
+      @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@request.contest, true).contest_request(@request)
     elsif !current_user.can_see_contest?(@request.contest, cookies)
       if current_user.client?
         render_404

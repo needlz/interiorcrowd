@@ -15,6 +15,8 @@
     Location = #{ translations_to_json(['contests', 'space', 'location']) }
 
 - content_for :client_center_content do
+  = render 'shared/breadcrumbs', breadcrumbs: @breadcrumbs
+
   .contest.brief.briefEditingBox{ data: { id: @contest.id } }
     - ContestView::EDITABLE_ATTRIBUTES.each do |attribute|
       = render partial: 'clients/client_center/brief_option', locals: { option: attribute }

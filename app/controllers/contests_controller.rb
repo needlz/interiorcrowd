@@ -57,6 +57,7 @@ class ContestsController < ApplicationController
       @setup_viglink = true
       @client = current_user
       @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+      @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@contest)
       TrackContestRequestVisit.perform(@entries_page.won_contest_request) if @entries_page.won_contest_request
     end
 

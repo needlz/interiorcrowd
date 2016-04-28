@@ -1,6 +1,6 @@
 .client-center
   = render partial: 'shared/user_center_layout',
-      locals: { title: t('client_center.title'),
+      locals: { title: (page_title if defined?(page_title)) || t('client_center.title'),
                 header: 'clients/client_center/header',
                 content: (yield :client_center_content),
                 container_class: (container_class if defined?(container_class)) }
