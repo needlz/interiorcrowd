@@ -1,7 +1,4 @@
-.col-md-12.disablePadding.marginTop40
-  = link_to t('client_center.moodboard_details.back'),
-      client_center_entry_path(id: contest_request.contest.id),
-      class: "backToEntries #{ tracked_link }"
+= render 'shared/breadcrumbs', breadcrumbs: @breadcrumbs
 .viewingMoodboard
   .col-md-8.disablePadding
     = render 'contest_requests/moodboard_with_answers',

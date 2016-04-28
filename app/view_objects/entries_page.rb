@@ -71,15 +71,6 @@ class EntriesPage < ContestPage
     'bottom60 entries-page' if contest.submission? || contest.winner_selection?
   end
 
-  def onload_popups
-    return [] if entries_concept_board_page.try(:previous_step?)
-    result = []
-    # if won_contest_request
-    #   result << ['shared/finalize_design_confirmation'] if won_contest_request.fulfillment_ready?
-    # end
-    result
-  end
-
   def current_user_owns_contest?
     contest.client == current_user
   end
@@ -96,6 +87,21 @@ class EntriesPage < ContestPage
 
   def phase_url(index)
     view_context.client_center_entry_path(phase_url_params(index))
+  end
+
+  def breadcrumbs
+    return @breadcrumbs if @breadcrumbs
+    @breadcrumbs = Breadcrumbs::Client.new(view_context)
+    if show_particular_request?
+      @breadcrumbs.my_contests.contest(contest, true).contest_request(won_contest_request)
+    else
+      @breadcrumbs.my_contests.contest(contest)
+    end
+    @breadcrumbs
+  end
+
+  def show_particular_request?
+    won_contest_request && entries_concept_board_page.active_step != ContestPhases.phase_to_index(:initial)
   end
 
   private

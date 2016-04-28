@@ -68,16 +68,6 @@
   }
 }
 
-.timeLeftToSubmitParent{
-  top: 140px;
-}
-
-@media(max-width: 480px){
-  .timeLeftToSubmitParent{
-    top: 240px;
-  }
-}
-
 .interiorDesignLevelMobile .active label,.interiorDesignLevelMobile .active label{
   background: #333333 !important;
   color: #FFF !important;
@@ -307,24 +297,10 @@
   }
 }
 
-.description-container{
-  margin-top: 35px;
-}
-
-.entries-container{
-  .description-container{
-    margin-top: 35px;
-  }
-}
-
 @media (max-width: 992px){
   .entries-container {
     .filter-container {
       margin-top: 20px;
-    }
-
-    .description-container{
-      margin-top: 60px;
     }
   }
 }

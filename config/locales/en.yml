@@ -559,6 +559,9 @@ en:
       entries: Entries
       brief: Brief
       profile: Profile
+    contests:
+      index:
+        title: My Contests
     sign_up:
       title: Create your account
       create_account: Create your account
@@ -615,6 +618,12 @@ en:
       closed: Closed
       finished: Contest is Finished
       incomplete: Brief pending
+    breadcrumbs:
+      my_contests: My contests
+      contest: Entries
+      profile: Profile
+      brief: Brief
+      contest_request: '%{possessive} concept board'
   designer_center:
     milestones:
       winner_selection:

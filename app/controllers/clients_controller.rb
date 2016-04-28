@@ -35,6 +35,7 @@ class ClientsController < ApplicationController
     end
     @contest_view = ContestView.new(contest_attributes: @contest)
     @navigation = Navigation::ClientCenter.new(:brief, contest: @contest)
+    @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@contest).brief(@contest)
     render 'clients/client_center/brief'
   end
 
