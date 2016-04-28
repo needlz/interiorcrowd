@@ -86,6 +86,7 @@ RSpec.describe DesignerCenterRequestsController do
           ContestPhases.indices.each do |index|
             get :show, id: concept_board.id, view: index
             expect(response).to render_template(:show)
+            expect(assigns(:setup_viglink)).to be_truthy
           end
         end
       end
@@ -96,7 +97,7 @@ RSpec.describe DesignerCenterRequestsController do
         it 'enables VigLink for the page' do
           ContestPhases.indices.each do |index|
             get :show, id: concept_board.id, view: index
-            expect(assigns(:setup_viglink)).to eq (ContestPhases.index_to_phase(index) == :final_design)
+            expect(assigns(:setup_viglink)).to be_truthy
           end
         end
       end
@@ -338,6 +339,7 @@ RSpec.describe DesignerCenterRequestsController do
         request.approve_fulfillment!
         get :edit, id: request.id
         expect(response).to render_template(:edit)
+        expect(assigns(:setup_viglink)).to be_truthy
       end
     end
 
@@ -354,6 +356,7 @@ RSpec.describe DesignerCenterRequestsController do
       [0..1].each do |index|
         get :edit, id: fulfillment_ready_request.id, view: index
         expect(response).to render_template(:edit)
+        expect(assigns(:setup_viglink)).to be_truthy
       end
     end
 

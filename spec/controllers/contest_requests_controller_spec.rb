@@ -166,6 +166,7 @@ RSpec.describe ContestRequestsController do
         it 'returns page' do
           get :show, id: request.id
           expect(response).to render_template(:show)
+          expect(assigns(:setup_viglink)).to be_nil
         end
       end
     end
@@ -178,6 +179,7 @@ RSpec.describe ContestRequestsController do
       it 'returns page' do
         get :show, id: request.id
         expect(response).to render_template(:show)
+        expect(assigns(:setup_viglink)).to be_truthy
       end
 
       it 'renders answers if contest is in submission state' do
