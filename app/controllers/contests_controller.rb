@@ -54,6 +54,7 @@ class ContestsController < ApplicationController
     @setup_viglink = @entries_page.phases_stripe.active_phase == :final_design
 
     if current_user.client?
+      @setup_viglink = true
       @client = current_user
       @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
       TrackContestRequestVisit.perform(@entries_page.won_contest_request) if @entries_page.won_contest_request

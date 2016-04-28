@@ -22,6 +22,7 @@ class ContestRequestsController < ApplicationController
       @client = current_user
       @show_answer_options = @request.answerable?
       @navigation = Navigation::ClientCenter.new(:entries, contest: @request.contest)
+      @setup_viglink = true
       TrackContestRequestVisit.perform(@request)
     elsif !current_user.can_see_contest?(@request.contest, cookies)
       if current_user.client?
