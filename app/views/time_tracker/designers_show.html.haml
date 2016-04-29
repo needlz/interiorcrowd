@@ -66,4 +66,4 @@
 .time-tracker
   = render partial: 'time_tracker', locals: { tracker: @time_tracker, add_hours_header: t('time_tracker.suggest_hours') }
   - if @time_tracker.actual_hours?
-    = render partial: 'designer_activity'
+    = render partial: 'designer_activity', locals: { designer_activities: @designer_activities}

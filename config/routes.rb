@@ -83,6 +83,7 @@ InteriorC::Application.routes.draw do
       resource :time_tracker do
         get '/', to: 'time_tracker#designers_show', as: 'designer_center'
         post 'suggest_hours', to: 'time_tracker#suggest_hours', as: 'suggest_hours'
+        post 'create_designer_activity', to: 'designer_activities#create'
         resources :attachments, only: [:create, :destroy], controller: 'time_tracker_attachments'
       end
     end
