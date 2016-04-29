@@ -11,7 +11,6 @@ class ContestRequestsController < ApplicationController
   end
 
   def approve_fulfillment
-    # return if current_user.client?
     approve_fulfillment = ApproveFulfillment.new(@request)
     approve_fulfillment.perform
     render json: { approved: approve_fulfillment.approved }
@@ -21,7 +20,8 @@ class ContestRequestsController < ApplicationController
     if @request.contest_owner?(current_user)
       @client = current_user
       @show_answer_options = @request.answerable?
-      @navigation = Navigation::ClientCenter.new(:entries, contest: @request.contest)
+      contest = @request.contest
+      @navigation = "Navigation::ClientCenter::#{ contest.status.camelize }".constantize.new(:entries, contest: contest)
       @setup_viglink = true
       TrackContestRequestVisit.perform(@request)
       @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@request.contest, true).contest_request(@request)

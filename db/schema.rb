@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.decimal  "space_height",                                      precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
+    t.integer  "designer_level_id"
     t.string   "status",                                                                     default: "incomplete"
     t.datetime "phase_end"
     t.string   "theme",                                 limit: 255
@@ -557,6 +558,14 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.datetime "audio_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "time_trackers", force: :cascade do |t|
+    t.integer  "hours_suggested", default: 0, null: false
+    t.integer  "hours_actual",    default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "contest_id"
   end
 
   create_table "user_notifications", force: :cascade do |t|

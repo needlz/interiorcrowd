@@ -38,6 +38,7 @@
 //= require lib/jquery.aw-showcase.min
 //= require lib/jquery.confirm
 //= require lib/imagesloaded.pkgd
+//= require lib/jStepper
 //= require designer_center_requests/finished
 //= require about_us
 //= require how_it_works
@@ -47,4 +48,5 @@
 //= require jquery.slick
 //= require comment_attachment
 //= require concept_board_comment_editor
-//= require lib/jquery.scrollintoview
+//= require time_tracker/tracker_attachment_uploader
+

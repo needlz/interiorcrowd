@@ -1,0 +1,28 @@
+- content_for :header do
+  = render partial: 'client_navigation_bar', locals: { contest_id: @time_tracker.contest.id }
+
+- content_for :breadcrumb do
+  .tracker-breadcrumb
+    = link_to '< ' + @time_tracker.contest.project_name.to_s, client_center_entry_path(id: @time_tracker.contest.id)
+    %span= '/ ' + t('time_tracker.tracker')
+
+- content_for :info_container do
+  - if @time_tracker.attachments?
+    = render partial: 'time_tracker/attachments/show_for_client', locals: { time_tracker: @time_tracker }
+  - else
+    - if @time_tracker.suggested_hours?
+      .tracker-description
+        = render partial: 'clients_suggested_hours'
+    - elsif @time_tracker.hours_actual?
+      = render partial: 'after_purchase'
+    - else
+      = render partial: 'how_this_works'
+
+- content_for :add_hours_submit do
+  %button.btn.hours-submit#buy-hours{ type: 'submit', disabled: true }= t('time_tracker.buy')
+
+- content_for :form do
+  - form_tag time_tracker_purchase_confirm_client_center_entry_path, method: 'post'
+
+.time-tracker
+  = render partial: 'time_tracker', locals: { tracker: @time_tracker, add_hours_header: t('time_tracker.add_more') }

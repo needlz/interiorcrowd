@@ -10,6 +10,7 @@ class SelectWinner < Action
         prepare_for_next_phase
         contest_request.update_attributes(won_at: Time.now)
         contest_request.contest.winner_selected!
+        create_time_tracker
         notify_designer_about_win
         notify_client
         notify_product_owner
@@ -41,6 +42,10 @@ class SelectWinner < Action
     PhaseUpdater.new(contest_request).monitor_phase_change do
       contest_request.winner!
     end
+  end
+
+  def create_time_tracker
+    TimeTracker.create(contest: contest_request.contest)
   end
 
 end
