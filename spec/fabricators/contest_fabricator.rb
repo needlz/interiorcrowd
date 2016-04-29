@@ -23,3 +23,11 @@ end
 Fabricator(:contest_during_winner_selection, from: :completed_contest) do
   status 'winner_selection'
 end
+
+Fabricator(:contest_during_fulfillment, from: :completed_contest) do
+  status 'fulfillment'
+end
+
+Fabricator(:contest_during_final_fulfillment, from: :completed_contest) do
+  status 'final_fulfillment'
+end

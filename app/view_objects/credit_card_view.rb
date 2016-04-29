@@ -28,6 +28,18 @@ class CreditCardView
     "#{ address }, #{ city } #{ state }"
   end
 
+  def short_address
+    "#{ address } #{ city }"
+  end
+
+  def post_number
+    if state
+      "#{ state.capitalize } #{ zip }"
+    else
+      "#{ zip }"
+    end
+  end
+
   def expiration_date
     "#{ ex_month } / #{ ex_year }"
   end

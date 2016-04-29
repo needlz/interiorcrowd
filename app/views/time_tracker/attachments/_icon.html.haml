@@ -1,0 +1,5 @@
+- if attachment.viewable?
+  %a.enlarge{ href: attachment.original_size_url, title: 'Preview' }
+    %img.preview{ src: attachment.small_size_url }
+- else
+  %img.preview{ src: attachment.small_size_url }

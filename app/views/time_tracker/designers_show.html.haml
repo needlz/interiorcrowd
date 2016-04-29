@@ -1,0 +1,69 @@
+- content_for :header do
+  %header
+    %h1= t('header.designer_center')
+    %nav
+      - @navigation.tabs.each do |tab, navigation_link|
+        = link_to navigation_link[:name], navigation_link[:href], class: @navigation.active_class(tab, 'active')
+
+- content_for :breadcrumb do
+  .tracker-breadcrumb
+    %p= @time_tracker.contest.project_name
+
+- content_for :info_container do
+  .tracker-upload-description{ style: ('display: none' if @time_tracker.attachments.present?) }
+    %p= t('time_tracker.uploader_description')
+    %label
+      %p.uploadButton= t('time_tracker.upload_file')
+      %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+      %input.fileIds{ type: 'hidden' }
+  .tracker-upload{ style: ('display: none' if @time_tracker.attachments.blank?),
+      data: { attachment_url: contest_time_tracker_attachments_path(contest_id: @contest.id) } }
+    %h4= 'Attachment'
+    .header.col-xs-12
+      .col-xs-5.filename
+        FILENAME
+      .col-xs-4.timeSubmitted{ style: ('display: none')}
+        DATE SUBMITTED
+    .editArea
+      .thumbs
+        .template
+          = render 'time_tracker/attachments/uploaded_attachment', attachment: Hashie::Mash.new
+        .uploadingTemplate
+          .upload-container.col-xs-5.no-x-padding
+            .col-xs-4.no-x-padding
+              %img.preview
+            .col-xs-8.no-x-padding
+              %span.filename
+          .progressbar.col-xs-5.no-x-padding
+            .pointer
+          .menuButtons.col-xs-2.no-x-padding
+            = render 'time_tracker/attachments/remove_button'
+        - @time_tracker.attachments.each do |attachment|
+          .thumb.col-xs-12{ data: { id: attachment.id } }
+            = render 'time_tracker/attachments/uploaded_attachment', attachment: attachment
+      %label.uploadButton
+        %p= t('time_tracker.upload_file')
+  = render 'shared/setup_uploadify'
+
+  :coffee
+    $ ->
+      PicturesZoom.init('.tracker-upload-description .thumb .enlarge')
+      TrackerAttachmentUploader.bindUploadButton($('.tracker-upload-description'))
+      PicturesUploadButton.init
+        fileinputSelector: $('.tracker-upload-description').find('.fileinput'),
+        uploadButtonSelector: $('.tracker-upload').find('.uploadButton'),
+        thumbs:
+          container: $('.tracker-upload').find('.thumbs')
+          selector: $('.tracker-upload').find('.fileIds')
+          theme: window.TrackerAttachmentsTheme
+          I18n: window.attachmentsI18n
+
+- content_for :add_hours_submit do
+  %button.btn.hours-submit#suggest-hours{ disabled: true, url: suggest_hours_contest_time_tracker_path }
+    = t('time_tracker.send_request')
+  %p.tracker-sent-hours= t('time_tracker.designer.hours_suggested', count: @time_tracker.hours_suggested).html_safe
+
+.time-tracker
+  = render partial: 'time_tracker', locals: { tracker: @time_tracker, add_hours_header: t('time_tracker.suggest_hours') }
+  - if @time_tracker.actual_hours?
+    = render partial: 'designer_activity'

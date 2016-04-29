@@ -90,7 +90,7 @@ class Designer < ActiveRecord::Base
   end
 
   def portfolio_path
-    portfolio.path
+    portfolio.path if portfolio
   end
 
   ransacker :by_submission_date, formatter: proc { |month|
