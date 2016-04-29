@@ -20,6 +20,4 @@ RSpec.describe DesignerActivity, type: :model do
     end
   end
 
-
-
 end
