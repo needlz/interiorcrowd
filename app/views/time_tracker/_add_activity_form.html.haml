@@ -1,28 +1,28 @@
 .designer-activity-form.col-xs-12
-  .col-xs-3
-    %h5= 'date'
-  .col-xs-4
-    = date_field('', '')
-  .col-xs-1
-    %p= 'to'
-  .col-xs-4
-    = date_field('', '')
-  .col-xs-3
-    %h5= 'task'
-  .col-xs-9
-    = text_field('','')
-  .col-xs-3
-    %h5= 'hour'
-  .col-xs-2
-    = text_field('','')
-  .col-xs-12
+  = form_for @designer_activity, { url: create_designer_activity_contest_time_tracker_path, method: 'post', remote: true } do |f|
     .col-xs-3
-      %h5= 'comment'
+      %h5= 'date'
+    .col-xs-4
+      = f.date_field :start_date
+    .col-xs-1
+      %p= 'to'
+    .col-xs-4
+      = f.date_field :due_date
+    .col-xs-3
+      %h5= 'task'
     .col-xs-9
-      =text_area('','')
-  .col-xs-offset-3.col-xs-4
-    =button_tag 'Submit', class: 'btn designer-activity-form-submit-button'
-    =button_tag 'Cancel', class: 'btn designer-activity-form-cancel-button'
-  .col-xs-offset-3.col-xs-2.designer-activity-form-add-more-button
-    =button_tag '+ Add more task', class: 'btn'
-
+      = f.text_field :task
+    .col-xs-3
+      %h5= 'hour'
+    .col-xs-2
+      = f.text_field :hours
+    .col-xs-12
+      .col-xs-3
+        %h5= 'comment'
+      .col-xs-9
+        =text_area('','')
+    .col-xs-offset-3.col-xs-4
+      =button_tag 'Submit', class: 'btn designer-activity-form-submit-button'
+      =button_tag 'Cancel', class: 'btn designer-activity-form-cancel-button'
+    .col-xs-offset-3.col-xs-2.designer-activity-form-add-more-button
+      =button_tag '+ Add more task', class: 'btn'
