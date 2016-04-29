@@ -16,15 +16,15 @@
       %p.uploadButton= t('time_tracker.upload_file')
       %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
       %input.fileIds{ type: 'hidden' }
-  .tracker-upload{ style: ('display: none' if @time_tracker.attachments.blank?),
+  .tracker-upload.no-x-padding.col-xs-12.col-sm-7.col-md-8{ style: ('display: none' if @time_tracker.attachments.blank?),
       data: { attachment_url: contest_time_tracker_attachments_path(contest_id: @contest.id) } }
     %h4= 'Attachment'
-    .header.col-xs-12
-      .col-xs-5.filename
+    .header.col-xs-12.col-sm-12
+      .col-xs-5.col-sm-5.filename
         FILENAME
-      .col-xs-4.timeSubmitted{ style: ('display: none')}
+      .col-sm-6.timeSubmitted.hidden-xs{ style: ('display: none')}
         DATE SUBMITTED
-    .editArea
+    .editArea.col-xs-12.col-sm-12.no-x-padding
       .thumbs
         .template
           = render 'time_tracker/attachments/uploaded_attachment', attachment: Hashie::Mash.new
@@ -34,7 +34,7 @@
               %img.preview
             .col-xs-8.no-x-padding
               %span.filename
-          .progressbar.col-xs-5.no-x-padding
+          .progressbar.col-xs-4.no-x-padding
             .pointer
           .menuButtons.col-xs-2.no-x-padding
             = render 'time_tracker/attachments/remove_button'
@@ -63,7 +63,7 @@
     = t('time_tracker.send_request')
   %p.tracker-sent-hours= t('time_tracker.designer.hours_suggested', count: @time_tracker.hours_suggested).html_safe
 
-.time-tracker
+.time-tracker#designers-tracker
   = render partial: 'time_tracker', locals: { tracker: @time_tracker, add_hours_header: t('time_tracker.suggest_hours') }
   - if @time_tracker.actual_hours?
     = render partial: 'designer_activity', locals: { designer_activities: @designer_activities}

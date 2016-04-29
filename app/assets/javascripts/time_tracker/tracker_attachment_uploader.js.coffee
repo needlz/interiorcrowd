@@ -46,10 +46,13 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
 
   onUploaded: (file)->
     $container = @uploadThumb(file.name)
-    $container.find('.progressbar').hide()
+    $container.find('.progressbar').removeClass('col-xs-4')
+    $container.find('.progressbar').remove()
     $container.find('.remove-thumb-button').hide()
-    $container.find('.menuButtons').removeClass('col-xs-2').addClass('col-xs-3')
+    $container.find('.upload-container').removeClass('col-xs-5').addClass('col-xs-6 col-md-5')
+    $container.find('.menuButtons').removeClass('col-xs-2').addClass('col-xs-6 col-md-5')
     $container.find('.server-processing').show()
+
     $container.find('.processing').show()
 
   onFail: (file)->

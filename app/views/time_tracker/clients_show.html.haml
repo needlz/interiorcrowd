@@ -24,5 +24,5 @@
 - content_for :form do
   - form_tag time_tracker_purchase_confirm_client_center_entry_path, method: 'post'
 
-.time-tracker
+.time-tracker#clients-tracker
   = render partial: 'time_tracker', locals: { tracker: @time_tracker, add_hours_header: t('time_tracker.add_more') }
