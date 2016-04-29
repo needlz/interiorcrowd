@@ -310,8 +310,7 @@ class UserMailer < ActionMailer::Base
     set_template_values(
         contest_url: renderer.designer_center_contest_url(id: contest.id),
         contest_name: contest.name,
-        client_name: client.name,
-        video_url: Settings.external_urls.youtube.what_the_client_wants
+        client_name: client.name
     )
     mail to: [wrap_recipient(designer, 'to')], email_id: email_id
   end

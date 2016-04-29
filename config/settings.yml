@@ -68,8 +68,6 @@ common: &defaults
       - https://www.linkedin.com/in/jolene-lindner-3abaa827
       - https://www.linkedin.com/in/nat-suriyapee-769954a3
       - https://www.linkedin.com/in/lia-aprile-18017410a
-    youtube:
-      what_the_client_wants: https://www.youtube.com/watch?v=FhV96s5Lx0E
   designer_note_profile_image: '/assets/profile-img.png'
   designer_level_pictures:
     novice: '/assets/design_levels/novice.jpg'
