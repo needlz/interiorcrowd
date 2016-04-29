@@ -1,0 +1,13 @@
+= render partial: 'time_tracker/clients_suggested_hours' if time_tracker.suggested_hours?
+.tracker-upload
+  %h4= 'Attachment'
+  .header.col-xs-12.col-md-8
+    .col-xs-5.col-sm-5.filename
+      FILENAME
+    .col-sm-6.timeSubmitted.hidden-xs
+      DATE SUBMITTED
+  .editArea
+    .thumbs
+      - time_tracker.attachments.each do |attachment|
+        .thumb.col-xs-12.col-md-8{ data: { id: attachment.id } }
+          = render 'time_tracker/attachments/upload_attachment_for_client', attachment: attachment

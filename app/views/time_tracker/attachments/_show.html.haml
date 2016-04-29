@@ -1,0 +1,4 @@
+= render 'attachments/icon', attachment: attachment
+.menuButtons
+  = additional_menu_buttons if defined?(additional_menu_buttons)
+  %a.downloadButton.glyphicon.glyphicon-download-alt{ href: attachment.url_for_downloading, title: t('.download_hint') }
