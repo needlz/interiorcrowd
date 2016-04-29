@@ -1,5 +1,6 @@
 class TimeTracker < ActiveRecord::Base
   belongs_to :contest
+  has_many :designer_activities
   has_and_belongs_to_many :attachments,
                           class_name: 'Image',
                           join_table: 'time_trackers_attachments',
