@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418073906) do
+ActiveRecord::Schema.define(version: 20160429123834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -290,6 +290,16 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.integer  "status",     default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "designer_activities", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "due_date"
+    t.string   "task"
+    t.integer  "hours"
+    t.integer  "time_tracker_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "designer_levels", force: :cascade do |t|
