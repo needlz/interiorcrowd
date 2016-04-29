@@ -1,0 +1,19 @@
+- content_for :head do
+  = stylesheet_link_tag 'time_tracker/uploader'
+  = javascript_include_tag 'time_tracker/hours_purchase'
+
+= content_for :header
+%section
+  .container
+    = content_for :breadcrumb
+    .tracker-hours-amount
+      %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
+    = content_for :form
+    .tracker-buy-hours
+      %h3= add_hours_header
+      .tracker-hours-panel
+        %button.btn#minus-hour{ type: 'button' } -
+        %input{ type: 'text', name: 'hours', value: '0' }
+        %button.btn#plus-hour{ type: 'button' } +
+      = content_for :add_hours_submit
+    = content_for :info_container

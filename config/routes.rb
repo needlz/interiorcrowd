@@ -80,6 +80,12 @@ InteriorC::Application.routes.draw do
         get 'payment_summary'
         put 'save_intake_form'
       end
+
+      resource :time_tracker do
+        get '/', to: 'time_tracker#designers_show', as: 'designer_center'
+        post 'suggest_hours', to: 'time_tracker#suggest_hours', as: 'suggest_hours'
+        resources :attachments, only: [:create, :destroy], controller: 'time_tracker_attachments'
+      end
     end
 
     resources :images, only: [:show, :create]
@@ -95,7 +101,13 @@ InteriorC::Application.routes.draw do
     end
 
     scope '/client_center' do
-      resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries'
+      resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries' do
+        member do
+          get 'time_tracker', to: 'time_tracker#clients_show', as: 'time_tracker'
+          post 'time_tracker/purchase_confirm', to: 'time_tracker#purchase_confirm', as: 'time_tracker_purchase_confirm'
+          post 'time_tracker/show_invoice', to: 'time_tracker#show_invoice', as: 'time_tracker_show_invoice'
+        end
+      end
       get '', to: 'clients#client_center', as: 'client_center'
       get 'concept_boards_page', to: 'clients#concept_boards_page', as: 'client_center_concept_boards_page'
       get 'profile', to: 'clients#profile', as: 'client_center_profile'

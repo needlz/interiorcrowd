@@ -1,0 +1,32 @@
+.time-tracker
+  = render partial: 'client_navigation_bar', locals: { contest_id: @contest.id }
+  .time-tracker-show-invoice
+    %section
+      %h3= t('time_tracker.client.invoice.header')
+      %h6= t('time_tracker.client.invoice.description')
+      .container
+        .table-header.col-xs-12
+          %h4= t('time_tracker.client.invoice.order_summary')
+        .payment-row.col-xs-12
+          .col.col-sm-5.col-xs-5
+            %p= t('time_tracker.client.invoice.your_payment')
+          .col.col-sm-7.col-xs-7
+            -if @card.name_on_card
+              %p= @card.name_on_card
+            -if @card.card_number
+              %p= @card.card_number
+            -if @card.short_address
+              %p= @card.short_address
+            -if @card.post_number
+              %p= @card.post_number
+        .payment-row.col-xs-12
+          .col.col-sm-5.col-xs-5
+            %p= t('time_tracker.client.invoice.total_price')
+          .col.col-sm-7
+            %p
+              %span $
+              = @time_tracker.total_price
+      .hours-sun
+        %p= t('time_tracker.client.invoice.hours', count: @hours).html_safe
+      = button_to t('time_tracker.client.invoice.continue'), time_tracker_client_center_entry_path,
+        method: 'get', class: 'btn', id: 'time-tracker-continue'
