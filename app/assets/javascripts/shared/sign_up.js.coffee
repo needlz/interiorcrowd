@@ -21,7 +21,7 @@ class @SignUp
   @signUpWithEmail: (params)->
     @signUpRequest
       data: params
-      url: '/clients/sign_up_with_email'
+      url: '/clients/ssl_sign_up_with_email'
 
   @signUpRequest: (requestOptions) ->
     defaultOptions =

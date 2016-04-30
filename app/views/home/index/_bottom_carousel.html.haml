@@ -60,7 +60,7 @@
       %h2= t('home.bottom.header')
       %h4= t('home.bottom.description')
     .form-body.col-md-6.col-xs-12
-      = form_for @client, { url: sign_up_with_email_clients_path, method: 'post' } do |f|
+      = form_for @client, { url: ssl_sign_up_with_email_clients_path, method: 'post' } do |f|
         %label.col-xs-12= t('home.about_us.signup_form.name')
         = f.text_field :name, class: 'col-xs-12 form-control'
         %label.col-xs-12= t('home.about_us.signup_form.email')

@@ -14,7 +14,7 @@ InteriorC::Application.configure do
 
   config.middleware.use Rack::SslEnforcer,
                         :redirect_to => 'https://www.interiorcrowd.com',
-                        :except => %w[/blog /designer_submission /designer_center/training /sitemaps],
+                        :except => %w[/blog /designer_submission /designer_center/training /sitemaps /clients/sign_up_with_email],
                         :strict => true
 
   # Code is not reloaded between requests.
