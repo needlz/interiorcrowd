@@ -82,7 +82,7 @@ module User
 
   def avatar_url
     return '/assets/profile-img.png' unless designer?
-    PortfolioView.new(portfolio).personal_picture_url('/assets/profile-img.png')
+    PortfolioView.new(portfolio).personal_picture_url('/assets/profile-img.png', :medium)
   end
 
 end
