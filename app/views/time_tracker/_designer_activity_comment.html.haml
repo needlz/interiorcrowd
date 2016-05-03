@@ -1,6 +1,6 @@
 .comment.row{ data_id: comment.id, class: css_class }
   .col-xs-1
-    = image_tag comment.author.avatar_url
+    %div{ style: "width: 40px; height: 40px; background-size: contain; background-repeat: no-repeat; background-image: #{ css_url(comment.author.avatar_url) }" }
   .col-xs-11
     .authorName
       = comment.author == current_user ? 'Me' : comment.author.name
@@ -8,4 +8,4 @@
       = comment.created_at.strftime(t('time_tracker_attachments.submit_date_format'))
     .clearfix
     .commentText
-      = comment.text
+      = format_comment(comment.text)
