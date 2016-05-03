@@ -245,6 +245,12 @@
           border: #E9E9E9 solid 1px;
         }
 
+        input[type="date"] {
+          height: 35px;
+          border: #E9E9E9 solid 1px;
+          margin-bottom: 15px;
+        }
+
         .designer-activity-form-submit-button {
           background: #409863;
           color: white;
@@ -285,6 +291,14 @@
       }
     }
 
+    .activitiesHeader {
+      text-transform: uppercase;
+
+      .hours {
+        text-align: center;
+      }
+    }
+    
     .activities {
       .group {
         > .title {
