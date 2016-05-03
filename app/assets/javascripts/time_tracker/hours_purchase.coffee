@@ -8,10 +8,6 @@ class @HoursPurchase
   inputSelector = '.tracker-hours-panel input'
   designerSuggestedHoursSelector = '.tracker-sent-hours'
   designerSuggestedHoursAmountSelector = '.tracker-sent-hours span'
-  addActivityButtonSelector = '.add-activity-button button'
-  activityFormCancelButtonSelector = '.designer-activity-form-cancel-button'
-  activityDescriptionSelector = '.activity-description'
-  addActivityFormSelector = '.designer-activity-form'
 
   @init: ->
     bindMinusButton()
@@ -22,7 +18,6 @@ class @HoursPurchase
     bindHoursSuggestedInput()
     bindDesignerSuggestedHoursDisplay()
     bindSuggestingButton()
-    bindDisplayAddActivityForm()
 
   bindMinusButton = ->
     $('#minus-hour').click =>
@@ -86,14 +81,6 @@ class @HoursPurchase
     $(inputSelector).bind 'mousewheel', ->
       $(inputSelector).change()
 
-  bindDisplayAddActivityForm = ->
-    $(addActivityButtonSelector). on 'click', ->
-      $(activityDescriptionSelector).hide()
-      $(addActivityFormSelector).show()
-    $(activityFormCancelButtonSelector).on 'click', ->
-      $(addActivityFormSelector).hide()
-      $(activityDescriptionSelector).show()
-
   sendSuggestRequest = ->
     $.ajax(
       data: {suggested_hours: parseInt($(inputSelector).val())}
@@ -120,6 +107,58 @@ class @HoursPurchase
   suggestedHours = ->
     return parseInt($(designerSuggestedHoursAmountSelector).text())
 
+class @ActivityEditor
+  addActivityButtonSelector = '.add-activity-button button'
+  activityFormCancelButtonSelector = '.designer-activity-form-cancel-button'
+  activityDescriptionSelector = '.activity-description'
+  addActivityFormSelector = '.designer-activity-form'
+  submitButtonSelector = '.designer-activity-form-submit-button'
+
+  @init: ->
+    bindDisplayAddActivityForm()
+    $(document).on 'ajax:success', addActivityFormSelector, onSubmitted
+
+  onSubmitted = (event, response)->
+    addActivity(response.new_activity_html)
+
+  addActivity = (activityHtml)->
+    activityDescription().hide()
+    activitiesHeader().show()
+    activities().append(activityHtml)
+    cancelActivity()
+
+  activitiesHeader = ->
+    $('.activitiesHeader')
+
+  addActivityButton = ->
+    $(addActivityButtonSelector)
+
+  cancelActivityButton = ->
+    $(activityFormCancelButtonSelector)
+
+  activityDescription = ->
+    $(activityDescriptionSelector)
+
+  activityForm = ->
+    $(addActivityFormSelector)
+
+  bindDisplayAddActivityForm = ->
+    addActivityButton().click ->
+      activityDescription().hide()
+      activityForm().show()
+    cancelActivityButton().click ->
+      cancelActivity()
+
+  cancelActivity = ->
+    activityForm().hide()
+    activityDescription().show() if noActivities()
+
+  noActivities = ->
+    activities().find('..activity[data-id]').length < 1
+
+  activities = ->
+    $('.activities')
+
 $ ->
   HoursPurchase.init()
-
+  ActivityEditor.init()
