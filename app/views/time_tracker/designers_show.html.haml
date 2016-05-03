@@ -66,4 +66,6 @@
 .time-tracker#designers-tracker
   = render 'time_tracker', tracker: @time_tracker, add_hours_header: t('time_tracker.suggest_hours')
   - if @time_tracker.actual_hours?
-    = render 'designer_activity', designer_activities: @designer_activities, new_activity_form: @new_activity_form
+    = render 'designer_activity',
+        designer_activities: @designer_activities,
+        creation_route: contest_time_tracker_designer_activities_path(contest_id: @contest.id)

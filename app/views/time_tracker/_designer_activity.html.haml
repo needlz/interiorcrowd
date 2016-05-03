@@ -1,45 +1,21 @@
-:scss
-  .time-tracker {
-    .designer-activity {
-      .title {
-        background-color: white;
-        line-height: 50px;
-      }
-
-      .activity {
-        border-bottom: #e1e1e1 solid 1px;
-
-        .task {
-          font-size: 17px;
-        }
-
-        .commentsIcon {
-          color: #e1e1e1;
-        }
-
-        .commentsIcon.withComments {
-          color: #3c9a65;
-        }
-      }
-    }
-  }
-
-
+- can_add_activity = defined?(creation_route)
 .designer-activity
   .container
     .header.col-md-3.col-xs-6
       %h3= t('time_tracker.designer.activity.header')
-    .add-activity-button.col-md-offset-7.col-md-2.col-xs-offset-0.col-xs-6
-      %button= t('time_tracker.designer.activity.add_activity')
-    = render 'add_activity_form', new_activity_form: new_activity_form
+    - if can_add_activity
+      .add-activity-button.col-md-offset-7.col-md-2.col-xs-offset-0.col-xs-6
+        %button= t('time_tracker.designer.activity.add_activity')
+      = render 'add_activity_form', creation_route: creation_route
     .col-xs-12.grey-title.marginTop20.activitiesHeader{ style: ('display: none' if designer_activities.blank?) }
       .row
         .col-xs-11.tasks
           Tasks
         .col-xs-1.hours
           Hours
-    .activity-description.col-xs-12{ style: ('display: none' if designer_activities.present?) }
-      %p= t('time_tracker.designer.activity.description').html_safe
+    - if can_add_activity
+      .activity-description.col-xs-12{ style: ('display: none' if designer_activities.present?) }
+        %p= t('time_tracker.designer.activity.description').html_safe
     .clearfix
     .activities
       - designer_activities.each do |activity|
