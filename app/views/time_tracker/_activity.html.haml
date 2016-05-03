@@ -1,0 +1,22 @@
+.col-xs-12.activity{ data: { id: activity.id }}
+  .title.collapsed{ aria: { controls: "collapse#{ activity.id }", expanded: "false"},
+        data: { parent: "#accordion", toggle: "collapse" }, href: "#collapse#{ activity.id }",
+        role: "tab", id: "heading#{ activity.id }" }
+    .row
+      .col-xs-11.tasks
+        %span.task
+          = activity.task
+        %span.commentsIcon{ class: ('withComments' if activity.comments.present?) }
+          Icon (#{ activity.comments.count })
+      .col-xs-1.hours
+        Hours
+  .collapse{"aria-labelledby" => "heading#{ activity.id }", id: "collapse#{ activity.id }"}
+    .panel-body
+      = form_for DesignerActivityCommentForm.new,
+          url: contest_time_tracker_designer_activity_comments_path(contest_id: activity.time_tracker.contest.id,
+              designer_activity_id: activity.id) do |f|
+        = f.text_area :text
+        = f.submit 'Send'
+      .comments
+        - activity.comments.each do |comment|
+          = render 'time_tracker/designer_activity_comment', comment: comment

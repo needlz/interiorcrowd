@@ -24,11 +24,8 @@ class TimeTrackerController < ApplicationController
                                                                                               contest: @contest,
                                                                                               contest_request: @contest_request)
     @time_tracker = TimeTrackerView.new(@contest.time_tracker)
-    @designer_activity = DesignerActivity.new()
-    @designer_activities = @contest.time_tracker.designer_activities.sort_by(& :start_date).group_by do |activity|
-      activity.start_date.at_end_of_week
-    end
-
+    @new_activity_form = DesignerActivityForm.new(DesignerActivity.new())
+    @designer_activities = @contest.time_tracker.designer_activities
   end
 
   def suggest_hours

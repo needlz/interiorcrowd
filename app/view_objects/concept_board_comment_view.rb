@@ -33,8 +33,7 @@ class ConceptBoardCommentView < CommentView
   end
 
   def avatar_url
-    return '/assets/profile-img.png' unless author.designer?
-    PortfolioView.new(author.portfolio).personal_picture_url('/assets/profile-img.png')
+    author.avatar_url
   end
 
   def sub_name
