@@ -224,7 +224,7 @@
           color: #757575;
           text-transform: uppercase;
         }
-        input {
+        input[type="text"] {
           width: 100%;
           border: 1px solid #ECECEC;
           padding: 0 10px;
@@ -937,6 +937,12 @@
       font-size: 16px;
     }
   }
+}
 
-
+.time-tracker {
+  .grey-title {
+    background-color: #C4C4C4;
+    color: white;
+    line-height: 35px;
+  }
 }

@@ -1,15 +1,46 @@
+:scss
+  .time-tracker {
+    .designer-activity {
+      .title {
+        background-color: white;
+        line-height: 50px;
+      }
+
+      .activity {
+        border-bottom: #e1e1e1 solid 1px;
+
+        .task {
+          font-size: 17px;
+        }
+
+        .commentsIcon {
+          color: #e1e1e1;
+        }
+
+        .commentsIcon.withComments {
+          color: #3c9a65;
+        }
+      }
+    }
+  }
+
+
 .designer-activity
   .container
     .header.col-md-3.col-xs-6
       %h3= t('time_tracker.designer.activity.header')
     .add-activity-button.col-md-offset-7.col-md-2.col-xs-offset-0.col-xs-6
       %button= t('time_tracker.designer.activity.add_activity')
-    .activity-description.col-xs-12
+    = render 'add_activity_form', new_activity_form: new_activity_form
+    .col-xs-12.grey-title.marginTop20.activitiesHeader{ style: ('display: none' if designer_activities.blank?) }
+      .row
+        .col-xs-11.tasks
+          Tasks
+        .col-xs-1.hours
+          Hours
+    .activity-description.col-xs-12{ style: ('display: none' if designer_activities.present?) }
       %p= t('time_tracker.designer.activity.description').html_safe
-    =render partial: 'add_activity_form'
-    -#- designer_activities.each do |week, activities|
-    -#  %h1= week.at_beginning_of_week.strftime("%m/%d/%Y") + ' - ' + week.strftime("%m/%d/%Y")
-    -#  - activities.each do |activity|
-    -#    %h5= activity.task + '   ' + activity.start_date.strftime("%m/%d/%Y")
-
-
+    .clearfix
+    .activities
+      - designer_activities.each do |activity|
+        = render 'activity', activity: activity
