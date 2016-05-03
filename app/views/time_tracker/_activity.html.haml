@@ -1,16 +1,15 @@
-.col-xs-12.activity{ data: { id: activity.id }}
-  .title.collapsed{ aria: { controls: "collapse#{ activity.id }", expanded: "false"},
+.activity{ data: { id: activity.id }}
+  .col-xs-12.title.collapsed{ aria: { controls: "collapse#{ activity.id }", expanded: "false"},
         data: { parent: "#accordion", toggle: "collapse" }, href: "#collapse#{ activity.id }",
         role: "tab", id: "heading#{ activity.id }" }
-    .row
-      .col-xs-11.tasks
-        %span.task
-          = activity.task
-        %span.commentsIcon{ class: ('withComments' if activity.comments.present?) }
-          %span.glyphicon.glyphicon-comment
-          (#{ activity.comments.count })
-      .col-xs-1.hours
-        = activity.hours
+    .col-xs-9.col-sm-11.tasks
+      %span.task
+        = activity.task
+      %span.commentsIcon{ class: ('withComments' if activity.comments.present?) }
+        %span.glyphicon.glyphicon-comment
+        %span.commentsCount (#{ activity.comments.count })
+    .col-xs-3.col-sm-1.hours
+      = activity.hours
   .collapse{"aria-labelledby" => "heading#{ activity.id }", id: "collapse#{ activity.id }"}
     .panel-body
       = form_for DesignerActivityCommentForm.new,
@@ -20,5 +19,6 @@
         = f.text_area :text, placeholder: placeholder
         = f.submit 'Send', class: 'greenButton', data: { disable_with: 'Saving...' }
       .comments
-        - activity.comments.each do |comment|
-          = render 'time_tracker/designer_activity_comment', comment: comment
+        - activity.comments.each_with_index do |comment, index|
+          = render 'time_tracker/designer_activity_comment', comment: comment, css_class: ('last' if index == activity.comments.count - 1)
+  .clearfix

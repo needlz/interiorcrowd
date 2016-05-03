@@ -6,11 +6,9 @@
     section {
       .tracker-description {
         width: 620px;
-        margin-bottom: 373px;
       }
       .tracker-buy-hours {
         width: 300px;
-        margin-bottom: 373px;
       }
     }
   }
@@ -25,11 +23,9 @@
       .tracker-description {
         width: 433px;
         padding: 20px 24px;
-        margin-bottom: 393px;
       }
       .tracker-buy-hours {
         width: 265px;
-        margin-bottom: 393px;
 
         .tracker-hours-panel {
           width: 165px;
@@ -53,6 +49,7 @@
 
 @media (max-width: 767px) {
   .time-tracker {
+
     header {
       nav {
         a {
@@ -77,7 +74,7 @@
 
       .tracker-description {
         width: 100%;
-        margin-bottom: 138px;
+        margin-bottom: 30px;
       }
 
       .tracker-buy-hours {
@@ -137,7 +134,7 @@
       .tracker-description {
         height: 300px;
         padding: 15px 10px;
-        margin-bottom: 150px;
+        margin-bottom: 30px;
       }
 
       .tracker-buy-hours {
@@ -239,9 +236,6 @@
         .col-xs-12 {
           padding: 0;
         }
-        .col-xs-3 {
-          padding-left: 100px;
-        }
 
         textarea {
           height: 130px;
@@ -249,6 +243,12 @@
           border: 1px solid #ECECEC;
           resize: none;
           margin-bottom: 10px;
+        }
+
+        input[type="date"] {
+          height: 35px;
+          border: #E9E9E9 solid 1px;
+          margin-bottom: 15px;
         }
 
         .designer-activity-form-submit-button {
@@ -277,9 +277,22 @@
       }
     }
 
+    .activitiesHeader {
+      text-transform: uppercase;
+
+      .hours {
+        text-align: center;
+      }
+    }
+    
     .activities {
       .activity {
         border-bottom: #e1e1e1 solid 1px;
+
+        .hours {
+          text-align: center;
+          font-size: 17px;
+        }
 
         .task {
           font-size: 17px;
@@ -287,6 +300,17 @@
 
         .commentsIcon {
           color: #e1e1e1;
+          margin-left: 15px;
+
+          .glyphicon {
+            margin-right: 5px;
+            font-size: 17px;
+            top: 4px;
+          }
+
+          .commentsCount {
+            font-size: 14px;
+          }
         }
 
         .commentsIcon.withComments {
@@ -304,6 +328,7 @@
           width: 100%;
           height: 120px;
           border: #E9E9E9 solid 1px;
+          margin-top: 15px;
         }
 
         .createdAt {
@@ -311,12 +336,18 @@
         }
 
         .comment {
-          margin-top: 10px;
+          margin: 15px 0px;
           border-bottom: #E5E5E5 solid 1px;
+        }
+
+        .comment.last {
+          border-bottom: none;
+          margin-bottom: 0px;
         }
 
         .panel-body {
           background-color: #FAFAFA;
+          padding: 0px 10% 15px;
         }
       }
     }
@@ -324,6 +355,7 @@
     .title {
       background-color: white;
       line-height: 50px;
+      cursor: pointer;
     }
   }
 
@@ -548,7 +580,6 @@
 
 @media(max-width: 1199px) {
   .time-tracker {
-    margin-bottom: 373px;
     .designer-activity {
       .container {
         .activity-description {
@@ -574,9 +605,20 @@
   }
 }
 
+@media (min-width: 991px) {
+  .designer-activity {
+    .container {
+      .designer-activity-form {
+        .field-name {
+          padding-left: 100px;
+        }
+      }
+    }
+  }
+}
+
 @media(max-width: 991px) {
   .time-tracker {
-    margin-bottom: 393px;
 
     .designer-activity {
       .container {
@@ -632,6 +674,14 @@
         .activity-description {
           margin-top: 10px;
           padding: 35px 35px;
+        }
+
+        .designer-activity-form {
+          padding: 20px 0px;
+
+          .due-date-name p {
+            text-align: left;
+          }
         }
       }
     }
@@ -765,6 +815,10 @@
         }
 
       }
+    }
+
+    .tracker-upload-description {
+      padding: 65px 20px !important;
     }
   }
 }
@@ -951,6 +1005,22 @@
       .payment-row {
         .col:first-child{
           padding: 0;
+        }
+      }
+    }
+  }
+
+  .designer-activity {
+    .container {
+      .designer-activity-form {
+        .field-name {
+          padding-left: 5px;
+        }
+      }
+
+      .new_designer_activity_comment {
+        input[type=submit] {
+          width: 100%;
         }
       }
     }

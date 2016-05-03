@@ -8,11 +8,10 @@
         %button= t('time_tracker.designer.activity.add_activity')
       = render 'add_activity_form', creation_route: creation_route
     .col-xs-12.grey-title.marginTop20.activitiesHeader{ style: ('display: none' if designer_activities.blank?) }
-      .row
-        .col-xs-11.tasks
-          Tasks
-        .col-xs-1.hours
-          Hours
+      .col-xs-9.col-sm-11.tasks
+        Tasks
+      .col-xs-3.col-sm-1.hours
+        Hours
     - if can_add_activity
       .activity-description.col-xs-12{ style: ('display: none' if designer_activities.present?) }
         %p= t('time_tracker.designer.activity.description').html_safe
