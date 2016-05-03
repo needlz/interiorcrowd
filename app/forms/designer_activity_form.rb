@@ -12,11 +12,15 @@ class DesignerActivityForm
 
   attr_reader :activity
 
-  def initialize(activity_or_params)
-    if activity_or_params.kind_of?(DesignerActivity)
-      @activity = activity_or_params
+  def initialize(activity_or_params = nil)
+    if activity_or_params
+      if activity_or_params.kind_of?(DesignerActivity)
+        @activity = activity_or_params
+      else
+        @params = ActionController::Parameters.new(activity_or_params)
+      end
     else
-      @params = ActionController::Parameters.new(activity_or_params)
+      @activity = DesignerActivity.new
     end
   end
 
