@@ -102,7 +102,7 @@ requestOptions = (formSelector) ->
   $form = $(formSelector).serializeArray()
 
   data: $form
-  url: '/clients/sign_up_with_email'
+  url: '/clients/ssl_sign_up_with_email'
   method: 'POST'
   dataType: 'json'
   success: (json) ->

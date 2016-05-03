@@ -88,6 +88,7 @@ InteriorC::Application.routes.draw do
         get 'validate_card'
         post 'sign_up_with_facebook'
         post 'sign_up_with_email'
+        post 'ssl_sign_up_with_email'
         get 'unsubscribe/:signature', to: 'clients#unsubscribe', as: 'unsubscribe'
       end
     end

@@ -1,7 +1,7 @@
 require 'will_paginate/array'
 class ClientsController < ApplicationController
 
-  before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email, :unsubscribe]
+  before_filter :set_client, except: [:create, :validate_card, :sign_up_with_facebook, :sign_up_with_email, :unsubscribe, :ssl_sign_up_with_email]
 
   def client_center
     redirect_to client_center_entries_path
@@ -96,6 +96,10 @@ class ClientsController < ApplicationController
     fast_signup(ClientEmailSignUp)
   end
 
+  def ssl_sign_up_with_email
+    fast_signup(ClientEmailSignUp)
+  end
+
   def sign_up_with_facebook
     fast_signup(ClientFacebookSignUp)
   end
@@ -161,6 +165,7 @@ class ClientsController < ApplicationController
   end
 
   def fast_signup(signup_class)
+    params[:client] = {} unless params[:client]
     sign_up = signup_class.new(params)
     client_creation = ClientCreation.new(client_attributes: sign_up.client_attributes,
                                          send_welcome_email: true)
