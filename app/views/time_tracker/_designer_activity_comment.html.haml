@@ -1,5 +1,11 @@
-= image_tag comment.author.avatar_url
-= comment.author.name
-= comment.created_at
-.clearfix
-= comment.text
+.comment.row{ data_id: comment.id }
+  .col-xs-1
+    = image_tag comment.author.avatar_url
+  .col-xs-11
+    .authorName
+      = comment.author == current_user ? 'Me' : comment.author.name
+    .createdAt
+      = comment.created_at
+    .clearfix
+    .commentText
+      = comment.text

@@ -6,7 +6,9 @@ class DesignerActivitiesController < ApplicationController
     activity_form = DesignerActivityForm.new(params)
 
     activity = tracker.designer_activities.create(activity_form.activity_attributes)
-    activity.comments.create(activity_form.activity_comment_attributes.merge(author: current_user))
+    if activity_form.activity_comment_attributes[:text].present?
+      activity.comments.create(activity_form.activity_comment_attributes.merge(author: current_user))
+    end
 
     if activity
       render status: :ok, json: { new_activity_html: render_to_string(partial: 'time_tracker/activity',

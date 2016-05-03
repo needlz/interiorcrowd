@@ -7,16 +7,18 @@
         %span.task
           = activity.task
         %span.commentsIcon{ class: ('withComments' if activity.comments.present?) }
-          Icon (#{ activity.comments.count })
+          %span.glyphicon.glyphicon-comment
+          (#{ activity.comments.count })
       .col-xs-1.hours
-        Hours
+        = activity.hours
   .collapse{"aria-labelledby" => "heading#{ activity.id }", id: "collapse#{ activity.id }"}
     .panel-body
       = form_for DesignerActivityCommentForm.new,
           url: contest_time_tracker_designer_activity_comments_path(contest_id: activity.time_tracker.contest.id,
-              designer_activity_id: activity.id) do |f|
-        = f.text_area :text
-        = f.submit 'Send'
+              designer_activity_id: activity.id), remote: true do |f|
+        - placeholder = current_user.designer? ? 'Write to your client here...' : 'Write to your designer here...'
+        = f.text_area :text, placeholder: placeholder
+        = f.submit 'Send', class: 'greenButton', data: { disable_with: 'Saving...' }
       .comments
         - activity.comments.each do |comment|
           = render 'time_tracker/designer_activity_comment', comment: comment
