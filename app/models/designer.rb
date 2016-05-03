@@ -27,6 +27,7 @@
 
 class Designer < ActiveRecord::Base
   include User
+
   validates :email, :first_name, :last_name, presence: true
   validates :password, on: :create, presence: true
   validates_confirmation_of :password, on: :create
@@ -39,6 +40,7 @@ class Designer < ActiveRecord::Base
   has_many :designer_invite_notifications, foreign_key: :user_id
   has_many :invited_contests, class_name: 'Contest', through: :designer_invite_notifications, source: :contest
   has_many :comments, class_name: 'ConceptBoardComment', through: :contest_requests
+  has_many :designer_activity_comments, as: :author
 
   before_save :downcase_email
 
