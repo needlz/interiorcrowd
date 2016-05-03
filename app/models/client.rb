@@ -47,6 +47,7 @@ class Client < ActiveRecord::Base
   has_many :client_payments
   has_many :credit_cards
   belongs_to :primary_card, class_name: 'CreditCard'
+  has_many :designer_activity_comments, as: :author
 
   before_save :downcase_email
 
