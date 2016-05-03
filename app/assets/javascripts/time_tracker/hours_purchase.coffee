@@ -113,18 +113,25 @@ class @ActivityEditor
   activityDescriptionSelector = '.activity-description'
   addActivityFormSelector = '.designer-activity-form'
   submitButtonSelector = '.designer-activity-form-submit-button'
+  newActivityCommentSelector = '.new_designer_activity_comment'
 
   @init: ->
     bindDisplayAddActivityForm()
     $(document).on 'ajax:success', addActivityFormSelector, onSubmitted
+    $(document).on 'ajax:success', newActivityCommentSelector, onCommentSubmitted
 
   onSubmitted = (event, response)->
     addActivity(response.new_activity_html)
 
+  onCommentSubmitted = (event, response)->
+    $commentForm = $(event.target)
+    $activity = $commentForm.closest('.activity')
+    $activity.replaceWith(response.new_activity_html)
+
   addActivity = (activityHtml)->
     activityDescription().hide()
     activitiesHeader().show()
-    activities().append(activityHtml)
+    activities().prepend(activityHtml)
     cancelActivity()
 
   activitiesHeader = ->
@@ -154,7 +161,7 @@ class @ActivityEditor
     activityDescription().show() if noActivities()
 
   noActivities = ->
-    activities().find('..activity[data-id]').length < 1
+    activities().find('.activity[data-id]').length < 1
 
   activities = ->
     $('.activities')
