@@ -6,7 +6,7 @@
     - if can_add_activity
       .add-activity-button.col-md-offset-7.col-md-2.col-xs-offset-0.col-xs-6
         %button= t('time_tracker.designer.activity.add_activity')
-      = render 'add_activity_form', creation_route: creation_route
+      = render 'new_activity_form', creation_route: creation_route
     - if can_add_activity
       .activity-description.col-xs-12{ style: ('display: none' if designer_activities_views.present?) }
         %p= t('time_tracker.designer.activity.description').html_safe

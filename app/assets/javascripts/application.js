@@ -23,6 +23,7 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
 //= require jquery-ui/slider
+//= require jquery-ui/datepicker
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mCustomScrollbar
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mousewheel
 //= require lib/enscroll-0.6.1.min
