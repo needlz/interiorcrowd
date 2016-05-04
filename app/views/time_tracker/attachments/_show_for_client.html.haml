@@ -1,10 +1,10 @@
 = render partial: 'time_tracker/clients_suggested_hours' if time_tracker.suggested_hours?
 .tracker-upload
   %h4= 'Attachment'
-  .header.col-xs-12.col-md-8
-    .col-xs-5.col-sm-5.filename
+  .header.col-xs-12.col-md-8.no-x-padding
+    .col-xs-12.col-sm-5.filename
       FILENAME
-    .col-sm-6.timeSubmitted.hidden-xs
+    .col-sm-7.timeSubmitted.hidden-xs
       DATE SUBMITTED
   .editArea
     .thumbs
