@@ -35,10 +35,25 @@ RSpec.describe TimeTrackerController do
         let(:contest) { Fabricate(:contest_during_final_fulfillment,
                                                     client: client,
                                                     time_tracker: time_tracker) }
-        it 'render time_tracker' do
-          get :clients_show, id: contest.id
 
-          expect(response).to render_template(:clients_show)
+        context 'when there is designer activity tracked' do
+          before do
+            Fabricate(:designer_activity, time_tracker: time_tracker)
+          end
+
+          it 'render time_tracker' do
+            get :clients_show, id: contest.id
+
+            expect(response).to render_template(:clients_show)
+          end
+        end
+
+        context 'when there is no designer activity tracked' do
+          it 'render time_tracker' do
+            get :clients_show, id: contest.id
+
+            expect(response).to render_template(:clients_show)
+          end
         end
 
         it 'has access to time tracker view' do

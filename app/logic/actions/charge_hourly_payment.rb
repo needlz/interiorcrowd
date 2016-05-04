@@ -53,7 +53,7 @@ class ChargeHourlyPayment
 
   def perform_stripe_charge
     if price <= 0
-      @charge = Hashie::Mash.new({ id: ZERO_PRICE_PLACEHOLDER })
+      @charge = Hashie::Mash.new({ id: Payment::ZERO_PRICE_PLACEHOLDER })
     else
       customer = StripeCustomer.new(client)
       amount = Money.new(total_price, DEFAULT_CURRENCY)
