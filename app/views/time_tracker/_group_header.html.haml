@@ -1,0 +1,12 @@
+.group{ data: { id: week.at_beginning_of_week.to_i } }
+  .title
+    %span.date-range= week.at_beginning_of_week.strftime('%b %d') + ' - ' + week.strftime('%d')
+  .col-xs-12.grey-title.marginTop20.activitiesHeader
+    .col-xs-9.col-sm-11.tasks
+      Tasks
+    .col-xs-3.col-sm-1.hours
+      Hours
+  .clearfix
+  .group-activities
+    - activities.each do |activity_view|
+      = render 'activity', activity_view: activity_view, collapsed: true
