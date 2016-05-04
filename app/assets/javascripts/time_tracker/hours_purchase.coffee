@@ -119,20 +119,30 @@ class @ActivityEditor
     bindDisplayAddActivityForm()
     $(document).on 'ajax:success', addActivityFormSelector, onSubmitted
     $(document).on 'ajax:success', newActivityCommentSelector, onCommentSubmitted
+    activityForm().find('#designer_activity_hours').ForceNumericOnly()
 
   onSubmitted = (event, response)->
-    addActivity(response.new_activity_html)
+    addActivity(response)
 
   onCommentSubmitted = (event, response)->
     $commentForm = $(event.target)
     $activity = $commentForm.closest('.activity')
     $activity.replaceWith(response.new_activity_html)
 
-  addActivity = (activityHtml)->
+  addActivity = (response)->
     activityDescription().hide()
     activitiesHeader().show()
-    activities().prepend(activityHtml)
-    cancelActivity()
+    $group = activities().find(".group[data-id=#{ response.date_range_id }]")
+    unless $group.length
+      later_activities = activities().find('.group').filter ->
+        $(@).attr('data-id') > response.date_range_id
+      if later_activities.length
+        later_activities.last().after(response.date_range_header_html)
+      else
+        activities().prepend(response.date_range_header_html)
+      $group = activities().find(".group[data-id=#{ response.date_range_id }]")
+    $group.find('.group-activities').append(response.new_activity_html)
+    closeActivityForm()
 
   activitiesHeader = ->
     $('.activitiesHeader')
@@ -151,12 +161,15 @@ class @ActivityEditor
 
   bindDisplayAddActivityForm = ->
     addActivityButton().click ->
-      activityDescription().hide()
-      activityForm().show()
+      if activityForm().is(':visible')
+        closeActivityForm()
+      else
+        activityDescription().hide()
+        activityForm().show()
     cancelActivityButton().click ->
-      cancelActivity()
+      closeActivityForm()
 
-  cancelActivity = ->
+  closeActivityForm = ->
     activityForm().hide()
     activityDescription().show() if noActivities()
 
