@@ -121,6 +121,20 @@ class @ActivityEditor
     $(document).on 'ajax:success', newActivityCommentSelector, onCommentSubmitted
     activityForm().find('#designer_activity_hours').ForceNumericOnly()
 
+    activityForm().find('#designer_activity_start_date').datepicker(
+      defaultDate: "+1w",
+      changeMonth: true,
+      onClose: (selectedDate)->
+        activityForm().find('#designer_activity_due_date').datepicker( "option", "minDate", selectedDate )
+    )
+    activityForm().find('#designer_activity_due_date').datepicker(
+      defaultDate: "+1w",
+      changeMonth: true,
+      onClose: (selectedDate)->
+        activityForm().find('#designer_activity_start_date').datepicker( "option", "maxDate", selectedDate )
+    )
+
+
   onSubmitted = (event, response)->
     addActivity(response)
 
