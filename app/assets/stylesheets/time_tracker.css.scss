@@ -182,6 +182,7 @@
     .container {
       .header {
         padding-left: 0;
+
         h3 {
           margin:5px 0 0;
           font-size: 20px;
@@ -286,6 +287,31 @@
     }
     
     .activities {
+      .group {
+        > .title {
+          margin-top: 35px;
+          line-height: 35px;
+
+          .line {
+            width: 100%;
+            height: 1px;
+            border-bottom: grey solid 1px;
+            line-height: 50px;
+            position: relative;
+            top: -50%;
+          }
+        }
+      }
+
+      .group > .title .date-range {
+        color: #C8C8C8;
+        border: #C8C8C8 solid 1px;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 15px;
+        text-transform: uppercase;
+      }
+
       .activity {
         border-bottom: #e1e1e1 solid 1px;
 
@@ -352,7 +378,7 @@
       }
     }
 
-    .title {
+    .activity > .title {
       background-color: white;
       line-height: 50px;
       cursor: pointer;
