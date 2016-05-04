@@ -10,9 +10,17 @@ class DesignerActivitiesController < ApplicationController
       activity.comments.create(activity_form.activity_comment_attributes.merge(author: current_user))
     end
 
+    week = activity.start_date.at_end_of_week
+    week_id = week.at_beginning_of_week.to_i
+
     if activity
       render status: :ok, json: { new_activity_html: render_to_string(partial: 'time_tracker/activity',
-                                                                      locals: { activity: activity }) }
+                                                                      locals: { activity_view: DesignerActivityView.new(activity),
+                                                                                collapsed: false }),
+                                  id: activity.id,
+                                  date_range_id: week_id,
+                                  date_range_header_html: render_to_string(partial: 'time_tracker/group_header',
+                                                                           locals: { week: week, activities: [] })}
     else
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
     end
