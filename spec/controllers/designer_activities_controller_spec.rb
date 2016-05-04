@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe DesignerActivitiesController, type: :controller do
 
-  describe "POST #create" do
+  describe 'POST #create' do
     let!(:contest) { Fabricate(:contest) }
     let!(:time_tracker) { Fabricate(:time_tracker, contest: contest) }
     let(:client) { Fabricate(:client) }
@@ -11,8 +11,8 @@ RSpec.describe DesignerActivitiesController, type: :controller do
       sign_in(client)
     end
 
-    it "returns http success" do
-      post :create, contest_id: contest.id, designer_activity: { comments: {} }
+    it 'returns http success' do
+      post :create, contest_id: contest.id, designer_activity: { start_date: Time.now, due_date: Time.now + 7.days }
       expect(response).to have_http_status(:success)
     end
   end
