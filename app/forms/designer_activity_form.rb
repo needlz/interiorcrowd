@@ -18,9 +18,11 @@ class DesignerActivityForm
         @activity = activity_or_params
       else
         @params = ActionController::Parameters.new(activity_or_params)
+        @params[:designer_activity][:start_date] = Date.strptime(@params[:designer_activity][:start_date], "%m/%d/%Y")
+        @params[:designer_activity][:due_date] = Date.strptime(@params[:designer_activity][:due_date], "%m/%d/%Y")
       end
     else
-      @activity = DesignerActivity.new
+      @activity = DesignerActivity.new(hours: 1)
     end
   end
 
@@ -32,7 +34,7 @@ class DesignerActivityForm
     DesignerActivity.model_name
   end
 
- def activity_attributes
+  def activity_attributes
     @params.require(:designer_activity).permit(*self.class.activity_attributes)
   end
 
