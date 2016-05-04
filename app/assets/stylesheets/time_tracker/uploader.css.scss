@@ -1,4 +1,16 @@
 .tracker-upload {
+  .header {
+    padding-right: 0;
+    padding-left: 0;
+    width:100%;
+    div {
+      color: white;
+      background: #C4C4C4;
+      padding: 13px 15px;
+      font-size: 13px;
+      margin: 0;
+    }
+  }
 
   .header {
     color: white;
