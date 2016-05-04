@@ -12,7 +12,7 @@ RSpec.describe DesignerActivitiesController, type: :controller do
     end
 
     it 'returns http success' do
-      post :create, contest_id: contest.id, designer_activity: { start_date: Time.now, due_date: Time.now + 7.days }
+      post :create, contest_id: contest.id, designer_activity: { start_date: '5/3/2016', due_date: '12/3/2016' }
       expect(response).to have_http_status(:success)
     end
   end
