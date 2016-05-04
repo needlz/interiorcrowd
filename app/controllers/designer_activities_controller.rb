@@ -6,7 +6,7 @@ class DesignerActivitiesController < ApplicationController
     activity_form = DesignerActivityForm.new(params)
 
     activity = tracker.designer_activities.create(activity_form.activity_attributes)
-    if activity_form.activity_comment_attributes[:text].present?
+    if activity_form.activity_comment_attributes.try(:text).present?
       activity.comments.create(activity_form.activity_comment_attributes.merge(author: current_user))
     end
 
