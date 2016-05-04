@@ -27,7 +27,7 @@ class DesignerActivityForm
   end
 
   def activity_comment_attributes
-    @params[:designer_activity].try(:comments)
+    @params[:designer_activity].try(:[], :comments)
   end
 
   def self.model_name
