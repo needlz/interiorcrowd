@@ -1,8 +1,5 @@
 .tracker-upload {
   .header {
-    padding-right: 0;
-    padding-left: 0;
-    width:100%;
     div {
       color: white;
       background: #C4C4C4;
@@ -245,5 +242,11 @@
 @media (min-width: 768px) and (max-width: 991px) {
   #client-side-suggested-hours {
     width: 60%;
+  }
+}
+
+@media (min-width: 992px) {
+  .tracker-upload .header div {
+    padding-left: 30px;
   }
 }

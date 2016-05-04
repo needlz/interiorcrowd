@@ -19,7 +19,7 @@
   .tracker-upload.no-x-padding.col-xs-12.col-sm-7.col-md-8{ style: ('display: none' if @time_tracker.attachments.blank?),
       data: { attachment_url: contest_time_tracker_attachments_path(contest_id: @contest.id) } }
     %h4= 'Attachment'
-    .header.col-xs-12.col-sm-12
+    .header.col-xs-12.col-sm-12.no-x-padding
       .col-xs-12.col-sm-5.filename.no-x-padding
         FILENAME
       .col-sm-7.timeSubmitted.hidden-xs{ style: ('display: none')}
