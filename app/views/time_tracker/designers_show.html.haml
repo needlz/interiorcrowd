@@ -20,9 +20,9 @@
       data: { attachment_url: contest_time_tracker_attachments_path(contest_id: @contest.id) } }
     %h4= 'Attachment'
     .header.col-xs-12.col-sm-12
-      .col-xs-5.col-sm-5.filename
+      .col-xs-12.col-sm-5.filename.no-x-padding
         FILENAME
-      .col-sm-6.timeSubmitted.hidden-xs{ style: ('display: none')}
+      .col-sm-7.timeSubmitted.hidden-xs{ style: ('display: none')}
         DATE SUBMITTED
     .editArea.col-xs-12.col-sm-12.no-x-padding
       .thumbs
