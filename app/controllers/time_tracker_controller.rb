@@ -74,8 +74,16 @@ class TimeTrackerController < ApplicationController
     return raise_404 unless check_contest_status
 
     @card = CreditCardView.new(current_user.primary_card)
-    @contest.time_tracker.update_attributes({ hours_actual: @hours + @contest.time_tracker.hours_actual, hours_suggested: 0 })
     @time_tracker = TimeTrackerView.new(@contest.time_tracker, @hours)
+
+    begin
+      ChargeHourlyPayment.new(@contest, @hours).perform
+    rescue StandardError => e
+      log_error(e)
+      flash[:error] = e.message
+      redirect_to time_tracker_client_center_entry_path
+    end
+
   end
 
   private
