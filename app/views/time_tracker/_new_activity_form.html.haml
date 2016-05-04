@@ -3,11 +3,11 @@
     .col-sm-3.field-name
       %h5= 'date'
     .col-sm-4
-      = f.date_field :start_date
+      = f.text_field :start_date
     .col-sm-1.due-date-name
       %p= 'to'
     .col-sm-4
-      = f.date_field :due_date
+      = f.text_field :due_date
     .col-sm-3.field-name
       %h5= 'task'
     .col-sm-9
@@ -15,7 +15,7 @@
     .col-sm-3.field-name
       %h5= 'hour'
     .col-sm-2
-      = f.text_field :hours
+      = f.number_field :hours, min: 1
     .clearfix
     = f.fields_for :comments do |f|
       .col-sm-3.field-name
