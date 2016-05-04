@@ -267,6 +267,8 @@ RSpec.describe TimeTrackerController do
 
       before do
         sign_in(client)
+        mock_stripe_customer_registration
+        mock_stripe_successful_charge
       end
 
       context 'when client is not contest owner' do
@@ -286,6 +288,21 @@ RSpec.describe TimeTrackerController do
         it 'updates the actual hours count' do
           post :show_invoice, id: contest.id, hours: 10
           expect(contest.time_tracker.reload.hours_actual).to eq(10)
+          expect(contest.time_tracker.reload.hours_suggested).to eq(0)
+        end
+
+        it 'creates hourly payment' do
+          expect(contest.time_tracker.hourly_payments).to be_empty
+
+          post :show_invoice, id: contest.id, hours: 10
+
+          expect(contest.time_tracker.hourly_payments).to be_present
+        end
+
+        it 'performs Stripe payment successfully' do
+          post :show_invoice, id: contest.id, hours: 10
+
+          expect(contest.time_tracker.hourly_payments.last.payment_status).to eq('completed')
         end
       end
     end

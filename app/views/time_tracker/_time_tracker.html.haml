@@ -6,6 +6,9 @@
 %section
   .container
     = content_for :breadcrumb
+    %div
+      - if flash[:error].present?
+        .alert.alert-danger= flash[:error].html_safe
     .tracker-hours-amount
       %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
     = content_for :form
