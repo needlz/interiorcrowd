@@ -3,25 +3,36 @@
     .col-sm-3.field-name
       %h5= 'date'
     .col-sm-4
-      = f.text_field :start_date
+      .form-group
+        #designer_activity_start_date.input-group.date
+          = f.text_field :start_date, class: 'form-control'
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
     .col-sm-1.due-date-name
       %p= 'to'
     .col-sm-4
-      = f.text_field :due_date
+      .form-group
+        #designer_activity_due_date.input-group.date
+          = f.text_field :due_date, class: 'form-control'
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
     .col-sm-3.field-name
       %h5= 'task'
     .col-sm-9
-      = f.text_field :task
+      .form-group
+        = f.text_field :task
     .col-sm-3.field-name
       %h5= 'hour'
     .col-sm-2
-      = f.number_field :hours, min: 1
+      .form-group
+        = f.number_field :hours, min: 1
     .clearfix
     = f.fields_for :comments do |f|
       .col-sm-3.field-name
         %h5= 'comment'
       .col-sm-9
-        = f.text_area :text
+        .form-group
+          = f.text_area :text
     .col-sm-offset-3.col-sm-9
       = f.submit 'Submit', class: 'btn designer-activity-form-submit-button', data: { disable_with: 'Saving...' }
       %span.btn.designer-activity-form-cancel-button Cancel
