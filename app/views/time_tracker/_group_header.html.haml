@@ -3,7 +3,6 @@
         data: { parent: "#accordion", toggle: "collapse" }, href: "#group-collapse#{ week.at_beginning_of_week.to_i }",
         role: "tab", id: "group-heading#{ week.at_beginning_of_week.to_i }" }
     %span.date-range= week.at_beginning_of_week.strftime('%b %d') + ' - ' + week.strftime('%d')
-    .line
   .collapse{"aria-labelledby" => "group-heading#{ week.at_beginning_of_week.to_i }",
       id: "group-collapse#{ week.at_beginning_of_week.to_i }", class: ('in' unless collapsed)}
     .col-xs-12.grey-title.activitiesHeader.marg-top10

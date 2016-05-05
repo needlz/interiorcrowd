@@ -10,7 +10,7 @@ class DesignerActivityCommentsController < ApplicationController
 
     if activity
       render status: :ok, json: { new_activity_html: render_to_string(partial: 'time_tracker/activity',
-                                                                      locals: { activity_view: DesignerActivityView.new(activity),
+                                                                      locals: { activity_view: DesignerActivityView.new(activity, current_user),
                                                                                 collapsed: false }) }
     else
       render status: :server_error, json: t('time_tracker.designer.request_send_error')

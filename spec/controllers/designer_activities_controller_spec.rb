@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe DesignerActivitiesController, type: :controller do
 
-  describe 'POST #create' do
-    let!(:contest) { Fabricate(:contest) }
-    let!(:time_tracker) { Fabricate(:time_tracker, contest: contest) }
-    let(:client) { Fabricate(:client) }
+  let(:contest) { Fabricate(:contest) }
+  let!(:time_tracker) { Fabricate(:time_tracker, contest: contest) }
+  let(:client) { Fabricate(:client) }
+  let(:designer) { Fabricate(:designer) }
 
+  describe 'POST #create' do
     before do
       sign_in(client)
     end
@@ -39,6 +40,24 @@ RSpec.describe DesignerActivitiesController, type: :controller do
                                                                    hours: 2 }
         expect(time_tracker.designer_activities.first.comments).to be_empty
       end
+    end
+  end
+
+  describe 'PATCH #read' do
+    let(:activity) { Fabricate(:designer_activity, time_tracker: time_tracker) }
+    let!(:foreign_comment) { Fabricate(:designer_activity_comment, designer_activity: activity, author: designer) }
+    let!(:my_comment) { Fabricate(:designer_activity_comment, designer_activity: activity, author: client) }
+
+    before do
+      sign_in(client)
+    end
+
+    it 'updates read attribute' do
+      patch(:read,
+            contest_id: contest.id,
+            id: activity.id)
+      expect(foreign_comment.reload.read).to be_truthy
+      expect(my_comment.reload.read).to be_falsey
     end
   end
 

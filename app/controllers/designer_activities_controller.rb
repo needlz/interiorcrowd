@@ -15,7 +15,7 @@ class DesignerActivitiesController < ApplicationController
 
     if activity
       render status: :ok, json: { new_activity_html: render_to_string(partial: 'time_tracker/activity',
-                                                                      locals: { activity_view: DesignerActivityView.new(activity),
+                                                                      locals: { activity_view: DesignerActivityView.new(activity, current_user),
                                                                                 collapsed: false }),
                                   id: activity.id,
                                   date_range_id: week_id,
@@ -24,6 +24,14 @@ class DesignerActivitiesController < ApplicationController
     else
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
     end
+  end
+
+  def read
+    tracker = Contest.find(params[:contest_id]).time_tracker
+    activity = tracker.designer_activities.find(params[:id])
+    comments = activity.comments.where.not(author_id: current_user.id, author_type: current_user.class.name)
+    comments.update_all(read: true)
+    render json: { saved: true, activity_id: activity.id }
   end
 
   private

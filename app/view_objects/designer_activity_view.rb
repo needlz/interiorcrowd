@@ -1,11 +1,12 @@
 class DesignerActivityView
 
-  attr_reader :designer_activity
+  attr_reader :designer_activity, :spectator
 
   delegate :id, :hours, :task, :start_date, :due_date, to: :designer_activity
 
-  def initialize(designer_activity)
+  def initialize(designer_activity, spectator)
     @designer_activity = designer_activity
+    @spectator = spectator
   end
 
   def comments
@@ -14,6 +15,10 @@ class DesignerActivityView
 
   def contest_id
     designer_activity.time_tracker.contest.id
+  end
+
+  def has_unread_comments?
+    designer_activity.comments.where(read: false).where.not(author_id: spectator.id, author_type: spectator.class.name).exists?
   end
 
 end
