@@ -1,16 +1,21 @@
 .activity{ data: { id: activity_view.id }}
   .col-xs-12.title.collapsed{ aria: { controls: "collapse#{ activity_view.id }", expanded: "false"},
-        data: { parent: "#accordion", toggle: "collapse" }, href: "#collapse#{ activity_view.id }",
+        data: { parent: "#accordion",
+          toggle: "collapse" },
+        href: "#collapse#{ activity_view.id }",
         role: "tab", id: "heading#{ activity_view.id }" }
     .col-xs-9.col-sm-11.tasks
       %span.task
         = activity_view.task
-      %span.commentsIcon{ class: ('withComments' if activity_view.comments.present?) }
+      %span.commentsIcon{ class: ('withComments' if activity_view.has_unread_comments?) }
         %span.glyphicon.glyphicon-comment
         %span.commentsCount (#{ activity_view.comments.count })
     .col-xs-3.col-sm-1.hours
       = activity_view.hours
-  .collapse{"aria-labelledby" => "heading#{ activity_view.id }", id: "collapse#{ activity_view.id }", class: ('in' unless collapsed)}
+  .collapse{"aria-labelledby" => "heading#{ activity_view.id }",
+      id: "collapse#{ activity_view.id }",
+      class: ('in' unless collapsed),
+      data: { read_url: read_contest_time_tracker_designer_activity_path(contest_id: activity_view.contest_id, id: activity_view.id) } }
     .panel-body
       = form_for DesignerActivityCommentForm.new,
           url: contest_time_tracker_designer_activity_comments_path(contest_id: activity_view.contest_id,
