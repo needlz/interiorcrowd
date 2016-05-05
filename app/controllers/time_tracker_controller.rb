@@ -91,7 +91,7 @@ class TimeTrackerController < ApplicationController
   end
 
   def activities_views_for_time_tracker(time_tracker)
-    activities_views = time_tracker.designer_activities.includes(comments: [:author]).map{ |activity| DesignerActivityView.new(activity) }
+    activities_views = time_tracker.designer_activities.includes(comments: [:author]).map{ |activity| DesignerActivityView.new(activity, current_user) }
     activities_views.sort_by(& :start_date).group_by do |activity|
       activity.start_date.at_end_of_week
     end

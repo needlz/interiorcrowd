@@ -307,8 +307,9 @@ ActiveRecord::Schema.define(version: 20160503155314) do
     t.integer  "designer_activity_id"
     t.integer  "author_id"
     t.string   "author_type"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "read",                 default: false
   end
 
   add_index "designer_activity_comments", ["author_type", "author_id"], name: "index_designer_activity_comments_on_author_type_and_author_id", using: :btree
