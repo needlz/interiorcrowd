@@ -1097,3 +1097,24 @@
 #designer_activity_hours{
   padding-left: 10px;
 }
+
+.designer-activity span.input-group-addon {
+  border-radius: 0;
+  color: #E1E1E1;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-left: none !important;
+  padding: 6px 5px;
+
+  span.glyphicon-calendar {
+    line-height: 0.6;
+    top: 4px;
+    font-size: 1.6em;
+  }
+}
+
+#designer_activity_start_date, #designer_activity_due_date {
+  border-right: none !important;
+}
+
+
