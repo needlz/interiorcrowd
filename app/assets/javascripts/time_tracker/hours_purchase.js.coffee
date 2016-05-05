@@ -58,7 +58,7 @@ class @HoursPurchase
 
   bindHoursSuggestedInput = ->
     $(document).on 'change keyup', inputSelector, ->
-      toggleButtonDisabling()
+      updateBuyButtonEnablity()
 
   bindSuggestingButton = ->
     $(suggestHours).on 'click', ->
@@ -92,7 +92,7 @@ class @HoursPurchase
         console.log('Server error while trying to suggest hours: ' + response.responseText)
     )
 
-  toggleButtonDisabling = ->
+  updateBuyButtonEnablity = ->
     unless ((parseInt($(inputSelector).val()) == 0) || ($(inputSelector).val() == ''))
       $(hoursSubmit).attr('disabled', false)
     else
