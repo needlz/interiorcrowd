@@ -123,17 +123,16 @@ class @ActivityEditor
     $(document).on 'shown.bs.collapse', activityHeaderSelector, onCommentUncollapsed
     activityForm().find('#designer_activity_hours').ForceNumericOnly()
 
-    activityForm().find('#designer_activity_start_date').datepicker(
-      defaultDate: "+1w",
-      changeMonth: true,
-      onClose: (selectedDate)->
-        activityForm().find('#designer_activity_due_date').datepicker( "option", "minDate", selectedDate )
+    activityForm().find('#designer_activity_start_date').datetimepicker(
+      format: 'MM/DD/YYYY'
+    ).on("dp.change", (e)->
+      activityForm().find('#designer_activity_due_date').data("DateTimePicker").minDate(e.date);
     )
-    activityForm().find('#designer_activity_due_date').datepicker(
-      defaultDate: "+1w",
-      changeMonth: true,
-      onClose: (selectedDate)->
-        activityForm().find('#designer_activity_start_date').datepicker( "option", "maxDate", selectedDate )
+    activityForm().find('#designer_activity_due_date').datetimepicker(
+      format: 'MM/DD/YYYY'
+      useCurrent: false
+    ).on("dp.change", (e)->
+      activityForm().find('#designer_activity_start_date').data("DateTimePicker").maxDate(e.date);
     )
 
   onCommentUncollapsed = (event)->
@@ -174,6 +173,7 @@ class @ActivityEditor
         activities().prepend(response.date_range_header_html)
       $group = activities().find(".group[data-id=#{ response.date_range_id }]")
     $group.find('.group-activities').append(response.new_activity_html)
+    $group.find('> .collapse').collapse('show')
     closeActivityForm()
 
   activitiesHeader = ->
