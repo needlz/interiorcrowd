@@ -226,7 +226,6 @@
           width: 100%;
           border: 1px solid #ECECEC;
           padding: 0 10px;
-          margin-bottom: 15px;
           height: 35px;
         }
         p {
@@ -243,13 +242,11 @@
           width: 100%;
           border: 1px solid #ECECEC;
           resize: none;
-          margin-bottom: 10px;
         }
 
-        input[type=date], input[type=number] {
+        input[type=number] {
           height: 35px;
           border: #E9E9E9 solid 1px;
-          margin-bottom: 15px;
         }
 
         .designer-activity-form-submit-button {
