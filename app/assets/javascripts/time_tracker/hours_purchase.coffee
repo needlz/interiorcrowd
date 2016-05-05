@@ -114,11 +114,13 @@ class @ActivityEditor
   addActivityFormSelector = '.designer-activity-form'
   submitButtonSelector = '.designer-activity-form-submit-button'
   newActivityCommentSelector = '.new_designer_activity_comment'
+  activityHeaderSelector = '.activities .activity .collapse'
 
   @init: ->
     bindDisplayAddActivityForm()
     $(document).on 'ajax:success', addActivityFormSelector, onSubmitted
     $(document).on 'ajax:success', newActivityCommentSelector, onCommentSubmitted
+    $(document).on 'shown.bs.collapse', activityHeaderSelector, onCommentUncollapsed
     activityForm().find('#designer_activity_hours').ForceNumericOnly()
 
     activityForm().find('#designer_activity_start_date').datepicker(
@@ -134,6 +136,22 @@ class @ActivityEditor
         activityForm().find('#designer_activity_start_date').datepicker( "option", "maxDate", selectedDate )
     )
 
+  onCommentUncollapsed = (event)->
+    $target = $(event.target)
+    $unreadCommentsIcon = $target.closest('.activity[data-id]').find('.commentsIcon.withComments')
+    if $unreadCommentsIcon.length
+      url = $target.attr('data-read-url')
+      $.ajax(
+        data: { method: 'patch' }
+        url: url
+        type: 'PATCH'
+        success: (response) =>
+          console.log response
+          if response.saved
+            activities().find(".activity[data-id=#{ response.activity_id }] .commentsIcon").removeClass('withComments')
+        error: (response)->
+          console.log('Server error while trying to mark comment as read')
+      )
 
   onSubmitted = (event, response)->
     addActivity(response)
