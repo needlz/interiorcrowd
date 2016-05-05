@@ -20,7 +20,9 @@ class DesignerActivitiesController < ApplicationController
                                   id: activity.id,
                                   date_range_id: week_id,
                                   date_range_header_html: render_to_string(partial: 'time_tracker/group_header',
-                                                                           locals: { week: week, activities: [] })}
+                                                                           locals: { week: week,
+                                                                                     activities: [],
+                                                                                     collapsed: false })}
     else
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
     end
