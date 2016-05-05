@@ -13,4 +13,4 @@
     .clearfix
     .activities
       - designer_activities_views.each do |week, activities|
-        = render 'time_tracker/group_header', week: week, activities: activities
+        = render 'time_tracker/group_header', week: week, activities: activities, collapsed: true
