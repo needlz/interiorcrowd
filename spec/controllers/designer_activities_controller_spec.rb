@@ -13,10 +13,22 @@ RSpec.describe DesignerActivitiesController, type: :controller do
     end
 
     it 'returns http success' do
-      expect { post(:create, contest_id: contest.id, designer_activity: { start_date: '5/3/2016',
-                                                                          due_date: '12/3/2016',
-                                                                          hours: 2 }) }.to(
-        change{ time_tracker.designer_activities.count }.from(0).to(1)
+      expect { post(:create,
+                    contest_id: contest.id,
+                    designer_activity:
+                      { start_date: '5/3/2016',
+                        due_date: '12/3/2016',
+                        tasks_attributes: {
+                          0 =>{ task: 'task',
+                            hours: 2 },
+                          1 =>{ task: 'task',
+                            hours: 3 }
+                        }
+                      }
+                   )}.
+        to(
+        change{ time_tracker.designer_activities.count }.
+          from(0).to(2)
       )
       expect(response).to have_http_status(:success)
     end
@@ -27,9 +39,13 @@ RSpec.describe DesignerActivitiesController, type: :controller do
       it 'creates comment' do
         post :create, contest_id: contest.id, designer_activity: { start_date: '5/3/2016',
                                                                    due_date: '12/3/2016',
-                                                                   hours: 2,
-                                                                   comments: { text: comment_text } }
-        expect(time_tracker.designer_activities.first.comments.first.text).to eq comment_text
+                                                                   tasks_attributes: {
+                                                                     0 =>{ hours: 2,
+                                                                       task: 'task',
+                                                                       comments: { text: comment_text }
+                                                                     }
+                                                                   } }
+        expect(time_tracker.reload.designer_activities.first.comments.first.text).to eq comment_text
       end
     end
 
@@ -37,7 +53,10 @@ RSpec.describe DesignerActivitiesController, type: :controller do
       it 'does not create comment' do
         post :create, contest_id: contest.id, designer_activity: { start_date: '5/3/2016',
                                                                    due_date: '12/3/2016',
-                                                                   hours: 2 }
+                                                                   tasks_attributes: {
+                                                                     0 =>{ hours: 2,
+                                                                      task: 'task' }
+                                                                   } }
         expect(time_tracker.designer_activities.first.comments).to be_empty
       end
     end

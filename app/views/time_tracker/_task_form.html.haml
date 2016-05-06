@@ -1,0 +1,17 @@
+.col-sm-3.field-name
+  %h5= 'task'
+.col-sm-9
+  .form-group
+    = f.text_field :task
+.col-sm-3.field-name
+  %h5= 'hour'
+.col-sm-2
+  .form-group
+    = f.number_field :hours, min: 1
+.clearfix
+= f.fields_for :comments do |f|
+  .col-sm-3.field-name
+    %h5= 'comment'
+  .col-sm-9
+    .form-group
+      = f.text_area :text

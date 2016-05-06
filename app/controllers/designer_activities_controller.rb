@@ -1,30 +1,38 @@
 class DesignerActivitiesController < ApplicationController
 
   def create
-    tracker = Contest.find(params[:contest_id]).time_tracker
+    begin
+      tracker = Contest.find(params[:contest_id]).time_tracker
 
-    activity_form = DesignerActivityForm.new(params)
+      activity_form = DesignerActivityForm.new(params)
 
-    activity = tracker.designer_activities.create(activity_form.activity_attributes)
-    if activity_form.activity_comment_attributes.try(:[], :text).present?
-      activity.comments.create(activity_form.activity_comment_attributes.merge(author: current_user))
-    end
+      activities = activity_form.activities_params.map { |activity_params|
+        activity = tracker.designer_activities.create!(designer_activity_params(activity_params))
+        comment_attributes = activity_params.try(:[], :comments)
+        if comment_attributes.try(:[], :text).present?
+          activity.comments.create(comment_attributes.merge(author: current_user))
+        end
+        activity
+      }
 
-    week = activity.start_date.at_end_of_week
-    week_id = week.at_beginning_of_week.to_i
-
-    if activity
-      render status: :ok, json: { new_activity_html: render_to_string(partial: 'time_tracker/activity',
-                                                                      locals: { activity_view: DesignerActivityView.new(activity, current_user),
-                                                                                collapsed: false }),
-                                  id: activity.id,
-                                  date_range_id: week_id,
-                                  date_range_header_html: render_to_string(partial: 'time_tracker/group_header',
-                                                                           locals: { week: week,
-                                                                                     activities: [],
-                                                                                     collapsed: false })}
-    else
+      week = activities.first.start_date.at_end_of_week
+      week_id = week.at_beginning_of_week.to_i
+    rescue StandardError => e
+      log_error(e)
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
+    else
+      responses = activities.map { |activity|
+        { new_activity_html: render_to_string(partial: 'time_tracker/activity',
+                                              locals: { activity_view: DesignerActivityView.new(activity, current_user),
+                                                        collapsed: false }),
+          id: activity.id,
+          date_range_id: week_id,
+          date_range_header_html: render_to_string(partial: 'time_tracker/group_header',
+                                                   locals: { week: week,
+                                                             activities: [],
+                                                             collapsed: false }) }
+      }
+      render status: :ok, json: { activities: responses }
     end
   end
 
@@ -38,8 +46,8 @@ class DesignerActivitiesController < ApplicationController
 
   private
 
-  def designer_activity_params
-    params.require(:designer_activity).permit!(:start_date, :due_date, :task, :hours)
+  def designer_activity_params(activity_params)
+    activity_params.permit(:start_date, :due_date, :task, :hours)
   end
 
 end
