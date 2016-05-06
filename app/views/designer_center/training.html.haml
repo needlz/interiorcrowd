@@ -2,7 +2,7 @@
   .container.animated.fadeInDown.bottom60.lightFont
     .row
       .col-md-10.col-md-offset-1
-        %h3= t('.check_out')
+        %h3= link_to t('.check_out'), designers_blog_root_path
         - t('.blog_articles.').each do |article|
           = link_to article[:title],
             URI.decode( designers_blog_page_path( blog_page_path: article[:path] ) ),
