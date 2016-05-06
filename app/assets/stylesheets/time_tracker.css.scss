@@ -213,7 +213,6 @@
         line-height: 24px;
       }
       .designer-activity-form {
-        display: none;
         margin-top: 20px;
         padding: 20px 100px 20px 0;
         background: #FAFAFA;
@@ -232,9 +231,6 @@
           margin: 10px auto 0;
           text-align: center;
           color: #B3B3B3;
-        }
-        .col-xs-12 {
-          padding: 0;
         }
 
         textarea {
@@ -265,12 +261,18 @@
 
         .designer-activity-form-add-more-button {
           text-align: right;
+
           .btn {
             background: transparent;
             color:  #CCCCCC;
             padding:0;
             border: none;
           }
+        }
+
+        .task + .task {
+          padding-top: 10px;
+          clear: both;
         }
       }
     }
@@ -706,6 +708,10 @@
 
         .designer-activity-form {
           padding: 20px 0px;
+
+          .designer-activity-form-add-more-button {
+            text-align: center;
+          }
 
           .due-date-name p {
             text-align: left;
