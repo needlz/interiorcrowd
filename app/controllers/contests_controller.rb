@@ -30,9 +30,13 @@ class ContestsController < ApplicationController
     @contest = Contest.find_by_id(params[:id])
     unless @contest
       @contest = ContestRequest.find_by_id(params[:id]).try(:contest)
-      return redirect_to client_center_entry_path(@contest.id) if @contest
+      if @contest
+        cookies[:contest_id] = @contest.id
+        return redirect_to client_center_entry_path(@contest.id)
+      end
     end
     raise_404 unless @contest
+    cookies[:contest_id] = @contest.id
     unless current_user.can_see_contest?(@contest, cookies)
       if current_user.client?
         raise_404
@@ -40,7 +44,7 @@ class ContestsController < ApplicationController
         return redirect_to(client_login_sessions_path)
       end
     end
-    return redirect_to(payment_details_contests_path(id: @contest.id)) if payment_details_to_be_entered?
+    return redirect_to(payment_details_contests_path) if payment_details_to_be_entered?
 
     @entries_page = EntriesPage.new(
       contest: @contest,
@@ -85,7 +89,7 @@ class ContestsController < ApplicationController
       begin
         @contest = Contest.find(params[:id])
         return redirect_to brief_contest_path(id: @contest.id) if @contest.completed?
-        @contest
+        cookies[:contest_id] = @contest.id
       rescue ActiveRecord::RecordNotFound => e
         return raise_404(e)
       end
@@ -143,10 +147,11 @@ class ContestsController < ApplicationController
   end
 
   def payment_details
+    return redirect_to client_center_path unless cookies[:contest_id].present?
     @client = current_user
     begin
-      @contest = @client.contests.find(params[:id])
-      return redirect_to payment_summary_contests_path(id: @contest.id) if @contest.paid? && Settings.automatic_payment
+      @contest = @client.contests.find(cookies[:contest_id])
+      return redirect_to payment_summary_contests_path if @contest.paid? && Settings.automatic_payment
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
@@ -159,8 +164,9 @@ class ContestsController < ApplicationController
   end
 
   def payment_summary
+    return redirect_to client_center_path unless cookies[:contest_id].present?
     begin
-      @contest = @client.contests.find(params[:id])
+      @contest = @client.contests.find(cookies[:contest_id])
     rescue ActiveRecord::RecordNotFound => e
       return raise_404(e)
     end
@@ -343,7 +349,7 @@ class ContestsController < ApplicationController
         contest_creation.contest
       end
 
-    redirect_to payment_details_contests_path(id: contest.id)
+    redirect_to payment_details_contests_path
   end
 
   def payment_details_to_be_entered?

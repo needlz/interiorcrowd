@@ -32,7 +32,7 @@ RSpec.describe ClientsController do
 
       it 'redirects to entries page' do
         post :create, { client: client_options }, contest_options_source
-        expect(response).to redirect_to(payment_details_contests_path(id: Contest.last.id))
+        expect(response).to redirect_to(payment_details_contests_path)
       end
 
       it 'saves attributes' do

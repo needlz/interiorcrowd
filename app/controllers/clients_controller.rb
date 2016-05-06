@@ -146,7 +146,7 @@ class ClientsController < ApplicationController
 
         redirect_path =
           if contest
-            contest.completed? ? payment_details_contests_path(id: contest.id) : ContestCreationWizard.incomplete_step_path(contest)
+            contest.completed? ? payment_details_contests_path : ContestCreationWizard.incomplete_step_path(contest)
           else
             client_center_entries_path(signed_up: true)
           end

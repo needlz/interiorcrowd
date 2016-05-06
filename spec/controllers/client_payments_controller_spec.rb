@@ -38,13 +38,13 @@ RSpec.describe ClientPaymentsController do
               expect(Settings.automatic_payment).to be_truthy
               post :create, contest_id: contest.id, client_agree: 'yes'
               expect(contest.client_payment.last_error).to be_nil
-              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_summary_contests_path)
             end
 
             it 'applies promocode' do
               post :create, contest_id: contest.id, client_agree: 'yes', client: { promocode: " #{ promocode.promocode } " }
               expect(contest.client_payment.last_error).to be_nil
-              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_summary_contests_path)
               expect(contest.promocodes.count).to eq(1)
             end
 
@@ -122,7 +122,7 @@ RSpec.describe ClientPaymentsController do
 
               post :create, contest_id: contest.id, client: { promocode: promocode.promocode }, client_agree: 'yes'
 
-              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_details_contests_path)
               expect(contest.client_payment.present?).to be_falsey
               expect(contest.promocodes.count).to eq(0)
               expect(contest.status).to eq('brief_pending')
@@ -153,7 +153,7 @@ RSpec.describe ClientPaymentsController do
           it 'does not create payment' do
             post :create, contest_id: contest.id, client: { promocode: promocode.promocode }, client_agree: 'yes'
 
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            expect(response).to redirect_to(payment_details_contests_path)
             expect(contest.client_payment.present?).to be_falsey
             expect(contest.promocodes.count).to eq(0)
             expect(contest.status).to eq('brief_pending')
@@ -178,7 +178,7 @@ RSpec.describe ClientPaymentsController do
 
           it 'does not create payment' do
             post :create, params.merge(client_agree: 'yes')
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            expect(response).to redirect_to(payment_details_contests_path)
             expect(contest.reload.client_payment).to be_nil
           end
         end
@@ -188,7 +188,7 @@ RSpec.describe ClientPaymentsController do
             it 'creates payment' do
               post :create, params.merge(client_agree: 'yes')
               expect(contest.client_payment.last_error).to be_nil
-              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_summary_contests_path)
             end
           end
         end
@@ -211,7 +211,7 @@ RSpec.describe ClientPaymentsController do
           it 'does not create payment' do
             expect(contest.client_payment).to be_falsey
             post :create, params
-            expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+            expect(response).to redirect_to(payment_summary_contests_path)
           end
 
           it 'does not log any error' do
@@ -290,7 +290,7 @@ RSpec.describe ClientPaymentsController do
           it 'does not create payment' do
             post :create, contest_id: contest.id, client: { promocode: promocode.promocode }, client_agree: 'yes'
 
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            expect(response).to redirect_to(payment_details_contests_path)
             expect(contest.client_payment).to be_nil
             expect(contest.promocodes.count).to eq(0)
             expect(contest.status).to eq('brief_pending')
@@ -320,7 +320,7 @@ RSpec.describe ClientPaymentsController do
 
           it 'does not create payment' do
             post :create, params
-            expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+            expect(response).to redirect_to(payment_details_contests_path)
             expect(contest.reload.client_payment).to be_nil
           end
         end
@@ -329,7 +329,7 @@ RSpec.describe ClientPaymentsController do
           context 'when contest not submitted yet' do
             it 'redirects to payment summary page' do
               post :create, params
-              expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_summary_contests_path)
             end
           end
 
