@@ -21,18 +21,25 @@ class DesignerActivitiesController < ApplicationController
       log_error(e)
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
     else
+      activities_views = tracker.designer_activities.map { |activity| DesignerActivityView.new(activity, current_user) }
+      groups_holder = DesignerActivitiesGrouper.new(activities_views, tracker)
+      groups_titles_html = groups_holder.groups.map { |group|
+        { group_id: group.group_id,
+          title_html: render_to_string(partial: 'time_tracker/activities_group_title', locals: { group_view: group }) }
+      }
       responses = activities.map { |activity|
+        group_view = groups_holder.group_by_activity(activity)
         { new_activity_html: render_to_string(partial: 'time_tracker/activity',
                                               locals: { activity_view: DesignerActivityView.new(activity, current_user),
                                                         collapsed: false }),
           id: activity.id,
-          date_range_id: week_id,
-          date_range_header_html: render_to_string(partial: 'time_tracker/group_header',
-                                                   locals: { week: week,
-                                                             activities: [],
-                                                             collapsed: false }) }
+          group_id: week_id,
+          group_header_html: render_to_string(partial: 'time_tracker/group_header',
+                                              locals: { group_view: group_view,
+                                                        collapsed: false,
+                                                        header_only: true }) }
       }
-      render status: :ok, json: { activities: responses }
+      render status: :ok, json: { activities: responses, groups_titles_html: groups_titles_html }
     end
   end
 

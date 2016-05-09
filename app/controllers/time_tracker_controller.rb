@@ -10,7 +10,7 @@ class TimeTrackerController < ApplicationController
     return raise_404 unless check_contest_status
 
     @time_tracker = TimeTrackerView.new(@contest.time_tracker)
-    @designer_activities_views = activities_views_for_time_tracker(@time_tracker)
+    @activities_groups_holder = activities_grouper(@time_tracker)
   end
 
   def designers_show
@@ -26,7 +26,7 @@ class TimeTrackerController < ApplicationController
                                                                                               contest_request: @contest_request)
     @time_tracker = TimeTrackerView.new(@contest.time_tracker)
     @new_activity_form = DesignerActivityForm.new(DesignerActivity.new)
-    @designer_activities_views = activities_views_for_time_tracker(@time_tracker)
+    @activities_groups_holder = activities_grouper(@time_tracker)
   end
 
   def suggest_hours
@@ -90,11 +90,9 @@ class TimeTrackerController < ApplicationController
     %w[fulfillment final_fulfillment].include? @contest.status
   end
 
-  def activities_views_for_time_tracker(time_tracker)
+  def activities_grouper(time_tracker)
     activities_views = time_tracker.designer_activities.includes(comments: [:author]).map{ |activity| DesignerActivityView.new(activity, current_user) }
-    activities_views.sort_by(& :start_date).group_by do |activity|
-      activity.start_date.at_end_of_week
-    end
+    DesignerActivitiesGrouper.new(activities_views, @time_tracker)
   end
 
 end
