@@ -49,7 +49,6 @@
 //= require jquery.slick
 //= require comment_attachment
 //= require concept_board_comment_editor
-//= require time_tracker/tracker_attachment_uploader
 //= require moment
 //= require bootstrap-datetimepicker
 //= require room_designs
