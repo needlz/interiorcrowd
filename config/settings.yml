@@ -96,6 +96,7 @@ common: &defaults
       path: <%= ENV['BLOG_API_PATH'] %>
       username: <%= ENV['BLOG_API_USERNAME'] %>
       password: <%= ENV['BLOG_API_PASSWORD'] %>
+  commercial_link: 'http://www.interiorcrowd.com/blog/office-design/'
 
 development:
   <<: *defaults

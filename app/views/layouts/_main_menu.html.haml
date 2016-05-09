@@ -6,7 +6,7 @@
       = t('header.need_help')
     .clearfix
     %ul.nav.nav-tabs.pull-right.hidden-xs.hidden-sm
-      - main_menu(@navigation).items.each do |item|
+      - ((@main_navigation_items_prepend || []) + main_menu(@navigation).items).each do |item|
         - if item.children
           %li.dropdown
             %a.dropdown-toggle{ data: { toggle: 'dropdown' } , href: item.href }
