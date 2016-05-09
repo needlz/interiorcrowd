@@ -70,6 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def log_error(exception)
+    raise exception if Rails.env.development?
     ErrorsLogger.log(exception, session.to_hash)
   end
 

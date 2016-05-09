@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: designer_activities
+#
+#  id              :integer          not null, primary key
+#  start_date      :datetime
+#  due_date        :datetime
+#  task            :string
+#  hours           :integer
+#  time_tracker_id :integer
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 class DesignerActivity < ActiveRecord::Base
 
   belongs_to :time_tracker
