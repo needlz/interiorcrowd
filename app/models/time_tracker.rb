@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: time_trackers
+#
+#  id              :integer          not null, primary key
+#  hours_suggested :integer          default(0), not null
+#  hours_actual    :integer          default(0), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  contest_id      :integer
+#
+
 class TimeTracker < ActiveRecord::Base
   belongs_to :contest
   has_many :designer_activities

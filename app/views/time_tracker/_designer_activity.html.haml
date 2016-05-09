@@ -8,9 +8,9 @@
         %button= t('time_tracker.designer.activity.add_activity')
       = render 'new_activity_form', creation_route: creation_route
     - if can_add_activity
-      .activity-description.col-xs-12{ style: ('display: none' if designer_activities_views.present?) }
+      .activity-description.col-xs-12{ style: ('display: none' if activities_groups_holder.any?) }
         %p= t('time_tracker.designer.activity.description').html_safe
     .clearfix
     .activities
-      - designer_activities_views.each do |week, activities|
-        = render 'time_tracker/group_header', week: week, activities: activities, collapsed: true
+      - activities_groups_holder.groups.each do |group_view|
+        = render 'time_tracker/group_header', group_view: group_view, collapsed: true
