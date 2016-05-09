@@ -73,21 +73,28 @@ class @ActivityEditor
     activityDescription().hide()
     activitiesHeader().show()
     
-    for response in response.activities
-      $group = activities().find(".group[data-id=#{ response.date_range_id }]")
+    for activity in response.activities
+      $group = activities().find(".group[data-id=#{ activity.group_id }]")
       unless $group.length
         later_activities = activities().find('.group').filter ->
-          $(@).attr('data-id') > response.date_range_id
+          $(@).attr('data-id') > activity.group_id
         if later_activities.length
-          later_activities.last().after(response.date_range_header_html)
+          later_activities.last().after(activity.group_header_html)
         else
-          activities().prepend(response.date_range_header_html)
-        $group = activities().find(".group[data-id=#{ response.date_range_id }]")
-      $group.find('.group-activities').append(response.new_activity_html)
+          activities().prepend(activity.group_header_html)
+        $group = groupById(activity.group_id)
+      $group.find('.group-activities').append(activity.new_activity_html)
       $group.find('> .collapse').collapse('show')
-    
+
+    for group_title in response.groups_titles_html
+      $group = groupById(group_title.group_id)
+      $group.find('> .title').replaceWith(group_title.title_html)
+
     closeActivityForm()
     clearActivityForm()
+
+  groupById = (id)->
+    activities().find(".group[data-id=#{ id }]")
 
   clearActivityForm = ->
     activityForm().find('.task:not(.template)').remove()

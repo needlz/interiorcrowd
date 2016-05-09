@@ -4,16 +4,10 @@
     float: right;
   }
 
-.group{ data: { id: week.at_beginning_of_week.to_i } }
-  .title.collapsed{ aria: { controls: "collapse#{ week.at_beginning_of_week.to_i }", expanded: "false"},
-        data: { parent: "#accordion", toggle: "collapse" }, href: "#group-collapse#{ week.at_beginning_of_week.to_i }",
-        role: "tab", id: "group-heading#{ week.at_beginning_of_week.to_i }" }
-    .date-range= week.at_beginning_of_week.strftime('%b %d') + ' - ' + week.strftime('%d')
-    .line-and-icon
-      .line
-      .collapse-icon
-  .collapse{"aria-labelledby" => "group-heading#{ week.at_beginning_of_week.to_i }",
-      id: "group-collapse#{ week.at_beginning_of_week.to_i }", class: ('in' unless collapsed)}
+.group{ data: { id: group_view.group_id } }
+  = render 'time_tracker/activities_group_title', group_view: group_view
+  .collapse{"aria-labelledby" => "group-heading#{ group_view.group_id }",
+      id: "group-collapse#{ group_view.group_id }", class: ('in' unless collapsed)}
     .col-xs-12.grey-title.activitiesHeader.marg-top10
       .col-xs-9.col-sm-11.tasks
         Tasks
@@ -21,5 +15,6 @@
         Hours
     .clearfix
     .group-activities
-      - activities.each do |activity_view|
-        = render 'activity', activity_view: activity_view, collapsed: true
+      - unless defined?(header_only) && header_only
+        - group_view.activities_views.each do |activity_view|
+          = render 'time_tracker/activity', activity_view: activity_view, collapsed: true
