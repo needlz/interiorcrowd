@@ -245,11 +245,6 @@
           border: #E9E9E9 solid 1px;
         }
 
-        input[type=number] {
-          height: 35px;
-          border: #E9E9E9 solid 1px;
-        }
-
         .designer-activity-form-submit-button {
           background: #409863;
           color: white;
@@ -289,17 +284,18 @@
         text-align: center;
       }
     }
-
-    .activitiesHeader {
-      text-transform: uppercase;
-
-      .hours {
-        text-align: center;
-      }
-    }
     
     .activities {
       .group {
+
+        > .title .collapse-icon::after {
+          content: '-'
+        }
+
+        > .title.collapsed .collapse-icon::after {
+          content: '+'
+        }
+
         > .title {
           margin-top: 35px;
           line-height: 35px;
@@ -310,21 +306,37 @@
           .date-range {
             color: #C8C8C8;
             border: #C8C8C8 solid 1px;
-            padding: 8px 20px;
+            padding: 0px 20px;
             border-radius: 20px;
             font-size: 15px;
             text-transform: uppercase;
             position: relative;
+            width: 8.4em;
+            float: left;
           }
 
-          .date-range::after {
-            border-bottom: #C8C8C8 solid 1px;
-            left: 110%;
-            content: "";
-            position: absolute;
-            height: 5px;
-            width: 10000px;
-            top: 38%;
+
+          .line-and-icon{
+            margin-left: 131px;
+
+            .line {
+              border-top: 1px solid #c8c8c8;
+              margin-top: 18px;
+              margin-right: 27px;
+            }
+
+            .collapse-icon {
+              color: #c8c8c8;
+              border: 1px solid #c8c8c8;
+              border-radius: 5px;
+              width: 20px;
+              height: 20px;
+              text-align: center;
+              line-height: 20px;
+              margin-top: -11px;
+              float: right;
+              font-size: 15px;
+            }
           }
         }
       }
