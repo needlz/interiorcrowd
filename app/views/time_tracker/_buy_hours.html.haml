@@ -1,0 +1,8 @@
+.tracker-buy-hours
+  %h3= add_hours_header
+  .tracker-hours-panel
+    %button.btn#minus-hour{ type: 'button' } -
+    %input{ type: 'text', name: 'hours', value: '0' }
+    %button.btn#plus-hour{ type: 'button' } +
+  = content_for :add_hours_submit
+
