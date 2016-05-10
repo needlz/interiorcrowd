@@ -15,7 +15,7 @@ class @ActivityEditor
     activityForm().find('#designer_activity_hours').ForceNumericOnly()
     @setupDatePickers()
     @bindNewTaskButton()
-#    closeActivityForm()
+    closeActivityForm()
 
   @setupDatePickers: ->
     activityForm().find('#designer_activity_start_date').datetimepicker(
@@ -124,6 +124,19 @@ class @ActivityEditor
         activityForm().show()
     cancelActivityButton().click ->
       closeActivityForm()
+      removeBlankTasks()
+      addTaskForm() unless activityForm().find('.task:not(.template)').length
+
+  removeBlankTasks = ->
+    tasks = activityForm().find('.task:not(.template)')
+    for task in tasks
+      saveTask = false
+      $task  = $(task)
+      for formGroup in $task.find('.form-group')
+        $formGroup = $(formGroup)
+        input = $formGroup.find('input, textarea')
+        saveTask = true unless input.val() == input.attr('data-default-value')
+      $task.remove() unless saveTask
 
   closeActivityForm = ->
     activityForm().hide()

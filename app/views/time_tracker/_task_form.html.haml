@@ -2,16 +2,16 @@
   %h5= 'task'
 .col-sm-9
   .form-group
-    = f.text_field :task
+    = f.text_field :task, data: { default_value: '' }
 .col-sm-3.field-name
   %h5= 'hour'
 .col-sm-2
   .form-group
-    = f.number_field :hours, min: 1
+    = f.number_field :hours, min: 1, class: 'hours', data: { default_value: 1 }
 .clearfix
 = f.fields_for :comments do |f|
   .col-sm-3.field-name
     %h5= 'comment'
   .col-sm-9
     .form-group
-      = f.text_area :text
+      = f.text_area :text, data: { default_value: '' }
