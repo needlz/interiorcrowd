@@ -18,8 +18,11 @@ class DesignerActivityForm
         @activity = activity_or_params
       else
         @params = ActionController::Parameters.new(activity_or_params)
-        @params[:designer_activity][:start_date] = Date.strptime(params[:designer_activity][:start_date], "%m/%d/%Y")
-        @params[:designer_activity][:due_date] = Date.strptime(params[:designer_activity][:due_date], "%m/%d/%Y")
+        begin
+          @params[:designer_activity][:start_date] = Date.strptime(params[:designer_activity][:start_date], "%m/%d/%Y")
+          @params[:designer_activity][:due_date] = Date.strptime(params[:designer_activity][:due_date], "%m/%d/%Y")
+        rescue ArgumentError
+        end
       end
     else
       @activity = DesignerActivity.new(hours: 1)
@@ -40,7 +43,8 @@ class DesignerActivityForm
   def activities_params
     params[:designer_activity][:tasks_attributes].map { |id, task_params|
       task_params.merge(start_date: params[:designer_activity][:start_date],
-                        due_date: params[:designer_activity][:start_date])
+                        due_date: params[:designer_activity][:due_date],
+                        temporary_id: id)
     }
   end
 

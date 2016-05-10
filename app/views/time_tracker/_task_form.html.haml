@@ -3,11 +3,14 @@
 .col-sm-9
   .form-group
     = f.text_field :task, data: { default_value: '' }
+    .error-row.task.hidden
+.clearfix
 .col-sm-3.field-name
   %h5= 'hour'
 .col-sm-2
   .form-group
     = f.number_field :hours, min: 1, class: 'hours', data: { default_value: 1 }
+    .error-row.hours.hidden
 .clearfix
 = f.fields_for :comments do |f|
   .col-sm-3.field-name
@@ -15,3 +18,4 @@
   .col-sm-9
     .form-group
       = f.text_area :text, data: { default_value: '' }
+      .error-row.text.hidden

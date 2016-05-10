@@ -23,7 +23,7 @@ class DesignerActivity < ActiveRecord::Base
   private
 
   def due_date_after_start_date
-    if due_date < start_date
+    if due_date && start_date && due_date < start_date
       errors.add(:due_date, 'must be after start_date')
     end
   end
