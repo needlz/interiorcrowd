@@ -52,7 +52,7 @@ module Blog
 
     def parse_dom
       response_body.gsub!(%r['/wp-admin/admin-ajax.php'], "\'#{ @internal_blog_namespace }wp-admin/admin-ajax.php\'")
-      response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog\2\3\5')
+      response_body.gsub!(%r[(//blog.interiorcrowd.com)([^"]+)([^\.]\.(?!(jpg|jpeg|png|gif)))(")], '/blog\2\3\5')
       response_body.gsub!(%r[(//designers.interiorcrowd.com)([^"]+)([^\.]\.(.+))(")], '/blog/designers\2\3\5')
       response_body.gsub!(%r[(")(/wp-content.+ajax-loader\.gif)], '\1http://blog.interiorcrowd.com\2')
       p response_body if Settings.log_requests_to_blog
