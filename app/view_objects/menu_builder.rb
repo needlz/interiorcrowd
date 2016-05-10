@@ -13,6 +13,14 @@ class MenuBuilder
       end
     end
 
+    def target
+      if name.include? I18n.t('header.how_it_works')
+        '_blank'
+      else
+        '_self'
+      end
+    end
+
     attr_reader :name, :href, :children, :identifier
 
     private
