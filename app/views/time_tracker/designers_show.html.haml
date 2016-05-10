@@ -16,33 +16,7 @@
       %p.uploadButton= t('time_tracker.upload_file')
       %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
       %input.fileIds{ type: 'hidden' }
-  .tracker-upload.no-x-padding.col-xs-12.col-sm-7.col-md-8{ style: ('display: none' if @time_tracker.attachments.blank?),
-      data: { attachment_url: contest_time_tracker_attachments_path(contest_id: @contest.id) } }
-    %h4= 'Attachment'
-    .header.col-xs-12.col-sm-12.no-x-padding
-      .col-xs-12.col-sm-5.filename.no-x-padding
-        FILENAME
-      .col-sm-7.timeSubmitted.hidden-xs{ style: ('display: none')}
-        DATE SUBMITTED
-    .editArea.col-xs-12.col-sm-12.no-x-padding
-      .thumbs
-        .template
-          = render 'time_tracker/attachments/uploaded_attachment', attachment: Hashie::Mash.new
-        .uploadingTemplate
-          .upload-container.col-xs-5.no-x-padding
-            .col-xs-4.no-x-padding
-              %img.preview
-            .col-xs-8.no-x-padding
-              %span.filename
-          .progressbar.col-xs-4.no-x-padding
-            .pointer
-          .menuButtons.col-xs-2.no-x-padding
-            = render 'time_tracker/attachments/remove_button'
-        - @time_tracker.attachments.each do |attachment|
-          .thumb.col-xs-12{ data: { id: attachment.id } }
-            = render 'time_tracker/attachments/uploaded_attachment', attachment: attachment
-      %label.uploadButton
-        %p= t('time_tracker.upload_file')
+  = render 'upload', time_tracker: @time_tracker, contest: @contest
   = render 'shared/setup_uploadify'
 
   :coffee

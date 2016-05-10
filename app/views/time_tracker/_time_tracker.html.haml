@@ -16,19 +16,7 @@
       %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
     - if defined?(form_options)
       = form_tag *form_options do
-        .tracker-buy-hours
-          %h3= add_hours_header
-          .tracker-hours-panel
-            %button.btn#minus-hour{ type: 'button' } -
-            %input{ type: 'text', name: 'hours', value: '0' }
-            %button.btn#plus-hour{ type: 'button' } +
-          = content_for :add_hours_submit
+        = render 'buy_hours', add_hours_header: add_hours_header
     - else
-      .tracker-buy-hours
-        %h3= add_hours_header
-        .tracker-hours-panel
-          %button.btn#minus-hour{ type: 'button' } -
-          %input{ type: 'text', name: 'hours', value: '0' }
-          %button.btn#plus-hour{ type: 'button' } +
-        = content_for :add_hours_submit
+      = render 'buy_hours', add_hours_header: add_hours_header
     = content_for :info_container
