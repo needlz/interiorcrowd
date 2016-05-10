@@ -3,7 +3,7 @@ class DesignerActivitiesGrouper
   attr_reader :groups
 
   def initialize(activities_views, time_tracker)
-    activities_by_week = activities_views.sort_by(& :start_date).group_by do |activity|
+    activities_by_week = activities_views.sort_by(&:start_date).reverse.group_by do |activity|
       activity.start_date.at_end_of_week
     end
     @groups = activities_by_week.map { |week, activities_views|
