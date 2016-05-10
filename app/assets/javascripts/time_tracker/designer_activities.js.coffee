@@ -72,32 +72,42 @@ class @ActivityEditor
   addActivities = (response)->
     activityDescription().hide()
     activitiesHeader().show()
-    
+
+    noErrors = true
+    clearErrorMessages()
     for activity in response.activities
-      $group = activities().find(".group[data-id=#{ activity.group_id }]")
-      unless $group.length
-        later_activities = activities().find('.group').filter ->
-          $(@).attr('data-id') > activity.group_id
-        if later_activities.length
-          later_activities.last().after(activity.group_header_html)
-        else
-          activities().prepend(activity.group_header_html)
-        $group = groupById(activity.group_id)
-      $group.find('.group-activities').append(activity.new_activity_html)
-      $group.find('> .collapse').collapse('show')
+      $task = activityForm().find(".task[data-temporary-id=#{ activity.temporary_id }]")
+      if activity.error
+        noErrors = false
+        for field, messages of activity.error
+          $task.find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+          activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+      else
+        $group = activities().find(".group[data-id=#{ activity.group_id }]")
+        unless $group.length
+          later_activities = activities().find('.group').filter ->
+            $(@).attr('data-id') > activity.group_id
+          if later_activities.length
+            later_activities.last().after(activity.group_header_html)
+          else
+            activities().prepend(activity.group_header_html)
+          $group = groupById(activity.group_id)
+        $group.find('.group-activities').append(activity.new_activity_html)
+        $group.find('> .collapse').collapse('show')
+
+        $task.remove()
 
     for group_title in response.groups_titles_html
       $group = groupById(group_title.group_id)
       $group.find('> .title').replaceWith(group_title.title_html)
 
-    closeActivityForm()
-    clearActivityForm()
+    closeActivityForm() if noErrors
 
   groupById = (id)->
     activities().find(".group[data-id=#{ id }]")
 
   clearActivityForm = ->
-    activityForm().find('.task:not(.template)').remove()
+    activityForm().find('.task[data-temporary-id]:not(.template)').remove()
     addTaskForm()
 
   activitiesHeader = ->
@@ -125,28 +135,32 @@ class @ActivityEditor
     cancelActivityButton().click ->
       closeActivityForm()
       removeBlankTasks()
-      addTaskForm() unless activityForm().find('.task:not(.template)').length
+      addTaskForm() unless activityForm().find('.task[data-temporary-id]:not(.template)').length
 
   removeBlankTasks = ->
-    tasks = activityForm().find('.task:not(.template)')
+    tasks = activityForm().find('.task[data-temporary-id]:not(.template)')
     for task in tasks
-      saveTask = false
+      keepTask = false
       $task  = $(task)
       for formGroup in $task.find('.form-group')
         $formGroup = $(formGroup)
         input = $formGroup.find('input, textarea')
-        saveTask = true unless input.val() == input.attr('data-default-value')
-      $task.remove() unless saveTask
+        keepTask = (input.val() != input.attr('data-default-value'))
+      $task.remove() unless keepTask
 
   closeActivityForm = ->
     activityForm().hide()
     activityDescription().show() if noActivities()
+    clearErrorMessages()
 
   noActivities = ->
     activities().find('.activity[data-id]').length < 1
 
   activities = ->
     $('.activities')
+
+  clearErrorMessages = ->
+    activityForm().find('.error-row').addClass('hidden')
 
 $ ->
   ActivityEditor.init()

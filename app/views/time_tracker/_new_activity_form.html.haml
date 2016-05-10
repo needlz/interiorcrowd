@@ -8,6 +8,7 @@
           = f.text_field :start_date
           %span.input-group-addon
             %span.glyphicon.glyphicon-calendar
+        .error-row.start_date.hidden
     .col-sm-1.due-date-name
       %p= 'to'
     .col-sm-4
@@ -16,13 +17,15 @@
           = f.text_field :due_date
           %span.input-group-addon
             %span.glyphicon.glyphicon-calendar
+        .error-row.due_date.hidden
+    .clearfix
     %fieldset{ disabled: 'disabled' }
       = f.fields_for :tasks, DesignerActivity.new(hours: 1), child_index: 'new_item' do |f|
-        .task.template
+        .task.template{ data: { temporary_id: 'new_item' } }
           = render 'time_tracker/task_form', f: f
     .tasks
       = f.fields_for :tasks do |f|
-        .task
+        .task{ data: { temporary_id: 0 } }
           = render 'time_tracker/task_form', f: f
     .col-sm-offset-3.col-sm-6
       = f.submit 'Submit', class: 'btn designer-activity-form-submit-button', data: { disable_with: 'Saving...' }
