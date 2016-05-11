@@ -49,17 +49,19 @@ class @ActivityEditor
     $unreadCommentsIcon = $target.closest('.activity[data-id]').find('.commentsIcon.withComments')
     if $unreadCommentsIcon.length
       url = $target.attr('data-read-url')
-      $.ajax(
-        data: { method: 'patch' }
-        url: url
-        type: 'PATCH'
-        success: (response) =>
-          console.log response
-          if response.saved
-            activities().find(".activity[data-id=#{ response.activity_id }] .commentsIcon").removeClass('withComments')
-        error: (response)->
-          console.log('Server error while trying to mark comment as read')
-      )
+      markCommentsAsRead(url)
+
+  markCommentsAsRead = (url)->
+    $.ajax(
+      data: { method: 'patch' }
+      url: url
+      type: 'PATCH'
+      success: (response) =>
+        if response.saved
+          activities().find(".activity[data-id=#{ response.activity_id }] .commentsIcon").removeClass('withComments')
+      error: (response)->
+        console.log('Server error while trying to mark comment as read')
+    )
 
   onSubmitted = (event, response)->
     addActivities(response)
@@ -73,35 +75,45 @@ class @ActivityEditor
     activityDescription().hide()
     activitiesHeader().show()
 
+    updateActivities(response.activities)
+    updateGroupTitles(response.groups_titles_html)
+
+  updateActivities = (activitiesJson)->
     noErrors = true
     clearErrorMessages()
-    for activity in response.activities
+    for activity in activitiesJson
       $task = activityForm().find(".task[data-temporary-id=#{ activity.temporary_id }]")
       if activity.error
         noErrors = false
-        for field, messages of activity.error
-          $task.find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
-          activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+        handleValidationError($task, activity.error)
       else
-        $group = activities().find(".group[data-id=#{ activity.group_id }]")
-        unless $group.length
-          later_activities = activities().find('.group').filter ->
-            $(@).attr('data-id') > activity.group_id
-          if later_activities.length
-            later_activities.last().after(activity.group_header_html)
-          else
-            activities().prepend(activity.group_header_html)
-          $group = groupById(activity.group_id)
-        $group.find('.group-activities').append(activity.new_activity_html)
-        $group.find('> .collapse').collapse('show')
+        updateActivity($task, activity)
+    closeActivityForm() if noErrors
 
-        $task.remove()
+  handleValidationError = ($task, errorJosn)->
+    for field, messages of errorJosn
+      $task.find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+      activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
 
-    for group_title in response.groups_titles_html
+  updateActivity = ($task, activityJson)->
+    $group = activities().find(".group[data-id=#{ activityJson.group_id }]")
+    unless $group.length
+      later_activities = activities().find('.group').filter ->
+        $(@).attr('data-id') > activityJson.group_id
+      if later_activities.length
+        later_activities.last().after(activityJson.group_header_html)
+      else
+        activities().prepend(activityJson.group_header_html)
+      $group = groupById(activityJson.group_id)
+    $group.find('.group-activities').append(activityJson.new_activity_html)
+    $group.find('> .collapse').collapse('show')
+
+    $task.remove()
+
+  updateGroupTitles = (groupTitlesJson)->
+    for group_title in groupTitlesJson
       $group = groupById(group_title.group_id)
       $group.find('> .title').replaceWith(group_title.title_html)
-
-    closeActivityForm() if noErrors
 
   groupById = (id)->
     activities().find(".group[data-id=#{ id }]")
