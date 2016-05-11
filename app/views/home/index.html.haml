@@ -1,5 +1,5 @@
 - content_for :head do
-  = javascript_include_tag 'home/main', defer: true
+  = javascript_include_tag 'home/main', async: Rails.env.production?
   = stylesheet_link_tag 'home/designer_stories'
 
   :javascript
