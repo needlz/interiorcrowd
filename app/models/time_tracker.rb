@@ -24,4 +24,9 @@ class TimeTracker < ActiveRecord::Base
   def price_per_hour
     Settings.hour_with_designer_price.to_i
   end
+
+  def tracked_hours
+    designer_activities.sum(:hours)
+  end
+
 end
