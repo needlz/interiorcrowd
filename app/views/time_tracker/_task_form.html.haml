@@ -19,3 +19,7 @@
     .form-group
       = f.text_area :text, data: { default_value: DesignerActivityView::DEFAULT_VALUES[:comments][:text] }
       .error-row.text.hidden
+.col-sm-offset-9.col-sm-3.add-or-delete-task
+  %span.minus.remove-task-btn.btn &#8213;
+  %span.plus.add-more-button.btn &#43;
+  %span.text Delete task
