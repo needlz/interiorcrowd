@@ -9,7 +9,7 @@
           .signin-errors= flash[:notice].html_safe
     = form_tag login_view[:auth_path], { id: :login } do
       %span#err_u.text-error
-      %input#username{ placeholder: t('login.email'), type: 'text', name: 'username' }/
+      %input#username{ placeholder: t('login.email'), type: 'email', name: 'username' }/
       %span#err_p.text-error
       %input#password{ placeholder: t('login.password'), type: 'password', name: 'password' }/
       .row

@@ -7,12 +7,7 @@ $(document).ready ->
     if password.length < 1
       $("#err_p").text "Please enter password."
       bool = "password"
-    if username.length > 1
-      regex = window.emailRegex
-      unless regex.test(username)
-        $("#err_u").text "Please enter valid email."
-        bool = "username"
-    else
+    if username.length < 1
       $("#err_u").text "Please enter email."
       bool = "username"
     if bool
