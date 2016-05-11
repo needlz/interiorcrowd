@@ -31,7 +31,7 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 
 gem 'figaro'
-gem 'hamlit'
+gem 'haml'
 gem 'devise'
 gem 'jquery-ui-rails'
 gem 'aws-sdk', '< 2.0' # incompatibility with SDK v2
