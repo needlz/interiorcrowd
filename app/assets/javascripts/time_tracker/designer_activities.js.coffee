@@ -110,6 +110,7 @@ class @ActivityEditor
     $group.find('> .collapse').collapse('show')
 
     $task.remove()
+    addTaskForm() unless hasAnyTasksFroms()
 
   updateGroupTitles = (groupTitlesJson)->
     for group_title in groupTitlesJson
@@ -148,7 +149,10 @@ class @ActivityEditor
     cancelActivityButton().click ->
       closeActivityForm()
       removeBlankTasks()
-      addTaskForm() unless activityForm().find('.task[data-temporary-id]:not(.template)').length
+      addTaskForm() unless hasAnyTasksFroms()
+
+  hasAnyTasksFroms = ->
+    activityForm().find('.task[data-temporary-id]:not(.template)').length
 
   removeBlankTasks = ->
     tasks = activityForm().find('.task[data-temporary-id]:not(.template)')
