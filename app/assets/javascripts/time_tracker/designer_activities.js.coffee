@@ -15,6 +15,7 @@ class @ActivityEditor
     activityForm().find('#designer_activity_hours').ForceNumericOnly()
     @setupDatePickers()
     @bindNewTaskButton()
+    @bindRemoveTaskButton()
     closeActivityForm()
 
 
@@ -32,7 +33,12 @@ class @ActivityEditor
     )
 
   @bindNewTaskButton: ->
-    $('.designer-activity-form .designer-activity-form-add-more-button').click addTaskForm
+    activityForm().on 'click', '.add-more-button', (event) ->
+      addTaskForm(event)
+
+  @bindRemoveTaskButton: ->
+    $('.designer-activity-form').on 'click', '.remove-task-btn', (event) ->
+      removeTaskForm(event.target)
 
   addTaskForm = (event)->
     $form = activityForm()
@@ -44,6 +50,12 @@ class @ActivityEditor
     $newTask.removeClass('template')
 
     $form.find('.tasks').append($newTask)
+
+    toggleRemoveTaskButtonVisibility()
+
+  removeTaskForm = (button)->
+    $(button).closest('.task').remove()
+    toggleRemoveTaskButtonVisibility()
 
   onCommentUncollapsed = (event)->
     $target = $(event.target)
@@ -146,6 +158,7 @@ class @ActivityEditor
       else
         activityDescription().hide()
         activityForm().show()
+        toggleRemoveTaskButtonVisibility()
     cancelActivityButton().click ->
       closeActivityForm()
       removeBlankTasks()
@@ -172,6 +185,23 @@ class @ActivityEditor
 
   noActivities = ->
     activities().find('.activity[data-id]').length < 1
+
+  toggleRemoveTaskButtonVisibility = ->
+    $tasks = tasks()
+    $tasks.find('.remove-task-btn').show()
+    $tasks.find('.text').text('Delete task')
+
+    $tasks.find('.add-more-button').hide()
+    $tasks.last().find('.add-more-button').show()
+
+    if $tasks.length == 1
+      $tasks.find('.remove-task-btn').hide()
+      $tasks.find('.text').text('Add task')
+    else
+      $tasks.last().find('.text').text('Add or delete task')
+
+  tasks = ->
+    activityForm().find('.task:not(.template)')
 
   activities = ->
     $('.activities')
