@@ -17,6 +17,7 @@ class @ActivityEditor
     @bindNewTaskButton()
     closeActivityForm()
 
+
   @setupDatePickers: ->
     activityForm().find('#designer_activity_start_date').datetimepicker(
       format: 'MM/DD/YYYY'
@@ -113,7 +114,7 @@ class @ActivityEditor
   updateGroupTitles = (groupTitlesJson)->
     for group_title in groupTitlesJson
       $group = groupById(group_title.group_id)
-      $group.find('> .title').replaceWith(group_title.title_html)
+      $group.find('> .title').html(group_title.title_html)
 
   groupById = (id)->
     activities().find(".group[data-id=#{ id }]")
