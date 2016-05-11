@@ -4,6 +4,14 @@ class DesignerActivityView
 
   delegate :id, :hours, :task, :start_date, :due_date, to: :designer_activity
 
+  DEFAULT_VALUES = {
+    hour: 1,
+    task: '',
+    comments: {
+      text: ''
+    }
+  }
+
   def initialize(designer_activity, spectator)
     @designer_activity = designer_activity
     @spectator = spectator

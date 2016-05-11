@@ -7,7 +7,6 @@ class TimeTrackerAttachmentsController < ApplicationController
       @time_tracker.attachments << attachment
     rescue StandardError => exception
       log_error(exception)
-      logger.error exception
     end
     respond_to do |format|
       format.json do

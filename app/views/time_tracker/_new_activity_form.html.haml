@@ -1,7 +1,7 @@
 .designer-activity-form.col-xs-12
   = form_for DesignerActivityForm.new, { url: creation_route, method: 'post', remote: true } do |f|
     .col-sm-3.field-name
-      %h5= 'date'
+      %h5= t('.date')
     .col-sm-4
       .form-group
         #designer_activity_start_date.input-group.date
@@ -10,7 +10,7 @@
             %span.glyphicon.glyphicon-calendar
         .error-row.start_date.hidden
     .col-sm-1.due-date-name
-      %p= 'to'
+      %p= t('.to')
     .col-sm-4
       .form-group
         #designer_activity_due_date.input-group.date
@@ -28,7 +28,7 @@
         .task{ data: { temporary_id: 0 } }
           = render 'time_tracker/task_form', f: f
     .col-sm-offset-3.col-sm-6
-      = f.submit 'Submit', class: 'btn designer-activity-form-submit-button', data: { disable_with: 'Saving...' }
-      %span.btn.designer-activity-form-cancel-button Cancel
+      = f.submit 'Submit', class: 'btn designer-activity-form-submit-button', data: { disable_with: t('.saving') }
+      %span.btn.designer-activity-form-cancel-button= t('.cancel')
     .col-sm-3.designer-activity-form-add-more-button
-      %span.btn + Add more task
+      %span.btn= t('.add_more_task')
