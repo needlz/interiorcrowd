@@ -11,7 +11,10 @@ class CreateDesignerActivities < Action
   def perform
     @result = activity_form.activities_params.map do |activity_params|
       activity = DesignerActivity.new(designer_activity_params(activity_params))
-      if activity.save
+      if (time_tracker.tracked_hours + activity.hours) > time_tracker.hours_actual
+        activity.errors.add(:hours, 'Hours spent on tasks can\'t exceed those purchased by client')
+      end
+      if activity.errors.empty? && activity.save
         comment_attributes = activity_params.try(:[], :comments)
         if activity.persisted? && comment_attributes.try(:[], :text).present?
           activity.comments.create(comment_attributes.merge(author: user))
