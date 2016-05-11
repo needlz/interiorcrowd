@@ -15,7 +15,8 @@ class DesignerActivityCreationResult
     @groups_holder = DesignerActivitiesGrouper.new(activities_views, time_tracker)
     groups_titles_html = groups_holder.groups.map { |group|
       { group_id: group.group_id,
-        title_html: view_context.render(partial: 'time_tracker/activities_group_title', locals: { group_view: group }) }
+        title_html: view_context.render(partial: 'time_tracker/activities_group_title', locals: { group_view: group,
+                                                                                                  collapsed: false }) }
     }
 
     responses = creation_result.map do |activity_creation_result|

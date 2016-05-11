@@ -1,7 +1,5 @@
-.title.collapsed{ data: { parent: "#accordion", toggle: "collapse" }, href: "#group-collapse#{ group_view.group_id }",
-        role: "tab", id: "group-heading#{ group_view.group_id }" }
-  .date-range= group_view.group_title
-  .line-and-icon
-    .collapse-icon
-    .line
-      .hours-left= t('.hours_left', count: group_view.hours_left)
+.date-range= group_view.group_title
+.line-and-icon
+  .collapse-icon
+  .line
+    .hours-left= t('.hours_left', count: group_view.hours_left)
