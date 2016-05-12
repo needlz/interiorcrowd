@@ -1897,4 +1897,5 @@ en:
       task: task
       hour: hour
       comment: comment
+      delete_task: delete task
 

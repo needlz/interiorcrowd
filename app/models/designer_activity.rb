@@ -16,9 +16,10 @@ class DesignerActivity < ActiveRecord::Base
 
   belongs_to :time_tracker
   has_many :comments, class_name: 'DesignerActivityComment'
+  normalize_attributes :task
 
-  validates_presence_of :hours, :start_date, :due_date, :task
-  validate :due_date_after_start_date
+  validates_presence_of :hours, :start_date, :due_date, :task, message: "Following field can't be blank"
+  validate :due_date_after_start_date, :dates_in_week_range
 
   private
 
@@ -28,4 +29,9 @@ class DesignerActivity < ActiveRecord::Base
     end
   end
 
+  def dates_in_week_range
+    if due_date && start_date && (due_date.day - start_date.day > 7)
+       errors.add(:due_date, 'Please add one week at a time.')
+    end
+  end
 end

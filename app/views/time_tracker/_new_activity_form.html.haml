@@ -1,5 +1,7 @@
 .designer-activity-form.col-xs-12
   = form_for DesignerActivityForm.new, { url: creation_route, method: 'post', remote: true } do |f|
+    .col-sm-offset-8.col-sm-4
+      .error-row.due_date.hidden
     .col-sm-3.field-name
       %h5= t('.date')
     .col-sm-4
@@ -17,7 +19,6 @@
           = f.text_field :due_date
           %span.input-group-addon
             %span.glyphicon.glyphicon-calendar
-        .error-row.due_date.hidden
     .clearfix
     %fieldset{ disabled: 'disabled' }
       = f.fields_for :tasks, DesignerActivity.new(hours: 1), child_index: 'new_item' do |f|
