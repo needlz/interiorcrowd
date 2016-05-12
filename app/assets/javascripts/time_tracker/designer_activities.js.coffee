@@ -78,6 +78,7 @@ class @ActivityEditor
 
   onSubmitted = (event, response)->
     addActivities(response)
+    toggleRemoveTaskButtonVisibility()
 
   onCommentSubmitted = (event, response)->
     $commentForm = $(event.target)
@@ -103,10 +104,15 @@ class @ActivityEditor
         updateActivity($task, activity)
     closeActivityForm() if noErrors
 
-  handleValidationError = ($task, errorJosn)->
-    for field, messages of errorJosn
+  handleValidationError = ($task, errorJson)->
+    console.log(errorJson)
+    for field, messages of errorJson
+      if field == 'due_date'
+        activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+        $('#designer_activity_start_date').addClass('input-error-border')
+        $('#designer_activity_due_date').addClass('input-error-border')
       $task.find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
-      activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
+      $task.find('input').filter(".#{ field }").addClass('input-error-border')
 
   updateActivity = ($task, activityJson)->
     $group = activities().find(".group[data-id=#{ activityJson.group_id }]")
@@ -201,13 +207,14 @@ class @ActivityEditor
       $tasks.last().find('.text').text('Add or delete task')
 
   tasks = ->
-    activityForm().find('.task:not(.template)')
+    activityForm().find('.task[data-temporary-id]:not(.template)')
 
   activities = ->
     $('.activities')
 
   clearErrorMessages = ->
     activityForm().find('.error-row').addClass('hidden')
+    activityForm().find('.input-error-border').removeClass('input-error-border')
 
 $ ->
   ActivityEditor.init()

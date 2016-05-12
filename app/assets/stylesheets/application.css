@@ -51,5 +51,6 @@
  *= require footer
  *= require breadcrumbs
  *= require bootstrap-datetimepicker
+ *= require validation
  *= require rooms
  */
