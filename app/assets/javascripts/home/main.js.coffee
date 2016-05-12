@@ -8,27 +8,30 @@ updateSizes = ->
 
 initClientSlider = ->
   $('.client-stories-slider').slick
-    dots: true,
-    infinite: true,
-    speed: 0,
-    fade: true,
-    cssEase: 'ease',
-    slidesToShow: 1,
+    dots: true
+    lazyLoad: 'ondemand'
+    infinite: true
+    speed: 0
+    fade: true
+    cssEase: 'ease'
+    slidesToShow: 1
     slidesToScroll: 1
 
 initClientBgSlider = ->
   $('.client-bg-slider').slick
-    dots: false,
-    infinite: true,
-    speed: 300,
-    fade: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    dots: false
+    lazyLoad: 'ondemand'
+    infinite: true
+    speed: 300
+    fade: true
+    slidesToShow: 1
+    slidesToScroll: 1
     draggable: false
 
 initDesignerSlider = ->
   $('.designers-slider').slick
     dots: true
+    lazyLoad: 'ondemand'
     infinite: false
     speed: 300
     slidesToShow: 3

@@ -11,7 +11,7 @@
     .theDesigner
       .design-example{ style: "background-image: url('/assets/our_designers/design-#{ index + 1 }.jpg');" }
       .image-container
-        %img{ src: "/assets/our_designers/personal-#{ index + 1 }.png" }
+        %img{ "data-lazy": "/assets/our_designers/personal-#{ index + 1 }.png" }
         %h4= designer[:name]
       .clearfix
       %p= designer[:wording]

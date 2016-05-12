@@ -13,7 +13,7 @@
             %div
               .client-stories-slider-outer
                 .client-stories-slider-inner
-                  %img{ src: "/assets/client_stories/#{ story[:name].downcase }-personal.png" }
+                  %img{ "data-lazy": "/assets/client_stories/#{ story[:name].downcase }-personal.png" }
                   %h4= story[:name].possessive + t('home.client_stories.story_title_constant_part')
                   .slider-delimiter
                   %p= story[:wording]
