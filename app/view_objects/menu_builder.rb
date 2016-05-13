@@ -2,8 +2,10 @@ class MenuBuilder
 
   class MenuItem
 
-    def initialize(name, href_or_children)
+    def initialize(name, href_or_children, options = nil)
       @name = name
+      options ||= { target: '_self' }
+      @target = options[:target]
       if href_or_children.kind_of?(Hash)
         set_children href_or_children.map{ |child_name, content| MenuItem.new(child_name, content) }
       elsif href_or_children.kind_of?(Navigation::Base)
@@ -13,7 +15,7 @@ class MenuBuilder
       end
     end
 
-    attr_reader :name, :href, :children, :identifier
+    attr_reader :name, :href, :children, :identifier, :target
 
     private
 
@@ -29,8 +31,8 @@ class MenuBuilder
     append(links) if links
   end
 
-  def append(links)
-    items_to_append = links.map{ |name, content| MenuItem.new(name, content) }
+  def append(links, common_link_options = nil)
+    items_to_append = links.map{ |name, content| MenuItem.new(name, content, common_link_options) }
     @items.concat(items_to_append)
   end
 
