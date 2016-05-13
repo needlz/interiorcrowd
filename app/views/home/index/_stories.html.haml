@@ -4,7 +4,8 @@
   .client-bg-slider-wrapper
     .client-bg-slider
       - todays_client_stories.each do |story|
-        .client-bg-slide{ style: "background: url('/assets/client_stories/designed-for-#{ story[:name].downcase }.jpeg') no-repeat center; background-size: cover;" }
+        .client-bg-slide{ "data-original":"/assets/client_stories/designed-for-#{ story[:name].downcase }.jpeg",
+                          style: "background: url('/assets/client_stories/designed-for-helene.jpeg') no-repeat center; background-size: cover;" }
   .container
     .row
       .col-xs-12.col-xs-offset-0.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.col-lg-4.col-lg-offset-8

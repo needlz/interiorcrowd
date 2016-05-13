@@ -9,7 +9,8 @@
 
   - t('home.our_network.designers').each_with_index do |designer, index|
     .theDesigner
-      .design-example{ style: "background-image: url('/assets/our_designers/design-#{ index + 1 }.jpg');" }
+      .design-example{ "data-original": "/assets/our_designers/design-#{ index + 1 }.jpg",
+                       style: "background-image: url('/assets/our_designers/design-1.jpg');" }
       .image-container
         %img{ "data-lazy": "/assets/our_designers/personal-#{ index + 1 }.png" }
         %h4= designer[:name]

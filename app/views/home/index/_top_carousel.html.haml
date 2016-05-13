@@ -8,20 +8,20 @@
   / Wrapper for slides
   .carousel-inner{:role => "listbox"}
     .item
-      .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
-                                url("/assets/bedroom1.jpg") center center no-repeat; background-size: cover;' }
+      .image-container{ "data-original": "/assets/come_home.jpg", style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
+                                 center center no-repeat; background-size: cover;' }
       = render 'home/index/carousel_shared_content'
     .item.active
       .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
                                 url("/assets/come_home.jpg") center center no-repeat; background-size: cover;' }
       = render 'home/index/carousel_shared_content'
     .item
-      .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
-                                url("/assets/Helene03.jpg") center; background-size: cover;' }
+      .image-container{ "data-original": "/assets/Helene03.jpg", style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
+                                 center; background-size: cover;' }
       = render 'home/index/carousel_shared_content'
     .item
-      .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
-                                url("/assets/Livingroom04.jpg") center; background-size: cover;' }
+      .image-container{ "data-original": "/assets/Livingroom04.jpg", style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
+                                 center; background-size: cover;' }
       = render 'home/index/carousel_shared_content'
   / Controls
   %a.left.carousel-control{"data-slide" => "prev", :href => "#topCarouselHome", :role => "button"}
