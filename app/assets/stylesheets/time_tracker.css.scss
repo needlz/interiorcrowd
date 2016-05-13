@@ -226,6 +226,7 @@
           border: 1px solid #ECECEC;
           padding: 0 10px;
           height: 35px;
+          outline: none;
         }
         p {
           margin: 10px auto 0;
@@ -238,12 +239,14 @@
           width: 100%;
           border: 1px solid #ECECEC;
           resize: none;
+          outline: none;
         }
 
         input[type=number] {
           height: 35px;
           border: #E9E9E9 solid 1px;
           width: 100%;
+          outline: none;
         }
 
         .error-row {
