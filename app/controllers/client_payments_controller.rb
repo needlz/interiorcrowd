@@ -7,7 +7,7 @@ class ClientPaymentsController < ApplicationController
       @contest = @client.contests.not_paid.find_by_id(params[:contest_id])
       unless @contest
         if @already_charged_contest = @client.contests.find(params[:contest_id])
-          return redirect_to payment_summary_contests_path(id: @already_charged_contest.id)
+          return redirect_to payment_summary_contests_path
         end
       end
     rescue ActiveRecord::RecordNotFound => e
@@ -30,9 +30,9 @@ class ClientPaymentsController < ApplicationController
     rescue StandardError => e
       log_error(e)
       flash[:error] = e.message
-      redirect_to payment_details_contests_path(id: contest.id)
+      redirect_to payment_details_contests_path
     else
-      redirect_to payment_summary_contests_path(id: contest.id)
+      redirect_to payment_summary_contests_path
     end
   end
 

@@ -1,4 +1,4 @@
-class ContestUpdater
+class ContestUpdater < Action
 
   attr_reader :contest_submission
 

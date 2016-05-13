@@ -151,40 +151,58 @@ RSpec.describe ContestsController do
         contest
       end
 
-      context 'when automatic payment enabled' do
+      context 'when contest_id cookie is not set' do
+        it 'redirects to client center' do
+          get :payment_details
+          expect(response).to redirect_to(client_center_path)
+        end
+      end
+
+      context 'when there is contest_id cookie is set' do
         before do
-          allow(Settings).to receive(:automatic_payment) { true }
+          cookies[:contest_id] = contest.id
         end
 
-        context 'when contest not paid' do
-          context 'when valid id passed' do
-            let(:id) { contest.id }
-
-            it 'renders page' do
-              get :payment_details, id: id
-              expect(response).to render_template(:payment_details)
-            end
-          end
-
-          context 'invalid id passed' do
-            it 'returns 404' do
-              get :payment_details, id: 0
-              expect(response).to have_http_status(:not_found)
-            end
-          end
-        end
-
-        context 'when contest paid' do
+        context 'when automatic payment enabled' do
           before do
-            Fabricate(:client_payment, contest: contest)
+            allow(Settings).to receive(:automatic_payment) { true }
           end
 
-          it 'redirects to payment summary' do
-            get :payment_details, id: contest.id
-            expect(response).to redirect_to(payment_summary_contests_path(id: contest.id))
+          context 'when contest not paid' do
+            context 'when valid id passed' do
+              let(:id) { contest.id }
+
+              it 'renders page' do
+                get :payment_details
+                expect(response).to render_template(:payment_details)
+              end
+            end
+
+            context 'invalid id passed' do
+              before do
+                cookies[:contest_id] = 0
+              end
+
+              it 'returns 404' do
+                get :payment_details
+                expect(response).to have_http_status(:not_found)
+              end
+            end
+          end
+
+          context 'when contest paid' do
+            before do
+              Fabricate(:client_payment, contest: contest)
+            end
+
+            it 'redirects to payment summary' do
+              get :payment_details
+              expect(response).to redirect_to(payment_summary_contests_path)
+            end
           end
         end
       end
+
     end
 
     context 'user is not logged in' do
@@ -257,7 +275,7 @@ RSpec.describe ContestsController do
 
           it 'redirect to credit cards page' do
             post :save_preview, contest_options_source
-            expect(response).to redirect_to(payment_details_contests_path(id: client.contests.last.id))
+            expect(response).to redirect_to(payment_details_contests_path)
           end
         end
       end
@@ -431,7 +449,8 @@ RSpec.describe ContestsController do
           context 'when credit card details not present' do
             it 'redirects to payment details page' do
               get :show, id: contest.id
-              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+              expect(cookies[:contest_id]).to eq contest.id
+              expect(response).to redirect_to(payment_details_contests_path)
             end
           end
         end
@@ -597,7 +616,7 @@ RSpec.describe ContestsController do
           context 'when credit cards not saved' do
             it 'redirects to payment details page' do
               get :show, id: contest.id
-              expect(response).to redirect_to(payment_details_contests_path(id: contest.id))
+              expect(response).to redirect_to(payment_details_contests_path)
             end
           end
         end
@@ -760,7 +779,8 @@ RSpec.describe ContestsController do
           end
 
           it 'returns page' do
-            get :payment_summary, id: contest.id
+            cookies[:contest_id] = contest.id
+            get :payment_summary
             expect(response).to render_template(:payment_summary)
           end
         end
@@ -784,7 +804,8 @@ RSpec.describe ContestsController do
           end
 
           it 'returns page' do
-            get :payment_summary, id: contest.id
+            cookies[:contest_id] = contest.id
+            get :payment_summary
             expect(response).to render_template(:payment_summary)
           end
         end

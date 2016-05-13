@@ -1,5 +1,5 @@
 - if @development_scenarios
   - @development_scenarios.each_with_index do |scenario, index|
-    %a{ href: development_scenario_path(scenario_class: scenario[:scenario_class].name, scenario_method: scenario[:scenario_method]) }= scenario[:name]
+    %a{ href: scenario[:scenario_class].path(self, scenario_method: scenario[:scenario_method]) }= scenario[:name]
     - unless index == @development_scenarios.length - 1
       *

@@ -1,8 +1,7 @@
 class CreateClientHelper < TestHelperBase
 
-  def initialize(controller, session)
-    @controller = controller
-    @session = session
+  def self.path(view_context, params)
+    view_context.development_scenario_path({ scenario_class: name }.merge(params))
   end
 
   def create_with_contest
