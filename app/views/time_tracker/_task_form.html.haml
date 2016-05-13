@@ -1,4 +1,4 @@
-.col-sm-3.field-name
+.col-xs-3.field-name
   %h5= t('.task')
 .col-sm-9
   .form-group
@@ -7,10 +7,10 @@
 .clearfix
 .col-sm-3.field-name
   %h5= t('.hour')
-.col-sm-2
+.col-sm-2.col-xs-4
   .form-group
     = f.number_field :hours, min: 1, class: 'hours', data: { default_value: DesignerActivityView::DEFAULT_VALUES[:hours] }
-.error-row.hours.hidden.col-sm-7
+.error-row.hours.hidden.col-sm-7.col-xs-8
 .clearfix
 = f.fields_for :comments do |f|
   .col-sm-3.field-name

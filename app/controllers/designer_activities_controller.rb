@@ -7,7 +7,8 @@ class DesignerActivitiesController < ApplicationController
       activity_form = DesignerActivityForm.new(params)
 
       activities_creation_results = CreateDesignerActivities.perform(activity_form: activity_form,
-                                                                      time_tracker: tracker).result
+                                                                      time_tracker: tracker,
+                                                                      user: current_user).result
     rescue StandardError => e
       log_error(e)
       render status: :server_error, json: t('time_tracker.designer.request_send_error')
