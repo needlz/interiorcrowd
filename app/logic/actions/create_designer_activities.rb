@@ -12,7 +12,7 @@ class CreateDesignerActivities < Action
     @result = activity_form.activities_params.map do |activity_params|
       activity = DesignerActivity.new(designer_activity_params(activity_params))
       activity.validate
-      if (time_tracker.tracked_hours + activity.hours) > time_tracker.hours_actual
+      if activity.hours && (time_tracker.tracked_hours + activity.hours) > time_tracker.hours_actual
         activity.errors.add(:hours, 'Hours spent on tasks can\'t exceed those purchased by client')
       end
       if activity.errors.empty? && activity.save

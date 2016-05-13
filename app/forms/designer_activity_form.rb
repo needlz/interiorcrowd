@@ -20,6 +20,9 @@ class DesignerActivityForm
         @params = ActionController::Parameters.new(activity_or_params)
         begin
           @params[:designer_activity][:start_date] = Date.strptime(params[:designer_activity][:start_date], "%m/%d/%Y")
+        rescue ArgumentError
+        end
+        begin
           @params[:designer_activity][:due_date] = Date.strptime(params[:designer_activity][:due_date], "%m/%d/%Y")
         rescue ArgumentError
         end

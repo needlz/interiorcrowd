@@ -5,7 +5,6 @@ class DesignerActivityCommentsController < ApplicationController
     activity = tracker.designer_activities.find(params[:designer_activity_id])
 
     comment_params = DesignerActivityCommentForm.new(params).comment_params
-
     activity.comments.create(comment_params.merge(author: current_user))
 
     if activity
