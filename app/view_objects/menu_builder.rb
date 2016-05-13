@@ -4,7 +4,8 @@ class MenuBuilder
 
     def initialize(name, href_or_children, options = nil)
       @name = name
-      options.present? ? @target = options[:target] : @target = '_self'
+      options ||= { target: '_self' }
+      @target = options[:target]
       if href_or_children.kind_of?(Hash)
         set_children href_or_children.map{ |child_name, content| MenuItem.new(child_name, content) }
       elsif href_or_children.kind_of?(Navigation::Base)
