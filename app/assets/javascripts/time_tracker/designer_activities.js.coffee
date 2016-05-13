@@ -107,7 +107,7 @@ class @ActivityEditor
   handleValidationError = ($task, errorJson)->
     console.log(errorJson)
     for field, messages of errorJson
-      if field == 'due_date'
+      if field == 'due_date' || field == 'start_date'
         activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
         $('#designer_activity_start_date').addClass('input-error-border')
         $('#designer_activity_due_date').addClass('input-error-border')

@@ -243,6 +243,7 @@
         input[type=number] {
           height: 35px;
           border: #E9E9E9 solid 1px;
+          width: 100%;
         }
 
         .error-row {
@@ -1075,12 +1076,6 @@
 
   .designer-activity {
     .container {
-      .designer-activity-form {
-        .field-name {
-          padding-left: 5px;
-        }
-      }
-
       .new_designer_activity_comment {
         input[type=submit] {
           width: 100%;
@@ -1135,8 +1130,12 @@
 
 .new_designer_activity  {
 
-  .error-row.due_date {
+  .error-row.due_date, .error-row.start_date {
     float: right;
+  }
+
+  .error-row.start_date {
+    margin-right: -10px;
   }
 
   .task {
@@ -1167,6 +1166,7 @@
       .add-more-button {
         background: transparent;
         margin-left: 10px;
+        margin-bottom: 15px;
         color: #e1e1e1;
         border: 1px solid #e1e1e1;
         border-radius: 15px;
@@ -1182,6 +1182,36 @@
       }
     }
   }
+}
+@media (max-width: 767px) {
+  .new_designer_activity  {
+    .error-row.due_date, .error-row.start_date {
+      margin-top: 10px;
+    }
+    .task {
+      .error-row.task {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  .new_designer_activity  {
+    .error-row {
+      font-size: 12px !important;
+    }
+  }
+}
+
+@media (max-width: 586px) {
+  .new_designer_activity {
+    .task {
+      .error-row.hours {
+        padding: 0 15px;
+      }
+    }
+  }
+
 }
 
 .designer-activity span.input-group-addon {
