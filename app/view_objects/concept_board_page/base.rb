@@ -57,8 +57,7 @@ class ConceptBoardPage::Base < PhasesHolder
   end
 
   def final_notes
-    @final_notes ||= (contest_request.comments + contest_request.contest.notes.by_client + contest_request.final_notes).
-        sort_by(&:created_at).map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
+    @final_notes ||= FinalNotesQuery.new(contest_request).all.map { |comment| ConceptBoardCommentView.new(comment, contest_request.designer) }
   end
 
   def image_items_partial
