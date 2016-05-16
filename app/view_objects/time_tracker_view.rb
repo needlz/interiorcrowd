@@ -1,6 +1,6 @@
 class TimeTrackerView
 
-  delegate :hours_actual, :hours_suggested, :contest, :price_per_hour, :designer_activities, to: :time_tracker
+  delegate :hours_actual, :hours_suggested, :contest, :price_per_hour, :designer_activities, :tracked_hours, to: :time_tracker
 
   def initialize(time_tracker, hours_to_buy = nil)
     @time_tracker = time_tracker
@@ -29,6 +29,10 @@ class TimeTrackerView
 
   def attachments?
     time_tracker.attachments.present?
+  end
+
+  def hours_left
+    hours_actual - tracked_hours
   end
 
   attr_reader :time_tracker, :hours_to_buy
