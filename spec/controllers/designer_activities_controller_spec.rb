@@ -14,7 +14,6 @@ RSpec.describe DesignerActivitiesController, type: :controller do
 
     context 'when tracked hours count does not exceed client\'s hours' do
       it 'returns http success' do
-        puts time_tracker.hours_actual
         expect { post(:create,
                       contest_id: contest.id,
                       designer_activity:
@@ -32,7 +31,6 @@ RSpec.describe DesignerActivitiesController, type: :controller do
             change{ time_tracker.designer_activities.count }.
               from(0).to(2)
           )
-        puts time_tracker.reload.hours_actual
         expect(response).to have_http_status(:success)
       end
 
