@@ -44,6 +44,14 @@ RSpec.describe SelectWinner do
     end.to raise_error(ActiveRecord::RecordInvalid)
   end
 
+  it 'creates time tracker for contest' do
+    expect(contest.time_tracker).to be_nil
+
+    SelectWinner.perform(contest_request)
+
+    expect(contest.reload.time_tracker).to be_present
+  end
+
   context 'on concurrent calls', concurrent: true do
     let(:contest_request) { Fabricate(:contest_request, contest: contest, lookbook: Fabricate(:lookbook)) }
 

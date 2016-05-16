@@ -46,6 +46,8 @@ gem 'rails_autolink'
 gem 'email_validator'
 gem 'active_record_union'
 gem 'jquery-slick-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

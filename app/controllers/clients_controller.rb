@@ -34,13 +34,13 @@ class ClientsController < ApplicationController
       return redirect_to ContestCreationWizard.incomplete_step_path(@contest)
     end
     @contest_view = ContestView.new(contest_attributes: @contest)
-    @navigation = Navigation::ClientCenter.new(:brief, contest: @contest)
     @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@contest).brief(@contest)
+    @navigation = "Navigation::ClientCenter::#{ @contest.status.camelize }".constantize.new(:brief, contest: @contest)
     render 'clients/client_center/brief'
   end
 
   def profile
-    @navigation = Navigation::ClientCenter.new(:profile)
+    @navigation = Navigation::ClientCenter::Base.new(:profile)
     render 'clients/client_center/profile'
   end
 
@@ -71,7 +71,7 @@ class ClientsController < ApplicationController
   def pictures_dimension
     @contest = @client.last_contest
     @contest_view = ContestView.new(contest_attributes: @contest)
-    @navigation = Navigation::ClientCenter.new(:entries)
+    @navigation = "Navigation::ClientCenter::#{ @contest.status.camelize }".constantize.new(:entries)
     render 'clients/client_center/pictures_dimension'
   end
 

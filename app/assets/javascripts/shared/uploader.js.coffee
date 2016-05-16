@@ -62,7 +62,7 @@ class Uploader
     themeClass = @options.thumbs.theme
     if themeClass
       @thumbsTheme = new themeClass(@$container, @$imageIds)
-      @thumbsTheme.onRemoved = @options.thumbs.onRemoved
+      @thumbsTheme.onRemoved = @options.thumbs.onRemoved unless @thumbsTheme.onRemoved
       @thumbsTheme.init()
 
     @bindUploadScript()
@@ -163,7 +163,7 @@ class @RemovableThumbsTheme extends ThumbsTheme
     @remove($thumbContainer)
 
   getImageId: ($thumb)->
-    $thumb.data('id')
+    $thumb.attr('data-id')
 
   remove: ($thumbContainer)->
     $thumbContainer.each (i, element)=>
@@ -194,7 +194,7 @@ class @RemovableThumbsTheme extends ThumbsTheme
     $template = @$container.find('.template')
     $container = $template.clone()
     $container.removeClass('template').addClass('thumb')
-    $container.data('id', fileInfo.id)
+    $container.attr('data-id', fileInfo.id)
     $container.find('img:first').attr('src', fileInfo.url)
     $container
 

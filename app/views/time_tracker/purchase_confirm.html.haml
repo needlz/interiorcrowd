@@ -1,0 +1,22 @@
+- content_for :head do
+  = stylesheet_link_tag 'time_tracker'
+
+.time-tracker
+  = render partial: 'client_navigation_bar', locals: { contest_id: @contest.id }
+  .time-tracker-purchase-confirm
+    %section
+    .container
+      %h3= t('time_tracker.client.confirmation.header')
+      .table-header
+        .col-sm-3.col-xs-5
+          %h5= t('time_tracker.client.confirmation.hours')
+        .col-sm-offset-5.col-sm-4.col-xs-7.col-xs-offset-0
+          %h5= t('time_tracker.client.confirmation.price_per_hour')
+      .table-content
+        .col-sm-3.col-xs-5
+          %h5= @hours
+        .col-sm-offset-5.col-sm-4.col-xs-7.col-xs-offset-0
+          %h5= @time_tracker.price_per_hour
+      %h4= t('time_tracker.client.confirmation.total', count: @time_tracker.total_price).html_safe
+      = button_to t('time_tracker.client.confirmation.confirm'), time_tracker_show_invoice_client_center_entry_path,
+        method: 'post', class: 'btn', id: 'hours-purchase-confirm', params: {hours: @hours}

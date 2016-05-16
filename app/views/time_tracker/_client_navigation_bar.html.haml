@@ -1,0 +1,7 @@
+%header
+  %h1= t('header.client_center')
+  %nav
+    = link_to t('time_tracker.tracker'), time_tracker_client_center_entry_path, class: 'active'
+    = link_to t('time_tracker.design'), client_center_entry_path(id: contest_id)
+    = link_to t('time_tracker.brief'), brief_contest_path(id: contest_id)
+    = link_to t('time_tracker.profile'), client_center_profile_path

@@ -13,7 +13,7 @@ class PortfoliosController < ApplicationController
 
   def edit
     @portfolio_view = PortfolioView.new(@portfolio)
-    @navigation = Navigation::DesignerCenter.new(:portfolio)
+    @navigation = Navigation::DesignerCenter::Base.new(:portfolio)
   end
 
   def update

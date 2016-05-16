@@ -23,6 +23,7 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require social-share-button
 //= require jquery-ui/slider
+//= require jquery-ui/datepicker
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mCustomScrollbar
 //= require lib/malihu-custom-scrollbar-plugin-3.1.3/jquery.mousewheel
 //= require lib/enscroll-0.6.1.min
@@ -38,6 +39,7 @@
 //= require lib/jquery.aw-showcase.min
 //= require lib/jquery.confirm
 //= require lib/imagesloaded.pkgd
+//= require lib/jStepper
 //= require designer_center_requests/finished
 //= require about_us
 //= require how_it_works
@@ -47,4 +49,5 @@
 //= require jquery.slick
 //= require comment_attachment
 //= require concept_board_comment_editor
-//= require lib/jquery.scrollintoview
+//= require moment
+//= require bootstrap-datetimepicker
