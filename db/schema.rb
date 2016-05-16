@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418073906) do
+ActiveRecord::Schema.define(version: 20160503155314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,6 +183,7 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.decimal  "space_height",                                      precision: 10, scale: 2
     t.integer  "design_category_id"
     t.integer  "design_space_id"
+    t.integer  "designer_level_id"
     t.string   "status",                                                                     default: "incomplete"
     t.datetime "phase_end"
     t.string   "theme",                                 limit: 255
@@ -291,6 +292,29 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.datetime "updated_at"
   end
 
+  create_table "designer_activities", force: :cascade do |t|
+    t.datetime "start_date"
+    t.datetime "due_date"
+    t.string   "task"
+    t.integer  "hours"
+    t.integer  "time_tracker_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "designer_activity_comments", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "designer_activity_id"
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "read",                 default: false
+  end
+
+  add_index "designer_activity_comments", ["author_type", "author_id"], name: "index_designer_activity_comments_on_author_type_and_author_id", using: :btree
+  add_index "designer_activity_comments", ["designer_activity_id"], name: "index_designer_activity_comments_on_designer_activity_id", using: :btree
+
   create_table "designer_levels", force: :cascade do |t|
     t.integer "level"
     t.text    "name"
@@ -353,6 +377,19 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.string   "last_name"
     t.string   "brokerage"
     t.string   "phone"
+  end
+
+  create_table "hourly_payments", force: :cascade do |t|
+    t.integer  "client_id"
+    t.string   "payment_status"
+    t.text     "last_error"
+    t.string   "stripe_charge_id"
+    t.integer  "time_tracker_id"
+    t.integer  "credit_card_id"
+    t.integer  "hours_count"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "total_price_in_cents"
   end
 
   create_table "image_items", force: :cascade do |t|
@@ -559,6 +596,23 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.datetime "updated_at"
   end
 
+  create_table "time_trackers", force: :cascade do |t|
+    t.integer  "hours_suggested", default: 0, null: false
+    t.integer  "hours_actual",    default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "contest_id"
+  end
+
+  create_table "time_trackers_attachments", force: :cascade do |t|
+    t.integer "time_tracker_id"
+    t.integer "attachment_id"
+  end
+
+  add_index "time_trackers_attachments", ["attachment_id"], name: "index_time_trackers_attachments_on_attachment_id", using: :btree
+  add_index "time_trackers_attachments", ["time_tracker_id", "attachment_id"], name: "time_trackers_on_attachments", unique: true, using: :btree
+  add_index "time_trackers_attachments", ["time_tracker_id"], name: "index_time_trackers_attachments_on_time_tracker_id", using: :btree
+
   create_table "user_notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "type",                     limit: 255
@@ -577,4 +631,7 @@ ActiveRecord::Schema.define(version: 20160418073906) do
 
   add_foreign_key "contests_design_spaces", "contests"
   add_foreign_key "contests_design_spaces", "design_spaces"
+  add_foreign_key "designer_activity_comments", "designer_activities"
+  add_foreign_key "time_trackers_attachments", "images", column: "attachment_id"
+  add_foreign_key "time_trackers_attachments", "time_trackers"
 end

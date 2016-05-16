@@ -17,7 +17,7 @@ class ClientMenu < Menu
   private
 
   def client_center_menu
-    @user_center_navigation ? @user_center_navigation.to_mobile_menu : Navigation::ClientCenter.new
+    @user_center_navigation ? @user_center_navigation.to_mobile_menu : Navigation::ClientCenter::Base.new
   end
 
 end

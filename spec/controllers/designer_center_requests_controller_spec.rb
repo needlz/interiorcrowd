@@ -73,8 +73,20 @@ RSpec.describe DesignerCenterRequestsController do
       end
     end
 
-    context 'when concept board has final image items' do
+    context 'when contest is in winner_selection state' do
+      before do
+        contest.start_winner_selection!
+      end
 
+      it 'returns page' do
+        ContestPhases.indices.each do |index|
+          get :show, id: submitted_request.id, view: index
+          expect(response).to render_template(:show)
+        end
+      end
+    end
+
+    context 'when concept board has final image items' do
       before do
         Fabricate.times(15, :product_item, contest_request: concept_board, status: 'published', phase: 'final_design')
       end

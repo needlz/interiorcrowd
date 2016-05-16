@@ -1,0 +1,25 @@
+.col-xs-3.field-name
+  %h5= t('.task')
+.col-sm-9
+  .form-group
+    .error-row.task.hidden
+    = f.text_field :task, class: 'task', data: { default_value: DesignerActivityView::DEFAULT_VALUES[:task] }
+.clearfix
+.col-sm-3.field-name
+  %h5= t('.hour')
+.col-sm-2.col-xs-4
+  .form-group
+    = f.number_field :hours, min: 1, class: 'hours', data: { default_value: DesignerActivityView::DEFAULT_VALUES[:hours] }
+.error-row.hours.hidden.col-sm-7.col-xs-8
+.clearfix
+= f.fields_for :comments do |f|
+  .col-sm-3.field-name
+    %h5= t('.comment')
+  .col-sm-9
+    .form-group
+      = f.text_area :text, data: { default_value: DesignerActivityView::DEFAULT_VALUES[:comments][:text] }
+      .error-row.text.hidden
+.col-sm-offset-9.col-sm-3.add-or-delete-task
+  %span.minus.remove-task-btn.btn &#8213;
+  %span.plus.add-more-button.btn &#43;
+  %span.text= t('.delete_task')

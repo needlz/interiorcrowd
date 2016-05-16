@@ -1,0 +1,22 @@
+:scss
+
+  .collapse-icon{
+    float: right;
+  }
+
+.group{ data: { id: group_view.group_id } }
+  .title{ data: { parent: "#accordion", toggle: "collapse" }, href: "#group-collapse#{ group_view.group_id }",
+        role: "tab", id: "group-heading#{ group_view.group_id }", class: ('collapsed' if collapsed) }
+    = render 'time_tracker/activities_group_title', group_view: group_view, collapsed: collapsed
+  .collapse{"aria-labelledby" => "group-heading#{ group_view.group_id }",
+      id: "group-collapse#{ group_view.group_id }", class: ('in' unless collapsed)}
+    .col-xs-12.grey-title.activitiesHeader.marg-top10
+      .col-xs-9.col-sm-11.tasks
+        Tasks
+      .col-xs-3.col-sm-1.hours
+        Hours
+    .clearfix
+    .group-activities
+      - unless defined?(header_only) && header_only
+        - group_view.activities_views.each do |activity_view|
+          = render 'time_tracker/activity', activity_view: activity_view, collapsed: true

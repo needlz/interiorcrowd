@@ -1,0 +1,45 @@
+- content_for :header do
+  %header
+    %h1= t('header.designer_center')
+    %nav
+      - @navigation.tabs.each do |tab, navigation_link|
+        = link_to navigation_link[:name], navigation_link[:href], class: @navigation.active_class(tab, 'active')
+
+- content_for :breadcrumb do
+  .tracker-breadcrumb
+    %p= @time_tracker.contest.project_name
+
+- content_for :info_container do
+  .tracker-upload-description{ style: ('display: none' if @time_tracker.attachments.present?) }
+    %p= t('time_tracker.uploader_description')
+    %label
+      %p.uploadButton= t('time_tracker.upload_file')
+      %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+      %input.fileIds{ type: 'hidden' }
+  = render 'upload', time_tracker: @time_tracker, contest: @contest
+  = render 'shared/setup_uploadify'
+
+  :coffee
+    $ ->
+      PicturesZoom.init('.tracker-upload-description .thumb .enlarge')
+      TrackerAttachmentUploader.bindUploadButton($('.tracker-upload-description'))
+      PicturesUploadButton.init
+        fileinputSelector: $('.tracker-upload-description').find('.fileinput'),
+        uploadButtonSelector: $('.tracker-upload').find('.uploadButton'),
+        thumbs:
+          container: $('.tracker-upload').find('.thumbs')
+          selector: $('.tracker-upload').find('.fileIds')
+          theme: window.TrackerAttachmentsTheme
+          I18n: window.attachmentsI18n
+
+- content_for :add_hours_submit do
+  %button.btn.hours-submit#suggest-hours{ disabled: true, url: suggest_hours_contest_time_tracker_path }
+    = t('time_tracker.send_request')
+  %p.tracker-sent-hours= t('time_tracker.designer.hours_suggested', count: @time_tracker.hours_suggested).html_safe
+
+.time-tracker#designers-tracker
+  = render 'time_tracker', tracker: @time_tracker, add_hours_header: t('time_tracker.suggest_hours')
+  - if @time_tracker.actual_hours?
+    = render 'designer_activity',
+        activities_groups_holder: @activities_groups_holder,
+        creation_route: contest_time_tracker_designer_activities_path(contest_id: @contest.id)

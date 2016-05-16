@@ -1,0 +1,1239 @@
+@media(max-width: 1199px) {
+  .time-tracker {
+    #time-tracker-description-after-purchase {
+      margin: 50px 20px;
+    }
+    section {
+      .tracker-description {
+        width: 620px;
+      }
+      .tracker-buy-hours {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media(max-width: 991px) {
+  .time-tracker {
+    #time-tracker-description-after-purchase {
+      margin: 70px 15px;
+    }
+    section {
+      .tracker-description {
+        width: 433px;
+        padding: 20px 24px;
+      }
+      .tracker-buy-hours {
+        width: 265px;
+
+        .tracker-hours-panel {
+          width: 165px;
+
+          input {
+            width: 75px;
+          }
+
+          button {
+            width: 45px
+          }
+        }
+
+        button#buy-hours {
+          width: 165px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .time-tracker {
+
+    header {
+      nav {
+        a {
+          padding: 10px 7.5px 0;
+          margin-left: 25px;
+          margin-right: 25px;
+        }
+      }
+    }
+    section {
+      .tracker-hours-amount {
+
+        h2 {
+          font-size: 22px;
+
+          span {
+            font-size: 21px;
+          }
+        }
+
+      }
+
+      .tracker-description {
+        width: 100%;
+        margin-bottom: 30px;
+      }
+
+      .tracker-buy-hours {
+        width: 100%;
+        margin-bottom: 20px;
+
+        .tracker-hours-panel {
+          width: 200px;
+
+          input {
+            width: 100px;
+          }
+
+          button {
+            width: 50px;
+          }
+        }
+
+        button#buy-hours {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .time-tracker {
+    #time-tracker-description-after-purchase {
+      margin: 90px 0;
+    }
+    header {
+      nav {
+        a {
+          padding: 10px 7.5px 0;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    section {
+      .tracker-hours-amount {
+
+        h2 {
+          font-size: 20px;
+
+          span {
+            font-size: 19px;
+          }
+        }
+
+        margin-bottom: 20px;
+      }
+
+
+      .tracker-description {
+        height: 300px;
+        padding: 15px 10px;
+        margin-bottom: 30px;
+      }
+
+      .tracker-buy-hours {
+
+        .tracker-hours-panel {
+          height: 40px;
+          width: 250px;
+
+          input {
+            width: 130px;
+          }
+          button {
+            padding: 3px 12px;
+            width: 60px;
+          }
+        }
+
+        button#buy-hours {
+          width: 250px;
+        }
+
+      }
+    }
+  }
+}
+
+.time-tracker {
+
+  margin-bottom: 380px;
+
+  #time-tracker-description-after-purchase {
+    margin: 50px 80px;
+    a {
+      color: #65b7fc;
+      font-weight: 600;
+    }
+  }
+
+  .designer-activity {
+    button {
+      outline:none;
+    }
+    margin-top: 40px;
+
+    .container {
+      .header {
+        padding-left: 0;
+
+        h3 {
+          margin:5px 0 0;
+          font-size: 20px;
+
+        }
+      }
+      .add-activity-button {
+        text-align: right;
+        padding-right: 0;
+        button {
+          text-transform: capitalize;
+          background-color: transparent;
+          border: 1px solid #4F9F6F;
+          padding: 6px 15px;
+          color: #4F9F6F;
+          border-radius: 25px;
+          cursor: pointer;
+        }
+      }
+      .activity-description {
+        margin-top: 20px;
+        border: 1px dashed #E1E1E1;
+        padding: 40px 150px;
+        text-align: center;
+        font-family: "AvenirLTStd-Roman";
+        font-size: 18px;
+        color: #c4c4c4;
+        line-height: 24px;
+      }
+      .designer-activity-form {
+        margin-top: 20px;
+        padding: 20px 100px 20px 0;
+        background: #FAFAFA;
+        border: 1px solid #ECECEC;
+        h5 {
+          color: #757575;
+          text-transform: uppercase;
+        }
+        input[type="text"] {
+          width: 100%;
+          border: 1px solid #ECECEC;
+          padding: 0 10px;
+          height: 35px;
+          outline: none;
+        }
+        p {
+          margin: 10px auto 0;
+          text-align: center;
+          color: #B3B3B3;
+        }
+
+        textarea {
+          height: 130px;
+          width: 100%;
+          border: 1px solid #ECECEC;
+          resize: none;
+          outline: none;
+        }
+
+        input[type=number] {
+          height: 35px;
+          border: #E9E9E9 solid 1px;
+          width: 100%;
+          outline: none;
+        }
+
+        .error-row {
+          color: red;
+          font-size: 13px;
+        }
+
+        .designer-activity-form-submit-button {
+          background: #409863;
+          color: white;
+          padding:5px 25px;
+          border-radius: 2px;
+        }
+        .designer-activity-form-cancel-button {
+          background: transparent;
+          color: #AFAFAF;
+          padding:5px 25px;
+          border-radius: 2px;
+          border: 1px solid #CDCDCD;
+        }
+
+        .task + .task {
+          padding: 10px;
+          clear: both;
+        }
+      }
+    }
+
+    .activitiesHeader {
+      text-transform: uppercase;
+
+      .hours {
+        text-align: center;
+      }
+    }
+    
+    .activities {
+      .group {
+
+        > .title .collapse-icon::after {
+          content: '-'
+        }
+
+        > .title.collapsed .collapse-icon::after {
+          content: '+'
+        }
+
+        > .title {
+          margin-top: 35px;
+          line-height: 35px;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+
+          .date-range {
+            color: #C8C8C8;
+            border: #C8C8C8 solid 1px;
+            padding: 0px 20px;
+            border-radius: 20px;
+            font-size: 15px;
+            text-transform: uppercase;
+            position: relative;
+            width: 8.4em;
+            float: left;
+          }
+
+
+          .line-and-icon {
+            margin-left: 131px;
+
+            .line {
+              border-top: 1px solid #c8c8c8;
+              margin-top: 18px;
+              margin-right: 33px;
+            }
+
+            .hours-left {
+              margin-top: -17px;
+              display: block;
+              background-color: white;
+              float: right;
+              padding-left: 10px;
+              text-transform: uppercase;
+              color: #c8c8c8;
+            }
+
+            .collapse-icon {
+              color: #c8c8c8;
+              border: 1px solid #c8c8c8;
+              border-radius: 5px;
+              width: 20px;
+              height: 20px;
+              text-align: center;
+              line-height: 20px;
+              margin-top: -11px;
+              float: right;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+
+      .activity {
+        border-bottom: #e1e1e1 solid 1px;
+
+        .hours {
+          text-align: center;
+          font-size: 17px;
+        }
+
+        .task {
+          font-size: 17px;
+        }
+
+        .commentsIcon {
+          color: #e1e1e1;
+          margin-left: 15px;
+
+          .glyphicon {
+            margin-right: 5px;
+            font-size: 17px;
+            top: 4px;
+          }
+
+          .commentsCount {
+            font-size: 14px;
+          }
+        }
+
+        .commentsIcon.withComments {
+          color: #3c9a65;
+        }
+
+        input[type=submit] {
+          border: none;
+          padding: 5px 25px 4px;
+          font-size: 17px;
+          margin-top: 10px;
+        }
+
+        textarea[name="designer_activity_comment[text]"] {
+          width: 100%;
+          height: 120px;
+          border: #E9E9E9 solid 1px;
+          margin-top: 15px;
+        }
+
+        .createdAt {
+          color: #9B9B9B;
+        }
+
+        .comment {
+          margin: 15px 0px;
+          border-bottom: #E5E5E5 solid 1px;
+        }
+
+        .comment.last {
+          border-bottom: none;
+          margin-bottom: 0px;
+        }
+
+        .panel-body {
+          background-color: #FAFAFA;
+          padding: 0px 10% 15px;
+        }
+      }
+    }
+
+    .activity > .title {
+      background-color: white;
+      line-height: 50px;
+      cursor: pointer;
+    }
+  }
+
+  header  {
+    text-align: center;
+    background-color: #FAFAFA;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: 1px solid transparent;
+
+    h1 {
+      text-transform: uppercase;
+      padding-top: 40px;
+      font-family: "SofiaProLight";
+      font-size: 30px;
+      color: #333333;
+      margin-bottom: 40px;
+    }
+
+    nav {
+      a {
+        padding: 10px 7.5px 0;
+        margin-left: 30px;
+        margin-right: 30px;
+        font-family: "AvenirLTStd-Roman";
+        font-size: 14px;
+        color: #8c8c8c;
+        font-weight: 500;
+        cursor: pointer;
+      }
+
+      a:hover, a.active {
+        font-family: "AvenirLTStd-Medium";
+        font-size: 14px;
+        color: #409863;
+        border-bottom: 3px solid #409863;
+        padding-bottom: 6px;
+      }
+      margin-bottom: 5px;
+    }
+
+  }
+
+  section {
+    margin:0 0px;
+
+    .tracker-breadcrumb {
+      font-weight: 400;
+      color: #c4c4c4;
+      margin: 10px 0px;
+
+      a {
+        font-family: "AvenirLTStd-Light";
+        font-size: 14px;
+        color: #409863;
+      }
+
+      p {
+        color: #333333;
+        font-size: 14px;
+        font-family: "AvenirLTStd-Light";
+        font-weight: 400;
+      }
+    }
+
+    .tracker-hours-amount {
+      text-align: center;
+      border: 1px solid #E1E1E1;
+      border-radius: 50px;
+      padding: 0px 0px;
+
+      h2 {
+        font-size: 24px;
+        font-family: "AvenirLTStd-Roman";
+        color: #666666;
+        margin: 8px auto;
+
+        span {
+          font-size: 23px;
+          color: #409863;
+          font-weight: 600;
+        }
+      }
+
+      margin-bottom: 20px;
+    }
+
+    #client-side-suggested-hours {
+      font-size: 20px;
+      color: #666666;
+      margin-bottom: 20px;
+
+      span {
+        font-size: 22px;
+        color: #409863;
+        font-weight: 600;
+      }
+    }
+
+    .tracker-description {
+      border: 1px solid #e1e1e1;
+      height: 255px;
+      padding: 40px 60px;
+      text-align: center;
+      display: inline-block;
+      width: 753px;
+      vertical-align: top;
+      float: left;
+
+      #client-side-suggested-hours {
+        margin-top: 60px;
+        margin-bottom: 0;
+      }
+
+      #after-purchase {
+        margin: 50px 80px;
+        a {
+          color: #65b7fc;
+          font-weight: 600;
+        }
+      }
+
+      h3 {
+        font-family: "AvenirLTStd-Roman";
+        font-size: 18px;
+        color: #c4c4c4;
+        text-align: center;
+        vertical-align: middle;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-family: "AvenirLTStd-Roman";
+        font-size: 16px;
+        color: #c4c4c4;
+        line-height: 24px;
+      }
+      margin-right: 20px;
+    }
+
+    .tracker-buy-hours {
+      float: right;
+      border: 1px solid #E1E1E1;
+      background-color: #FAFAFA;
+      text-align: center;
+      width: 367px;
+      height: 255px;
+      display: inline-block;
+
+      .tracker-sent-hours {
+        color: #409863;
+        display: none;
+      }
+
+      h3 {
+        text-transform: uppercase;
+        text-align: center;
+        font-family: "AvenirLTStd-Medium";
+        font-size: 18px;
+        color: #666666;
+        margin-top: 25px;
+        margin-bottom: 25px;
+      }
+
+      .tracker-hours-panel {
+        margin: 15px auto 20px;
+        width: 200px;
+        height: 50px;
+        background-color: #FAFAFA;
+
+
+        button {
+          background: #FAFAFA;
+          color: #666666;
+          width: 50px;
+          font-size: 24px;
+          border-radius: 0;
+          border: 1px solid #d7d7d7;
+          height: 100%;
+          outline:none;
+        }
+
+        input {
+          background: #FAFAFA;
+          color: #409863;
+          font-size: 24px;
+          font-family: "AvenirLTStd-Medium";
+          width: 100px;
+          border-radius: 0;
+          border-top: 1px solid #d7d7d7;
+          border-bottom: 1px solid #d7d7d7;
+          border-left: none;
+          border-right: none;
+          height: 100%;
+          text-align: center;
+          vertical-align: middle;
+          margin-left: -4px;
+          margin-right: -4px;
+        }
+
+        input[type="text"]{
+          outline:none;
+        }
+        input[type="text"]::-moz-focus-inner {
+          border: 0;
+        }
+      }
+
+      button.hours-submit {
+        text-transform: uppercase;
+        border-radius: 2px;
+        background: #409863;
+        color: #FFF;
+        font-size: 20px;
+        font-family: "AvenirLTStd-Medium";
+        width: 200px;
+        height: 50px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+@media(max-width: 1199px) {
+  .time-tracker {
+    .designer-activity {
+      .container {
+        .activity-description {
+          margin-top: 10px;
+          padding: 35px 140px;
+        }
+      }
+    }
+    #time-tracker-description-after-purchase {
+      margin: 50px 20px;
+    }
+    section {
+      .tracker-description {
+        width: 620px;
+        #after-purchase {
+          margin: 50px 20px;
+        }
+      }
+      .tracker-buy-hours {
+        width: 300px;
+      }
+    }
+  }
+}
+
+@media (min-width: 991px) {
+  .designer-activity {
+    .container {
+      .designer-activity-form {
+        .field-name {
+          padding-left: 100px;
+        }
+      }
+    }
+  }
+}
+
+@media(max-width: 991px) {
+  .time-tracker {
+
+    .designer-activity {
+      .container {
+        .activity-description {
+          margin-top: 10px;
+          padding: 35px 30px;
+        }
+      }
+    }
+    #time-tracker-description-after-purchase {
+      margin: 70px 15px;
+    }
+    section {
+      .tracker-description {
+        width: 433px;
+        padding: 20px 24px;
+        #after-purchase {
+          margin: 70px 15px;
+        }
+
+      }
+      .tracker-buy-hours {
+        width: 265px;
+
+
+        .tracker-hours-panel {
+          width: 165px;
+
+          input {
+            width: 75px;
+          }
+
+          button {
+            width: 45px;
+          }
+        }
+
+        button.hours-submit {
+          width: 165px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .time-tracker {
+    margin-bottom: 138px;
+
+    .designer-activity {
+      .container {
+        .activity-description {
+          margin-top: 10px;
+          padding: 35px 35px;
+        }
+
+        .designer-activity-form {
+          padding: 20px 0px;
+
+          .add-more-button {
+            text-align: center;
+          }
+
+          .due-date-name p {
+            text-align: left;
+          }
+        }
+      }
+    }
+
+    header {
+      nav {
+        a {
+          padding: 10px 7.5px 0;
+          margin-left: 25px;
+          margin-right: 25px;
+        }
+      }
+    }
+    section {
+      .tracker-hours-amount {
+
+        h2 {
+          font-size: 22px;
+
+          span {
+            font-size: 21px;
+          }
+        }
+
+      }
+
+      .tracker-description {
+        width: 100%;
+      }
+
+      .tracker-buy-hours {
+        width: 100%;
+        margin-bottom: 20px;
+
+        .tracker-hours-panel {
+          width: 200px;
+
+          input {
+            width: 100px;
+          }
+
+          button {
+            width: 50px;
+          }
+        }
+
+        button.hours-submit {
+          width: 200px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .time-tracker {
+    margin-bottom: 150px;
+    #time-tracker-description-after-purchase {
+      margin: 90px 0;
+    }
+
+    .designer-activity {
+      .container {
+        .header {
+          padding-left: 0;
+          h3 {
+            font-size: 16px;
+
+          }
+        }
+        .add-activity-button {
+          button {
+            font-size: 13px;
+          }
+        }
+        .activity-description {
+          margin-top: 10px;
+          padding: 30px 25px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    header {
+      nav {
+        a {
+          padding: 10px 7.5px 0;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+      }
+    }
+
+    section {
+      .tracker-hours-amount {
+
+        h2 {
+          font-size: 20px;
+
+          span {
+            font-size: 19px;
+          }
+        }
+
+        margin-bottom: 20px;
+      }
+
+
+      .tracker-description {
+        height: 300px;
+        padding: 15px 10px;
+      }
+
+      .tracker-buy-hours {
+
+        .tracker-hours-panel {
+          height: 40px;
+          width: 250px;
+
+          input {
+            width: 130px;
+          }
+          button {
+            padding: 3px 12px;
+            width: 60px;
+          }
+        }
+
+        button.hours-submit {
+          width: 250px;
+        }
+
+      }
+    }
+
+    .tracker-upload-description {
+      padding: 65px 20px !important;
+    }
+  }
+}
+
+.time-tracker-purchase-confirm {
+  .container {
+    margin-top: 50px;
+    margin-bottom: 450px;
+    max-width: 600px;
+    height: 350px;
+    text-align: center;
+
+    #hours-purchase-confirm {
+      text-transform: uppercase;
+      border-radius: 2px;
+      background: #409863;
+      color: #FFF;
+      font-size: 16px;
+      font-family: "AvenirLTStd-Medium";
+      width: 180px;
+      height: 40px;
+      margin-bottom: 20px;
+    }
+    span {
+      font-size: 22px;
+      color: #409863;
+      font-weight: 600;
+    }
+
+    h3 {
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 22px;
+      margin-bottom: 30px;
+      color:#666666;
+    }
+
+    h4 {
+      text-align: center;
+      text-transform: uppercase;
+      margin: 30px 0;
+      color:#666666;
+
+
+    }
+    .table-header {
+      height: 28px;
+
+      h5 {
+        text-transform: uppercase;
+        color: #c4c4c4;
+      }
+
+    }
+
+    .table-content {
+      height:60px;
+      margin:5px 0px;
+      padding: 14px 0;
+      border-top: 1px solid #E1E1E1;
+      border-bottom: 1px solid #E1E1E1;
+
+      h5 {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .time-tracker-purchase-confirm .container {
+    margin-bottom: 200px;
+
+    h3 {
+      font-size: 16px;
+    }
+  }
+}
+
+.time-tracker-show-invoice {
+  section {
+    margin-top: 50px;
+    text-align: center;
+    margin-bottom: 200px;
+
+    .hours-sun {
+      width: 120px;
+      height: 120px;
+      margin: -80px auto 30px;
+      text-transform: uppercase;
+      padding: 28px 15px;
+      font-size: 13px;
+      color: white;
+      font-weight: 600;
+      background: url("/assets/sun.png") no-repeat center;
+
+      span  {
+        margin: 0 30px;
+        font-size: 26px;
+      }
+    }
+
+    #time-tracker-continue {
+      border-radius: 2px;
+      background: #409863;
+      color: #FFF;
+      font-size: 22px;
+      font-family: "AvenirLTStd-Medium";
+      width: 180px;
+      height: 40px;
+    }
+
+    .container {
+      margin: 20px auto;
+      max-width: 670px;
+      text-align: center;
+      background-color: #FAFAFA;
+      padding: 50px 100px 100px;
+
+
+      h4 {
+        text-transform: uppercase;
+        text-align: center;
+        color: #333333;
+      }
+      .table-header {
+        border-bottom: 1px dashed #E1E1E1;
+      }
+
+      .payment-row {
+        text-align: center;
+        border-bottom: 1px dashed #E1E1E1;
+        padding: 20px 0;
+
+        p {
+          font-size: 15px;
+          margin-bottom: 0;
+          color:#666666;
+        }
+
+        .col:first-child{
+          font-weight: 600;
+
+          p {
+            text-align: left;
+            padding-left: 20px;
+          }
+        }
+
+        .col:last-child {
+          text-align: left;
+        }
+      }
+    }
+
+    h3 {
+      text-align: center;
+      text-transform: uppercase;
+      color: #409863;;
+    }
+    h6 {
+      text-align: center;
+      font-size: 16px;
+      color:#8c8c8c;
+    }
+  }
+}
+
+@media (max-width: 479px) {
+  .time-tracker-show-invoice {
+    section {
+      h3 {
+        padding: 0 10px;
+
+      }
+      h6 {
+        padding: 0 35px;
+      }
+      .container {
+        background-color: white;
+        padding: 50px 0 100px;
+      }
+
+      .payment-row {
+        .col:first-child{
+          padding: 0;
+        }
+      }
+    }
+  }
+
+  .designer-activity {
+    .container {
+      .new_designer_activity_comment {
+        input[type=submit] {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.how-this-work {
+  @extend .tracker-description;
+  border: 1px dashed #e1e1e1 !important;
+}
+
+.tracker-upload-description {
+  @extend .tracker-description;
+  padding: 65px 95px !important;
+
+  input {
+    display:none;
+  }
+}
+
+.tracker-upload-description, .tracker-upload {
+  .uploadButton {
+    text-transform: capitalize;
+    background-color: transparent;
+    border: 1px solid #4F9F6F;
+    padding: 6px 35px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: normal;
+    color: #4F9F6F !important;
+
+    p {
+      margin-bottom: 0px;
+      color: #8c8c8c;
+      font-size: 16px;
+    }
+  }
+}
+
+.time-tracker {
+  .grey-title {
+    background-color: #C4C4C4;
+    color: white;
+    line-height: 35px;
+  }
+}
+
+.new_designer_activity .task .hours {
+  padding-left: 10px;
+}
+
+.new_designer_activity  {
+
+  .error-row.due_date, .error-row.start_date {
+    float: right;
+  }
+
+  .error-row.start_date {
+    margin-right: -10px;
+  }
+
+  .task {
+    .error-row.hours {
+      padding: 10px 15px;
+    }
+
+    .error-row.task {
+      float:right;
+    }
+
+    .add-or-delete-task {
+      margin-top: -15px;
+      color: #e1e1e1;
+
+      .remove-task-btn {
+        float: right;
+        margin-bottom: 15px;
+        color: #e1e1e1;
+        border: 1px solid #e1e1e1;
+        border-radius: 15px;
+        padding: 2px 3px;
+        font-size: 12px;
+        height: 20px;
+        margin-left: 10px;
+      }
+
+      .add-more-button {
+        background: transparent;
+        margin-left: 10px;
+        margin-bottom: 15px;
+        color: #e1e1e1;
+        border: 1px solid #e1e1e1;
+        border-radius: 15px;
+        padding: 0 4px;
+        font-size: 15px;
+        height: 20px;
+        display: none;
+        float:right;
+      }
+
+      .text {
+        float:right;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .new_designer_activity  {
+    .error-row.due_date, .error-row.start_date {
+      margin-top: 10px;
+    }
+    .task {
+      .error-row.task {
+        margin-top: 10px;
+      }
+    }
+  }
+}
+@media (max-width: 991px) {
+  .new_designer_activity  {
+    .error-row {
+      font-size: 12px !important;
+    }
+  }
+}
+
+@media (max-width: 586px) {
+  .new_designer_activity {
+    .task {
+      .error-row.hours {
+        padding: 0 15px;
+      }
+    }
+  }
+
+}
+
+.designer-activity span.input-group-addon {
+  border-radius: 0;
+  color: #E1E1E1;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-left: none !important;
+  padding: 6px 5px;
+
+  span.glyphicon-calendar {
+    line-height: 0.6;
+    top: 4px;
+    font-size: 1.6em;
+  }
+}
+
+#designer_activity_start_date, #designer_activity_due_date {
+  border-right: none !important;
+}

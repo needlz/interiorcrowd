@@ -5,7 +5,9 @@ RSpec.describe ClientMenu do
 
   let(:client) { Fabricate(:client) }
   let(:contest) { Fabricate(:contest, client: client) }
-  let(:client_center_navigation) { Navigation::ClientCenter.new(:brief, contest: contest) }
+  let(:client_center_navigation) {
+    "Navigation::ClientCenter::#{ contest.status.camelize }".constantize.new(:brief, contest: contest)
+  }
   let(:menu_with_navigation) do
     ClientMenu.new(
       current_user: client,

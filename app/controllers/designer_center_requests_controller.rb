@@ -9,7 +9,7 @@ class DesignerCenterRequestsController < ApplicationController
         @completed_responses = ContestResponseView.for_responses(responses_query.completed_responses)
         @show_package_type = ENV['SHOW_PACKAGE_TYPE_DESC'].to_bool
       }
-      @navigation = Navigation::DesignerCenter.new(:requests)
+      @navigation = Navigation::DesignerCenter::Base.new(:requests)
     end
   end
 
@@ -30,7 +30,7 @@ class DesignerCenterRequestsController < ApplicationController
       pagination_options: params
     })
     @visible_image_items = @show_page.image_items
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(:requests)
     @setup_viglink = true
     set_image_item_views
   end
@@ -38,7 +38,9 @@ class DesignerCenterRequestsController < ApplicationController
   def edit
     @request = @designer.contest_requests.find(params[:id])
     return redirect_to designer_center_response_path(id: @request.id) if !@request.details_editable? || @request.draft? || @request.submitted?
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(:brief,
+                                                                                                      contest: @request.contest,
+                                                                                                      contest_request: @request)
     @current_user = current_user
     @designer_view = DesignerView.new(@designer)
     @request_view = ContestResponseView.new(@request)
@@ -58,7 +60,7 @@ class DesignerCenterRequestsController < ApplicationController
 
   def preview
     @request = @designer.contest_requests.find(params[:id])
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(:requests)
   end
 
   def update
@@ -92,7 +94,7 @@ class DesignerCenterRequestsController < ApplicationController
     existing_request = @contest.response_of(@designer)
     return redirect_to designer_center_response_path(id: existing_request.id) if existing_request
 
-    @navigation = Navigation::DesignerCenter.new(:requests)
+    @navigation = "Navigation::DesignerCenter::#{ @contest.status.camelize }".constantize.new(:requests)
     @contest_view = ContestView.new(contest_attributes: @contest)
     @contest_short_details = ContestShortDetails.new(@contest)
     @request = ContestRequest.new(contest_id: @contest.id)
