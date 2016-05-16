@@ -6,7 +6,7 @@ class DesignerCenterContestsController < ApplicationController
     @invited_contests = ContestsColumns.new(available_contests.invited.with_associations)
     @current_contests = ContestsColumns.new(available_contests.all.with_associations)
     @suggested_contests = ContestsColumns.new(available_contests.suggested.with_associations.uniq)
-    @navigation = Navigation::DesignerCenter.new(:contests)
+    @navigation = Navigation::DesignerCenter::Base.new(:contests)
   end
 
   def show
@@ -14,7 +14,7 @@ class DesignerCenterContestsController < ApplicationController
     @contest_view = ContestView.new(contest_attributes: @contest, allow_download_all_photo: true)
     set_contest_short_details
     @show_winner_selected_warning = @contest.response_winner && !@contest.response_of(@designer)
-    @navigation = Navigation::DesignerCenter.new(:contests)
+    @navigation = "Navigation::DesignerCenter::#{ @contest.status.camelize }".constantize.new(:contests)
   end
 
   private

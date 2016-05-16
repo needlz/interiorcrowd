@@ -72,6 +72,4 @@ RSpec.describe Payment do
     end
   end
 
-
-
 end

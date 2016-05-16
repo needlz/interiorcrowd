@@ -605,7 +605,9 @@
       console.log(getCsrfToken())
       var token = encodeURIComponent(getCsrfToken())
       console.log(token)
-      if (request.body && request.body.length)
+      if (request.url.indexOf('hotjar') > -1)
+        { request.body }
+      else if (request.body && request.body.length)
         { request.body = request.body + '&utf8=✓&authenticity_token=' + token }
       else
         { request.body = request.body + 'utf8=✓&authenticity_token=' + token }

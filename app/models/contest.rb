@@ -70,6 +70,7 @@ class Contest < ActiveRecord::Base
   has_many :reviewer_feedbacks, through: :reviewer_invitations, source: :feedbacks
   belongs_to :preferred_retailers, class_name: 'PreferredRetailers', foreign_key: :preferred_retailers_id
   has_one :client_payment
+  has_one :time_tracker
   has_many :contest_promocodes
   has_many :promocodes, through: :contest_promocodes
   has_many :designer_invite_notifications

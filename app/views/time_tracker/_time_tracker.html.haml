@@ -1,0 +1,22 @@
+- content_for :head do
+  = stylesheet_link_tag 'time_tracker/uploader'
+  = stylesheet_link_tag 'time_tracker'
+  = javascript_include_tag 'time_tracker/hours_purchase'
+  = javascript_include_tag 'time_tracker/tracker_attachment_uploader'
+  = javascript_include_tag 'time_tracker/designer_activities'
+
+= content_for :header
+%section
+  .container
+    = content_for :breadcrumb
+    %div
+      - if flash[:error].present?
+        .alert.alert-danger= flash[:error].html_safe
+    .tracker-hours-amount
+      %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
+    - if defined?(form_options)
+      = form_tag *form_options do
+        = render 'buy_hours', add_hours_header: add_hours_header
+    - else
+      = render 'buy_hours', add_hours_header: add_hours_header
+    = content_for :info_container

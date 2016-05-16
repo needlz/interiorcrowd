@@ -45,8 +45,10 @@ class Client < ActiveRecord::Base
   has_many :designer_invite_notifications, through: :contests
   has_many :contest_requests, through: :contests, source: :requests
   has_many :client_payments
+  has_many :hourly_payments
   has_many :credit_cards
   belongs_to :primary_card, class_name: 'CreditCard'
+  has_many :designer_activity_comments, as: :author
 
   before_save :downcase_email
 

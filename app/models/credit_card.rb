@@ -23,6 +23,8 @@
 class CreditCard < ActiveRecord::Base
 
   belongs_to :client
+  has_many :client_payments
+  has_many :hourly_payments
 
   normalize_attributes  :name_on_card, :address, :state, :city
 

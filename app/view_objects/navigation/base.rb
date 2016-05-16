@@ -13,8 +13,8 @@ module Navigation
       raise NotImplementedError
     end
 
-    def active_class(tab)
-      'item-sel' if tab == active_tab
+    def active_class(tab, css_class = 'item-sel')
+      css_class if tab == active_tab
     end
 
     def to_mobile_menu

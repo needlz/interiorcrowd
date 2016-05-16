@@ -133,18 +133,18 @@ class Image < ActiveRecord::Base
     file_type == 'image'
   end
 
-  private
-
-  def attachment
-    image
-  end
-
   def thumb_url_for(style)
     if viewable?
       image.url(style)
     else
       '/assets/file-icon.png'
     end
+  end
+
+  private
+
+  def attachment
+    image
   end
 
 end

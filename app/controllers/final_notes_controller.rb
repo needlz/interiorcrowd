@@ -32,7 +32,7 @@ class FinalNotesController < ApplicationController
   end
 
   def render_contest_request_comments
-    @note_views = (@contest_request.comments + @contest_request.final_notes).sort_by(&:created_at).map do |note|
+    @note_views = FinalNotesQuery.new(@contest_request).all.map do |note|
       ConceptBoardCommentView.new(note, current_user)
     end
     render_to_string(partial: 'shared/request_comments_read_only',

@@ -1,0 +1,13 @@
+.col-xs-8.col-sm-5.no-x-padding
+  .col-xs-4.no-x-padding
+    %img.preview{ src: attachment.small_size_url }
+  .col-xs-8.no-x-padding
+    %span.filename= attachment.image_file_name
+%span.submitted_date.col-sm-4.hidden-xs= attachment.created_at.strftime(t('time_tracker_attachments.submit_date_format')) if attachment.created_at
+.menuButtons.col-xs-3.no-x-padding
+  - unless attachment.created_at
+    %span.delete Delete
+    %span.submit Submit
+    %span.file-has-sent
+      File has sent
+      %span.glyphicon.glyphicon-ok
