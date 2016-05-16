@@ -13,7 +13,7 @@
       - if flash[:error].present?
         .alert.alert-danger= flash[:error].html_safe
     .tracker-hours-amount
-      %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
+      %h2= t('time_tracker.hours_amount', count: tracker.hours_left).html_safe
     - if defined?(form_options)
       = form_tag *form_options do
         = render 'buy_hours', add_hours_header: add_hours_header
