@@ -90,7 +90,11 @@ class @ActivityEditor
     activitiesHeader().show()
 
     updateActivities(response.activities)
+    updateTrackerActualHours(response.hours_actual)
     updateGroupTitles(response.groups_titles_html)
+
+  updateTrackerActualHours = (hours) ->
+    $('.tracker-hours-amount').find('span').text(hours)
 
   updateActivities = (activitiesJson)->
     noErrors = true
