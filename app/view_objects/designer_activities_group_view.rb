@@ -12,7 +12,7 @@ class DesignerActivitiesGroupView
   end
 
   def hours_left
-    previous_group_hours_left - hours_sum
+    time_tracker.hours_actual
   end
 
   private

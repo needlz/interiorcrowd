@@ -21,6 +21,7 @@ class CreateDesignerActivities < Action
           activity.comments.create(comment_attributes.merge(author: user))
         end
         time_tracker.designer_activities << activity
+        time_tracker.update_attributes(hours_actual: time_tracker.hours_actual - activity.hours)
       end
       {
         temporary_id: activity_params[:temporary_id],
