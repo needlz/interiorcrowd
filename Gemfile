@@ -9,7 +9,7 @@ gem 'passenger' # webserver
 gem 'activerecord-session_store', git: 'https://github.com/rails/activerecord-session_store.git'
 
 gem 'pg'
-gem "paperclip", "~> 3.0"
+gem "paperclip", "~> 4.2"
 gem 'mime-types'
 gem "will_paginate", "~> 3.0.4"
 # Use SCSS for stylesheets
@@ -118,6 +118,7 @@ gem 'postoffice'
 gem 'gibbon'
 gem 'ruby_dig'
 gem 'timecop'
+gem 'delayed_paperclip'
 
 # profiling
 gem 'rack-mini-profiler'

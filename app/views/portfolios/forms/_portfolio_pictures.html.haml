@@ -9,16 +9,16 @@
   #portfolio_pictures_preview.col-md-12.dashedBorder
     .container
       .col-md-3.novice.template.portfolio-item
-        = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: '' }
+        = render 'portfolios/forms/portfolio_picture_thumb', src: ''
       - portfolio.pictures.try(:map) do |picture|
         .col-md-3.novice.thumb.portfolio-item{ data: { id: picture.id }, class: ('active' if picture.id == portfolio.background_id) }
-          = render partial: 'portfolios/forms/portfolio_picture_thumb', locals: { src: picture.medium_size_url }
+          = render 'portfolios/forms/portfolio_picture_thumb', src: picture.medium_size_url
   .clearfix
   .col-md-6.no-x-padding.marg-top40
-    %input#portfolio_pictures.hidden{ name: 'image[image]', type: 'file', multiple: 'multiple' }
+    %input#portfolio_pictures.hidden{ name: 'file', type: 'file', multiple: 'multiple' }
     %input#portfolio_pictures_ids{ name: "portfolio[picture_ids]",
       type: "hidden",
       value: portfolio.pictures.try(:pluck, :id).try(:join, ',') }
-    %button.btn3.btn3-confirm.upload-button.margin0{ :type => "button"} Upload images
+    %button.btn3.btn3-confirm.upload-button.margin0{ type: 'button' } Upload images
     = form.hidden_field :background_id
   .clearfix
