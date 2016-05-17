@@ -602,9 +602,7 @@
 
   xhook.before(function(request){
     if (request.method == "POST"){
-      console.log(getCsrfToken())
       var token = encodeURIComponent(getCsrfToken())
-      console.log(token)
       if (request.url.indexOf('hotjar') > -1)
         { request.body }
       else if (request.body && request.body.length)
