@@ -74,6 +74,7 @@ class ContestRequest < ActiveRecord::Base
   has_many :similar_styles, ->{ similar_styles }, class_name: 'ImageItem'
   has_one :sound, dependent: :destroy
   has_many :final_notes
+  has_many :room_designs
 
   scope :by_page, ->(page){ paginate(page: page).order(created_at: :desc) }
   scope :active, -> { where(status: %w(draft submitted fulfillment_ready fulfillment_approved)) }
