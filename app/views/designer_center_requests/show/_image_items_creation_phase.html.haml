@@ -1,3 +1,47 @@
+:scss
+  .rooms {
+    .line-with-collapse-icon {
+      margin-left: 131px;
+
+      .line {
+        border-top: 1px solid #c8c8c8;
+        margin-top: 18px;
+        margin-right: 33px;
+      }
+
+      .hours-left {
+        margin-top: -17px;
+        display: block;
+        background-color: white;
+        float: right;
+        padding-left: 10px;
+        text-transform: uppercase;
+        color: #c8c8c8;
+      }
+
+      .collapse-icon {
+        color: #c8c8c8;
+        border: 1px solid #c8c8c8;
+        border-radius: 5px;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+        line-height: 20px;
+        margin-top: -11px;
+        float: right;
+        font-size: 15px;
+      }
+    }
+  }
+
+.rooms
+  .title
+    ROOM TITLE
+  .line-with-collapse-icon
+    .line
+    .collapse-icon
+
+
 .image-items
   = render partial: 'designer_center_requests/edit/image_block_designer_view',
            locals: { editable: false,
