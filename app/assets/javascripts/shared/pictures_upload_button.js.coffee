@@ -1,12 +1,16 @@
 class @PicturesUploadButton
   @init: (options)->
-    $fileInput = $(options.fileinputSelector)
+    $formOrInput = $(options.fileinputSelector)
+    if $formOrInput.prop('tagName') == 'FORM'
+      $fileInput = $formOrInput.find('input[type=file]')
+    else if $formOrInput.prop('tagName') == 'INPUT'
+      $fileInput = $formOrInput
 
     $(options.uploadButtonSelector).click (event)=>
       event.preventDefault()
-      $(options.fileinputSelector).focus().click()
+      $fileInput.focus().click()
 
-    $(options.fileinputSelector).initUploaderWithThumbs(
+    $formOrInput.initUploaderWithThumbs(
       thumbs:
         options.thumbs
       uploadify:
@@ -16,7 +20,6 @@ class @PicturesUploadButton
           $(options.uploadButtonSelector).text(options.I18n.upload_button) if options.I18n
           options.uploading.onStop?(event) if options.uploading
       single: options.single
-      fileInput: $fileInput
     )
 
 class @ExamplesUploader

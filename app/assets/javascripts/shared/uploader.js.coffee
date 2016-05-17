@@ -33,19 +33,51 @@ $(document).bind('drop dragover', (e)->
   e.preventDefault()
 )
 
-$.fn.initUploader = (options)->
-  $inputWithoutForm = @.clone()
+$.fn.initUploader = (options, uploader)->
+  $form = $(uploadFormHtml)
   $.extend(
     options,
+    forceIframeTransport: true,
     dataType: 'json'
-    url: uploadifyUploader
     type: 'POST'
-    formData: (form)->
-      []
+    formData: {}
+    url: $form.attr('action')
     replaceFileInput: false # the plugin recreates the input element after each upload, and so events bound to the original input will be lost.
+    add: (event, data)=>
+      $.ajax(
+        url: "/images/sign",
+        type: 'POST',
+        dataType: 'json',
+        data: { filename: data.files[0].name, type: data.files[0].type },
+        success: (retdata)=>
+          $form.find('input[name=key]').val(retdata.key);
+          $form.find('input[name=policy]').val(retdata.policy);
+          $form.find('input[name=signature]').val(retdata.signature);
+          $form.find('input[name=Content-Type]').val(retdata.content_type);
+          data.form = $form
+          data.formData = $form.serializeArray()
+
+          data.process(=>
+              @.fileupload('process', data)
+            ).done =>
+              data.submit();
+      )
+    done: (event, data)->
+      $.ajax(
+        url: "/images/on_uploaded",
+        type: 'POST',
+        dataType: 'json',
+        data: { filename: data.files[0].name },
+        async: false,
+        success: (retdata)=>
+          data.result = retdata
+          uploader.onUploaded?(event, data)
+      )
   )
-  @.fileupload(options)
-  @.val('')
+  @.fileupload(options).on('fileuploadprogress', (e, data)->
+    console.log data
+
+  )
 
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
@@ -54,7 +86,7 @@ $.fn.initUploaderWithThumbs = (options) ->
 
 class Uploader
 
-  constructor: (@$input, @options)->
+  constructor: (@$formOrInput, @options)->
 
   init: ()->
     @$container = $(@options.thumbs.container)
@@ -85,9 +117,11 @@ class Uploader
       @options.uploadify
     )
 
-    @$input.initUploader(uploadOptions)
+    @$formOrInput.initUploader(uploadOptions, @)
 
   onUploaded: (event, data) =>
+    console.log 'onUploaded'
+    ProcessedFilesUpdater.setTimer()
     $.each data.result.files, (index, fileInfo) =>
       return if @thumbsTheme && @thumbsTheme.isUploadHalted?(fileInfo)
       if @options.single
@@ -97,6 +131,7 @@ class Uploader
       @options.uploadify.onUploaded?(data.result) if @options.uploadify
 
   onProgress: (event, data)=>
+    console.log 'onProgress'
     progress = parseInt(data.loaded / data.total * 100)
     file = data.files[0]
     if progress >= 100
@@ -115,18 +150,22 @@ class Uploader
     @$imageIds.val(previousIds + fileInfo.id)
 
   onSend: (e, data)=>
+    console.log 'onSend'
     file = data.files[0]
     @thumbsTheme.onSend?(file) if @thumbsTheme
 
   onProcess: (e, data)=>
+    console.log 'onProcess'
     file = data.files[0]
     @thumbsTheme.onProcess?(file) if @thumbsTheme
 
   onProcessDone: (e, data)=>
+    console.log 'onProcessDone'
     file = data.files[0]
     @thumbsTheme.onProcessDone?(file) if @thumbsTheme
 
   onFail: (e, data)=>
+    console.log 'onFail'
     file = data.files[0]
     @thumbsTheme.onFail?(file) if @thumbsTheme
 
