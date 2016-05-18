@@ -29,43 +29,6 @@ class ImagesController < ApplicationController
     render json: { files: [ image.reload.thumbnail.merge(original_name: filename) ] }
   end
 
-  def ready
-    ids = params[:images_ids].split(',')
-    images = Image.where(id: ids)
-    result = images.map { |image| { image_id: image.id, processed: !image.image.processing?, file_type: image.file_type } }
-    render json: result
-  end
-
-  def sign
-    render :json => {
-      :policy => s3_upload_policy_document,
-      :signature => s3_upload_signature,
-      :key => "temporary/#{ params[:filename] }",
-      content_type: params[:type]
-    }
-  end
-
-  def on_uploaded
-    s3 = AWS::S3.new
-    filename = params[:filename]
-    path = 'temporary/' + filename
-    bucket_name = Settings.aws.bucket_name
-    bucket = s3.buckets[bucket_name]
-    direct_upload_head = bucket.objects[path].head
-
-    image = Image.new(
-      image: StringIO.new('dummy'),
-      uploader_role: current_user.role,
-      uploader_id: current_user.try(:id),
-      image_file_name: filename,
-      image_file_size: direct_upload_head.content_length,
-      image_content_type: direct_upload_head.content_type,
-    )
-    image.save!
-
-    render json: { files: [ image.reload.thumbnail.merge(original_name: filename) ] }
-  end
-
   private
 
   def file_details(file)
