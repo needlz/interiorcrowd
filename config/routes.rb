@@ -81,7 +81,13 @@ InteriorC::Application.routes.draw do
       end
     end
 
-    resources :images, only: [:show, :create]
+    resources :images, only: [] do
+      collection do
+        get 'ready', to: 'images#ready'
+        post 'sign', to: 'images#sign'
+        post 'on_uploaded', to: 'images#on_uploaded'
+      end
+    end
 
     resources :clients, only: [:create, :update] do
       collection do
