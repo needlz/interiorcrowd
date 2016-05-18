@@ -1,18 +1,32 @@
 class ImagesController < ApplicationController
     
-  def create
-    @image = Image.new(params[:image].merge(uploader_role: current_user.role, uploader_id: current_user.try(:id)))
-    if @image.save
-      render json: { files: [ file_details(@image) ] }
-    else
-      render json: { msg: "Upload Failed", error: @image.errors }
-    end
+  def sign
+    render :json => {
+      :policy => s3_upload_policy_document,
+      :signature => s3_upload_signature,
+      :key => "temporary/#{ params[:filename] }",
+      content_type: params[:type]
+    }
   end
 
-  def show
-    @image = Image.find(params[:id])
-    send_file @image.image.path, type: @image.image.content_type,
-              disposition: 'inline'
+  def on_uploaded
+    s3 = AWS::S3.new
+    filename = params[:filename]
+    path = 'temporary/' + filename
+    bucket_name = Settings.aws.bucket_name
+    bucket = s3.buckets[bucket_name]
+    direct_upload_head = bucket.objects[path].head
+
+    image = Image.create!(
+      image: StringIO.new('dummy'),
+      uploader_role: current_user.role,
+      uploader_id: current_user.try(:id),
+      image_file_name: filename,
+      image_file_size: direct_upload_head.content_length,
+      image_content_type: direct_upload_head.content_type,
+    )
+
+    render json: { files: [ image.reload.thumbnail.merge(original_name: filename) ] }
   end
 
   def ready

@@ -37,7 +37,7 @@ $.fn.initUploader = (options, uploader)->
   $form = $(uploadFormHtml)
   $.extend(
     options,
-    forceIframeTransport: true,
+    forceIframeTransport: false # if Cross-Origin Resource Sharing is properly configured for buckets
     dataType: 'json'
     type: 'POST'
     formData: {}
@@ -74,10 +74,7 @@ $.fn.initUploader = (options, uploader)->
           uploader.onUploaded?(event, data)
       )
   )
-  @.fileupload(options).on('fileuploadprogress', (e, data)->
-    console.log data
-
-  )
+  @.fileupload(options)
 
 $.fn.initUploaderWithThumbs = (options) ->
   uploader = new Uploader($(@), options)
@@ -120,7 +117,6 @@ class Uploader
     @$formOrInput.initUploader(uploadOptions, @)
 
   onUploaded: (event, data) =>
-    console.log 'onUploaded'
     ProcessedFilesUpdater.setTimer()
     $.each data.result.files, (index, fileInfo) =>
       return if @thumbsTheme && @thumbsTheme.isUploadHalted?(fileInfo)
@@ -131,7 +127,6 @@ class Uploader
       @options.uploadify.onUploaded?(data.result) if @options.uploadify
 
   onProgress: (event, data)=>
-    console.log 'onProgress'
     progress = parseInt(data.loaded / data.total * 100)
     file = data.files[0]
     if progress >= 100
@@ -150,22 +145,18 @@ class Uploader
     @$imageIds.val(previousIds + fileInfo.id)
 
   onSend: (e, data)=>
-    console.log 'onSend'
     file = data.files[0]
     @thumbsTheme.onSend?(file) if @thumbsTheme
 
   onProcess: (e, data)=>
-    console.log 'onProcess'
     file = data.files[0]
     @thumbsTheme.onProcess?(file) if @thumbsTheme
 
   onProcessDone: (e, data)=>
-    console.log 'onProcessDone'
     file = data.files[0]
     @thumbsTheme.onProcessDone?(file) if @thumbsTheme
 
   onFail: (e, data)=>
-    console.log 'onFail'
     file = data.files[0]
     @thumbsTheme.onFail?(file) if @thumbsTheme
 
