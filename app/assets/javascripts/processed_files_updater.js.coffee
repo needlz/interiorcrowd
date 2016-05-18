@@ -55,7 +55,7 @@ class @ProcessedFilesUpdater
       $image.attr('href').match(new RegExp(regex + '"'))
 
   @imagesBeingProcessed: ->
-    $("img[src*=\"/assets/#{ uploadIconFilename }?\"], [style*=\"/assets/#{ uploadIconFilename }?\"]").filter (index, image)=>
+    $("img[src*=\"/assets/#{ uploadIconFilename }?\"], div[style*=\"/assets/#{ uploadIconFilename }?\"], a[href*=\"/assets/#{ uploadIconFilename }?\"]").filter (index, image)=>
       @imageSrc(image)
 
 $ ->
