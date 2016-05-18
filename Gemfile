@@ -57,7 +57,6 @@ group :production, :staging do
 end
 
 group :development do
-  gem 'quiet_assets'
   gem 'bullet'
   gem 'erb2haml'
   gem 'haml-rails'
@@ -122,3 +121,5 @@ gem 'rack-mini-profiler'
 gem 'flamegraph'
 gem 'stackprof'
 gem 'memory_profiler'
+gem 'lograge'
+
