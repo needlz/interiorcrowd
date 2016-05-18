@@ -1,0 +1,59 @@
+.image-items .list-kind .items {
+  .line {
+    border-top: 1px solid #E9E9E9;
+    display:inline-block;
+    margin-top: 15px;
+    width: 100%;
+  }
+  .line.right {
+    width: 95%;
+  }
+  .collapse-icon {
+    color: #c8c8c8;
+    border: 1px solid #c8c8c8;
+    border-radius: 3px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    line-height: 15px;
+    margin-top: 7px;
+    float: right;
+    font-size: 15px;
+  }
+
+  .row.collapsed .collapse-icon::after {
+    content: "+";
+  }
+  .row .collapse-icon::after {
+    content: "-";
+  }
+  .room-name {
+    border:1px solid #E9E9E9;
+    display: inline-block;
+    text-align: center;
+    height: 30px;
+    margin-bottom: 15px;
+
+    p {
+      font-size: 13px;
+      margin-top: 6px;
+      color: #A9A9A9;
+      text-transform: uppercase;
+    }
+  }
+}
+.image-items .list-kind .productList {
+  .add-room-button {
+    text-transform: capitalize;
+    background-color: transparent;
+    border: 1px solid #4F9F6F;
+    padding: 6px 15px;
+    color: #4F9F6F;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 130px;
+    float:right;
+    margin-bottom: 20px;
+  }
+}
+

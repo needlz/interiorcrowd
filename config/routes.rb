@@ -29,6 +29,7 @@ InteriorC::Application.routes.draw do
 
     resources :contest_requests, only: [:show, :create] do
       resources :comments, controller: :concept_board_comments, only: [:create, :update, :destroy]
+      resources :room_designs, controller: :room_designs, only: [:create]
       member do
         get 'save_lookbook'
         post 'answer'
