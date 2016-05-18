@@ -1,6 +1,5 @@
 = content_for :head do
   = javascript_include_tag 'designers/form'
-  = render partial: 'shared/setup_uploadify'
   :javascript
     window.externaLinks = #{session[:example_links].present? ? session[:example_links].split(',') : []}
     window.I18n = #{ translations_to_json(['designer_center', 'sign_up']) }

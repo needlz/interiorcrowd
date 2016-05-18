@@ -76,4 +76,9 @@ module ApplicationHelper
     content_for?(:description) ? content_for(:description) : page_title
   end
 
+  def file_uploading_form(locales, &block)
+    form_content = capture(&block) if block
+    render 'shared/file_upload_form', locales.merge(form_content: form_content)
+  end
+
 end
