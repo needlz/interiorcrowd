@@ -1,5 +1,12 @@
 class ImagesController < ApplicationController
     
+  def ready
+    ids = params[:images_ids].split(',')
+    images = Image.where(id: ids)
+    result = images.map { |image| { image_id: image.id, processed: !image.image.processing?, file_type: image.file_type } }
+    render json: result
+  end
+
   def sign
     render :json => {
       :policy => s3_upload_policy_document,

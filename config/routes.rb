@@ -96,6 +96,7 @@ InteriorC::Application.routes.draw do
 
     resources :images, only: [] do
       collection do
+        get 'ready', to: 'images#ready'
         post 'sign', to: 'images#sign'
         post 'on_uploaded', to: 'images#on_uploaded'
       end
