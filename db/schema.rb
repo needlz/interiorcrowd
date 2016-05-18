@@ -398,6 +398,7 @@ ActiveRecord::Schema.define(version: 20160418073906) do
     t.string   "uploader_role",      limit: 255
     t.integer  "uploader_id"
     t.string   "file_type",                      default: "image"
+    t.boolean  "image_processing"
   end
 
   create_table "inbound_emails", force: :cascade do |t|
