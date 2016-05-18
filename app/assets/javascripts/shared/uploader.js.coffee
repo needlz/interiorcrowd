@@ -38,7 +38,7 @@ $.fn.initUploader = (options, uploader)->
   $.extend(
     options,
     forceIframeTransport: false # if Cross-Origin Resource Sharing is properly configured for buckets
-    dataType: 'json'
+    dataType: 'xml'
     type: 'POST'
     formData: {}
     url: $form.attr('action')
@@ -157,6 +157,7 @@ class Uploader
     @thumbsTheme.onProcessDone?(file) if @thumbsTheme
 
   onFail: (e, data)=>
+    console.log e, data
     file = data.files[0]
     @thumbsTheme.onFail?(file) if @thumbsTheme
 
