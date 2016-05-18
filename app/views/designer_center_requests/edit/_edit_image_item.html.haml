@@ -8,7 +8,7 @@
             %a.dcProductTrash{:href => "#"}
         .dcProductImage{ style: 'cursor: pointer' }
           %img.fullWidth{:src => item.thumb_url }/
-          = file_field_tag 'image[image]', class: 'hidden'
+          = file_field_tag 'file', class: 'hidden'
           = hidden_field_tag 'image_item[image_id]', item.image_id
       .col-sm-8.dcProductMiddle
         .row

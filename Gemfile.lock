@@ -120,6 +120,8 @@ GEM
     delayed_job_active_record (4.1.0)
       activerecord (>= 3.0, < 5)
       delayed_job (>= 3.0, < 5)
+    delayed_paperclip (2.10.0)
+      paperclip (>= 3.3)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -278,6 +280,7 @@ GEM
     memory_profiler (0.9.6)
     method_source (0.8.2)
     mime-types (2.99.1)
+    mimemagic (0.3.0)
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     mixpanel-ruby (2.2.0)
@@ -317,11 +320,12 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-    paperclip (3.5.4)
-      activemodel (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      cocaine (~> 0.5.3)
+    paperclip (4.3.6)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      cocaine (~> 0.5.5)
       mime-types
+      mimemagic (= 0.3.0)
     parallel (1.6.2)
     parallel_tests (2.4.1)
       parallel
@@ -521,6 +525,7 @@ DEPENDENCIES
   daemons
   database_cleaner
   delayed_job_active_record
+  delayed_paperclip
   devise
   dotiw
   email_validator
@@ -557,7 +562,7 @@ DEPENDENCIES
   newrelic_rpm
   numbers_and_words
   omniauth-facebook
-  paperclip (~> 3.0)
+  paperclip (~> 4.2)
   parallel_tests
   passenger
   pg
