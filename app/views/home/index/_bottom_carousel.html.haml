@@ -9,7 +9,7 @@
     / Wrapper for slides
     .carousel-inner{:role => "listbox"}
       .item
-        %img{:src => "/assets/kirsten-room1.jpg"}/
+        %img#test{"data-original": "/assets/kirsten-room1.jpg"}/
         .carousel-caption
           %div
             %h5 Kirsten
@@ -18,7 +18,7 @@
               As soon as the process began, I felt instantly inspired to go out and buy all the new furniture the designer recommended for my space. It was so easy! 
               %span ”
       .item.active
-        %img{:src => "/assets/cathy-room1.jpg"}/
+        %img#test{"data-original": "/assets/cathy-room1.jpg"}/
         .carousel-caption
           %div
             %h5 Cathy
@@ -27,7 +27,7 @@
               I never felt comfortable in this room - there were just too many things wrong with it. Now, it brings me a lot of joy to be in this room. 
               %span ”
       .item
-        %img{:src => "/assets/kevin-room1.jpg"}/
+        %img#test{"data-original": "/assets/kevin-room1.jpg"}/
         .carousel-caption
           %div
             %h5 Kevin
@@ -36,7 +36,7 @@
               Our priorities changed a lot when we had kids and our home became cluttered. Our designer provided some amazing solutions that were both practical - and nice to look at. 
               %span ”
       .item
-        %img{:src => "/assets/melanie-room1.jpg"}/
+        %img#test{"data-original": "/assets/melanie-room1.jpg"}/
         .carousel-caption
           %div
             %h5 Melanie
@@ -78,4 +78,25 @@
             %span= t('home.get_started').upcase
             %img.arrow{ src: '/assets/go_right.png' }
   #scrollingAnchor
-    
+
+:javascript
+  function loadCSS(href){
+    var ss = window.document.createElement('link'),
+        ref = window.document.getElementsByTagName('head')[0];
+
+    ss.rel = 'stylesheet';
+    ss.href = href;
+
+    // temporarily, set media to something non-matching to ensure it'll
+    // fetch without blocking render
+    ss.media = 'only x';
+
+    ref.parentNode.insertBefore(ss, ref);
+
+    setTimeout( function(){
+      // set media back to `all` so that the stylesheet applies once it loads
+      ss.media = 'all';
+    },0);
+  }
+  loadCSS('/assets/home/designer_stories.css.scss');
+  loadCSS('/assets/application.css');

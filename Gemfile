@@ -116,6 +116,7 @@ gem 'postoffice'
 gem 'gibbon'
 gem 'ruby_dig'
 gem 'timecop'
+gem 'jquery-lazy-images'
 
 # profiling
 gem 'rack-mini-profiler'

@@ -8,27 +8,30 @@ updateSizes = ->
 
 initClientSlider = ->
   $('.client-stories-slider').slick
-    dots: true,
-    infinite: true,
-    speed: 0,
-    fade: true,
-    cssEase: 'ease',
-    slidesToShow: 1,
+    dots: true
+    lazyLoad: 'ondemand'
+    infinite: true
+    speed: 0
+    fade: true
+    cssEase: 'ease'
+    slidesToShow: 1
     slidesToScroll: 1
 
 initClientBgSlider = ->
   $('.client-bg-slider').slick
-    dots: false,
-    infinite: true,
-    speed: 300,
-    fade: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    dots: false
+    lazyLoad: 'ondemand'
+    infinite: true
+    speed: 300
+    fade: true
+    slidesToShow: 1
+    slidesToScroll: 1
     draggable: false
 
 initDesignerSlider = ->
   $('.designers-slider').slick
     dots: true
+    lazyLoad: 'ondemand'
     infinite: false
     speed: 300
     slidesToShow: 3
@@ -195,6 +198,14 @@ resizeClientStoriesSlider = ->
 bindClientStoriesSliderHeight = ->
   resizeClientStoriesSlider()
 
+$(window).bind 'load', ->
+  $(window).bind 'scroll', ->
+    $('.designers-slider .design-example').trigger 'test_event'
+    $('#bottomCarouselHome #test').trigger 'test_event'
+
+  $('#topCarouselHome').bind 'slide.bs.carousel', (e) ->
+    $('.topCarouselHome .carousel-inner .image-container').trigger 'test_event'
+
 $(document).ready ->
   screenWidth = $(window).width()
   $('img').one('load', ->
@@ -203,6 +214,17 @@ $(document).ready ->
   ).each ->
     if @complete
       $(this).load()
+
+  $('.topCarouselHome .carousel-inner .image-container').lazyload
+    event: 'test_event'
+
+  $('.designers-slider .design-example').lazyload
+    event: 'test_event'
+
+  $('.clientStories .client-bg-slide').lazyload()
+
+  $('#bottomCarouselHome #test').lazyload
+    event: 'test_event'
 
   bindCustomScrollbar()
   bindScrollDownButton()

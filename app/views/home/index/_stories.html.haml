@@ -4,7 +4,8 @@
   .client-bg-slider-wrapper
     .client-bg-slider
       - todays_client_stories.each do |story|
-        .client-bg-slide{ style: "background: url('/assets/client_stories/designed-for-#{ story[:name].downcase }.jpeg') no-repeat center; background-size: cover;" }
+        .client-bg-slide{ "data-original":"/assets/client_stories/designed-for-#{ story[:name].downcase }.jpeg",
+                          style: "background: url('/assets/client_stories/designed-for-helene.jpeg') no-repeat center; background-size: cover;" }
   .container
     .row
       .col-xs-12.col-xs-offset-0.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3.col-lg-4.col-lg-offset-8
@@ -13,7 +14,7 @@
             %div
               .client-stories-slider-outer
                 .client-stories-slider-inner
-                  %img{ src: "/assets/client_stories/#{ story[:name].downcase }-personal.png" }
+                  %img{ "data-lazy": "/assets/client_stories/#{ story[:name].downcase }-personal.png" }
                   %h4= story[:name].possessive + t('home.client_stories.story_title_constant_part')
                   .slider-delimiter
                   %p= story[:wording]
