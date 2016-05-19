@@ -93,10 +93,10 @@ class @HoursPurchase
     )
 
   updateBuyButtonEnablity = ->
-    unless ((parseInt($(inputSelector).val()) == 0) || ($(inputSelector).val() == ''))
-      $(hoursSubmit).attr('disabled', false)
-    else
+    if ((parseInt($(inputSelector).val()) == defaultValue) || ($(inputSelector).val() == ''))
       $(hoursSubmit).attr('disabled', true)
+    else
+      $(hoursSubmit).attr('disabled', false)
 
   updateSuggestedHours = (suggestedHours)->
     $(designerSuggestedHoursAmountSelector).text(suggestedHours)

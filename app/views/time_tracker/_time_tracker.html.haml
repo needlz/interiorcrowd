@@ -5,6 +5,9 @@
   = javascript_include_tag 'time_tracker/tracker_attachment_uploader'
   = javascript_include_tag 'time_tracker/designer_activities'
 
+  :javascript
+    TaskForm = #{ translations_to_json(['time_tracker', 'task_form']) }
+
 = content_for :header
 %section
   .container
@@ -13,7 +16,7 @@
       - if flash[:error].present?
         .alert.alert-danger= flash[:error].html_safe
     .tracker-hours-amount
-      %h2= t('time_tracker.hours_amount', count: tracker.hours_actual).html_safe
+      %h2= t('time_tracker.hours_amount', count: tracker.hours_left).html_safe
     - if defined?(form_options)
       = form_tag *form_options do
         = render 'buy_hours', add_hours_header: add_hours_header

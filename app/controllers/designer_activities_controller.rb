@@ -25,8 +25,11 @@ class DesignerActivitiesController < ApplicationController
     tracker = Contest.find(params[:contest_id]).time_tracker
     activity = tracker.designer_activities.find(params[:id])
     comments = activity.comments.where.not(author_id: current_user.id, author_type: current_user.class.name)
-    comments.update_all(read: true)
-    render json: { saved: true, activity_id: activity.id }
+    if comments.update_all(read: true) > 0
+      render json: { saved: true, activity_id: activity.id }
+    else
+      render status: :server_error
+    end
   end
 
 end

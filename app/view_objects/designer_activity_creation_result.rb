@@ -22,7 +22,7 @@ class DesignerActivityCreationResult
     responses = creation_result.map do |activity_creation_result|
       activity_result(activity_creation_result)
     end
-    { activities: responses, groups_titles_html: groups_titles_html, hours_actual: time_tracker.hours_actual}
+    { activities: responses, groups_titles_html: groups_titles_html, hours_actual: time_tracker.hours_actual - time_tracker.tracked_hours}
   end
 
   def activity_result(creation_result)

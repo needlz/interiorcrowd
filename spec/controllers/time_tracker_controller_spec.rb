@@ -19,13 +19,13 @@ RSpec.describe TimeTrackerController do
         let(:contest) { Fabricate(:contest_during_fulfillment, client: client, time_tracker: time_tracker) }
 
         it 'render time_tracker' do
-          get :clients_show, id: contest.id
+          get :client_view, id: contest.id
 
-          expect(response).to render_template(:clients_show)
+          expect(response).to render_template(:client_view)
         end
 
         it 'has access to time tracker view' do
-          get :clients_show, id: contest.id
+          get :client_view, id: contest.id
           time_tracker_view = TimeTrackerView.new(time_tracker)
           expect(assigns(:time_tracker)).equal?(time_tracker_view)
         end
@@ -42,22 +42,22 @@ RSpec.describe TimeTrackerController do
           end
 
           it 'render time_tracker' do
-            get :clients_show, id: contest.id
+            get :client_view, id: contest.id
 
-            expect(response).to render_template(:clients_show)
+            expect(response).to render_template(:client_view)
           end
         end
 
         context 'when there is no designer activity tracked' do
           it 'render time_tracker' do
-            get :clients_show, id: contest.id
+            get :client_view, id: contest.id
 
-            expect(response).to render_template(:clients_show)
+            expect(response).to render_template(:client_view)
           end
         end
 
         it 'has access to time tracker view' do
-          get :clients_show, id: contest.id
+          get :client_view, id: contest.id
           time_tracker_view = TimeTrackerView.new(time_tracker)
           expect(assigns(:time_tracker)).equal?(time_tracker_view)
         end
@@ -67,7 +67,7 @@ RSpec.describe TimeTrackerController do
         let(:contest) { Fabricate(:contest_in_submission, client: client) }
 
         it 'it response with 404' do
-          get :clients_show, id: contest.id
+          get :client_view, id: contest.id
           expect(response).to have_http_status(404)
         end
       end
@@ -76,7 +76,7 @@ RSpec.describe TimeTrackerController do
         let(:contest) { Fabricate(:contest_during_winner_selection, client: client) }
 
         it 'it response with 404' do
-          get :clients_show, id: contest.id
+          get :client_view, id: contest.id
           expect(response).to have_http_status(404)
         end
       end
@@ -91,7 +91,7 @@ RSpec.describe TimeTrackerController do
                                                   time_tracker: time_tracker) }
 
       it 'it respond with 404' do
-        get :clients_show, id: contest.id
+        get :client_view, id: contest.id
         expect(response).to have_http_status(404)
       end
     end
@@ -112,7 +112,7 @@ RSpec.describe TimeTrackerController do
       end
 
       it 'it response with 404' do
-        get :designers_show, contest_id: contest.id
+        get :designer_view, contest_id: contest.id
 
         expect(response).to have_http_status(404)
       end
@@ -132,7 +132,7 @@ RSpec.describe TimeTrackerController do
       end
 
       it 'it response with 404' do
-        get :designers_show, contest_id: contest.id
+        get :designer_view, contest_id: contest.id
 
         expect(response).to have_http_status(404)
       end
@@ -148,9 +148,9 @@ RSpec.describe TimeTrackerController do
       end
 
       it 'render time_tracker' do
-        get :designers_show, contest_id: contest.id
+        get :designer_view, contest_id: contest.id
 
-        expect(response).to render_template(:designers_show)
+        expect(response).to render_template(:designer_view)
       end
     end
   end

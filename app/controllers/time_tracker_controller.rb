@@ -1,7 +1,7 @@
 class TimeTrackerController < ApplicationController
-  before_action :check_designer, only: [:designers_show, :suggest_hours]
+  before_action :check_designer, only: [:designer_view, :suggest_hours]
 
-  def clients_show
+  def client_view
     return unless check_client
 
     @contest = Contest.find(params[:id])
@@ -13,7 +13,7 @@ class TimeTrackerController < ApplicationController
     @activities_groups_holder = activities_grouper(@time_tracker)
   end
 
-  def designers_show
+  def designer_view
     @contest = Contest.find(params[:contest_id])
     contests_designer = @contest.response_winner.designer if @contest.response_winner
 

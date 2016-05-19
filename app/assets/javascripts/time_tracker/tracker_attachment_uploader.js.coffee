@@ -1,4 +1,6 @@
 class @TrackerAttachmentsTheme extends RemovableThumbsTheme
+  uploadDescriptionSelector = '.tracker-upload-description'
+  uploadingAreaSelector = '.tracker-upload'
 
   createThumb: (fileInfo)->
     $container = super
@@ -17,12 +19,12 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
     $container.find('.progressbar .pointer').width("#{ progressPercents }%")
 
   addUploadItem: (file)->
-    $('.tracker-upload-description').hide()
-    $('.tracker-upload').show()
+    $(uploadDescriptionSelector).hide()
+    $(uploadingAreaSelector).show()
     $template = @$container.find('.uploadingTemplate')
     $container = $template.clone()
     $container.removeClass('uploadingTemplate').addClass('uploadingThumb thumb col-xs-12')
-    $container.attr('data-filename', file.name)
+    $container.attr('data-filename', escape(file.name))
     $container.find('.filename').text(file.name)
     fileSize = humanFileSize(file.size, 'si')
     $container.find('.size').text(fileSize)
@@ -33,7 +35,7 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
     $container.remove()
 
   uploadThumb: (filename)->
-    @$container.find(".uploadingThumb[data-filename='#{ filename }']")
+    @$container.find(".uploadingThumb[data-filename='#{ escape(filename) }']")
 
   onProcess: (file)->
     @addUploadItem(file)
@@ -73,9 +75,10 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
 
 
 class @TrackerAttachmentUploader
+  uploadingAreaSelector = '.tracker-upload'
 
   attachmentUrl = ->
-    $('.tracker-upload').attr('data-attachment-url')
+    $(uploadingAreaSelector).attr('data-attachment-url')
 
   removeThumb = (target) ->
     $button = $(target)
@@ -108,8 +111,8 @@ class @TrackerAttachmentUploader
     detectMenuButtons(button).find('.submit').remove()
 
   showTimeSubmittedHeader = ->
-    if ($('.tracker-upload').find('.submitted_date:not(:empty)').length > 0)
-      $('.tracker-upload').find('.timeSubmitted').show()
+    if ($(uploadingAreaSelector).find('.submitted_date:not(:empty)').length > 0)
+      $(uploadingAreaSelector).find('.timeSubmitted').show()
 
   showTimeSubmitted = (button, submittedDate) ->
     detectSubmittedDate(button).text(submittedDate).show()
@@ -130,7 +133,7 @@ class @TrackerAttachmentUploader
       success: (response) =>
         onSubmitted(button, response.submitted_at)
       error: (response)->
-        console.log(response)
+        console.log(response.responseText.error_message)
         toggleEnablity(button)
     )
 
@@ -148,7 +151,7 @@ class @TrackerAttachmentUploader
       fileinputSelector: $inputsContainer.find('.fileinput'),
       uploadButtonSelector: $inputsContainer.find('.uploadButton'),
       thumbs:
-        container: $('.tracker-upload').find('.thumbs')
-        selector: $('.tracker-upload').find('.fileIds')
+        container: $(uploadingAreaSelector).find('.thumbs')
+        selector: $(uploadingAreaSelector).find('.fileIds')
         theme: window.TrackerAttachmentsTheme
         I18n: window.attachmentsI18n

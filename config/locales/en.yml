@@ -1823,19 +1823,13 @@ en:
       download_hint: Download file
     remove_button:
       hint: Remove attachment
-  time_tracker_attachments:
-    show:
-      download_hint: Download file
-    remove_button:
-      hint: Remove attachment
-    submit_date_format: "%m/%d/%Y at %I:%M%P"
-
   time_tracker:
     attachments:
       show:
         download_hint: Download file
       remove_button:
         hint: Remove attachment
+      submit_date_format: "%m/%d/%Y at %I:%M%P"
     tracker: Time tracker
     design: Design
     brief: Brief
@@ -1898,5 +1892,8 @@ en:
       task: task
       hour: hour
       comment: comment
-      delete_task: delete task
+      delete_task: Delete task
+      add_or_delete_task: Add or delete task
+      add_task: Add task
+
 

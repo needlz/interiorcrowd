@@ -52,3 +52,4 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require processed_files_updater
+
