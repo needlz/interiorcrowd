@@ -17,7 +17,6 @@
       %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
       %input.fileIds{ type: 'hidden' }
   = render 'upload', time_tracker: @time_tracker, contest: @contest
-  = render 'shared/setup_uploadify'
 
   :coffee
     $ ->
