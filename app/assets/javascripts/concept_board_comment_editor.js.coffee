@@ -81,8 +81,13 @@ class @ConceptBoardCommentEditor extends InlineEditor
       $comment = $saveButton.parents(@attributeSelector)
       @update($comment)
 
+  contestRequestId: ->
+    $('.response[data-id]').attr('data-id') ||
+      $('.concept-board[data-id]').attr('data-id') ||
+      $('.designConcept[data-id]').attr('data-id')
+
   delete: ($comment)->
-    requestId = $('.response[data-id]').attr('data-id') || $('.concept-board[data-id]').attr('data-id')
+    requestId = @contestRequestId()
     commentId = $comment.attr('data-id')
     $.ajax(
       url: "/contest_requests/#{ requestId }/comments/#{ commentId }"
@@ -111,7 +116,7 @@ class @ConceptBoardCommentEditor extends InlineEditor
 
   update: ($comment)->
     text = $comment.find('.editForm .text').val()
-    requestId = $('.response[data-id]').attr('data-id') || $('.concept-board[data-id]').attr('data-id')
+    requestId = @contestRequestId()
     commentId = $comment.attr('data-id')
     attachmentIds = $comment.find('.fileIds').val().split(',')
     data = { comment: { text: text } }

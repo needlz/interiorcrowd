@@ -8,7 +8,7 @@
             .full-size-image-container.image-container{ style: "background-image: #{ css_url(image_item.medium_size_image_url) }" }
             = button_tag t('designer_center.product_items.change_image'), class: 'btn btnChangeImage', type: 'button'
             = button_tag t('designer_center.product_items.delete'), class: 'productListDeleteImage', type: 'button'
-          = file_field_tag 'image[image]', class: 'hidden'
+          = file_field_tag 'file', class: 'hidden'
           = hidden_field_tag "contest_request[#{ image_item.kind }][image_ids][]", image_item.image_id
         %a.cancelSaveLinks.save-button{ href: '#' }= t('designer_center.final_upload.save')
         %a.cancelSaveLinks.cancel-button{ href: '#' }= t('designer_center.final_upload.cancel')

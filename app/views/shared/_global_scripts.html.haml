@@ -10,3 +10,6 @@
 :coffee
   $ ->
     $('[data-toggle=popover]').popover?()
+
+  window.uploadFormHtml = #{ render('shared/file_upload_form').to_json }
+  Settings = { aws : { bucket_name: #{ Settings.aws.bucket_name.to_json } } }

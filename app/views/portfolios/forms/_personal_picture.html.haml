@@ -16,7 +16,7 @@
     .clearfix
   .clearfix
   .col-md-6.no-x-padding.marg-top20
-    %input#personal_picture.hidden{ name: 'image[image]', type: 'file' }
+    %input#personal_picture.hidden{ name: 'file', type: 'file' }
     %input#personal_picture_id{ name: "portfolio[personal_picture_id]",
       type: "hidden",
       value: portfolio.personal_picture.try(:id) }
