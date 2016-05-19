@@ -5,7 +5,7 @@
     .authorName
       = comment.author == current_user ? 'Me' : comment.author.name
     .createdAt
-      = comment.created_at.strftime(t('time_tracker_attachments.submit_date_format'))
+      = comment.created_at.strftime(t('time_tracker.attachments.submit_date_format'))
     .clearfix
     .commentText
       = format_comment(comment.text)

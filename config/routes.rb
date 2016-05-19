@@ -90,7 +90,7 @@ InteriorC::Application.routes.draw do
             patch 'read', to: 'designer_activities#read'
           end
         end
-        resources :attachments, only: [:create, :destroy], controller: 'time_tracker_attachments'
+        resources :attachments, only: [:create], controller: 'time_tracker_attachments'
       end
     end
 
