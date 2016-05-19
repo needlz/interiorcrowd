@@ -14,7 +14,7 @@
     %p= t('time_tracker.uploader_description')
     %label
       %p.uploadButton= t('time_tracker.upload_file')
-      %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+      %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'file' }
       %input.fileIds{ type: 'hidden' }
   = render 'upload', time_tracker: @time_tracker, contest: @contest
 
