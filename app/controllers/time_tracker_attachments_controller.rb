@@ -8,35 +8,11 @@ class TimeTrackerAttachmentsController < ApplicationController
     rescue StandardError => exception
       log_error(exception)
     end
-    respond_to do |format|
-      format.json do
-        if exception
-          render json: { error: 'Internal error' }
-        else
-          render json: { created: attachment.id,
-                         submitted_at: attachment.created_at.strftime(t('time_tracker_attachments.submit_date_format')) }
-        end
-      end
-    end
-  end
-
-  def destroy
-    begin
-      attachment = @time_tracker.attachments.find(params[:id])
-      attachment_id = attachment.id
-      @time_tracker.attachments.delete(attachment)
-      attachment.destroy
-    rescue StandardError => exception
-      log_error(exception)
-    end
-    respond_to do |format|
-      format.json do
-        if error_message
-          render json: { error: 'Internal error' }
-        else
-          render json: { deleted: attachment_id }
-        end
-      end
+    if exception
+      render status: :server_error, json: { error_message: 'Internal error' }
+    else
+      render json: { created: attachment.id,
+                     submitted_at: attachment.created_at.strftime(t('time_tracker.attachments.submit_date_format')) }
     end
   end
 

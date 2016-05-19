@@ -24,7 +24,7 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
     $template = @$container.find('.uploadingTemplate')
     $container = $template.clone()
     $container.removeClass('uploadingTemplate').addClass('uploadingThumb thumb col-xs-12')
-    $container.attr('data-filename', file.name)
+    $container.attr('data-filename', escape(file.name))
     $container.find('.filename').text(file.name)
     fileSize = humanFileSize(file.size, 'si')
     $container.find('.size').text(fileSize)
@@ -35,7 +35,7 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
     $container.remove()
 
   uploadThumb: (filename)->
-    @$container.find(".uploadingThumb[data-filename='#{ filename }']")
+    @$container.find(".uploadingThumb[data-filename='#{ escape(filename) }']")
 
   onProcess: (file)->
     @addUploadItem(file)
@@ -133,7 +133,7 @@ class @TrackerAttachmentUploader
       success: (response) =>
         onSubmitted(button, response.submitted_at)
       error: (response)->
-        console.log(response)
+        console.log(response.responseText.error_message)
         toggleEnablity(button)
     )
 
