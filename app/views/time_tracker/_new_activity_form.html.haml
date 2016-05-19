@@ -1,0 +1,35 @@
+.designer-activity-form.col-xs-12
+  = form_for DesignerActivityForm.new, { url: creation_route, method: 'post', remote: true } do |f|
+    .col-sm-offset-4.col-sm-8
+      .col-sm-4.no-x-padding
+        .error-row.start_date.hidden
+      .col-sm-8.no-x-padding
+        .error-row.due_date.hidden
+    .col-sm-3.field-name
+      %h5= t('.date')
+    .col-sm-4
+      .form-group
+        #designer_activity_start_date.input-group.date
+          = f.text_field :start_date
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+    .col-sm-1.due-date-name
+      %p= t('.to')
+    .col-sm-4
+      .form-group
+        #designer_activity_due_date.input-group.date
+          = f.text_field :due_date
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+    .clearfix
+    %fieldset{ disabled: 'disabled' }
+      = f.fields_for :tasks, DesignerActivity.new(hours: 1), child_index: 'new_item' do |f|
+        .task.template{ data: { temporary_id: 'new_item' } }
+          = render 'time_tracker/task_form', f: f
+    .tasks
+      = f.fields_for :tasks do |f|
+        .task{ data: { temporary_id: 0 } }
+          = render 'time_tracker/task_form', f: f
+    .col-sm-offset-3.col-sm-6.col-xs-offset-0.col-xs-12
+      = f.submit 'Submit', class: 'btn designer-activity-form-submit-button', data: { disable_with: t('.saving') }
+      %span.btn.designer-activity-form-cancel-button= t('.cancel')

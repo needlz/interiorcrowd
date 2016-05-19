@@ -1,0 +1,15 @@
+- can_add_activity = defined?(creation_route)
+.designer-activity
+  .container
+    .header.col-md-3.col-xs-6
+      %h3= t('time_tracker.designer.activity.header')
+    - if can_add_activity
+      .add-activity-button.col-md-offset-7.col-md-2.col-xs-offset-0.col-xs-6
+        %button= t('time_tracker.designer.activity.add_activity')
+      = render 'new_activity_form', creation_route: creation_route
+      .activity-description.col-xs-12{ style: ('display: none' if activities_groups_holder.any?) }
+        %p= t('time_tracker.designer.activity.description').html_safe
+    .clearfix
+    .activities
+      - activities_groups_holder.groups.each do |group_view|
+        = render 'time_tracker/group_header', group_view: group_view, collapsed: true

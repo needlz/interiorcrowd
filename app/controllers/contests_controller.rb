@@ -60,8 +60,8 @@ class ContestsController < ApplicationController
     if current_user.client?
       @setup_viglink = true
       @client = current_user
-      @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
       @breadcrumbs = Breadcrumbs::Client.new(self).my_contests.contest(@contest)
+      @navigation = "Navigation::ClientCenter::#{ @contest.status.camelize }".constantize.new(:entries, contest: @contest)
       TrackContestRequestVisit.perform(@entries_page.won_contest_request) if @entries_page.won_contest_request
     end
 
@@ -236,7 +236,7 @@ class ContestsController < ApplicationController
 
   def invite_designers
     return raise_404 unless ContestPolicies.new(@contest).invite_designers_page_accessible?
-    @navigation = Navigation::ClientCenter.new(:entries, contest: @contest)
+    @navigation = "Navigation::ClientCenter::#{ @contest.status.camelize }".constantize.new(:entries, contest: @contest)
     @designers = Designer.active.includes(portfolio: [:personal_picture]).all.map do |designer|
       DesignerView.new(designer)
     end
@@ -301,7 +301,7 @@ class ContestsController < ApplicationController
 
   def set_client_navigation
     if current_user.client?
-      @navigation = Navigation::ClientCenter.new(:entries)
+      @navigation = Navigation::ClientCenter::Base.new(:entries)
       @client = current_user
     end
   end

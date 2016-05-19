@@ -79,4 +79,10 @@ module User
     return false if anonymous?
     self.email == email.downcase
   end
+
+  def avatar_url
+    return '/assets/profile-img.png' unless designer?
+    PortfolioView.new(portfolio).personal_picture_url('/assets/profile-img.png', :medium)
+  end
+
 end

@@ -9,7 +9,7 @@ class DesignerMenu < Menu
 
   def mobile_items
     specific_items =
-        { I18n.t('header.designer_center') => Navigation::DesignerCenter.new.to_mobile_menu,
+        { I18n.t('header.designer_center') => Navigation::DesignerCenter::Base.new.to_mobile_menu,
           I18n.t('header.sign_out') => view_context.logout_sessions_path }
     common_menu_with specific_items
   end
