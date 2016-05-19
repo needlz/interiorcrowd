@@ -1898,5 +1898,8 @@ en:
       task: task
       hour: hour
       comment: comment
-      delete_task: delete task
+      delete_task: Delete task
+      add_or_delete_task: Add or delete task
+      add_task: Add task
+
 

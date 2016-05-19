@@ -1,4 +1,6 @@
 class @TrackerAttachmentsTheme extends RemovableThumbsTheme
+  uploadDescriptionSelector = '.tracker-upload-description'
+  uploadingAreaSelector = '.tracker-upload'
 
   createThumb: (fileInfo)->
     $container = super
@@ -17,8 +19,8 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
     $container.find('.progressbar .pointer').width("#{ progressPercents }%")
 
   addUploadItem: (file)->
-    $('.tracker-upload-description').hide()
-    $('.tracker-upload').show()
+    $(uploadDescriptionSelector).hide()
+    $(uploadingAreaSelector).show()
     $template = @$container.find('.uploadingTemplate')
     $container = $template.clone()
     $container.removeClass('uploadingTemplate').addClass('uploadingThumb thumb col-xs-12')
@@ -73,9 +75,10 @@ class @TrackerAttachmentsTheme extends RemovableThumbsTheme
 
 
 class @TrackerAttachmentUploader
+  uploadingAreaSelector = '.tracker-upload'
 
   attachmentUrl = ->
-    $('.tracker-upload').attr('data-attachment-url')
+    $(uploadingAreaSelector).attr('data-attachment-url')
 
   removeThumb = (target) ->
     $button = $(target)
@@ -108,8 +111,8 @@ class @TrackerAttachmentUploader
     detectMenuButtons(button).find('.submit').remove()
 
   showTimeSubmittedHeader = ->
-    if ($('.tracker-upload').find('.submitted_date:not(:empty)').length > 0)
-      $('.tracker-upload').find('.timeSubmitted').show()
+    if ($(uploadingAreaSelector).find('.submitted_date:not(:empty)').length > 0)
+      $(uploadingAreaSelector).find('.timeSubmitted').show()
 
   showTimeSubmitted = (button, submittedDate) ->
     detectSubmittedDate(button).text(submittedDate).show()
@@ -148,7 +151,7 @@ class @TrackerAttachmentUploader
       fileinputSelector: $inputsContainer.find('.fileinput'),
       uploadButtonSelector: $inputsContainer.find('.uploadButton'),
       thumbs:
-        container: $('.tracker-upload').find('.thumbs')
-        selector: $('.tracker-upload').find('.fileIds')
+        container: $(uploadingAreaSelector).find('.thumbs')
+        selector: $(uploadingAreaSelector).find('.fileIds')
         theme: window.TrackerAttachmentsTheme
         I18n: window.attachmentsI18n
