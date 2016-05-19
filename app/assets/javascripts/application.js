@@ -51,4 +51,5 @@
 //= require concept_board_comment_editor
 //= require moment
 //= require bootstrap-datetimepicker
+//= require processed_files_updater
 //= require room_designs

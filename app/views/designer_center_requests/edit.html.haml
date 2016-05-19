@@ -8,7 +8,6 @@
   - if @request.fulfillment_ready?
     = render 'shared/finalize_design_confirmation'
     = render 'shared/create_product_items_for_room', request_id: @request.id
-  = render partial: 'shared/setup_uploadify'
   :javascript
     I18n = #{ translations_to_json('client_center') }
     MessagesI18n = #{ translations_to_json(['board_comments']) }
