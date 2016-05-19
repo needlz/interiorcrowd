@@ -82,7 +82,7 @@ InteriorC::Application.routes.draw do
       end
 
       resource :time_tracker do
-        get '/', to: 'time_tracker#designers_show', as: 'designer_center'
+        get '/', to: 'time_tracker#designer_view', as: 'designer_center'
         post 'suggest_hours', to: 'time_tracker#suggest_hours', as: 'suggest_hours'
         resources :designer_activities, only: [:create] do
           resources :comments, only: [:create], controller: 'designer_activity_comments'
@@ -110,7 +110,7 @@ InteriorC::Application.routes.draw do
     scope '/client_center' do
       resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries' do
         member do
-          get 'time_tracker', to: 'time_tracker#clients_show', as: 'time_tracker'
+          get 'time_tracker', to: 'time_tracker#client_view', as: 'time_tracker'
           post 'time_tracker/purchase_confirm', to: 'time_tracker#purchase_confirm', as: 'time_tracker_purchase_confirm'
           post 'time_tracker/show_invoice', to: 'time_tracker#show_invoice', as: 'time_tracker_show_invoice'
         end

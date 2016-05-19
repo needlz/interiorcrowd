@@ -4,9 +4,9 @@ class EditTimeTrackerPolicy < Policy
     new(designer)
   end
 
-  def initialize(client)
+  def initialize(user)
     super
-    @designer = client
+    @designer = user
   end
 
   def edit(time_tracker)
