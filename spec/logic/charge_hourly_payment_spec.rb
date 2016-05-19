@@ -14,7 +14,6 @@ RSpec.describe ChargeHourlyPayment do
   context 'when Stripe payment is successful' do
     before do
       mock_stripe_successful_charge
-      # expect_any_instance_of(StripeCustomer).to receive(:charge)
     end
 
     it 'creates hourly payment' do
