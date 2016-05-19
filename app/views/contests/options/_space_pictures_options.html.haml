@@ -18,7 +18,7 @@
       type: 'hidden',
       value: @contest_view.space_pictures_ids.try(:join, ',') }
     %a.uploadImagesBtn.upload-button= t('contests.space.photos.upload_button')
-    %input.hidden#file_input{ name: 'image[image]', type: 'file', multiple: 'multiple' }
+    %input.hidden#file_input{ name: 'file', type: 'file', multiple: 'multiple' }
     %p= t('contests.space.photos.prefer_to_email_or_text')
     %p= t('contests.space.photos.text_to')
     %p= t('contests.space.photos.email_to')

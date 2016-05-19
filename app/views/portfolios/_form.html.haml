@@ -1,11 +1,11 @@
 .container.animated.fadeInDown
   %h3 Create your portfolio
-  = render partial: 'portfolios/forms/years_of_experience', locals: { portfolio: form.object, form: form }
+  = render 'portfolios/forms/years_of_experience', portfolio: form.object, form: form
   %div.lineBreak
-  = render partial: 'portfolios/forms/education', locals: { portfolio: form.object, form: form }
-  = render partial: 'portfolios/forms/awards', locals: { portfolio: form.object, form: form }
-  = render partial: 'portfolios/forms/portfolio_pictures', locals: { portfolio: form.object, form: form }
-  = render partial: 'portfolios/forms/personal_picture', locals: { portfolio: form.object, form: form }
-  = render partial: 'portfolios/forms/style_description', locals: { portfolio: form.object, form: form }
+  = render 'portfolios/forms/education', portfolio: form.object, form: form
+  = render 'portfolios/forms/awards', portfolio: form.object, form: form
+  = render 'portfolios/forms/portfolio_pictures', portfolio: form.object, form: form
+  = render 'portfolios/forms/personal_picture', portfolio: form.object, form: form
+  = render 'portfolios/forms/style_description', portfolio: form.object, form: form
   %div.lineBreak
-  = render partial: 'portfolios/forms/about', locals: { portfolio: form.object, form: form }
+  = render 'portfolios/forms/about', portfolio: form.object, form: form

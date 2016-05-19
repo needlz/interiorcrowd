@@ -5,11 +5,11 @@
   .clearfix
   .lnk_container
     .col-md-10.form-group.no-x-padding
-      %input.form-control{name: 'portfolio[example_links][]', type: 'text'}
+      %input.form-control{ name: 'portfolio[example_links][]', type: 'text'}
     .col-md-2.text-center-xs.text-center-sm
-      %a.plus_wrapper{:href => "#"}
+      %a.plus_wrapper{ href: '#' }
         %i.glyphicon.glyphicon-plus.pull-right.glyphic-link.example-link-glyph.glyphiconPlus
-      %a.minus_wrapper{:href => "#"}
+      %a.minus_wrapper{ href: '#' }
         %i.glyphicon.glyphicon-minus.pull-right.glyphic-link.example-link-glyph.glyphiconMinus
       .clearfix
   .clearfix
@@ -22,18 +22,17 @@
   #portfolio_pictures_preview.col-md-12.dashedBorder
     .container
       .col-md-3.novice.template.portfolio-item
-        = render partial: 'contests/options/example_picture_thumb', locals: { src: '' }
+        = render 'contests/options/example_picture_thumb', src: ''
       - if @designer_images.present?
         - @designer_images.split(',').each do |id|
           .col-md-3.novice.thumb.portfolio-item
-            = render partial: 'contests/options/example_picture_thumb',
-                locals: { src: Image.find(id).medium_size_url }
+            = render 'contests/options/example_picture_thumb', src: Image.find(id).medium_size_url
     .col-md-12.marg-top20
   .clearfix
   .col-md-6.no-x-padding.marg-top40
-    %input#portfolio_pictures.hidden{:multiple => "multiple", :name => "image[image]", :type => "file"}/
-    %input#portfolio_pictures_ids{:name => "portfolio[picture_ids]", :type => "hidden"}/
-    %button.btn3.btn3-confirm.upload-button.margin0{:type => "button"}= t('designer_center.sign_up.examples.upload_button')
-    %input#portfolio_background_id{:name => "portfolio[background_id]", :type => "hidden"}/
+    %input#portfolio_pictures.hidden{ multiple: 'multiple', name: 'file', type: 'file' }/
+    %input#portfolio_pictures_ids{ name: 'portfolio[picture_ids]', type: 'hidden' }/
+    %button.btn3.btn3-confirm.upload-button.margin0{ type: 'button' }= t('designer_center.sign_up.examples.upload_button')
+    %input#portfolio_background_id{ name: 'portfolio[background_id]', type: 'hidden' }/
   .clearfix
 .lineBreak
