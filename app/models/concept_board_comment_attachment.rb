@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: concept_board_comment_attachments
+#
+#  id            :integer          not null, primary key
+#  comment_id    :integer
+#  attachment_id :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 class ConceptBoardCommentAttachment < ActiveRecord::Base
   include Downloadable
 

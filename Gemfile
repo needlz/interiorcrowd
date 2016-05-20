@@ -14,6 +14,7 @@ gem 'mime-types'
 gem "will_paginate", "~> 3.0.4"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'sprockets', '2.11.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -37,7 +38,6 @@ gem 'jquery-ui-rails'
 gem 'aws-sdk', '< 2.0' # incompatibility with SDK v2
 gem 'hashie'
 gem 'fabrication'
-gem 'sprockets', '~> 2.11.0'
 gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'

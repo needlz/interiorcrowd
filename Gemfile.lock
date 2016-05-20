@@ -308,7 +308,7 @@ GEM
       money (~> 6.7)
       railties (>= 3.0)
     msgpack (0.7.4)
-    multi_json (1.11.2)
+    multi_json (1.12.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     netrc (0.11.0)
@@ -474,7 +474,7 @@ GEM
     social-share-button (0.1.10)
       coffee-rails
       sass-rails
-    sprockets (2.11.3)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -606,7 +606,7 @@ DEPENDENCIES
   simplecov
   sitemap_generator
   social-share-button
-  sprockets (~> 2.11.0)
+  sprockets (= 2.11.0)
   stackprof
   state_machine
   stripe

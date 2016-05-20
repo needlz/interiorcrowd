@@ -2,40 +2,44 @@
 #
 # Table name: contests
 #
-#  id                              :integer          not null, primary key
-#  desirable_colors                :text
-#  undesirable_colors              :text
-#  space_budget                    :string(255)
-#  feedback                        :text
-#  project_name                    :text
-#  budget_plan                     :integer
-#  client_id                       :integer
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  space_length                    :decimal(10, 2)   default(0.0)
-#  space_width                     :decimal(10, 2)   default(0.0)
-#  space_height                    :decimal(10, 2)
-#  design_category_id              :integer
-#  design_space_id                 :integer
-#  status                          :string           default("incomplete")
-#  phase_end                       :datetime
-#  theme                           :string(255)
-#  space                           :string(255)
-#  accessories                     :string(255)
-#  space_changes                   :string(255)
-#  shop                            :string(255)
-#  accommodate_children            :string(255)
-#  accommodate_pets                :string(255)
-#  retailer                        :text
-#  elements_to_avoid               :text
-#  entertaining                    :integer
-#  durability                      :integer
-#  preferred_retailers_id          :integer
-#  designers_explore_other_colors  :boolean          default(FALSE)
-#  designers_only_use_these_colors :boolean          default(FALSE)
-#  finished_at                     :datetime
-#  submission_started_at           :datetime
-#  was_in_brief_pending_state      :boolean
+#  id                                    :integer          not null, primary key
+#  desirable_colors                      :text
+#  undesirable_colors                    :text
+#  space_budget                          :string(255)
+#  feedback                              :text
+#  project_name                          :text
+#  budget_plan                           :integer
+#  client_id                             :integer
+#  created_at                            :datetime
+#  updated_at                            :datetime
+#  space_length                          :decimal(10, 2)   default(0.0)
+#  space_width                           :decimal(10, 2)   default(0.0)
+#  space_height                          :decimal(10, 2)
+#  design_category_id                    :integer
+#  design_space_id                       :integer
+#  status                                :string           default("incomplete")
+#  phase_end                             :datetime
+#  theme                                 :string(255)
+#  space                                 :string(255)
+#  accessories                           :string(255)
+#  space_changes                         :string(255)
+#  shop                                  :string(255)
+#  accommodate_children                  :string(255)
+#  accommodate_pets                      :string(255)
+#  retailer                              :text
+#  elements_to_avoid                     :text
+#  entertaining                          :integer
+#  durability                            :integer
+#  preferred_retailers_id                :integer
+#  designers_explore_other_colors        :boolean          default(FALSE)
+#  designers_only_use_these_colors       :boolean          default(FALSE)
+#  finished_at                           :datetime
+#  submission_started_at                 :datetime
+#  was_in_brief_pending_state            :boolean
+#  notified_client_contest_not_yet_live  :boolean          default(FALSE)
+#  ever_received_published_product_items :boolean
+#  location_zip                          :string
+#  designer_level_id                     :integer
 #
 
 class Contest < ActiveRecord::Base

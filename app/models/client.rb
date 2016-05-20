@@ -27,6 +27,7 @@
 #  last_log_in_at                :datetime
 #  last_log_in_ip                :string
 #  last_remind_about_feedback_at :datetime
+#  last_activity_at              :datetime
 #
 
 class Client < ActiveRecord::Base

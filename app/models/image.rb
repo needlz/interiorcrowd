@@ -15,6 +15,8 @@
 #  portfolio_id       :integer
 #  uploader_role      :string(255)
 #  uploader_id        :integer
+#  file_type          :string           default("image")
+#  image_processing   :boolean
 #
 
 class Image < ActiveRecord::Base
