@@ -969,10 +969,10 @@ en:
       ok: Like
       remove: Dislike
       product_list_title: >
-        This is where you upload pictures of products you've included in your board.
-        You can include why they would work for the client in the box below.
+        This is where you upload pictures of product recommendations for the client.<br />
+        Start by creating a room to add product and a concept board specific to that space (if necessary).
       product_list_reminder: >
-        ( Don't forget to hit the submit button below to send your work to the client. )
+        *Don't forget to hit the submit button below to send your work to the client!
       similar_styles_title: >
         'Similar styles' can be additional items that you'd also like the client to see,
         but have not included in the board. They might also be out of the client's budget.

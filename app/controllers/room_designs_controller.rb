@@ -1,14 +1,15 @@
 class RoomDesignsController < ApplicationController
   def create
     @room_design = RoomDesign.new(room_params)
+    @room_design.contest_request = ContestRequest.find(params[:contest_request_id])
     @room_design.save!
-    redirect_to root_path
+    render json: { new_room_html: render_to_string(partial: 'designer_center_requests/edit/room',
+                                                   locals: { room: @room_design }) }
   end
 
   private
 
   def room_params
-    params.require(:contest_request_id)
-    params.require(:room).permit(:room)
+    params.require(:room_design).permit(:room)
   end
 end

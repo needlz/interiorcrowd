@@ -1,0 +1,10 @@
+.row.collapsed.room-item{data: {toggle: 'collapse'}, href: "#room-collapse#{room.id}"}
+  .col-xs-5
+    .line
+  .room-name.col-xs-2
+    %p= room.room
+  .col-xs-5
+    .line.right
+    .collapse-icon
+  .collapse{ id: "room-collapse#{room.id}" }
+    %h1 nice

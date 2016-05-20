@@ -54,6 +54,83 @@
     width: 130px;
     float:right;
     margin-bottom: 20px;
+    outline:none;
+  }
+}
+
+#roomCreationModal {
+  .modal-dialog {
+    margin:auto;
+    top:250px;
+    width:500px;
+  }
+  .modal-content {
+    text-align: center;
+    .modal-header {
+      background-color: #F5F5F5;
+      border-bottom:none;
+      border-radius: 6px 6px 0 0;
+      padding:25px;
+
+      .close {
+        position: absolute;
+        margin: 0;
+        top: -20px;
+        right: -20px;
+        opacity: 0.5;
+        width:15px;
+        height:15px;
+        background-size: 15px 15px;
+        background: url('close-modal.png') no-repeat center;
+        outline:none;
+      }
+      .close:hover {
+        opacity: 0.5;
+      }
+
+      .title {
+        font-size: 28px;
+        margin: 10px;
+        color: #2E2E2E;
+      }
+    }
+    .modal-body {
+      padding: 40px;
+
+      input[type='text']{
+        height:45px;
+        width:96%;
+        border: 1px solid #E6E6E6;
+        padding: 0 15px;
+        font-size: 20px;
+        outline:none;
+      }
+
+      .create-room-btn {
+        background-color: #409863;
+        color: white;
+        font-size: 18px;
+        text-transform: capitalize;
+        height:45px;
+        line-height: 35px;
+        width:155px;
+        margin: 25px auto 0;
+        border-radius: 2px;
+        outline:none;
+      }
+
+    }
+  }
+}
+
+.no-room-description {
+  text-align: center;
+  border: 2px dotted #EEEEEE;
+  padding: 50px 200px;
+  margin-bottom: 50px;
+  p {
+    color: #D0D0D0;
+    margin-bottom:0;
   }
 }
 

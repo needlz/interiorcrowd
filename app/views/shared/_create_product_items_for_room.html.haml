@@ -2,8 +2,12 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %h3 Create a new room
+        %button.close{ data: { dismiss: 'modal' }, area: { label: 'Close' }}
+        %p.title Create a new room
       .modal-body
-        %input
-        .button create
-      .modal-footer
+        =form_for RoomDesign.new, url: contest_request_room_designs_path(contest_request_id: request_id),
+                                  method: 'post',
+                                  remote: true,
+                                  html: {id: 'room-creation-from'} do |f|
+          = f.text_field :room
+          = f.submit 'create',class: 'create-room-btn btn'

@@ -42,7 +42,7 @@
     = render partial: 'designer_center_requests/edit/image_block_designer_view',
         locals: { editable: editable,
           title: t('designer_center.edit.product_items'),
-          subtitle: t('designer_center.product_items.product_list_title'),
+          subtitle: t('designer_center.product_items.product_list_title').html_safe,
           reminder: t('designer_center.product_items.product_list_reminder'),
           image_list_name: :product_items,
           contest_request: @request,

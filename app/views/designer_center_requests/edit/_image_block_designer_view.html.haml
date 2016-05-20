@@ -1,15 +1,14 @@
 .row.productList
-  .col-sm-12
+  .col-sm-8
     %h4= title
-    %p.light14Gray= subtitle
-    %p.product-list-reminder= reminder if defined?(reminder)
-  = render partial: 'designer_center_requests/edit/room_creation_modal'
+  = render 'designer_center_requests/edit/room_creation_modal'
 .items
-  = render partial: 'designer_center_requests/edit/room_designs', locals: {contest_request: contest_request}
+  - if contest_request.room_designs.present?
+    = render 'designer_center_requests/edit/room_designs', contest_request: contest_request
+  - else
+    = render 'designer_center_requests/edit/no_room_designs',subtitle: subtitle, reminder: (reminder if defined?(reminder))
   - image_items.each do |item|
-    = render partial: 'designer_center_requests/edit/image_content',
-          locals: { image_list_name: image_list_name, item: item }
-
+    = render 'designer_center_requests/edit/image_content', image_list_name: image_list_name, item: item
 - if editable
   .row.dcProduct
     .col-sm-7
