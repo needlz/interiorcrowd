@@ -162,6 +162,14 @@ RSpec.describe UserMailer do
       expect(UserMailer.client_ready_for_final_design(contest_request.id)).to be_present
     end
 
+    it 'sends email to client about designer has recommended a bundle of hours' do
+      expect(UserMailer.hours_added_to_client_project(contest.id)).to be_present
+    end
+
+    it 'sends email to client about designer has recommended a bundle of hours' do
+      expect(UserMailer.client_bought_hours_start_designing(contest_request.id)).to be_present
+    end
+
     it 'saves list of recipients' do
       ActionMailer::Base.perform_deliveries = true
       email = OutboundEmail.create!

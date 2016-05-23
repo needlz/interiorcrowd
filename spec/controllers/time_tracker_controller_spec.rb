@@ -192,6 +192,34 @@ RSpec.describe TimeTrackerController do
 
       before do
         sign_in(designer)
+      end
+
+      context 'when no hours amount is submitted' do
+        it 'answers with server error message' do
+          post :suggest_hours, contest_id: contest.id
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'designer is adding positive amount of hours' do
+        it 'updates the amount of hours suggested' do
+          post :suggest_hours, contest_id: contest.id, suggested_hours: 10
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+
+      context 'designer is adding negative amount of hours' do
+        it 'answers with server error message' do
+          post :suggest_hours, contest_id: contest.id, suggested_hours: -10
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    context 'when designer is winner of the contest' do
+
+      before do
+        sign_in(designer)
         SelectWinner.perform(contest_request)
       end
 
@@ -207,6 +235,13 @@ RSpec.describe TimeTrackerController do
           post :suggest_hours, contest_id: contest.id, suggested_hours: 10
           expect(response).to have_http_status(200)
         end
+
+        it 'notifies client about the suggestion by email' do
+          expect {
+            post :suggest_hours, contest_id: contest.id, suggested_hours: 10 }.to change {
+            jobs_with_handler_like('hours_added_to_client_project').count
+          }.from(0).to(1)
+        end
       end
 
       context 'designer is adding negative amount of hours' do
@@ -218,7 +253,7 @@ RSpec.describe TimeTrackerController do
     end
   end
 
-  describe 'POST #purchase_confirm' do
+  describe 'POST #initialize_purchase' do
     let(:contest) { Fabricate(:contest_during_fulfillment, time_tracker: time_tracker) }
     let(:time_tracker) { Fabricate(:time_tracker) }
 
@@ -230,7 +265,7 @@ RSpec.describe TimeTrackerController do
       end
 
       it 'redirects to client sign in path' do
-        expect(post :purchase_confirm, id: contest.id, hours: 10).to redirect_to client_login_sessions_path
+        expect(post :initialize_purchase, id: contest.id, hours: 10).to redirect_to client_login_sessions_path
       end
     end
 
@@ -243,7 +278,7 @@ RSpec.describe TimeTrackerController do
 
       context 'when client is not contest owner' do
         it 'renders 404' do
-          expect(post :purchase_confirm, id: contest.id, hours: 10).to have_http_status(:not_found)
+          expect(post :initialize_purchase, id: contest.id, hours: 10).to have_http_status(:not_found)
         end
       end
 
@@ -252,7 +287,7 @@ RSpec.describe TimeTrackerController do
         let(:contest) { Fabricate(:contest_during_fulfillment, time_tracker: time_tracker, client: client) }
 
         it 'renders page' do
-          post :purchase_confirm, id: contest.id, hours: 10
+          post :initialize_purchase, id: contest.id, hours: 10
           expect(response).to have_http_status(:ok)
         end
       end
@@ -260,7 +295,7 @@ RSpec.describe TimeTrackerController do
 
   end
 
-  describe 'POST #show_invoice' do
+  describe 'POST #confirm_purchase' do
     let(:contest) { Fabricate(:contest_during_fulfillment, time_tracker: time_tracker) }
     let(:time_tracker) { Fabricate(:time_tracker) }
 
@@ -272,7 +307,7 @@ RSpec.describe TimeTrackerController do
       end
 
       it 'redirects to client sign in path' do
-        expect(post :show_invoice, id: contest.id, hours: 10).to redirect_to client_login_sessions_path
+        expect(post :confirm_purchase, id: contest.id, hours: 10).to redirect_to client_login_sessions_path
       end
     end
 
@@ -288,20 +323,27 @@ RSpec.describe TimeTrackerController do
 
       context 'when client is not contest owner' do
         it 'renders 404' do
-          expect(post :show_invoice, id: contest.id, hours: 10).to have_http_status(:not_found)
+          expect(post :confirm_purchase, id: contest.id, hours: 10).to have_http_status(:not_found)
         end
       end
 
       context 'when client is contest owner' do
         let(:contest) { Fabricate(:contest_during_fulfillment, time_tracker: time_tracker, client: client) }
+        let(:designer) { Fabricate(:designer) }
+        let!(:contest_request) do
+          contest_request = Fabricate(:contest_request, designer: designer, status: 'fulfillment_ready', answer: 'winner')
+          contest_request.update_attributes!(contest_id: contest.id)
+          contest_request
+        end
+
+        subject(:invoice_action) { post :confirm_purchase, id: contest.id, hours: 10 }
 
         it 'renders page' do
-          post :show_invoice, id: contest.id, hours: 10
-          expect(response).to render_template(:show_invoice)
+          is_expected.to render_template(:confirm_purchase)
         end
 
         it 'updates the actual hours count' do
-          post :show_invoice, id: contest.id, hours: 10
+          invoice_action
           expect(contest.time_tracker.reload.hours_actual).to eq(10)
           expect(contest.time_tracker.reload.hours_suggested).to eq(0)
         end
@@ -309,15 +351,27 @@ RSpec.describe TimeTrackerController do
         it 'creates hourly payment' do
           expect(contest.time_tracker.hourly_payments).to be_empty
 
-          post :show_invoice, id: contest.id, hours: 10
+          invoice_action
 
           expect(contest.time_tracker.hourly_payments).to be_present
         end
 
         it 'performs Stripe payment successfully' do
-          post :show_invoice, id: contest.id, hours: 10
+          invoice_action
 
           expect(contest.time_tracker.hourly_payments.last.payment_status).to eq('completed')
+        end
+
+        it 'notifies designer about purchase with email' do
+          expect { invoice_action }.to change {
+            jobs_with_handler_like('client_bought_hours_start_designing').count
+          }.from(0).to(1)
+        end
+
+        it 'notifies designer about purchase with notification' do
+          expect { invoice_action }.to change {
+            designer.user_notifications.where(type: DesignerTimeTrackerNotification.name).count
+          }.from(0).to(1)
         end
       end
     end

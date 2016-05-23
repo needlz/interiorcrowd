@@ -12,8 +12,8 @@ RSpec.describe TimeTrackerController do
   end
 
   describe 'GET /time_tracker/confirm_purchase' do
-    it 'routes to client center purchase confirmation' do
-      expect(post: '/client_center/entries/0/time_tracker/purchase_confirm').to route_to('time_tracker#purchase_confirm', id: '0')
+    it 'routes to client center purchase initialization page' do
+      expect(post: '/client_center/entries/0/time_tracker/initialize_purchase').to route_to('time_tracker#initialize_purchase', id: '0')
     end
   end
 

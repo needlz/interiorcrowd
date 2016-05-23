@@ -1835,7 +1835,9 @@ en:
     brief: Brief
     profile: Profile
     link_design_tab: Thanks! Your designer will now start working on your project! Stay updated in the <a href=%{path}>Design Tab</a>.
-    hours_amount: Currently you have <span>%{count}</span> hours
+    hours_amount:
+      one: Currently you have <span>%{count}</span> hour
+      many: Currently you have <span>%{count}</span> hours
     description_title: how this works
     description_wording: >
       Your designer will suggest a bundle of hours to purchase for them to get started designing for you.
@@ -1860,6 +1862,8 @@ en:
           Once your client has purchased hours you can get started on designing for them!<br/>
           You'll use this tab to keep the client updated on what you're doing - and how long it's taking.
           Let them know if your next activity will probably use up all existing hours so that they know to purchase more.
+      notification:
+        text: Congratulations! Your client, %{client_name}, has added hours to your project.
     client:
       hours_suggested: Designer has suggested you to get started with <span>%{count}</span> hours
       confirmation:

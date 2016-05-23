@@ -75,7 +75,12 @@ RSpec.describe DesignerCenterController do
                                                            final_note: final_note)
       notification
     end
-
+    let!(:hours_purchase_notification) do
+      notification = DesignerTimeTrackerNotification.create!(user_id: designer.id,
+                                                             contest_request_id: request.id,
+                                                             contest_id: contest.id)
+      notification
+    end
 
     it 'renders page' do
       get :updates
