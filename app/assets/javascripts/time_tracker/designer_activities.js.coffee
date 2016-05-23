@@ -6,6 +6,9 @@ class @ActivityEditor
   submitButtonSelector = '.designer-activity-form-submit-button'
   newActivityCommentSelector = '.new_designer_activity_comment'
   activityHeaderSelector = '.activities .activity .collapse'
+  activityStartDateSelector = '#designer_activity_start_date'
+  activityDueDateSelector = '#designer_activity_due_date'
+  hoursAmountSelector = '.tracker-hours-amount'
 
   @init: ->
     @bindActivityFormSwitcher()
@@ -20,16 +23,16 @@ class @ActivityEditor
 
 
   @setupDatePickers: ->
-    activityForm().find('#designer_activity_start_date').datetimepicker(
+    activityForm().find(activityStartDateSelector).datetimepicker(
       format: 'MM/DD/YYYY'
     ).on("dp.change", (e)->
-      activityForm().find('#designer_activity_due_date').data("DateTimePicker").minDate(e.date);
+      activityForm().find(activityDueDateSelector).data("DateTimePicker").minDate(e.date);
     )
-    activityForm().find('#designer_activity_due_date').datetimepicker(
+    activityForm().find(activityDueDateSelector).datetimepicker(
       format: 'MM/DD/YYYY'
       useCurrent: false
     ).on("dp.change", (e)->
-      activityForm().find('#designer_activity_start_date').data("DateTimePicker").maxDate(e.date);
+      activityForm().find(activityStartDateSelector).data("DateTimePicker").maxDate(e.date);
     )
 
   @bindNewTaskButton: ->
@@ -37,7 +40,7 @@ class @ActivityEditor
       addTaskForm(event)
 
   @bindRemoveTaskButton: ->
-    $('.designer-activity-form').on 'click', '.remove-task-btn', (event) ->
+    $(addActivityFormSelector).on 'click', '.remove-task-btn', (event) ->
       removeTaskForm(event.target)
 
   addTaskForm = (event)->
@@ -72,8 +75,8 @@ class @ActivityEditor
       success: (response) =>
         if response.saved
           activities().find(".activity[data-id=#{ response.activity_id }] .commentsIcon").removeClass('withComments')
-      error: (response)->
-        console.log('Server error while trying to mark comment as read')
+      error: ->
+        console.log('Server error while trying to mark comment as read.')
     )
 
   onSubmitted = (event, response)->
@@ -94,7 +97,7 @@ class @ActivityEditor
     updateGroupTitles(response.groups_titles_html)
 
   updateTrackerActualHours = (hours) ->
-    $('.tracker-hours-amount').find('span').text(hours)
+    $(hoursAmountSelector).find('span').text(hours)
 
   updateActivities = (activitiesJson)->
     noErrors = true
@@ -113,8 +116,8 @@ class @ActivityEditor
     for field, messages of errorJson
       if field == 'due_date' || field == 'start_date'
         activityForm().find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
-        $('#designer_activity_start_date').addClass('input-error-border')
-        $('#designer_activity_due_date').addClass('input-error-border')
+        $(activityStartDateSelector).addClass('input-error-border')
+        $(activityDueDateSelector).addClass('input-error-border')
       $task.find('.error-row').filter(".#{ field }").removeClass('hidden').text(messages.join('; '))
       $task.find('input').filter(".#{ field }").addClass('input-error-border')
 
@@ -132,7 +135,7 @@ class @ActivityEditor
     $group.find('> .collapse').collapse('show')
 
     $task.remove()
-    addTaskForm() unless hasAnyTasksFroms()
+    addTaskForm() unless hasAnyTasksForms()
 
   updateGroupTitles = (groupTitlesJson)->
     for group_title in groupTitlesJson
@@ -172,16 +175,16 @@ class @ActivityEditor
     cancelActivityButton().click ->
       closeActivityForm()
       removeBlankTasks()
-      addTaskForm() unless hasAnyTasksFroms()
+      addTaskForm() unless hasAnyTasksForms()
 
-  hasAnyTasksFroms = ->
+  hasAnyTasksForms = ->
     activityForm().find('.task[data-temporary-id]:not(.template)').length
 
   removeBlankTasks = ->
     tasks = activityForm().find('.task[data-temporary-id]:not(.template)')
     for task in tasks
       keepTask = false
-      $task  = $(task)
+      $task = $(task)
       for formGroup in $task.find('.form-group')
         $formGroup = $(formGroup)
         input = $formGroup.find('input, textarea')
@@ -199,16 +202,16 @@ class @ActivityEditor
   toggleRemoveTaskButtonVisibility = ->
     $tasks = tasks()
     $tasks.find('.remove-task-btn').show()
-    $tasks.find('.text').text('Delete task')
+    $tasks.find('.text').text(TaskForm.delete_task)
 
     $tasks.find('.add-more-button').hide()
     $tasks.last().find('.add-more-button').show()
 
     if $tasks.length == 1
       $tasks.find('.remove-task-btn').hide()
-      $tasks.find('.text').text('Add task')
+      $tasks.find('.text').text(TaskForm.add_task)
     else
-      $tasks.last().find('.text').text('Add or delete task')
+      $tasks.last().find('.text').text(TaskForm.add_or_delete_task)
 
   tasks = ->
     activityForm().find('.task[data-temporary-id]:not(.template)')

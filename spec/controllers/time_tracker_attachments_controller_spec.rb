@@ -23,8 +23,5 @@ RSpec.describe TimeTrackerAttachmentsController do
       expect(time_tracker.attachments.reload.to_a).to match_array [attachment]
     end
   end
-
-  describe 'DELETE attachment' do
-
-  end
+  
 end

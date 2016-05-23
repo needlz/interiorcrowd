@@ -1121,6 +1121,47 @@ en:
           If you click on the pencil icon in the Pictures of your Space section, you can upload new images.
           If your designer asks you for additional pictures once you're in the collaboration period,
           you can upload them the same way by editing your brief.
+    commercial:
+      how_does_it_work:
+        question: How does it work?
+        answer: >
+          Either send us your information %{google_form} or email us at %{hello_email}.
+          We’ll be in touch immediately to set up a call to discuss your budget and priorities so that we can match
+          you with the best designer for your project. We’ll set up a time for you and your designer to meet
+          to discuss details. After meeting, your designer will send you a detailed project spec and we’ll put together
+          a contract. Our designers bill at a rate of $100/hour. Once everything’s been signed off, your designer will
+          get going on that dream space for your team!
+      what_type_of_commercial_projects:
+        question: What type of commercial projects do you specialize in?
+        answer: >
+          Our designers are experienced in managing many type of commercial projects, from small to medium office
+          spaces (for startups as well as for established companies), medical offices, restaurants, retail, showroom,
+          and beyond. Tell us more about your project %{google_form} or email us at %{hello_email} so we can
+          match you with the right designer for your project type.
+      who_are_designers:
+        question: Who are the designers?
+        answer: >
+          We have a large network of established and up-and-coming Bay Area interior designers who all have
+          experience with commercial projects. Each designer goes through an extensive interview process for us
+          to vet that their style, knowledge of design principles, materials and trends, communication, and ease with
+          technology is up to our standards and that they can delight a diverse group of clients with different
+          budgets, styles, geographies, and functional or aesthetic needs.
+      is_this_for_me:
+        question: I don’t think our company can afford interior design. Is this for me?
+        answer: >
+          Our platform is flexible enough that we can cater to different types of budgets, big or small.
+          For example, our designers can pick furniture pieces that are perfect for your office space and quickly
+          come up with a spatial design that makes sense for your needs, all for a reasonable fee.
+      we_need_everything_asap:
+        question: I have a crazy deadline. We need everything ASAP. Can you handle that?
+        answer: >
+          We already have a large network of designers to choose from. No need to waste time getting quotes from other
+          design firms. We can move quickly to meet your deadline.
+      i_dont_have_time:
+        question: I don’t have time to manage an interior design project for my office. What will you handle?
+        answer: >
+          Your designer can project manage the process for you.
+          If you’d like us to handle purchasing and installation, we’re on it!
     designer:
       If you’re interested in joining InteriorCrowd, or have any questions for us about our pricing model or process
       please email us at %{hello_email}
@@ -1168,6 +1209,13 @@ en:
     title: Terms of service
     designer_contract: Designer contract
   home:
+    faq:
+      title: Frequently Asked Questions
+      search_field_placeholder: Search...
+    navigation_menu:
+      customer: Customer
+      designer: Designer
+      commercial: Commercial
     lets_design: Let's design
     places:
       to_start_day: your place to start the day.
@@ -1823,25 +1871,21 @@ en:
       download_hint: Download file
     remove_button:
       hint: Remove attachment
-  time_tracker_attachments:
-    show:
-      download_hint: Download file
-    remove_button:
-      hint: Remove attachment
-    submit_date_format: "%m/%d/%Y at %I:%M%P"
-
   time_tracker:
     attachments:
       show:
         download_hint: Download file
       remove_button:
         hint: Remove attachment
+      submit_date_format: "%m/%d/%Y at %I:%M%P"
     tracker: Time tracker
     design: Design
     brief: Brief
     profile: Profile
     link_design_tab: Thanks! Your designer will now start working on your project! Stay updated in the <a href=%{path}>Design Tab</a>.
-    hours_amount: Currently you have <span>%{count}</span> hours
+    hours_amount:
+      one: Currently you have <span>%{count}</span> hour
+      many: Currently you have <span>%{count}</span> hours
     description_title: how this works
     description_wording: >
       Your designer will suggest a bundle of hours to purchase for them to get started designing for you.
@@ -1866,6 +1910,8 @@ en:
           Once your client has purchased hours you can get started on designing for them!<br/>
           You'll use this tab to keep the client updated on what you're doing - and how long it's taking.
           Let them know if your next activity will probably use up all existing hours so that they know to purchase more.
+      notification:
+        text: Congratulations! Your client, %{client_name}, has added hours to your project.
     client:
       hours_suggested: Designer has suggested you to get started with <span>%{count}</span> hours
       confirmation:
@@ -1898,5 +1944,8 @@ en:
       task: task
       hour: hour
       comment: comment
-      delete_task: delete task
+      delete_task: Delete task
+      add_or_delete_task: Add or delete task
+      add_task: Add task
+
 

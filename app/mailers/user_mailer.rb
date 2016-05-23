@@ -175,6 +175,18 @@ class UserMailer < ActionMailer::Base
           description: { recipients: 'client',
                          recipients_roles: [Client],
                          occurrence: 'client has provided credit card details but contest brief is not yet completed' }
+      },
+      hours_added_to_client_project: {
+        template: 'hours-added-to-client-project',
+        description: { recipients: 'client',
+                       recipients_roles: [Client],
+                       occurrence: 'designer has recommended a bundle of hours for client to purchase' }
+      },
+      client_bought_hours_start_designing: {
+        template: 'client-bought-hours-start-designing',
+        description: { recipients: 'designer',
+                       recipients_roles: [Designer],
+                       occurrence: 'client has has added hours to designer\'s project' }
       }
   }
 
@@ -531,6 +543,27 @@ class UserMailer < ActionMailer::Base
       login_link: renderer.client_center_entries_url
     )
     mail to: [wrap_recipient(client, 'to')], email_id: email_id
+  end
+
+  def hours_added_to_client_project(contest_id, email_id = nil)
+    contest = Contest.find(contest_id)
+    client = contest.client
+    set_template_values(
+      client_time_tracker_url: renderer.time_tracker_client_center_entry_url(id: contest.id)
+    )
+    mail to: [wrap_recipient(client, 'to')], email_id: email_id
+  end
+
+  def client_bought_hours_start_designing(contest_request_id, email_id = nil)
+    contest_request = ContestRequest.find(contest_request_id)
+    designer = contest_request.designer
+    contest = contest_request.contest
+    client = contest.client
+    set_template_values(
+      project_time_tracker_url: renderer.designer_center_contest_time_tracker_url(contest_id: contest.id),
+      client_name: client.name
+    )
+    mail to: [wrap_recipient(designer, 'to')], email_id: email_id
   end
 
   private

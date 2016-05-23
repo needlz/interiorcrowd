@@ -1,7 +1,7 @@
 class TimeTrackerController < ApplicationController
-  before_action :check_designer, only: [:designers_show, :suggest_hours]
+  before_action :check_designer, only: [:designer_view, :suggest_hours]
 
-  def clients_show
+  def client_view
     return unless check_client
 
     @contest = Contest.find(params[:id])
@@ -13,7 +13,7 @@ class TimeTrackerController < ApplicationController
     @activities_groups_holder = activities_grouper(@time_tracker)
   end
 
-  def designers_show
+  def designer_view
     @contest = Contest.find(params[:contest_id])
     contests_designer = @contest.response_winner.designer if @contest.response_winner
 
@@ -33,14 +33,15 @@ class TimeTrackerController < ApplicationController
     contest = Contest.find(params[:contest_id])
     contest_request = contest.response_winner
 
-    raise ArgumentError unless params[:suggested_hours]
-
+    return raise_404 unless contest_request
     return raise_404 unless current_user == contest_request.designer
+    raise ArgumentError unless params[:suggested_hours]
 
     time_tracker = contest.time_tracker
     time_tracker.with_lock do
       hours_suggested = time_tracker.hours_suggested + params[:suggested_hours].to_i
       if time_tracker.update_attributes({hours_suggested: hours_suggested})
+        Jobs::Mailer.schedule(:hours_added_to_client_project, [contest.id])
         render status: 200, json: hours_suggested
       else
         raise ArgumentError
@@ -50,7 +51,7 @@ class TimeTrackerController < ApplicationController
     render status: 500, json: t('time_tracker.designer.request_send_error')
   end
 
-  def purchase_confirm
+  def initialize_purchase
     return unless check_client
 
     @hours = params[:hours].to_i
@@ -62,7 +63,7 @@ class TimeTrackerController < ApplicationController
     @time_tracker = TimeTrackerView.new(@contest.time_tracker, @hours)
   end
 
-  def show_invoice
+  def confirm_purchase
     return unless check_client
 
     @hours = params[:hours].to_i

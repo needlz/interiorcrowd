@@ -35,7 +35,7 @@
           %span.cancel= t('.cancel_comment')
           %span.delete= t('.delete_comment')
         .editAttachments.editArea
-          %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'image[image]' }
+          %input.fileinput.hidden{ type: 'file', multiple: 'multiple', name: 'file' }
           %input.fileIds{ type: 'hidden' }
           .thumbs
             .template
@@ -69,8 +69,6 @@
             - comments.where.not(role: current_user.role).each do |comment|
               = render 'designer_center_requests/edit/comment',
                   { user: current_user, comment_view: CommentView.create(comment, current_user) }
-
-    = render 'shared/setup_uploadify'
 
     :coffee
       $ ->

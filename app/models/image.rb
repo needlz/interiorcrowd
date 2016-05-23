@@ -45,7 +45,24 @@ class Image < ActiveRecord::Base
                     convert_options: {
                       all: '-background white -flatten +matte'
                     },
-                    path: ':class/:id/:style:filename'
+                    path: ':class/:id/:style:filename',
+                    default_url: ->(image){
+                      image.processing? ? image.options[:url] : 'missing.png'
+                    }
+  process_in_background :image
+  do_not_validate_attachment_file_type :image
+
+  def move_from_temporary
+    if image.job_is_processing == true
+      s3 = AWS::S3.new
+      filename = image_file_name
+      path = 'temporary/' + filename
+      bucket_name = Settings.aws.bucket_name
+      bucket = s3.buckets[bucket_name]
+      new_path = image.interpolator.interpolate(':class/:id/:style:filename', image, :original)
+      bucket.objects[path].copy_to(new_path, acl: :public_read, copy_source: new_path)
+    end
+  end
 
   has_one :lookbook_details
 
@@ -101,6 +118,7 @@ class Image < ActiveRecord::Base
       name: image_file_name,
       size: image_file_size,
       url: medium_size_url,
+      small_size_url: small_size_url,
       original_size_url: original_size_url,
       download_url: url_for_downloading,
       id: id
@@ -135,7 +153,11 @@ class Image < ActiveRecord::Base
 
   def thumb_url_for(style)
     if viewable?
-      image.url(style)
+      if image.processing?
+        "/assets/thumbnail_is_being_generated.svg?image_id=#{ id }&ready_url=#{ image.url(style) }"
+      else
+        image.url(style)
+      end
     else
       '/assets/file-icon.png'
     end
@@ -146,5 +168,17 @@ class Image < ActiveRecord::Base
   def attachment
     image
   end
+
+end
+
+class Paperclip::Attachment
+
+  def reprocess_with_moving
+    instance.move_from_temporary
+    reprocess_without_moving
+  end
+
+  alias_method :reprocess_without_moving, :reprocess!
+  alias_method :reprocess!, :reprocess_with_moving
 
 end

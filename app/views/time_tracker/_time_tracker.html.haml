@@ -5,6 +5,9 @@
   = javascript_include_tag 'time_tracker/tracker_attachment_uploader'
   = javascript_include_tag 'time_tracker/designer_activities'
 
+  :javascript
+    TaskForm = #{ translations_to_json(['time_tracker', 'task_form']) }
+
 = content_for :header
 %section
   .container
