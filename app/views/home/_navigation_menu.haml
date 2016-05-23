@@ -1,6 +1,8 @@
 .col-md-3
   %ul.nav.faqNav{:role => "tablist"}
     %li.active{:role => "presentation"}
-      %a{"aria-controls" => "customer", "data-toggle" => "tab", :href => "#customer", :role => "tab"} Customer
+      %a{"aria-controls" => "customer", "data-toggle" => "tab", :href => "#customer", :role => "tab"}= t('.customer')
     %li{:role => "presentation"}
-      %a{"aria-controls" => "designer", "data-toggle" => "tab", :href => "#designer", :role => "tab"} Designer
+      %a{"aria-controls" => "designer", "data-toggle" => "tab", :href => "#designer", :role => "tab"}= t('.designer')
+    %li{:role => "presentation"}
+      %a{"aria-controls" => "commercial", "data-toggle" => "tab", :href => "#commercial", :role => "tab"}= t('.commercial')

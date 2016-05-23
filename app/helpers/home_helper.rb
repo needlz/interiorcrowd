@@ -18,6 +18,17 @@ module HomeHelper
      { how_to_upload_additional_pictures: pictures_link }]
   end
 
+  def faq_commercial_questions
+    hello_link = { hello_email: mail_to(t('feedback_email')),
+                   google_form: link_to('here', Settings.external_urls.google_forms.help_with_new_office, target: '_blank') }
+    [{ how_does_it_work: hello_link },
+     { what_type_of_commercial_projects: hello_link },
+     :who_are_designers,
+     :is_this_for_me,
+     :we_need_everything_asap,
+     :i_dont_have_time]
+  end
+
   def faq_designer_questions
     []
   end
