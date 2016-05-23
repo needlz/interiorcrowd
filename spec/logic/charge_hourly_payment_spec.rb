@@ -3,7 +3,13 @@ require 'rails_helper'
 RSpec.describe ChargeHourlyPayment do
   let(:credit_card) { Fabricate(:credit_card) }
   let(:client) { Fabricate(:client, primary_card_id: credit_card.id) }
-  let(:contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
+  let(:contest) { Fabricate(:contest_during_fulfillment, client: client) }
+  let(:designer) { Fabricate(:designer) }
+  let!(:winner_request) do
+    contest_request = Fabricate(:contest_request, contest: contest, status: 'fulfillment_ready', designer: designer)
+    contest_request.update_attribute(:answer, 'winner')
+    contest_request
+  end
   let!(:time_tracker) { Fabricate(:time_tracker, contest: contest) }
   let!(:hours_count) { 4 }
 
