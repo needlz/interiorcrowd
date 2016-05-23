@@ -33,14 +33,15 @@ class TimeTrackerController < ApplicationController
     contest = Contest.find(params[:contest_id])
     contest_request = contest.response_winner
 
-    raise ArgumentError unless params[:suggested_hours]
-
+    return raise_404 unless contest_request
     return raise_404 unless current_user == contest_request.designer
+    raise ArgumentError unless params[:suggested_hours]
 
     time_tracker = contest.time_tracker
     time_tracker.with_lock do
       hours_suggested = time_tracker.hours_suggested + params[:suggested_hours].to_i
       if time_tracker.update_attributes({hours_suggested: hours_suggested})
+        Jobs::Mailer.schedule(:hours_added_to_client_project, [contest.id])
         render status: 200, json: hours_suggested
       else
         raise ArgumentError

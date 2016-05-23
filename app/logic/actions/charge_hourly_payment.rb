@@ -27,6 +27,7 @@ class ChargeHourlyPayment
           perform_stripe_charge
           finalize_payment_record
           track_actual_hours
+          notify_designer
         end
       end
     rescue StandardError => e
@@ -74,4 +75,10 @@ class ChargeHourlyPayment
     time_tracker.update_attributes({ hours_actual: hours + time_tracker.hours_actual,
                                      hours_suggested: 0 })
   end
+
+  def notify_designer
+    contest_request = contest.response_winner
+    Jobs::Mailer.schedule(:client_bought_hours_start_designing, [contest_request.id])
+  end
+
 end
