@@ -24,7 +24,7 @@ class DesignerNotification < UserNotification
   def self.types
     %w(DesignerInviteNotification DesignerWinnerNotification DesignerInfoNotification DesignerWelcomeNotification
        ContestCommentDesignerNotification ConceptBoardCommentNotification BoardSubmittedDesignerNotification
-       FinalNoteDesignerNotification DesignerLoserInfoNotification)
+       FinalNoteDesignerNotification DesignerLoserInfoNotification DesignerTimeTrackerNotification)
   end
 
   def recipient

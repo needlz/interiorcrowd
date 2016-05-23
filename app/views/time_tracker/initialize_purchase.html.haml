@@ -18,5 +18,5 @@
         .col-sm-offset-5.col-sm-4.col-xs-7.col-xs-offset-0
           %h5= @time_tracker.price_per_hour
       %h4= t('time_tracker.client.confirmation.total', count: @time_tracker.total_price).html_safe
-      = button_to t('time_tracker.client.confirmation.confirm'), time_tracker_show_invoice_client_center_entry_path,
+      = button_to t('time_tracker.client.confirmation.confirm'), time_tracker_confirm_purchase_client_center_entry_path,
         method: 'post', class: 'btn', id: 'hours-purchase-confirm', params: {hours: @hours}

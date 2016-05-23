@@ -1,6 +1,6 @@
 module DesignerNotifications
 
-  class DesignerWinnerNotificationView < NotificationView
+  class DesignerTimeTrackerNotificationView < NotificationView
     def initialize(designer_notification)
       super(designer_notification)
       @designer_notification = designer_notification
@@ -8,19 +8,19 @@ module DesignerNotifications
     end
 
     def color
-      'red'
+      'yellow'
     end
 
     def text
-      I18n.t('designer_center.contests_preview.winner', contest_name: contest.project_name)
+      I18n.t('time_tracker.designer.notification.text', client_name: contest.client.name)
     end
 
     def href(spectator = nil)
-      edit_designer_center_response_path(id: designer_notification.contest_request_id)
+      designer_center_contest_time_tracker_path(contest_id: contest.id)
     end
 
     def type
-      'win'
+      'notification'
     end
 
     private

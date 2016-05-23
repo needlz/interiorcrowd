@@ -167,7 +167,7 @@ RSpec.describe UserMailer do
     end
 
     it 'sends email to client about designer has recommended a bundle of hours' do
-      expect(UserMailer.client_bought_hours_start_designing(contest.id)).to be_present
+      expect(UserMailer.client_bought_hours_start_designing(contest_request.id)).to be_present
     end
 
     it 'saves list of recipients' do

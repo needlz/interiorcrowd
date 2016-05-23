@@ -51,7 +51,7 @@ class TimeTrackerController < ApplicationController
     render status: 500, json: t('time_tracker.designer.request_send_error')
   end
 
-  def purchase_confirm
+  def initialize_purchase
     return unless check_client
 
     @hours = params[:hours].to_i
@@ -63,7 +63,7 @@ class TimeTrackerController < ApplicationController
     @time_tracker = TimeTrackerView.new(@contest.time_tracker, @hours)
   end
 
-  def show_invoice
+  def confirm_purchase
     return unless check_client
 
     @hours = params[:hours].to_i
