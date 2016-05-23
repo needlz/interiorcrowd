@@ -1,0 +1,5 @@
+#commercial.tab-pane.active{:role => "tabpanel"}
+  #accordion.panel-group{"aria-multiselectable" => "false", :role => "tablist"}
+    - faq_commercial_questions.each_with_index do |question, index|
+      = render partial: 'home/faq/spoiler_item', locals: { number: index + faq_client_questions.count + 1,
+          faq_item: faq_item('commercial', question) }
