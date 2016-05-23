@@ -36,9 +36,6 @@ class DesignerActivityForm
     [@activity]
   end
 
-  def tasks_attributes=(attributes)
-  end
-
   def self.model_name
     DesignerActivity.model_name
   end
