@@ -1532,6 +1532,7 @@ h3.exploreMore {
 /* start Credit-Card-Form */
 .creditCardForm {
   padding-bottom: 60px;
+  color:#747474;
 }
 
 .creditCardForm h3 {
@@ -1539,12 +1540,12 @@ h3.exploreMore {
   color: #707070;
   font-size: 36px;
   text-align: center;
-  margin: 80px 0px 40px;
+  margin: 80px 0px 20px;
   text-transform: uppercase;
 }
 
 .creditCardForm h4 {
-  color: #231f20;
+  color: #747474;
   font-size: 24px;
   margin-top: 60px;
   margin-bottom: 20px;
@@ -1557,20 +1558,20 @@ h3.exploreMore {
 
 .creditCardForm label p {
   font-size: 18px;
-  color: #231f20;
+  color:#747474;
 }
 
 .creditCardForm label input {
   width: 100%;
   line-height: 38px;
-  border: 1px solid #000;
+  border: 1px solid #747474;
   font-size: 18px;
   padding: 0px 5px;
 }
 
 .creditCardForm .dropdown .btn {
   background: transparent;
-  border: 1px solid #000;
+  border: 1px solid #747474;
   line-height: 40px;
   height: 40px;
   width: 100%;
@@ -1584,7 +1585,7 @@ h3.exploreMore {
   height: 40px;
   display: block;
   background: url("/assets/caret.png") no-repeat center;
-  border-left: 1px solid #000;
+  border-left: 1px solid #747474;
   margin: 0px;
 }
 
@@ -1604,7 +1605,7 @@ h3.exploreMore {
 
 .iAgreeTerms {
   font-size: 22px;
-  color: #000;
+  color: #747474;
   text-align: center;
   margin: 40px 0px;
 }
@@ -1615,15 +1616,16 @@ h3.exploreMore {
 
 .creditCardForm .submit-button {
   font-size: 22px;
-  color: #231f20;
-  background: transparent;
-  border: 1px solid #000;
-  border-radius: 0px;
+  color: white;
+  background: #409863;
+  border-color: #409863;
+  border-radius: 3px;
   padding: 0px;
   height: 60px;
-  width: 198px;
+  width: 100%;
   display: block;
   margin: 0 auto;
+  text-transform: uppercase;
 }
 
 .customCheckbox input[type="checkbox"] {
@@ -1650,20 +1652,20 @@ h3.exploreMore {
 
 .promotionCodeApply p {
   font-size: 18px;
-  color: #231f20;
+  color: #747474;
   padding-left: 15px;
   font-weight: 700;
 
 }
 
 .promotionCodeApply input[type=text] {
-  width: 65%;
+  width: 75%;
   float: left;
   margin-right: 5%;
 }
 
 .promotionCodeApply a {
-  width: 30%;
+  width: 20%;
   float: left;
   color: #FFF;
   border: none;

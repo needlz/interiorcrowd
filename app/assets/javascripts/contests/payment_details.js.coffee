@@ -4,7 +4,7 @@ class CardValidation
     @error = null
     @valid = false
     $('#card_number, #card_cvc, #credit_card_ex_month, #credit_card_ex_year').change (event)=>
-      $("#err_card_number").text('')
+      $(".err_card_number").text('')
       @validate() if @allInputsFilled()
 
   @validate: ->
@@ -18,7 +18,7 @@ class CardValidation
         if response.error
           @error = response.error.message
           @valid = false
-          $("#err_card_number").text(response.error.message)
+          $(".err_card_number").text(response.error.message)
         else
           @valid = true
     )
