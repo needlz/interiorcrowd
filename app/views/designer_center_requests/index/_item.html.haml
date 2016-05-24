@@ -18,7 +18,7 @@
       %a.btn{ href: edit_designer_center_response_path(id: response.id) }
         = t('designer_center.responses.item.comments')
         %span= response.collaboration_and_final_comments_count
-      %a.btn{ href: edit_designer_center_response_path(id: response.id) }
+      %a.btn{ href: contest.fulfillment? ? designer_center_contest_time_tracker_path(contest_id: contest.id) : edit_designer_center_response_path(id: response.id) }
         = t('designer_center.responses.item.go')
         %img{:src => "/assets/go_right.png"}/
 
