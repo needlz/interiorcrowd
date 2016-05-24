@@ -1,0 +1,1 @@
+class Navigation::DesignerCenter::Closed < Navigation::DesignerCenter::Base; end

@@ -5,7 +5,7 @@ class ContestShortDetails
   attr_reader :id, :name, :package_name, :design_spaces, :days_left, :price, :days_count, :days_till_end, :status,
               :client_name, :status_name, :continue_path, :continue_label, :progress, :unfinished_step_path,
               :submissions_count, :rooms_short_name, :rooms_popover_attributes, :design_spaces_list, :design_space_possesive_name
-  delegate :response_winner, :completed?, :winner_selection?, to: :contest
+  delegate :response_winner, :completed?, :winner_selection?, :fulfillment?, to: :contest
 
   def initialize(contest)
     @contest = contest
@@ -25,7 +25,11 @@ class ContestShortDetails
     @contest_view = ContestView.new(contest_attributes: contest)
     @progress = "#{ calculate_progress }% completed"
     if contest.completed?
-      @continue_path = client_center_entry_path(id: contest.id)
+      if contest.fulfillment?
+        @continue_path = time_tracker_client_center_entry_path(id: contest.id)
+      else
+        @continue_path = client_center_entry_path(id: contest.id)
+      end
       @continue_label = I18n.t('designer_center.responses.item.go')
     else
       @continue_path = ContestCreationWizard.incomplete_step_path(contest)

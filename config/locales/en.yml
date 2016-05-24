@@ -1837,7 +1837,7 @@ en:
     link_design_tab: Thanks! Your designer will now start working on your project! Stay updated in the <a href=%{path}>Design Tab</a>.
     hours_amount:
       one: Currently you have <span>%{count}</span> hour
-      many: Currently you have <span>%{count}</span> hours
+      other: Currently you have <span>%{count}</span> hours
     description_title: how this works
     description_wording: >
       Your designer will suggest a bundle of hours to purchase for them to get started designing for you.
