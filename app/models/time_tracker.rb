@@ -29,4 +29,8 @@ class TimeTracker < ActiveRecord::Base
     designer_activities.sum(:hours)
   end
 
+  def display_name
+    "Time tracker of contest ##{ contest.id } (#{ contest.name })"
+  end
+
 end

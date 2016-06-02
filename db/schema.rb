@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503155314) do
+ActiveRecord::Schema.define(version: 20160602152804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -381,7 +381,7 @@ ActiveRecord::Schema.define(version: 20160503155314) do
 
   create_table "hourly_payments", force: :cascade do |t|
     t.integer  "client_id"
-    t.string   "payment_status"
+    t.string   "payment_status",       default: "pending"
     t.text     "last_error"
     t.string   "stripe_charge_id"
     t.integer  "time_tracker_id"
