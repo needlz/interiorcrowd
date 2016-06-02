@@ -27,11 +27,12 @@ class ChargeHourlyPayment
           perform_stripe_charge
           finalize_payment_record
           track_actual_hours
+          notify_designer
         end
       end
     rescue StandardError => e
-      hourly_payment.update_attributes!({ payment_status: 'failed',
-                                          last_error: e.message + "\n" + e.backtrace.join("\n") })
+      hourly_payment.update_attributes!(payment_status: 'failed',
+                                        last_error: e.message + "\n" + e.backtrace.join("\n"))
       raise
     end
   end
@@ -53,7 +54,7 @@ class ChargeHourlyPayment
 
   def perform_stripe_charge
     if price <= 0
-      @charge = Hashie::Mash.new({ id: Payment::ZERO_PRICE_PLACEHOLDER })
+      @charge = Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
     else
       customer = StripeCustomer.new(client)
       amount = Money.new(total_price, DEFAULT_CURRENCY)
@@ -71,7 +72,16 @@ class ChargeHourlyPayment
   end
 
   def track_actual_hours
-    time_tracker.update_attributes({ hours_actual: hours + time_tracker.hours_actual,
-                                     hours_suggested: 0 })
+    time_tracker.update_attributes(hours_actual: hours + time_tracker.hours_actual,
+                                   hours_suggested: 0)
   end
+
+  def notify_designer
+    contest_request = contest.response_winner
+    Jobs::Mailer.schedule(:client_bought_hours_start_designing, [contest_request.id])
+    designer = contest_request.designer
+    designer.user_notifications << DesignerTimeTrackerNotification.create!(contest_id: contest.id,
+                                                                           contest_request_id: contest_request.id)
+  end
+
 end

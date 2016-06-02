@@ -116,8 +116,8 @@ InteriorC::Application.routes.draw do
       resources :entries, only: [:index, :show], controller: 'contests', as: 'client_center_entries' do
         member do
           get 'time_tracker', to: 'time_tracker#client_view', as: 'time_tracker'
-          post 'time_tracker/purchase_confirm', to: 'time_tracker#purchase_confirm', as: 'time_tracker_purchase_confirm'
-          post 'time_tracker/show_invoice', to: 'time_tracker#show_invoice', as: 'time_tracker_show_invoice'
+          post 'time_tracker/initialize_purchase', to: 'time_tracker#initialize_purchase', as: 'time_tracker_initialize_purchase'
+          post 'time_tracker/confirm_purchase', to: 'time_tracker#confirm_purchase', as: 'time_tracker_confirm_purchase'
         end
       end
       get '', to: 'clients#client_center', as: 'client_center'

@@ -4,11 +4,11 @@ module DesignerNotifications
     include Rails.application.routes.url_helpers
 
     def self.for_notifications(user_notifications)
-      user_notifications.map {|notification| for_notification(notification) }
+      user_notifications.map { |notification| for_notification(notification) }
     end
 
     def self.for_notification(notification)
-      view_class = "DesignerNotifications::#{notification.type}View".constantize
+      view_class = "DesignerNotifications::#{ notification.type }View".constantize
       view_class.new(notification)
     end
 
