@@ -4,6 +4,8 @@ require 'spec_helper'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 
+require "capybara/rspec"
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -40,27 +42,28 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :truncation
   end
 
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
   config.before(:each) do
     DatabaseCleaner.start
+  end
+
+  config.before(:each, js: true) do
+    Capybara.current_driver = :webkit
+    Capybara.javascript_driver = :webkit
+    Capybara.run_server = true
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
   end
 
-  # RSpec Rails can automatically mix in different behaviours to your tests
-  # based on their file location, for example enabling you to call `get` and
-  # `post` in specs under `spec/controllers`.
-  #
-  # You can disable this behaviour by removing the line below, and instead
-  # explicitly tag your specs with their type, e.g.:
-  #
-  #     RSpec.describe ClientsController, :type => :controller do
-  #       # ...
-  #     end
-  #
-  # The different available types are documented in the features, such as in
-  # https://relishapp.com/rspec/rspec-rails/docs
+  Capybara::Webkit.configure do |capybara_config|
+    capybara_config.block_unknown_urls # Silently return an empty 200 response for any requests to unknown URLs.
+  end
+
   Rails.application.routes.default_url_options = { trailing_slash: true, host: 'test.host' }
 
   config.infer_spec_type_from_file_location!

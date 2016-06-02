@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: raeltor_contacts
+# Table name: realtor_contacts
 #
 #  id         :integer          not null, primary key
 #  first_name :string

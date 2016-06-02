@@ -28,3 +28,4 @@
 /config/settings/test_environment_credentials.yml
 
 coverage
+public/uploads

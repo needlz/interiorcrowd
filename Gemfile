@@ -4,7 +4,8 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
-gem 'passenger' # webserver
+gem 'puma' # webserver
+gem 'puma-heroku'
 
 gem 'activerecord-session_store', git: 'https://github.com/rails/activerecord-session_store.git'
 
@@ -14,6 +15,7 @@ gem 'mime-types'
 gem "will_paginate", "~> 3.0.4"
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+gem 'sprockets', '2.11.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -37,7 +39,6 @@ gem 'jquery-ui-rails'
 gem 'aws-sdk', '< 2.0' # incompatibility with SDK v2
 gem 'hashie'
 gem 'fabrication'
-gem 'sprockets', '~> 2.11.0'
 gem 'state_machine'
 gem 'delayed_job_active_record'
 gem 'daemons'
@@ -79,6 +80,10 @@ group :test do
   gem 'rspec_junit_formatter', '0.2.2' # test metadata collection for CircleCI
   gem 'simplecov', require: false
   gem 'webmock'
+
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'capybara-webkit'
 end
 
 gem 'faker' # generating fake data
@@ -86,7 +91,7 @@ gem 'faker' # generating fake data
 gem 'mandrill-rails'
 gem 'mandrill-api'
 
-gem 'rollbar', '~> 1.4.2' #error notifier
+gem 'rollbar' #error notifier
 gem 'social-share-button'
 gem 'numbers_and_words' #humanize numbers output
 gem 'activeadmin', '~> 1.0.0.pre1'
@@ -109,7 +114,6 @@ gem 'faraday-cookie_jar'
 gem 'http-cookie'
 gem 'newrelic_rpm'
 gem 'fork_break'
-gem 'database_cleaner'
 gem 'rack-ssl-enforcer'
 gem 'griddler' # parses email text
 gem 'viglink-api'

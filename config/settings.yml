@@ -111,6 +111,7 @@ test:
   mailchimp:
     api_key: '1234-us1'
     list_id: '123'
+  uploads_stored_in_filesystem: true
 
 staging:
   <<: *defaults

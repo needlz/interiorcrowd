@@ -37,8 +37,10 @@ development:
   AUTOMATIC_PAYMENT: 'true'
 
 test:
-  APP_HOST: 'localhost:3000'
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
   INFO_EMAIL: 'romans@softwareplanet.uk.com'
   INBOUND_MAIL_DOMAIN: 'inbound.test.com'
+  APP_HOST: 'local.home:3000'
+  APP_URL: 'http://beta.local.com:3000'
+  BETA_PASSWORD: 'beta'

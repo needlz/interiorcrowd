@@ -38,6 +38,7 @@ class DesignerCenterRequestsController < ApplicationController
   def edit
     @request = @designer.contest_requests.find(params[:id])
     return redirect_to designer_center_response_path(id: @request.id) if !@request.details_editable? || @request.draft? || @request.submitted?
+    ActiveRecord::Associations::Preloader.new.preload(@request, comments: [:attachments])
     @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(:brief,
                                                                                                       contest: @request.contest,
                                                                                                       contest_request: @request)

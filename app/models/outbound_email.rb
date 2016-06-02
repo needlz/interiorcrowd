@@ -10,6 +10,9 @@
 #  updated_at             :datetime
 #  sent_to_mail_server_at :datetime
 #  api_response           :text
+#  plain_message          :text
+#  template_name          :string
+#  recipients             :text
 #
 
 class OutboundEmail < ActiveRecord::Base

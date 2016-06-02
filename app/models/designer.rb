@@ -23,6 +23,10 @@
 #  facebook_user_id        :integer
 #  last_log_in_at          :datetime
 #  last_log_in_ip          :string
+#  paid_for_concept_boards :boolean          default(FALSE)
+#  blog_account_json       :text
+#  blog_password           :string
+#  blog_username           :string
 #
 
 class Designer < ActiveRecord::Base
