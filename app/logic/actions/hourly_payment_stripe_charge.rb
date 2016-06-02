@@ -10,12 +10,12 @@ class HourlyPaymentStripeCharge < Action
 
   def perform
     if hourly_payment.total_price_in_cents <= 0
-      Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
+      @charge = Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
     else
       customer = StripeCustomer.new(client)
       amount = Money.new(hourly_payment.total_price_in_cents, ChargeHourlyPayment::DEFAULT_CURRENCY)
       description = "hourly charge for client with id #{ client.id }"
-      customer.charge(money: amount,
+      @charge = customer.charge(money: amount,
                       description: description,
                       card_id: credit_card.stripe_id)
     end
