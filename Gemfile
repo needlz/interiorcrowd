@@ -4,7 +4,7 @@ ruby '2.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
-gem 'passenger' # webserver
+gem 'puma' # webserver
 
 gem 'activerecord-session_store', git: 'https://github.com/rails/activerecord-session_store.git'
 
@@ -71,6 +71,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'foreman'
+  gem 'meta_request'
 end
 
 group :test do
@@ -86,7 +87,7 @@ gem 'faker' # generating fake data
 gem 'mandrill-rails'
 gem 'mandrill-api'
 
-gem 'rollbar', '~> 1.4.2' #error notifier
+gem 'rollbar' #error notifier
 gem 'social-share-button'
 gem 'numbers_and_words' #humanize numbers output
 gem 'activeadmin', '~> 1.0.0.pre1'

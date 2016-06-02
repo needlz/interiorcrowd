@@ -2,6 +2,7 @@ module TextFormatHelper
   extend ActiveSupport::Concern
 
   include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::UrlHelper
   included do
     extend ActionView::Helpers::SanitizeHelper::ClassMethods
   end

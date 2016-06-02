@@ -2,7 +2,7 @@
   .row.designerFeedback
     - if readonly
       .col-sm-12
-        = render partial: 'clients/client_center/entries/notes_list_container', locals: { notes: notes }
+        = render 'clients/client_center/entries/notes_list_container', notes: notes
     - else
       .col-sm-6
         = form_for ContestNote.new, remote: true do |f|
@@ -11,4 +11,4 @@
           = f.text_area :text
           = f.submit t('client_center.entries.send_note'), class: 'btn'
       .col-sm-6
-        = render partial: 'clients/client_center/entries/notes_list_container', locals: { notes: notes }
+        = render 'clients/client_center/entries/notes_list_container', notes: notes
