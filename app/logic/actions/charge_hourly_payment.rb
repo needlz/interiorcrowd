@@ -1,4 +1,4 @@
-class ChargeHourlyPayment
+class ChargeHourlyPayment < Action
   DEFAULT_CURRENCY = 'USD'
 
   attr_reader :hourly_payment
@@ -53,16 +53,8 @@ class ChargeHourlyPayment
   attr_reader :contest, :client, :time_tracker, :charge, :price, :total_price, :hours, :credit_card, :hourly_payment
 
   def perform_stripe_charge
-    if price <= 0
-      @charge = Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
-    else
-      customer = StripeCustomer.new(client)
-      amount = Money.new(total_price, DEFAULT_CURRENCY)
-      description = "hourly charge for client with id #{ client.id }"
-      @charge = customer.charge(money: amount,
-                                description: description,
-                                card_id: credit_card.stripe_id)
-    end
+    stripe_charge = HourlyPaymentStripeCharge.perform(@hourly_payment)
+    @charge = stripe_charge.charge
   end
 
   def finalize_payment_record
