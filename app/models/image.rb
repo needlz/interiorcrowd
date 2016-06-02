@@ -48,7 +48,8 @@ class Image < ActiveRecord::Base
                     path: ':class/:id/:style:filename',
                     default_url: ->(image){
                       image.processing? ? image.options[:url] : 'missing.png'
-                    }
+                    },
+                    s3_protocol: Rails.env.production? ? :https : :http
   process_in_background :image
   do_not_validate_attachment_file_type :image
 

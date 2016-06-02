@@ -1,6 +1,4 @@
 module Paperclip
-  # do not require any validations
-  REQUIRED_VALIDATORS = []
 
   # do not complain when missing validations
   class Attachment
