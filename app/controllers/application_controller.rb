@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
   end
 
   def raise_404(e = nil)
-    log_error(e) if e
     raise ActionController::RoutingError.new(t('page_not_found'))
   end
 
@@ -95,8 +94,11 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_error(exception)
-    log_error(exception)
-    return render_404 if exception.kind_of?(ActionController::RoutingError)
+    if exception.kind_of?(ActionController::RoutingError)
+      return render_404
+    else
+      log_error(exception)
+    end
     raise exception
   end
 

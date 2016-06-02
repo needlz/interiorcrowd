@@ -35,6 +35,8 @@ development:
   MAILCHIMP_LIST_ID: '854c60de30'
   SHOW_PACKAGE_TYPE_DESC: 'false'
   AUTOMATIC_PAYMENT: 'true'
+  ROLLBAR_JS_ACCESS_TOKEN: '4d6c88dd31bc4667a66ae7b22f259873' # pustomytnyk@gmail.com account
+  ROLLBAR_ACCESS_TOKEN: 'befcb19850e14ee9b77146367b341c16'
 
 test:
   APP_HOST: 'localhost:3000'

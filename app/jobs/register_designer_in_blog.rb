@@ -1,4 +1,5 @@
 class RegisterDesignerInBlog < ActiveJob::Base
+  include Rollbar::ActiveJob
   queue_as Jobs::BLOG_QUEUE
 
   def perform(designer_id)
