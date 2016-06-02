@@ -37,4 +37,8 @@ class CreditCard < ActiveRecord::Base
 
   scope :from_newer_to_older, -> { order(created_at: :desc) }
 
+  def display_name
+    "##{ id }"
+  end
+
 end
