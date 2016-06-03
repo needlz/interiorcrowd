@@ -9,17 +9,20 @@ class HourlyPaymentStripeCharge < Action
   end
 
   def perform
-    if hourly_payment.total_price_in_cents <= 0
-      @charge = Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
-    else
-      customer = StripeCustomer.new(client)
-      amount = Money.new(hourly_payment.total_price_in_cents, ChargeHourlyPayment::DEFAULT_CURRENCY)
-      description = "hourly charge for client with id #{ client.id }"
-      @charge = customer.charge(money: amount,
-                      description: description,
-                      card_id: credit_card.stripe_id)
-    end
-
+    stripe_charge =
+      if hourly_payment.total_price_in_cents <= 0
+        Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
+      else
+        customer = StripeCustomer.new(client)
+        amount = Money.new(hourly_payment.total_price_in_cents, ChargeHourlyPayment::DEFAULT_CURRENCY)
+        description = "hourly charge for client with id #{ client.id }"
+        customer.charge(money: amount,
+                        description: description,
+                        card_id: credit_card.stripe_id)
+      end
+    hourly_payment.update_attributes!(payment_status: 'completed',
+                                      stripe_charge_id: stripe_charge.id,
+                                      last_error: nil)
   end
 
 end

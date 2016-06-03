@@ -25,7 +25,6 @@ class ChargeHourlyPayment < Action
       hourly_payment.with_lock do
         ActiveRecord::Base.transaction do
           perform_stripe_charge
-          finalize_payment_record
           track_actual_hours
           notify_designer
         end
@@ -50,17 +49,10 @@ class ChargeHourlyPayment < Action
 
   private
 
-  attr_reader :contest, :client, :time_tracker, :charge, :price, :total_price, :hours, :credit_card, :hourly_payment
+  attr_reader :contest, :client, :time_tracker, :price, :total_price, :hours, :credit_card, :hourly_payment
 
   def perform_stripe_charge
-    stripe_charge = HourlyPaymentStripeCharge.perform(@hourly_payment)
-    @charge = stripe_charge.charge
-  end
-
-  def finalize_payment_record
-    hourly_payment.update_attributes!(payment_status: 'completed',
-                                      stripe_charge_id: charge.id,
-                                      last_error: nil)
+    HourlyPaymentStripeCharge.perform(@hourly_payment)
   end
 
   def track_actual_hours

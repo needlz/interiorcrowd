@@ -26,6 +26,7 @@ ActiveAdmin.register HourlyPayment do
     hourly_payment = HourlyPayment.find(params[:id])
     begin
       HourlyPaymentStripeCharge.perform(hourly_payment)
+      redirect_to({ action: :show }, notice: 'Charged')
     rescue StandardError => e
       hourly_payment.update_attributes!(last_error: e.message)
       redirect_to({ action: :show }, error: e.message)
