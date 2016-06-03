@@ -26,12 +26,12 @@
       = render 'contests/card_manager', { card_views: @card_views, new_card: @credit_card }
 
     = form_for @client_payment, { method: 'post' } do |f|
-      .col-xs-6
-        %h4.marginTop40.info-title#marginBottom10= t('client_center.sign_up.payment_information')
+      .col-sm-6.col-xs-12.payment-col-padding
+        %h4.marginTop40.info-title= t('client_center.sign_up.payment_information')
         - unless @show_cards_manager
           = fields_for @credit_card do |card_form|
             = render 'contests/card_inputs_new', f: card_form, placeholder: nil, show_promocode_input: true
-      .col-xs-6
+      .col-sm-6.col-xs-12.payment-col-padding
         - if @show_cards_manager
           .clearfix
           .col-sm-7.marginTop20
@@ -40,14 +40,14 @@
         .order-summary-container
           %h4.title= t('client_center.sign_up.order_summary')
           .fullWidthLine
-          .order-total-info.marginTop40= t('client_center.sign_up.order_total')
-          .order-total-price.order-total-value.marginTop40= @contest_view.order_total
+          .order-total-info.marginTop25= t('client_center.sign_up.order_total')
+          .order-total-price.order-total-value.marginTop25= @contest_view.order_total
           %br
           .order-total-info= t('client_center.sign_up.promotion_code')
           .order-total-price.promotion-code-discount= t('client_center.sign_up.initial_discount')
           %br
-          .order-total-info.marginBottom40= t('client_center.sign_up.total_price')
-          .big-total-price.marginBottom40= @contest_view.order_total
+          .order-total-info.marginBottom25= t('client_center.sign_up.total_price')
+          .big-total-price.marginBottom25= @contest_view.order_total
           %br
           .fullWidthLine
 
@@ -63,14 +63,14 @@
               class: 'btn btn1-confirm submit-button'
           = hidden_mixpanel_submit_tag
         .contacts-container
-          %span.glyphicon.glyphicon-ok-circle
+          %span.ok-icon
           .ok-container
             %h4.title= t('client_center.sign_up.happiness_title')
             %h5.description= t('client_center.sign_up.happiness_description')
           .clearfix
-          %span.glyphicon.glyphicon-earphone
+          %span.phone-icon
           .phone-container
             %h4.title= t('client_center.sign_up.questions_title')
             %h5.description= t('client_center.sign_up.questions_description').html_safe
-
 = render partial: 'home/terms_of_service_modal'
+= render 'contests/payment_footer'

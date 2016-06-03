@@ -652,7 +652,7 @@ div.form-selector {
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: 'AvenirLTStd-LightOblique';
-  font-size: 18px;
+  font-size: 16px;
   color: #a9a9a9;
 }
 
@@ -1531,41 +1531,42 @@ h3.exploreMore {
 
 /* start Credit-Card-Form */
 .creditCardForm {
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   color:#747474;
 }
 
 .creditCardForm h3 {
   font-family: 'SofiaProLight';
-  color: #707070;
-  font-size: 36px;
+  color: #666666;
+  font-size: 30px;
   text-align: center;
   margin: 80px 0px 20px;
   text-transform: uppercase;
 }
 
 .creditCardForm h4 {
-  color: #747474;
-  font-size: 24px;
-  margin-top: 60px;
+  color: #333333;
+  font-size: 18px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
 .creditCardForm label {
   display: block;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .creditCardForm label p {
   font-size: 18px;
-  color:#747474;
+  color:#666666;
+  margin-bottom: 15px;
 }
 
 .creditCardForm label input {
   width: 100%;
   line-height: 38px;
   border: 1px solid #747474;
-  font-size: 18px;
+  font-size: 16px;
   padding: 0px 5px;
 }
 
@@ -1615,13 +1616,13 @@ h3.exploreMore {
 }
 
 .creditCardForm .submit-button {
-  font-size: 22px;
+  font-size: 18px;
   color: white;
   background: #409863;
   border-color: #409863;
-  border-radius: 3px;
-  padding: 0px;
-  height: 60px;
+  border-radius: 2px;
+  padding: 0;
+  height: 50px;
   width: 100%;
   display: block;
   margin: 0 auto;
@@ -1680,46 +1681,23 @@ h3.exploreMore {
   .creditCardForm > .row > div {
     padding-right: 15px;
   }
-  .creditCardForm h3 {
-    font-size: 30px;
-    margin: 60px 0px 40px;
-  }
-  .creditCardForm h4 {
-    font-size: 22px;
-  }
   .creditCardForm .dropdown .customCaret {
     width: 40px;
   }
 }
 
 @media(max-width: 992px) {
-  .creditCardForm h3 {
-    font-size: 24px;
-  }
-  .creditCardForm h4 {
-    font-size: 20px;
-    margin-top: 40px;
-  }
   .creditCardForm label p {
     font-size: 16px;
   }
 }
 
 @media(max-width: 768px) {
-  .creditCardForm label {
-    margin-bottom: 20px;
-  }
   .creditCardForm .dropdown .dateExpire {
     text-align: left;
     font-size: 14px;
   }
-  .customCheckbox input[type="checkbox"] + label {
-    display: block;
-    width: 35px;
-    height: 35px;
-    background: url("/assets/checkboxLarge.png") top no-repeat;
-    margin: 25px auto;
-  }
+
   .iAgreeTerms .customCheckbox {
     margin: 0px;
   }
@@ -1735,7 +1713,7 @@ h3.exploreMore {
   }
 }
 
-@media(max-width: 480px) {
+@media(max-width: 479px) {
   .accountInfo .col-xs-6, .promotionCodeApply > div {
     width: 100%;
   }
