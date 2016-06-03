@@ -2,11 +2,11 @@
 .menu-room.row{ data: { id: parent.id } }
   .menu-room.text-center.children
     - areas.each do |area|
-      = check_box_tag("design_brief_design_area_#{ area.id }",
+      = check_box_tag("design_style_design_area_#{ area.id }",
         area.id,
         @contest_view.design_areas.include?(area),
         class: 'hidden',
-        name: 'design_brief[design_area][]')
+        name: 'design_style[design_area][]')
       %label.m-room.option-item.lightFont{ data: { id: area.id },
         class: ('active' if @contest_view.design_areas.include?(area)),
-        for: "design_brief_design_area_#{ area.id }" }= area.name
+        for: "design_style_design_area_#{ area.id }" }= area.name

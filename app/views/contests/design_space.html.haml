@@ -35,12 +35,12 @@
       = render 'contests/sign_up_suggestion'
       .text-center.marginTop40
         %a{ href: design_style_contests_path,
-            class: "backBtn #{ tracked_link }",
+            class: "greenButton backBtn #{ tracked_link }",
             data: { name: 'Contest creation - Back to Step 2' } }= t('contests.creation.go_back')
-        %a.continueBtn{ href: '#' }= t('contests.creation.continue')
+        %a.continueBtn.greenButton{ href: '#' }= t('contests.creation.continue')
         .clearfix
         %a{ href: design_style_contests_path,
-            class: "backBtnLink #{ tracked_link }",
+            class: "greenButton backBtnLink #{ tracked_link }",
             data: { name: 'Contest creation - Back to Step 2' } }
           %img{ src: '/assets/back-to-small.png' }
           = t('contests.creation.go_back')

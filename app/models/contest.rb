@@ -95,7 +95,6 @@ class Contest < ActiveRecord::Base
   end
 
   validates_inclusion_of :status, in: STATUSES, allow_nil: false
-  validates_presence_of :design_category, if: -> { completed? }
   validates_presence_of :design_spaces, if: -> { completed? }
   validates :location_zip, postcode_format: { country_code: :us, allow_blank: true }
   ContestAdditionalPreference::PREFERENCES.each do |preference, options|

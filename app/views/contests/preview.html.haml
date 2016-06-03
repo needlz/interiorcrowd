@@ -28,12 +28,12 @@
       .marginBottom40
       = render 'contests/sign_up_suggestion'
       .text-center.marginTop40
-        %a.backBtn{ href: design_space_contests_path,
+        %a.backBtn.greenButton{ href: design_space_contests_path,
             class: tracked_link,
             data: { name: 'Contest creation - Preview - Back to Step 3' } }
           = t('contests.creation.go_back')
 
-        %a.continueBtn{ href: '#' }
+        %a.continueBtn.greenButton{ href: '#' }
           - if current_user.client?
             = t('contests.creation.create')
           - else

@@ -97,9 +97,7 @@ en:
     design_style:
       title: Style Profile
       description: >
-        Now for the really fun part! Please give us a better sense of where your style is now - and where
-        you would like it to be, by going through our style profile.
-        The more information we have, the easier it'll be to design something amazing for you.
+        The fun part! Let us know what you love and what you don't. This will help the designers get a better sense of who you are.
       validations:
         no_colors: Please enter data.
         select_design_level: Please select one

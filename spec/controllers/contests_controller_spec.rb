@@ -283,7 +283,7 @@ RSpec.describe ContestsController do
       context 'when required steps not stored in session' do
         it 'redirects to uncompleted step' do
           post :save_preview, preview: { contest_name: 'any name' }
-          expect(response).to redirect_to(ContestCreationWizard.creation_steps_paths[:design_brief])
+          expect(response).to redirect_to(ContestCreationWizard.creation_steps_paths[:design_style])
         end
       end
     end
@@ -374,9 +374,9 @@ RSpec.describe ContestsController do
   end
 
   describe 'GET design_brief' do
-    it 'renders page' do
+    it 'redirects to design_style' do
       get :design_brief
-      expect(response).to render_template(:design_brief)
+      expect(response).to redirect_to(controller: :contests, action: :design_style)
     end
   end
 
@@ -823,15 +823,15 @@ RSpec.describe ContestsController do
         let!(:incomplete_contest) { Fabricate(:contest, client: client) }
 
         it 'redirects to contest editing' do
-          get :design_brief
-          expect(response).to redirect_to design_brief_contest_path(id: incomplete_contest.id )
+          get :design_style
+          expect(response).to redirect_to design_style_contest_path(id: incomplete_contest.id )
         end
       end
 
       context 'when there is no incomplete contest' do
         it 'returns page' do
           dont_raise_i18n_exceptions do
-            get :design_brief
+            get :design_style
             expect(response).to be_ok
           end
         end
@@ -841,7 +841,7 @@ RSpec.describe ContestsController do
     context 'when not logged as client' do
       it 'returns page' do
         dont_raise_i18n_exceptions do
-          get :design_brief
+          get :design_style
           expect(response).to be_ok
         end
       end
@@ -865,7 +865,7 @@ RSpec.describe ContestsController do
 
         it 'renders page' do
           dont_raise_i18n_exceptions do
-            get :design_brief, id: incomplete_contest.id
+            get :design_style, id: incomplete_contest.id
             expect(response).to be_ok
           end
         end
@@ -875,14 +875,14 @@ RSpec.describe ContestsController do
         let!(:completed_contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
 
         it 'redirects to contest brief page' do
-          get :design_brief, id: submitted_contest.id
+          get :design_style, id: submitted_contest.id
           expect(response).to redirect_to brief_contest_path(id: submitted_contest.id)
         end
       end
 
       context 'when there is no incomplete contest' do
         it 'returns 404' do
-          get :design_brief, id: 0
+          get :design_style, id: 0
           expect(response).to have_http_status(:not_found)
         end
       end
@@ -890,7 +890,7 @@ RSpec.describe ContestsController do
 
     context 'when not logged as client' do
       it 'returns 404' do
-        get :design_brief, id: submitted_contest.id
+        get :design_style, id: submitted_contest.id
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -906,29 +906,29 @@ RSpec.describe ContestsController do
         let!(:incomplete_contest) { Fabricate(:contest, client: client) }
 
         it 'reloads page in context of the incomplete contest' do
-          post :save_design_brief
-          expect(response).to redirect_to design_brief_contest_path(id: incomplete_contest.id)
+          post :save_design_style
+          expect(response).to redirect_to design_style_contest_path(id: incomplete_contest.id)
         end
       end
 
       context 'when there is no incomplete contest' do
 
         it 'redirects to next step in context of the incomplete contest' do
-          post :save_design_brief
+          post :save_design_style
           new_contest = client.contests.first
-          expect(response).to redirect_to design_style_contest_path(id: new_contest.id)
+          expect(response).to redirect_to design_space_contest_path(id: new_contest.id)
         end
 
         it 'creates incomplete contest' do
-          expect { post :save_design_brief }.to change{ client.reload.contests.count }.from(0).to(1)
+          expect { post :save_design_style }.to change{ client.reload.contests.count }.from(0).to(1)
         end
       end
     end
 
     context 'when not logged as client' do
       it 'returns next step' do
-        post :save_design_brief
-        expect(response).to redirect_to design_style_contests_path
+        post :save_design_style
+        expect(response).to redirect_to design_space_contests_path
       end
     end
   end
@@ -942,15 +942,15 @@ RSpec.describe ContestsController do
       let!(:incomplete_contest) { Fabricate(:contest, client: client) }
 
       it 'saves changes' do
-        post :save_design_brief, contest_options_source.merge(id: incomplete_contest.id)
-        expect(response).to redirect_to design_style_contest_path(id: incomplete_contest.id)
-        expect(incomplete_contest.reload.design_space_ids).to eq contest_options_source[:design_brief][:design_area].map(&:to_i)
+        post :save_design_style, contest_options_source.merge(id: incomplete_contest.id)
+        expect(response).to redirect_to design_space_contest_path(id: incomplete_contest.id)
+        expect(incomplete_contest.reload.design_space_ids).to eq contest_options_source[:design_style][:design_area].map(&:to_i)
       end
     end
 
     context 'when a wrong contest id specified' do
       it 'returns 404' do
-        post :save_design_brief, id: 0
+        post :save_design_style, id: 0
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -959,7 +959,7 @@ RSpec.describe ContestsController do
       let(:completed_contest) { Fabricate(:completed_contest, client: client, status: 'brief_pending') }
 
       it 'returns 404' do
-        post :save_design_brief, contest_options_source.merge(id: completed_contest.id)
+        post :save_design_style, contest_options_source.merge(id: completed_contest.id)
         expect(response).to have_http_status(:not_found)
       end
     end
@@ -1001,9 +1001,9 @@ RSpec.describe ContestsController do
         it 'saves data in session' do
           expect do
             patch(:save_intake_form, contest_options_source)
-          end.to change{ session[:design_brief].try(:[], :design_category) }.
+          end.to change{ session[:design_style].try(:[], :desirable_colors) }.
               from(nil).
-              to(contest_options_source[:design_brief][:design_category])
+              to(contest_options_source[:design_style][:desirable_colors])
         end
       end
 
@@ -1013,9 +1013,9 @@ RSpec.describe ContestsController do
         it 'saves data to the contest' do
           expect do
             patch(:save_intake_form, contest_options_source.merge(id: contest.id))
-          end.to change{ contest.reload.designer_level_id }.
+          end.to change{ contest.reload.desirable_colors }.
               from(nil).
-              to(contest_options_source[:design_style][:designer_level].to_i)
+              to(contest_options_source[:design_style][:desirable_colors])
         end
       end
     end
@@ -1024,9 +1024,9 @@ RSpec.describe ContestsController do
       it 'saves data in session' do
         expect do
           patch(:save_intake_form, contest_options_source)
-        end.to change{ session[:design_brief].try(:[], :design_category) }.
+        end.to change{ session[:design_style].try(:[], :design_area) }.
             from(nil).
-            to(contest_options_source[:design_brief][:design_category])
+            to(contest_options_source[:design_style][:design_area])
       end
     end
   end

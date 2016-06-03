@@ -63,10 +63,6 @@ class ContestOptions
   def initialize_from_hash(hash)
     options = hash.with_indifferent_access
     @contest = {}
-    if options[:design_brief]
-      @contest[:design_category_id] = options[:design_brief][:design_category].to_i if options[:design_brief].key?(:design_category)
-      @contest[:design_space_ids] = options[:design_brief][:design_area] if options[:design_brief].key?(:design_area)
-    end
     if options[:design_space]
       @contest[:space_length] = ContestOptions.calculate_inches(options[:design_space], :length)
       @contest[:space_width] = ContestOptions.calculate_inches(options[:design_space], :width)
@@ -82,12 +78,12 @@ class ContestOptions
       @contest[:project_name] = options[:preview][:contest_name] if options[:preview].key?(:contest_name)
     end
     if options[:design_style]
+      @contest[:design_space_ids] = options[:design_style][:design_area] if options[:design_style].key?(:design_area)
       @contest[:desirable_colors] = options[:design_style][:desirable_colors] if options[:design_style].key?(:desirable_colors)
       @contest[:undesirable_colors] = options[:design_style][:undesirable_colors] if options[:design_style].key?(:undesirable_colors)
       @appeals = options[:design_style][:appeals].deep_symbolize_keys if options[:design_style].key?(:appeals)
       @liked_example_ids = options[:design_style][:document_id].split(',').map(&:strip).map(&:to_i) if options[:design_style][:document_id]
       @example_links = options[:design_style][:ex_links].delete_if(&:blank?) if options[:design_style][:ex_links]
-      @contest[:designer_level_id] = options[:design_style][:designer_level].to_i if options[:design_style].has_key?(:designer_level)
       @contest[:designers_explore_other_colors] = options[:design_style][:designers_explore_other_colors].to_bool if options[:design_style].key?(:designers_explore_other_colors)
       @contest[:designers_only_use_these_colors] = options[:design_style][:designers_only_use_these_colors].to_bool if options[:design_style].key?(:designers_only_use_these_colors)
     end

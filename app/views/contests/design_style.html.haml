@@ -4,6 +4,8 @@
   = javascript_include_tag 'shared/color_selector'
   = javascript_include_tag 'contests/desirable_colors_options'
   = javascript_include_tag 'contests/undesirable_colors_options'
+  = javascript_include_tag 'contests/design_brief'
+  = javascript_include_tag 'contests/area_options'
 
   = stylesheet_link_tag 'lib/slider'
   = stylesheet_link_tag 'contests/design_style'
@@ -21,13 +23,11 @@
       .row.marginTop60
         .col-md-12
           = render 'home/msg'
-          %h4= t('contests.design_style.title')
           %p.lightFont.marginTop20= t('contests.design_style.description')
           = form_tag @save_path,
               { id: 'design_style', method: 'post', class: 'intake-form' } do
-            = render 'contests/options/designer_level_options'
-            .fullWidthLine.marginTop40
             = render 'contests/options/appeals_options'
+            = render 'contests/options/area_options'
             = render 'contests/options/desirable_colors_options'
             .hLine
             = render 'contests/options/undesirable_colors_options'
@@ -40,16 +40,9 @@
             .marginBottom40
             = render 'contests/sign_up_suggestion'
             .text-center.footer-buttons
-              %a.backBtn{ href: design_brief_contests_path,
-                  class: tracked_link,
-                  data: { name: 'Contest creation - back to Step 1' } }
-                = t('contests.creation.go_back')
-              %a.continueBtn{ href: '#' }
+              %a.continueBtn.greenButton{ href: '#' }
                 = t('contests.creation.continue')
               .clearfix
-              %a.backBtnLink{ href: design_brief_contests_path }
-                %img{ src: '/assets/back-to-small.png' }
-                = t('contests.creation.go_back')
             = hidden_mixpanel_submit_tag
 
 = render 'contests/contest_creation_page'
