@@ -1020,43 +1020,75 @@ label.col-xs-11 {
   }
 }
 
+.creditCardForm input.form-control{
+  font-style: normal;
+  padding: 6px 12px;
+  font-weight: 500;
+}
 .creditCardForm .main-description {
-  font-size: 18px;
+  font-size: 14px;
   text-align: center;
   margin: 0;
-  color: #8F8F8F;
+  color: #8c8c8c;
   a {
-    color:#428bca;
+    color:#30A7FC;
   }
 }
 .payment-info-container {
+
+  .promotionCodeApply {
+    a {
+      border-radius: 2px;
+      font-size: 16px;
+    }
+  }
   .info-title, .billing-title {
     background: #666666;
     text-align: center;
     color: white;
-    padding: 15px;
+    padding: 13px;
     text-transform: uppercase;
+    margin-bottom: 25px;
   }
   .contacts-container {
     .ok-container, .phone-container {
       float:right;
       width:88%
     }
+
     .title {
-      margin: 40px 0 5px;
-      font-size:24px;
-      color: #6E6E6E;
+      margin: 25px 0 0;
+      font-size: 18px;
+      color: #666666;
     }
     .description {
-      font-size: 18px;
-      color: #848484;
-      line-height: 1.3;
+      font-size: 14px;
+      color: #666666;
+      line-height: 20px;
+      margin-top: 5px;
     }
-
+    .ok-icon {
+      position:absolute;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 40px 40px;
+      height:40px;
+      width:40px;
+      background-image: url('credit_card/check.png');
+    }
+    .phone-icon {
+      position:absolute;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 40px 40px;
+      height:40px;
+      width:40px;
+      background-image: url('credit_card/phone.png');
+    }
     span {
       width:9%;
-      height:50px;
-      margin-top: 40px;
+      height:40px;
+      margin-top: 25px;
       padding: 0;
     }
 
@@ -1067,24 +1099,370 @@ label.col-xs-11 {
   }
 }
 .order-summary-container {
-  padding: 30px 45px;
+  padding: 30px 40px;
   background: #FAFAFA;
   border: 1px solid #E8E8E8;
   margin-top: 40px;
   .title {
+    font-size: 20px;
     margin-top:0;
     color:#3E3E3E;
   }
   .order-total-info {
     text-align: left;
     width:70%;
+    font-size:18px;
+    color:#666666;
   }
   .order-total-price, .big-total-price {
     width:30%;
   }
+  .order-total-price{
+    font-size: 20px;
+    line-height: 20px;
+    color: #666666;
+  }
+  .big-total-price {
+    font-size: 24px;
+    line-height: 24px;
+    color: #409863;
+  }
 
   .iAgreeTerms {
     text-align: left;
-    font-size: 18px;
+    font-size: 14px;
+    color: #666666;
+    margin: 25px auto 20px;
+    font-weight: 600;
+  }
+}
+
+.marginBottom25 {
+  margin-bottom: 25px !important;
+}
+.marginTop25 {
+  margin-top: 25px !important;
+}
+
+.payment-footer {
+  width:100%;
+  background: #F0F0F0;
+  padding-bottom: 50px;
+  .title {
+    text-align: center;
+    color: #8c8c8c;
+    font-size: 24px;
+    padding: 35px 0 40px;
+    margin: 0;
+  }
+  .top-logo {
+    text-align: center;
+    span {
+      background-size: 80% auto !important;
+      height: 150px;
+      margin: 0;
+      position:static;
+      z-index: -1;
+      display: inline-block;
+    }
+    #gilt-icon {
+      background-size: 50% auto !important;
+    }
+    #seven-x-seven-icon {
+      background-size: 55% auto !important;
+    }
+    #brunch-icon {
+      margin-left:3%;
+      background-size: 100% auto !important;
+    }
+    #gilt-icon, #houzz-icon, #oacland-icon, #brunch-icon, #brunch-icon, #seven-x-seven-icon {
+      width: 19%;
+    }
+    #say-yes-icon, #washington-icon, #twenty-something-icon {
+      width:27%;
+    }
+  }
+}
+
+.payment-col-padding {
+  padding: 0 30px 0 78px;
+}
+.payment-col-padding:last-child {
+  padding: 0 76px 0 30px;
+}
+
+@media ( max-width: 1199px ) {
+  .payment-footer {
+    .top-logo {
+      span {
+        height:100px;
+        margin: 0;
+      }
+    }
+    #gilt-icon, #houzz-icon, #oacland-icon, #brunch-icon, #brunch-icon, #seven-x-seven-icon {
+      width: 19% !important;
+    }
+    #say-yes-icon, #washington-icon, #twenty-something-icon {
+      margin-top:20px;
+      width:33% !important;
+    }
+  }
+  .payment-col-padding {
+    padding: 0 4px 0 4px;
+  }
+  .payment-col-padding:last-child {
+    padding: 0 6px 0 26px;
+  }
+  .order-summary-container {
+    padding: 30px 27px;
+  }
+}
+
+@media ( max-width: 991px ) {
+  .payment-col-padding {
+    padding: 0 0 0 25px;
+  }
+  .payment-col-padding:last-child {
+    padding: 0 25px 0 20px;
+  }
+  .order-summary-container {
+    padding: 30px 13px;
+    .iAgreeTerms {
+      font-size:13px;
+    }
+  }
+  .payment-info-container .contacts-container {
+    .ok-container, .phone-container {
+      width: 82%;
+    }
+  }
+
+  .promotionCodeApply{
+    p{
+      margin-left: 15px !important;
+      padding-left: 0 !important;
+    }
+    label{
+      margin-left: 0px !important;
+      padding-left: 0 !important;
+    }
+  }
+
+  .payment-footer {
+    .top-logo {
+      span {
+        height:100px;
+        margin: 0;
+      }
+    }
+    #say-yes-icon {
+      background-size: 100% auto !important;
+    }
+    #gilt-icon, #houzz-icon, #oacland-icon, #brunch-icon, #brunch-icon, #seven-x-seven-icon, #say-yes-icon {
+      width: 27% !important;
+    }
+    #washington-icon, #twenty-something-icon {
+      margin-top:20px;
+      width:40% !important;
+    }
+  }
+  .promotionCodeApply {
+    input[type=text] {
+      width: 72%;
+      margin-right: 3%;
+    }
+    a {
+      width: 25%;
+    }
+  }
+}
+
+@media ( max-width: 767px ) {
+  .payment-col-padding {
+    padding: 0;
+  }
+  .payment-col-padding:last-child {
+    padding: 0;
+  }
+
+  .creditCardForm {
+    padding: 10px;
+    .main-description {
+      padding: 0 30px !important;
+      line-height: 20px !important;
+    }
+    .main-title {
+      font-size: 24px;
+    }
+  }
+
+  .order-summary-container {
+    padding: 30px 20px;
+  }
+  .payment-info-container .contacts-container {
+    .ok-container, .phone-container {
+      width: 87%;
+    }
+  }
+  .order-summary-container {
+    margin-top: 0;
+    .iAgreeTerms {
+      text-align: center;
+      font-size: 13px;
+    }
+  }
+  .payment-footer {
+    .top-logo {
+      span {
+        height: 100px;
+        margin: 0;
+      }
+    }
+    #gilt-icon, #houzz-icon, #oacland-icon {
+      width: 32% !important;
+    }
+    #brunch-icon {
+      margin-left: 10% !important;
+    }
+    #brunch-icon, #seven-x-seven-icon {
+      width: 38% !important;
+    }
+    #say-yes-icon {
+      width: 40% !important;
+      margin-left: 5%;
+    }
+    #washington-icon {
+      width: 50% !important;
+    }
+    #twenty-something-icon {
+      width:60% !important;
+    }
+  }
+
+  .payment-info-container {
+    .card-exp .selectpicker span {
+      font-size: 14px !important;
+    }
+
+    .promotionCodeApply {
+      input[type=text] {
+        width: 72%;
+        margin-right: 3%;
+      }
+      a {
+        width: 25%;
+      }
+    }
+
+  }
+}
+
+@media ( max-width: 479px ) {
+  .creditCardForm {
+    padding: 10px;
+    .main-description {
+      padding: 0 30px !important;
+      line-height: 20px !important;
+    }
+    .main-title {
+      font-size: 24px;
+    }
+    button[data-id=credit_card_card_type], button[data-id=credit_card_state] {
+      span {
+        font-size: 16px !important;
+      }
+    }
+    .promotionCodeApply {
+      width:100%;
+      input[type=text] {
+        float: left !important;
+      }
+      a {
+        margin-top: 0 !important;
+      }
+    }
+  }
+  .payment-col-padding {
+    padding: 0;
+  }
+  .payment-col-padding:last-child {
+    padding: 0;
+  }
+  .order-summary-container {
+    padding: 30px 13px;
+    .iAgreeTerms {
+      font-size:12px;
+    }
+  }
+  .payment-info-container .contacts-container {
+    .ok-container, .phone-container {
+      width: 82%;
+    }
+  }
+  .payment-footer {
+    .top-logo {
+      span {
+        height: 100px;
+        margin: 0;
+      }
+    }
+    .top-logo #gilt-icon {
+      background-size: 65% auto !important;
+    }
+    #gilt-icon, #houzz-icon  {
+      width: 48% !important;
+    }
+
+    #oacland-icon, #brunch-icon {
+      width: 44% !important;
+    }
+    .top-logo #seven-x-seven-icon {
+      background-size: 65% !important;
+    }
+    .top-logo #say-yes-icon {
+      width: 49% !important;
+    }
+    #seven-x-seven-icon, #say-yes-icon {
+      margin: 0;
+      width: 44% !important;
+    }
+    #washington-icon {
+      margin: 0;
+      top: 90px;
+      width: 80% !important;
+    }
+    #twenty-something-icon {
+      margin: 0;
+      top: -110px;
+      width:80% !important;
+    }
+  }
+  .payment-footer {
+    padding-bottom: 0 !important;
+  }
+}
+
+.payment-info-container {
+  .card-exp .selectpicker span {
+    font-size: 14px !important;
+  }
+
+  .btn-selector-medium {
+    padding-right: 35px !important;
+    .caret {
+      background: url('/assets/down-caret.png') no-repeat center;
+      width: 20px !important;
+      right: 0 !important;
+      margin-top: 0 !important;
+      top: 0 !important;
+      background-size: 13px 7px;
+      padding: 0 12px;
+    }
+  }
+
+  .promotionCodeApply {
+    a {
+      line-height: 40px;
+    }
   }
 }
