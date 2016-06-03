@@ -1161,7 +1161,8 @@ label.col-xs-11 {
       background-size: 80% auto !important;
       height: 150px;
       margin: 0;
-      position:relative;
+      position:static;
+      z-index: -1;
       display: inline-block;
     }
     #gilt-icon {
