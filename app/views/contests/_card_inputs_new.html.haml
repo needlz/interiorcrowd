@@ -12,7 +12,7 @@
               { class: 'selectpicker form-selector', tabindex: 7 }
       .clearfix
     .row
-      .col-xs-8
+      .col-xs-8.no-padding-right
         %label
           %p= t('client_center.profile.labels.card_number')
           = text_field_tag 'credit_card[number]',
@@ -37,7 +37,7 @@
               disabled: f.object.persisted?
           %span.err_cvc.text-error
     .row
-      .col-xs-6
+      .col-xs-6.no-padding-right
         %label.expiration-label
           %p= t('client_center.profile.labels.card_exp_date')
           = select_month(f.object.ex_month,
@@ -54,7 +54,7 @@
     .row
       - if show_promocode_input
         = render 'contests/promocode_input'
-    %h4.billing-title.marginTop40= t('client_center.sign_up.billing_information')
+    %h4.billing-title= t('client_center.sign_up.billing_information')
     %label
       %p= t('client_center.profile.labels.address')
       = f.text_field :address, class: 'form-control', tabindex: 13
@@ -63,7 +63,7 @@
       %p= t('client_center.profile.labels.city')
       = f.text_field :city, class: 'form-control', tabindex: 14
     .row
-      .col-xs-8.col-ss-6
+      .col-xs-7.col-ss-6
         %label
           %p= t('client_center.profile.labels.state')
           = f.select :state,
@@ -71,14 +71,10 @@
                   {},
                   { class: 'selectpicker form-selector', tabindex: 15 }
           %span#err_state.text-error
-      .col-xs-4.col-ss-6
+      .col-xs-5.col-ss-6.no-padding-left
         %label
           %p= t('client_center.profile.labels.zip')
           = f.text_field :zip,
                   class: 'form-control left-control',
                   tabindex: 16
           %span#err_zip.text-error
-.row
-  #credit-card-form-controls-mobile
-    %a#save-credit-card= t('client_center.sign_up.save')
-    %a#cancel-card-adding= t('client_center.sign_up.cancel')
