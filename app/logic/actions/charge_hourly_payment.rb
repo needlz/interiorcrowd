@@ -1,4 +1,4 @@
-class ChargeHourlyPayment
+class ChargeHourlyPayment < Action
   DEFAULT_CURRENCY = 'USD'
 
   attr_reader :hourly_payment
@@ -25,7 +25,6 @@ class ChargeHourlyPayment
       hourly_payment.with_lock do
         ActiveRecord::Base.transaction do
           perform_stripe_charge
-          finalize_payment_record
           track_actual_hours
           notify_designer
         end
@@ -50,25 +49,10 @@ class ChargeHourlyPayment
 
   private
 
-  attr_reader :contest, :client, :time_tracker, :charge, :price, :total_price, :hours, :credit_card, :hourly_payment
+  attr_reader :contest, :client, :time_tracker, :price, :total_price, :hours, :credit_card, :hourly_payment
 
   def perform_stripe_charge
-    if price <= 0
-      @charge = Hashie::Mash.new(id: Payment::ZERO_PRICE_PLACEHOLDER)
-    else
-      customer = StripeCustomer.new(client)
-      amount = Money.new(total_price, DEFAULT_CURRENCY)
-      description = "hourly charge for client with id #{ client.id }"
-      @charge = customer.charge(money: amount,
-                                description: description,
-                                card_id: credit_card.stripe_id)
-    end
-  end
-
-  def finalize_payment_record
-    hourly_payment.update_attributes!(payment_status: 'completed',
-                                      stripe_charge_id: charge.id,
-                                      last_error: nil)
+    HourlyPaymentStripeCharge.perform(@hourly_payment)
   end
 
   def track_actual_hours
