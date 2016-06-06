@@ -10,7 +10,8 @@
   = stylesheet_link_tag 'shared-style'
 
   :javascript
-    I18n = #{ translations_to_json('') }
+    BriefI18n = #{ translations_to_json('contests') }
+    I18n = #{ translations_to_json('client_center') }
     Location = #{ translations_to_json(['contests', 'space', 'location']) }
 
 - content_for :client_center_content do
