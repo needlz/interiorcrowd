@@ -1,5 +1,6 @@
-:javascript
-  window.areas = #{ @creation_wizard.available_areas.to_json }
+%script{ type: 'text/javascript', data: { cfasync: 'false' } }
+  :plain
+    window.areas = #{ @creation_wizard.available_areas.to_json }
 
 .roomOptions
   .rooms.text-package.text-center-sm.text-center-xs

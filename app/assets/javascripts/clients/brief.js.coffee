@@ -61,7 +61,7 @@ class @ContestEditing extends InlineEditor
 
   editFormsCallbacks:
     space_pictures: ->
-      SpacePicturesUploader.init(I18n.contests.space.photos)
+      SpacePicturesUploader.init(BriefI18n.space.photos)
     example_pictures: ->
       ExamplesUploader.init()
     desirable_colors: ->
@@ -77,7 +77,7 @@ class @ContestEditing extends InlineEditor
     design_package: ->
       Packages.init()
     feedback: ->
-      DesignSpaceOptions.init(feedbackPlaceholder: I18n.contests.space.other_feedback.placeholder)
+      DesignSpaceOptions.init(feedbackPlaceholder: BriefI18n.space.other_feedback.placeholder)
 
   previewCallbacks:
     desirable_colors: ->
