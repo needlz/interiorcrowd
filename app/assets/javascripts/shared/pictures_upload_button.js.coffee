@@ -16,6 +16,7 @@ class @PicturesUploadButton
       uploadify:
         start: (event)=>
           $(options.uploadButtonSelector).text(options.I18n.uploading) if options.I18n
+        onUploaded: (event)=> options.uploading.onDone?(event) if options.uploading
         stop: (event)=>
           $(options.uploadButtonSelector).text(options.I18n.upload_button) if options.I18n
           options.uploading.onStop?(event) if options.uploading

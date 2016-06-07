@@ -51,4 +51,4 @@
 //= require concept_board_comment_editor
 //= require moment
 //= require bootstrap-datetimepicker
-//= require processed_files_updater
+//= require(processed_files_updater) if Rails.env.production? || Rails.env.staging?
