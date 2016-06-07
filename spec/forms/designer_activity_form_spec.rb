@@ -17,14 +17,6 @@ RSpec.describe DesignerActivityForm do
   end
 
   it 'creates params when hash is given' do
-
-    allow_any_instance_of(ActionController::Base).to receive(:params) {
-      { designer_activity: {
-          start_date: "05/19/2016",
-          due_date: "05/23/2016"
-        }
-      }
-    }
     form = DesignerActivityForm.new(designer_activity: { start_date: '', due_date: '' })
     expect(form.instance_variable_get(:@params)).to be_present
     expect(form.instance_variable_get(:@activity)).to be_nil

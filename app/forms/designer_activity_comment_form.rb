@@ -13,12 +13,10 @@ class DesignerActivityCommentForm
   attr_reader :comment
 
   def initialize(comment_or_params = nil)
-    if comment_or_params
-      if comment_or_params.kind_of?(DesignerActivityComment)
-        @comment = comment_or_params
-      else
-        @params = ActionController::Parameters.new(comment_or_params)
-      end
+    if comment_or_params && comment_or_params.kind_of?(DesignerActivityComment)
+      @comment = comment_or_params
+    elsif comment_or_params
+      @params = ActionController::Parameters.new(comment_or_params)
     else
       @comment = DesignerActivityComment.new
     end

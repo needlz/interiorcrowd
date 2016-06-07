@@ -13,19 +13,17 @@ class DesignerActivityForm
   attr_reader :activity, :params
 
   def initialize(activity_or_params = nil)
-    if activity_or_params
-      if activity_or_params.kind_of?(DesignerActivity)
-        @activity = activity_or_params
-      else
-        @params = ActionController::Parameters.new(activity_or_params)
-        begin
-          @params[:designer_activity][:start_date] = Date.strptime(params[:designer_activity][:start_date], "%m/%d/%Y")
-        rescue ArgumentError
-        end
-        begin
-          @params[:designer_activity][:due_date] = Date.strptime(params[:designer_activity][:due_date], "%m/%d/%Y")
-        rescue ArgumentError
-        end
+    if activity_or_params && activity_or_params.kind_of?(DesignerActivity)
+      @activity = activity_or_params
+    elsif activity_or_params
+      @params = ActionController::Parameters.new(activity_or_params)
+      begin
+        @params[:designer_activity][:start_date] = Date.strptime(params[:designer_activity][:start_date], "%m/%d/%Y")
+      rescue ArgumentError
+      end
+      begin
+        @params[:designer_activity][:due_date] = Date.strptime(params[:designer_activity][:due_date], "%m/%d/%Y")
+      rescue ArgumentError
       end
     else
       @activity = DesignerActivity.new(hours: 1)

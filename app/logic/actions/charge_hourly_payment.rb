@@ -72,8 +72,8 @@ class ChargeHourlyPayment
   end
 
   def track_actual_hours
-    time_tracker.update_attributes(hours_actual: hours + time_tracker.hours_actual,
-                                   hours_suggested: 0)
+    time_tracker.update_attributes(hours_actual: time_tracker.hours_actual + hours,
+                                   hours_suggested: time_tracker.hours_actual - hours)
   end
 
   def notify_designer
