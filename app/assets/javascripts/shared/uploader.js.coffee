@@ -73,6 +73,8 @@ $.fn.initUploader = (options, uploader)->
           data.result = retdata
           uploader.onUploaded?(event, data)
       )
+     fail: (event, data)->
+       Rollbar.log('File uploading error', data);
   )
   @.fileupload(options)
 
@@ -117,7 +119,7 @@ class Uploader
     @$formOrInput.initUploader(uploadOptions, @)
 
   onUploaded: (event, data) =>
-    ProcessedFilesUpdater.setTimer()
+    ProcessedFilesUpdater.setTimer() if ProcessedFilesUpdater?
     $.each data.result.files, (index, fileInfo) =>
       return if @thumbsTheme && @thumbsTheme.isUploadHalted?(fileInfo)
       if @options.single
