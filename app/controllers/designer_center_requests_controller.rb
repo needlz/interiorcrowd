@@ -30,7 +30,10 @@ class DesignerCenterRequestsController < ApplicationController
       pagination_options: params
     })
     @visible_image_items = @show_page.image_items
-    @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(:requests)
+    @navigation = "Navigation::DesignerCenter::#{ @request.contest.status.camelize }".constantize.new(
+      :requests,
+      contest: @request.contest,
+      contest_request: @request)
     @setup_viglink = true
     set_image_item_views
   end

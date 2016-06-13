@@ -8,7 +8,7 @@ class ConfigureCors < Action
 
     bucket.cors = ({ allowed_methods: ["POST", "GET", "HEAD"],
                      allowed_origins: ["#{ url.scheme }://#{ url.host }"],
-                     allowed_headers: ["accept", "Content-Type", "Content-Type", "Content-Range", "Content-Disposition", "Content-Description"],
+                     allowed_headers: ["accept", "Content-Type", "Content-Type", "Content-Range", "Content-Disposition", "Content-Description", 'origin'],
                      expose_headers: ["Content-Type", "Content-Range", "Content-Disposition", "Content-Description", "Accept"],
                      max_age_seconds: 1,
     })
