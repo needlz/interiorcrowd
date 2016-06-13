@@ -14,7 +14,7 @@ class DesignerCenterContestsController < ApplicationController
     @contest_view = ContestView.new(contest_attributes: @contest, allow_download_all_photo: true)
     set_contest_short_details
     @show_winner_selected_warning = @contest.response_winner && !@contest.response_of(@designer)
-    @navigation = "Navigation::DesignerCenter::#{ @contest.status.camelize }".constantize.new(:contests)
+    @navigation = "Navigation::DesignerCenter::#{ @contest.status.camelize }".constantize.new(:contests, { contest: @contest })
   end
 
   private

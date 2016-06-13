@@ -5,6 +5,7 @@
       - if request.lost?
         .col-md-12.loser-text.big= t('designer_center.responses.loser.title')
         .col-md-12.loser-text.small= t('designer_center.responses.loser.add_to_portfolio')
+        .clearfix
       - if request.editable?
         = render 'designer_center_requests/show/image_loading',
               items: show_page.current_lookbook_items,
