@@ -17,8 +17,8 @@ class TimeTrackerController < ApplicationController
     @contest = Contest.find(params[:contest_id])
     contests_designer = @contest.response_winner.designer if @contest.response_winner
 
-    return raise_404 unless contests_designer == current_user
-    return raise_404 unless check_contest_status
+    return redirect_to(designer_center_contest_path(id: @contest.id)) unless contests_designer == current_user
+    return redirect_to(designer_center_contest_path(id: @contest.id)) unless check_contest_status
 
     @contest_request = @contest.response_of(current_user)
     @navigation = "Navigation::DesignerCenter::#{ @contest.status.camelize }".constantize.new(:time_tracker,

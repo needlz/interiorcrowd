@@ -18,7 +18,7 @@ development:
   AWS_SECRET_ACCESS_KEY: 4tMyvEFuxlQ8uTrZ3fqimSGF1C2nE+fqfELEr617
   MANDRILL_EMAIL: 'hello@interiorcrowd.com'
   MANDRILL_API_TOKEN: 'IqRBhcv59Pu64Z1UVXg7pg'
-  INFO_EMAIL: 'romans@softwareplanet.uk.com'
+  INFO_EMAIL: 'test@example.com'
   BETA_PASSWORD: 'beta'
   APP_HOST: 'localhost:3000'
   MARKS_DIGEST_MINUTES_INTERVAL: '1'
@@ -42,5 +42,5 @@ test:
   APP_HOST: 'localhost:3000'
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
-  INFO_EMAIL: 'romans@softwareplanet.uk.com'
+  INFO_EMAIL: 'test@example.com'
   INBOUND_MAIL_DOMAIN: 'inbound.test.com'

@@ -70,7 +70,7 @@ common: &defaults
       - https://www.linkedin.com/in/nat-suriyapee-769954a3
       - https://www.linkedin.com/in/lia-aprile-18017410a
     google_forms:
-      help_with_new_office: https://docs.google.com/a/softwareplanet.uk.com/forms/d/10UThblQuuGogb59971Fj7O1Rj0ZI-EwyXBVLgOSdDKM/viewform
+      help_with_new_office: https://docs.google.com/a/interiorcrowd.com/forms/d/10UThblQuuGogb59971Fj7O1Rj0ZI-EwyXBVLgOSdDKM/viewform
   designer_note_profile_image: '/assets/profile-img.png'
   designer_level_pictures:
     novice: '/assets/design_levels/novice.jpg'
