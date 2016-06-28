@@ -1,19 +1,14 @@
 #topCarouselHome.carousel.slide.carousel-fade{"data-ride" => "carousel"}
   / Indicators
   %ol.carousel-indicators
-    %li{"data-slide-to" => "0", "data-target" => "#topCarouselHome"}
-    %li.active{"data-slide-to" => "1", "data-target" => "#topCarouselHome"}
+    %li.active{"data-slide-to" => "0", "data-target" => "#topCarouselHome"}
+    %li{"data-slide-to" => "1", "data-target" => "#topCarouselHome"}
     %li{"data-slide-to" => "2", "data-target" => "#topCarouselHome"}
-    %li{"data-slide-to" => "3", "data-target" => "#topCarouselHome"}
   / Wrapper for slides
   .carousel-inner{:role => "listbox"}
-    .item
-      .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
-                                url("/assets/bedroom1.jpg") center center no-repeat; background-size: cover;' }
-      = render 'home/index/carousel_shared_content'
     .item.active
       .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),
-                                url("/assets/come_home.jpg") center center no-repeat; background-size: cover;' }
+                                url("/assets/bedroom1.jpg") center center no-repeat; background-size: cover;' }
       = render 'home/index/carousel_shared_content'
     .item
       .image-container{ style: 'background: linear-gradient(to bottom, rgba(0,0,0,.65) 0%, transparent 50%),

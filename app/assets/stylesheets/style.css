@@ -2876,11 +2876,6 @@ padding-bottom: 40px;
 	width: 24%;
 	background: url('/assets/place_to_relax.jpg') no-repeat center;
 }
-.lets-design > div:nth-child(4){
-	width: 27%;
-	width: 25%;
-	background: url('/assets/place_to_come_home.jpg') no-repeat center;
-}
 
 .lets-design > div p{
 	position: absolute;
