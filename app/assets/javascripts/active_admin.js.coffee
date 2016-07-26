@@ -1,5 +1,6 @@
 #= require active_admin/base
 
 $ ->
-  $emailFilterInput = $('.admin_designers #q_email')
-  $emailFilterInput.clone().css('display', 'none').insertBefore($emailFilterInput)
+  $('#edit_designer textarea#designer_email').attr('name', 'designer[ema_il]')
+  $('form#edit_designer').submit ->
+    $('#edit_designer textarea#designer_email').attr('name', 'designer[email]')
