@@ -96,7 +96,7 @@ ActiveAdmin.register Designer do
 
   filter :first_name
   filter :last_name
-  filter :email
+  filter :net_address_cont, label: 'Email Contains'
   filter :plain_password
   filter :created_at
 

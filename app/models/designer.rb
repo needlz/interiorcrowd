@@ -95,6 +95,10 @@ class Designer < ActiveRecord::Base
     portfolio.path if portfolio
   end
 
+  ransacker :net_address do |parent|
+    parent.table[:email]
+  end
+
   ransacker :by_submission_date, formatter: proc { |month|
     date = ActiveAdminExtensions::ContestDetails.ranges_for_month(month)
     designers = Designer.joins(:contest_requests).where(contest_requests: { submitted_at: date..date.next_month }).map(&:id)
