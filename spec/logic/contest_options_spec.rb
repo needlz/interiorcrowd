@@ -4,8 +4,7 @@ RSpec.describe ContestOptions do
 
   def test_options(options, source)
     expect(options.contest).to eq({
-                                        design_category_id: source[:design_brief][:design_category].to_i,
-                                        design_space_ids: source[:design_brief][:design_area],
+                                        design_space_ids: source[:design_style][:design_area],
                                         space_length: ContestOptions.calculate_inches(source[:design_space], :length),
                                         space_width: ContestOptions.calculate_inches(source[:design_space], :width),
                                         space_height: ContestOptions.calculate_inches(source[:design_space], :height),
@@ -18,8 +17,7 @@ RSpec.describe ContestOptions do
                                         undesirable_colors: source[:design_style][:undesirable_colors],
                                         elements_to_avoid: source[:contest][:elements_to_avoid],
                                         entertaining: source[:contest][:entertaining],
-                                        durability: source[:contest][:durability],
-                                        designer_level_id: source[:design_style][:designer_level].to_i
+                                        durability: source[:contest][:durability]
                                    })
     expect(options.appeals).to eq(source[:design_style][:appeals].deep_symbolize_keys)
     expect(options.space_image_ids).to eq(source[:design_space][:document_id].split(',').map(&:strip).map(&:to_i))

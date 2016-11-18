@@ -1,13 +1,13 @@
 .col-xs-6.col-sm-6.col-md-4.col-lg-3.text-center.no-padding-left.areas-row
   .bedr.clickable
     - if area.children.blank?
-      = check_box_tag("design_brief_design_area_#{ area.id }",
+      = check_box_tag("design_style_design_area_#{ area.id }",
           area.id,
           @contest_view.design_areas.include?(area),
           class: 'hidden',
-          name: 'design_brief[design_area][]')
+          name: 'design_style[design_area][]')
     %label.room.room-selector-sub.fixWrap.clickable{ class: ('active' if active),
         data: { id: area.id },
-        for: "design_brief_design_area_#{ area.id }" }
+        for: "design_style_design_area_#{ area.id }" }
       = area.name
       %i.glyphicon.glyphicon-ok.option-selected

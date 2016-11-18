@@ -129,9 +129,7 @@ RSpec.configure do |config|
 
   def contest_options_source
     appeal = Fabricate(:appeal)
-    @contest_options_source ||= { design_brief: {
-        design_category: Fabricate(:design_category).id.to_s,
-        design_area: Fabricate.times(2, :design_space).map(&:id).map(&:to_s) },
+    @contest_options_source ||= {
       design_space: {
           length: '2',
           width: '2',
@@ -142,12 +140,12 @@ RSpec.configure do |config|
           f_budget: '2000',
           zip: '00001',
           feedback: 'feedback',
-          document_id: [Fabricate(:image).id, Fabricate(:image).id].join(',') },
+          document_id: Fabricate.times(2, :image).map(&:id).join(',')
+      },
       preview: {
           b_plan: '1',
           contest_name: 'contest_name' },
       design_style: {
-          designer_level: '1',
           desirable_colors: '#bbbbbb',
           undesirable_colors: '#aaaaaa,#888888',
           appeals: {
@@ -155,7 +153,9 @@ RSpec.configure do |config|
                   reason: 'reason',
                   value: '100' } },
           document_id: [Fabricate(:image).id, Fabricate(:image).id].join(','),
-          ex_links: ['link1', 'link2'] },
+          ex_links: ['link1', 'link2'],
+          design_area: Fabricate.times(2, :design_space).map(&:id).map(&:to_s)
+      },
       contest: {
           retailer_ikea: true,
           elements_to_avoid: 'Fur',

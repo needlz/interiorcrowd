@@ -44,7 +44,6 @@ RSpec.describe ClientsController do
         integer_attributes.each do |attribute|
           expect(client.send(attribute)).to eq client_options[attribute].to_i
         end
-        expect(client.designer_level_id).to eq contest_options_source[:design_style][:designer_level].to_i
         expect(client.plain_password).to eq client_options[:password]
       end
 
@@ -139,7 +138,7 @@ RSpec.describe ClientsController do
       it 'does not create contest if some of required options were not set' do
         expect(Contest.count).to eq 0
         expect(Client.count).to eq 0
-        expect { post :create, { client: client_options }, contest_options_source.except(:design_brief) }.to raise_error(ArgumentError)
+        expect { post :create, { client: client_options }, contest_options_source.except(:design_style) }.to raise_error(ArgumentError)
         expect(Contest.count).to eq 0
         expect(Client.count).to eq 1
       end

@@ -17,7 +17,7 @@ class ContestView
   end
 
   EDITABLE_ATTRIBUTES = [
-    :design_package, :category, :area, :design_profile, :desirable_colors, :undesirable_colors,
+    :design_package, :area, :design_profile, :desirable_colors, :undesirable_colors,
     :example_pictures, :budget, :example_links, :space_pictures, :space_dimensions, :feedback,
     :additional_preferences, :preferences_retailers, :element_to_avoid, :entertaining, :durability, :location_zip
   ] + ACCOMMODATION_ATTRIBUTES

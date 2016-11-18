@@ -1,15 +1,15 @@
 class AppealScale
 
   SCALES = [
-    :vintage,
     :eclectic,
     :midcentury_modern,
-    :rustic_elegance,
-    :coastal,
-    :traditional,
-    :transitional,
     :modern,
-    :hollywood_regency
+    :coastal,
+    :rustic_elegance,
+    :traditional,
+    :vintage,
+    :hollywood_regency,
+    :transitional
   ]
 
   attr_reader :value, :description, :retailers
@@ -57,7 +57,8 @@ class AppealScale
   end
 
   def collage_picture
-    "/assets/style_collages/Collage#{ appeal.id }.png"
+
+    "/assets/style_collages/collage-#{ appeal.name }-desktop.jpg"
   end
 
   def value_key

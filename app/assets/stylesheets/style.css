@@ -239,7 +239,7 @@ padding-left:0px;
 }
 
 .room:hover{
-	background-color:#000000;
+	background-color: #666666;
 	color:#ffffff !important;
 }
 
@@ -248,7 +248,9 @@ text-decoration:none;
 color:#000000;
 }
 
-.bedr {border:1px solid black;}
+.bedr {
+    border:1px solid #D5D5D5;
+}
 
 .room{
 position:relative;

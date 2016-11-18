@@ -11,8 +11,7 @@ class ContestCreationWizard
   def self.creation_steps_paths
     urls_helper = Rails.application.routes.url_helpers
     @creation_steps_paths ||=
-      { design_brief: urls_helper.design_brief_contests_path,
-        design_style: urls_helper.design_style_contests_path,
+      { design_style: urls_helper.design_style_contests_path,
         design_space: urls_helper.design_space_contests_path,
         preview: urls_helper.preview_contests_path }
   end
@@ -49,7 +48,7 @@ class ContestCreationWizard
   end
 
   def self.steps_count
-    4
+    creation_steps.length
   end
 
   def initialize(options)

@@ -3,14 +3,12 @@ module ContestValidation
   class Creation < Base
 
     def self.required_contest_attributes
-      [:design_category_id, :design_space_ids, :space_budget,
-       :budget_plan, :project_name, :desirable_colors, :designer_level_id]
+      [:design_space_ids, :space_budget, :budget_plan, :project_name, :desirable_colors]
     end
 
     def self.required_options_by_step
       {
-          design_brief: [:design_category_id, :design_space_ids],
-          design_style: [:designer_level_id, :appeals, :desirable_colors],
+          design_style: [:design_space_ids, :appeals, :desirable_colors],
           design_space: [:space_budget],
           preview: [:budget_plan, :project_name]
       }

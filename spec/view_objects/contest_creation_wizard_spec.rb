@@ -4,13 +4,6 @@ RSpec.describe ContestCreationWizard do
   let(:room) { DesignSpace.create }
   let(:completion_procedures) do
     { 0 => {
-      semicomplete: ->(contest){ contest.update_attributes!(design_category_id: 1) },
-      complete: ->(contest) do
-        contest.update_attributes!(design_category_id: 1)
-        contest.design_spaces << room
-      end
-    },
-      1 => {
         semicomplete: ->(contest) do
           Fabricate.times(2, :appeal)
           contest.update_attributes!(desirable_colors: '#000000')
@@ -19,13 +12,14 @@ RSpec.describe ContestCreationWizard do
         complete: ->(contest) do
           Fabricate.times(2, :appeal).each { |style| contest.appeals << style }
           contest.update_attributes!(desirable_colors: '#000000', designer_level_id: 1)
+          contest.design_spaces << room
         end
       },
-      2 => {
+      1 => {
         semicomplete: ->(contest){ },
         complete: ->(contest) { contest.update_attributes!(space_budget: '$100') }
       },
-      3 => {
+      2 => {
         semicomplete: ->(contest){ contest.update_attributes!(project_name: 'Test project') },
         complete: ->(contest) { contest.update_attributes!(project_name: 'Test project', budget_plan: 1) }
       }

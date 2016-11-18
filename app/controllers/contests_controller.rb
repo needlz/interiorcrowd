@@ -6,7 +6,7 @@ class ContestsController < ApplicationController
                                      :image_items]
   before_filter :set_creation_wizard, :set_save_path, only: ContestCreationWizard.creation_steps
 
-  [:design_brief, :design_style, :design_space].each do |action|
+  [:design_style, :design_space].each do |action|
     define_method action do
       development_scenarios do
         [
@@ -26,6 +26,10 @@ class ContestsController < ApplicationController
     end
   end
 
+  def design_brief
+    redirect_to action: :design_style
+  end
+  
   def show
     @contest = Contest.find_by_id(params[:id])
     unless @contest
