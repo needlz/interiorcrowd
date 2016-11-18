@@ -18,7 +18,7 @@ development:
   AWS_SECRET_ACCESS_KEY: 4tMyvEFuxlQ8uTrZ3fqimSGF1C2nE+fqfELEr617
   MANDRILL_EMAIL: 'hello@interiorcrowd.com'
   MANDRILL_API_TOKEN: 'IqRBhcv59Pu64Z1UVXg7pg'
-  INFO_EMAIL: 'romans@softwareplanet.uk.com'
+  INFO_EMAIL: 'test@example.com'
   BETA_PASSWORD: 'beta'
   APP_HOST: 'localhost:3000'
   MARKS_DIGEST_MINUTES_INTERVAL: '1'
@@ -35,12 +35,12 @@ development:
   MAILCHIMP_LIST_ID: '854c60de30'
   SHOW_PACKAGE_TYPE_DESC: 'false'
   AUTOMATIC_PAYMENT: 'true'
-  ROLLBAR_JS_ACCESS_TOKEN: '4d6c88dd31bc4667a66ae7b22f259873' # pustomytnyk@gmail.com account
+  ROLLBAR_JS_ACCESS_TOKEN: '4d6c88dd31bc4667a66ae7b22f259873'
   ROLLBAR_ACCESS_TOKEN: 'befcb19850e14ee9b77146367b341c16'
 
 test:
   APP_HOST: 'localhost:3000'
   FACEBOOK_APP_ID: 'dummy'
   FACEBOOK_APP_SECRET: 'dummy'
-  INFO_EMAIL: 'romans@softwareplanet.uk.com'
+  INFO_EMAIL: 'test@example.com'
   INBOUND_MAIL_DOMAIN: 'inbound.test.com'
