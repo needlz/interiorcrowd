@@ -114,7 +114,7 @@ RSpec.describe TimeTrackerController do
       it 'it response with 404' do
         get :designer_view, contest_id: contest.id
 
-        expect(response).to have_http_status(404)
+        expect(response).to redirect_to(designer_center_contest_path(id: contest.id))
       end
 
     end
@@ -134,7 +134,7 @@ RSpec.describe TimeTrackerController do
       it 'it response with 404' do
         get :designer_view, contest_id: contest.id
 
-        expect(response).to have_http_status(404)
+        expect(response).to redirect_to(designer_center_contest_path(id: contest.id))
       end
     end
 
