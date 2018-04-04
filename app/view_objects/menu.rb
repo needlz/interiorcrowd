@@ -16,7 +16,7 @@ class Menu
   def common_menu_with(specific_items)
     menu = MenuBuilder.new
     menu.append({ I18n.t('header.how_it_works') => view_context.how_it_works_path }, { target: '_blank' })
-    menu.append({ I18n.t('header.blog') => view_context.blog_root_path })
+    # menu.append({ I18n.t('header.blog') => view_context.blog_root_path })
     menu.append(specific_items)
     menu
   end
