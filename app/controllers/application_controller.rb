@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :beta_redirect
   before_filter :setup_event_tracker
   before_filter :expire_hsts
-  before_filter :on_page_visit, :track_client_activity, :check_rack_mini_profiler
+  before_filter :on_page_visit, :track_client_activity
 
   add_flash_types :error
 
@@ -122,13 +122,4 @@ class ApplicationController < ActionController::Base
       current_user.update_attributes!(last_activity_at: Time.now)
     end
   end
-
-  def check_rack_mini_profiler
-    return unless warden
-    if current_admin_user && params[:debug_session]
-      session[:debug_session] = true
-    end
-    Rack::MiniProfiler.authorize_request if session[:debug_session]
-  end
-
 end

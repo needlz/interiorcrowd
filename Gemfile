@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.0'
+ruby '2.3.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 
@@ -61,8 +61,6 @@ end
 group :development do
   gem 'quiet_assets'
   gem 'bullet'
-  gem 'erb2haml'
-  gem 'haml-rails'
   gem 'sass-rails-source-maps'
   gem 'rails_best_practices'
   gem 'lol_dba'  #https://github.com/plentz/lol_dba
@@ -120,9 +118,3 @@ gem 'gibbon'
 gem 'ruby_dig'
 gem 'timecop'
 gem 'delayed_paperclip'
-
-# profiling
-gem 'rack-mini-profiler'
-gem 'flamegraph'
-gem 'stackprof'
-gem 'memory_profiler'
